@@ -108,16 +108,39 @@ $("body").on("click", "#btnProcesarFE", function () {
     });
 });
 
-
-
-
 // MOSTRAR MODAL DE FECHAS
 $(document).on("click", "#btnFechaEspecifica", function () {
-    //MOSTRAR EL MODAL DE AGREGAR
     $("#frmFechaDecimoTercer").modal();
 });
 
 // OCULTAR MODAL DE FECHAS
 $("#btnCerrarFecha").click(function () {
     $("#frmFechaDecimoTercer").modal('hide');
+});
+
+
+
+$(document).on("click", "#btnEnviarFecha", function () {
+    var FechaInicial = $("#hipa_FechaInicio").val();
+    var FechaFinal = $("#hipa_FechaFin").val();
+
+    if (FechaInicial == "" || FechaFinal == "") {
+        iziToast.error({
+            title: 'Decimo Tercer Mes',
+            message: "No puede dejar fechas vacias."
+        });
+    }
+    else
+    {
+        $.ajax({
+            url: "/DecimoTercerMes/FechaEspecifica",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ hipa_FechaInicio: FechaInicial, hipa_FechaFin: FechaFinal }),
+            success: $.post
+        });
+        
+    }
+
 });
