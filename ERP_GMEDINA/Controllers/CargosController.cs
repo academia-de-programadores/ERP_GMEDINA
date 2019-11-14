@@ -51,11 +51,21 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "car_Id,car_Descripcion,car_Estado,car_RazonInactivo,car_UsuarioCrea,car_FechaCrea,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
         {
+            
             if (ModelState.IsValid)
             {
-                db.tbCargos.Add(tbCargos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> listcargos = null;
+                    string MensajeError = "";
+                    db.tbCargos.Add(tbCargos);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+
+                }
             }
 
             ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
