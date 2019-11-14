@@ -1,0 +1,30 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialDePago
+@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST"}))
+{
+
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            <label class="font-noraml">Fecha Inicial</label>
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" name="hipa_FechaInicio" id="hipa_FechaInicio">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="font-noraml">Fecha Final</label>
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" name="hipa_FechaFin" id="hipa_FechaFin">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@
+        <button type="button" class="btn btn-white" id="btnCerrarFecha">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btnEnviarFecha">Aceptar</button>
+    </div>
+}
