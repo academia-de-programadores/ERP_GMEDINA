@@ -317,7 +317,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 else
                 {
-                    Create(catalogoDePlanillas, catalogoIngresos,catalogoDeducciones, id);
+                    Create(idPlanillaEdit: id,catalogoDePlanillas:catalogoDePlanillas, catalogoIngresos: catalogoIngresos, catalogoDeducciones: catalogoDeducciones);
                 }
             }
 
@@ -341,13 +341,30 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbCatalogoDePlanillas tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id);
-            db.tbCatalogoDePlanillas.Remove(tbCatalogoDePlanillas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            string response = "";
+            string mensajeError = "";
+            IEnumerable<object> planillaInactivada = null; 
+            try
+            {
+                //Inactivar la planilla
+                planillaInactivada = db.UDP_Plani_tbCatalogoDePlanillas_Inactivar(id);
+
+                foreach (UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result result in planillaInactivada)
+                    mensajeError = result.MensajeError;
+
+                if (mensajeError.Contains("-1"))
+                    response = "error";
+                else
+                    response = "bien";
+
+            }
+            catch (Exception ex)
+            {
+                response = "error";
+            }
+            return Json(response,JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

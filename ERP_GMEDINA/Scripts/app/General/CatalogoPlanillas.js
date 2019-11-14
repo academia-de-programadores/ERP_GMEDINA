@@ -1,9 +1,12 @@
 ﻿//Funcion generica para reutilizar AJAX
 function _ajax(params, uri, type, callback) {
+    debugger;
     $.ajax({
         url: uri,
         type: type,
-        data: { params },
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(params),
         success: function (data) {
             callback(data);
         }
@@ -142,6 +145,15 @@ var create = function (edit) {
 }
 
 //inactivar
-$('#inactivar').click(() =>{
-    console.log('click');
-})
+$('#inactivar').click(() => {
+    $('#InactivarCatalogoDeducciones').modal();
+});
+
+$('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
+    var id = $('form #cpla_IdPlanilla').val();
+    _ajax({id: id}, '/CatalogoDePlanillas/Delete', 'POST', (data) => {
+        if (data == "bien") {
+            location.href = 'http://localhost:51144/';
+        }
+    });
+});
