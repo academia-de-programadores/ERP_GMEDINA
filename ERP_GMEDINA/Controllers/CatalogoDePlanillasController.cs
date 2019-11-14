@@ -297,6 +297,78 @@ namespace ERP_GMEDINA.Controllers
             string mensajeErrorIngreso = "", mensajeErrorDeduccion = "";
             string response = "";
 
+            var listadoDetallePlanillaDeduccion = db.tbTipoPlanillaDetalleDeduccion.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cde_IdDeducciones).ToList();
+            var listadoDetallePlanillaIngresos = db.tbTipoPlanillaDetalleIngreso.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cin_IdIngreso).ToList();
+
+            //borrar los que esten desactivados
+            //agregar los nuevos que no esten en la lista
+            //borrar los que no existen en la lista
+
+
+
+            //foreach(var i in listadoDetallePlanillaDeduccion)
+            //{
+            //    if(catalogoIngresos)
+            //}
+
+
+            List<int> arrayDeduccionesInsertar = new List<int>();
+            List<int> arrayDeduccionesEliminar = new List<int>();
+            bool hacerNadaDeducciones = false;
+
+            // Obtener el cada valor que esta en listadoDetallePlanillaDeduccion
+
+
+            foreach(var i in listadoDetallePlanillaDeduccion)
+            {
+                foreach(var j in catalogoDeducciones)
+                {
+                    if(i == j)
+                    {
+
+                    }
+                }
+            }
+
+
+            //if (arrayDeduccionesInsertar.Contains(catalogoDeducciones)
+            //{
+            //    hacerNadaDeducciones = true;
+            //}
+            foreach (var i in listadoDetallePlanillaDeduccion)
+            {
+
+                var idDeduccion = catalogoDeducciones.Contains(i);
+
+                if(idDeduccion)
+
+                if (idDeduccion)
+                {
+
+                }
+                else
+                {
+
+                }
+
+            }
+
+            //for (k = 0; k < b.Length; k++)
+            //{
+            //    Console.WriteLine("Ingrese numero vector B");
+            //    b[k] = Convert.ToInt32(Console.ReadLine())
+
+            //  //PARA CADA VALOR DE B vas a buscar si existe en a.
+            //    for (i = 0; i < a.Length; i++)
+            //        if (b[k] == a[i])
+            //        {
+            //            c[l] = b[k];
+            //            Console.WriteLine("C: " + c[l]);
+            //            l++;
+            //        }
+
+            //}
+
             if (catalogoDePlanillas != null && catalogoIngresos != null && catalogoDeducciones != null)
             {
                 //Eliminar los registros del detalle del catalogo de ingresos de la planilla
