@@ -796,13 +796,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id, Nullable<int> tede_UsuarioModifica, Nullable<System.DateTime> tede_FechaModifica)
         {
             var tede_IdParameter = tede_Id.HasValue ?
                 new ObjectParameter("tede_Id", tede_Id) :
                 new ObjectParameter("tede_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter);
+            var tede_UsuarioModificaParameter = tede_UsuarioModifica.HasValue ?
+                new ObjectParameter("tede_UsuarioModifica", tede_UsuarioModifica) :
+                new ObjectParameter("tede_UsuarioModifica", typeof(int));
+    
+            var tede_FechaModificaParameter = tede_FechaModifica.HasValue ?
+                new ObjectParameter("tede_FechaModifica", tede_FechaModifica) :
+                new ObjectParameter("tede_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Insert(Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioCrea, Nullable<System.DateTime> tede_FechaCrea)
@@ -867,13 +875,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Update", tede_IdParameter, tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu)
+        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu, Nullable<int> tde_UsuarioModifica, Nullable<System.DateTime> tde_FechaModifica)
         {
             var tde_IdTipoDeduParameter = tde_IdTipoDedu.HasValue ?
                 new ObjectParameter("tde_IdTipoDedu", tde_IdTipoDedu) :
                 new ObjectParameter("tde_IdTipoDedu", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter);
+            var tde_UsuarioModificaParameter = tde_UsuarioModifica.HasValue ?
+                new ObjectParameter("tde_UsuarioModifica", tde_UsuarioModifica) :
+                new ObjectParameter("tde_UsuarioModifica", typeof(int));
+    
+            var tde_FechaModificaParameter = tde_FechaModifica.HasValue ?
+                new ObjectParameter("tde_FechaModifica", tde_FechaModifica) :
+                new ObjectParameter("tde_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter, tde_UsuarioModificaParameter, tde_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Insert(string tde_Descripcion, Nullable<int> tde_UsuarioCrea, Nullable<System.DateTime> tde_FechaCrea)
@@ -972,6 +988,65 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tpdi_IdDetallePlanillaIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Update", tpdi_IdDetallePlanillaIngresoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Delete_Result> UDP_RRHH_tbTipoAmonestaciones_Delete(Nullable<int> tamo_Id, string tamo_razon_Inactivo, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)
+        {
+            var tamo_IdParameter = tamo_Id.HasValue ?
+                new ObjectParameter("tamo_Id", tamo_Id) :
+                new ObjectParameter("tamo_Id", typeof(int));
+    
+            var tamo_razon_InactivoParameter = tamo_razon_Inactivo != null ?
+                new ObjectParameter("tamo_razon_Inactivo", tamo_razon_Inactivo) :
+                new ObjectParameter("tamo_razon_Inactivo", typeof(string));
+    
+            var tamo_UsuarioModificaParameter = tamo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tamo_UsuarioModifica", tamo_UsuarioModifica) :
+                new ObjectParameter("tamo_UsuarioModifica", typeof(int));
+    
+            var tamo_FechaModificaParameter = tamo_FechaModifica.HasValue ?
+                new ObjectParameter("tamo_FechaModifica", tamo_FechaModifica) :
+                new ObjectParameter("tamo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Delete_Result>("UDP_RRHH_tbTipoAmonestaciones_Delete", tamo_IdParameter, tamo_razon_InactivoParameter, tamo_UsuarioModificaParameter, tamo_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Insert_Result> UDP_RRHH_tbTipoAmonestaciones_Insert(string tamo_Descripcion, Nullable<int> tamo_UsuarioCrea, Nullable<System.DateTime> tamo_FechaCrea)
+        {
+            var tamo_DescripcionParameter = tamo_Descripcion != null ?
+                new ObjectParameter("tamo_Descripcion", tamo_Descripcion) :
+                new ObjectParameter("tamo_Descripcion", typeof(string));
+    
+            var tamo_UsuarioCreaParameter = tamo_UsuarioCrea.HasValue ?
+                new ObjectParameter("tamo_UsuarioCrea", tamo_UsuarioCrea) :
+                new ObjectParameter("tamo_UsuarioCrea", typeof(int));
+    
+            var tamo_FechaCreaParameter = tamo_FechaCrea.HasValue ?
+                new ObjectParameter("tamo_FechaCrea", tamo_FechaCrea) :
+                new ObjectParameter("tamo_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Insert_Result>("UDP_RRHH_tbTipoAmonestaciones_Insert", tamo_DescripcionParameter, tamo_UsuarioCreaParameter, tamo_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Update_Result> UDP_RRHH_tbTipoAmonestaciones_Update(Nullable<int> tamo_Id, string tamo_Descripcion, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)
+        {
+            var tamo_IdParameter = tamo_Id.HasValue ?
+                new ObjectParameter("tamo_Id", tamo_Id) :
+                new ObjectParameter("tamo_Id", typeof(int));
+    
+            var tamo_DescripcionParameter = tamo_Descripcion != null ?
+                new ObjectParameter("tamo_Descripcion", tamo_Descripcion) :
+                new ObjectParameter("tamo_Descripcion", typeof(string));
+    
+            var tamo_UsuarioModificaParameter = tamo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tamo_UsuarioModifica", tamo_UsuarioModifica) :
+                new ObjectParameter("tamo_UsuarioModifica", typeof(int));
+    
+            var tamo_FechaModificaParameter = tamo_FechaModifica.HasValue ?
+                new ObjectParameter("tamo_FechaModifica", tamo_FechaModifica) :
+                new ObjectParameter("tamo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Update_Result>("UDP_RRHH_tbTipoAmonestaciones_Update", tamo_IdParameter, tamo_DescripcionParameter, tamo_UsuarioModificaParameter, tamo_FechaModificaParameter);
         }
     }
 }

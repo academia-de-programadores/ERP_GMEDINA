@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -211,6 +211,7 @@
           <Property Name="deif_UsuarioModifica" Type="int" />
           <Property Name="deif_FechaModifica" Type="datetime" />
           <Property Name="deif_Activo" Type="bit" Nullable="false" />
+          <Property Name="deif_Pagado" Type="bit" />
         </EntityType>
         <EntityType Name="tbEmpleadoBonos">
           <Key>
@@ -2935,18 +2936,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id">
-          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="depto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_bEmpleadoComisiones_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbEmpleadoComisiones" Type="Self.tbEmpleadoComisiones" Multiplicity="*" />
@@ -3076,18 +3065,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbPrestaciones">
               <PropertyRef Name="pres_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4567,30 +4544,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="rper_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="rper_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
@@ -5058,6 +5011,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tede_Id" Type="int" Mode="In" />
+          <Parameter Name="tede_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tede_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tede_RangoInicial" Type="decimal" Mode="In" />
@@ -5078,6 +5033,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </Function>
         <Function Name="UDP_Plani_tbTipoDeduccion_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
+          <Parameter Name="tde_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tde_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTipoDeduccion_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tde_Descripcion" Type="nvarchar" Mode="In" />
@@ -5107,6 +5064,28 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbFasesReclutamiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="fare_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Id" Type="int" Mode="In" />
+          <Parameter Name="tamo_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Id" Type="int" Mode="In" />
+          <Parameter Name="tamo_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
@@ -5889,10 +5868,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
             <End Role="tbHistorialContrataciones" EntitySet="tbHistorialContrataciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_bEmpleadoComisiones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_bEmpleadoComisiones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbEmpleadoComisiones" EntitySet="tbEmpleadoComisiones" />
@@ -5936,10 +5911,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbPrestaciones_pres_UsuarioModifica" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbPrestaciones_pres_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPrestaciones" EntitySet="tbPrestaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbSueldos_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbSueldos_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -6433,14 +6404,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea" Association="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica" Association="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea" Association="Self.FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
@@ -6534,8 +6497,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -6964,6 +6926,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.FK_Plani_tbCatalogoDeDeducciones_tbDeduccionInstitucionFinanciera_cde_IdDeducciones" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbCatalogoDeDeducciones" />
           <NavigationProperty Name="tbInstitucionesFinancieras" Relationship="Self.FK_Plani_tbInstitucionesFinancieras_tbDeduInstiFinan_insf_IdInstituFinan" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbInstitucionesFinancieras" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbEmpleados" />
+          <Property Name="deif_Pagado" Type="Boolean" />
         </EntityType>
         <EntityType Name="tbEmpleadoBonos">
           <Key>
@@ -13066,10 +13029,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_Plani_CatalogoDeduccionesEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeduccionesEdit_Select_Result1)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeIngresosEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeIngresosEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Inactivar" ReturnType="Collection(String)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
@@ -13134,7 +13097,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cin_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(String)">
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
@@ -13180,7 +13143,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="cb_Id" Mode="In" Type="Int32" />
+          <Parameter Name="cb_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -13202,7 +13165,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cb_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbFormaPago_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="tede_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tede_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Insert" ReturnType="Collection(String)">
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
@@ -13224,7 +13187,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="tede_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tede_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tede_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tede_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Insert" ReturnType="Collection(String)">
             <Parameter Name="tede_RangoInicial" Mode="In" Type="Decimal" />
@@ -13244,7 +13209,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="tede_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTipoDeduccion_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+          <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="tde_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTipoDeduccion_Insert" ReturnType="Collection(String)">
             <Parameter Name="tde_Descripcion" Mode="In" Type="String" />
@@ -13264,7 +13231,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="tpdd_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" ReturnType="Collection(String)">
-            <Parameter Name="tpdd_IdPlanillaDetDeduccion" Mode="In" Type="Int32" />
+          <Parameter Name="tpdd_IdPlanillaDetDeduccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" ReturnType="Collection(String)">
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
@@ -13273,7 +13240,24 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="tpdi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(String)">
-            <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
+          <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result)">
+            <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result)">
+            <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result)">
+            <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -13310,6 +13294,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13525,6 +13518,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySetMapping Name="tbDeduccionInstitucionFinanciera">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera">
               <MappingFragment StoreEntitySet="tbDeduccionInstitucionFinanciera">
+                <ScalarProperty Name="deif_Pagado" ColumnName="deif_Pagado" />
                 <ScalarProperty Name="deif_IdDeduccionInstFinanciera" ColumnName="deif_IdDeduccionInstFinanciera" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="insf_IdInstitucionFinanciera" ColumnName="insf_IdInstitucionFinanciera" />
@@ -15054,6 +15048,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleDeduccion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleDeduccion_Update" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
