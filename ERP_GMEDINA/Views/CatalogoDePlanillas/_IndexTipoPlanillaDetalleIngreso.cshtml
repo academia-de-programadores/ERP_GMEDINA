@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbTipoPlanillaDetalleIngreso>
+
+<div class="col-lg-6">
+    <div class="ibox-title">
+        <h5>Ingresos de la planilla</h5>
+    </div>
+    <div class="ibox-content">
+        <table class="table table-bordered">
+            <thead>
+                <tr role="row">
+                    <th>@Html.DisplayNameFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if(item.tbCatalogoDeIngresos.cin_Activo == true)
+                    {
+                        <tr class="gradeA odd" role="row" data-id="@item.tpdi_IdDetallePlanillaIngreso">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

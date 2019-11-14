@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbTipoPlanillaDetalleDeduccion>
+
+<div class="col-lg-6">
+    <div class="ibox-title">
+        <h5>Deducciones de la Planilla</h5>
+    </div>
+    <div class="ibox-content">
+        <table class="table table-bordered">
+            <thead>
+                <tr role="row">
+                    <th>@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.tbCatalogoDeDeducciones.cde_Activo == true)
+                    {
+                        <tr class="gradeA odd" role="row" data-id="@item.tpdd_IdPlanillaDetDeduccion">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr role="row">
+                    <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+

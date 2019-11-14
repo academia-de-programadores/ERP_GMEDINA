@@ -159,13 +159,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
+    <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cCatalogoDePlanillas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -439,9 +442,6 @@
     <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result1.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -452,6 +452,33 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_BonosColaborador.cs">
@@ -740,6 +767,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -1265,6 +1293,13 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Create.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Delete.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleDeduccion.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleIngreso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

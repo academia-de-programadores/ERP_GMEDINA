@@ -1,0 +1,80 @@
+﻿@model ERP_GMEDINA.Models.tbCatalogoDePlanillas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbCatalogoDePlanillas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cpla_DescripcionPlanilla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpla_DescripcionPlanilla)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpla_FrecuenciaEnDias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpla_FrecuenciaEnDias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpla_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpla_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpla_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpla_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpla_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpla_Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
