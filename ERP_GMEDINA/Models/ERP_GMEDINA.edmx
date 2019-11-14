@@ -13149,7 +13149,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cpla_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDecimoTercerMes_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDecimoTercerMes_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDecimoTercerMes_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dtm_DecimoTercer" Mode="In" Type="Decimal" />
           </FunctionImport>
@@ -13309,6 +13309,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDecimoTercerMes_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -15034,7 +15037,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoTercerMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoTercerMes_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoTercerMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoTercerMes_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDecimoTercerMes_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" />
