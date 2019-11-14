@@ -5,17 +5,15 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="col-lg-12">
-<div class="ibox float-e-margins">
 <div class="ibox-title">
 	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
-	<h2>Edit</h2>
+	<h2>Editar</h2>
 </div>
 
 
+<div class="ibox-content">
 @using (Html.BeginForm())
 {
-<div class="ibox-content">
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -84,11 +82,17 @@
             </div>
         </div>
     </div>
-</div>
 }
-</div>
-</div>
 
+<div class="row">
+    <div class="col-md-11">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <button class="btn btn-danger btn-lg pull-right" id="inactivar">Inactivar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h2>Auditoría</h2>
@@ -119,7 +123,8 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/Scripts/app/general/CatalogoPlanillas");
 }
+</div>
+@* TOOD: Renderizar scripts de una buena manera aqui *@
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>

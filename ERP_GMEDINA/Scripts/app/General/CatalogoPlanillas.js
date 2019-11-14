@@ -35,6 +35,17 @@ $(document).on('click', '#tblCatalogoPlanillas tbody tr td #btnDesplegarIngresos
     fila = $('#fila-' + ID);
 });
 
+//Seleccionar todo 
+$(function () {
+    $('#catalogoDeIngresos #seleccionar-todos').change(function () {
+        $('#listado > input[type=checkbox]').prop('checked', $(this).is(':checked'));
+    });
+
+    $('#catalogoDeDeducciones #seleccionar-todos').change(function () {
+        $('#listado > input[type=checkbox]').prop('checked', $(this).is(':checked'));
+    });
+});
+
 $(document).on('click', '#btnGuardarCatalogoDePlanillasIngresosDeducciones', function () {
     create();
 });
@@ -129,3 +140,8 @@ var create = function (edit) {
     console.log(descripcionPlanilla);
     console.log(frecuenciaDias);
 }
+
+//inactivar
+$('#inactivar').click(() =>{
+    console.log('click');
+})
