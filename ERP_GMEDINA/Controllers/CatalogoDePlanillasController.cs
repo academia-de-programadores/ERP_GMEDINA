@@ -33,6 +33,7 @@ namespace ERP_GMEDINA.Controllers
             //hice esto
 
 
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
