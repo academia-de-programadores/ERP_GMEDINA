@@ -27,12 +27,34 @@ namespace ERP_GMEDINA.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
+        public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
+        public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
+        public virtual DbSet<V_ColaboradoresPorPlanilla> V_ColaboradoresPorPlanilla { get; set; }
+        public virtual DbSet<V_ComisionesColaborador> V_ComisionesColaborador { get; set; }
+        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
+        public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
+        public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
+        public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
+        public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
+        public virtual DbSet<V_EmpleadoComisiones> V_EmpleadoComisiones { get; set; }
+        public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
+        public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
+        public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
+        public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
+        public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
+        public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
+        public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
+        public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
+        public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<tbAccesoRol> tbAccesoRol { get; set; }
         public virtual DbSet<tbObjeto> tbObjeto { get; set; }
         public virtual DbSet<tbRol> tbRol { get; set; }
         public virtual DbSet<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         public virtual DbSet<tbAuxilioDeCesantias> tbAuxilioDeCesantias { get; set; }
         public virtual DbSet<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
@@ -96,7 +118,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbPrestaciones> tbPrestaciones { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
         public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
-        public virtual DbSet<tbRequisicionPersonal> tbRequisicionPersonal { get; set; }
         public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
@@ -110,28 +131,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         public virtual DbSet<tbVacaciones> tbVacaciones { get; set; }
-        public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
-        public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
-        public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
-        public virtual DbSet<V_ColaboradoresPorPlanilla> V_ColaboradoresPorPlanilla { get; set; }
-        public virtual DbSet<V_ComisionesColaborador> V_ComisionesColaborador { get; set; }
-        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
-        public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
-        public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
-        public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
-        public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
-        public virtual DbSet<V_EmpleadoComisiones> V_EmpleadoComisiones { get; set; }
-        public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
-        public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
-        public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
-        public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
-        public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
-        public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
-        public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
-        public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
-        public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -717,13 +716,13 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Update", cb_IdParameter, emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> fpa_IdFormaPago)
         {
-            var tede_IdParameter = tede_Id.HasValue ?
-                new ObjectParameter("tede_Id", tede_Id) :
-                new ObjectParameter("tede_Id", typeof(int));
+            var fpa_IdFormaPagoParameter = fpa_IdFormaPago.HasValue ?
+                new ObjectParameter("fpa_IdFormaPago", fpa_IdFormaPago) :
+                new ObjectParameter("fpa_IdFormaPago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", tede_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", fpa_IdFormaPagoParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<System.DateTime> insf_FechaCrea, Nullable<bool> insf_Activo)
@@ -796,13 +795,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id, Nullable<int> tede_UsuarioModifica, Nullable<System.DateTime> tede_FechaModifica)
         {
             var tede_IdParameter = tede_Id.HasValue ?
                 new ObjectParameter("tede_Id", tede_Id) :
                 new ObjectParameter("tede_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter);
+            var tede_UsuarioModificaParameter = tede_UsuarioModifica.HasValue ?
+                new ObjectParameter("tede_UsuarioModifica", tede_UsuarioModifica) :
+                new ObjectParameter("tede_UsuarioModifica", typeof(int));
+    
+            var tede_FechaModificaParameter = tede_FechaModifica.HasValue ?
+                new ObjectParameter("tede_FechaModifica", tede_FechaModifica) :
+                new ObjectParameter("tede_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Insert(Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioCrea, Nullable<System.DateTime> tede_FechaCrea)
@@ -867,13 +874,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Update", tede_IdParameter, tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu)
+        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu, Nullable<int> tde_UsuarioModifica, Nullable<System.DateTime> tde_FechaModifica)
         {
             var tde_IdTipoDeduParameter = tde_IdTipoDedu.HasValue ?
                 new ObjectParameter("tde_IdTipoDedu", tde_IdTipoDedu) :
                 new ObjectParameter("tde_IdTipoDedu", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter);
+            var tde_UsuarioModificaParameter = tde_UsuarioModifica.HasValue ?
+                new ObjectParameter("tde_UsuarioModifica", tde_UsuarioModifica) :
+                new ObjectParameter("tde_UsuarioModifica", typeof(int));
+    
+            var tde_FechaModificaParameter = tde_FechaModifica.HasValue ?
+                new ObjectParameter("tde_FechaModifica", tde_FechaModifica) :
+                new ObjectParameter("tde_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter, tde_UsuarioModificaParameter, tde_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Insert(string tde_Descripcion, Nullable<int> tde_UsuarioCrea, Nullable<System.DateTime> tde_FechaCrea)
@@ -972,6 +987,65 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tpdi_IdDetallePlanillaIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Update", tpdi_IdDetallePlanillaIngresoParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbfasesReclutamiento_Delete(Nullable<int> fare_Id, string fare_razon_Inactivo, Nullable<int> fare_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var fare_razon_InactivoParameter = fare_razon_Inactivo != null ?
+                new ObjectParameter("fare_razon_Inactivo", fare_razon_Inactivo) :
+                new ObjectParameter("fare_razon_Inactivo", typeof(string));
+    
+            var fare_UsuarioModificaParameter = fare_UsuarioModifica.HasValue ?
+                new ObjectParameter("fare_UsuarioModifica", fare_UsuarioModifica) :
+                new ObjectParameter("fare_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbfasesReclutamiento_Delete", fare_IdParameter, fare_razon_InactivoParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbFasesReclutamiento_Insert(string fare_Descripcion, Nullable<int> fare_UsuarioCrea, Nullable<System.DateTime> fare_FechaCrea)
+        {
+            var fare_DescripcionParameter = fare_Descripcion != null ?
+                new ObjectParameter("fare_Descripcion", fare_Descripcion) :
+                new ObjectParameter("fare_Descripcion", typeof(string));
+    
+            var fare_UsuarioCreaParameter = fare_UsuarioCrea.HasValue ?
+                new ObjectParameter("fare_UsuarioCrea", fare_UsuarioCrea) :
+                new ObjectParameter("fare_UsuarioCrea", typeof(int));
+    
+            var fare_FechaCreaParameter = fare_FechaCrea.HasValue ?
+                new ObjectParameter("fare_FechaCrea", fare_FechaCrea) :
+                new ObjectParameter("fare_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbFasesReclutamiento_Insert", fare_DescripcionParameter, fare_UsuarioCreaParameter, fare_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbFasesReclutamiento_Update(Nullable<int> fare_Id, string fare_Descripcion, Nullable<int> fare_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var fare_DescripcionParameter = fare_Descripcion != null ?
+                new ObjectParameter("fare_Descripcion", fare_Descripcion) :
+                new ObjectParameter("fare_Descripcion", typeof(string));
+    
+            var fare_UsuarioModificaParameter = fare_UsuarioModifica.HasValue ?
+                new ObjectParameter("fare_UsuarioModifica", fare_UsuarioModifica) :
+                new ObjectParameter("fare_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbFasesReclutamiento_Update", fare_IdParameter, fare_DescripcionParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
     }
 }
