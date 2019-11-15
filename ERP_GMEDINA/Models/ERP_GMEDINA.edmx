@@ -5067,6 +5067,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Id" Type="int" Mode="In" />
+          <Parameter Name="idi_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Id" Type="int" Mode="In" />
+          <Parameter Name="idi_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" Schema="Acce" store:Type="Tables" />
@@ -8337,6 +8354,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result)">
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result)">
+            <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result)">
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13186,6 +13220,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14917,6 +14960,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -160,12 +160,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -449,6 +451,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_BonosColaborador.cs">
@@ -1262,6 +1273,11 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\Idiomas\Create.cshtml" />
+    <Content Include="Views\Idiomas\Delete.cshtml" />
+    <Content Include="Views\Idiomas\Details.cshtml" />
+    <Content Include="Views\Idiomas\Edit.cshtml" />
+    <Content Include="Views\Idiomas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
