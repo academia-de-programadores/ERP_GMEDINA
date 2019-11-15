@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Models
     {
     }
     public class cHabilidades
-    {
+    { 
         [Display(Name = "Id")]
         public int habi_Id { get; set; }
         [Display(Name = "Descripcion")]

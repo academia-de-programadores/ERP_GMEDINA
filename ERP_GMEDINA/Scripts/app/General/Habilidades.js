@@ -1,5 +1,4 @@
-﻿var id = 0;
-$(document).ready(function () {
+﻿$(document).ready(function () {
     AsignarFunciones();
 });
 function AsignarFunciones() {
@@ -10,9 +9,16 @@ function AsignarFunciones() {
     });
     $(".tablaEditar").click(function () {
         var tr = this.closest("tr");
-        $("#FormEditar").find("#habi_Descripcion").val(tabla.row(tr).data()["0"]);
         id = $(this).data("id");
-        $('#ModalEditar').modal('show');
+        _ajax(null,
+            '/Habilidades/Edit/' + id,
+            'GET',
+            function (obj) {
+                if (obj != "-1" || obj != "-2" || obj != "-3") {
+                    $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+                    $('#ModalEditar').modal('show');
+                }
+            });
     });
     $("#btnInhabilitar").click(function () {
         CierraPopup();
@@ -100,7 +106,7 @@ function llenarTabla() {
                 console.log(value.habi_Descripcion);
                 tabla.row.add([value.habi_Descripcion,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                        "<a class='btn btn-primary btn-xs tablaDetalles' data-id=" + value.habi_Id + ">Detalles</a>" +
+                    "<a class='btn btn-primary btn-xs' href='/Habilidades/Details/" + value.habi_Id + "' >Detalles</a>" +
                         "<a class='btn btn-default btn-xs tablaEditar' data-id=" + value.habi_Id + ">Editar</a>" +
                     "</div>"]).draw();
             });

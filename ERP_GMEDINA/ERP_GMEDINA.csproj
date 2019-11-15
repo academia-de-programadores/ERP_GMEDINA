@@ -939,6 +939,7 @@
     <Content Include="Views\Habilidades\Details.cshtml" />
     <Content Include="Views\Habilidades\_Edit.cshtml" />
     <Content Include="Views\Habilidades\Index.cshtml" />
+    <Content Include="Views\Habilidades\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

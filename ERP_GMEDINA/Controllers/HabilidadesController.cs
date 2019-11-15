@@ -18,10 +18,9 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             List< tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbUsuario Usuario = new tbUsuario { usu_Id = 1 };
-                Session["Usuario"] = Usuario;
                 tbHabilidades = db.tbHabilidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbHabilidades);
             }
@@ -35,8 +34,9 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
-            foreach (tbHabilidades x in db.tbHabilidades.ToList())
+            List<tbHabilidades> tbHabilidades =
+                new List<Models.tbHabilidades> { };
+            foreach (tbHabilidades x in db.tbHabilidades.ToList().Where(x=>x.habi_Estado==true))
             {
                 tbHabilidades.Add( new tbHabilidades
                 {
@@ -104,13 +104,12 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbHabilidades tbHabilidades = db.tbHabilidades.Find(id);
-            if (tbHabilidades == null)
+            if (tbHabilidades == null || !tbHabilidades.habi_Estado)
             {
                 return HttpNotFound();
             }
-            ViewBag.habi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHabilidades.habi_UsuarioCrea);
-            ViewBag.habi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHabilidades.habi_UsuarioModifica);
-            return View(tbHabilidades);
+            Session["id"] = id;
+            return Json(new tbHabilidades { habi_Descripcion=tbHabilidades.habi_Descripcion },JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Edit/5
@@ -119,11 +118,12 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Edit(tbHabilidades tbHabilidades)
         {
+            var id =(int) Session["id"];
             string msj = "";
             var Usuario = (tbUsuario)Session["Usuario"];
             try
             {
-                var list = db.UDP_RRHH_tbHabilidades_Update(tbHabilidades.habi_Id,tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
                 foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
                 {
                     msj = item.MensajeError;
@@ -141,11 +141,12 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(tbHabilidades tbHabilidades)
         {
+            var id = (int)Session["id"];
             string msj = "";
             var Usuario = (tbUsuario)Session["Usuario"];
             try
             {
-                var list = db.UDP_RRHH_tbHabilidades_Delete(tbHabilidades.habi_Id,tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                 foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
                 {
                     msj = item.MensajeError;
