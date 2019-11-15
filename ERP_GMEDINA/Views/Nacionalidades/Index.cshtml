@@ -7,7 +7,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>tbNacionalidades</h2>
+        <h2>Nacionalidades</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
@@ -20,9 +20,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>List of tbNacionalidades</h5>
+                    <h5>Lista de Nacionalidades</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar tbNacionalidades", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @Html.ActionLink("Registrar Nacionalidad", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -30,12 +30,12 @@
                     <thead>
                         <tr role="row">
                             <th>@Html.DisplayNameFor(model => model.nac_Descripcion)</th>
-                            <th>@Html.DisplayNameFor(model => model.nac_Estado)</th>
+                            @*<th>@Html.DisplayNameFor(model => model.nac_Estado)</th>
                             <th>@Html.DisplayNameFor(model => model.nac_RazonInactivo)</th>
                             <th>@Html.DisplayNameFor(model => model.nac_FechaCrea)</th>
                             <th>@Html.DisplayNameFor(model => model.nac_FechaModifica)</th>
                             <th>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>*@
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -45,7 +45,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.nac_Descripcion)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.nac_Estado)
                             </td>
                             <td>
@@ -62,7 +62,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
-                            </td>
+                            </td>*@
                            <td>
                               @Html.ActionLink("Detalles", "Details", new { id=item.nac_Id },  new {@class = "btn btn-primary btn-xs" })
                               @Html.ActionLink("Editar", "Edit", new { id=item.nac_Id }, new {@class = "btn btn-default btn-xs" })
