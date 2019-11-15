@@ -58,8 +58,21 @@ namespace ERP_GMEDINA.Controllers
                 {
                     IEnumerable<object> listcargos = null;
                     string MensajeError = "";
-                    db.tbCargos.Add(tbCargos);
-                    db.SaveChanges();
+                    listcargos = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion,
+                                                           1,
+                                                           DateTime.Now
+                                                            );
+                    foreach (UDP_RRHH_tbCargos_Insert_Result car in listcargos)
+                        MensajeError = car.MensajeError;
+
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "1. No se pudo insertar el registro");
+                        return View(tbCargos);
+                    }
+
+               
                     return RedirectToAction("Index");
                 }
                 catch
