@@ -65,9 +65,9 @@
 
                     @foreach (var item in ViewBag.CatalogoDeducciones)
                     {
-                        <div class="form-horizontal">
+                        <div class="form-horizontal col-xs-offset-1">
                             <div class="form-group">
-                                <input type="checkbox" class="custom-control-input" id="check-@item.id" checked="@item.check" /> @item.descripcion
+                                <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
                             </div>
                         </div>
                     }
@@ -114,4 +114,11 @@
 </div>
 @* TOOD: Renderizar scripts de una buena manera aqui *@
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
 <script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+}
+
+
+<link href="~/Content/plugins/izitoast/iziToast.min.css" rel="stylesheet" />

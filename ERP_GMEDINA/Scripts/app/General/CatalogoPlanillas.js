@@ -1,6 +1,5 @@
 ﻿//Funcion generica para reutilizar AJAX
 function _ajax(params, uri, type, callback) {
-    debugger;
     $.ajax({
         url: uri,
         type: type,
@@ -47,12 +46,11 @@ $(document).on('click', '#btnEditarCatalogoDePlanillasIngresosDeducciones', func
 });
 
 function verificarCampos(descripcionPlanilla, frecuenciaDias, catalogoIngresos, catalogoDeducciones) {
-    debugger;
-    var validado = false;
-
-
     if (descripcionPlanilla == "" || frecuenciaDias == "" || catalogoIngresos.length == 0 || catalogoDeducciones.length == 0) {
-        console.log('Hubo un error');
+        iziToast.error({
+            title: 'Error',
+            message: 'Faltan campos por ingresar',
+        });
         return false;
     }
     return true;
@@ -107,9 +105,7 @@ var create = function (edit) {
             arrayDeducciones.push(currentCheckboxIdDedu);
         }
     });
-    debugger;
     if (verificarCampos(descripcionPlanilla, frecuenciaDias, arrayIngresos, arrayDeducciones)) {
-        debugger;
         if (edit != 'edit')
             $.ajax({
                 url: "/CatalogoDePlanillas/Create",
