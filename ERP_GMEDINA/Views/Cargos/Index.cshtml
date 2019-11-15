@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de tbCargos</h5>
+                    <h5>List of tbCargos</h5>
                     <div class="ibox-tools">
                        @Html.ActionLink("Registrar tbCargos", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
@@ -63,7 +63,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
                             </td>
-                            <td>
+                           <td>
                               @Html.ActionLink("Detalles", "Details", new { id=item.car_Id },  new {@class = "btn btn-primary btn-xs" })
                               @Html.ActionLink("Editar", "Edit", new { id=item.car_Id }, new {@class = "btn btn-default btn-xs" })
                             </td>
@@ -77,6 +77,49 @@
     </div>
  </div>
     
+
+ @*MODAL CREAR*@
+<div class="modal inmodal fade" id="ModalCrear" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Crear Horario</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @*--PARTIAL VIEW AQUI--*@
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnAgregar" data-dismiss="modal">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*MODAL CREAR*@
+
+@*MODAL EDITAR*@
+<div class="modal inmodal fade" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar Horario</h4>
+            </div>
+            <div class="modal-body" id="ModalEdit">
+                @*--PARTIAL VIEW AQUI--*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnEditarModal" data-dismiss="modal">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*MODAL EDITAR*@
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }

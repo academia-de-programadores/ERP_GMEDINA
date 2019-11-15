@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            var tbCargos = db.tbCargos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbCargos = db.tbCargos.Include(t => t.car_Estado==true);
             return View(tbCargos.ToList());
         }
 
