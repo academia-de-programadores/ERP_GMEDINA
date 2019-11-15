@@ -5050,6 +5050,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_usuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbfasesReclutamiento_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="fare_Id" Type="int" Mode="In" />
           <Parameter Name="fare_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -8337,6 +8354,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(String)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(String)">
+            <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(String)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -14917,6 +14951,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
