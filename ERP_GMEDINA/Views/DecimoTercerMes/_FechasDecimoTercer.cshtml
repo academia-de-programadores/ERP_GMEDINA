@@ -1,22 +1,23 @@
 ﻿@model ERP_GMEDINA.Models.tbHistorialDePago
-@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST" }))
+@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST"}))
 {
-
 	<div class="modal-body">
 
 
 		<div class="form-group">
-			<label class="font-noraml">Fecha Inicial</label>
+			@Html.LabelFor(model => model.hipa_FechaInicio, htmlAttributes: new { @class = "font-noraml" }) <br />
 			<div class="input-group date">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaInicio" name="hipa_FechaInicio">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control",@type = "date", @name="hipa_FechaInicio", @id= "hipa_FechaInicio" } })       
 			</div>
+            @Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
 		</div>
 
 		<div class="form-group">
-			<label class="font-noraml">Fecha Final</label>
+			@Html.LabelFor(model => model.hipa_FechaFin, htmlAttributes: new { @class = "font-noraml" })
 			<div class="input-group date">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaFin" name="hipa_FechaFin">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control",@type = "date", @name = "hipa_FechaFin", @id= "hipa_FechaFin" } })
 			</div>
+            @Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
 		</div>
 
 	</div>
@@ -28,4 +29,3 @@
 		<button type="submit" class="btn btn-primary" id="btnEnviarFecha">Aceptar</button>
 	</div>
 }
-

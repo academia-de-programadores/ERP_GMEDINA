@@ -120,6 +120,8 @@ $("#btnCerrarFecha").click(function () {
 
 
 
+
+
 //$(document).on("click", "#btnEnviarFecha", function () {
 //    var FechaInicial = $("#hipa_FechaInicio").val();
 //    var FechaFinal = $("#hipa_FechaFin").val();
@@ -137,9 +139,8 @@ $("#btnCerrarFecha").click(function () {
 //            method: "POST",
 //            dataType: "json",
 //            contentType: "application/json; charset=utf-8",
-//            data: JSON.stringify({ hipa_FechaInicio: FechaInicial, hipa_FechaFin: FechaFinal })
+//            data: JSON.stringify({ hipa_FechaInicio: FechaInicial, hipa_FechaFin: FechaFinal })            
 //        });
         
 //    }
-
 //});
