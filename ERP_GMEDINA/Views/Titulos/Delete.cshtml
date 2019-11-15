@@ -1,0 +1,81 @@
+﻿@model ERP_GMEDINA.Models.tbTitulos
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbTitulos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titu_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titu_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titu_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titu_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titu_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titu_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titu_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titu_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.titu_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titu_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
