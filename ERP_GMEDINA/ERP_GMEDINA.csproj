@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\TipoMonedasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -449,6 +450,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_BonosColaborador.cs">
@@ -1262,6 +1272,11 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\TipoMonedas\Create.cshtml" />
+    <Content Include="Views\TipoMonedas\Delete.cshtml" />
+    <Content Include="Views\TipoMonedas\Details.cshtml" />
+    <Content Include="Views\TipoMonedas\Edit.cshtml" />
+    <Content Include="Views\TipoMonedas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

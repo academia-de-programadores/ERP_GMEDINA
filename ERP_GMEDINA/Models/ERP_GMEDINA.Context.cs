@@ -1047,5 +1047,64 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbFasesReclutamiento_Update", fare_IdParameter, fare_DescripcionParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMoneda_Update_Result> UDP_RRHH_tbTipoMoneda_Update(Nullable<int> tmon_Id, string tmon_Descripcion, Nullable<int> tmon_UsuarioModifica, Nullable<System.DateTime> tmon_FechaModifica)
+        {
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var tmon_DescripcionParameter = tmon_Descripcion != null ?
+                new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
+                new ObjectParameter("tmon_Descripcion", typeof(string));
+    
+            var tmon_UsuarioModificaParameter = tmon_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmon_UsuarioModifica", tmon_UsuarioModifica) :
+                new ObjectParameter("tmon_UsuarioModifica", typeof(int));
+    
+            var tmon_FechaModificaParameter = tmon_FechaModifica.HasValue ?
+                new ObjectParameter("tmon_FechaModifica", tmon_FechaModifica) :
+                new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMoneda_Update_Result>("UDP_RRHH_tbTipoMoneda_Update", tmon_IdParameter, tmon_DescripcionParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Delete_Result> UDP_RRHH_tbTipoMonedas_Delete(Nullable<int> tmon_Id, string tmon_razon_Inactivo, Nullable<int> tmon_UsuarioModifica, Nullable<System.DateTime> tmon_FechaModifica)
+        {
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var tmon_razon_InactivoParameter = tmon_razon_Inactivo != null ?
+                new ObjectParameter("tmon_razon_Inactivo", tmon_razon_Inactivo) :
+                new ObjectParameter("tmon_razon_Inactivo", typeof(string));
+    
+            var tmon_UsuarioModificaParameter = tmon_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmon_UsuarioModifica", tmon_UsuarioModifica) :
+                new ObjectParameter("tmon_UsuarioModifica", typeof(int));
+    
+            var tmon_FechaModificaParameter = tmon_FechaModifica.HasValue ?
+                new ObjectParameter("tmon_FechaModifica", tmon_FechaModifica) :
+                new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Delete_Result>("UDP_RRHH_tbTipoMonedas_Delete", tmon_IdParameter, tmon_razon_InactivoParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Insert_Result> UDP_RRHH_tbTipoMonedas_Insert(string tmon_Descripcion, Nullable<int> tmon_UsuarioCrea, Nullable<System.DateTime> tmon_FechaCrea)
+        {
+            var tmon_DescripcionParameter = tmon_Descripcion != null ?
+                new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
+                new ObjectParameter("tmon_Descripcion", typeof(string));
+    
+            var tmon_UsuarioCreaParameter = tmon_UsuarioCrea.HasValue ?
+                new ObjectParameter("tmon_UsuarioCrea", tmon_UsuarioCrea) :
+                new ObjectParameter("tmon_UsuarioCrea", typeof(int));
+    
+            var tmon_FechaCreaParameter = tmon_FechaCrea.HasValue ?
+                new ObjectParameter("tmon_FechaCrea", tmon_FechaCrea) :
+                new ObjectParameter("tmon_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Insert_Result>("UDP_RRHH_tbTipoMonedas_Insert", tmon_DescripcionParameter, tmon_UsuarioCreaParameter, tmon_FechaCreaParameter);
+        }
     }
 }
