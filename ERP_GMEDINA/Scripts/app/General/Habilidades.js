@@ -138,7 +138,7 @@ function llenarTabla() {
                 console.log(value.habi_Descripcion);
                 tabla.row.add([value.habi_Descripcion,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs' data-id='" + value.habi_Id + "' >Detalles</a>" +
+                    "<a class='btn btn-primary btn-xs tablaDetalles' data-id='" + value.habi_Id + "' >Detalles</a>" +
                         "<a class='btn btn-default btn-xs tablaEditar' data-id=" + value.habi_Id + ">Editar</a>" +
                     "</div>"]).draw();
             });
