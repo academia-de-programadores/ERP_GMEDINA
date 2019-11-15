@@ -310,10 +310,10 @@ namespace ERP_GMEDINA.Controllers
                 mensajeErrorDeduccion = "", 
                 response = "", 
                 MensajeError = "", 
-                cpla_DescripcionPlanilla = "",
+                cpla_DescripcionPlanilla = catalogoDePlanillas[0],
                 MensajeErrorCatalogoDeIngresos =""
                 , MensajeErrorCatalogoDeDeducciones = "";
-            int cpla_UsuarioModifica = 1, cpla_FrecuenciaEnDias = 0; //TODO: Editar el usuario modifica
+            int cpla_UsuarioModifica = 1, cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //TODO: Editar el usuario modifica
             DateTime cpla_FechaModifica = DateTime.Now;
             #endregion
 
@@ -408,7 +408,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         foreach (var i in listadoDetallePlanillaDeduccionesDelete)
                         {
-                            borrarDeducciones = db.UDP_tbTipoPlanillaDetalleIngreso_Update(i);
+                            borrarDeducciones = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(i);
 
                             foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeducciones)
                                 mensajeErrorDeduccion = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
@@ -451,35 +451,6 @@ namespace ERP_GMEDINA.Controllers
                     }
                     #endregion
                 }
-
-                #region CodigoPrueba
-                if (false)
-                {
-                    if (catalogoDePlanillas != null && catalogoIngresos != null && catalogoDeducciones != null)
-                    {
-                        //Eliminar los registros del detalle del catalogo de ingresos de la planilla
-                        borrarIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Update(id);
-                        borrarDeducciones = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(id);
-
-                        //dedu: UDP_tbTipoPlanillaDetalleDeduccion_Update_Result
-                        //ingreso: UDP_tbTipoPlanillaDetalleIngreso_Update_Result
-                        foreach (UDP_tbTipoPlanillaDetalleIngreso_Update_Result result in borrarIngresos)
-                            mensajeErrorIngreso = result.MensajeError;
-
-                        foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeducciones)
-                            mensajeErrorDeduccion = result.MensajeError;
-
-                        if (mensajeErrorDeduccion.Contains("-1") || mensajeErrorIngreso.Contains("-1"))
-                        {
-                            response = "error";
-                        }
-                        else
-                        {
-                            Create(idPlanillaEdit: id, catalogoDePlanillas: catalogoDePlanillas, catalogoIngresos: catalogoIngresos, catalogoDeducciones: catalogoDeducciones);
-                        }
-                    }
-                }
-                #endregion
             }
             catch (Exception)
             {
