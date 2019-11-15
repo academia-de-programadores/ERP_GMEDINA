@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-    $('.dataTables-example').DataTable({
+    var Cols = ColCount();
+
+    var Test = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 25,
@@ -7,8 +9,18 @@
         buttons: [
             { extend: 'copy' },
             { extend: 'csv' },
-            { extend: 'excel', title: 'ExampleFile' },
-            { extend: 'pdf', title: 'ExampleFile' },
+            {
+                extend: 'excel', title: 'ExampleFile',
+                exportOptions: {
+                    columns: [Cols]
+                }
+            },
+            {
+                extend: 'pdf', title: 'ExampleFile',
+                exportOptions: {
+                    columns: [Cols]
+                }
+            },
 
             {
                 extend: 'print',
@@ -19,8 +31,22 @@
                     $(win.document.body).find('table')
                             .addClass('compact')
                             .css('font-size', 'inherit');
+                },
+                exportOptions: {
+                    columns: [Cols]
                 }
             }
         ]
     });
 });
+
+function ColCount() {
+    var col = document.getElementById('IndexTable').rows[0].cells.length;
+    console.log(col);
+    var RtrStr = "0";
+
+    for (var i = 1; i < col - 1; i++) {
+        RtrStr += ", " + i.toString();
+    }
+    return RtrStr;
+};

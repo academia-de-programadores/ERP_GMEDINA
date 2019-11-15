@@ -27,111 +27,8 @@ namespace ERP_GMEDINA.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbAccesoRol> tbAccesoRol { get; set; }
-        public virtual DbSet<tbObjeto> tbObjeto { get; set; }
-        public virtual DbSet<tbRol> tbRol { get; set; }
-        public virtual DbSet<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
-        public virtual DbSet<tbAuxilioDeCesantias> tbAuxilioDeCesantias { get; set; }
-        public virtual DbSet<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
-        public virtual DbSet<tbCatalogoDeIngresos> tbCatalogoDeIngresos { get; set; }
-        public virtual DbSet<tbCatalogoDePlanillas> tbCatalogoDePlanillas { get; set; }
-        public virtual DbSet<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
-        public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
-        public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
-        public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
-        public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
-        public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
-        public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
-        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
-        public virtual DbSet<tbLiquidaciones> tbLiquidaciones { get; set; }
-        public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
-        public virtual DbSet<tbMotivoLiquidaciones> tbMotivoLiquidaciones { get; set; }
-        public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
-        public virtual DbSet<tbPreaviso> tbPreaviso { get; set; }
-        public virtual DbSet<tbRamaActividad> tbRamaActividad { get; set; }
-        public virtual DbSet<tbSalarioPorHora> tbSalarioPorHora { get; set; }
-        public virtual DbSet<tbTechosDeducciones> tbTechosDeducciones { get; set; }
-        public virtual DbSet<tbTipoDeduccion> tbTipoDeduccion { get; set; }
-        public virtual DbSet<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
-        public virtual DbSet<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
-        public virtual DbSet<tbAreas> tbAreas { get; set; }
-        public virtual DbSet<tbCargos> tbCargos { get; set; }
-        public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
-        public virtual DbSet<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
-        public virtual DbSet<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
-        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
-        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
-        public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
-        public virtual DbSet<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
-        public virtual DbSet<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
-        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
-        public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
-        public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
-        public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
-        public virtual DbSet<tbHabilidadesRequisicion> tbHabilidadesRequisicion { get; set; }
-        public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
-        public virtual DbSet<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
-        public virtual DbSet<tbHistorialCargos> tbHistorialCargos { get; set; }
-        public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
-        public virtual DbSet<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
-        public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
-        public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
-        public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
-        public virtual DbSet<tbHistorialSalidas> tbHistorialSalidas { get; set; }
-        public virtual DbSet<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
-        public virtual DbSet<tbHorarios> tbHorarios { get; set; }
-        public virtual DbSet<tbIdiomaPersona> tbIdiomaPersona { get; set; }
-        public virtual DbSet<tbIdiomas> tbIdiomas { get; set; }
-        public virtual DbSet<tbIdiomasRequisicion> tbIdiomasRequisicion { get; set; }
-        public virtual DbSet<tbJornadas> tbJornadas { get; set; }
-        public virtual DbSet<tbNacionalidades> tbNacionalidades { get; set; }
-        public virtual DbSet<tbPersonas> tbPersonas { get; set; }
-        public virtual DbSet<tbPrestaciones> tbPrestaciones { get; set; }
-        public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
-        public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
-        public virtual DbSet<tbRequisicionPersonal> tbRequisicionPersonal { get; set; }
-        public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
-        public virtual DbSet<tbSucursales> tbSucursales { get; set; }
-        public virtual DbSet<tbSueldos> tbSueldos { get; set; }
-        public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
         public virtual DbSet<tbTipoHoras> tbTipoHoras { get; set; }
-        public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
-        public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
-        public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
-        public virtual DbSet<tbTipoSalidas> tbTipoSalidas { get; set; }
-        public virtual DbSet<tbTitulos> tbTitulos { get; set; }
-        public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
-        public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
-        public virtual DbSet<tbVacaciones> tbVacaciones { get; set; }
-        public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
-        public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
-        public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
-        public virtual DbSet<V_ColaboradoresPorPlanilla> V_ColaboradoresPorPlanilla { get; set; }
-        public virtual DbSet<V_ComisionesColaborador> V_ComisionesColaborador { get; set; }
-        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
-        public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
-        public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
-        public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
-        public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
-        public virtual DbSet<V_EmpleadoComisiones> V_EmpleadoComisiones { get; set; }
-        public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
-        public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
-        public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
-        public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
-        public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
-        public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
-        public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
-        public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
-        public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -717,13 +614,13 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Update", cb_IdParameter, emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> fpa_IdFormaPago)
         {
-            var tede_IdParameter = tede_Id.HasValue ?
-                new ObjectParameter("tede_Id", tede_Id) :
-                new ObjectParameter("tede_Id", typeof(int));
+            var fpa_IdFormaPagoParameter = fpa_IdFormaPago.HasValue ?
+                new ObjectParameter("fpa_IdFormaPago", fpa_IdFormaPago) :
+                new ObjectParameter("fpa_IdFormaPago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", tede_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", fpa_IdFormaPagoParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<System.DateTime> insf_FechaCrea, Nullable<bool> insf_Activo)
@@ -796,13 +693,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id, Nullable<int> tede_UsuarioModifica, Nullable<System.DateTime> tede_FechaModifica)
         {
             var tede_IdParameter = tede_Id.HasValue ?
                 new ObjectParameter("tede_Id", tede_Id) :
                 new ObjectParameter("tede_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter);
+            var tede_UsuarioModificaParameter = tede_UsuarioModifica.HasValue ?
+                new ObjectParameter("tede_UsuarioModifica", tede_UsuarioModifica) :
+                new ObjectParameter("tede_UsuarioModifica", typeof(int));
+    
+            var tede_FechaModificaParameter = tede_FechaModifica.HasValue ?
+                new ObjectParameter("tede_FechaModifica", tede_FechaModifica) :
+                new ObjectParameter("tede_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Insert(Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioCrea, Nullable<System.DateTime> tede_FechaCrea)
@@ -867,13 +772,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Update", tede_IdParameter, tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu)
+        public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu, Nullable<int> tde_UsuarioModifica, Nullable<System.DateTime> tde_FechaModifica)
         {
             var tde_IdTipoDeduParameter = tde_IdTipoDedu.HasValue ?
                 new ObjectParameter("tde_IdTipoDedu", tde_IdTipoDedu) :
                 new ObjectParameter("tde_IdTipoDedu", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter);
+            var tde_UsuarioModificaParameter = tde_UsuarioModifica.HasValue ?
+                new ObjectParameter("tde_UsuarioModifica", tde_UsuarioModifica) :
+                new ObjectParameter("tde_UsuarioModifica", typeof(int));
+    
+            var tde_FechaModificaParameter = tde_FechaModifica.HasValue ?
+                new ObjectParameter("tde_FechaModifica", tde_FechaModifica) :
+                new ObjectParameter("tde_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTipoDeduccion_Inactivar", tde_IdTipoDeduParameter, tde_UsuarioModificaParameter, tde_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Insert(string tde_Descripcion, Nullable<int> tde_UsuarioCrea, Nullable<System.DateTime> tde_FechaCrea)
@@ -972,6 +885,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tpdi_IdDetallePlanillaIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Update", tpdi_IdDetallePlanillaIngresoParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbTipoHora_Update(Nullable<int> tiho_Id, string tiho_Descripcion, Nullable<int> tiho_Recargo, Nullable<int> tiho_UsuarioModifica, Nullable<System.DateTime> tiho_FechaModifica)
+        {
+            var tiho_IdParameter = tiho_Id.HasValue ?
+                new ObjectParameter("tiho_Id", tiho_Id) :
+                new ObjectParameter("tiho_Id", typeof(int));
+    
+            var tiho_DescripcionParameter = tiho_Descripcion != null ?
+                new ObjectParameter("tiho_Descripcion", tiho_Descripcion) :
+                new ObjectParameter("tiho_Descripcion", typeof(string));
+    
+            var tiho_RecargoParameter = tiho_Recargo.HasValue ?
+                new ObjectParameter("tiho_Recargo", tiho_Recargo) :
+                new ObjectParameter("tiho_Recargo", typeof(int));
+    
+            var tiho_UsuarioModificaParameter = tiho_UsuarioModifica.HasValue ?
+                new ObjectParameter("tiho_UsuarioModifica", tiho_UsuarioModifica) :
+                new ObjectParameter("tiho_UsuarioModifica", typeof(int));
+    
+            var tiho_FechaModificaParameter = tiho_FechaModifica.HasValue ?
+                new ObjectParameter("tiho_FechaModifica", tiho_FechaModifica) :
+                new ObjectParameter("tiho_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbTipoHora_Update", tiho_IdParameter, tiho_DescripcionParameter, tiho_RecargoParameter, tiho_UsuarioModificaParameter, tiho_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoHoras_Delete_Result> UDP_RRHH_tbTipoHoras_Delete(Nullable<int> tiho_Id, string tiho_razon_Inactivo, Nullable<int> tiho_UsuarioModifica, Nullable<System.DateTime> tiho_FechaModifica)
+        {
+            var tiho_IdParameter = tiho_Id.HasValue ?
+                new ObjectParameter("tiho_Id", tiho_Id) :
+                new ObjectParameter("tiho_Id", typeof(int));
+    
+            var tiho_razon_InactivoParameter = tiho_razon_Inactivo != null ?
+                new ObjectParameter("tiho_razon_Inactivo", tiho_razon_Inactivo) :
+                new ObjectParameter("tiho_razon_Inactivo", typeof(string));
+    
+            var tiho_UsuarioModificaParameter = tiho_UsuarioModifica.HasValue ?
+                new ObjectParameter("tiho_UsuarioModifica", tiho_UsuarioModifica) :
+                new ObjectParameter("tiho_UsuarioModifica", typeof(int));
+    
+            var tiho_FechaModificaParameter = tiho_FechaModifica.HasValue ?
+                new ObjectParameter("tiho_FechaModifica", tiho_FechaModifica) :
+                new ObjectParameter("tiho_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoHoras_Delete_Result>("UDP_RRHH_tbTipoHoras_Delete", tiho_IdParameter, tiho_razon_InactivoParameter, tiho_UsuarioModificaParameter, tiho_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoHoras_Insert_Result> UDP_RRHH_tbTipoHoras_Insert(string tiho_Descripcion, Nullable<int> tiho_Recargo, Nullable<int> tiho_UsuarioCrea, Nullable<System.DateTime> tiho_FechaCrea)
+        {
+            var tiho_DescripcionParameter = tiho_Descripcion != null ?
+                new ObjectParameter("tiho_Descripcion", tiho_Descripcion) :
+                new ObjectParameter("tiho_Descripcion", typeof(string));
+    
+            var tiho_RecargoParameter = tiho_Recargo.HasValue ?
+                new ObjectParameter("tiho_Recargo", tiho_Recargo) :
+                new ObjectParameter("tiho_Recargo", typeof(int));
+    
+            var tiho_UsuarioCreaParameter = tiho_UsuarioCrea.HasValue ?
+                new ObjectParameter("tiho_UsuarioCrea", tiho_UsuarioCrea) :
+                new ObjectParameter("tiho_UsuarioCrea", typeof(int));
+    
+            var tiho_FechaCreaParameter = tiho_FechaCrea.HasValue ?
+                new ObjectParameter("tiho_FechaCrea", tiho_FechaCrea) :
+                new ObjectParameter("tiho_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoHoras_Insert_Result>("UDP_RRHH_tbTipoHoras_Insert", tiho_DescripcionParameter, tiho_RecargoParameter, tiho_UsuarioCreaParameter, tiho_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoHoras_Select_Result1> UDP_RRHH_tbTipoHoras_Select(Nullable<int> tiho_Id)
+        {
+            var tiho_IdParameter = tiho_Id.HasValue ?
+                new ObjectParameter("tiho_Id", tiho_Id) :
+                new ObjectParameter("tiho_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoHoras_Select_Result1>("UDP_RRHH_tbTipoHoras_Select", tiho_IdParameter);
         }
     }
 }

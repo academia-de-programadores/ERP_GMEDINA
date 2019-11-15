@@ -460,6 +460,14 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
 
+
+
+            //bundles APP/TipoHoras/TipoHoras
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
+                "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
+
+
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network 
