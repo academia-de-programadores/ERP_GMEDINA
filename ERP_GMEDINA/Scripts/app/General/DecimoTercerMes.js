@@ -119,6 +119,18 @@ $("#btnCerrarFecha").click(function () {
 });
 
 
+//FUNCION: OCULTAR MODAL DE CREATE
+$("#btnCerrarFecha").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+});
+
+
+//FUNCION: OCULTAR MODAL DE CREATE CON EL ICONO DE CERRAR
+$("#IconCerrar").click(function () {
+    $("#Crear #Validation_descipcion").css("display", "none");
+});
+
+
 
 
 

@@ -9,7 +9,7 @@
 			<div class="input-group date">
 				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control",@type = "date", @name="hipa_FechaInicio", @id= "hipa_FechaInicio" } })       
 			</div>
-            @Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger",@id= "Validation_descipcion" })
 		</div>
 
 		<div class="form-group">
