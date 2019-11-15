@@ -23,48 +23,45 @@
 </head>
 <body>
 
-    <!-- Skin configuration box -->
-    <!-- @Html.Partial("_SkinConfig") -->
+	<!-- Skin configuration box -->
+	<!-- @Html.Partial("_SkinConfig") -->
+	<!-- Wrapper-->
+	<!-- PageClass give you ability to specify custom style for specific view based on action -->
+	<div id="wrapper" class="@Html.PageClass()">
 
-    <!-- Wrapper-->
-    <!-- PageClass give you ability to specify custom style for specific view based on action -->
-    <div id="wrapper" class="@Html.PageClass()">
+		<!-- Navigation -->
+		@Html.Partial("_Navigation")
 
-        <!-- Navigation -->
-        @Html.Partial("_Navigation")
+		<!-- Page wraper -->
+		<div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
 
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+			<!-- Top Navbar -->
+			@Html.Partial("_TopNavbar")
 
-            <!-- Top Navbar -->
-            @Html.Partial("_TopNavbar")
+			<!-- Main view  -->
+			@RenderBody()
 
-            <!-- Main view  -->
-            @RenderBody()
+			<!-- Footer -->
+			@Html.Partial("_Footer")
 
-            <!-- Footer -->
-            @Html.Partial("_Footer")
+		</div>
+		<!-- End page wrapper-->
+		<!-- Right Sidebar -->
+		@Html.Partial("_RightSidebar")
 
-        </div>
-        <!-- End page wrapper-->
+	</div>
+	<!-- End wrapper-->
+	<!-- Section for main scripts render -->
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/plugins/slimScroll")
+	@Scripts.Render("~/bundles/inspinia")
 
-        <!-- Right Sidebar -->
-        @Html.Partial("_RightSidebar")
+	<!-- Skin config script - only for demo purpose-->
+	@Scripts.Render("~/bundles/skinConfig")
 
-    </div>
-    <!-- End wrapper-->
-
-    <!-- Section for main scripts render -->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/slimScroll")
-    @Scripts.Render("~/bundles/inspinia")
-
-    <!-- Skin config script - only for demo purpose-->
-    @Scripts.Render("~/bundles/skinConfig")
-
-    <!-- Handler for local scripts -->
-    @RenderSection("scripts", required: false)
+	<!-- Handler for local scripts -->
+	@RenderSection("scripts", required: false)
 </body>
 </html>
 

@@ -89,12 +89,13 @@ namespace ERP_GMEDINA.Controllers
 										 emp_CuentaBancaria = PagoDT.Key.emp_CuentaBancaria,
 										 DecimoTercerMes = (PagoDT.Sum(x => x.hipa_SueldoNeto) / 360 * 30)
 									 };
-				ViewBag.ConsultasFechas = ConsultaFechas.ToList();
-			}
+				ViewBag.ConsultasFechas = ConsultaFechas.ToList();					
+				}
 			catch (Exception ex)
 			{
 				ex.Message.ToString();                
 			}
+				
 			}
 			return View();
         }
