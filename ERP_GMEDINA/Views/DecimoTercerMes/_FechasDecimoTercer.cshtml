@@ -1,33 +1,31 @@
 ﻿@model ERP_GMEDINA.Models.tbHistorialDePago
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDecimoTercerMes" }))
+@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST" ,OnBegin= "ValidarFormulario()" }))
 {
 
-    <div class="modal-body">
+	<div class="modal-body">
 
 
-        <div class="form-group">
-            <label class="font-noraml">Fecha Inicial</label>
-            <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaInicio">
-            </div>
-        </div>
+		<div class="form-group">
+			<label class="font-noraml">Fecha Inicial</label>
+			<div class="input-group date">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaInicio" name="hipa_FechaInicio">
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label class="font-noraml">Fecha Final</label>
-            <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaFin">
-            </div>
-        </div>
+		<div class="form-group">
+			<label class="font-noraml">Fecha Final</label>
+			<div class="input-group date">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" class="form-control" id="hipa_FechaFin" name="hipa_FechaFin">
+			</div>
+		</div>
 
-    </div>
+	</div>
 
 
-    <div class="modal-footer">
-        @*data-dismiss="modal"*@
-        <button type="button" class="btn btn-white" id="btnCerrarFecha">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btnEnviarFecha">Aceptar</button>
-    </div>
+	<div class="modal-footer">
+		@*data-dismiss="modal"*@
+		<button type="button" class="btn btn-white" id="btnCerrarFecha">Cerrar</button>
+		<button type="submit" class="btn btn-primary" id="btnEnviarFecha">Aceptar</button>
+	</div>
 }
 
-@*@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST" }))
-{*@

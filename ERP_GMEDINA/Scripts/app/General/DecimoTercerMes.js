@@ -119,8 +119,7 @@ $("#btnCerrarFecha").click(function () {
 });
 
 
-
-$(document).on("click", "#btnEnviarFecha", function () {
+function ValidarFormulario() {
     var FechaInicial = $("#hipa_FechaInicio").val();
     var FechaFinal = $("#hipa_FechaFin").val();
 
@@ -130,17 +129,6 @@ $(document).on("click", "#btnEnviarFecha", function () {
             message: "No puede dejar fechas vacias."
         });
     }
-    else
-    {
-        $.ajax({
-            url: "/DecimoTercerMes/FechaEspecifica",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ hipa_FechaInicio: FechaInicial, hipa_FechaFin: FechaFinal }),
-            success: $.post
-        });
-        
-    }
+    
 
-});
+};
