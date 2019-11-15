@@ -38,17 +38,6 @@ $(document).on('click', '#tblCatalogoPlanillas tbody tr td #btnDesplegarIngresos
     fila = $('#fila-' + ID);
 });
 
-//Seleccionar todo 
-$(function () {
-    $('#catalogoDeIngresos #seleccionar-todos').change(function () {
-        $('#listado > input[type=checkbox]').prop('checked', $(this).is(':checked'));
-    });
-
-    $('#catalogoDeDeducciones #seleccionar-todos').change(function () {
-        $('#listado > input[type=checkbox]').prop('checked', $(this).is(':checked'));
-    });
-});
-
 $(document).on('click', '#btnGuardarCatalogoDePlanillasIngresosDeducciones', function () {
     create();
 });
@@ -56,6 +45,18 @@ $(document).on('click', '#btnGuardarCatalogoDePlanillasIngresosDeducciones', fun
 $(document).on('click', '#btnEditarCatalogoDePlanillasIngresosDeducciones', function () {
     create('edit');
 });
+
+function verificarCampos(descripcionPlanilla, frecuenciaDias, catalogoIngresos, catalogoDeducciones) {
+    debugger;
+    var validado = false;
+
+
+    if (descripcionPlanilla == "" || frecuenciaDias == "" || catalogoIngresos.length == 0 || catalogoDeducciones.length == 0) {
+        console.log('Hubo un error');
+        return false;
+    }
+    return true;
+}
 
 // Funcion de obtener datos
 var create = function (edit) {
@@ -107,35 +108,38 @@ var create = function (edit) {
         }
     });
     debugger;
-    if (edit != 'edit')
-        $.ajax({
-            url: "/CatalogoDePlanillas/Create",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                catalogoDePlanillas: [
-                    descripcionPlanilla, frecuenciaDias
-                ],
-                catalogoIngresos: arrayIngresos,
-                catalogoDeducciones: arrayDeducciones
-            })
-        });
-    else
-        $.ajax({
-            url: "/CatalogoDePlanillas/Edit",
-            method: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                id: idPlanilla,
-                catalogoDePlanillas: [
-                    descripcionPlanilla, frecuenciaDias
-                ],
-                catalogoIngresos: arrayIngresos,
-                catalogoDeducciones: arrayDeducciones
-            })
-        });
+    if (verificarCampos(descripcionPlanilla, frecuenciaDias, arrayIngresos, arrayDeducciones)) {
+        debugger;
+        if (edit != 'edit')
+            $.ajax({
+                url: "/CatalogoDePlanillas/Create",
+                method: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    catalogoDePlanillas: [
+                        descripcionPlanilla, frecuenciaDias
+                    ],
+                    catalogoIngresos: arrayIngresos,
+                    catalogoDeducciones: arrayDeducciones
+                })
+            });
+        else
+            $.ajax({
+                url: "/CatalogoDePlanillas/Edit",
+                method: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    id: idPlanilla,
+                    catalogoDePlanillas: [
+                        descripcionPlanilla, frecuenciaDias
+                    ],
+                    catalogoIngresos: arrayIngresos,
+                    catalogoDeducciones: arrayDeducciones
+                })
+            });
+    }
 
 
     console.log('Array de Ingresos:' + arrayIngresos);
@@ -151,7 +155,7 @@ $('#inactivar').click(() => {
 
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
     var id = $('form #cpla_IdPlanilla').val();
-    _ajax({id: id}, '/CatalogoDePlanillas/Delete', 'POST', (data) => {
+    _ajax({ id: id }, '/CatalogoDePlanillas/Delete', 'POST', (data) => {
         if (data == "bien") {
             location.href = 'http://localhost:51144/';
         }
