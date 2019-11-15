@@ -36,17 +36,13 @@
                     <tbody>
                       @foreach (var item in Model)
                       {
-                          if (item.habi_Estado)
-                          {
-                            <tr class="gradeA odd" role="row" data-id="@item.habi_Id">
-                                <td>@Html.DisplayFor(modelItem => item.habi_Descripcion)</td>
-                                <td>
-                                    @Html.ActionLink("Detalles", "Details", new { id = item.habi_Id }, new { @class = "btn btn-primary btn-xs" })
-                                    <a class="btn btn-default btn-xs tablaEditar" data-id="@item.habi_Id">Editar</a>
-                                </td>
-                            </tr>
-                          }
-
+                        <tr class="gradeA odd" role="row" data-id="@item.habi_Id">
+                            <td>@Html.DisplayFor(modelItem => item.habi_Descripcion)</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs tablaDetalles" data-id="@item.habi_Id">Detalles</a>
+                                <a class="btn btn-default btn-xs tablaEditar" data-id="@item.habi_Id">Editar</a>
+                            </td>
+                        </tr>
                       }
                     </tbody>
                   </table>
@@ -58,6 +54,7 @@
 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbHabilidades())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHabilidades())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbHabilidades())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbHabilidades())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

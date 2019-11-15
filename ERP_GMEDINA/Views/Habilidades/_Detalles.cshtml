@@ -1,5 +1,5 @@
 ﻿@model ERP_GMEDINA.Models.tbHabilidades
-<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -49,28 +49,23 @@
             @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
         </dt>
 
-        <dd id="tbUsuario.usu_NombreUsuario">
+        <dd id="tbUsuario_usu_NombreUsuario">
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
         </dt>
 
-        <dd id="tbUsuario1.usu_NombreUsuario">
+        <dd id="tbUsuario1_usu_NombreUsuario">
         </dd>
 
     </dl>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.habi_Id }, new {@class="btn btn-primary" }) 
-    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
-</p>
 </div>
 </div>
 </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
             </div>
         </div>
     </div>

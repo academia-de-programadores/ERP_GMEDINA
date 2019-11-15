@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbHabilidades = db.tbHabilidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbHabilidades = db.tbHabilidades.Where(x=>x.habi_Estado==true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbHabilidades);
             }
             catch (Exception ex)
@@ -54,21 +54,6 @@ namespace ERP_GMEDINA.Controllers
             //List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
             ////tbHabilidades.Add(Habilidad);
             return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Habilidades/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbHabilidades tbHabilidades = db.tbHabilidades.Find(id);
-            if (tbHabilidades == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbHabilidades);
         }
         
         // POST: Habilidades/Create
@@ -109,7 +94,34 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            return Json(new tbHabilidades { habi_Descripcion=tbHabilidades.habi_Descripcion },JsonRequestBehavior.AllowGet);
+            var habilidad = new tbHabilidades
+            {
+                habi_Id = tbHabilidades.habi_Id,
+                habi_Descripcion = tbHabilidades.habi_Descripcion,
+                habi_Estado = tbHabilidades.habi_Estado,
+                habi_RazonInactivo = tbHabilidades.habi_RazonInactivo,
+                habi_UsuarioCrea = tbHabilidades.habi_UsuarioCrea,
+                habi_FechaCrea = tbHabilidades.habi_FechaCrea,
+                habi_UsuarioModifica = tbHabilidades.habi_UsuarioModifica,
+                habi_FechaModifica = tbHabilidades.habi_FechaModifica
+            };
+            if (tbHabilidades.tbUsuario!=null)
+            {
+                habilidad.tbUsuario = new tbUsuario { usu_NombreUsuario = tbHabilidades.tbUsuario.usu_NombreUsuario };
+            }
+            else
+            {
+                habilidad.tbUsuario = new tbUsuario { usu_NombreUsuario = "" };
+            }
+            if (tbHabilidades.tbUsuario1 != null)
+            {
+                habilidad.tbUsuario1 = new tbUsuario { usu_NombreUsuario = tbHabilidades.tbUsuario1.usu_NombreUsuario };
+            }
+            else
+            {
+                habilidad.tbUsuario1 = new tbUsuario { usu_NombreUsuario = "" };
+            }
+            return Json(habilidad, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Edit/5
