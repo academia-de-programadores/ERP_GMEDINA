@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
+@*<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
         <h2>Tipo Amonestaciones</h2>
         <ol class="breadcrumb">
@@ -13,7 +13,7 @@
             </li>
         </ol>
     </div>
-</div>
+</div>*@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -22,7 +22,7 @@
                 <div class="ibox-title">
                     <h5>Lista Tipo de Amonestacion</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
                 <div class="ibox-content">
