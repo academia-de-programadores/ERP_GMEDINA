@@ -17,11 +17,43 @@ namespace ERP_GMEDINA.Controllers
         // GET: Habilidades
         public ActionResult Index()
         {
-            //var tbHabilidades = db.tbHabilidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            tbHabilidades Habilidad = new tbHabilidades {habi_Descripcion="hola", habi_Id=1 };
-            List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
-            tbHabilidades.Add(Habilidad);
+            List< tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            try
+            {
+                tbUsuario Usuario = new tbUsuario { usu_Id = 1 };
+                Session["Usuario"] = Usuario;
+                tbHabilidades = db.tbHabilidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbHabilidades);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbHabilidades.Add(new tbHabilidades {habi_Id=1,habi_Descripcion="fallo la conexion" });
+            }
             return View(tbHabilidades);
+        }
+        [HttpPost]
+        public JsonResult llenarTabla()
+        {
+            List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            foreach (tbHabilidades x in db.tbHabilidades.ToList())
+            {
+                tbHabilidades.Add( new tbHabilidades
+                {
+                    habi_Id = x.habi_Id,
+                    habi_Descripcion = x.habi_Descripcion,
+                    habi_Estado = x.habi_Estado,
+                    habi_RazonInactivo = x.habi_RazonInactivo,
+                    habi_UsuarioCrea = x.habi_UsuarioCrea,
+                    habi_FechaCrea = x.habi_FechaCrea,
+                    habi_UsuarioModifica = x.habi_UsuarioModifica,
+                    habi_FechaModifica = x.habi_FechaModifica
+                });
+            }
+            //tbHabilidades Habilidad = new tbHabilidades {habi_Descripcion="hola", habi_Id=1 };
+            //List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            ////tbHabilidades.Add(Habilidad);
+            return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Habilidades/Details/5
@@ -38,26 +70,23 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbHabilidades);
         }
-
-        // GET: Habilidades/Create
-        public ActionResult Create()
-        {
-            ViewBag.habi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.habi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
-
+        
         // POST: Habilidades/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Bind(Include = "habi_Id,habi_Descripcion,habi_Estado,habi_RazonInactivo,habi_UsuarioCrea,habi_FechaCrea,habi_UsuarioModifica,habi_FechaModifica")]
         [HttpPost]
-        public ActionResult Create([Bind(Include = "habi_Id,habi_Descripcion,habi_Estado,habi_RazonInactivo,habi_UsuarioCrea,habi_FechaCrea,habi_UsuarioModifica,habi_FechaModifica")] tbHabilidades tbHabilidades)
+        public JsonResult Create(tbHabilidades tbHabilidades)
         {
             string msj = "";
+            var Usuario=(tbUsuario)Session["Usuario"];
             try
             {
-                db.tbHabilidades.Add(tbHabilidades);
-                db.SaveChanges();
+                var list= db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
+                {
+                    msj = item.MensajeError;
+                }
             }
             catch (Exception ex)
             {
@@ -88,44 +117,46 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "habi_Id,habi_Descripcion,habi_Estado,habi_RazonInactivo,habi_UsuarioCrea,habi_FechaCrea,habi_UsuarioModifica,habi_FechaModifica")] tbHabilidades tbHabilidades)
+        public JsonResult Edit(tbHabilidades tbHabilidades)
         {
-            if (ModelState.IsValid)
+            string msj = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
             {
-                db.Entry(tbHabilidades).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var list = db.UDP_RRHH_tbHabilidades_Update(tbHabilidades.habi_Id,tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
+                {
+                    msj = item.MensajeError;
+                }
             }
-            ViewBag.habi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHabilidades.habi_UsuarioCrea);
-            ViewBag.habi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHabilidades.habi_UsuarioModifica);
-            return View(tbHabilidades);
+            catch (Exception ex)
+            {
+                msj = "-2";
+                ex.Message.ToString();
+            }
+            return Json(msj);
         }
 
         // GET: Habilidades/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult Delete(tbHabilidades tbHabilidades)
         {
-            if (id == null)
+            string msj = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var list = db.UDP_RRHH_tbHabilidades_Delete(tbHabilidades.habi_Id,tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
+                {
+                    msj = item.MensajeError;
+                }
             }
-            tbHabilidades tbHabilidades = db.tbHabilidades.Find(id);
-            if (tbHabilidades == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                msj = "-2";
+                ex.Message.ToString();
             }
-            return View(tbHabilidades);
-        }
-
-        // POST: Habilidades/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbHabilidades tbHabilidades = db.tbHabilidades.Find(id);
-            db.tbHabilidades.Remove(tbHabilidades);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(msj);
         }
 
         protected override void Dispose(bool disposing)

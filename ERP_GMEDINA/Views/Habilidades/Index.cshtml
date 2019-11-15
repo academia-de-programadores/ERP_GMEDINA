@@ -7,7 +7,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>tbHabilidades</h2>
+        <h2>Habilidades</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de tbHabilidades</h5>
+                    <h5>Listado de Habilidades</h5>
                     <div class="ibox-tools">
                         <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Habilidades" />
                     </div>
@@ -34,14 +34,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) {
-                        <tr class="gradeA odd" role="row" data-id="@item.habi_Id">
-                            <td>@Html.DisplayFor(modelItem => item.habi_Descripcion)</td>
-                            <td>
-                                @Html.ActionLink("Detalles", "Details", new { id=item.habi_Id },  new {@class = "btn btn-primary btn-xs" })
-                                <a class="btn btn-default btn-xs tablaEditar" id="@item.habi_Id">Editar</a>
-                            </td>
-                        </tr>
+                      @foreach (var item in Model)
+                      {
+                          if (item.habi_Estado)
+                          {
+                            <tr class="gradeA odd" role="row" data-id="@item.habi_Id">
+                                <td>@Html.DisplayFor(modelItem => item.habi_Descripcion)</td>
+                                <td>
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.habi_Id }, new { @class = "btn btn-primary btn-xs" })
+                                    <a class="btn btn-default btn-xs tablaEditar" data-id="@item.habi_Id">Editar</a>
+                                </td>
+                            </tr>
+                          }
+
                       }
                     </tbody>
                   </table>
@@ -60,5 +65,4 @@
 @section Scripts {
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general/Habilidades")
-  @Scripts.Render("~/bundles/jqueryval")
 }
