@@ -52,17 +52,48 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tiho_Descripcion,tiho_Recargo,tiho_UsuarioCrea,tiho_FechaCrea")] tbTipoHoras TipoHoras)
+        public ActionResult Create( string tiho_Descripcion, int tiho_recargo)
         {
-         
+            tbTipoHoras TipoHora = new tbTipoHoras();
+            var Usuario = (tbUsuario)Session["Usuario"];
+            TipoHora.tiho_Descripcion = tiho_Descripcion;
+            TipoHora.tiho_Recargo = tiho_recargo;
+            //TipoHora.tiho_FechaCrea = DateTime.Now;
             if (ModelState.IsValid)
             {
-                db.tbTipoHoras.Add(TipoHoras);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string MensajeError = "";
+                try
+                {
+                    IEnumerable<object> listTipoHoras = null;
+                    listTipoHoras = db.UDP_RRHH_tbTipoHoras_Insert(TipoHora.tiho_Descripcion,
+                                                                    TipoHora.tiho_Recargo,
+                                                                    Usuario.usu_Id,
+                                                                    DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHoras_Insert_Result RES in listTipoHoras)
+                    {
+                        MensajeError = RES.MensajeError;
+
+                    }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
+                            return Json(MensajeError.Substring(1, 2));
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
+                    return Json(MensajeError.Substring(0, 1));
+                }
+
             }
 
-            return View(TipoHoras);
+            return Json(TipoHora, JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoHoras/Edit/5
@@ -77,18 +108,51 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tiho_Id,tiho_Descripcion,tiho_Recargo,tiho_Estado,tiho_RazonInactivo,tiho_UsuarioCrea,tiho_FechaCrea,tiho_UsuarioModifica,tiho_FechaModifica")] tbTipoHoras tbTipoHoras)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit( tbTipoHoras tbTipoHoras)
         {
+            var Usuario = (tbUsuario)Session["Usuario"];
+            //tbTipoHoras TipoHora = new tbTipoHoras();
+            //TipoHora.tiho_Id = tiho_Id;
+            //TipoHora.tiho_Descripcion = tiho_Descripcion;
+            //TipoHora.tiho_Recargo = tiho_Recargo;
+            //TipoHora.tiho_FechaCrea = DateTime.Now;
             if (ModelState.IsValid)
             {
-                db.Entry(tbTipoHoras).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string MensajeError = "";
+                try
+                {
+                    IEnumerable<object> listTipoHoras = null;
+                    listTipoHoras = db.UDP_RRHH_tbTipoHora_Update(tbTipoHoras.tiho_Id,
+                                                                   tbTipoHoras.tiho_Descripcion,
+                                                                   tbTipoHoras.tiho_Recargo,
+                                                                    Usuario.usu_Id,
+                                                                    DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHora_Update_Result RES in listTipoHoras)
+                    {
+                        MensajeError = RES.MensajeError;
+
+                    }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
+                            return Json(MensajeError.Substring(1, 2));
+                        }
+                    }
+                    return Json("Exito", JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
+                    return Json(MensajeError.Substring(0, 1));
+                }
+
             }
-            ViewBag.tiho_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoHoras.tiho_UsuarioCrea);
-            ViewBag.tiho_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoHoras.tiho_UsuarioModifica);
-            return View(tbTipoHoras);
+
+            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoHoras/Delete/5

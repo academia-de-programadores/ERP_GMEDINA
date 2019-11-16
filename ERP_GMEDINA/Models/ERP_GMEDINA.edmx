@@ -596,7 +596,7 @@
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
           </AssociationSet>
-          <FunctionImport Name="UDP_RRHH_tbTipoHora_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoHora_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHora_Update_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
             <Parameter Name="tiho_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tiho_Recargo" Mode="In" Type="Int32" />
@@ -725,6 +725,9 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoHoras_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoHora_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
@@ -856,7 +859,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHora_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHora_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHora_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHora_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHora_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Delete_Result">

@@ -33,7 +33,7 @@ $('#btnAgregar').click(function () {
         else {
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
+                message: 'El registro fue ingresado con Exito',
             });
         }
     });
@@ -111,13 +111,19 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                console.log('data')
-                $("#ModalEdit #tiho_Id").val(data.tiho_Id);
-                $("#ModalEdit #tiho_Descripcion").val(data.tiho_Descripcion);
-                $("#ModalEdit #tiho_Recargo").val(data.tiho_Recargo);
-             
-            }
+           
+                if (data.length > 0) {
+                    console.log("funciona");
+                    console.log(data);
+                    $.each(data, function (i, item) {
+                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
+                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
+                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
+                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
+                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                    })
+                }
+            
                 })
                    
            
@@ -127,14 +133,16 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarModal").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEditarTipoHoras").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    var tbTipoHoras = $("#frmEditarTipoHoras").serializeArray();
+    tbTipoHoras = serializar(tbTipoHoras);
+    tbTipoHoras = JSON.stringify({ tbTipoHoras: tbTipoHoras });
+    console.log(tbTipoHoras);
     $.ajax({
         url: "/TipoHoras/Edit",
         method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
+        data: tbTipoHoras
+    }).done(function (tbTipoHoras) {
+        if (tbTipoHoras == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -142,14 +150,9 @@ $("#btnEditarModal").click(function () {
             });
         }
         else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            //$("#EditarCatalogoDeducciones").modal('hide');
-            //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                message: 'El registro fue editado con exito!',
             });
         }
     });
