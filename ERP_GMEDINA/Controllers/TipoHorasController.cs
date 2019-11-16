@@ -55,6 +55,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create( string tiho_Descripcion, int tiho_recargo)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
+         
             var Usuario = (tbUsuario)Session["Usuario"];
             TipoHora.tiho_Descripcion = tiho_Descripcion;
             TipoHora.tiho_Recargo = tiho_recargo;
@@ -109,23 +110,26 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit( tbTipoHoras tbTipoHoras)
+        public ActionResult Edit(int tiho_Id ,string tiho_Descripcion,int tiho_Recargo)
         {
+            tbTipoHoras TipoHora = new tbTipoHoras();
             var Usuario = (tbUsuario)Session["Usuario"];
-            //tbTipoHoras TipoHora = new tbTipoHoras();
-            //TipoHora.tiho_Id = tiho_Id;
-            //TipoHora.tiho_Descripcion = tiho_Descripcion;
-            //TipoHora.tiho_Recargo = tiho_Recargo;
-            //TipoHora.tiho_FechaCrea = DateTime.Now;
+            TipoHora.tiho_Id = tiho_Id;
+            Session["TipoHora"] = TipoHora;
+           
+            TipoHora.tiho_Id = tiho_Id;
+            TipoHora.tiho_Descripcion = tiho_Descripcion;
+            TipoHora.tiho_Recargo = tiho_Recargo;
+       
             if (ModelState.IsValid)
             {
                 string MensajeError = "";
                 try
                 {
                     IEnumerable<object> listTipoHoras = null;
-                    listTipoHoras = db.UDP_RRHH_tbTipoHora_Update(tbTipoHoras.tiho_Id,
-                                                                   tbTipoHoras.tiho_Descripcion,
-                                                                   tbTipoHoras.tiho_Recargo,
+                    listTipoHoras = db.UDP_RRHH_tbTipoHora_Update(TipoHora.tiho_Id,
+                                                                   TipoHora.tiho_Descripcion,
+                                                                   TipoHora.tiho_Recargo,
                                                                     Usuario.usu_Id,
                                                                     DateTime.Now);
                     foreach (UDP_RRHH_tbTipoHora_Update_Result RES in listTipoHoras)
@@ -152,33 +156,64 @@ namespace ERP_GMEDINA.Controllers
 
             }
 
-            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
+            return Json(TipoHora, JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoHoras/Delete/5
-        public ActionResult Delete(int? id)
+
+        public JsonResult Inactivar(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(id);
-            if (tbTipoHoras == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTipoHoras);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(ID);
+            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
         }
 
         // POST: TipoHoras/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost,ActionName("Inactivar")]
+       // [ValidateAntiForgeryToken]
+        public ActionResult Inactivar(int id,string razoninactivo)
         {
-            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(id);
-            db.tbTipoHoras.Remove(tbTipoHoras);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            tbTipoHoras TipoHora = new tbTipoHoras();
+            TipoHora.tiho_RazonInactivo = razoninactivo;
+            var TipoHoras = (tbTipoHoras)Session["TipoHora"];
+            var Usuario = (tbUsuario)Session["Usuario"];
+            if (ModelState.IsValid)
+            {
+                string MensajeError = "";
+                try
+                {
+                    IEnumerable<object> listTipoHoras = null;
+                    listTipoHoras = db.UDP_RRHH_tbTipoHoras_Delete(TipoHora.tiho_Id,
+                                                                   TipoHora.tiho_RazonInactivo,
+                                                                   Usuario.usu_Id,
+                                                                   DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHoras_Delete_Result RES in listTipoHoras)
+                    {
+                        MensajeError = RES.MensajeError;
+
+                    }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
+                            return Json(MensajeError.Substring(1, 2));
+                        }
+                    }
+                    return Json("Exito", JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
+                    return Json(MensajeError.Substring(0, 1));
+                }
+
+            }
+
+            return Json(TipoHora, JsonRequestBehavior.AllowGet);
+
+
         }
 
         protected override void Dispose(bool disposing)

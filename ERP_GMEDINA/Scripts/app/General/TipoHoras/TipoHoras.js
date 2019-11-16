@@ -133,16 +133,16 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarModal").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var tbTipoHoras = $("#frmEditarTipoHoras").serializeArray();
-    tbTipoHoras = serializar(tbTipoHoras);
-    tbTipoHoras = JSON.stringify({ tbTipoHoras: tbTipoHoras });
-    console.log(tbTipoHoras);
+    var data = $("#frmEditarTipoHoras").serializeArray();
+    //tbTipoHoras = serializar(tbTipoHoras);
+    //tbTipoHoras = JSON.stringify({ tbTipoHoras: tbTipoHoras });
+    console.log(data);
     $.ajax({
         url: "/TipoHoras/Edit",
         method: "POST",
-        data: tbTipoHoras
-    }).done(function (tbTipoHoras) {
-        if (tbTipoHoras == "error") {
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -158,26 +158,6 @@ $("#btnEditarModal").click(function () {
     });
 });
 
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/CatalogoDeDeducciones/EditGetDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarCatalogoDeducciones").modal();
-});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
@@ -234,55 +214,26 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccion').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarCatalogoDeducciones").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
-});
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoDeducciones").modal('hide');
-});
 
-$(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal();
-});
+
+
+//$(document).on("click", "#btnInhabilitarModal", function () {
+//    //MOSTRAR EL MODAL DE INACTIVAR
+//    var data = $("#frmEditarTipoHoras").serializeArray();
+//    console.log(data);
+   
+//});
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroDeduccion").click(function () {
+$("#btnInhabilitar").click(function () {
 
-    var data = $("#frmCatalogoDeduccionesInactivar").serializeArray();
+    var data = $("#frmEditarTipoHoras").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    console.log(data);
     $.ajax({
-        url: "/CatalogoDeDeducciones/Inactivar",
+        url: "/TipoHoras/Inactivar",
         method: "POST",
         data: data
     }).done(function (data) {
@@ -296,9 +247,6 @@ $("#btnInactivarRegistroDeduccion").click(function () {
         else {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#InactivarCatalogoDeducciones").modal('hide');
-            $("#EditarCatalogoDeducciones").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
