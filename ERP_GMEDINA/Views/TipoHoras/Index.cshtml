@@ -49,7 +49,7 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>
+                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-toggle="modal" data-target="#ModalDetalles">Detalle</button>
                                         <button type="button" class="btn btn-default btn-xs" id="btnEditarR" data-toggle="modal" data-target="#ModalEditar">Editar</button>
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
                     
-                            <h4 class="modal-title">Eliminar Horario</h4>
+                            <h4 class="modal-title">Inhabilitar Horario</h4>
 
                         </div>
                         <div class="modal-body" id="ModalInhabilitar">
@@ -136,13 +136,41 @@
                         </div>
                         <div class="modal-footer">
                      
-                            <button type="button" class="btn btn-primary pull-left" id="btnInhabilitar" data-dismiss="modal">Eliminar</button>
+                            <button type="button" class="btn btn-primary pull-left" id="btnInhabilitar" data-dismiss="modal">Actualizar</button>
                             <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
             </div>
             @*MODAL INHABILITAR*@
+
+
+@*MODAL DETALLES*@
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+
+                <h4 class="modal-title">Detalles del Horario</h4>
+
+            </div>
+            <div class="modal-body" id="ModalInhabilitar">
+                <p>
+                    @Html.Partial("_DetallesTipoHorarios", new ERP_GMEDINA.Models.tbTipoHoras())
+
+                </p>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary pull-left" id="btnEditarR" data-target="#ModalEditar" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*MODAL DETALLES*@
 
 
 

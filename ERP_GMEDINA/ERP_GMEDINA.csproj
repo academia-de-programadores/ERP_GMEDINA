@@ -977,6 +977,7 @@
     <Content Include="Views\TipoHoras\_CreateTipoHorarios.cshtml" />
     <Content Include="Views\TipoHoras\_EditTipoHorarios.cshtml" />
     <Content Include="Views\TipoHoras\_InhabilitarTipoHorarios.cshtml" />
+    <Content Include="Views\TipoHoras\_DetallesTipoHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

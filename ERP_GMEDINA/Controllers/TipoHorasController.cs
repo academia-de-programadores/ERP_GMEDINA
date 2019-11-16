@@ -161,15 +161,15 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: TipoHoras/Delete/5
 
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(ID);
-            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult Inactivar(int? ID)
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(ID);
+        //    return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
+        //}
 
         // POST: TipoHoras/Delete/5
-        [HttpPost,ActionName("Inactivar")]
+        [HttpPost]
        // [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int id,string razoninactivo)
         {

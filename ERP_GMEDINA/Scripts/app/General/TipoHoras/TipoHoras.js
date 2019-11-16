@@ -130,12 +130,10 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
         
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+//EDICION DEL REGISTRO
 $("#btnEditarModal").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+
     var data = $("#frmEditarTipoHoras").serializeArray();
-    //tbTipoHoras = serializar(tbTipoHoras);
-    //tbTipoHoras = JSON.stringify({ tbTipoHoras: tbTipoHoras });
     console.log(data);
     $.ajax({
         url: "/TipoHoras/Edit",
@@ -143,7 +141,7 @@ $("#btnEditarModal").click(function () {
         data: data
     }).done(function (data) {
         if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
+           
             iziToast.error({
                 title: 'Error',
                 message: 'No se pudo editar el registro, contacte al administrador',
@@ -159,7 +157,7 @@ $("#btnEditarModal").click(function () {
 });
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//MODAL DETALLES
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     $.ajax({
@@ -172,36 +170,15 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data.cde_FechaCrea);
-                var FechaModifica = FechaFormato(data.cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data.cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
-                $("#Detalles #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").val(data.cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").val(data.cde_UsuarioCrea);
-                $("#Detalles #cde_FechaCrea").val(FechaCrea);
-                $("#Detalles #cde_UsuarioModifica").val(data.cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").val(FechaModifica);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/CatalogoDeDeducciones/EditGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-                $("#DetallesCatalogoDeducciones").modal();
+                $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
+                $("#ModalDetalles").find("#habi_Estado")["0"].innerText = obj.habi_Estado;
+                $("#ModalDetalles").find("#habi_RazonInactivo")["0"].innerText = obj.habi_RazonInactivo;
+                $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
+                $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $('#ModalDetalles').modal('show');
             }
             else {
                 //Mensaje de error si no hay data
@@ -212,24 +189,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
             }
         });
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
 
-//$(document).on("click", "#btnInhabilitarModal", function () {
-//    //MOSTRAR EL MODAL DE INACTIVAR
-//    var data = $("#frmEditarTipoHoras").serializeArray();
-//    console.log(data);
-   
-//});
-
-//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
+//INHABILITAR
 $("#btnInhabilitar").click(function () {
 
-    var data = $("#frmEditarTipoHoras").serializeArray();
+    var data = $("#frmInhabilitarTipoHoras").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     console.log(data);
     $.ajax({
