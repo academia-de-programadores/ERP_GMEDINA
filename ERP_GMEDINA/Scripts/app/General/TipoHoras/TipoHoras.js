@@ -42,7 +42,7 @@ $('#btnAgregar').click(function () {
         }
     });
 });
-
+//AGREGAR HORARIOS///
 
 
 //
@@ -75,17 +75,34 @@ function llenarTabla() {
     _ajax(null,
         '/TipoHoras/llenarTabla',
         'POST',
-        function (Lista) {
-            tabla.clear();
-            tabla.draw();
-            $.each(Lista, function (index, value) {
-                console.log(value.tiho_Descripcion);
-                tabla.row.add([value.tiho_Descripcion,
+        function (data) {
+            if (data.length > 0) {
+                console.log(data);
+            }
+            var IndexTable = $('#IndexTable').DataTable();
+            IndexTable.clear();
+            IndexTable.draw();
+            $.each(data, function (i, item) {
+                console.log(item.tiho_Descripcion);
+                IndexTable.row.add([item.tiho_Descripcion,item.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs tablaDetalles' data-id='" + value.tiho_Id + "' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs tablaEditar' data-id=" + value.tiho_Id + ">Editar</a>" +
+                    "<a class='btn btn-primary btn-xs ' data-id='" + item.tiho_Id + "' >Detalles</a>" +
+                        "<a class='btn btn-default btn-xs ' data-id=" + item.tiho_Id + ">Editar</a>" +
                     "</div>"]).draw();
+            
             });
+            //var data = data;
+            //for (var i = 0; i < data.length; i++) {
+            //    console.log(i);
+            //    IndexTable.row.add( '<tr data-id = "' + data[i].tiho_Id + '">' +
+            //        '<td>' + data[i].tiho_Descripcion + '</td>' +
+            //        '<td>' + data[i].tiho_Recargo + '</td>' +
+            //        '<td>' +
+            //        '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnEditar">Detalles</button>' +
+            //        '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnDetale">Editar</button>' +
+            //        '</td>' +
+            //        '</tr>').draw();
+            //}
           
         });
 }

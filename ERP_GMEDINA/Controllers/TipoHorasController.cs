@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Controllers
             tbUsuario Usuario = new tbUsuario();
             Usuario.usu_Id = 1;
             Session["Usuario"] = Usuario;
-            var tbTipoHoras = db.tbTipoHoras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.tiho_Estado == true);
+            var tbTipoHoras = db.tbTipoHoras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.tiho_Estado == true).OrderByDescending(x => x.tiho_FechaCrea );
             return View(tbTipoHoras.ToList());
         }
 

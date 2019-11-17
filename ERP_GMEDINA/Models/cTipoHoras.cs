@@ -34,9 +34,16 @@ namespace ERP_GMEDINA.Models
         [MaxLength(100, ErrorMessage = "Excedio el numero maximo de caracteres")]
         public string tiho_RazonInactivo { get; set; }
 
+        [Display(Name = "Usuario Crea")]
         public int tiho_UsuarioCrea { get; set; }
+
+        [Display(Name = "Fecha Crea")]
         public System.DateTime tiho_FechaCrea { get; set; }
+
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> tiho_UsuarioModifica { get; set; }
+
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> tiho_FechaModifica { get; set; }
     }
 
