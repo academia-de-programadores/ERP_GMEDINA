@@ -31,18 +31,61 @@ namespace ERP_GMEDINA.Controllers
             return new JsonResult { Data=datostabla, JsonRequestBehavior= JsonRequestBehavior.AllowGet };
         }
 
+
+       
         // GET: TipoHoras/Details/5
         public ActionResult Details(int? id)
         {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            // var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
+
+            //return Json(List, JsonRequestBehavior.AllowGet);
+      
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
+            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(id);
+            if (tbTipoHoras == null || !tbTipoHoras.tiho_Estado)
+            {
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var tipohora = new tbTipoHoras
+            {
+                tiho_Id = tbTipoHoras.tiho_Id,
+                tiho_Descripcion = tbTipoHoras.tiho_Descripcion,
+                tiho_Recargo = tbTipoHoras.tiho_Recargo,
+                tiho_Estado = tbTipoHoras.tiho_Estado,
+                tiho_RazonInactivo = tbTipoHoras.tiho_RazonInactivo,
+                tiho_UsuarioCrea = tbTipoHoras.tiho_UsuarioCrea,
+                tiho_FechaCrea = tbTipoHoras.tiho_FechaCrea,
+                tiho_UsuarioModifica = tbTipoHoras.tiho_UsuarioModifica,
+                tiho_FechaModifica = tbTipoHoras.tiho_FechaModifica
+            };
+            if (tbTipoHoras.tbUsuario != null)
+            {
+                tipohora.tbUsuario = new tbUsuario { usu_NombreUsuario = tbTipoHoras.tbUsuario.usu_NombreUsuario };
+            }
+            else
+            {
+                tipohora.tbUsuario = new tbUsuario { usu_NombreUsuario = "" };
+            }
+            if (tbTipoHoras.tbUsuario1 != null)
+            {
+                tipohora.tbUsuario1 = new tbUsuario { usu_NombreUsuario = tbTipoHoras.tbUsuario1.usu_NombreUsuario };
+            }
+            else
+            {
+                tipohora.tbUsuario1 = new tbUsuario { usu_NombreUsuario = "" };
+            }
+            return Json(tipohora, JsonRequestBehavior.AllowGet);
+        
 
-            return Json(List, JsonRequestBehavior.AllowGet);
-
-        }
+    }
 
         // GET: TipoHoras/Create
         public ActionResult Create()

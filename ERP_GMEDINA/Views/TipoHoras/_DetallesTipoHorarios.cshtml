@@ -26,10 +26,7 @@
             @Html.DisplayFor(model => model.tiho_Estado)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tiho_RazonInactivo)
-        </dt>
-
+     
         <dt>
             @Html.DisplayNameFor(model => model.tiho_FechaCrea)
         </dt>
@@ -65,3 +62,35 @@
     </dl>
 
 
+
+@*MODAL EDITAR*@
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+
+                <h4 class="modal-title">Editar Horario</h4>
+
+            </div>
+            <div class="modal-body" id="ModalEdit">
+
+
+                @Html.Partial("_EditTipoHorarios", new ERP_GMEDINA.Models.tbTipoHoras())
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="btnEditarModal" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitarModal" data-toggle="modal" data-target="#ModalInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-white  pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/TipoHoras")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

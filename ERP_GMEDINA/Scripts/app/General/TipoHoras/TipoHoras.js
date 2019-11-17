@@ -1,4 +1,7 @@
-﻿///FUNCION SERIALIZAR 
+﻿var id = 0;
+
+
+///FUNCION SERIALIZAR 
 function serializar(data) {
     var Data = new Object();
     $.each(data, function (index, valor) {
