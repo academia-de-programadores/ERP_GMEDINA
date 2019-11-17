@@ -159,10 +159,10 @@ $("#btnEditarModal").click(function () {
 
 
 //MODAL DETALLES
-$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
-    var ID = $(this).data('id');
+$(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
+    var ID = $(this).closest('tr').data('id');
     $.ajax({
-        url: "/CatalogoDeDeducciones/Details/" + ID,
+        url: "/TipoHoras/Details/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -171,15 +171,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
-                $("#ModalDetalles").find("#habi_Estado")["0"].innerText = obj.habi_Estado;
-                $("#ModalDetalles").find("#habi_RazonInactivo")["0"].innerText = obj.habi_RazonInactivo;
-                $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
-                $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
-                $('#ModalDetalles').modal('show');
+                $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = data.tiho_Descripcion;
+                $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = data.tiho_Recargo;
+                $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = data.tiho_Estado;
+              
+                $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(data.tiho_FechaCrea);
+                $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
+                $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetallesR").find("#btnEditarR")["0"].dataset.id = id;
+                $('#ModalDetallesR').modal('show');
             }
             else {
                 //Mensaje de error si no hay data

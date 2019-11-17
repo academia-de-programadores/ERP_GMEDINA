@@ -38,12 +38,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(id);
-            if (tbTipoHoras == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTipoHoras);
+             var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
+
+            return Json(List, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: TipoHoras/Create
