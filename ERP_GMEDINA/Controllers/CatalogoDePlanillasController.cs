@@ -1,12 +1,11 @@
-﻿using System;
+﻿using ERP_GMEDINA.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -17,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDePlanillas
         public ActionResult Index()
         {
+            //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
             var tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbCatalogoDePlanillas.ToList());
         }
@@ -24,10 +24,6 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDePlanillas/Details/5
         public ActionResult Details(int? id)
         {
-            //hice esto
-
-
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,39 +39,51 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDePlanillas/Create
         public ActionResult Create()
         {
+            #region Obtener ingresos
+            //Obtener la lista de ingresos de la base de datos
             var CatalogoIngresos = (from catalogoIngresos in db.tbCatalogoDeIngresos
                                     where catalogoIngresos.cin_Activo == true
-                                    select new CatalogoDeIngresosDeduccionesViewModel
+                                    select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
                                     {
-                                          id = catalogoIngresos.cin_IdIngreso,
-                                          descripcion = catalogoIngresos.cin_DescripcionIngreso
+                                        id = catalogoIngresos.cin_IdIngreso,
+                                        descripcion = catalogoIngresos.cin_DescripcionIngreso
                                     }).ToList();
+            #endregion
 
+            #region Obtener Deducciones
+            //Obtener la lista de deducciones de la base de datos
             var CatalogoDeducciones = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
                                        where catalogoDeducciones.cde_Activo == true
-                                    select new CatalogoDeIngresosDeduccionesViewModel
-                                    {
-                                        id = catalogoDeducciones.cde_IdDeducciones,
-                                        descripcion = catalogoDeducciones.cde_DescripcionDeduccion
-                                    }).ToList();
+                                       select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+                                       {
+                                           id = catalogoDeducciones.cde_IdDeducciones,
+                                           descripcion = catalogoDeducciones.cde_DescripcionDeduccion
+                                       }).ToList();
+            #endregion
+
+            //A estos ViewBags se les asigna la lista de objetos de ingresos y deducciones, para luego recorrerla en la vista
             ViewBag.CatalogoIngresos = CatalogoIngresos;
             ViewBag.CatalogoDeducciones = CatalogoDeducciones;
+
             return View();
         }
 
         // POST: CatalogoDePlanillas/Create
         [HttpPost]
-        public ActionResult Create(string[] catalogoDePlanillas, int[] catalogoIngresos, int[] catalogoDeducciones, int? idPlanillaEdit)
+        public ActionResult Create(string[] catalogoDePlanillas,
+            int[] catalogoIngresos,
+            int[] catalogoDeducciones)
         {
+
             //La variabele "response" puede contener la palabra: "bien", o "error".
-            string response = "";
+            string response = "bien";
 
             /*
              * Verificar que el catalogo de planillas, catalogo de ingresos, y catalogo de deducciones
              * tengan algún valor, si no no dejara insertar en la planillas, la validación también
              * se hace en el lado del cliente
              */
-            if(catalogoDePlanillas.Length > 1 && catalogoIngresos.Length > 0 && catalogoDeducciones.Length > 0)
+            if (catalogoDePlanillas.Length > 1 && catalogoIngresos.Length > 0 && catalogoDeducciones.Length > 0)
             {
                 #region Declaración de Variables
                 string MensajeError = "", /*MensajeError es la variable que va a contener el id de la tabla
@@ -92,12 +100,12 @@ namespace ERP_GMEDINA.Controllers
                                                              * también con esta variable se detecta si hubo un error.
                                                              */
 
-                //Estas variables se utilizaan para saber el resultado que manda el procedimiento almacenado al insertar
+                //Estas variables se utilizan para saber el resultado que manda el procedimiento almacenado al insertar
                 IEnumerable<object> listCatalogoDePlanillas = null;
                 IEnumerable<object> listCatalogoDeIngresos = null;
                 IEnumerable<object> listCatalogoDeDeducciones = null;
                 int cpla_UsuarioCreaModifica = 1; //TODO: Editar el Usuario Crea del catalogo de planillas
-                DateTime cpla_FechaCreaModifica =  DateTime.Now; // Asignarle la fecha actual a la variable cpla_FechaCrea
+                DateTime cpla_FechaCreaModifica = DateTime.Now; // Asignarle la fecha actual a la variable cpla_FechaCrea
                 string cpla_DescripcionPlanilla;
                 int cpla_FrecuenciaEnDias;
 
@@ -105,22 +113,22 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
-                    #region Insertar o editar en el catalogo de Planillas
+                    #region Insertar en el catalogo de Planillas
 
                     cpla_DescripcionPlanilla = catalogoDePlanillas[0]; //El índice 0 del array catalogoDePlanillas contiene la descripción de la planilla
                     cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //El índice 1 contiene la frecuencia en días de la planilla
 
-                        /* Guardar el catalogo de Planillas en la base de datos
-                         * El procedimiento lo igualo a la variable listCatalogoDePlanillas para luego recorrerla
-                         * y ver que datos me trae del procedimiento almacenado
-                         */
-                        listCatalogoDePlanillas = InsertarPlanilla(cpla_UsuarioCreaModifica, cpla_FechaCreaModifica, cpla_DescripcionPlanilla, cpla_FrecuenciaEnDias);
+                    /* Guardar el catalogo de Planillas en la base de datos
+                     * El procedimiento lo igualo a la variable listCatalogoDePlanillas para luego recorrerla
+                     * y ver que datos me trae del procedimiento almacenado
+                     */
+                    listCatalogoDePlanillas = InsertarPlanilla(cpla_UsuarioCreaModifica, cpla_FechaCreaModifica, cpla_DescripcionPlanilla, cpla_FrecuenciaEnDias);
 
-                        /*Recorrer la variable listCatalogoDePlanillas para obtener el id del campo registro ingresado actualmente.
-                         *O obtener un -1 y el mensaje de error enviado desde el procedimieto almacenado
-                         */
-                        foreach (UDP_Plani_tbCatalogoDePlanillas_Insert_Result Resultado in listCatalogoDePlanillas)
-                            MensajeError = Resultado.MensajeError;
+                    /*Recorrer la variable listCatalogoDePlanillas para obtener el id del campo registro ingresado actualmente.
+                     *O obtener un -1 y el mensaje de error enviado desde el procedimieto almacenado
+                     */
+                    foreach (UDP_Plani_tbCatalogoDePlanillas_Insert_Result Resultado in listCatalogoDePlanillas)
+                        MensajeError = Resultado.MensajeError;
 
                     #endregion
 
@@ -131,20 +139,31 @@ namespace ERP_GMEDINA.Controllers
                     }
                     else
                     {
-                        response = "bien";
                         //Verificar que se haya insertado en el catalogo de Planillas
                         if (listCatalogoDePlanillas != null)
                         {
                             #region Insertar en el catalogo de Ingresos
 
                             // Recorrer el array catalogoIngresos, el catalogoIngresos trae todos los id de los ingresos
-                            InsertarCatalogoIngresos(catalogoIngresos, ref response, MensajeError, ref MensajeErrorCatalogoDeIngresos, ref listCatalogoDeIngresos, cpla_UsuarioCreaModifica);
+                            InsertarCatalogoIngresos(catalogoIngresos,
+                                ref response,
+                                MensajeError,
+                                ref MensajeErrorCatalogoDeIngresos,
+                                ref listCatalogoDeIngresos,
+                                cpla_UsuarioCreaModifica);
+
                             #endregion
 
                             #region Insertar en el catalogo de Deducciones
 
                             // Recorrer el array catalogoDeducciones
-                            InsertarCatalogoDeducciones(catalogoDeducciones, ref response, MensajeError, MensajeErrorCatalogoDeIngresos, ref MensajeErrorCatalogoDeDeducciones, ref listCatalogoDeDeducciones);
+                            InsertarCatalogoDeducciones(catalogoDeducciones,
+                                ref response,
+                                MensajeError,
+                                MensajeErrorCatalogoDeIngresos,
+                                ref MensajeErrorCatalogoDeDeducciones,
+                                ref listCatalogoDeDeducciones);
+
                             #endregion
                         }
                     }
@@ -154,14 +173,14 @@ namespace ERP_GMEDINA.Controllers
                     response = "error";
                 }
             }
-            if(response == "bien")
-                return RedirectToAction("Index");
-            else
-                return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         //Insertar una nueva planilla
-        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias)
+        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica,
+            DateTime cpla_FechaCreaModifica,
+            string cpla_DescripcionPlanilla,
+            int cpla_FrecuenciaEnDias)
         {
             return db.UDP_Plani_tbCatalogoDePlanillas_Insert(cpla_DescripcionPlanilla,
                 cpla_FrecuenciaEnDias,
@@ -170,7 +189,12 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Editar una planilla
-        private string EditarPlanilla(int? idPlanillaEdit, ref string MensajeError, int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias)
+        private string EditarPlanilla(int? idPlanillaEdit,
+            ref string MensajeError,
+            int cpla_UsuarioCreaModifica,
+            DateTime cpla_FechaCreaModifica,
+            string cpla_DescripcionPlanilla,
+            int cpla_FrecuenciaEnDias)
         {
             IEnumerable<object> listCatalogoDePlanillas = db.UDP_Plani_tbCatalogoDePlanillas_Update(idPlanillaEdit,
                 cpla_DescripcionPlanilla,
@@ -183,7 +207,12 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Insertar en el catalogo de deducciones
-        private void InsertarCatalogoDeducciones(int[] catalogoDeducciones, ref string response, string MensajeError, string MensajeErrorCatalogoDeIngresos, ref string MensajeErrorCatalogoDeDeducciones, ref IEnumerable<object> listCatalogoDeDeducciones)
+        private void InsertarCatalogoDeducciones(int[] catalogoDeducciones,
+            ref string response,
+            string MensajeError,
+            string MensajeErrorCatalogoDeIngresos,
+            ref string MensajeErrorCatalogoDeDeducciones,
+            ref IEnumerable<object> listCatalogoDeDeducciones)
         {
             foreach (int i in catalogoDeducciones)
             {
@@ -204,18 +233,20 @@ namespace ERP_GMEDINA.Controllers
                 // Asignarle a la variable response el error si hubo error
                 if (MensajeErrorCatalogoDeIngresos.StartsWith("-1"))
                     response = "error";
-                else
-                    response = "bien";
             }
         }
 
         //Insertar en el catalogo de ingresos
-        private void InsertarCatalogoIngresos(int[] catalogoIngresos, ref string response, string MensajeError, ref string MensajeErrorCatalogoDeIngresos, ref IEnumerable<object> listCatalogoDeIngresos, int cpla_UsuarioCreaModifica)
+        private void InsertarCatalogoIngresos(int[] catalogoIngresos,
+            ref string response,
+            string MensajeError,
+            ref string MensajeErrorCatalogoDeIngresos,
+            ref IEnumerable<object> listCatalogoDeIngresos,
+            int cpla_UsuarioCreaModifica)
         {
             foreach (int i in catalogoIngresos)
             {
                 int cin_IdIngreso = i; // Asignarle el id del ingreso 
-                                       //int tpdi_UsuarioCrea = 1; // TODO: Editar el Usuario Crea del Catalogo de Ingresos 
                 DateTime tpdi_FechaCrea = DateTime.Now; //Asignarle la fecha y hora actual a la variable tpdi_FechaCrea
 
                 // Insertar en el Catalogo de Ingresos
@@ -231,93 +262,128 @@ namespace ERP_GMEDINA.Controllers
                 // Si hubo un error entonces se le asigna a la variable response el texto "error", caso contrario "bien"
                 if (MensajeErrorCatalogoDeIngresos.StartsWith("-1"))
                     response = "error";
-                else
-                    response = "bien";
             }
         }
 
         // GET: CatalogoDePlanillas/Edit/5
         public ActionResult Edit(int? id)
         {
-            string response = "";
-            //Buscar en la 
+            string response = "bien";
+
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(response = "error", JsonRequestBehavior.AllowGet);
             }
 
             // Obtener los datos del catalogo de planillas filtrando por el id
-            IEnumerable<object> listCatalogoDeDeducciones = null;
-            IEnumerable<object> listCatalogoDeIngresos = null;
+            tbCatalogoDePlanillas tbCatalogoDePlanillas;
+            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, listaCatalogoDeducciones;
+            response = ObtenerCatalogoDePlanillaIngresosDeducciones(id, response, out tbCatalogoDePlanillas, out listaCatalogoIngresos, out listaCatalogoDeducciones);
 
-            List<CatalogoDeIngresosDeduccionesViewModel> catalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>();
-            tbCatalogoDePlanillas tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id);
-            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>();
-            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>();
-
-            try
-            {
-                listCatalogoDeIngresos = db.UDP_Plani_CatalogoDeIngresosEdit_Select(id);
-                foreach (UDP_Plani_CatalogoDeIngresosEdit_Select_Result result in listCatalogoDeIngresos)
-                {
-                    CatalogoDeIngresosDeduccionesViewModel catalogoIngreso = new CatalogoDeIngresosDeduccionesViewModel();
-                    catalogoIngreso.id = result.cin_IdIngreso;
-                    catalogoIngreso.descripcion = result.cin_DescripcionIngreso;
-                    if (result.@checked == 1)
-                        catalogoIngreso.check = true;
-                    else
-                        catalogoIngreso.check = false;
-                    listaCatalogoIngresos.Add(catalogoIngreso);
-                }
-
-                listCatalogoDeDeducciones = db.UDP_Plani_CatalogoDeduccionesEdit_Select(id);
-
-                foreach (UDP_Plani_CatalogoDeduccionesEdit_Select_Result result in listCatalogoDeDeducciones)
-                {
-                    CatalogoDeIngresosDeduccionesViewModel catalogoDeduccion = new CatalogoDeIngresosDeduccionesViewModel();
-                    catalogoDeduccion.id = result.cde_IdDeducciones;
-                    catalogoDeduccion.descripcion = result.cde_DescripcionDeduccion;
-
-                    if (result.@checked == 1)
-                        catalogoDeduccion.check = true;
-                    else
-                        catalogoDeduccion.check = false;
-                    listaCatalogoDeducciones.Add(catalogoDeduccion);
-                }
-            }
-            catch (Exception ex)
-            {
-                response = ex.Message.ToString();
-            }
-            
             ViewBag.CatalogoIngresos = listaCatalogoIngresos;
             ViewBag.CatalogoDeducciones = listaCatalogoDeducciones;
             if (tbCatalogoDePlanillas == null)
             {
-                return HttpNotFound();
+                return Json(response = "error", JsonRequestBehavior.AllowGet);
             }
 
             return View(tbCatalogoDePlanillas);
         }
 
-        // POST: CatalogoDePlanillas/Edit/5
+        /*Obtener el catalogo de planillas, el catalogo de ingresos de la planilla 
+        *y el catalogo de deducciones de la planilla, filtrando por el id de la planilla*/
+        private string ObtenerCatalogoDePlanillaIngresosDeducciones(int? id,
+            string response,
+            out tbCatalogoDePlanillas tbCatalogoDePlanillas,
+            out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos,
+            out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones)
+        {
+            #region Declaración de variables
+            IEnumerable<object> listCatalogoDeDeducciones = null; //Aqui se almacena la lista del catalogo de deducciones 
+            IEnumerable<object> listCatalogoDeIngresos = null; //Aqui se almacena la lista del catalogo de ingresos
+
+            listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>(); //Generar la salida del catalogo de ingresos
+            listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>();//Generar salida del catalogo de deducciones
+            #endregion
+
+            tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id); //Buscar por el id en el catalogo de planillas
+            try
+            {
+                #region Obtener el catalogo de ingresos
+                listCatalogoDeIngresos = db.UDP_Plani_CatalogoDeIngresosEdit_Select(id); //Obtener la lista del catalogo de ingresos filtrando por el id de la planilla
+
+                //Recorrer el resultado de la variable listCatalogoDeIngresos
+                foreach (UDP_Plani_CatalogoDeIngresosEdit_Select_Result result in listCatalogoDeIngresos)
+                {
+                    CatalogoDeIngresosDeduccionesViewModel catalogoIngresos = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar los ingresos de la planilla
+                    catalogoIngresos.id = result.cin_IdIngreso; //Se utilizara para identificar que checkbox ha sido clickeado
+                    catalogoIngresos.descripcion = result.cin_DescripcionIngreso; //Descripcion del ingreso
+
+                    //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
+                    if (result.@checked == 1)
+                        catalogoIngresos.check = true;
+                    else
+                        catalogoIngresos.check = false;
+
+                    //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
+                    listaCatalogoIngresos.Add(catalogoIngresos);
+                }
+                #endregion
+
+                #region Obtener el catalogo de deducciones
+                //Obtener la lista del catalogo de deducciones filtrando por el id de la planilla
+                listCatalogoDeDeducciones = db.UDP_Plani_CatalogoDeduccionesEdit_Select(id);
+
+                //Recorrer el resultado de la variable listCatalogoDeDeducciones
+                foreach (UDP_Plani_CatalogoDeduccionesEdit_Select_Result result in listCatalogoDeDeducciones)
+                {
+                    CatalogoDeIngresosDeduccionesViewModel catalogoDeduccion = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar las deducciones de la planilla
+                    catalogoDeduccion.id = result.cde_IdDeducciones; //Se utilizara para identificar que checkbox ha sido clickeado
+                    catalogoDeduccion.descripcion = result.cde_DescripcionDeduccion; //Descripcion de la deducción
+
+                    //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
+                    if (result.@checked == 1)
+                        catalogoDeduccion.check = true;
+                    else
+                        catalogoDeduccion.check = false;
+
+                    //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
+                    listaCatalogoDeducciones.Add(catalogoDeduccion);
+                }
+                #endregion
+            }
+            catch (Exception)
+            {
+                response = "error"; //Retornar con un error en el lado del cliente
+            }
+
+            return response;
+        }
+
+
+        // POST: CatalogoDePlanillas/Edit/5/arrayCatalogoPlanillas/arrayCatalogoIngresos/arrayCatalogoDeducciones
         [HttpPost]
-        public ActionResult Edit(int id,string[] catalogoDePlanillas, int[] catalogoIngresos, int[] catalogoDeducciones)
+        public ActionResult Edit(int id, //El id de la planilla
+            string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla
+                                            valor 2:int = Frecuencia en días*/
+            int[] catalogoIngresos, //Array de enteros con los id de los ingresos para la planilla
+            int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/ )
         {
             #region Declaracion de Variables
-            IEnumerable<object> borrarIngresos = null,
-                borrarDeducciones = null,
-                listCatalogoDeIngresos = null,
-                listCatalogoDeDeducciones = null;
+            IEnumerable<object> borrarIngresos = null, //Aquí se almacenara el resultado del procedimiento almacenado para borrar el ingreso
+                borrarDeduccion = null, //Aquí se almacenara el resultado del procedimiento almacenado para borrar la deducción
+                agregarIngreso = null, //Se almacena el resultado del procedimiento almacenado para agregar el ingreso
+                agregarDeduccion = null; //Se almacena el resultado del procedimiento almacenado para agregar la deducción
 
-            string mensajeErrorIngreso = "",
-                mensajeErrorDeduccion = "", 
-                response = "", 
-                MensajeError = "", 
-                cpla_DescripcionPlanilla = catalogoDePlanillas[0],
-                MensajeErrorCatalogoDeIngresos =""
-                , MensajeErrorCatalogoDeDeducciones = "";
-            int cpla_UsuarioModifica = 1, cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //TODO: Editar el usuario modifica
+            string mensajeErrorIngreso = "", //Para cuando suceda algún error al amacenar un ingreso
+                mensajeErrorDeduccion = "", //Para cuando suceda algún error al amacenar una deducción
+                MensajeErrorCatalogoPlanillas = "", //Para cuando suceda algun error en al guardar en el catalogo de planillas
+                MensajeErrorCatalogoDeIngresos = "", //Para cuando suceda algún error al amacenar un ingreso
+                cpla_DescripcionPlanilla = catalogoDePlanillas[0], //Descripción de la planilla
+                response = "bien" //Si no hay nada que falle, entonces recibira un mensaje de que todo se hizo bien el cliente
+                , MensajeErrorCatalogoDeDeducciones = ""; //Si hay error al guardar las deduccioenes se le notifica
+            int cpla_UsuarioModifica = 1, //TODO: Editar el usuario modifica
+                cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
             DateTime cpla_FechaModifica = DateTime.Now;
             #endregion
 
@@ -398,9 +464,9 @@ namespace ERP_GMEDINA.Controllers
                 #endregion
 
                 //Actualizar el el catalogo de planillas
-                MensajeError = EditarPlanilla(id, ref MensajeError, cpla_UsuarioModifica, cpla_FechaModifica, cpla_DescripcionPlanilla, cpla_FrecuenciaEnDias);
+                MensajeErrorCatalogoPlanillas = EditarPlanilla(id, ref MensajeErrorCatalogoPlanillas, cpla_UsuarioModifica, cpla_FechaModifica, cpla_DescripcionPlanilla, cpla_FrecuenciaEnDias);
 
-                if (MensajeError.StartsWith("-1"))
+                if (MensajeErrorCatalogoPlanillas.StartsWith("-1"))
                 {
                     response = "error";
                 }
@@ -412,9 +478,9 @@ namespace ERP_GMEDINA.Controllers
                     {
                         foreach (var i in listadoDetallePlanillaDeduccionesDelete)
                         {
-                            borrarDeducciones = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(i);
+                            borrarDeduccion = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(i); //Eliminar la deducción de la base de datos
 
-                            foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeducciones)
+                            foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeduccion)
                                 mensajeErrorDeduccion = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
                         }
                     }
@@ -437,10 +503,10 @@ namespace ERP_GMEDINA.Controllers
                     {
                         InsertarCatalogoDeducciones(catalogoDeducciones: (from i in listadoDetallePlanillaDeduccionesInsert select i).ToArray(),
                             response: ref response,
-                            MensajeError: MensajeError,
+                            MensajeError: MensajeErrorCatalogoPlanillas,
                             MensajeErrorCatalogoDeIngresos: MensajeErrorCatalogoDeIngresos,
                             MensajeErrorCatalogoDeDeducciones: ref MensajeErrorCatalogoDeDeducciones,
-                            listCatalogoDeDeducciones: ref listCatalogoDeDeducciones);
+                            listCatalogoDeDeducciones: ref agregarDeduccion);
                     }
 
                     //Insertar los registros en el catalogo de ingresoso
@@ -448,9 +514,9 @@ namespace ERP_GMEDINA.Controllers
                     {
                         InsertarCatalogoIngresos(catalogoIngresos: (from i in listadoDetallePlanillaIngresosInsert select i).ToArray(),
                             response: ref response,
-                            MensajeError: MensajeError,
+                            MensajeError: MensajeErrorCatalogoPlanillas,
                             MensajeErrorCatalogoDeIngresos: ref MensajeErrorCatalogoDeIngresos,
-                            listCatalogoDeIngresos: ref listCatalogoDeIngresos,
+                            listCatalogoDeIngresos: ref agregarIngreso,
                             cpla_UsuarioCreaModifica: cpla_UsuarioModifica);
                     }
                     #endregion
@@ -464,13 +530,14 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+
         // POST: CatalogoDePlanillas/Delete/5
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            string response = "";
+            string response = "bien";
             string mensajeError = "";
-            IEnumerable<object> planillaInactivada = null; 
+            IEnumerable<object> planillaInactivada = null;
             try
             {
                 //Inactivar la planilla
@@ -481,15 +548,13 @@ namespace ERP_GMEDINA.Controllers
 
                 if (mensajeError.Contains("-1"))
                     response = "error";
-                else
-                    response = "bien";
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 response = "error";
             }
-            return Json(response,JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

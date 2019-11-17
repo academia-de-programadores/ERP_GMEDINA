@@ -47,7 +47,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+                    Usuario Crea
                 </dt>
 
                 <dd>
@@ -55,7 +55,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+                    Usuario Modifica
                 </dt>
 
                 <dd>
@@ -63,6 +63,42 @@
                 </dd>
 
             </dl>
+            <br />
+            <div class="col-lg-5" id="catalogoDeIngresos">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Lista del catalogo de Ingresos</h5>
+                    </div>
+                    <div class="ibox-content">
+                        @foreach (var item in ViewBag.CatalogoIngresos)
+                        {
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5" id="catalogoDeDeducciones">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Lista del catalogo de Deducciones</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        @foreach (var item in ViewBag.CatalogoDeducciones)
+                        {
+                            <div class="form-horizontal col-xs-offset-1">
+                                <div class="form-group">
+                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
             <p>
                 @Html.ActionLink("Editar", "Edit", new { id = Model.cpla_IdPlanilla }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
@@ -93,7 +129,7 @@
                     <tr>
                         <td>Modificado</td>
                         <td>@Html.DisplayFor(model => model.tbUsuario1.usu_Nombres)</td>
-                        <td>@Html.DisplayFor(model => model.cpla_FechaCrea)</td>
+                        <td>@Html.DisplayFor(model => model.cpla_FechaModifica)</td>
                     </tr>
                 </tbody>
             </table>

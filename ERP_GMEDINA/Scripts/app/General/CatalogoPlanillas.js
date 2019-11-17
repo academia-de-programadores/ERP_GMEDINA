@@ -12,8 +12,12 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-// Si esta en la pantalla de Create entonces vaciar todo
+//Obtener la URL
 var URLactual = window.location.toString();
+var getUrl = window.location
+var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
+// Si esta en la pantalla de Create entonces vaciar todo
 if (URLactual.indexOf('Create') > 1) {
     $('input[type="checkbox"]').prop("checked", false);
     $('#cpla_DescripcionPlanilla').val('');

@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.cpla_FrecuenciaEnDias, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.cpla_FrecuenciaEnDias, new { htmlAttributes = new { @class = "form-control", @pattern = "[0-9]" } })
                                     @Html.ValidationMessageFor(model => model.cpla_FrecuenciaEnDias, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -110,16 +110,7 @@
     @Scripts.Render("~/plugins/iCheck")
 }
 
-
-<link href="~/Content/plugins/izitoast/iziToast.min.css" rel="stylesheet" />
-
-
-<script src="~/Scripts/app/inspinia.js"></script>
-
-@* Estilos *@
 <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
-<link href="~/Content/style.css" rel="stylesheet" />
-
 
 <script>
     $(document).ready(function () {
