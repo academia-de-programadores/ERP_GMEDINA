@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            var tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.cpla_FechaCrea);
             return View(tbCatalogoDePlanillas.ToList());
         }
 
@@ -70,9 +70,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Create
         [HttpPost]
-        public ActionResult Create(string[] catalogoDePlanillas,
-            int[] catalogoIngresos,
-            int[] catalogoDeducciones)
+        public ActionResult Create(string[] catalogoDePlanillas, int[] catalogoIngresos, int[] catalogoDeducciones)
         {
 
             //La variabele "response" puede contener la palabra: "bien", o "error".
@@ -177,10 +175,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Insertar una nueva planilla
-        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica,
-            DateTime cpla_FechaCreaModifica,
-            string cpla_DescripcionPlanilla,
-            int cpla_FrecuenciaEnDias)
+        private IEnumerable<object> InsertarPlanilla(int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias)
         {
             return db.UDP_Plani_tbCatalogoDePlanillas_Insert(cpla_DescripcionPlanilla,
                 cpla_FrecuenciaEnDias,
@@ -189,12 +184,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Editar una planilla
-        private string EditarPlanilla(int? idPlanillaEdit,
-            ref string MensajeError,
-            int cpla_UsuarioCreaModifica,
-            DateTime cpla_FechaCreaModifica,
-            string cpla_DescripcionPlanilla,
-            int cpla_FrecuenciaEnDias)
+        private string EditarPlanilla(int? idPlanillaEdit, ref string MensajeError, int cpla_UsuarioCreaModifica, DateTime cpla_FechaCreaModifica, string cpla_DescripcionPlanilla, int cpla_FrecuenciaEnDias)
         {
             IEnumerable<object> listCatalogoDePlanillas = db.UDP_Plani_tbCatalogoDePlanillas_Update(idPlanillaEdit,
                 cpla_DescripcionPlanilla,
@@ -207,12 +197,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Insertar en el catalogo de deducciones
-        private void InsertarCatalogoDeducciones(int[] catalogoDeducciones,
-            ref string response,
-            string MensajeError,
-            string MensajeErrorCatalogoDeIngresos,
-            ref string MensajeErrorCatalogoDeDeducciones,
-            ref IEnumerable<object> listCatalogoDeDeducciones)
+        private void InsertarCatalogoDeducciones(int[] catalogoDeducciones, ref string response, string MensajeError, string MensajeErrorCatalogoDeIngresos, ref string MensajeErrorCatalogoDeDeducciones, ref IEnumerable<object> listCatalogoDeDeducciones)
         {
             foreach (int i in catalogoDeducciones)
             {
@@ -237,12 +222,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //Insertar en el catalogo de ingresos
-        private void InsertarCatalogoIngresos(int[] catalogoIngresos,
-            ref string response,
-            string MensajeError,
-            ref string MensajeErrorCatalogoDeIngresos,
-            ref IEnumerable<object> listCatalogoDeIngresos,
-            int cpla_UsuarioCreaModifica)
+        private void InsertarCatalogoIngresos(int[] catalogoIngresos, ref string response, string MensajeError, ref string MensajeErrorCatalogoDeIngresos, ref IEnumerable<object> listCatalogoDeIngresos, int cpla_UsuarioCreaModifica)
         {
             foreach (int i in catalogoIngresos)
             {
@@ -292,11 +272,7 @@ namespace ERP_GMEDINA.Controllers
 
         /*Obtener el catalogo de planillas, el catalogo de ingresos de la planilla 
         *y el catalogo de deducciones de la planilla, filtrando por el id de la planilla*/
-        private string ObtenerCatalogoDePlanillaIngresosDeducciones(int? id,
-            string response,
-            out tbCatalogoDePlanillas tbCatalogoDePlanillas,
-            out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos,
-            out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones)
+        private string ObtenerCatalogoDePlanillaIngresosDeducciones(int? id, string response, out tbCatalogoDePlanillas tbCatalogoDePlanillas, out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones)
         {
             #region Declaración de variables
             IEnumerable<object> listCatalogoDeDeducciones = null; //Aqui se almacena la lista del catalogo de deducciones 
@@ -363,11 +339,7 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: CatalogoDePlanillas/Edit/5/arrayCatalogoPlanillas/arrayCatalogoIngresos/arrayCatalogoDeducciones
         [HttpPost]
-        public ActionResult Edit(int id, //El id de la planilla
-            string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla
-                                            valor 2:int = Frecuencia en días*/
-            int[] catalogoIngresos, //Array de enteros con los id de los ingresos para la planilla
-            int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/ )
+        public ActionResult Edit(int id, /*El id de la planilla*/ string[] catalogoDePlanillas, /*valor 1:string =  Descripcion de la planilla valor 2:int = Frecuencia en días*/ int[] catalogoIngresos, /*Array de enteros con los id de los ingresos para la planilla*/ int[] catalogoDeducciones /*Array de enteros con los id de las deducciones para la planilla*/ )
         {
             #region Declaracion de Variables
             IEnumerable<object> borrarIngresos = null, //Aquí se almacenara el resultado del procedimiento almacenado para borrar el ingreso

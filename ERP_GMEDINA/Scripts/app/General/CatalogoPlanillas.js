@@ -18,7 +18,7 @@ var getUrl = window.location
 var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
 // Si esta en la pantalla de Create entonces vaciar todo
-if (URLactual.indexOf('Create') > 1) {
+if (getUrl.toString().indexOf('Create') > 1) {
     $('input[type="checkbox"]').prop("checked", false);
     $('#cpla_DescripcionPlanilla').val('');
     $('#cpla_FrecuenciaEnDias').val('')
@@ -41,12 +41,14 @@ $(document).on('click', '#tblCatalogoPlanillas tbody tr td #btnDesplegarIngresos
     fila = $('#fila-' + ID);
 });
 
+//Insetar
 $(document).on('click', '#btnGuardarCatalogoDePlanillasIngresosDeducciones', function () {
-    create();
+    crearEditar();
 });
 
+//Editar
 $(document).on('click', '#btnEditarCatalogoDePlanillasIngresosDeducciones', function () {
-    create('edit');
+    crearEditar('edit');
 });
 
 function verificarCampos(descripcionPlanilla, frecuenciaDias, catalogoIngresos, catalogoDeducciones) {
@@ -60,8 +62,8 @@ function verificarCampos(descripcionPlanilla, frecuenciaDias, catalogoIngresos, 
     return true;
 }
 
-// Funcion de obtener datos
-var create = function (edit) {
+// Funcion para crear y editar
+var crearEditar = function (edit) {
     //Array de Ingresos y deducciones
     var arrayIngresos = [];
     var arrayDeducciones = [];
@@ -109,46 +111,62 @@ var create = function (edit) {
             arrayDeducciones.push(currentCheckboxIdDedu);
         }
     });
+
+    //Insertar o editar
     if (verificarCampos(descripcionPlanilla, frecuenciaDias, arrayIngresos, arrayDeducciones)) {
         if (edit != 'edit')
-            $.ajax({
-                url: "/CatalogoDePlanillas/Create",
-                method: "POST",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({
-                    catalogoDePlanillas: [
-                        descripcionPlanilla, frecuenciaDias
-                    ],
-                    catalogoIngresos: arrayIngresos,
-                    catalogoDeducciones: arrayDeducciones
-                })
-            });
+            _ajax({
+                catalogoDePlanillas: [
+                    descripcionPlanilla, frecuenciaDias
+                ],
+                catalogoIngresos: arrayIngresos,
+                catalogoDeducciones: arrayDeducciones
+            },
+                "/CatalogoDePlanillas/Create",
+                "POST",
+                (data) => {
+                    if (data == "bien"){
+                        iziToast.success({
+                            title: 'Exito',
+                            message: 'El registro fue insertado de forma exitosa.',
+                        });
+                        location.href = baseUrl;
+                    }
+                    else
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'Hubo un error al insertar el registro',
+                        });
+                });
         else
-            $.ajax({
-                url: "/CatalogoDePlanillas/Edit",
-                method: "POST",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({
-                    id: idPlanilla,
-                    catalogoDePlanillas: [
-                        descripcionPlanilla, frecuenciaDias
-                    ],
-                    catalogoIngresos: arrayIngresos,
-                    catalogoDeducciones: arrayDeducciones
-                })
-            });
+            _ajax({
+                id: idPlanilla,
+                catalogoDePlanillas: [
+                    descripcionPlanilla, frecuenciaDias
+                ],
+                catalogoIngresos: arrayIngresos,
+                catalogoDeducciones: arrayDeducciones
+            },
+                "/CatalogoDePlanillas/Edit",
+                "POST",
+                (data) => {
+                    if (data == "bien"){
+                        iziToast.success({
+                            title: 'Exito',
+                            message: 'El registro fue editado de forma exitosa.',
+                        });
+                        location.href = baseUrl;
+                    }
+                    else
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'Hubo un error al editar el registro',
+                        });
+                });
     }
-
-
-    console.log('Array de Ingresos:' + arrayIngresos);
-    console.log('Array de Deducciones:' + arrayDeducciones);
-    console.log(descripcionPlanilla);
-    console.log(frecuenciaDias);
 }
 
-//inactivar
+//Inactivar
 $('#inactivar').click(() => {
     $('#InactivarCatalogoDeducciones').modal();
 });
@@ -157,7 +175,16 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
     var id = $('form #cpla_IdPlanilla').val();
     _ajax({ id: id }, '/CatalogoDePlanillas/Delete', 'POST', (data) => {
         if (data == "bien") {
-            location.href = 'http://localhost:51144/';
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue inactivado de forma exitosa.',
+            });
+            location.href = baseUrl;
+        } else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Ocurrió un error',
+            });
         }
     });
 });
