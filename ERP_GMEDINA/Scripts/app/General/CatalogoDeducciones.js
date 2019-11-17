@@ -1,6 +1,8 @@
 ﻿//
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
+
+
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
       console.log(textStatus);
@@ -21,6 +23,7 @@ function _ajax(params, uri, type, callback) {
         }
     });
 }
+
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {

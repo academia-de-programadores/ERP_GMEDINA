@@ -1,6 +1,8 @@
 ﻿//var id = 0;
 
-
+$(document).ready(function () {
+    AllFunctions();
+});
 ///FUNCION SERIALIZAR 
 function serializar(data) {
     var Data = new Object();
@@ -12,37 +14,179 @@ function serializar(data) {
 ///FUNCION SERIALZAR
 
 
+function AllFunctions() {
 
-//AGREGAR HORARIOS///
-$('#btnAgregar').click(function () {
+    //AGREGAR HORARIOS///
+    $('#btnAgregar').click(function () {
 
-    var data = $("#frmAgregarTipoHoras").serializeArray();
-    //data = serializar(data);
-    //data = JSON.stringify({ tbTipoHoras: data });
-    console.log(data);
+        var data = $("#frmAgregarTipoHoras").serializeArray();
+        //data = serializar(data);
+        //data = JSON.stringify({ tbTipoHoras: data });
+        //console.log(data);
 
-    $.ajax({
-        url: "/TipoHoras/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-       
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            llenarTabla();
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue ingresado con Exito',
-            });
-        }
+        $.ajax({
+            url: "/TipoHoras/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo guardar el registro, contacte al administrador',
+                });
+            }
+            else {
+                llenarTabla();
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue ingresado con Exito',
+                });
+            }
+        });
     });
-});
-//AGREGAR HORARIOS///
+    //AGREGAR HORARIOS///
+
+
+
+    ///////FUNCIONES PARA EDITAR///////////
+
+    //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+    $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
+        var id = $(this).closest('tr').data('id');
+        //console.log(id);
+        $.ajax({
+            url: "/TipoHoras/Edit/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
+                if (data.length > 0) {
+                    //console.log("funciona");
+                    //console.log(data);
+                    $.each(data, function (i, item) {
+                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
+                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
+                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
+                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
+                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                    })
+                }
+
+            })
+
+
+
+    });
+
+    //EDICION DEL REGISTRO
+    $("#btnEditarModal").click(function () {
+
+        var data = $("#frmEditarTipoHoras").serializeArray();
+        //console.log(data);
+        $.ajax({
+            url: "/TipoHoras/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo editar el registro, contacte al administrador',
+                });
+            }
+            else {
+                llenarTabla();
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue editado con exito!',
+                });
+            }
+        });
+    });
+
+    //////////////
+
+
+    ////////CARGAR EL MODAL DE DETALLES/////////
+
+    //MODAL DETALLES
+    $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
+        var id = $(this).closest('tr').data('id');
+        $.ajax({
+            url: "/TipoHoras/Details/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data) {
+                    $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = data.tiho_Descripcion;
+                    $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = data.tiho_Recargo;
+                    $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = data.tiho_Estado;
+                    $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(data.tiho_FechaCrea);
+                    $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
+                    $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
+                    $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
+                    $("#ModalDetallesR").find("#btnEditarM")["0"].dataset.id = id;
+                    $('#ModalDetallesR').modal('show');
+                }
+                else {
+                    //Mensaje de error si no hay data
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo cargar la información, contacte al administrador',
+                    });
+                }
+            });
+    });
+    ////////////////
+
+
+
+    //////FUNCION PARA INHABILITAR////////////
+
+
+    //INHABILITAR
+    $("#btnInhabilitar").click(function () {
+
+        var data = $("#frmInhabilitarTipoHoras").serializeArray();
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        console.log(data);
+        $.ajax({
+            url: "/TipoHoras/Inactivar",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo inactivar el registro, contacte al administrador',
+                });
+            }
+            else {
+                // REFRESCAR UNICAMENTE LA TABLA
+                cargarGridDeducciones();
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue Inactivado de forma exitosa!',
+                });
+            }
+        });
+    });
+    ///////////////
+
+}
+
 
 
 //
@@ -83,11 +227,12 @@ function llenarTabla() {
             IndexTable.clear();
             IndexTable.draw();
             $.each(data, function (i, item) {
-                console.log(item.tiho_Descripcion);
-                IndexTable.row.add([item.tiho_Descripcion,item.tiho_Recargo,
+                //console.log(item.tiho_Descripcion);
+                IndexTable.row.add(['<tr data-id = "' + item.tiho_Id + '">' +
+                    item.tiho_Descripcion, item.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' data-id='" + item.tiho_Id + "' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' data-id=" + item.tiho_Id + ">Editar</a>" +
+                    "<button type='button' class='btn btn-primary btn-xs' id='btnDetalle' data-toggle='modal' data-target='#ModalDetalles'>Detalle</button>" +
+                        "<button type='button' class='btn btn-default btn-xs' id='btnEditarR' data-toggle='modal' data-target='#ModalEditar'>Editar</button>" +
                     "</div>"]).draw();
             
             });
@@ -103,146 +248,10 @@ function llenarTabla() {
             //        '</td>' +
             //        '</tr>').draw();
             //}
+            AllFunctions();
           
         });
 }
 
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
-    var id = $(this).closest('tr').data('id');
-    console.log(id);
-    $.ajax({
-        url: "/TipoHoras/Edit/" + id,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-           
-                if (data.length > 0) {
-                    console.log("funciona");
-                    console.log(data);
-                    $.each(data, function (i, item) {
-                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
-                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
-                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
-                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
-                    })
-                }
-            
-                })
-                   
-           
-        
-});
-
-//EDICION DEL REGISTRO
-$("#btnEditarModal").click(function () {
-
-    var data = $("#frmEditarTipoHoras").serializeArray();
-    console.log(data);
-    $.ajax({
-        url: "/TipoHoras/Edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-           
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
-            });
-        }
-        else {
-            llenarTabla();
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado con exito!',
-            });
-        }
-    });
-});
-
-
-//MODAL DETALLES
-$(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
-    var id = $(this).closest('tr').data('id');
-    $.ajax({
-        url: "/TipoHoras/Details/" + id,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = data.tiho_Descripcion;
-                $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = data.tiho_Recargo;
-                $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = data.tiho_Estado;
-                $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(data.tiho_FechaCrea);
-                $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
-                $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#btnEditarM")["0"].dataset.id = id;
-                $('#ModalDetallesR').modal('show');
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
-});
-
-
-
-
-
-
-//INHABILITAR
-$("#btnInhabilitar").click(function () {
-
-    var data = $("#frmInhabilitarTipoHoras").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    console.log(data);
-    $.ajax({
-        url: "/TipoHoras/Inactivar",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
-            });
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
-            });
-        }
-    });
-});
-
-
-// PROBANDO LOS IZITOAST
-//$(document).ready(function () {
-//    console.log('cargado JS');
-//    iziToast.show({
-//        title: 'Hola',
-//        message: 'Estoy probando los iziToast'
-//    });
-//});
 
 
