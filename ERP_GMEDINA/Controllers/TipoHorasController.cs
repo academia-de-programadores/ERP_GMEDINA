@@ -17,11 +17,18 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoHoras
         public ActionResult Index()
         {
-              tbUsuario Usuario = new tbUsuario();
+            tbUsuario Usuario = new tbUsuario();
             Usuario.usu_Id = 1;
             Session["Usuario"] = Usuario;
-            var tbTipoHoras = db.tbTipoHoras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x=>x.tiho_Estado==true);
+            var tbTipoHoras = db.tbTipoHoras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.tiho_Estado == true);
             return View(tbTipoHoras.ToList());
+        }
+
+        public ActionResult obtenerDatos()
+        {
+
+           var datostabla= db.tbTipoHoras.ToList().Where(x => x.tiho_Estado == true);
+            return new JsonResult { Data=datostabla, JsonRequestBehavior= JsonRequestBehavior.AllowGet };
         }
 
         // GET: TipoHoras/Details/5

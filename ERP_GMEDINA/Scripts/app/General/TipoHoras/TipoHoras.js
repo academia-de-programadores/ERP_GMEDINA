@@ -31,6 +31,7 @@ $('#btnAgregar').click(function () {
             });
         }
         else {
+            cargarDatosTabla();
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue ingresado con Exito',
@@ -66,37 +67,36 @@ function _ajax(params, uri, type, callback) {
 }
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
-//function cargarGridDeducciones() {
-//    _ajax(null,
-//        '/CatalogoDeDeducciones/GetData',
-//        'GET',
-//        (data) => {
-//            if (data.length == 0) {
-//                //Validar si se genera un error al cargar de nuevo el grid
-//                iziToast.error({
-//                    title: 'Error',
-//                    message: 'No se pudo cargar la información, contacte al administrador',
-//                });
-//            }
-//            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-//            var ListaDeducciones = data, template = '';
-//            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-//            for (var i = 0; i < ListaDeducciones.length; i++) {
-//                template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-//                    '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-//                    '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-//                    '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-//                    '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-//                    '<td>' +
-//                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-//                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-//                    '</td>' +
-//                    '</tr>';
-//            }
-//            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-//            $('#tbodyDeducciones').html(template);
-//        });
-//}
+function cargarDatosTabla() {
+    _ajax(null,
+        '/TipoHoras/obtenerDatos',
+        'GET',
+        (data) => {
+            if (data.length == 0) {
+                //Validar si se genera un error al cargar de nuevo el grid
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
+            var ListaDatos = data, template = '';
+            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            for (var i = 0; i < ListaDatos.length; i++) {
+                template += '<tr data-id = "' + ListaDatos[i].tiho_Id + '">' +
+                    '<td>' + ListaDatos[i].tiho_Descripcion + '</td>' +
+                    '<td>' + ListaDatos[i].tiho_Recargo + '</td>' +
+           
+                    '<td>' +
+                    '<button type="button" data-id = "' + ListaDatos[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>' +
+                    '<button type="button" data-id = "' + ListaDatos[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnEditarR">Editar</button>' +
+                    '</td>' +
+                    '</tr>';
+            }
+            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            $('#tbody').html(template);
+        });
+}
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
@@ -148,6 +148,7 @@ $("#btnEditarModal").click(function () {
             });
         }
         else {
+            cargarDatosTabla();
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue editado con exito!',
