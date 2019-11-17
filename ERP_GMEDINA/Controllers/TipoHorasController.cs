@@ -24,26 +24,36 @@ namespace ERP_GMEDINA.Controllers
             return View(tbTipoHoras.ToList());
         }
 
-        public ActionResult obtenerDatos()
+        [HttpPost]
+        public JsonResult llenarTabla()
         {
-
-           var datostabla= db.tbTipoHoras.ToList().Where(x => x.tiho_Estado == true);
-            return new JsonResult { Data=datostabla, JsonRequestBehavior= JsonRequestBehavior.AllowGet };
+            List<tbTipoHoras> tbTipoHoras =
+                new List<Models.tbTipoHoras> { };
+            foreach (tbTipoHoras x in db.tbTipoHoras.ToList().Where(x => x.tiho_Estado == true))
+            {
+                tbTipoHoras.Add(new tbTipoHoras
+                {
+                    tiho_Id = x.tiho_Id,
+                    tiho_Descripcion = x.tiho_Descripcion,
+                    tiho_Recargo=x.tiho_Recargo,
+                    tiho_Estado = x.tiho_Estado,
+                    tiho_RazonInactivo = x.tiho_RazonInactivo,
+                    tiho_UsuarioCrea = x.tiho_UsuarioCrea,
+                    tiho_FechaCrea = x.tiho_FechaCrea,
+                    tiho_UsuarioModifica = x.tiho_UsuarioModifica,
+                    tiho_FechaModifica = x.tiho_FechaModifica
+                });
+            }
+            //tbHabilidades Habilidad = new tbHabilidades {habi_Descripcion="hola", habi_Id=1 };
+            //List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            ////tbHabilidades.Add(Habilidad);
+            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
         }
 
 
-       
         // GET: TipoHoras/Details/5
         public ActionResult Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            // var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
-
-            //return Json(List, JsonRequestBehavior.AllowGet);
-      
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

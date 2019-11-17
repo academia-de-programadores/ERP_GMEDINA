@@ -1,4 +1,4 @@
-﻿var id = 0;
+﻿//var id = 0;
 
 
 ///FUNCION SERIALIZAR 
@@ -34,7 +34,7 @@ $('#btnAgregar').click(function () {
             });
         }
         else {
-            cargarDatosTabla();
+            llenarTabla();
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue ingresado con Exito',
@@ -70,34 +70,23 @@ function _ajax(params, uri, type, callback) {
 }
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
-function cargarDatosTabla() {
+
+function llenarTabla() {
     _ajax(null,
-        '/TipoHoras/obtenerDatos',
-        'GET',
-        (data) => {
-            if (data.length == 0) {
-                //Validar si se genera un error al cargar de nuevo el grid
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaDatos = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaDatos.length; i++) {
-                template += '<tr data-id = "' + ListaDatos[i].tiho_Id + '">' +
-                    '<td>' + ListaDatos[i].tiho_Descripcion + '</td>' +
-                    '<td>' + ListaDatos[i].tiho_Recargo + '</td>' +
-           
-                    '<td>' +
-                    '<button type="button" data-id = "' + ListaDatos[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>' +
-                    '<button type="button" data-id = "' + ListaDatos[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnEditarR">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbody').html(template);
+        '/TipoHoras/llenarTabla',
+        'POST',
+        function (Lista) {
+            tabla.clear();
+            tabla.draw();
+            $.each(Lista, function (index, value) {
+                console.log(value.tiho_Descripcion);
+                tabla.row.add([value.tiho_Descripcion,
+                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                    "<a class='btn btn-primary btn-xs tablaDetalles' data-id='" + value.tiho_Id + "' >Detalles</a>" +
+                        "<a class='btn btn-default btn-xs tablaEditar' data-id=" + value.tiho_Id + ">Editar</a>" +
+                    "</div>"]).draw();
+            });
+          
         });
 }
 
@@ -151,7 +140,7 @@ $("#btnEditarModal").click(function () {
             });
         }
         else {
-            cargarDatosTabla();
+            llenarTabla();
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue editado con exito!',
@@ -163,13 +152,13 @@ $("#btnEditarModal").click(function () {
 
 //MODAL DETALLES
 $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
-    var ID = $(this).closest('tr').data('id');
+    var id = $(this).closest('tr').data('id');
     $.ajax({
-        url: "/TipoHoras/Details/" + ID,
+        url: "/TipoHoras/Details/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        data: JSON.stringify({ id: id })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -177,12 +166,11 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
                 $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = data.tiho_Descripcion;
                 $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = data.tiho_Recargo;
                 $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = data.tiho_Estado;
-              
                 $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(data.tiho_FechaCrea);
                 $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#btnEditarR")["0"].dataset.id = id;
+                $("#ModalDetallesR").find("#btnEditarM")["0"].dataset.id = id;
                 $('#ModalDetallesR').modal('show');
             }
             else {
