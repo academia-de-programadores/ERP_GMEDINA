@@ -52,37 +52,38 @@ function AllFunctions() {
     ///////FUNCIONES PARA EDITAR///////////
 
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-    $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
-        var id = $(this).closest('tr').data('id');
-        //console.log(id);
-        $.ajax({
-            url: "/TipoHoras/Edit/" + id,
-            method: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: id })
-        })
-            .done(function (data) {
-                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-
-                if (data.length > 0) {
-                    //console.log("funciona");
-                    //console.log(data);
-                    $.each(data, function (i, item) {
-                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
-                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
-                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
-                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
-                    })
-                }
-
+    $(".tablaEditar").click(function () {
+       // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
+            var id = $(this).closest('tr').data('id');
+            //console.log(id);
+            $.ajax({
+                url: "/TipoHoras/Edit/" + id,
+                method: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: id })
             })
+                .done(function (data) {
+                    //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
+                    if (data.length > 0) {
+                        //console.log("funciona");
+                        //console.log(data);
+                        $.each(data, function (i, item) {
+                            $("#ModalEdit #tiho_Id").val(item.tiho_Id)
+                            $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
+                            $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
+                            //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
+                            //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                        })
+                    }
+
+                //})
 
 
 
+        });
     });
-
     //EDICION DEL REGISTRO
     $("#btnEditarModal").click(function () {
 
@@ -231,23 +232,26 @@ function llenarTabla() {
                 IndexTable.row.add(['<tr data-id = "' + item.tiho_Id + '">' +
                     item.tiho_Descripcion, item.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs' id='btnDetalle' data-toggle='modal' data-target='#ModalDetalles'>Detalle</button>" +
-                        "<button type='button' class='btn btn-default btn-xs' id='btnEditarR' data-toggle='modal' data-target='#ModalEditar'>Editar</button>" +
+                    "<button type='button' class='btn btn-primary btn-xs' id='btnDetalle' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalDetalles'>Detalle</button>" +
+                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalEditar'>Editar</button>" +
                     "</div>"]).draw();
             
             });
-            //var data = data;
+
+            //var data = data,template="";
             //for (var i = 0; i < data.length; i++) {
-            //    console.log(i);
-            //    IndexTable.row.add( '<tr data-id = "' + data[i].tiho_Id + '">' +
-            //        '<td>' + data[i].tiho_Descripcion + '</td>' +
-            //        '<td>' + data[i].tiho_Recargo + '</td>' +
-            //        '<td>' +
-            //        '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnEditar">Detalles</button>' +
-            //        '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnDetale">Editar</button>' +
-            //        '</td>' +
-            //        '</tr>').draw();
+            //    //console.log(i);
+            //    template += '<tr data-id = "' + data[i].tiho_Id + '">' +
+            //    '<td>' + data[i].tiho_Descripcion + '</td>' +
+            //    '<td>' + data[i].tiho_Recargo + '</td>' +
+            //    '<td>' +
+            //    '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnEditar">Detalles</button>' +
+            //    '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnDetale">Editar</button>' +
+            //    '</td>' +
+            //    '</tr>';
             //}
+            ////REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //$('#tbody').html(template);
             AllFunctions();
           
         });
