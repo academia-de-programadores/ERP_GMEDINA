@@ -54,7 +54,9 @@ function AllFunctions() {
     //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
     $(".tablaEditar").click(function () {
        // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
-            var id = $(this).closest('tr').data('id');
+       // var id = $(this).closest('tr').data('id');
+        var tr = this.closest("tr");
+        var id = $(this).data("id");
             //console.log(id);
             $.ajax({
                 url: "/TipoHoras/Edit/" + id,
@@ -102,11 +104,12 @@ function AllFunctions() {
                 });
             }
             else {
-                llenarTabla();
+                
                 iziToast.success({
                     title: 'Exito',
                     message: 'El registro fue editado con exito!',
                 });
+                llenarTabla();
             }
         });
     });
@@ -117,8 +120,11 @@ function AllFunctions() {
     ////////CARGAR EL MODAL DE DETALLES/////////
 
     //MODAL DETALLES
-    $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
-        var id = $(this).closest('tr').data('id');
+    $(".tablaDetalle").click(function () {
+        // $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
+        var tr = this.closest("tr");
+        var id = $(this).data("id");
+        //var id = $(this).closest('tr').data('id');
         $.ajax({
             url: "/TipoHoras/Details/" + id,
             method: "GET",
@@ -147,6 +153,7 @@ function AllFunctions() {
                     });
                 }
             });
+        // });
     });
     ////////////////
 
@@ -175,7 +182,7 @@ function AllFunctions() {
             }
             else {
                 // REFRESCAR UNICAMENTE LA TABLA
-                cargarGridDeducciones();
+                llenarTabla();
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
@@ -232,7 +239,7 @@ function llenarTabla() {
                 IndexTable.row.add(['<tr data-id = "' + item.tiho_Id + '">' +
                     item.tiho_Descripcion, item.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs' id='btnDetalle' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalDetalles'>Detalle</button>" +
+                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalDetalles'>Detalle</button>" +
                         "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalEditar'>Editar</button>" +
                     "</div>"]).draw();
             
