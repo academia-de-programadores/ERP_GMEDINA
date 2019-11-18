@@ -158,6 +158,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoHoras/Edit/5
         public ActionResult Edit(int? id)
         {
+            Session["id"] = id;
             var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
 
             return Json(List, JsonRequestBehavior.AllowGet);
@@ -168,13 +169,13 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit(int tiho_Id ,string tiho_Descripcion,int tiho_Recargo)
+        public ActionResult Edit(int tiho_Id, string tiho_Descripcion,int tiho_Recargo)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
             var Usuario = (tbUsuario)Session["Usuario"];
             TipoHora.tiho_Id = tiho_Id;
-            Session["TipoHora"] = TipoHora;
-           
+            //Session["TipoHora"] = TipoHora;
+            var id = (int)Session["id"];
             TipoHora.tiho_Id = tiho_Id;
             TipoHora.tiho_Descripcion = tiho_Descripcion;
             TipoHora.tiho_Recargo = tiho_Recargo;
