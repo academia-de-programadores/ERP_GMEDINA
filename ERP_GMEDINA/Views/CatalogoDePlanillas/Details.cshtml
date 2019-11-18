@@ -9,7 +9,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-            <h2>Details</h2>
+            <h2>Detalles</h2>
         </div>
 
         <div class="ibox-content">
@@ -63,42 +63,6 @@
                 </dd>
 
             </dl>
-            <br />
-            <div class="col-lg-5" id="catalogoDeIngresos">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Lista del catalogo de Ingresos</h5>
-                    </div>
-                    <div class="ibox-content">
-                        @foreach (var item in ViewBag.CatalogoIngresos)
-                        {
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5" id="catalogoDeDeducciones">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Lista del catalogo de Deducciones</h5>
-                    </div>
-                    <div class="ibox-content">
-
-                        @foreach (var item in ViewBag.CatalogoDeducciones)
-                        {
-                            <div class="form-horizontal col-xs-offset-1">
-                                <div class="form-group">
-                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
             <p>
                 @Html.ActionLink("Editar", "Edit", new { id = Model.cpla_IdPlanilla }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
@@ -106,6 +70,43 @@
         </div>
     </div>
 </div>
+<br />
+<div class="col-lg-5" id="catalogoDeIngresos">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Lista del catalogo de Ingresos</h5>
+        </div>
+        <div class="ibox-content">
+            @foreach (var item in ViewBag.CatalogoIngresos)
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <input type="checkbox" class="i-checks" id="check-@item.id" disabled checked="@item.check" /> @item.descripcion
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-lg-5" id="catalogoDeDeducciones">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Lista del catalogo de Deducciones</h5>
+        </div>
+        <div class="ibox-content">
+
+            @foreach (var item in ViewBag.CatalogoDeducciones)
+            {
+                <div class="form-horizontal col-xs-offset-1">
+                    <div class="form-group">
+                        <input type="checkbox" class="i-checks" id="check-@item.id" disabled checked="@item.check" /> @item.descripcion
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h2>Auditoría</h2>
@@ -136,3 +137,27 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+
+
+
+
+<link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>

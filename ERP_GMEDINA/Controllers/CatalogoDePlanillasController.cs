@@ -24,15 +24,25 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDePlanillas/Details/5
         public ActionResult Details(int? id)
         {
+            string response = "bien";
+
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json(response = "error", JsonRequestBehavior.AllowGet);
             }
-            tbCatalogoDePlanillas tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id);
+
+            // Obtener los datos del catalogo de planillas filtrando por el id
+            tbCatalogoDePlanillas tbCatalogoDePlanillas;
+            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, listaCatalogoDeducciones;
+            response = ObtenerCatalogoDePlanillaIngresosDeducciones(id, response, out tbCatalogoDePlanillas, out listaCatalogoIngresos, out listaCatalogoDeducciones);
+
+            ViewBag.CatalogoIngresos = listaCatalogoIngresos;
+            ViewBag.CatalogoDeducciones = listaCatalogoDeducciones;
             if (tbCatalogoDePlanillas == null)
             {
-                return HttpNotFound();
+                return Json(response = "error", JsonRequestBehavior.AllowGet);
             }
+
             return View(tbCatalogoDePlanillas);
         }
 
