@@ -168,7 +168,8 @@ function tablaEditar(ID) {
                 $.each(data, function (i, item) {
                     $("#ModalEdit #tiho_Id").val(item.tiho_Id)
                     $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                    $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
+                    $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
+                    $("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
                     //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
                     //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
                 })
@@ -259,5 +260,8 @@ function FechaFormato(pFecha) {
         return FechaFinal;
     }
     return '';
+}
+function pad2(number) {
+    return (number < 10 ? '0' : '') + number
 }
 
