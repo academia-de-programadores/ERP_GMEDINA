@@ -17,7 +17,7 @@
 			<div class="input-group date">
 				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control",@type = "date", @name = "hipa_FechaFin", @id= "hipa_FechaFin" } })
 			</div>
-            @Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
 		</div>
 
 	</div>

@@ -111,6 +111,8 @@ $("body").on("click", "#btnProcesarFE", function () {
 // MOSTRAR MODAL DE FECHAS
 $(document).on("click", "#btnFechaEspecifica", function () {
     $("#frmFechaDecimoTercer").modal();
+    $("#Validation_descipcion").css("display", "");
+    $("#Validation_descipcion2").css("display", "");
 });
 
 // OCULTAR MODAL DE FECHAS
@@ -122,12 +124,14 @@ $("#btnCerrarFecha").click(function () {
 //FUNCION: OCULTAR MODAL DE CREATE
 $("#btnCerrarFecha").click(function () {
     $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
 });
 
 
 //FUNCION: OCULTAR MODAL DE CREATE CON EL ICONO DE CERRAR
 $("#IconCerrar").click(function () {
-    $("#Crear #Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
 });
 
 

@@ -46,7 +46,7 @@ namespace ERP_GMEDINA.Controllers
 				//Ciclo para insertar los registros.
 				foreach (tbDecimoTercerMes DC in DecimoTercer)
 				{
-                    entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id,DC.dtm_DecimoTercer);			
+                    entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id,DC.dtm_Monto);			
 				}
 				int RegistrosInsertados = entities.SaveChanges();
 				return Json(RegistrosInsertados);
