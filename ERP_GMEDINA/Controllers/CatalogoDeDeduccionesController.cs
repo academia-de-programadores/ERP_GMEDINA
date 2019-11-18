@@ -276,31 +276,6 @@ namespace PruebaPlanilla.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // GET: CatalogoDeDeducciones/Delete/5
         //public ActionResult Delete(int? id)
         //{
