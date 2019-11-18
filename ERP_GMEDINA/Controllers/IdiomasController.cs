@@ -51,15 +51,41 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idi_Id,idi_Descripcion,idi_Estado,idi_RazonInactivo,idi_UsuarioCrea,idi_FechaCrea,idi_UsuarioModifica,idi_FechaModifica")] tbIdiomas tbIdiomas)
         {
+            tbIdiomas.idi_FechaCrea = DateTime.Now;
+            tbIdiomas.idi_UsuarioCrea = 2;
             if (ModelState.IsValid)
             {
-                db.tbIdiomas.Add(tbIdiomas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> listidioma = null;
+                    string MensajeError = "";
+                    listidioma = db.UDP_RRHH_tbIdiomas_Insert(tbIdiomas.idi_Descripcion,
+                                                               tbIdiomas.idi_UsuarioCrea,
+                                                               tbIdiomas.idi_FechaCrea);
+                    foreach(UDP_RRHH_tbIdiomas_Insert_Result Res in listidioma)
+                    {
+                        MensajeError = Res.MensajeError;
+                    }
+                    if(!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if(MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.No se pudo ingresar el registro");
+                            return View(tbIdiomas);
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                 
+                catch(Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2.No se pudo insertar el registro");
+                    return View(tbIdiomas);
+                }
             }
-
-            ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
-            ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
+          //  ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
+           // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
             return View(tbIdiomas);
         }
 
@@ -87,14 +113,42 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idi_Id,idi_Descripcion,idi_Estado,idi_RazonInactivo,idi_UsuarioCrea,idi_FechaCrea,idi_UsuarioModifica,idi_FechaModifica")] tbIdiomas tbIdiomas)
         {
+            tbIdiomas.idi_FechaModifica = DateTime.Now;
+            tbIdiomas.idi_UsuarioModifica = 7;
             if (ModelState.IsValid)
             {
-                db.Entry(tbIdiomas).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> listIdiomas = null;
+                    string MensajeError = "";
+                    listIdiomas = db.UDP_RRHH_tbIdiomas_Update(tbIdiomas.idi_Id,
+                                                                tbIdiomas.idi_Descripcion,
+                                                                tbIdiomas.idi_UsuarioModifica,
+                                                                tbIdiomas.idi_FechaModifica);
+                    foreach(UDP_RRHH_tbIdiomas_Update_Result Res in listIdiomas)
+                    {
+                        MensajeError = Res.MensajeError;
+                    }
+                    if(!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if(MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1. No se pudo Editar el registo");
+                            return View(tbIdiomas);
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
+                    return View(tbIdiomas);
+                }
+               
             }
-            ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
-            ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
+         //   ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
+           // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
             return View(tbIdiomas);
         }
 
