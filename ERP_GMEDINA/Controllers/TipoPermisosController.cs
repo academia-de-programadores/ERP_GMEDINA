@@ -240,10 +240,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Delete(   tbCatalogoDeDeducciones.cde_IdDeducciones,
-                                                                            tbCatalogoDeDeducciones.tper_RazonInactivo,
-                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
-                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
+                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Delete(   tbTipoPermisos.tper_Id,
+                                                                            tbTipoPermisos.tper_RazonInactivo,
+                                                                            tbTipoPermisos.tper_UsuarioModifica,
+                                                                            tbTipoPermisos.tper_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_RRHH_tbTipoPermisos_Delete_Result Resultado in listTipoPermisos)
                         MensajeError = Resultado.MensajeError;
