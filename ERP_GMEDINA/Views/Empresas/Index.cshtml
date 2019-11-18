@@ -65,8 +65,10 @@
                                 @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
                             </td>*@
                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { id=item.empr_Id },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { id=item.empr_Id }, new {@class = "btn btn-default btn-xs" })
+                              @*@Html.ActionLink("Detalles", "Details", new { id=item.empr_Id },  new {@class = "btn btn-primary btn-xs" })
+                              @Html.ActionLink("Editar", "Edit", new { id=item.empr_Id }, new {@class = "btn btn-default btn-xs" })*@
+                               <button data-id="@item.empr_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpresas">Editar</button>
+                               <button data-id="@item.empr_Id" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpresas">Detalle</button>
                             </td>
                         </tr>
                       }
@@ -112,6 +114,7 @@
             </div>
             <div class="modal-body" id="ModalEdit">
                 @*--PARTIAL VIEW AQUI--*@
+                @Html.Partial("_EditEmpresa", new ERP_GMEDINA.Models.tbEmpresas())
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>

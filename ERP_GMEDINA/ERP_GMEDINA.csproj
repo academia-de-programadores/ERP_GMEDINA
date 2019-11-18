@@ -1279,6 +1279,7 @@
     <Content Include="Views\Empresas\Edit.cshtml" />
     <Content Include="Views\Empresas\Index.cshtml" />
     <Content Include="Views\Empresas\_CreateEmpresa.cshtml" />
+    <Content Include="Views\Empresas\_EditEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
