@@ -38,26 +38,64 @@ namespace ERP_GMEDINA.Controllers
 		{
 			using (ERP_GMEDINAEntities entities = new ERP_GMEDINAEntities())
 			{
-				//int numeroLotes = 2;
+                
+                    try
+                    {
+                        int numeroLotes = 1;
+                        int CantidadRegistros = DecimoTercer.Count;
 
-				//Corroborar si la lista viene nula.
-				if (DecimoTercer == null)
-				{
-					DecimoTercer = new List<tbDecimoTercerMes>();
-				}
-				//Ciclo para insertar los registros.
-				foreach (tbDecimoTercerMes DC in DecimoTercer)
-				{
-					//for (int i = 0; i < DecimoTercer.Count; i++)
-					//{
-						entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
-					//	if (i % numeroLotes == 0)
-							entities.SaveChanges();
-					//}
-				}
+                        if (CantidadRegistros == 1)
+                        {
+                            numeroLotes = 1;
+                        }
+                        else if (CantidadRegistros <= 10)
+                        {
+                            numeroLotes = 5;
+                        }
+                        else if (CantidadRegistros <= 50)
+                        {
+                            numeroLotes = 10;
+                        }
+                        else if (CantidadRegistros <= 100)
+                        {
+                            numeroLotes = 20;
+                        }
+                        else if (CantidadRegistros <= 500)
+                        {
+                            numeroLotes = 50;
+                        }
+                        else if (CantidadRegistros <= 1000 || CantidadRegistros >= 1000)
+                        {
+                            numeroLotes = 100;
+                        }
 
-				int RegistrosInsertados = entities.SaveChanges();
-				return Json(RegistrosInsertados);
+
+                        //Corroborar si la lista viene nula.
+                        if (DecimoTercer == null)
+                        {
+                            DecimoTercer = new List<tbDecimoTercerMes>();
+                        }
+                        int i = 0;
+                        //Ciclo para insertar los registros.
+                        foreach (tbDecimoTercerMes DC in DecimoTercer)
+                        {
+                            i++;
+                            entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
+                            if (i % numeroLotes == 0)
+                                entities.SaveChanges();                            
+                        }
+
+                    }
+                    catch(Exception ex)
+                    {
+                        ex.Message.ToString();
+                        
+                    }
+                    
+
+                    int RegistrosInsertados = entities.SaveChanges();
+                    return Json(RegistrosInsertados);
+                
 			}
 		}
 

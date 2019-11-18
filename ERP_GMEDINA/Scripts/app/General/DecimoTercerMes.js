@@ -149,6 +149,8 @@ $("#btnEnviarFecha").click(function () {
 
 
 
+
+
 //$(document).on("click", "#btnEnviarFecha", function () {
 //    var FechaInicial = $("#hipa_FechaInicio").val();
 //    var FechaFinal = $("#hipa_FechaFin").val();
