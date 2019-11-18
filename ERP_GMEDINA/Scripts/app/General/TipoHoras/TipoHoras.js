@@ -42,6 +42,7 @@ function AllFunctions() {
                 $('#ModalCrear').modal('hide');
                 //table.ajax.reload(null, false);
                 llenarTabla();
+                LimpiarControles()
             }
         });
     });
@@ -50,8 +51,6 @@ function AllFunctions() {
 
 
 }
-
-
 
     //EDICION DEL REGISTRO
     $("#btnEditarModal").click(function () {
@@ -85,18 +84,13 @@ function AllFunctions() {
     });
     //////////////
 
-
-   
-
-
-
 //////FUNCION PARA INHABILITAR////////////
     //INHABILITAR
     $("#btnInhabilitar").click(function () {
 
         // var data = $("#frmInhabilitarTipoHoras").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        var data = $("#frmEditarTipoHoras").serializeArray();
+        var data = $("#frmInhabilitarTipoHoras").serializeArray();
         data = serializar(data);
         data.tiho_Id = id;
         data = JSON.stringify({ tbTipoHoras: data });
@@ -122,6 +116,7 @@ function AllFunctions() {
                     message: 'El registro fue Inactivado de forma exitosa!',
                 });
                 $('#ModalInhabilitar').modal('hide');
+                LimpiarControles()
             }
         });
     });
@@ -168,7 +163,7 @@ function tablaEditar(ID) {
                 $.each(data, function (i, item) {
                     $("#ModalEdit #tiho_Id").val(item.tiho_Id)
                     $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                    $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
+                    $("#ModalEdit #tiho_Rqecargo").val(item.tiho_Recargo);
                     $("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
                     //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
                     //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
@@ -265,3 +260,11 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 }
 
+function LimpiarControles() {
+    //$("#tiho_Id").val("");
+    $("#tiho_Descripcion").val("");
+    $("#tiho_Recargo").val("");
+    $("#tiho_RazonInactivo").val("");
+
+
+}
