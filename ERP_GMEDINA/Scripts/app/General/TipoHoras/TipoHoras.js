@@ -245,5 +245,19 @@ function llenarTabla() {
         });
 }
 
-
+function FechaFormato(pFecha) {
+    if (pFecha != null && pFecha != undefined) {
+        var fechaString = pFecha.substr(6);
+        var fechaActual = new Date(parseInt(fechaString));
+        var mes = fechaActual.getMonth() + 1;
+        var dia = pad2(fechaActual.getDate());
+        var anio = fechaActual.getFullYear();
+        var hora = pad2(fechaActual.getHours());
+        var minutos = pad2(fechaActual.getMinutes());
+        var segundos = pad2(fechaActual.getSeconds().toString());
+        var FechaFinal = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos + ":" + segundos;
+        return FechaFinal;
+    }
+    return '';
+}
 
