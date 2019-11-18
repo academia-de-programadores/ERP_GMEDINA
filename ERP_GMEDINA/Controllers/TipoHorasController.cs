@@ -174,8 +174,8 @@ namespace ERP_GMEDINA.Controllers
             tbTipoHoras TipoHora = new tbTipoHoras();
             var Usuario = (tbUsuario)Session["Usuario"];
             TipoHora.tiho_Id = tiho_Id;
-            //Session["TipoHora"] = TipoHora;
-            var id = (int)Session["id"];
+            Session["TipoHora"] = TipoHora;
+            //var id = (int)Session["id"];
             TipoHora.tiho_Id = tiho_Id;
             TipoHora.tiho_Descripcion = tiho_Descripcion;
             TipoHora.tiho_Recargo = tiho_Recargo;
@@ -228,13 +228,14 @@ namespace ERP_GMEDINA.Controllers
         //}
 
         // POST: TipoHoras/Delete/5
-        [HttpPost]
+        //[HttpPost]
        // [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(tbTipoHoras tbTipoHoras)
+        public ActionResult Inactivar( string  tiho_RazonInactivo)
         {
+            var id = (int)Session["id"];
             tbTipoHoras TipoHora = new tbTipoHoras();
-            //TipoHora.tiho_RazonInactivo = razoninactivo;
-            var TipoHoras = (tbTipoHoras)Session["TipoHora"];
+            TipoHora.tiho_Id = id;
+            TipoHora.tiho_RazonInactivo = tiho_RazonInactivo;
             var Usuario = (tbUsuario)Session["Usuario"];
             if (ModelState.IsValid)
             {

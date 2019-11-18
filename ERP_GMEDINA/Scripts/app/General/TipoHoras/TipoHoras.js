@@ -90,17 +90,17 @@ function AllFunctions() {
 
         // var data = $("#frmInhabilitarTipoHoras").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        var data = $("#frmInhabilitarTipoHoras").serializeArray();
-        data = serializar(data);
-        data.tiho_Id = id;
-        data = JSON.stringify({ tbTipoHoras: data });
-        console.log(data);
+        var tbTipoHoras = $("#frmInhabilitarTipoHoras").serializeArray();
+        //tbTipoHoras = serializar(tbTipoHoras);
+        //tbTipoHoras.tiho_Id = id;
+        //tbTipoHoras = JSON.stringify({ tbTipoHoras: tbTipoHoras });
+        console.log(tbTipoHoras);
         $.ajax({
             url: "/TipoHoras/Inactivar",
             method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "-1" || data == "2") {
+            data: tbTipoHoras
+        }).done(function (tbTipoHoras) {
+            if (tbTipoHoras == "-1" || tbTipoHoras == "2") {
                 //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
@@ -115,6 +115,7 @@ function AllFunctions() {
                     title: 'Exito',
                     message: 'El registro fue Inactivado de forma exitosa!',
                 });
+                $('#ModalEditar').modal('hide');
                 $('#ModalInhabilitar').modal('hide');
                 LimpiarControles()
             }
@@ -163,8 +164,8 @@ function tablaEditar(ID) {
                 $.each(data, function (i, item) {
                     $("#ModalEdit #tiho_Id").val(item.tiho_Id)
                     $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                    $("#ModalEdit #tiho_Rqecargo").val(item.tiho_Recargo);
-                    $("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
+                    $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
+                    //$("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
                     //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
                     //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
                 })
