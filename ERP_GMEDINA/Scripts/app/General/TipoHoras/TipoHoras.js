@@ -48,9 +48,40 @@ function AllFunctions() {
     });
     //AGREGAR HORARIOS///
 
+    $("#btnEditarM").click(function () {
+       // id = ID;
+        //console.log(id);
+        $.ajax({
+            url: "/TipoHoras/Edit/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+
+                if (data.length > 0) {
+                    //console.log("funciona");
+                    //console.log(data);
+                    $.each(data, function (i, item) {
+                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
+                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
+                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
+                        //$("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
+                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
+                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                        $('#ModalEditar').modal('show');
+                    })
+                }
+
+                //})
 
 
-}
+
+            });
+
+    });
 
     //EDICION DEL REGISTRO
     $("#btnEditarModal").click(function () {
@@ -70,7 +101,7 @@ function AllFunctions() {
                 });
             }
             else {
-                
+
                 iziToast.success({
                     title: 'Exito',
                     message: 'El registro fue editado con exito!',
@@ -83,6 +114,10 @@ function AllFunctions() {
         });
     });
     //////////////
+
+}
+
+  
 
 //////FUNCION PARA INHABILITAR////////////
     //INHABILITAR
