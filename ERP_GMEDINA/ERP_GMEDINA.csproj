@@ -1265,6 +1265,7 @@
     <Content Include="Views\TipoPermisos\Details.cshtml" />
     <Content Include="Views\TipoPermisos\Edit.cshtml" />
     <Content Include="Views\TipoPermisos\Index.cshtml" />
+    <Content Include="Views\TipoPermisos\_CreateTipoPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
