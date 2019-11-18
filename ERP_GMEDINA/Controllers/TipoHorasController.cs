@@ -229,10 +229,10 @@ namespace ERP_GMEDINA.Controllers
         // POST: TipoHoras/Delete/5
         [HttpPost]
        // [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int id,string razoninactivo)
+        public ActionResult Inactivar(int id)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
-            TipoHora.tiho_RazonInactivo = razoninactivo;
+            //TipoHora.tiho_RazonInactivo = razoninactivo;
             var TipoHoras = (tbTipoHoras)Session["TipoHora"];
             var Usuario = (tbUsuario)Session["Usuario"];
             if (ModelState.IsValid)

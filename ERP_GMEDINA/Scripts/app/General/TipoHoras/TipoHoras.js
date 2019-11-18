@@ -1,4 +1,4 @@
-﻿//var id = 0;
+﻿var id = 0;
 
 $(document).ready(function () {
     AllFunctions();
@@ -37,11 +37,14 @@ function AllFunctions() {
                 });
             }
             else {
-                llenarTabla();
+                //llenarTabla();
+        
                 iziToast.success({
                     title: 'Exito',
                     message: 'El registro fue ingresado con Exito',
                 });
+                //table.ajax.reload(null, false);
+                llenarTabla();
             }
         });
     });
@@ -56,7 +59,7 @@ function AllFunctions() {
        // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
        // var id = $(this).closest('tr').data('id');
         var tr = this.closest("tr");
-        var id = $(this).data("id");
+         id = $(this).data("id");
             //console.log(id);
             $.ajax({
                 url: "/TipoHoras/Edit/" + id,
@@ -109,6 +112,8 @@ function AllFunctions() {
                     title: 'Exito',
                     message: 'El registro fue editado con exito!',
                 });
+                //llenarTabla();
+
                 llenarTabla();
             }
         });
@@ -123,7 +128,7 @@ function AllFunctions() {
     $(".tablaDetalle").click(function () {
         // $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
         var tr = this.closest("tr");
-        var id = $(this).data("id");
+         id = $(this).data("id");
         //var id = $(this).closest('tr').data('id');
         $.ajax({
             url: "/TipoHoras/Details/" + id,
@@ -165,8 +170,11 @@ function AllFunctions() {
     //INHABILITAR
     $("#btnInhabilitar").click(function () {
 
-        var data = $("#frmInhabilitarTipoHoras").serializeArray();
+       // var data = $("#frmInhabilitarTipoHoras").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        var data = $("#frmEditarTipoHoras").serializeArray();
+     
+        data.tiho_Id = id;
         console.log(data);
         $.ajax({
             url: "/TipoHoras/Inactivar",
@@ -221,6 +229,14 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+
+//var table = $('#IndexTable').DataTable({
+//    ajax: {
+//        url: '/TipoHoras/llenarTabla',
+//        method: "POST",
+//        data: data
+//    }
+//});
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 
 function llenarTabla() {
@@ -244,23 +260,7 @@ function llenarTabla() {
                     "</div>"]).draw();
             
             });
-
-            //var data = data,template="";
-            //for (var i = 0; i < data.length; i++) {
-            //    //console.log(i);
-            //    template += '<tr data-id = "' + data[i].tiho_Id + '">' +
-            //    '<td>' + data[i].tiho_Descripcion + '</td>' +
-            //    '<td>' + data[i].tiho_Recargo + '</td>' +
-            //    '<td>' +
-            //    '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-primary btn-xs" id="btnEditar">Detalles</button>' +
-            //    '<button type="button" data-id = "' + data[i].tiho_Id + '" class="btn btn-default btn-xs" id="btnDetale">Editar</button>' +
-            //    '</td>' +
-            //    '</tr>';
-            //}
-            ////REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            //$('#tbody').html(template);
             AllFunctions();
-          
         });
 }
 
