@@ -22,7 +22,8 @@
                 <div class="ibox-title">
                     <h5>List of tbTipoMonedas</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar tbTipoMonedas", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarTipoMonedas">Registrar Tipo de Moneda</button>
+                       @*@Html.ActionLink("Registrar tbTipoMonedas", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -51,7 +52,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.tmon_RazonInactivo)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.tmon_FechaCrea)
                             </td>
                             <td>
@@ -62,7 +63,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
-                            </td>
+                            </td>*@
                            <td>
                               @Html.ActionLink("Detalles", "Details", new { id=item.tmon_Id },  new {@class = "btn btn-primary btn-xs" })
                               @Html.ActionLink("Editar", "Edit", new { id=item.tmon_Id }, new {@class = "btn btn-default btn-xs" })
@@ -84,11 +85,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Crear Horario</h4>
+                <h4 class="modal-title">Crear Tipo de Moneda</h4>
             </div>
             <div class="modal-body">
                 <p>
                     @*--PARTIAL VIEW AQUI--*@
+                    @Html.Partial("_CreateTipoMonedas", new ERP_GMEDINA.Models.tbTipoMonedas())
                 </p>
             </div>
             <div class="modal-footer">
@@ -126,4 +128,6 @@
 
 @section Scripts {
   @Scripts.Render("~/plugins/dataTables")
+@Scripts.Render("~/Scripts/app/general/TipoMonedas/TipoMonedas.js")
 }
+
