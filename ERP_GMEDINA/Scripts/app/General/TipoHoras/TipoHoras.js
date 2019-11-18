@@ -187,11 +187,11 @@ function tablaDetalle(ID) {
     var ide = id;
     //var id = $(this).closest('tr').data('id');
     $.ajax({
-        url: "/TipoHoras/Details/" + id,
+        url: "/TipoHoras/Details/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
+        data: JSON.stringify({ id: ID })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -203,7 +203,7 @@ function tablaDetalle(ID) {
                 $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#btnEditarM")["0"].dataset.id = ide;
+                $("#ModalDetallesR").find("#btnEditarM")["0"].dataset.id = ID;
                 $('#ModalDetallesR').modal('show');
             }
             else {
