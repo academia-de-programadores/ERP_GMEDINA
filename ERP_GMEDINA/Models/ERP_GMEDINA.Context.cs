@@ -129,8 +129,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
-        public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
+        public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

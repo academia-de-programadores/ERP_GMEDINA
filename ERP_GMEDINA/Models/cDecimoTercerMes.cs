@@ -27,6 +27,6 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Cuenta Bancaria")]
         public string emp_CuentaBancaria { get; set; }
         [Display(Name = "Decimo Tercer Mes")]
-        public Nullable<decimal> DecimoTercerMes { get; set; }
+        public Nullable<decimal> dtm_Monto { get; set; }
     }
 }

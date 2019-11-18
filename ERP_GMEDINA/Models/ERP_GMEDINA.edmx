@@ -1350,7 +1350,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes' no tien
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
-          <Property Name="DecimoTercerMes" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="dtm_Monto" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1413,8 +1413,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinari
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_DeduccionesExtrasColaboradores">
@@ -5487,7 +5485,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_DecimoTercerMes].[car_Descripcion] AS [car_Descripcion], 
     [V_DecimoTercerMes].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_DecimoTercerMes].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoTercerMes].[DecimoTercerMes] AS [DecimoTercerMes]
+    [V_DecimoTercerMes].[dtm_Monto] AS [dtm_Monto]
     FROM [Plani].[V_DecimoTercerMes] AS [V_DecimoTercerMes]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" store:Type="Views" store:Schema="Plani">
@@ -13303,7 +13301,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tbDecimoTercerMes" EntityType="ERP_GMEDINAModel.tbDecimoTercerMes" />
-          <EntitySet Name="V_DecimoTercerMes" EntityType="ERP_GMEDINAModel.V_DecimoTercerMes" />
           <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
@@ -13498,7 +13495,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <Parameter Name="tiho_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(String)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
@@ -13562,6 +13559,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_DecimoTercerMes" EntityType="ERP_GMEDINAModel.V_DecimoTercerMes" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13614,22 +13612,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id" FromRole="tbDecimoTercerMes" ToRole="tbEmpleados" />
-        </EntityType>
-        <EntityType Name="V_DecimoTercerMes">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DecimoTercerMes" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
         <Association Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -13727,6 +13709,22 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Property Type="String" Name="tiho_Descripcion" Nullable="false" MaxLength="25" />
           <Property Type="Int32" Name="tiho_Recargo" Nullable="false" />
         </ComplexType>
+        <EntityType Name="V_DecimoTercerMes">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -15434,19 +15432,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoTercerMes">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMes">
-              <MappingFragment StoreEntitySet="V_DecimoTercerMes">
-                <ScalarProperty Name="DecimoTercerMes" ColumnName="DecimoTercerMes" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoTercerMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoTercerMes_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDecimoTercerMes_Insert_Result">
@@ -15530,6 +15515,19 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" />
+          <EntitySetMapping Name="V_DecimoTercerMes">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMes">
+              <MappingFragment StoreEntitySet="V_DecimoTercerMes">
+                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

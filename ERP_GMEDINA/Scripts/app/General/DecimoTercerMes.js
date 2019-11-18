@@ -49,7 +49,7 @@ $("body").on("click", "#btnProcesar", function () {
         var row = $(this);
         var DC = {};
         DC.emp_Id = row.find("TD").eq(0).html();
-        DC.dtm_DecimoTercer = row.find("TD").eq(5).html();
+        DC.dtm_Monto = row.find("TD").eq(5).html();
         DecimoTercer.push(DC);
     });
 
@@ -82,7 +82,7 @@ $("body").on("click", "#btnProcesarFE", function () {
         var row = $(this);
         var DC = {};
         DC.emp_Id = row.find("TD").eq(0).html();
-        DC.dtm_DecimoTercer = row.find("TD").eq(5).html();
+        DC.dtm_Monto = row.find("TD").eq(5).html();
         DecimoTercer.push(DC);
     });
 
