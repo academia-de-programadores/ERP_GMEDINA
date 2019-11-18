@@ -109,10 +109,8 @@ $("body").on("click", "#btnProcesarFE", function () {
 });
 
 // MOSTRAR MODAL DE FECHAS
-$(document).on("click", "#btnFechaEspecifica", function () {
-    $("#frmFechaDecimoTercer").modal();
-    $("#Validation_descipcion").css("display", "");
-    $("#Validation_descipcion2").css("display", "");
+$(document).on("click", "#btnFechaEspecifica", function () {    
+    $("#frmFechaDecimoTercer").modal();    
 });
 
 // OCULTAR MODAL DE FECHAS
@@ -121,17 +119,30 @@ $("#btnCerrarFecha").click(function () {
 });
 
 
-//FUNCION: OCULTAR MODAL DE CREATE
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarFecha").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
 });
 
 
-//FUNCION: OCULTAR MODAL DE CREATE CON EL ICONO DE CERRAR
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrar").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnEnviarFecha").click(function () {
+    var FechaInicial = $("#hipa_FechaInicio").val();
+    var FechaFinal = $("#hipa_FechaFin").val();
+
+    if (FechaInicial == "" || FechaFinal == "") {
+        $("#Validation_descipcion").css("display", "");
+        $("#Validation_descipcion2").css("display", "");
+    }
+
 });
 
 
