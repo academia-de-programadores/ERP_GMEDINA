@@ -51,15 +51,43 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "comp_Id,comp_Descripcion,comp_Estado,comp_RazonInactivo,comp_UsuarioCrea,comp_FechaCrea,comp_UsuarioModifica,comp_FechaModifica")] tbCompetencias tbCompetencias)
         {
+            tbCompetencias.comp_FechaCrea = DateTime.Now;
+            tbCompetencias.comp_UsuarioCrea = 1;
             if (ModelState.IsValid)
             {
-                db.tbCompetencias.Add(tbCompetencias);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> listCompetencias = null;
+                    string MensajeError = "";
+                    listCompetencias = db.UDP_RRHH_tbCompetencias_Insert(
+                                                                            tbCompetencias.comp_Descripcion,
+                                                                            tbCompetencias.comp_UsuarioCrea,
+                                                                            tbCompetencias.comp_FechaCrea);
+                    foreach (UDP_RRHH_tbCompetencias_Insert_Result com in listCompetencias)
+                    {
+                        MensajeError = com.MensajeError;
+                    }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.hubo un problema");
+                            return View(tbCompetencias);
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                    ModelState.AddModelError("", "2. no se pudo insertar el registro");
+                    return View(tbCompetencias);
+                }
+              
             }
 
-            ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
-            ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
+            //ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
+            //ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
             return View(tbCompetencias);
         }
 
@@ -87,14 +115,42 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "comp_Id,comp_Descripcion,comp_Estado,comp_RazonInactivo,comp_UsuarioCrea,comp_FechaCrea,comp_UsuarioModifica,comp_FechaModifica")] tbCompetencias tbCompetencias)
         {
+            tbCompetencias.comp_FechaModifica = DateTime.Now;
+            tbCompetencias.comp_UsuarioModifica = 2;
+
             if (ModelState.IsValid)
             {
-                db.Entry(tbCompetencias).State = EntityState.Modified;
-                db.SaveChanges();
+                try { 
+                        IEnumerable<object> listCompetencias = null;
+                        string MensajeError = "";
+                        listCompetencias = db.UDP_RRHH_tbCompetencias_Update(
+                                                                                tbCompetencias.comp_Id,
+                                                                                tbCompetencias.comp_Descripcion,
+                                                                                tbCompetencias.comp_UsuarioModifica,
+                                                                                tbCompetencias.comp_FechaModifica);
+                foreach (UDP_RRHH_tbCompetencias_Update_Result Com in listCompetencias)
+                {
+                    MensajeError = Com.MensajeError;
+                }
+                if (!string.IsNullOrEmpty(MensajeError))
+                {
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "1. hubo un error");
+                        return View(tbCompetencias);
+                    }
+                }
                 return RedirectToAction("Index");
             }
-            ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
-            ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2. Nose pudo actualizar");
+                    return View(tbCompetencias);
+                }
+            }
+            //ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
+            //ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
             return View(tbCompetencias);
         }
 
