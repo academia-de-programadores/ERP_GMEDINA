@@ -18,23 +18,19 @@ function AllFunctions() {
 
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
-
         var data = $("#frmAgregarTipoHoras").serializeArray();
-        //data = serializar(data);
-        //data = JSON.stringify({ tbTipoHoras: data });
-        //console.log(data);
-
         $.ajax({
             url: "/TipoHoras/Create",
             method: "POST",
             data: data
         }).done(function (data) {
 
-            if (data == "error") {
+            if (data == "-1" || data=="2") {
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo guardar el registro, contacte al administrador',
                 });
+
             }
             else {
                 //llenarTabla();
@@ -53,42 +49,43 @@ function AllFunctions() {
 
 
     ///////FUNCIONES PARA EDITAR///////////
+    //FUNCION:MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+    function tablaEditar(ID) {
+        // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
+        // var id = $(this).closest('tr').data('id');
+       // var tr = this.closest("tr");
+        id = ID;
+        //console.log(id);
+        $.ajax({
+            url: "/TipoHoras/Edit/" + id,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: id })
+        })
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
 
-    //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-    $(".tablaEditar").click(function () {
-       // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
-       // var id = $(this).closest('tr').data('id');
-        var tr = this.closest("tr");
-         id = $(this).data("id");
-            //console.log(id);
-            $.ajax({
-                url: "/TipoHoras/Edit/" + id,
-                method: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ id: id })
-            })
-                .done(function (data) {
-                    //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-
-                    if (data.length > 0) {
-                        //console.log("funciona");
-                        //console.log(data);
-                        $.each(data, function (i, item) {
-                            $("#ModalEdit #tiho_Id").val(item.tiho_Id)
-                            $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                            $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
-                            //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
-                            //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
-                        })
-                    }
+                if (data.length > 0) {
+                    //console.log("funciona");
+                    //console.log(data);
+                    $.each(data, function (i, item) {
+                        $("#ModalEdit #tiho_Id").val(item.tiho_Id)
+                        $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
+                        $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo)
+                        //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
+                        //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                    })
+                }
 
                 //})
 
 
 
-        });
-    });
+            });
+    }
+
+
     //EDICION DEL REGISTRO
     $("#btnEditarModal").click(function () {
 
@@ -118,17 +115,15 @@ function AllFunctions() {
             }
         });
     });
-
     //////////////
 
 
     ////////CARGAR EL MODAL DE DETALLES/////////
-
     //MODAL DETALLES
-    $(".tablaDetalle").click(function () {
+    function tablaDetalle(ID) {
         // $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
-        var tr = this.closest("tr");
-         id = $(this).data("id");
+        //var tr = this.closest("tr");
+        id = ID;
         //var id = $(this).closest('tr').data('id');
         $.ajax({
             url: "/TipoHoras/Details/" + id,
@@ -159,14 +154,12 @@ function AllFunctions() {
                 }
             });
         // });
-    });
-    ////////////////
+    }
+    ////////CARGAR EL MODAL DE DETALLES/////////
 
 
 
     //////FUNCION PARA INHABILITAR////////////
-
-
     //INHABILITAR
     $("#btnInhabilitar").click(function () {
 
@@ -200,9 +193,8 @@ function AllFunctions() {
             }
         });
     });
-    ///////////////
-
 }
+//////FUNCION PARA INHABILITAR////////////
 
 
 
@@ -256,8 +248,8 @@ function llenarTabla() {
                 IndexTable.row.add(['<tr data-id = "' + item.tiho_Id + '">' +
                     item.tiho_Descripcion, item.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalDetalles'>Detalle</button>" +
-                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' data-id=" + item.tiho_Id + " data-target='#ModalEditar'>Editar</button>" +
+                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalle("+item.tiho_Id+")' data-target='#ModalDetalles'>Detalle</button>" +
+                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar("+item.tiho_Id+")' data-target='#ModalEditar'>Editar</button>" +
                     "</div>"]).draw();
             
             });
