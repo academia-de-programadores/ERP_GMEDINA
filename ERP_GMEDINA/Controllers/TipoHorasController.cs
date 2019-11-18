@@ -229,7 +229,7 @@ namespace ERP_GMEDINA.Controllers
         // POST: TipoHoras/Delete/5
         [HttpPost]
        // [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int id)
+        public ActionResult Inactivar(tbTipoHoras tbTipoHoras)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
             //TipoHora.tiho_RazonInactivo = razoninactivo;

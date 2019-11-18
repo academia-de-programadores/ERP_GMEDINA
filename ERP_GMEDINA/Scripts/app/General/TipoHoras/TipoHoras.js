@@ -173,8 +173,9 @@ function AllFunctions() {
        // var data = $("#frmInhabilitarTipoHoras").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         var data = $("#frmEditarTipoHoras").serializeArray();
-     
+        data = serializar(data);
         data.tiho_Id = id;
+        data = JSON.stringify({ tbTipoHoras: data });
         console.log(data);
         $.ajax({
             url: "/TipoHoras/Inactivar",
