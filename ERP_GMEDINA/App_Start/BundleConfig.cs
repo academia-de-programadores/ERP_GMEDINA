@@ -459,6 +459,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
+            //bundles APP/GENERAL/EMPRESAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas/Empresas").Include(
+                "~/Scripts/app/General/Empresas/Empresas.js"));
+
 
             //OPTIMIZATION
 

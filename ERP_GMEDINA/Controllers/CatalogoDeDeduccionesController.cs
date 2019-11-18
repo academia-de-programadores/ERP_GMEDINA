@@ -45,10 +45,12 @@ namespace PruebaPlanilla.Controllers
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
             tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
+
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeDeducciones = null;
             string MensajeError = "";
+
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
