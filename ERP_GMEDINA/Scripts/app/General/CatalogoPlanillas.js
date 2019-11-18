@@ -12,6 +12,17 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+// $(document).ready(function(){
+//     var prueba = [];
+//     $('#tblCatalogoPlanillas tbody tr').each(function (index, val) {
+//         debugger;
+//         let id = $(val).data('id');
+//         prueba.push(id);
+
+//     })
+//     console.log(prueba);
+// });
+
 //Obtener la URL
 var URLactual = window.location.toString();
 var getUrl = window.location
@@ -26,8 +37,10 @@ if (getUrl.toString().indexOf('Create') > 1) {
 
 // Desplegar los detalles del catalogo de planillas (ingresos y deducciones)
 $(document).on('click', '#tblCatalogoPlanillas tbody tr td #btnDesplegarIngresosDeducciones', function () {
+    debugger;
     var ID = $(this).closest('tr').data('id');
-    var fila = $('#fila-' + ID);
+
+    var fila = $('#detalles #fila-' + ID);
     if (fila.css('display') == 'none') {
         $(this).closest('tr').after('<tr style="display:table-row" id="fila-' + ID + '">' + $('#fila-' + ID).html() + '</tr>');
         $(fila).remove();

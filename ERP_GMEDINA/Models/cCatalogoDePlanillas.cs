@@ -21,7 +21,6 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Planilla")]
         public int cpla_IdPlanilla { get; set; }
 
-
         [Display(Name = "Planilla")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} de requerido.")]
         [MaxLength(50, ErrorMessage = "Excedió el máximo de caracteres permitidos.")]
