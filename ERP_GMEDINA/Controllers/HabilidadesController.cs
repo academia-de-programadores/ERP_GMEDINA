@@ -72,13 +72,17 @@ namespace ERP_GMEDINA.Controllers
                 {
                     msj = item.MensajeError;
                 }
+                if (msj.Length > 2)
+                {
+                    msj = msj.Substring(0, 2);
+                }
             }
             catch (Exception ex)
             {
                 msj = "-2";
                 ex.Message.ToString();
             }
-            return Json(msj);
+            return Json(msj,JsonRequestBehavior.AllowGet);
         }
 
         // GET: Habilidades/Edit/5
@@ -140,6 +144,10 @@ namespace ERP_GMEDINA.Controllers
                 {
                     msj = item.MensajeError;
                 }
+                if (msj.Length>2)
+                {
+                    msj = msj.Substring(0, 2);
+                }
             }
             catch (Exception ex)
             {
@@ -162,6 +170,10 @@ namespace ERP_GMEDINA.Controllers
                 foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
                 {
                     msj = item.MensajeError;
+                }
+                if (msj.Length > 2)
+                {
+                    msj = msj.Substring(0, 2);
                 }
             }
             catch (Exception ex)

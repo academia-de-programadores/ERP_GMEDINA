@@ -1,11 +1,12 @@
 ﻿var id = 0;
+//Funciones GET
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
         '/Habilidades/Edit/' + ID,
         'GET',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
                 $('#ModalEditar').modal('show');
             }
@@ -17,7 +18,7 @@ function tablaDetalles(ID) {
         '/Habilidades/Edit/' + ID,
         'GET',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
                 $("#ModalDetalles").find("#habi_Estado")["0"].innerText = obj.habi_Estado;
                 $("#ModalDetalles").find("#habi_RazonInactivo")["0"].innerText = obj.habi_RazonInactivo;
@@ -29,31 +30,6 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
-}
-function CierraPopup() {
-    var modal = ["ModalNuevo", "ModalEditar", "ModalDelete", "ModalDetalles"];
-    $.each(modal, function(index,valor) {
-        $("#" + valor).modal('hide');//ocultamos el modal
-        $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-        $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-    })        
-}
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        method: type,
-        dataType: "json",
-        contentType: "application/json; charset = utf-8",
-        data: params,
-        success: callback
-    });
-}
-function serializar(data) {
-    var Data = new Object();
-    $.each(data, function (index,valor) {
-        Data[valor.name] = valor.value;
-    });
-    return Data;
 }
 function llenarTabla() {
     _ajax(null,
@@ -72,24 +48,7 @@ function llenarTabla() {
             });
         });
 }
-function FechaFormato(pFecha) {
-    if (pFecha != null && pFecha!=undefined) {
-        var fechaString = pFecha.substr(6);
-        var fechaActual = new Date(parseInt(fechaString));
-        var mes = fechaActual.getMonth() + 1;
-        var dia = pad2(fechaActual.getDate());
-        var anio = fechaActual.getFullYear();
-        var hora = pad2(fechaActual.getHours());
-        var minutos = pad2(fechaActual.getMinutes());
-        var segundos = pad2(fechaActual.getSeconds().toString());
-        var FechaFinal = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos + ":" + segundos;
-        return FechaFinal;
-    }
-    return '';
-}
-function pad2(number) {
-    return (number < 10 ? '0' : '') + number
-}
+//Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#habi_Descripcion").val("");
@@ -100,7 +59,7 @@ $("#btnEditar").click(function () {
         '/Habilidades/Edit/' + id,
         'GET',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopup();
                 $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
                 $('#ModalEditar').modal('show');
@@ -111,6 +70,7 @@ $("#btnInhabilitar").click(function () {
     CierraPopup();
     $('#ModalDelete').modal('show');
 });
+//botones POST
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
@@ -119,14 +79,18 @@ $("#btnGuardar").click(function () {
         '/Habilidades/Create',
         'POST',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopup();
                 llenarTabla();
+                LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                MsgSuccess("¡Exito!", "Se ah agregado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
             }
         });
 });
 $("#InActivar").click(function () {
-    var data = $("#FormEditar").serializeArray();
+    var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     data.habi_Id = id;
     data = JSON.stringify({ tbHabilidades: data });
@@ -134,10 +98,14 @@ $("#InActivar").click(function () {
         '/Habilidades/Delete',
         'POST',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopup();
                 llenarTabla();
-            }
+                LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+            } else {
+                MsgError("Error","Codigo:"+obj+". contacte al administrador.");
+}
         });
 });
 $("#btnActualizar").click(function () {
@@ -149,9 +117,12 @@ $("#btnActualizar").click(function () {
         '/Habilidades/Edit',
         'POST',
         function (obj) {
-            if (obj != "-1" || obj != "-2" || obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopup();
                 llenarTabla();
+                MsgSuccess("¡Exito!","Se ah actualizado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
             }
         });
 });

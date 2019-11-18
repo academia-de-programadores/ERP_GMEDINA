@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHabilidades" Width="1.5" PointX="3" PointY="136.375" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoSalidas" Width="1.5" PointX="3" PointY="140.5" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

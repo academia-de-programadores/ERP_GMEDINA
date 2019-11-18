@@ -33,6 +33,19 @@
           <Property Name="habi_UsuarioModifica" Type="int" />
           <Property Name="habi_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTipoSalidas">
+          <Key>
+            <PropertyRef Name="tsal_Id" />
+          </Key>
+          <Property Name="tsal_Id" Type="int" Nullable="false" />
+          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="tsal_Estado" Type="bit" Nullable="false" />
+          <Property Name="tsal_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="tsal_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="tsal_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tsal_UsuarioModifica" Type="int" />
+          <Property Name="tsal_FechaModifica" Type="datetime" />
+        </EntityType>
         <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="*" />
@@ -57,6 +70,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoSalidas">
+              <PropertyRef Name="tsal_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoSalidas">
+              <PropertyRef Name="tsal_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="UDP_RRHH_tbHabilidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="habi_id" Type="int" Mode="In" />
           <Parameter Name="habi_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -74,9 +111,27 @@
           <Parameter Name="habi_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="habi_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbTipoSalidas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tsal_id" Type="int" Mode="In" />
+          <Parameter Name="tsal_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tsal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tsal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoSalidas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tsal_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tsal_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tsal_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoSalidas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tsal_Id" Type="int" Mode="In" />
+          <Parameter Name="tsal_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tsal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tsal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTipoSalidas" EntityType="Self.tbTipoSalidas" Schema="rrhh" store:Type="Tables" />
           <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
@@ -84,6 +139,14 @@
           <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -106,6 +169,8 @@
           <Property Name="usu_SesionesValidas" Type="Byte" />
           <NavigationProperty Name="tbHabilidades" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHabilidades" />
           <NavigationProperty Name="tbHabilidades1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHabilidades" />
+          <NavigationProperty Name="tbTipoSalidas" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
+          <NavigationProperty Name="tbTipoSalidas1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
           </EntityType>
         <EntityContainer Name="ERP_GMEDINAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
@@ -134,6 +199,32 @@
             <Parameter Name="habi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbTipoSalidas" EntityType="ERP_GMEDINAModel.tbTipoSalidas" />
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result)">
+            <Parameter Name="tsal_id" Mode="In" Type="Int32" />
+            <Parameter Name="tsal_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result)">
+            <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tsal_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tsal_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result)">
+            <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbHabilidades">
@@ -183,6 +274,54 @@
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHabilidades_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="tbTipoSalidas">
+          <Key>
+            <PropertyRef Name="tsal_Id" />
+          </Key>
+          <Property Name="tsal_Id" Type="Int32" Nullable="false" />
+          <Property Name="tsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tsal_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tsal_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tsal_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="tsal_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tsal_UsuarioModifica" Type="Int32" />
+          <Property Name="tsal_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" FromRole="tbTipoSalidas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" FromRole="tbTipoSalidas" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoSalidas" Role="tbTipoSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoSalidas">
+              <PropertyRef Name="tsal_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoSalidas" Role="tbTipoSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoSalidas">
+              <PropertyRef Name="tsal_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -237,6 +376,41 @@
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbTipoSalidas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoSalidas">
+              <MappingFragment StoreEntitySet="tbTipoSalidas">
+                <ScalarProperty Name="tsal_FechaModifica" ColumnName="tsal_FechaModifica" />
+                <ScalarProperty Name="tsal_UsuarioModifica" ColumnName="tsal_UsuarioModifica" />
+                <ScalarProperty Name="tsal_FechaCrea" ColumnName="tsal_FechaCrea" />
+                <ScalarProperty Name="tsal_UsuarioCrea" ColumnName="tsal_UsuarioCrea" />
+                <ScalarProperty Name="tsal_RazonInactivo" ColumnName="tsal_RazonInactivo" />
+                <ScalarProperty Name="tsal_Estado" ColumnName="tsal_Estado" />
+                <ScalarProperty Name="tsal_Descripcion" ColumnName="tsal_Descripcion" />
+                <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

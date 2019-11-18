@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -184,6 +185,9 @@
     <Compile Include="Models\tbHabilidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbTipoSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -194,6 +198,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHabilidades_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -416,8 +429,10 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
-    <Content Include="Scripts\app\General\Habilidades.js" />
+    <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -940,6 +955,11 @@
     <Content Include="Views\Habilidades\_Edit.cshtml" />
     <Content Include="Views\Habilidades\Index.cshtml" />
     <Content Include="Views\Habilidades\_Detalles.cshtml" />
+    <Content Include="Views\TipoSalidas\_Create.cshtml" />
+    <Content Include="Views\TipoSalidas\_Delete.cshtml" />
+    <Content Include="Views\TipoSalidas\_Edit.cshtml" />
+    <Content Include="Views\TipoSalidas\Index.cshtml" />
+    <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

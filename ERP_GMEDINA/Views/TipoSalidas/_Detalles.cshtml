@@ -1,0 +1,63 @@
+﻿@model ERP_GMEDINA.Models.tbTipoSalidas
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar habilidad</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+                    <div class="ibox-content">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tsal_Descripcion)
+                            </dt>
+                            <dd id="tsal_Descripcion">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tsal_Estado)
+                            </dt>
+                            <dd id="tsal_Estado">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tsal_RazonInactivo)
+                            </dt>
+                            <dd id="tsal_RazonInactivo">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tsal_FechaCrea)
+                            </dt>
+                            <dd id="tsal_FechaCrea">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tsal_FechaModifica)
+                            </dt>
+                            <dd id="tsal_FechaModifica">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+                            </dt>
+                            <dd id="tbUsuario.usu_NombreUsuario">
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+                            </dt>
+                            <dd id="tbUsuario1.usu_NombreUsuario">
+                            </dd>
+                        </dl>
+                        <p>
+                            @Html.ActionLink("Editar", "Edit", new { id = Model.tsal_Id }, new {@class="btn btn-primary" }) 
+                            @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>

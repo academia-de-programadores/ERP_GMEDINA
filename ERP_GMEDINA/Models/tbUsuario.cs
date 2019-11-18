@@ -19,6 +19,8 @@ namespace ERP_GMEDINA.Models
         {
             this.tbHabilidades = new HashSet<tbHabilidades>();
             this.tbHabilidades1 = new HashSet<tbHabilidades>();
+            this.tbTipoSalidas = new HashSet<tbTipoSalidas>();
+            this.tbTipoSalidas1 = new HashSet<tbTipoSalidas>();
         }
     
         public int usu_Id { get; set; }
@@ -36,5 +38,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHabilidades> tbHabilidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHabilidades> tbHabilidades1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoSalidas> tbTipoSalidas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoSalidas> tbTipoSalidas1 { get; set; }
     }
 }

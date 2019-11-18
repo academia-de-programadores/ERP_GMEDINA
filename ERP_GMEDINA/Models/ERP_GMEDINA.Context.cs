@@ -29,6 +29,7 @@ namespace ERP_GMEDINA.Models
     
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
+        public virtual DbSet<tbTipoSalidas> tbTipoSalidas { get; set; }
     
         public virtual ObjectResult<UDP_RRHH_tbHabilidades_Delete_Result> UDP_RRHH_tbHabilidades_Delete(Nullable<int> habi_id, string habi_razon_Inactivo, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {
@@ -87,6 +88,65 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("habi_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHabilidades_Update_Result>("UDP_RRHH_tbHabilidades_Update", habi_IdParameter, habi_DescripcionParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoSalidas_Delete_Result> UDP_RRHH_tbTipoSalidas_Delete(Nullable<int> tsal_id, string tsal_razon_Inactivo, Nullable<int> tsal_UsuarioModifica, Nullable<System.DateTime> tsal_FechaModifica)
+        {
+            var tsal_idParameter = tsal_id.HasValue ?
+                new ObjectParameter("tsal_id", tsal_id) :
+                new ObjectParameter("tsal_id", typeof(int));
+    
+            var tsal_razon_InactivoParameter = tsal_razon_Inactivo != null ?
+                new ObjectParameter("tsal_razon_Inactivo", tsal_razon_Inactivo) :
+                new ObjectParameter("tsal_razon_Inactivo", typeof(string));
+    
+            var tsal_UsuarioModificaParameter = tsal_UsuarioModifica.HasValue ?
+                new ObjectParameter("tsal_UsuarioModifica", tsal_UsuarioModifica) :
+                new ObjectParameter("tsal_UsuarioModifica", typeof(int));
+    
+            var tsal_FechaModificaParameter = tsal_FechaModifica.HasValue ?
+                new ObjectParameter("tsal_FechaModifica", tsal_FechaModifica) :
+                new ObjectParameter("tsal_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoSalidas_Delete_Result>("UDP_RRHH_tbTipoSalidas_Delete", tsal_idParameter, tsal_razon_InactivoParameter, tsal_UsuarioModificaParameter, tsal_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoSalidas_Insert_Result> UDP_RRHH_tbTipoSalidas_Insert(string tsal_Descripcion, Nullable<int> tsal_UsuarioCrea, Nullable<System.DateTime> tsal_FechaCrea)
+        {
+            var tsal_DescripcionParameter = tsal_Descripcion != null ?
+                new ObjectParameter("tsal_Descripcion", tsal_Descripcion) :
+                new ObjectParameter("tsal_Descripcion", typeof(string));
+    
+            var tsal_UsuarioCreaParameter = tsal_UsuarioCrea.HasValue ?
+                new ObjectParameter("tsal_UsuarioCrea", tsal_UsuarioCrea) :
+                new ObjectParameter("tsal_UsuarioCrea", typeof(int));
+    
+            var tsal_FechaCreaParameter = tsal_FechaCrea.HasValue ?
+                new ObjectParameter("tsal_FechaCrea", tsal_FechaCrea) :
+                new ObjectParameter("tsal_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoSalidas_Insert_Result>("UDP_RRHH_tbTipoSalidas_Insert", tsal_DescripcionParameter, tsal_UsuarioCreaParameter, tsal_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoSalidas_Update_Result> UDP_RRHH_tbTipoSalidas_Update(Nullable<int> tsal_Id, string tsal_Descripcion, Nullable<int> tsal_UsuarioModifica, Nullable<System.DateTime> tsal_FechaModifica)
+        {
+            var tsal_IdParameter = tsal_Id.HasValue ?
+                new ObjectParameter("tsal_Id", tsal_Id) :
+                new ObjectParameter("tsal_Id", typeof(int));
+    
+            var tsal_DescripcionParameter = tsal_Descripcion != null ?
+                new ObjectParameter("tsal_Descripcion", tsal_Descripcion) :
+                new ObjectParameter("tsal_Descripcion", typeof(string));
+    
+            var tsal_UsuarioModificaParameter = tsal_UsuarioModifica.HasValue ?
+                new ObjectParameter("tsal_UsuarioModifica", tsal_UsuarioModifica) :
+                new ObjectParameter("tsal_UsuarioModifica", typeof(int));
+    
+            var tsal_FechaModificaParameter = tsal_FechaModifica.HasValue ?
+                new ObjectParameter("tsal_FechaModifica", tsal_FechaModifica) :
+                new ObjectParameter("tsal_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoSalidas_Update_Result>("UDP_RRHH_tbTipoSalidas_Update", tsal_IdParameter, tsal_DescripcionParameter, tsal_UsuarioModificaParameter, tsal_FechaModificaParameter);
         }
     }
 }
