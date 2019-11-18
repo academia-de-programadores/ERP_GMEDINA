@@ -56,11 +56,11 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //[tper_Descripcion],[tper_UsuarioCrea],[tper_FechaCrea]
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    tbTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Insert( tbTipoPermisos.tper_Descripcion,
+                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Insert( tbTipoPermisos.tper_Descripcion,
                                                                         tbTipoPermisos.tper_UsuarioCrea,
                                                                         tbTipoPermisos.tper_FechaCrea   );
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Insert_Result Resultado in tbTipoPermisos)
+                    foreach (UDP_RRHH_tbTipoPermisos_Insert_Result Resultado in listTipoPermisos)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -219,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "tper_Id,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
+        public ActionResult Inactivar([Bind(Include = "tper_Id,tper_RazonInactivo,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -240,12 +240,12 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Delete(tbCatalogoDeDeducciones.cde_IdDeducciones,
-                                                                                            tbCatalogoDeDeducciones.tper_RazonInactivo,
-                                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
-                                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
+                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Delete(   tbCatalogoDeDeducciones.cde_IdDeducciones,
+                                                                            tbCatalogoDeDeducciones.tper_RazonInactivo,
+                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
+                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
+                    foreach (UDP_RRHH_tbTipoPermisos_Delete_Result Resultado in listTipoPermisos)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
