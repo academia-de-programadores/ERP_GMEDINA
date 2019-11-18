@@ -200,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
                         if (MensajeError.StartsWith("-1"))
                         {
                             ModelState.AddModelError("", "1.No se pudo agregar el Registro");
-                            return Json(MensajeError.Substring(1, 2));
+                            return Json(MensajeError.Substring(0, 2));
                         }
                     }
                     return Json("Exito", JsonRequestBehavior.AllowGet);
