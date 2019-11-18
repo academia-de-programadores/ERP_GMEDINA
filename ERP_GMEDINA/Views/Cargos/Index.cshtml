@@ -30,12 +30,12 @@
                     <thead>
                         <tr role="row">
                             <th>@Html.DisplayNameFor(model => model.car_Descripcion)</th>
-                            <th>@Html.DisplayNameFor(model => model.car_Estado)</th>
-                            <th>@Html.DisplayNameFor(model => model.car_RazonInactivo)</th>
+                            @*<th>@Html.DisplayNameFor(model => model.car_Estado)</th>
+                            <th>@Html.DisplayNameFor(model => model.car_RazonInactivo)</th>*@
+                            <th>@Html.DisplayNameFor(model => model.car_UsuarioCrea)</th>
                             <th>@Html.DisplayNameFor(model => model.car_FechaCrea)</th>
-                            <th>@Html.DisplayNameFor(model => model.car_FechaModifica)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
+                            @*<th>@Html.DisplayNameFor(model => model.car_FechaModifica)</th>*@
+                            @*<th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>*@
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -45,24 +45,24 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.car_Descripcion)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.car_Estado)
-                            </td>
-                            <td>
+                            </td>*@
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.car_RazonInactivo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.car_FechaCrea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.car_FechaModifica)
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
+                                @Html.DisplayFor(modelItem => item.car_FechaCrea)
                             </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
+                            </td>*@
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.car_FechaModifica)
+                            </td>*@
                            <td>
                               @Html.ActionLink("Detalles", "Details", new { id=item.car_Id },  new {@class = "btn btn-primary btn-xs" })
                               @Html.ActionLink("Editar", "Edit", new { id=item.car_Id }, new {@class = "btn btn-default btn-xs" })

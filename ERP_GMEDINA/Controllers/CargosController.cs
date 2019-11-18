@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            var tbCargos = db.tbCargos.Include(t => t.car_Estado==true);
+            var tbCargos = db.tbCargos.Where(t => t.car_Estado==true);
             return View(tbCargos.ToList());
         }
 
@@ -51,7 +51,8 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "car_Id,car_Descripcion,car_Estado,car_RazonInactivo,car_UsuarioCrea,car_FechaCrea,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
         {
-            
+            tbCargos.car_UsuarioCrea = 1;
+            tbCargos.car_FechaCrea = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
@@ -59,30 +60,33 @@ namespace ERP_GMEDINA.Controllers
                     IEnumerable<object> listcargos = null;
                     string MensajeError = "";
                     listcargos = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion,
-                                                           1,
-                                                           DateTime.Now
-                                                            );
+                                                           tbCargos.car_UsuarioCrea,
+                                                           tbCargos.car_FechaCrea);
                     foreach (UDP_RRHH_tbCargos_Insert_Result car in listcargos)
-                        MensajeError = car.MensajeError;
-
-
-                    if (MensajeError.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "1. No se pudo insertar el registro");
-                        return View(tbCargos);
+                        MensajeError = car.MensajeError;
                     }
-
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1. No se pudo insertar el registro");
+                            return View(tbCargos);
+                        }
+                    }
                
                     return RedirectToAction("Index");
                 }
-                catch
+                catch(Exception ex)
                 {
-
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
+                    return View(tbCargos);
                 }
             }
 
-            ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
-            ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
+            //ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
+            //ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
             return View(tbCargos);
         }
 
@@ -108,16 +112,50 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Edit([Bind(Include = "car_Id,car_Descripcion,car_Estado,car_RazonInactivo,car_UsuarioCrea,car_FechaCrea,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
         {
+            tbCargos.car_UsuarioModifica = 2;
+            tbCargos.car_FechaModifica = DateTime.Now;
             if (ModelState.IsValid)
             {
-                db.Entry(tbCargos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> listcargos = null;
+                    string MensajeError = "";
+                    listcargos = db.UDP_RRHH_tbCargos_Update(tbCargos.car_Id,
+                                                             tbCargos.car_Descripcion,
+                                                             tbCargos.car_UsuarioModifica,
+                                                             tbCargos.car_FechaModifica);
+
+                    foreach(UDP_RRHH_tbCargos_Update_Result car in listcargos)
+                    {
+                        MensajeError = car.MensajeError;
+                    }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1. No se pudo editar el registro");
+                            return View(tbCargos);
+                        }
+                    }
+                    return RedirectToAction("Index");
+
+                }
+                catch(Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
+                    return View(tbCargos);
+                }
+
+                //db.Entry(tbCargos).State = EntityState.Modified;
+                //db.SaveChanges();
+                
             }
-            ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
-            ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
+            //ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
+            //ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
             return View(tbCargos);
         }
 

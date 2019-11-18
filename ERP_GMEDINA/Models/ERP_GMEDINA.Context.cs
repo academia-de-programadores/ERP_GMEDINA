@@ -1069,7 +1069,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCargos_Delete", car_IdParameter, car_razon_InactivoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
         {
             var car_DescripcionParameter = car_Descripcion != null ?
                 new ObjectParameter("car_Descripcion", car_Descripcion) :
@@ -1083,10 +1083,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("car_FechaCrea", car_FechaCrea) :
                 new ObjectParameter("car_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
         {
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -1104,7 +1104,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("car_FechaModifica", car_FechaModifica) :
                 new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     }
 }
