@@ -372,6 +372,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_tbSueldos_tmon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_id_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_tbtitulosRequisicion_titu_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
