@@ -20,28 +20,54 @@ namespace ERP_GMEDINA.Controllers
             var tbCompetencias = db.tbCompetencias.Where(t => t.comp_Estado == true);
             return View(tbCompetencias.ToList());
         }
+        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        public ActionResult GetData()
+        {
+            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
+            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
+            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCompetencias.ToList(); )
+            var tbCompetencias1 = db.tbCompetencias
+                        .Select(c => new {
+                            comp_Id = c.comp_Id,
+                            comp_Descripcion = c.comp_Descripcion,
+                            comp_Estado = c.comp_Estado,
+                            comp_RazonInactivo = c.comp_RazonInactivo,
+                            comp_UsuarioModifica = c.comp_UsuarioModifica,
+                            comp_UsuarioCrea = c.comp_UsuarioCrea,
+                            comp_FechaCrea = c.comp_FechaCrea,
+                            comp_FechaModifica = c.comp_FechaModifica
+                        }).Where(c => c.comp_Estado == true)
+                        .ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbCompetencias1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         // GET: Competencias/Details/5
-        public ActionResult Details(int? id)
+        public JsonResult Details(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbCompetencias tbCompetencias = db.tbCompetencias.Find(id);
-            if (tbCompetencias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbCompetencias);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCompetencias tbJSON = db.tbCompetencias.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tbCompetencias tbCompetencias = db.tbCompetencias.Find(id);
+        //    if (tbCompetencias == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tbCompetencias);
+        //}
 
         // GET: Competencias/Create
         public ActionResult Create()
         {
-            ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
+
         }
 
         // POST: Competencias/Create
@@ -49,63 +75,66 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "comp_Id,comp_Descripcion,comp_Estado,comp_RazonInactivo,comp_UsuarioCrea,comp_FechaCrea,comp_UsuarioModifica,comp_FechaModifica")] tbCompetencias tbCompetencias)
+        public ActionResult Create([Bind(Include = "comp_Id, comp_Descripcion, comp_Estado, comp_RazonInactivo, comp_UsuarioCrea, comp_FechaCrea, comp_UsuarioModifica, comp_FechaModifica")] tbCompetencias tbCompetencias)
         {
-            tbCompetencias.comp_FechaCrea = DateTime.Now;
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbCompetencias.comp_UsuarioCrea = 1;
+            tbCompetencias.comp_FechaCrea = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            string response = String.Empty;
+            IEnumerable<object> listCompetencias = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
                 try
                 {
-                    IEnumerable<object> listCompetencias = null;
-                    string MensajeError = "";
-                    listCompetencias = db.UDP_RRHH_tbCompetencias_Insert(
-                                                                            tbCompetencias.comp_Descripcion,
-                                                                            tbCompetencias.comp_UsuarioCrea,
-                                                                            tbCompetencias.comp_FechaCrea);
-                    foreach (UDP_RRHH_tbCompetencias_Insert_Result com in listCompetencias)
-                    {
-                        MensajeError = com.MensajeError;
-                    }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.hubo un problema");
-                            return View(tbCompetencias);
-                        }
-                    }
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    ex.ToString();
-                    ModelState.AddModelError("", "2. no se pudo insertar el registro");
-                    return View(tbCompetencias);
-                }
-              
-            }
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listCompetencias = db.UDP_RRHH_tbCompetencias_Insert(tbCompetencias.comp_Descripcion,
+                                                                                            tbCompetencias.comp_UsuarioCrea,
+                                                                                            tbCompetencias.comp_FechaCrea);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_RRHH_tbCompetencias_Insert_Result Resultado in listCompetencias)
+                        MensajeError = Resultado.MensajeError;
 
-            //ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
-            //ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
-            return View(tbCompetencias);
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = "error";
+            }
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+
+
+
+
+
+
         // GET: Competencias/Edit/5
-        public ActionResult Edit(int? id)
+        public JsonResult Edit(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbCompetencias tbCompetencias = db.tbCompetencias.Find(id);
-            if (tbCompetencias == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
-            ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
-            return View(tbCompetencias);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCompetencias tbJSON = db.tbCompetencias.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Competencias/Edit/5
@@ -115,43 +144,51 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "comp_Id,comp_Descripcion,comp_Estado,comp_RazonInactivo,comp_UsuarioCrea,comp_FechaCrea,comp_UsuarioModifica,comp_FechaModifica")] tbCompetencias tbCompetencias)
         {
-            tbCompetencias.comp_FechaModifica = DateTime.Now;
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbCompetencias.comp_UsuarioModifica = 2;
-
+            tbCompetencias.comp_FechaModifica = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            string response = String.Empty;
+            IEnumerable<object> listCompetencias = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                try { 
-                        IEnumerable<object> listCompetencias = null;
-                        string MensajeError = "";
-                        listCompetencias = db.UDP_RRHH_tbCompetencias_Update(
-                                                                                tbCompetencias.comp_Id,
-                                                                                tbCompetencias.comp_Descripcion,
-                                                                                tbCompetencias.comp_UsuarioModifica,
-                                                                                tbCompetencias.comp_FechaModifica);
-                foreach (UDP_RRHH_tbCompetencias_Update_Result Com in listCompetencias)
+                try
                 {
-                    MensajeError = Com.MensajeError;
-                }
-                if (!string.IsNullOrEmpty(MensajeError))
-                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listCompetencias = db.UDP_RRHH_tbCompetencias_Update(tbCompetencias.comp_Id,
+                                                                                            tbCompetencias.comp_Descripcion,
+                                                                                            tbCompetencias.comp_UsuarioModifica,
+                                                                                            tbCompetencias.comp_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_RRHH_tbCompetencias_Update_Result Resultado in listCompetencias)
+                        MensajeError = Resultado.MensajeError;
+
                     if (MensajeError.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "1. hubo un error");
-                        return View(tbCompetencias);
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
                     }
+
                 }
-                return RedirectToAction("Index");
-            }
-                catch (Exception ex)
+                catch (Exception Ex)
                 {
-                    ex.Message.ToString();
-                    ModelState.AddModelError("", "2. Nose pudo actualizar");
-                    return View(tbCompetencias);
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
                 }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
             }
-            //ViewBag.comp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioCrea);
-            //ViewBag.comp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCompetencias.comp_UsuarioModifica);
-            return View(tbCompetencias);
+            else
+            {
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = "error";
+            }
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Competencias/Delete/5
