@@ -13,19 +13,63 @@ function serializar(data) {
 }
 ///FUNCION SERIALZAR
 
+//$.each(function Validar (data) {
+//    var isValid = true;
+//    if ($.trim($(this).val()) == '') {
+//        isValid = false;
+//        $(this).css({
+//            "border": "1px solid red",
+//            "background": "#FFCECE"
+//        });
+//    }
+//    else {
+//        $(this).css({
+//            "border": "",
+//            "background": ""
+//        });
+//    }
+//});
+//if (isValid == false)
+//    e.preventDefault();
+
+
 
 function AllFunctions() {
 
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
+        //var isValid = true;
+        $('#tiho_Descripcion,#tiho_Recargo').each(function () {
+            if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
+               // isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#ff9696"
+                });
+            
+            }
+            else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+                //$("#tiho_Descripcion").removeClass("border", "background");
+                //$("#tiho_Recargo").removeClass("border", "background");
+            }
+           
+        }
+        );
+       
+    
         var data = $("#frmAgregarTipoHoras").serializeArray();
+        
         $.ajax({
             url: "/TipoHoras/Create",
             method: "POST",
             data: data
         }).done(function (data) {
 
-            if (data == "-1" || data=="2") {
+            if (data == "-1" ) {
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo guardar el registro, contacte al administrador',
@@ -41,6 +85,10 @@ function AllFunctions() {
                 });
                 $('#ModalCrear').modal('hide');
                 //table.ajax.reload(null, false);
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
                 llenarTabla();
                 LimpiarControles()
             }
@@ -258,9 +306,9 @@ function llenarTabla() {
         '/TipoHoras/llenarTabla',
         'POST',
         function (data) {
-            if (data.length > 0) {
-                console.log(data);
-            }
+            //if (data.length > 0) {
+            //    console.log(data);
+            //}
             var IndexTable = $('#IndexTable').DataTable();
             IndexTable.clear();
             IndexTable.draw();
