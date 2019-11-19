@@ -10,18 +10,18 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-    public class tbJornadasController : Controller
+    public class JornadasController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: tbJornadas
+        // GET: Jornadas
         public ActionResult Index()
         {
             var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbJornadas.ToList());
         }
 
-        // GET: tbJornadas/Details/5
+        // GET: Jornadas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        // GET: tbJornadas/Create
+        // GET: Jornadas/Create
         public ActionResult Create()
         {
             ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        // POST: tbJornadas/Create
+        // POST: Jornadas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -63,7 +63,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        // GET: tbJornadas/Edit/5
+        // GET: Jornadas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        // POST: tbJornadas/Edit/5
+        // POST: Jornadas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        // GET: tbJornadas/Delete/5
+        // GET: Jornadas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +113,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        // POST: tbJornadas/Delete/5
+        // POST: Jornadas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
