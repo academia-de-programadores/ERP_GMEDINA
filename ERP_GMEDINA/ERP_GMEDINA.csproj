@@ -162,6 +162,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -748,6 +749,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\Idiomas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -803,6 +805,9 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1278,6 +1283,9 @@
     <Content Include="Views\Idiomas\Details.cshtml" />
     <Content Include="Views\Idiomas\Edit.cshtml" />
     <Content Include="Views\Idiomas\Index.cshtml" />
+    <Content Include="Views\Idiomas\_Create.cshtml" />
+    <Content Include="Views\Idiomas\_Details.cshtml" />
+    <Content Include="Views\Idiomas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

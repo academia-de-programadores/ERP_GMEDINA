@@ -1,0 +1,24 @@
+﻿@model ERP_GMEDINA.Models.tbIdiomas
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreate" }))
+        {       
+            @Html.AntiForgeryToken()
+              <div class="form-horizontal">
+			      @Html.HiddenFor(model => model.idi_Id)
+                  @Html.HiddenFor(model => model.idi_FechaCrea)
+                  @Html.HiddenFor(model => model.idi_UsuarioCrea)
+                 
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.idi_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.idi_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.idi_Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                </div>
+          }
+
+
+
