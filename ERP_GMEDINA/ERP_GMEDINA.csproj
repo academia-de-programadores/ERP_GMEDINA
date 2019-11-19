@@ -904,8 +904,6 @@
     <Content Include="Scripts\jquery-ui-1.11.0.min.js" />
     <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.js" />
     <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
-    <Content Include="Scripts\jquery.mask.js" />
-    <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

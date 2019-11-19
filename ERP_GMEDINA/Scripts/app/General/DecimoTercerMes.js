@@ -10,6 +10,10 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+$(document).ready(function () {
+    console.clear();
+});
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     _ajax(null,
@@ -144,8 +148,6 @@ $("#btnEnviarFecha").click(function () {
     }
 
 });
-
-
 
 
 //$(document).on("click", "#btnEnviarFecha", function () {
