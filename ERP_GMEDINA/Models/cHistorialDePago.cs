@@ -21,12 +21,10 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Fecha Inicio")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime hipa_FechaInicio { get; set; }
 
         [Display(Name = "Fecha Fin")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime hipa_FechaFin { get; set; }
 
         public System.DateTime hipa_FechaPago { get; set; }
