@@ -108,6 +108,7 @@ function AllFunctions() {
                     message: 'El registro fue ingresado con Exito',
                 });
                 $('#ModalCrear').modal('hide');
+
                 //table.ajax.reload(null, false);
                 $(this).css({
                     "border": "",
