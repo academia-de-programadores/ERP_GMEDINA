@@ -21,7 +21,8 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbHabilidades = db.tbHabilidades.Where(x=>x.habi_Estado==true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
                 return View(tbHabilidades);
             }
             catch (Exception ex)
@@ -52,20 +53,27 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create(tbHabilidades tbHabilidades)
         {
             string msj = "";
-            var Usuario=(tbUsuario)Session["Usuario"];
-            try
+            if (tbHabilidades.habi_Descripcion!="")
             {
-                var list= db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
-                foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError+" ";
+                    var list = db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
-            }
+                msj = "-3";
+            }            
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
@@ -76,11 +84,21 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbHabilidades tbHabilidades = db.tbHabilidades.Find(id);
-            if (tbHabilidades == null || !tbHabilidades.habi_Estado)
+
+            tbHabilidades tbHabilidades = null;
+            try
             {
-                return HttpNotFound();
+                tbHabilidades = db.tbHabilidades.Find(id);
+                if (tbHabilidades == null || !tbHabilidades.habi_Estado)
+                {
+                    return HttpNotFound();
+                }
             }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }            
             Session["id"] = id;
             var habilidad = new tbHabilidades
             {
@@ -102,23 +120,30 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Edit(tbHabilidades tbHabilidades)
         {
-            var id =(int) Session["id"];
             string msj = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
-            try
+            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_Descripcion != "")
             {
-                var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
-                foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError+" ";
+                    var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
-            }
-            Session.Remove("id");
+                msj = "-3";
+            }            
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
@@ -126,23 +151,30 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(tbHabilidades tbHabilidades)
         {
-            var id = (int)Session["id"];
             string msj = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
-            try
+            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_RazonInactivo != "")
             {
-                var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
-                foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError+" ";
+                    var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
-            }
-            Session.Remove("id");
+                msj = "-3";
+            }            
             return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
 

@@ -48,6 +48,13 @@ function llenarTabla() {
             });
         });
 }
+//Modals
+$("#ModalNuevo").on('hidden.bs.modal', function () {
+    SetearClases("habi_Descripcion", "valid", "error");
+});
+$("#ModalEditar").on('hidden.bs.modal', function () {
+    SetearClases("habi_Descripcion", "valid", "error");
+});
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
@@ -74,55 +81,67 @@ $("#btnInhabilitar").click(function () {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    data = JSON.stringify({ tbHabilidades: data });
-    _ajax(data,
-        '/Habilidades/Create',
-        'POST',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-                llenarTabla();
-                LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "Se ah agregado el registro");
-            } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-            }
-        });
+    if (data!=null) {
+        data = JSON.stringify({ tbHabilidades: data });
+        _ajax(data,
+            '/Habilidades/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error","por favor llene todas las cajas de texto");
+    }    
 });
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    data.habi_Id = id;
-    data = JSON.stringify({ tbHabilidades: data });
-    _ajax(data,
-        '/Habilidades/Delete',
-        'POST',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopup();
-                llenarTabla();
-                LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                MsgWarning("¡Exito!", "Se ah Inactivado el registro");
-            } else {
-                MsgError("Error","Codigo:"+obj+". contacte al administrador.");
-}
-        });
+    if (data != null) {
+        data.habi_Id = id;
+        data = JSON.stringify({ tbHabilidades: data });
+        _ajax(data,
+            '/Habilidades/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
 });
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
-    data.habi_Id = id;
-    data = JSON.stringify({ tbHabilidades: data });
-    _ajax(data,
-        '/Habilidades/Edit',
-        'POST',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopup();
-                llenarTabla();
-                MsgSuccess("¡Exito!","Se ah actualizado el registro");
-            } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-            }
-        });
+    if (data!=null) {
+        data.habi_Id = id;
+        data = JSON.stringify({ tbHabilidades: data });
+        _ajax(data,
+            '/Habilidades/Edit',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }    
 });

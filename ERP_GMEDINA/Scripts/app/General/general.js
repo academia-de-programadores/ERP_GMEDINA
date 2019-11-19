@@ -1,5 +1,5 @@
-﻿function CierraPopups() {
-    var modal = ["ModalNuevo", "ModalEditar", "ModalDelete", "ModalDetalles"];
+﻿var modal = ["ModalNuevo", "ModalEditar", "ModalDelete", "ModalDetalles"];
+function CierraPopups() {
     $.each(modal, function (index, valor) {
         $("#" + valor).modal('hide');//ocultamos el modal
         $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
@@ -21,10 +21,21 @@ function _ajax(params, uri, type, callback, fError) {
 }
 function serializar(data) {
     var Data = new Object();
+    var verificacion = true;
     $.each(data, function (index, valor) {
-        Data[valor.name] = valor.value;
+        var value = valor.value.trim();
+        if (value!="") {
+            Data[valor.name] = value;
+        } else {
+            SetearClases(valor.name, "error", "valid");
+            verificacion = false;
+        }
     });
-    return Data;
+    if (verificacion) {
+        return Data;
+    } else {
+        return null;
+    }
 }
 function FechaFormato(pFecha) {
     if (pFecha != null && pFecha != undefined) {
@@ -43,6 +54,12 @@ function FechaFormato(pFecha) {
 }
 function pad2(number) {
     return (number < 10 ? '0' : '') + number
+}
+function SetearClases(Id,Agregar,Remover) {
+    modal.forEach(function (indice, value) {
+        $("#" + indice).find("#" + Id).addClass(Agregar);
+        $("#" + indice).find("#" + Id).removeClass(Remover);
+    });
 }
 function LimpiarControles(Controles) {
     $.each(Controles, function (index, value) {
@@ -73,3 +90,5 @@ function MsgWarning(Titulo, Mensajes) {
         message: Mensajes,
     });
 }
+//$("#btnPrueva").click()
+//form.validate()
