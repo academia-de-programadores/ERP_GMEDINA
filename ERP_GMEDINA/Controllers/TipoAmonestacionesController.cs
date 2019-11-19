@@ -17,38 +17,43 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoAmonestaciones
         public ActionResult Index()
         {
-            var tbTipoAmonestaciones = db.tbTipoAmonestaciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbTipoAmonestaciones = db.tbTipoAmonestaciones.Where(t => t.tamo_Estado == true);
             return View(tbTipoAmonestaciones.ToList());
         }
         //LO AGREGUE
         public ActionResult GetData()
         {
-            var tbTipoAmonestaciones1 = db.tbTipoAmonestaciones.ToList();
+            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
+            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
+            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+            var tbTipoAmonestaciones1 = db.tbTipoAmonestaciones
+                        .Select(c => new {
+                            tamo_Id = c.tamo_Id,
+                            tamo_Descripcionn = c.tamo_Descripcion,
+                            tamo_Estado = c.tamo_Estado,
+                            tamo_RazonInactivo = c.tamo_RazonInactivo,
+                            tamo_UsuarioModifica = c.tamo_UsuarioModifica,
+                            tamo_UsuarioCrea = c.tamo_UsuarioCrea,
+                            tamo_FechaCrea = c.tamo_FechaCrea,
+                            tamo_FechaModifica = c.tamo_FechaModifica
+                        }).Where(c => c.tamo_Estado == true)
+                        .ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbTipoAmonestaciones1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-     
+
         // GET: TipoAmonestaciones/Details/5
-        public ActionResult Details(int? id)
+        public JsonResult Details(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbTipoAmonestaciones tbTipoAmonestaciones = db.tbTipoAmonestaciones.Find(id);
-            if (tbTipoAmonestaciones == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTipoAmonestaciones);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbTipoAmonestaciones tbJSON = db.tbTipoAmonestaciones.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoAmonestaciones/Create
         //LO AGREGE
         public ActionResult Create()
         {
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
-            //ViewBag.tamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            //ViewBag.tamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
 
@@ -56,57 +61,60 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-            //LO AGREGE
+        //LO AGREGE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tamo_Id,tamo_Descripcion,tamo_Estado,tamo_RazonInactivo,tamo_UsuarioCrea,tamo_FechaCrea,tamo_UsuarioModifica,tamo_FechaModifica")] tbTipoAmonestaciones tbTipoAmonestaciones)
         {
             tbTipoAmonestaciones.tamo_UsuarioCrea = 1;
             tbTipoAmonestaciones.tamo_FechaCrea = DateTime.Now;
-            string response = String.Empty;
-            IEnumerable<object> listTipoAmonestacion = null;
+            IEnumerable<object> listTipoAmonestaciones = null;
             string MensajeError = "";
             if (ModelState.IsValid)
             {
                 try
                 {
+                   
+                    listTipoAmonestaciones = db.UDP_RRHH_tbTipoAmonestaciones_Insert(tbTipoAmonestaciones.tamo_Descripcion,
+                                                                                     tbTipoAmonestaciones.tamo_UsuarioCrea,
+                                                                                     tbTipoAmonestaciones.tamo_FechaCrea);
 
-                    listTipoAmonestacion = db.UDP_RRHH_tbTipoAmonestaciones_Insert(tbTipoAmonestaciones.tamo_Descripcion,
-                                                                                   tbTipoAmonestaciones.tamo_UsuarioCrea,
-                                                                                   tbTipoAmonestaciones.tamo_FechaCrea);
-                    foreach (UDP_RRHH_tbTipoAmonestaciones_Insert_Result Resultado in listTipoAmonestacion)
-                        MensajeError = Resultado.MensajeError;
-
-                    if (MensajeError.StartsWith("-1"))
+                    foreach (UDP_RRHH_tbTipoAmonestaciones_Insert_Result Resultado in listTipoAmonestaciones)
                     {
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
+                        MensajeError = Resultado.MensajeError;
                     }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1.No se pudo ingresar el registro");
+                            return View(tbTipoAmonestaciones);
+                        }
+                    }
+                    return RedirectToAction("Index");
                 }
-                catch (Exception Ex)
-                {
-                    response = Ex.Message.ToString();
-                }
-                response="Exito";
-            }
-            else
-            {
-                response = "Falló";
-            }
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbTipoAmonestaciones.tamo_Id);
-            return Json(response, JsonRequestBehavior.AllowGet);
 
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2.No se pudo insertar el registro");
+                    return View(tbTipoAmonestaciones);
+                }
+            }
+            //  ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
+            // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
+            return View(tbTipoAmonestaciones);
         }
-        
+
+
         // GET: TipoAmonestaciones/Edit/5
         //LO AGREGE
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbTipoAmonestaciones tbTipoAmonestacionesJSON = db.tbTipoAmonestaciones.Find(id);
-            return Json(tbTipoAmonestacionesJSON,JsonRequestBehavior.AllowGet);
+            tbTipoAmonestaciones tbJSON = db.tbTipoAmonestaciones.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
-
         // POST: TipoAmonestaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,51 +123,47 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tamo_Id,tamo_Descripcion,tamo_Estado,tamo_RazonInactivo,tamo_UsuarioCrea,tamo_FechaCrea,tamo_UsuarioModifica,tamo_FechaModifica")] tbTipoAmonestaciones tbTipoAmonestaciones)
         {
-            //traer los campo de auditorioa de Usuario y Fecha Crea
-            tbTipoAmonestaciones.tamo_UsuarioCrea = 1;
-            tbTipoAmonestaciones.tamo_FechaCrea = DateTime.Now;
-
+           
             //Llenar los campo de auditoria
             tbTipoAmonestaciones.tamo_UsuarioModifica = 1;
             tbTipoAmonestaciones.tamo_FechaModifica = DateTime.Now;
 
-            //Variable donde se alamacenara los resultados
-            string response = String.Empty;
-            IEnumerable<object> listTipoAmonestaciones = null;
-            string MensajeError = "";
             if (ModelState.IsValid)
             {
-              try
+                try
                 {
-                    //PROCEDIMIENTO
-                    listTipoAmonestaciones = db.UDP_RRHH_tbTipoAmonestaciones_Update(tbTipoAmonestaciones.tamo_Id,
-                                                                             tbTipoAmonestaciones.tamo_Descripcion,
-                                                                                     tbTipoAmonestaciones.tamo_UsuarioModifica,
-                                                                                     tbTipoAmonestaciones.tamo_FechaModifica);
+                    IEnumerable<object> listTipoAmonestacion1 = null;
+                    string MensajeError = "";
+                    listTipoAmonestacion1 = db.UDP_RRHH_tbTipoAmonestaciones_Update(tbTipoAmonestaciones.tamo_Id,
+                                                                           tbTipoAmonestaciones.tamo_Descripcion,
+                                                                           tbTipoAmonestaciones.tamo_UsuarioModifica,
+                                                                           tbTipoAmonestaciones.tamo_FechaModifica);
 
-                    foreach (UDP_RRHH_tbTipoAmonestaciones_Update_Result Resultado in listTipoAmonestaciones)
-                        MensajeError = Resultado.MensajeError;
-                    if(MensajeError.StartsWith("-1"))
+                    foreach (UDP_RRHH_tbTipoAmonestaciones_Update_Result Res in listTipoAmonestacion1)
                     {
-                        ModelState.AddModelError("", "No se pudo encontrar");
-                        response = "error";
+                        MensajeError = Res.MensajeError;
                     }
+                    if (!string.IsNullOrEmpty(MensajeError))
+                    {
+                        if (MensajeError.StartsWith("-1"))
+                        {
+                            ModelState.AddModelError("", "1. No se pudo Editar el registo");
+                            return View(tbTipoAmonestaciones);
+                        }
+                    }
+                    return RedirectToAction("Index");
                 }
-                catch (Exception EX)
+                catch (Exception ex)
                 {
-                    EX.Message.ToString();
+                    ex.Message.ToString();
+                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
+                    return View(tbTipoAmonestaciones);
                 }
-                response = "Bien";
-            }
-            else
-            {
 
-                ModelState.AddModelError("", "No se pudo");
-                response = "mal";
             }
-
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbTipoAmonestaciones.tamo_Id);
-            return Json(response, JsonRequestBehavior.AllowGet);
+            //   ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
+            // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
+            return View(tbTipoAmonestaciones);
         }
 
         // GET: TipoAmonestaciones/Delete/5
