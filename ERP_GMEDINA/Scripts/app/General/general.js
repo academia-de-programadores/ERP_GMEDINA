@@ -1,12 +1,12 @@
-﻿function CierraPopup() {
+﻿function CierraPopups() {
     var modal = ["ModalNuevo", "ModalEditar", "ModalDelete", "ModalDetalles"];
     $.each(modal, function (index, valor) {
         $("#" + valor).modal('hide');//ocultamos el modal
         $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
         $('.modal-backdrop').remove();//eliminamos el backdrop del modal
-    })
+    });
 }
-function _ajax(params, uri, type, callback) {
+function _ajax(params, uri, type, callback, fError) {
     $.ajax({
         url: uri,
         method: type,
@@ -14,6 +14,9 @@ function _ajax(params, uri, type, callback) {
         contentType: "application/json; charset = utf-8",
         data: params,
         success: callback
+    }).fail(function (request, status, error) {
+        CierraPopups()
+        MsgError("Error", "contacte al administrador.(Verifique su conexion a internet)");
     });
 }
 function serializar(data) {

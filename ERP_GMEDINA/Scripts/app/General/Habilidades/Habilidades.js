@@ -60,14 +60,14 @@ $("#btnEditar").click(function () {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopup();
+                CierraPopups();
                 $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
                 $('#ModalEditar').modal('show');
             }
         });
 });
 $("#btnInhabilitar").click(function () {
-    CierraPopup();
+    CierraPopups();
     $('#ModalDelete').modal('show');
 });
 //botones POST
@@ -80,7 +80,7 @@ $("#btnGuardar").click(function () {
         'POST',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopup();
+                CierraPopups();
                 llenarTabla();
                 LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "Se ah agregado el registro");

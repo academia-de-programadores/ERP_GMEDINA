@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbHabilidades.Add(new tbHabilidades {habi_Id=1,habi_Descripcion="fallo la conexion" });
+                tbHabilidades.Add(new tbHabilidades {habi_Id=0,habi_Descripcion="fallo la conexion" });
             }
             return View(tbHabilidades);
         }
@@ -41,25 +41,13 @@ namespace ERP_GMEDINA.Controllers
                 tbHabilidades.Add( new tbHabilidades
                 {
                     habi_Id = x.habi_Id,
-                    habi_Descripcion = x.habi_Descripcion,
-                    habi_Estado = x.habi_Estado,
-                    habi_RazonInactivo = x.habi_RazonInactivo,
-                    habi_UsuarioCrea = x.habi_UsuarioCrea,
-                    habi_FechaCrea = x.habi_FechaCrea,
-                    habi_UsuarioModifica = x.habi_UsuarioModifica,
-                    habi_FechaModifica = x.habi_FechaModifica
+                    habi_Descripcion = x.habi_Descripcion
                 });
             }
-            //tbHabilidades Habilidad = new tbHabilidades {habi_Descripcion="hola", habi_Id=1 };
-            //List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
-            ////tbHabilidades.Add(Habilidad);
             return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
         }
-        
+
         // POST: Habilidades/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[Bind(Include = "habi_Id,habi_Descripcion,habi_Estado,habi_RazonInactivo,habi_UsuarioCrea,habi_FechaCrea,habi_UsuarioModifica,habi_FechaModifica")]
         [HttpPost]
         public JsonResult Create(tbHabilidades tbHabilidades)
         {
@@ -70,11 +58,7 @@ namespace ERP_GMEDINA.Controllers
                 var list= db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
                 foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
                 {
-                    msj = item.MensajeError;
-                }
-                if (msj.Length > 2)
-                {
-                    msj = msj.Substring(0, 2);
+                    msj = item.MensajeError+" ";
                 }
             }
             catch (Exception ex)
@@ -82,7 +66,7 @@ namespace ERP_GMEDINA.Controllers
                 msj = "-2";
                 ex.Message.ToString();
             }
-            return Json(msj,JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Habilidades/Edit/5
@@ -107,30 +91,14 @@ namespace ERP_GMEDINA.Controllers
                 habi_UsuarioCrea = tbHabilidades.habi_UsuarioCrea,
                 habi_FechaCrea = tbHabilidades.habi_FechaCrea,
                 habi_UsuarioModifica = tbHabilidades.habi_UsuarioModifica,
-                habi_FechaModifica = tbHabilidades.habi_FechaModifica
+                habi_FechaModifica = tbHabilidades.habi_FechaModifica,
+                tbUsuario = new tbUsuario {usu_NombreUsuario= IsNull(tbHabilidades.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbHabilidades.tbUsuario1).usu_NombreUsuario }
             };
-            if (tbHabilidades.tbUsuario!=null)
-            {
-                habilidad.tbUsuario = new tbUsuario { usu_NombreUsuario = tbHabilidades.tbUsuario.usu_NombreUsuario };
-            }
-            else
-            {
-                habilidad.tbUsuario = new tbUsuario { usu_NombreUsuario = "" };
-            }
-            if (tbHabilidades.tbUsuario1 != null)
-            {
-                habilidad.tbUsuario1 = new tbUsuario { usu_NombreUsuario = tbHabilidades.tbUsuario1.usu_NombreUsuario };
-            }
-            else
-            {
-                habilidad.tbUsuario1 = new tbUsuario { usu_NombreUsuario = "" };
-            }
             return Json(habilidad, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public JsonResult Edit(tbHabilidades tbHabilidades)
         {
@@ -142,11 +110,7 @@ namespace ERP_GMEDINA.Controllers
                 var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
                 foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
                 {
-                    msj = item.MensajeError;
-                }
-                if (msj.Length>2)
-                {
-                    msj = msj.Substring(0, 2);
+                    msj = item.MensajeError+" ";
                 }
             }
             catch (Exception ex)
@@ -154,7 +118,8 @@ namespace ERP_GMEDINA.Controllers
                 msj = "-2";
                 ex.Message.ToString();
             }
-            return Json(msj);
+            Session.Remove("id");
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Habilidades/Delete/5
@@ -169,11 +134,7 @@ namespace ERP_GMEDINA.Controllers
                 var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                 foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
                 {
-                    msj = item.MensajeError;
-                }
-                if (msj.Length > 2)
-                {
-                    msj = msj.Substring(0, 2);
+                    msj = item.MensajeError+" ";
                 }
             }
             catch (Exception ex)
@@ -181,9 +142,21 @@ namespace ERP_GMEDINA.Controllers
                 msj = "-2";
                 ex.Message.ToString();
             }
-            return Json(msj);
+            Session.Remove("id");
+            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
 
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor!=null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario {usu_NombreUsuario="" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

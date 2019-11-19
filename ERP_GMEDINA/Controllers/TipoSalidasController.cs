@@ -17,50 +17,59 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoSalidas
         public ActionResult Index()
         {
-            var tbTipoSalidas = db.tbTipoSalidas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            return View(tbTipoSalidas.ToList());
-        }
-
-        // GET: TipoSalidas/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            List<tbTipoSalidas> tbTipoSalidas = new List<Models.tbTipoSalidas> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                tbTipoSalidas = db.tbTipoSalidas.Where(x => x.tsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbTipoSalidas);
             }
-            tbTipoSalidas tbTipoSalidas = db.tbTipoSalidas.Find(id);
-            if (tbTipoSalidas == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ex.Message.ToString();
+                tbTipoSalidas.Add(new tbTipoSalidas { tsal_Id = 0, tsal_Descripcion = "fallo la conexion" });
             }
             return View(tbTipoSalidas);
         }
 
-        // GET: TipoSalidas/Create
-        public ActionResult Create()
-        {
-            ViewBag.tsal_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.tsal_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
-
-        // POST: TipoSalidas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tsal_Id,tsal_Descripcion,tsal_Estado,tsal_RazonInactivo,tsal_UsuarioCrea,tsal_FechaCrea,tsal_UsuarioModifica,tsal_FechaModifica")] tbTipoSalidas tbTipoSalidas)
+        public JsonResult llenarTabla()
         {
-            if (ModelState.IsValid)
+            List<tbTipoSalidas> tbTipoSalidas =
+                new List<Models.tbTipoSalidas> { };
+            foreach (tbTipoSalidas x in db.tbTipoSalidas.ToList().Where(x => x.tsal_Estado == true))
             {
-                db.tbTipoSalidas.Add(tbTipoSalidas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                tbTipoSalidas.Add(new tbTipoSalidas
+                {
+                    tsal_Id = x.tsal_Id,
+                    tsal_Descripcion = x.tsal_Descripcion
+                });
             }
-
-            ViewBag.tsal_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioCrea);
-            ViewBag.tsal_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioModifica);
-            return View(tbTipoSalidas);
+            return Json(tbTipoSalidas, JsonRequestBehavior.AllowGet);
+        }
+        // GET: TipoSalidas/Create
+        [HttpPost]
+        public ActionResult Create(tbTipoSalidas tbTipoSalidas)
+        {
+            string msj = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                var list = db.UDP_RRHH_tbTipoSalidas_Insert(
+                    tbTipoSalidas.tsal_Descripcion, 
+                    Usuario.usu_Id, 
+                    DateTime.Now);
+                foreach (UDP_RRHH_tbTipoSalidas_Insert_Result item in list)
+                {
+                    msj = item.MensajeError.ToString()+" ";
+                }
+            }
+            catch (Exception ex)
+            {
+                msj = "-2";
+                ex.Message.ToString();
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoSalidas/Edit/5
@@ -71,59 +80,92 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbTipoSalidas tbTipoSalidas = db.tbTipoSalidas.Find(id);
-            if (tbTipoSalidas == null)
+            if (tbTipoSalidas == null || !tbTipoSalidas.tsal_Estado)
             {
                 return HttpNotFound();
             }
-            ViewBag.tsal_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioCrea);
-            ViewBag.tsal_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioModifica);
-            return View(tbTipoSalidas);
+            Session["id"] = id;
+            var TipoSalidas = new tbTipoSalidas
+            {
+                tsal_Id = tbTipoSalidas.tsal_Id,
+                tsal_Descripcion = tbTipoSalidas.tsal_Descripcion,
+                tsal_Estado = tbTipoSalidas.tsal_Estado,
+                tsal_RazonInactivo = tbTipoSalidas.tsal_RazonInactivo,
+                tsal_UsuarioCrea = tbTipoSalidas.tsal_UsuarioCrea,
+                tsal_FechaCrea = tbTipoSalidas.tsal_FechaCrea,
+                tsal_UsuarioModifica = tbTipoSalidas.tsal_UsuarioModifica,
+                tsal_FechaModifica = tbTipoSalidas.tsal_FechaModifica,
+                tbUsuario=new tbUsuario { usu_NombreUsuario= tbTipoSalidas.tbUsuario.usu_NombreUsuario},
+                tbUsuario1=new tbUsuario {usu_NombreUsuario= tbTipoSalidas.tbUsuario1.usu_NombreUsuario }
+            };
+            return Json(TipoSalidas, JsonRequestBehavior.AllowGet);
         }
 
         // POST: TipoSalidas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tsal_Id,tsal_Descripcion,tsal_Estado,tsal_RazonInactivo,tsal_UsuarioCrea,tsal_FechaCrea,tsal_UsuarioModifica,tsal_FechaModifica")] tbTipoSalidas tbTipoSalidas)
+        public ActionResult Edit(tbTipoSalidas tbTipoSalidas)
         {
-            if (ModelState.IsValid)
+            var id = (int)Session["id"];
+            string msj = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
             {
-                db.Entry(tbTipoSalidas).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                foreach (UDP_RRHH_tbTipoSalidas_Update_Result item in list)
+                {
+                    msj = item.MensajeError.ToString()+" ";
+                }
             }
-            ViewBag.tsal_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioCrea);
-            ViewBag.tsal_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoSalidas.tsal_UsuarioModifica);
-            return View(tbTipoSalidas);
-        }
-
-        // GET: TipoSalidas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+            catch (Exception ex)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                msj = "-2";
+                ex.Message.ToString();
             }
-            tbTipoSalidas tbTipoSalidas = db.tbTipoSalidas.Find(id);
-            if (tbTipoSalidas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTipoSalidas);
+            Session.Remove("Usuario");
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // POST: TipoSalidas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(tbTipoSalidas tbTipoSalidas)
         {
-            tbTipoSalidas tbTipoSalidas = db.tbTipoSalidas.Find(id);
-            db.tbTipoSalidas.Remove(tbTipoSalidas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var id = (int)Session["id"];
+            string msj = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                var list = db.UDP_RRHH_tbTipoSalidas_Delete(
+                    id,
+                    tbTipoSalidas.tsal_Descripcion, 
+                    Usuario.usu_Id, 
+                    DateTime.Now);
+                foreach (UDP_RRHH_tbTipoSalidas_Delete_Result item in list)
+                {
+                    msj = item.MensajeError.ToString()+" ";
+                }
+            }
+            catch (Exception ex)
+            {
+                msj = "-2";
+                ex.Message.ToString();
+            }
+            Session.Remove("Usuario");
+            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
 
+        protected object IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
