@@ -1,11 +1,14 @@
 ﻿//Funcion generica para reutilizar AJAX
-function _ajax(params, uri, type, callback) {
+function _ajax(params, uri, type, callback, enviar) {
     $.ajax({
         url: uri,
         type: type,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(params),
+        beforeSend:function(){
+			enviar();
+		},
         success: function (data) {
             callback(data);
         }
@@ -37,13 +40,21 @@ if (getUrl.toString().indexOf('Create') > 1) {
 
 // Desplegar los detalles del catalogo de planillas (ingresos y deducciones)
 $(document).on('click', '#tblCatalogoPlanillas tbody tr td #btnDesplegarIngresosDeducciones', function () {
-    debugger;
+    //debugger;
     var ID = $(this).closest('tr').data('id');
+    //var fila = $('#fila-' + ID);
+    //console.log(fila)
 
-    var fila = $('#detalles #fila-' + ID);
-    if (fila.css('display') == 'none') {
-        $(this).closest('tr').after('<tr style="display:table-row" id="fila-' + ID + '">' + $('#fila-' + ID).html() + '</tr>');
-        $(fila).remove();
+    var div = $('#detalles #fila-'+ID);
+    var tr = $(this).parent().parent().parent().find('tr');
+    let trHijo = document.createElement("tr"); 
+    $(trHijo).attr('id', 'fila-'+ ID);
+    trHijo.style.display = 'table-row';
+    trHijo.append(div[0]);
+    $('#tblCatalogoPlanillas tbody').prepend(trHijo);
+    if (true) {
+        $(this).closest('tr').after('<tr style="display:table-row" id="fila-' + ID + '">' + $('#detalles #fila-' + ID).html() + '</tr>');
+        $('#detalles #fila-' + ID).remove();
         $(this).text('-');
     }
     else {
@@ -150,6 +161,12 @@ var crearEditar = function (edit) {
                             title: 'Error',
                             message: 'Hubo un error al insertar el registro',
                         });
+                },
+                ()=>{
+                    iziToast.success({
+                        title: 'Enviando...',
+                        message: 'Enviando los datos para crear',
+                    });
                 });
         else
             _ajax({
@@ -175,6 +192,12 @@ var crearEditar = function (edit) {
                             title: 'Error',
                             message: 'Hubo un error al editar el registro',
                         });
+                },
+                ()=>{
+                    iziToast.success({
+                        title: 'Enviando...',
+                        message: 'Enviando los datos para editar',
+                    });
                 });
     }
 }
@@ -199,5 +222,12 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
                 message: 'Ocurrió un error',
             });
         }
+    },
+    function(){
+        iziToast.success({
+            title: 'Enviando...',
+            message: 'Enviando los datos para eliminar',
+        });
     });
+    
 });

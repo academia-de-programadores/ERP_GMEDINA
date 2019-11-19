@@ -15,20 +15,15 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div id="detalles">
+                    <div id="detalles" style="display:none">
                         @foreach (var item in Model)
                         {
                             if (item.cpla_Activo == true)
                             {
-                                    <tr style="display:none" id="fila-@item.cpla_IdPlanilla">
-                                        <td style="display:none"></td>
-                                        <td colspan="4">
-                                            @Html.Partial("_IndexTipoPlanillaDetalleIngreso", item.tbTipoPlanillaDetalleIngreso, new ViewDataDictionary { { "idDetalleIngreso", item.cpla_IdPlanilla } })
-                                            @Html.Partial("_IndexTipoPlanillaDetalleDeduccion", item.tbTipoPlanillaDetalleDeduccion, new ViewDataDictionary { { "idDetalleDeduccion", item.cpla_IdPlanilla } })
-                                        </td>
-                                        <td></td>
-                                        <td style="display:none"></td>
-                                    </tr>
+                                <div id="fila-@item.cpla_IdPlanilla">
+                                    @Html.Partial("_IndexTipoPlanillaDetalleIngreso", item.tbTipoPlanillaDetalleIngreso, new ViewDataDictionary { { "idDetalleIngreso", item.cpla_IdPlanilla } })
+                                    @Html.Partial("_IndexTipoPlanillaDetalleDeduccion", item.tbTipoPlanillaDetalleDeduccion, new ViewDataDictionary { { "idDetalleDeduccion", item.cpla_IdPlanilla } })
+                                </div>
                             }
                         }
                     </div>
