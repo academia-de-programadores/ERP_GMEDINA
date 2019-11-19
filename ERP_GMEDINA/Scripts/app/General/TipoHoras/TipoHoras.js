@@ -13,52 +13,86 @@ function serializar(data) {
 }
 ///FUNCION SERIALZAR
 
-//$.each(function Validar (data) {
-//    var isValid = true;
-//    if ($.trim($(this).val()) == '') {
-//        isValid = false;
-//        $(this).css({
-//            "border": "1px solid red",
-//            "background": "#FFCECE"
-//        });
-//    }
-//    else {
-//        $(this).css({
-//            "border": "",
-//            "background": ""
-//        });
-//    }
-//});
-//if (isValid == false)
-//    e.preventDefault();
 
+function GEEKFORGEEKS()								 
+{ 
+    var name = document.forms["RegForm"]["Name"];			 
+    var email = document.forms["RegForm"]["EMail"]; 
+    var phone = document.forms["RegForm"]["Telephone"]; 
+    var what = document.forms["RegForm"]["Subject"]; 
+    var password = document.forms["RegForm"]["Password"]; 
+    var address = document.forms["RegForm"]["Address"]; 
 
+    if (name.value == "")								 
+    { 
+        window.alert("Please enter your name."); 
+        name.focus(); 
+        return false; 
+    } 
+
+    if (address.value == "")							 
+    { 
+        window.alert("Please enter your address."); 
+        address.focus(); 
+        return false; 
+    } 
+	
+    if (email.value == "")								 
+    { 
+        window.alert("Please enter a valid e-mail address."); 
+        email.focus(); 
+        return false; 
+    } 
+
+    if (phone.value == "")						 
+    { 
+        window.alert("Please enter your telephone number."); 
+        phone.focus(); 
+        return false; 
+    } 
+
+    if (password.value == "")					 
+    { 
+        window.alert("Please enter your password"); 
+        password.focus(); 
+        return false; 
+    } 
+
+    if (what.selectedIndex < 1)				 
+    { 
+        alert("Please enter your course."); 
+        what.focus(); 
+        return false; 
+    } 
+
+    return true; 
+}
 
 function AllFunctions() {
 
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
-        //var isValid = true;
-        $('#tiho_Descripcion,#tiho_Recargo').each(function () {
-            if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
-               // isValid = false;
-                $(this).css({
-                    "border": "1px solid red",
-                    "background": "#ff9696"
-                });
+        ////var isValid = true;
+        //$('#tiho_Descripcion,#tiho_Recargo').each(function () {
+        //    if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
+        //       // isValid = false;
+        //        $(this).css({
+        //            //"border": "1px solid red",
+        //            //"background": "#ff9696"
+        //        });
             
-            }
-            else {
-                $(this).css({
-                    "border": "",
-                    "background": ""
-                });
-                //$("#tiho_Descripcion").removeClass("border", "background");
-                //$("#tiho_Recargo").removeClass("border", "background");
-            }
+        //    }
+        //    else {
+        //        $(this).css({
+        //            "border": "",
+        //            "background": ""
+        //        });
+        //        //$("#tiho_Descripcion").removeClass("border", "background");
+        //        //$("#tiho_Recargo").removeClass("border", "background");
+        //    }
            
-        }
-        );
+        //}
+        //);
        
     
         var data = $("#frmAgregarTipoHoras").serializeArray();
