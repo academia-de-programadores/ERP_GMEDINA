@@ -30,12 +30,6 @@
                     <thead>
                         <tr role="row">
                             <th>@Html.DisplayNameFor(model => model.jor_Descripcion)</th>
-                            <th>@Html.DisplayNameFor(model => model.jor_Estado)</th>
-                            <th>@Html.DisplayNameFor(model => model.jor_RazonInactivo)</th>
-                            <th>@Html.DisplayNameFor(model => model.jor_FechaCrea)</th>
-                            <th>@Html.DisplayNameFor(model => model.jor_FechaModifica)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -44,24 +38,6 @@
                         <tr class="gradeA odd" role="row" data-id="@item.jor_Id">
                             <td>
                                 @Html.DisplayFor(modelItem => item.jor_Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_Estado)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_RazonInactivo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_FechaCrea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_FechaModifica)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
                             </td>
                             <td>
                               @Html.ActionLink("Detalles", "Details", new { id=item.jor_Id },  new {@class = "btn btn-primary btn-xs" })

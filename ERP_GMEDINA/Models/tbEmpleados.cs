@@ -18,7 +18,6 @@ namespace ERP_GMEDINA.Models
         public tbEmpleados()
         {
             this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
-            this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMes>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbEmpleadoBonos = new HashSet<tbEmpleadoBonos>();
             this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
@@ -65,8 +64,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

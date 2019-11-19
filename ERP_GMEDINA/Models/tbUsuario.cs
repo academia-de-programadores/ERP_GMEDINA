@@ -38,8 +38,6 @@ namespace ERP_GMEDINA.Models
             this.tbCatalogoDePlanillas1 = new HashSet<tbCatalogoDePlanillas>();
             this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMes>();
             this.tbDecimoCuartoMes1 = new HashSet<tbDecimoCuartoMes>();
-            this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMes>();
-            this.tbDecimoTercerMes1 = new HashSet<tbDecimoTercerMes>();
             this.tbDeduccionesExtraordinarias = new HashSet<tbDeduccionesExtraordinarias>();
             this.tbDeduccionesExtraordinarias1 = new HashSet<tbDeduccionesExtraordinarias>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
@@ -233,10 +231,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
