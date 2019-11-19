@@ -637,13 +637,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDeduccionesExtraordinarias_Update", dex_IdDeduccionesExtraParameter, eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioModificaParameter, dex_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Inactivar(Nullable<int> cb_Id)
+        public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Inactivar(Nullable<int> cb_Id, Nullable<int> cb_UsuarioModifica, Nullable<System.DateTime> cb_FechaModifica)
         {
             var cb_IdParameter = cb_Id.HasValue ?
                 new ObjectParameter("cb_Id", cb_Id) :
                 new ObjectParameter("cb_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Inactivar", cb_IdParameter);
+            var cb_UsuarioModificaParameter = cb_UsuarioModifica.HasValue ?
+                new ObjectParameter("cb_UsuarioModifica", cb_UsuarioModifica) :
+                new ObjectParameter("cb_UsuarioModifica", typeof(int));
+    
+            var cb_FechaModificaParameter = cb_FechaModifica.HasValue ?
+                new ObjectParameter("cb_FechaModifica", cb_FechaModifica) :
+                new ObjectParameter("cb_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Inactivar", cb_IdParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Insert(Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> cb_Monto, Nullable<System.DateTime> cb_FechaRegistro, Nullable<bool> cb_Pagado, Nullable<int> cb_UsuarioCrea, Nullable<System.DateTime> cb_FechaCrea)
@@ -1105,6 +1113,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("empr_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Update_Result>("UDP_RRHH_tbEmpresas_Update", empr_IdParameter, empr_NombreParameter, empr_usuarioModificaParameter, empr_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Select_Result> UDP_RRHH_tbEmpresas_Select(Nullable<int> empr_Id)
+        {
+            var empr_IdParameter = empr_Id.HasValue ?
+                new ObjectParameter("empr_Id", empr_Id) :
+                new ObjectParameter("empr_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Select_Result>("UDP_RRHH_tbEmpresas_Select", empr_IdParameter);
         }
     }
 }

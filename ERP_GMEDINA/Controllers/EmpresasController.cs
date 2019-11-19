@@ -95,18 +95,20 @@ namespace ERP_GMEDINA.Controllers
         // GET: Empresas/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            if (tbEmpresas == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
-            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
-            return View(tbEmpresas);
+            var List = db.UDP_RRHH_tbEmpresas_Select(id).ToList();
+            return Json(List, JsonRequestBehavior.AllowGet);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
+            //if (tbEmpresas == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
+            //ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
+            //return View(tbEmpresas);
         }
 
         // POST: Empresas/Edit/5
