@@ -1,54 +1,16 @@
-﻿<#@ template language="C#" HostSpecific="True" #>
-<#@ output extension=".cshtml" #>
-<#@ include file="Imports.include.t4" #>
-@model IEnumerable<#= "<" + ViewDataTypeName + ">" #>
-<#
-// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
-if(IsPartialView) {
-#>
-
-<#
-} else if(IsLayoutPageSelected) {
-#>
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbRazonSalidas>
 
 @{
-    ViewBag.Title = "<#= ViewName#>";
-<#
-if (!String.IsNullOrEmpty(LayoutPageFile)) {
-#>
-    Layout = "<#= LayoutPageFile#>";
-<#
-}
-#>
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<#
-}
-else {
-#>
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-  <head>
-      <meta name="viewport" content="width=device-width" />
-      <title><#= ViewName #></title>
-  </head>
-  <body>
-<#
-    PushIndent("    ");
-}
-#>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de <#= ViewDataTypeShortName #></h5>
+                    <h5>Listado de tbRazonSalidas</h5>
                     <div class="ibox-tools">
 						<button type="button" class="btn btn-primary btn-xs" id="btnAgregar">Nuevo</button>
                     </div>
@@ -57,84 +19,27 @@ else {
                   <table id="table" class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                         <tr role="row">
-<#
-                            IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
-                            foreach (PropertyMetadata property in properties) {
-                                if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
-#>
-<#
-      // This is a temporary work around until core scaffolding provides support for independent associations.
-                                    if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
-                                        continue;
-                                    }
-#>
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)</th>
-<#
-                                }
-                            }
-#>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.rsal_Descripcion)</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
-<#
-                      string pkName = GetPrimaryKeyName();
-#>
                       @foreach (var item in Model) {
                         <tr class="gradeA odd" role="row">
-<#
-                          foreach (PropertyMetadata property in properties) {
-                              if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
-#>
-<#
-      // This is a temporary work around until core scaffolding provides support for independent associations.
-                                if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
-                                    continue;
-                                }
-#>
                             <td>
-                                @Html.DisplayFor(modelItem => <#= "item." + GetValueExpression(property) #>)
+                                @Html.DisplayFor(modelItem => item.rsal_Descripcion)
                             </td>
-<#
-                              }
-                          }
-                          if (pkName != null) {
-#>
+  
                             <td>
-							    <button data-id="@item.<#= pkName #>" type="button" class="btn btn-primary btn-xs" id="btnEditar">Editar</button>
-                                <button  data-id="@item.<#= pkName #>"  type="button" class="btn btn-default btn-xs" id="btnDetalle">Detalle</button>
+							    <button data-id="@item.rsal_Id" type="button" class="btn btn-primary btn-xs" id="btnEditar">Editar</button>
+                                <button  data-id="@item.rsal_Id"  type="button" class="btn btn-default btn-xs" id="btnDetalle">Detalle</button>
                             </td>
-<#
-                            }
-                            else {
-#>
-                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { /*id=item.pkName*/ },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { /*id=item.pkName*/ }, new {@class = "btn btn-default btn-xs" })
-                            </td>
-<#
-}
-#>
                         </tr>
                       }
                     </tbody>
                         <tfoot>
                             <tr role="row">
-<#
-                            foreach (PropertyMetadata property in properties) {
-                                if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
-#>
-<#
-      // This is a temporary work around until core scaffolding provides support for independent associations.
-                                    if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
-                                        continue;
-                                    }
-#>
-									<th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)</th>								
-<#
-                                }
-                            }
-#>
+									<th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.rsal_Descripcion)</th>															
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -152,7 +57,7 @@ else {
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
-                @Html.Partial("_Create", new <#= ViewDataTypeName #>())
+                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbRazonSalidas())
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -170,7 +75,7 @@ else {
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_Edit", new <#= ViewDataTypeName #>())
+                @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbRazonSalidas())
             </div>
             <div class="modal-footer">
                 @*data-dismiss="modal"*@
@@ -189,7 +94,7 @@ else {
                 <h4 class="modal-title">Detalles</h4>
             </div>
             <div class="modal-body" id="Detalles">
-                @Html.Partial("_Details", new <#= ViewDataTypeName #>())
+                @Html.Partial("_Details", new ERP_GMEDINA.Models.tbRazonSalidas())
             </div>
         </div>
     </div>
@@ -215,31 +120,13 @@ else {
 
 
 
-  <#
-  // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
-  #>
-  <#
-  if(!IsPartialView && !IsLayoutPageSelected) {
-      ClearIndent();
-  #>
-  </body>
-</html>
-<#
-  }
-#>
-<#
-
-
-
-#>
-@section Scripts {
+    @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")
-    @Scripts.Render("~/Scripts/app/general/<#= ViewDataTypeShortName.Substring(2) #>.js")
+    @Scripts.Render("~/Scripts/app/general/RazonSalidas.js")
 }
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
-<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

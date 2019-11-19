@@ -159,9 +159,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
-    <Compile Include="Controllers\FasesReclutamientoesController.cs" />
+    <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -522,6 +523,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -739,6 +748,8 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\FasesReclutamiento.js" />
+    <Content Include="Scripts\app\General\RazonSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -779,14 +790,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
-    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
@@ -794,6 +797,10 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="CodeTemplates\MvcView\ListModals.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1264,11 +1271,14 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\FasesReclutamientoes\Create.cshtml" />
-    <Content Include="Views\FasesReclutamientoes\Delete.cshtml" />
-    <Content Include="Views\FasesReclutamientoes\Details.cshtml" />
-    <Content Include="Views\FasesReclutamientoes\Edit.cshtml" />
-    <Content Include="Views\FasesReclutamientoes\Index.cshtml" />
+    <Content Include="Views\RazonSalidas\Index.cshtml" />
+    <Content Include="Views\RazonSalidas\_Create.cshtml" />
+    <Content Include="Views\RazonSalidas\_Details.cshtml" />
+    <Content Include="Views\RazonSalidas\_Edit.cshtml" />
+    <Content Include="Views\FasesReclutamiento\Index.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Details.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Create.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
