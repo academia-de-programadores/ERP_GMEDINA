@@ -215,7 +215,7 @@ function llenarTabla() {
                     "</div>"]).draw();
             
             });
-            AllFunctions();
+            //AllFunctions();
         });
 }
 

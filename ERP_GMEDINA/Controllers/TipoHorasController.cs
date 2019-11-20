@@ -97,20 +97,20 @@ namespace ERP_GMEDINA.Controllers
 
     }
 
-        // GET: TipoHoras/Create
-        public ActionResult Create()
-        {
-            ViewBag.tiho_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.tiho_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
+        //// GET: TipoHoras/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.tiho_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+        //    ViewBag.tiho_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+        //    return View();
+        //}
 
         // POST: TipoHoras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(object tbTipoHoras)
+        public ActionResult Create(tbTipoHoras tbTipoHoras)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
 
