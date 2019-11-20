@@ -85,14 +85,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 var FechaRegistro = FechaFormato(data.cc_FechaRegistro);
-               
-                //-----------------------------------AQUI VALIDA EL CHECKBOX PARA PODER CARGARLO EN EL MODAL
-                if (data.cc_Pagado) {
-                    $('#Editar #cc_Pagado').prop('checked', true);
-                } else {
-                    $('#Editar #cc_Pagado').prop('checked', false);
-                }//-----------------------------------
-
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_Monto").val(data.cc_Monto);
                 $("#Editar #cc_FechaRegistro").val(FechaRegistro);
@@ -145,15 +137,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
             Check = "";
         });
 });
-//-----------------------------------NECESITA ESTA FUNCION PARA ESCUCHAR EL CAMBIO EN EL CHECKBOX Y CAMBIAR SU VALOR
-$('#Editar #cc_Pagado').click(function () {
-    if ($('#Editar #cc_Pagado').is(':checked')) {
-        $('#Editar #cc_Pagado').val(true);
-    }
-    else {
-        $('#Editar #cc_Pagado').val(false);
-    }
-});//-----------------------------------
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisiones").click(function () {
@@ -431,4 +414,27 @@ $("#btnInactivarRegistroComisiones").click(function () {
             $("#Validation_descipcion").css("display", "none");
         }
 
+    });
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+    $("#btnUpdateComisiones").click(function () {
+        var Monto = $("#Monto").val();
+        var Empleado = $("#emp_IdEmpleado").val();
+
+        if (Monto == "") {
+            $("#Validation_descipcion2").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion2").css("display", "none");
+        }
+
+        if (Empleado == "0" || Empleado == null) {
+            $("#Validation_descipcion").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion").css("display", "none");
+        }
+
+       
     });
