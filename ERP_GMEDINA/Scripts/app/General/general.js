@@ -28,7 +28,7 @@ function serializar(data) {
         if (value!="") {
             Data[valor.name] = value;
         } else {
-            //SetearClases(valor.name, "error", "valid");
+            SetearClases(valor.name, "error", "valid");
             verificacion = false;
         }
     });
@@ -58,9 +58,11 @@ function pad2(number) {
 }
 function SetearClases(Id,Agregar,Remover) {
     modal.forEach(function (indice, value) {
-
-        $("#" + indice).find("#" + Id).addClass(Agregar);
-        $("#" + indice).find("#" + Id).removeClass(Remover);
+        var spam = $("#" + indice).find("#error" + Id);
+        var input = $("#" + indice).find("#" + Id);
+        spam.text(input.data("val-required"));
+        input.addClass(Agregar);
+        input.removeClass(Remover);
     });
 }
 function LimpiarControles(Controles) {

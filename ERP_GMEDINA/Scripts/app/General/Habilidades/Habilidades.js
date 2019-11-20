@@ -48,36 +48,18 @@ function llenarTabla() {
             });
         });
 }
-//$("#FormNuevo").on('submit', function (evt) {
-//    //evt.preventDefault();
-//    // tu codigo aqui
-//    var data = $("#FormNuevo").serializeArray();
-//    data = serializar(data);
-//    if (data != null) {
-//        data = JSON.stringify({ tbHabilidades: data });
-//        _ajax(data,
-//            '/Habilidades/Create',
-//            'POST',
-//            function (obj) {
-//                if (obj != "-1" && obj != "-2" && obj != "-3") {
-//                    CierraPopups();
-//                    llenarTabla();
-//                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-//                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-//                } else {
-//                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-//                }
-//            });
-//    } else {
-//        MsgError("Error", "por favor llene todas las cajas de texto");
-//    }
-//});
 //Modals
 $("#ModalNuevo").on('hidden.bs.modal', function () {
     SetearClases("habi_Descripcion", "valid", "error");
+    $("#ModalNuevo").find("#errorhabi_Descripcion").text("");
 });
 $("#ModalEditar").on('hidden.bs.modal', function () {
     SetearClases("habi_Descripcion", "valid", "error");
+    $("#ModalEditar").find("#errorhabi_Descripcion").text("");
+});
+$("#ModalInhabilitar").on('hidden.bs.modal', function () {
+    SetearClases("habi_Descripcion", "valid", "error");
+    $("#ModalEditar").find("#errorhabi_Descripcion").text("");
 });
 //Botones GET
 $("#btnAgregar").click(function () {
@@ -102,28 +84,28 @@ $("#btnInhabilitar").click(function () {
     $('#ModalInhabilitar').modal('show');
 });
 //botones POST
-//$("#btnGuardar").click(function () {
-//    var data = $("#FormNuevo").serializeArray();
-//    data = serializar(data);
-//    if (data!=null) {
-//        data = JSON.stringify({ tbHabilidades: data });
-//        _ajax(data,
-//            '/Habilidades/Create',
-//            'POST',
-//            function (obj) {
-//                if (obj != "-1" && obj != "-2" && obj != "-3") {
-//                    CierraPopups();
-//                    llenarTabla();
-//                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-//                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-//                } else {
-//                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-//                }
-//            });
-//    } else {
-//        MsgError("Error","por favor llene todas las cajas de texto");
-//    }    
-//});
+$("#btnGuardar").click(function () {
+    var data = $("#FormNuevo").serializeArray();
+    data = serializar(data);
+    if (data!=null) {
+        data = JSON.stringify({ tbHabilidades: data });
+        _ajax(data,
+            '/Habilidades/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error","por favor llene todas las cajas de texto");
+    }    
+});
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
