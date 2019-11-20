@@ -13094,12 +13094,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <FunctionImport Name="UDP_Plani_CatalogoDeIngresosEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeIngresosEdit_Select_Result)">
           <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Inactivar_Result)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
             <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaModifcia" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="cc_Monto" Mode="In" Type="Decimal" />
@@ -13108,7 +13108,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <Parameter Name="cc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
@@ -13725,6 +13725,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="dtm_Monto" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -15368,9 +15377,27 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Inactivar" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
