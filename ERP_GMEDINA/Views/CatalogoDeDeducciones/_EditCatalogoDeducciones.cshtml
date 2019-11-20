@@ -37,6 +37,13 @@
             </div>
         </div>
     </div>
+
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@
+        <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btnUpdateDeduccion">Aceptar</button>
+        <button type="button" class="btn btn-danger" id="btnmodalInactivarCatalogoDeducciones">Inactivar</button>
+    </div>
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesInactivar" }))
 {
