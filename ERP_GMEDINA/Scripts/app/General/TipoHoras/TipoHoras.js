@@ -58,96 +58,83 @@ function serializar(data) {
 //    return true; 
 //}
 
+////var isValid = true;
+//$('#tiho_Descripcion,#tiho_Recargo').each(function () {
+//    if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
+//       // isValid = false;
+//        $(this).css({
+//            //"border": "1px solid red",
+//            //"background": "#ff9696"
+//        });
+
+//    }
+//    else {
+//        $(this).css({
+//            "border": "",
+//            "background": ""
+//        });
+//        //$("#tiho_Descripcion").removeClass("border", "background");
+//        //$("#tiho_Recargo").removeClass("border", "background");
+//    }
+
+//}
+//);
+//var modal = $("#ModalCrear").val();
+//VALIDAR(modal);
+
+
 function AllFunctions() {
 
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
-        ////var isValid = true;
-        //$('#tiho_Descripcion,#tiho_Recargo').each(function () {
-        //    if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
-        //       // isValid = false;
-        //        $(this).css({
-        //            //"border": "1px solid red",
-        //            //"background": "#ff9696"
-        //        });
-            
-        //    }
-        //    else {
-        //        $(this).css({
-        //            "border": "",
-        //            "background": ""
-        //        });
-        //        //$("#tiho_Descripcion").removeClass("border", "background");
-        //        //$("#tiho_Recargo").removeClass("border", "background");
-        //    }
-           
-        //}
-        //);
-        //var modal = $("#ModalCrear").val();
-        //VALIDAR(modal);
-        var data = null;
+
+        //var data = null;
         
-        data = $("#frmAgregarTipoHoras").serializeArray();
-        //$('#tiho_Descripcion,#tiho_Recargo').each(function () {
-        //    if ($.trim($(this).val()) == '' || $.trim($(this).val()) == 0) {
+       var data = $("#frmAgregarTipoHoras").serializeArray();
+    
+        //if ($.trim(data) == '') {
+        //    iziToast.error({
+        //        title: 'Error',
+        //        message: 'No se pudo guardar el registro, asegurese de llenar todos los campos',
+        //    });
+        //}
+       $.ajax({
+           url: "/TipoHoras/Create",
+           method: "POST",
+           data: data
+       }).done(function (data) {
+           if (data == "-1" || data == "2") {
+               iziToast.error({
+                   title: 'Error',
+                   message: 'No se pudo guardar el registro, contacte al administrador',
 
-        //        $(this).css({
-        //            "border": "1px solid red",
-        //            "background": "#ff9696"
-        //        });
-        //    }
-        //    else {
-        //        $(this).css({
-        //            "border": "",
-        //            "background": ""
-                  
-        //        });
-        //    }
-        //});
-        //console.log(data);
-        if (data == "") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, asegurese de llenar todos los campos',
-            });
-        }
-         $.ajax({
-             url: "/TipoHoras/Create",
-             method: "POST",
-             data: data
-         }).done(function (data) {
-             if (data == "-1" || data == "2") {
-                 iziToast.error({
-                     title: 'Error',
-                     message: 'No se pudo guardar el registro, contacte al administrador',
+               });
+           }
+           else {
+               iziToast.success({
+                   title: 'Exito',
+                   message: 'El registro fue ingresado con Exito',
+               });
+               $('#ModalCrear').modal('hide');
+           }
 
-                 });
-             }
-             else {
-                 iziToast.success({
-                     title: 'Exito',
-                     message: 'El registro fue ingresado con Exito',
-                 });
-                 $('#ModalCrear').modal('hide');
-             }
-            
 
-         })
-            .error(function(data) {
-                //llenarTabla();
-                if (data == "-1" || data=="2") {
-                    iziToast.error({
-                        title: 'Error',
-                        message: 'No se pudo guardar el registro, contacte al administrador',
-                    });
+       });
+            //.error(function(data) {
+ 
+            //    if (data == "-1" || data=="2") {
+            //        iziToast.error({
+            //            title: 'Error',
+            //            message: 'No se pudo guardar el registro, contacte al administrador',
+            //        });
                
-                    //table.ajax.reload(null, false);
-                    //$(this).css({
-                    //    "border": "",
-                    //    "background": ""
-                    //});
+            //        //table.ajax.reload(null, false);
+            //        //$(this).css({
+            //        //    "border": "",
+            //        //    "background": ""
+            //        //});
 
-                }});
+            //    }});
             llenarTabla();
             LimpiarControles();
             
