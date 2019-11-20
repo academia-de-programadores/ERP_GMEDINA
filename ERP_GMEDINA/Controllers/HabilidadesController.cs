@@ -52,8 +52,10 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Create(tbHabilidades tbHabilidades)
         {
+            if (ModelState.IsValid)
+            {
             string msj = "";
-            if (tbHabilidades.habi_Descripcion!="")
+            if (tbHabilidades.habi_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -73,8 +75,10 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 msj = "-3";
-            }            
+            }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+            return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Habilidades/Edit/5

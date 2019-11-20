@@ -28,7 +28,7 @@ function serializar(data) {
         if (value!="") {
             Data[valor.name] = value;
         } else {
-            SetearClases(valor.name, "error", "valid");
+            //SetearClases(valor.name, "error", "valid");
             verificacion = false;
         }
     });
