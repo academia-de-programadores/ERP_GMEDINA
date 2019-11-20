@@ -17,7 +17,7 @@ namespace PruebaPlanilla.Controllers
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
-            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion);
+            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario);
             return View(tbCatalogoDeDeducciones.ToList());
         }
 
@@ -87,6 +87,8 @@ namespace PruebaPlanilla.Controllers
                 response = "error";
             }
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+            ViewBag.cde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioCrea);
+            ViewBag.cde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioModifica);
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -183,9 +185,72 @@ namespace PruebaPlanilla.Controllers
 
         public JsonResult Details(int? ID)
         {
+            var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
+                                            //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
+                                            //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
+                                        where tbCatDedu.cde_Activo == true && tbCatDedu.cde_IdDeducciones == ID
+                                        select new
+                                        {
+                                            tbCatDedu.cde_IdDeducciones,
+                                            tbCatDedu.cde_DescripcionDeduccion,
+                                            tbCatDedu.cde_PorcentajeColaborador,
+                                            tbCatDedu.cde_PorcentajeEmpresa,
+                                            tbCatDedu.cde_Activo,
+                                            tbCatDedu.cde_UsuarioCrea,
+                                            UsuCrea = tbCatDedu.tbUsuario.usu_NombreUsuario,
+                                            tbCatDedu.cde_FechaCrea,
+                                            tbCatDedu.cde_UsuarioModifica,
+                                            UsuModifica = tbCatDedu.tbUsuario1.usu_NombreUsuario,
+                                            tbCatDedu.cde_FechaModifica
+                                        };
+
             db.Configuration.ProxyCreationEnabled = false;
-            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+            //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
             return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inactivar(int id)
+        {
+            IEnumerable<object> listCatalogoDeIngresos = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(id,
+                                                                                         1,
+                                                                                         DateTime.Now
+                                                                                            );
+
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
+                        MensajeError = Resultado.MensajeError;
+
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    response = "error";
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                response = "error";
+            }
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         // GET: CatalogoDeDeducciones/Details/5
@@ -204,101 +269,73 @@ namespace PruebaPlanilla.Controllers
         //}
 
         // GET: CatalogoDeDeducciones/Create
-        public ActionResult Create()
-        {
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
-            return View();
-        }
-
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
-            return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "cde_IdDeducciones,cde_UsuarioModifica,cde_FechaModifica")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
-        {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
 
 
-            //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
-            tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            IEnumerable<object> listCatalogoDeDeducciones = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeDeducciones = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(tbCatalogoDeDeducciones.cde_IdDeducciones,
-                                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
-                                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
-                        MensajeError = Resultado.MensajeError;
+        //public JsonResult Inactivar(int? ID)
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+        //    return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
+        //}
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-                        response = "error";
-                    }
-
-                }
-                catch (Exception Ex)
-                {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
-                }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
-            }
-            else
-            {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-                response = "error";
-            }
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Inactivar([Bind(Include = "cde_IdDeducciones,cde_UsuarioModifica,cde_FechaModifica")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
+        //{
+        //    //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
+        //    //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+        //    //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+        //    //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
 
 
+        //    //LLENAR DATA DE AUDITORIA
+        //    tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
+        //    tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
+        //    //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+        //    string response = String.Empty;
+        //    IEnumerable<object> listCatalogoDeDeducciones = null;
+        //    string MensajeError = "";
+        //    //VALIDAR SI EL MODELO ES VÁLIDO
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            //EJECUTAR PROCEDIMIENTO ALMACENADO
+        //            listCatalogoDeDeducciones = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(tbCatalogoDeDeducciones.cde_IdDeducciones,
+        //                                                                                    tbCatalogoDeDeducciones.cde_UsuarioModifica,
+        //                                                                                    tbCatalogoDeDeducciones.cde_FechaModifica);
+        //            //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+        //            foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
+        //                MensajeError = Resultado.MensajeError;
 
+        //            if (MensajeError.StartsWith("-1"))
+        //            {
+        //                //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+        //                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+        //                response = "error";
+        //            }
 
+        //        }
+        //        catch (Exception Ex)
+        //        {
+        //            //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+        //            response = Ex.Message.ToString();
+        //        }
+        //        //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+        //        //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+        //        response = "bien";
+        //    }
+        //    else
+        //    {
+        //        // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+        //        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+        //        response = "error";
+        //    }
+        //    //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //    //RETORNAR MENSAJE AL LADO DEL CLIENTE
+        //    return Json(response, JsonRequestBehavior.AllowGet);
+        //}
 
 
         // GET: CatalogoDeDeducciones/Delete/5
