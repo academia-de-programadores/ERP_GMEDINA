@@ -2,6 +2,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetalle" }))
         {       
             @Html.AntiForgeryToken()
+
               <div class="form-horizontal">
                   <div class="form-group">
                     @Html.LabelFor(model => model.comp_Id, htmlAttributes: new { @class = "control-label col-md-2" })

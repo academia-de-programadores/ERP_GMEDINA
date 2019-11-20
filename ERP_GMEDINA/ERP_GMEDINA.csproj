@@ -160,7 +160,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
-    <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
@@ -1286,18 +1285,14 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\Nacionalidades\Create.cshtml" />
-    <Content Include="Views\Nacionalidades\Delete.cshtml" />
-    <Content Include="Views\Nacionalidades\Details.cshtml" />
-    <Content Include="Views\Nacionalidades\Edit.cshtml" />
     <Content Include="Views\Nacionalidades\Index.cshtml" />
-    <Content Include="Views\Competencias\Index.cshtml" />
-    <Content Include="Views\Competencias\_Create.cshtml" />
-    <Content Include="Views\Competencias\_Details.cshtml" />
-    <Content Include="Views\Competencias\_Edit.cshtml" />
+    <Content Include="Views\Nacionalidades\_Create.cshtml" />
+    <Content Include="Views\Nacionalidades\_Edit.cshtml" />
+    <Content Include="Views\Nacionalidades\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Competencias\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
