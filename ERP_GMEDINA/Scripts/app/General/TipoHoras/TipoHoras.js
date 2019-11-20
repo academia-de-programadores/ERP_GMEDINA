@@ -1,143 +1,31 @@
 ﻿var id = 0;
 
 $(document).ready(function () {
-    AllFunctions();
+    //AllFunctions();
 
 });
-///FUNCION SERIALIZAR 
-//function serializar(data) {
-//    var Data = new Object();
-//    $.each(data, function (index, valor) {
-//        Data[valor.name] = valor.value;
-//    });
-//    return Data;
-//}
-///FUNCION SERIALZAR
-
-
-//function VALIDAR(Modal)								 
-//{ 
-//    var Des = document.forms[Modal]["tiho_Descripcion"];
-//    var Recargo = document.forms[Modal]["tiho_Recargo"];
-//    var RazonActivo = document.forms[Modal]["tiho_RazonInactivo"];
-
-
-//    if ($.trim(Des).value == "")
-//    { 
-//        iziToast.warning({
-//            title: 'Error',
-//            message: 'Campo descripcion esta vacio',
-//        });
-//        Des.focus();
-       
-//        return false; 
-//    } 
-
-//    if ($.trim(Recargo).value == "")
-//    {
-//        iziToast.warning({
-//            title: 'Error',
-//            message: 'Campo Recargo esta vacio',
-//        });
-//        Recargo.focus();
-       
-//        return false; 
-//    } 
-	
-//    if ($.trim(RazonActivo).value == "")
-//    {
-//        iziToast.warning({
-//            title: 'Error',
-//            message: 'Campo Razon Activo esta vacio',
-//        });
-//        RazonActivo.val("");
-//        return false; 
-//    } 
-
-  
-//    return true; 
-//}
-
-////var isValid = true;
-//$('#tiho_Descripcion,#tiho_Recargo').each(function () {
-//    if ($.trim($(this).val()) == ''|| $.trim($(this).val())==0) {
-//       // isValid = false;
-//        $(this).css({
-//            //"border": "1px solid red",
-//            //"background": "#ff9696"
-//        });
-
-//    }
-//    else {
-//        $(this).css({
-//            "border": "",
-//            "background": ""
-//        });
-//        //$("#tiho_Descripcion").removeClass("border", "background");
-//        //$("#tiho_Recargo").removeClass("border", "background");
-//    }
-
-//}
-//);
-//var modal = $("#ModalCrear").val();
-//VALIDAR(modal);
-
-
-function AllFunctions() {
+//function AllFunctions() {
 
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
-
-        //var data = null;
-        
-       var data = $("#frmAgregarTipoHoras").serializeArray();
-    
-        //if ($.trim(data) == '') {
-        //    iziToast.error({
-        //        title: 'Error',
-        //        message: 'No se pudo guardar el registro, asegurese de llenar todos los campos',
-        //    });
-        //}
-       $.ajax({
-           url: "/TipoHoras/Create",
-           method: "POST",
-           data: data
-       }).done(function (data) {
-           if (data == "-1" || data == "2") {
-               iziToast.error({
-                   title: 'Error',
-                   message: 'No se pudo guardar el registro, contacte al administrador',
-
-               });
-           }
-           else {
-               iziToast.success({
-                   title: 'Exito',
-                   message: 'El registro fue ingresado con Exito',
-               });
-               $('#ModalCrear').modal('hide');
-           }
-
-
-       });
-            //.error(function(data) {
- 
-            //    if (data == "-1" || data=="2") {
-            //        iziToast.error({
-            //            title: 'Error',
-            //            message: 'No se pudo guardar el registro, contacte al administrador',
-            //        });
-               
-            //        //table.ajax.reload(null, false);
-            //        //$(this).css({
-            //        //    "border": "",
-            //        //    "background": ""
-            //        //});
-
-            //    }});
-            llenarTabla();
-            LimpiarControles();
-            
+        var data = $("#frmAgregarTipoHoras").serializeArray();
+        if (data!=null) {
+            _ajax(data,
+                    '/TipoHoras/Create',
+                   'POST',
+                   function (obj) {
+                       if (obj != "-1" && obj != "-2" && obj != "-3") {
+                           CierraPopups();
+                           llenarTabla();
+                           LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
+                           MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                       } else {
+                           MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                       }
+                   });
+        } else {
+            MsgError("Error", "por favor llene todas las cajas de texto");
+        }
         });
     
     //AGREGAR HORARIOS///
@@ -209,7 +97,7 @@ function AllFunctions() {
     });
     //////////////
 
-}
+//}
 
   
 
@@ -254,29 +142,10 @@ function AllFunctions() {
 //////FUNCION PARA INHABILITAR////////////
 
 
-
-
-
-//FUNCION GENERICA PARA REUTILIZAR AJAX
-function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data) {
-            callback(data);
-        }
-    });
-}
-
 ///////FUNCIONES PARA EDITAR///////////
 //FUNCION:MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 function tablaEditar(ID) {
-    // $(document).on("click", "#IndexTable tbody tr td #btnEditarR", function () {
-    // var id = $(this).closest('tr').data('id');
-    // var tr = this.closest("tr");
     id = ID;
-    //console.log(id);
     $.ajax({
         url: "/TipoHoras/Edit/" + id,
         method: "GET",
@@ -285,36 +154,19 @@ function tablaEditar(ID) {
         data: JSON.stringify({ id: id })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-
             if (data.length > 0) {
-                //console.log("funciona");
-                //console.log(data);
                 $.each(data, function (i, item) {
                     $("#ModalEdit #tiho_Id").val(item.tiho_Id)
                     $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
                     $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
-                    //$("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
-                    //$("#ModalEdit #tiho_UsuarioCrea").val(item.tiho_UsuarioCrea)
-                    //$("#ModalEdit #tiho_FechaCrea").val(item.tiho_FechaCrea);
+                    $('#ModalEditar').modal('show');
                 })
             }
-
-            //})
-
-
-
         });
 }
-
-////////CARGAR EL MODAL DE DETALLES/////////
 //MODAL DETALLES
 function tablaDetalle(ID) {
-    // $(document).on("click", "#IndexTable tbody tr td #btnDetalle", function () {
-    //var tr = this.closest("tr");
     id = ID;
-    //var ide = id;
-    //var id = $(this).closest('tr').data('id');
     $.ajax({
         url: "/TipoHoras/Details/" + ID,
         method: "GET",
@@ -323,8 +175,7 @@ function tablaDetalle(ID) {
         data: JSON.stringify({ id: ID })
     })
         .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
+            if (data != "-1" && data != "-2" && data != "-3") {
                 $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = data.tiho_Descripcion;
                 $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = data.tiho_Recargo;
                 $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = data.tiho_Estado;
@@ -333,15 +184,9 @@ function tablaDetalle(ID) {
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditarM")["0"].dataset.id = id;
-                //$('#ModalEditar').modal('show');
+                $('#ModalDetalles').modal('show');
             }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
+         
         });
     // });
 }
@@ -372,30 +217,11 @@ function llenarTabla() {
         });
 }
 
-function FechaFormato(pFecha) {
-    if (pFecha != null && pFecha != undefined) {
-        var fechaString = pFecha.substr(6);
-        var fechaActual = new Date(parseInt(fechaString));
-        var mes = fechaActual.getMonth() + 1;
-        var dia = pad2(fechaActual.getDate());
-        var anio = fechaActual.getFullYear();
-        var hora = pad2(fechaActual.getHours());
-        var minutos = pad2(fechaActual.getMinutes());
-        var segundos = pad2(fechaActual.getSeconds().toString());
-        var FechaFinal = dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos + ":" + segundos;
-        return FechaFinal;
-    }
-    return '';
-}
-function pad2(number) {
-    return (number < 10 ? '0' : '') + number
-}
 
-function LimpiarControles() {
-    //$("#tiho_Id").val("");
-    $("#tiho_Descripcion").val("");
-    $("#tiho_Recargo").val("");
-    $("#tiho_RazonInactivo").val("");
-
-
-}
+//Modals
+$("#ModalNuevo").on('hidden.bs.modal', function () {
+    SetearClases("tiho_Descripcion","tiho_Recargo", "valid", "error");
+});
+$("#ModalEditar").on('hidden.bs.modal', function () {
+    SetearClases("tiho_Descripcion", "tiho_Recargo", "valid", "error");
+});

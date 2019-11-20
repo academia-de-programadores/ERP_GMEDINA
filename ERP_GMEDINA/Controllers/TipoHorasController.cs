@@ -200,7 +200,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         if (MensajeError.StartsWith("-1"))
                         {
-                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
+                            ModelState.AddModelError("", "1.No se pudo editar el Registro");
                             return Json(MensajeError.Substring(0, 2));
                         }
                     }
@@ -209,7 +209,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
+                    ModelState.AddModelError("", "2.No se pudo editar el registro");
                     return Json(MensajeError.Substring(0, 1));
                 }
 
@@ -256,7 +256,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         if (MensajeError.StartsWith("-1"))
                         {
-                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
+                            ModelState.AddModelError("", "1.No se pudo inhabilitar el Registro");
                             return Json(MensajeError.Substring(0, 2));
                         }
                     }
@@ -265,7 +265,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
+                    ModelState.AddModelError("", "2.No se pudo inhabilitar el registro");
                     return Json(MensajeError.Substring(0, 1));
                 }
 
