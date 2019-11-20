@@ -9,18 +9,20 @@ $(document).ready(function () {
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
         var data = $("#frmAgregarTipoHoras").serializeArray();
-        if (data!=null) {
+        data = serializar(data);
+        if (data != null) {
+            data = JSON.stringify({ tbTipoHoras: data });
             _ajax(data,
                     '/TipoHoras/Create',
                    'POST',
-                   function (obj) {
-                       if (obj != "-1" && obj != "-2" && obj != "-3") {
+                   function (data) {
+                       if (data != "-1" && data != "-2" && data != "-3") {
                            CierraPopups();
                            llenarTabla();
                            LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
                            MsgSuccess("¡Exito!", "Se ah agregado el registro");
                        } else {
-                           MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                           MsgError("Error", "Codigo:" + data + ". contacte al administrador.(Verifique si el registro ya existe)");
                        }
                    });
         } else {
