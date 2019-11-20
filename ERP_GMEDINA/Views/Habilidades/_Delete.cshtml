@@ -7,7 +7,6 @@
                 <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
             </div>
             <div class="modal-body">
-                <div class="ibox-content">
                     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
                     {
                         <div class="form-horizontal">
@@ -21,7 +20,6 @@
                             </div>
                         </div>
                     }
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>

@@ -1,4 +1,5 @@
-﻿var modal = ["ModalNuevo", "ModalEditar", "ModalDelete", "ModalDetalles"];
+﻿//
+var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
 function CierraPopups() {
     $.each(modal, function (index, valor) {
         $("#" + valor).modal('hide');//ocultamos el modal
@@ -57,6 +58,7 @@ function pad2(number) {
 }
 function SetearClases(Id,Agregar,Remover) {
     modal.forEach(function (indice, value) {
+
         $("#" + indice).find("#" + Id).addClass(Agregar);
         $("#" + indice).find("#" + Id).removeClass(Remover);
     });
