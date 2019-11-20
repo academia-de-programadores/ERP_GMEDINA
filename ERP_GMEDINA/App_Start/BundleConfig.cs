@@ -451,9 +451,10 @@ namespace ERP_GMEDINA
                         "~/Scripts/plugins/iziToast/iziToast.min.js"));
             //iziToast CSS
             // Touch Spin Styless
-            bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
-                      "~/Content/plugins/izitoast/iziToast.css",
-                      "~/Content/plugins/izitoast/iziToast.min.css"));   
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+             "~/Scripts/plugins/iziToast/iziToast.js",
+             "~/Scripts/plugins/iziToast/iziToast.min.js",
+             "~/Scripts/app/general/general.js"));
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
