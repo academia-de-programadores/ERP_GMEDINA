@@ -69,7 +69,6 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                $(".field-validation-error").css('display', 'none');
                 $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
                 $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
                 $("#Editar #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
@@ -87,8 +86,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Editar #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+                        //LLENAR EL DROPDOWNLIST                    
                         $.each(data, function (i, iter) {
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
@@ -267,11 +265,6 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 
 
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoDeducciones").modal('hide');
-});
-
 
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
@@ -371,6 +364,54 @@ $("#btnCreateRegistroDeduccion").click(function () {
 
 });
 
+//VALIDAR EDIT//
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarEditar").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion3").css("display", "none");
+});
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEdit").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion3").css("display", "none");
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnUpdateDeduccion").click(function () {
+    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
+    var tde_IdTipoDeduE = $("#tde_IdTipoDedu").val();
+    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
+    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
+
+
+    if (cde_DescripcionDeduccionE == "") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+    }
+
+    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == "") {
+        $("#Validation_descipcion2").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion2").css("display", "none");
+    }
+
+    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
+        $("#Validation_descipcion3").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3").css("display", "none");
+    }
+
+});
 
 
 
