@@ -419,7 +419,6 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
     $("#btnUpdateComisiones").click(function () {
-        debugger;
         var Monto = $("#Monto").val();
         var Empleado = $("#emp_IdEmpleado").val();
 
