@@ -10,15 +10,11 @@
             @Html.HiddenFor(model => model.cc_Id)
             
 
-
-
-
             <div class="form-group">
-                @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
                 <div class="col-md-10">
                     <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.cc_Monto, "", new { @class = "text-danger", @id = "Empleado" })
-                    
+                    <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                 </div>
             </div>
 
@@ -33,7 +29,7 @@
                 @Html.LabelFor(model => model.cc_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.cc_Monto, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.cc_Monto, "", new { @class = "text-danger", @id="Monto"})
+                    @Html.ValidationMessageFor(model => model.cc_Monto, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
                 </div>
             </div>
 
