@@ -5,13 +5,13 @@ $(document).ready(function () {
 
 });
 ///FUNCION SERIALIZAR 
-function serializar(data) {
-    var Data = new Object();
-    $.each(data, function (index, valor) {
-        Data[valor.name] = valor.value;
-    });
-    return Data;
-}
+//function serializar(data) {
+//    var Data = new Object();
+//    $.each(data, function (index, valor) {
+//        Data[valor.name] = valor.value;
+//    });
+//    return Data;
+//}
 ///FUNCION SERIALZAR
 
 
