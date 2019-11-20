@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     AllFunctions();
+
 });
 ///FUNCION SERIALIZAR 
 function serializar(data) {
@@ -84,42 +85,74 @@ function AllFunctions() {
         //);
         //var modal = $("#ModalCrear").val();
         //VALIDAR(modal);
-
-        var data = $("#frmAgregarTipoHoras").serializeArray();
+        var data = null;
         
-        $.ajax({
-            url: "/TipoHoras/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
+        data = $("#frmAgregarTipoHoras").serializeArray();
+        //$('#tiho_Descripcion,#tiho_Recargo').each(function () {
+        //    if ($.trim($(this).val()) == '' || $.trim($(this).val()) == 0) {
 
-            if (data == "-1" ) {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
+        //        $(this).css({
+        //            "border": "1px solid red",
+        //            "background": "#ff9696"
+        //        });
+        //    }
+        //    else {
+        //        $(this).css({
+        //            "border": "",
+        //            "background": ""
+                  
+        //        });
+        //    }
+        //});
+        //console.log(data);
+        if (data == "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo guardar el registro, asegurese de llenar todos los campos',
+            });
+        }
+         $.ajax({
+             url: "/TipoHoras/Create",
+             method: "POST",
+             data: data
+         }).done(function (data) {
+             if (data == "-1" || data == "2") {
+                 iziToast.error({
+                     title: 'Error',
+                     message: 'No se pudo guardar el registro, contacte al administrador',
 
-            }
-            else {
+                 });
+             }
+             else {
+                 iziToast.success({
+                     title: 'Exito',
+                     message: 'El registro fue ingresado con Exito',
+                 });
+                 $('#ModalCrear').modal('hide');
+             }
+            
+
+         })
+            .error(function(data) {
                 //llenarTabla();
-        
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue ingresado con Exito',
-                });
-                $('#ModalCrear').modal('hide');
-                //table.ajax.reload(null, false);
-                //$(this).css({
-                //    "border": "",
-                //    "background": ""
-                //});
+                if (data == "-1" || data=="2") {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo guardar el registro, contacte al administrador',
+                    });
+               
+                    //table.ajax.reload(null, false);
+                    //$(this).css({
+                    //    "border": "",
+                    //    "background": ""
+                    //});
 
-            }
+                }});
             llenarTabla();
             LimpiarControles();
             
         });
-    });
+    
     //AGREGAR HORARIOS///
 
     $("#btnEditarM").click(function () {
