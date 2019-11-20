@@ -28,7 +28,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.cc_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.cc_Monto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.cc_Monto, new { htmlAttributes = new { @class = "form-control", @id = "cc_Monto" } })
                     @Html.ValidationMessageFor(model => model.cc_Monto, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
                 </div>
             </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="modal-footer">
         @*data-dismiss="modal"*@
-        <button type="submit" class="btn btn-white" data-dismiss="modal" id="btnCerrarModal">Cancelar</button>
+        <button type="submit" class="btn btn-white" data-dismiss="modal" id="btnCerrarModaledit">Cancelar</button>
         <button type="submit" class="btn btn-primary" id="btnUpdateComisiones">Guardar</button>
         <button type="submit" class="btn btn-danger" id="btnInactivarEmpleadoComisiones">Inactivar</button>
     </div>

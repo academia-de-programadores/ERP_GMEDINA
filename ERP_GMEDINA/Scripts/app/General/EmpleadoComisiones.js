@@ -71,7 +71,6 @@ function cargarGridComisiones() {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
-    $(".field-validation-error").css('display', 'none');
     var ID = $(this).closest('tr').data('id');
     Idinactivar = ID;
     $.ajax({
@@ -104,7 +103,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_IdEmpleado").append("<option"+(iter.Id == SelectedIdEmp ? " selected" : "") + " value='"+iter.Id+"'>"+iter.Descripcion+"</option>");
                         });
@@ -380,6 +378,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
     });
 });
 
+//VALIDAR CREAR//
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
     $("#btnCerrarModal").click(function () {        
@@ -416,25 +415,31 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
     });
 
+//VALIDAR EDIT//
 
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+    $("#btnCerrarModaledit").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+    });
+
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+    $("#IconoCerraredit").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+    });
+
+
+    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
     $("#btnUpdateComisiones").click(function () {
-        var Monto = $("#Monto").val();
-        var Empleado = $("#emp_IdEmpleado").val();
+        var Monto = $("#cc_Monto").val();
 
-        if (Monto == "") {
+        if (Monto == "" || Monto == null || Monto == undefined) {
             $("#Validation_descipcion2").css("display", "");
         }
         else {
             $("#Validation_descipcion2").css("display", "none");
         }
 
-        if (Empleado == "0" || Empleado == null) {
-            $("#Validation_descipcion").css("display", "");
-        }
-        else {
-            $("#Validation_descipcion").css("display", "none");
-        }
-
-       
     });
