@@ -167,29 +167,56 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: TipoAmonestaciones/Delete/5
-        public ActionResult Delete(int? id)
+        public JsonResult Inactivar(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbTipoAmonestaciones tbTipoAmonestaciones = db.tbTipoAmonestaciones.Find(id);
-            if (tbTipoAmonestaciones == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTipoAmonestaciones);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbTipoAmonestaciones tbJSON = db.tbTipoAmonestaciones.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: TipoAmonestaciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Inactivar([Bind(Include = "tamo_Id,tamo_Descripcion,tamo_Estado,tamo_RazonInactivo,tamo_UsuarioCrea,tamo_FechaCrea,tamo_UsuarioModifica,tamo_FechaModifica")] tbTipoAmonestaciones tbTipoAmonestaciones)
         {
-            tbTipoAmonestaciones tbTipoAmonestaciones = db.tbTipoAmonestaciones.Find(id);
-            db.tbTipoAmonestaciones.Remove(tbTipoAmonestaciones);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            tbTipoAmonestaciones.tamo_UsuarioModifica = 1;
+            tbTipoAmonestaciones.tamo_FechaModifica = DateTime.Now;
+            tbTipoAmonestaciones.tamo_RazonInactivo = "Porque ya no exite";
+            string response = String.Empty;
+            IEnumerable<object> listTipo = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listTipo = db.UDP_RRHH_tbTipoAmonestaciones_Delete(tbTipoAmonestaciones.tamo_Id,
+                                                              tbTipoAmonestaciones.tamo_RazonInactivo,
+                                                              tbTipoAmonestaciones.tamo_UsuarioModifica,
+                                                              tbTipoAmonestaciones.tamo_FechaModifica);
+                    foreach (UDP_RRHH_tbTipoAmonestaciones_Delete_Result Resultado in listTipo)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    response = Ex.Message.ToString();
+                }
+                response = "bien";
+            }
+            else
+            {
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
