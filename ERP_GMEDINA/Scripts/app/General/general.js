@@ -16,7 +16,7 @@ function _ajax(params, uri, type, callback, fError) {
         success: callback
     }).fail(function (request, status, error) {
         CierraPopups()
-        MsgError("Error", "contacte al administrador.(Verifique su conexion a internet)");
+        MsgError("Error", "Verifique su conexion a internet.(si el problema persistecontacte al administrador.)");
     });
 }
 function serializar(data) {
