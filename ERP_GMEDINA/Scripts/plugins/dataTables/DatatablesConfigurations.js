@@ -1,11 +1,12 @@
 ﻿$(document).ready(function () {
     var Cols = ColCount();
 
-    var Test = $('#IndexTable').DataTable({
+    var IndexTable = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
+        pageLength: 2,
         buttons: [
             { extend: 'copy' },
             { extend: 'csv' },
@@ -21,7 +22,6 @@
                     columns: [Cols]
                 }
             },
-
             {
                 extend: 'print',
                 customize: function (win) {
@@ -37,7 +37,8 @@
                 }
             }
         ]
-        });
+    });
+   IndexTable = IndexTable.DataTable({pageLength: 2 });
 });
 
 function ColCount() {
