@@ -21,28 +21,42 @@ namespace ERP_GMEDINA.Controllers
             return View(tbCargos.ToList());
         }
 
-        // GET: Cargos/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult GetData()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbCargos tbCargos = db.tbCargos.Find(id);
-            if (tbCargos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbCargos);
+            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
+            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
+            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+            var tbCargos1 = db.tbCargos
+                        .Select(c => new {
+                            car_Id = c.car_Id,
+                            car_Descripcionn = c.car_Descripcion,
+                            car_Estado = c.car_Estado,
+                            car_RazonInactivo = c.car_RazonInactivo,
+                            car_UsuarioModifica = c.car_UsuarioModifica,
+                            car_UsuarioCrea = c.car_UsuarioCrea,
+                            car_FechaCrea = c.car_FechaCrea,
+                            car_FechaModifica = c.car_FechaModifica
+                        }).Where(c => c.car_Estado == true)
+                        .ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbCargos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        // GET: Cargos/Create
+
+        public JsonResult Details(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCargos tbJSON = db.tbCargos.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Idiomas/Create
         public ActionResult Create()
         {
-            ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
+        // GET: Cargos/Create
+
 
         // POST: Cargos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -91,20 +105,11 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Cargos/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbCargos tbCargos = db.tbCargos.Find(id);
-            if (tbCargos == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
-            ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
-            return View(tbCargos);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCargos tbJSON = db.tbCargos.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Cargos/Edit/5
@@ -160,30 +165,61 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: Cargos/Delete/5
-        public ActionResult Delete(int? id)
+        public JsonResult Inactivar(int? ID)
         {
-            if (id == null)
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCargos tbJSON = db.tbCargos.Find(ID);
+            return Json(tbJSON, JsonRequestBehavior.AllowGet);
+        }
+        // POST: Cargos/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+
+        public ActionResult Inactivar([Bind(Include = "car_Id,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
+        {
+
+            tbCargos.car_UsuarioModifica = 1;
+            tbCargos.car_FechaModifica = DateTime.Now;
+            tbCargos.car_RazonInactivo = "Inactivo";
+            string response = String.Empty;
+            IEnumerable<object> listCargos = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    listCargos = db.UDP_RRHH_tbCargos_Delete(tbCargos.car_Id,
+                                                              tbCargos.car_RazonInactivo,
+                                                              tbCargos.car_UsuarioModifica,
+                                                              tbCargos.car_FechaModifica);
+                    foreach (UDP_RRHH_tbCargos_Delete_Result Resultado in listCargos)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    response = Ex.Message.ToString();
+                }
+                response = "bien";
             }
-            tbCargos tbCargos = db.tbCargos.Find(id);
-            if (tbCargos == null)
+            else
             {
-                return HttpNotFound();
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
             }
-            return View(tbCargos);
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Cargos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbCargos tbCargos = db.tbCargos.Find(id);
-            db.tbCargos.Remove(tbCargos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

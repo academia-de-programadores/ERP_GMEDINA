@@ -8354,7 +8354,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
-          <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
@@ -13226,6 +13226,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_RRHH_tbCargos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14957,7 +14960,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result">
