@@ -14,33 +14,40 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: Idiomas
+        // GET: Idiomas Index
         public ActionResult Index()
         {
-            var tbIdiomas = db.tbIdiomas.Where(t => t.idi_Estado == true);
-            return View(tbIdiomas.ToList());
+            List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbIdiomas = db.tbIdiomas.Where(x => x.idi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbIdiomas);
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+                tbIdiomas.Add(new tbIdiomas { idi_Id = 0, idi_Descripcion = "Fallo la conexión" });
+            }
+            return View(tbIdiomas);
         }
-        public ActionResult GetData()
+        //Llenar la tabla de algun lado
+        [HttpPost]
+        public JsonResult llenarTabla()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbIdiomas1 = db.tbIdiomas
-                        .Select(c => new {
-                            idi_Id = c.idi_Id,
-                            idi_Descripcionn = c.idi_Descripcion,
-                            idi_Estado = c.idi_Estado,
-                            idi_RazonInactivo = c.idi_RazonInactivo,
-                            idi_UsuarioModifica = c.idi_UsuarioModifica,
-                            idi_UsuarioCrea = c.idi_UsuarioCrea,
-                            idi_FechaCrea = c.idi_FechaCrea,
-                            idi_FechaModifica = c.idi_FechaModifica
-                        }).Where(c => c.idi_Estado == true)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbIdiomas1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
+            foreach(tbIdiomas x in db.tbIdiomas.ToList().Where(x=> x.idi_Estado == true))
+            {
+                tbIdiomas.Add(new tbIdiomas
+                {
+                    idi_Id = x.idi_Id,
+                    idi_Descripcion = x.idi_Descripcion
+                });
+            }
+            return Json(tbIdiomas, JsonRequestBehavior.AllowGet);
         }
-        // GET: Idiomas/Details/5
+       
+        // POST: Idiomas/Create
 
         public JsonResult Details(int? ID)
         {
@@ -49,168 +56,152 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbJSON, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Idiomas/Create
-         public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Idiomas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idi_Id,idi_Descripcion,idi_Estado,idi_RazonInactivo,idi_UsuarioCrea,idi_FechaCrea,idi_UsuarioModifica,idi_FechaModifica")] tbIdiomas tbIdiomas)
+        public JsonResult Create(tbIdiomas tbIdiomas)
         {
-            tbIdiomas.idi_FechaCrea = DateTime.Now;
-            tbIdiomas.idi_UsuarioCrea = 2;
-            if (ModelState.IsValid)
+            string msj = "...";
+            if(tbIdiomas.idi_Descripcion !="")
             {
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    IEnumerable<object> listidioma = null;
-                    string MensajeError = "";
-                    listidioma = db.UDP_RRHH_tbIdiomas_Insert(tbIdiomas.idi_Descripcion,
-                                                               tbIdiomas.idi_UsuarioCrea,
-                                                               tbIdiomas.idi_FechaCrea);
-                    foreach(UDP_RRHH_tbIdiomas_Insert_Result Res in listidioma)
+                    var list = db.UDP_RRHH_tbIdiomas_Insert(tbIdiomas.idi_Descripcion,
+                                                            Usuario.usu_Id,
+                                                            DateTime.Now);
+                    foreach(UDP_RRHH_tbIdiomas_Insert_Result item in list)
                     {
-                        MensajeError = Res.MensajeError;
+                        msj = item.MensajeError + "";
                     }
-                    if(!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if(MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.No se pudo ingresar el registro");
-                            return View(tbIdiomas);
-                        }
-                    }
-                    return RedirectToAction("Index");
                 }
-                 
                 catch(Exception ex)
                 {
+                    msj = "-2";
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo insertar el registro");
-                    return View(tbIdiomas);
                 }
             }
-          //  ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
-           // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
-            return View(tbIdiomas);
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int? ID)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbIdiomas tbJSON = db.tbIdiomas.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-        // POST: Idiomas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idi_Id,idi_Descripcion,idi_Estado,idi_RazonInactivo,idi_UsuarioCrea,idi_FechaCrea,idi_UsuarioModifica,idi_FechaModifica")] tbIdiomas tbIdiomas)
-        {
-            tbIdiomas.idi_FechaModifica = DateTime.Now;
-            tbIdiomas.idi_UsuarioModifica = 7;
-            if (ModelState.IsValid)
+           if(ID == null )
             {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbIdiomas tbIdiomas = null;
+            try
+            {
+                tbIdiomas = db.tbIdiomas.Find(ID);
+                if(tbIdiomas == null || !tbIdiomas.idi_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = ID;
+            var idiomas = new tbIdiomas
+            {
+                idi_Id = tbIdiomas.idi_Id,
+                idi_Descripcion = tbIdiomas.idi_Descripcion,
+                idi_Estado = tbIdiomas.idi_Estado,
+                idi_RazonInactivo = tbIdiomas.idi_RazonInactivo,
+                idi_UsuarioCrea = tbIdiomas.idi_UsuarioCrea,
+                idi_FechaCrea = tbIdiomas.idi_FechaCrea,
+                idi_UsuarioModifica = tbIdiomas.idi_UsuarioModifica,
+                idi_FechaModifica = tbIdiomas.idi_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbIdiomas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbIdiomas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(idiomas, JsonRequestBehavior.AllowGet);
+        }
+        //POST : Idiomas/Edit
+       
+        [HttpPost]
+        public JsonResult Edit(tbIdiomas tbIdiomas)
+        {
+            string msj = "";
+            if(tbIdiomas.idi_Id !=0 && tbIdiomas.idi_Descripcion !="")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    IEnumerable<object> listIdiomas = null;
-                    string MensajeError = "";
-                    listIdiomas = db.UDP_RRHH_tbIdiomas_Update(tbIdiomas.idi_Id,
-                                                                tbIdiomas.idi_Descripcion,
-                                                                tbIdiomas.idi_UsuarioModifica,
-                                                                tbIdiomas.idi_FechaModifica);
-                    foreach(UDP_RRHH_tbIdiomas_Update_Result Res in listIdiomas)
+                    var list = db.UDP_RRHH_tbIdiomas_Update(id,
+                                                            tbIdiomas.idi_Descripcion,
+                                                            Usuario.usu_Id,
+                                                            DateTime.Now);
+                    foreach(UDP_RRHH_tbIdiomas_Update_Result item in list)
                     {
-                        MensajeError = Res.MensajeError;
+                        msj = item.MensajeError + "";
                     }
-                    if(!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if(MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1. No se pudo Editar el registo");
-                            return View(tbIdiomas);
-                        }
-                    }
-                    return RedirectToAction("Index");
                 }
                 catch(Exception ex)
                 {
+                    msj = "-2";
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
-                    return View(tbIdiomas);
                 }
-               
-            }
-         //   ViewBag.idi_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioCrea);
-           // ViewBag.idi_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbIdiomas.idi_UsuarioModifica);
-            return View(tbIdiomas);
-        }
-
-
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbIdiomas tbJSON = db.tbIdiomas.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "idi_Id,idi_UsuarioModifica,idi_FechaModifica")] tbIdiomas tbIdiomas)
-        {
-           
-            tbIdiomas.idi_UsuarioModifica = 1;
-            tbIdiomas.idi_FechaModifica = DateTime.Now;
-            tbIdiomas.idi_RazonInactivo = "Porque ya no exite";
-            string response = String.Empty;
-            IEnumerable<object> listIdiomas = null;
-            string MensajeError = "";
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    listIdiomas = db.UDP_RRHH_tbIdiomas_Delete(tbIdiomas.idi_Id,
-                                                              tbIdiomas.idi_RazonInactivo,
-                                                              tbIdiomas.idi_UsuarioModifica,
-                                                              tbIdiomas.idi_FechaModifica);
-                    foreach (UDP_RRHH_tbIdiomas_Delete_Result Resultado in listIdiomas)
-                    {
-                        MensajeError = Resultado.MensajeError;
-                    }
-
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.No se pudo ingresar el registro");
-                            return View(tbIdiomas);
-                        }
-                    }
-                    return RedirectToAction("Index");
-
-                }
-                catch (Exception Ex)
-                {
-                    response = Ex.Message.ToString();
-                }
-                response = "bien";
+                Session.Remove("id");
             }
             else
             {
-                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-                response = "error";
+                msj = "-3";
             }
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        
+        // Idiomas/Delete
+        [HttpPost]
+        public ActionResult Delete(tbIdiomas tbIdiomas)
+        {
+            string msj = "";
+            if(tbIdiomas.idi_Id != 0 && tbIdiomas.idi_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbIdiomas_Delete(id,
+                                                            tbIdiomas.idi_RazonInactivo,
+                                                            Usuario.usu_Id,
+                                                            DateTime.Now);
+                    foreach(UDP_RRHH_tbIdiomas_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + "";
+                    }
+                }
+                catch(Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor !=null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
