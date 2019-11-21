@@ -49,8 +49,9 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-xs tablaDetalle" id="btnDetalle"  onclick="tablaDetalle(@item.tiho_Id)" data-toggle="modal" data-target="#ModalDetalles">Detalle</button>
-                                        <button type="button" class="btn btn-default btn-xs tablaEditar" id="btnEditar"  onclick="tablaEditar(@item.tiho_Id)" data-toggle="modal" data-target="#ModalEditar">Editar</button>
+
+                                        <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.tiho_Id)">Detalles</a>
+                                        <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.tiho_Id)">Editar</a>
                                     </td>
                                 </tr>
                             }
@@ -120,9 +121,7 @@
                     <div class="modal-content animated fadeIn">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                    
-                            <h4 class="modal-title">Inhabilitar Horario</h4>
-
+                            <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
                         </div>
                         <div class="modal-body" id="ModalInhabilitar">
                             <p>
@@ -132,9 +131,8 @@
 
                         </div>
                         <div class="modal-footer">
-                     
-                            <button type="button" class="btn btn-primary pull-left" id="InActivar" >Actualizar</button>
-                            <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary pull-left" id="InActivar">Actualizar</button>
                         </div>
                     </div>
                 </div>
@@ -160,9 +158,8 @@
 
             </div>
             <div class="modal-footer">
-
-                <button type="button" class="btn btn-primary pull-left" id="btnEditarM" data-id=""  data-target="#ModalEditar"  onclick="" data-dismiss="modal">Editar</button>
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
             </div>
         </div>
     </div>
