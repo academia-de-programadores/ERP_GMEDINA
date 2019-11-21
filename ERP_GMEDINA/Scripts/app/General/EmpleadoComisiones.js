@@ -449,28 +449,30 @@ $("#IconoCerrar").click(function () {
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
     $("#btnCerrarModaledit").click(function () {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
-
+       
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#Monto").val('');
     });
 
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
     $("#IconoCerraredit").click(function () {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
+    
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#Monto").val('');
     });
 
 
     //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
     $("#btnUpdateComisiones").click(function () {
-        var Monto = $("#cc_Monto").val();
+        var MontoE = $("#cc_Monto").val();
 
-        if (Monto == "" || Monto == null || Monto == undefined) {
-            $("#Validation_descipcion2").css("display", "");
+
+        if (MontoE == "" || MontoE == null || MontoE == undefined) {
+            $("#Validation_descipcion2e").css("display", "");
         }
         else {
-            $("#Validation_descipcion2").css("display", "none");
+            $("#Validation_descipcion2e").css("display", "none");
         }
 
     });
