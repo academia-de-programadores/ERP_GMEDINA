@@ -1280,6 +1280,7 @@
     <Content Include="Views\TipoMonedas\Index.cshtml" />
     <Content Include="Views\TipoMonedas\_CreateTipoMonedas.cshtml" />
     <Content Include="Views\TipoMonedas\_EditTipoMonedas.cshtml" />
+    <Content Include="Views\TipoMonedas\_DetallesTipoMonedas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

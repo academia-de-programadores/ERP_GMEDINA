@@ -39,32 +39,62 @@ $('#btnAgregar').click(function () {
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#tblTipoMonedas tbody tr td #btnEditarTipoMonedas", function () {
-    var ID = $(this).data('id');
+$("#btnEditarM").click(function () {
+    // id = ID;
+    //console.log(id);
     $.ajax({
-        url: "/TipoMonedas/Edit/" + ID,
+        url: "/TipoMonedas/Edit/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        data: JSON.stringify({ id: id })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                console.log('Hla')
-                $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
-                $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
-                $("#Editar #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
-                $("#Editar #cde_PorcentajeEmpresa").val(data.cde_PorcentajeEmpresa);
-             
-                $("#EditarCatalogoDeducciones").modal();
+
+            if (data.length > 0) {
+                //console.log("funciona");
+                //console.log(data);
+                $.each(data, function (i, item) {
+                    $("#ModalEdit #tmo_Id").val(item.tiho_Id)
+                    $("#ModalEdit #tmo_Descripcion").val(item.tiho_Descripcion);
+                    //$("#ModalEdit").find("#btnInhabilitarModal").dataset.id = id;
+                    //$("#ModalEdit #tmo_UsuarioCrea").val(item.tmo_UsuarioCrea)
+                    //$("#ModalEdit #tmo_FechaCrea").val(item.tmo_FechaCrea);
+                    $('#ModalEditar').modal('show');
+                })
             }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
+            //})
         });
+});
+
+//EDICION DEL REGISTRO
+$("#btnEditarModal").click(function () {
+
+    var data = $("#frmEditarTipoHoras").serializeArray();
+    //console.log(data);
+    $.ajax({
+        url: "/TipoHoras/Edit",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "-1" || data == "2") {
+
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo editar el registro, contacte al administrador',
+            });
+        }
+        else {
+
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue editado con exito!',
+            });
+            $('#ModalEditar').modal('hide');
+            //llenarTabla();
+
+            llenarTabla();
+        }
+    });
 });
