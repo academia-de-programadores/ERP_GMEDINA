@@ -1402,7 +1402,6 @@
     <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CatalogoDeDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
