@@ -39,16 +39,13 @@ function cargarGridComisiones() {
             for (var i = 0; i < ListaComisiones.length; i++) {
                 var FechaRegistro = FechaFormato(ListaComisiones[i].cc_FechaRegistro);
 
-
-
-                //-----------------------------------VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
-                //-----------------------------------ESTA VARIABLE GUARDA CODIGO HTML DE UN CHECKBOX, PARA ENVIARLO A LA TABLA
                 if (ListaComisiones[i].cc_Pagado == true) {
-                    Check = '<input type="checkbox" id="cc_Pagado" name="cc_Pagado" checked disabled>'; //-----------------------------------SE LLENA LA VARIABLE CON UN INPUT CHEQUEADO
+                    Check = '<div class="icheckbox_square-green checked disabled" style="position: relative;"><input type="checkbox" class="i-checks" id="check-id" checked="" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>'; //SE LLENA LA VARIABLE CON UN INPUT CHEQUEADO
                 } else {
-                    Check = '<input type="checkbox" id="cc_Pagado" name="cc_Pagado" disabled>'; //-----------------------------------SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
+                    Check = '<div class="icheckbox_square-green disabled" style="position: relative;"><input type="checkbox" class="i-checks" id="check-" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
                 }
+
                 //-----------------------------------
                 template += '<tr data-id = "' + ListaComisiones[i].cc_Id + '">' +
                     '<td>' + ListaComisiones[i].per_Nombres + '</td>' +
@@ -258,29 +255,60 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
                 var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
-              
-                // -----------------------------------AQUI VALIDA EL CHECKBOX PARA PODER CARGARLO EN EL MODAL
-                if (data.cc_Pagado) {
-                    $('#Detallar #cc_Pagado').prop('checked', true);
+
+                //-------------------------CHECKBOX-------------------------
+                var padre = document.getElementById("padre");
+                //OBTIENE EL DIV PADRE QUE CONTENDRA EL CHECKBOX
+                if (data[0].cc_Pagado) {
+                    //VACIA EN CONTENIDO DEL DIV PADRE ANTES DE LLENARLO
+                    padre.innerHTML = '';
+                    //CREA EL DIV HIJO
+                    var input = document.createElement("INPUT");
+                    //ASIGNA LOS ATRIBUTOS Y CLASES AL DIV HIJO
+                    input.type = 'checkbox';
+                    input.classList.add('i-checks');
+                    input.disabled = true;
+                    input.checked = true;
+
+                    //AGREGA EL DIV HIJO AL DIV PADRE
+                    padre.appendChild(input);
+
+                    //LLAMA LA FUNCION DE I-CHECKS PARA DARLE ESTILO AL CHECKBOX
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
                 } else {
-                    $('#Detallar #cc_Pagado').prop('checked', false);
-                }//-----------------------------------
+                    //VACIA EN CONTENIDO DEL DIV PADRE ANTES DE LLENARLO
+                    padre.innerHTML = '';
+                    //CREA EL DIV HIJO
+                    var input = document.createElement("INPUT");
+                    //ASIGNA LOS ATRIBUTOS Y CLASES AL DIV HIJO
+                    input.type = 'checkbox';
+                    input.classList.add('i-checks');
+                    input.disabled = true;
+
+                    //AGREGA EL DIV HIJO AL DIV PADRE
+                    padre.appendChild(input);
+
+                    //LLAMA LA FUNCION DE I-CHECKS PARA DARLE ESTILO AL CHECKBOX
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
+                }
+
+
+
                 $("#Detallar #cc_Id").val(data[0].cc_Id);
                 $("#Detallar #cc_Monto").val(data[0].cc_Monto);
                 $("#Detallar #cc_FechaRegistro").val(FechaRegistro);
-                $("#Detallar #cc_Pagado").val(cc_Pagado);
                 $("#Detallar #cc_UsuarioCrea").val(data[0].cc_UsuarioCrea);
                 $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-
-
                 $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").val(data[0].Ingreso);
                 $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
-
                 $("#Detallar #emp_Id").val(data[0].emp_Id);
                 $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado+' '+data[0].ApellidosEmpleado);
-
-                
-            
                 $("#Detallar #cc_FechaCrea").val(FechaCrea);
                 $("#Detallar #cc_UsuarioModifica").val(data[0].cc_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
@@ -322,7 +350,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                             $("#Detallar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                console.log('holaentro?')
+                
                 $("#DetalleEmpleadoComisiones").modal();
             }
             else {
@@ -381,16 +409,18 @@ $("#btnInactivarRegistroComisiones").click(function () {
 //VALIDAR CREAR//
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-    $("#btnCerrarModal").click(function () {        
+$("#btnCerrarModal").click(function () {
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Monto").val('');
     });
 
  
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-    $("#IconoCerrar").click(function () {
+$("#IconoCerrar").click(function () {
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Monto").val('');
     });
 
 
@@ -419,27 +449,30 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
     $("#btnCerrarModaledit").click(function () {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
+       
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#Monto").val('');
     });
 
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
     $("#IconoCerraredit").click(function () {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
+    
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#Monto").val('');
     });
 
 
     //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
     $("#btnUpdateComisiones").click(function () {
-        var Monto = $("#cc_Monto").val();
+        var MontoE = $("#cc_Monto").val();
 
-        if (Monto == "" || Monto == null || Monto == undefined) {
-            $("#Validation_descipcion2").css("display", "");
+
+        if (MontoE == "" || MontoE == null || MontoE == undefined) {
+            $("#Validation_descipcion2e").css("display", "");
         }
         else {
-            $("#Validation_descipcion2").css("display", "none");
+            $("#Validation_descipcion2e").css("display", "none");
         }
 
     });

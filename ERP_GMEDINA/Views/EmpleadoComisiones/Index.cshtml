@@ -48,7 +48,9 @@
                                         @Html.DisplayFor(modelItem => item.cc_FechaRegistro)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.cc_Pagado)
+                                     @{var Pagado = item.cc_Pagado == true ? "checked" : string.Empty;}
+                                    <input type="checkbox" class="i-checks" id="check-@item.cc_Pagado" @Pagado disabled />
+
                                     </td>
                                     <td>
                                         <button data-id="@item.cc_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
@@ -135,13 +137,28 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/app/general/EmpleadoComisiones.js")
-
-
+    @Scripts.Render("~/plugins/iCheck")
 }
+
+
+<link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+    });
+</script>
+
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

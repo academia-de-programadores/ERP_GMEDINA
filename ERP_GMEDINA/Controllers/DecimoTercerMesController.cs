@@ -36,11 +36,13 @@ namespace ERP_GMEDINA.Controllers
 		public JsonResult InsertDecimoTercerMes(List<tbDecimoTercerMes> DecimoTercer)
 
 		{
+			//Contexto de base de datos para que se use solo cuando sea necesario.
 			using (ERP_GMEDINAEntities entities = new ERP_GMEDINAEntities())
 			{
                 
                     try
                     {
+					//se construyen los lotes dependiendo de la cantidad de registros que reciba el controlador
                         int numeroLotes = 1;
                         int CantidadRegistros = DecimoTercer.Count;
 
@@ -107,7 +109,7 @@ namespace ERP_GMEDINA.Controllers
 			
 			try
 			{
-				
+					//Consulta LINQ para accesar a los datos solicitados por medio de las fechas recibidas en el controlador.				
 				var ConsultaFechas = from HP in db.tbHistorialDePago
 									 join P in db.tbPersonas on HP.emp_Id equals P.per_Id
 									 join E in db.tbEmpleados on P.per_Id equals E.emp_Id
@@ -140,6 +142,7 @@ namespace ERP_GMEDINA.Controllers
 										 emp_CuentaBancaria = PagoDT.Key.emp_CuentaBancaria,
 										 dtm_Monto = (PagoDT.Sum(x => x.hipa_SueldoNeto) / 360 * 30)
 									 };
+					//La consulta LINQ se almacena en un viewbag y se convierte a list la cual vamos a recorrer con un foreach en la vista.
 				ViewBag.ConsultasFechas = ConsultaFechas.ToList();					
 				}
 			catch (Exception ex)

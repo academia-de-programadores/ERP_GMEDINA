@@ -42,12 +42,10 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.cc_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.cc_Pagado, new { htmlAttributes = new { @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.cc_Pagado, "", new { @class = "text-danger" })
-                </div>
+            <div class="col-md-10" id="padre">
+                @*AQUI SE AGREGARÁ UN INPUT HIJO TIPO CHECKBOX*@
             </div>
+
         </div>
     </div>
 
