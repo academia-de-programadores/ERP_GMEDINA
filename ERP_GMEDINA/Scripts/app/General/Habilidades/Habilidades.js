@@ -48,16 +48,7 @@ function llenarTabla() {
             });
         });
 }
-//Modals
-$("#ModalNuevo").on('hidden.bs.modal', function () {
-    SetearClases("habi_Descripcion", "valid", "error", "");
-});
-$("#ModalEditar").on('hidden.bs.modal', function () {
-    SetearClases("habi_Descripcion", "valid", "error", "");
-});
-$("#ModalInhabilitar").on('hidden.bs.modal', function () {
-    SetearClases("habi_RazonInactivo", "valid", "error", "");
-});//Botones GET
+//Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#habi_Descripcion").val("");

@@ -1,5 +1,6 @@
 ﻿//
 var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
+var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
 function CierraPopups() {
     $.each(modal, function (index, valor) {
         $("#" + valor).modal('hide');//ocultamos el modal
@@ -28,7 +29,6 @@ function serializar(data) {
         if (value!="") {
             Data[valor.name] = value;
         } else {
-            SetearClases(valor.name, "error", "valid", "val-required");
             verificacion = false;
         }
     });
@@ -98,5 +98,67 @@ function MsgWarning(Titulo, Mensajes) {
         message: Mensajes,
     });
 }
-//$("#btnPrueva").click()
-//form.validate()
+function limpiarClases(form) {
+    var div = null;
+    $(form).find(".required").each(function (indice, input) {
+        input.val("");
+        div = $(input).closest("div");
+        div.removeClass("has-error has-warning");
+    });
+    $(form).find("form").serializeArray().forEach(function (id, valor) {
+        div.find("#error" + id.name).text("");
+    });
+}
+$("#ModalNuevo").on('hidden.bs.modal', function () {
+    limpiarClases(this);
+});
+$("#ModalEditar").on('hidden.bs.modal', function () {
+    limpiarClases(this);
+});
+$("#ModalInhabilitar").on('hidden.bs.modal', function () {
+    limpiarClases(this);
+});
+$(".required").each(function (indice, input) {
+    var maxlength = $(input).data("val-maxlength-max");
+    var form = $(input).closest("form");
+    var txt_maxlength = $(input).data("val-maxlength");
+    var txt_required = $(input).data("val-required");
+    var id = input.id;
+    $(input).keyup(function (event) {
+        key(event);
+    });
+    $(input).keypress(function (event) {
+        key(event);
+    });
+    $(input).focusout(function () {
+        var span = $(form).find("#error" + id);
+        if ($(input).val().trim() == "") {
+            $(span).closest("div").addClass("has-error");
+            span.text(txt_required);
+            $(span).addClass("text-danger");
+        } else {
+            $(span).closest("div").removeClass("has-error");
+            $(span).removeClass("text-danger");
+        }
+    });
+    function key(event) {
+        var span = $(form).find("#error" + id);
+        $(span).closest("div").removeClass("has-error");
+        $(span).removeClass("text-danger");
+        if ($(input).val().length > maxlength) {
+            $(span).addClass("text-warning");
+            $(span).closest("div").addClass("has-warning");
+            span.text(txt_maxlength);
+            event.preventDefault();
+        } else {
+            $(span).removeClass("text-warning");
+            $(span).closest("div").removeClass("has-warning");
+            $(form).find("#error" + id).text("");
+        }
+    }
+});
+formularios.forEach(function (formulario) {
+    $("#" + formulario).submit(function (e) {
+        e.preventDefault();
+    });
+})
