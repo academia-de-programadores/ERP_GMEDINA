@@ -410,17 +410,17 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModal").click(function () {
-    var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val(" ");
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Monto").val('');
     });
 
  
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconoCerrar").click(function () {
-    var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val(" ");
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Monto").val('');
     });
 
 
@@ -451,6 +451,7 @@ $("#IconoCerrar").click(function () {
     $("#btnCerrarModaledit").click(function () {
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+
     });
 
 
