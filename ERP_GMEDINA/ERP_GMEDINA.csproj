@@ -166,32 +166,120 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
-    <Compile Include="Models\cTipoSalidas.cs" />
+    <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cHabilidades.cs" />
+    <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\ERP_GMEDINA.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\ERP_GMEDINA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs" />
+    <Compile Include="Models\sp_helpdiagrams_Result.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\tbAccesoRol.cs" />
+    <Compile Include="Models\tbAdelantoSueldo.cs" />
+    <Compile Include="Models\tbAreas.cs" />
+    <Compile Include="Models\tbAuxilioDeCesantias.cs" />
+    <Compile Include="Models\tbCargos.cs" />
+    <Compile Include="Models\tbCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\tbCatalogoDeIngresos.cs" />
+    <Compile Include="Models\tbCatalogoDePlanillas.cs" />
+    <Compile Include="Models\tbCompetencias.cs" />
+    <Compile Include="Models\tbCompetenciasPersona.cs" />
+    <Compile Include="Models\tbCompetenciasRequisicion.cs" />
+    <Compile Include="Models\tbDecimoCuartoMes.cs" />
+    <Compile Include="Models\tbDecimoTercerMes.cs" />
+    <Compile Include="Models\tbDeduccionesExtraordinarias.cs" />
+    <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs" />
+    <Compile Include="Models\tbDepartamentos.cs" />
+    <Compile Include="Models\tbEmpleadoBonos.cs" />
+    <Compile Include="Models\tbEmpleadoComisiones.cs" />
+    <Compile Include="Models\tbEmpleados.cs" />
+    <Compile Include="Models\tbEmpresas.cs" />
+    <Compile Include="Models\tbEquipoEmpleados.cs" />
+    <Compile Include="Models\tbEquipoTrabajo.cs" />
+    <Compile Include="Models\tbFaseSeleccion.cs" />
+    <Compile Include="Models\tbFasesReclutamiento.cs" />
+    <Compile Include="Models\tbFormaPago.cs" />
     <Compile Include="Models\tbHabilidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbHabilidadesPersona.cs" />
+    <Compile Include="Models\tbHabilidadesRequisicion.cs" />
+    <Compile Include="Models\tbHistorialAmonestaciones.cs" />
+    <Compile Include="Models\tbHistorialAudienciaDescargo.cs" />
+    <Compile Include="Models\tbHistorialCargos.cs" />
+    <Compile Include="Models\tbHistorialContrataciones.cs" />
+    <Compile Include="Models\tbHistorialDeduccionPago.cs" />
+    <Compile Include="Models\tbHistorialDeIngresosPago.cs" />
+    <Compile Include="Models\tbHistorialDePago.cs" />
+    <Compile Include="Models\tbHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\tbHistorialIncapacidades.cs" />
+    <Compile Include="Models\tbHistorialLiquidaciones.cs" />
+    <Compile Include="Models\tbHistorialPermisos.cs" />
+    <Compile Include="Models\tbHistorialRefrendamientos.cs" />
+    <Compile Include="Models\tbHistorialSalidas.cs" />
+    <Compile Include="Models\tbHistorialVacaciones.cs" />
+    <Compile Include="Models\tbHorarios.cs" />
+    <Compile Include="Models\tbIdiomaPersona.cs" />
+    <Compile Include="Models\tbIdiomas.cs" />
+    <Compile Include="Models\tbIdiomasRequisicion.cs" />
+    <Compile Include="Models\tbInstitucionesFinancieras.cs" />
+    <Compile Include="Models\tbJornadas.cs" />
+    <Compile Include="Models\tbLiquidaciones.cs" />
+    <Compile Include="Models\tbLiquidacionVacaciones.cs" />
+    <Compile Include="Models\tbMotivoLiquidaciones.cs" />
+    <Compile Include="Models\tbNacionalidades.cs" />
+    <Compile Include="Models\tbObjeto.cs" />
+    <Compile Include="Models\tbPeriodos.cs" />
+    <Compile Include="Models\tbPersonas.cs" />
+    <Compile Include="Models\tbPreaviso.cs" />
+    <Compile Include="Models\tbPrestaciones.cs" />
+    <Compile Include="Models\tbRamaActividad.cs" />
+    <Compile Include="Models\tbRazonSalidas.cs" />
+    <Compile Include="Models\tbRequisiciones.cs" />
+    <Compile Include="Models\tbRol.cs" />
+    <Compile Include="Models\tbRolesUsuario.cs" />
+    <Compile Include="Models\tbSalarioPorHora.cs" />
+    <Compile Include="Models\tbSeleccionCandidatos.cs" />
+    <Compile Include="Models\tbSucursales.cs" />
+    <Compile Include="Models\tbSueldos.cs" />
+    <Compile Include="Models\tbTechosDeducciones.cs" />
+    <Compile Include="Models\tbTipoAmonestaciones.cs" />
+    <Compile Include="Models\tbTipoDeduccion.cs" />
+    <Compile Include="Models\tbTipoHoras.cs" />
+    <Compile Include="Models\tbTipoIncapacidades.cs" />
+    <Compile Include="Models\tbTipoMonedas.cs" />
+    <Compile Include="Models\tbTipoPermisos.cs" />
+    <Compile Include="Models\tbTipoPlanillaDetalleDeduccion.cs" />
+    <Compile Include="Models\tbTipoPlanillaDetalleIngreso.cs" />
     <Compile Include="Models\tbTipoSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbTitulos.cs" />
+    <Compile Include="Models\tbTitulosPersona.cs" />
+    <Compile Include="Models\tbTitulosRequisicion.cs" />
     <Compile Include="Models\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbVacaciones.cs" />
+    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs" />
+    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result1.cs" />
+    <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs" />
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result.cs" />
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Insert_Result.cs" />
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs" />
     <Compile Include="Models\UDP_RRHH_tbHabilidades_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -210,12 +298,46 @@
     <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_BonosColaborador.cs" />
+    <Compile Include="Models\V_CatalogoDeIngresos.cs" />
+    <Compile Include="Models\V_CatalogoDePlanillasConIngresosYDeducciones.cs" />
+    <Compile Include="Models\V_ColaboradoresPorPlanilla.cs" />
+    <Compile Include="Models\V_ComisionesColaborador.cs" />
+    <Compile Include="Models\V_DecimoCuartoMes.cs" />
+    <Compile Include="Models\V_DecimoTercerMes.cs" />
+    <Compile Include="Models\V_DeduccionesExtraordinarias.cs" />
+    <Compile Include="Models\V_DeduccionesExtraordinarias_Empleados.cs" />
+    <Compile Include="Models\V_DeduccionesExtrasColaboradores.cs" />
+    <Compile Include="Models\V_DeduccionesInstitucionesFinancierasColaboradres.cs" />
+    <Compile Include="Models\V_EmpleadoBonos.cs" />
+    <Compile Include="Models\V_EmpleadoComisiones.cs" />
+    <Compile Include="Models\V_FormaDePago.cs" />
+    <Compile Include="Models\V_InformacionColaborador.cs" />
+    <Compile Include="Models\V_PlanillaDeducciones.cs" />
+    <Compile Include="Models\V_PlanillaIngresos.cs" />
+    <Compile Include="Models\V_PreviewPlanilla.cs" />
+    <Compile Include="Models\V_tbCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\V_tbCatalogoDeIngresos.cs" />
+    <Compile Include="Models\V_TechosDeducciones.cs" />
+    <Compile Include="Models\V_TipoDeduccion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\DetailsForModal.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ListModals.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
     <Content Include="Content\img\1.jpg" />
@@ -321,6 +443,7 @@
     <Content Include="Content\plugins\blueimp\img\video-play.svg" />
     <Content Include="Content\plugins\bootstrap-markdown\bootstrap-markdown.min.css" />
     <Content Include="Content\plugins\bootstrap-rtl\bootstrap-rtl.css" />
+    <Content Include="Content\plugins\bootstrap-rtl\bootstrap-rtl.css.map" />
     <Content Include="Content\plugins\bootstrap-rtl\bootstrap-rtl.min.css" />
     <Content Include="Content\plugins\bootstrap-tagsinput\bootstrap-tagsinput.css" />
     <Content Include="Content\plugins\bootstrapSocial\bootstrap-social.css" />
@@ -342,7 +465,10 @@
     <Content Include="Content\plugins\dropzone\basic.css" />
     <Content Include="Content\plugins\dropzone\dropzone.css" />
     <Content Include="Content\plugins\dualListbox\bootstrap-duallistbox.min.css" />
+    <Content Include="Content\plugins\footable\fonts\footable.eot" />
     <Content Include="Content\plugins\footable\fonts\footable.svg" />
+    <Content Include="Content\plugins\footable\fonts\footable.ttf" />
+    <Content Include="Content\plugins\footable\fonts\footable.woff" />
     <Content Include="Content\plugins\footable\footable.core.css" />
     <Content Include="Content\plugins\fullcalendar\fullcalendar.css" />
     <Content Include="Content\plugins\fullcalendar\fullcalendar.print.css" />
@@ -398,11 +524,17 @@
     <Content Include="Content\plugins\nouslider\jquery.nouislider.css" />
     <Content Include="Content\plugins\select2\select2.min.css" />
     <Content Include="Content\plugins\slick\ajax-loader.gif" />
+    <Content Include="Content\plugins\slick\fonts\slick.eot" />
     <Content Include="Content\plugins\slick\fonts\slick.svg" />
+    <Content Include="Content\plugins\slick\fonts\slick.ttf" />
+    <Content Include="Content\plugins\slick\fonts\slick.woff" />
     <Content Include="Content\plugins\slick\slick-theme.css" />
     <Content Include="Content\plugins\slick\slick.css" />
     <Content Include="Content\plugins\social-buttons\social-buttons.css" />
     <Content Include="Content\plugins\steps\jquery.steps.css" />
+    <Content Include="Content\plugins\summernote\font\summernote.eot" />
+    <Content Include="Content\plugins\summernote\font\summernote.ttf" />
+    <Content Include="Content\plugins\summernote\font\summernote.woff" />
     <Content Include="Content\plugins\summernote\summernote-bs3.css" />
     <Content Include="Content\plugins\summernote\summernote.css" />
     <Content Include="Content\plugins\sweetalert\sweetalert.css" />
@@ -419,25 +551,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Models\ERP_GMEDINA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ERP_GMEDINA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
-    </Content>
-    <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
-    <Content Include="Scripts\app\General\general.js" />
-    <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
-    <Content Include="Scripts\app\General\SerializeDate.js" />
-    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
-    <Content Include="Scripts\app\inspinia.js" />
-    <Content Include="Scripts\app\skin.config.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -473,16 +586,36 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Detalles.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
+    <Content Include="Models\ERP_GMEDINA.Context.tt">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Models\ERP_GMEDINA.tt">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\api\typehead_collection.json" />
+    <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
+    <Content Include="Scripts\app\inspinia.js" />
+    <Content Include="Scripts\app\skin.config.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Scripts\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\bootstrap-markdown.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\markdown.js" />
@@ -490,6 +623,7 @@
     <Content Include="Scripts\plugins\bootstrapTour\bootstrap-tour.min.js" />
     <Content Include="Scripts\plugins\c3\c3.min.js" />
     <Content Include="Scripts\plugins\chartist\chartist.min.js" />
+    <Content Include="Scripts\plugins\chartist\chartist.min.js.map" />
     <Content Include="Scripts\plugins\chartJs\Chart.min.js" />
     <Content Include="Scripts\plugins\chosen\chosen.jquery.js" />
     <Content Include="Scripts\plugins\clipboard\clipboard.min.js" />
@@ -697,6 +831,7 @@
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Scripts\plugins\diff_match_patch\COPYING" />
     <Content Include="Scripts\plugins\diff_match_patch\javascript\diff_match_patch.js" />
     <Content Include="Scripts\plugins\diff_match_patch\README.txt" />
     <Content Include="Scripts\plugins\dotdotdot\jquery.dotdotdot.min.js" />
@@ -873,6 +1008,7 @@
     <Content Include="Scripts\plugins\justified-gallery\jquery.justifiedgallery.min.css" />
     <Content Include="Scripts\plugins\justified-gallery\jquery.justifiedgallery.min.js" />
     <Content Include="Scripts\plugins\justified-gallery\loading.gif" />
+    <Content Include="Scripts\plugins\justified-gallery\README.md" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-2.0.2.css" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-2.0.2.min.js" />
@@ -903,6 +1039,7 @@
     <Content Include="Scripts\plugins\switchery\switchery.js" />
     <Content Include="Scripts\plugins\tinycon\tinycon.min.js" />
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
+    <Content Include="Scripts\plugins\topojson\LICENSE" />
     <Content Include="Scripts\plugins\topojson\topojson.js" />
     <Content Include="Scripts\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
     <Content Include="Scripts\plugins\typehead\bootstrap3-typeahead.min.js" />
@@ -910,29 +1047,26 @@
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
-    <None Include="Scripts\Scripts_Base\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\Scripts_Base\jquery-3.3.1.min.map" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\Scripts_Base\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.min.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Scripts_Base\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
+    <Content Include="Views\Habilidades\Details.cshtml" />
+    <Content Include="Views\Habilidades\Index.cshtml" />
+    <Content Include="Views\Habilidades\_Create.cshtml" />
+    <Content Include="Views\Habilidades\_Delete.cshtml" />
+    <Content Include="Views\Habilidades\_Detalles.cshtml" />
+    <Content Include="Views\Habilidades\_Edit.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -941,61 +1075,40 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\Habilidades\_Create.cshtml" />
-    <Content Include="Views\Habilidades\_Delete.cshtml" />
-    <Content Include="Views\Habilidades\Details.cshtml" />
-    <Content Include="Views\Habilidades\_Edit.cshtml" />
-    <Content Include="Views\Habilidades\Index.cshtml" />
-    <Content Include="Views\Habilidades\_Detalles.cshtml" />
+    <Content Include="Views\TipoSalidas\Index.cshtml" />
     <Content Include="Views\TipoSalidas\_Create.cshtml" />
     <Content Include="Views\TipoSalidas\_Delete.cshtml" />
-    <Content Include="Views\TipoSalidas\_Edit.cshtml" />
-    <Content Include="Views\TipoSalidas\Index.cshtml" />
     <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
+    <Content Include="Views\TipoSalidas\_Edit.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Habilidades2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Content\plugins\bootstrap-rtl\bootstrap-rtl.css.map" />
-    <Content Include="Content\plugins\footable\fonts\footable.eot" />
-    <Content Include="Content\plugins\footable\fonts\footable.ttf" />
-    <Content Include="Content\plugins\footable\fonts\footable.woff" />
-    <Content Include="Content\plugins\slick\fonts\slick.eot" />
-    <Content Include="Content\plugins\slick\fonts\slick.ttf" />
-    <Content Include="Content\plugins\slick\fonts\slick.woff" />
-    <Content Include="Content\plugins\summernote\font\summernote.eot" />
-    <Content Include="Content\plugins\summernote\font\summernote.ttf" />
-    <Content Include="Content\plugins\summernote\font\summernote.woff" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\api\typehead_collection.json" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
-    <Content Include="Scripts\plugins\chartist\chartist.min.js.map" />
-    <Content Include="Scripts\plugins\diff_match_patch\COPYING" />
-    <Content Include="Scripts\plugins\justified-gallery\README.md" />
-    <Content Include="Scripts\plugins\topojson\LICENSE" />
-    <Content Include="Scripts\Scripts_Base\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.min.map" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <None Include="Scripts\Scripts_Base\jquery-3.3.1.intellisense.js" />
+    <None Include="Scripts\Scripts_Base\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
