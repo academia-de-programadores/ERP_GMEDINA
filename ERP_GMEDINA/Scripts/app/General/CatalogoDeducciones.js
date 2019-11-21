@@ -8,6 +8,8 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
   .fail(function (jqxhr, settings, exception) {
       console.log("No se pudo recuperar Script SerializeDate");
   });
+
+//VARIABLE PARA INACTIVAR
 var InactivarID = 0;
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -189,7 +191,7 @@ $("#frmCatalogoDeduccionesCreate").submit(function (e) {
     return false;
 });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//FUNCTION: MOSTRAR DETALLE
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
     var ID = $(this).data('id');
     console.log(ID);
@@ -247,11 +249,10 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
             }
         });
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-
+//MOSTRAR MODAL INACTIVAR
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarCatalogoDeducciones").modal();
@@ -290,7 +291,6 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     });
 });
 
-
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
     $("#Validation_descipcionA").css("display", "none");
@@ -328,7 +328,7 @@ $("#btnCreateRegistroDeduccion").click(function () {
     if (tde_IdTipoDeduA == "0" || tde_IdTipoDeduA == null || tde_IdTipoDeduA == undefined) {
         $("#Validation_descipcion2A").css("display", "");
     }
-    else if (tde_IdTipoDeduA != null)
+    else if (tde_IdTipoDeduA != null || tde_IdTipoDeduA != "" || tde_IdTipoDeduA != undefined)
         {
         $("#Validation_descipcion2A").css("display", "none");
     }
@@ -398,26 +398,3 @@ $("#btnUpdateDeduccion").click(function () {
     }
 
 });
-
-
-
-
-
-//Mascara para Inputs
-//$ (documento).ready(function (){
-////$ ("# teléfono"). inputmask ("máscara", {"máscara": "(99) 9999-99999"});//Mascara para Telefono
-////$ ("# zip"). inputmask ("máscara", {"máscara": "99999-999"});//Mascara Codigo Postal
-////$ ("# birth"). inputmask ("máscara", {"máscara": "99/99/9999"});//Mascara Fecha
-//$ ("#precio"). inputmask ("máscara", {"máscara": "999,999.99"}, {reverso: true});//Mascara Precio
-////$ ("#value"). inputmask ("mask", {"mask": "#. ## 9.99"}, {reverse: true});//Mascara Valor
-////$ ("# ip"). inputmask ("máscara", {"máscara": "999,999,999,999"});//Mascara IP
-//});
-
-// PROBANDO LOS IZITOAST
-//$(document).ready(function () {
-//    console.log('cargado JS');
-//    iziToast.show({
-//        title: 'Hola',
-//        message: 'Estoy probando los iziToast'
-//    });
-//});
