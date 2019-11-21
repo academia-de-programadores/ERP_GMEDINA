@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: TipoSalidas
+        // GET: Habilidades
         public ActionResult Index()
         {
             List<tbTipoSalidas> tbTipoSalidas = new List<Models.tbTipoSalidas> { };
@@ -31,7 +31,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbTipoSalidas);
         }
-
         [HttpPost]
         public JsonResult llenarTabla()
         {
@@ -47,45 +46,60 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(tbTipoSalidas, JsonRequestBehavior.AllowGet);
         }
-        // GET: TipoSalidas/Create
+
+        // POST: Habilidades/Create
         [HttpPost]
-        public ActionResult Create(tbTipoSalidas tbTipoSalidas)
+        public JsonResult Create(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
-            try
+            if (tbTipoSalidas.tsal_Descripcion != "")
             {
-                var list = db.UDP_RRHH_tbTipoSalidas_Insert(
-                    tbTipoSalidas.tsal_Descripcion, 
-                    Usuario.usu_Id, 
-                    DateTime.Now);
-                foreach (UDP_RRHH_tbTipoSalidas_Insert_Result item in list)
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError.ToString()+" ";
+                    var list = db.UDP_RRHH_tbTipoSalidas_Insert(tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
+                msj = "-3";
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: TipoSalidas/Edit/5
+        // GET: Habilidades/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoSalidas tbTipoSalidas = db.tbTipoSalidas.Find(id);
-            if (tbTipoSalidas == null || !tbTipoSalidas.tsal_Estado)
+
+            tbTipoSalidas tbTipoSalidas = null;
+            try
             {
+                tbTipoSalidas = db.tbTipoSalidas.Find(id);
+                if (tbTipoSalidas == null || !tbTipoSalidas.tsal_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var TipoSalidas = new tbTipoSalidas
+            var TipoSalida = new tbTipoSalidas
             {
                 tsal_Id = tbTipoSalidas.tsal_Id,
                 tsal_Descripcion = tbTipoSalidas.tsal_Descripcion,
@@ -95,67 +109,75 @@ namespace ERP_GMEDINA.Controllers
                 tsal_FechaCrea = tbTipoSalidas.tsal_FechaCrea,
                 tsal_UsuarioModifica = tbTipoSalidas.tsal_UsuarioModifica,
                 tsal_FechaModifica = tbTipoSalidas.tsal_FechaModifica,
-                tbUsuario=new tbUsuario { usu_NombreUsuario= tbTipoSalidas.tbUsuario.usu_NombreUsuario},
-                tbUsuario1=new tbUsuario {usu_NombreUsuario= tbTipoSalidas.tbUsuario1.usu_NombreUsuario }
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario1).usu_NombreUsuario }
             };
-            return Json(TipoSalidas, JsonRequestBehavior.AllowGet);
+            return Json(TipoSalida, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: TipoSalidas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Habilidades/Edit/5
         [HttpPost]
-        public ActionResult Edit(tbTipoSalidas tbTipoSalidas)
+        public JsonResult Edit(tbTipoSalidas tbTipoSalidas)
         {
-            var id = (int)Session["id"];
             string msj = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
-            try
+            if (tbTipoSalidas.tsal_Id != 0 && tbTipoSalidas.tsal_Descripcion != "")
             {
-                var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
-                foreach (UDP_RRHH_tbTipoSalidas_Update_Result item in list)
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError.ToString()+" ";
+                    var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
+                msj = "-3";
             }
-            Session.Remove("Usuario");
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // POST: TipoSalidas/Delete/5
+        // GET: Habilidades/Delete/5
         [HttpPost]
         public ActionResult Delete(tbTipoSalidas tbTipoSalidas)
         {
-            var id = (int)Session["id"];
             string msj = "";
-            var Usuario = (tbUsuario)Session["Usuario"];
-            try
+            if (tbTipoSalidas.tsal_Id != 0 && tbTipoSalidas.tsal_RazonInactivo != "")
             {
-                var list = db.UDP_RRHH_tbTipoSalidas_Delete(
-                    id,
-                    tbTipoSalidas.tsal_Descripcion, 
-                    Usuario.usu_Id, 
-                    DateTime.Now);
-                foreach (UDP_RRHH_tbTipoSalidas_Delete_Result item in list)
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
                 {
-                    msj = item.MensajeError.ToString()+" ";
+                    var list = db.UDP_RRHH_tbTipoSalidas_Delete(id, tbTipoSalidas.tsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            catch (Exception ex)
+            else
             {
-                msj = "-2";
-                ex.Message.ToString();
+                msj = "-3";
             }
-            Session.Remove("Usuario");
-            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        protected object IsNull(tbUsuario valor)
+        protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
             {

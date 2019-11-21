@@ -101,7 +101,7 @@ function MsgWarning(Titulo, Mensajes) {
 function limpiarClases(form) {
     var div = null;
     $(form).find(".required").each(function (indice, input) {
-        input.val("");
+        //$(input).val("");
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });

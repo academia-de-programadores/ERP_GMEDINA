@@ -52,6 +52,7 @@ function llenarTabla() {
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#habi_Descripcion").val("");
+    $("#FormEditar").find("#habi_Descripcion").focus();
     modalnuevo.modal('show');
 });
 $("#btnEditar").click(function () {
@@ -61,14 +62,16 @@ $("#btnEditar").click(function () {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
                 $('#ModalEditar').modal('show');
+                $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
             }
         });
 });
 $("#btnInhabilitar").click(function () {
     CierraPopups();
     $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#habi_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
