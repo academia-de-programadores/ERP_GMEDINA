@@ -67,11 +67,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInidilitar").click(function () {
+$("#btnInhabilitar").click(function () {
     CierraPopups();
-    $('#ModalInidilitar').modal('show');
-    $("#ModalInidilitar").find("#idi_RazonInactivo").val("");
-    $("#ModalInidilitar").find("#idi_RazonInactivo").focus();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#idi_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#idi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
