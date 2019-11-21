@@ -460,6 +460,12 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Competencias").Include(
+               "~/Scripts/app/General/Competencias.js"));
+
+
+
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network 

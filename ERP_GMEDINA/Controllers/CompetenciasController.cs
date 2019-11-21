@@ -17,58 +17,68 @@ namespace ERP_GMEDINA.Controllers
         // GET: Competencias
         public ActionResult Index()
         {
-            var tbCompetencias = db.tbCompetencias.Where(t => t.comp_Estado == true);
-            return View(tbCompetencias.ToList());
+            List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbCompetencias = db.tbCompetencias.Where(x => x.comp_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbCompetencias);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbCompetencias.Add(new tbCompetencias { comp_Id = 0, comp_Descripcion = "fallo la conexion" });
+            }
+            return View(tbCompetencias);
         }
-        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
-        public ActionResult GetData()
+        [HttpPost]
+        public JsonResult llenarTabla()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCompetencias.ToList(); )
-            var tbCompetencias1 = db.tbCompetencias
-                        .Select(c => new {
-                            comp_Id = c.comp_Id,
-                            comp_Descripcion = c.comp_Descripcion,
-                            comp_Estado = c.comp_Estado,
-                            comp_RazonInactivo = c.comp_RazonInactivo,
-                            comp_UsuarioModifica = c.comp_UsuarioModifica,
-                            comp_UsuarioCrea = c.comp_UsuarioCrea,
-                            comp_FechaCrea = c.comp_FechaCrea,
-                            comp_FechaModifica = c.comp_FechaModifica
-                        }).Where(c => c.comp_Estado == true)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbCompetencias1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
+            foreach (tbCompetencias x in db.tbCompetencias.ToList().Where(x => x.comp_Estado == true))
+            {
+                tbCompetencias.Add(new tbCompetencias
+                {
+                    comp_Id = x.comp_Id,
+                    comp_Descripcion = x.comp_Descripcion
+                });
+            }
+            return Json(tbCompetencias, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult Create(tbCompetencias tbCompetencias)
+        {
+            string msj = "";
+            if (tbCompetencias.comp_Descripcion != "")
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbCompetencias_Insert(
+                        tbCompetencias.comp_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCompetencias_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + "";
+                    }
+                }
+                catch(Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Competencias/Details/5
-        public JsonResult Details(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbCompetencias tbJSON = db.tbCompetencias.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbCompetencias tbCompetencias = db.tbCompetencias.Find(id);
-        //    if (tbCompetencias == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbCompetencias);
-        //}
 
-        // GET: Competencias/Create
-        public ActionResult Create()
-        {
-            return View();
 
-        }
+
+
+        
 
         // POST: Competencias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
