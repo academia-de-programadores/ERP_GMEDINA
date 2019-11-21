@@ -10,8 +10,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cde_DescripcionDeduccion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id= "cde_DescripcionDeduccion" } })
-                @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id= "Validation_descipcion" })
+                @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id= "cde_DescripcionDeduccionA", @Value = "" } })
+                @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id= "Validation_descipcionA" })
             </div>
         </div>
 
@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>   
+                <label class="text-danger" id="Validation_descipcion2A" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>   
             </div>
         </div>  
 
@@ -27,16 +27,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cde_PorcentajeColaborador, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @id= "cde_PorcentajeColaborador", @Value="" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id= "Validation_descipcion3" })
+                @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @id= "cde_PorcentajeColaboradorA", @Value = "" } })
+                @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id= "Validation_descipcion3A" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.cde_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @id= "cde_PorcentajeEmpresa", @Value = "" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id= "Validation_descipcion4" })
+                @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @id= "cde_PorcentajeEmpresaA", @Value = "" } })
+                @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id= "Validation_descipcion4A" })
             </div>
         </div>
     </div>
