@@ -92,7 +92,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ColaboradoresPorPlanilla" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ComisionesColaborador" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtrasColaboradores" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesInstitucionesFinancierasColaboradres" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoBonos" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
@@ -367,6 +366,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMes" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Editar" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado" Width="1.5" PointX="7.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
