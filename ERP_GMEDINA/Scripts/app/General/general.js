@@ -28,7 +28,7 @@ function serializar(data) {
         if (value!="") {
             Data[valor.name] = value;
         } else {
-            SetearClases(valor.name, "error", "valid");
+            SetearClases(valor.name, "error", "valid", "val-required");
             verificacion = false;
         }
     });
@@ -56,11 +56,15 @@ function FechaFormato(pFecha) {
 function pad2(number) {
     return (number < 10 ? '0' : '') + number
 }
-function SetearClases(Id,Agregar,Remover) {
+function SetearClases(Id,Agregar,Remover,valorError) {
     modal.forEach(function (indice, value) {
         var spam = $("#" + indice).find("#error" + Id);
         var input = $("#" + indice).find("#" + Id);
-        spam.text(input.data("val-required"));
+        if (valorError == "") {
+            spam.text(valorError);
+        } else {
+            spam.text(input.data(valorError));
+        }
         input.addClass(Agregar);
         input.removeClass(Remover);
     });

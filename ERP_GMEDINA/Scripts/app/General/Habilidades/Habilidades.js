@@ -50,18 +50,14 @@ function llenarTabla() {
 }
 //Modals
 $("#ModalNuevo").on('hidden.bs.modal', function () {
-    SetearClases("habi_Descripcion", "valid", "error");
-    $("#ModalNuevo").find("#errorhabi_Descripcion").text("");
+    SetearClases("habi_Descripcion", "valid", "error", "");
 });
 $("#ModalEditar").on('hidden.bs.modal', function () {
-    SetearClases("habi_Descripcion", "valid", "error");
-    $("#ModalEditar").find("#errorhabi_Descripcion").text("");
+    SetearClases("habi_Descripcion", "valid", "error", "");
 });
 $("#ModalInhabilitar").on('hidden.bs.modal', function () {
-    SetearClases("habi_Descripcion", "valid", "error");
-    $("#ModalEditar").find("#errorhabi_Descripcion").text("");
-});
-//Botones GET
+    SetearClases("habi_RazonInactivo", "valid", "error", "");
+});//Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#habi_Descripcion").val("");
