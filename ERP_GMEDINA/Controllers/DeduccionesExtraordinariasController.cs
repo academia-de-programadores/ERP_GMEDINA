@@ -68,7 +68,6 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
         {
-
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado");
             return View();
@@ -214,20 +213,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
-
-        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetDDL()
-        {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from EqEm in db.tbEquipoEmpleados
-            join Empl in db.tbEmpleados on EqEm.emp_Id equals Empl.emp_Id
-            join Pers in db.tbPersonas on Empl.per_Id equals Pers.per_Id
-            select new { Id = EqEm.eqem_Id , Nombre = Pers.per_Nombres };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
-        }
-
 
         //GET: DeduccionesExtraordinarias/Inactivar
         public ActionResult Inactivar(int? ID)

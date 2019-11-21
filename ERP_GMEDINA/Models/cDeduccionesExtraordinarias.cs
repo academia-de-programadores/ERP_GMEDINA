@@ -45,9 +45,6 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducción")]
         public int cde_IdDeducciones { get; set; }
 
-       [Display(Name = "Deducción")]
-        public string cde_DescripcionDeduccion { get; set; }
-
         [DataType(DataType.Currency, ErrorMessage = "Debe ingresar solo numeros")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
         [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
