@@ -36,7 +36,7 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
                     '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra +'">Editar</a>' +
-                    '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra +'">Detalle</a>' +
+                    '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra +'">Detalles</a>' +
                     '<button iddeduccionesextra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
                     '</td>' +
                     '</tr>';
@@ -124,12 +124,6 @@ $("#btnEditDeduccionesExtraordinarias").click(function () {
         }
     });
 });
-
-
-//$(document).ready(function () {
-//    //codigo cargar grid
-//    /*cargarGridDeducciones();*/
-//});
 
 
 ////FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
