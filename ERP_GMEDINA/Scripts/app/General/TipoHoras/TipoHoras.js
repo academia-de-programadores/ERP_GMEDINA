@@ -1,6 +1,4 @@
-﻿
-
-var id = 0;
+﻿var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -54,17 +52,7 @@ function llenarTabla() {
             });
         });
 }
-//Modals
-$("#ModalNuevo").on('hidden.bs.modal', function () {
-    SetearClases("tiho_Descripcion", "tiho_Recargo", "valid", "error", "");
-});
-$("#ModalEditar").on('hidden.bs.modal', function () {
-    SetearClases("tiho_Descripcion", "tiho_Recargo", "valid", "error", "");
-});
-$("#ModalInhabilitar").on('hidden.bs.modal', function () {
-    SetearClases("tiho_RazonInactivo", "valid", "error", "");
-});//Botones GET
-
+//Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#tiho_Descripcion").val("");
@@ -87,6 +75,8 @@ $("#btnEditar").click(function () {
 $("#btnInhabilitar").click(function () {
     CierraPopups();
     $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#tiho_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#tiho_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -115,10 +105,10 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.tiho_Id = id;
+        data.habi_Id = id;
         data = JSON.stringify({ tbHabilidades: data });
         _ajax(data,
-            '/TipoHoras/Inactivar',
+            '/TipoHoras/Delete',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {

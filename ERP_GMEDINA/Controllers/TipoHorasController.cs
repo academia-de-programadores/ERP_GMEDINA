@@ -14,16 +14,24 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: TipoHoras
+        // GET: Habilidades
         public ActionResult Index()
         {
-            tbUsuario Usuario = new tbUsuario();
-            Usuario.usu_Id = 1;
-            Session["Usuario"] = Usuario;
-            var tbTipoHoras = db.tbTipoHoras.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.tiho_Estado == true).OrderByDescending(x => x.tiho_FechaCrea );
-            return View(tbTipoHoras.ToList());
+            List<tbTipoHoras> tbTipoHoras = new List<Models.tbTipoHoras> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbTipoHoras = db.tbTipoHoras.Where(x => x.tiho_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
+                return View(tbTipoHoras);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbTipoHoras.Add(new tbTipoHoras { tiho_Id = 0, tiho_Descripcion = "fallo la conexion",tiho_Recargo=0 });
+            }
+            return View(tbTipoHoras);
         }
-
         [HttpPost]
         public JsonResult llenarTabla()
         {
@@ -35,36 +43,65 @@ namespace ERP_GMEDINA.Controllers
                 {
                     tiho_Id = x.tiho_Id,
                     tiho_Descripcion = x.tiho_Descripcion,
-                    tiho_Recargo=x.tiho_Recargo,
-                    tiho_Estado = x.tiho_Estado,
-                    tiho_RazonInactivo = x.tiho_RazonInactivo,
-                    tiho_UsuarioCrea = x.tiho_UsuarioCrea,
-                    tiho_FechaCrea = x.tiho_FechaCrea,
-                    tiho_UsuarioModifica = x.tiho_UsuarioModifica,
-                    tiho_FechaModifica = x.tiho_FechaModifica
+                    tiho_Recargo=x.tiho_Recargo
                 });
             }
-            //tbHabilidades Habilidad = new tbHabilidades {habi_Descripcion="hola", habi_Id=1 };
-            //List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
-            ////tbHabilidades.Add(Habilidad);
             return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
         }
 
+        // POST: Habilidades/Create
+        [HttpPost]
+        public JsonResult Create(tbTipoHoras tbTipoHoras)
+        {
+            string msj = "";
+            if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo!=0)
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoHoras_Insert(tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHoras_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
 
-        // GET: TipoHoras/Details/5
-        public ActionResult Details(int? id)
+        // GET: Habilidades/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(id);
-            if (tbTipoHoras == null || !tbTipoHoras.tiho_Estado)
+
+            tbTipoHoras tbTipoHoras = null;
+            try
             {
+                tbTipoHoras = db.tbTipoHoras.Find(id);
+                if (tbTipoHoras == null || !tbTipoHoras.tiho_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var tipohora = new tbTipoHoras
+            var TipoHoras = new tbTipoHoras
             {
                 tiho_Id = tbTipoHoras.tiho_Id,
                 tiho_Descripcion = tbTipoHoras.tiho_Descripcion,
@@ -74,220 +111,86 @@ namespace ERP_GMEDINA.Controllers
                 tiho_UsuarioCrea = tbTipoHoras.tiho_UsuarioCrea,
                 tiho_FechaCrea = tbTipoHoras.tiho_FechaCrea,
                 tiho_UsuarioModifica = tbTipoHoras.tiho_UsuarioModifica,
-                tiho_FechaModifica = tbTipoHoras.tiho_FechaModifica
+                tiho_FechaModifica = tbTipoHoras.tiho_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoHoras.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoHoras.tbUsuario1).usu_NombreUsuario }
             };
-            if (tbTipoHoras.tbUsuario != null)
-            {
-                tipohora.tbUsuario = new tbUsuario { usu_NombreUsuario = tbTipoHoras.tbUsuario.usu_NombreUsuario };
-            }
-            else
-            {
-                tipohora.tbUsuario = new tbUsuario { usu_NombreUsuario = "" };
-            }
-            if (tbTipoHoras.tbUsuario1 != null)
-            {
-                tipohora.tbUsuario1 = new tbUsuario { usu_NombreUsuario = tbTipoHoras.tbUsuario1.usu_NombreUsuario };
-            }
-            else
-            {
-                tipohora.tbUsuario1 = new tbUsuario { usu_NombreUsuario = "" };
-            }
-            return Json(tipohora, JsonRequestBehavior.AllowGet);
-        
+            return Json(TipoHoras, JsonRequestBehavior.AllowGet);
+        }
 
-    }
-
-        //// GET: TipoHoras/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.tiho_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-        //    ViewBag.tiho_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-        //    return View();
-        //}
-
-        // POST: TipoHoras/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Habilidades/Edit/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Create(tbTipoHoras tbTipoHoras)
+        public JsonResult Edit(tbTipoHoras tbTipoHoras)
         {
-               //string tiho_Descripcion,int tiho_Recargo
-            //tbTipoHoras TipoHora = new tbTipoHoras();
-            //TipoHora.tiho_Descripcion = tiho_Descripcion;
-            //TipoHora.tiho_Recargo = tiho_Recargo;
-            //TipoHora.tiho_FechaCrea = DateTime.Now;
-            string MensajeError = "";
-            if (TipoHora.tiho_Descripcion != "" )
+            string msj = "";
+            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo!=0)
             {
-               
-
-            var Usuario = (tbUsuario)Session["Usuario"];
-         
-            if (ModelState.IsValid)
-            {
-               
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    IEnumerable<object> listTipoHoras = null;
-                    listTipoHoras = db.UDP_RRHH_tbTipoHoras_Insert(TipoHora.tiho_Descripcion,
-                                                                    TipoHora.tiho_Recargo,
-                                                                    Usuario.usu_Id,
-                                                                    DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHoras_Insert_Result RES in listTipoHoras)
+                    var list = db.UDP_RRHH_tbTipoHora_Update(id, tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHora_Update_Result item in list)
                     {
-                        MensajeError = RES.MensajeError;
-
+                        msj = item.MensajeError + " ";
                     }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.No se pudo agregar el Registro");
-                            return Json(MensajeError.Substring(0, 2));
-                        }
-                    }
-                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
+                    msj = "-2";
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo agregar el registro");
-                    return Json(MensajeError.Substring(0, 1));
                 }
-
-            }
-
-            return Json(TipoHora, JsonRequestBehavior.AllowGet);
+                Session.Remove("id");
             }
             else
             {
-                MensajeError = "-3";
+                msj = "-3";
             }
-            return Json(MensajeError.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: TipoHoras/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            Session["id"] = id;
-            var List = db.UDP_RRHH_tbTipoHoras_Select(id).ToList();
-
-            return Json(List, JsonRequestBehavior.AllowGet);
-        }
-
-        // POST: TipoHoras/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: Habilidades/Delete/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Edit(int tiho_Id, string tiho_Descripcion,int tiho_Recargo)
+        public ActionResult Delete(tbTipoHoras tbTipoHoras)
         {
-            tbTipoHoras TipoHora = new tbTipoHoras();
-            var Usuario = (tbUsuario)Session["Usuario"];
-            TipoHora.tiho_Id = tiho_Id;
-            Session["TipoHora"] = TipoHora;
-            //var id = (int)Session["id"];
-            TipoHora.tiho_Id = tiho_Id;
-            TipoHora.tiho_Descripcion = tiho_Descripcion;
-            TipoHora.tiho_Recargo = tiho_Recargo;
-       
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_RazonInactivo != "")
             {
-                string MensajeError = "";
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    IEnumerable<object> listTipoHoras = null;
-                    listTipoHoras = db.UDP_RRHH_tbTipoHora_Update(TipoHora.tiho_Id,
-                                                                   TipoHora.tiho_Descripcion,
-                                                                   TipoHora.tiho_Recargo,
-                                                                    Usuario.usu_Id,
-                                                                    DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHora_Update_Result RES in listTipoHoras)
+                    var list = db.UDP_RRHH_tbTipoHoras_Delete(id, tbTipoHoras.tiho_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHoras_Delete_Result item in list)
                     {
-                        MensajeError = RES.MensajeError;
-
+                        msj = item.MensajeError + " ";
                     }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.No se pudo editar el Registro");
-                            return Json(MensajeError.Substring(0, 2));
-                        }
-                    }
-                    return Json("Exito", JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
+                    msj = "-2";
                     ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo editar el registro");
-                    return Json(MensajeError.Substring(0, 1));
                 }
-
+                Session.Remove("id");
             }
-
-            return Json(TipoHora, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: TipoHoras/Delete/5
-
-        //public JsonResult Inactivar(int? ID)
-        //{
-        //    db.Configuration.ProxyCreationEnabled = false;
-        //    tbTipoHoras tbTipoHoras = db.tbTipoHoras.Find(ID);
-        //    return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
-        //}
-
-        // POST: TipoHoras/Delete/5
-        //[HttpPost]
-       // [ValidateAntiForgeryToken]
-        public ActionResult Inactivar( string  tiho_RazonInactivo)
-        {
-            var id = (int)Session["id"];
-            tbTipoHoras TipoHora = new tbTipoHoras();
-            TipoHora.tiho_Id = id;
-            TipoHora.tiho_RazonInactivo = tiho_RazonInactivo;
-            var Usuario = (tbUsuario)Session["Usuario"];
-            if (ModelState.IsValid)
+            else
             {
-                string MensajeError = "";
-                try
-                {
-                    IEnumerable<object> listTipoHoras = null;
-                    listTipoHoras = db.UDP_RRHH_tbTipoHoras_Delete(TipoHora.tiho_Id,
-                                                                   TipoHora.tiho_RazonInactivo,
-                                                                   Usuario.usu_Id,
-                                                                   DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHoras_Delete_Result RES in listTipoHoras)
-                    {
-                        MensajeError = RES.MensajeError;
-
-                    }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1.No se pudo inhabilitar el Registro");
-                            return Json(MensajeError.Substring(0, 2));
-                        }
-                    }
-                    return Json("Exito", JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                    ModelState.AddModelError("", "2.No se pudo inhabilitar el registro");
-                    return Json(MensajeError.Substring(0, 1));
-                }
-
+                msj = "-3";
             }
-
-            return Json(TipoHora, JsonRequestBehavior.AllowGet);
-
-
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
