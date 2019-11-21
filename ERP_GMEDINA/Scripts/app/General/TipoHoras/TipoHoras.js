@@ -7,9 +7,9 @@ function tablaEditar(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalEdit #tiho_Id").val(item.tiho_Id)
-                $("#ModalEdit #tiho_Descripcion").val(item.tiho_Descripcion);
-                $("#ModalEdit #tiho_Recargo").val(item.tiho_Recargo);
+                $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
+                $("#FormEditar").find("#tiho_Descripcion").val(obj.habi_Descripcion);
+                $("#FormEditar").find("#tiho_Recargo").val(obj.tiho_Recargo);
                 $('#ModalEditar').modal('show');
             }
         });
@@ -17,7 +17,7 @@ function tablaEditar(ID) {
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
-        '/TipoHoras/Details/' + ID,
+        '/TipoHoras/Edit/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -28,7 +28,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(data.tiho_FechaModifica);
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = data.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = data.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditarM")["0"].dataset.id = id;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -55,9 +55,10 @@ function llenarTabla() {
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
-    $("#FormNuevo").find("#tiho_Descripcion").val("");
-    $("#FormNuevo").find("#tiho_Recargo").val("");
     modalnuevo.modal('show');
+    $("#FormNuevo").find("#habi_Descripcion").val("");
+    $("#FormEditar").find("#habi_Descripcion").focus();
+    
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -66,17 +67,17 @@ $("#btnEditar").click(function () {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
+                $('#ModalEditar').modal('show');
                 $("#FormEditar").find("#tiho_Descripcion").val(obj.tiho_Descripcion);
                 $("#FormEditar").find("#tiho_Recargo").val(obj.tiho_Recargo);
-                $('#ModalEditar').modal('show');
             }
         });
 });
 $("#btnInhabilitar").click(function () {
     CierraPopups();
     $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#tiho_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#tiho_RazonInactivo").focus();
+    $("#ModalInhabilitar").find("#habi_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -91,7 +92,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
@@ -114,7 +115,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["tiho_RazonInactivo"]);
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
