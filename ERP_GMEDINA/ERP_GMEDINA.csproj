@@ -1416,7 +1416,6 @@
     <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Create.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Delete.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />

@@ -9,7 +9,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-            <h2>Edit</h2>
+            <h2>Editar</h2>
         </div>
 
         @using (Html.BeginForm())
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger" })
                         </div>
                     </div>
