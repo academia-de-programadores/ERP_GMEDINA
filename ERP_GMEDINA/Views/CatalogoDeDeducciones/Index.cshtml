@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>Catálogo de Deducciones</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deducción</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Nuevo</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -49,6 +49,15 @@
                                 </tr>
                             }
                         </tbody>
+                        <tfoot>
+                            <tr role="row">
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cde_DescripcionDeduccion)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cde_PorcentajeColaborador)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cde_PorcentajeEmpresa)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
