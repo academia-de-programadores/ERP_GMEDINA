@@ -51,9 +51,9 @@ function llenarTabla() {
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
-    $("#FormNuevo").find("#habi_Descripcion").val("");
-    $("#FormEditar").find("#habi_Descripcion").focus();
     modalnuevo.modal('show');
+    $(modalnuevo).find("#habi_Descripcion").val("");
+    $(modalnuevo).find("#habi_Descripcion").focus();
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -63,7 +63,8 @@ $("#btnEditar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+                $("#ModalEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+                $("#ModalEditar").find("#habi_Descripcion").focus();
             }
         });
 });
