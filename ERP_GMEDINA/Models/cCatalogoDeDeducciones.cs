@@ -23,19 +23,19 @@ namespace ERP_GMEDINA.Models
         [Required]
         public int tde_IdTipoDedu { get; set; }
 
-        
+        [DataType(DataType.Currency)]
         [Display(Name = "Porcentaje Colaborador")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-		[Range(1, 1000000000,
-		ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
-		public decimal cde_PorcentajeColaborador { get; set; }
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
+        [Range(1, 999999999999, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        public decimal cde_PorcentajeColaborador { get; set; }
 
-        
+        [DataType(DataType.Currency)]
         [Display(Name = "Porcentaje Empresa")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-		[Range(1, 1000000000,
-		ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
-		public decimal cde_PorcentajeEmpresa { get; set; }
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
+        [Range(1, 999999999999, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        public decimal cde_PorcentajeEmpresa { get; set; }
 
         [Display(Name = "Creado por")]
         public int cde_UsuarioCrea { get; set; }

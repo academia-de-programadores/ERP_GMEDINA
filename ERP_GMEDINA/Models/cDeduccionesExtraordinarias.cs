@@ -21,13 +21,11 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Equipo Empleado")]
         public int eqem_Id { get; set; }
 
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, a mayor de 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Restante")]
@@ -38,7 +36,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
 
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
+
         [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Cuota")]
