@@ -21,8 +21,8 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
+                //tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
                 return View(tbHabilidades);
             }
             catch (Exception ex)

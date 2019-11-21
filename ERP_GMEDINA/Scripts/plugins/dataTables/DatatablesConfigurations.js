@@ -1,6 +1,26 @@
 ﻿var tabla = null;
 $(document).ready(function () {
-    tabla=$('.dataTables-example').DataTable({
+    var columnas = [];
+    var col = 0;
+    $("#IndexTable thead tr").find("th").each(function (indice,valor) {
+        if (valor.innerText == "") {
+            col = 1;
+            columnas.push({
+                "className": 'details-control',
+                "orderable": false,
+                "data": null,
+                "defaultContent": ''
+            });
+        } else if (valor.innerText == "Acciones") {
+                columnas.push({
+                    "orderable": false,
+                    "data": "Acciones",
+                });
+            } else {
+                columnas.push(null);
+            }
+    });
+    tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 25,
@@ -22,6 +42,8 @@ $(document).ready(function () {
                             .css('font-size', 'inherit');
                 }
             }
-        ]
+        ],
+        columns: columnas,
+        order: [[col, 'asc']],
     });
 });

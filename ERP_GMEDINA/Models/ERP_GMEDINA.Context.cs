@@ -30,6 +30,10 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbTipoSalidas> tbTipoSalidas { get; set; }
+        public virtual DbSet<tbAreas> tbAreas { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
+        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<V_Departamentos> V_Departamentos { get; set; }
     
         public virtual ObjectResult<UDP_RRHH_tbHabilidades_Delete_Result> UDP_RRHH_tbHabilidades_Delete(Nullable<int> habi_id, string habi_razon_Inactivo, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {
@@ -147,6 +151,245 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tsal_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoSalidas_Update_Result>("UDP_RRHH_tbTipoSalidas_Update", tsal_IdParameter, tsal_DescripcionParameter, tsal_UsuarioModificaParameter, tsal_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbAreas_Delete_Result> UDP_RRHH_tbAreas_Delete(Nullable<int> area_Id, string area_Razoninactivo, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var area_RazoninactivoParameter = area_Razoninactivo != null ?
+                new ObjectParameter("area_Razoninactivo", area_Razoninactivo) :
+                new ObjectParameter("area_Razoninactivo", typeof(string));
+    
+            var area_UsuariomodificaParameter = area_Usuariomodifica.HasValue ?
+                new ObjectParameter("area_Usuariomodifica", area_Usuariomodifica) :
+                new ObjectParameter("area_Usuariomodifica", typeof(int));
+    
+            var area_FechamodificaParameter = area_Fechamodifica.HasValue ?
+                new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
+                new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Delete_Result>("UDP_RRHH_tbAreas_Delete", area_IdParameter, area_RazoninactivoParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbAreas_Insert_Result> UDP_RRHH_tbAreas_Insert(Nullable<int> car_Id, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariocrea, Nullable<System.DateTime> area_Fechacrea)
+        {
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var suc_IdParameter = suc_Id.HasValue ?
+                new ObjectParameter("suc_Id", suc_Id) :
+                new ObjectParameter("suc_Id", typeof(int));
+    
+            var area_DescripcionParameter = area_Descripcion != null ?
+                new ObjectParameter("area_Descripcion", area_Descripcion) :
+                new ObjectParameter("area_Descripcion", typeof(string));
+    
+            var area_UsuariocreaParameter = area_Usuariocrea.HasValue ?
+                new ObjectParameter("area_Usuariocrea", area_Usuariocrea) :
+                new ObjectParameter("area_Usuariocrea", typeof(int));
+    
+            var area_FechacreaParameter = area_Fechacrea.HasValue ?
+                new ObjectParameter("area_Fechacrea", area_Fechacrea) :
+                new ObjectParameter("area_Fechacrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Insert_Result>("UDP_RRHH_tbAreas_Insert", car_IdParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariocreaParameter, area_FechacreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbAreas_Restore_Result> UDP_RRHH_tbAreas_Restore(Nullable<int> area_Id, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var area_UsuariomodificaParameter = area_Usuariomodifica.HasValue ?
+                new ObjectParameter("area_Usuariomodifica", area_Usuariomodifica) :
+                new ObjectParameter("area_Usuariomodifica", typeof(int));
+    
+            var area_FechamodificaParameter = area_Fechamodifica.HasValue ?
+                new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
+                new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Restore_Result>("UDP_RRHH_tbAreas_Restore", area_IdParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbAreas_Update_Result> UDP_RRHH_tbAreas_Update(Nullable<int> area_Id, Nullable<int> car_Id, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var suc_IdParameter = suc_Id.HasValue ?
+                new ObjectParameter("suc_Id", suc_Id) :
+                new ObjectParameter("suc_Id", typeof(int));
+    
+            var area_DescripcionParameter = area_Descripcion != null ?
+                new ObjectParameter("area_Descripcion", area_Descripcion) :
+                new ObjectParameter("area_Descripcion", typeof(string));
+    
+            var area_UsuariomodificaParameter = area_Usuariomodifica.HasValue ?
+                new ObjectParameter("area_Usuariomodifica", area_Usuariomodifica) :
+                new ObjectParameter("area_Usuariomodifica", typeof(int));
+    
+            var area_FechamodificaParameter = area_Fechamodifica.HasValue ?
+                new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
+                new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Update_Result>("UDP_RRHH_tbAreas_Update", area_IdParameter, car_IdParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Delete_Result> UDP_RRHH_tbCargos_Delete(Nullable<int> car_Id, string car_razon_Inactivo, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        {
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var car_razon_InactivoParameter = car_razon_Inactivo != null ?
+                new ObjectParameter("car_razon_Inactivo", car_razon_Inactivo) :
+                new ObjectParameter("car_razon_Inactivo", typeof(string));
+    
+            var car_UsuarioModificaParameter = car_UsuarioModifica.HasValue ?
+                new ObjectParameter("car_UsuarioModifica", car_UsuarioModifica) :
+                new ObjectParameter("car_UsuarioModifica", typeof(int));
+    
+            var car_FechaModificaParameter = car_FechaModifica.HasValue ?
+                new ObjectParameter("car_FechaModifica", car_FechaModifica) :
+                new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Delete_Result>("UDP_RRHH_tbCargos_Delete", car_IdParameter, car_razon_InactivoParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Insert_Result> UDP_RRHH_tbCargos_Insert(string car_Descripcion, Nullable<int> car_UsuarioCrea, Nullable<System.DateTime> car_FechaCrea)
+        {
+            var car_DescripcionParameter = car_Descripcion != null ?
+                new ObjectParameter("car_Descripcion", car_Descripcion) :
+                new ObjectParameter("car_Descripcion", typeof(string));
+    
+            var car_UsuarioCreaParameter = car_UsuarioCrea.HasValue ?
+                new ObjectParameter("car_UsuarioCrea", car_UsuarioCrea) :
+                new ObjectParameter("car_UsuarioCrea", typeof(int));
+    
+            var car_FechaCreaParameter = car_FechaCrea.HasValue ?
+                new ObjectParameter("car_FechaCrea", car_FechaCrea) :
+                new ObjectParameter("car_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Insert_Result>("UDP_RRHH_tbCargos_Insert", car_DescripcionParameter, car_UsuarioCreaParameter, car_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Restore_Result> UDP_RRHH_tbCargos_Restore(Nullable<int> car_Id, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        {
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var car_UsuarioModificaParameter = car_UsuarioModifica.HasValue ?
+                new ObjectParameter("car_UsuarioModifica", car_UsuarioModifica) :
+                new ObjectParameter("car_UsuarioModifica", typeof(int));
+    
+            var car_FechaModificaParameter = car_FechaModifica.HasValue ?
+                new ObjectParameter("car_FechaModifica", car_FechaModifica) :
+                new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Restore_Result>("UDP_RRHH_tbCargos_Restore", car_IdParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCargos_Update_Result> UDP_RRHH_tbCargos_Update(Nullable<int> car_Id, string car_Descripcion, Nullable<int> car_UsuarioModifica, Nullable<System.DateTime> car_FechaModifica)
+        {
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var car_DescripcionParameter = car_Descripcion != null ?
+                new ObjectParameter("car_Descripcion", car_Descripcion) :
+                new ObjectParameter("car_Descripcion", typeof(string));
+    
+            var car_UsuarioModificaParameter = car_UsuarioModifica.HasValue ?
+                new ObjectParameter("car_UsuarioModifica", car_UsuarioModifica) :
+                new ObjectParameter("car_UsuarioModifica", typeof(int));
+    
+            var car_FechaModificaParameter = car_FechaModifica.HasValue ?
+                new ObjectParameter("car_FechaModifica", car_FechaModifica) :
+                new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Insert_Result> UDP_RRHH_tbDepartamentos_Insert(Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var depto_DescripcionParameter = depto_Descripcion != null ?
+                new ObjectParameter("depto_Descripcion", depto_Descripcion) :
+                new ObjectParameter("depto_Descripcion", typeof(string));
+    
+            var depto_UsuariocreaParameter = depto_Usuariocrea.HasValue ?
+                new ObjectParameter("depto_Usuariocrea", depto_Usuariocrea) :
+                new ObjectParameter("depto_Usuariocrea", typeof(int));
+    
+            var depto_FechaCreaParameter = depto_FechaCrea.HasValue ?
+                new ObjectParameter("depto_FechaCrea", depto_FechaCrea) :
+                new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Insert_Result>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_IdParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Restore_Result> UDP_RRHH_tbDepartamentos_Restore(Nullable<int> depto_Id, Nullable<int> depto_Usuariomodifica, Nullable<System.DateTime> depto_Fechamodifica)
+        {
+            var depto_IdParameter = depto_Id.HasValue ?
+                new ObjectParameter("depto_Id", depto_Id) :
+                new ObjectParameter("depto_Id", typeof(int));
+    
+            var depto_UsuariomodificaParameter = depto_Usuariomodifica.HasValue ?
+                new ObjectParameter("depto_Usuariomodifica", depto_Usuariomodifica) :
+                new ObjectParameter("depto_Usuariomodifica", typeof(int));
+    
+            var depto_FechamodificaParameter = depto_Fechamodifica.HasValue ?
+                new ObjectParameter("depto_Fechamodifica", depto_Fechamodifica) :
+                new ObjectParameter("depto_Fechamodifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Restore_Result>("UDP_RRHH_tbDepartamentos_Restore", depto_IdParameter, depto_UsuariomodificaParameter, depto_FechamodificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Update_Result> UDP_RRHH_tbDepartamentos_Update(Nullable<int> depto_Id, Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
+        {
+            var depto_IdParameter = depto_Id.HasValue ?
+                new ObjectParameter("depto_Id", depto_Id) :
+                new ObjectParameter("depto_Id", typeof(int));
+    
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var depto_DescripcionParameter = depto_Descripcion != null ?
+                new ObjectParameter("depto_Descripcion", depto_Descripcion) :
+                new ObjectParameter("depto_Descripcion", typeof(string));
+    
+            var depto_UsuarioModificaParameter = depto_UsuarioModifica.HasValue ?
+                new ObjectParameter("depto_UsuarioModifica", depto_UsuarioModifica) :
+                new ObjectParameter("depto_UsuarioModifica", typeof(int));
+    
+            var depto_FechaModificaParameter = depto_FechaModifica.HasValue ?
+                new ObjectParameter("depto_FechaModifica", depto_FechaModifica) :
+                new ObjectParameter("depto_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Update_Result>("UDP_RRHH_tbDepartamentos_Update", depto_IdParameter, area_IdParameter, car_IdParameter, depto_DescripcionParameter, depto_UsuarioModificaParameter, depto_FechaModificaParameter);
         }
     }
 }

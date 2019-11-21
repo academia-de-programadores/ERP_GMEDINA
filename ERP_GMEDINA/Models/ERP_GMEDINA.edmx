@@ -20,6 +20,49 @@
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
+        <EntityType Name="tbAreas">
+          <Key>
+            <PropertyRef Name="area_Id" />
+          </Key>
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="suc_Id" Type="int" Nullable="false" />
+          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="area_Estado" Type="bit" Nullable="false" />
+          <Property Name="area_Razoninactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="area_Usuariocrea" Type="int" Nullable="false" />
+          <Property Name="area_Fechacrea" Type="datetime" Nullable="false" />
+          <Property Name="area_Usuariomodifica" Type="int" />
+          <Property Name="area_Fechamodifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbCargos">
+          <Key>
+            <PropertyRef Name="car_Id" />
+          </Key>
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_Estado" Type="bit" Nullable="false" />
+          <Property Name="car_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="car_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="car_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="car_UsuarioModifica" Type="int" />
+          <Property Name="car_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbDepartamentos">
+          <Key>
+            <PropertyRef Name="depto_Id" />
+          </Key>
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="depto_Estado" Type="bit" Nullable="false" />
+          <Property Name="depto_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="depto_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="depto_Fechacrea" Type="datetime" Nullable="false" />
+          <Property Name="depto_UsuarioModifica" Type="int" />
+          <Property Name="depto_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbHabilidades">
           <Key>
             <PropertyRef Name="habi_Id" />
@@ -46,7 +89,107 @@
           <Property Name="tsal_UsuarioModifica" Type="int" />
           <Property Name="tsal_FechaModifica" Type="datetime" />
         </EntityType>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Departamentos">
+          <Key>
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="area_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="depto_UsuarioCrea" />
+            <PropertyRef Name="depto_Fechacrea" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="per_NombreCompleto" />
+          </Key>
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="depto_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="depto_Fechacrea" Type="datetime" Nullable="false" />
+          <Property Name="depto_Usuariomodifica" Type="int" />
+          <Property Name="depto_Fechamodifica" Type="datetime" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="per_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="area_Usuariocrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="area_Usuariomodifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCargos">
+              <PropertyRef Name="car_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCargos">
+              <PropertyRef Name="car_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="depto_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="depto_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -58,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -70,7 +213,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -82,7 +225,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -94,6 +237,110 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreas">
+              <PropertyRef Name="area_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="area_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="UDP_RRHH_tbAreas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Razoninactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
+          <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbAreas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="area_Usuariocrea" Type="int" Mode="In" />
+          <Parameter Name="area_Fechacrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbAreas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
+          <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
+          <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbCargos_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="car_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="car_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbCargos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="car_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="car_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbCargos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="car_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="car_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbCargos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="car_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbDepartamentos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="depto_Usuariocrea" Type="int" Mode="In" />
+          <Parameter Name="depto_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbDepartamentos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Usuariomodifica" Type="int" Mode="In" />
+          <Parameter Name="depto_Fechamodifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbHabilidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="habi_id" Type="int" Mode="In" />
           <Parameter Name="habi_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -130,23 +377,79 @@
         </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
+          <EntitySet Name="tbAreas" EntityType="Self.tbAreas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbCargos" EntityType="Self.tbCargos" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoSalidas" EntityType="Self.tbTipoSalidas" Schema="rrhh" store:Type="Tables" />
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
+          <EntitySet Name="V_Departamentos" EntityType="Self.V_Departamentos" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_Departamentos].[depto_Id] AS [depto_Id], 
+    [V_Departamentos].[area_Id] AS [area_Id], 
+    [V_Departamentos].[depto_Descripcion] AS [depto_Descripcion], 
+    [V_Departamentos].[depto_UsuarioCrea] AS [depto_UsuarioCrea], 
+    [V_Departamentos].[depto_Fechacrea] AS [depto_Fechacrea], 
+    [V_Departamentos].[depto_Usuariomodifica] AS [depto_Usuariomodifica], 
+    [V_Departamentos].[depto_Fechamodifica] AS [depto_Fechamodifica], 
+    [V_Departamentos].[car_Id] AS [car_Id], 
+    [V_Departamentos].[car_Descripcion] AS [car_Descripcion], 
+    [V_Departamentos].[per_Id] AS [per_Id], 
+    [V_Departamentos].[per_NombreCompleto] AS [per_NombreCompleto], 
+    [V_Departamentos].[per_Telefono] AS [per_Telefono], 
+    [V_Departamentos].[per_CorreoElectronico] AS [per_CorreoElectronico]
+    FROM [rrhh].[V_Departamentos] AS [V_Departamentos]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCargos" EntitySet="tbCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCargos" EntitySet="tbCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoSalidas" EntitySet="tbTipoSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
+            <End Role="tbAreas" EntitySet="tbAreas" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -171,6 +474,12 @@
           <NavigationProperty Name="tbHabilidades1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHabilidades" />
           <NavigationProperty Name="tbTipoSalidas" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
           <NavigationProperty Name="tbTipoSalidas1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
+          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" FromRole="tbUsuario" ToRole="tbAreas" />
+          <NavigationProperty Name="tbAreas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" FromRole="tbUsuario" ToRole="tbAreas" />
+          <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCargos" />
+          <NavigationProperty Name="tbCargos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCargos" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbDepartamentos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDepartamentos" />
           </EntityType>
         <EntityContainer Name="ERP_GMEDINAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
@@ -225,6 +534,114 @@
             <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbAreas" EntityType="ERP_GMEDINAModel.tbAreas" />
+          <EntitySet Name="tbCargos" EntityType="ERP_GMEDINAModel.tbCargos" />
+          <EntitySet Name="tbDepartamentos" EntityType="ERP_GMEDINAModel.tbDepartamentos" />
+          <EntitySet Name="V_Departamentos" EntityType="ERP_GMEDINAModel.V_Departamentos" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCargos" EntitySet="tbCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCargos" EntitySet="tbCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
+            <End Role="tbAreas" EntitySet="tbAreas" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Razoninactivo" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result)">
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariocrea" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechacrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result)">
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbCargos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result)">
+            <Parameter Name="car_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="car_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="car_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbCargos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Restore_Result)">
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbCargos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result)">
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Insert_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="depto_Usuariocrea" Mode="In" Type="Int32" />
+            <Parameter Name="depto_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Restore_Result)">
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result)">
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbHabilidades">
@@ -323,6 +740,228 @@
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Update_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tbAreas">
+          <Key>
+            <PropertyRef Name="area_Id" />
+          </Key>
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="suc_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="area_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="area_Razoninactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area_Usuariocrea" Type="Int32" Nullable="false" />
+          <Property Name="area_Fechacrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="area_Usuariomodifica" Type="Int32" />
+          <Property Name="area_Fechamodifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" FromRole="tbAreas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" FromRole="tbAreas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" FromRole="tbAreas" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" FromRole="tbAreas" ToRole="tbCargos" />
+        </EntityType>
+        <EntityType Name="tbCargos">
+          <Key>
+            <PropertyRef Name="car_Id" />
+          </Key>
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="car_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="car_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="car_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="car_UsuarioModifica" Type="Int32" />
+          <Property Name="car_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" FromRole="tbCargos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" FromRole="tbCargos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" FromRole="tbCargos" ToRole="tbAreas" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbCargos" ToRole="tbDepartamentos" />
+        </EntityType>
+        <EntityType Name="tbDepartamentos">
+          <Key>
+            <PropertyRef Name="depto_Id" />
+          </Key>
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="depto_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="depto_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="depto_Fechacrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="depto_UsuarioModifica" Type="Int32" />
+          <Property Name="depto_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" FromRole="tbDepartamentos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbDepartamentos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" FromRole="tbDepartamentos" ToRole="tbAreas" />
+          <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbDepartamentos" ToRole="tbCargos" />
+        </EntityType>
+        <EntityType Name="V_Departamentos">
+          <Key>
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="area_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="depto_UsuarioCrea" />
+            <PropertyRef Name="depto_Fechacrea" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="per_NombreCompleto" />
+          </Key>
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="depto_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="depto_Fechacrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="depto_Usuariomodifica" Type="Int32" />
+          <Property Name="depto_Fechamodifica" Type="DateTime" Precision="3" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="area_Usuariocrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="area_Usuariomodifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCargos">
+              <PropertyRef Name="car_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCargos">
+              <PropertyRef Name="car_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="depto_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="depto_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreas">
+              <PropertyRef Name="area_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="area_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbDepartamentos">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbAreas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -411,6 +1050,148 @@
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbAreas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbAreas">
+              <MappingFragment StoreEntitySet="tbAreas">
+                <ScalarProperty Name="area_Fechamodifica" ColumnName="area_Fechamodifica" />
+                <ScalarProperty Name="area_Usuariomodifica" ColumnName="area_Usuariomodifica" />
+                <ScalarProperty Name="area_Fechacrea" ColumnName="area_Fechacrea" />
+                <ScalarProperty Name="area_Usuariocrea" ColumnName="area_Usuariocrea" />
+                <ScalarProperty Name="area_Razoninactivo" ColumnName="area_Razoninactivo" />
+                <ScalarProperty Name="area_Estado" ColumnName="area_Estado" />
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCargos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCargos">
+              <MappingFragment StoreEntitySet="tbCargos">
+                <ScalarProperty Name="car_FechaModifica" ColumnName="car_FechaModifica" />
+                <ScalarProperty Name="car_UsuarioModifica" ColumnName="car_UsuarioModifica" />
+                <ScalarProperty Name="car_FechaCrea" ColumnName="car_FechaCrea" />
+                <ScalarProperty Name="car_UsuarioCrea" ColumnName="car_UsuarioCrea" />
+                <ScalarProperty Name="car_RazonInactivo" ColumnName="car_RazonInactivo" />
+                <ScalarProperty Name="car_Estado" ColumnName="car_Estado" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDepartamentos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDepartamentos">
+              <MappingFragment StoreEntitySet="tbDepartamentos">
+                <ScalarProperty Name="depto_FechaModifica" ColumnName="depto_FechaModifica" />
+                <ScalarProperty Name="depto_UsuarioModifica" ColumnName="depto_UsuarioModifica" />
+                <ScalarProperty Name="depto_Fechacrea" ColumnName="depto_Fechacrea" />
+                <ScalarProperty Name="depto_UsuarioCrea" ColumnName="depto_UsuarioCrea" />
+                <ScalarProperty Name="depto_RazonInactivo" ColumnName="depto_RazonInactivo" />
+                <ScalarProperty Name="depto_Estado" ColumnName="depto_Estado" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Departamentos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Departamentos">
+              <MappingFragment StoreEntitySet="V_Departamentos">
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_NombreCompleto" ColumnName="per_NombreCompleto" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="depto_Fechamodifica" ColumnName="depto_Fechamodifica" />
+                <ScalarProperty Name="depto_Usuariomodifica" ColumnName="depto_Usuariomodifica" />
+                <ScalarProperty Name="depto_Fechacrea" ColumnName="depto_Fechacrea" />
+                <ScalarProperty Name="depto_UsuarioCrea" ColumnName="depto_UsuarioCrea" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

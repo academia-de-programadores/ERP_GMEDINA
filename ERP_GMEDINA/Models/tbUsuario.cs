@@ -21,6 +21,12 @@ namespace ERP_GMEDINA.Models
             this.tbHabilidades1 = new HashSet<tbHabilidades>();
             this.tbTipoSalidas = new HashSet<tbTipoSalidas>();
             this.tbTipoSalidas1 = new HashSet<tbTipoSalidas>();
+            this.tbAreas = new HashSet<tbAreas>();
+            this.tbAreas1 = new HashSet<tbAreas>();
+            this.tbCargos = new HashSet<tbCargos>();
+            this.tbCargos1 = new HashSet<tbCargos>();
+            this.tbDepartamentos = new HashSet<tbDepartamentos>();
+            this.tbDepartamentos1 = new HashSet<tbDepartamentos>();
         }
     
         public int usu_Id { get; set; }
@@ -42,5 +48,17 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTipoSalidas> tbTipoSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoSalidas> tbTipoSalidas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAreas> tbAreas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAreas> tbAreas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCargos> tbCargos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCargos> tbCargos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamentos> tbDepartamentos1 { get; set; }
     }
 }
