@@ -24,7 +24,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.eqem_Id, "eqem_Id", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.DropDownList("eqem_Id", null, "Seleccione un Equipo Empleado...", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.eqem_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -54,17 +54,17 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.tbCatalogoDeDeducciones.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.DropDownList("cde_IdDeducciones", null, "Seleccione una Deducción...", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
+                            @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.tbCatalogoDeDeducciones.cde_IdDeducciones, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { /*@pattern = "[0-9]+([\.,][0-9]+)?", @step = "0.01",*/ @class = "form-control" } })
+                            @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -17,21 +17,18 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducciones Extraordinarias")]
         public int dex_IdDeduccionesExtra { get; set; }
 
-    
-        [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
+        [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Id Equipo Empleado")]
         public int eqem_Id { get; set; }
 
-        [DataType(DataType.Currency, ErrorMessage = "Debe ingresar solo numeros")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor de 10 dígitos")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, a mayor de 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
-        [DataType(DataType.Currency, ErrorMessage = "Debe ingresar solo numeros")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor de 10 dígitos")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
@@ -41,13 +38,8 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
 
-        [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
-        [Display(Name = "Id Deducción")]
-        public int cde_IdDeducciones { get; set; }
-
-        [DataType(DataType.Currency, ErrorMessage = "Debe ingresar solo numeros")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Solo números con máximo de 2 decimales")]
-        [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+        [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }

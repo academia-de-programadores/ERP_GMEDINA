@@ -129,7 +129,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado", tbDeduccionesExtraordinarias.eqem_Id);
+            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado",tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }

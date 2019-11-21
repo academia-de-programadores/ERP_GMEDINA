@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripcion Deduccion")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-
         public string cde_DescripcionDeduccion { get; set; }
 
         [Display(Name = "Tipo Deduccion")]
