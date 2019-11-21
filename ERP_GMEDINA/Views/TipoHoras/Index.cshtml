@@ -22,7 +22,7 @@
                 <div class="ibox-title">
                     <h5>Listado de Horarios</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalCrear">
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#ModalNuevo">
                             Registrar Horario
                         </button>
                     </div>
@@ -50,7 +50,7 @@
 
                                     <td>
                                         <button type="button" class="btn btn-primary btn-xs tablaDetalle" id="btnDetalle"  onclick="tablaDetalle(@item.tiho_Id)" data-toggle="modal" data-target="#ModalDetalles">Detalle</button>
-                                        <button type="button" class="btn btn-default btn-xs tablaEditar" id="btnEditarR"  onclick="tablaEditar(@item.tiho_Id)" data-toggle="modal" data-target="#ModalEditar">Editar</button>
+                                        <button type="button" class="btn btn-default btn-xs tablaEditar" id="btnEditar"  onclick="tablaEditar(@item.tiho_Id)" data-toggle="modal" data-target="#ModalEditar">Editar</button>
                                     </td>
                                 </tr>
                             }
@@ -64,7 +64,7 @@
 
 @*MODAL CREAR*@
 
-<div class="modal inmodal" id="ModalCrear" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<div class="modal inmodal" id="ModalNuevo" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -80,7 +80,7 @@
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary pull-left" id="btnAgregar" >Agregar</button>
+                            <button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Agregar</button>
                             <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                             
                         </div>
@@ -107,8 +107,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary pull-left" id="btnEditarModal" >Editar</button>
-                            <button type="button" class="btn btn-danger pull-left" id="btnInhabilitarModal" data-id=""  data-toggle="modal" data-target="#ModalInhabilitar">Inhabilitar</button>
+                            <button type="button" class="btn btn-primary pull-left" id="btnActualizar" >Editar</button>
+                            <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar" data-id=""  data-toggle="modal" data-target="#ModalInhabilitar">Inhabilitar</button>
                             <button type="button" class="btn btn-white  pull-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="modal-footer">
                      
-                            <button type="button" class="btn btn-primary pull-left" id="btnInhabilitar" >Actualizar</button>
+                            <button type="button" class="btn btn-primary pull-left" id="InActivar" >Actualizar</button>
                             <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>

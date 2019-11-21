@@ -110,12 +110,13 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(string tiho_Descripcion,int tiho_Recargo)
+        public ActionResult Create(tbTipoHoras tbTipoHoras)
         {
-            tbTipoHoras TipoHora = new tbTipoHoras();
-            TipoHora.tiho_Descripcion = tiho_Descripcion;
-            TipoHora.tiho_Recargo = tiho_Recargo;
-            TipoHora.tiho_FechaCrea = DateTime.Now;
+               //string tiho_Descripcion,int tiho_Recargo
+            //tbTipoHoras TipoHora = new tbTipoHoras();
+            //TipoHora.tiho_Descripcion = tiho_Descripcion;
+            //TipoHora.tiho_Recargo = tiho_Recargo;
+            //TipoHora.tiho_FechaCrea = DateTime.Now;
             string MensajeError = "";
             if (TipoHora.tiho_Descripcion != "" )
             {
