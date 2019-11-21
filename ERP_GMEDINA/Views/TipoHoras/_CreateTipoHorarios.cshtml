@@ -11,17 +11,17 @@
                   <div class="form-group">
                     @Html.LabelFor(model => model.tiho_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                      @Html.EditorFor(model => model.tiho_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "25", autocomplete = "off", required = "required" } })
-                      @Html.ValidationMessageFor(model => model.tiho_Descripcion, "", new { @class = "text-danger" })
+                      @Html.EditorFor(model => model.tiho_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+                      @Html.ValidationMessageFor(model => model.tiho_Descripcion, "", new { @class = "text-danger", @id = "errortiho_Descripcion" })
                     </div>
                   </div>
 
                   <div class="form-group">
                     @Html.LabelFor(model => model.tiho_Recargo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                      @Html.EditorFor(model => model.tiho_Recargo, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", autocomplete = "off", required = "required" } })
-                      @Html.ValidationMessageFor(model => model.tiho_Recargo, "", new { @class = "text-danger" })
-                    </div>
+                      @Html.EditorFor(model => model.tiho_Recargo, new { htmlAttributes = new { @class = "form-control required valid" } })
+                        @Html.ValidationMessageFor(model => model.tiho_Descripcion, "", new { @class = "text-danger", @id = "errortiho_Descripcion" })
+                     </div>
                   </div>
 
                
@@ -31,6 +31,6 @@
             
           }
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

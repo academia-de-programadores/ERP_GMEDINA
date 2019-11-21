@@ -56,8 +56,9 @@ function llenarTabla() {
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');
-    $("#FormNuevo").find("#habi_Descripcion").val("");
-    $("#FormEditar").find("#habi_Descripcion").focus();
+    $("#FormNuevo").find("#tiho_Descripcion").val("");
+    $("#FormNuevo").find("#tiho_Recargo").val(0);
+    $("#FormNuevo").find("#tiho_Descripcion").focus();
     
 });
 $("#btnEditar").click(function () {
@@ -84,7 +85,7 @@ $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data = JSON.stringify({ tbHabilidades: data });
+        data = JSON.stringify({ tbTipoHoras: data });
         _ajax(data,
             '/TipoHoras/Create',
             'POST',
@@ -92,7 +93,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
@@ -106,8 +107,8 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.habi_Id = id;
-        data = JSON.stringify({ tbHabilidades: data });
+        data.tiho_Id = id;
+        data = JSON.stringify({ tbTipoHoras: data });
         _ajax(data,
             '/TipoHoras/Delete',
             'POST',
@@ -115,7 +116,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    LimpiarControles(["tiho_Descripcion", "tiho_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
@@ -129,8 +130,8 @@ $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.habi_Id = id;
-        data = JSON.stringify({ tbHabilidades: data });
+        data.tiho_Id = id;
+        data = JSON.stringify({ tbTipoHoras: data });
         _ajax(data,
             '/TipoHoras/Edit',
             'POST',
