@@ -9,13 +9,13 @@ $(document).ready(function () {
     //AGREGAR HORARIOS///
     $('#btnAgregar').click(function () {
         var data = $("#frmAgregarTipoHoras").serializeArray();
-        data = serializar(data);
+        //data = serializar(data);
         if (data != null) {
-            data = JSON.stringify({ tbTipoHoras: data });
-            _ajax(data,
-                    '/TipoHoras/Create',
-                   'POST',
-                   function (data) {
+            $.ajax({
+                url: "/TipoHoras/Create",
+                method: "POST",
+                data: data,
+            }).done(function (data) {
                        if (data != "-1" && data != "-2" && data != "-3") {
                            CierraPopups();
                            llenarTabla();

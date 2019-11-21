@@ -110,17 +110,22 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create(tbTipoHoras tbTipoHoras)
+        public ActionResult Create(string tiho_Descripcion,int tiho_Recargo)
         {
             tbTipoHoras TipoHora = new tbTipoHoras();
+            TipoHora.tiho_Descripcion = tiho_Descripcion;
+            TipoHora.tiho_Recargo = tiho_Recargo;
+            TipoHora.tiho_FechaCrea = DateTime.Now;
+            string MensajeError = "";
+            if (TipoHora.tiho_Descripcion != "" )
+            {
+               
 
             var Usuario = (tbUsuario)Session["Usuario"];
-            //TipoHora.tiho_Descripcion = tiho_Descripcion;
-            //TipoHora.tiho_Recargo = tiho_recargo;
-            //TipoHora.tiho_FechaCrea = DateTime.Now;
+         
             if (ModelState.IsValid)
             {
-                string MensajeError = "";
+               
                 try
                 {
                     IEnumerable<object> listTipoHoras = null;
@@ -153,6 +158,12 @@ namespace ERP_GMEDINA.Controllers
             }
 
             return Json(TipoHora, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                MensajeError = "-3";
+            }
+            return Json(MensajeError.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: TipoHoras/Edit/5
