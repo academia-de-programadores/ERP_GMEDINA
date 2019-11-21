@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbTipoHoras.Add(new tbTipoHoras { tiho_Id = 0, tiho_Descripcion = "fallo la conexion",tiho_Recargo=0 });
+                tbTipoHoras.Add(new tbTipoHoras { tiho_Id = 0, tiho_Descripcion = "fallo la conexion", tiho_Recargo = 0 });
             }
             return View(tbTipoHoras);
         }
@@ -43,7 +43,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     tiho_Id = x.tiho_Id,
                     tiho_Descripcion = x.tiho_Descripcion,
-                    tiho_Recargo=x.tiho_Recargo
+                    tiho_Recargo = x.tiho_Recargo
                 });
             }
             return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Create(tbTipoHoras tbTipoHoras)
         {
             string msj = "";
-            if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo!=0)
+            if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -123,7 +123,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbTipoHoras tbTipoHoras)
         {
             string msj = "";
-            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo!=0)
+            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
