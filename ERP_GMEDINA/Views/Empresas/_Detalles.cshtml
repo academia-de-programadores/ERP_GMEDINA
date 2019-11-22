@@ -1,0 +1,41 @@
+﻿@model ERP_GMEDINA.Models.tbEmpresas
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle Empresa</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+					<dt>@Html.DisplayNameFor(model => model.empr_Nombre)</dt>
+                    <dd id="empr_Nombre"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.empr_Estado)</dt>
+                    <dd id="empr_Estado"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.empr_RazonInactivo)</dt>
+                    <dd id="empr_RazonInactivo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.empr_FechaCrea)</dt>
+                    <dd id="empr_FechaCrea"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.empr_FechaModifica)</dt>
+                    <dd id="empr_FechaModifica"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>
+
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+			</div>
+		</div>
+	</div>
+</div>
+

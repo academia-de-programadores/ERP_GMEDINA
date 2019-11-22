@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class EmpresasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities1 db = new ERP_GMEDINAEntities1();
 
         // GET: Empresas
         public ActionResult Index()
@@ -51,64 +51,33 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "empr_Id,empr_Nombre,empr_Estado,empr_RazonInactivo,empr_UsuarioCrea,empr_FechaCrea,empr_UsuarioModifica,empr_FechaModifica")] tbEmpresas tbEmpresas)
         {
-            tbEmpresas.empr_UsuarioCrea = 1;
-            tbEmpresas.empr_FechaCrea = DateTime.Now;
-
-            string response = String.Empty;
-            IEnumerable<Object> listaEmpresas = null;
-            string MensajeError = "";
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    listaEmpresas = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre,
-                                                                    tbEmpresas.empr_UsuarioCrea,
-                                                                    tbEmpresas.empr_FechaCrea);
-                    foreach (UDP_RRHH_tbEmpresas_Insert_Result Resultado in listaEmpresas)
-                    {
-                        MensajeError = Resultado.MensajeError;
-                    }
-
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    response = Ex.Message.ToString();
-                }
-                response = "Bien";
-            }
-
-            else
-            {
-                response = "Error";
+                db.tbEmpresas.Add(tbEmpresas);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
-            return Json(response, JsonRequestBehavior.AllowGet);
-    }
+            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
+            return View(tbEmpresas);
+        }
 
         // GET: Empresas/Edit/5
         public ActionResult Edit(int? id)
         {
-            var List = db.UDP_RRHH_tbEmpresas_Select(id).ToList();
-            return Json(List, JsonRequestBehavior.AllowGet);
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            //if (tbEmpresas == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
-            //ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
-            //return View(tbEmpresas);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
+            if (tbEmpresas == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
+            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
+            return View(tbEmpresas);
         }
 
         // POST: Empresas/Edit/5
