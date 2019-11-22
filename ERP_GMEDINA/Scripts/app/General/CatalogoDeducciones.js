@@ -57,6 +57,69 @@ function cargarGridDeducciones() {
         });
 }
 
+//VALIDAR CREATE//
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarCrear").click(function () {
+    $("#Validation_descipcionA").css("display", "none");
+    $("#Validation_descipcion2A").css("display", "none");
+    $("#Validation_descipcion3A").css("display", "none");
+    $("#Validation_descipcion4A").css("display", "none");
+    $("#cde_DescripcionDeduccionA").val("");
+    $("#cde_PorcentajeColaboradorA").val("");
+    $("#cde_PorcentajeEmpresaA").val("");
+});
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarCreate").click(function () {
+    $("#Validation_descipcionA").css("display", "none");
+    $("#Validation_descipcion2A").css("display", "none");
+    $("#Validation_descipcion3A").css("display", "none");
+    $("#Validation_descipcion4A").css("display", "none");
+    $("#cde_DescripcionDeduccionA").val("");
+    $("#cde_PorcentajeColaboradorA").val("");
+    $("#cde_PorcentajeEmpresaA").val("");
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnCreateRegistroDeduccion").click(function () {
+    var cde_DescripcionDeduccionA = $("#cde_DescripcionDeduccionA").val();
+    var tde_IdTipoDedu = $("#tde_IdTipoDedu").val();
+    var cde_PorcentajeColaboradorA = $("#cde_PorcentajeColaboradorA").val();
+    var cde_PorcentajeEmpresaA = $("#cde_PorcentajeEmpresaA").val();
+
+    if (cde_DescripcionDeduccionA == "") {
+        $("#Validation_descipcionA").css("display", "");
+    }
+    else {
+        $("#Validation_descipcionA").css("display", "none");
+    }
+
+    if (tde_IdTipoDedu <= 0 || tde_IdTipoDedu == null) {
+        $("#Validation_descipcion2A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion2A").css("display", "none");
+    }
+
+    if (cde_PorcentajeColaboradorA == "0.00" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA <= 0) {
+        $("#Validation_descipcion3A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3A").css("display", "none");
+    }
+
+    if (cde_PorcentajeEmpresaA == "0.00" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA <= 0) {
+        $("#Validation_descipcion4A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion4A").css("display", "none");
+    }
+
+});
+
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
@@ -69,10 +132,10 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            $("#Crear #tde_IdTipoDeduA").empty();
-            $("#Crear #tde_IdTipoDeduA").append("<option value='0'>Selecione una opción...</option>");
+            $("#Crear #tde_IdTipoDedu").empty();
+            $("#Crear #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDeduA").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
@@ -110,6 +173,57 @@ $('#btnCreateRegistroDeduccion').click(function () {
 $("#frmCatalogoDeduccionesCreate").submit(function (e) {
     return false;
 });
+
+//VALIDAR EDIT//
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarEditar").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion3").css("display", "none");
+
+});
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEdit").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion3").css("display", "none");
+
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnUpdateDeduccion").click(function () {
+    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
+    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
+    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
+
+
+    if (cde_DescripcionDeduccionE == "") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+    }
+
+    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
+        $("#Validation_descipcion2").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion2").css("display", "none");
+    }
+
+    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
+        $("#Validation_descipcion3").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3").css("display", "none");
+    }
+
+});
+
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
@@ -293,115 +407,5 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     });
 });
 
-//VALIDAR CREATE//
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarCrear").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-});
 
 
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarCreate").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-});
-
-
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-$("#btnCreateRegistroDeduccion").click(function () {
-    var cde_DescripcionDeduccionA = $("#cde_DescripcionDeduccionA").val();
-    var tde_IdTipoDeduA = $("#tde_IdTipoDeduA").val();
-    var cde_PorcentajeColaboradorA = $("#cde_PorcentajeColaboradorA").val();
-    var cde_PorcentajeEmpresaA = $("#cde_PorcentajeEmpresaA").val();
-
-    if (cde_DescripcionDeduccionA == "") {
-        $("#Validation_descipcionA").css("display", "");
-    }
-    else {
-        $("#Validation_descipcionA").css("display", "none");
-    }
-
-    if (tde_IdTipoDeduA == "0" || tde_IdTipoDeduA == null) {
-        $("#Validation_descipcion2A").css("display", "");
-    }
-    else{
-        $("#Validation_descipcion2A").css("display", "none");
-    }   
-
-    if (cde_PorcentajeColaboradorA == "0.00" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA <= 0) {
-        $("#Validation_descipcion3A").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion3A").css("display", "none");
-    }
-
-    if (cde_PorcentajeEmpresaA == "0.00" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA <= 0) {
-        $("#Validation_descipcion4A").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion4A").css("display", "none");
-    }
-
-});
-
-//VALIDAR EDIT//
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarEditar").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#Validation_descipcion3").css("display", "none");
-
-});
-
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarEdit").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#Validation_descipcion3").css("display", "none");
-
-});
-
-
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-$("#btnUpdateDeduccion").click(function () {
-    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
-    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
-    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
-
-
-    if (cde_DescripcionDeduccionE == "") {
-        $("#Validation_descipcion").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion").css("display", "none");
-    }
-
-    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
-        $("#Validation_descipcion2").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion2").css("display", "none");
-    }
-
-    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
-        $("#Validation_descipcion3").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion3").css("display", "none");
-    }
-
-});
