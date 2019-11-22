@@ -162,7 +162,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 <# 
             if (isControlHtmlAttributesSupported) {
 #>
-                @Html.ValidationMessageFor(model => model.<#= property.PropertyName #>, "", new { @class = "text-danger",@id= "error<#= property.PropertyName #>" })
+                @Html.ValidationMessageFor(model => model.<#= property.PropertyName #>, "", new { @class = "text-danger" })
 <#        
             } else {
 #>
