@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\tbTipoPermisosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1262,6 +1263,11 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\tbTipoPermisos\Create.cshtml" />
+    <Content Include="Views\tbTipoPermisos\Delete.cshtml" />
+    <Content Include="Views\tbTipoPermisos\Details.cshtml" />
+    <Content Include="Views\tbTipoPermisos\Edit.cshtml" />
+    <Content Include="Views\tbTipoPermisos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
