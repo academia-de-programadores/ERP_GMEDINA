@@ -23,11 +23,11 @@ namespace ERP_GMEDINA.Models
         public int hamo_Id { get; set; }
         public int emp_Id { get; set; }
         public int tamo_Id { get; set; }
-        public System.DateTime tamo_Fecha { get; set; }
+        public System.DateTime hamo_Fecha { get; set; }
         public int hamo_AmonestacionAnterior { get; set; }
         public string hamo_Observacion { get; set; }
         public bool hamo_Estado { get; set; }
-        public string hamo_EsInactivo { get; set; }
+        public string hamo_RazonInactivo { get; set; }
         public int hamo_UsuarioCrea { get; set; }
         public System.DateTime hamo_FechaCrea { get; set; }
         public Nullable<int> hamo_UsuarioModifica { get; set; }

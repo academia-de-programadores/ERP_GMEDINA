@@ -17,8 +17,10 @@ namespace ERP_GMEDINA.Models
         public int hinc_Id { get; set; }
         public int Emp_Id { get; set; }
         public int ticn_Id { get; set; }
-        public int hinc_PorcentajeIndemnizado { get; set; }
-        public string hinc_Observacion { get; set; }
+        public int hinc_Dias { get; set; }
+        public string hinc_CentroMedico { get; set; }
+        public string hinc_Doctor { get; set; }
+        public string hinc_Diagnostico { get; set; }
         public Nullable<System.DateTime> hinc_FechaInicio { get; set; }
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
         public int hinc_UsuarioCrea { get; set; }
