@@ -83,9 +83,11 @@ $("#btnInhabilitar").click(function () {
 //botones POST
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
+    //data = parseInt(data.tiho_Recargo);
     data = serializar(data);
+    data.tiho_Recargo = parseInt(data.tiho_Recargo);
     if (data != null) {
-        data = JSON.stringify({ tbTipoHoras: data });
+        data = JSON.stringify({ tbTipoHoras: data }),
         _ajax(data,
             '/TipoHoras/Create',
             'POST',
