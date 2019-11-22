@@ -7207,18 +7207,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(String)">
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Insert" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result)">
             <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
@@ -13186,6 +13186,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13632,9 +13641,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleDeduccion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleDeduccion_Update" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="tbAccesoRol">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbAccesoRol">
               <MappingFragment StoreEntitySet="tbAccesoRol">

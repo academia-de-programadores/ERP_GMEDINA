@@ -14,223 +14,180 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: FasesReclutamiento
         public ActionResult Index()
         {
-            var tbFasesReclutamiento = db.tbFasesReclutamiento.Where(d=> d.fare_Estado == true);
-            return View(tbFasesReclutamiento.ToList());
+            List<tbFasesReclutamiento> tbFasesReclutamiento = new List<Models.tbFasesReclutamiento> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbFasesReclutamiento = db.tbFasesReclutamiento.Where(x => x.fare_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbFasesReclutamiento.Add(new tbFasesReclutamiento { fare_Id = 0, habi_Descripcion = "fallo la conexion" });
+                return View(tbFasesReclutamiento);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbFasesReclutamiento.Add(new tbFasesReclutamiento { fare_Id = 0, fare_Descripcion = "fallo la conexion" });
+            }
+            return View(tbFasesReclutamiento);
         }
-
-        public ActionResult GetData()
+        [HttpPost]
+        public JsonResult llenarTabla()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbFasesReclutamiento1 = db.tbFasesReclutamiento
-                        .Select(c => new {
-                            fare_Descripcion = c.fare_Descripcion,
-                            fare_UsuarioCrea = c.fare_FechaCrea,
-                            fare_FechaCrea = c.fare_FechaCrea,
-                            fare_UsuarioModifica = c.fare_UsuarioModifica ,
-                            fare_FechaModifica = c.fare_FechaModifica,
-                            fare_Estado = c.fare_Estado,
-                            fare_RazonInactivo = c.fare_RazonInactivo
-                        }).Where(c => c.fare_Estado == true)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbFasesReclutamiento1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
-        // GET: FasesReclutamiento/Details/5
-        public ActionResult Details(int? id)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbFasesReclutamiento tbJSON = db.tbFasesReclutamiento.Find(id);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: FasesReclutamiento/Create
-        public ActionResult Create()
-        {
-            return View();
+            List<tbFasesReclutamiento> tbFasesReclutamiento =
+                new List<Models.tbFasesReclutamiento> { };
+            foreach (tbFasesReclutamiento x in db.tbFasesReclutamiento.ToList().Where(x => x.fare_Estado == true))
+            {
+                tbFasesReclutamiento.Add(new tbFasesReclutamiento
+                {
+                    fare_Id = x.fare_Id,
+                    fare_Descripcion = x.fare_Descripcion
+                });
+            }
+            return Json(tbFasesReclutamiento, JsonRequestBehavior.AllowGet);
         }
 
         // POST: FasesReclutamiento/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "fare_Id,fare_Descripcion,fare_Estado,fare_RazonInactivo,fare_UsuarioCrea,fare_FechaCrea,fare_UsuarioModifica,fare_FechaModifica")] tbFasesReclutamiento tbFasesReclutamiento)
+        public JsonResult Create(tbFasesReclutamiento tbFasesReclutamiento)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbFasesReclutamiento.fare_UsuarioCrea = 1;
-            tbFasesReclutamiento.fare_FechaCrea = DateTime.Now;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
-            string response = String.Empty;
-            IEnumerable<object> list = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbFasesReclutamiento.fare_Descripcion != "")
             {
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    if (MensajeError.StartsWith("-1"))
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
+                        msj = item.MensajeError + " ";
                     }
                 }
-                catch(Exception Ex)
+                catch (Exception ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                response = "error";
+                msj = "-3";
             }
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: FasesReclutamiento/Edit/5
+        // GET: Habilidades/Edit/5
         public ActionResult Edit(int? id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbFasesReclutamiento tbJSON = db.tbFasesReclutamiento.Find(id);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tbFasesReclutamiento tbFasesReclutamiento = null;
+            try
+            {
+                tbFasesReclutamiento = db.tbFasesReclutamiento.Find(id);
+                if (tbFasesReclutamiento == null || !tbFasesReclutamiento.fare_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var FaseReclutamiento = new tbFasesReclutamiento
+            {
+                fare_Id = tbFasesReclutamiento.fare_Id,
+                fare_Descripcion = tbFasesReclutamiento.fare_Descripcion,
+                fare_Estado = tbFasesReclutamiento.fare_Estado,
+                fare_RazonInactivo = tbFasesReclutamiento.fare_RazonInactivo,
+                fare_UsuarioCrea = tbFasesReclutamiento.fare_UsuarioCrea,
+                fare_FechaCrea = tbFasesReclutamiento.fare_FechaCrea,
+                fare_UsuarioModifica = tbFasesReclutamiento.fare_UsuarioModifica,
+                fare_FechaModifica = tbFasesReclutamiento.fare_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbFasesReclutamiento.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbFasesReclutamiento.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(FaseReclutamiento, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: FasesReclutamiento/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Habilidades/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "fare_Id,fare_Descripcion,fare_Estado,fare_RazonInactivo,fare_UsuarioCrea,fare_FechaCrea,fare_UsuarioModifica,fare_FechaModifica")] tbFasesReclutamiento tbFasesReclutamiento)
+        public JsonResult Edit(tbHabilidades tbHabilidades)
         {
-            tbFasesReclutamiento.fare_UsuarioCrea = 1;
-            tbFasesReclutamiento.fare_FechaCrea = DateTime.Now;
-
-            //LLENAR DATA DE AUDITORIA
-            tbFasesReclutamiento.fare_UsuarioModifica = 1;
-            tbFasesReclutamiento.fare_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            IEnumerable<object> list = null;
-            string MensajeError = "";
-
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_Descripcion != "")
             {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    //list = db.UDP_rrhh_tbRazonSalidas_Update(   tbRazonSalidas.rsal_Id,
-                    //                                            tbRazonSalidas.rsal_Descripcion,
-                    //                                            tbRazonSalidas.rsal_UsuarioModifica,
-                    //                                            tbRazonSalidas.rsal_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    //foreach (UDP_rrhh_tbRazonSalidas_Update Resultado in list)
-                    //    MensajeError = Resultado.MensajeError;
-
-                    //if (MensajeError.StartsWith("-1"))
+                    //var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    //foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
                     //{
-                    //    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    //    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    //    response = "error";
+                    //    msj = item.MensajeError + " ";
                     //}
-
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
+                Session.Remove("id");
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
+                msj = "-3";
             }
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
-
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Inactivar(int? id)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbFasesReclutamiento tbJSON = db.tbFasesReclutamiento.Find(id);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-
+        // GET: Habilidades/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "fare_Id,fare_Descripcion,fare_Estado,fare_RazonInactivo,fare_UsuarioCrea,fare_FechaCrea,fare_UsuarioModifica,fare_FechaModifica")] tbFasesReclutamiento tbFasesReclutamiento)
+        public ActionResult Delete(tbFasesReclutamiento tbFasesReclutamiento)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.rsal_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.rsal_FechaCrea = DateTime.Now;
-
-
-            //LLENAR DATA DE AUDITORIA
-            tbFasesReclutamiento.fare_UsuarioModifica = 1;
-            tbFasesReclutamiento.fare_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            IEnumerable<object> list = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbFasesReclutamiento.fare_Id != 0 && tbFasesReclutamiento.fare_RazonInactivo != "")
             {
-                //try
-                //{
-                //    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                //    list = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar( tbRazonSalidas.rsal_Id,
-                //                                                           tbRazonSalidas.rsal_UsuarioModifica,
-                //                                                           tbRazonSalidas.rsal_FechaModifica);
-                //    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                //    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
-                //        MensajeError = Resultado.MensajeError;
-
-                //    if (MensajeError.StartsWith("-1"))
-                //    {
-                //        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                //        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-                //        response = "error";
-                //    }
-
-                //}
-                //catch (Exception Ex)
-                //{
-                //    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                //    response = Ex.Message.ToString();
-                //}
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    //var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    //foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
+                    //{
+                    //    msj = item.MensajeError + " ";
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-                response = "error";
+                msj = "-3";
             }
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
