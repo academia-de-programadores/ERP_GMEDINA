@@ -17,207 +17,191 @@ namespace ERP_GMEDINA.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            var tbCargos = db.tbCargos.Where(t => t.car_Estado==true);
-            return View(tbCargos.ToList());
-        }
-
-        public ActionResult GetData()
-        {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbCargos1 = db.tbCargos
-                        .Select(c => new {
-                            car_Id = c.car_Id,
-                            car_Descripcionn = c.car_Descripcion,
-                            car_Estado = c.car_Estado,
-                            car_RazonInactivo = c.car_RazonInactivo,
-                            car_UsuarioModifica = c.car_UsuarioModifica,
-                            car_UsuarioCrea = c.car_UsuarioCrea,
-                            car_FechaCrea = c.car_FechaCrea,
-                            car_FechaModifica = c.car_FechaModifica
-                        }).Where(c => c.car_Estado == true)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbCargos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
-
-
-        public JsonResult Details(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbCargos tbJSON = db.tbCargos.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Idiomas/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-        // GET: Cargos/Create
-
-
-        // POST: Cargos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "car_Id,car_Descripcion,car_Estado,car_RazonInactivo,car_UsuarioCrea,car_FechaCrea,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
-        {
-            tbCargos.car_UsuarioCrea = 1;
-            tbCargos.car_FechaCrea = DateTime.Now;
-            if (ModelState.IsValid)
+            List<tbCargos> tbCargos = new List<Models.tbCargos> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
             {
-                try
-                {
-                    IEnumerable<object> listcargos = null;
-                    string MensajeError = "";
-                    listcargos = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion,
-                                                           tbCargos.car_UsuarioCrea,
-                                                           tbCargos.car_FechaCrea);
-                    foreach (UDP_RRHH_tbCargos_Insert_Result car in listcargos)
-                    {
-                        MensajeError = car.MensajeError;
-                    }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1. No se pudo insertar el registro");
-                            return View(tbCargos);
-                        }
-                    }
-               
-                    return RedirectToAction("Index");
-                }
-                catch(Exception ex)
-                {
-                    ex.Message.ToString();
-                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
-                    return View(tbCargos);
-                }
+                tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbCargos.Add(new tbCargos { car_Id = 0,car_Descripcion = "fallo la conexion" });
+                return View(tbCargos);
             }
-
-            //ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
-            //ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbCargos.Add(new tbCargos { car_Id = 0, car_Descripcion = "fallo la conexion" });
+            }
             return View(tbCargos);
         }
 
-        // GET: Cargos/Edit/5
-        public ActionResult Edit(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbCargos tbJSON = db.tbCargos.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
 
-        // POST: Cargos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public ActionResult Edit([Bind(Include = "car_Id,car_Descripcion,car_Estado,car_RazonInactivo,car_UsuarioCrea,car_FechaCrea,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
+        public JsonResult llenarTabla()
         {
-            tbCargos.car_UsuarioModifica = 2;
-            tbCargos.car_FechaModifica = DateTime.Now;
-            if (ModelState.IsValid)
+            List<tbCargos> tbCargos =
+                new List<Models.tbCargos> { };
+            foreach (tbCargos x in db.tbCargos.ToList().Where(x => x.car_Estado == true))
             {
-                try
+                tbCargos.Add(new tbCargos
                 {
-                    IEnumerable<object> listcargos = null;
-                    string MensajeError = "";
-                    listcargos = db.UDP_RRHH_tbCargos_Update(tbCargos.car_Id,
-                                                             tbCargos.car_Descripcion,
-                                                             tbCargos.car_UsuarioModifica,
-                                                             tbCargos.car_FechaModifica);
-
-                    foreach(UDP_RRHH_tbCargos_Update_Result car in listcargos)
-                    {
-                        MensajeError = car.MensajeError;
-                    }
-                    if (!string.IsNullOrEmpty(MensajeError))
-                    {
-                        if (MensajeError.StartsWith("-1"))
-                        {
-                            ModelState.AddModelError("", "1. No se pudo editar el registro");
-                            return View(tbCargos);
-                        }
-                    }
-                    return RedirectToAction("Index");
-
-                }
-                catch(Exception ex)
-                {
-                    ex.Message.ToString();
-                    ModelState.AddModelError("", "2. No se pudo insertar el registro");
-                    return View(tbCargos);
-                }
-
-                //db.Entry(tbCargos).State = EntityState.Modified;
-                //db.SaveChanges();
-                
+                    car_Id = x.car_Id,
+                    car_Descripcion = x.car_Descripcion
+                });
             }
-            //ViewBag.car_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioCrea);
-            //ViewBag.car_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCargos.car_UsuarioModifica);
-            return View(tbCargos);
+            return Json(tbCargos, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Cargos/Delete/5
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbCargos tbJSON = db.tbCargos.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-        // POST: Cargos/Delete/5
+
+
+
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-
-
-        public ActionResult Inactivar([Bind(Include = "car_Id,car_UsuarioModifica,car_FechaModifica")] tbCargos tbCargos)
+        public JsonResult Create(tbCargos tbCargos)
         {
-
-            tbCargos.car_UsuarioModifica = 1;
-            tbCargos.car_FechaModifica = DateTime.Now;
-            tbCargos.car_RazonInactivo = "Inactivo";
-            string response = String.Empty;
-            IEnumerable<object> listCargos = null;
-            string MensajeError = "";
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbCargos.car_Descripcion != "")
             {
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    listCargos = db.UDP_RRHH_tbCargos_Delete(tbCargos.car_Id,
-                                                              tbCargos.car_RazonInactivo,
-                                                              tbCargos.car_UsuarioModifica,
-                                                              tbCargos.car_FechaModifica);
-                    foreach (UDP_RRHH_tbCargos_Delete_Result Resultado in listCargos)
-                        MensajeError = Resultado.MensajeError;
-
-                    if (MensajeError.StartsWith("-1"))
+                    var list = db.UDP_RRHH_tbCargos_Insert(tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCargos_Insert_Result item in list)
                     {
-                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-                        response = "error";
+                        msj = item.MensajeError + " ";
                     }
-
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    response = Ex.Message.ToString();
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
-                response = "bien";
             }
             else
             {
-                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-                response = "error";
+                msj = "-3";
             }
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
 
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
+
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tbCargos tbCargos = null;
+            try
+            {
+                tbCargos = db.tbCargos.Find(id);
+                if (tbCargos == null || !tbCargos.car_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var Cargos = new tbCargos
+            {
+                car_Id = tbCargos.car_Id,
+                car_Descripcion = tbCargos.car_Descripcion,
+                car_Estado = tbCargos.car_Estado,
+                car_RazonInactivo = tbCargos.car_RazonInactivo,
+                car_UsuarioCrea = tbCargos.car_UsuarioCrea,
+                car_FechaCrea = tbCargos.car_FechaCrea,
+                car_UsuarioModifica = tbCargos.car_UsuarioModifica,
+                car_FechaModifica = tbCargos.car_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbCargos.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbCargos.tbUsuario1).usu_NombreUsuario }
+            };
+
+            return Json(Cargos, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public JsonResult Edit(tbCargos tbCargos)
+        {
+            string msj = "";
+            if (tbCargos.car_Id != 0 && tbCargos.car_Descripcion != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbCargos_Update(id, tbCargos.car_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCargos_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Delete(tbCargos tbCargos)
+        {
+            string msj = "";
+            if (tbCargos.car_Id != 0 && tbCargos.car_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbCargos_Delete(id, tbCargos.car_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCargos_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
         }
 
 

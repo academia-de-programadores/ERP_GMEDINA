@@ -747,7 +747,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\General\Cargos.js" />
+    <Content Include="Scripts\app\Cargos\Cargos.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -807,6 +807,8 @@
     <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
     <Content Include="CodeTemplates\MvcView\_Details.cs.t4" />
     <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Detalles.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1285,6 +1287,8 @@
     <Content Include="Views\Cargos\_Details.cshtml" />
     <Content Include="Views\Cargos\_Edit.cshtml" />
     <Content Include="Views\Cargos\_Create.cshtml" />
+    <Content Include="Views\Cargos\_Delete.cshtml" />
+    <Content Include="Views\Cargos\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
