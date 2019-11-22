@@ -158,10 +158,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
-    <Compile Include="Controllers\tbTipoPermisosController.cs" />
+    <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1254,20 +1253,12 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
     <Content Include="Views\tbTipoPermisos\Create.cshtml" />
     <Content Include="Views\tbTipoPermisos\Delete.cshtml" />
     <Content Include="Views\tbTipoPermisos\Details.cshtml" />
     <Content Include="Views\tbTipoPermisos\Edit.cshtml" />
     <Content Include="Views\tbTipoPermisos\Index.cshtml" />
+    <Content Include="Views\TipoPermisos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

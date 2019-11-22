@@ -10,8 +10,9 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-    public class tbTipoPermisosController : Controller
+    public class TipoPermisosController : Controller
     {
+
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: tbTipoPermisos
