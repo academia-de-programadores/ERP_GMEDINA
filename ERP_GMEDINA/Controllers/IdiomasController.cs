@@ -162,7 +162,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(tbIdiomas tbIdiomas)
         {
-            string msj = "";
+            string msj = "...";
             if(tbIdiomas.idi_Id != 0 && tbIdiomas.idi_RazonInactivo != "")
             {
                 var id = (int)Session["id"];

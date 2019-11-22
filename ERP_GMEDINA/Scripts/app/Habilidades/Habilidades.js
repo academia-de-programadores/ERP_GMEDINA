@@ -36,7 +36,7 @@ function llenarTabla() {
         '/Habilidades/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
+            tabla.Clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
                 console.log(value.habi_Descripcion);

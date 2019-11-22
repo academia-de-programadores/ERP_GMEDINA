@@ -36,8 +36,7 @@ function llenarTabla() {
         '/Idiomas/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
-            tabla.draw();
+           tabla.clear().draw();
             $.each(Lista, function (index, value) {
                 console.log(value.idi_Descripcion);
                 tabla.row.add([value.idi_Descripcion,
@@ -48,12 +47,15 @@ function llenarTabla() {
             });
         });
 }
+//function ClearTables() {
+//    $('#IndexTable').dataTable().clear().draw();
+//}
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
-    $("#FormNuevo").find("#idi_Descripcion").val("");
-    $("#FormEditar").find("#idi_Descripcion").focus();
     modalnuevo.modal('show');
+    $(modalnuevo).find("#idi_Descripcion").val("");
+    $(modalnuevo).find("#idi_Descripcion").focus();
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -63,7 +65,8 @@ $("#btnEditar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#idi_Descripcion").val(obj.idi_Descripcion);
+                $("#ModalEditar").find("#idi_Descripcion").val(obj.idi_Descripcion);
+                $("#ModalEditar").find("#idi_Descripcion").focus();
             }
         });
 });
