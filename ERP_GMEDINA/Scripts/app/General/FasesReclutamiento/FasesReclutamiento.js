@@ -1,5 +1,6 @@
 ﻿var id = 0;
 //Funciones GET
+
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
@@ -7,7 +8,7 @@ function tablaEditar(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
+                $("#FormEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
                 $('#ModalEditar').modal('show');
             }
         });
@@ -36,6 +37,7 @@ function llenarTabla() {
         '/FasesReclutamiento/llenarTabla',
         'POST',
         function (Lista) {
+            var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
@@ -63,7 +65,7 @@ $("#btnEditar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#ModalEditar").find("#fare_Descripcion").val(obj.habi_Descripcion);
+                $("#ModalEditar").find("#fare_Descripcion").val(obj.fare_Descripcion);
                 $("#ModalEditar").find("#fare_Descripcion").focus();
             }
         });

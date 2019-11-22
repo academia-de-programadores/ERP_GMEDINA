@@ -117,20 +117,20 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Edit/5
         [HttpPost]
-        public JsonResult Edit(tbHabilidades tbHabilidades)
+        public JsonResult Edit(tbFasesReclutamiento tbFasesReclutamiento)
         {
             string msj = "";
-            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_Descripcion != "")
+            if ( tbFasesReclutamiento.fare_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    //foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
-                    //{
-                    //    msj = item.MensajeError + " ";
-                    //}
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbFasesReclutamiento_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -157,11 +157,11 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
-                    //foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
-                    //{
-                    //    msj = item.MensajeError + " ";
-                    //}
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, tbFasesReclutamiento.fare_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbfasesReclutamiento_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
                 catch (Exception ex)
                 {
