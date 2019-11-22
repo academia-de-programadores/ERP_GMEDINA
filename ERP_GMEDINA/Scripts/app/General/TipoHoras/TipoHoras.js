@@ -43,11 +43,11 @@ function llenarTabla() {
             IndexTable.draw();
             $.each(Lista, function (index, value) {
                 //console.log(item.tiho_Descripcion);
-                IndexTable.row.add(['<tr data-id = "' + item.tiho_Id + '">' +
-                    item.tiho_Descripcion, item.tiho_Recargo,
+                IndexTable.row.add(['<tr data-id = "' + value.tiho_Id + '">' +
+                    value.tiho_Descripcion, value.tiho_Recargo,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalle(" + item.tiho_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
-                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + item.tiho_Id + ")' data-target='#ModalEditar'>Editar</button>" +
+                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalles(" + value.tiho_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
+                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + value.tiho_Id + ")' data-target='#ModalEditar'>Editar</button>" +
                     "</div>"]).draw();
             });
         });
@@ -83,70 +83,54 @@ $("#btnInhabilitar").click(function () {
 //botones POST
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
-    //data = parseInt(data.tiho_Recargo);
     data = serializar(data);
-    data.tiho_Recargo = parseInt(data.tiho_Recargo);
+    //console.log(data);
     if (data != null) {
-        data = JSON.stringify({ tbTipoHoras: data }),
-        _ajax(data,
-            '/TipoHoras/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        $.post("/TipoHoras/Create",data).done(function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                llenarTabla();
+                LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
+                MsgSuccess("¡Exito!", "Se ha agregado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            }
+        });
     }
 });
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.tiho_Id = id;
-        data = JSON.stringify({ tbTipoHoras: data });
-        _ajax(data,
-            '/TipoHoras/Delete',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["tiho_Descripcion", "tiho_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        //data.tiho_Id = id;
+       // data = JSON.stringify({ tbTipoHoras: data });
+        $.post("/TipoHoras/Delete", data).done(function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                llenarTabla();
+                LimpiarControles(["tiho_Descripcion", "tiho_Recargo", "tiho_RazonInactivo"]);
+                MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            }
+        });
     }
 });
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
-    data = serializar(data);
+    //data = serializar(data);
     if (data != null) {
         data.tiho_Id = id;
-        data = JSON.stringify({ tbTipoHoras: data });
-        _ajax(data,
-            '/TipoHoras/Edit',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        //data = JSON.stringify({ tbTipoHoras: data });
+        $.post("/TipoHoras/Edit", data).done(function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                llenarTabla();
+                LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
+                MsgSuccess("¡Exito!", "Se ha editado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            }
+        });
     }
 });

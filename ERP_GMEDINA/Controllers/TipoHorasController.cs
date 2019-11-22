@@ -51,9 +51,12 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Create
         [HttpPost]
-        public JsonResult Create(tbTipoHoras tbTipoHoras)
+        public JsonResult Create(string tiho_Descripcion, int tiho_Recargo)
         {
             string msj = "";
+            tbTipoHoras tbTipoHoras = new tbTipoHoras();
+            tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
+            tbTipoHoras.tiho_Recargo = tiho_Recargo;
             if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
@@ -120,10 +123,14 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: Habilidades/Edit/5
         [HttpPost]
-        public JsonResult Edit(tbTipoHoras tbTipoHoras)
+        public JsonResult Edit(string tiho_Descripcion, int tiho_Recargo)
         {
             string msj = "";
-            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
+            tbTipoHoras tbTipoHoras = new tbTipoHoras();
+            //tbTipoHoras.tiho_Id = id;
+            tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
+            tbTipoHoras.tiho_Recargo = tiho_Recargo;
+            if ( tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
@@ -151,10 +158,14 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Delete/5
         [HttpPost]
-        public ActionResult Delete(tbTipoHoras tbTipoHoras)
+        public ActionResult Delete(string tiho_RazonInactivo)
         {
             string msj = "";
-            if (tbTipoHoras.tiho_Id != 0 && tbTipoHoras.tiho_RazonInactivo != "")
+            tbTipoHoras tbTipoHoras = new tbTipoHoras();
+            //tbTipoHoras.tiho_Id = id;
+            tbTipoHoras.tiho_RazonInactivo = tiho_RazonInactivo;
+
+            if ( tbTipoHoras.tiho_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
