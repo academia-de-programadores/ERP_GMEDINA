@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                tbCargos.Add(new tbCargos { car_Id = 0,car_Descripcion = "fallo la conexion" });
+             
                 return View(tbCargos);
             }
             catch (Exception ex)

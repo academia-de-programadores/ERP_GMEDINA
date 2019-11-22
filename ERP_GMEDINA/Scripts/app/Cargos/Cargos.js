@@ -37,7 +37,6 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             tabla.clear();
-            tabla.draw();
             $.each(Lista, function (index, value) {
                 console.log(value.car_Descripcion);
                 tabla.row.add([value.car_Descripcion,
@@ -51,9 +50,9 @@ function llenarTabla() {
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
+    $("#FormNuevo").find("#car_Descripcion").val("");
+    $("#FormEditar").find("#car_Descripcion").focus();
     modalnuevo.modal('show');
-    $(modalnuevo).find("#car_Descripcion").val("");
-    $(modalnuevo).find("#car_Descripcion").focus();
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -63,12 +62,10 @@ $("#btnEditar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#ModalEditar").find("#car_Descripcion").val(obj.car_Descripcion);
-                $("#ModalEditar").find("#car_Descripcion").focus();
+                $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
             }
         });
 });
-
 $("#btnInhabilitar").click(function () {
     CierraPopups();
     $('#ModalInhabilitar').modal('show');
@@ -80,7 +77,7 @@ $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data = JSON.stringify({ tbcarlidades: data });
+        data = JSON.stringify({ tbCargos: data });
         _ajax(data,
             '/Cargos/Create',
             'POST',
@@ -89,7 +86,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
+                    location.reload();
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -103,7 +102,7 @@ $("#InActivar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.car_Id = id;
-        data = JSON.stringify({ tbcarlidades: data });
+        data = JSON.stringify({ tbCargos: data });
         _ajax(data,
             '/Cargos/Delete',
             'POST',
@@ -111,8 +110,10 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
+                   
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    location.reload();
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -126,7 +127,7 @@ $("#btnActualizar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.car_Id = id;
-        data = JSON.stringify({ tbcarlidades: data });
+        data = JSON.stringify({ tbCargos: data });
         _ajax(data,
             '/Cargos/Edit',
             'POST',
@@ -134,6 +135,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
+                    location.reload();
                     MsgSuccess("¡Exito!", "Se ah actualizado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
