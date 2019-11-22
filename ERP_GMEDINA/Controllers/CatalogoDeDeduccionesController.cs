@@ -8,17 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 
-namespace ERP_GMEDINA.Controllers
+namespace PruebaPlanilla.Controllers
 {
-    public class TipoPermisosController : Controller
+    public class CatalogoDeDeduccionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
-            var tbTipoPermisos = db.tbTipoPermisos.Where(d => d.tper_Estado == true);
-            return View(tbTipoPermisos.ToList());
+            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion);
+            return View(tbCatalogoDeDeducciones.ToList());
         }
 
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
@@ -27,12 +27,12 @@ namespace ERP_GMEDINA.Controllers
             //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbTipoPermisos1 = db.tbCatalogoDeDeducciones
+            var tbCatalogoDeDeducciones1 = db.tbCatalogoDeDeducciones
                         .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica }).Where(c => c.cde_Activo == true)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbTipoPermisos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
+            return new JsonResult { Data = tbCatalogoDeDeducciones1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }   
 
 
 
@@ -40,29 +40,31 @@ namespace ERP_GMEDINA.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "tper_Descripcion,tper_Estado,tper_RazonInactivo,tper_UsuarioCrea,tper_FechaCrea,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
+        public ActionResult Create([Bind(Include = "cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbTipoPermisos.tper_UsuarioCrea = 1;
-            tbTipoPermisos.tper_FechaCrea = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
-            IEnumerable<object> listTipoPermisos = null;
+            IEnumerable<object> listCatalogoDeDeducciones = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //[tper_Descripcion],[tper_UsuarioCrea],[tper_FechaCrea]
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Insert(tbTipoPermisos.tper_Descripcion,
-                                                                        tbTipoPermisos.tper_UsuarioCrea,
-                                                                        tbTipoPermisos.tper_FechaCrea);
+                    listCatalogoDeDeducciones = db.UDP_Plani_tbCatalogoDeDeducciones_Insert(tbCatalogoDeDeducciones.cde_DescripcionDeduccion, 
+                                                                                            tbCatalogoDeDeducciones.tde_IdTipoDedu,
+                                                                                            tbCatalogoDeDeducciones.cde_PorcentajeColaborador,
+                                                                                            tbCatalogoDeDeducciones.cde_PorcentajeEmpresa, 
+                                                                                            tbCatalogoDeDeducciones.cde_UsuarioCrea,
+                                                                                            tbCatalogoDeDeducciones.cde_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_RRHH_tbTipoPermisos_Insert_Result Resultado in listTipoPermisos)
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Insert_Result Resultado in listCatalogoDeDeducciones)
                         MensajeError = Resultado.MensajeError;
-
+                    
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
@@ -70,15 +72,14 @@ namespace ERP_GMEDINA.Controllers
                         response = "error";
                     }
 
-                }
-                catch (Exception Ex)
+                }catch (Exception Ex)
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     response = Ex.Message.ToString();
                 }
                 //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
                 //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
+                response = "bien";                
             }
             else
             {
@@ -86,8 +87,7 @@ namespace ERP_GMEDINA.Controllers
                 response = "error";
             }
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
@@ -95,9 +95,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDeDeducciones/Edit/5
         public JsonResult Edit(int? ID)
         {
-            db.Configuration.ProxyCreationEnabled = false; /*ESTO*/
-            tbTipoPermisos tbTipoPermisosJSON = db.tbTipoPermisos.Find(ID);
-            return Json(tbTipoPermisosJSON, JsonRequestBehavior.AllowGet);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+            return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: CatalogoDeDeducciones/Edit/5
@@ -105,22 +105,20 @@ namespace ERP_GMEDINA.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(/*[Bind(Include = "cde_IdDeducciones,cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")]*/ tbTipoPermisos tbTipoPermisos)
+        public ActionResult Edit([Bind(Include = "cde_IdDeducciones,cde_DescripcionDeduccion,tde_IdTipoDedu,cde_PorcentajeColaborador,cde_PorcentajeEmpresa,cde_UsuarioCrea,cde_FechaCrea")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-
-
-            tbTipoPermisos.tper_UsuarioCrea = 1;
-            tbTipoPermisos.tper_FechaCrea = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
 
 
             //LLENAR DATA DE AUDITORIA
-            tbTipoPermisos.tper_UsuarioModifica = 1;
-            tbTipoPermisos.tper_FechaModifica = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
+            tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            IEnumerable<object> ListTipoPermisos = null;
+            IEnumerable<object> listCatalogoDeDeducciones = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -128,12 +126,15 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    ListTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Update(tbTipoPermisos.tper_Id,
-                                                                            tbTipoPermisos.tper_Descripcion,
-                                                                            tbTipoPermisos.tper_UsuarioModifica,
-                                                                            tbTipoPermisos.tper_FechaModifica);
+                    listCatalogoDeDeducciones = db.UDP_Plani_tbCatalogoDeDeducciones_Update(tbCatalogoDeDeducciones.cde_IdDeducciones,
+                                                                                            tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                                                                                            tbCatalogoDeDeducciones.tde_IdTipoDedu,
+                                                                                            tbCatalogoDeDeducciones.cde_PorcentajeColaborador,
+                                                                                            tbCatalogoDeDeducciones.cde_PorcentajeEmpresa,
+                                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
+                                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_RRHH_tbTipoPermisos_Update_Result Resultado in ListTipoPermisos)
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Update_Result Resultado in listCatalogoDeDeducciones)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -153,27 +154,26 @@ namespace ERP_GMEDINA.Controllers
                 //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
                 response = "bien";
             }
-            else
-            {
+            else {
                 // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-            /*aqui*///ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-
+            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+            
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
 
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetDDL() /*LINQ*/
+        public JsonResult EditGetDDL()
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from TipoPer in db.tbTipoPermisos
-                //join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-            select new { Id = TipoPer.tper_Id, Descripcion = TipoPer.tper_Descripcion };
+            from TipoDedu in db.tbTipoDeduccion
+            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -184,8 +184,8 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbTipoPermisos tbTipoPermisosJSON = db.tbTipoPermisos.Find(ID);
-            return Json(tbTipoPermisosJSON, JsonRequestBehavior.AllowGet);
+            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+            return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
         // GET: CatalogoDeDeducciones/Details/5
@@ -206,20 +206,20 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDeDeducciones/Create
         public ActionResult Create()
         {
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion");
+            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
             return View();
         }
 
         public JsonResult Inactivar(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbTipoPermisos tbTipoPermisosJSON = db.tbTipoPermisos.Find(ID);
-            return Json(tbTipoPermisosJSON, JsonRequestBehavior.AllowGet);
+            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+            return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "tper_Id,tper_RazonInactivo,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
+        public ActionResult Inactivar([Bind(Include = "cde_IdDeducciones,cde_UsuarioModifica,cde_FechaModifica")] tbCatalogoDeDeducciones tbCatalogoDeDeducciones)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -228,11 +228,11 @@ namespace ERP_GMEDINA.Controllers
 
 
             //LLENAR DATA DE AUDITORIA
-            tbTipoPermisos.tper_UsuarioModifica = 1;
-            tbTipoPermisos.tper_FechaModifica = DateTime.Now;
+            tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;
+            tbCatalogoDeDeducciones.cde_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            IEnumerable<object> listTipoPermisos = null;
+            IEnumerable<object> listCatalogoDeDeducciones = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -240,12 +240,11 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listTipoPermisos = db.UDP_RRHH_tbTipoPermisos_Delete(tbTipoPermisos.tper_Id,
-                                                                            tbTipoPermisos.tper_RazonInactivo,
-                                                                            tbTipoPermisos.tper_UsuarioModifica,
-                                                                            tbTipoPermisos.tper_FechaModifica);
+                    listCatalogoDeDeducciones = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(tbCatalogoDeDeducciones.cde_IdDeducciones,
+                                                                                            tbCatalogoDeDeducciones.cde_UsuarioModifica,
+                                                                                            tbCatalogoDeDeducciones.cde_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_RRHH_tbTipoPermisos_Delete_Result Resultado in listTipoPermisos)
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
