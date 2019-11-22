@@ -15,10 +15,10 @@ namespace ERP_GMEDINA.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ERP_GMEDINAEntities : DbContext
+    public partial class ERP_GMEDINA : DbContext
     {
-        public ERP_GMEDINAEntities()
-            : base("name=ERP_GMEDINAEntities")
+        public ERP_GMEDINA()
+            : base("name=ERP_GMEDINA")
         {
         }
     

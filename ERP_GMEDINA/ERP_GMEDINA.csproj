@@ -167,21 +167,16 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cTipoPermisos.cs" />
-    <Compile Include="Models\ERP_.Designer.cs">
-      <DependentUpon>ERP_.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
-      <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ERP_GMEDINA.cs" />
     <Compile Include="Models\ERP_GMEDINA.Designer.cs">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ERP_GMEDINA1.cs">
       <AutoGen>True</AutoGen>
@@ -575,13 +570,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Models\ERP_GMEDINA.Context.tt">
-      <DependentUpon>ERP_.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ERP_GMEDINA.tt">
-      <DependentUpon>ERP_.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
@@ -633,10 +628,6 @@
     <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
-    <EntityDeploy Include="Models\ERP_.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ERP_.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
