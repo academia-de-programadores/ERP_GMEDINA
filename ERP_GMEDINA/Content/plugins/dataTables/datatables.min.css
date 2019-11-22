@@ -22,6 +22,6 @@ td.details-control {
     cursor: pointer;
 }
 tr.shown td.details-control {
-    background: url(https://datatables.net/examples/resources/details_open.png) no-repeat center center;
+    background: url(https://datatables.net/examples/resources/details_close.png) no-repeat center center;
 }
 

@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="46">
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="136.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHabilidades" Width="1.5" PointX="3" PointY="136.375" />
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="3" PointY="136.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHabilidades" Width="1.5" PointX="5.25" PointY="136.375" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoSalidas" Width="1.5" PointX="3" PointY="140.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoSalidas" Width="1.5" PointX="5.25" PointY="140.5" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAreas" Width="1.5" PointX="5.625" PointY="140" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3.375" PointY="144.375" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDepartamentos" Width="1.5" PointX="7.875" PointY="140" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Departamentos" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAreas" Width="1.5" PointX="7.875" PointY="140" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="5.625" PointY="144.375" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDepartamentos" Width="1.5" PointX="10.125" PointY="140" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Departamentos" Width="1.5" PointX="0.5" PointY="137" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" />
