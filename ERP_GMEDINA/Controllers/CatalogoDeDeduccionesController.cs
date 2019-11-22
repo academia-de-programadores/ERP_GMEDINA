@@ -193,6 +193,7 @@ namespace PruebaPlanilla.Controllers
                                         {
                                             tbCatDedu.cde_IdDeducciones,
                                             tbCatDedu.cde_DescripcionDeduccion,
+                                            TipoDedu = tbCatDedu.tbTipoDeduccion.tde_IdTipoDedu,
                                             tbCatDedu.cde_PorcentajeColaborador,
                                             tbCatDedu.cde_PorcentajeEmpresa,
                                             tbCatDedu.cde_Activo,

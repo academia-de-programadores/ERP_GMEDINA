@@ -68,6 +68,7 @@ $("#btnCerrarCrear").click(function () {
     $("#cde_DescripcionDeduccionA").val("");
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
+    $("#tde_IdTipoDedu").val("0");
 });
 
 
@@ -80,6 +81,7 @@ $("#IconCerrarCreate").click(function () {
     $("#cde_DescripcionDeduccionA").val("");
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
+    $("#tde_IdTipoDedu").val("0");
 });
 
 
@@ -97,8 +99,9 @@ $("#btnCreateRegistroDeduccion").click(function () {
         $("#Validation_descipcionA").css("display", "none");
     }
 
-    if (tde_IdTipoDedu <= 0 || tde_IdTipoDedu == null) {
+    if (tde_IdTipoDedu == "0" || tde_IdTipoDedu == null) {
         $("#Validation_descipcion2A").css("display", "");
+        $("#tde_IdTipoDedu").val("0");
     }
     else {
         $("#Validation_descipcion2A").css("display", "none");
@@ -133,13 +136,14 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
+            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarCatalogoDeducciones").modal();
+    $("#tde_IdTipoDedu").val("0");
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -164,7 +168,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue registrado de forma exitosa!',
-            });
+            });     
         }
     });
 });
@@ -181,7 +185,6 @@ $("#btnCerrarEditar").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
     $("#Validation_descipcion3").css("display", "none");
-
 });
 
 
@@ -336,7 +339,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
                 $("#Detalles #cde_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data[0].tde_IdTipoDedu;
+                var SelectedId = data[0].TipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/CatalogoDeDeducciones/EditGetDDL",
@@ -349,7 +352,6 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                     //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                     $("#Detalles #tde_IdTipoDedu").empty();
                     //LLENAR EL DROPDOWNLIST
-                    $("#Detalles #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
                     $.each(data, function (i, iter) {
                         $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                     });
