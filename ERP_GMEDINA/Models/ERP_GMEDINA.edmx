@@ -5067,23 +5067,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbTipoMoneda_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="tmon_Id" Type="int" Mode="In" />
-          <Parameter Name="tmon_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="tmon_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tmon_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbTipoMonedas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="tmon_Id" Type="int" Mode="In" />
-          <Parameter Name="tmon_razon_Inactivo" Type="nvarchar" Mode="In" />
-          <Parameter Name="tmon_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tmon_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbTipoMonedas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="tmon_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="tmon_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="tmon_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" Schema="Acce" store:Type="Tables" />
@@ -8354,23 +8337,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
-          <FunctionImport Name="UDP_RRHH_tbTipoMoneda_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMoneda_Update_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Delete_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_razon_Inactivo" Mode="In" Type="String" />
-            <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Insert_Result)">
-            <Parameter Name="tmon_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tmon_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13220,15 +13186,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbTipoMoneda_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14960,27 +14917,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMoneda_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMoneda_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMoneda_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
