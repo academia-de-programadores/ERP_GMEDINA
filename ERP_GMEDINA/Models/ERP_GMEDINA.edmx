@@ -360,7 +360,7 @@
             <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
@@ -371,7 +371,7 @@
             <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
@@ -453,17 +453,11 @@
         <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbEmpresas_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbEmpresas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbEmpresas_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -532,11 +526,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" >
             <ResultMapping>
@@ -546,11 +535,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="tbTipoDeduccion">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoDeduccion">

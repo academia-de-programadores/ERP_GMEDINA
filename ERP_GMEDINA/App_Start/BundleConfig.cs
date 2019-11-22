@@ -64,7 +64,7 @@ namespace ERP_GMEDINA
             // Lightbox gallery
             bundles.Add(new ScriptBundle("~/plugins/lightboxGallery").Include(
                       "~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"));
-            
+
             // Sparkline
             bundles.Add(new ScriptBundle("~/plugins/sparkline").Include(
                       "~/Scripts/plugins/sparkline/jquery.sparkline.min.js"));
@@ -261,7 +261,7 @@ namespace ERP_GMEDINA
             // image cropper styles
             bundles.Add(new StyleBundle("~/plugins/imagecropperStyles").Include(
                       "~/Content/plugins/cropper/cropper.min.css"));
-            
+
             // jsTree
             bundles.Add(new ScriptBundle("~/plugins/jsTree").Include(
                       "~/Scripts/plugins/jsTree/jstree.min.js"));
@@ -453,15 +453,34 @@ namespace ERP_GMEDINA
             // Touch Spin Styless
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
-                      "~/Content/plugins/izitoast/iziToast.min.css"));   
+                      "~/Content/plugins/izitoast/iziToast.min.css"));
+            //script con funciones generales
+
+
+
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+            "~/Scripts/plugins/iziToast/iziToast.js",
+            "~/Scripts/plugins/iziToast/iziToast.min.js",
+            "~/Scripts/app/general/general.js",
+            "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
-            //bundles APP/GENERAL/EMPRESAS
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas/Empresas").Include(
-                "~/Scripts/app/General/Empresas/Empresas.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
+            "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas").Include(
+                "~/Scripts/app/general/Idiomas/Idiomas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
+                "~/Scripts/app/general/Empresas/Empresas.js"));
 
 
             //OPTIMIZATION
@@ -479,3 +498,4 @@ namespace ERP_GMEDINA
         }
     }
 }
+
