@@ -1,5 +1,6 @@
-﻿$(document).ready(function () {
-    $('.dataTables-example').DataTable({
+﻿var tabla = null;
+$(document).ready(function () {
+    tabla=$('.dataTables-example').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 25,

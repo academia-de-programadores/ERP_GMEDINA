@@ -144,7 +144,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(tbCompetencias tbCompetencias)
         {
-            string msj = "";
+            string msj = "...";
             if (tbCompetencias.comp_Id != 0 && tbCompetencias.comp_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
@@ -168,7 +168,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }
 
         protected tbUsuario IsNull(tbUsuario valor)

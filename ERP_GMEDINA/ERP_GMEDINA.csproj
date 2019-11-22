@@ -748,9 +748,9 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
-    <Content Include="Scripts\app\General\Competencias.js" />
-    <Content Include="Scripts\app\General\Competencias\Competencias.js" />
+    <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -1282,9 +1282,10 @@
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
     <Content Include="Views\Competencias\Index.cshtml" />
     <Content Include="Views\Competencias\_Create.cshtml" />
-    <Content Include="Views\Competencias\_Details.cshtml" />
     <Content Include="Views\Competencias\_Edit.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Index2.cshtml" />
+    <Content Include="Views\Competencias\_Delete.cshtml" />
+    <Content Include="Views\Competencias\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

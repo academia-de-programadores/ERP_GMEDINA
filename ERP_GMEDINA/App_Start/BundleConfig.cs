@@ -453,15 +453,24 @@ namespace ERP_GMEDINA
             // Touch Spin Styless
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
-                      "~/Content/plugins/izitoast/iziToast.min.css"));   
+                      "~/Content/plugins/izitoast/iziToast.min.css"));
 
-            //bundles APP/GENERAL
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
-                "~/Scripts/app/General/CatalogoDeducciones.js"));
+            ////bundles APP/GENERAL
+            //bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
+            //    "~/Scripts/app/General/CatalogoDeducciones.js"));
 
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Competencias").Include(
-               "~/Scripts/app/General/Competencias.js"));
+
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+            "~/Scripts/plugins/iziToast/iziToast.js",
+            "~/Scripts/plugins/iziToast/iziToast.min.js",
+            "~/Scripts/app/general/general.js",
+            "~/Scripts/plugins/validate/jquery.validate.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
+               "~/Scripts/app/Competencias/Competencias.js"));
 
 
 
