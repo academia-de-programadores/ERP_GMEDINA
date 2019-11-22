@@ -51,46 +51,16 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tmon_Id,tmon_Descripcion,tmon_Estado,tmon_RazonInactivo,tmon_UsuarioCrea,tmon_FechaCrea,tmon_UsuarioModifica,tmon_FechaModifica")] tbTipoMonedas tbTipoMonedas)
         {
-            tbTipoMonedas.tmon_UsuarioCrea = 1;
-            tbTipoMonedas.tmon_FechaCrea = DateTime.Now;
-
-            string response = String.Empty;
-            IEnumerable<Object> listaTipoMonedas = null;
-            string MensajeError = "";
-
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    listaTipoMonedas = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion,
-                                                                    tbTipoMonedas.tmon_UsuarioCrea,
-                                                                    tbTipoMonedas.tmon_FechaCrea);
-                    foreach (UDP_RRHH_tbTipoMonedas_Insert_Result Resultado in listaTipoMonedas)
-                    {
-                        MensajeError = Resultado.MensajeError;
-                    }
-
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    response = Ex.Message.ToString();
-                }
-                response = "Bien";
+                db.tbTipoMonedas.Add(tbTipoMonedas);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            else
-            {
-                response = "Error";
-            }
-
-            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoMonedas.tmon_UsuarioCrea);
-            return Json(response, JsonRequestBehavior.AllowGet);
+            ViewBag.tmon_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoMonedas.tmon_UsuarioCrea);
+            ViewBag.tmon_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoMonedas.tmon_UsuarioModifica);
+            return View(tbTipoMonedas);
         }
 
         // GET: TipoMonedas/Edit/5

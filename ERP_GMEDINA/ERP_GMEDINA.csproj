@@ -748,7 +748,6 @@
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
-    <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1278,7 +1277,6 @@
     <Content Include="Views\TipoMonedas\Details.cshtml" />
     <Content Include="Views\TipoMonedas\Edit.cshtml" />
     <Content Include="Views\TipoMonedas\Index.cshtml" />
-    <Content Include="Views\TipoMonedas\_CreateTipoMonedas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
