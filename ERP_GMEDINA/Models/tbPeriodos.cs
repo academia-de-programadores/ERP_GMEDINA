@@ -12,29 +12,28 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbRequerimientosEspeciales
+    public partial class tbPeriodos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbRequerimientosEspeciales()
+        public tbPeriodos()
         {
-            this.tbRequerimientosEspecialesRequisicion = new HashSet<tbRequerimientosEspecialesRequisicion>();
-            this.tbRequerimientosEspecialesPersona = new HashSet<tbRequerimientosEspecialesPersona>();
+            this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
+            this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
         }
     
-        public int resp_Id { get; set; }
-        public string resp_Descripcion { get; set; }
-        public bool resp_Estado { get; set; }
-        public string resp_RazonInactivo { get; set; }
-        public int resp_UsuarioCrea { get; set; }
-        public System.DateTime resp_FechaCrea { get; set; }
-        public Nullable<int> resp_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> resp_FechaModifica { get; set; }
+        public int peri_IdPeriodo { get; set; }
+        public string peri_DescripPeriodo { get; set; }
+        public int peri_UsuarioCrea { get; set; }
+        public System.DateTime peri_FechaCrea { get; set; }
+        public Nullable<int> peri_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> peri_FechaModifica { get; set; }
+        public bool peri_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
+        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
+        public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
     }
 }

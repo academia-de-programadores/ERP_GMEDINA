@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Models
         public int tipe_Id { get; set; }
         public int per_Id { get; set; }
         public int titu_Id { get; set; }
-        public int titu_anio { get; set; }
         public bool tipe_Estado { get; set; }
         public string tipe_RazonInactivo { get; set; }
         public int tipe_UsuarioCrea { get; set; }

@@ -22,7 +22,6 @@ namespace ERP_GMEDINA.Models
     
         public int tper_Id { get; set; }
         public string tper_Descripcion { get; set; }
-        public bool tper_GoceDeSueldo { get; set; }
         public bool tper_Estado { get; set; }
         public string tper_RazonInactivo { get; set; }
         public int tper_UsuarioCrea { get; set; }

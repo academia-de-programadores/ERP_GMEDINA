@@ -14,12 +14,6 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbHorarios
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbHorarios()
-        {
-            this.tbEmpleados = new HashSet<tbEmpleados>();
-        }
-    
         public int hor_Id { get; set; }
         public int jor_Id { get; set; }
         public string hor_Descripcion { get; set; }
@@ -35,8 +29,6 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
     }
 }
