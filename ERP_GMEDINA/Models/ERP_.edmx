@@ -6971,7 +6971,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ERP_GMEDINAEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ERP_GMEDINA" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" />
           <EntitySet Name="tbRol" EntityType="Self.tbRol" />
@@ -7765,7 +7765,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ERP_GMEDINAModelStoreContainer" CdmEntityContainer="ERP_GMEDINAEntities">
+        <EntityContainerMapping StorageEntityContainer="ERP_GMEDINAModelStoreContainer" CdmEntityContainer="ERP_GMEDINA">
           <EntitySetMapping Name="tbAccesoRol">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbAccesoRol">
               <MappingFragment StoreEntitySet="tbAccesoRol">
