@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1262,6 +1263,12 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\TipoPermisos\Create.cshtml" />
+    <Content Include="Views\TipoPermisos\Delete.cshtml" />
+    <Content Include="Views\TipoPermisos\Details.cshtml" />
+    <Content Include="Views\TipoPermisos\Edit.cshtml" />
+    <Content Include="Views\TipoPermisos\Index.cshtml" />
+    <Content Include="Views\TipoPermisos\_CreateTipoPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
