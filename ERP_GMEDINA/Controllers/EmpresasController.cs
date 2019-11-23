@@ -48,6 +48,22 @@ namespace ERP_GMEDINA.Controllers
             return View(tbEmpresas);
         }
 
+        [HttpPost]
+        public JsonResult llenarTabla()
+        {
+            List<tbEmpresas> tbEmpresas =
+                new List<Models.tbEmpresas> { };
+            foreach (tbEmpresas x in db.tbEmpresas.ToList().Where(x => x.empr_Estado == true))
+            {
+                tbEmpresas.Add(new tbEmpresas
+                {
+                    empr_Id = x.empr_Id,
+                    empr_Nombre = x.empr_Nombre
+                });
+            }
+            return Json(tbEmpresas, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Empresas/Create
         public ActionResult Create()
         {
