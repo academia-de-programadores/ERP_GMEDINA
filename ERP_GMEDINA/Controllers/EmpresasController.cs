@@ -33,21 +33,6 @@ namespace ERP_GMEDINA.Controllers
             return View(tbEmpresas);
         }
 
-        // GET: Empresas/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            if (tbEmpresas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbEmpresas);
-        }
-
         [HttpPost]
         public JsonResult llenarTabla()
         {
