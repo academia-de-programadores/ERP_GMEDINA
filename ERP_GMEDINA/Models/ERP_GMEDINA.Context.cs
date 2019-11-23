@@ -15,10 +15,10 @@ namespace ERP_GMEDINA.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ERP_GMEDINAEntities1 : DbContext
+    public partial class ERP_GMEDINAEntities2 : DbContext
     {
-        public ERP_GMEDINAEntities1()
-            : base("name=ERP_GMEDINAEntities1")
+        public ERP_GMEDINAEntities2()
+            : base("name=ERP_GMEDINAEntities2")
         {
         }
     
@@ -28,71 +28,7 @@ namespace ERP_GMEDINA.Models
         }
     
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
-        public virtual DbSet<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
-        public virtual DbSet<tbTipoDeduccion> tbTipoDeduccion { get; set; }
-    
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDeDeducciones_Insert_Result> UDP_Plani_tbCatalogoDeDeducciones_Insert(string cde_DescripcionDedu, Nullable<int> tde_IdTipoDedu, Nullable<decimal> cde_PorcentajeColaborador, Nullable<decimal> cde_PorcentajeEmpresa, Nullable<int> cde_UsuarioCrea, Nullable<System.DateTime> cde_FechaCrea)
-        {
-            var cde_DescripcionDeduParameter = cde_DescripcionDedu != null ?
-                new ObjectParameter("cde_DescripcionDedu", cde_DescripcionDedu) :
-                new ObjectParameter("cde_DescripcionDedu", typeof(string));
-    
-            var tde_IdTipoDeduParameter = tde_IdTipoDedu.HasValue ?
-                new ObjectParameter("tde_IdTipoDedu", tde_IdTipoDedu) :
-                new ObjectParameter("tde_IdTipoDedu", typeof(int));
-    
-            var cde_PorcentajeColaboradorParameter = cde_PorcentajeColaborador.HasValue ?
-                new ObjectParameter("cde_PorcentajeColaborador", cde_PorcentajeColaborador) :
-                new ObjectParameter("cde_PorcentajeColaborador", typeof(decimal));
-    
-            var cde_PorcentajeEmpresaParameter = cde_PorcentajeEmpresa.HasValue ?
-                new ObjectParameter("cde_PorcentajeEmpresa", cde_PorcentajeEmpresa) :
-                new ObjectParameter("cde_PorcentajeEmpresa", typeof(decimal));
-    
-            var cde_UsuarioCreaParameter = cde_UsuarioCrea.HasValue ?
-                new ObjectParameter("cde_UsuarioCrea", cde_UsuarioCrea) :
-                new ObjectParameter("cde_UsuarioCrea", typeof(int));
-    
-            var cde_FechaCreaParameter = cde_FechaCrea.HasValue ?
-                new ObjectParameter("cde_FechaCrea", cde_FechaCrea) :
-                new ObjectParameter("cde_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeDeducciones_Insert_Result>("UDP_Plani_tbCatalogoDeDeducciones_Insert", cde_DescripcionDeduParameter, tde_IdTipoDeduParameter, cde_PorcentajeColaboradorParameter, cde_PorcentajeEmpresaParameter, cde_UsuarioCreaParameter, cde_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDeDeducciones_Update_Result> UDP_Plani_tbCatalogoDeDeducciones_Update(Nullable<int> cde_IdDeduccion, string cde_DescripcionDedu, Nullable<int> tde_IdTipoDedu, Nullable<decimal> cde_PorcentajeColaborador, Nullable<decimal> cde_PorcentajeEmpresa, Nullable<int> cde_UsuarioModifica, Nullable<System.DateTime> cde_FechaModifica)
-        {
-            var cde_IdDeduccionParameter = cde_IdDeduccion.HasValue ?
-                new ObjectParameter("cde_IdDeduccion", cde_IdDeduccion) :
-                new ObjectParameter("cde_IdDeduccion", typeof(int));
-    
-            var cde_DescripcionDeduParameter = cde_DescripcionDedu != null ?
-                new ObjectParameter("cde_DescripcionDedu", cde_DescripcionDedu) :
-                new ObjectParameter("cde_DescripcionDedu", typeof(string));
-    
-            var tde_IdTipoDeduParameter = tde_IdTipoDedu.HasValue ?
-                new ObjectParameter("tde_IdTipoDedu", tde_IdTipoDedu) :
-                new ObjectParameter("tde_IdTipoDedu", typeof(int));
-    
-            var cde_PorcentajeColaboradorParameter = cde_PorcentajeColaborador.HasValue ?
-                new ObjectParameter("cde_PorcentajeColaborador", cde_PorcentajeColaborador) :
-                new ObjectParameter("cde_PorcentajeColaborador", typeof(decimal));
-    
-            var cde_PorcentajeEmpresaParameter = cde_PorcentajeEmpresa.HasValue ?
-                new ObjectParameter("cde_PorcentajeEmpresa", cde_PorcentajeEmpresa) :
-                new ObjectParameter("cde_PorcentajeEmpresa", typeof(decimal));
-    
-            var cde_UsuarioModificaParameter = cde_UsuarioModifica.HasValue ?
-                new ObjectParameter("cde_UsuarioModifica", cde_UsuarioModifica) :
-                new ObjectParameter("cde_UsuarioModifica", typeof(int));
-    
-            var cde_FechaModificaParameter = cde_FechaModifica.HasValue ?
-                new ObjectParameter("cde_FechaModifica", cde_FechaModifica) :
-                new ObjectParameter("cde_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeDeducciones_Update_Result>("UDP_Plani_tbCatalogoDeDeducciones_Update", cde_IdDeduccionParameter, cde_DescripcionDeduParameter, tde_IdTipoDeduParameter, cde_PorcentajeColaboradorParameter, cde_PorcentajeEmpresaParameter, cde_UsuarioModificaParameter, cde_FechaModificaParameter);
-        }
     
         public virtual ObjectResult<UDP_RRHH_tbEmpresas_Delete_Result> UDP_RRHH_tbEmpresas_Delete(Nullable<int> empr_Id, string empr_razon_Inactivo, Nullable<int> empr_UsuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
         {
@@ -132,6 +68,23 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Insert_Result>("UDP_RRHH_tbEmpresas_Insert", empr_NombreParameter, empr_usuarioCreaParameter, empr_FechaCreaParameter);
         }
     
+        public virtual ObjectResult<string> UDP_RRHH_tbEmpresas_Restore(Nullable<int> empr_Id, Nullable<int> empr_UsuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
+        {
+            var empr_IdParameter = empr_Id.HasValue ?
+                new ObjectParameter("empr_Id", empr_Id) :
+                new ObjectParameter("empr_Id", typeof(int));
+    
+            var empr_UsuarioModificaParameter = empr_UsuarioModifica.HasValue ?
+                new ObjectParameter("empr_UsuarioModifica", empr_UsuarioModifica) :
+                new ObjectParameter("empr_UsuarioModifica", typeof(int));
+    
+            var empr_FechaModificaParameter = empr_FechaModifica.HasValue ?
+                new ObjectParameter("empr_FechaModifica", empr_FechaModifica) :
+                new ObjectParameter("empr_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbEmpresas_Restore", empr_IdParameter, empr_UsuarioModificaParameter, empr_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<UDP_RRHH_tbEmpresas_Update_Result> UDP_RRHH_tbEmpresas_Update(Nullable<int> empr_Id, string empr_Nombre, Nullable<int> empr_usuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
         {
             var empr_IdParameter = empr_Id.HasValue ?
@@ -151,23 +104,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("empr_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Update_Result>("UDP_RRHH_tbEmpresas_Update", empr_IdParameter, empr_NombreParameter, empr_usuarioModificaParameter, empr_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result> UDP_Plani_tbCatalogoDeDeducciones_Inactivar(Nullable<int> cde_IdDeduccion, Nullable<int> cde_UsuarioModifica, Nullable<System.DateTime> cde_FechaModifica)
-        {
-            var cde_IdDeduccionParameter = cde_IdDeduccion.HasValue ?
-                new ObjectParameter("cde_IdDeduccion", cde_IdDeduccion) :
-                new ObjectParameter("cde_IdDeduccion", typeof(int));
-    
-            var cde_UsuarioModificaParameter = cde_UsuarioModifica.HasValue ?
-                new ObjectParameter("cde_UsuarioModifica", cde_UsuarioModifica) :
-                new ObjectParameter("cde_UsuarioModifica", typeof(int));
-    
-            var cde_FechaModificaParameter = cde_FechaModifica.HasValue ?
-                new ObjectParameter("cde_FechaModifica", cde_FechaModifica) :
-                new ObjectParameter("cde_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result>("UDP_Plani_tbCatalogoDeDeducciones_Inactivar", cde_IdDeduccionParameter, cde_UsuarioModificaParameter, cde_FechaModificaParameter);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class EmpresasController : Controller
     {
-        private ERP_GMEDINAEntities1 db = new ERP_GMEDINAEntities1();
+        private ERP_GMEDINAEntities2 db = new ERP_GMEDINAEntities2();
 
         // GET: Empresas
         public ActionResult Index()

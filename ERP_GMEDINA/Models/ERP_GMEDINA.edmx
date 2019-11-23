@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbUsuario">
           <Key>
             <PropertyRef Name="usu_Id" />
@@ -20,33 +20,6 @@
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
-        <EntityType Name="tbCatalogoDeDeducciones">
-          <Key>
-            <PropertyRef Name="cde_IdDeducciones" />
-          </Key>
-          <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="tde_IdTipoDedu" Type="int" Nullable="false" />
-          <Property Name="cde_PorcentajeColaborador" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_PorcentajeEmpresa" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="cde_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="cde_UsuarioModifica" Type="int" />
-          <Property Name="cde_FechaModifica" Type="datetime" />
-          <Property Name="cde_Activo" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tbTipoDeduccion">
-          <Key>
-            <PropertyRef Name="tde_IdTipoDedu" />
-          </Key>
-          <Property Name="tde_IdTipoDedu" Type="int" Nullable="false" />
-          <Property Name="tde_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="tde_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="tde_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="tde_UsuarioModifica" Type="int" />
-          <Property Name="tde_FechaModifica" Type="datetime" />
-          <Property Name="tde_Activo" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
             <PropertyRef Name="empr_Id" />
@@ -60,55 +33,7 @@
           <Property Name="empr_UsuarioModifica" Type="int" />
           <Property Name="empr_FechaModifica" Type="datetime" />
         </EntityType>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="cde_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="cde_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -120,7 +45,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,40 +57,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-          <End Role="tbTipoDeduccion" Type="Self.tbTipoDeduccion" Multiplicity="1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="cde_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="cde_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="cde_DescripcionDedu" Type="nvarchar" Mode="In" />
-          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
-          <Parameter Name="cde_PorcentajeColaborador" Type="decimal" Mode="In" />
-          <Parameter Name="cde_PorcentajeEmpresa" Type="decimal" Mode="In" />
-          <Parameter Name="cde_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="cde_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="cde_DescripcionDedu" Type="nvarchar" Mode="In" />
-          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
-          <Parameter Name="cde_PorcentajeColaborador" Type="decimal" Mode="In" />
-          <Parameter Name="cde_PorcentajeEmpresa" Type="decimal" Mode="In" />
-          <Parameter Name="cde_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="cde_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbEmpresas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
           <Parameter Name="empr_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -177,6 +68,11 @@
           <Parameter Name="empr_usuarioCrea" Type="int" Mode="In" />
           <Parameter Name="empr_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
@@ -185,39 +81,18 @@
         </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
-          <EntitySet Name="tbCatalogoDeDeducciones" EntityType="Self.tbCatalogoDeDeducciones" Schema="Plani" store:Type="Tables" />
-          <EntitySet Name="tbTipoDeduccion" EntityType="Self.tbTipoDeduccion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" Association="Self.'FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -235,30 +110,8 @@
           <Property Name="usu_RazonInactivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="usu_EsAdministrador" Type="Boolean" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="Byte" />
-          <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDeDeducciones" />
-          <NavigationProperty Name="tbCatalogoDeDeducciones1" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDeDeducciones" />
-          <NavigationProperty Name="tbEmpresas" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpresas" />
-          <NavigationProperty Name="tbEmpresas1" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpresas" />
-          <NavigationProperty Name="tbTipoDeduccion" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoDeduccion" />
-          <NavigationProperty Name="tbTipoDeduccion1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoDeduccion" />
-        </EntityType>
-        <EntityType Name="tbCatalogoDeDeducciones">
-          <Key>
-            <PropertyRef Name="cde_IdDeducciones" />
-          </Key>
-          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tde_IdTipoDedu" Type="Int32" Nullable="false" />
-          <Property Name="cde_PorcentajeColaborador" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_PorcentajeEmpresa" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="cde_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cde_UsuarioModifica" Type="Int32" />
-          <Property Name="cde_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="cde_Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" FromRole="tbCatalogoDeDeducciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" FromRole="tbCatalogoDeDeducciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbTipoDeduccion" Relationship="ERP_GMEDINAModel.C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" FromRole="tbCatalogoDeDeducciones" ToRole="tbTipoDeduccion" />
+          <NavigationProperty Name="tbEmpresas" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpresas" />
+          <NavigationProperty Name="tbEmpresas1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpresas" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -272,34 +125,10 @@
           <Property Name="empr_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="empr_UsuarioModifica" Type="Int32" />
           <Property Name="empr_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbEmpresas" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbEmpresas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbEmpresas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbEmpresas" ToRole="tbUsuario" />
         </EntityType>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="cde_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="cde_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -323,43 +152,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ERP_GMEDINAEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ERP_GMEDINAEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
-          <EntitySet Name="tbCatalogoDeDeducciones" EntityType="Self.tbCatalogoDeDeducciones" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" />
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" Association="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" Association="Self.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
           </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result)">
-            <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
-            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
-            <Parameter Name="cde_PorcentajeColaborador" Mode="In" Type="Decimal" />
-            <Parameter Name="cde_PorcentajeEmpresa" Mode="In" Type="Decimal" />
-            <Parameter Name="cde_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="cde_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result)">
-            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
-            <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
-            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
-            <Parameter Name="cde_PorcentajeColaborador" Mode="In" Type="Decimal" />
-            <Parameter Name="cde_PorcentajeEmpresa" Mode="In" Type="Decimal" />
-            <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_razon_Inactivo" Mode="In" Type="String" />
@@ -371,90 +174,20 @@
             <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Restore" ReturnType="Collection(String)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="tbTipoDeduccion" EntityType="ERP_GMEDINAModel.tbTipoDeduccion" />
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" Association="ERP_GMEDINAModel.C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-            <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
-            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
-          </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result)">
-            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
-            <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="tbTipoDeduccion">
-          <Key>
-            <PropertyRef Name="tde_IdTipoDedu" />
-          </Key>
-          <Property Name="tde_IdTipoDedu" Type="Int32" Nullable="false" />
-          <Property Name="tde_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tde_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="tde_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tde_UsuarioModifica" Type="Int32" />
-          <Property Name="tde_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="tde_Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea" FromRole="tbTipoDeduccion" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica" FromRole="tbTipoDeduccion" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="ERP_GMEDINAModel.C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" FromRole="tbTipoDeduccion" ToRole="tbCatalogoDeDeducciones" />
-        </EntityType>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbTipoDeduccion" Role="tbTipoDeduccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbTipoDeduccion" Role="tbTipoDeduccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu">
-          <End Type="ERP_GMEDINAModel.tbTipoDeduccion" Role="tbTipoDeduccion" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbCatalogoDeDeducciones" Role="tbCatalogoDeDeducciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoDeduccion">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Principal>
-            <Dependent Role="tbCatalogoDeDeducciones">
-              <PropertyRef Name="tde_IdTipoDedu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbEmpresas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
@@ -462,15 +195,12 @@
         <ComplexType Name="UDP_RRHH_tbEmpresas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbEmpresas_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ERP_GMEDINAModelStoreContainer" CdmEntityContainer="ERP_GMEDINAEntities1">
+        <EntityContainerMapping StorageEntityContainer="ERP_GMEDINAModelStoreContainer" CdmEntityContainer="ERP_GMEDINAEntities2">
           <EntitySetMapping Name="tbUsuario">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbUsuario">
               <MappingFragment StoreEntitySet="tbUsuario">
@@ -484,22 +214,6 @@
                 <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
                 <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
                 <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbCatalogoDeDeducciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCatalogoDeDeducciones">
-              <MappingFragment StoreEntitySet="tbCatalogoDeDeducciones">
-                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-                <ScalarProperty Name="tde_IdTipoDedu" ColumnName="tde_IdTipoDedu" />
-                <ScalarProperty Name="cde_PorcentajeColaborador" ColumnName="cde_PorcentajeColaborador" />
-                <ScalarProperty Name="cde_PorcentajeEmpresa" ColumnName="cde_PorcentajeEmpresa" />
-                <ScalarProperty Name="cde_UsuarioCrea" ColumnName="cde_UsuarioCrea" />
-                <ScalarProperty Name="cde_FechaCrea" ColumnName="cde_FechaCrea" />
-                <ScalarProperty Name="cde_UsuarioModifica" ColumnName="cde_UsuarioModifica" />
-                <ScalarProperty Name="cde_FechaModifica" ColumnName="cde_FechaModifica" />
-                <ScalarProperty Name="cde_Activo" ColumnName="cde_Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -517,20 +231,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result">
@@ -545,29 +245,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="tbTipoDeduccion">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoDeduccion">
-              <MappingFragment StoreEntitySet="tbTipoDeduccion">
-                <ScalarProperty Name="tde_Activo" ColumnName="tde_Activo" />
-                <ScalarProperty Name="tde_FechaModifica" ColumnName="tde_FechaModifica" />
-                <ScalarProperty Name="tde_UsuarioModifica" ColumnName="tde_UsuarioModifica" />
-                <ScalarProperty Name="tde_FechaCrea" ColumnName="tde_FechaCrea" />
-                <ScalarProperty Name="tde_UsuarioCrea" ColumnName="tde_UsuarioCrea" />
-                <ScalarProperty Name="tde_Descripcion" ColumnName="tde_Descripcion" />
-                <ScalarProperty Name="tde_IdTipoDedu" ColumnName="tde_IdTipoDedu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

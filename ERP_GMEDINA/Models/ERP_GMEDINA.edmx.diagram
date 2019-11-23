@@ -4,18 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19cee403c23b43b898ad3d56d2ca4090" Name="Diagram1">
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCatalogoDeDeducciones" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpresas" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDeDeducciones_cde_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoDeduccion" Width="1.5" PointX="3" PointY="9.5" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTipoDeduccion_tde_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" />
+      <Diagram DiagramId="989aa68e48954f9390a91cc39d445521" Name="Diagram1">
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpresas" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" ManuallyRouted="false" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

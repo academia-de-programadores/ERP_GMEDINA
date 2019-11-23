@@ -17,12 +17,8 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbUsuario()
         {
-            this.tbCatalogoDeDeducciones = new HashSet<tbCatalogoDeDeducciones>();
-            this.tbCatalogoDeDeducciones1 = new HashSet<tbCatalogoDeDeducciones>();
             this.tbEmpresas = new HashSet<tbEmpresas>();
             this.tbEmpresas1 = new HashSet<tbEmpresas>();
-            this.tbTipoDeduccion = new HashSet<tbTipoDeduccion>();
-            this.tbTipoDeduccion1 = new HashSet<tbTipoDeduccion>();
         }
     
         public int usu_Id { get; set; }
@@ -37,16 +33,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<byte> usu_SesionesValidas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpresas> tbEmpresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpresas> tbEmpresas1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccion1 { get; set; }
     }
 }
