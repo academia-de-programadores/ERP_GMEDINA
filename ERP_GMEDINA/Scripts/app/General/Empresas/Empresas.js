@@ -3,6 +3,7 @@
         '/Empresas/llenarTabla',
         'POST',
         function (Lista) {
+            var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
@@ -16,6 +17,39 @@
         });
 }
 
+function tablaEditar(ID) {
+    id = ID;
+    _ajax(null,
+        '/Empresas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+                $('#ModalEditar').modal('show');
+            }
+        });
+}
+
+function tablaDetalles(ID) {
+    id = ID;
+    _ajax(null,
+        '/Empresas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
+                $("#ModalDetalles").find("#empr_Estado")["0"].innerText = obj.empr_Estado;
+                $("#ModalDetalles").find("#empr_RazonInactivo")["0"].innerText = obj.empr_RazonInactivo;
+                $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
+                $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                $('#ModalDetalles').modal('show');
+            }
+        });
+}
+
 
 //Botones GET
 $("#btnAgregar").click(function () {
@@ -24,6 +58,27 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#empr_Nombre").val("");
     $(modalnuevo).find("#empr_Nombre").focus();
 })
+
+$("#btnEditar").click(function () {
+    _ajax(null,
+        '/Empresas/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+                $("#ModalEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+                $("#ModalEditar").find("#empr_Nombre").focus();
+            }
+        });
+});
+
+$("#btnInhabilitar").click(function () {
+    CierraPopups();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#empr_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#empr_RazonInactivo").focus();
+});
 
 //Botones POST
 $("#btnGuardar").click(function () {
@@ -42,6 +97,53 @@ $("#btnGuardar").click(function () {
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
+$("#btnActualizar").click(function () {
+    var data = $("#FormEditar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.empr_Id = id;
+        data = JSON.stringify({ tbEmpresas: data });
+        _ajax(data,
+            '/Empresas/Edit',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.empr_Id = id;
+        data = JSON.stringify({ tbEmpresas: data });
+        _ajax(data,
+            '/Empresas/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["empr_Descripcion", "empr_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
             });
     } else {

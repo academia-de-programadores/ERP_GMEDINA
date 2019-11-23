@@ -111,60 +111,124 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            if (tbEmpresas == null)
+
+            tbEmpresas tbEmpresas = null;
+            try
             {
+                tbEmpresas = db.tbEmpresas.Find(id);
+                if (tbEmpresas == null || !tbEmpresas.empr_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
-            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
-            return View(tbEmpresas);
+            Session["id"] = id;
+            var empresa = new tbEmpresas
+            {
+                empr_Id = tbEmpresas.empr_Id,
+                empr_Nombre = tbEmpresas.empr_Nombre,
+                empr_Estado = tbEmpresas.empr_Estado,
+                empr_RazonInactivo = tbEmpresas.empr_RazonInactivo,
+                empr_UsuarioCrea = tbEmpresas.empr_UsuarioCrea,
+                empr_FechaCrea = tbEmpresas.empr_FechaCrea,
+                empr_UsuarioModifica = tbEmpresas.empr_UsuarioModifica,
+                empr_FechaModifica = tbEmpresas.empr_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbEmpresas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbEmpresas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(empresa, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Empresas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "empr_Id,empr_Nombre,empr_Estado,empr_RazonInactivo,empr_UsuarioCrea,empr_FechaCrea,empr_UsuarioModifica,empr_FechaModifica")] tbEmpresas tbEmpresas)
+        public JsonResult Edit(tbEmpresas tbEmpresas)
         {
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbEmpresas.empr_Id != 0 && tbEmpresas.empr_Nombre != "")
             {
-                db.Entry(tbEmpresas).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioCrea);
-            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpresas.empr_UsuarioModifica);
-            return View(tbEmpresas);
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Empresas/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(tbEmpresas tbEmpresas)
         {
-            if (id == null)
+            string msj = "...";
+            if (tbEmpresas.empr_Id != 0 && tbEmpresas.empr_RazonInactivo != "")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbEmpresas_Delete(id, tbEmpresas.empr_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbEmpresas_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            if (tbEmpresas == null)
+            else
             {
-                return HttpNotFound();
+                msj = "-3";
             }
-            return View(tbEmpresas);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Empresas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
-            db.tbEmpresas.Remove(tbEmpresas);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Empresas/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    tbEmpresas tbEmpresas = db.tbEmpresas.Find(id);
+        //    db.tbEmpresas.Remove(tbEmpresas);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
+        protected tbUsuario IsNull (tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
