@@ -105,7 +105,7 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-
+   
 }
 $("#ModalNuevo").on('hidden.bs.modal', function () {
     limpiarClases(this);
