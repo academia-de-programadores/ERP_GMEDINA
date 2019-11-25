@@ -10,20 +10,11 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbTipoMonedas
+    public partial class UDP_RRHH_tbTipoMonedas_Select_Result
     {
-        public int tmon_Id { get; set; }
         public string tmon_Descripcion { get; set; }
         public bool tmon_Estado { get; set; }
         public string tmon_RazonInactivo { get; set; }
-        public int tmon_UsuarioCrea { get; set; }
-        public System.DateTime tmon_FechaCrea { get; set; }
-        public Nullable<int> tmon_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tmon_FechaModifica { get; set; }
-    
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }
