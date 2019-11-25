@@ -47,10 +47,7 @@ function llenarTabla() {
             });
         });
 }
-//function ClearTables() {
-//    $('#IndexTable').dataTable().clear().draw();
-//}
-//Botones GET
+
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');

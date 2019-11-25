@@ -105,7 +105,9 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-   
+    $(form).find("#form").serializeArray().forEach(function (id, valor) {
+        div.find("#error" + id.name).text("");
+    });
 }
 $("#ModalNuevo").on('hidden.bs.modal', function () {
     limpiarClases(this);
@@ -113,7 +115,9 @@ $("#ModalNuevo").on('hidden.bs.modal', function () {
 $("#ModalEditar").on('hidden.bs.modal', function () {
     limpiarClases(this);
 });
-
+$("#ModalInhabilitar").on('hidden.bs.modal', function () {
+    limpiarClases(this);
+});
 $(".required").each(function (indice, input) {
     var maxlength = $(input).data("val-maxlength-max");
     var form = $(input).closest("form");
