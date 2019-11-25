@@ -63,6 +63,36 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
+        public ActionResult ChildRowData(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            try
+            {
+                var Horarios = db.tbHorarios.Where(x => x.jor_Id == id).ToList();
+                List<tbHorarios> ListHorarios = new List<tbHorarios> { };
+                foreach (var item in Horarios)
+                {
+                    ListHorarios.Add(new tbHorarios {
+                        hor_Descripcion = item.hor_Descripcion,
+                        hor_HoraInicio = item.hor_HoraInicio,
+                        hor_HoraFin = item.hor_HoraFin,
+                        hor_CantidadHoras = item.hor_CantidadHoras
+                    });
+                }
+
+                return Json(ListHorarios, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+        }
+
         // GET: Jornadas/Edit/5
         public ActionResult Edit(int? id)
         {

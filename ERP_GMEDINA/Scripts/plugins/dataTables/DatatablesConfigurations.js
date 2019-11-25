@@ -2,16 +2,16 @@
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-            '<td>Full name:</td>' +
-            '<td>' + d.name + '</td>' +
+            '<td>Descripción:</td>' +
+            '<td>Hora inicio:</td>' +
+            '<td>Hora fin:</td>' +
+            '<td>Hora inicio:</td>' +
         '</tr>' +
         '<tr>' +
-            '<td>Extension number:</td>' +
-            '<td>' + d.extn + '</td>' +
-        '</tr>' +
-        '<tr>' +
-            '<td>Extra info:</td>' +
-            '<td>And any further details here (images etc)...</td>' +
+            '<td>' + "Descripcion" + '</td>' +
+            '<td>' + "Hora_inicio" + '</td>' +
+            '<td>' + "Hora_fin" + '</td>' +
+            '<td>' + "cant_horas" + '</td>' +
         '</tr>' +
     '</table>';
 }
@@ -21,7 +21,6 @@ $(document).ready(function () {
 
     var IndexTable = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-        responsive: true,
         pageLength: 25,
         columns: [
             {
@@ -30,8 +29,9 @@ $(document).ready(function () {
                 "data": null,
                 "defaultContent": ''
             },
-            null,
-            null,
+            {"data":"Jor_Id"},
+            {"data":"Jor_Desc"},
+            { "data": "Acciones"}
         ],
         order: [[1, 'asc']],
         dom: '<"html5buttons"B>lTfgitp',
@@ -71,7 +71,7 @@ $(document).ready(function () {
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = IndexTable.row(tr);
- 
+    console.log(tr.data("id"));
     if ( row.child.isShown() ) {
         // This row is already open - close it
         row.child.hide();
