@@ -13,8 +13,7 @@ $(document).ready(function () {
             });
         } else if (valor.innerText == "Acciones") {
             columnas.push({
-                "orderable": false,
-                "data": "Acciones",
+                "orderable": false
             });
         } else {
             columnas.push(null);
