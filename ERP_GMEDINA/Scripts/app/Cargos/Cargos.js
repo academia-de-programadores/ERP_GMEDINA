@@ -61,7 +61,7 @@ $("#btnEditar").click(function () {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                location.reload();
+              
                 $('#ModalEditar').modal('show');
                 $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
             }
@@ -112,7 +112,6 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                   
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "Se ah Inactivado el registro");
                     location.reload();
@@ -138,7 +137,6 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    location.reload();
                     MsgSuccess("¡Exito!", "Se ah actualizado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
