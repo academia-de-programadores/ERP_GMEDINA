@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-             
+
                 return View(tbCargos);
             }
             catch (Exception ex)
