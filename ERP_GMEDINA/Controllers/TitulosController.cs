@@ -17,179 +17,184 @@ namespace ERP_GMEDINA.Controllers
         // GET: Titulos
         public ActionResult Index()
         {
-            var tbTitulos = db.tbTitulos.Where(t => t.titu_Estado == true);
-            return View(tbTitulos.ToList());
+            List<tbTitulos> tbtitulos = new List<Models.tbTitulos> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbtitulos);
+            }
+            catch (Exception ex)
+            {
+
+                ex.Message.ToString();
+                tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
+            }
+            return View(tbtitulos);
         }
 
-
-
-
-
-        // GET: Titulos/Details/5
-        /*public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbTitulos tbTitulos = db.tbTitulos.Find(id);
-            if (tbTitulos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbTitulos);
-        }
-        */
-
-
-        // GET: Titulos/Create
-    
-
-        // POST: Titulos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "titu_Id,titu_Descripcion,titu_Estado,titu_RazonInactivo,titu_UsuarioCrea,titu_FechaCrea,titu_UsuarioModifica,titu_FechaModifica")] tbTitulos tbtitulos)
+        public JsonResult llenarTabla()
         {
-            tbtitulos.titu_UsuarioCrea = 1;
-            tbtitulos.titu_FechaCrea = DateTime.Now;
-
-            string response = String.Empty;
-            IEnumerable<object> listatitulos = null;
-            string MensajeError = "";
-            if (ModelState.IsValid)
+            List<tbTitulos> tbtitulos = new List<Models.tbTitulos> { };
+            foreach (tbTitulos x in db.tbTitulos.ToList().Where(x => x.titu_Estado == true))
             {
+                tbtitulos.Add(new tbTitulos
+                {
+                    titu_Id = x.titu_Id,
+
+                    titu_Descripcion = x.titu_Descripcion
+                });
+            }
+            return Json(tbtitulos, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult Create(tbTitulos tbtitulos)
+        {
+            string msj = "";
+            if (tbtitulos.titu_Descripcion != "")
+            {
+                var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    listatitulos = db.UDP_RRHH_tbTitulos_Insert(tbtitulos.titu_Descripcion,
-                                                                tbtitulos.titu_UsuarioCrea,
-                                                                tbtitulos.titu_FechaCrea
-                                                                );
-                    foreach (UDP_RRHH_tbTitulos_Insert_Result Resultado in listatitulos)
-                        MensajeError = Resultado.MensajeError;
-
-                    if (MensajeError.StartsWith("-1"))
+                    var list = db.UDP_RRHH_tbTitulos_Insert(tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTitulos_Insert_Result item in list)
                     {
-                        ModelState.AddModelError("", "No se pudo ingresar el registro");
-                        response = "error";
+                        msj = item.MensajeError + " ";
                     }
-
                 }
                 catch (Exception ex)
                 {
-                    response = ex.Message.ToString();
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
-                response = "bien";
-
             }
             else
             {
-                response = "error";
+                msj = "-3";
             }
-
-
-            ViewBag.titu_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbtitulos.titu_UsuarioCrea);
-            ViewBag.titu_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbtitulos.titu_UsuarioModifica);
-            return Json(response,JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
 
 
-        // GET: Titulos/Edit/5
+        // GET: Habilidades/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTitulos tbTitulos = db.tbTitulos.Find(id);
-            if (tbTitulos == null)
+            tbTitulos tbtitulos = null;
+
+            try
             {
+                tbtitulos = db.tbTitulos.Find(id);
+                if (tbtitulos == null || !tbtitulos.titu_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            ViewBag.titu_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTitulos.titu_UsuarioCrea);
-            ViewBag.titu_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTitulos.titu_UsuarioModifica);
-            return View(tbTitulos);
+            Session["id"] = id;
+            var titulos = new tbTitulos
+            {
+                titu_Id = tbtitulos.titu_Id,
+                titu_Descripcion = tbtitulos.titu_Descripcion,
+                titu_Estado = tbtitulos.titu_Estado,
+                titu_RazonInactivo = tbtitulos.titu_RazonInactivo,
+                titu_UsuarioCrea = tbtitulos.titu_UsuarioCrea,
+                titu_FechaCrea = tbtitulos.titu_FechaCrea,
+                titu_UsuarioModifica = tbtitulos.titu_UsuarioModifica,
+                titu_FechaModifica = tbtitulos.titu_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbtitulos.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbtitulos.tbUsuario).usu_NombreUsuario }
+            };
+            return Json(titulos, JsonRequestBehavior.AllowGet);
         }
 
-
-
-        // POST: Titulos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "titu_Id,titu_Descripcion,titu_Estado,titu_RazonInactivo,titu_UsuarioCrea,titu_FechaCrea,titu_UsuarioModifica,titu_FechaModifica")] tbTitulos tbtitulos)
+        public JsonResult Edit(tbTitulos tbtitulos)
         {
-            tbtitulos.titu_UsuarioCrea = 1;
-            tbtitulos.titu_FechaCrea = DateTime.Now;
-
-            tbtitulos.titu_UsuarioModifica = 1;
-            tbtitulos.titu_FechaModifica = DateTime.Now;
-
-            string response = String.Empty;
-            IEnumerable<object> listatitulos = null;
-            string MensajeError = "";
-
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbtitulos.titu_Id != 0 && tbtitulos.titu_Descripcion != "")
             {
+                var id = (int)Session["id"];
+                var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    listatitulos = db.UDP_RRHH_tbTitulos_Update(tbtitulos.titu_Id,
-                                                                tbtitulos.titu_Descripcion,
-                                                                tbtitulos.titu_UsuarioModifica,
-                                                                tbtitulos.titu_FechaModifica
-                                                                );
-                    foreach (UDP_RRHH_tbTitulos_Update_Result Resultado in listatitulos)
-                        MensajeError = Resultado.MensajeError;
-
-                    if (MensajeError.StartsWith("-1"))
+                    var list = db.UDP_RRHH_tbTitulos_Update(id, tbtitulos.titu_Descripcion, usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTitulos_Update_Result item in list)
                     {
-                        ModelState.AddModelError("", "No se pudo ingresar el registron,conecte al administrador");
+                        msj = item.MensajeError + " ";
                     }
+                }
+
+                catch (Exception ex)
+                {
+
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(tbTitulos tbtitulos)
+        {
+            string msj = "";
+            if (tbtitulos.titu_Id != 0 && tbtitulos.titu_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbTitulos_Delete(id, tbtitulos.titu_RazonInactivo, usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTitulos_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+
                 }
                 catch (Exception ex)
                 {
-                    response = ex.Message.ToString();
-                }
-                response = "bien";
 
-            } 
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
             else
             {
-                ModelState.AddModelError("", "no se pudo modificar el registro, conecte con el administrador");
-                response = "error";
+                msj = "-3";
             }
-            ViewBag.titu_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbtitulos.titu_UsuarioCrea);
-            ViewBag.titu_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbtitulos.titu_UsuarioModifica);
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Titulos/Delete/5
-        public ActionResult Delete(int? id)
+        protected tbUsuario IsNull(tbUsuario valor)
         {
-            if (id == null)
+            if (valor != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return valor;
             }
-            tbTitulos tbTitulos = db.tbTitulos.Find(id);
-            if (tbTitulos == null)
+            else
             {
-                return HttpNotFound();
+                return new tbUsuario { usu_NombreUsuario = "" };
             }
-            return View(tbTitulos);
-        }
-
-        // POST: Titulos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbTitulos tbTitulos = db.tbTitulos.Find(id);
-            db.tbTitulos.Remove(tbTitulos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -202,3 +207,26 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     

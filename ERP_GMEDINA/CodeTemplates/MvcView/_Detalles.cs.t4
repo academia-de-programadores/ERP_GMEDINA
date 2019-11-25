@@ -1,0 +1,157 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+@model <#= ViewDataTypeName #>
+<#
+// "form-control" attribute is only supported for all EditorFor() in System.Web.Mvc 5.1.0.0 or later versions, except for checkbox, which uses a div in Bootstrap
+string boolType = "System.Boolean";
+Version requiredMvcVersion = new Version("5.1.0.0");
+bool isControlHtmlAttributesSupported = MvcVersion >= requiredMvcVersion;
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {#>
+<#
+}
+else if(IsLayoutPageSelected) {
+#>
+@{
+    ViewBag.Title = "<#= ViewName#>";
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+}
+    @Html.AntiForgeryToken()
+<#
+}
+else {
+#>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width" />
+      <title><#= ViewName #></title>
+  </head>
+  <body>
+<#
+    PushIndent("    ");
+}
+#>
+<#
+if (ReferenceScriptLibraries) {
+#>
+<#
+    if (!IsLayoutPageSelected && IsBundleConfigPresent) {
+#>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<#
+    }
+#>
+<#
+    else if (!IsLayoutPageSelected) {
+#>
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<#
+    }
+#>
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle <#= ViewDataTypeShortName.Substring(2) #></h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+<#
+}
+#>
+<#
+
+#>
+<#
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+
+
+			
+
+if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+<#
+    // We do not want to show any association properties for which there is
+    // no associated foreign key.
+    if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+        continue;
+    }
+
+	string ddid = property.PropertyName;
+if (property.PropertyName.Substring(0,9) == "tbUsuario")
+{
+ddid = "";
+string Valor = GetValueExpression(property);
+        foreach (var item in Valor)
+        {
+            if (item == '.')
+            {
+                ddid += '_';
+            }
+            else
+            {
+                ddid += item;
+            }
+        }
+}
+#>
+					<dt>@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)</dt>
+                    <dd id="<#= ddid #>"></dd>
+
+<#
+}
+}#>				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<#
+if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {
+}
+#>
+<#
+else if(IsLayoutPageSelected && ReferenceScriptLibraries) {
+#>
+
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<#
+}
+#>
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+  </body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>
