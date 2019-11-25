@@ -84,7 +84,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int? ID)
@@ -155,7 +155,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
         
         // Idiomas/Delete
@@ -189,7 +189,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
         protected tbUsuario IsNull(tbUsuario valor)
         {

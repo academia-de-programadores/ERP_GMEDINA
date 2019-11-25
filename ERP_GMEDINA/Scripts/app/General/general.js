@@ -105,7 +105,7 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-    $(form).find("form").serializeArray().forEach(function (id, valor) {
+    $(form).find("#form").serializeArray().forEach(function (id, valor) {
         div.find("#error" + id.name).text("");
     });
 }

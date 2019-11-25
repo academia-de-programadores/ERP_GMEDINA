@@ -8,13 +8,12 @@ $(document).ready(function () {
             columnas.push({
                 "className": 'details-control',
                 "orderable": false,
-                "data": null,
+                "data": "data01",
                 "defaultContent": ''
             });
         } else if (valor.innerText == "Acciones") {
                 columnas.push({
-                    "orderable": false,
-                    "data": "Acciones",
+                    "orderable": false
                 });
             } else {
                 columnas.push(null);
