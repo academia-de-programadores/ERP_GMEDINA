@@ -7,7 +7,7 @@ function tablaEditar(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#tmon_Descripcion").val(obj.habi_Descripcion);
+                $("#FormEditar").find("#tmon_Descripcion").val(obj.tmon_Descripcion);
                 $('#ModalEditar').modal('show');
             }
         });
@@ -42,8 +42,8 @@ function llenarTabla() {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add([value.tmon_Descripcion,
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.habi_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.habi_Id + ")'>Editar</a>" +
+                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tmon_Id + ")' >Detalles</a>" +
+                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tmon_Id + ")'>Editar</a>" +
                     "</div>"]).draw();
             });
         });
@@ -57,13 +57,13 @@ $("#btnAgregar").click(function () {
 });
 $("#btnEditar").click(function () {
     _ajax(null,
-        '/Habilidades/Edit/' + id,
+        '/TipoMonedas/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#ModalEditar").find("#tmon_Descripcion").val(obj.habi_Descripcion);
+                $("#ModalEditar").find("#tmon_Descripcion").val(obj.tmon_Descripcion);
                 $("#ModalEditar").find("#tmon_Descripcion").focus();
             }
         });
@@ -101,7 +101,7 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.habi_Id = id;
+        data.tmon_Id = id;
         data = JSON.stringify({ TipoMonedas: data });
         _ajax(data,
             '/TipoMonedas/Delete',
@@ -124,7 +124,7 @@ $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.habi_Id = id;
+        data.tmon_Id = id;
         data = JSON.stringify({ TipoMonedas: data });
         _ajax(data,
             '/TipoMonedas/Edit',
