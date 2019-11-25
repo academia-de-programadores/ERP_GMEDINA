@@ -463,7 +463,9 @@ namespace ERP_GMEDINA
             "~/Scripts/plugins/iziToast/iziToast.js",
             "~/Scripts/plugins/iziToast/iziToast.min.js",
             "~/Scripts/app/General/general.js",
-            "~/Scripts/plugins/validate/jquery.validate.min.js"));
+            "~/Scripts/plugins/validate/jquery.validate.min.js",
+            "~/Scripts/app/Cargos/Cargos.js"
+            ));
 
             //OPTIMIZATION
 
