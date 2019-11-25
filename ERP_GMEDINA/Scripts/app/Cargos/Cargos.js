@@ -36,7 +36,7 @@ function llenarTabla() {
         '/Cargos/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
+            tabla.clear().draw();
             $.each(Lista, function (index, value) {
                 console.log(value.car_Descripcion);
                 tabla.row.add([value.car_Descripcion,
@@ -54,14 +54,14 @@ $("#btnAgregar").click(function () {
     $("#FormEditar").find("#car_Descripcion").focus();
     modalnuevo.modal('show');
 });
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/Cargos/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
-              
+                CierraPopups();       
                 $('#ModalEditar').modal('show');
                 $("#FormEditar").find("#car_Descripcion").val(obj.car_Descripcion);
             }
@@ -87,7 +87,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
-                    location.reload();
+                   
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                     
                     
@@ -114,7 +114,7 @@ $("#InActivar").click(function () {
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "Se ah Inactivado el registro");
-                    location.reload();
+                    
                    
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
