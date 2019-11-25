@@ -57,11 +57,11 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
+                //    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                //    foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
+                //    {
+                //        msj = item.MensajeError + " ";
+                //    }
                 }
                 catch (Exception ex)
                 {

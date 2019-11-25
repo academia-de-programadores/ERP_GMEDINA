@@ -23,6 +23,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> emp_Id { get; set; }
         public Nullable<decimal> dtm_DecimoTercer { get; set; }
         public string dtm_CodigoPago { get; set; }
+        public Nullable<decimal> dtm_Monto { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
