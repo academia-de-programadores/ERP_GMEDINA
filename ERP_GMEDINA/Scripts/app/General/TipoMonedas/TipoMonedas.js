@@ -36,6 +36,7 @@ function llenarTabla() {
         '/TipoMonedas/llenarTabla',
         'POST',
         function (Lista) {
+            var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
@@ -79,7 +80,7 @@ $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data = JSON.stringify({ TipoMonedas: data });
+        data = JSON.stringify({ tbTipoMonedas: data });
         _ajax(data,
             '/TipoMonedas/Create',
             'POST',
@@ -102,7 +103,7 @@ $("#InActivar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.tmon_Id = id;
-        data = JSON.stringify({ TipoMonedas: data });
+        data = JSON.stringify({ tbTipoMonedas: data });
         _ajax(data,
             '/TipoMonedas/Delete',
             'POST',
@@ -125,7 +126,7 @@ $("#btnActualizar").click(function () {
     data = serializar(data);
     if (data != null) {
         data.tmon_Id = id;
-        data = JSON.stringify({ TipoMonedas: data });
+        data = JSON.stringify({ tbTipoMonedas: data });
         _ajax(data,
             '/TipoMonedas/Edit',
             'POST',
