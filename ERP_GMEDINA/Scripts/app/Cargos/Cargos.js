@@ -43,7 +43,7 @@ function llenarTabla() {
                     "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                     "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.car_Id + ")' >Detalles</a>" +
                         "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.car_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                    "</div>"]);
             });
         });
 }
@@ -85,7 +85,7 @@ $("#btnGuardar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
+                   
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                    
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
@@ -111,11 +111,9 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
+                
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "Se ah Inactivado el registro");
-                    
-                   
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -136,7 +134,7 @@ $("#btnActualizar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    llenarTabla();
+                   
                     MsgSuccess("¡Exito!", "Se ah actualizado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
