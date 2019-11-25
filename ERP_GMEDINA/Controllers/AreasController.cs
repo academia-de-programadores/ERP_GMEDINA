@@ -20,11 +20,11 @@ namespace ERP_GMEDINA.Controllers
             var tbAreas = db.tbAreas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCargos);
             return View(tbAreas.ToList());
         }
-
-        public ActionResult ChildRowData(int id)
+        //[HttpPost]
+        public ActionResult ChildRowData(int? id)
         {
             var tbAreas = db.V_Departamentos.Where(x=>x.area_Id==id);
-            return View(tbAreas);
+            return Json(tbAreas,JsonRequestBehavior.AllowGet);
         }
 
         // GET: Areas/Details/5
