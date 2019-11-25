@@ -57,11 +57,11 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                //    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
-                //    foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
-                //    {
-                //        msj = item.MensajeError + " ";
-                //    }
+                    var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +151,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbFasesReclutamiento tbFasesReclutamiento)
         {
             string msj = "";
-            if (tbFasesReclutamiento.fare_Id != 0 && tbFasesReclutamiento.fare_RazonInactivo != "")
+            if (tbFasesReclutamiento.fare_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
