@@ -1,4 +1,12 @@
-﻿var id = 0;
+﻿//$(document).ready(function () {
+//    $('ul li a').click(function () {
+//        //$('ul li.current').removeClass('current');
+//        $(this).closest('li').addClass('active');
+//    });
+    
+//});
+
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
