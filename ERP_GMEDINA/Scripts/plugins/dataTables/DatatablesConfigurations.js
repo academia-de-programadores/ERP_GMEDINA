@@ -3,12 +3,28 @@ $(document).ready(function () {
     var columnas = [];
     var col = 0;
     $("#IndexTable thead tr").find("th").each(function (indice,valor) {
-        if (valor.innerText == "Acciones") {
-                columnas.push({
-                    "orderable": false
+        campo = valor.innerText;
+        if (campo=="") {
+            columnas.push({
+                className: 'details-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
+            });
+            col = col+1;
+        } else if (campo=="Id") {
+            columnas.push({
+                data: campo,
+                visible: false
+            });
+            col = col + 1;
+        }else if (campo == "Acciones") {
+            columnas.push({
+                data: "Acciones",
+                orderable: false
                 });
             } else {
-                columnas.push(null);
+            columnas.push({ data: campo });
             }
     });
     tabla = $('#IndexTable').DataTable({

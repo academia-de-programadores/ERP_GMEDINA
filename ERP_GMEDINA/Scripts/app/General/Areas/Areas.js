@@ -1,72 +1,50 @@
 ﻿function format(obj) {
     // `d` is the original data object for the row
-    var tableChild = '<table class="table"><thead><tr>' +
-        '<th>Departamento:</th>' +
-        '<th>Encargado:</th>' +
-        '<th>Telefono:</th>' +        
-    '</tr></thead>' +
-    '<tbody>' ;
-    obj.forEach(function (index,value) {
-        tableChild = tableChild + 
-        '<tr><td>' + index.depto_Descripcion + '</td>' +
-      '<td>' + index.per_NombreCompleto + '</td>' +
-        '<td>' + index.per_Telefono + '</td>' +
-    '</tr>';
-    });
+    //var tableChild = '<table class="table"><thead><tr>' +
+    //    '<th>Departamento:</th>' +
+    //    '<th>Encargado:</th>' +
+    //    '<th>Telefono:</th>' +        
+    //'</tr></thead>' +
+    //'<tbody>' ;
+    //obj.forEach(function (index,value) {
+    //    tableChild = tableChild + 
+    //    '<tr><td>' + index.depto_Descripcion + '</td>' +
+    //  '<td>' + index.per_NombreCompleto + '</td>' +
+    //    '<td>' + index.per_Telefono + '</td>' +
+    //'</tr>';
+    //});
     
-    tableChild = tableChild + '</tbody></table>';
-    console.log(tableChild);
-      return tableChild;
+    //tableChild = tableChild + '</tbody></table>';
+    //return tableChild;
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
+    obj.forEach(function (index,value) {
+        div = div +
+            '<div class="col-md-3">'+
+                '<div class="panel panel-default">' +
+                  '<div class="panel-heading">' +
+                     '<h5>' + index.depto_Descripcion + '</h5>' +
+                '</div>'+
+                '<div class="panel-body">' +
+                    '<h5>' + index.car_Descripcion + '</h5>'
+                    //'<span class="fa fa-user-o m-r-xs"></span>' +
+                    + index.per_NombreCompleto + '<br>' +
+                    //'<span class="fa fa-phone m-r-xs"></span>' +
+                    index.per_Telefono + '</div>' +
+                '</div>'+
+            '</div>'
+    });
+    return div + '</div></div></div>';
 }
-var tabla = null;
-$(document).ready(function () {
-    IndexTable = $('.IndexTable').DataTable({
-        "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-        columns: [
-            {
-                "className": 'details-control',
-                "orderable": false,
-                "data": '',
-                "defaultContent": ''
-            },
-            { "data": "id", "visible": false },
-            { "data": "area_Descripcion" },
-            { "data": "Acciones" }
-        ],
-        responsive: true,
-        pageLength: 25,
-        dom: '<"html5buttons"B>lTfgitp',
-        buttons: [
-            { extend: 'copy' },
-            { extend: 'csv' },
-            { extend: 'excel', title: 'ExampleFile' },
-            { extend: 'pdf', title: 'ExampleFile' },
-
-            {
-                extend: 'print',
-                customize: function (win) {
-                    $(win.document.body).addClass('white-bg');
-                    $(win.document.body).css('font-size', '10px');
-
-                    $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                }
-            }
-        ],
-        order: [[1, 'asc']]
-    });    
-});
-$('.IndexTable tbody').on('click', 'td.details-control', function () {
+$('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
-    var row = IndexTable.row(tr);
+    var row = tabla.row(tr);
 
     if (row.child.isShown()) {
         row.child.hide();
         tr.removeClass('shown');
     }
     else {
-        id = tr.data("id");
+        id = row.data().Id;
         _ajax({ id: parseInt(id) },
             '/Areas/ChildRowData',
             'GET',
