@@ -63,12 +63,37 @@
           <Property Name="depto_UsuarioModifica" Type="int" />
           <Property Name="depto_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="jor_Id" Type="int" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="fpa_IdFormaPago" Type="int" Nullable="false" />
+          <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
+          <Property Name="emp_Reingreso" Type="bit" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
+          <Property Name="emp_RazonSalida" Type="nvarchar" MaxLength="50" />
+          <Property Name="emp_CargoAnterior" Type="int" />
+          <Property Name="emp_FechaDeSalida" Type="datetime" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="emp_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="emp_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="emp_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="emp_UsuarioModifica" Type="int" />
+          <Property Name="emp_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbHabilidades">
           <Key>
             <PropertyRef Name="habi_Id" />
           </Key>
           <Property Name="habi_Id" Type="int" Nullable="false" />
-          <Property Name="habi_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="habi_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="habi_Estado" Type="bit" Nullable="false" />
           <Property Name="habi_RazonInactivo" Type="nvarchar" MaxLength="50" />
           <Property Name="habi_UsuarioCrea" Type="int" Nullable="false" />
@@ -76,12 +101,56 @@
           <Property Name="habi_UsuarioModifica" Type="int" />
           <Property Name="habi_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbPersonas">
+          <Key>
+            <PropertyRef Name="per_Id" />
+          </Key>
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="per_Sexo" Type="char" MaxLength="1" />
+          <Property Name="per_Edad" Type="int" />
+          <Property Name="nac_Id" Type="int" Nullable="false" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
+          <Property Name="per_TipoSangre" Type="nvarchar" MaxLength="4" />
+          <Property Name="per_Estado" Type="bit" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="per_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="per_UsuarioModifica" Type="int" />
+          <Property Name="per_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbSucursales">
+          <Key>
+            <PropertyRef Name="suc_Id" />
+          </Key>
+          <Property Name="suc_Id" Type="int" Nullable="false" />
+          <Property Name="empr_Id" Type="int" Nullable="false" />
+          <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="bod_Id" Type="int" Nullable="false" />
+          <Property Name="pemi_Id" Type="int" Nullable="false" />
+          <Property Name="suc_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="suc_Correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="suc_Direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="suc_Telefono" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="suc_Estado" Type="bit" Nullable="false" />
+          <Property Name="suc_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="suc_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="suc_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="suc_UsuarioModifica" Type="int" />
+          <Property Name="suc_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoSalidas">
           <Key>
             <PropertyRef Name="tsal_Id" />
           </Key>
           <Property Name="tsal_Id" Type="int" Nullable="false" />
-          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="tsal_Estado" Type="bit" Nullable="false" />
           <Property Name="tsal_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="tsal_UsuarioCrea" Type="int" Nullable="false" />
@@ -189,6 +258,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="*" />
@@ -210,6 +303,54 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Principal>
             <Dependent Role="tbHabilidades">
               <PropertyRef Name="habi_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbSucursales" Type="Self.tbSucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursales">
+              <PropertyRef Name="suc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbSucursales" Type="Self.tbSucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursales">
+              <PropertyRef Name="suc_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -249,6 +390,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id">
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreas">
+              <PropertyRef Name="area_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="area_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
           <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
           <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
@@ -270,6 +423,54 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Principal>
             <Dependent Role="tbDepartamentos">
               <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id">
+          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamentos">
+              <PropertyRef Name="depto_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="depto_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id">
+          <End Role="tbSucursales" Type="Self.tbSucursales" Multiplicity="1" />
+          <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSucursales">
+              <PropertyRef Name="suc_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="suc_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -380,7 +581,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <EntitySet Name="tbAreas" EntityType="Self.tbAreas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbCargos" EntityType="Self.tbCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbSucursales" EntityType="Self.tbSucursales" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoSalidas" EntityType="Self.tbTipoSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_Departamentos" EntityType="Self.V_Departamentos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -423,6 +627,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
@@ -430,6 +642,22 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -443,6 +671,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <End Role="tbAreas" EntitySet="tbAreas" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id">
+            <End Role="tbAreas" EntitySet="tbAreas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id">
             <End Role="tbCargos" EntitySet="tbCargos" />
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -450,6 +682,22 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
             <End Role="tbCargos" EntitySet="tbCargos" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id">
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" Association="Self.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id">
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -480,6 +728,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <NavigationProperty Name="tbCargos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCargos" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamentos" />
           <NavigationProperty Name="tbDepartamentos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbSucursales" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSucursales" />
+          <NavigationProperty Name="tbSucursales1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSucursales" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbEmpleados1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
           </EntityType>
         <EntityContainer Name="ERP_GMEDINAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
@@ -643,13 +897,60 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbSucursales" EntityType="ERP_GMEDINAModel.tbSucursales" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id">
+            <End Role="tbSucursales" EntitySet="tbSucursales" />
+            <End Role="tbAreas" EntitySet="tbAreas" />
+          </AssociationSet>
+          <EntitySet Name="tbEmpleados" EntityType="ERP_GMEDINAModel.tbEmpleados" />
+          <EntitySet Name="tbPersonas" EntityType="ERP_GMEDINAModel.tbPersonas" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id">
+            <End Role="tbAreas" EntitySet="tbAreas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id">
+            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbHabilidades">
           <Key>
             <PropertyRef Name="habi_Id" />
           </Key>
           <Property Name="habi_Id" Type="Int32" Nullable="false" />
-          <Property Name="habi_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="habi_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="habi_Estado" Type="Boolean" Nullable="false" />
           <Property Name="habi_RazonInactivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="habi_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -697,7 +998,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <PropertyRef Name="tsal_Id" />
           </Key>
           <Property Name="tsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="tsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tsal_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tsal_Estado" Type="Boolean" Nullable="false" />
           <Property Name="tsal_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="tsal_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -758,6 +1059,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" FromRole="tbAreas" ToRole="tbUsuario" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" FromRole="tbAreas" ToRole="tbDepartamentos" />
           <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" FromRole="tbAreas" ToRole="tbCargos" />
+          <NavigationProperty Name="tbSucursales" Relationship="ERP_GMEDINAModel.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" FromRole="tbAreas" ToRole="tbSucursales" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" FromRole="tbAreas" ToRole="tbEmpleados" />
         </EntityType>
         <EntityType Name="tbCargos">
           <Key>
@@ -775,6 +1078,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" FromRole="tbCargos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" FromRole="tbCargos" ToRole="tbAreas" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbCargos" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbCargos" ToRole="tbEmpleados" />
         </EntityType>
         <EntityType Name="tbDepartamentos">
           <Key>
@@ -794,6 +1098,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbDepartamentos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" FromRole="tbDepartamentos" ToRole="tbAreas" />
           <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" FromRole="tbDepartamentos" ToRole="tbCargos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" FromRole="tbDepartamentos" ToRole="tbEmpleados" />
         </EntityType>
         <EntityType Name="V_Departamentos">
           <Key>
@@ -962,6 +1267,219 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
         <ComplexType Name="UDP_RRHH_tbDepartamentos_Update_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tbSucursales">
+          <Key>
+            <PropertyRef Name="suc_Id" />
+          </Key>
+          <Property Name="suc_Id" Type="Int32" Nullable="false" />
+          <Property Name="empr_Id" Type="Int32" Nullable="false" />
+          <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="bod_Id" Type="Int32" Nullable="false" />
+          <Property Name="pemi_Id" Type="Int32" Nullable="false" />
+          <Property Name="suc_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="suc_Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="suc_Direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="suc_Telefono" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="suc_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="suc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="suc_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="suc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="suc_UsuarioModifica" Type="Int32" />
+          <Property Name="suc_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" FromRole="tbSucursales" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" FromRole="tbSucursales" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" FromRole="tbSucursales" ToRole="tbAreas" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbSucursales" Role="tbSucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursales">
+              <PropertyRef Name="suc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbSucursales" Role="tbSucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSucursales">
+              <PropertyRef Name="suc_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id">
+          <End Type="ERP_GMEDINAModel.tbSucursales" Role="tbSucursales" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSucursales">
+              <PropertyRef Name="suc_Id" />
+            </Principal>
+            <Dependent Role="tbAreas">
+              <PropertyRef Name="suc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="jor_Id" Type="Int32" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="fpa_IdFormaPago" Type="Int32" Nullable="false" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Reingreso" Type="Boolean" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_RazonSalida" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CargoAnterior" Type="Int32" />
+          <Property Name="emp_FechaDeSalida" Type="DateTime" Precision="3" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="emp_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="emp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_UsuarioModifica" Type="Int32" />
+          <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbAreas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" FromRole="tbEmpleados" ToRole="tbAreas" />
+          <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbEmpleados" ToRole="tbCargos" />
+          <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" FromRole="tbEmpleados" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+        </EntityType>
+        <EntityType Name="tbPersonas">
+          <Key>
+            <PropertyRef Name="per_Id" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_Edad" Type="Int32" />
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_TipoSangre" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="per_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="per_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="per_UsuarioModifica" Type="Int32" />
+          <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbPersonas" ToRole="tbEmpleados" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id">
+          <End Type="ERP_GMEDINAModel.tbAreas" Role="tbAreas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAreas">
+              <PropertyRef Name="area_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="area_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id">
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id">
+          <End Type="ERP_GMEDINAModel.tbDepartamentos" Role="tbDepartamentos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamentos">
+              <PropertyRef Name="depto_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="depto_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1196,6 +1714,78 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbSucursales">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbSucursales">
+              <MappingFragment StoreEntitySet="tbSucursales">
+                <ScalarProperty Name="suc_FechaModifica" ColumnName="suc_FechaModifica" />
+                <ScalarProperty Name="suc_UsuarioModifica" ColumnName="suc_UsuarioModifica" />
+                <ScalarProperty Name="suc_FechaCrea" ColumnName="suc_FechaCrea" />
+                <ScalarProperty Name="suc_UsuarioCrea" ColumnName="suc_UsuarioCrea" />
+                <ScalarProperty Name="suc_RazonInactivo" ColumnName="suc_RazonInactivo" />
+                <ScalarProperty Name="suc_Estado" ColumnName="suc_Estado" />
+                <ScalarProperty Name="suc_Telefono" ColumnName="suc_Telefono" />
+                <ScalarProperty Name="suc_Direccion" ColumnName="suc_Direccion" />
+                <ScalarProperty Name="suc_Correo" ColumnName="suc_Correo" />
+                <ScalarProperty Name="suc_Descripcion" ColumnName="suc_Descripcion" />
+                <ScalarProperty Name="pemi_Id" ColumnName="pemi_Id" />
+                <ScalarProperty Name="bod_Id" ColumnName="bod_Id" />
+                <ScalarProperty Name="mun_Codigo" ColumnName="mun_Codigo" />
+                <ScalarProperty Name="empr_Id" ColumnName="empr_Id" />
+                <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEmpleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbEmpleados">
+              <MappingFragment StoreEntitySet="tbEmpleados">
+                <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
+                <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
+                <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
+                <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
+                <ScalarProperty Name="emp_RazonInactivo" ColumnName="emp_RazonInactivo" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_FechaDeSalida" ColumnName="emp_FechaDeSalida" />
+                <ScalarProperty Name="emp_CargoAnterior" ColumnName="emp_CargoAnterior" />
+                <ScalarProperty Name="emp_RazonSalida" ColumnName="emp_RazonSalida" />
+                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
+                <ScalarProperty Name="emp_Reingreso" ColumnName="emp_Reingreso" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="fpa_IdFormaPago" ColumnName="fpa_IdFormaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="jor_Id" ColumnName="jor_Id" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPersonas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPersonas">
+              <MappingFragment StoreEntitySet="tbPersonas">
+                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
+                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
+                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
+                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
+                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
+                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
+                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
+                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
+                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
+                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

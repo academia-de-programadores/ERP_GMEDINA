@@ -12,29 +12,36 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbDepartamentos
+    public partial class tbPersonas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbDepartamentos()
+        public tbPersonas()
         {
             this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
-        public int depto_Id { get; set; }
-        public int area_Id { get; set; }
-        public int car_Id { get; set; }
-        public string depto_Descripcion { get; set; }
-        public bool depto_Estado { get; set; }
-        public string depto_RazonInactivo { get; set; }
-        public int depto_UsuarioCrea { get; set; }
-        public System.DateTime depto_Fechacrea { get; set; }
-        public Nullable<int> depto_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> depto_FechaModifica { get; set; }
+        public int per_Id { get; set; }
+        public string per_Identidad { get; set; }
+        public string per_Nombres { get; set; }
+        public string per_Apellidos { get; set; }
+        public System.DateTime per_FechaNacimiento { get; set; }
+        public string per_Sexo { get; set; }
+        public Nullable<int> per_Edad { get; set; }
+        public int nac_Id { get; set; }
+        public string per_Direccion { get; set; }
+        public string per_Telefono { get; set; }
+        public string per_CorreoElectronico { get; set; }
+        public string per_EstadoCivil { get; set; }
+        public string per_TipoSangre { get; set; }
+        public bool per_Estado { get; set; }
+        public string per_RazonInactivo { get; set; }
+        public int per_UsuarioCrea { get; set; }
+        public System.DateTime per_FechaCrea { get; set; }
+        public Nullable<int> per_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> per_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
     }

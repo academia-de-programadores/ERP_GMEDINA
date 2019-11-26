@@ -34,6 +34,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbCargos> tbCargos { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
         public virtual DbSet<V_Departamentos> V_Departamentos { get; set; }
+        public virtual DbSet<tbSucursales> tbSucursales { get; set; }
+        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
+        public virtual DbSet<tbPersonas> tbPersonas { get; set; }
     
         public virtual ObjectResult<UDP_RRHH_tbHabilidades_Delete_Result> UDP_RRHH_tbHabilidades_Delete(Nullable<int> habi_id, string habi_razon_Inactivo, Nullable<int> habi_UsuarioModifica, Nullable<System.DateTime> habi_FechaModifica)
         {

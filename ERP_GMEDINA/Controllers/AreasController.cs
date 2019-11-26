@@ -45,9 +45,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Create
         public ActionResult Create()
         {
-            ViewBag.area_Usuariocrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.area_Usuariomodifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
+            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
 
@@ -56,18 +54,16 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "area_Id,car_Id,suc_Id,area_Descripcion,area_Estado,area_Razoninactivo,area_Usuariocrea,area_Fechacrea,area_Usuariomodifica,area_Fechamodifica")] tbAreas tbAreas)
+        public ActionResult Create( [Bind(Include = "suc_Id,area_Descripcion")] tbAreas tbAreas)
         {
+            tbAreas.tbCargos = new tbCargos {car_Descripcion= Request["tbCargos.car_Descripcion"] };
             if (ModelState.IsValid)
             {
                 db.tbAreas.Add(tbAreas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.area_Usuariocrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariocrea);
-            ViewBag.area_Usuariomodifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariomodifica);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbAreas.car_Id);
+            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View(tbAreas);
         }
 
@@ -86,6 +82,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.area_Usuariocrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariocrea);
             ViewBag.area_Usuariomodifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariomodifica);
             ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbAreas.car_Id);
+            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View(tbAreas);
         }
 
@@ -105,6 +102,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.area_Usuariocrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariocrea);
             ViewBag.area_Usuariomodifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariomodifica);
             ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbAreas.car_Id);
+            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View(tbAreas);
         }
 
