@@ -8,7 +8,7 @@ function CierraPopups() {
         $('.modal-backdrop').remove();//eliminamos el backdrop del modal
     });
 }
-function _ajax(params, uri, type, callback, fError) {
+function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
         method: type,
@@ -105,7 +105,7 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-    $(form).find("form").serializeArray().forEach(function (id, valor) {
+    $(form).find("#form").serializeArray().forEach(function (id, valor) {
         div.find("#error" + id.name).text("");
     });
 }
