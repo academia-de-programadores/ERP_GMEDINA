@@ -12,7 +12,7 @@ namespace PruebaPlanilla.Controllers
 {
     public class CatalogoDeDeduccionesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities1 db = new ERP_GMEDINAEntities();
 
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
