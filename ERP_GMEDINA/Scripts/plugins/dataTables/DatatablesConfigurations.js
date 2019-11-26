@@ -12,7 +12,7 @@ $(document).ready(function () {
                 defaultContent: ''
             });
             col = col+1;
-        } else if (campo=="Id") {
+        } else if (campo.toUpperCase() == "ID") {
             columnas.push({
                 data: campo,
                 visible: false
