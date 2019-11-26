@@ -36,5 +36,11 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> car_FechaModifica { get; set; }
+
+        [Display(Name = "Usuario Crea")]
+        public virtual tbUsuario tbUsuario { get; set; }
+
+        [Display(Name = "Usuario Modifica")]
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }
