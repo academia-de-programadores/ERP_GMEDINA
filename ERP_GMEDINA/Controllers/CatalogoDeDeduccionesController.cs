@@ -175,13 +175,11 @@ namespace PruebaPlanilla.Controllers
             var DDL =
             from TipoDedu in db.tbTipoDeduccion
             join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            where TipoDedu.tde_Activo == true
             select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
-
-
-
 
         public JsonResult Details(int? ID)
         {
