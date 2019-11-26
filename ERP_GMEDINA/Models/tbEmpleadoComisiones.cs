@@ -29,6 +29,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

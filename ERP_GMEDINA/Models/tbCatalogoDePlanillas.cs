@@ -19,7 +19,6 @@ namespace ERP_GMEDINA.Models
         {
             this.tbTipoPlanillaDetalleDeduccion = new HashSet<tbTipoPlanillaDetalleDeduccion>();
             this.tbTipoPlanillaDetalleIngreso = new HashSet<tbTipoPlanillaDetalleIngreso>();
-            this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
         public int cpla_IdPlanilla { get; set; }
@@ -37,7 +36,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
     }
 }

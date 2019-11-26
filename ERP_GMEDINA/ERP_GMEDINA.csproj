@@ -161,12 +161,14 @@
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
+    <Compile Include="Models\cRequerimientosEspeciales.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,13 +241,7 @@
     <Compile Include="Models\tbEmpleadoComisiones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEmpleados.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbEmpresas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbEquipoEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEquipoTrabajo.cs">
@@ -269,13 +265,7 @@
     <Compile Include="Models\tbHabilidadesRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialAmonestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbHistorialAudienciaDescargo.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbHistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialContrataciones.cs">
@@ -291,12 +281,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialHorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbHistorialIncapacidades.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbHistorialLiquidaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialPermisos.cs">
@@ -362,7 +346,7 @@
     <Compile Include="Models\tbRazonSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRequisiciones.cs">
+    <Compile Include="Models\tbRequerimientosEspeciales.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRol.cs">
@@ -378,9 +362,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSucursales.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbSueldos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTechosDeducciones.cs">
@@ -425,9 +406,6 @@
     <Compile Include="Models\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbVacaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -456,6 +434,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbFasesReclutamiento_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
@@ -698,6 +688,7 @@
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas.js" />
+    <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -1214,6 +1205,11 @@
     <Content Include="Views\FasesReclutamiento\_Delete.cshtml" />
     <Content Include="Views\FasesReclutamiento\_Edit.cshtml" />
     <Content Include="Views\FasesReclutamiento\_Detalles.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\Index.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Create.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Delete.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Detalles.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

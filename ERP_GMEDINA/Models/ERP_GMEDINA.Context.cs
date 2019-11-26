@@ -64,22 +64,16 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
         public virtual DbSet<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
-        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
-        public virtual DbSet<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
         public virtual DbSet<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
         public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
         public virtual DbSet<tbHabilidadesRequisicion> tbHabilidadesRequisicion { get; set; }
-        public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
         public virtual DbSet<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
-        public virtual DbSet<tbHistorialCargos> tbHistorialCargos { get; set; }
         public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual DbSet<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
-        public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
         public virtual DbSet<tbHistorialSalidas> tbHistorialSalidas { get; set; }
@@ -93,10 +87,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbPersonas> tbPersonas { get; set; }
         public virtual DbSet<tbPrestaciones> tbPrestaciones { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
-        public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
         public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
-        public virtual DbSet<tbSueldos> tbSueldos { get; set; }
         public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
         public virtual DbSet<tbTipoHoras> tbTipoHoras { get; set; }
         public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
@@ -106,7 +98,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
-        public virtual DbSet<tbVacaciones> tbVacaciones { get; set; }
+        public virtual DbSet<tbRequerimientosEspeciales> tbRequerimientosEspeciales { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1047,6 +1039,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbfasesReclutamiento_Restore_Result>("UDP_RRHH_tbfasesReclutamiento_Restore", fare_IdParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Delete_Result> UDP_RRHH_tbRequerimientosEspeciales_Delete(Nullable<int> resp_id, string resp_razon_Inactivo, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        {
+            var resp_idParameter = resp_id.HasValue ?
+                new ObjectParameter("resp_id", resp_id) :
+                new ObjectParameter("resp_id", typeof(int));
+    
+            var resp_razon_InactivoParameter = resp_razon_Inactivo != null ?
+                new ObjectParameter("resp_razon_Inactivo", resp_razon_Inactivo) :
+                new ObjectParameter("resp_razon_Inactivo", typeof(string));
+    
+            var resp_UsuarioModificaParameter = resp_UsuarioModifica.HasValue ?
+                new ObjectParameter("resp_UsuarioModifica", resp_UsuarioModifica) :
+                new ObjectParameter("resp_UsuarioModifica", typeof(int));
+    
+            var resp_FechaModificaParameter = resp_FechaModifica.HasValue ?
+                new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
+                new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Delete_Result>("UDP_RRHH_tbRequerimientosEspeciales_Delete", resp_idParameter, resp_razon_InactivoParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Insert_Result> UDP_RRHH_tbRequerimientosEspeciales_Insert(string resp_Descripcion, Nullable<int> resp_UsuarioCrea, Nullable<System.DateTime> resp_FechaCrea)
+        {
+            var resp_DescripcionParameter = resp_Descripcion != null ?
+                new ObjectParameter("resp_Descripcion", resp_Descripcion) :
+                new ObjectParameter("resp_Descripcion", typeof(string));
+    
+            var resp_UsuarioCreaParameter = resp_UsuarioCrea.HasValue ?
+                new ObjectParameter("resp_UsuarioCrea", resp_UsuarioCrea) :
+                new ObjectParameter("resp_UsuarioCrea", typeof(int));
+    
+            var resp_FechaCreaParameter = resp_FechaCrea.HasValue ?
+                new ObjectParameter("resp_FechaCrea", resp_FechaCrea) :
+                new ObjectParameter("resp_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Insert_Result>("UDP_RRHH_tbRequerimientosEspeciales_Insert", resp_DescripcionParameter, resp_UsuarioCreaParameter, resp_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Restore_Result> UDP_RRHH_tbRequerimientosEspeciales_Restore(Nullable<int> resp_id, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        {
+            var resp_idParameter = resp_id.HasValue ?
+                new ObjectParameter("resp_id", resp_id) :
+                new ObjectParameter("resp_id", typeof(int));
+    
+            var resp_UsuarioModificaParameter = resp_UsuarioModifica.HasValue ?
+                new ObjectParameter("resp_UsuarioModifica", resp_UsuarioModifica) :
+                new ObjectParameter("resp_UsuarioModifica", typeof(int));
+    
+            var resp_FechaModificaParameter = resp_FechaModifica.HasValue ?
+                new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
+                new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Restore_Result>("UDP_RRHH_tbRequerimientosEspeciales_Restore", resp_idParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequerimientosEspeciales_Update_Result> UDP_RRHH_tbRequerimientosEspeciales_Update(Nullable<int> resp_Id, string resp_Descripcion, Nullable<int> resp_UsuarioModifica, Nullable<System.DateTime> resp_FechaModifica)
+        {
+            var resp_IdParameter = resp_Id.HasValue ?
+                new ObjectParameter("resp_Id", resp_Id) :
+                new ObjectParameter("resp_Id", typeof(int));
+    
+            var resp_DescripcionParameter = resp_Descripcion != null ?
+                new ObjectParameter("resp_Descripcion", resp_Descripcion) :
+                new ObjectParameter("resp_Descripcion", typeof(string));
+    
+            var resp_UsuarioModificaParameter = resp_UsuarioModifica.HasValue ?
+                new ObjectParameter("resp_UsuarioModifica", resp_UsuarioModifica) :
+                new ObjectParameter("resp_UsuarioModifica", typeof(int));
+    
+            var resp_FechaModificaParameter = resp_FechaModifica.HasValue ?
+                new ObjectParameter("resp_FechaModifica", resp_FechaModifica) :
+                new ObjectParameter("resp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Update_Result>("UDP_RRHH_tbRequerimientosEspeciales_Update", resp_IdParameter, resp_DescripcionParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
         }
     }
 }

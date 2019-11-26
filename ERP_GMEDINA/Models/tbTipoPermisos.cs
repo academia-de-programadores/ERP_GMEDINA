@@ -28,6 +28,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime tper_FechaCrea { get; set; }
         public Nullable<int> tper_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tper_FechaModifica { get; set; }
+        public bool tper_GoceDeSueldo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

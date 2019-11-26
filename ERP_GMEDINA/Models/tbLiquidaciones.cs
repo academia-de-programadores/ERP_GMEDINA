@@ -32,6 +32,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbLiquidacionVacaciones tbLiquidacionVacaciones { get; set; }
         public virtual tbMotivoLiquidaciones tbMotivoLiquidaciones { get; set; }
         public virtual tbPreaviso tbPreaviso { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

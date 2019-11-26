@@ -45,6 +45,5 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual tbPeriodos tbPeriodos { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }
