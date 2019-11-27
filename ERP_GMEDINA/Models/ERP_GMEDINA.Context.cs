@@ -32,6 +32,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
         public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
+        public virtual DbSet<tbIdiomas> tbIdiomas { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1208,6 +1209,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Restore_Result>("UDP_RRHH_tbTipoMonedas_Restore", tmon_IdParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Delete_Result> UDP_RRHH_tbIdiomas_Delete(Nullable<int> idi_Id, string idi_razon_Inactivo, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        {
+            var idi_IdParameter = idi_Id.HasValue ?
+                new ObjectParameter("idi_Id", idi_Id) :
+                new ObjectParameter("idi_Id", typeof(int));
+    
+            var idi_razon_InactivoParameter = idi_razon_Inactivo != null ?
+                new ObjectParameter("idi_razon_Inactivo", idi_razon_Inactivo) :
+                new ObjectParameter("idi_razon_Inactivo", typeof(string));
+    
+            var idi_UsuarioModificaParameter = idi_UsuarioModifica.HasValue ?
+                new ObjectParameter("idi_UsuarioModifica", idi_UsuarioModifica) :
+                new ObjectParameter("idi_UsuarioModifica", typeof(int));
+    
+            var idi_FechaModificaParameter = idi_FechaModifica.HasValue ?
+                new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
+                new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Delete_Result>("UDP_RRHH_tbIdiomas_Delete", idi_IdParameter, idi_razon_InactivoParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Insert_Result> UDP_RRHH_tbIdiomas_Insert(string idi_Descripcion, Nullable<int> idi_UsuarioCrea, Nullable<System.DateTime> idi_FechaCrea)
+        {
+            var idi_DescripcionParameter = idi_Descripcion != null ?
+                new ObjectParameter("idi_Descripcion", idi_Descripcion) :
+                new ObjectParameter("idi_Descripcion", typeof(string));
+    
+            var idi_UsuarioCreaParameter = idi_UsuarioCrea.HasValue ?
+                new ObjectParameter("idi_UsuarioCrea", idi_UsuarioCrea) :
+                new ObjectParameter("idi_UsuarioCrea", typeof(int));
+    
+            var idi_FechaCreaParameter = idi_FechaCrea.HasValue ?
+                new ObjectParameter("idi_FechaCrea", idi_FechaCrea) :
+                new ObjectParameter("idi_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Insert_Result>("UDP_RRHH_tbIdiomas_Insert", idi_DescripcionParameter, idi_UsuarioCreaParameter, idi_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Restore_Result> UDP_RRHH_tbIdiomas_Restore(Nullable<int> idi_Id, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        {
+            var idi_IdParameter = idi_Id.HasValue ?
+                new ObjectParameter("idi_Id", idi_Id) :
+                new ObjectParameter("idi_Id", typeof(int));
+    
+            var idi_UsuarioModificaParameter = idi_UsuarioModifica.HasValue ?
+                new ObjectParameter("idi_UsuarioModifica", idi_UsuarioModifica) :
+                new ObjectParameter("idi_UsuarioModifica", typeof(int));
+    
+            var idi_FechaModificaParameter = idi_FechaModifica.HasValue ?
+                new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
+                new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Restore_Result>("UDP_RRHH_tbIdiomas_Restore", idi_IdParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbIdiomas_Update_Result> UDP_RRHH_tbIdiomas_Update(Nullable<int> idi_Id, string idi_Descripcion, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
+        {
+            var idi_IdParameter = idi_Id.HasValue ?
+                new ObjectParameter("idi_Id", idi_Id) :
+                new ObjectParameter("idi_Id", typeof(int));
+    
+            var idi_DescripcionParameter = idi_Descripcion != null ?
+                new ObjectParameter("idi_Descripcion", idi_Descripcion) :
+                new ObjectParameter("idi_Descripcion", typeof(string));
+    
+            var idi_UsuarioModificaParameter = idi_UsuarioModifica.HasValue ?
+                new ObjectParameter("idi_UsuarioModifica", idi_UsuarioModifica) :
+                new ObjectParameter("idi_UsuarioModifica", typeof(int));
+    
+            var idi_FechaModificaParameter = idi_FechaModifica.HasValue ?
+                new ObjectParameter("idi_FechaModifica", idi_FechaModifica) :
+                new ObjectParameter("idi_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Update_Result>("UDP_RRHH_tbIdiomas_Update", idi_IdParameter, idi_DescripcionParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
     }
 }

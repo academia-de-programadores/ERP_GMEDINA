@@ -36,6 +36,7 @@ function llenarTabla() {
         '/Idiomas/llenarTabla',
         'POST',
         function (Lista) {
+            var tabla = $("#IndexTable").DataTable();
            tabla.clear().draw();
             $.each(Lista, function (index, value) {
                 console.log(value.idi_Descripcion);

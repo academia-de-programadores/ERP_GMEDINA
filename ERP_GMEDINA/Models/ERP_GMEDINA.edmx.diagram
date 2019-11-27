@@ -18,6 +18,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoMonedas" Width="1.5" PointX="3" PointY="13.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbIdiomas" Width="1.5" PointX="3" PointY="18" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

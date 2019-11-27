@@ -33,6 +33,19 @@
           <Property Name="empr_UsuarioModifica" Type="int" />
           <Property Name="empr_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbIdiomas">
+          <Key>
+            <PropertyRef Name="idi_Id" />
+          </Key>
+          <Property Name="idi_Id" Type="int" Nullable="false" />
+          <Property Name="idi_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idi_Estado" Type="bit" Nullable="false" />
+          <Property Name="idi_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="idi_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="idi_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="idi_UsuarioModifica" Type="int" />
+          <Property Name="idi_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
             <PropertyRef Name="tiho_Id" />
@@ -94,6 +107,30 @@
             </Principal>
             <Dependent Role="tbEmpresas">
               <PropertyRef Name="empr_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbIdiomas" Type="Self.tbIdiomas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbIdiomas">
+              <PropertyRef Name="idi_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbIdiomas" Type="Self.tbIdiomas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbIdiomas">
+              <PropertyRef Name="idi_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -418,6 +455,28 @@
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Id" Type="int" Mode="In" />
+          <Parameter Name="idi_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Id" Type="int" Mode="In" />
+          <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbIdiomas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idi_Id" Type="int" Mode="In" />
+          <Parameter Name="idi_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoHora_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tiho_Id" Type="int" Mode="In" />
           <Parameter Name="tiho_Descripcion" Type="nvarchar" Mode="In" />
@@ -487,6 +546,7 @@
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbIdiomas" EntityType="Self.tbIdiomas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoMonedas" EntityType="Self.tbTipoMonedas" Schema="rrhh" store:Type="Tables" />
@@ -497,6 +557,14 @@
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbIdiomas" EntitySet="tbIdiomas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbIdiomas" EntitySet="tbIdiomas" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -901,6 +969,37 @@
             <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbIdiomas" EntityType="ERP_GMEDINAModel.tbIdiomas" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbIdiomas" EntitySet="tbIdiomas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbIdiomas" EntitySet="tbIdiomas" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result)">
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result)">
+            <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Restore_Result)">
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result)">
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -959,6 +1058,8 @@
           <NavigationProperty Name="tbEmpresas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpresas" />
           <NavigationProperty Name="tbTipoMonedas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
           <NavigationProperty Name="tbTipoMonedas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
+          <NavigationProperty Name="tbIdiomas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" FromRole="tbUsuario" ToRole="tbIdiomas" />
+          <NavigationProperty Name="tbIdiomas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" FromRole="tbUsuario" ToRole="tbIdiomas" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -1173,6 +1274,57 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoMonedas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="tbIdiomas">
+          <Key>
+            <PropertyRef Name="idi_Id" />
+          </Key>
+          <Property Name="idi_Id" Type="Int32" Nullable="false" />
+          <Property Name="idi_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idi_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="idi_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idi_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="idi_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idi_UsuarioModifica" Type="Int32" />
+          <Property Name="idi_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" FromRole="tbIdiomas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" FromRole="tbIdiomas" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbIdiomas" Role="tbIdiomas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbIdiomas">
+              <PropertyRef Name="idi_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbIdiomas" Role="tbIdiomas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbIdiomas">
+              <PropertyRef Name="idi_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -1459,6 +1611,48 @@
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Restore" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbIdiomas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbIdiomas">
+              <MappingFragment StoreEntitySet="tbIdiomas">
+                <ScalarProperty Name="idi_FechaModifica" ColumnName="idi_FechaModifica" />
+                <ScalarProperty Name="idi_UsuarioModifica" ColumnName="idi_UsuarioModifica" />
+                <ScalarProperty Name="idi_FechaCrea" ColumnName="idi_FechaCrea" />
+                <ScalarProperty Name="idi_UsuarioCrea" ColumnName="idi_UsuarioCrea" />
+                <ScalarProperty Name="idi_RazonInactivo" ColumnName="idi_RazonInactivo" />
+                <ScalarProperty Name="idi_Estado" ColumnName="idi_Estado" />
+                <ScalarProperty Name="idi_Descripcion" ColumnName="idi_Descripcion" />
+                <ScalarProperty Name="idi_Id" ColumnName="idi_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

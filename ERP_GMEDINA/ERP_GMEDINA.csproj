@@ -160,6 +160,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cEmpresas.cs" />
+    <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
     <Compile Include="Models\cUsuarios.cs" />
@@ -195,6 +197,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEmpresas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbIdiomas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoHoras.cs">
@@ -237,6 +242,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbIdiomas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Delete_Result.cs">
@@ -507,6 +524,7 @@
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
+    <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1043,6 +1061,16 @@
     <Content Include="Views\TipoMonedas\_Delete.cshtml" />
     <Content Include="Views\TipoMonedas\_Detalles.cshtml" />
     <Content Include="Views\TipoMonedas\_Edit.cshtml" />
+    <Content Include="Views\Idiomas\Create.cshtml" />
+    <Content Include="Views\Idiomas\Delete.cshtml" />
+    <Content Include="Views\Idiomas\Details.cshtml" />
+    <Content Include="Views\Idiomas\Edit.cshtml" />
+    <Content Include="Views\Idiomas\Index.cshtml" />
+    <Content Include="Views\Idiomas\_Create.cshtml" />
+    <Content Include="Views\Idiomas\_Delete.cshtml" />
+    <Content Include="Views\Idiomas\_Details.cshtml" />
+    <Content Include="Views\Idiomas\_Detalles.cshtml" />
+    <Content Include="Views\Idiomas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

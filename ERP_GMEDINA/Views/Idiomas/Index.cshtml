@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbIdiomas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Idiomas";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -22,7 +22,7 @@
                 <div class="ibox-title">
                     <h5>Listado de Idiomas</h5>
                     <div class="ibox-tools">
-                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Idiomas" />
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Idioma" />
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -65,5 +65,5 @@
      {
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/app/Idiomas/Idiomas")
+@Scripts.Render("~/Scripts/app/general/Idiomas/Idiomas")
 }

@@ -487,8 +487,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
                 "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
-                bundles.Add(new ScriptBundle("~/Scripts/app/Idiomas/Idiomas").Include(
-                               "~/Scripts/app/Idiomas/Idiomas.js"));
+
+                bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
+                               "~/Scripts/app/general/Idiomas/Idiomas.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network
