@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbEmpresas>
+
+@{
+    ViewBag.Title = "Empresas";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Empresas</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de Empresas</h5>
+                    <div class="ibox-tools">
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Empresas" />
+                    </div>
+                </div>
+                <div class="ibox-content">
+                  <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
+                    <thead>
+                        <tr role="row">
+                            <th>@Html.DisplayNameFor(model => model.empr_Nombre)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach (var item in Model) 
+                      {
+                        <tr class="gradeA odd" role="row" data-id="@item.empr_Id">
+                            <td>@Html.DisplayFor(modelItem => item.empr_Nombre)</td>
+                            <td>
+							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.empr_Id)">Detalles</a>
+							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.empr_Id)">Editar</a>
+                            </td>
+                        </tr>
+                      }
+                    </tbody>                       
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbEmpresas())
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbEmpresas())
+@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbEmpresas())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbEmpresas())
+    
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+@section Scripts {
+@Scripts.Render("~/plugins/dataTables")
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/app/general/Empresas")
+}

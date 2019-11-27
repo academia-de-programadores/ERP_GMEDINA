@@ -481,6 +481,8 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
+                "~/Scripts/app/general/Empresas/Empresas.js"));
 
 
             //OPTIMIZATION
