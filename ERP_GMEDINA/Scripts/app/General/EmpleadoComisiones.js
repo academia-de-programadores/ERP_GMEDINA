@@ -46,7 +46,6 @@ function cargarGridComisiones() {
                     Check = '<div class="icheckbox_square-green disabled" style="position: relative;"><input type="checkbox" class="i-checks" id="check-" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
                 }
 
-                //-----------------------------------
                 template += '<tr data-id = "' + ListaComisiones[i].cc_Id + '">' +
                     '<td>' + ListaComisiones[i].per_Nombres + '</td>' +
                     '<td>' + ListaComisiones[i].per_Apellidos + '</td>' +
@@ -63,12 +62,13 @@ function cargarGridComisiones() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyComisiones').html(template);
         });
+    FullBody();
 }
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     Idinactivar = ID;
     $.ajax({
         url: "/EmpleadoComisiones/Edit/" + ID,
@@ -101,7 +101,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                         $("#Editar #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleado").append("<option"+(iter.Id == SelectedIdEmp ? " selected" : "") + " value='"+iter.Id+"'>"+iter.Descripcion+"</option>");
+                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -117,7 +117,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                         $("#Editar #cin_IdIngreso").empty();
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
-                            $("#Editar #cin_IdIngreso").append("<option"+(iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='"+iter.Id+"'>"+iter.Descripcion+"</option>");
+                            $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
                 $("#EditarEmpleadoComisiones").modal();
@@ -143,9 +143,9 @@ $("#btnUpdateComisiones").click(function () {
         method: "POST",
         data: data
     }).done(function (data) {
-        if (data == "error") { 
+        if (data == "error") {
         }
-        else {
+        else {            
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridComisiones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
@@ -155,15 +155,16 @@ $("#btnUpdateComisiones").click(function () {
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
+
         }
     });
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val(" ");
+    var cc_Monto = $('#AgregarEmpleadoComisiones #Monto').val('');
     var cc_Pagado = $('#AgregarEmpleadoComisiones #cc_Pagado').prop('checked', false);
-   
+
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLEmpleado",
@@ -174,11 +175,11 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-   
+
             $("#Crear #emp_IdEmpleado").empty();
             $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Crear #emp_IdEmpleado").append("<option value='"+iter.Id+"'>"+iter.Descripcion+"</option>");
+                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
@@ -211,7 +212,7 @@ $('#btnCreateRegistroComisiones').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
 
     var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-   
+
     $.ajax({
         url: "/EmpleadoComisiones/Create",
         method: "POST",
@@ -223,7 +224,7 @@ $('#btnCreateRegistroComisiones').click(function () {
         if (data == "error") {
 
         }
-        else {
+        else {            
             cargarGridComisiones();
             $("#AgregarEmpleadoComisiones").modal('hide');
             // Mensaje de exito cuando un registro se ha guardado bien
@@ -240,8 +241,8 @@ $('#btnCreateRegistroComisiones').click(function () {
 //FUNCION: Detail 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoComisiones", function () {
-    
-    var ID = $(this).closest('tr').data('id');
+
+    var ID = $(this).data('id');
     $.ajax({
         url: "/EmpleadoComisiones/Details/" + ID,
         method: "GET",
@@ -249,7 +250,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data){
+        .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
@@ -308,7 +309,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").val(data[0].Ingreso);
                 $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
                 $("#Detallar #emp_Id").val(data[0].emp_Id);
-                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado+' '+data[0].ApellidosEmpleado);
+                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
                 $("#Detallar #cc_FechaCrea").val(FechaCrea);
                 $("#Detallar #cc_UsuarioModifica").val(data[0].cc_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
@@ -350,7 +351,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                             $("#Detallar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                
+
                 $("#DetalleEmpleadoComisiones").modal();
             }
             else {
@@ -369,6 +370,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
 
 $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
+    $("#EditarEmpleadoComisiones").modal('hide');
     $("#InactivarEmpleadoComisiones").modal();
 });
 
@@ -391,9 +393,8 @@ $("#btnInactivarRegistroComisiones").click(function () {
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
-            
+
             cargarGridComisiones();
-            console.log("Crago grid");
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarEmpleadoComisiones").modal('hide');
             $("#EditarEmpleadoComisiones").modal('hide');
@@ -408,71 +409,75 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
 //VALIDAR CREAR//
 
-    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModal").click(function () {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
-        $("#Monto").val('');
-    });
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Monto").val('');
+});
 
- 
-    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconoCerrar").click(function () {
-        $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+    $("#Monto").val('');
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnCreateRegistroComisiones").click(function () {
+    var Monto = $("#Monto").val();
+    var Empleado = $("#emp_IdEmpleado").val();
+
+    if (Monto == "") {
+        $("#Validation_descipcion2").css("display", "");
+    }
+    else {
         $("#Validation_descipcion2").css("display", "none");
-        $("#Monto").val('');
-    });
+    }
 
+    if (Empleado == "0") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+    }
 
-    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-    $("#btnCreateRegistroComisiones").click(function () {
-        var Monto = $("#Monto").val();
-        var Empleado = $("#emp_IdEmpleado").val();
-
-        if (Monto == "") {
-            $("#Validation_descipcion2").css("display", "");
-        }
-        else {
-            $("#Validation_descipcion2").css("display", "none");
-        }
-
-        if (Empleado == "0") {
-            $("#Validation_descipcion").css("display", "");
-        }
-        else {
-            $("#Validation_descipcion").css("display", "none");
-        }
-
-    });
+});
 
 //VALIDAR EDIT//
 
-    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-    $("#btnCerrarModaledit").click(function () {
-       
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarModaledit").click(function () {
+
+    $("#Validation_descipcion2e").css("display", "none");
+    $("#Monto").val('');
+});
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconoCerraredit").click(function () {
+
+    $("#Validation_descipcion2e").css("display", "none");
+    $("#Monto").val('');
+});
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnUpdateComisiones").click(function () {
+    var MontoE = $("#cc_Monto").val();
+
+
+    if (MontoE == "" || MontoE == null || MontoE == undefined) {
+        $("#Validation_descipcion2e").css("display", "");
+    }
+    else {
         $("#Validation_descipcion2e").css("display", "none");
-        $("#Monto").val('');
-    });
+    }
 
+});
 
-    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-    $("#IconoCerraredit").click(function () {
-    
-        $("#Validation_descipcion2e").css("display", "none");
-        $("#Monto").val('');
-    });
-
-
-    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-    $("#btnUpdateComisiones").click(function () {
-        var MontoE = $("#cc_Monto").val();
-
-
-        if (MontoE == "" || MontoE == null || MontoE == undefined) {
-            $("#Validation_descipcion2e").css("display", "");
-        }
-        else {
-            $("#Validation_descipcion2e").css("display", "none");
-        }
-
-    });
+$("#frmEmpleadoComisionesCreate").submit(function (e) {
+    e.preventDefault();
+});

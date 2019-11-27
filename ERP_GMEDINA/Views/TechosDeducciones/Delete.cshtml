@@ -1,0 +1,97 @@
+﻿@model ERP_GMEDINA.Models.tbTechosDeducciones
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbTechosDeducciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_RangoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_RangoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_RangoFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_RangoFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_Porcentaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_Porcentaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

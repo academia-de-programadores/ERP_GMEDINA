@@ -1,0 +1,11 @@
+﻿td.details-control {
+    background: url('../../img/mas.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../../img/menos.png') no-repeat center center;
+}
+
+#tblCatalogoPlanillas_next{
+    background: url(../../img/flecha-derecha.png) no-repeat center left;
+}

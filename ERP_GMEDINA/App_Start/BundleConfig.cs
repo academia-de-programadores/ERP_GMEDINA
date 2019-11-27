@@ -453,14 +453,41 @@ namespace ERP_GMEDINA
             // Touch Spin Styless
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
-                      "~/Content/plugins/izitoast/iziToast.min.css"));   
+                      "~/Content/plugins/izitoast/iziToast.min.css"));
 
-            //bundles APP/GENERAL
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
-                "~/Scripts/app/General/CatalogoDeducciones.js"));
+            //EQUIPO FLAMENCO
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
+            
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
+                "~/Scripts/app/General/CatalogoDeducciones.js"));
+
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
+                "~/Scripts/app/General/Planilla.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeIngresos").Include(
+                "~/Scripts/app/General/CatalogoDeIngresos.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TechosDeducciones").Include(
+                "~/Scripts/app/General/TechosDeducciones.js"));
+
+            // SELVIN
+            
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
+                "~/Scripts/app/General/CatalogoPlanillas.js"));
+
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
+                 "~/Scripts/plugins/dataTables/datatables.min.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/app/General").Include(
+                 "~/Content/app/General/catalogoPlanillas.css"));
+
 
             //bundles ScripBase/Validate DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
@@ -470,6 +497,15 @@ namespace ERP_GMEDINA
                 "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
                 "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
 
+            //==========================EQUIPO MALCOM ===========================
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoDeducciones").Include(
+                "~/Scripts/app/General/TipoDeducciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/EmpleadoBonos").Include(
+                "~/Scripts/app/General/EmpleadoBonos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/FormaPago").Include(
+                "~/Scripts/app/General/FormaPago.js"));
 
             //OPTIMIZATION
 

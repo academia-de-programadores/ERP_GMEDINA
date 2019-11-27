@@ -44,6 +44,7 @@ function cargarGridDeducciones() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyDecimoTercerMes').html(template);
         });
+    FullBody();
 }
 
 $("body").on("click", "#btnProcesar", function () {
