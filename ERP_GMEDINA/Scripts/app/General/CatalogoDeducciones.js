@@ -99,7 +99,7 @@ $("#btnCreateRegistroDeduccion").click(function () {
         $("#Validation_descipcionA").css("display", "none");
     }
 
-    if (tde_IdTipoDedu == "0" || tde_IdTipoDedu == null) {
+    if (tde_IdTipoDedu == "0") {
         $("#Validation_descipcion2A").css("display", "");
         $("#tde_IdTipoDedu").val("0");
     }
@@ -136,7 +136,7 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+            $("#Crear #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
