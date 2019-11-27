@@ -1,4 +1,5 @@
-﻿var id = 0;
+﻿
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;

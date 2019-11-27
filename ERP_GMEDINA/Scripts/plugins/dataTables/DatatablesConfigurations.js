@@ -22,15 +22,11 @@
                 }
             },
 
-
-
             {
                 extend: 'print',
                 customize: function (win) {
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
-
-
 
                     $(win.document.body).find('table')
                             .addClass('compact')
@@ -40,9 +36,7 @@
                     columns: [Cols]
                 }
             }
-        ],
-        columns: columnas,
-        order: [[col, 'asc']],
+        ]
     });
 });
 
