@@ -183,9 +183,6 @@ namespace PruebaPlanilla.Controllers
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
