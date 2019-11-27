@@ -29,7 +29,7 @@
                 <a href="@Url.Action("General_1", "General")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.dashboard">General</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
                     <li class="@Html.IsSelected(action: "General_1")"><a href="@Url.Action("Dashboard_1", "Dashboards")">Cargos</a></li>
-                    <li class="@Html.IsSelected(action: "Dashboard_2")"><a href="@Url.Action("Dashboard_2", "Dashboards")">Empresas</a></li>
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Empresas")">Empresas</a></li>
                     <li class="@Html.IsSelected(action: "Dashboard_3")"><a href="@Url.Action("Dashboard_3", "Dashboards")">Sucursales</a></li>
                     <li class="@Html.IsSelected(action: "Dashboard_4_1")"><a href="@Url.Action("Dashboard_4_1", "Dashboards")">Idiomas</a></li>
 
@@ -114,8 +114,8 @@
                     <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Incapacidades <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Tipos de Incapacidades</a>
+                            <li class="@Html.IsSelected(action: "Index")">
+                                <a href="@Url.Action("Index", "TipoIncapacidades")">Tipos de Incapacidades</a>
                             </li>
            
                             <li class="@Html.IsSelected(action: "Dashboard_5")">

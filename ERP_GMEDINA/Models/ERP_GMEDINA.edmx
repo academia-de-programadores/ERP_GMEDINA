@@ -20,6 +20,19 @@
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
+        <EntityType Name="tbEmpresas">
+          <Key>
+            <PropertyRef Name="empr_Id" />
+          </Key>
+          <Property Name="empr_Id" Type="int" Nullable="false" />
+          <Property Name="empr_Nombre" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="empr_Estado" Type="bit" Nullable="false" />
+          <Property Name="empr_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="empr_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="empr_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="empr_UsuarioModifica" Type="int" />
+          <Property Name="empr_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
             <PropertyRef Name="tiho_Id" />
@@ -47,6 +60,30 @@
           <Property Name="ticn_UsuarioModifica" Type="int" />
           <Property Name="ticn_FechaModifica" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpresas">
+              <PropertyRef Name="empr_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpresas">
+              <PropertyRef Name="empr_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoHoras" Type="Self.tbTipoHoras" Multiplicity="*" />
@@ -320,6 +357,28 @@
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_usuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoHora_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tiho_Id" Type="int" Mode="In" />
           <Parameter Name="tiho_Descripcion" Type="nvarchar" Mode="In" />
@@ -366,8 +425,17 @@
         </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
+          <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
@@ -533,7 +601,7 @@
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Inactivar" ReturnType="Collection(String)">
-          <Parameter Name="cb_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cb_Id" Mode="In" Type="Int32" />
             <Parameter Name="cb_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cb_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -557,7 +625,7 @@
             <Parameter Name="cb_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbFormaPago_Inactivar" ReturnType="Collection(String)">
-          <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="fpa_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -699,6 +767,37 @@
             <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbEmpresas" EntityType="ERP_GMEDINAModel.tbEmpresas" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Insert_Result)">
+            <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Restore_Result)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -753,6 +852,8 @@
           <NavigationProperty Name="tbTipoHoras1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoHoras" />
           <NavigationProperty Name="tbTipoIncapacidades" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
           <NavigationProperty Name="tbTipoIncapacidades1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
+          <NavigationProperty Name="tbEmpresas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpresas" />
+          <NavigationProperty Name="tbEmpresas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpresas" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -865,6 +966,57 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="tbEmpresas">
+          <Key>
+            <PropertyRef Name="empr_Id" />
+          </Key>
+          <Property Name="empr_Id" Type="Int32" Nullable="false" />
+          <Property Name="empr_Nombre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="empr_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="empr_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="empr_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="empr_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="empr_UsuarioModifica" Type="Int32" />
+          <Property Name="empr_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea" FromRole="tbEmpresas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" FromRole="tbEmpresas" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpresas" Role="tbEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpresas">
+              <PropertyRef Name="empr_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbEmpresas" Role="tbEmpresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpresas">
+              <PropertyRef Name="empr_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -1067,6 +1219,48 @@
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbEmpresas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbEmpresas">
+              <MappingFragment StoreEntitySet="tbEmpresas">
+                <ScalarProperty Name="empr_FechaModifica" ColumnName="empr_FechaModifica" />
+                <ScalarProperty Name="empr_UsuarioModifica" ColumnName="empr_UsuarioModifica" />
+                <ScalarProperty Name="empr_FechaCrea" ColumnName="empr_FechaCrea" />
+                <ScalarProperty Name="empr_UsuarioCrea" ColumnName="empr_UsuarioCrea" />
+                <ScalarProperty Name="empr_RazonInactivo" ColumnName="empr_RazonInactivo" />
+                <ScalarProperty Name="empr_Estado" ColumnName="empr_Estado" />
+                <ScalarProperty Name="empr_Nombre" ColumnName="empr_Nombre" />
+                <ScalarProperty Name="empr_Id" ColumnName="empr_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
