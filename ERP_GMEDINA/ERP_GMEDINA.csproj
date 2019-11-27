@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\TipoIncapacidadesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -454,6 +455,10 @@
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Delete_Result.cs" />
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Insert_Result.cs" />
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Restore_Result.cs" />
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Update_Result.cs" />
     <Compile Include="Models\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -741,6 +746,7 @@
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1265,6 +1271,11 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\TipoIncapacidades\Index.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Create.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Delete.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Detalles.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
