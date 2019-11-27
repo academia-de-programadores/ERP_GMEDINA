@@ -27,7 +27,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.css"));
 
-            // jQueryUI 
+            // jQueryUI
             bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
 
@@ -64,7 +64,7 @@ namespace ERP_GMEDINA
             // Lightbox gallery
             bundles.Add(new ScriptBundle("~/plugins/lightboxGallery").Include(
                       "~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"));
-            
+
             // Sparkline
             bundles.Add(new ScriptBundle("~/plugins/sparkline").Include(
                       "~/Scripts/plugins/sparkline/jquery.sparkline.min.js"));
@@ -109,12 +109,12 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
                       "~/Content/plugins/dataTables/datatables.min.css"));
             //
-            // dataTables 
+            // dataTables
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
 
-            // jeditable 
+            // jeditable
             bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
                       "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
 
@@ -122,7 +122,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/jqGrid/jqGridStyles").Include(
                       "~/Content/plugins/jqGrid/ui.jqgrid.css"));
 
-            // jqGrid 
+            // jqGrid
             bundles.Add(new ScriptBundle("~/plugins/jqGrid").Include(
                       "~/Scripts/plugins/jqGrid/i18n/grid.locale-en.js",
                       "~/Scripts/plugins/jqGrid/jquery.jqGrid.min.js"));
@@ -132,16 +132,16 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/codemirror/codemirror.css",
                       "~/Content/plugins/codemirror/ambiance.css"));
 
-            // codeEditor 
+            // codeEditor
             bundles.Add(new ScriptBundle("~/plugins/codeEditor").Include(
                       "~/Scripts/plugins/codemirror/codemirror.js",
                       "~/Scripts/plugins/codemirror/mode/javascript/javascript.js"));
 
-            // codeEditor 
+            // codeEditor
             bundles.Add(new ScriptBundle("~/plugins/nestable").Include(
                       "~/Scripts/plugins/nestable/jquery.nestable.js"));
 
-            // validate 
+            // validate
             bundles.Add(new ScriptBundle("~/plugins/validate").Include(
                       "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
@@ -149,12 +149,12 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/fullCalendarStyles").Include(
                       "~/Content/plugins/fullcalendar/fullcalendar.css"));
 
-            // fullCalendar 
+            // fullCalendar
             bundles.Add(new ScriptBundle("~/plugins/fullCalendar").Include(
                       "~/Scripts/plugins/fullcalendar/moment.min.js",
                       "~/Scripts/plugins/fullcalendar/fullcalendar.min.js"));
 
-            // vectorMap 
+            // vectorMap
             bundles.Add(new ScriptBundle("~/plugins/vectorMap").Include(
                       "~/Scripts/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
                       "~/Scripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"));
@@ -164,7 +164,7 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/ionRangeSlider/ion.rangeSlider.css",
                       "~/Content/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css"));
 
-            // ionRange 
+            // ionRange
             bundles.Add(new ScriptBundle("~/plugins/ionRange").Include(
                       "~/Scripts/plugins/ionRangeSlider/ion.rangeSlider.min.js"));
 
@@ -172,7 +172,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
                       "~/Content/plugins/datapicker/datepicker3.css"));
 
-            // dataPicker 
+            // dataPicker
             bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
                       "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
 
@@ -180,7 +180,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/nouiSliderStyles").Include(
                       "~/Content/plugins/nouslider/jquery.nouislider.css"));
 
-            // nouiSlider 
+            // nouiSlider
             bundles.Add(new ScriptBundle("~/plugins/nouiSlider").Include(
                       "~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
 
@@ -188,7 +188,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/jasnyBootstrapStyles").Include(
                       "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
 
-            // jasnyBootstrap 
+            // jasnyBootstrap
             bundles.Add(new ScriptBundle("~/plugins/jasnyBootstrap").Include(
                       "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
 
@@ -196,7 +196,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/switcheryStyles").Include(
                       "~/Content/plugins/switchery/switchery.css"));
 
-            // switchery 
+            // switchery
             bundles.Add(new ScriptBundle("~/plugins/switchery").Include(
                       "~/Scripts/plugins/switchery/switchery.js"));
 
@@ -204,11 +204,11 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
                       "~/Content/plugins/chosen/bootstrap-chosen.css"));
 
-            // chosen 
+            // chosen
             bundles.Add(new ScriptBundle("~/plugins/chosen").Include(
                       "~/Scripts/plugins/chosen/chosen.jquery.js"));
 
-            // knob 
+            // knob
             bundles.Add(new ScriptBundle("~/plugins/knob").Include(
                       "~/Scripts/plugins/jsKnob/jquery.knob.js"));
 
@@ -216,7 +216,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
                       "~/Content/plugins/steps/jquery.steps.css"));
 
-            // wizardSteps 
+            // wizardSteps
             bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
                       "~/Scripts/plugins/staps/jquery.steps.min.js"));
 
@@ -225,7 +225,7 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/dropzone/basic.css",
                       "~/Content/plugins/dropzone/dropzone.css"));
 
-            // dropZone 
+            // dropZone
             bundles.Add(new ScriptBundle("~/plugins/dropZone").Include(
                       "~/Scripts/plugins/dropzone/dropzone.js"));
 
@@ -234,11 +234,11 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/summernote/summernote.css",
                       "~/Content/plugins/summernote/summernote-bs3.css"));
 
-            // summernote 
+            // summernote
             bundles.Add(new ScriptBundle("~/plugins/summernote").Include(
                       "~/Scripts/plugins/summernote/summernote.min.js"));
 
-            // toastr notification 
+            // toastr notification
             bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
                       "~/Scripts/plugins/toastr/toastr.min.js"));
 
@@ -261,7 +261,7 @@ namespace ERP_GMEDINA
             // image cropper styles
             bundles.Add(new StyleBundle("~/plugins/imagecropperStyles").Include(
                       "~/Content/plugins/cropper/cropper.min.css"));
-            
+
             // jsTree
             bundles.Add(new ScriptBundle("~/plugins/jsTree").Include(
                       "~/Scripts/plugins/jsTree/jstree.min.js"));
@@ -309,7 +309,7 @@ namespace ERP_GMEDINA
 
             // Date range picker
             bundles.Add(new ScriptBundle("~/plugins/dateRange").Include(
-                      // Date range use moment.js same as full calendar plugin 
+                      // Date range use moment.js same as full calendar plugin
                       "~/Scripts/plugins/fullcalendar/moment.min.js",
                       "~/Scripts/plugins/daterangepicker/daterangepicker.js"));
 
@@ -407,7 +407,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/markdownStyles").Include(
                       "~/Content/plugins/bootstrap-markdown/bootstrap-markdown.min.css"));
 
-            // Markdown 
+            // Markdown
             bundles.Add(new ScriptBundle("~/plugins/markdown").Include(
                       "~/Scripts/plugins/bootstrap-markdown/bootstrap-markdown.js",
                       "~/Scripts/plugins/bootstrap-markdown/markdown.js"));
@@ -460,6 +460,20 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
+            "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas").Include(
+                "~/Scripts/app/general/Idiomas/Idiomas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
+                "~/Scripts/app/General/Titulos/Titulos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoIncapacidades").Include(
+               "~/Scripts/app/General/TipoIncapacidades/TipoIncapacidades.js"));
 
 
 
@@ -471,7 +485,7 @@ namespace ERP_GMEDINA
 
             //OPTIMIZATION
 
-            //Allow any type of Content Delivery Network 
+            //Allow any type of Content Delivery Network
             bundles.UseCdn = true;
 
             //Execute the Optimization at Bundles in runtime
