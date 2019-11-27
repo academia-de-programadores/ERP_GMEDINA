@@ -1,83 +1,32 @@
 ﻿@model ERP_GMEDINA.Models.tbNacionalidades
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEdit" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-				@Html.HiddenFor(model => model.nac_Id)
-                @Html.HiddenFor(model => model.nac_FechaCrea)
-                @Html.HiddenFor(model => model.nac_UsuarioCrea)
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.nac_Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nac_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nac_Descripcion, "", new { @class = "text-danger" })
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar Nacionalidad</h4>
             </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.nac_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.nac_Estado)
-                    @Html.ValidationMessageFor(model => model.nac_Estado, "", new { @class = "text-danger" })
-                </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditar" }))
+                {
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+							@Html.LabelFor(model => model.nac_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.nac_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.ValidationMessageFor(model => model.nac_Descripcion, "", new { @class = "text-danger", @id = "errornac_Descripcion" })
+                            </div>
+                        </div>
+					</div>
+				}
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nac_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nac_RazonInactivo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_UsuarioCrea, "nac_UsuarioCrea", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("nac_UsuarioCrea", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.nac_UsuarioCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_FechaCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nac_FechaCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nac_FechaCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_UsuarioModifica, "nac_UsuarioModifica", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("nac_UsuarioModifica", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.nac_UsuarioModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nac_FechaModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nac_FechaModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nac_FechaModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-
-
-
-    </div>
-}
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivar" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.nac_Id)}
-
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
+				<button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+			</div>
+		</div>
+	</div>
+</div>
 
