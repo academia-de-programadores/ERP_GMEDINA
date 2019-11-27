@@ -31,10 +31,9 @@ namespace ERP_GMEDINA.Controllers
 			reportViewer.BackColor = System.Drawing.Color.White;
 
 			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-
-
 			SqlConnection conx = new SqlConnection(connectionString);
 			SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM rrhh.tbEmpleados", conx);
+
 
 			adp.Fill(ds, ds.UDP_Plani_DecimoTercerMes_RPT.TableName);
 
