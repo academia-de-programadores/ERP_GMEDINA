@@ -1,31 +1,35 @@
 ﻿var tabla = null;
+var botones = [];
 $(document).ready(function () {
     var columnas = [];
     var col = 0;
-    $("#IndexTable thead tr").find("th").each(function (indice,valor) {
+    var contador = -1;
+    var head= $("#IndexTable thead tr").find("th").each(function (indice, valor) {
+        contador = contador + 1;
         campo = valor.innerText;
-        if (campo=="") {
+        if (campo == "") {
             columnas.push({
                 className: 'details-control',
                 orderable: false,
                 data: null,
                 defaultContent: ''
             });
-            col = col+1;
+            col = col + 1;
         } else if (campo.toUpperCase() == "ID") {
             columnas.push({
                 data: campo,
                 visible: false
             });
             col = col + 1;
-        }else if (campo == "Acciones") {
+        } else if (campo == "Acciones") {
             columnas.push({
                 data: "Acciones",
                 orderable: false
-                });
-            } else {
+            });
+        } else {
             columnas.push({ data: campo });
-            }
+            botones.push(contador);
+        }
     });
     tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
@@ -33,13 +37,38 @@ $(document).ready(function () {
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
-            { extend: 'copy' },
-            { extend: 'csv' },
-            { extend: 'excel', title: 'ExampleFile' },
-            { extend: 'pdf', title: 'ExampleFile' },
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'ExampleFile'
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'nadaaa'
+            },
 
             {
                 extend: 'print',
+                exportOptions: {
+                    columns: botones
+                },
                 customize: function (win) {
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');

@@ -12,33 +12,35 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HabilidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Habilidades
         public ActionResult Index()
         {
-            List< tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbHabilidades);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbHabilidades.Add(new tbHabilidades {habi_Id=0,habi_Descripcion="fallo la conexion" });
+                tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
             }
             return View(tbHabilidades);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
+            var i = "df";
+            db = new ERP_GMEDINAEntities();
             List<tbHabilidades> tbHabilidades =
                 new List<Models.tbHabilidades> { };
-            foreach (tbHabilidades x in db.tbHabilidades.ToList().Where(x=>x.habi_Estado==true))
+            foreach (tbHabilidades x in db.tbHabilidades.ToList().Where(x => x.habi_Estado == true))
             {
-                tbHabilidades.Add( new tbHabilidades
+                tbHabilidades.Add(new tbHabilidades
                 {
                     habi_Id = x.habi_Id,
                     habi_Descripcion = x.habi_Descripcion
@@ -97,7 +99,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 ex.Message.ToString();
                 return HttpNotFound();
-            }            
+            }
             Session["id"] = id;
             var habilidad = new tbHabilidades
             {
@@ -109,7 +111,7 @@ namespace ERP_GMEDINA.Controllers
                 habi_FechaCrea = tbHabilidades.habi_FechaCrea,
                 habi_UsuarioModifica = tbHabilidades.habi_UsuarioModifica,
                 habi_FechaModifica = tbHabilidades.habi_FechaModifica,
-                tbUsuario = new tbUsuario {usu_NombreUsuario= IsNull(tbHabilidades.tbUsuario).usu_NombreUsuario },
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHabilidades.tbUsuario).usu_NombreUsuario },
                 tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbHabilidades.tbUsuario1).usu_NombreUsuario }
             };
             return Json(habilidad, JsonRequestBehavior.AllowGet);
@@ -142,7 +144,7 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 msj = "-3";
-            }            
+            }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
@@ -173,24 +175,24 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 msj = "-3";
-            }            
-            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         protected tbUsuario IsNull(tbUsuario valor)
         {
-            if (valor!=null)
+            if (valor != null)
             {
                 return valor;
             }
             else
             {
-                return new tbUsuario {usu_NombreUsuario="" };
+                return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

@@ -35,6 +35,9 @@
     });
     return div + '</div></div></div>';
 }
+$(document).ready(function () {
+    tabla.row.add({ Id: 0, Descripcion: 'chisto', Acciones: 'no hay',hola:69 });
+});
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);
@@ -45,6 +48,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
     else {
         id = row.data().Id;
+        hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/Areas/ChildRowData',
             'GET',
