@@ -163,6 +163,7 @@
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
+    <Compile Include="Controllers\TipoMonedasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +171,7 @@
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
+    <Compile Include="Models\cTipoMonedas.cs" />
     <Compile Include="Models\cUsuarios.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
@@ -199,6 +201,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoMonedas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbUsuario.cs">
@@ -259,6 +264,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
@@ -1020,6 +1037,11 @@
     <Content Include="Views\Empresas\_Delete.cshtml" />
     <Content Include="Views\Empresas\_Detalles.cshtml" />
     <Content Include="Views\Empresas\_Edit.cshtml" />
+    <Content Include="Views\TipoMonedas\Index.cshtml" />
+    <Content Include="Views\TipoMonedas\_Create.cshtml" />
+    <Content Include="Views\TipoMonedas\_Delete.cshtml" />
+    <Content Include="Views\TipoMonedas\_Detalles.cshtml" />
+    <Content Include="Views\TipoMonedas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

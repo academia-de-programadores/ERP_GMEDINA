@@ -31,6 +31,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTipoHoras> tbTipoHoras { get; set; }
         public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
+        public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -375,7 +376,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbCatalogoDePlanillas_Inactivar", cpla_IdPlanillaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbCatalogoDePlanillas_Insert(string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioCrea, Nullable<System.DateTime> cpla_FechaCrea)
+        public virtual ObjectResult<string> UDP_Plani_tbCatalogoDePlanillas_Insert(string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioCrea, Nullable<System.DateTime> cpla_FechaCrea, Nullable<bool> cpla_RecibeComision)
         {
             var cpla_DescripcionPlanillaParameter = cpla_DescripcionPlanilla != null ?
                 new ObjectParameter("cpla_DescripcionPlanilla", cpla_DescripcionPlanilla) :
@@ -393,10 +394,14 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cpla_FechaCrea", cpla_FechaCrea) :
                 new ObjectParameter("cpla_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbCatalogoDePlanillas_Insert", cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioCreaParameter, cpla_FechaCreaParameter);
+            var cpla_RecibeComisionParameter = cpla_RecibeComision.HasValue ?
+                new ObjectParameter("cpla_RecibeComision", cpla_RecibeComision) :
+                new ObjectParameter("cpla_RecibeComision", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbCatalogoDePlanillas_Insert", cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioCreaParameter, cpla_FechaCreaParameter, cpla_RecibeComisionParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbCatalogoDePlanillas_Update(Nullable<int> cpla_IdPlanilla, string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica)
+        public virtual ObjectResult<string> UDP_Plani_tbCatalogoDePlanillas_Update(Nullable<int> cpla_IdPlanilla, string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica, Nullable<bool> cpla_RecibeComision)
         {
             var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
                 new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
@@ -418,7 +423,11 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cpla_FechaModifica", cpla_FechaModifica) :
                 new ObjectParameter("cpla_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbCatalogoDePlanillas_Update", cpla_IdPlanillaParameter, cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter);
+            var cpla_RecibeComisionParameter = cpla_RecibeComision.HasValue ?
+                new ObjectParameter("cpla_RecibeComision", cpla_RecibeComision) :
+                new ObjectParameter("cpla_RecibeComision", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbCatalogoDePlanillas_Update", cpla_IdPlanillaParameter, cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter, cpla_RecibeComisionParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbDecimoTercerMes_Insert(Nullable<int> emp_Id, Nullable<decimal> dtm_DecimoTercer)
@@ -1123,6 +1132,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("empr_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Update_Result>("UDP_RRHH_tbEmpresas_Update", empr_IdParameter, empr_NombreParameter, empr_usuarioModificaParameter, empr_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMoneda_Update_Result> UDP_RRHH_tbTipoMoneda_Update(Nullable<int> tmon_Id, string tmon_Descripcion, Nullable<int> tmon_UsuarioModifica, Nullable<System.DateTime> tmon_FechaModifica)
+        {
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var tmon_DescripcionParameter = tmon_Descripcion != null ?
+                new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
+                new ObjectParameter("tmon_Descripcion", typeof(string));
+    
+            var tmon_UsuarioModificaParameter = tmon_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmon_UsuarioModifica", tmon_UsuarioModifica) :
+                new ObjectParameter("tmon_UsuarioModifica", typeof(int));
+    
+            var tmon_FechaModificaParameter = tmon_FechaModifica.HasValue ?
+                new ObjectParameter("tmon_FechaModifica", tmon_FechaModifica) :
+                new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMoneda_Update_Result>("UDP_RRHH_tbTipoMoneda_Update", tmon_IdParameter, tmon_DescripcionParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Delete_Result> UDP_RRHH_tbTipoMonedas_Delete(Nullable<int> tmon_Id, string tmon_razon_Inactivo, Nullable<int> tmon_UsuarioModifica, Nullable<System.DateTime> tmon_FechaModifica)
+        {
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var tmon_razon_InactivoParameter = tmon_razon_Inactivo != null ?
+                new ObjectParameter("tmon_razon_Inactivo", tmon_razon_Inactivo) :
+                new ObjectParameter("tmon_razon_Inactivo", typeof(string));
+    
+            var tmon_UsuarioModificaParameter = tmon_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmon_UsuarioModifica", tmon_UsuarioModifica) :
+                new ObjectParameter("tmon_UsuarioModifica", typeof(int));
+    
+            var tmon_FechaModificaParameter = tmon_FechaModifica.HasValue ?
+                new ObjectParameter("tmon_FechaModifica", tmon_FechaModifica) :
+                new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Delete_Result>("UDP_RRHH_tbTipoMonedas_Delete", tmon_IdParameter, tmon_razon_InactivoParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Insert_Result> UDP_RRHH_tbTipoMonedas_Insert(string tmon_Descripcion, Nullable<int> tmon_UsuarioCrea, Nullable<System.DateTime> tmon_FechaCrea)
+        {
+            var tmon_DescripcionParameter = tmon_Descripcion != null ?
+                new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
+                new ObjectParameter("tmon_Descripcion", typeof(string));
+    
+            var tmon_UsuarioCreaParameter = tmon_UsuarioCrea.HasValue ?
+                new ObjectParameter("tmon_UsuarioCrea", tmon_UsuarioCrea) :
+                new ObjectParameter("tmon_UsuarioCrea", typeof(int));
+    
+            var tmon_FechaCreaParameter = tmon_FechaCrea.HasValue ?
+                new ObjectParameter("tmon_FechaCrea", tmon_FechaCrea) :
+                new ObjectParameter("tmon_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Insert_Result>("UDP_RRHH_tbTipoMonedas_Insert", tmon_DescripcionParameter, tmon_UsuarioCreaParameter, tmon_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Restore_Result> UDP_RRHH_tbTipoMonedas_Restore(Nullable<int> tmon_Id, Nullable<int> tmon_UsuarioModifica, Nullable<System.DateTime> tmon_FechaModifica)
+        {
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var tmon_UsuarioModificaParameter = tmon_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmon_UsuarioModifica", tmon_UsuarioModifica) :
+                new ObjectParameter("tmon_UsuarioModifica", typeof(int));
+    
+            var tmon_FechaModificaParameter = tmon_FechaModifica.HasValue ?
+                new ObjectParameter("tmon_FechaModifica", tmon_FechaModifica) :
+                new ObjectParameter("tmon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Restore_Result>("UDP_RRHH_tbTipoMonedas_Restore", tmon_IdParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
         }
     }
 }

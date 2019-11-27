@@ -23,6 +23,8 @@ namespace ERP_GMEDINA.Models
             this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidades>();
             this.tbEmpresas = new HashSet<tbEmpresas>();
             this.tbEmpresas1 = new HashSet<tbEmpresas>();
+            this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
+            this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
         }
     
         public int usu_Id { get; set; }
@@ -48,5 +50,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbEmpresas> tbEmpresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpresas> tbEmpresas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
     }
 }
