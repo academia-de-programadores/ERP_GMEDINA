@@ -179,6 +179,11 @@
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
+    <Compile Include="DataSet\ReportesPlaniDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -989,6 +994,17 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="DataSet\ReportesPlaniDS.xsc">
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet\ReportesPlaniDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlaniDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSet\ReportesPlaniDS.xss">
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1557,6 +1573,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReportesPlani\DecimoTercerMesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
