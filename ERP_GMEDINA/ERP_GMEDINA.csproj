@@ -161,6 +161,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
+    <Compile Include="Controllers\TipoIncapacidadesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +191,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoHoras.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbUsuario.cs">
@@ -226,6 +230,21 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHora_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoIncapacidades_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -451,6 +470,7 @@
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
+    <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -972,6 +992,11 @@
     <Content Include="Views\TipoHoras\_EditTipoHorarios.cshtml" />
     <Content Include="Views\TipoHoras\_InhabilitarTipoHorarios.cshtml" />
     <Content Include="Views\TipoHoras\_DetallesTipoHorarios.cshtml" />
+    <Content Include="Views\TipoIncapacidades\Index.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Create.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Delete.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Detalles.cshtml" />
+    <Content Include="Views\TipoIncapacidades\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

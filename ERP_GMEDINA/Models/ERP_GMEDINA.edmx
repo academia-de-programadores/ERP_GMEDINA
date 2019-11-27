@@ -34,7 +34,20 @@
           <Property Name="tiho_UsuarioModifica" Type="int" />
           <Property Name="tiho_FechaModifica" Type="datetime" />
         </EntityType>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+        <EntityType Name="tbTipoIncapacidades">
+          <Key>
+            <PropertyRef Name="ticn_Id" />
+          </Key>
+          <Property Name="ticn_Id" Type="int" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ticn_Estado" Type="bit" Nullable="false" />
+          <Property Name="ticn_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="ticn_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="ticn_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="ticn_UsuarioModifica" Type="int" />
+          <Property Name="ticn_FechaModifica" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoHoras" Type="Self.tbTipoHoras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -46,7 +59,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbTipoHoras" Type="Self.tbTipoHoras" Multiplicity="*" />
           <ReferentialConstraint>
@@ -55,6 +68,30 @@
             </Principal>
             <Dependent Role="tbTipoHoras">
               <PropertyRef Name="tiho_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -103,21 +140,19 @@
         <Function Name="UDP_Plani_EmpleadoComisiones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
-          <Parameter Name="cc_Monto" Type="decimal" Mode="In" />
           <Parameter Name="cc_FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="cc_Pagado" Type="bit" Mode="In" />
           <Parameter Name="cc_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="cc_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_EmpleadoComisiones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cc_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
-          <Parameter Name="cc_Monto" Type="decimal" Mode="In" />
-          <Parameter Name="cc_FechaRegistro" Type="datetime" Mode="In" />
-          <Parameter Name="cc_Pagado" Type="bit" Mode="In" />
           <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="cc_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
@@ -205,6 +240,8 @@
         </Function>
         <Function Name="UDP_Plani_tbEmpleadoBonos_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cb_Id" Type="int" Mode="In" />
+          <Parameter Name="cb_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cb_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbEmpleadoBonos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -227,6 +264,8 @@
         </Function>
         <Function Name="UDP_Plani_tbFormaPago_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
+          <Parameter Name="fpa_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="fpa_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbInstitucionesFinancieras_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_DescInstitucionFinanc" Type="nvarchar" Mode="In" />
@@ -246,28 +285,6 @@
           <Parameter Name="insf_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="insf_FechaModifica" Type="datetime" Mode="In" />
           <Parameter Name="insf_Activo" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="UDP_Plani_tbTechosDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_Id" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_Plani_tbTechosDeducciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_RangoInicial" Type="decimal" Mode="In" />
-          <Parameter Name="tede_RangoFinal" Type="decimal" Mode="In" />
-          <Parameter Name="tede_Porcentaje" Type="int" Mode="In" />
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_Plani_tbTechosDeducciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_Id" Type="int" Mode="In" />
-          <Parameter Name="tede_RangoInicial" Type="decimal" Mode="In" />
-          <Parameter Name="tede_RangoFinal" Type="decimal" Mode="In" />
-          <Parameter Name="tede_Porcentaje" Type="int" Mode="In" />
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTipoDeduccion_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
@@ -325,16 +342,47 @@
         <Function Name="UDP_RRHH_tbTipoHoras_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tiho_Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbTipoIncapacidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="ticn_Id" Type="int" Mode="In" />
+          <Parameter Name="ticn_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticn_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="ticn_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoIncapacidades_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="ticn_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticn_Usuariocrea" Type="int" Mode="In" />
+          <Parameter Name="ticn_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoIncapacidades_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="ticn_Id" Type="int" Mode="In" />
+          <Parameter Name="ticn_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="ticn_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoIncapacidades_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="ticn_Id" Type="int" Mode="In" />
+          <Parameter Name="ticn_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticn_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="ticn_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+          <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -386,21 +434,19 @@
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
-            <Parameter Name="cc_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="cc_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="cc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(String)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
-            <Parameter Name="cc_Monto" Mode="In" Type="Decimal" />
-            <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
-            <Parameter Name="cc_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result)">
             <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
@@ -488,6 +534,8 @@
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Inactivar" ReturnType="Collection(String)">
           <Parameter Name="cb_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cb_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cb_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -510,6 +558,8 @@
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbFormaPago_Inactivar" ReturnType="Collection(String)">
           <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Insert" ReturnType="Collection(String)">
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
@@ -553,7 +603,7 @@
             <Parameter Name="tede_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTipoDeduccion_Inactivar" ReturnType="Collection(String)">
-          <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
             <Parameter Name="tde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -568,7 +618,7 @@
             <Parameter Name="tde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result)">
             <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="tpdd_UsuarioCrea" Mode="In" Type="Int32" />
@@ -616,7 +666,38 @@
             <Parameter Name="tiho_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result1)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tbTipoIncapacidades" EntityType="ERP_GMEDINAModel.tbTipoIncapacidades" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result)">
+            <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Insert_Result)">
+            <Parameter Name="ticn_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="ticn_Usuariocrea" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Restore_Result)">
+            <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Update_Result)">
+            <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -670,6 +751,8 @@
           <Property Name="usu_SesionesValidas" Type="Byte" />
           <NavigationProperty Name="tbTipoHoras" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoHoras" />
           <NavigationProperty Name="tbTipoHoras1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoHoras" />
+          <NavigationProperty Name="tbTipoIncapacidades" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
+          <NavigationProperty Name="tbTipoIncapacidades1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -729,6 +812,60 @@
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoHora_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="tbTipoIncapacidades">
+          <Key>
+            <PropertyRef Name="ticn_Id" />
+          </Key>
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ticn_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="ticn_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ticn_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="ticn_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ticn_UsuarioModifica" Type="Int32" />
+          <Property Name="ticn_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoIncapacidades" Role="tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoIncapacidades" Role="tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -818,13 +955,16 @@
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbFormaPago_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbFormaPago_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleDeduccion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleDeduccion_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleDeduccion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleDeduccion_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleDeduccion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleDeduccion_Update" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_tbTipoPlanillaDetalleIngreso_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_tbTipoPlanillaDetalleIngreso_Update" />
@@ -886,6 +1026,48 @@
                 <ScalarProperty Name="tiho_Id" ColumnName="tiho_Id" />
                 <ScalarProperty Name="tiho_Descripcion" ColumnName="tiho_Descripcion" />
                 <ScalarProperty Name="tiho_Recargo" ColumnName="tiho_Recargo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbTipoIncapacidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoIncapacidades">
+              <MappingFragment StoreEntitySet="tbTipoIncapacidades">
+                <ScalarProperty Name="ticn_FechaModifica" ColumnName="ticn_FechaModifica" />
+                <ScalarProperty Name="ticn_UsuarioModifica" ColumnName="ticn_UsuarioModifica" />
+                <ScalarProperty Name="ticn_FechaCrea" ColumnName="ticn_FechaCrea" />
+                <ScalarProperty Name="ticn_UsuarioCrea" ColumnName="ticn_UsuarioCrea" />
+                <ScalarProperty Name="ticn_RazonInactivo" ColumnName="ticn_RazonInactivo" />
+                <ScalarProperty Name="ticn_Estado" ColumnName="ticn_Estado" />
+                <ScalarProperty Name="ticn_Descripcion" ColumnName="ticn_Descripcion" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

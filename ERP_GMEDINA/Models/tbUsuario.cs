@@ -19,6 +19,8 @@ namespace ERP_GMEDINA.Models
         {
             this.tbTipoHoras = new HashSet<tbTipoHoras>();
             this.tbTipoHoras1 = new HashSet<tbTipoHoras>();
+            this.tbTipoIncapacidades = new HashSet<tbTipoIncapacidades>();
+            this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidades>();
         }
     
         public int usu_Id { get; set; }
@@ -36,5 +38,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTipoHoras> tbTipoHoras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoHoras> tbTipoHoras1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades1 { get; set; }
     }
 }

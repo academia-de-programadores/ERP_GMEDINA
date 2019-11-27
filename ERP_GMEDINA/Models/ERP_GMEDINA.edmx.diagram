@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoHoras" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoIncapacidades" Width="1.5" PointX="3" PointY="5.375" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
