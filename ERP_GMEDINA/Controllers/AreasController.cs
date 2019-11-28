@@ -17,16 +17,16 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            var tbAreas = db.tbAreas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCargos);
-            return View(tbAreas.ToList());
+            var tbAreas = new List<tbAreas> { };
+            return View(tbAreas);
         }
         public ActionResult llenarTabla()
         {
             try
             {
                 //var tbAreas = db.tbAreas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCargos);
-                var tbAreas =from Areas in db.tbAreas.Where(x=>x.area_Estado).Include(t => t.tbCargos).Include(t=>t.tbEmpleados.First())
-                             select (new { Areas.area_Descripcion ,Areas.tbEmpleados});
+                var tbAreas =from Areas in db.tbAreas.Where(x=>x.area_Estado).Include(t => t.tbCargos)
+                             select (new { Areas.area_Descripcion ,Areas.tbEmpleados.});
                 return Json(tbAreas, JsonRequestBehavior.AllowGet);
             }
             catch 
