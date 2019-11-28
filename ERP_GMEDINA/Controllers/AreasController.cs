@@ -20,7 +20,20 @@ namespace ERP_GMEDINA.Controllers
             var tbAreas = db.tbAreas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCargos);
             return View(tbAreas.ToList());
         }
-        //[HttpPost]
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                //var tbAreas = db.tbAreas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCargos);
+                var tbAreas =from Areas in db.tbAreas.Where(x=>x.area_Estado).Include(t => t.tbCargos).Include(t=>t.tbEmpleados.First())
+                             select (new { Areas.area_Descripcion ,Areas.tbEmpleados});
+                return Json(tbAreas, JsonRequestBehavior.AllowGet);
+            }
+            catch 
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult ChildRowData(int? id)
         {
             var tbAreas = db.V_Departamentos.Where(x=>x.area_Id==id);

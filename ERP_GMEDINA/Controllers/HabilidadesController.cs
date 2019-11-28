@@ -12,33 +12,22 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HabilidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = null;
+        private ERP_GMEDINAEntities db =  new ERP_GMEDINAEntities();
 
         // GET: Habilidades
         public ActionResult Index()
         {
-            List<tbHabilidades> tbHabilidades = new List<Models.tbHabilidades> { };
+            List<tbHabilidades> tbHabilidades = new List<tbHabilidades> { };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                //tbHabilidades = db.tbHabilidades.Where(x => x.habi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbHabilidades);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
-            }
             return View(tbHabilidades);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            var i = "df";
-            db = new ERP_GMEDINAEntities();
             List<tbHabilidades> tbHabilidades =
                 new List<Models.tbHabilidades> { };
-            foreach (tbHabilidades x in db.tbHabilidades.ToList().Where(x => x.habi_Estado == true))
+            var lista = db.tbHabilidades.Where(x => x.habi_Estado == true).ToList();
+            foreach (tbHabilidades x in lista)
             {
                 tbHabilidades.Add(new tbHabilidades
                 {

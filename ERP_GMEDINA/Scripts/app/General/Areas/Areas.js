@@ -1,21 +1,4 @@
 ﻿function format(obj) {
-    // `d` is the original data object for the row
-    //var tableChild = '<table class="table"><thead><tr>' +
-    //    '<th>Departamento:</th>' +
-    //    '<th>Encargado:</th>' +
-    //    '<th>Telefono:</th>' +        
-    //'</tr></thead>' +
-    //'<tbody>' ;
-    //obj.forEach(function (index,value) {
-    //    tableChild = tableChild + 
-    //    '<tr><td>' + index.depto_Descripcion + '</td>' +
-    //  '<td>' + index.per_NombreCompleto + '</td>' +
-    //    '<td>' + index.per_Telefono + '</td>' +
-    //'</tr>';
-    //});
-    
-    //tableChild = tableChild + '</tbody></table>';
-    //return tableChild;
     var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
@@ -35,8 +18,29 @@
     });
     return div + '</div></div></div>';
 }
+function llenarTabla() {
+    _ajax(null,
+       '/Areas/llenarTabla',
+       'POST',
+       function (Lista) {
+           tabla.clear();
+           tabla.draw();
+           $.each(Lista, function (index, value) {
+               console.log(value.habi_Descripcion);
+               tabla.row.add({
+                   Descripcion: value.habi_Descripcion,
+                   Acciones:
+                   "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                   "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.habi_Id + ")' >Detalles</a>" +
+                       "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.habi_Id + ")'>Editar</a>" +
+                   "</div>"
+               });
+           });
+           tabla.draw();
+       });
+}
 $(document).ready(function () {
-    tabla.row.add({ Id: 0, Descripcion: 'chisto', Acciones: 'no hay',hola:69 });
+    llenarTabla();
 });
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

@@ -1,9 +1,11 @@
 ﻿var id = 0;
 //Funciones GET
-function tablaEditar(ID) {
-    id = ID;
+function tablaEditar(btn) {
+    var tr=$(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().id;
     _ajax(null,
-        '/Habilidades/Edit/' + ID,
+        '/Habilidades/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -13,9 +15,11 @@ function tablaEditar(ID) {
         });
 }
 function tablaDetalles(ID) {
-    id = ID;
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().id;
     _ajax(null,
-        '/Habilidades/Edit/' + ID,
+        '/Habilidades/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -26,7 +30,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -41,12 +45,8 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 console.log(value.habi_Descripcion);
                 tabla.row.add({
-                    Descripcion: value.habi_Descripcion,
-                    Acciones:
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.habi_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.habi_Id + ")'>Editar</a>" +
-                    "</div>"
+                    id: value.habi_Id,
+                    Descripcion: value.habi_Descripcion
                 });
             });
             tabla.draw();

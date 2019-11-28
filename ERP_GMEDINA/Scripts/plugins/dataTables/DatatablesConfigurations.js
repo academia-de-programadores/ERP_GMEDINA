@@ -23,8 +23,12 @@ $(document).ready(function () {
             col = col + 1;
         } else if (campo == "Acciones") {
             columnas.push({
-                data: "Acciones",
-                orderable: false
+                data: null,
+                orderable: false,
+                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(this)' >Detalles</a>" +
+                                    "<a class='btn btn-default btn-xs ' onclick='tablaEditar(this)'>Editar</a>" +
+                                "</div>"
             });
         } else {
             columnas.push({ data: campo });
