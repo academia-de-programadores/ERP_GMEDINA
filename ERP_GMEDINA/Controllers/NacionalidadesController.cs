@@ -12,11 +12,9 @@ namespace ERP_GMEDINA.Controllers
 {
     public class NacionalidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities1 db = new ERP_GMEDINAEntities1();
 
         // GET: Nacionalidades
-
-        // GET: Habilidades
         public ActionResult Index()
         {
             List<tbNacionalidades> tbNacionalidades = new List<Models.tbNacionalidades> { };
@@ -34,6 +32,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbNacionalidades);
         }
+
         [HttpPost]
         public JsonResult llenarTabla()
         {
@@ -50,7 +49,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbNacionalidades, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Habilidades/Create
+        // POST: Nacionalidades/Create
         [HttpPost]
         public JsonResult Create(tbNacionalidades tbNacionalidades)
         {
@@ -79,7 +78,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Habilidades/Edit/5
+        // GET: Nacionalidades/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,7 +117,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(habilidad, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Habilidades/Edit/5
+        // POST: Nacionalidades/Edit/5
         [HttpPost]
         public JsonResult Edit(tbNacionalidades tbNacionalidades)
         {
@@ -149,7 +148,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Habilidades/Delete/5
+        // GET: Nacionalidades/Delete/5
         [HttpPost]
         public ActionResult Delete(tbNacionalidades tbNacionalidades)
         {
