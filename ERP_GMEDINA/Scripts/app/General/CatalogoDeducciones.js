@@ -88,7 +88,7 @@ $("#IconCerrarCreate").click(function () {
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnCreateRegistroDeduccion").click(function () {
     var cde_DescripcionDeduccionA = $("#cde_DescripcionDeduccionA").val();
-    var tde_IdTipoDedu = $("#tde_IdTipoDedu").val();
+    var tde_IdTipoDedu = $('#tde_IdTipoDedu').val();
     var cde_PorcentajeColaboradorA = $("#cde_PorcentajeColaboradorA").val();
     var cde_PorcentajeEmpresaA = $("#cde_PorcentajeEmpresaA").val();
 
@@ -99,11 +99,11 @@ $("#btnCreateRegistroDeduccion").click(function () {
         $("#Validation_descipcionA").css("display", "none");
     }
 
-    if (tde_IdTipoDedu == "0") {
+    if (tde_IdTipoDedu == "0" || tde_IdTipoDedu == null) {
         $("#Validation_descipcion2A").css("display", "");
         $("#tde_IdTipoDedu").val("0");
     }
-    else {
+    else if (tde_IdTipoDedu != '0' || tde_IdTipoDedu != null) {
         $("#Validation_descipcion2A").css("display", "none");
     }
 
