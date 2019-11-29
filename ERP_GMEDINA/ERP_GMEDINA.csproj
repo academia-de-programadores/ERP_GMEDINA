@@ -45,16 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JQueryUIHelpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1440f6df3b58b47e, processorArchitecture=MSIL">
-      <HintPath>..\packages\jQueryUIHelpers.Mvc5.3.0.0\lib\net45\JQueryUIHelpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +90,26 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.4.11.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpreadsheetLight.3.4.11\lib\net40\SpreadsheetLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -153,6 +173,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -164,447 +185,411 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
+    <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
+    <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
+    <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PruebasController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\HMTLHelperExtensions.cs" />
-    <Compile Include="Models\cCatalogoDeDeducciones.cs" />
-    <Compile Include="Models\cDecimoTercerMes.cs" />
-    <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
-    <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
-    <Compile Include="Models\cEmpleadoComisiones.cs" />
-    <Compile Include="Models\cHistorialDePago.cs" />
-    <Compile Include="Models\ERP_GMEDINA.Context.cs">
+    <Compile Include="Controllers\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ERP_GMEDINA.cs">
+    <Compile Include="Controllers\ERP_GMEDINA.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ERP_GMEDINA.Designer.cs">
+    <Compile Include="Controllers\ERP_GMEDINA.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Controllers\FormaPagoController.cs" />
+    <Compile Include="Controllers\ISRController.cs" />
+    <Compile Include="Controllers\PlanillaController.cs" />
+    <Compile Include="Controllers\ReportesPlaniController.cs" />
+    <Compile Include="Controllers\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Controllers\sp_helpdiagrams_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Controllers\sysdiagrams.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbAccesoRol.cs">
+    <Compile Include="Controllers\tbAccesoRol.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbAdelantoSueldo.cs">
+    <Compile Include="Controllers\tbAdelantoSueldo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbAreas.cs">
+    <Compile Include="Controllers\tbAreas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbAuxilioDeCesantias.cs">
+    <Compile Include="Controllers\tbAuxilioDeCesantias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCargos.cs">
+    <Compile Include="Controllers\tbCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCatalogoDeDeducciones.cs">
+    <Compile Include="Controllers\tbCatalogoDeDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCatalogoDeIngresos.cs">
+    <Compile Include="Controllers\tbCatalogoDeIngresos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCatalogoDePlanillas.cs">
+    <Compile Include="Controllers\tbCatalogoDePlanillas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCompetencias.cs">
+    <Compile Include="Controllers\tbCompetencias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCompetenciasPersona.cs">
+    <Compile Include="Controllers\tbCompetenciasPersona.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbCompetenciasRequisicion.cs">
+    <Compile Include="Controllers\tbCompetenciasRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDecimoCuartoMes.cs">
+    <Compile Include="Controllers\tbDecimoCuartoMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDecimoTercerMes.cs">
+    <Compile Include="Controllers\tbDecimoTercerMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDeduccionesExtraordinarias.cs">
+    <Compile Include="Controllers\tbDeduccionesExtraordinarias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
+    <Compile Include="Controllers\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDepartamentos.cs">
+    <Compile Include="Controllers\tbDepartamentos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEmpleadoBonos.cs">
+    <Compile Include="Controllers\tbEmpleadoBonos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEmpleadoComisiones.cs">
+    <Compile Include="Controllers\tbEmpleadoComisiones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEmpleados.cs">
+    <Compile Include="Controllers\tbEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEmpresas.cs">
+    <Compile Include="Controllers\tbEmpresas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEquipoEmpleados.cs">
+    <Compile Include="Controllers\tbEquipoEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbEquipoTrabajo.cs">
+    <Compile Include="Controllers\tbEquipoTrabajo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbFaseSeleccion.cs">
+    <Compile Include="Controllers\tbFaseSeleccion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbFasesReclutamiento.cs">
+    <Compile Include="Controllers\tbFasesReclutamiento.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbFormaPago.cs">
+    <Compile Include="Controllers\tbFormaPago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHabilidades.cs">
+    <Compile Include="Controllers\tbHabilidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHabilidadesPersona.cs">
+    <Compile Include="Controllers\tbHabilidadesPersona.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHabilidadesRequisicion.cs">
+    <Compile Include="Controllers\tbHabilidadesRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialAmonestaciones.cs">
+    <Compile Include="Controllers\tbHistorialAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialAudienciaDescargo.cs">
+    <Compile Include="Controllers\tbHistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialCargos.cs">
+    <Compile Include="Controllers\tbHistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialContrataciones.cs">
+    <Compile Include="Controllers\tbHistorialContrataciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialDeduccionPago.cs">
+    <Compile Include="Controllers\tbHistorialDeduccionPago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialDeIngresosPago.cs">
+    <Compile Include="Controllers\tbHistorialDeIngresosPago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialDePago.cs">
+    <Compile Include="Controllers\tbHistorialDePago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialHorasTrabajadas.cs">
+    <Compile Include="Controllers\tbHistorialHorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialIncapacidades.cs">
+    <Compile Include="Controllers\tbHistorialIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialLiquidaciones.cs">
+    <Compile Include="Controllers\tbHistorialLiquidaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialPermisos.cs">
+    <Compile Include="Controllers\tbHistorialPermisos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialRefrendamientos.cs">
+    <Compile Include="Controllers\tbHistorialRefrendamientos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialSalidas.cs">
+    <Compile Include="Controllers\tbHistorialSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialVacaciones.cs">
+    <Compile Include="Controllers\tbHistorialVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHorarios.cs">
+    <Compile Include="Controllers\tbHorarios.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbIdiomaPersona.cs">
+    <Compile Include="Controllers\tbIdiomaPersona.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbIdiomas.cs">
+    <Compile Include="Controllers\tbIdiomas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbIdiomasRequisicion.cs">
+    <Compile Include="Controllers\tbIdiomasRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbInstitucionesFinancieras.cs">
+    <Compile Include="Controllers\tbInstitucionesFinancieras.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbJornadas.cs">
+    <Compile Include="Controllers\tbISR.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbLiquidaciones.cs">
+    <Compile Include="Controllers\tbJornadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbLiquidacionVacaciones.cs">
+    <Compile Include="Controllers\tbLiquidaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbMotivoLiquidaciones.cs">
+    <Compile Include="Controllers\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbNacionalidades.cs">
+    <Compile Include="Controllers\tbMotivoLiquidaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbObjeto.cs">
+    <Compile Include="Controllers\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPeriodos.cs">
+    <Compile Include="Controllers\tbObjeto.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPersonas.cs">
+    <Compile Include="Controllers\tbPeriodos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPreaviso.cs">
+    <Compile Include="Controllers\tbPersonas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPrestaciones.cs">
+    <Compile Include="Controllers\tbPreaviso.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRamaActividad.cs">
+    <Compile Include="Controllers\tbRamaActividad.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRazonSalidas.cs">
+    <Compile Include="Controllers\tbRazonSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRequisiciones.cs">
+    <Compile Include="Controllers\tbRequisiciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRol.cs">
+    <Compile Include="Controllers\tbRol.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbRolesUsuario.cs">
+    <Compile Include="Controllers\tbRolesUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbSalarioPorHora.cs">
+    <Compile Include="Controllers\tbSalarioPorHora.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbSeleccionCandidatos.cs">
+    <Compile Include="Controllers\tbSeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbSucursales.cs">
+    <Compile Include="Controllers\tbSucursales.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbSueldos.cs">
+    <Compile Include="Controllers\tbSueldos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTechosDeducciones.cs">
+    <Compile Include="Controllers\tbTechosDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoAmonestaciones.cs">
+    <Compile Include="Controllers\tbTipoAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoDeduccion.cs">
+    <Compile Include="Controllers\tbTipoDeduccion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoHoras.cs">
+    <Compile Include="Controllers\tbTipoHoras.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoIncapacidades.cs">
+    <Compile Include="Controllers\tbTipoIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoMonedas.cs">
+    <Compile Include="Controllers\tbTipoMonedas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoPermisos.cs">
+    <Compile Include="Controllers\tbTipoPermisos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoPlanillaDetalleDeduccion.cs">
+    <Compile Include="Controllers\tbTipoPlanillaDetalleDeduccion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoPlanillaDetalleIngreso.cs">
+    <Compile Include="Controllers\tbTipoPlanillaDetalleIngreso.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoSalidas.cs">
+    <Compile Include="Controllers\tbTipoSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTitulos.cs">
+    <Compile Include="Controllers\tbTitulos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTitulosPersona.cs">
+    <Compile Include="Controllers\tbTitulosPersona.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTitulosRequisicion.cs">
+    <Compile Include="Controllers\tbTitulosRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbUsuario.cs">
+    <Compile Include="Controllers\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbVacaciones.cs">
+    <Compile Include="Controllers\tbVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
+    <Compile Include="Controllers\TechosDeduccionesController.cs" />
+    <Compile Include="Controllers\TipoDeduccionesController.cs" />
+    <Compile Include="Controllers\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result1.cs">
+    <Compile Include="Controllers\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
+    <Compile Include="Controllers\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Inactivar_Result.cs">
+    <Compile Include="Controllers\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Insert_Result.cs">
+    <Compile Include="Controllers\V_CatalogoDeIngresos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Update_Result.cs">
+    <Compile Include="Controllers\V_CatalogoDePlanillasConIngresosYDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result.cs">
+    <Compile Include="Controllers\V_ColaboradoresPorPlanilla.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Insert_Result.cs">
+    <Compile Include="Controllers\V_ComisionesColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+    <Compile Include="Controllers\V_DecimoCuartoMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbDecimoTercerMes_Insert_Result.cs">
+    <Compile Include="Controllers\V_DecimoTercerMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result.cs">
+    <Compile Include="Controllers\V_DecimoTercerMes_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result.cs">
+    <Compile Include="Controllers\V_DeduccionesExtraordinarias_Detalles.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
+    <Compile Include="Controllers\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
+    <Compile Include="Controllers\V_DeduccionesExtrasColaboradores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\V_DeduccionesInstitucionesFinancierasColaboradres.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_EmpleadoBonos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_FormaDePago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_InformacionColaborador.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PlanillaDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PlanillaIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_EmpleadoPorPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_FechaPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_ReporteIHSS.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_TipoPlani.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PreviewPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbCatalogoDeDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbCatalogoDeIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbEmpleadoComisiones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_TechosDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_TipoDeduccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet\ReportesPlaniDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\General.cs" />
+    <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
+    <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cCatalogoDePlanillas.cs" />
+    <Compile Include="Models\cCatalogoIngresos.cs" />
+    <Compile Include="Models\cDecimoTercerMes.cs" />
+    <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
+    <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\cEmpleadoBonos.cs" />
+    <Compile Include="Models\cEmpleadoComisiones.cs" />
+    <Compile Include="Models\cFormaPago.cs" />
+    <Compile Include="Models\cHistorialDePago.cs" />
+    <Compile Include="Models\ComprobantePagoModel.cs" />
+    <Compile Include="Models\cTechosDeducciones.cs" />
+    <Compile Include="Models\cTipoDeducciones.cs" />
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
-    <Compile Include="Models\V_BonosColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_CatalogoDeIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_CatalogoDePlanillasConIngresosYDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_ColaboradoresPorPlanilla.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_ComisionesColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DecimoCuartoMes.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DecimoTercerMes.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_Detalles.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_Editar.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtrasColaboradores.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesInstitucionesFinancierasColaboradres.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_EmpleadoBonos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_EmpleadoComisiones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_FormaDePago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_InformacionColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PlanillaDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PlanillaIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PreviewPlanilla.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbCatalogoDeDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbCatalogoDeIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_TechosDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_TipoDeduccion.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
-    <Content Include="bin\ERP_GMEDINA.dll" />
-    <Content Include="bin\ERP_GMEDINA.pdb" />
-    <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
-    <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
-    <Content Include="bin\Microsoft.AI.DependencyCollector.xml" />
-    <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
-    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.dll" />
-    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.xml" />
-    <Content Include="bin\Microsoft.AI.Web.dll" />
-    <Content Include="bin\Microsoft.AI.Web.xml" />
-    <Content Include="bin\Microsoft.AI.WindowsServer.dll" />
-    <Content Include="bin\Microsoft.AI.WindowsServer.xml" />
-    <Content Include="bin\Microsoft.ApplicationInsights.dll" />
-    <Content Include="bin\Microsoft.ApplicationInsights.xml" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
-    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\app\General\catalogoPlanillas.css" />
+    <Content Include="Content\app\Voucher\dimension.png" />
+    <Content Include="Content\app\Voucher\index.html" />
+    <Content Include="Content\app\Voucher\logo.png" />
+    <Content Include="Content\app\Voucher\payroll.png" />
+    <Content Include="Content\app\Voucher\style.css" />
+    <Content Include="Content\app\Voucher\voucher.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatables.min.css" />
@@ -666,6 +651,9 @@
     <Content Include="Content\img\email_1.jpg" />
     <Content Include="Content\img\email_2.jpg" />
     <Content Include="Content\img\email_3.jpg" />
+    <Content Include="Content\img\flecha-derecha.png" />
+    <Content Include="Content\img\flecha-derecha.svg" />
+    <Content Include="Content\img\flecha-hacia-la-izquierda.svg" />
     <Content Include="Content\img\full_height.jpg" />
     <Content Include="Content\img\header-profile-skin-1.png" />
     <Content Include="Content\img\header-profile-skin-2.png" />
@@ -676,6 +664,8 @@
     <Content Include="Content\img\header_two.jpg" />
     <Content Include="Content\img\iphone.jpg" />
     <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\mas.png" />
+    <Content Include="Content\img\menos.png" />
     <Content Include="Content\img\off_canvas.jpg" />
     <Content Include="Content\img\otis_redding.png" />
     <Content Include="Content\img\p1.jpg" />
@@ -801,40 +791,16 @@
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\animated-overlay.gif" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Controllers\ERP_GMEDINA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Controllers\ERP_GMEDINA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -844,24 +810,19 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Models\ERP_GMEDINA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ERP_GMEDINA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
-    </Content>
-    <Content Include="obj\Debug\ERP_GMEDINA.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\ERP_GMEDINA.dll" />
-    <Content Include="obj\Debug\ERP_GMEDINA.pdb" />
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
+    <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
     <Content Include="Scripts\app\General\DecimoTercerMes.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
+    <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
+    <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TechosDeducciones.js" />
+    <Content Include="Scripts\app\General\TipoDeducciones.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -909,36 +870,33 @@
     <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+    <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSet\ReportesPlaniDS.xsc">
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Controllers\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
+    <Content Include="Controllers\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
-    <Content Include="bin\ApplicationInsights.config" />
-    <Content Include="bin\ERP_GMEDINA.dll.config" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\ERP_GMEDINA.csdl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\ERP_GMEDINA.msl" />
-    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\ERP_GMEDINA.ssdl" />
-    <Content Include="obj\Debug\ERP_GMEDINA.csproj.CopyComplete" />
-    <Content Include="obj\Debug\ERP_GMEDINA.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\ERP_GMEDINA.csprojAssemblyReference.cache" />
+    <None Include="DataSet\ReportesPlaniDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlaniDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSet\ReportesPlaniDS.xss">
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.11.0.js" />
-    <Content Include="Scripts\jquery-ui-1.11.0.min.js" />
-    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.js" />
-    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\bootstrap-markdown.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\markdown.js" />
@@ -1150,6 +1108,7 @@
     <Content Include="Scripts\plugins\d3\d3.min.js" />
     <Content Include="Scripts\plugins\datamaps\datamaps.all.min.js" />
     <Content Include="Scripts\plugins\datapicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\plugins\dataTables\colvis.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
@@ -1322,6 +1281,7 @@
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.js" />
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Scripts\plugins\jquery\jquery-3.3.1.js" />
     <Content Include="Scripts\plugins\jsKnob\jquery.knob.js" />
     <Content Include="Scripts\plugins\jsTree\jstree.min.js" />
     <Content Include="Scripts\plugins\justified-gallery\jquery.justifiedgallery.css" />
@@ -1366,6 +1326,7 @@
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
+    <Content Include="Scripts\plugins\dataTables\datatables1.10.20" />
     <None Include="Scripts\Scripts_Base\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.min.js" />
@@ -1377,18 +1338,15 @@
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Scripts_Base\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1397,14 +1355,39 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Create.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Delete.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Details.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Edit.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_DetailCatalogoDeIngreso.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_EditCatalogoDeIngresos.cshtml" />
+    <Content Include="Views\TechosDeducciones\Create.cshtml" />
+    <Content Include="Views\TechosDeducciones\Delete.cshtml" />
+    <Content Include="Views\TechosDeducciones\Details.cshtml" />
+    <Content Include="Views\TechosDeducciones\Edit.cshtml" />
+    <Content Include="Views\TechosDeducciones\Index.cshtml" />
+    <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
+    <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
+    <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Create.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleDeduccion.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleIngreso.cshtml" />
+    <Content Include="Views\EmpleadoBonos\Index.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_CreateEmpleadoBonos.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_DetalleEmpleadoBonos.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_EditEmpleadoBonos.cshtml" />
+    <Content Include="Views\FormaPago\Index.cshtml" />
+    <Content Include="Views\FormaPago\_Create.cshtml" />
+    <Content Include="Views\FormaPago\_Edit.cshtml" />
+    <Content Include="Views\TipoDeducciones\Index.cshtml" />
+    <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
+    <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
     <Content Include="Views\DecimoTercerMes\FechaEspecifica.cshtml" />
     <Content Include="Views\DecimoTercerMes\Index.cshtml" />
     <Content Include="Views\DecimoTercerMes\_FechasDecimoTercer.cshtml" />
@@ -1418,11 +1401,35 @@
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
+    <Content Include="Views\Planilla\Create.cshtml" />
+    <Content Include="Views\Planilla\Delete.cshtml" />
+    <Content Include="Views\Planilla\Details.cshtml" />
+    <Content Include="Views\Planilla\Edit.cshtml" />
+    <Content Include="Views\Planilla\Index.cshtml" />
+    <Content Include="Views\Planilla\_CatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_CreateCatalogoDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_EditCatalogoDeducciones.cshtml" />
+    <Content Include="Views\ISR\_CreateTechosDeducciones.cshtml" />
+    <Content Include="Views\ISR\_DetailsTechosDeducciones.cshtml" />
+    <Content Include="Views\ISR\_EditTechosDeducciones.cshtml" />
+    <Content Include="Views\ISR\Create.cshtml" />
+    <Content Include="Views\ISR\Delete.cshtml" />
+    <Content Include="Views\ISR\Details.cshtml" />
+    <Content Include="Views\ISR\Edit.cshtml" />
+    <Content Include="Views\ISR\Index.cshtml" />
+    <Content Include="Views\ReportesPlani\DecimoTercerMesRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="bin\roslyn\" />
-    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="ReportesPlani\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1439,9 +1446,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\api\typehead_collection.json" />

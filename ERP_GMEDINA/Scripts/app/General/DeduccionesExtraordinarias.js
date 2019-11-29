@@ -44,6 +44,7 @@ function cargarGridDeducciones() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyDeduccionesExtraordinarias').html(template);
         });
+    FullBody();
 }
 
 

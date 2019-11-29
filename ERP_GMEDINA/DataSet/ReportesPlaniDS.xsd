@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportesPlaniDS" targetNamespace="http://tempuri.org/ReportesPlaniDS.xsd" xmlns:mstns="http://tempuri.org/ReportesPlaniDS.xsd" xmlns="http://tempuri.org/ReportesPlaniDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ERP_GMEDINAConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ERP_GMEDINAConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ERP_GMEDINAConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_DecimoTercerMes_RPTTableAdapter" GeneratorDataComponentClassName="V_DecimoTercerMes_RPTTableAdapter" Name="V_DecimoTercerMes_RPT" UserDataComponentName="V_DecimoTercerMes_RPTTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [Codigo Aguinaldo], [Codigo Empleado], Nombres, Apellidos, [Fecha Pago], Monto, [Cuenta Bancaria], [Codigo Pago], [Tipo Planilla] FROM Plani.V_DecimoTercerMes_RPT</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Codigo Aguinaldo" DataSetColumn="Codigo Aguinaldo" />
+              <Mapping SourceColumn="Codigo Empleado" DataSetColumn="Codigo Empleado" />
+              <Mapping SourceColumn="Nombres" DataSetColumn="Nombres" />
+              <Mapping SourceColumn="Apellidos" DataSetColumn="Apellidos" />
+              <Mapping SourceColumn="Fecha Pago" DataSetColumn="Fecha Pago" />
+              <Mapping SourceColumn="Monto" DataSetColumn="Monto" />
+              <Mapping SourceColumn="Cuenta Bancaria" DataSetColumn="Cuenta Bancaria" />
+              <Mapping SourceColumn="Codigo Pago" DataSetColumn="Codigo Pago" />
+              <Mapping SourceColumn="Tipo Planilla" DataSetColumn="Tipo Planilla" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportesPlaniDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportesPlaniDS" msprop:Generator_UserDSName="ReportesPlaniDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_DecimoTercerMes_RPT" msprop:Generator_TableClassName="V_DecimoTercerMes_RPTDataTable" msprop:Generator_TableVarName="tableV_DecimoTercerMes_RPT" msprop:Generator_TablePropName="V_DecimoTercerMes_RPT" msprop:Generator_RowDeletingName="V_DecimoTercerMes_RPTRowDeleting" msprop:Generator_RowChangingName="V_DecimoTercerMes_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_DecimoTercerMes_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_DecimoTercerMes_RPTRowDeleted" msprop:Generator_UserTableName="V_DecimoTercerMes_RPT" msprop:Generator_RowChangedName="V_DecimoTercerMes_RPTRowChanged" msprop:Generator_RowEvArgName="V_DecimoTercerMes_RPTRowChangeEvent" msprop:Generator_RowClassName="V_DecimoTercerMes_RPTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Codigo_x0020_Aguinaldo" msprop:Generator_ColumnVarNameInTable="columnCodigo_Aguinaldo" msprop:Generator_ColumnPropNameInRow="Codigo_Aguinaldo" msprop:Generator_ColumnPropNameInTable="Codigo_AguinaldoColumn" msprop:Generator_UserColumnName="Codigo Aguinaldo" type="xs:int" />
+              <xs:element name="Codigo_x0020_Empleado" msprop:Generator_ColumnVarNameInTable="columnCodigo_Empleado" msprop:Generator_ColumnPropNameInRow="Codigo_Empleado" msprop:Generator_ColumnPropNameInTable="Codigo_EmpleadoColumn" msprop:Generator_UserColumnName="Codigo Empleado" type="xs:int" minOccurs="0" />
+              <xs:element name="Nombres" msprop:Generator_ColumnVarNameInTable="columnNombres" msprop:Generator_ColumnPropNameInRow="Nombres" msprop:Generator_ColumnPropNameInTable="NombresColumn" msprop:Generator_UserColumnName="Nombres">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Apellidos" msprop:Generator_ColumnVarNameInTable="columnApellidos" msprop:Generator_ColumnPropNameInRow="Apellidos" msprop:Generator_ColumnPropNameInTable="ApellidosColumn" msprop:Generator_UserColumnName="Apellidos">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fecha_x0020_Pago" msprop:Generator_ColumnVarNameInTable="columnFecha_Pago" msprop:Generator_ColumnPropNameInRow="Fecha_Pago" msprop:Generator_ColumnPropNameInTable="Fecha_PagoColumn" msprop:Generator_UserColumnName="Fecha Pago" type="xs:dateTime" />
+              <xs:element name="Monto" msprop:Generator_ColumnVarNameInTable="columnMonto" msprop:Generator_ColumnPropNameInRow="Monto" msprop:Generator_ColumnPropNameInTable="MontoColumn" msprop:Generator_UserColumnName="Monto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Cuenta_x0020_Bancaria" msprop:Generator_ColumnVarNameInTable="columnCuenta_Bancaria" msprop:Generator_ColumnPropNameInRow="Cuenta_Bancaria" msprop:Generator_ColumnPropNameInTable="Cuenta_BancariaColumn" msprop:Generator_UserColumnName="Cuenta Bancaria" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Codigo_x0020_Pago" msprop:Generator_ColumnVarNameInTable="columnCodigo_Pago" msprop:Generator_ColumnPropNameInRow="Codigo_Pago" msprop:Generator_ColumnPropNameInTable="Codigo_PagoColumn" msprop:Generator_UserColumnName="Codigo Pago">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Tipo_x0020_Planilla" msprop:Generator_ColumnVarNameInTable="columnTipo_Planilla" msprop:Generator_ColumnPropNameInRow="Tipo_Planilla" msprop:Generator_ColumnPropNameInTable="Tipo_PlanillaColumn" msprop:Generator_UserColumnName="Tipo Planilla">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:V_DecimoTercerMes_RPT" />
+      <xs:field xpath="mstns:Codigo_x0020_Aguinaldo" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

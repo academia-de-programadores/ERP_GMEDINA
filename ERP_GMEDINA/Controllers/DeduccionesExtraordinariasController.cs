@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias
         public ActionResult Index()
         {
-            var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Where(t => t.dex_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados).OrderBy(d=>d.dex_FechaCrea);
+            var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Where(t => t.dex_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados).OrderBy(d=>d.dex_FechaCrea).OrderByDescending(x => x.dex_FechaCrea);
             return View(tbDeduccionesExtraordinarias.ToList());
         }
 
@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
                     dex_FechaCrea = d.dex_FechaCrea,
                     dex_UsuarioModifica = d.dex_UsuarioModifica,
                     dex_FechaModifica = d.dex_FechaModifica
-                }).Where(d => d.dex_Activo == true).OrderBy(d => d.dex_FechaCrea)
+                }).Where(d => d.dex_Activo == true).OrderByDescending(d => d.dex_FechaCrea)
                 .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

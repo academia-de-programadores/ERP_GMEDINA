@@ -1,0 +1,191 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.V_PreviewPlanilla>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>Planillas</h2>
+        <div class="row">
+            <!-- INICIAN LOS WIDGETS-->
+            <div class="col-lg-3">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-user fa-3x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:white;"><b><a style="vertical-align: inherit;color:white;" href="#" class="cargarPlanilla" data-id="">Todos</a></b></font></font></span>
+                            <h2 class="font-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.colaboradoresGeneral</font></font></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- WIDGETS CON FOREACH-->
+@foreach (var item in ViewBag.PlanillasColaboradores)
+{
+            <div class="col-lg-3">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-user fa-3x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span>
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;color:white;">
+                                <b><a href="#" style="vertical-align: inherit;color:white;" class="cargarPlanilla" data-id="@item.cpla_IdPlanilla">
+                                    @item.cpla_DescripcionPlanilla
+                                    </a></b>
+                                </font>
+                                </font>
+                            </span>
+                            <h2 class="font-bold"><font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">@item.CantidadColaboradores</font>
+                                </font>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+            <!-- TERMINAN WIDGETS CON FOREACH-->
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Colaboradores de la planilla <b id="nombrePlanilla"> </b></h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary btn-w-m" id="btnPlanilla">Generar planilla</button>
+
+                        <div  id="Cargando" style="display:none" class="sk-spinner sk-spinner-wave pull-right">
+                            <div class="sk-rect1"></div>
+                            <div class="sk-rect2"></div>
+                            <div class="sk-rect3"></div>
+                            <div class="sk-rect4"></div>
+                            <div class="sk-rect5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblPreviewPlanilla" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.Nombres)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.per_Identidad)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.salarioBase)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tmon_Descripcion)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPreviewPlanilla">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd" role="row" data-id="@item.emp_Id">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombres)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.per_Identidad)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.salarioBase)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tmon_Descripcion)
+                                    </td>
+                                    <td>
+                                        <!--<button type="button" class="btn btn-primary btn-xs" id="btnEditarColaboradorPreview">Editar</button>-->
+                                        <button type="button" class="btn btn-default btn-xs" id="btnDetalleDelColaborador">Detalle</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr role="row">
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Nombres)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.per_Identidad)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.salarioBase)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tmon_Descripcion)</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal de confirmación generar planilla *@
+<div class="modal fade" id="confirmarGenerarPlanilla" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Generar planilla</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Está seguro que desea generar planilla?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger " id="btnGenerarPlanilla">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="EditarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edición de datos</h4>
+            </div>
+            <div class="modal-body" id="Editar">*@
+                @*Mandamos un nuevo modelo solo para poder cargar la página *@
+                @*Html.Partial("_EditCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())*@
+            @*</div>
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@@*
+                <button type="button" class="btn btn-white" id="btnCerrarEditar">Close</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateDeduccion">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+@*<div class="modal fade" id="AgregarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar datos</h4>
+            </div>
+            <div class="modal-body" id="Crear">
+                @*Html.Partial("_CreateCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())*@
+                @*</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnCreateRegistroDeduccion">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    @section Scripts {
+        @Scripts.Render("~/plugins/dataTables")
+        @Scripts.Render("~/plugins/izitoast")
+        @Scripts.Render("~/Scripts/app/general/Planilla")
+    }
+
+    @section Styles {
+        @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+        @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    }
