@@ -177,6 +177,7 @@
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
+    <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
@@ -1541,6 +1542,8 @@
     <Content Include="Views\ISR\Details.cshtml" />
     <Content Include="Views\ISR\Edit.cshtml" />
     <Content Include="Views\ISR\Index.cshtml" />
+    <Content Include="Views\ReportesPlanilla\Index.cshtml" />
+    <Content Include="Views\ReportesPlanilla\DecimoTercerMesIndexRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
