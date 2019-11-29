@@ -96,10 +96,12 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
+            List<tbSucursales> Sucursales = null;
             using (db = new ERP_GMEDINAEntities())
             {
-                ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
+                Sucursales = db.tbSucursales.ToList();
             }
+            ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
 
@@ -141,9 +143,12 @@ namespace ERP_GMEDINA.Controllers
             tbAreas tbAreas = null;
             using (db = new ERP_GMEDINAEntities())
             {
+                List<tbSucursales> Sucursales = null;
                 try
                 {
-                    tbAreas= db.tbAreas.Find(id);  
+                    tbAreas= db.tbAreas.Find(id);
+                    Sucursales = db.tbSucursales.ToList();
+                    ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
                 }
                 catch
                 {
@@ -153,10 +158,6 @@ namespace ERP_GMEDINA.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.area_Usuariocrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariocrea);
-            ViewBag.area_Usuariomodifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAreas.area_Usuariomodifica);
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion", tbAreas.car_Id);
-            ViewBag.suc_Id = new SelectList(db.tbSucursales, "suc_Id", "suc_Descripcion");
             return View(tbAreas);
         }
 
@@ -205,7 +206,7 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db!=null)
             {
                 db.Dispose();
             }

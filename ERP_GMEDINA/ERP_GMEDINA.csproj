@@ -485,7 +485,9 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\General\Areas\Areas.js" />
+    <Content Include="Scripts\app\General\Areas\CreateArea.js" />
+    <Content Include="Scripts\app\General\Areas\EditArea.js" />
+    <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />

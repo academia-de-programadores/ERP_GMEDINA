@@ -14,7 +14,7 @@ function tablaEditar(btn) {
             }
         });
 }
-function tablaDetalles(ID) {
+function tablaDetalles(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().id;
@@ -43,7 +43,6 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                console.log(value.habi_Descripcion);
                 tabla.row.add({
                     id: value.habi_Id,
                     Descripcion: value.habi_Descripcion

@@ -26,10 +26,9 @@ function llenarTabla() {
            tabla.clear();
            tabla.draw();
            $.each(Lista, function (index, value) {
-               console.log(value.habi_Descripcion);
                tabla.row.add({
-                   id: parseInt(value.area_Id),
-                   Descripcion: value.habi_Descripcion
+                   Id: value.area_Id,
+                   Descripcion: value.area_Descripcion
                });
            });
            tabla.draw();

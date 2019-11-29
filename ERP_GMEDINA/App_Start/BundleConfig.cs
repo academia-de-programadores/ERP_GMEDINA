@@ -471,9 +471,14 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
             "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+            //script de areas
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexAreas").Include(
+            "~/Scripts/app/general/Areas/IndexAreas.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
+                        "~/Scripts/app/general/Areas/CreateArea.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
+                        "~/Scripts/app/general/Areas/EditArea.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Areas").Include(
-            "~/Scripts/app/general/Areas/Areas.js"));
 
 
             //OPTIMIZATION
