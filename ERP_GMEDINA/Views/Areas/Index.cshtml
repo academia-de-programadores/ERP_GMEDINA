@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbAreas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Area";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>tbAreas</h2>
+        <h2>Areas</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
@@ -22,7 +22,7 @@
                 <div class="ibox-title">
                     <h5>Listado de tbAreas</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar tbAreas", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @Html.ActionLink("Registrar Area", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -37,21 +37,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                      @foreach (var item in Model) {
-                        <tr>
-                            <td></td>
-                            <td>@Html.DisplayFor(modelItem => item.area_Id)</td>
-                            <td>@Html.DisplayFor(modelItem => item.area_Descripcion)</td>
-                            @*<td>@Html.DisplayFor(modelItem => item.tbCargos.car_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.tbCargos.tbEmpleados.First().tbPersonas.per_Nombres)</td>*@
-                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { id=item.area_Id },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { id=item.area_Id }, new {@class = "btn btn-default btn-xs" })
-                            </td>
-                        </tr>
-                      }
-                    </tbody>
+                    <tbody></tbody>
                   </table>
                 </div>
             </div>

@@ -28,12 +28,8 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                console.log(value.habi_Descripcion);
                tabla.row.add({
-                   Descripcion: value.habi_Descripcion,
-                   Acciones:
-                   "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                   "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.habi_Id + ")' >Detalles</a>" +
-                       "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.habi_Id + ")'>Editar</a>" +
-                   "</div>"
+                   id: parseInt(value.area_Id),
+                   Descripcion: value.habi_Descripcion
                });
            });
            tabla.draw();
