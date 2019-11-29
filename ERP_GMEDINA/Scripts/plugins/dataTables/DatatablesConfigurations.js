@@ -85,5 +85,5 @@ $(document).ready(function () {
         ],
         columns: columnas,
         order: [[col, 'asc']],
-    });
+    });   
 });
