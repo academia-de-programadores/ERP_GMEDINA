@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hip_FechaFinal { get; set; }
         public int hip_UnidadesPagar { get; set; }
         public int hip_MedidaUnitaria { get; set; }
-        public decimal hip_TotalPagar { get; set; }
+        public Nullable<decimal> hip_TotalPagar { get; set; }
         public int tpdi_IdDetallePlanillaIngreso { get; set; }
         public int hip_UsuarioCrea { get; set; }
         public System.DateTime hip_FechaCrea { get; set; }

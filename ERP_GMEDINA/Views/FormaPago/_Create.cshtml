@@ -1,0 +1,24 @@
+﻿@model ERP_GMEDINA.Models.tbFormaPago
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateFormaPago" }))
+        {
+            <div class="modal-body" id="Crear">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.fpa_UsuarioCrea)
+                    @Html.HiddenFor(model => model.fpa_FechaCrea)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" value="Cancelar" id="btnCerrarCrear" class="btn btn-default" />
+                <input type="submit" value="Guardar" id="btnCrearFormaPago" class="btn btn-primary" />
+            </div>
+        }

@@ -1,0 +1,121 @@
+﻿@model ERP_GMEDINA.Models.tbCatalogoDePlanillas
+
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<link href="~/Content/plugins/switchery/switchery.css" rel="stylesheet" />
+
+<div class="ibox-title">
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+    <h2>Crear</h2>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                @using (Html.BeginForm())
+                {
+                    <div class="ibox-content">
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.cpla_IdPlanilla)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.cpla_DescripcionPlanilla, new { htmlAttributes = new { @class = "form-control" } })
+                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.cpla_FrecuenciaEnDias, new { htmlAttributes = new { @class = "form-control" } })
+                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-5" id="catalogoDeIngresos">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Lista del catalogo de Ingresos</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="col-xs-offset-1" style="display:none">
+                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
+                                </div>
+                                &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
+                                <br /><br />
+                                @foreach (var item in ViewBag.CatalogoIngresos)
+                                {
+                                    <div class="form-horizontal col-xs-offset-1">
+                                        <div class="form-group">
+                                            <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5" id="catalogoDeDeducciones">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Lista del catalogo de Deducciones</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="col-xs-offset-1" style="display:none">
+                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
+                                </div>
+                                &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
+                                <br /><br />
+                                @foreach (var item in ViewBag.CatalogoDeducciones)
+                                {
+                                    <div class="form-horizontal col-xs-offset-1">
+                                        <div class="form-group">
+                                            <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" id="btnGuardarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
+                            <div style="display:none" class="btn" id="cargandoCrear">
+                            </div>
+                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
+<script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+}
+@section Styles {
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+
+<script src="~/Scripts/plugins/switchery/switchery.js"></script>
+
+<link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />

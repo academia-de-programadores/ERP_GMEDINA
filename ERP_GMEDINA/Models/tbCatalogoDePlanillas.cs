@@ -25,6 +25,7 @@ namespace ERP_GMEDINA.Models
         public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
         public int cpla_FrecuenciaEnDias { get; set; }
+        public bool cpla_RecibeComision { get; set; }
         public int cpla_UsuarioCrea { get; set; }
         public System.DateTime cpla_FechaCrea { get; set; }
         public Nullable<int> cpla_UsuarioModifica { get; set; }

@@ -49,19 +49,21 @@
                     <tbody>
                         <tr>
                             <td>Creado</td>
-                            <td>@Html.EditorFor(model => model.cde_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            @Html.HiddenFor(model => model.cde_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.cde_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
-                            <td>@Html.EditorFor(model => model.cde_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            @Html.HiddenFor(model => model.cde_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.cde_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

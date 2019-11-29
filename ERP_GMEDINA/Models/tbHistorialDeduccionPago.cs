@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int hidp_IdHistorialdeDeduPago { get; set; }
         public int tpdd_IdPlanillaDetDeduccion { get; set; }
         public int hipa_IdHistorialDePago { get; set; }
-        public decimal hidp_Total { get; set; }
+        public Nullable<decimal> hidp_Total { get; set; }
         public int hidp_UsuarioCrea { get; set; }
         public System.DateTime hidp_FechaCrea { get; set; }
         public Nullable<int> hidp_UsuarioModifica { get; set; }

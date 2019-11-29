@@ -17,14 +17,13 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbHistorialDePago()
         {
-            this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMes>();
             this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
             this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
         }
     
         public int hipa_IdHistorialDePago { get; set; }
         public int emp_Id { get; set; }
-        public decimal hipa_SueldoNeto { get; set; }
+        public Nullable<decimal> hipa_SueldoNeto { get; set; }
         public System.DateTime hipa_FechaInicio { get; set; }
         public System.DateTime hipa_FechaFin { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
@@ -38,8 +37,6 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

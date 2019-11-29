@@ -22,9 +22,9 @@ namespace ERP_GMEDINA.Models
     
         public int pres_Id { get; set; }
         public bool pres_DerechoPreaviso { get; set; }
-        public decimal pres_Preaviso { get; set; }
-        public decimal pres_DecimoTercer { get; set; }
-        public decimal pres_Catorceavo { get; set; }
+        public Nullable<decimal> pres_Preaviso { get; set; }
+        public Nullable<decimal> pres_DecimoTercer { get; set; }
+        public Nullable<decimal> pres_Catorceavo { get; set; }
         public bool pres_Estado { get; set; }
         public string pres_RazonInactivo { get; set; }
         public int pres_UsuarioCrea { get; set; }

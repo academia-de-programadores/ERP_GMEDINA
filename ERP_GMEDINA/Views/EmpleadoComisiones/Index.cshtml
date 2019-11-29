@@ -1,0 +1,166 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbEmpleadoComisiones>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Comisiones Por Empleado</h5>
+                    <div class="ibox-tools">
+                        <input type="button" id="btnAgregarEmpleadoComisiones" value="Registar Comisión" class="btn btn-primary btn-xs" />
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblEmpleadoComisiones" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Nombres)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Apellidos)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_Monto)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_FechaRegistro)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_Pagado)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyComisiones">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd" role="row" data-id="@item.cc_Id">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cc_Monto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cc_FechaRegistro)
+                                    </td>
+                                    <td>
+                                     @{var Pagado = item.cc_Pagado == true ? "checked" : string.Empty;}
+                                    <input type="checkbox" class="i-checks" id="check-@item.cc_Pagado" @Pagado disabled />
+
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.cc_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
+                                        <button data-id="@item.cc_Id" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="AgregarEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconoCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Agregar datos</h4>
+            </div>
+            <div class="modal-body" id="Crear">
+                @Html.Partial("_CreateEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="EditarEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" id="IconoCerraredit">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Edición de datos</h4>
+            </div>
+            <div class="modal-body" id="Editar">
+                @*Mandamos un nuevo modelo solo para poder cargar la página*@
+                @Html.Partial("_EditEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
+            </div>
+         
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="DetalleEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Detalle datos</h4>
+            </div>
+            <div class="modal-body" id="Detallar">
+                @Html.Partial("_DetalleEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InactivarEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Inactivar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Esta seguro que desea Inactivar este Registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger " id="btnInactivarRegistroComisiones">Inactivar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/EmpleadoComisiones.js")
+    @Scripts.Render("~/plugins/iCheck")
+}
+
+
+<link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+    });
+</script>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

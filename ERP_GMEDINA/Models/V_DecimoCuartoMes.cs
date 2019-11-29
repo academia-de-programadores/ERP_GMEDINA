@@ -15,10 +15,11 @@ namespace ERP_GMEDINA.Models
     public partial class V_DecimoCuartoMes
     {
         public int emp_Id { get; set; }
-        public string per_Nombres { get; set; }
-        public string per_Apellidos { get; set; }
-        public string car_Descripcion { get; set; }
-        public string cpla_DescripcionPlanilla { get; set; }
-        public Nullable<decimal> DecimoTercerMes { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Cargo { get; set; }
+        public string Planilla { get; set; }
+        public string CuentaBancaria { get; set; }
+        public Nullable<decimal> Monto { get; set; }
     }
 }

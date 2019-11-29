@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> dtm_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> dtm_FechaModifica { get; set; }
         public Nullable<int> emp_Id { get; set; }
-        public Nullable<decimal> dtm_DecimoTercer { get; set; }
+        public Nullable<decimal> dtm_Monto { get; set; }
         public string dtm_CodigoPago { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }

@@ -23,7 +23,7 @@ namespace ERP_GMEDINA.Models
         public int sue_Id { get; set; }
         public int emp_Id { get; set; }
         public int tmon_Id { get; set; }
-        public decimal sue_Cantidad { get; set; }
+        public Nullable<decimal> sue_Cantidad { get; set; }
         public Nullable<int> sue_SueldoAnterior { get; set; }
         public bool sue_Estado { get; set; }
         public string sue_RazonInactivo { get; set; }

@@ -1,0 +1,100 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleadoBonos
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonosDetalle" }))
+{
+    <div class="modal-body" id="Detalles">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.cb_Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control" disabled></select>
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cin_IdIngreso, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" disabled></select>
+                    @Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cb_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cb_FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cb_FechaRegistro, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.cb_FechaRegistro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cb_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.cb_Pagado, new { htmlAttributes = new { @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.cb_Pagado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.cb_Activo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.cb_Activo)
+                            @Html.ValidationMessageFor(model => model.cb_Activo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Auditoría</h2>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <table class="table table-striped table-bordered dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Acción</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Creado</td>
+                                    <td>@Html.EditorFor(model => model.cb_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    <td>@Html.EditorFor(model => model.cb_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                </tr>
+                                <tr>
+                                    <td>Modificado</td>
+                                    <td>@Html.EditorFor(model => model.cb_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    <td>@Html.EditorFor(model => model.cb_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer">
+                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

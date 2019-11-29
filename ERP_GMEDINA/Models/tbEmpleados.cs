@@ -18,10 +18,10 @@ namespace ERP_GMEDINA.Models
         public tbEmpleados()
         {
             this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
+            this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMes>();
             this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMes>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbEmpleadoBonos = new HashSet<tbEmpleadoBonos>();
-            this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
             this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
             this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
             this.tbEquipoEmpleados = new HashSet<tbEquipoEmpleados>();
@@ -66,13 +66,13 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual tbFormaPago tbFormaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }

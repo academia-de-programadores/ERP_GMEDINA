@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.V_DecimoTercerMes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Decimo Tercer Mes</h5>
+                    <div class="ibox-tools" id="boxTools">
+                        <input type="button" id="btnFechaEspecifica" value="Fecha Especifica" class="btn btn-primary btn-xs" />
+                        <input type="button" id="btnProcesar" value="Procesar Decimo Tercer Mes" class="btn btn-primary btn-xs" />
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblDecimoTercerMes" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.emp_Id)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.per_Nombres)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.per_Apellidos)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.car_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cpla_DescripcionPlanilla)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dtm_Monto)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.emp_CuentaBancaria)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyDecimoTercerMes">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.emp_Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.per_Nombres)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.per_Apellidos)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.car_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cpla_DescripcionPlanilla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dtm_Monto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.emp_CuentaBancaria)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr role="row">
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.emp_Id)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.per_Nombres)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.per_Apellidos)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.car_Descripcion)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cpla_DescripcionPlanilla)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.dtm_Monto)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.emp_CuentaBancaria)</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frmFechaDecimoTercer" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Ingrese Fechas</h4>
+            </div>
+
+            @Html.Partial("_FechasDecimoTercer", new ERP_GMEDINA.Models.tbHistorialDePago())           
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/DecimoTercerMes.js")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
