@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -190,12 +191,369 @@
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\ERP_GMEDINA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ERP_GMEDINA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ERP_GMEDINA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlaniController.cs" />
+    <Compile Include="Controllers\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\sysdiagrams.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbAccesoRol.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbAdelantoSueldo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbAreas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbAuxilioDeCesantias.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCargos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCatalogoDeDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCatalogoDeIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCatalogoDePlanillas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCompetencias.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCompetenciasPersona.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbCompetenciasRequisicion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbDecimoCuartoMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbDecimoTercerMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbDeduccionesExtraordinarias.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbDeduccionInstitucionFinanciera.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbDepartamentos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEmpleadoBonos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEmpleadoComisiones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEmpleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEmpresas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEquipoEmpleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbEquipoTrabajo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbFaseSeleccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbFasesReclutamiento.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbFormaPago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHabilidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHabilidadesPersona.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHabilidadesRequisicion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialAmonestaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialAudienciaDescargo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialCargos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialContrataciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialDeduccionPago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialDeIngresosPago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialDePago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialHorasTrabajadas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialLiquidaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialPermisos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialRefrendamientos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHistorialVacaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbHorarios.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbIdiomaPersona.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbIdiomas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbIdiomasRequisicion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbInstitucionesFinancieras.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbISR.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbJornadas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbLiquidaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbLiquidacionVacaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbMotivoLiquidaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbNacionalidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbObjeto.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbPeriodos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbPersonas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbPreaviso.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbRamaActividad.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbRazonSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbRequisiciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbRol.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbRolesUsuario.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbSalarioPorHora.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbSeleccionCandidatos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbSucursales.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbSueldos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTechosDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoAmonestaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoDeduccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoHoras.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoMonedas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoPermisos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoPlanillaDetalleDeduccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoPlanillaDetalleIngreso.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTipoSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTitulos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTitulosPersona.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbTitulosRequisicion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbUsuario.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\tbVacaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
+    <Compile Include="Controllers\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_BonosColaborador.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_CatalogoDeIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_CatalogoDePlanillasConIngresosYDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_ColaboradoresPorPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_ComisionesColaborador.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DecimoCuartoMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DecimoTercerMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DecimoTercerMes_RPT.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DeduccionesExtraordinarias_Detalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DeduccionesExtrasColaboradores.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_DeduccionesInstitucionesFinancierasColaboradres.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_EmpleadoBonos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_FormaDePago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_InformacionColaborador.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PlanillaDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PlanillaIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_EmpleadoPorPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_FechaPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_ReporteIHSS.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_Plani_TipoPlani.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_PreviewPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbCatalogoDeDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbCatalogoDeIngresos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_tbEmpleadoComisiones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_TechosDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\V_TipoDeduccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataSet\ReportesPlaniDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -220,21 +578,6 @@
     <Compile Include="Models\ComprobantePagoModel.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
-    <Compile Include="Models\ERP_GMEDINA.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ERP_GMEDINA.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ERP_GMEDINA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -448,6 +791,16 @@
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Controllers\ERP_GMEDINA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Controllers\ERP_GMEDINA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -456,16 +809,6 @@
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Models\ERP_GMEDINA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ERP_GMEDINA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-      <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
@@ -528,15 +871,15 @@
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Scripts\api\spanish.json" />
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+    <Content Include="DataSet\ReportesPlaniDS.xsc">
+      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Controllers\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
+    <Content Include="Controllers\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-    </Content>
-    <Content Include="DataSet\ReportesPlaniDS.xsc">
-      <DependentUpon>ReportesPlaniDS.xsd</DependentUpon>
     </Content>
     <None Include="DataSet\ReportesPlaniDS.xsd">
       <SubType>Designer</SubType>
