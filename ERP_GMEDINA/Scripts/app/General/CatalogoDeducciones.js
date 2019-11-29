@@ -69,6 +69,9 @@ $("#btnCerrarCrear").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
+
+    //ocultar el modal
+    $("#AgregarCatalogoDeducciones").modal('hide');
 });
 
 
@@ -82,6 +85,7 @@ $("#IconCerrarCreate").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
+
 });
 
 
@@ -161,8 +165,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         if (data != "error") {
             cargarGridDeducciones();
 
-            //ocultar el modal
-            $("#AgregarCatalogoDeducciones").modal('hide');
+            
 
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
