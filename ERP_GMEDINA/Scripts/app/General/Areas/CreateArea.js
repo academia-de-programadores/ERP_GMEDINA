@@ -27,7 +27,7 @@ function llenarDropDownList() {
                console.log(id);
                console.log(Lista);
                Lista.forEach(function (value,index) {
-                   $("#" + id).append(new Option(value.suc_Descripcion, value.suc_Id));
+                   $("#" + id).append(new Option(value.Descripcion, value.Id));
                });
            });
        });
@@ -41,6 +41,8 @@ function Remover(btn) {
 $(document).ready(function () {
     llenarDropDownList();
     ChildTable = $(ChildDataTable).DataTable({
+        pageLength: 3,
+        lengthChange: false,
      columns: 
       [
             { data: 'Descripcion' },
@@ -57,9 +59,9 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
- var Descripcion = $("#depto_Descripcion").val();
- var Cargo = $("#depto_tbCargos_car_Descripcion").val();
- $("#Sucursales").val("0").change();
+    var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();
+    var Cargo = $("#FormDepartamentos").find("#car_Descripcion").val();
+ //$("#Sucursales").val("0").change();
  ChildTable.row.add(
   {
    Descripcion: Descripcion,
@@ -71,6 +73,17 @@ $("#FormCreate").submit(function (e) {
     e.preventDefault();
 });
 $("#btnCrear").click(function () {
+    //otro metodo
+    var areas =
+        {
+            area_Descripcion: $("#area_Descripcion").val(),
+            tbCargos:
+                {
+                    car_Descripcion: $("#car_Descripcion").val()
+                },
+
+        };
+
  //declaramos el objeto principal de nuestra tabla y asignamos sus valores
  var tbAreas = new Object();
  tbAreas.tbCargos = new Object();

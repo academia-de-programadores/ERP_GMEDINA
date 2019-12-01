@@ -22,34 +22,34 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult llenarTabla()
         {
-            var tbAreas = new List<tbAreas> { };
-            List<tbAreas> lista = new List<tbAreas> { };
             try
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                     lista= db.tbAreas.ToList();
+                    var tbAreas = db.tbAreas
+                        .Select(
+                        t=>new
+                        {
+                            area_Id = t.area_Id,
+                            area_Descripcion = t.area_Descripcion
+                        }
+                        )
+                        .ToList();
+                    return Json(tbAreas, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch 
+            catch
             {
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
-            foreach (tbAreas item in lista)
-            {
-                tbAreas.Add(new tbAreas {
-                    area_Id =item.area_Id,
-                    area_Descripcion = item.area_Descripcion});
-            }
-            return Json(tbAreas, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_Departamentos> lista =new List<V_Departamentos> { };
+            List<V_Departamentos> lista = new List<V_Departamentos> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
@@ -65,17 +65,25 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult llenarDropDowlist()
         {
-            var Sucursales = new List<tbSucursales> { new tbSucursales { suc_Id = 0, suc_Descripcion = "**seleccione una sucursal**" } };
-            using (db= new ERP_GMEDINAEntities())
+            var Sucursales = new List<object>{ };
+            using (db = new ERP_GMEDINAEntities())
             {
-                foreach (var item in db.tbSucursales.ToList())
+                try
                 {
-                    Sucursales.Add(new tbSucursales
+                    Sucursales.Add(new
                     {
-                        suc_Id =item.suc_Id,
-                        suc_Descripcion = item.suc_Descripcion
+                        Id =0,
+                        Descripcion ="**Seleccione una opción**"
                     });
+                    Sucursales.AddRange(db.tbSucursales
+                    .Select(tabla => new { Id = tabla.suc_Id, Descripcion = tabla.suc_Descripcion })
+                    .ToList());
                 }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+                
             }
             var result = new Dictionary<string, object>();
             result.Add("Sucursales", Sucursales);
@@ -99,7 +107,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch
                 {
-                    
+
                 }
             }
             if (tbAreas == null)
@@ -135,12 +143,12 @@ namespace ERP_GMEDINA.Controllers
                 {
 
                 }
-                catch 
+                catch
                 {
                     result = "-2";
                 }
             }
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Areas/Edit/5
@@ -158,7 +166,7 @@ namespace ERP_GMEDINA.Controllers
                 List<tbSucursales> Sucursales = null;
                 try
                 {
-                    tbAreas= db.tbAreas.Find(id);
+                    tbAreas = db.tbAreas.Find(id);
                     Sucursales = db.tbSucursales.ToList();
                     ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
                 }
@@ -193,7 +201,7 @@ namespace ERP_GMEDINA.Controllers
                     result = "-2";
                 }
             }
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
         [HttpPost]
@@ -218,7 +226,7 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db!=null)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
