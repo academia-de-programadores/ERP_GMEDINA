@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="10">
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoHoras" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" />
@@ -21,6 +21,38 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbIdiomas" Width="1.5" PointX="3" PointY="18" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="3" PointY="22" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAreas" Width="1.5" PointX="5.25" PointY="15.125" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3" PointY="29.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPersonas" Width="1.5" PointX="3" PointY="33.625" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariomodifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbEmpleados_area_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbAreas_car_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDepartamentos" Width="1.5" PointX="7.5" PointY="15" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbJornadas" Width="1.5" PointX="3" PointY="40.25" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbSueldos" Width="1.5" PointX="5.25" PointY="9.5" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbJornadas_jor_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbJornadas_jor_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_sue_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_ue_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSueldos_sue_Id_rrhh_tbSueldos_sue_SueldoAnterior" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

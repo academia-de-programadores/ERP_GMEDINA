@@ -33,6 +33,13 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
         public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
         public virtual DbSet<tbIdiomas> tbIdiomas { get; set; }
+        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
+        public virtual DbSet<tbAreas> tbAreas { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
+        public virtual DbSet<tbPersonas> tbPersonas { get; set; }
+        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<tbJornadas> tbJornadas { get; set; }
+        public virtual DbSet<tbSueldos> tbSueldos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -209,11 +216,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_EmpleadoComisiones_Insert", emp_IdParameter, cin_IdIngresoParameter, cc_FechaRegistroParameter, cc_PagadoParameter, cc_UsuarioCreaParameter, cc_FechaCreaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
+        public virtual ObjectResult<string> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> eMP_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
         {
             var cc_IdParameter = cc_Id.HasValue ?
                 new ObjectParameter("cc_Id", cc_Id) :
                 new ObjectParameter("cc_Id", typeof(int));
+    
+            var eMP_IdParameter = eMP_Id.HasValue ?
+                new ObjectParameter("EMP_Id", eMP_Id) :
+                new ObjectParameter("EMP_Id", typeof(int));
     
             var cc_UsuarioModificaParameter = cc_UsuarioModifica.HasValue ?
                 new ObjectParameter("cc_UsuarioModifica", cc_UsuarioModifica) :
@@ -231,7 +242,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
                 new ObjectParameter("cc_TotalVenta", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, eMP_IdParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result> UDP_Plani_tbCatalogoDeDeducciones_Inactivar(Nullable<int> cde_IdDeduccion, Nullable<int> cde_UsuarioModifica, Nullable<System.DateTime> cde_FechaModifica)
