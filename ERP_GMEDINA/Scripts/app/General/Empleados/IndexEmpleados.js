@@ -20,7 +20,7 @@
 }
 function llenarTabla() {
     _ajax(null,
-       '/Areas/llenarTabla',
+       '/Empleados/llenarTabla',
        'POST',
        function (Lista) {
            tabla.clear();

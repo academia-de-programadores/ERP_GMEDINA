@@ -541,6 +541,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />

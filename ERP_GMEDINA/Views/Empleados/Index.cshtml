@@ -32,7 +32,7 @@
                             <th>@Html.DisplayNameFor(model => model.tbPersonas.per_Nombres)</th>
                             <th>@Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)</th>
                             <th>@Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)</th>
-                             <th>@Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)</th>
                             <th>@Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)</th>
                             <th>@Html.DisplayNameFor(model => model.emp_Fechaingreso)</th>
                 
@@ -42,22 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.emp_Id">
-                            <td>@Html.DisplayFor(modelItem => item.tbPersonas.per_Nombres)</td>
-                            <td>@Html.DisplayFor(modelItem => item.tbCargos.car_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.tbAreas.area_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.tbDepartamentos.depto_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.tbJornadas.jor_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.emp_Fechaingreso)</td>
-                      
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.emp_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.emp_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
+                     
                     </tbody>                       
                   </table>
                 </div>

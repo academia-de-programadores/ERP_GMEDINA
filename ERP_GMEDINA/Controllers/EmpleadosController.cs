@@ -20,6 +20,53 @@ namespace ERP_GMEDINA.Controllers
             var tbEmpleados = db.tbEmpleados.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbAreas).Include(t => t.tbCargos).Include(t => t.tbPersonas);
             return View(tbEmpleados.ToList());
         }
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+                //posteriormente es destruida.
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbEmpleados = db.tbEmpleados
+                        .Select(x=>new
+                        {
+                            car_Descripcion = x.tbCargos.car_Descripcion,
+                            area_Id = x.area_Id,
+                            depto_Id = x.depto_Id,
+                            jor_Id = x.jor_Id,
+                            emp_Reingreso = x.emp_Reingreso,
+                            emp_Fechaingreso = x.emp_Fechaingreso
+                        })
+                        .ToList();
+                    return Json(tbEmpleados, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }            
+        }
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<tbPersonas> lista = new List<tbPersonas> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    lista = db.tbPersonas.Where(x => x.per_Id == id).ToList();
+                }
+                catch
+                {
+                }
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         // GET: Empleados/Details/5
         public ActionResult Details(int? id)
