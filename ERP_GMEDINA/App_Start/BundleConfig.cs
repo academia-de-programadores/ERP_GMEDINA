@@ -462,6 +462,10 @@ namespace ERP_GMEDINA
             "~/Scripts/app/general/general.js",
             "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
+            //scriipt para tablas personalizadas detalles con datatable
+            bundles.Add(new ScriptBundle("~/plugins/customdataTables").Include(
+                      "~/Scripts/plugins/dataTables/datatables.min.js"));
+
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
