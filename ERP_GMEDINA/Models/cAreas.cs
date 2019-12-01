@@ -9,12 +9,14 @@ namespace ERP_GMEDINA.Models
     [MetadataType(typeof(cAreas))]
     public partial class tbAreas
     {
+        public string car_Descripcion { get; set; }
     }
     public class cAreas
     {
         [Display(Name = "Id")]
         public int area_Id { get; set; }
         public int car_Id { get; set; }
+        [Display(Name = "Sucursal")]
         public int suc_Id { get; set; }
         [Display(Name = "Descripcion")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
@@ -29,5 +31,11 @@ namespace ERP_GMEDINA.Models
         public System.DateTime area_Fechacrea { get; set; }
         public Nullable<int> area_Usuariomodifica { get; set; }
         public Nullable<System.DateTime> area_Fechamodifica { get; set; }
+
+
+        [Display(Name = "Cargo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        public string car_Descripcion { get; set; }
     }
 }

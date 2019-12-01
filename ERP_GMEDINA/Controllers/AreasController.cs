@@ -63,6 +63,24 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult llenarDropDowlist()
+        {
+            var Sucursales = new List<tbSucursales> { new tbSucursales { suc_Id = 0, suc_Descripcion = "**seleccione una sucursal**" } };
+            using (db= new ERP_GMEDINAEntities())
+            {
+                foreach (var item in db.tbSucursales.ToList())
+                {
+                    Sucursales.Add(new tbSucursales
+                    {
+                        suc_Id =item.suc_Id,
+                        suc_Descripcion = item.suc_Descripcion
+                    });
+                }
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Sucursales", Sucursales);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         // GET: Areas/Details/5
         public ActionResult Details(int? id)
         {
@@ -96,11 +114,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<tbSucursales> Sucursales = null;
-            using (db = new ERP_GMEDINAEntities())
-            {
-                Sucursales = db.tbSucursales.ToList();
-            }
+            List<tbSucursales> Sucursales = new List<tbSucursales> { };
             ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
@@ -109,10 +123,8 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create( [Bind(Include = "suc_Id,area_Descripcion")] tbAreas tbAreas)
+        public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
-
-            tbAreas.tbCargos = new tbCargos {car_Descripcion= Request["tbCargos.car_Descripcion"] };
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
