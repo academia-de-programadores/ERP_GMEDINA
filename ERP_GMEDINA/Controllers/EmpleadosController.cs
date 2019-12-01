@@ -35,7 +35,6 @@ namespace ERP_GMEDINA.Controllers
                             area_Id = x.area_Id,
                             depto_Id = x.depto_Id,
                             jor_Id = x.jor_Id,
-                            emp_Reingreso = x.emp_Reingreso,
                             emp_Fechaingreso = x.emp_Fechaingreso
                         })
                         .ToList();

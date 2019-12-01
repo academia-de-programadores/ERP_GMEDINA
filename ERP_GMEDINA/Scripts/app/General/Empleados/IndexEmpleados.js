@@ -27,8 +27,12 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.area_Id,
-                   Descripcion: value.area_Descripcion
+                   Id: value.emp_Id,
+                   Cargos: value.car_Descripcion,
+                   Area: area_Descripcion,
+                   Departamento: depto_Descripcion,
+                   Jornada: jor_Descripcion,
+
                });
            });
            tabla.draw();
