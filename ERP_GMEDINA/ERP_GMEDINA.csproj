@@ -159,6 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
+    <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
@@ -167,6 +168,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1293,6 +1295,7 @@
     <Content Include="Views\TipoAmonestaciones\_Detalles.cshtml" />
     <Content Include="Views\TipoAmonestaciones\_Edit.cshtml" />
     <Content Include="Views\TipoAmonestaciones\_Delete.cshtml" />
+    <Content Include="Views\HistorialHorasTrabajadas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

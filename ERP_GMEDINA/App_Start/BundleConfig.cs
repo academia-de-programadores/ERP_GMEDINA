@@ -482,6 +482,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
                 "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
 
+            //bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialHorasTrabajas").Include(
+           
+            //   aqui van las referencias del js "~/Scripts/app/General/HistorialHorasTrabajas/HistorialHorasTrabajas.js"));
 
 
             //OPTIMIZATION

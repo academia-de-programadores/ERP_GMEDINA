@@ -8,7 +8,7 @@ function CierraPopups() {
         $('.modal-backdrop').remove();//eliminamos el backdrop del modal
     });
 }
-function _ajax(params, uri, type, callback, fError) {
+function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
         method: type,
@@ -132,7 +132,7 @@ $(".required").each(function (indice, input) {
     });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
-        if ($(input).val().trim() == "") {
+        if ($(input).val() == null || $(input).val()==0 || $(input).val().trim() == "") {
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $(span).addClass("text-danger");
@@ -158,7 +158,8 @@ $(".required").each(function (indice, input) {
     }
 });
 formularios.forEach(function (formulario) {
-    $("#" + formulario).submit(function (e) {
-        e.preventDefault();
-    });
-})
+ $("#" + formulario).submit(function (e) {
+  e.preventDefault();
+ });
+});
+
