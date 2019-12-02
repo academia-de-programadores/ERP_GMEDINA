@@ -46,7 +46,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>dtm Id Decimo Tercer Mes</Value>
+                              <Value>Codigo Decimo Tercer Mes</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -82,7 +82,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>emp Id</Value>
+                              <Value>Codigo Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -118,7 +118,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>per Nombres</Value>
+                              <Value>Nombres</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -154,7 +154,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>per Apellidos</Value>
+                              <Value>Apellidos</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -190,7 +190,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>dtm Fecha Pago</Value>
+                              <Value>Fecha Pago</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -226,7 +226,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>dtm Monto</Value>
+                              <Value>Monto</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -262,7 +262,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>emp Cuenta Bancaria</Value>
+                              <Value>Cuenta Bancaria</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -298,7 +298,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>dtm Codigo Pago</Value>
+                              <Value>Codigo Pago</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -334,7 +334,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>cpla Descripcion Planilla</Value>
+                              <Value>Descripcion Planilla</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
