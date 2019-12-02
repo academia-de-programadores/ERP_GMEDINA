@@ -9,6 +9,26 @@ function Remove(Id, lista) {
     });
     return list;
 }
+function Add(depto_Descripcion, car_Descripcion) {
+    for (var i = 0; i < ChildTable.data().length; i++) {
+        var Fila = ChildTable.rows().data()[i];
+        if (Fila.Descripcion == Descripcion || Fila.Cargo == Cargo) {
+            if (Fila.Descripcion == Descripcion) {
+                MsgError("Error", "ya existe el departamento: '"+Descripcion+"'");
+            }
+            if (Fila.Cargo == Cargo) {
+                MsgError("Error", "ya existe el Cargo: '" + Cargo + "'");
+            }
+            return null;
+        }
+    }
+    ChildTable.row.add(
+  {
+      Descripcion: Descripcion.trim(),
+      Cargo: Cargo
+  }
+ ).draw();
+}
 function getJson() {
  //declaramos una lista para recuperar en un formato 
  //especifico el json de datatable.
@@ -40,15 +60,10 @@ function llenarDropDownList() {
        });
 }
 function Remover(btn) {
- //ChildTable
- //       .row($(btn).parents('tr'))
- //       .remove()
-//       .draw();hide()
-ChildTable
-       .row($(btn).parents('tr'))
-       .hide()
-       .draw();
-
+ ChildTable
+        .row($(btn).parents('tr'))
+        .remove()
+        .draw();
 }
 $(document).ready(function () {
     llenarDropDownList();
@@ -80,13 +95,7 @@ $("#add").click(function () {
             return null;
         }
     }
- //$("#Sucursales").val("0").change();
- ChildTable.row.add(
-  {
-   Descripcion: Descripcion.trim(),
-   Cargo: Cargo
-  }
- ).draw();
+    Add(Descripcion, Cargo);
 });
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
