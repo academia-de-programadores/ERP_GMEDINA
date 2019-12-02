@@ -13,16 +13,26 @@ namespace ERP_GMEDINA.Models
     }
     public class cEmpleados
     {
+        [Display(Name = "Id")]
         public int emp_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
         [Display(Name = "Nombres")]
-        [MaxLength(25, ErrorMessage = "Excedio el numero maximo de caracteres")]
+        [MaxLength(50, ErrorMessage = "Excedio el numero maximo de caracteres")]
         public int per_Nombres { get; set; }
+
+        [Display (Name = "Cargo")]
         public int car_Id { get; set; }
+
+        [Display(Name = "Area")]
         public int area_Id { get; set; }
+
+        [Display(Name = "Departamento")]
         public int depto_Id { get; set; }
+
+        [Display(Name = "Jornada")]
         public int jor_Id { get; set; }
+
         public int cpla_IdPlanilla { get; set; }
         public int fpa_IdFormaPago { get; set; }
         public string emp_CuentaBancaria { get; set; }
