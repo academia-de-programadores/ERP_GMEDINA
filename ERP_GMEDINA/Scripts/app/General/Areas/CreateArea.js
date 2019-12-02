@@ -59,12 +59,19 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
-    var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();
+    var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();    
     var Cargo = $("#FormDepartamentos").find("#car_Descripcion").val();
+    var valores=Descripcion + Cargo;
+    for (var i = 0; i < valores.length; i++) {
+        if (valores[i] == ">" || valores[i] == "<") {
+            MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.");
+            return null;
+        }
+    }
  //$("#Sucursales").val("0").change();
  ChildTable.row.add(
   {
-   Descripcion: Descripcion,
+   Descripcion: Descripcion.trim(),
    Cargo: Cargo
   }
  ).draw();
@@ -73,24 +80,12 @@ $("#FormCreate").submit(function (e) {
     e.preventDefault();
 });
 $("#btnCrear").click(function () {
-    //otro metodo
-    var areas =
-        {
-            area_Descripcion: $("#area_Descripcion").val(),
-            tbCargos:
-                {
-                    car_Descripcion: $("#car_Descripcion").val()
-                },
-
-        };
-
  //declaramos el objeto principal de nuestra tabla y asignamos sus valores
- var tbAreas = new Object();
- tbAreas.tbCargos = new Object();
- tbAreas.tbCargos.car_Descripcion = $("#car_Descripcion").val();
- tbAreas.area_Descripcion = $("#area_Descripcion").val();
- tbAreas.suc_Id = $("#Sucursales").val();
-
+var tbAreas =
+    {
+        area_Descripcion: $("#area_Descripcion").val(),
+        tbCargos:{car_Descripcion: $("#car_Descripcion").val()},
+    };
  var lista = getJson();
  if (tbAreas != null) {
      data = JSON.stringify({

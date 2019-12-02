@@ -33,7 +33,8 @@ namespace ERP_GMEDINA.Controllers
                         t=>new
                         {
                             area_Id = t.area_Id,
-                            area_Descripcion = t.area_Descripcion
+                            area_Descripcion = t.area_Descripcion,
+                            Encargado=t.tbCargos.tbEmpleados.Where(c=>c.per_Id==c.tbPersonas.per_Id).Select(p=> p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
                         }
                         )
                         .ToList();
@@ -62,7 +63,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult llenarDropDowlist()
         {
             var Sucursales = new List<object>{ };
@@ -116,7 +116,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbAreas);
         }
-
         // GET: Areas/Create
         public ActionResult Create()
         {
@@ -126,7 +125,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
-
         // POST: Areas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -150,7 +148,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -180,7 +177,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbAreas);
         }
-
         // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
