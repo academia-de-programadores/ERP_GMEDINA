@@ -32,7 +32,7 @@ namespace ERP_GMEDINA.Controllers
 		{
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
-			reportViewer.SizeToReportContent = false;
+			reportViewer.SizeToReportContent = true;
 			reportViewer.Width = Unit.Pixel(1050);
 			reportViewer.Height = Unit.Pixel(500);
 			reportViewer.BackColor = System.Drawing.Color.White;
@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 
 		//Reporte con parametros
-		public ActionResult DecimoTercerMesParametrosRPT(DateTime dtm_FechaPago, string id)
+		public ActionResult DecimoTercerMesParametrosRPT(DateTime dtm_FechaPago, string cpla_DescripcionPlanilla, string id)
 		{
 			LocalReport lr = new LocalReport();
 			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "DecimoTercerMesRPT.rdlc");
@@ -68,7 +68,7 @@ namespace ERP_GMEDINA.Controllers
 			}
 			List<V_DecimoTercerMes_RPT> cm = new List<V_DecimoTercerMes_RPT>();
 
-			cm = db.V_DecimoTercerMes_RPT.Where(x => dtm_FechaPago == x.dtm_FechaPago).ToList();
+			cm = db.V_DecimoTercerMes_RPT.Where(x => dtm_FechaPago == x.dtm_FechaPago && cpla_DescripcionPlanilla == x.cpla_DescripcionPlanilla).ToList();
 
 			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
 			lr.DataSources.Add(rd);

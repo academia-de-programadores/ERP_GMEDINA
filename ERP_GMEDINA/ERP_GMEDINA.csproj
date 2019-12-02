@@ -714,7 +714,7 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
-    <Content Include="Scripts\app\General\DecimoTercerMes.js" />
+    <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
