@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -167,18 +168,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
-    <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
-    <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
-    <Compile Include="Controllers\DecimoTercerMesController.cs" />
-    <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
-    <Compile Include="Controllers\EmpleadoBonosController.cs" />
-    <Compile Include="Controllers\EmpleadoComisionesController.cs" />
-    <Compile Include="Controllers\FormaPagoController.cs" />
-    <Compile Include="Controllers\ISRController.cs" />
-    <Compile Include="Controllers\PlanillaController.cs" />
-    <Compile Include="Controllers\TechosDeduccionesController.cs" />
-    <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,10 +202,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbAccesoRol.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbAdelantoSueldo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbAFP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbAreas.cs">
@@ -250,6 +245,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbDecimoTercerMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbDeduccionAFP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbDeduccionesExtraordinarias.cs">
@@ -384,9 +382,6 @@
     <Compile Include="Models\tbPreaviso.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPrestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbRamaActividad.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -459,236 +454,8 @@
     <Compile Include="Models\tbVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeduccionesEdit_Select_Result1.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result1.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDecimoTercerMes_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbFormaPago_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbFormaPago_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbFormaPago_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbFormaPago_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbISR_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbISR_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbISR_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbISR_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbEmpresas_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
-    <Compile Include="Models\V_BonosColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_CatalogoDeIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_CatalogoDePlanillasConIngresosYDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_ColaboradoresPorPlanilla.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_ComisionesColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DecimoCuartoMes.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DecimoTercerMes.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_Detalles.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtrasColaboradores.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesInstitucionesFinancierasColaboradres.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_Departamentos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_EmpleadoBonos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_FormaDePago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_InformacionColaborador.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PlanillaDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PlanillaIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_PreviewPlanilla.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbCatalogoDeDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbCatalogoDeIngresos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbEmpleadoComisiones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_TechosDeducciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_TipoDeduccion.cs">
+    <Compile Include="Models\V_DecimoTercerMes_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1455,79 +1222,10 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Create.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Details.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_DetailCatalogoDeIngreso.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\_EditCatalogoDeIngresos.cshtml" />
-    <Content Include="Views\TechosDeducciones\Create.cshtml" />
-    <Content Include="Views\TechosDeducciones\Delete.cshtml" />
-    <Content Include="Views\TechosDeducciones\Details.cshtml" />
-    <Content Include="Views\TechosDeducciones\Edit.cshtml" />
-    <Content Include="Views\TechosDeducciones\Index.cshtml" />
-    <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
-    <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
-    <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\Create.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleDeduccion.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleIngreso.cshtml" />
-    <Content Include="Views\EmpleadoBonos\Index.cshtml" />
-    <Content Include="Views\EmpleadoBonos\_CreateEmpleadoBonos.cshtml" />
-    <Content Include="Views\EmpleadoBonos\_DetalleEmpleadoBonos.cshtml" />
-    <Content Include="Views\EmpleadoBonos\_EditEmpleadoBonos.cshtml" />
-    <Content Include="Views\FormaPago\Index.cshtml" />
-    <Content Include="Views\FormaPago\_Create.cshtml" />
-    <Content Include="Views\FormaPago\_Edit.cshtml" />
-    <Content Include="Views\TipoDeducciones\Index.cshtml" />
-    <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
-    <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
-    <Content Include="Views\DecimoTercerMes\FechaEspecifica.cshtml" />
-    <Content Include="Views\DecimoTercerMes\Index.cshtml" />
-    <Content Include="Views\DecimoTercerMes\_FechasDecimoTercer.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
-    <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Create.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\Planilla\Create.cshtml" />
-    <Content Include="Views\Planilla\Delete.cshtml" />
-    <Content Include="Views\Planilla\Details.cshtml" />
-    <Content Include="Views\Planilla\Edit.cshtml" />
-    <Content Include="Views\Planilla\Index.cshtml" />
-    <Content Include="Views\Planilla\_CatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\Planilla\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\Planilla\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\ISR\_CreateTechosDeducciones.cshtml" />
-    <Content Include="Views\ISR\_DetailsTechosDeducciones.cshtml" />
-    <Content Include="Views\ISR\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\ISR\Create.cshtml" />
-    <Content Include="Views\ISR\Delete.cshtml" />
-    <Content Include="Views\ISR\Details.cshtml" />
-    <Content Include="Views\ISR\Edit.cshtml" />
-    <Content Include="Views\ISR\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
