@@ -295,6 +295,8 @@ namespace ERP_GMEDINA.DataSets {
             
             private global::System.Data.DataColumn columndtm_CodigoPago;
             
+            private global::System.Data.DataColumn columncpla_IdPlanilla;
+            
             private global::System.Data.DataColumn columncpla_DescripcionPlanilla;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -396,6 +398,14 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cpla_IdPlanillaColumn {
+                get {
+                    return this.columncpla_IdPlanilla;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn cpla_DescripcionPlanillaColumn {
                 get {
                     return this.columncpla_DescripcionPlanilla;
@@ -439,7 +449,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_DecimoTercerMes_RPTRow AddV_DecimoTercerMes_RPTRow(int dtm_IdDecimoTercerMes, int emp_Id, string per_Nombres, string per_Apellidos, System.DateTime dtm_FechaPago, decimal dtm_Monto, string emp_CuentaBancaria, string dtm_CodigoPago, string cpla_DescripcionPlanilla) {
+            public V_DecimoTercerMes_RPTRow AddV_DecimoTercerMes_RPTRow(int dtm_IdDecimoTercerMes, int emp_Id, string per_Nombres, string per_Apellidos, System.DateTime dtm_FechaPago, decimal dtm_Monto, string emp_CuentaBancaria, string dtm_CodigoPago, int cpla_IdPlanilla, string cpla_DescripcionPlanilla) {
                 V_DecimoTercerMes_RPTRow rowV_DecimoTercerMes_RPTRow = ((V_DecimoTercerMes_RPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dtm_IdDecimoTercerMes,
@@ -450,17 +460,11 @@ namespace ERP_GMEDINA.DataSets {
                         dtm_Monto,
                         emp_CuentaBancaria,
                         dtm_CodigoPago,
+                        cpla_IdPlanilla,
                         cpla_DescripcionPlanilla};
                 rowV_DecimoTercerMes_RPTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowV_DecimoTercerMes_RPTRow);
                 return rowV_DecimoTercerMes_RPTRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_DecimoTercerMes_RPTRow FindBydtm_IdDecimoTercerMes(int dtm_IdDecimoTercerMes) {
-                return ((V_DecimoTercerMes_RPTRow)(this.Rows.Find(new object[] {
-                            dtm_IdDecimoTercerMes})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -488,6 +492,7 @@ namespace ERP_GMEDINA.DataSets {
                 this.columndtm_Monto = base.Columns["dtm_Monto"];
                 this.columnemp_CuentaBancaria = base.Columns["emp_CuentaBancaria"];
                 this.columndtm_CodigoPago = base.Columns["dtm_CodigoPago"];
+                this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
                 this.columncpla_DescripcionPlanilla = base.Columns["cpla_DescripcionPlanilla"];
             }
             
@@ -510,12 +515,11 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columnemp_CuentaBancaria);
                 this.columndtm_CodigoPago = new global::System.Data.DataColumn("dtm_CodigoPago", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndtm_CodigoPago);
+                this.columncpla_IdPlanilla = new global::System.Data.DataColumn("cpla_IdPlanilla", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncpla_IdPlanilla);
                 this.columncpla_DescripcionPlanilla = new global::System.Data.DataColumn("cpla_DescripcionPlanilla", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncpla_DescripcionPlanilla);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columndtm_IdDecimoTercerMes}, true));
                 this.columndtm_IdDecimoTercerMes.AllowDBNull = false;
-                this.columndtm_IdDecimoTercerMes.Unique = true;
                 this.columnper_Nombres.AllowDBNull = false;
                 this.columnper_Nombres.MaxLength = 50;
                 this.columnper_Apellidos.AllowDBNull = false;
@@ -524,6 +528,7 @@ namespace ERP_GMEDINA.DataSets {
                 this.columnemp_CuentaBancaria.MaxLength = 100;
                 this.columndtm_CodigoPago.AllowDBNull = false;
                 this.columndtm_CodigoPago.MaxLength = 50;
+                this.columncpla_IdPlanilla.AllowDBNull = false;
                 this.columncpla_DescripcionPlanilla.AllowDBNull = false;
                 this.columncpla_DescripcionPlanilla.MaxLength = 50;
             }
@@ -772,6 +777,17 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int cpla_IdPlanilla {
+                get {
+                    return ((int)(this[this.tableV_DecimoTercerMes_RPT.cpla_IdPlanillaColumn]));
+                }
+                set {
+                    this[this.tableV_DecimoTercerMes_RPT.cpla_IdPlanillaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string cpla_DescripcionPlanilla {
                 get {
                     return ((string)(this[this.tableV_DecimoTercerMes_RPT.cpla_DescripcionPlanillaColumn]));
@@ -985,6 +1001,7 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             tableMapping.ColumnMappings.Add("dtm_Monto", "dtm_Monto");
             tableMapping.ColumnMappings.Add("emp_CuentaBancaria", "emp_CuentaBancaria");
             tableMapping.ColumnMappings.Add("dtm_CodigoPago", "dtm_CodigoPago");
+            tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
             tableMapping.ColumnMappings.Add("cpla_DescripcionPlanilla", "cpla_DescripcionPlanilla");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -1003,8 +1020,8 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT dtm_IdDecimoTercerMes, emp_Id, per_Nombres, per_Apellidos, dtm_FechaPago, " +
-                "dtm_Monto, emp_CuentaBancaria, dtm_CodigoPago, cpla_DescripcionPlanilla FROM Pla" +
-                "ni.V_DecimoTercerMes_RPT";
+                "dtm_Monto, emp_CuentaBancaria, dtm_CodigoPago, cpla_IdPlanilla, cpla_Descripcion" +
+                "Planilla FROM Plani.V_DecimoTercerMes_RPT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

@@ -200,6 +200,7 @@
     <Compile Include="Models\cCatalogoDePlanillas.cs" />
     <Compile Include="Models\cCatalogoIngresos.cs" />
     <Compile Include="Models\cDecimoTercerMes.cs" />
+    <Compile Include="Models\cDecimoTercerMesRPT.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />

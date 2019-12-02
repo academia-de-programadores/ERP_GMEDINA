@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT dtm_IdDecimoTercerMes, emp_Id, per_Nombres, per_Apellidos, dtm_FechaPago, dtm_Monto, emp_CuentaBancaria, dtm_CodigoPago, cpla_DescripcionPlanilla FROM Plani.V_DecimoTercerMes_RPT</CommandText>
+                    <CommandText>SELECT dtm_IdDecimoTercerMes, emp_Id, per_Nombres, per_Apellidos, dtm_FechaPago, dtm_Monto, emp_CuentaBancaria, dtm_CodigoPago, cpla_IdPlanilla, cpla_DescripcionPlanilla FROM Plani.V_DecimoTercerMes_RPT</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -27,6 +27,7 @@
               <Mapping SourceColumn="dtm_Monto" DataSetColumn="dtm_Monto" />
               <Mapping SourceColumn="emp_CuentaBancaria" DataSetColumn="emp_CuentaBancaria" />
               <Mapping SourceColumn="dtm_CodigoPago" DataSetColumn="dtm_CodigoPago" />
+              <Mapping SourceColumn="cpla_IdPlanilla" DataSetColumn="cpla_IdPlanilla" />
               <Mapping SourceColumn="cpla_DescripcionPlanilla" DataSetColumn="cpla_DescripcionPlanilla" />
             </Mappings>
             <Sources />
@@ -74,6 +75,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
               <xs:element name="cpla_DescripcionPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_DescripcionPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_DescripcionPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_DescripcionPlanillaColumn" msprop:Generator_UserColumnName="cpla_DescripcionPlanilla">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -86,9 +88,5 @@
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:V_DecimoTercerMes_RPT" />
-      <xs:field xpath="mstns:dtm_IdDecimoTercerMes" />
-    </xs:unique>
   </xs:element>
 </xs:schema>

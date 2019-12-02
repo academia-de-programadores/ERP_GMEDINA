@@ -30,6 +30,10 @@ namespace ERP_GMEDINA.Controllers
 		ReportesPlanillaDS ds = new ReportesPlanillaDS();
 		public ActionResult DecimoTercerMesIndexRPT()
 		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
 			reportViewer.SizeToReportContent = true;
