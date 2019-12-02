@@ -28,7 +28,8 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.area_Id,
-                   Descripcion: value.area_Descripcion
+                   Descripcion: value.area_Descripcion,
+                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0]
                });
            });
            tabla.draw();

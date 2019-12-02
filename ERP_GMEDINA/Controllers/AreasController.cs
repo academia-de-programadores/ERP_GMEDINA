@@ -34,7 +34,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             area_Id = t.area_Id,
                             area_Descripcion = t.area_Descripcion,
-                            Encargado=t.tbCargos.tbEmpleados.Where(c=>c.per_Id==c.tbPersonas.per_Id).Select(p=> p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+                            Encargado = t.tbCargos.tbEmpleados
+                                .Select(p=> p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
                         }
                         )
                         .ToList();
