@@ -23,15 +23,18 @@ function llenarTabla() {
        '/Empleados/llenarTabla',
        'POST',
        function (Lista) {
+           //var tabla = $("#IndexTable").DataTable();
            tabla.clear();
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.emp_Id,
-                   Cargos: value.car_Descripcion,
-                   Area: area_Descripcion,
-                   Departamento: depto_Descripcion,
-                   Jornada: jor_Descripcion,
+                   Identidad: value.per_Identidad,
+                   Nombre: value.Nombre,
+                   Departamento: value.depto_Descripcion,
+                   Sexo: value.per_Sexo,
+                   Edad: value.per_Edad,
+                   Telefono: value.per_Telefono,
+                   Correo: value.per_CorreoElectronico
 
                });
            });

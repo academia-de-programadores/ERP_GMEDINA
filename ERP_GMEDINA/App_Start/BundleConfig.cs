@@ -490,6 +490,9 @@ namespace ERP_GMEDINA
 
                 bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
                                "~/Scripts/app/general/Idiomas/Idiomas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
+                              "~/Scripts/app/general/Empleados/IndexEmpleados.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

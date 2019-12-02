@@ -31,11 +31,13 @@ namespace ERP_GMEDINA.Controllers
                     var tbEmpleados = db.tbEmpleados
                         .Select(x=>new
                         {
-                            car_Descripcion = x.tbCargos.car_Descripcion,
-                            area_Id = x.area_Id,
-                            depto_Id = x.depto_Id,
-                            jor_Id = x.jor_Id,
-                            emp_Fechaingreso = x.emp_Fechaingreso
+                            per_Identidad = x.tbPersonas.per_Identidad,
+                            Nombre = x.tbPersonas.per_Nombres+" "+x.tbPersonas.per_Apellidos,
+                            depto_Descripcion = x.tbDepartamentos.depto_Descripcion,
+                            per_Sexo = x.tbPersonas.per_Sexo,
+                            per_Edad = x.tbPersonas.per_Edad,
+                            per_Telefono = x.tbPersonas.per_Telefono,
+                            per_CorreoElectronico = x.tbPersonas.per_CorreoElectronico
                         })
                         .ToList();
                     return Json(tbEmpleados, JsonRequestBehavior.AllowGet);
