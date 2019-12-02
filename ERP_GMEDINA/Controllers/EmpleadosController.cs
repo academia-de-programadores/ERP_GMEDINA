@@ -48,31 +48,22 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }            
         }
-        public ActionResult ChildRowData(int? id)
+        public ActionResult ChildRowData(int id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<tbEmpleados> lista = new List<tbEmpleados> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
+            // List<tbEmpleados> lista = new List<tbEmpleados> { };
+            //var LISTA = new { };
+           // IQueryable<List> list = Enumerable.Empty<List>().AsQueryable();
+            try
                 {
-                    //lista = db.tbEmpleados.Where(x => x.per_Id == id).ToList();
-                    //var list = db.tbEmpleados.
-                    //Join(db.tbCargos, u => u.car_Id, uir => uir.car_Id,
-                    //(u, uir) => new { u, uir })
-                    //.Join(db.tbAreas,t=>t.)
-                    //.Select(m => new AddUserToRole
-                    //{
-                    //    UserName = m.r.u.UserName,
-                    //    RoleName = m.ro.RoleName
-                    //});
+                ///////HACER VISTA////
                 }
-                catch
+                catch 
                 {
                 }
-            }
-            return Json(lista, JsonRequestBehavior.AllowGet);
+            
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
 
