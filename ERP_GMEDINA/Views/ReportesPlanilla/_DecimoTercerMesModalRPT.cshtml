@@ -1,0 +1,24 @@
+﻿@model ERP_GMEDINA.Models.tbDecimoTercerMes
+
+@using (Html.BeginForm("DecimoTercerMesParametrosRPT", "ReportesPlanilla"))
+{
+	<div class="modal-body">
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.dtm_FechaPago, htmlAttributes: new { @class = "font-noraml" }) <br />
+			<div class="input-group date">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.dtm_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dtm_FechaPago", @id = "dtm_FechaPago" } })
+			</div>
+			@Html.ValidationMessageFor(model => model.dtm_FechaPago, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+		</div>
+
+		<input type="hidden" value="pdf" name="id" />
+
+
+
+		<div class="modal-footer">
+			<input type="submit" value="Create" class="btn btn-default" />
+		</div>
+
+	</div>
+}
