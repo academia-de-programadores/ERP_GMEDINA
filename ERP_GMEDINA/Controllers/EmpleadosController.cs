@@ -57,7 +57,16 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.tbEmpleados.Where(x => x.per_Id == id).ToList();
+                    //lista = db.tbEmpleados.Where(x => x.per_Id == id).ToList();
+                    //var list = db.tbEmpleados.
+                    //Join(db.tbCargos, u => u.car_Id, uir => uir.car_Id,
+                    //(u, uir) => new { u, uir })
+                    //.Join(db.tbAreas,t=>t.)
+                    //.Select(m => new AddUserToRole
+                    //{
+                    //    UserName = m.r.u.UserName,
+                    //    RoleName = m.ro.RoleName
+                    //});
                 }
                 catch
                 {
