@@ -70,9 +70,6 @@ $("#btnCerrarCrear").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
-
-    //ocultar el modal
-    $("#AgregarCatalogoDeducciones").modal('hide');
 });
 
 
@@ -86,14 +83,13 @@ $("#IconCerrarCreate").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
-
 });
 
 
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnCreateRegistroDeduccion").click(function () {
     var cde_DescripcionDeduccionA = $("#cde_DescripcionDeduccionA").val();
-    var tde_IdTipoDedu = $('#tde_IdTipoDedu').val();
+    var tde_IdTipoDedu = $("#tde_IdTipoDedu").val();
     var cde_PorcentajeColaboradorA = $("#cde_PorcentajeColaboradorA").val();
     var cde_PorcentajeEmpresaA = $("#cde_PorcentajeEmpresaA").val();
 
@@ -108,7 +104,7 @@ $("#btnCreateRegistroDeduccion").click(function () {
         $("#Validation_descipcion2A").css("display", "");
         $("#tde_IdTipoDedu").val("0");
     }
-    else if (tde_IdTipoDedu != '0' || tde_IdTipoDedu != null) {
+    else {
         $("#Validation_descipcion2A").css("display", "none");
     }
 
@@ -142,7 +138,7 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         .done(function (data) {
             console.log('la data del DDL ES: ' + data);
             $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
+            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
@@ -168,7 +164,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
         if (data != "error") {
             cargarGridDeducciones();
 
-            
+            //ocultar el modal
+            $("#AgregarCatalogoDeducciones").modal('hide');
 
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
