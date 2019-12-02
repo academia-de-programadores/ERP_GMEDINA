@@ -171,9 +171,11 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cIdiomas.cs" />
+    <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
     <Compile Include="Models\cUsuarios.cs" />

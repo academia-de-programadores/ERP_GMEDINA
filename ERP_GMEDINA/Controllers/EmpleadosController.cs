@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: Empleados
         public ActionResult Index()
         {
-            var tbEmpleados = db.tbEmpleados.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbAreas).Include(t => t.tbCargos).Include(t => t.tbPersonas);
-            return View(tbEmpleados.ToList());
+            var tbEmpleados = new List < tbEmpleados >{ };
+            return View(tbEmpleados);
         }
         public ActionResult llenarTabla()
         {
@@ -52,12 +52,12 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<tbPersonas> lista = new List<tbPersonas> { };
+            List<tbEmpleados> lista = new List<tbEmpleados> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.tbPersonas.Where(x => x.per_Id == id).ToList();
+                    lista = db.tbEmpleados.Where(x => x.per_Id == id).ToList();
                 }
                 catch
                 {
