@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int tede_Id { get; set; }
         public decimal tede_RangoInicial { get; set; }
         public decimal tede_RangoFinal { get; set; }
-        public int tede_Porcentaje { get; set; }
+        public decimal tede_Porcentaje { get; set; }
         public int cde_IdDeducciones { get; set; }
         public int tede_UsuarioCrea { get; set; }
         public System.DateTime tede_FechaCrea { get; set; }

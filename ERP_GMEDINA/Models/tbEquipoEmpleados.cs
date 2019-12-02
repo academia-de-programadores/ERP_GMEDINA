@@ -23,7 +23,8 @@ namespace ERP_GMEDINA.Models
         public int eqem_Id { get; set; }
         public int emp_Id { get; set; }
         public int eqtra_Id { get; set; }
-        public System.DateTime eqem_Fecha { get; set; }
+        public System.DateTime eqem_FechaEntrega { get; set; }
+        public Nullable<System.DateTime> eqem_Fechadevolucion { get; set; }
         public bool eqem_Estado { get; set; }
         public string eqem_RazonInactivo { get; set; }
         public int eqem_UsuarioCrea { get; set; }

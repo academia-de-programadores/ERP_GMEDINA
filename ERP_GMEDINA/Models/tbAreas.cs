@@ -18,11 +18,9 @@ namespace ERP_GMEDINA.Models
         public tbAreas()
         {
             this.tbDepartamentos = new HashSet<tbDepartamentos>();
-            this.tbEmpleados = new HashSet<tbEmpleados>();
         }
     
         public int area_Id { get; set; }
-        public int car_Id { get; set; }
         public int suc_Id { get; set; }
         public string area_Descripcion { get; set; }
         public bool area_Estado { get; set; }
@@ -36,9 +34,6 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         public virtual tbSucursales tbSucursales { get; set; }
     }
 }

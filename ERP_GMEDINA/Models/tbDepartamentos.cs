@@ -17,13 +17,12 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbDepartamentos()
         {
-            this.tbEmpleados = new HashSet<tbEmpleados>();
+            this.tbCargos = new HashSet<tbCargos>();
             this.tbHistorialContrataciones = new HashSet<tbHistorialContrataciones>();
         }
     
         public int depto_Id { get; set; }
         public int area_Id { get; set; }
-        public int car_Id { get; set; }
         public string depto_Descripcion { get; set; }
         public bool depto_Estado { get; set; }
         public string depto_RazonInactivo { get; set; }
@@ -35,9 +34,8 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
+        public virtual ICollection<tbCargos> tbCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
     }

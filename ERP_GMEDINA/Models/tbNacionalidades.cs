@@ -21,6 +21,7 @@ namespace ERP_GMEDINA.Models
         }
     
         public int nac_Id { get; set; }
+        public string nac_Pais { get; set; }
         public string nac_Descripcion { get; set; }
         public bool nac_Estado { get; set; }
         public string nac_RazonInactivo { get; set; }

@@ -16,7 +16,8 @@ namespace ERP_GMEDINA.Models
     {
         public int hcar_Id { get; set; }
         public int emp_Id { get; set; }
-        public int car_Id { get; set; }
+        public Nullable<int> car_IdAnterior { get; set; }
+        public int car_IdNuevo { get; set; }
         public Nullable<System.DateTime> hcar_Fecha { get; set; }
         public bool hcar_Estado { get; set; }
         public string hcar_RazonInactivo { get; set; }
@@ -28,6 +29,7 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
+        public virtual tbCargos tbCargos1 { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

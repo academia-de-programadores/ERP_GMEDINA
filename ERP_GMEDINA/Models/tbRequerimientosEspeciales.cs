@@ -12,31 +12,29 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbCargos
+    public partial class tbRequerimientosEspeciales
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbCargos()
+        public tbRequerimientosEspeciales()
         {
-            this.tbHistorialCargos = new HashSet<tbHistorialCargos>();
-            this.tbHistorialCargos1 = new HashSet<tbHistorialCargos>();
+            this.tbRequerimientosEspecialesRequisicion = new HashSet<tbRequerimientosEspecialesRequisicion>();
+            this.tbRequerimientosEspecialesPersona = new HashSet<tbRequerimientosEspecialesPersona>();
         }
     
-        public int car_Id { get; set; }
-        public string car_Descripcion { get; set; }
-        public Nullable<int> depto_Id { get; set; }
-        public bool car_Estado { get; set; }
-        public string car_RazonInactivo { get; set; }
-        public int car_UsuarioCrea { get; set; }
-        public System.DateTime car_FechaCrea { get; set; }
-        public Nullable<int> car_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> car_FechaModifica { get; set; }
+        public int resp_Id { get; set; }
+        public string resp_Descripcion { get; set; }
+        public bool resp_Estado { get; set; }
+        public string resp_RazonInactivo { get; set; }
+        public int resp_UsuarioCrea { get; set; }
+        public System.DateTime resp_FechaCrea { get; set; }
+        public Nullable<int> resp_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> resp_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialCargos> tbHistorialCargos { get; set; }
+        public virtual ICollection<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialCargos> tbHistorialCargos1 { get; set; }
-        public virtual tbDepartamentos tbDepartamentos { get; set; }
+        public virtual ICollection<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
     }
 }
