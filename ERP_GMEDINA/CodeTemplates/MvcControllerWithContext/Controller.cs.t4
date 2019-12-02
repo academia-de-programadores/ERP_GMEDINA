@@ -374,7 +374,7 @@ $('#ModalEditar').modal('show');
             }
         });
 }
-function tablaDetalles(ID) {
+function tablaDetalles(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().id;
@@ -390,8 +390,8 @@ $("#ModalDetalles").find("#<#= CamposSinAuditoria[fori] #>")["0"].innerText = ob
 				<#}#>
 $("#ModalDetalles").find("#<#= Estado #>")["0"].innerText = obj.<#= Estado #>;
                 $("#ModalDetalles").find("#<#= RazonInactivo #>")["0"].innerText = obj.<#= RazonInactivo #>;
-                $("#ModalDetalles").find("#<#= FechaCrea #>")["0"].innerText = FechaFormato(obj.<#= RazonInactivo #>);
-                $("#ModalDetalles").find("#<#= FechaModifica #>")["0"].innerText = FechaFormato(obj.<#= RazonInactivo #>);
+                $("#ModalDetalles").find("#<#= FechaCrea #>")["0"].innerText = FechaFormato(obj.<#= FechaCrea #>);
+                $("#ModalDetalles").find("#<#= FechaModifica #>")["0"].innerText = FechaFormato(obj.<#= FechaModifica #>);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
@@ -407,9 +407,8 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                console.log('hola');
                 tabla.row.add({
-					id: value.<#= Id.Substring(PrefijoTabla.Length) #>,
+					id: value.<#= PrefijoTabla #><#= Id.Substring(PrefijoTabla.Length) #>,
 <#								
 				for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){#>
 					<#= CamposSinAuditoria[fori].Substring(PrefijoTabla.Length + 1) #>: value.<#= CamposSinAuditoria[fori] #><#if(fori != CamposSinAuditoria.Length - 1){#>,<#}else{#><#}#>
@@ -521,7 +520,7 @@ $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data!=null) {
-        data.<#= PrefijoTabla #>Id = id;
+        data.<#= PrefijoTabla #>_Id = id;
         data = JSON.stringify({ <#= entitySetName #>: data });
         _ajax(data,
             '/<#= entitySetName.Substring(2) #>/Edit',
