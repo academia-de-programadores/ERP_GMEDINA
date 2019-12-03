@@ -220,6 +220,19 @@
           <Property Name="tmon_UsuarioModifica" Type="int" />
           <Property Name="tmon_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTitulos">
+          <Key>
+            <PropertyRef Name="titu_Id" />
+          </Key>
+          <Property Name="titu_Id" Type="int" Nullable="false" />
+          <Property Name="titu_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="titu_Estado" Type="bit" Nullable="false" />
+          <Property Name="titu_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="titu_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="titu_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="titu_UsuarioModifica" Type="int" />
+          <Property Name="titu_FechaModifica" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Datos_Empleado">
@@ -551,6 +564,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Principal>
             <Dependent Role="tbTipoMonedas">
               <PropertyRef Name="tmon_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTitulos" Type="Self.tbTitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTitulos">
+              <PropertyRef Name="titu_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTitulos" Type="Self.tbTitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTitulos">
+              <PropertyRef Name="titu_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1046,6 +1083,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Parameter Name="tmon_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="tmon_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbTitulos_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="titu_id" Type="int" Mode="In" />
+          <Parameter Name="titu_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="titu_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="titu_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTitulos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="titu_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="titu_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="titu_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTitulos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="titu_id" Type="int" Mode="In" />
+          <Parameter Name="titu_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="titu_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTitulos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="titu_Id" Type="int" Mode="In" />
+          <Parameter Name="titu_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="titu_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="titu_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbAreas" EntityType="Self.tbAreas" Schema="rrhh" store:Type="Tables" />
@@ -1061,6 +1120,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoMonedas" EntityType="Self.tbTipoMonedas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_Datos_Empleado" EntityType="Self.V_Datos_Empleado" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_Datos_Empleado].[emp_Id] AS [emp_Id], 
@@ -1176,6 +1236,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTitulos" EntitySet="tbTitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTitulos" EntitySet="tbTitulos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -1771,6 +1839,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             <Parameter Name="comp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="comp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbTitulos" EntityType="ERP_GMEDINAModel.tbTitulos" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTitulos" EntitySet="tbTitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTitulos" EntitySet="tbTitulos" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Delete_Result)">
+            <Parameter Name="titu_id" Mode="In" Type="Int32" />
+            <Parameter Name="titu_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Insert_Result)">
+            <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="titu_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="titu_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Restore_Result)">
+            <Parameter Name="titu_id" Mode="In" Type="Int32" />
+            <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result)">
+            <Parameter Name="titu_Id" Mode="In" Type="Int32" />
+            <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1847,6 +1946,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbSueldos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_ue_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSueldos" />
           <NavigationProperty Name="tbCompetencias" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCompetencias" />
           <NavigationProperty Name="tbCompetencias1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCompetencias" />
+          <NavigationProperty Name="tbTitulos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTitulos" />
+          <NavigationProperty Name="tbTitulos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulos" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -2639,6 +2740,57 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
         <ComplexType Name="UDP_RRHH_tbCompetencias_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbTitulos">
+          <Key>
+            <PropertyRef Name="titu_Id" />
+          </Key>
+          <Property Name="titu_Id" Type="Int32" Nullable="false" />
+          <Property Name="titu_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="titu_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="titu_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="titu_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="titu_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="titu_UsuarioModifica" Type="Int32" />
+          <Property Name="titu_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" FromRole="tbTitulos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" FromRole="tbTitulos" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTitulos" Role="tbTitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTitulos">
+              <PropertyRef Name="titu_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTitulos" Role="tbTitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTitulos">
+              <PropertyRef Name="titu_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3143,6 +3295,48 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbTitulos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTitulos">
+              <MappingFragment StoreEntitySet="tbTitulos">
+                <ScalarProperty Name="titu_FechaModifica" ColumnName="titu_FechaModifica" />
+                <ScalarProperty Name="titu_UsuarioModifica" ColumnName="titu_UsuarioModifica" />
+                <ScalarProperty Name="titu_FechaCrea" ColumnName="titu_FechaCrea" />
+                <ScalarProperty Name="titu_UsuarioCrea" ColumnName="titu_UsuarioCrea" />
+                <ScalarProperty Name="titu_RazonInactivo" ColumnName="titu_RazonInactivo" />
+                <ScalarProperty Name="titu_Estado" ColumnName="titu_Estado" />
+                <ScalarProperty Name="titu_Descripcion" ColumnName="titu_Descripcion" />
+                <ScalarProperty Name="titu_Id" ColumnName="titu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

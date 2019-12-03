@@ -43,6 +43,8 @@ namespace ERP_GMEDINA.Models
             this.tbSueldos1 = new HashSet<tbSueldos>();
             this.tbCompetencias = new HashSet<tbCompetencias>();
             this.tbCompetencias1 = new HashSet<tbCompetencias>();
+            this.tbTitulos = new HashSet<tbTitulos>();
+            this.tbTitulos1 = new HashSet<tbTitulos>();
         }
     
         public int usu_Id { get; set; }
@@ -108,5 +110,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbCompetencias> tbCompetencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbCompetencias> tbCompetencias1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTitulos> tbTitulos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTitulos> tbTitulos1 { get; set; }
     }
 }

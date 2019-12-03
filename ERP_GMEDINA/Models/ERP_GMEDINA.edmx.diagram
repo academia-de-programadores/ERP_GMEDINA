@@ -57,6 +57,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCompetencias" Width="1.5" PointX="3" PointY="44.5" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioModifica" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulos" Width="1.5" PointX="3" PointY="48.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -42,6 +42,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
         public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
+        public virtual DbSet<tbTitulos> tbTitulos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1374,6 +1375,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("comp_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCompetencias_Update_Result>("UDP_RRHH_tbCompetencias_Update", comp_IdParameter, comp_DescripcionParameter, comp_UsuarioModificaParameter, comp_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTitulos_Delete_Result> UDP_RRHH_tbTitulos_Delete(Nullable<int> titu_id, string titu_razon_Inactivo, Nullable<int> titu_UsuarioModifica, Nullable<System.DateTime> titu_FechaModifica)
+        {
+            var titu_idParameter = titu_id.HasValue ?
+                new ObjectParameter("titu_id", titu_id) :
+                new ObjectParameter("titu_id", typeof(int));
+    
+            var titu_razon_InactivoParameter = titu_razon_Inactivo != null ?
+                new ObjectParameter("titu_razon_Inactivo", titu_razon_Inactivo) :
+                new ObjectParameter("titu_razon_Inactivo", typeof(string));
+    
+            var titu_UsuarioModificaParameter = titu_UsuarioModifica.HasValue ?
+                new ObjectParameter("titu_UsuarioModifica", titu_UsuarioModifica) :
+                new ObjectParameter("titu_UsuarioModifica", typeof(int));
+    
+            var titu_FechaModificaParameter = titu_FechaModifica.HasValue ?
+                new ObjectParameter("titu_FechaModifica", titu_FechaModifica) :
+                new ObjectParameter("titu_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Delete_Result>("UDP_RRHH_tbTitulos_Delete", titu_idParameter, titu_razon_InactivoParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTitulos_Insert_Result> UDP_RRHH_tbTitulos_Insert(string titu_Descripcion, Nullable<int> titu_UsuarioCrea, Nullable<System.DateTime> titu_FechaCrea)
+        {
+            var titu_DescripcionParameter = titu_Descripcion != null ?
+                new ObjectParameter("titu_Descripcion", titu_Descripcion) :
+                new ObjectParameter("titu_Descripcion", typeof(string));
+    
+            var titu_UsuarioCreaParameter = titu_UsuarioCrea.HasValue ?
+                new ObjectParameter("titu_UsuarioCrea", titu_UsuarioCrea) :
+                new ObjectParameter("titu_UsuarioCrea", typeof(int));
+    
+            var titu_FechaCreaParameter = titu_FechaCrea.HasValue ?
+                new ObjectParameter("titu_FechaCrea", titu_FechaCrea) :
+                new ObjectParameter("titu_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Insert_Result>("UDP_RRHH_tbTitulos_Insert", titu_DescripcionParameter, titu_UsuarioCreaParameter, titu_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTitulos_Restore_Result> UDP_RRHH_tbTitulos_Restore(Nullable<int> titu_id, Nullable<int> titu_UsuarioModifica, Nullable<System.DateTime> titu_FechaModifica)
+        {
+            var titu_idParameter = titu_id.HasValue ?
+                new ObjectParameter("titu_id", titu_id) :
+                new ObjectParameter("titu_id", typeof(int));
+    
+            var titu_UsuarioModificaParameter = titu_UsuarioModifica.HasValue ?
+                new ObjectParameter("titu_UsuarioModifica", titu_UsuarioModifica) :
+                new ObjectParameter("titu_UsuarioModifica", typeof(int));
+    
+            var titu_FechaModificaParameter = titu_FechaModifica.HasValue ?
+                new ObjectParameter("titu_FechaModifica", titu_FechaModifica) :
+                new ObjectParameter("titu_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Restore_Result>("UDP_RRHH_tbTitulos_Restore", titu_idParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTitulos_Update_Result> UDP_RRHH_tbTitulos_Update(Nullable<int> titu_Id, string titu_Descripcion, Nullable<int> titu_UsuarioModifica, Nullable<System.DateTime> titu_FechaModifica)
+        {
+            var titu_IdParameter = titu_Id.HasValue ?
+                new ObjectParameter("titu_Id", titu_Id) :
+                new ObjectParameter("titu_Id", typeof(int));
+    
+            var titu_DescripcionParameter = titu_Descripcion != null ?
+                new ObjectParameter("titu_Descripcion", titu_Descripcion) :
+                new ObjectParameter("titu_Descripcion", typeof(string));
+    
+            var titu_UsuarioModificaParameter = titu_UsuarioModifica.HasValue ?
+                new ObjectParameter("titu_UsuarioModifica", titu_UsuarioModifica) :
+                new ObjectParameter("titu_UsuarioModifica", typeof(int));
+    
+            var titu_FechaModificaParameter = titu_FechaModifica.HasValue ?
+                new ObjectParameter("titu_FechaModifica", titu_FechaModifica) :
+                new ObjectParameter("titu_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
         }
     }
 }
