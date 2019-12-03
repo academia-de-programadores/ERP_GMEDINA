@@ -1,4 +1,5 @@
-﻿function format(obj) {
+﻿
+function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
