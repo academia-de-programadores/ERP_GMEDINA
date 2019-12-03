@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,6 +172,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cCompetencias.cs" />
     <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
@@ -204,6 +206,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbCargos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCompetencias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbDepartamentos.cs">
@@ -255,6 +260,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbCompetencias_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbCompetencias_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbCompetencias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Delete_Result.cs">
@@ -546,6 +560,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\general.js" />
@@ -1105,6 +1120,11 @@
     <Content Include="Views\Empleados\Details.cshtml" />
     <Content Include="Views\Empleados\Edit.cshtml" />
     <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\Competencias\Index.cshtml" />
+    <Content Include="Views\Competencias\_Create.cshtml" />
+    <Content Include="Views\Competencias\_Delete.cshtml" />
+    <Content Include="Views\Competencias\_Detalles.cshtml" />
+    <Content Include="Views\Competencias\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

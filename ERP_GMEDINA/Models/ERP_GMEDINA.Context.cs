@@ -41,6 +41,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbJornadas> tbJornadas { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
         public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
+        public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1335,6 +1336,23 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("comp_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCompetencias_Insert_Result>("UDP_RRHH_tbCompetencias_Insert", comp_DescripcionParameter, comp_UsuarioCreaParameter, comp_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbCompetencias_Restore(Nullable<int> comp_Id, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)
+        {
+            var comp_IdParameter = comp_Id.HasValue ?
+                new ObjectParameter("comp_Id", comp_Id) :
+                new ObjectParameter("comp_Id", typeof(int));
+    
+            var comp_UsuarioModificaParameter = comp_UsuarioModifica.HasValue ?
+                new ObjectParameter("comp_UsuarioModifica", comp_UsuarioModifica) :
+                new ObjectParameter("comp_UsuarioModifica", typeof(int));
+    
+            var comp_FechaModificaParameter = comp_FechaModifica.HasValue ?
+                new ObjectParameter("comp_FechaModifica", comp_FechaModifica) :
+                new ObjectParameter("comp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCompetencias_Restore", comp_IdParameter, comp_UsuarioModificaParameter, comp_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbCompetencias_Update_Result> UDP_RRHH_tbCompetencias_Update(Nullable<int> comp_Id, string comp_Descripcion, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)
