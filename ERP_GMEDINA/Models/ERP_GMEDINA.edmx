@@ -193,6 +193,19 @@
           <Property Name="ue_UsuarioModifica" Type="int" />
           <Property Name="sue_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTipoAmonestaciones">
+          <Key>
+            <PropertyRef Name="tamo_Id" />
+          </Key>
+          <Property Name="tamo_Id" Type="int" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tamo_Estado" Type="bit" Nullable="false" />
+          <Property Name="tamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="tamo_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="tamo_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tamo_UsuarioModifica" Type="int" />
+          <Property Name="tamo_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
             <PropertyRef Name="tiho_Id" />
@@ -529,6 +542,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Principal>
             <Dependent Role="tbSueldos">
               <PropertyRef Name="ue_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoAmonestaciones" Type="Self.tbTipoAmonestaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoAmonestaciones">
+              <PropertyRef Name="tamo_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoAmonestaciones" Type="Self.tbTipoAmonestaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoAmonestaciones">
+              <PropertyRef Name="tamo_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1098,6 +1135,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Id" Type="int" Mode="In" />
+          <Parameter Name="tamo_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Id" Type="int" Mode="In" />
+          <Parameter Name="tamo_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbTipoAmonestaciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tamo_Id" Type="int" Mode="In" />
+          <Parameter Name="tamo_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tamo_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoHora_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tiho_Id" Type="int" Mode="In" />
           <Parameter Name="tiho_Descripcion" Type="nvarchar" Mode="In" />
@@ -1199,6 +1258,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <EntitySet Name="tbJornadas" EntityType="Self.tbJornadas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoMonedas" EntityType="Self.tbTipoMonedas" Schema="rrhh" store:Type="Tables" />
@@ -1302,6 +1362,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_ue_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_ue_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbSueldos" EntitySet="tbSueldos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -2013,6 +2081,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbTipoAmonestaciones" EntityType="ERP_GMEDINAModel.tbTipoAmonestaciones" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result)">
+            <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result)">
+            <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Restore_Result)">
+            <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result)">
+            <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2093,6 +2192,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbTitulos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulos" />
           <NavigationProperty Name="tbFasesReclutamiento" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbFasesReclutamiento1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
+          <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
+          <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -2999,6 +3100,57 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
         <ComplexType Name="UDP_RRHH_tbCargos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbTipoAmonestaciones">
+          <Key>
+            <PropertyRef Name="tamo_Id" />
+          </Key>
+          <Property Name="tamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tamo_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tamo_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="tamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tamo_UsuarioModifica" Type="Int32" />
+          <Property Name="tamo_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoAmonestaciones" Role="tbTipoAmonestaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoAmonestaciones">
+              <PropertyRef Name="tamo_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoAmonestaciones" Role="tbTipoAmonestaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoAmonestaciones">
+              <PropertyRef Name="tamo_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3615,6 +3767,48 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbTipoAmonestaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoAmonestaciones">
+              <MappingFragment StoreEntitySet="tbTipoAmonestaciones">
+                <ScalarProperty Name="tamo_FechaModifica" ColumnName="tamo_FechaModifica" />
+                <ScalarProperty Name="tamo_UsuarioModifica" ColumnName="tamo_UsuarioModifica" />
+                <ScalarProperty Name="tamo_FechaCrea" ColumnName="tamo_FechaCrea" />
+                <ScalarProperty Name="tamo_UsuarioCrea" ColumnName="tamo_UsuarioCrea" />
+                <ScalarProperty Name="tamo_RazonInactivo" ColumnName="tamo_RazonInactivo" />
+                <ScalarProperty Name="tamo_Estado" ColumnName="tamo_Estado" />
+                <ScalarProperty Name="tamo_Descripcion" ColumnName="tamo_Descripcion" />
+                <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

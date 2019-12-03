@@ -44,6 +44,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
+        public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1604,6 +1605,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("car_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Delete_Result> UDP_RRHH_tbTipoAmonestaciones_Delete(Nullable<int> tamo_Id, string tamo_razon_Inactivo, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)
+        {
+            var tamo_IdParameter = tamo_Id.HasValue ?
+                new ObjectParameter("tamo_Id", tamo_Id) :
+                new ObjectParameter("tamo_Id", typeof(int));
+    
+            var tamo_razon_InactivoParameter = tamo_razon_Inactivo != null ?
+                new ObjectParameter("tamo_razon_Inactivo", tamo_razon_Inactivo) :
+                new ObjectParameter("tamo_razon_Inactivo", typeof(string));
+    
+            var tamo_UsuarioModificaParameter = tamo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tamo_UsuarioModifica", tamo_UsuarioModifica) :
+                new ObjectParameter("tamo_UsuarioModifica", typeof(int));
+    
+            var tamo_FechaModificaParameter = tamo_FechaModifica.HasValue ?
+                new ObjectParameter("tamo_FechaModifica", tamo_FechaModifica) :
+                new ObjectParameter("tamo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Delete_Result>("UDP_RRHH_tbTipoAmonestaciones_Delete", tamo_IdParameter, tamo_razon_InactivoParameter, tamo_UsuarioModificaParameter, tamo_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Insert_Result> UDP_RRHH_tbTipoAmonestaciones_Insert(string tamo_Descripcion, Nullable<int> tamo_UsuarioCrea, Nullable<System.DateTime> tamo_FechaCrea)
+        {
+            var tamo_DescripcionParameter = tamo_Descripcion != null ?
+                new ObjectParameter("tamo_Descripcion", tamo_Descripcion) :
+                new ObjectParameter("tamo_Descripcion", typeof(string));
+    
+            var tamo_UsuarioCreaParameter = tamo_UsuarioCrea.HasValue ?
+                new ObjectParameter("tamo_UsuarioCrea", tamo_UsuarioCrea) :
+                new ObjectParameter("tamo_UsuarioCrea", typeof(int));
+    
+            var tamo_FechaCreaParameter = tamo_FechaCrea.HasValue ?
+                new ObjectParameter("tamo_FechaCrea", tamo_FechaCrea) :
+                new ObjectParameter("tamo_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Insert_Result>("UDP_RRHH_tbTipoAmonestaciones_Insert", tamo_DescripcionParameter, tamo_UsuarioCreaParameter, tamo_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Restore_Result> UDP_RRHH_tbTipoAmonestaciones_Restore(Nullable<int> tamo_Id, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)
+        {
+            var tamo_IdParameter = tamo_Id.HasValue ?
+                new ObjectParameter("tamo_Id", tamo_Id) :
+                new ObjectParameter("tamo_Id", typeof(int));
+    
+            var tamo_UsuarioModificaParameter = tamo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tamo_UsuarioModifica", tamo_UsuarioModifica) :
+                new ObjectParameter("tamo_UsuarioModifica", typeof(int));
+    
+            var tamo_FechaModificaParameter = tamo_FechaModifica.HasValue ?
+                new ObjectParameter("tamo_FechaModifica", tamo_FechaModifica) :
+                new ObjectParameter("tamo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Restore_Result>("UDP_RRHH_tbTipoAmonestaciones_Restore", tamo_IdParameter, tamo_UsuarioModificaParameter, tamo_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Update_Result> UDP_RRHH_tbTipoAmonestaciones_Update(Nullable<int> tamo_Id, string tamo_Descripcion, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)
+        {
+            var tamo_IdParameter = tamo_Id.HasValue ?
+                new ObjectParameter("tamo_Id", tamo_Id) :
+                new ObjectParameter("tamo_Id", typeof(int));
+    
+            var tamo_DescripcionParameter = tamo_Descripcion != null ?
+                new ObjectParameter("tamo_Descripcion", tamo_Descripcion) :
+                new ObjectParameter("tamo_Descripcion", typeof(string));
+    
+            var tamo_UsuarioModificaParameter = tamo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tamo_UsuarioModifica", tamo_UsuarioModifica) :
+                new ObjectParameter("tamo_UsuarioModifica", typeof(int));
+    
+            var tamo_FechaModificaParameter = tamo_FechaModifica.HasValue ?
+                new ObjectParameter("tamo_FechaModifica", tamo_FechaModifica) :
+                new ObjectParameter("tamo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoAmonestaciones_Update_Result>("UDP_RRHH_tbTipoAmonestaciones_Update", tamo_IdParameter, tamo_DescripcionParameter, tamo_UsuarioModificaParameter, tamo_FechaModificaParameter);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
     }
     public class cTipoAmonestaciones
     {
-        [Display(Name ="ID ")]
+        [Display(Name ="ID")]
         public int tamo_Id { get; set; }
 
         [Display (Name ="Descripcion")]

@@ -1,4 +1,7 @@
-﻿var id = 0;
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -39,11 +42,10 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                tabla.row.add([value.tamo_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tamo_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tamo_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    ID:value.tamo_Id,
+                    Descripcion:value.tamo_Descripcion
+                   }).draw();
             });
         });
 }

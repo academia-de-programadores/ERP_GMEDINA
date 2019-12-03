@@ -50,7 +50,7 @@ function llenarTabla() {
                 console.log(value.ticn_Descripcion);
                 tabla.row.add({
                     ID:value.ticn_Id,
-                Descripción:value.ticn_Descripcion
+                    Descripción:value.ticn_Descripcion
                     }).draw();
 
             });

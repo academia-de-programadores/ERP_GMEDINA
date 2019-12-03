@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbTipoAmonestaciones>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tipos de Amonestacicones";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-@*<div class="row wrapper border-bottom white-bg page-heading">
+<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>Tipo Amonestación</h2>
+        <h2>Amonestaciones</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
         </ol>
     </div>
-</div>*@
+</div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -34,16 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.tamo_Id">
-                            <td>@Html.DisplayFor(modelItem => item.tamo_Descripcion)</td>
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.tamo_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.tamo_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
+         
                     </tbody>                       
                   </table>
                 </div>

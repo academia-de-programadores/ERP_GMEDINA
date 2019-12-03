@@ -87,8 +87,8 @@
                     <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Amonestaciones <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Tipo de Amonestaciones</a>
+                            <li class="@Html.IsSelected(controller:"TipoAmonestaciones",action: "Index")">
+                                <a href="@Url.Action("Index", "TipoAmonestaciones")">Tipo de Amonestaciones</a>
                             </li>
                             <li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Audiencia de Descargo</a>
