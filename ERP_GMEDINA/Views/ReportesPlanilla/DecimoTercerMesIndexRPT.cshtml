@@ -1,7 +1,7 @@
 ﻿@using ReportViewerForMvc;
 
 @{
-    ViewBag.Title = "DecimoTercerMesIndexRPT";
+    ViewBag.Title = "Reporteria";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -17,7 +17,7 @@
 	</div>
 </div>
 <br />
-<button class="btn btn-primary btn-sm" id="ParametrosDecimoTercerMesRPT">Reporte Especifico</button>
+<button class="btn btn-primary btn-sm pull-left" id="ParametrosDecimoTercerMesRPT">Reporte Especifico</button>
 <br />
 <br />
 @Html.ReportViewer(ViewBag.ReportViewerDecimoTercerMesRPT as Microsoft.Reporting.WebForms.ReportViewer)
