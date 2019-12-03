@@ -42,11 +42,10 @@ function llenarTabla() {
             tabla.clear().draw();
             $.each(Lista, function (index, value) {
                 console.log(value.comp_Descripcion);
-                tabla.row.add([value.comp_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.comp_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.comp_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    ID:value.comp_Id,
+                    Descripcion: value.comp_Descripcion
+                }).draw();
             });
         });
 }

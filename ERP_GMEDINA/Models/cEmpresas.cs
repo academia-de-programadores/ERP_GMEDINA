@@ -11,7 +11,7 @@ namespace ERP_GMEDINA.Models
     {
 
     }
-
+        
     public class cEmpresas
     {
         [Display(Name = "Id")]

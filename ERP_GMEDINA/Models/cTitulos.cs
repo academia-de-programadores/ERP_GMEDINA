@@ -13,10 +13,10 @@ namespace ERP_GMEDINA.Models
     public class cTitulos
     {
 
-        [Display(Name = "ID Titulo")]
+        [Display(Name = "ID")]
         public int titu_Id { get; set; }
 
-        [Display(Name = "Descripcion Titulo")]
+        [Display(Name = "Descripcion")]
         public string titu_Descripcion { get; set; }
 
         [Display(Name = "Estado")]

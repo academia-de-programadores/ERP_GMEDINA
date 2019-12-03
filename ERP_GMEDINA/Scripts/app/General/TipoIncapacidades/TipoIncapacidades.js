@@ -48,11 +48,10 @@ function llenarTabla() {
             tabla.draw();
             $.each(lista, function (index, value) {
                 console.log(value.ticn_Descripcion);
-                tabla.row.add([value.ticn_Descripcion,
-                  "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.ticn_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.ticn_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    ID:value.ticn_Id,
+                Descripción:value.ticn_Descripcion
+                    }).draw();
 
             });
         });

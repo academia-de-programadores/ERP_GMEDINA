@@ -11,11 +11,10 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 console.log(value.empr_Nombre);
-                tabla.row.add([value.empr_Nombre,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.empr_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.empr_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    Id: value.empr_Id,   
+                    Empresa:value.empr_Nombre,
+                    }).draw();
             });
         });
 }

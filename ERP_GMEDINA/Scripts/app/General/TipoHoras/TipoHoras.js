@@ -49,18 +49,18 @@ function llenarTabla() {
         '/TipoHoras/llenarTabla',
         'POST',
         function (Lista) {
-            var IndexTable = $('#IndexTable').DataTable();
-            IndexTable.clear();
-            IndexTable.draw();
+            tabla.clear();
+            tabla.draw();
             $.each(Lista, function (index, value) {
                 //console.log(item.tiho_Descripcion);
-                IndexTable.row.add(['<tr data-id = "' + value.tiho_Id + '">' +
-                    value.tiho_Descripcion, value.tiho_Recargo,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalles(" + value.tiho_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
-                        "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + value.tiho_Id + ")' data-target='#ModalEditar'>Editar</button>" +
-                    "</div>"]).draw();
-            });
+           
+                  tabla.row.add({
+                      id: value.habi_Id,
+                      Descripcion: value.tiho_Descripcion,
+                      Recargo:value.tiho_Recargo
+                  });
+        });
+            tabla.draw();
         });
 }
 //Botones GET

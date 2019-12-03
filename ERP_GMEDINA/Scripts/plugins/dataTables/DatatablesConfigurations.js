@@ -32,40 +32,58 @@ $(document).ready(function () {
             });
         } else {
             columnas.push({ data: campo });
+            botones.push(contador);
         }
     });
-    var Test = $('#IndexTable').DataTable({
+    tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         responsive: true,
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'ExampleFile'
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'nadaaa'
+            },
 
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: botones
+                },
+                customize: function (win) {
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ],
         columns: columnas,
         order: [[col, 'asc']],
     });
 });
-    
-
-
-//$(document).ready(function () {
-//    var Test = $('#IndexTable').DataTable({
-//        "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-//        responsive: true,
-//        pageLength: 25,
-//        dom: '<"html5buttons"B>lTfgitp',
-       
-//        columns: columnas,
-//        order: [[col, 'asc']],
-//    });
-//});
-
-function ColCount() {
-    var col = document.getElementById('IndexTable').rows[0].cells.length;
-    console.log(col);
-    var RtrStr = "0";
-
-    for (var i = 1; i < col - 1; i++) {
-        RtrStr += ", " + i.toString();
-    }
-    return RtrStr;
-};

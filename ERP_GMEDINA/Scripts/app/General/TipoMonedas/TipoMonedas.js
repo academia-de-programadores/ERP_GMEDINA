@@ -45,11 +45,10 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 console.log(value.tmon_Descripcion);
-                tabla.row.add([value.tmon_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tmon_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tmon_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    Id:value.tmon_Id,
+                    Descripcion:value.tmon_Descripcion
+                }).draw();
             });
         });
 }

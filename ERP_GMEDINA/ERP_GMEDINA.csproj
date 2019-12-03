@@ -183,6 +183,7 @@
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
+    <Compile Include="Models\cTipoIncapacidades.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
@@ -1113,11 +1114,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1155,14 +1151,9 @@
     <Content Include="Views\TipoMonedas\_Delete.cshtml" />
     <Content Include="Views\TipoMonedas\_Detalles.cshtml" />
     <Content Include="Views\TipoMonedas\_Edit.cshtml" />
-    <Content Include="Views\Idiomas\Create.cshtml" />
-    <Content Include="Views\Idiomas\Delete.cshtml" />
-    <Content Include="Views\Idiomas\Details.cshtml" />
-    <Content Include="Views\Idiomas\Edit.cshtml" />
     <Content Include="Views\Idiomas\Index.cshtml" />
     <Content Include="Views\Idiomas\_Create.cshtml" />
     <Content Include="Views\Idiomas\_Delete.cshtml" />
-    <Content Include="Views\Idiomas\_Details.cshtml" />
     <Content Include="Views\Idiomas\_Detalles.cshtml" />
     <Content Include="Views\Idiomas\_Edit.cshtml" />
     <Content Include="Views\Empleados\Create.cshtml" />
