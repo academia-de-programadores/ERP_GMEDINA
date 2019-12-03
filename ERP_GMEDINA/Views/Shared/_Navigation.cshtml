@@ -137,17 +137,17 @@
                     <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Reclutamiento <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Listado de Competencias</a>
+                            <li class="@Html.IsSelected(controller:"Competencias", action: "Index")">
+                                <a href="@Url.Action("Index", "Competencias")">Listado de Competencias</a>
                             </li>
                             <li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Listado de Habilidades</a>
                             </li>
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Listado de Titulos</a>
+                            <li class="@Html.IsSelected(controller:"Titulos", action: "Index")">
+                                <a href="@Url.Action("Index", "Titulos")">Listado de Titulos</a>
                             </li>
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Fases de Reclutamiento</a>
+                            <li class="@Html.IsSelected(controller:"FasesReclutamiento", action: "Index")">
+                                <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
                             </li>
                             <li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Personas</a>
