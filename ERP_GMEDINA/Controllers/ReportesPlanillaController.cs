@@ -58,7 +58,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 
 		//Reporte con parametros
-		public ActionResult DecimoTercerMesParametrosRPT(DateTime dtm_FechaPago, string cpla_DescripcionPlanilla, string id)
+		public ActionResult DecimoTercerMesParametrosRPT(DateTime dtm_FechaPago, int cpla_DescripcionPlanilla, string id)
 		{
 			LocalReport lr = new LocalReport();
 			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "DecimoTercerMesRPT.rdlc");
@@ -72,7 +72,7 @@ namespace ERP_GMEDINA.Controllers
 			}
 			List<V_DecimoTercerMes_RPT> cm = new List<V_DecimoTercerMes_RPT>();
 
-			cm = db.V_DecimoTercerMes_RPT.Where(x => dtm_FechaPago == x.dtm_FechaPago && cpla_DescripcionPlanilla == x.cpla_DescripcionPlanilla).ToList();
+			cm = db.V_DecimoTercerMes_RPT.Where(x => dtm_FechaPago == x.dtm_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
 
 			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
 			lr.DataSources.Add(rd);

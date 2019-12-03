@@ -15,8 +15,6 @@ $(document).ready(function () {
 });
 
 
-
-
 // MOSTRAR MODAL DE FECHAS
 $(document).on("click", "#ParametrosDecimoTercerMesRPT", function () {
 	$("#DecimoTercerMesModalRPT").modal();
@@ -28,34 +26,35 @@ $("#btnCerrarModalRPT").click(function () {
 });
 
 
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarModalRPT").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+
+    $("#dtm_FechaPago").val('');
+    $("#cpla_DescripcionPlanilla").val('');
+
+});
 
 
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrar").click(function () {
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
+
+    $("#dtm_FechaPago").val('');
+    $("#cpla_DescripcionPlanilla").val('');
+});
 
 
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnEnviarParametros").click(function () {
+	var Parametro1 = $("#dtm_FechaPago").val();
+	var Parametro2 = $("#cpla_DescripcionPlanilla").val();
 
+	if (Parametro1 == "" || Parametro2 == "") {
+        $("#Validation_descipcion").css("display", "");
+        $("#Validation_descipcion2").css("display", "");
+    }
 
-////FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-//$("#btnCerrarFecha").click(function () {
-//    $("#Validation_descipcion").css("display", "none");
-//    $("#Validation_descipcion2").css("display", "none");
-//});
-
-
-////FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-//$("#IconCerrar").click(function () {
-//    $("#Validation_descipcion").css("display", "none");
-//    $("#Validation_descipcion2").css("display", "none");
-//});
-
-
-////FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-//$("#btnEnviarFecha").click(function () {
-//    var FechaInicial = $("#hipa_FechaInicio").val();
-//    var FechaFinal = $("#hipa_FechaFin").val();
-
-//    if (FechaInicial == "" || FechaFinal == "") {
-//        $("#Validation_descipcion").css("display", "");
-//        $("#Validation_descipcion2").css("display", "");
-//    }
-
-//});
+});

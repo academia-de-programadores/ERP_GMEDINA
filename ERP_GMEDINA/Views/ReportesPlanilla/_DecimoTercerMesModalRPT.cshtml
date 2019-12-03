@@ -17,7 +17,7 @@
 
 			@Html.DropDownList("cpla_DescripcionPlanilla", (IEnumerable<SelectListItem>)ViewBag.TipoPlanillaDDL, "Seleccione", new { @class = "form-control" })
 		
-			@Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+			@Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
 		</div>
 
 		<input type="hidden" value="pdf" name="id" />
@@ -26,7 +26,7 @@
 
 		<div class="modal-footer">
 			<button type="button" class="btn btn-white" id="btnCerrarModalRPT">Cerrar</button>
-			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<button type="submit" class="btn btn-primary" id="btnEnviarParametros">Aceptar</button>
 		</div>
 
 	</div>
