@@ -1,4 +1,7 @@
-﻿//$(document).ready(function () {
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+//$(document).ready(function () {
 //    $('ul li a').click(function () {
 //        //$('ul li.current').removeClass('current');
 //        $(this).closest('li').addClass('active');

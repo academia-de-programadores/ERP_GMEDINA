@@ -1,4 +1,7 @@
-﻿function llenarTabla() {
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+function llenarTabla() {
     _ajax(null,
         '/Empresas/llenarTabla',
         'POST',

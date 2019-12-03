@@ -1,4 +1,7 @@
-﻿var id = 0;
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
