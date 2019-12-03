@@ -36,7 +36,9 @@
                     columns: [Cols]
                 }
             }
-        ]
+        ],
+        columns: columnas,
+        order: [[col, 'asc']],
     });
 });
 
