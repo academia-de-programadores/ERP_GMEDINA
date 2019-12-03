@@ -61,7 +61,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialCargos" Width="1.5" PointX="16.5" PointY="155.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialContrataciones" Width="1.5" PointX="21.75" PointY="160" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialHorasTrabajadas" Width="1.5" PointX="10.5" PointY="193.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialIncapacidades" Width="1.5" PointX="13.5" PointY="189.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialLiquidaciones" Width="1.5" PointX="10.5" PointY="146.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialPermisos" Width="1.5" PointX="7.5" PointY="197" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialRefrendamientos" Width="1.5" PointX="16.5" PointY="150.75" IsExpanded="true" />
@@ -89,7 +88,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulosPersona" Width="1.5" PointX="13.5" PointY="199.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulosRequisicion" Width="1.5" PointX="5.25" PointY="197.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbVacaciones" Width="1.5" PointX="7.5" PointY="164.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMes_RPT" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbRol_rol_Id_Acce_tbAccesoRol_rol_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Acce_tbAccesoRol_acrol_UsuarioCrea" ManuallyRouted="false" />
@@ -202,8 +200,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialContrataciones_hcon_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" ManuallyRouted="false" />
@@ -315,7 +311,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialHorasTrabajadas_emp_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialRefrendamientos_emp_Id" ManuallyRouted="false" />
@@ -338,7 +333,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbRazonSalidas_rsal_Id_rrhh_tbHistorialSalidas_rsal_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoSalidas_tsal_Id_rrhh_tbHistorialSalidas_tsal_Id" ManuallyRouted="false" />
@@ -356,6 +350,10 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_RPT" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DecimoTercerMes_RPT" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_INFOP_RPT" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" Width="1.5" PointX="4.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

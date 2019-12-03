@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -820,22 +820,6 @@
           <Property Name="htra_UsuarioModifica" Type="int" />
           <Property Name="htra_FechaModifica" Type="datetime" />
         </EntityType>
-        <EntityType Name="tbHistorialIncapacidades">
-          <Key>
-            <PropertyRef Name="hinc_Id" />
-          </Key>
-          <Property Name="hinc_Id" Type="int" Nullable="false" />
-          <Property Name="Emp_Id" Type="int" Nullable="false" />
-          <Property Name="ticn_Id" Type="int" Nullable="false" />
-          <Property Name="hinc_PorcentajeIndemnizado" Type="int" Nullable="false" />
-          <Property Name="hinc_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hinc_FechaInicio" Type="datetime" />
-          <Property Name="hinc_FechaFin" Type="datetime" />
-          <Property Name="hinc_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hinc_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hinc_UsuarioModifica" Type="int" />
-          <Property Name="hinc_FechaModifica" Type="datetime" />
-        </EntityType>
         <EntityType Name="tbHistorialLiquidaciones">
           <Key>
             <PropertyRef Name="hliq_Id" />
@@ -1248,6 +1232,30 @@
           <Property Name="vaca_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_DecimoCuartoMes_RPT">
+          <Key>
+            <PropertyRef Name="dcm_IdDecimoCuartoMes" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="dcm_FechaPago" />
+            <PropertyRef Name="dcm_CodigoPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="dcm_IdDecimoCuartoMes" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dcm_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="dcm_Monto" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
+          <Property Name="dcm_CodigoPago" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_DecimoTercerMes_RPT">
           <Key>
@@ -1256,6 +1264,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="dtm_FechaPago" />
             <PropertyRef Name="dtm_CodigoPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
           </Key>
           <Property Name="dtm_IdDecimoTercerMes" Type="int" Nullable="false" />
@@ -1266,7 +1275,62 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <Property Name="dtm_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="dtm_CodigoPago" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_INFOP_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="depto_descripcion" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cde_IdDeducciones" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="hipa_FechaPago" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="depto_descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_InstitucionesFinancieras_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="depto_descripcion" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cde_IdDeducciones" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="hipa_FechaPago" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="depto_descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id">
           <End Role="tbObjeto" Type="Self.tbObjeto" Multiplicity="0..1" />
@@ -2612,30 +2676,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialLiquidaciones" Type="Self.tbHistorialLiquidaciones" Multiplicity="*" />
@@ -3896,18 +3936,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="Emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialLiquidaciones" Type="Self.tbHistorialLiquidaciones" Multiplicity="*" />
@@ -4376,18 +4404,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id">
           <End Role="tbTipoMonedas" Type="Self.tbTipoMonedas" Multiplicity="1" />
           <End Role="tbSueldos" Type="Self.tbSueldos" Multiplicity="*" />
@@ -4517,7 +4533,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <EntitySet Name="tbHistorialCargos" EntityType="Self.tbHistorialCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialContrataciones" EntityType="Self.tbHistorialContrataciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialHorasTrabajadas" EntityType="Self.tbHistorialHorasTrabajadas" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="tbHistorialIncapacidades" EntityType="Self.tbHistorialIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialLiquidaciones" EntityType="Self.tbHistorialLiquidaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialPermisos" EntityType="Self.tbHistorialPermisos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialRefrendamientos" EntityType="Self.tbHistorialRefrendamientos" Schema="rrhh" store:Type="Tables" />
@@ -4545,6 +4560,20 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbVacaciones" EntityType="Self.tbVacaciones" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_DecimoCuartoMes_RPT" EntityType="Self.V_DecimoCuartoMes_RPT" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_DecimoCuartoMes_RPT].[dcm_IdDecimoCuartoMes] AS [dcm_IdDecimoCuartoMes], 
+    [V_DecimoCuartoMes_RPT].[emp_Id] AS [emp_Id], 
+    [V_DecimoCuartoMes_RPT].[per_Nombres] AS [per_Nombres], 
+    [V_DecimoCuartoMes_RPT].[per_Apellidos] AS [per_Apellidos], 
+    [V_DecimoCuartoMes_RPT].[dcm_FechaPago] AS [dcm_FechaPago], 
+    [V_DecimoCuartoMes_RPT].[dcm_Monto] AS [dcm_Monto], 
+    [V_DecimoCuartoMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
+    [V_DecimoCuartoMes_RPT].[dcm_CodigoPago] AS [dcm_CodigoPago], 
+    [V_DecimoCuartoMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+    [V_DecimoCuartoMes_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
+    FROM [Plani].[V_DecimoCuartoMes_RPT] AS [V_DecimoCuartoMes_RPT]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="Self.V_DecimoTercerMes_RPT" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_DecimoTercerMes_RPT].[dtm_IdDecimoTercerMes] AS [dtm_IdDecimoTercerMes], 
@@ -4555,8 +4584,39 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
     [V_DecimoTercerMes_RPT].[dtm_Monto] AS [dtm_Monto], 
     [V_DecimoTercerMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
     [V_DecimoTercerMes_RPT].[dtm_CodigoPago] AS [dtm_CodigoPago], 
+    [V_DecimoTercerMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_DecimoTercerMes_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_DecimoTercerMes_RPT] AS [V_DecimoTercerMes_RPT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_INFOP_RPT" EntityType="Self.V_INFOP_RPT" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_INFOP_RPT].[emp_Id] AS [emp_Id], 
+    [V_INFOP_RPT].[per_Identidad] AS [per_Identidad], 
+    [V_INFOP_RPT].[per_Nombres] AS [per_Nombres], 
+    [V_INFOP_RPT].[per_Apellidos] AS [per_Apellidos], 
+    [V_INFOP_RPT].[depto_descripcion] AS [depto_descripcion], 
+    [V_INFOP_RPT].[area_Descripcion] AS [area_Descripcion], 
+    [V_INFOP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
+    [V_INFOP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
+    [V_INFOP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
+    [V_INFOP_RPT].[hidp_Total] AS [hidp_Total], 
+    [V_INFOP_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
+    FROM [Plani].[V_INFOP_RPT] AS [V_INFOP_RPT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="Self.V_InstitucionesFinancieras_RPT" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_InstitucionesFinancieras_RPT].[emp_Id] AS [emp_Id], 
+    [V_InstitucionesFinancieras_RPT].[per_Identidad] AS [per_Identidad], 
+    [V_InstitucionesFinancieras_RPT].[per_Nombres] AS [per_Nombres], 
+    [V_InstitucionesFinancieras_RPT].[per_Apellidos] AS [per_Apellidos], 
+    [V_InstitucionesFinancieras_RPT].[depto_descripcion] AS [depto_descripcion], 
+    [V_InstitucionesFinancieras_RPT].[area_Descripcion] AS [area_Descripcion], 
+    [V_InstitucionesFinancieras_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
+    [V_InstitucionesFinancieras_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
+    [V_InstitucionesFinancieras_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
+    [V_InstitucionesFinancieras_RPT].[hidp_Total] AS [hidp_Total], 
+    [V_InstitucionesFinancieras_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
+    FROM [Plani].[V_InstitucionesFinancieras_RPT] AS [V_InstitucionesFinancieras_RPT]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id" Association="Self.FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id">
             <End Role="tbObjeto" EntitySet="tbObjeto" />
@@ -5006,14 +5066,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialLiquidaciones" EntitySet="tbHistorialLiquidaciones" />
@@ -5434,10 +5486,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialLiquidaciones" EntitySet="tbHistorialLiquidaciones" />
@@ -5594,10 +5642,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" Association="Self.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id">
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
             <End Role="tbSueldos" EntitySet="tbSueldos" />
@@ -5623,8 +5667,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -5814,8 +5857,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <NavigationProperty Name="tbHistorialContrataciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialContrataciones_hcon_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialHorasTrabajadas" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialHorasTrabajadas_htra_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialHorasTrabajadas" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
-          <NavigationProperty Name="tbHistorialIncapacidades1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
           <NavigationProperty Name="tbHistorialLiquidaciones" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialLiquidaciones" />
           <NavigationProperty Name="tbHistorialLiquidaciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialLiquidaciones" />
           <NavigationProperty Name="tbHistorialPermisos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
@@ -6606,7 +6647,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAudienciaDescargo" />
           <NavigationProperty Name="tbHistorialCargos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialCargos" />
           <NavigationProperty Name="tbHistorialHorasTrabajadas" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialHorasTrabajadas_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialHorasTrabajadas" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialIncapacidades" />
           <NavigationProperty Name="tbHistorialLiquidaciones" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialLiquidaciones" />
           <NavigationProperty Name="tbHistorialPermisos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbHistorialRefrendamientos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialRefrendamientos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialRefrendamientos" />
@@ -6860,26 +6900,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialHorasTrabajadas_emp_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbJornadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbJornadas" />
           <NavigationProperty Name="tbTipoHoras" Relationship="Self.FK_rrhh_tbTipoHoras_tiho_Id_rrhh_tbHistorialHorasTrabajadas_tiho_Id" FromRole="tbHistorialHorasTrabajadas" ToRole="tbTipoHoras" />
-        </EntityType>
-        <EntityType Name="tbHistorialIncapacidades">
-          <Key>
-            <PropertyRef Name="hinc_Id" />
-          </Key>
-          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
-          <Property Name="hinc_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
-          <Property Name="hinc_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
-          <Property Name="hinc_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hinc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hinc_UsuarioModifica" Type="Int32" />
-          <Property Name="hinc_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbHistorialIncapacidades" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbTipoIncapacidades" Relationship="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbHistorialIncapacidades" ToRole="tbTipoIncapacidades" />
         </EntityType>
         <EntityType Name="tbHistorialLiquidaciones">
           <Key>
@@ -7282,7 +7302,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <Property Name="ticn_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbTipoIncapacidades" ToRole="tbHistorialIncapacidades" />
         </EntityType>
         <EntityType Name="tbTipoMonedas">
           <Key>
@@ -7401,25 +7420,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbVacaciones_vaca_UsuarioCrea" FromRole="tbVacaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbVacaciones_vaca_UsuarioModifica" FromRole="tbVacaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbVacaciones_emp_Id" FromRole="tbVacaciones" ToRole="tbEmpleados" />
-        </EntityType>
-        <EntityType Name="V_DecimoTercerMes_RPT">
-          <Key>
-            <PropertyRef Name="dtm_IdDecimoTercerMes" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="dtm_FechaPago" />
-            <PropertyRef Name="dtm_CodigoPago" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="dtm_IdDecimoTercerMes" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" />
-          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dtm_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dtm_Monto" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="dtm_CodigoPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id">
           <End Role="tbObjeto" Type="Self.tbObjeto" Multiplicity="0..1" />
@@ -8765,30 +8765,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="hinc_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialLiquidaciones" Type="Self.tbHistorialLiquidaciones" Multiplicity="*" />
@@ -10121,18 +10097,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="Emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialLiquidaciones" Type="Self.tbHistorialLiquidaciones" Multiplicity="*" />
@@ -10397,18 +10361,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="1" />
-          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialIncapacidades">
-              <PropertyRef Name="ticn_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
           <End Role="tbTipoPermisos" Type="Self.tbTipoPermisos" Multiplicity="1" />
           <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
@@ -10670,7 +10622,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <EntitySet Name="tbHistorialCargos" EntityType="Self.tbHistorialCargos" />
           <EntitySet Name="tbHistorialContrataciones" EntityType="Self.tbHistorialContrataciones" />
           <EntitySet Name="tbHistorialHorasTrabajadas" EntityType="Self.tbHistorialHorasTrabajadas" />
-          <EntitySet Name="tbHistorialIncapacidades" EntityType="Self.tbHistorialIncapacidades" />
           <EntitySet Name="tbHistorialLiquidaciones" EntityType="Self.tbHistorialLiquidaciones" />
           <EntitySet Name="tbHistorialPermisos" EntityType="Self.tbHistorialPermisos" />
           <EntitySet Name="tbHistorialRefrendamientos" EntityType="Self.tbHistorialRefrendamientos" />
@@ -10698,7 +10649,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" />
           <EntitySet Name="tbVacaciones" EntityType="Self.tbVacaciones" />
-          <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="Self.V_DecimoTercerMes_RPT" />
           <AssociationSet Name="FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id" Association="Self.FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id">
             <End Role="tbObjeto" EntitySet="tbObjeto" />
             <End Role="tbAccesoRol" EntitySet="tbAccesoRol" />
@@ -11147,14 +11097,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialLiquidaciones_hliq_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialLiquidaciones" EntitySet="tbHistorialLiquidaciones" />
@@ -11599,10 +11541,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialLiquidaciones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialLiquidaciones" EntitySet="tbHistorialLiquidaciones" />
@@ -11691,10 +11629,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
             <End Role="tbHistorialHorasTrabajadas" EntitySet="tbHistorialHorasTrabajadas" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
-            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
-            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="Self.FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
             <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
@@ -11763,7 +11697,104 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <EntitySet Name="V_DecimoCuartoMes_RPT" EntityType="ERP_GMEDINAModel.V_DecimoCuartoMes_RPT" />
+          <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="ERP_GMEDINAModel.V_DecimoTercerMes_RPT" />
+          <EntitySet Name="V_INFOP_RPT" EntityType="ERP_GMEDINAModel.V_INFOP_RPT" />
+          <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" />
         </EntityContainer>
+        <EntityType Name="V_DecimoCuartoMes_RPT">
+          <Key>
+            <PropertyRef Name="dcm_IdDecimoCuartoMes" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="dcm_FechaPago" />
+            <PropertyRef Name="dcm_CodigoPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="dcm_IdDecimoCuartoMes" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dcm_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dcm_Monto" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dcm_CodigoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_DecimoTercerMes_RPT">
+          <Key>
+            <PropertyRef Name="dtm_IdDecimoTercerMes" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="dtm_FechaPago" />
+            <PropertyRef Name="dtm_CodigoPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="dtm_IdDecimoTercerMes" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dtm_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dtm_Monto" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dtm_CodigoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_INFOP_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="depto_descripcion" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cde_IdDeducciones" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="hipa_FechaPago" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_InstitucionesFinancieras_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="depto_descripcion" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cde_IdDeducciones" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="hipa_FechaPago" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12641,23 +12672,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbHistorialIncapacidades">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialIncapacidades">
-              <MappingFragment StoreEntitySet="tbHistorialIncapacidades">
-                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
-                <ScalarProperty Name="hinc_PorcentajeIndemnizado" ColumnName="hinc_PorcentajeIndemnizado" />
-                <ScalarProperty Name="hinc_Observacion" ColumnName="hinc_Observacion" />
-                <ScalarProperty Name="hinc_FechaInicio" ColumnName="hinc_FechaInicio" />
-                <ScalarProperty Name="hinc_FechaFin" ColumnName="hinc_FechaFin" />
-                <ScalarProperty Name="hinc_UsuarioCrea" ColumnName="hinc_UsuarioCrea" />
-                <ScalarProperty Name="hinc_FechaCrea" ColumnName="hinc_FechaCrea" />
-                <ScalarProperty Name="hinc_UsuarioModifica" ColumnName="hinc_UsuarioModifica" />
-                <ScalarProperty Name="hinc_FechaModifica" ColumnName="hinc_FechaModifica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbHistorialLiquidaciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialLiquidaciones">
               <MappingFragment StoreEntitySet="tbHistorialLiquidaciones">
@@ -13096,18 +13110,69 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_DecimoCuartoMes_RPT">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoCuartoMes_RPT">
+              <MappingFragment StoreEntitySet="V_DecimoCuartoMes_RPT">
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="dcm_CodigoPago" ColumnName="dcm_CodigoPago" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="dcm_Monto" ColumnName="dcm_Monto" />
+                <ScalarProperty Name="dcm_FechaPago" ColumnName="dcm_FechaPago" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="dcm_IdDecimoCuartoMes" ColumnName="dcm_IdDecimoCuartoMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_DecimoTercerMes_RPT">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMes_RPT">
               <MappingFragment StoreEntitySet="V_DecimoTercerMes_RPT">
-                <ScalarProperty Name="dtm_IdDecimoTercerMes" ColumnName="dtm_IdDecimoTercerMes" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="dtm_FechaPago" ColumnName="dtm_FechaPago" />
-                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="dtm_CodigoPago" ColumnName="dtm_CodigoPago" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="dtm_CodigoPago" ColumnName="dtm_CodigoPago" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
+                <ScalarProperty Name="dtm_FechaPago" ColumnName="dtm_FechaPago" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="dtm_IdDecimoTercerMes" ColumnName="dtm_IdDecimoTercerMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_INFOP_RPT">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_INFOP_RPT">
+              <MappingFragment StoreEntitySet="V_INFOP_RPT">
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
+                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
+                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="depto_descripcion" ColumnName="depto_descripcion" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_InstitucionesFinancieras_RPT">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT">
+              <MappingFragment StoreEntitySet="V_InstitucionesFinancieras_RPT">
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
+                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
+                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="depto_descripcion" ColumnName="depto_descripcion" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

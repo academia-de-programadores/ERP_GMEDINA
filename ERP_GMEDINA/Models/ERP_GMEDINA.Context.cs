@@ -81,7 +81,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialCargos> tbHistorialCargos { get; set; }
         public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual DbSet<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
-        public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
         public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
@@ -109,6 +108,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         public virtual DbSet<tbVacaciones> tbVacaciones { get; set; }
+        public virtual DbSet<V_DecimoCuartoMes_RPT> V_DecimoCuartoMes_RPT { get; set; }
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
+        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
+        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
     }
 }

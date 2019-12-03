@@ -126,8 +126,6 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialContrataciones1 = new HashSet<tbHistorialContrataciones>();
             this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
             this.tbHistorialHorasTrabajadas1 = new HashSet<tbHistorialHorasTrabajadas>();
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
-            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidades>();
             this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
             this.tbHistorialLiquidaciones1 = new HashSet<tbHistorialLiquidaciones>();
             this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
@@ -413,10 +411,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
