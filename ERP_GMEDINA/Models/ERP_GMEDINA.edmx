@@ -1231,8 +1231,8 @@
           <Property Name="vaca_UsuarioModifica" Type="int" />
           <Property Name="vaca_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoCuartoMes_RPT">
           <Key>
             <PropertyRef Name="dcm_IdDecimoCuartoMes" />
@@ -1255,8 +1255,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoCuartoMes_RPT' no 
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DecimoTercerMes_RPT">
           <Key>
             <PropertyRef Name="dtm_IdDecimoTercerMes" />
@@ -1278,8 +1278,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_DecimoTercerMes_RPT' no 
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_INFOP_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_INFOP_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1288,6 +1288,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene defi
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="depto_descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
@@ -1299,14 +1300,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_INFOP_RPT' no tiene defi
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="depto_descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_InstitucionesFinancieras_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -1315,6 +1317,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="depto_descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
@@ -1326,6 +1329,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="depto_descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -4596,6 +4600,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
     [V_INFOP_RPT].[per_Apellidos] AS [per_Apellidos], 
     [V_INFOP_RPT].[depto_descripcion] AS [depto_descripcion], 
     [V_INFOP_RPT].[area_Descripcion] AS [area_Descripcion], 
+    [V_INFOP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_INFOP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_INFOP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
     [V_INFOP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
@@ -4611,6 +4616,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
     [V_InstitucionesFinancieras_RPT].[per_Apellidos] AS [per_Apellidos], 
     [V_InstitucionesFinancieras_RPT].[depto_descripcion] AS [depto_descripcion], 
     [V_InstitucionesFinancieras_RPT].[area_Descripcion] AS [area_Descripcion], 
+    [V_InstitucionesFinancieras_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_InstitucionesFinancieras_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_InstitucionesFinancieras_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
     [V_InstitucionesFinancieras_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
@@ -11753,6 +11759,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="depto_descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
@@ -11764,6 +11771,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="depto_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -11778,6 +11786,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
             <PropertyRef Name="per_Apellidos" />
             <PropertyRef Name="depto_descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
             <PropertyRef Name="cde_DescripcionDeduccion" />
@@ -11789,6 +11798,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="depto_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -13150,6 +13160,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
                 <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
                 <ScalarProperty Name="depto_descripcion" ColumnName="depto_descripcion" />
                 <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
@@ -13167,6 +13178,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
                 <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
                 <ScalarProperty Name="depto_descripcion" ColumnName="depto_descripcion" />
                 <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
