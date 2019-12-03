@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
 			reportViewer.SizeToReportContent = true;
-			reportViewer.Width = Unit.Pixel(1110);
+			reportViewer.Width = Unit.Pixel(1050);
 			reportViewer.Height = Unit.Pixel(450);
 			reportViewer.BackColor = System.Drawing.Color.White;
 

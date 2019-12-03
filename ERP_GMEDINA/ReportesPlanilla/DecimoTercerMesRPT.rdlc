@@ -619,7 +619,7 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Height>1.2cm</Height>
-        <Width>23.175cm</Width>
+        <Width>23.17504cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -630,7 +630,7 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>11.40502in</Width>
+  <Width>9.12403in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
