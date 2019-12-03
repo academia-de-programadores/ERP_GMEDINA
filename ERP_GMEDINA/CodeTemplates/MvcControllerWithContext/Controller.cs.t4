@@ -1,0 +1,566 @@
+<#@ template language="C#" HostSpecific="True" Debug="True" #><#@ output extension="cs" #><#@ assembly name="System.ComponentModel.DataAnnotations" #><#@ assembly name="System.Core" #><#@ assembly name="System.Data.Entity" #><#@ assembly name="System.Data.Linq" #><#@ assembly name="EnvDTE" #><#@ ScaffoldingAssembly Processor="ScaffoldingAssemblyLoader" #><# var routePrefix = String.Empty;if (!String.IsNullOrWhiteSpace(AreaName)) {    routePrefix = "/" + AreaName;}routePrefix += "/" + ControllerRootName + "/";#><#@ import namespace="System.Collections" #><#@ import namespace="System.Collections.Generic" #><#@ import namespace="System.Linq" #><#@ import namespace="Microsoft.AspNet.Scaffolding.Core.Metadata" #><#@ parameter type="System.String" name="ControllerName" #><#@ parameter type="System.String" name="ControllerRootName" #><#@ parameter type="System.String" name="Namespace" #><#@ parameter type="System.String" name="AreaName" #><#@ parameter type="System.String" name="ContextTypeName" #><#@ parameter type="System.String" name="ModelTypeName" #><#@ parameter type="System.String" name="ModelVariable" #><#@ parameter type="Microsoft.AspNet.Scaffolding.Core.Metadata.ModelMetadata" name="ModelMetadata" #><#@ parameter type="System.Boolean" name="UseAsync" #><#@ parameter type="System.Boolean" name="IsOverpostingProtectionRequired" #><#@ parameter type="System.String" name="BindAttributeIncludeText" #><#@ parameter type="System.String" name ="OverpostingWarningMessage" #><#@ parameter type="System.Collections.Generic.HashSet<System.String>" name="RequiredNamespaces" #>using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+<# if (UseAsync) { #>using System.Threading.Tasks;<# } #>
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+<# foreach (var namespaceName in RequiredNamespaces) { #>
+using <#= namespaceName #>;
+<# } #>
+
+namespace <#= Namespace #>
+{<# var contextTypeName = ContextTypeName;
+    var entitySetName = ModelMetadata.EntitySetName;
+    var entitySetVariable = entitySetName.ToLowerInvariant();
+    var primaryKeyName = ModelMetadata.PrimaryKeys[0].PropertyName;
+    var primaryKeyShortTypeName = ModelMetadata.PrimaryKeys[0].ShortTypeName;
+    var primaryKeyDefaultValue = ModelMetadata.PrimaryKeys[0].DefaultValue;
+    var primaryKeyType = ModelMetadata.PrimaryKeys[0].TypeName;
+    var primaryKeyNullableTypeName = GetNullableTypeName(primaryKeyType, primaryKeyShortTypeName);
+    var lambdaVar = ModelVariable[0];
+    var relatedProperties = ModelMetadata.RelatedEntities.ToDictionary(item => item.AssociationPropertyName);
+    string bindAttribute;
+    if (IsOverpostingProtectionRequired)
+    {
+        bindAttribute = String.Format("[Bind(Include=\"{0}\")] ", BindAttributeIncludeText);
+    }
+    else
+    {
+        bindAttribute = String.Empty;
+    }#><# String StringbindAttribute = bindAttribute.Substring(15); #><# StringbindAttribute = StringbindAttribute.Substring(0, StringbindAttribute.Length - 4);#><#String[] Campos = StringbindAttribute.Split(',');#>
+	<#
+
+
+
+
+
+
+	        String[] Auditoria = new String[6];
+            int i = 0;
+			bool IdPermiso = true;
+			string Id = "";
+            int Tamaño = 0;
+			string PrefijoTabla = "";
+			string Estado = "";
+			string RazonInactivo = "";
+			string UsuarioCrea = "";
+			string FechaCrea = "";
+			string UsuarioModifica = "";
+			string FechaModifica = "";
+
+            foreach (var item in Campos)
+            {
+			if(IdPermiso)
+			{
+				Id = item;
+				IdPermiso = false;
+			}
+
+                Tamaño = item.Length;
+                if (Tamaño >= 6)
+                {
+                    if (item.Substring(Tamaño - 6) == "Estado")
+                    {	
+						Estado = item;
+                        Auditoria[i] = item;
+                        i++;
+                    }
+                }
+                if (Tamaño >= 13)
+                {
+                    if (item.Substring(Tamaño - 13) == "RazonInactivo")
+                    {
+						RazonInactivo = item;
+                        Auditoria[i] = item;
+                        i++;
+                    }
+                }
+
+
+
+                if (Tamaño >= 11)
+                {
+                    if (item.Substring(Tamaño - 11) == "UsuarioCrea")
+                    {
+						UsuarioCrea = item;
+                        Auditoria[i] = item;
+                        i++;
+                        PrefijoTabla = item.Substring(0,4);
+                    }
+                }
+
+                if (Tamaño >= 9)
+                {
+                    if (item.Substring(Tamaño - 9) == "FechaCrea")
+                    {
+						FechaCrea = item;
+                        Auditoria[i] = item;
+                        i++;
+                    }
+                }
+
+                if (Tamaño >= 15)
+                {
+                    if (item.Substring(Tamaño - 15) == "UsuarioModifica")
+                    {
+						UsuarioModifica = item;
+                        Auditoria[i] = item;
+                        i++;
+                    }
+                }
+
+                if (Tamaño >= 13)
+                {
+                    if (item.Substring(Tamaño - 13) == "FechaModifica")
+                    {
+						FechaModifica = item;
+                        Auditoria[i] = item;
+                        i++;
+                    }
+                }
+
+
+            }
+
+			string[] CamposSinAuditoria = Campos.Except(Auditoria).ToArray();
+			
+				int CantidadCamposSinAuditoria = 0;
+					foreach (var item in CamposSinAuditoria)
+					{
+						CantidadCamposSinAuditoria++;
+					}#>
+			
+	public class <#= ControllerName #> : Controller
+    {
+        private <#= ContextTypeName #> db = new <#= ContextTypeName #>();
+
+        // GET: <#= routePrefix #><# if (UseAsync) { #>
+
+        public async Task<ActionResult> Index()<# } else { 
+
+#>
+
+        public ActionResult Index()<# } 
+#>
+        
+		{<#  var includeExpressions = "";     includeExpressions = String.Join("", relatedProperties.Values.Select(property => String.Format(".Include({0} => {0}.{1})", lambdaVar, property.AssociationPropertyName)));#><# if(!String.IsNullOrEmpty(includeExpressions)) { #>
+           
+		    List<<#= entitySetName #>> <#= entitySetName #> = new List<Models.<#= entitySetName #>> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+<#		if (UseAsync) { #>
+            return View(await <#= entitySetVariable #>.ToListAsync());
+<#		} else { #>
+            return View(<#= entitySetName #>);
+<#		} #>
+<# } else { #>
+<#		if (UseAsync) { #>
+            return View(await db.<#= entitySetName #><#= includeExpressions #>.ToListAsync());
+<#		} else { #>
+            return View(db.<#= entitySetName #><#= includeExpressions #>.ToList());
+<#		} #>
+<# } #>
+        }
+		[HttpPost]
+        public JsonResult llenarTabla()
+        {
+			List<<#= entitySetName #>> <#= entitySetName #> = new List<Models.<#= entitySetName #>> { };
+            var lista = db.<#= entitySetName #>.Where(x => x.<#= PrefijoTabla #>_Estado).ToList();
+            foreach (<#= entitySetName #> x in db.<#= entitySetName #>.ToList().Where(x=>x.<#= Estado #>))
+            {
+                <#= entitySetName #>.Add( new <#= entitySetName #>
+                {
+				<# int Camposcount2 = 0;  foreach (var item in CamposSinAuditoria)
+				{Camposcount2++;
+				if(Camposcount2 !=CantidadCamposSinAuditoria)
+				{
+				#>
+	<#= item #> = x.<#= item #>,
+				<#}
+				else
+				{
+				#>
+	<#= item #> = x.<#= item #>
+				<#}
+				}#>
+});
+            }
+            return Json(<#= entitySetName #>, JsonRequestBehavior.AllowGet);
+        }
+        // POST: <#= routePrefix #>Create
+        [HttpPost]
+        public JsonResult Create(<#= entitySetName #> <#= entitySetName #>)
+        {
+            string msj = "";
+            if (<#
+			for(int fori = 1;fori<CamposSinAuditoria.Length;fori++)
+			{#><#= entitySetName #>.<#= CamposSinAuditoria[fori] #> != <# if (CamposSinAuditoria[fori].Substring(CamposSinAuditoria[fori].Length - 3)  != "_Id"){#>""<#}else{#>0<#}
+			if(fori != CamposSinAuditoria.Length -1 )
+			{#> && <#}}#>)
+            { 
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_<#= entitySetName #>_Insert(<#
+
+						for(int fori = 1;fori<CamposSinAuditoria.Length;fori++)
+						{#><#= entitySetName #>.<#= CamposSinAuditoria[fori]#>, <#}#>Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_<#= entitySetName #>_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+		// GET: <#= routePrefix #>/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            <#= entitySetName #> <#= entitySetName #> = null;
+            try
+            {
+                <#= entitySetName #> = db.<#= entitySetName #>.Find(id);
+                if (<#= entitySetName #> == null || !<#= entitySetName #>.<#= Estado #>)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }            
+            Session["id"] = id;
+            var tabla = new <#= entitySetName #>
+            {
+<#
+				foreach(var item in Campos)
+				{#>
+				<#= item #> = <#= entitySetName #>.<#=item#>,
+<#}
+#>				tbUsuario = new tbUsuario { usu_NombreUsuario= IsNull(<#= entitySetName #>.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(<#= entitySetName #>.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+        // POST: <#= routePrefix #>Edit/5
+        [HttpPost]
+        public JsonResult Edit(<#= entitySetName #> <#= entitySetName #>)
+        {
+            string msj = "";
+            if (<#
+			for(int fori = 0;fori<CamposSinAuditoria.Length;fori++)
+			{#><#= entitySetName #>.<#= CamposSinAuditoria[fori] #> != <# if (CamposSinAuditoria[fori].Substring(CamposSinAuditoria[fori].Length - 3)  != "_Id"){#>""<#}else{#>0<#}  
+			if(fori != CamposSinAuditoria.Length -1 )
+			{#> && <#}}#>)            
+			{
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_<#= entitySetName #>_Update(id, <#for(int fori = 1; fori < CamposSinAuditoria.Length; fori++){#><#= entitySetName #>.<#= CamposSinAuditoria[fori]#>, <#}#>Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_<#= entitySetName #>_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }            
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+		// GET: <#= routePrefix #>/Delete/5
+        [HttpPost]
+        public ActionResult Delete(<#= entitySetName #> <#= entitySetName #>)
+        {
+            string msj = "";
+            if (<#= entitySetName #>.<#= Id #> != 0 && <#= entitySetName #>.<#= RazonInactivo #> != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_<#= entitySetName #>_Delete(id, <#= entitySetName #>.<#= RazonInactivo #>, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_<#= entitySetName #>_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }            
+            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
+        }
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor!=null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario {usu_NombreUsuario="" };
+            }
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var id = 0;
+//Funciones GET
+function tablaEditar(btn) {
+    var tr=$(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().id;
+    _ajax(null,
+        '/<#= entitySetName.Substring(2) #>/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+<#											
+				for(int fori = 1; fori<CamposSinAuditoria.Length; fori++)
+				{#>
+				$("#FormEditar").find("#<#= CamposSinAuditoria[fori] #>").val(obj.<#= CamposSinAuditoria[fori] #>);
+				<#			
+				}												#>
+$('#ModalEditar').modal('show');
+            }
+        });
+}
+function tablaDetalles(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().id;
+    _ajax(null,
+        '/<#= entitySetName.Substring(2) #>/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+				<#								
+				for(int fori = 1; fori<CamposSinAuditoria.Length; fori++)
+				{#>
+$("#ModalDetalles").find("#<#= CamposSinAuditoria[fori] #>")["0"].innerText = obj.<#= CamposSinAuditoria[fori] #>;
+				<#}#>
+$("#ModalDetalles").find("#<#= Estado #>")["0"].innerText = obj.<#= Estado #>;
+                $("#ModalDetalles").find("#<#= RazonInactivo #>")["0"].innerText = obj.<#= RazonInactivo #>;
+                $("#ModalDetalles").find("#<#= FechaCrea #>")["0"].innerText = FechaFormato(obj.<#= FechaCrea #>);
+                $("#ModalDetalles").find("#<#= FechaModifica #>")["0"].innerText = FechaFormato(obj.<#= FechaModifica #>);
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $('#ModalDetalles').modal('show');
+            }
+        });
+}
+function llenarTabla() {
+    _ajax(null,
+        '/<#= entitySetName.Substring(2) #>/llenarTabla',
+        'POST',
+        function (Lista) {
+            tabla.clear();
+            tabla.draw();
+            $.each(Lista, function (index, value) {
+                tabla.row.add({
+					id: value.<#= PrefijoTabla #><#= Id.Substring(PrefijoTabla.Length) #>,
+<#								
+				for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){#>
+					<#= CamposSinAuditoria[fori].Substring(PrefijoTabla.Length + 1) #>: value.<#= CamposSinAuditoria[fori] #><#if(fori != CamposSinAuditoria.Length - 1){#>,<#}else{#><#}#>
+				
+<#}#>
+                });
+            });
+            tabla.draw();
+        });
+}
+$(document).ready(function () {
+    llenarTabla();
+});
+//Botones GET
+$("#btnAgregar").click(function () {
+    var modalnuevo = $('#ModalNuevo');
+    modalnuevo.modal('show');
+<#
+		for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){
+#>
+	$(modalnuevo).find("#<#= CamposSinAuditoria[fori] #>").val("");
+<# 
+	if(fori == 1) 
+{
+#>	$(modalnuevo).find("#<#= CamposSinAuditoria[fori] #>").focus();
+<#}
+		}
+#>
+});
+$("#btnEditar").click(function () {
+    _ajax(null,
+        '/<#= entitySetName.Substring(2) #>/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+<#
+		for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){
+#>
+				$("#ModalEditar").find("#<#= CamposSinAuditoria[fori] #>").val(obj.<#= CamposSinAuditoria[fori] #>);
+<# 
+	if(fori == 1) 
+{
+#>				$("#ModalEditar").find("#<#= CamposSinAuditoria[fori] #>").focus();
+<#}
+		}
+#>
+            }
+        });
+});
+$("#btnInhabilitar").click(function () {
+    CierraPopups();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#<#= PrefijoTabla #>_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#<#= PrefijoTabla #>_RazonInactivo").focus();
+});
+//botones POST
+$("#btnGuardar").click(function () {
+    var data = $("#FormNuevo").serializeArray();
+    data = serializar(data);
+    if (data!=null) {
+        data = JSON.stringify({ <#= entitySetName #>: data });
+        _ajax(data,
+            '/<#= entitySetName.Substring(2) #>/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles([<#
+		for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){
+#>"<#= CamposSinAuditoria[fori] #>", <#} #>"<#= PrefijoTabla #>_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error","por favor llene todas las cajas de texto");
+    }    
+});
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.<#= PrefijoTabla #>_Id = id;
+        data = JSON.stringify({ <#= entitySetName #>: data });
+        _ajax(data,
+            '/<#= entitySetName.Substring(2) #>/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles([<#
+		for(int fori = 1; fori<CamposSinAuditoria.Length; fori++){
+#>"<#= CamposSinAuditoria[fori] #>", <#} #>"<#= PrefijoTabla #>_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+$("#btnActualizar").click(function () {
+    var data = $("#FormEditar").serializeArray();
+    data = serializar(data);
+    if (data!=null) {
+        data.<#= PrefijoTabla #>_Id = id;
+        data = JSON.stringify({ <#= entitySetName #>: data });
+        _ajax(data,
+            '/<#= entitySetName.Substring(2) #>/Edit',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }    
+});
+<#+
+// This function converts the primary key short type name to its nullable equivalent when possible. This is required to make
+// sure that an HTTP 400 error is thrown when the user tries to access the edit, delete, or details action with null values.
+    string GetNullableTypeName(string typeName, string shortTypeName)
+    {
+        // The exceptions are caught because if for any reason the type is user defined, then the short type name will be used.
+        // In that case the user will receive a server error if null is passed to the edit, delete, or details actions.
+        Type primaryKeyType = null;
+        try
+        {
+            primaryKeyType = Type.GetType(typeName);
+        }
+        catch
+        {
+        }
+        if (primaryKeyType != null && (primaryKeyType.IsPrimitive || IsGuid(typeName)))
+        {
+            return shortTypeName + "?";
+        }
+        return shortTypeName;
+    }
+
+    bool IsGuid(string typeName) {
+        return String.Equals("System.Guid", typeName, StringComparison.OrdinalIgnoreCase);
+    }
+#>
