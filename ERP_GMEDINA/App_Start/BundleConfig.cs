@@ -475,7 +475,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
                   "~/Scripts/app/Competencias/Competencias.js"));
 
-
+                  bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
+                      "~/Scripts/app/General/Titulos/Titulos.js"));
+                      
             //bundles APP/TipoHoras/TipoHoras
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
@@ -492,6 +494,8 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js"));
+
+
 
             //OPTIMIZATION
 

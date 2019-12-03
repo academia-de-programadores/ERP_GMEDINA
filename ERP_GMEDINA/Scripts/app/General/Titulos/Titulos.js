@@ -123,7 +123,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
@@ -155,5 +155,3 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
-
