@@ -164,6 +164,7 @@
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
+    <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -1171,6 +1172,7 @@
     <Content Include="Views\FasesReclutamiento\_Delete.cshtml" />
     <Content Include="Views\FasesReclutamiento\_Detalles.cshtml" />
     <Content Include="Views\FasesReclutamiento\_Edit.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

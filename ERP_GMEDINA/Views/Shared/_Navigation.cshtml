@@ -10,7 +10,7 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <strong class="font-bold">Perfil </strong>
-                            </span> <span class="text-muted text-xs block">Dato Extra<b class="caret"></b></span>
+                            </span> <span class="text-muted text-xs block">Otras Acciones<b class="caret"></b></span>
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -23,6 +23,12 @@
                 </div>
             </li>
             @*MENUS DE RRHH*@
+
+            @* INICIO *@
+            <li class="@Html.IsSelected(controller:"Empresas",action: "Index")">
+                <a href="@Url.Action("Index", "Inicio")"><i class="fa fa-home"></i>Inicio</a>
+            </li>
+            @* INICIO *@
 
             @*MENU GENERAL*@
             <li class="@Html.IsSelected(controller: "General")">
