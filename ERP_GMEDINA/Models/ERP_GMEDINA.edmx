@@ -207,6 +207,28 @@
           <Property Name="tmon_UsuarioModifica" Type="int" />
           <Property Name="tmon_FechaModifica" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Datos_Empleado">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="area_Id" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="jor_Descripcion" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="*" />
@@ -979,6 +1001,18 @@
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoMonedas" EntityType="Self.tbTipoMonedas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_Datos_Empleado" EntityType="Self.V_Datos_Empleado" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_Datos_Empleado].[emp_Id] AS [emp_Id], 
+    [V_Datos_Empleado].[area_Id] AS [area_Id], 
+    [V_Datos_Empleado].[area_Descripcion] AS [area_Descripcion], 
+    [V_Datos_Empleado].[car_Id] AS [car_Id], 
+    [V_Datos_Empleado].[car_Descripcion] AS [car_Descripcion], 
+    [V_Datos_Empleado].[depto_Id] AS [depto_Id], 
+    [V_Datos_Empleado].[depto_Descripcion] AS [depto_Descripcion], 
+    [V_Datos_Empleado].[jor_Descripcion] AS [jor_Descripcion]
+    FROM [rrhh].[V_Datos_Empleado] AS [V_Datos_Empleado]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -1637,6 +1671,7 @@
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
             <End Role="tbSueldos" EntitySet="tbSueldos" />
           </AssociationSet>
+          <EntitySet Name="V_Datos_Empleado" EntityType="ERP_GMEDINAModel.V_Datos_Empleado" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2435,6 +2470,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_Datos_Empleado">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="area_Id" />
+            <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="jor_Descripcion" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="jor_Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2890,6 +2945,20 @@
                 <ScalarProperty Name="tmon_Id" ColumnName="tmon_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Datos_Empleado">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Datos_Empleado">
+              <MappingFragment StoreEntitySet="V_Datos_Empleado">
+                <ScalarProperty Name="jor_Descripcion" ColumnName="jor_Descripcion" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

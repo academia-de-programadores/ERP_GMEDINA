@@ -40,6 +40,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
         public virtual DbSet<tbJornadas> tbJornadas { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
+        public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

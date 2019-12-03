@@ -50,20 +50,18 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult ChildRowData(int id)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            // List<tbEmpleados> lista = new List<tbEmpleados> { };
-            //var LISTA = new { };
-           // IQueryable<List> list = Enumerable.Empty<List>().AsQueryable();
-            try
+            List<V_Datos_Empleado> lista = new List<V_Datos_Empleado> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
                 {
-                ///////HACER VISTA////
+                    lista = db.V_Datos_Empleado.Where(x => x.emp_Id == id).ToList();
                 }
-                catch 
+                catch
                 {
                 }
-            
-            return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
 
