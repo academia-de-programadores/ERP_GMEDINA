@@ -43,6 +43,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
         public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
+        public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1451,6 +1452,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("titu_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbfasesReclutamiento_Delete_Result> UDP_RRHH_tbfasesReclutamiento_Delete(Nullable<int> fare_Id, string fare_razon_Inactivo, Nullable<int> fare_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var fare_razon_InactivoParameter = fare_razon_Inactivo != null ?
+                new ObjectParameter("fare_razon_Inactivo", fare_razon_Inactivo) :
+                new ObjectParameter("fare_razon_Inactivo", typeof(string));
+    
+            var fare_UsuarioModificaParameter = fare_UsuarioModifica.HasValue ?
+                new ObjectParameter("fare_UsuarioModifica", fare_UsuarioModifica) :
+                new ObjectParameter("fare_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbfasesReclutamiento_Delete_Result>("UDP_RRHH_tbfasesReclutamiento_Delete", fare_IdParameter, fare_razon_InactivoParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbFasesReclutamiento_Insert_Result> UDP_RRHH_tbFasesReclutamiento_Insert(string fare_Descripcion, Nullable<int> fare_UsuarioCrea, Nullable<System.DateTime> fare_FechaCrea)
+        {
+            var fare_DescripcionParameter = fare_Descripcion != null ?
+                new ObjectParameter("fare_Descripcion", fare_Descripcion) :
+                new ObjectParameter("fare_Descripcion", typeof(string));
+    
+            var fare_UsuarioCreaParameter = fare_UsuarioCrea.HasValue ?
+                new ObjectParameter("fare_UsuarioCrea", fare_UsuarioCrea) :
+                new ObjectParameter("fare_UsuarioCrea", typeof(int));
+    
+            var fare_FechaCreaParameter = fare_FechaCrea.HasValue ?
+                new ObjectParameter("fare_FechaCrea", fare_FechaCrea) :
+                new ObjectParameter("fare_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbFasesReclutamiento_Insert_Result>("UDP_RRHH_tbFasesReclutamiento_Insert", fare_DescripcionParameter, fare_UsuarioCreaParameter, fare_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbfasesReclutamiento_Restore_Result> UDP_RRHH_tbfasesReclutamiento_Restore(Nullable<int> fare_Id, Nullable<int> fare_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var fare_UsuarioModificaParameter = fare_UsuarioModifica.HasValue ?
+                new ObjectParameter("fare_UsuarioModifica", fare_UsuarioModifica) :
+                new ObjectParameter("fare_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbfasesReclutamiento_Restore_Result>("UDP_RRHH_tbfasesReclutamiento_Restore", fare_IdParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbFasesReclutamiento_Update_Result> UDP_RRHH_tbFasesReclutamiento_Update(Nullable<int> fare_Id, string fare_Descripcion, Nullable<int> fare_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var fare_DescripcionParameter = fare_Descripcion != null ?
+                new ObjectParameter("fare_Descripcion", fare_Descripcion) :
+                new ObjectParameter("fare_Descripcion", typeof(string));
+    
+            var fare_UsuarioModificaParameter = fare_UsuarioModifica.HasValue ?
+                new ObjectParameter("fare_UsuarioModifica", fare_UsuarioModifica) :
+                new ObjectParameter("fare_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbFasesReclutamiento_Update_Result>("UDP_RRHH_tbFasesReclutamiento_Update", fare_IdParameter, fare_DescripcionParameter, fare_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
     }
 }

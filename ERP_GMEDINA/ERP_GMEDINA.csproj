@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
+    <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
@@ -220,6 +222,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEmpresas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbFasesReclutamiento.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbIdiomas.cs">
@@ -286,6 +291,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbfasesReclutamiento_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbFasesReclutamiento_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbfasesReclutamiento_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbFasesReclutamiento_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbIdiomas_Delete_Result.cs">
@@ -580,6 +597,7 @@
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
+    <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
@@ -1148,6 +1166,11 @@
     <Content Include="Views\Titulos\_Delete.cshtml" />
     <Content Include="Views\Titulos\_Detalles.cshtml" />
     <Content Include="Views\Titulos\_Edit.cshtml" />
+    <Content Include="Views\FasesReclutamiento\Index.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Create.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Delete.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Detalles.cshtml" />
+    <Content Include="Views\FasesReclutamiento\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

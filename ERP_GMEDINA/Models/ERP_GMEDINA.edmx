@@ -114,6 +114,19 @@
           <Property Name="empr_UsuarioModifica" Type="int" />
           <Property Name="empr_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbFasesReclutamiento">
+          <Key>
+            <PropertyRef Name="fare_Id" />
+          </Key>
+          <Property Name="fare_Id" Type="int" Nullable="false" />
+          <Property Name="fare_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fare_Estado" Type="bit" Nullable="false" />
+          <Property Name="fare_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="fare_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="fare_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="fare_UsuarioModifica" Type="int" />
+          <Property Name="fare_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbIdiomas">
           <Key>
             <PropertyRef Name="idi_Id" />
@@ -396,6 +409,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Principal>
             <Dependent Role="tbEmpresas">
               <PropertyRef Name="empr_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -995,6 +1032,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbfasesReclutamiento_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="fare_Id" Type="int" Mode="In" />
+          <Parameter Name="fare_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbFasesReclutamiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="fare_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbfasesReclutamiento_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="fare_Id" Type="int" Mode="In" />
+          <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbFasesReclutamiento_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="fare_Id" Type="int" Mode="In" />
+          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbIdiomas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="idi_Id" Type="int" Mode="In" />
           <Parameter Name="idi_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -1113,6 +1172,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <EntitySet Name="tbDepartamentos" EntityType="Self.tbDepartamentos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbFasesReclutamiento" EntityType="Self.tbFasesReclutamiento" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbIdiomas" EntityType="Self.tbIdiomas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbJornadas" EntityType="Self.tbJornadas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
@@ -1180,6 +1240,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpresas_empr_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbIdiomas_idi_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -1870,6 +1938,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbFasesReclutamiento" EntityType="ERP_GMEDINAModel.tbFasesReclutamiento" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result)">
+            <Parameter Name="fare_Id" Mode="In" Type="Int32" />
+            <Parameter Name="fare_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result)">
+            <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="fare_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="fare_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Restore_Result)">
+            <Parameter Name="fare_Id" Mode="In" Type="Int32" />
+            <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result)">
+            <Parameter Name="fare_Id" Mode="In" Type="Int32" />
+            <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1948,6 +2047,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbCompetencias1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCompetencias" />
           <NavigationProperty Name="tbTitulos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTitulos" />
           <NavigationProperty Name="tbTitulos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulos_titu_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulos" />
+          <NavigationProperty Name="tbFasesReclutamiento" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
+          <NavigationProperty Name="tbFasesReclutamiento1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -2791,6 +2892,57 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
         <ComplexType Name="UDP_RRHH_tbTitulos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbFasesReclutamiento">
+          <Key>
+            <PropertyRef Name="fare_Id" />
+          </Key>
+          <Property Name="fare_Id" Type="Int32" Nullable="false" />
+          <Property Name="fare_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fare_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="fare_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fare_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="fare_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fare_UsuarioModifica" Type="Int32" />
+          <Property Name="fare_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbFasesReclutamiento" Role="tbFasesReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbFasesReclutamiento" Role="tbFasesReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3337,6 +3489,48 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbFasesReclutamiento">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbFasesReclutamiento">
+              <MappingFragment StoreEntitySet="tbFasesReclutamiento">
+                <ScalarProperty Name="fare_FechaModifica" ColumnName="fare_FechaModifica" />
+                <ScalarProperty Name="fare_UsuarioModifica" ColumnName="fare_UsuarioModifica" />
+                <ScalarProperty Name="fare_FechaCrea" ColumnName="fare_FechaCrea" />
+                <ScalarProperty Name="fare_UsuarioCrea" ColumnName="fare_UsuarioCrea" />
+                <ScalarProperty Name="fare_RazonInactivo" ColumnName="fare_RazonInactivo" />
+                <ScalarProperty Name="fare_Estado" ColumnName="fare_Estado" />
+                <ScalarProperty Name="fare_Descripcion" ColumnName="fare_Descripcion" />
+                <ScalarProperty Name="fare_Id" ColumnName="fare_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
