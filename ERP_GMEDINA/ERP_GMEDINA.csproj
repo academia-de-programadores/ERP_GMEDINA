@@ -726,6 +726,8 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\INFOPRPT.js" />
+    <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />
@@ -1265,6 +1267,10 @@
     <Content Include="Views\ReportesPlanilla\DecimoTercerMesIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\Index.cshtml" />
     <Content Include="Views\ReportesPlanilla\_DecimoTercerMesModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\INFOPIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_INFOPModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_InstitucionesFinancierasModalRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1300,6 +1306,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

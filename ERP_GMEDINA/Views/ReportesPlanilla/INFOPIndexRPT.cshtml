@@ -1,0 +1,29 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "INFOPIndexRPT";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="modal fade" id="INFOPModalRPT" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Ingrese Parametros</h4>
+            </div>
+            @Html.Partial("_INFOPModalRPT", new ERP_GMEDINA.Models.V_INFOP_RPT())
+        </div>
+    </div>
+</div>
+<br />
+<button class="btn btn-primary btn-sm" id="ParametrosINFOPRPT">Reporte Especifico</button>
+<br />
+<br />
+@Html.ReportViewer(ViewBag.ReportViewerINFOPRPT as Microsoft.Reporting.WebForms.ReportViewer)
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/general/INFOPRPT.js")
+}
+
