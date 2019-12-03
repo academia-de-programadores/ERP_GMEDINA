@@ -37,8 +37,8 @@ namespace ERP_GMEDINA.Controllers
 			ReportViewer reportViewer = new ReportViewer();
 			reportViewer.ProcessingMode = ProcessingMode.Local;
 			reportViewer.SizeToReportContent = true;
-			reportViewer.Width = Unit.Pixel(1050);
-			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.Width = Unit.Pixel(1110);
+			reportViewer.Height = Unit.Pixel(450);
 			reportViewer.BackColor = System.Drawing.Color.White;
 
 			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
@@ -84,12 +84,12 @@ namespace ERP_GMEDINA.Controllers
 
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
-			"  <PageWidth>8.5in</PageWidth>" +
-			"  <PageHeight>11in</PageHeight>" +
-			"  <MarginTop>0.5in</MarginTop>" +
-			"  <MarginLeft>1in</MarginLeft>" +
-			"  <MarginRight>1in</MarginRight>" +
-			"  <MarginBottom>0.5in</MarginBottom>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
 			"</DeviceInfo>";
 
 			Warning[] warnings;
