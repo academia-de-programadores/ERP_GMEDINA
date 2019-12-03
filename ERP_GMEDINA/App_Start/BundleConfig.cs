@@ -473,7 +473,7 @@ namespace ERP_GMEDINA
                "~/Scripts/app/General/TipoIncapacidades/TipoIncapacidades.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
-                  "~/Scripts/app/Competencias/Competencias.js"));
+                  "~/Scripts/app/general/Competencias/Competencias.js"));
 
                   bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
                       "~/Scripts/app/General/Titulos/Titulos.js"));

@@ -50,10 +50,6 @@ function llenarTabla() {
             });
         });
 }
-//function ClearTables() {
-//    $('#IndexTable').dataTable().clear().draw();
-//}
-//Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');
@@ -73,11 +69,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnIncomplitar").click(function () {
+$("#btnInhabilitar").click(function () {
     CierraPopups();
-    $('#ModalIncomplitar').modal('show');
-    $("#ModalIncomplitar").find("#comp_RazonInactivo").val("");
-    $("#ModalIncomplitar").find("#comp_RazonInactivo").focus();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#comp_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#comp_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -93,7 +89,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["comp_Descripcion", "comp_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -116,7 +112,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["comp_Descripcion", "comp_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -138,7 +134,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha actualizado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
