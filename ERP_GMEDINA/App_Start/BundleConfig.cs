@@ -477,10 +477,14 @@ namespace ERP_GMEDINA
 
                   bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
                       "~/Scripts/app/General/Titulos/Titulos.js"));
-                      
+
             //bundles APP/TipoHoras/TipoHoras
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
+                
+                bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento").Include(
+                    "~/Scripts/app/General/FasesReclutamiento/FasesReclutamiento.js"));
+
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
                 "~/Scripts/app/general/Empresas/Empresas.js"));
