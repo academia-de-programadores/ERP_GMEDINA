@@ -16,7 +16,7 @@
             @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "font-noraml" }) <br />
 
             @Html.DropDownList("cpla_DescripcionPlanilla", (IEnumerable<SelectListItem>)ViewBag.TipoPlanillaDDL, "Seleccione", new { @class = "form-control" })
-
+           
             @Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
         </div>
 
