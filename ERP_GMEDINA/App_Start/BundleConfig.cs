@@ -456,9 +456,6 @@ namespace ERP_GMEDINA
              "~/Scripts/plugins/iziToast/iziToast.min.js",
              "~/Scripts/app/general/general.js"));
 
-            //bundles APP/GENERAL
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
-                "~/Scripts/app/General/CatalogoDeducciones.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
             "~/Scripts/app/general/Habilidades/Habilidades.js"));
@@ -475,6 +472,8 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoIncapacidades").Include(
                "~/Scripts/app/General/TipoIncapacidades/TipoIncapacidades.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
+                  "~/Scripts/app/Competencias/Competencias.js"));
 
 
             //bundles APP/TipoHoras/TipoHoras
@@ -493,6 +492,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js"));
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

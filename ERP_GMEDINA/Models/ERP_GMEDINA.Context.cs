@@ -1298,5 +1298,64 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Update_Result>("UDP_RRHH_tbIdiomas_Update", idi_IdParameter, idi_DescripcionParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCompetencias_Delete_Result> UDP_RRHH_tbCompetencias_Delete(Nullable<int> comp_Id, string comp_razon_Inactivo, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)
+        {
+            var comp_IdParameter = comp_Id.HasValue ?
+                new ObjectParameter("comp_Id", comp_Id) :
+                new ObjectParameter("comp_Id", typeof(int));
+    
+            var comp_razon_InactivoParameter = comp_razon_Inactivo != null ?
+                new ObjectParameter("comp_razon_Inactivo", comp_razon_Inactivo) :
+                new ObjectParameter("comp_razon_Inactivo", typeof(string));
+    
+            var comp_UsuarioModificaParameter = comp_UsuarioModifica.HasValue ?
+                new ObjectParameter("comp_UsuarioModifica", comp_UsuarioModifica) :
+                new ObjectParameter("comp_UsuarioModifica", typeof(int));
+    
+            var comp_FechaModificaParameter = comp_FechaModifica.HasValue ?
+                new ObjectParameter("comp_FechaModifica", comp_FechaModifica) :
+                new ObjectParameter("comp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCompetencias_Delete_Result>("UDP_RRHH_tbCompetencias_Delete", comp_IdParameter, comp_razon_InactivoParameter, comp_UsuarioModificaParameter, comp_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCompetencias_Insert_Result> UDP_RRHH_tbCompetencias_Insert(string comp_Descripcion, Nullable<int> comp_UsuarioCrea, Nullable<System.DateTime> comp_FechaCrea)
+        {
+            var comp_DescripcionParameter = comp_Descripcion != null ?
+                new ObjectParameter("comp_Descripcion", comp_Descripcion) :
+                new ObjectParameter("comp_Descripcion", typeof(string));
+    
+            var comp_UsuarioCreaParameter = comp_UsuarioCrea.HasValue ?
+                new ObjectParameter("comp_UsuarioCrea", comp_UsuarioCrea) :
+                new ObjectParameter("comp_UsuarioCrea", typeof(int));
+    
+            var comp_FechaCreaParameter = comp_FechaCrea.HasValue ?
+                new ObjectParameter("comp_FechaCrea", comp_FechaCrea) :
+                new ObjectParameter("comp_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCompetencias_Insert_Result>("UDP_RRHH_tbCompetencias_Insert", comp_DescripcionParameter, comp_UsuarioCreaParameter, comp_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbCompetencias_Update_Result> UDP_RRHH_tbCompetencias_Update(Nullable<int> comp_Id, string comp_Descripcion, Nullable<int> comp_UsuarioModifica, Nullable<System.DateTime> comp_FechaModifica)
+        {
+            var comp_IdParameter = comp_Id.HasValue ?
+                new ObjectParameter("comp_Id", comp_Id) :
+                new ObjectParameter("comp_Id", typeof(int));
+    
+            var comp_DescripcionParameter = comp_Descripcion != null ?
+                new ObjectParameter("comp_Descripcion", comp_Descripcion) :
+                new ObjectParameter("comp_Descripcion", typeof(string));
+    
+            var comp_UsuarioModificaParameter = comp_UsuarioModifica.HasValue ?
+                new ObjectParameter("comp_UsuarioModifica", comp_UsuarioModifica) :
+                new ObjectParameter("comp_UsuarioModifica", typeof(int));
+    
+            var comp_FechaModificaParameter = comp_FechaModifica.HasValue ?
+                new ObjectParameter("comp_FechaModifica", comp_FechaModifica) :
+                new ObjectParameter("comp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCompetencias_Update_Result>("UDP_RRHH_tbCompetencias_Update", comp_IdParameter, comp_DescripcionParameter, comp_UsuarioModificaParameter, comp_FechaModificaParameter);
+        }
     }
 }
