@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Models
     }
     public class cRazonSalidas
     {
-        [Display(Name = "ID Razon Salidas")]
+        [Display(Name = "ID")]
         public int rsal_Id { get; set; }
         [Display(Name = "Descripcion")]
         public string rsal_Descripcion { get; set; }

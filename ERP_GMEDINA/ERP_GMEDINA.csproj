@@ -166,6 +166,7 @@
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cPersonas.cs" />
+    <Compile Include="Models\cRazonSalidas.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
@@ -238,6 +240,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRazonSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSueldos.cs">
@@ -334,6 +339,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbIdiomas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRazonSalidas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRazonSalidas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRazonSalidas_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRazonSalida_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoAmonestaciones_Delete_Result.cs">
@@ -631,6 +648,7 @@
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
@@ -1210,6 +1228,11 @@
     <Content Include="Views\TipoAmonestaciones\_Delete.cshtml" />
     <Content Include="Views\TipoAmonestaciones\_Detalles.cshtml" />
     <Content Include="Views\TipoAmonestaciones\_Edit.cshtml" />
+    <Content Include="Views\RazonSalidas\Index.cshtml" />
+    <Content Include="Views\RazonSalidas\_Create.cshtml" />
+    <Content Include="Views\RazonSalidas\_Delete.cshtml" />
+    <Content Include="Views\RazonSalidas\_Detalles.cshtml" />
+    <Content Include="Views\RazonSalidas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

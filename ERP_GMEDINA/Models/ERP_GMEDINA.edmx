@@ -177,6 +177,19 @@
           <Property Name="per_UsuarioModifica" Type="int" />
           <Property Name="per_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbRazonSalidas">
+          <Key>
+            <PropertyRef Name="rsal_Id" />
+          </Key>
+          <Property Name="rsal_Id" Type="int" Nullable="false" />
+          <Property Name="rsal_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rsal_Estado" Type="bit" Nullable="false" />
+          <Property Name="rsal_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="rsal_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="rsal_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="rsal_UsuarioModifica" Type="int" />
+          <Property Name="rsal_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbSueldos">
           <Key>
             <PropertyRef Name="sue_Id" />
@@ -518,6 +531,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Principal>
             <Dependent Role="tbPersonas">
               <PropertyRef Name="per_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbRazonSalidas" Type="Self.tbRazonSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbRazonSalidas">
+              <PropertyRef Name="rsal_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbRazonSalidas" Type="Self.tbRazonSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbRazonSalidas">
+              <PropertyRef Name="rsal_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1135,6 +1172,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbRazonSalida_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rsal_Id" Type="int" Mode="In" />
+          <Parameter Name="rsal_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="rsal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="rsal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbRazonSalidas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rsal_Id" Type="int" Mode="In" />
+          <Parameter Name="rsal_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="rsal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="rsal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbRazonSalidas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rsal_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="rsal_Usuariocrea" Type="int" Mode="In" />
+          <Parameter Name="rsal_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbRazonSalidas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rsal_Id" Type="int" Mode="In" />
+          <Parameter Name="rsal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="rsal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tamo_Id" Type="int" Mode="In" />
           <Parameter Name="tamo_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -1257,6 +1316,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <EntitySet Name="tbIdiomas" EntityType="Self.tbIdiomas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbJornadas" EntityType="Self.tbJornadas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
@@ -1354,6 +1414,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbRazonSalidas" EntitySet="tbRazonSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbRazonSalidas" EntitySet="tbRazonSalidas" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_sue_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_sue_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -2112,6 +2180,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbRazonSalidas" EntityType="ERP_GMEDINAModel.tbRazonSalidas" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbRazonSalidas" EntitySet="tbRazonSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbRazonSalidas" EntitySet="tbRazonSalidas" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbRazonSalida_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalida_Update_Result)">
+            <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Delete_Result)">
+            <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Insert_Result)">
+            <Parameter Name="rsal_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="rsal_Usuariocrea" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Restore_Result)">
+            <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2194,6 +2293,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbFasesReclutamiento1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
           <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
+          <NavigationProperty Name="tbRazonSalidas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
+          <NavigationProperty Name="tbRazonSalidas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -3151,6 +3252,57 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
         <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbRazonSalidas">
+          <Key>
+            <PropertyRef Name="rsal_Id" />
+          </Key>
+          <Property Name="rsal_Id" Type="Int32" Nullable="false" />
+          <Property Name="rsal_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rsal_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="rsal_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rsal_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="rsal_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rsal_UsuarioModifica" Type="Int32" />
+          <Property Name="rsal_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" FromRole="tbRazonSalidas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbRazonSalidas" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbRazonSalidas" Role="tbRazonSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbRazonSalidas">
+              <PropertyRef Name="rsal_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbRazonSalidas" Role="tbRazonSalidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbRazonSalidas">
+              <PropertyRef Name="rsal_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbRazonSalida_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3809,6 +3961,48 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbRazonSalidas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbRazonSalidas">
+              <MappingFragment StoreEntitySet="tbRazonSalidas">
+                <ScalarProperty Name="rsal_FechaModifica" ColumnName="rsal_FechaModifica" />
+                <ScalarProperty Name="rsal_UsuarioModifica" ColumnName="rsal_UsuarioModifica" />
+                <ScalarProperty Name="rsal_FechaCrea" ColumnName="rsal_FechaCrea" />
+                <ScalarProperty Name="rsal_UsuarioCrea" ColumnName="rsal_UsuarioCrea" />
+                <ScalarProperty Name="rsal_RazonInactivo" ColumnName="rsal_RazonInactivo" />
+                <ScalarProperty Name="rsal_Estado" ColumnName="rsal_Estado" />
+                <ScalarProperty Name="rsal_Descripcion" ColumnName="rsal_Descripcion" />
+                <ScalarProperty Name="rsal_Id" ColumnName="rsal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalida_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalida_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Restore_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

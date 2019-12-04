@@ -34,16 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.rsal_Id">
-                            <td>@Html.DisplayFor(modelItem => item.rsal_Descripcion)</td>
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.rsal_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.rsal_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
+               
                     </tbody>                       
                   </table>
                 </div>
