@@ -501,8 +501,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
                              "~/Scripts/app/general/Cargos/Cargos.js"));
 
-                             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
-                                 "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
+                  "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/RazonSalidas").Include(
+              "~/Scripts/app/general/RazonSalidas/RazonSalidas.js"));
 
             //OPTIMIZATION
 

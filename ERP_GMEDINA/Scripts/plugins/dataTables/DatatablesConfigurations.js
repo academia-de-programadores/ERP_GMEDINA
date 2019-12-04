@@ -114,5 +114,3 @@ function CallEditar(btn) {
 
     tablaEditar(id);
 }
-
-

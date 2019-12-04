@@ -14,236 +14,182 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+
         // GET: RazonSalidas
         public ActionResult Index()
         {
-            var tbRazonSalidas = db.tbRazonSalidas.Where(d => d.rsal_Estado == true);
-            return View(tbRazonSalidas.ToList());
+            List<tbRazonSalidas> tbRazonSalidas = new List<Models.tbRazonSalidas> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                tbRazonSalidas = db.tbRazonSalidas.Where(x => x.rsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbRazonSalidas.Add(new tbRazonSalidas { rsal_Id = 0, rsal_Descripcion = "fallo la conexion" });
+                return View(tbRazonSalidas);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbRazonSalidas.Add(new tbRazonSalidas { rsal_Id = 0, rsal_Descripcion = "fallo la conexion" });
+            }
+            return View(tbRazonSalidas);
         }
-        public ActionResult GetData()
+        [HttpPost]
+        public JsonResult llenarTabla()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbRazonSalidas1 = db.tbRazonSalidas
-                        .Select(c => new {
-                            rsal_Id = c.rsal_Id,
-                            rsal_Descripcionn = c.rsal_Descripcion,
-                            rsal_Estado = c.rsal_Estado,
-                            rsal_RazonInactivo = c.rsal_RazonInactivo,
-                            rsal_UsuarioModifica = c.rsal_UsuarioModifica,
-                            rsal_UsuarioCrea = c.rsal_UsuarioCrea,                           
-                            rsal_FechaCrea = c.rsal_FechaCrea,
-                            rsal_FechaModifica = c.rsal_FechaModifica
-                        }).Where(c => c.rsal_Estado == true)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbRazonSalidas1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
-        // GET: RazonSalidas/Details/5
-        public ActionResult Details(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbRazonSalidas tbJSON = db.tbRazonSalidas.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: RazonSalidas/Create
-        public ActionResult Create()
-        {
-            return View();
+            List<tbRazonSalidas> tbRazonSalidas =
+                new List<Models.tbRazonSalidas> { };
+            foreach (tbRazonSalidas x in db.tbRazonSalidas.ToList().Where(x => x.rsal_Estado == true))
+            {
+                tbRazonSalidas.Add(new tbRazonSalidas
+                {
+                    rsal_Id = x.rsal_Id,
+                    rsal_Descripcion = x.rsal_Descripcion
+                });
+            }
+            return Json(tbRazonSalidas, JsonRequestBehavior.AllowGet);
         }
 
         // POST: RazonSalidas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "rsal_Id,rsal_Descripcion,rsal_UsuarioCrea,rsal_FechaCrea")] tbRazonSalidas tbRazonSalidas)
+        public JsonResult Create(tbRazonSalidas tbRazonSalidas)
         {
-            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbRazonSalidas.rsal_UsuarioCrea = 1;
-            tbRazonSalidas.rsal_FechaCrea = DateTime.Now;
-            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
-            string response = String.Empty;
-            IEnumerable<object> list = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
-
+            string msj = "";
+            if (tbRazonSalidas.rsal_Descripcion != "")
             {
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-
-                    //list = db.UDP_rrhh_tbRazonSalidas_Insert( tbRazonSalidas.rsal_Descripcion,
-                    //                                          tbRazonSalidas.rsal_UsuarioCrea,
-                    //                                          tbRazonSalidas.rsal_FechaCrea);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                   // foreach (UDP_rrhh_tbRazonSalidas_Insert Resultado in list)
-                    //    MensajeError = Resultado.MensajeError;
-
-                    if (MensajeError.StartsWith("-1"))
+                    var list = db.UDP_RRHH_tbRazonSalidas_Insert(tbRazonSalidas.rsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRazonSalidas_Insert_Result item in list)
                     {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                        response = "error";
+                        msj = item.MensajeError + " ";
                     }
-
                 }
-                catch (Exception Ex)
+                catch (Exception ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
+                    msj = "-2";
+                    ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {
-                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                response = "error";
+                msj = "-3";
             }
-
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: RazonSalidas/Edit/5
-        public ActionResult Edit(int? ID)
+        public ActionResult Edit(int? id)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbRazonSalidas tbJSON = db.tbRazonSalidas.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tbRazonSalidas tbRazonSalidas = null;
+            try
+            {
+                tbRazonSalidas = db.tbRazonSalidas.Find(id);
+                if (tbRazonSalidas == null || !tbRazonSalidas.rsal_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var habilidad = new tbRazonSalidas
+            {
+                rsal_Id = tbRazonSalidas.rsal_Id,
+                rsal_Descripcion = tbRazonSalidas.rsal_Descripcion,
+                rsal_Estado = tbRazonSalidas.rsal_Estado,
+                rsal_RazonInactivo = tbRazonSalidas.rsal_RazonInactivo,
+                rsal_UsuarioCrea = tbRazonSalidas.rsal_UsuarioCrea,
+                rsal_FechaCrea = tbRazonSalidas.rsal_FechaCrea,
+                rsal_UsuarioModifica = tbRazonSalidas.rsal_UsuarioModifica,
+                rsal_FechaModifica = tbRazonSalidas.rsal_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbRazonSalidas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbRazonSalidas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(habilidad, JsonRequestBehavior.AllowGet);
         }
 
         // POST: RazonSalidas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "rsal_Id,rsal_Descripcion,rsal_UsuarioCrea,rsal_FechaCrea")] tbRazonSalidas tbRazonSalidas)
-        { 
-        //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-        //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            tbRazonSalidas.rsal_UsuarioCrea = 1;
-            tbRazonSalidas.rsal_FechaCrea = DateTime.Now;
-
-
-            //LLENAR DATA DE AUDITORIA
-            tbRazonSalidas.rsal_UsuarioModifica = 1;
-            tbRazonSalidas.rsal_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            IEnumerable<object> list = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
+        public JsonResult Edit(tbRazonSalidas tbRazonSalidas)
+        {
+            string msj = "";
+            if (tbRazonSalidas.rsal_Id != 0 && tbRazonSalidas.rsal_Descripcion != "")
             {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    //list = db.UDP_rrhh_tbRazonSalidas_Update(   tbRazonSalidas.rsal_Id,
-                    //                                            tbRazonSalidas.rsal_Descripcion,
-                    //                                            tbRazonSalidas.rsal_UsuarioModifica,
-                    //                                            tbRazonSalidas.rsal_FechaModifica);
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    //foreach (UDP_rrhh_tbRazonSalidas_Update Resultado in list)
-                    //    MensajeError = Resultado.MensajeError;
-
-                    //if (MensajeError.StartsWith("-1"))
-                    //{
-                    //    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    //    ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
-                    //    response = "error";
-                    //}
-
+                    var list = db.UDP_RRHH_tbRazonSalida_Update(id, tbRazonSalidas.rsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRazonSalida_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
                     }
-                catch (Exception Ex)
-                {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
-            }
-            else {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
-            }
-            
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbRazonSalidas tbJSON = db.tbRazonSalidas.Find(ID);
-            return Json(tbJSON, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "rsal_Id,rsal_UsuarioModifica,rsal_FechaModifica")] tbRazonSalidas tbRazonSalidas)
-        {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.rsal_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.rsal_FechaCrea = DateTime.Now;
-
-
-            //LLENAR DATA DE AUDITORIA
-            tbRazonSalidas.rsal_UsuarioModifica = 1;
-            tbRazonSalidas.rsal_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            IEnumerable<object> listCatalogoDeDeducciones = null;
-            string MensajeError = "";
-            //VALIDAR SI EL MODELO ES VÁLIDO
-            if (ModelState.IsValid)
-            {
-                //try
-                //{
-                //    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                //    list = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar( tbRazonSalidas.rsal_Id,
-                //                                                           tbRazonSalidas.rsal_UsuarioModifica,
-                //                                                           tbRazonSalidas.rsal_FechaModifica);
-                //    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                //    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeDeducciones)
-                //        MensajeError = Resultado.MensajeError;
-
-                //    if (MensajeError.StartsWith("-1"))
-                //    {
-                //        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                //        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
-                //        response = "error";
-                //    }
-
-                //}
-                //catch (Exception Ex)
-                //{
-                //    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                //    response = Ex.Message.ToString();
-                //}
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
-                response = "error";
+                msj = "-3";
             }
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        // GET: RazonSalidas/Delete/5
+        [HttpPost]
+        public ActionResult Delete(tbRazonSalidas tbRazonSalidas)
+        {
+            string msj = "";
+            if (tbRazonSalidas.rsal_Id != 0 && tbRazonSalidas.rsal_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbRazonSalidas_Delete(id, tbRazonSalidas.rsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRazonSalidas_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
