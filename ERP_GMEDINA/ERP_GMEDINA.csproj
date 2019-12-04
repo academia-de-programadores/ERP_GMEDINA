@@ -220,9 +220,6 @@
     <Compile Include="Models\UDP_RRHH_tbAreas_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_RRHH_tbAreas_Restore_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_RRHH_tbAreas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

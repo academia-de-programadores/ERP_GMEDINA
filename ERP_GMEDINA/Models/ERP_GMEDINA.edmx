@@ -481,16 +481,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
           <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="car_descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="area_Usuariocrea" Type="int" Mode="In" />
           <Parameter Name="area_Fechacrea" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbAreas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
-          <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -829,32 +824,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <End Role="tbCargos" EntitySet="tbCargos" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
           </AssociationSet>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result)">
-            <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="area_Razoninactivo" Mode="In" Type="String" />
-            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
-            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result)">
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
-            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
-            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="area_Usuariocrea" Mode="In" Type="Int32" />
-            <Parameter Name="area_Fechacrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result)">
-            <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
-            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
-            <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
-            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
-            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
-            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_razon_Inactivo" Mode="In" Type="String" />
@@ -944,6 +913,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Razoninactivo" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result)">
+            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_descripcion" Mode="In" Type="String" />
+            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariocrea" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechacrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
+            <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbHabilidades">
           <Key>
@@ -1234,18 +1224,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_RRHH_tbAreas_Delete_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbAreas_Insert_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbAreas_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbAreas_Update_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbCargos_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -1480,6 +1458,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbAreas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1637,34 +1624,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result">
@@ -1786,6 +1745,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

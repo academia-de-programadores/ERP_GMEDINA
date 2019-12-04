@@ -10,24 +10,51 @@ function Remove(Id, lista) {
     return list;
 }
 function Add(depto_Descripcion, car_Descripcion) {
-    for (var i = 0; i < ChildTable.data().length; i++) {
-        var Fila = ChildTable.rows().data()[i];
-        if (Fila.Descripcion == Descripcion || Fila.Cargo == Cargo) {
-            if (Fila.Descripcion == Descripcion) {
-                MsgError("Error", "ya existe el departamento: '"+Descripcion+"'");
+    if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
+        for (var i = 0; i < ChildTable.data().length; i++) {
+            var Fila = ChildTable.rows().data()[i];
+            if (Fila.Descripcion == depto_Descripcion || Fila.Cargo == car_Descripcion) {            
+                if (Fila.Cargo == car_Descripcion) {
+                    var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
+                    $(span).addClass("text-warning");
+                    $(span).closest("div").addClass("has-warning");
+                    span.text('El cargo "' + car_Descripcion + '" ya existe');
+                    $("#FormDepartamentos").find("#car_Descripcion").focus();
+                }
+                if (Fila.Descripcion == depto_Descripcion) {
+                    var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
+                    $(span).addClass("text-warning");
+                    $(span).closest("div").addClass("has-warning");
+                    span.text('La Descripcion "' + depto_Descripcion + '" ya existe');
+                    $("#FormDepartamentos").find("#depto_Descripcion").focus();
+                }            
+                return null;
             }
-            if (Fila.Cargo == Cargo) {
-                MsgError("Error", "ya existe el Cargo: '" + Cargo + "'");
+        }
+        ChildTable.row.add(
+            {
+                Descripcion: depto_Descripcion.trim(),
+                Cargo: car_Descripcion
             }
-            return null;
+            ).draw();
+    } else {
+        if (car_Descripcion.trim().length == 0) {
+            var txt_required = $("#FormDepartamentos").find("#car_Descripcion").data("val-required");
+            var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
+            $(span).addClass("text-danger");
+            $(span).closest("div").addClass("has-error");
+            span.text(txt_required);
+            $("#FormDepartamentos").find("#car_Descripcion").focus();
+        }
+        if (depto_Descripcion.trim().length == 0) {
+            var txt_required = $("#FormDepartamentos").find("#depto_Descripcion").data("val-required");
+            var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
+            $(span).addClass("text-danger");
+            $(span).closest("div").addClass("has-error");
+            span.text(txt_required);
+            $("#FormDepartamentos").find("#depto_Descripcion").focus();
         }
     }
-    ChildTable.row.add(
-  {
-      Descripcion: Descripcion.trim(),
-      Cargo: Cargo
-  }
- ).draw();
 }
 function getJson() {
  //declaramos una lista para recuperar en un formato 
@@ -104,6 +131,7 @@ $("#btnCrear").click(function () {
  //declaramos el objeto principal de nuestra tabla y asignamos sus valores
 var tbAreas =
     {
+        suc_Id: $("#Sucursales").val(),
         area_Descripcion: $("#area_Descripcion").val(),
         tbCargos:{car_Descripcion: $("#car_Descripcion").val()},
     };
@@ -128,6 +156,22 @@ var lista = getJson();
         } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
-    console.log(lista);
-    console.log(Remove(0, lista));
 });
+$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
+    var id = $(this).attr("id");
+    var form = $(this).closest("form");
+    limpiarSpan(id,form);
+});
+$("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
+    var id = $(this).attr("id");
+    var form = $(this).closest("form");
+    limpiarSpan(id,form);
+});
+function limpiarSpan(id,form) {
+    var span = $(form).find("#error" + id);
+    $(span).closest("div").removeClass("has-error");
+    $(span).removeClass("text-danger");
+    $(span).closest("div").removeClass("has-warning");
+    $(span).removeClass("text-warning");
+    span["0"].innerText = "";
+}

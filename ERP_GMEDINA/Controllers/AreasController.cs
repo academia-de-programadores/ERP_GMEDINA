@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbAreas = new List<tbAreas> { };
             return View(tbAreas);
         }
@@ -30,12 +31,12 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var tbAreas = db.tbAreas
                         .Select(
-                        t=>new
+                        t => new
                         {
                             area_Id = t.area_Id,
                             area_Descripcion = t.area_Descripcion,
                             Encargado = t.tbCargos.tbEmpleados
-                                .Select(p=> p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
+                                .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
                         }
                         )
                         .ToList();
@@ -66,15 +67,15 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult llenarDropDowlist()
         {
-            var Sucursales = new List<object>{ };
+            var Sucursales = new List<object> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
                     Sucursales.Add(new
                     {
-                        Id =0,
-                        Descripcion ="**Seleccione una opción**"
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
                     });
                     Sucursales.AddRange(db.tbSucursales
                     .Select(tabla => new { Id = tabla.suc_Id, Descripcion = tabla.suc_Descripcion })
@@ -84,7 +85,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     return Json("-2", 0);
                 }
-                
+
             }
             var result = new Dictionary<string, object>();
             result.Add("Sucursales", Sucursales);
@@ -135,19 +136,53 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
-            using (db = new ERP_GMEDINAEntities())
+            //en esta area ingresamos el registro con el procedimiento almacenado
+            try
             {
-                //en esta area ingresamos el registro con el procedimiento almacenado
-                try
+                if (tbAreas.suc_Id != 0 || tbAreas.tbCargos.car_Descripcion != "" || tbAreas.area_Descripcion == "")
                 {
+                    return Json("-2", JsonRequestBehavior.AllowGet);
+                }
+                foreach (var item in tbDepartamentos)
+                {
+                    if (item.depto_Descripcion == "" || item.tbCargos.car_Descripcion=="")
+                    {
+                        return Json("-2", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                var Usuario = (tbUsuario)Session["Usuario"];
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    using (var transacion = db.Database.BeginTransaction())
+                    {
+                        var list = db.UDP_RRHH_tbAreas_Insert(
+                                                                tbAreas.suc_Id,
+                                                                tbAreas.tbCargos.car_Descripcion,
+                                                                tbAreas.area_Descripcion,
+                                                                Usuario.usu_Id,
+                                                                DateTime.Now);
+                        foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
+                        {
+                            tbAreas.area_Id = int.Parse(item.MensajeError.ToString());
+                        }
+                        if (tbAreas.area_Id==-2)
+                        {
+                            return Json("-2", JsonRequestBehavior.AllowGet);
+                        }
+                        foreach (var item in tbDepartamentos)
+                        {
+                        
+                        }
 
+                    }
                 }
-                catch
-                {
-                    result = "-2";
-                }
+                
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                result = "-2";
+            }
+        return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
