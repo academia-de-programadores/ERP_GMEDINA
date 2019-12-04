@@ -12,7 +12,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 console.log(value.empr_Nombre);
                 tabla.row.add({
-                    Id: value.empr_Id,   
+                    ID: value.empr_Id,   
                     Empresa:value.empr_Nombre,
                     }).draw();
             });

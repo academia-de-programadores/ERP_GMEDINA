@@ -46,7 +46,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add({
-                    Id:value.tmon_Id,
+                    ID:value.tmon_Id,
                     Descripcion:value.tmon_Descripcion
                 }).draw();
             });
