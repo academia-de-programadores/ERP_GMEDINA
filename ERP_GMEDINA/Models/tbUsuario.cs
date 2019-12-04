@@ -17,20 +17,22 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbUsuario()
         {
-            this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
-            this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
             this.tbEmpleados = new HashSet<tbEmpleados>();
             this.tbEmpleados1 = new HashSet<tbEmpleados>();
             this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
             this.tbHistorialPermisos1 = new HashSet<tbHistorialPermisos>();
             this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
             this.tbHistorialVacaciones1 = new HashSet<tbHistorialVacaciones>();
+            this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
+            this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
+            this.tbTipoPermisos = new HashSet<tbTipoPermisos>();
+            this.tbTipoPermisos1 = new HashSet<tbTipoPermisos>();
         }
     
         public int usu_Id { get; set; }
         public string usu_NombreUsuario { get; set; }
         public byte[] usu_Password { get; set; }
-        public string usu_Nombres { get; set; }
+        public string su_Nombres { get; set; }
         public string usu_Apellidos { get; set; }
         public string usu_Correos { get; set; }
         public bool usu_EsActivo { get; set; }
@@ -38,10 +40,6 @@ namespace ERP_GMEDINA.Models
         public bool usu_EsAdministrador { get; set; }
         public Nullable<byte> usu_SesionesValidas { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoMonedas> tbTipoMonedas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -54,5 +52,13 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos1 { get; set; }
     }
 }
