@@ -46,6 +46,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
+        public virtual DbSet<tbNacionalidades> tbNacionalidades { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1758,6 +1759,82 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("rsal_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalidas_Restore_Result>("UDP_RRHH_tbRazonSalidas_Restore", rsal_IdParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Delete_Result> UDP_RRHH_tbNacionalidades_Delete(Nullable<int> nac_id, string nac_razon_Inactivo, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        {
+            var nac_idParameter = nac_id.HasValue ?
+                new ObjectParameter("nac_id", nac_id) :
+                new ObjectParameter("nac_id", typeof(int));
+    
+            var nac_razon_InactivoParameter = nac_razon_Inactivo != null ?
+                new ObjectParameter("nac_razon_Inactivo", nac_razon_Inactivo) :
+                new ObjectParameter("nac_razon_Inactivo", typeof(string));
+    
+            var nac_UsuarioModificaParameter = nac_UsuarioModifica.HasValue ?
+                new ObjectParameter("nac_UsuarioModifica", nac_UsuarioModifica) :
+                new ObjectParameter("nac_UsuarioModifica", typeof(int));
+    
+            var nac_FechaModificaParameter = nac_FechaModifica.HasValue ?
+                new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
+                new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Delete_Result>("UDP_RRHH_tbNacionalidades_Delete", nac_idParameter, nac_razon_InactivoParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Insert_Result> UDP_RRHH_tbNacionalidades_Insert(string nac_Descripcion, Nullable<int> nac_UsuarioCrea, Nullable<System.DateTime> nac_FechaCrea)
+        {
+            var nac_DescripcionParameter = nac_Descripcion != null ?
+                new ObjectParameter("nac_Descripcion", nac_Descripcion) :
+                new ObjectParameter("nac_Descripcion", typeof(string));
+    
+            var nac_UsuarioCreaParameter = nac_UsuarioCrea.HasValue ?
+                new ObjectParameter("nac_UsuarioCrea", nac_UsuarioCrea) :
+                new ObjectParameter("nac_UsuarioCrea", typeof(int));
+    
+            var nac_FechaCreaParameter = nac_FechaCrea.HasValue ?
+                new ObjectParameter("nac_FechaCrea", nac_FechaCrea) :
+                new ObjectParameter("nac_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Insert_Result>("UDP_RRHH_tbNacionalidades_Insert", nac_DescripcionParameter, nac_UsuarioCreaParameter, nac_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Restore_Result> UDP_RRHH_tbNacionalidades_Restore(Nullable<int> nac_id, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        {
+            var nac_idParameter = nac_id.HasValue ?
+                new ObjectParameter("nac_id", nac_id) :
+                new ObjectParameter("nac_id", typeof(int));
+    
+            var nac_UsuarioModificaParameter = nac_UsuarioModifica.HasValue ?
+                new ObjectParameter("nac_UsuarioModifica", nac_UsuarioModifica) :
+                new ObjectParameter("nac_UsuarioModifica", typeof(int));
+    
+            var nac_FechaModificaParameter = nac_FechaModifica.HasValue ?
+                new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
+                new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Restore_Result>("UDP_RRHH_tbNacionalidades_Restore", nac_idParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbNacionalidades_Update_Result> UDP_RRHH_tbNacionalidades_Update(Nullable<int> nac_Id, string nac_Descripcion, Nullable<int> nac_UsuarioModifica, Nullable<System.DateTime> nac_FechaModifica)
+        {
+            var nac_IdParameter = nac_Id.HasValue ?
+                new ObjectParameter("nac_Id", nac_Id) :
+                new ObjectParameter("nac_Id", typeof(int));
+    
+            var nac_DescripcionParameter = nac_Descripcion != null ?
+                new ObjectParameter("nac_Descripcion", nac_Descripcion) :
+                new ObjectParameter("nac_Descripcion", typeof(string));
+    
+            var nac_UsuarioModificaParameter = nac_UsuarioModifica.HasValue ?
+                new ObjectParameter("nac_UsuarioModifica", nac_UsuarioModifica) :
+                new ObjectParameter("nac_UsuarioModifica", typeof(int));
+    
+            var nac_FechaModificaParameter = nac_FechaModifica.HasValue ?
+                new ObjectParameter("nac_FechaModifica", nac_FechaModifica) :
+                new ObjectParameter("nac_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbNacionalidades_Update_Result>("UDP_RRHH_tbNacionalidades_Update", nac_IdParameter, nac_DescripcionParameter, nac_UsuarioModificaParameter, nac_FechaModificaParameter);
         }
     }
 }

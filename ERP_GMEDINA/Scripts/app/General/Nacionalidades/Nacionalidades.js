@@ -1,4 +1,9 @@
-﻿var id = 0;
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+
+
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -39,12 +44,11 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                console.log(value.nac_Descripcion);
-                tabla.row.add([value.nac_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.nac_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.nac_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                //console.log(value.nac_Descripcion);
+                tabla.row.add({
+                    ID: value.nac_Id,
+                    Descripción:value.nac_Descripcion
+                }).draw();
             });
         });
 }

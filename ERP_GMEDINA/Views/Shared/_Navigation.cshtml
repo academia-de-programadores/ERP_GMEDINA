@@ -39,6 +39,7 @@
                     <li class="@Html.IsSelected(action: "Dashboard_3")"><a href="@Url.Action("Dashboard_3", "Dashboards")">Sucursales</a></li>
                     <li class="@Html.IsSelected(controller:"Idiomas",action: "Index")"><a href="@Url.Action("Index", "Idiomas")">Idiomas</a></li>
                     <li class="@Html.IsSelected(controller:"TipoMonedas",action: "Index")"><a href="@Url.Action("Index", "TipoMonedas")">Monedas</a></li>
+                    <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
 
                     <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Empleado <span class="fa arrow"></span></a>
@@ -99,6 +100,30 @@
                         </ul>
                     </li>
                     @*AMONESTACIONES*@
+
+
+                    @*Salidas*@
+                    <li class="@Html.IsSelected(action: "Dashboard_5")">
+                        <a href="#">Salidas <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li class="@Html.IsSelected(controller:"RazonSalidas",action: "Index")">
+                                <a href="@Url.Action("Index", "RazonSalidas")">Razones de Salidas</a>
+                            </li>
+                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
+                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Audiencia de Descargo</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Dashboard_5")">
+                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Amonestaciones</a>
+                            </li>*@
+                        </ul>
+                    </li>
+                    @*Salidas*@
+
+
+
+
+
+
 
 
                     @*PERMISOS*@

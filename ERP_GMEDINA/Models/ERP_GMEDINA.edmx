@@ -153,6 +153,19 @@
           <Property Name="jor_UsuarioModifica" Type="int" />
           <Property Name="jor_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbNacionalidades">
+          <Key>
+            <PropertyRef Name="nac_Id" />
+          </Key>
+          <Property Name="nac_Id" Type="int" Nullable="false" />
+          <Property Name="nac_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nac_Estado" Type="bit" Nullable="false" />
+          <Property Name="nac_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="nac_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="nac_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="nac_UsuarioModifica" Type="int" />
+          <Property Name="nac_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -510,6 +523,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
@@ -795,6 +832,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             </Principal>
             <Dependent Role="tbEmpleados">
               <PropertyRef Name="jor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id">
+          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="1" />
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNacionalidades">
+              <PropertyRef Name="nac_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="nac_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1172,6 +1221,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Parameter Name="idi_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="idi_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbNacionalidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="nac_id" Type="int" Mode="In" />
+          <Parameter Name="nac_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="nac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="nac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbNacionalidades_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="nac_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="nac_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="nac_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbNacionalidades_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="nac_id" Type="int" Mode="In" />
+          <Parameter Name="nac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="nac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbNacionalidades_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="nac_Id" Type="int" Mode="In" />
+          <Parameter Name="nac_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="nac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="nac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbRazonSalida_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="rsal_Id" Type="int" Mode="In" />
           <Parameter Name="rsal_Descripcion" Type="nvarchar" Mode="In" />
@@ -1315,6 +1386,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <EntitySet Name="tbFasesReclutamiento" EntityType="Self.tbFasesReclutamiento" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbIdiomas" EntityType="Self.tbIdiomas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbJornadas" EntityType="Self.tbJornadas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbNacionalidades" EntityType="Self.tbNacionalidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" Schema="rrhh" store:Type="Tables" />
@@ -1406,6 +1478,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbJornadas_jor_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbJornadas_jor_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbJornadas" EntitySet="tbJornadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -1502,6 +1582,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id">
             <End Role="tbJornadas" EntitySet="tbJornadas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" Association="Self.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id">
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
             <End Role="tbPersonas" EntitySet="tbPersonas" />
@@ -2211,6 +2295,41 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
             <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbNacionalidades" EntityType="ERP_GMEDINAModel.tbNacionalidades" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id">
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Delete_Result)">
+            <Parameter Name="nac_id" Mode="In" Type="Int32" />
+            <Parameter Name="nac_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Insert_Result)">
+            <Parameter Name="nac_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="nac_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="nac_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Restore_Result)">
+            <Parameter Name="nac_id" Mode="In" Type="Int32" />
+            <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Update_Result)">
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="nac_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2295,6 +2414,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
           <NavigationProperty Name="tbRazonSalidas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
           <NavigationProperty Name="tbRazonSalidas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
+          <NavigationProperty Name="tbNacionalidades" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" FromRole="tbUsuario" ToRole="tbNacionalidades" />
+          <NavigationProperty Name="tbNacionalidades1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" FromRole="tbUsuario" ToRole="tbNacionalidades" />
         </EntityType>
         <EntityType Name="tbTipoHoras">
           <Key>
@@ -2684,6 +2805,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbPersonas" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbPersonas" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbNacionalidades" Relationship="ERP_GMEDINAModel.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" FromRole="tbPersonas" ToRole="tbNacionalidades" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -3301,6 +3423,70 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbRazonSalidas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="tbNacionalidades">
+          <Key>
+            <PropertyRef Name="nac_Id" />
+          </Key>
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="nac_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nac_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="nac_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nac_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="nac_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nac_UsuarioModifica" Type="Int32" />
+          <Property Name="nac_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" FromRole="tbNacionalidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" FromRole="tbNacionalidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" FromRole="tbNacionalidades" ToRole="tbPersonas" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbNacionalidades" Role="tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbNacionalidades" Role="tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id">
+          <End Type="ERP_GMEDINAModel.tbNacionalidades" Role="tbNacionalidades" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNacionalidades">
+              <PropertyRef Name="nac_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="nac_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -4003,6 +4189,48 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Datos_Empleado' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Restore" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbNacionalidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbNacionalidades">
+              <MappingFragment StoreEntitySet="tbNacionalidades">
+                <ScalarProperty Name="nac_FechaModifica" ColumnName="nac_FechaModifica" />
+                <ScalarProperty Name="nac_UsuarioModifica" ColumnName="nac_UsuarioModifica" />
+                <ScalarProperty Name="nac_FechaCrea" ColumnName="nac_FechaCrea" />
+                <ScalarProperty Name="nac_UsuarioCrea" ColumnName="nac_UsuarioCrea" />
+                <ScalarProperty Name="nac_RazonInactivo" ColumnName="nac_RazonInactivo" />
+                <ScalarProperty Name="nac_Estado" ColumnName="nac_Estado" />
+                <ScalarProperty Name="nac_Descripcion" ColumnName="nac_Descripcion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

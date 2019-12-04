@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\NacionalidadesController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cIdiomas.cs" />
+    <Compile Include="Models\cNacionalidades.cs" />
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cRazonSalidas.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
@@ -237,6 +239,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbJornadas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
@@ -339,6 +344,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbIdiomas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbNacionalidades_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbNacionalidades_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbNacionalidades_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbNacionalidades_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbRazonSalidas_Delete_Result.cs">
@@ -648,6 +665,7 @@
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
@@ -1233,6 +1251,11 @@
     <Content Include="Views\RazonSalidas\_Delete.cshtml" />
     <Content Include="Views\RazonSalidas\_Detalles.cshtml" />
     <Content Include="Views\RazonSalidas\_Edit.cshtml" />
+    <Content Include="Views\Nacionalidades\Index.cshtml" />
+    <Content Include="Views\Nacionalidades\_Create.cshtml" />
+    <Content Include="Views\Nacionalidades\_Delete.cshtml" />
+    <Content Include="Views\Nacionalidades\_Detalles.cshtml" />
+    <Content Include="Views\Nacionalidades\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

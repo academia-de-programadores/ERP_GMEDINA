@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbNacionalidades>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Nacionalidades";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -34,16 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.nac_Id">
-                            <td>@Html.DisplayFor(modelItem => item.nac_Descripcion)</td>
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.nac_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.nac_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
+            
                     </tbody>                       
                   </table>
                 </div>
