@@ -55,7 +55,7 @@ function llenarTabla() {
                 //console.log(item.tiho_Descripcion);
            
                   tabla.row.add({
-                      id: value.habi_Id,
+                      ID: value.tiho_Id,
                       Descripcion: value.tiho_Descripcion,
                       Recargo:value.tiho_Recargo
                   });
