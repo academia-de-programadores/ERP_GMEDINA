@@ -12,7 +12,7 @@
           <Property Name="usu_Id" Type="int" Nullable="false" />
           <Property Name="usu_NombreUsuario" Type="varchar" MaxLength="100" />
           <Property Name="usu_Password" Type="varbinary" MaxLength="64" />
-          <Property Name="usu_Nombres" Type="varchar" MaxLength="150" />
+          <Property Name="su_Nombres" Type="varchar" MaxLength="150" />
           <Property Name="usu_Apellidos" Type="varchar" MaxLength="150" />
           <Property Name="usu_Correos" Type="varchar" MaxLength="150" />
           <Property Name="usu_EsActivo" Type="bit" Nullable="false" />
@@ -26,12 +26,10 @@
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="car_Id" Type="int" Nullable="false" />
-          <Property Name="area_Id" Type="int" Nullable="false" />
-          <Property Name="depto_Id" Type="int" Nullable="false" />
           <Property Name="hor_Id" Type="int" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="fpa_IdFormaPago" Type="int" Nullable="false" />
+          <Property Name="emp_Permanente" Type="bit" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
           <Property Name="emp_Reingreso" Type="bit" Nullable="false" />
           <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
@@ -61,23 +59,6 @@
           <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hamo_UsuarioModifica" Type="int" />
           <Property Name="hamo_FechaModifica" Type="datetime" />
-        </EntityType>
-        <EntityType Name="tbHistorialAudienciaDescargo">
-          <Key>
-            <PropertyRef Name="aude_Id" />
-          </Key>
-          <Property Name="aude_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="aude_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="aude_FechaAudiencia" Type="datetime" Nullable="false" />
-          <Property Name="aude_Testigo" Type="bit" Nullable="false" />
-          <Property Name="aude_DireccionArchivo" Type="nvarchar" MaxLength="25" />
-          <Property Name="aude_Estado" Type="bit" Nullable="false" />
-          <Property Name="aude_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="aude_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="aude_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="aude_UsuarioModifica" Type="int" />
-          <Property Name="aude_FechaModifica" Type="datetime" />
         </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
@@ -116,7 +97,62 @@
           <Property Name="tamo_UsuarioModifica" Type="int" />
           <Property Name="tamo_FechaModifica" Type="datetime" />
         </EntityType>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.dbo.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialAmonestacion">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="tamo_Id" />
+            <PropertyRef Name="tamo_Descripcion" />
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="hamo_Fecha" />
+            <PropertyRef Name="hamo_Estado" />
+            <PropertyRef Name="hamo_UsuarioCrea" />
+            <PropertyRef Name="hamo_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="tamo_Id" Type="int" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hamo_Id" Type="int" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="hamo_AmonestacionAnterior" Type="int" />
+          <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
+          <Property Name="hamo_Estado" Type="bit" Nullable="false" />
+          <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hamo_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hamo_UsuarioModifica" Type="int" />
+          <Property Name="hamo_FechaModifica" Type="datetime" />
+        </EntityType>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,7 +164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,31 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialAudienciaDescargo" Type="Self.tbHistorialAudienciaDescargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="aude_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialAudienciaDescargo" Type="Self.tbHistorialAudienciaDescargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="aude_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -176,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoAmonestaciones" Type="Self.tbTipoAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbTipoAmonestaciones" Type="Self.tbTipoAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
+        <Association Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,19 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialAudienciaDescargo" Type="Self.tbHistorialAudienciaDescargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
+        <Association Name="'FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="0..1" />
           <End Role="tbHistorialAmonestaciones1" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -248,7 +248,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
+        <Association Name="'FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
           <End Role="tbTipoAmonestaciones" Type="Self.tbTipoAmonestaciones" Multiplicity="1" />
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -460,23 +472,8 @@
           <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
           <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbAreas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="car_Id" Type="int" Mode="In" />
-          <Parameter Name="suc_Id" Type="int" Mode="In" />
-          <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="area_Usuariocrea" Type="int" Mode="In" />
-          <Parameter Name="area_Fechacrea" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbAreas_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
-          <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
-          <Parameter Name="suc_Id" Type="int" Mode="In" />
-          <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
           <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
@@ -530,23 +527,8 @@
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbDepartamentos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
-          <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="depto_Usuariocrea" Type="int" Mode="In" />
-          <Parameter Name="depto_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbDepartamentos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
-          <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="depto_Id" Type="int" Mode="In" />
-          <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
-          <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -663,32 +645,6 @@
           <Parameter Name="hamo_Id" Type="int" Mode="In" />
           <Parameter Name="hamo_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="aude_Id" Type="int" Mode="In" />
-          <Parameter Name="aude_RazonInactivo" Type="nvarchar" Mode="In" />
-          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="aude_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="aude_FechaAudiencia" Type="datetime" Mode="In" />
-          <Parameter Name="aude_Testigo" Type="bit" Mode="In" />
-          <Parameter Name="aude_DireccionArchivo" Type="nvarchar" Mode="In" />
-          <Parameter Name="aude_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="aude_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="aude_Id" Type="int" Mode="In" />
-          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="aude_Id" Type="int" Mode="In" />
-          <Parameter Name="aude_FechaAudiencia" Type="datetime" Mode="In" />
-          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_Id" Type="int" Mode="In" />
@@ -919,6 +875,7 @@
         </Function>
         <Function Name="UDP_RRHH_tbTipoPermisos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tper_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tper_GoceSueldo" Type="bit" Mode="In" />
           <Parameter Name="tper_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="tper_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -930,6 +887,7 @@
         <Function Name="UDP_RRHH_tbTipoPermisos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tper_Id" Type="int" Mode="In" />
           <Parameter Name="tper_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="tper_GoceSueldo" Type="bit" Mode="In" />
           <Parameter Name="tper_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="tper_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -981,54 +939,72 @@
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialAmonestaciones" EntityType="Self.tbHistorialAmonestaciones" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="tbHistorialAudienciaDescargo" EntityType="Self.tbHistorialAudienciaDescargo" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
+          <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_HistorialAmonestacion].[emp_Id] AS [emp_Id], 
+    [V_HistorialAmonestacion].[emp_Nombre] AS [emp_Nombre], 
+    [V_HistorialAmonestacion].[emp_Estado] AS [emp_Estado], 
+    [V_HistorialAmonestacion].[tamo_Id] AS [tamo_Id], 
+    [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion], 
+    [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id], 
+    [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha], 
+    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior], 
+    [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion], 
+    [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado], 
+    [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo], 
+    [V_HistorialAmonestacion].[hamo_UsuarioCrea] AS [hamo_UsuarioCrea], 
+    [V_HistorialAmonestacion].[hamo_FechaCrea] AS [hamo_FechaCrea], 
+    [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
+    [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
+    FROM [dbo].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
+          <AssociationSet Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" Association="Self.'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="Self.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
+          <AssociationSet Name="'FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="Self.'FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
             <End Role="tbHistorialAmonestaciones1" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="Self.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
+          <AssociationSet Name="'FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="Self.'FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="Self.'FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
@@ -1037,31 +1013,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tbUsuario">
-          <Key>
-            <PropertyRef Name="usu_Id" />
-          </Key>
-          <Property Name="usu_Id" Nullable="false" Type="Int32" />
-          <Property Name="usu_NombreUsuario" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="usu_Password" MaxLength="64" FixedLength="false" Type="Binary" />
-          <Property Name="usu_Nombres" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="usu_Apellidos" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="usu_Correos" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="usu_EsActivo" Nullable="false" Type="Boolean" />
-          <Property Name="usu_RazonInactivo" MaxLength="150" FixedLength="false" Unicode="false" Type="String" />
-          <Property Name="usu_EsAdministrador" Nullable="false" Type="Boolean" />
-          <Property Name="usu_SesionesValidas" Type="Byte" />
-          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialAmonestaciones" />
-          <NavigationProperty Name="tbHistorialAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialAmonestaciones" />
-          <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialAudienciaDescargo" />
-          <NavigationProperty Name="tbHistorialAudienciaDescargo1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialAudienciaDescargo" />
-          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
-          <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
-          <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
-          <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
-          </EntityType>
         <EntityContainer Name="ERP_GMEDINAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" />
           <FunctionImport Name="UDP_Plani_CatalogoDeduccionesEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeduccionesEdit_Select_Result1)">
           <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1786,6 +1738,7 @@
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Insert" ReturnType="Collection(String)">
             <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tper_GoceSueldo" Mode="In" Type="Boolean" />
             <Parameter Name="tper_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -1797,6 +1750,7 @@
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Update" ReturnType="Collection(String)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tper_GoceSueldo" Mode="In" Type="Boolean" />
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -1889,60 +1843,61 @@
             <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbUsuario" EntityType="ERP_GMEDINAModel.tbUsuario" />
           <EntitySet Name="tbEmpleados" EntityType="ERP_GMEDINAModel.tbEmpleados" />
           <EntitySet Name="tbHistorialAmonestaciones" EntityType="ERP_GMEDINAModel.tbHistorialAmonestaciones" />
-          <EntitySet Name="tbHistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" />
           <EntitySet Name="tbPersonas" EntityType="ERP_GMEDINAModel.tbPersonas" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="ERP_GMEDINAModel.tbTipoAmonestaciones" />
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
+          <EntitySet Name="V_HistorialAmonestacion" EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" />
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
+          <AssociationSet Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id">
+          <AssociationSet Name="C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
+          <AssociationSet Name="C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="ERP_GMEDINAModel.C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
             <End Role="tbHistorialAmonestaciones1" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
+          <AssociationSet Name="C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
           <Property Type="String" Name="cde_DescripcionDeduccion" Nullable="true" MaxLength="50" />
@@ -2127,18 +2082,57 @@
         <ComplexType Name="UDP_tbTipoPlanillaDetalleIngreso_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="tbUsuario">
+          <Key>
+            <PropertyRef Name="usu_Id" />
+          </Key>
+          <Property Name="usu_Id" Type="Int32" Nullable="false" />
+          <Property Name="usu_NombreUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Password" Type="Binary" MaxLength="64" FixedLength="false" />
+          <Property Name="su_Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_Correos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsActivo" Type="Boolean" Nullable="false" />
+          <Property Name="usu_RazonInactivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="usu_EsAdministrador" Type="Boolean" Nullable="false" />
+          <Property Name="usu_SesionesValidas" Type="Byte" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbEmpleados1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialAmonestaciones" />
+          <NavigationProperty Name="tbHistorialAmonestaciones1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialAmonestaciones" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
+          <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
+        </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
             <PropertyRef Name="emp_Id" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="car_Id" Type="Int32" Nullable="false" />
-          <Property Name="area_Id" Type="Int32" Nullable="false" />
-          <Property Name="depto_Id" Type="Int32" Nullable="false" />
           <Property Name="hor_Id" Type="Int32" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="fpa_IdFormaPago" Type="Int32" Nullable="false" />
+          <Property Name="emp_Permanente" Type="Boolean" Nullable="false" />
           <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Reingreso" Type="Boolean" Nullable="false" />
           <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
@@ -2151,8 +2145,10 @@
           <Property Name="emp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="emp_UsuarioModifica" Type="Int32" />
           <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAmonestaciones" />
-          <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAudienciaDescargo" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAmonestaciones" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
         </EntityType>
         <EntityType Name="tbHistorialAmonestaciones">
           <Key>
@@ -2170,32 +2166,12 @@
           <Property Name="hamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hamo_UsuarioModifica" Type="Int32" />
           <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" FromRole="tbHistorialAmonestaciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" FromRole="tbHistorialAmonestaciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbHistorialAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones" ToRole="tbHistorialAmonestaciones1" />
-          <NavigationProperty Name="tbHistorialAmonestaciones2" Relationship="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones1" ToRole="tbHistorialAmonestaciones" />
-          <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbTipoAmonestaciones" />
-        </EntityType>
-        <EntityType Name="tbHistorialAudienciaDescargo">
-          <Key>
-            <PropertyRef Name="aude_Id" />
-          </Key>
-          <Property Name="aude_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="aude_FechaAudiencia" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="aude_Testigo" Type="Boolean" Nullable="false" />
-          <Property Name="aude_DireccionArchivo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="aude_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="aude_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="aude_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="aude_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="aude_UsuarioModifica" Type="Int32" />
-          <Property Name="aude_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea" FromRole="tbHistorialAudienciaDescargo" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica" FromRole="tbHistorialAudienciaDescargo" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbHistorialAudienciaDescargo" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" FromRole="tbHistorialAmonestaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" FromRole="tbHistorialAmonestaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbHistorialAmonestaciones1" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones" ToRole="tbHistorialAmonestaciones1" />
+          <NavigationProperty Name="tbHistorialAmonestaciones2" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones1" ToRole="tbHistorialAmonestaciones" />
+          <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbTipoAmonestaciones" />
         </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
@@ -2220,8 +2196,9 @@
           <Property Name="per_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="per_UsuarioModifica" Type="Int32" />
           <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbPersonas" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbPersonas" ToRole="tbEmpleados" />
         </EntityType>
         <EntityType Name="tbTipoAmonestaciones">
           <Key>
@@ -2235,11 +2212,64 @@
           <Property Name="tamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tamo_UsuarioModifica" Type="Int32" />
           <Property Name="tamo_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" FromRole="tbTipoAmonestaciones" ToRole="tbHistorialAmonestaciones" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbTipoAmonestaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" FromRole="tbTipoAmonestaciones" ToRole="tbHistorialAmonestaciones" />
         </EntityType>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
+        <EntityType Name="V_HistorialAmonestacion">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="tamo_Id" />
+            <PropertyRef Name="tamo_Descripcion" />
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="hamo_Fecha" />
+            <PropertyRef Name="hamo_Estado" />
+            <PropertyRef Name="hamo_UsuarioCrea" />
+            <PropertyRef Name="hamo_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_AmonestacionAnterior" Type="Int32" />
+          <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_UsuarioModifica" Type="Int32" />
+          <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2251,7 +2281,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2263,31 +2293,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Role="tbHistorialAudienciaDescargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="aude_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Role="tbHistorialAudienciaDescargo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="aude_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2299,7 +2305,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
           <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2311,7 +2317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbTipoAmonestaciones" Role="tbTipoAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2323,7 +2329,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
           <End Type="ERP_GMEDINAModel.tbTipoAmonestaciones" Role="tbTipoAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2335,7 +2341,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
+        <Association Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id">
           <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2347,19 +2353,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id">
-          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Role="tbHistorialAudienciaDescargo" Multiplicity="*" />
+        <Association Name="C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
             </Principal>
-            <Dependent Role="tbHistorialAudienciaDescargo">
-              <PropertyRef Name="emp_Id" />
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
+        <Association Name="C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="0..1" />
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones1" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2371,7 +2377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
+        <Association Name="C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
           <End Type="ERP_GMEDINAModel.tbTipoAmonestaciones" Role="tbTipoAmonestaciones" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2383,46 +2389,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ERP_GMEDINAModelStoreContainer" CdmEntityContainer="ERP_GMEDINAEntities">
-          <EntitySetMapping Name="tbUsuario">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbUsuario">
-              <MappingFragment StoreEntitySet="tbUsuario">
-                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
-                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
-                <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
-                <ScalarProperty Name="usu_Nombres" ColumnName="usu_Nombres" />
-                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
-                <ScalarProperty Name="usu_Correos" ColumnName="usu_Correos" />
-                <ScalarProperty Name="usu_EsActivo" ColumnName="usu_EsActivo" />
-                <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
-                <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
-                <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_CatalogoDeduccionesEdit_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_CatalogoDeduccionesEdit_Select">
           <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_CatalogoDeduccionesEdit_Select_Result1">
@@ -2645,9 +2617,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Restore" />
@@ -2657,9 +2627,7 @@
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Restore" />
@@ -2764,28 +2732,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Restore" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Update" />
+          <EntitySetMapping Name="tbUsuario">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbUsuario">
+              <MappingFragment StoreEntitySet="tbUsuario">
+                <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
+                <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
+                <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
+                <ScalarProperty Name="usu_EsActivo" ColumnName="usu_EsActivo" />
+                <ScalarProperty Name="usu_Correos" ColumnName="usu_Correos" />
+                <ScalarProperty Name="usu_Apellidos" ColumnName="usu_Apellidos" />
+                <ScalarProperty Name="su_Nombres" ColumnName="su_Nombres" />
+                <ScalarProperty Name="usu_Password" ColumnName="usu_Password" />
+                <ScalarProperty Name="usu_NombreUsuario" ColumnName="usu_NombreUsuario" />
+                <ScalarProperty Name="usu_Id" ColumnName="usu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbEmpleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbEmpleados">
               <MappingFragment StoreEntitySet="tbEmpleados">
@@ -2801,12 +2763,10 @@
                 <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
                 <ScalarProperty Name="emp_Reingreso" ColumnName="emp_Reingreso" />
                 <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="emp_Permanente" ColumnName="emp_Permanente" />
                 <ScalarProperty Name="fpa_IdFormaPago" ColumnName="fpa_IdFormaPago" />
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="hor_Id" ColumnName="hor_Id" />
-                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
-                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
-                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
                 <ScalarProperty Name="per_Id" ColumnName="per_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
@@ -2827,24 +2787,6 @@
                 <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hamo_Id" ColumnName="hamo_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbHistorialAudienciaDescargo">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialAudienciaDescargo">
-              <MappingFragment StoreEntitySet="tbHistorialAudienciaDescargo">
-                <ScalarProperty Name="aude_FechaModifica" ColumnName="aude_FechaModifica" />
-                <ScalarProperty Name="aude_UsuarioModifica" ColumnName="aude_UsuarioModifica" />
-                <ScalarProperty Name="aude_FechaCrea" ColumnName="aude_FechaCrea" />
-                <ScalarProperty Name="aude_UsuarioCrea" ColumnName="aude_UsuarioCrea" />
-                <ScalarProperty Name="aude_RazonInactivo" ColumnName="aude_RazonInactivo" />
-                <ScalarProperty Name="aude_Estado" ColumnName="aude_Estado" />
-                <ScalarProperty Name="aude_DireccionArchivo" ColumnName="aude_DireccionArchivo" />
-                <ScalarProperty Name="aude_Testigo" ColumnName="aude_Testigo" />
-                <ScalarProperty Name="aude_FechaAudiencia" ColumnName="aude_FechaAudiencia" />
-                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2887,7 +2829,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="V_HistorialAmonestacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAmonestacion">
+              <MappingFragment StoreEntitySet="V_HistorialAmonestacion">
+                <ScalarProperty Name="hamo_FechaModifica" ColumnName="hamo_FechaModifica" />
+                <ScalarProperty Name="hamo_UsuarioModifica" ColumnName="hamo_UsuarioModifica" />
+                <ScalarProperty Name="hamo_FechaCrea" ColumnName="hamo_FechaCrea" />
+                <ScalarProperty Name="hamo_UsuarioCrea" ColumnName="hamo_UsuarioCrea" />
+                <ScalarProperty Name="hamo_RazonInactivo" ColumnName="hamo_RazonInactivo" />
+                <ScalarProperty Name="hamo_Estado" ColumnName="hamo_Estado" />
+                <ScalarProperty Name="hamo_Observacion" ColumnName="hamo_Observacion" />
+                <ScalarProperty Name="hamo_AmonestacionAnterior" ColumnName="hamo_AmonestacionAnterior" />
+                <ScalarProperty Name="hamo_Fecha" ColumnName="hamo_Fecha" />
+                <ScalarProperty Name="hamo_Id" ColumnName="hamo_Id" />
+                <ScalarProperty Name="tamo_Descripcion" ColumnName="tamo_Descripcion" />
+                <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_Nombre" ColumnName="emp_Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

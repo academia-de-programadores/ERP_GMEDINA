@@ -1,0 +1,113 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialAmonestaciones
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbHistorialAmonestaciones</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_Observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_Observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hamo_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hamo_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEmpleados.emp_CuentaBancaria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbHistorialAmonestaciones2.hamo_Observacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbHistorialAmonestaciones2.hamo_Observacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbTipoAmonestaciones.tamo_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbTipoAmonestaciones.tamo_Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

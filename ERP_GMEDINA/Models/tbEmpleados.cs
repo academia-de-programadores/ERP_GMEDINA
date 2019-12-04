@@ -18,17 +18,14 @@ namespace ERP_GMEDINA.Models
         public tbEmpleados()
         {
             this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
-            this.tbHistorialAudienciaDescargo = new HashSet<tbHistorialAudienciaDescargo>();
         }
     
         public int emp_Id { get; set; }
         public int per_Id { get; set; }
-        public int car_Id { get; set; }
-        public int area_Id { get; set; }
-        public int depto_Id { get; set; }
         public int hor_Id { get; set; }
         public int cpla_IdPlanilla { get; set; }
         public int fpa_IdFormaPago { get; set; }
+        public bool emp_Permanente { get; set; }
         public string emp_CuentaBancaria { get; set; }
         public bool emp_Reingreso { get; set; }
         public System.DateTime emp_Fechaingreso { get; set; }
@@ -42,9 +39,10 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
+        public virtual tbUsuario tbUsuario { get; set; }
+        public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
+        public virtual tbPersonas tbPersonas { get; set; }
     }
 }
