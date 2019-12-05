@@ -11,7 +11,7 @@ function tablaEditar(btn) {
     $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
             '<div class="col-md-3">' +
