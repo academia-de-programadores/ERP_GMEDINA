@@ -5,9 +5,9 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace ERP_GMEDINA.Models
-{ 
-
-        public partial class tbTipoMonedas
+{
+    [MetadataType(typeof(cTipoMonedas))]
+    public partial class tbTipoMonedas
         {
 
         }
