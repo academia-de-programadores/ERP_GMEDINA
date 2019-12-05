@@ -35,30 +35,9 @@ namespace ERP_GMEDINA.Controllers
 		public ActionResult DecimoTercerMesIndexRPT()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
-
 			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 
-			ReportViewer reportViewer = new ReportViewer();
-			reportViewer.ProcessingMode = ProcessingMode.Local;
-			reportViewer.SizeToReportContent = true;
-			reportViewer.Width = Unit.Pixel(1050);
-			reportViewer.Height = Unit.Pixel(450);
-			reportViewer.BackColor = System.Drawing.Color.White;
-
-			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-
-
-			SqlConnection conx = new SqlConnection(connectionString);
-			SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_DecimoTercerMes_RPT", conx);
-
-			adp.Fill(ds, ds.V_DecimoTercerMes_RPT.TableName);
-
-			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoTercerMesRPT.rdlc";
-			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[0]));
-
-
-			ViewBag.ReportViewerDecimoTercerMesRPT = reportViewer;
-			return View();
+			return View(db.V_DecimoTercerMes_RPT.ToList());
 		}
 
 		//Reporte con parametros
