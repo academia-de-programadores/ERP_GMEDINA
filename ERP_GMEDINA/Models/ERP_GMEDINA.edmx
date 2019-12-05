@@ -129,6 +129,38 @@
           <Property Name="tamo_UsuarioModifica" Type="int" />
           <Property Name="tamo_FechaModifica" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialAmonestacion">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="tamo_Id" />
+            <PropertyRef Name="tamo_Descripcion" />
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="hamo_Fecha" />
+            <PropertyRef Name="hamo_AmonestacionAnterior" />
+            <PropertyRef Name="hamo_Estado" />
+            <PropertyRef Name="hamo_UsuarioCrea" />
+            <PropertyRef Name="hamo_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="tamo_Id" Type="int" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hamo_Id" Type="int" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
+          <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
+          <Property Name="hamo_Estado" Type="bit" Nullable="false" />
+          <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hamo_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hamo_UsuarioModifica" Type="int" />
+          <Property Name="hamo_FechaModifica" Type="datetime" />
+        </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="*" />
@@ -1047,6 +1079,25 @@
           <EntitySet Name="tbHistorialAudienciaDescargo" EntityType="Self.tbHistorialAudienciaDescargo" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HistorialAmonestacion].[emp_Id] AS [emp_Id], 
+    [V_HistorialAmonestacion].[emp_Nombre] AS [emp_Nombre], 
+    [V_HistorialAmonestacion].[emp_Estado] AS [emp_Estado], 
+    [V_HistorialAmonestacion].[tamo_Id] AS [tamo_Id], 
+    [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion], 
+    [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id], 
+    [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha], 
+    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior], 
+    [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion], 
+    [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado], 
+    [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo], 
+    [V_HistorialAmonestacion].[hamo_UsuarioCrea] AS [hamo_UsuarioCrea], 
+    [V_HistorialAmonestacion].[hamo_FechaCrea] AS [hamo_FechaCrea], 
+    [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
+    [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
+    FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCargos" EntitySet="tbCargos" />
@@ -1329,7 +1380,7 @@
             <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbFormaPago_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbFormaPago_Inactivar_Result)">
-          <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="fpa_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2033,6 +2084,7 @@
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
+          <EntitySet Name="V_HistorialAmonestacion" EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" />
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -2612,6 +2664,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_HistorialAmonestacion">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="tamo_Id" />
+            <PropertyRef Name="tamo_Descripcion" />
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="hamo_Fecha" />
+            <PropertyRef Name="hamo_AmonestacionAnterior" />
+            <PropertyRef Name="hamo_Estado" />
+            <PropertyRef Name="hamo_UsuarioCrea" />
+            <PropertyRef Name="hamo_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
+          <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hamo_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_UsuarioModifica" Type="Int32" />
+          <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3083,6 +3165,27 @@
                 <ScalarProperty Name="tamo_Estado" ColumnName="tamo_Estado" />
                 <ScalarProperty Name="tamo_Descripcion" ColumnName="tamo_Descripcion" />
                 <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HistorialAmonestacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAmonestacion">
+              <MappingFragment StoreEntitySet="V_HistorialAmonestacion">
+                <ScalarProperty Name="hamo_FechaModifica" ColumnName="hamo_FechaModifica" />
+                <ScalarProperty Name="hamo_UsuarioModifica" ColumnName="hamo_UsuarioModifica" />
+                <ScalarProperty Name="hamo_FechaCrea" ColumnName="hamo_FechaCrea" />
+                <ScalarProperty Name="hamo_UsuarioCrea" ColumnName="hamo_UsuarioCrea" />
+                <ScalarProperty Name="hamo_RazonInactivo" ColumnName="hamo_RazonInactivo" />
+                <ScalarProperty Name="hamo_Estado" ColumnName="hamo_Estado" />
+                <ScalarProperty Name="hamo_Observacion" ColumnName="hamo_Observacion" />
+                <ScalarProperty Name="hamo_AmonestacionAnterior" ColumnName="hamo_AmonestacionAnterior" />
+                <ScalarProperty Name="hamo_Fecha" ColumnName="hamo_Fecha" />
+                <ScalarProperty Name="hamo_Id" ColumnName="hamo_Id" />
+                <ScalarProperty Name="tamo_Descripcion" ColumnName="tamo_Descripcion" />
+                <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_Nombre" ColumnName="emp_Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

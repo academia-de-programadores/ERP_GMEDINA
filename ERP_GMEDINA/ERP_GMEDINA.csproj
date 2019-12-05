@@ -388,6 +388,9 @@
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_HistorialAmonestacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -632,6 +635,7 @@
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />

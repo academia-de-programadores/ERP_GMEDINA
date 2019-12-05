@@ -17,10 +17,49 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         public ActionResult Index()
         {
-            var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbHistorialAmonestaciones2).Include(t => t.tbTipoAmonestaciones);
-            return View(tbHistorialAmonestaciones.ToList());
+            var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            return View(tbHistorialAmonestaciones);
         }
-
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var HistorialAmonestaciones = db.tbHistorialAmonestaciones
+                        .Select(
+                        t => new
+                        {
+                            hamo_Id = t.hamo_Id,
+                            Cargo = t.tbEmpleados.tbCargos.car_Descripcion,
+                            Empleado= t.tbHistorialAmonestaciones1
+                            .Select(p => p.tbEmpleados.tbPersonas.per_Nombres + " " + p.tbEmpleados.tbPersonas.per_Apellidos)
+                        }).ToList();
+                    return Json(HistorialAmonestaciones, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<V_HistorialAmonestacion> lista = new List<V_HistorialAmonestacion> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    lista = db.V_HistorialAmonestacion.Where(x => x.hamo_Id == id).ToList();
+                }
+                catch
+                {
+                }
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         // GET: HistorialAmonestaciones/Details/5
         public ActionResult Details(int? id)
         {

@@ -34,6 +34,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
         public virtual DbSet<tbPersonas> tbPersonas { get; set; }
         public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
+        public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
     
         public virtual ObjectResult<UDP_Plani_CatalogoDeduccionesEdit_Select_Result1> UDP_Plani_CatalogoDeduccionesEdit_Select(Nullable<int> cpla_IdPlanilla)
         {
