@@ -199,6 +199,7 @@
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCatalogoDePlanillas.cs" />
     <Compile Include="Models\cCatalogoIngresos.cs" />
+    <Compile Include="Models\cDecimoCuartoMesRPT.cs" />
     <Compile Include="Models\cDecimoTercerMes.cs" />
     <Compile Include="Models\cDecimoTercerMesRPT.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
@@ -837,6 +838,7 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
+    <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
@@ -1387,6 +1389,8 @@
     <Content Include="Views\ReportesPlanilla\_INFOPModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_InstitucionesFinancierasModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\DecimoCuartoMesIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_DecimoCuartoMesModalRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1421,6 +1425,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />

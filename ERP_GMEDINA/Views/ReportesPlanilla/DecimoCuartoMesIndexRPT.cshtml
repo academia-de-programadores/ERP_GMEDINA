@@ -5,25 +5,25 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="modal fade" id="DecimoTercerMesModalRPT" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="DecimoCuartoMesModalRPT" tabindex="-1" role="dialog" aria-hidden="false">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title">Ingrese Datos</h4>
 			</div>
-			@Html.Partial("_DecimoTercerMesModalRPT", new ERP_GMEDINA.Models.V_DecimoTercerMes_RPT())
+			@Html.Partial("_DecimoCuartoMesModalRPT", new ERP_GMEDINA.Models.V_DecimoCuartoMes_RPT())
 		</div>
 	</div>
 </div>
 <br />
-<button class="btn btn-primary btn-sm pull-left" id="ParametrosDecimoTercerMesRPT">Reporte Especifico</button>
+<button class="btn btn-primary btn-sm pull-left" id="ParametrosDecimoCuartoMesRPT">Reporte Especifico</button>
 <br />
 <br />
-@Html.ReportViewer(ViewBag.ReportViewerDecimoTercerMesRPT as Microsoft.Reporting.WebForms.ReportViewer)
+@Html.ReportViewer(ViewBag.ReportViewerDecimoCuartoMesRPT as Microsoft.Reporting.WebForms.ReportViewer)
 
 
 
 @section Scripts {
-	@Scripts.Render("~/Scripts/app/general/DecimoTercerMesRPT.js")
+	@Scripts.Render("~/Scripts/app/general/DecimoCuartoMesRPT.js")
 }

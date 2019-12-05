@@ -140,10 +140,10 @@ namespace ERP_GMEDINA.Controllers
 			SqlConnection conx = new SqlConnection(connectionString);
 			SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_DecimoCuartoMes_RPT", conx);
 
-			//adp.Fill(ds, ds.V_DecimoTercerMes_RPT.TableName);
+			adp.Fill(ds, ds.V_DecimoCuartoMes_RPT.TableName);
 
-			//reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoTercerMesRPT.rdlc";
-			//reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[0]));
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoCuartoMesRPT.rdlc";
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[1]));
 
 
 			ViewBag.ReportViewerDecimoCuartoMesRPT = reportViewer;
@@ -165,7 +165,7 @@ namespace ERP_GMEDINA.Controllers
 			}
 			List<V_DecimoCuartoMes_RPT> cm = new List<V_DecimoCuartoMes_RPT>();
 
-			//cm = db.V_DecimoTercerMes_RPT.Where(x => dcm_FechaPago == x.dtm_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+			cm = db.V_DecimoCuartoMes_RPT.Where(x => dcm_FechaPago == x.dcm_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
 
 			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
 			lr.DataSources.Add(rd);
