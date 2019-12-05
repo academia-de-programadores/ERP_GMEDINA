@@ -174,6 +174,7 @@ namespace ERP_GMEDINA.Controllers
 
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 
+<<<<<<< HEAD
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
             reportViewer.SizeToReportContent = true;
@@ -195,6 +196,9 @@ namespace ERP_GMEDINA.Controllers
 
             ViewBag.ReportViewerINFOPRPT = reportViewer;
             return View();
+=======
+            return View(db.V_INFOP_RPT.ToList());
+>>>>>>> dbe6f2488ecf99670f7c615f386085e9c0222b12
         }
 
         //Reporte con parametros
@@ -262,6 +266,7 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
 
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+<<<<<<< HEAD
 
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -284,6 +289,9 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.ReportViewerInstitucionesFinancierasRPT = reportViewer;
             return View();
 
+=======
+            return View(db.V_InstitucionesFinancieras_RPT.ToList());
+>>>>>>> dbe6f2488ecf99670f7c615f386085e9c0222b12
 
         }
 
