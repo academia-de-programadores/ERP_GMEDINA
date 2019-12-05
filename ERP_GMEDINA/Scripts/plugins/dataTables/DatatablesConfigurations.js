@@ -29,6 +29,7 @@ $(document).ready(function () {
             });
             col = col + 1;
         }
+
         //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
@@ -39,7 +40,18 @@ $(document).ready(function () {
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
                                 "</div>"
             });
-        } else {
+        }
+        //else if (campo == "Reportes") {
+        //    columnas.push({
+        //        data: null,
+        //        orderable: false,
+        //        defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+        //                            "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Horas Trabajadas</a>" +
+        //                            "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Perfil Profesional</a>" +
+        //                        "</div>"
+        //    });
+        //}
+        else {
             columnas.push({ data: campo });
             botones.push(contador);
         }
