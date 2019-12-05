@@ -30,6 +30,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbRol> tbRol { get; set; }
         public virtual DbSet<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbAcumuladosISR> tbAcumuladosISR { get; set; }
         public virtual DbSet<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         public virtual DbSet<tbAFP> tbAFP { get; set; }

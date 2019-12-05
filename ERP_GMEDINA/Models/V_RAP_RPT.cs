@@ -16,8 +16,7 @@ namespace ERP_GMEDINA.Models
     {
         public int emp_Id { get; set; }
         public string per_Identidad { get; set; }
-        public string per_Nombres { get; set; }
-        public string per_Apellidos { get; set; }
+        public string per_Empleado { get; set; }
         public int depto_Id { get; set; }
         public string depto_descripcion { get; set; }
         public int area_Id { get; set; }

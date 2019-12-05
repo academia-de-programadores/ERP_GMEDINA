@@ -227,6 +227,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbAccesoRol.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

@@ -23,6 +23,8 @@ namespace ERP_GMEDINA.Models
         public string hinc_Diagnostico { get; set; }
         public Nullable<System.DateTime> hinc_FechaInicio { get; set; }
         public Nullable<System.DateTime> hinc_FechaFin { get; set; }
+        public bool hinc_Estado { get; set; }
+        public string hinc_RazonInactivo { get; set; }
         public int hinc_UsuarioCrea { get; set; }
         public System.DateTime hinc_FechaCrea { get; set; }
         public Nullable<int> hinc_UsuarioModifica { get; set; }
