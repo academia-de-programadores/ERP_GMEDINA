@@ -1842,7 +1842,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="insf_DescInstitucionFinanc" />
             <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
@@ -1856,7 +1856,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="insf_DescInstitucionFinanc" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
         </EntityType>
@@ -5936,7 +5936,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_InstitucionesFinancieras_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_InstitucionesFinancieras_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_InstitucionesFinancieras_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_InstitucionesFinancieras_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
+    [V_InstitucionesFinancieras_RPT].[insf_DescInstitucionFinanc] AS [insf_DescInstitucionFinanc], 
     [V_InstitucionesFinancieras_RPT].[hidp_Total] AS [hidp_Total], 
     [V_InstitucionesFinancieras_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
     FROM [Plani].[V_InstitucionesFinancieras_RPT] AS [V_InstitucionesFinancieras_RPT]</DefiningQuery>
@@ -9591,7 +9591,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="insf_DescInstitucionFinanc" />
             <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
@@ -9605,7 +9605,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="insf_DescInstitucionFinanc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
@@ -16244,7 +16244,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
                 <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
+                <ScalarProperty Name="insf_DescInstitucionFinanc" ColumnName="insf_DescInstitucionFinanc" />
                 <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
               </MappingFragment>
