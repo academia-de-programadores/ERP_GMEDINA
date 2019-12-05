@@ -63,6 +63,17 @@
                     <li class="@Html.IsSelected(action: "Dashboard_2")"><a href="@Url.Action("Dashboard_2", "Dashboards")">Seguridad</a></li>
                 </ul>
             </li>
+
+			<li class="@Html.IsSelected(controller: "ReportesPlanilla")">
+				<a href="#"><i class="fa fa-group"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ReportesPlanilla", cssClass: "in")">
+					<li class="@Html.IsSelected(controller: "ReportesPlanilla")"><a href="@Url.Action("DecimoTercerMesIndexRPT", "ReportesPlanilla")">Decimo Tercer Mes</a></li>
+					<li class="@Html.IsSelected(controller: "ReportesPlanilla")"><a href="@Url.Action("DecimoCuartoMesIndexRPT", "ReportesPlanilla")">Decimo Cuarto Mes</a></li>
+					<li class="@Html.IsSelected(controller: "ReportesPlanilla")"><a href="@Url.Action("INFOPIndexRPT", "ReportesPlanilla")">INFOP</a></li>
+					<li class="@Html.IsSelected(controller: "ReportesPlanilla")"><a href="@Url.Action("InstitucionesFinancierasIndexRPT", "ReportesPlanilla")">Instituciones Financieras</a></li>
+				</ul>
+			</li>
+
         </ul>
     </div>
 </nav>
