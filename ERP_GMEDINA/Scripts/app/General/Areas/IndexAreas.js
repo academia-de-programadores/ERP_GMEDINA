@@ -1,4 +1,16 @@
-﻿function format(obj) {
+﻿function tablaDetalles(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/"+id);
+}
+function tablaEditar(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/" + id);
+}
+function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
@@ -28,7 +40,8 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.area_Id,
-                   Descripcion: value.area_Descripcion
+                   Descripcion: value.area_Descripcion,
+                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0]
                });
            });
            tabla.draw();
@@ -52,10 +65,11 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             '/Areas/ChildRowData',
             'GET',
             function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {                        
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
                     tr.addClass('shown');
                 }
-            });       
+            });
     }
+
 });

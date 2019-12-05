@@ -11,8 +11,8 @@ namespace ERP_GMEDINA.Models
 {
     using System;
     
-    public partial class UDP_RRHH_tbCargos_Delete_Result
+    public partial class UDP_RRHH_tbDepartamentos_Insert_Result
     {
-        public string MensajeError { get; set; }
+        public Nullable<int> MensajeError { get; set; }
     }
 }

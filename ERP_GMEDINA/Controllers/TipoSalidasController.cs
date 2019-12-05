@@ -10,46 +10,55 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-    public class HabilidadesController : Controller
+    public class TipoSalidasController : Controller
     {
-        private ERP_GMEDINAEntities db =  new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: Habilidades
         public ActionResult Index()
         {
-            List<tbHabilidades> tbHabilidades = new List<tbHabilidades> { };
+            List<tbTipoSalidas> tbTipoSalidas = new List<Models.tbTipoSalidas> { };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            return View(tbHabilidades);
+            try
+            {
+                tbTipoSalidas = db.tbTipoSalidas.Where(x => x.tsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbTipoSalidas);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                tbTipoSalidas.Add(new tbTipoSalidas { tsal_Id = 0, tsal_Descripcion = "fallo la conexion" });
+            }
+            return View(tbTipoSalidas);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbHabilidades> tbHabilidades =
-                new List<Models.tbHabilidades> { };
-            var lista = db.tbHabilidades.Where(x => x.habi_Estado == true).ToList();
-            foreach (tbHabilidades x in lista)
+            List<tbTipoSalidas> tbTipoSalidas =
+                new List<Models.tbTipoSalidas> { };
+            foreach (tbTipoSalidas x in db.tbTipoSalidas.ToList().Where(x => x.tsal_Estado == true))
             {
-                tbHabilidades.Add(new tbHabilidades
+                tbTipoSalidas.Add(new tbTipoSalidas
                 {
-                    habi_Id = x.habi_Id,
-                    habi_Descripcion = x.habi_Descripcion
+                    tsal_Id = x.tsal_Id,
+                    tsal_Descripcion = x.tsal_Descripcion
                 });
             }
-            return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
+            return Json(tbTipoSalidas, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Create
         [HttpPost]
-        public JsonResult Create(tbHabilidades tbHabilidades)
+        public JsonResult Create(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
-            if (tbHabilidades.habi_Descripcion != "")
+            if (tbTipoSalidas.tsal_Descripcion != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
+                    var list = db.UDP_RRHH_tbTipoSalidas_Insert(tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -75,11 +84,11 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            tbHabilidades tbHabilidades = null;
+            tbTipoSalidas tbTipoSalidas = null;
             try
             {
-                tbHabilidades = db.tbHabilidades.Find(id);
-                if (tbHabilidades == null || !tbHabilidades.habi_Estado)
+                tbTipoSalidas = db.tbTipoSalidas.Find(id);
+                if (tbTipoSalidas == null || !tbTipoSalidas.tsal_Estado)
                 {
                     return HttpNotFound();
                 }
@@ -90,35 +99,35 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var habilidad = new tbHabilidades
+            var TipoSalida = new tbTipoSalidas
             {
-                habi_Id = tbHabilidades.habi_Id,
-                habi_Descripcion = tbHabilidades.habi_Descripcion,
-                habi_Estado = tbHabilidades.habi_Estado,
-                habi_RazonInactivo = tbHabilidades.habi_RazonInactivo,
-                habi_UsuarioCrea = tbHabilidades.habi_UsuarioCrea,
-                habi_FechaCrea = tbHabilidades.habi_FechaCrea,
-                habi_UsuarioModifica = tbHabilidades.habi_UsuarioModifica,
-                habi_FechaModifica = tbHabilidades.habi_FechaModifica,
-                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHabilidades.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbHabilidades.tbUsuario1).usu_NombreUsuario }
+                tsal_Id = tbTipoSalidas.tsal_Id,
+                tsal_Descripcion = tbTipoSalidas.tsal_Descripcion,
+                tsal_Estado = tbTipoSalidas.tsal_Estado,
+                tsal_RazonInactivo = tbTipoSalidas.tsal_RazonInactivo,
+                tsal_UsuarioCrea = tbTipoSalidas.tsal_UsuarioCrea,
+                tsal_FechaCrea = tbTipoSalidas.tsal_FechaCrea,
+                tsal_UsuarioModifica = tbTipoSalidas.tsal_UsuarioModifica,
+                tsal_FechaModifica = tbTipoSalidas.tsal_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoSalidas.tbUsuario1).usu_NombreUsuario }
             };
-            return Json(habilidad, JsonRequestBehavior.AllowGet);
+            return Json(TipoSalida, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Edit/5
         [HttpPost]
-        public JsonResult Edit(tbHabilidades tbHabilidades)
+        public JsonResult Edit(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
-            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_Descripcion != "")
+            if (tbTipoSalidas.tsal_Id != 0 && tbTipoSalidas.tsal_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
+                    var list = db.UDP_RRHH_tbTipoSalidas_Update(id, tbTipoSalidas.tsal_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -139,17 +148,17 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: Habilidades/Delete/5
         [HttpPost]
-        public ActionResult Delete(tbHabilidades tbHabilidades)
+        public ActionResult Delete(tbTipoSalidas tbTipoSalidas)
         {
             string msj = "";
-            if (tbHabilidades.habi_Id != 0 && tbHabilidades.habi_RazonInactivo != "")
+            if (tbTipoSalidas.tsal_Id != 0 && tbTipoSalidas.tsal_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHabilidades_Delete(id, tbHabilidades.habi_RazonInactivo, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
+                    var list = db.UDP_RRHH_tbTipoSalidas_Delete(id, tbTipoSalidas.tsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -181,7 +190,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db != null)
+            if (disposing)
             {
                 db.Dispose();
             }
