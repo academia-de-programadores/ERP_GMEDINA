@@ -493,9 +493,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
-    <Compile Include="Models\V_AFP_RPT.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -545,9 +542,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_FormaDePago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_GeneralTotales_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_IHSS_RPT.cs">
@@ -1138,6 +1132,7 @@
     <Content Include="Scripts\plugins\dataTables\colvis.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
+    <Content Include="Scripts\plugins\dataTables\DatatablesConfigurationsRPT.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Scripts\plugins\diff_match_patch\javascript\diff_match_patch.js" />
     <Content Include="Scripts\plugins\diff_match_patch\README.txt" />
@@ -1394,6 +1389,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\plugins\dataTables\RPT\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1425,10 +1421,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportesPlanilla\AFPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\GeneralTotalesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

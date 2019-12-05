@@ -114,8 +114,13 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
 
-            // jeditable 
-            bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
+			// dataTables RPT
+			bundles.Add(new ScriptBundle("~/plugins/dataTablesRPT").Include(
+					  "~/Scripts/plugins/dataTables/datatables.min.js",
+					  "~/Scripts/plugins/dataTables/DatatablesConfigurationsRPT.js"));
+
+			// jeditable 
+			bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
                       "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
 
             // jqGrid styles

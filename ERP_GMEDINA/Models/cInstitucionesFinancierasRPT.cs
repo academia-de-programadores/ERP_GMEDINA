@@ -14,39 +14,38 @@ namespace ERP_GMEDINA.Models
     public class cInstitucionesFinancierasRPT
     {
 
+        [Display(Name = "Codigo Empleado")]
         public int emp_Id { get; set; }
 
-
+        [Display(Name = "Identidad")]
         public string per_Identidad { get; set; }
 
-
+        [Display(Name = "Nombres")]
         public string per_Nombres { get; set; }
 
-
+        [Display(Name = "Apellidos")]
         public string per_Apellidos { get; set; }
 
-
+        [Display(Name = "Departamento")]
         public string depto_descripcion { get; set; }
 
-
+        [Display(Name = "Área")]
         public string area_Descripcion { get; set; }
 
-
-
+        [Display(Name = "Codigo Planilla")]
         public int cpla_IdPlanilla { get; set; }
 
         [Display(Name = "Tipo Planilla")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
         public string cpla_DescripcionPlanilla { get; set; }
 
-
+        [Display(Name = "Codigo Deducciones")]
         public int cde_IdDeducciones { get; set; }
 
+        [Display(Name = "Institucion Financiera")]
+        public string insf_DescInstitucionFinanc { get; set; }
 
-
-        public string cde_DescripcionDeduccion { get; set; }
-
-
+        [Display(Name = "Total")]
         public Nullable<decimal> hidp_Total { get; set; }
 
 
