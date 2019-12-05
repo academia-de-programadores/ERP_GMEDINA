@@ -1391,7 +1391,6 @@
     <Content Include="Views\ReportesPlanilla\_InstitucionesFinancierasModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\DecimoCuartoMesIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_DecimoCuartoMesModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\IHSSRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
