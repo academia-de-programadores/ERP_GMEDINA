@@ -158,17 +158,17 @@ namespace ERP_GMEDINA.Controllers
 
 			return File(renderedBytes, mimeType);
 		}
-		//Reporte Decimo Cuarto Mes - FIN
-		//-------------------------------------------------------------------------------------------------------------------------------
-		#endregion
+        //Reporte Decimo Cuarto Mes - FIN
+        //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
 
 
+        #region INFOP
+        //-------------------------------------------------------------------------------------------------------------------------------
+        //Reporte INFOP - INICIO
 
-		//-------------------------------------------------------------------------------------------------------------------------------
-		//Reporte INFOP - INICIO
-
-		//Index 
-		public ActionResult INFOPIndexRPT()
+        //Index 
+        public ActionResult INFOPIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
 
@@ -187,10 +187,10 @@ namespace ERP_GMEDINA.Controllers
             SqlConnection conx = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_INFOP_RPT", conx);
 
-           // adp.Fill(ds, ds.V_INFOP_RPT.TableName);
+            adp.Fill(ds, ds.V_INFOP_RPT.TableName);
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\INFOPRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[1]));
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[2]));
 
 
             ViewBag.ReportViewerINFOPRPT = reportViewer;
@@ -249,9 +249,9 @@ namespace ERP_GMEDINA.Controllers
         }
         //Reporte INFOP - FIN
         //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
 
-
-
+        #region Instituciones Financieras
         //-------------------------------------------------------------------------------------------------------------------------------
         //Reporte Instituciones Financiras- INICIO
 
@@ -268,21 +268,22 @@ namespace ERP_GMEDINA.Controllers
             reportViewer.Width = Unit.Pixel(1050);
             reportViewer.Height = Unit.Pixel(500);
             reportViewer.BackColor = System.Drawing.Color.White;
-
             var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
 
 
             SqlConnection conx = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_InstitucionesFinancieras_RPT", conx);
 
-           // adp.Fill(ds, ds.V_InstitucionesFinancieras_RPT.TableName);
+            adp.Fill(ds, ds.V_InstitucionesFinancieras_RPT.TableName);
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\InstitucionesFinancierasRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[2]));
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[3]));
 
 
             ViewBag.ReportViewerInstitucionesFinancierasRPT = reportViewer;
             return View();
+
+
         }
 
         //Reporte con parametros
@@ -298,6 +299,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 return View("Index");
             }
+         
             List<V_InstitucionesFinancieras_RPT> cm = new List<V_InstitucionesFinancieras_RPT>();
 
             cm = db.V_InstitucionesFinancieras_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
@@ -337,5 +339,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //Reporte InstitucionesFinancieras - FIN
         //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
     }
+
 }
