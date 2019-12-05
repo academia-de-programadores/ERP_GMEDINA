@@ -1138,7 +1138,6 @@
     <Content Include="Scripts\plugins\dataTables\colvis.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
-    <Content Include="Scripts\plugins\dataTables\DatatablesConfigurationsRPT.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Scripts\plugins\diff_match_patch\javascript\diff_match_patch.js" />
     <Content Include="Scripts\plugins\diff_match_patch\README.txt" />

@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Models
 
 
 
-        public string insf_DescInstitucionFinanc { get; set; }
+        public string cde_DescripcionDeduccion { get; set; }
 
 
         public Nullable<decimal> hidp_Total { get; set; }
