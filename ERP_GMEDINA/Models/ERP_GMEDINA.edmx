@@ -1193,49 +1193,28 @@
           <Property Name="vaca_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_BonosColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_CatalogoDeIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_CatalogoDePlanillasConIngresosYDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ComisionesColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesInstitucionesFinancierasColaboradres' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_EmpleadoBonos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_EmpleadoComisiones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_FormaDePago' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InformacionColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PreviewPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbCatalogoDeDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbCatalogoDeIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TechosDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HorariosDetalles">
+          <Key>
+            <PropertyRef Name="hor_Id" />
+            <PropertyRef Name="jor_Id" />
+            <PropertyRef Name="hor_Estado" />
+            <PropertyRef Name="hor_UsuarioCrea" />
+            <PropertyRef Name="hor_FechaCrea" />
+          </Key>
+          <Property Name="hor_Id" Type="int" Nullable="false" />
+          <Property Name="jor_Id" Type="int" Nullable="false" />
+          <Property Name="hor_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="hor_HoraInicio" Type="nvarchar" MaxLength="5" />
+          <Property Name="hor_HoraFin" Type="nvarchar" MaxLength="5" />
+          <Property Name="hor_CantidadHoras" Type="nvarchar" MaxLength="5" />
+          <Property Name="hor_Estado" Type="bit" Nullable="false" />
+          <Property Name="hor_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hor_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hor_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hor_UsuarioModifica" Type="int" />
+          <Property Name="hor_FechaModifica" Type="datetime" />
+        </EntityType>
         <Association Name="FK_ Acce _ tbUsuario_ tbAccesoRol _acrol_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbAccesoRol" Type="Self.tbAccesoRol" Multiplicity="*" />
@@ -4550,11 +4529,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="hor_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hor_FechaCrea" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbHorarios_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hor_Id" Type="int" Mode="In" />
-          <Parameter Name="hor_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="hor_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbHorarios_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_Id" Type="int" Mode="In" />
           <Parameter Name="hor_Descripcion" Type="nvarchar" Mode="In" />
@@ -4656,6 +4630,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbVacaciones" EntityType="Self.tbVacaciones" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_HorariosDetalles" EntityType="Self.V_HorariosDetalles" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HorariosDetalles].[hor_Id] AS [hor_Id], 
+    [V_HorariosDetalles].[jor_Id] AS [jor_Id], 
+    [V_HorariosDetalles].[hor_Descripcion] AS [hor_Descripcion], 
+    [V_HorariosDetalles].[hor_HoraInicio] AS [hor_HoraInicio], 
+    [V_HorariosDetalles].[hor_HoraFin] AS [hor_HoraFin], 
+    [V_HorariosDetalles].[hor_CantidadHoras] AS [hor_CantidadHoras], 
+    [V_HorariosDetalles].[hor_Estado] AS [hor_Estado], 
+    [V_HorariosDetalles].[hor_RazonInactivo] AS [hor_RazonInactivo], 
+    [V_HorariosDetalles].[hor_UsuarioCrea] AS [hor_UsuarioCrea], 
+    [V_HorariosDetalles].[hor_FechaCrea] AS [hor_FechaCrea], 
+    [V_HorariosDetalles].[hor_UsuarioModifica] AS [hor_UsuarioModifica], 
+    [V_HorariosDetalles].[hor_FechaModifica] AS [hor_FechaModifica]
+    FROM [rrhh].[V_HorariosDetalles] AS [V_HorariosDetalles]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ Acce _ tbUsuario_ tbAccesoRol _acrol_UsuarioCrea" Association="Self.FK_ Acce _ tbUsuario_ tbAccesoRol _acrol_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbAccesoRol" EntitySet="tbAccesoRol" />
@@ -7091,6 +7081,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_HorariosDetalles" EntityType="ERP_GMEDINAModel.V_HorariosDetalles" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11884,6 +11875,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_HorariosDetalles">
+          <Key>
+            <PropertyRef Name="hor_Id" />
+            <PropertyRef Name="jor_Id" />
+            <PropertyRef Name="hor_Estado" />
+            <PropertyRef Name="hor_UsuarioCrea" />
+            <PropertyRef Name="hor_FechaCrea" />
+          </Key>
+          <Property Name="hor_Id" Type="Int32" Nullable="false" />
+          <Property Name="jor_Id" Type="Int32" Nullable="false" />
+          <Property Name="hor_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hor_HoraInicio" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="hor_HoraFin" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="hor_CantidadHoras" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="hor_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hor_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hor_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hor_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hor_UsuarioModifica" Type="Int32" />
+          <Property Name="hor_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13234,7 +13246,24 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" />
+          <EntitySetMapping Name="V_HorariosDetalles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HorariosDetalles">
+              <MappingFragment StoreEntitySet="V_HorariosDetalles">
+                <ScalarProperty Name="hor_FechaModifica" ColumnName="hor_FechaModifica" />
+                <ScalarProperty Name="hor_UsuarioModifica" ColumnName="hor_UsuarioModifica" />
+                <ScalarProperty Name="hor_FechaCrea" ColumnName="hor_FechaCrea" />
+                <ScalarProperty Name="hor_UsuarioCrea" ColumnName="hor_UsuarioCrea" />
+                <ScalarProperty Name="hor_RazonInactivo" ColumnName="hor_RazonInactivo" />
+                <ScalarProperty Name="hor_Estado" ColumnName="hor_Estado" />
+                <ScalarProperty Name="hor_CantidadHoras" ColumnName="hor_CantidadHoras" />
+                <ScalarProperty Name="hor_HoraFin" ColumnName="hor_HoraFin" />
+                <ScalarProperty Name="hor_HoraInicio" ColumnName="hor_HoraInicio" />
+                <ScalarProperty Name="hor_Descripcion" ColumnName="hor_Descripcion" />
+                <ScalarProperty Name="jor_Id" ColumnName="jor_Id" />
+                <ScalarProperty Name="hor_Id" ColumnName="hor_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

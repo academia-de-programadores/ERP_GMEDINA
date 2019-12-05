@@ -19,9 +19,9 @@ function format(obj) {
                   '<div class="panel-heading">' +
                      '<h5>' + index.hor_descripcion + '</h5>' +
                 '</div>' +
-                '<div class="panel-body">' +
-                    + index.hor_HoraInicio + '<br>' +
-                    index.hor_HOraFin + '</div>' +
+                '<div class="panel-body">' + 'Hora Inicio: '
+                    + index.hor_HoraInicio.toString() + '<br> Hora Fin: ' +
+                    index.hor_HoraFin + '</div>' +
                 '</div>' +
             '</div>'
     });
