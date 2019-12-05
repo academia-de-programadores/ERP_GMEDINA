@@ -173,12 +173,7 @@ namespace ERP_GMEDINA.Controllers
 		public ActionResult INFOPIndexRPT()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
-
-
-
 			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-
-
 
 			return View(db.V_INFOP_RPT.ToList());
 		}
@@ -200,11 +195,7 @@ namespace ERP_GMEDINA.Controllers
 			}
 			List<V_INFOP_RPT> cm = new List<V_INFOP_RPT>();
 
-
-
 			cm = db.V_INFOP_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
-
-
 
 			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
 			lr.DataSources.Add(rd);
@@ -213,9 +204,6 @@ namespace ERP_GMEDINA.Controllers
 			string encoding;
 			string fileNameExtension;
 			string deviceInfo =
-
-
-
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
 			"  <PageWidth>11in</PageWidth>" +
@@ -226,13 +214,9 @@ namespace ERP_GMEDINA.Controllers
 			"  <MarginBottom>0.1in</MarginBottom>" +
 			"</DeviceInfo>";
 
-
-
 			Warning[] warnings;
 			string[] streams;
 			byte[] renderedBytes;
-
-
 
 			renderedBytes = lr.Render(
 				reportType,
@@ -242,8 +226,6 @@ namespace ERP_GMEDINA.Controllers
 				out fileNameExtension,
 				out streams,
 				out warnings);
-
-
 
 			return File(renderedBytes, mimeType);
 		}
@@ -256,20 +238,13 @@ namespace ERP_GMEDINA.Controllers
 		//-------------------------------------------------------------------------------------------------------------------------------
 		//Reporte Instituciones Financiras- INICIO
 
-
-
 		//Index 
 		public ActionResult InstitucionesFinancierasIndexRPT()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
-
-
-
 			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
 			return View(db.V_InstitucionesFinancieras_RPT.ToList());
-
-
-
 		}
 
 
@@ -288,16 +263,10 @@ namespace ERP_GMEDINA.Controllers
 				return View("Index");
 			}
 
-
-
 			List<V_InstitucionesFinancieras_RPT> cm = new List<V_InstitucionesFinancieras_RPT>();
 
-
-
 			cm = db.V_InstitucionesFinancieras_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
-
-
-
+						
 			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
 			lr.DataSources.Add(rd);
 			string reportType = id;
@@ -305,9 +274,6 @@ namespace ERP_GMEDINA.Controllers
 			string encoding;
 			string fileNameExtension;
 			string deviceInfo =
-
-
-
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
 			"  <PageWidth>11in</PageWidth>" +
@@ -318,13 +284,9 @@ namespace ERP_GMEDINA.Controllers
 			"  <MarginBottom>0.1in</MarginBottom>" +
 			"</DeviceInfo>";
 
-
-
 			Warning[] warnings;
 			string[] streams;
 			byte[] renderedBytes;
-
-
 
 			renderedBytes = lr.Render(
 				reportType,
@@ -335,13 +297,12 @@ namespace ERP_GMEDINA.Controllers
 				out streams,
 				out warnings);
 
-
-
 			return File(renderedBytes, mimeType);
 		}
 		//Reporte InstitucionesFinancieras - FIN
 		//-------------------------------------------------------------------------------------------------------------------------------
 		#endregion
+
 	}
 
 }
