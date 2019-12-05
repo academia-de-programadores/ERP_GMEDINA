@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
     {
         public int cb_Id { get; set; }
         public int emp_Id { get; set; }
-        public decimal cb_Monto { get; set; }
+        public Nullable<decimal> cb_Monto { get; set; }
         public System.DateTime cb_FechaRegistro { get; set; }
         public bool cb_Pagado { get; set; }
         public int cb_UsuarioCrea { get; set; }

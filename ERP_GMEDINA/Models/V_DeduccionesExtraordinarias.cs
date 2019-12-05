@@ -12,17 +12,14 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_ISR_RPT
+    public partial class V_DeduccionesExtraordinarias
     {
-        public int emp_Id { get; set; }
-        public string per_Identidad { get; set; }
-        public string NombreCompleto { get; set; }
-        public int depto_Id { get; set; }
-        public string depto_descripcion { get; set; }
-        public int area_Id { get; set; }
-        public string area_Descripcion { get; set; }
-        public decimal hipa_TotalISR { get; set; }
-        public Nullable<decimal> hipa_SueldoNeto { get; set; }
-        public System.DateTime hipa_FechaPago { get; set; }
+        public string per_DeduccionEmpleado { get; set; }
+        public string car_Descripcion { get; set; }
+        public string dex_ObservacionesComentarios { get; set; }
+        public Nullable<decimal> dex_MontoInicial { get; set; }
+        public Nullable<decimal> dex_MontoRestante { get; set; }
+        public Nullable<decimal> dex_Cuota { get; set; }
+        public string cde_DescripcionDeduccion { get; set; }
     }
 }

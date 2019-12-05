@@ -25,6 +25,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> cb_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> cb_FechaModifica { get; set; }
         public bool cb_Activo { get; set; }
+        public Nullable<System.DateTime> cb_FechaPagado { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

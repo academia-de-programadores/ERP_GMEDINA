@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
         public string per_Nombres { get; set; }
         public int cin_IdIngreso { get; set; }
         public string cin_DescripcionIngreso { get; set; }
-        public decimal cb_Monto { get; set; }
+        public Nullable<decimal> cb_Monto { get; set; }
         public System.DateTime cb_FechaRegistro { get; set; }
         public bool cb_Pagado { get; set; }
         public int cb_UsuarioCrea { get; set; }

@@ -229,7 +229,7 @@ namespace ERP_GMEDINA.Controllers
             SqlConnection conx = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_INFOP_RPT", conx);
 
-            adp.Fill(ds, ds.V_INFOP_RPT.TableName);
+           // adp.Fill(ds, ds.V_INFOP_RPT.TableName);
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\INFOPRPT.rdlc";
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[1]));
@@ -317,7 +317,7 @@ namespace ERP_GMEDINA.Controllers
             SqlConnection conx = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_InstitucionesFinancieras_RPT", conx);
 
-            adp.Fill(ds, ds.V_InstitucionesFinancieras_RPT.TableName);
+           // adp.Fill(ds, ds.V_InstitucionesFinancieras_RPT.TableName);
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\InstitucionesFinancierasRPT.rdlc";
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[2]));

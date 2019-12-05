@@ -12,27 +12,27 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoPermisos
+    public partial class tbAuxilioDeCesantias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoPermisos()
+        public tbAuxilioDeCesantias()
         {
-            this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
+            this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
         }
     
-        public int tper_Id { get; set; }
-        public string tper_Descripcion { get; set; }
-        public bool tper_GoceDeSueldo { get; set; }
-        public bool tper_Estado { get; set; }
-        public string tper_RazonInactivo { get; set; }
-        public int tper_UsuarioCrea { get; set; }
-        public System.DateTime tper_FechaCrea { get; set; }
-        public Nullable<int> tper_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tper_FechaModifica { get; set; }
+        public int aces_IdAuxilioCesantia { get; set; }
+        public int aces_RangoInicioMeses { get; set; }
+        public int aces_RangoFinMeses { get; set; }
+        public int aces_DiasAuxilioCesantia { get; set; }
+        public int aces_UsuarioCrea { get; set; }
+        public System.DateTime aces_FechaCrea { get; set; }
+        public Nullable<int> aces_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> aces_FechaModifica { get; set; }
+        public bool aces_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
+        public virtual ICollection<tbLiquidaciones> tbLiquidaciones { get; set; }
     }
 }

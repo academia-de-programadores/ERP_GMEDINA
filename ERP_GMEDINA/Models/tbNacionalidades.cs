@@ -31,6 +31,8 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbUsuario tbUsuario2 { get; set; }
+        public virtual tbUsuario tbUsuario3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPersonas> tbPersonas { get; set; }
     }

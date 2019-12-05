@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
     {
         public int deif_IdDeduccionInstFinanciera { get; set; }
         public int emp_Id { get; set; }
-        public decimal deif_Monto { get; set; }
+        public Nullable<decimal> deif_Monto { get; set; }
         public string deif_Comentarios { get; set; }
         public int deif_UsuarioCrea { get; set; }
         public System.DateTime deif_FechaCrea { get; set; }

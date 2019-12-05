@@ -30,11 +30,16 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbRol> tbRol { get; set; }
         public virtual DbSet<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<tbAcumuladosISR> tbAcumuladosISR { get; set; }
+        public virtual DbSet<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
+        public virtual DbSet<tbAFP> tbAFP { get; set; }
+        public virtual DbSet<tbAuxilioDeCesantias> tbAuxilioDeCesantias { get; set; }
+        public virtual DbSet<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<tbCatalogoDeIngresos> tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<tbCatalogoDePlanillas> tbCatalogoDePlanillas { get; set; }
         public virtual DbSet<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
         public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
+        public virtual DbSet<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
@@ -43,6 +48,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
+        public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidaciones> tbLiquidaciones { get; set; }
@@ -77,7 +83,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual DbSet<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
         public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
         public virtual DbSet<tbHistorialSalidas> tbHistorialSalidas { get; set; }
@@ -89,7 +94,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbJornadas> tbJornadas { get; set; }
         public virtual DbSet<tbNacionalidades> tbNacionalidades { get; set; }
         public virtual DbSet<tbPersonas> tbPersonas { get; set; }
+        public virtual DbSet<tbPrestaciones> tbPrestaciones { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
+        public virtual DbSet<tbRequerimientosEspeciales> tbRequerimientosEspeciales { get; set; }
+        public virtual DbSet<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
+        public virtual DbSet<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
         public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
         public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
@@ -103,7 +112,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
-        public virtual DbSet<tbVacaciones> tbVacaciones { get; set; }
+        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
         public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
@@ -113,12 +122,15 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoCuartoMes_RPT> V_DecimoCuartoMes_RPT { get; set; }
         public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
         public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
         public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
+        public virtual DbSet<V_GeneralTotales_RPT> V_GeneralTotales_RPT { get; set; }
         public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
         public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
@@ -131,11 +143,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
+        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
         public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
-        public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
     }
 }

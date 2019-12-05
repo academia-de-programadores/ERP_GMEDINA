@@ -227,16 +227,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\tbAccesoRol.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbAccesoRol.cs">
+    <Compile Include="Models\tbAcumuladosISR.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbAdelantoSueldo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbAFP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbAreas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbAuxilioDeCesantias.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbCargos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCatalogoDeDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbCatalogoDeIngresos.cs">
@@ -258,6 +270,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbDecimoTercerMes.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbDeduccionAFP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbDeduccionesExtraordinarias.cs">
@@ -392,10 +407,22 @@
     <Compile Include="Models\tbPreaviso.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbPrestaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbRamaActividad.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRazonSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRequerimientosEspeciales.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRequerimientosEspecialesPersona.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRequerimientosEspecialesRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRequisiciones.cs">
@@ -461,10 +488,10 @@
     <Compile Include="Models\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbVacaciones.cs">
+    <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
+    <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
     <Compile Include="Models\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -492,7 +519,13 @@
     <Compile Include="Models\V_DecimoTercerMes_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DeduccionesExtraordinarias.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_DeduccionesExtraordinarias_Detalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_DeduccionesExtraordinarias_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
@@ -508,6 +541,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_FormaDePago.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_GeneralTotales_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_IHSS_RPT.cs">
@@ -546,6 +582,9 @@
     <Compile Include="Models\V_PreviewPlanilla.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RAP_RPT.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_tbAdelantoSueldo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -556,9 +595,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbEmpleadoComisiones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_TechosDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_TipoDeduccion.cs">

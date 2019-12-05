@@ -12,22 +12,18 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTitulosPersona
+    public partial class tbAcumuladosISR
     {
-        public int tipe_Id { get; set; }
-        public int per_Id { get; set; }
-        public int titu_Id { get; set; }
-        public int titu_anio { get; set; }
-        public bool tipe_Estado { get; set; }
-        public string tipe_RazonInactivo { get; set; }
-        public int tipe_UsuarioCrea { get; set; }
-        public Nullable<System.DateTime> tipe_FechaCrea { get; set; }
-        public Nullable<int> tipe_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tipe_FechaModifica { get; set; }
+        public int aisr_Id { get; set; }
+        public string aisr_Descripcion { get; set; }
+        public decimal aisr_Monto { get; set; }
+        public int aisr_UsuarioCrea { get; set; }
+        public System.DateTime aisr_FechaCrea { get; set; }
+        public Nullable<int> aisr_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> aisr_FechaModifica { get; set; }
+        public bool aisr_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbPersonas tbPersonas { get; set; }
-        public virtual tbTitulos tbTitulos { get; set; }
     }
 }

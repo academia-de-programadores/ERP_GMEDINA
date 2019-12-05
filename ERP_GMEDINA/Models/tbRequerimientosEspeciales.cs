@@ -12,31 +12,29 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoDeduccion
+    public partial class tbRequerimientosEspeciales
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoDeduccion()
+        public tbRequerimientosEspeciales()
         {
-            this.tbAFP = new HashSet<tbAFP>();
-            this.tbCatalogoDeDeducciones = new HashSet<tbCatalogoDeDeducciones>();
-            this.tbISR = new HashSet<tbISR>();
+            this.tbRequerimientosEspecialesPersona = new HashSet<tbRequerimientosEspecialesPersona>();
+            this.tbRequerimientosEspecialesRequisicion = new HashSet<tbRequerimientosEspecialesRequisicion>();
         }
     
-        public int tde_IdTipoDedu { get; set; }
-        public string tde_Descripcion { get; set; }
-        public int tde_UsuarioCrea { get; set; }
-        public System.DateTime tde_FechaCrea { get; set; }
-        public Nullable<int> tde_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tde_FechaModifica { get; set; }
-        public bool tde_Activo { get; set; }
+        public int resp_Id { get; set; }
+        public string resp_Descripcion { get; set; }
+        public bool resp_Estado { get; set; }
+        public string resp_RazonInactivo { get; set; }
+        public int resp_UsuarioCrea { get; set; }
+        public System.DateTime resp_FechaCrea { get; set; }
+        public Nullable<int> resp_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> resp_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAFP> tbAFP { get; set; }
+        public virtual ICollection<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbISR> tbISR { get; set; }
+        public virtual ICollection<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
     }
 }
