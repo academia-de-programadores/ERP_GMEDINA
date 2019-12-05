@@ -158,7 +158,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\TipoMonedasController.cs" />
@@ -200,9 +199,6 @@
     <Compile Include="Models\tbTipoMonedas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoPermisos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbUsuario.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -222,9 +218,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Delete_Result.cs">
@@ -982,11 +975,6 @@
     <Content Include="Views\TipoMonedas\_Delete.cshtml" />
     <Content Include="Views\TipoMonedas\_Detalles.cshtml" />
     <Content Include="Views\TipoMonedas\_Edit.cshtml" />
-    <Content Include="Views\HistorialPermisos\Create.cshtml" />
-    <Content Include="Views\HistorialPermisos\Delete.cshtml" />
-    <Content Include="Views\HistorialPermisos\Details.cshtml" />
-    <Content Include="Views\HistorialPermisos\Edit.cshtml" />
-    <Content Include="Views\HistorialPermisos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
