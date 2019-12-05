@@ -1429,6 +1429,7 @@
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
