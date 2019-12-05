@@ -666,9 +666,15 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\General\Areas\CreateArea.js" />
+    <Content Include="Scripts\app\General\Areas\EditArea.js" />
+    <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
-    <Content Include="Scripts\app\General\Jornadas.js" />
+    <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />

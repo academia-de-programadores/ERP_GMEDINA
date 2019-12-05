@@ -445,10 +445,12 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
                       "~/Scripts/plugins/pdfjs/pdf.js"));
 
-            // iziToast JS
-            bundles.Add(new ScriptBundle("~/plugins/izitoast").Include(
-                        "~/Scripts/plugins/iziToast/iziToast.js",
-                        "~/Scripts/plugins/iziToast/iziToast.min.js"));
+            // general
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+            "~/Scripts/plugins/iziToast/iziToast.js",
+            "~/Scripts/plugins/iziToast/iziToast.min.js",
+            "~/Scripts/app/general/general.js",
+            "~/Scripts/plugins/validate/jquery.validate.min.js"));
             //iziToast CSS
             // Touch Spin Styless
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
@@ -458,6 +460,10 @@ namespace ERP_GMEDINA
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
+
+            //App/Jornadas
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
+                "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
 
 
             //OPTIMIZATION

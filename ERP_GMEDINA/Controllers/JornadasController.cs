@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: Jornadas
         public ActionResult Index()
         {
-            var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            return View(tbJornadas.ToList());
+            //var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            return View(new List<tbJornadas> { });
         }
 
         // GET: Jornadas/Details/5
@@ -44,6 +44,54 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
+
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            //List<tbHorarios> lista = new List<tbHorarios> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var lista = db.tbHorarios.Where(x => x.jor_Id == id)
+                        .Select(tabla=>new {hor_HoraInicio=tabla.hor_HoraInicio }).ToList();
+                     return Json(lista, JsonRequestBehavior.AllowGet);
+                }
+                catch
+                {
+                }
+            }
+            return Json("-2", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+                //posteriormente es destruida.
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbJornadas = db.tbJornadas
+                        .Select(
+                        t => new
+                        {
+                            jor_Id = t.jor_Id,
+                            jor_Descripcion = t.jor_Descripcion
+                        }
+                        )
+                        .ToList();
+                    return Json(tbJornadas, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch(Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // POST: Jornadas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -63,35 +111,35 @@ namespace ERP_GMEDINA.Controllers
             return View(tbJornadas);
         }
 
-        public ActionResult ChildRowData(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //public ActionResult ChildRowData(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
             
-            try
-            {
-                var Horarios = db.tbHorarios.Where(x => x.jor_Id == id).ToList();
-                List<tbHorarios> ListHorarios = new List<tbHorarios> { };
-                foreach (var item in Horarios)
-                {
-                    ListHorarios.Add(new tbHorarios {
-                        hor_Descripcion = item.hor_Descripcion,
-                        hor_HoraInicio = item.hor_HoraInicio,
-                        hor_HoraFin = item.hor_HoraFin,
-                        hor_CantidadHoras = item.hor_CantidadHoras
-                    });
-                }
+        //    try
+        //    {
+        //        var Horarios = db.tbHorarios.Where(x => x.jor_Id == id).ToList();
+        //        List<tbHorarios> ListHorarios = new List<tbHorarios> { };
+        //        foreach (var item in Horarios)
+        //        {
+        //            ListHorarios.Add(new tbHorarios {
+        //                hor_Descripcion = item.hor_Descripcion,
+        //                hor_HoraInicio = item.hor_HoraInicio,
+        //                hor_HoraFin = item.hor_HoraFin,
+        //                hor_CantidadHoras = item.hor_CantidadHoras
+        //            });
+        //        }
 
-                return Json(ListHorarios, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                return HttpNotFound();
-            }
-        }
+        //        return Json(ListHorarios, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ex.Message.ToString();
+        //        return HttpNotFound();
+        //    }
+        //}
 
         // GET: Jornadas/Edit/5
         public ActionResult Edit(int? id)

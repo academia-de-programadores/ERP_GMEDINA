@@ -30,27 +30,11 @@
                     <thead>
                         <tr role="row">
                             <th></th>
-                            <th>@Html.DisplayNameFor(model => model.jor_Id)</th>
                             <th>@Html.DisplayNameFor(model => model.jor_Descripcion)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) {
-                        <tr class="gradeA odd" role="row" data-id="@item.jor_Id">
-                            <td></td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.jor_Descripcion)
-                            </td>
-                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { id=item.jor_Id },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { id=item.jor_Id }, new {@class = "btn btn-default btn-xs" })
-                            </td>
-                        </tr>
-                      }
                     </tbody>
                   </table>
                 </div>
@@ -65,4 +49,6 @@
 
 @section Scripts {
   @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/Jornadas")
+@Scripts.Render("~/Scripts/app/general")
 }
