@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 	$('.rpt').DataTable({
 		"language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-		responsive: true,
+		responsive: false,
 		pageLength: 10,
 		dom: '<"html5buttons"B>lTfgitp',
 		buttons: [
