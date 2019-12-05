@@ -158,10 +158,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
+    <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -172,17 +174,21 @@
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
     <Compile Include="Controllers\TipoMonedasController.cs" />
+    <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\cAreas.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCompetencias.cs" />
     <Compile Include="Models\cDepartamentos.cs" />
+    <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
+    <Compile Include="Models\cHabilidades.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
     <Compile Include="Models\cPersonas.cs" />
@@ -191,6 +197,7 @@
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
+    <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
@@ -659,12 +666,16 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\Cargos\Cargos.js" />
+    <Content Include="Scripts\app\General\Areas\CreateArea.js" />
+    <Content Include="Scripts\app\General\Areas\EditArea.js" />
+    <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -673,6 +684,7 @@
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -1256,6 +1268,23 @@
     <Content Include="Views\Nacionalidades\_Delete.cshtml" />
     <Content Include="Views\Nacionalidades\_Detalles.cshtml" />
     <Content Include="Views\Nacionalidades\_Edit.cshtml" />
+    <Content Include="Views\Areas\Create.cshtml" />
+    <Content Include="Views\Areas\Delete.cshtml" />
+    <Content Include="Views\Areas\Details.cshtml" />
+    <Content Include="Views\Areas\Edit.cshtml" />
+    <Content Include="Views\Areas\Index.cshtml" />
+    <Content Include="Views\Areas\_CreateDepartamento.cshtml" />
+    <Content Include="Views\Habilidades\Details.cshtml" />
+    <Content Include="Views\Habilidades\Index.cshtml" />
+    <Content Include="Views\Habilidades\_Create.cshtml" />
+    <Content Include="Views\Habilidades\_Delete.cshtml" />
+    <Content Include="Views\Habilidades\_Detalles.cshtml" />
+    <Content Include="Views\Habilidades\_Edit.cshtml" />
+    <Content Include="Views\TipoSalidas\Index.cshtml" />
+    <Content Include="Views\TipoSalidas\_Create.cshtml" />
+    <Content Include="Views\TipoSalidas\_Delete.cshtml" />
+    <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
+    <Content Include="Views\TipoSalidas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
