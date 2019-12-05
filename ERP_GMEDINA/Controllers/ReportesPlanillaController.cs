@@ -195,27 +195,7 @@ namespace ERP_GMEDINA.Controllers
 
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 
-            ReportViewer reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-            reportViewer.SizeToReportContent = true;
-            reportViewer.Width = Unit.Pixel(1050);
-            reportViewer.Height = Unit.Pixel(500);
-            reportViewer.BackColor = System.Drawing.Color.White;
-
-            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-
-
-            SqlConnection conx = new SqlConnection(connectionString);
-            SqlDataAdapter adp = new SqlDataAdapter("SELECT * FROM Plani.V_INFOP_RPT", conx);
-
-            adp.Fill(ds, ds.V_INFOP_RPT.TableName);
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\INFOPRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables[2]));
-
-
-            ViewBag.ReportViewerINFOPRPT = reportViewer;
-            return View();
+            return View(db.V_INFOP_RPT.ToList());
         }
 
         //Reporte con parametros
