@@ -507,6 +507,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FormaPago").Include(
                 "~/Scripts/app/General/FormaPago.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones").Include(
+                "~/Scripts/app/General/CreateHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General").Include(
+                "~/Scripts/app/General/general.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network 

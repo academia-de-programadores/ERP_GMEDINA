@@ -187,10 +187,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Models\tbCargos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialAmonestaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbHistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
@@ -380,9 +386,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_HistorialAmonestacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -619,6 +622,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
@@ -627,6 +631,7 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />

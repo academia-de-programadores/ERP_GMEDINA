@@ -29,8 +29,16 @@
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
-                            <th>@Html.DisplayNameFor(model => model.emp_Id)</th>
                             <th>@Html.DisplayNameFor(model => model.hamo_Fecha)</th>
+                            <th>@Html.DisplayNameFor(model => model.hamo_Observacion)</th>
+                            <th>@Html.DisplayNameFor(model => model.hamo_Estado)</th>
+                            <th>@Html.DisplayNameFor(model => model.hamo_RazonInactivo)</th>
+                            <th>@Html.DisplayNameFor(model => model.hamo_FechaCrea)</th>
+                            <th>@Html.DisplayNameFor(model => model.hamo_FechaModifica)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbHistorialAmonestaciones2.hamo_Observacion)</th>
                             <th>@Html.DisplayNameFor(model => model.tbTipoAmonestaciones.tamo_Descripcion)</th>
                             <th>Acciones</th>
                         </tr>
@@ -39,10 +47,34 @@
                       @foreach (var item in Model) {
                         <tr class="gradeA odd" role="row" data-id="@item.hamo_Id">
                             <td>
-                                @Html.DisplayFor(modelItem => item.emp_Id)
+                                @Html.DisplayFor(modelItem => item.hamo_Fecha)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.hamo_Fecha)
+                                @Html.DisplayFor(modelItem => item.hamo_Observacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hamo_Estado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hamo_RazonInactivo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hamo_FechaCrea)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hamo_FechaModifica)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbHistorialAmonestaciones2.hamo_Observacion)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbTipoAmonestaciones.tamo_Descripcion)

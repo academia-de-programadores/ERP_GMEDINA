@@ -4,25 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39baaca949c34bada950c3ca8786b220" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="6.875" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="5.25" PointY="5.375" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAmonestaciones" Width="1.5" PointX="7.5" PointY="10.25" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPersonas" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoAmonestaciones" Width="1.5" PointX="3" PointY="16.625" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="4.625" PointX="7.75" PointY="0.75" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" />
-        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
+      <Diagram DiagramId="39baaca949c34bada950c3ca8786b220" Name="Diagram1" ZoomLevel="133">
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAmonestaciones" Width="1.5" PointX="7.5" PointY="8.25" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Width="1.5" PointX="7.5" PointY="13.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPersonas" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoAmonestaciones" Width="1.5" PointX="3" PointY="4.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAudienciaDescargo_aude_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

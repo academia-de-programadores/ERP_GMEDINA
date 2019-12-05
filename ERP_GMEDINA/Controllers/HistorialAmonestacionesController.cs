@@ -17,9 +17,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         public ActionResult Index()
         {
-            var tbHistorialAmonestaciones = db.tbPersonas.Include(t => t.tbEmpleados);
-            return View(tbHistorialAmonestaciones);
+            var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbHistorialAmonestaciones2).Include(t => t.tbTipoAmonestaciones);
+            return View(tbHistorialAmonestaciones.ToList());
         }
+
         // GET: HistorialAmonestaciones/Details/5
         public ActionResult Details(int? id)
         {
@@ -51,7 +52,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_UsuarioCrea,hamo_FechaCrea")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
+        public ActionResult Create([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_Observacion,hamo_Estado,hamo_RazonInactivo,hamo_UsuarioCrea,hamo_FechaCrea,hamo_UsuarioModifica,hamo_FechaModifica")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
             if (ModelState.IsValid)
             {
