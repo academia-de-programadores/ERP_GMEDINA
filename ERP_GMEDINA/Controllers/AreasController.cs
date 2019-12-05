@@ -211,7 +211,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tbAreas);
+            return View(new cAreas{
+                suc_Id =tbAreas.suc_Id,
+                area_Descripcion =tbAreas.area_Descripcion });
         }
         // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

@@ -122,7 +122,9 @@ $("#add").click(function () {
             return null;
         }
     }
-    Add(Descripcion, Cargo);
+ //Add(Descripcion, Cargo);
+
+    $("#FormDepartamentos").validate();
 });
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
