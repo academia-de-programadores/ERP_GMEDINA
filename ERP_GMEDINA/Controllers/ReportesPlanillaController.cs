@@ -304,151 +304,6 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
 
-        //#region Reporte RAP
-
-        ////-------------------------------------------------------------------------------------------------------------------------------
-        ////Reporte INFOP - INICIO
-
-        ////Index 
-        //public ActionResult RAPIndexRPT()
-        //{
-        //    //Cargar DDL del modal (Tipo de planilla a seleccionar)
-
-        //    ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-
-        //    return View(db.V_RAP_RPT.ToList());
-        //}
-
-        ////Reporte con parametros
-        //public ActionResult RAPParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
-        //{
-        //    LocalReport lr = new LocalReport();
-        //    string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "RAPRPT.rdlc");
-        //    if (System.IO.File.Exists(path))
-        //    {
-        //        lr.ReportPath = path;
-        //    }
-        //    else
-        //    {
-        //        return View("Index");
-        //    }
-        //    List<V_RAP_RPT> cm = new List<V_RAP_RPT>();
-
-        //    cm = db.V_RAP_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
-
-        //    ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
-        //    lr.DataSources.Add(rd);
-        //    string reportType = id;
-        //    string mimeType;
-        //    string encoding;
-        //    string fileNameExtension;
-        //    string deviceInfo =
-
-        //    "<DeviceInfo>" +
-        //    "  <OutputFormat>" + id + "</OutputFormat>" +
-        //    "  <PageWidth>11in</PageWidth>" +
-        //    "  <PageHeight>8.5in</PageHeight>" +
-        //    "  <MarginTop>0.1in</MarginTop>" +
-        //    "  <MarginLeft>0.1in</MarginLeft>" +
-        //    "  <MarginRight>0.1in</MarginRight>" +
-        //    "  <MarginBottom>0.1in</MarginBottom>" +
-        //    "</DeviceInfo>";
-
-        //    Warning[] warnings;
-        //    string[] streams;
-        //    byte[] renderedBytes;
-
-        //    renderedBytes = lr.Render(
-        //        reportType,
-        //        deviceInfo,
-        //        out mimeType,
-        //        out encoding,
-        //        out fileNameExtension,
-        //        out streams,
-        //        out warnings);
-
-        //    return File(renderedBytes, mimeType);
-        //}
-        ////Reporte RAP - FIN
-        ////-------------------------------------------------------------------------------------------------------------------------------
-
-
-        //#endregion
-
-
-        //#region Reporte AFP
-
-        ////-------------------------------------------------------------------------------------------------------------------------------
-        ////Reporte INFOP - INICIO
-
-        ////Index 
-        //public ActionResult AFPIndexRPT()
-        //{
-        //    //Cargar DDL del modal (Tipo de planilla a seleccionar)
-
-        //    ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-
-        //    return View(db.V_INFOP_RPT.ToList());
-        //}
-
-        ////Reporte con parametros
-        //public ActionResult AFPParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
-        //{
-        //    LocalReport lr = new LocalReport();
-        //    string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "AFPRPT.rdlc");
-        //    if (System.IO.File.Exists(path))
-        //    {
-        //        lr.ReportPath = path;
-        //    }
-        //    else
-        //    {
-        //        return View("Index");
-        //    }
-        //    List<V_AFP_RPT> cm = new List<V_AFP_RPT>();
-
-        //    cm = db.V_AFP_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
-
-        //    ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
-        //    lr.DataSources.Add(rd);
-        //    string reportType = id;
-        //    string mimeType;
-        //    string encoding;
-        //    string fileNameExtension;
-        //    string deviceInfo =
-
-        //    "<DeviceInfo>" +
-        //    "  <OutputFormat>" + id + "</OutputFormat>" +
-        //    "  <PageWidth>11in</PageWidth>" +
-        //    "  <PageHeight>8.5in</PageHeight>" +
-        //    "  <MarginTop>0.1in</MarginTop>" +
-        //    "  <MarginLeft>0.1in</MarginLeft>" +
-        //    "  <MarginRight>0.1in</MarginRight>" +
-        //    "  <MarginBottom>0.1in</MarginBottom>" +
-        //    "</DeviceInfo>";
-
-        //    Warning[] warnings;
-        //    string[] streams;
-        //    byte[] renderedBytes;
-
-        //    renderedBytes = lr.Render(
-        //        reportType,
-        //        deviceInfo,
-        //        out mimeType,
-        //        out encoding,
-        //        out fileNameExtension,
-        //        out streams,
-        //        out warnings);
-
-        //    return File(renderedBytes, mimeType);
-        //}
-        ////Reporte AFP - FIN
-        ////-------------------------------------------------------------------------------------------------------------------------------
-
-
-        //#endregion
-
-
-
         #region Reporte IHSS
         //-------------------------------------------------------------------------------------------------------------------------------
         //Reporte Decimo Tercer Mes - INICIO
@@ -648,8 +503,152 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte Decimo Cuarto Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
-    }
+		//Reporte Decimo Cuarto Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
+
+
+		#region Reporte RAP
+
+		////-------------------------------------------------------------------------------------------------------------------------------
+		////Reporte INFOP - INICIO
+
+		////Index 
+		public ActionResult RAPIndexRPT()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
+			return View(db.V_RAP_RPT.ToList());
+		}
+
+		//Reporte con parametros
+		public ActionResult RAPParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
+		{
+			LocalReport lr = new LocalReport();
+			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "RAPRPT.rdlc");
+			if (System.IO.File.Exists(path))
+			{
+				lr.ReportPath = path;
+			}
+			else
+			{
+				return View("Index");
+			}
+			List<V_RAP_RPT> cm = new List<V_RAP_RPT>();
+
+			cm = db.V_RAP_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+
+			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
+			lr.DataSources.Add(rd);
+			string reportType = id;
+			string mimeType;
+			string encoding;
+			string fileNameExtension;
+			string deviceInfo =
+
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
+
+			Warning[] warnings;
+			string[] streams;
+			byte[] renderedBytes;
+
+			renderedBytes = lr.Render(
+				reportType,
+				deviceInfo,
+				out mimeType,
+				out encoding,
+				out fileNameExtension,
+				out streams,
+				out warnings);
+
+			return File(renderedBytes, mimeType);
+		}
+		////Reporte RAP - FIN
+		////-------------------------------------------------------------------------------------------------------------------------------
+
+
+		#endregion
+
+
+		#region Reporte AFP
+
+		////-------------------------------------------------------------------------------------------------------------------------------
+		////Reporte INFOP - INICIO
+
+		////Index 
+		public ActionResult AFPIndexRPT()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
+			return View(db.V_AFP_RPT.ToList());
+		}
+
+		//Reporte con parametros
+		public ActionResult AFPParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
+		{
+			LocalReport lr = new LocalReport();
+			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "AFPRPT.rdlc");
+			if (System.IO.File.Exists(path))
+			{
+				lr.ReportPath = path;
+			}
+			else
+			{
+				return View("Index");
+			}
+			List<V_AFP_RPT> cm = new List<V_AFP_RPT>();
+
+			cm = db.V_AFP_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+
+			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
+			lr.DataSources.Add(rd);
+			string reportType = id;
+			string mimeType;
+			string encoding;
+			string fileNameExtension;
+			string deviceInfo =
+
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
+
+			Warning[] warnings;
+			string[] streams;
+			byte[] renderedBytes;
+
+			renderedBytes = lr.Render(
+				reportType,
+				deviceInfo,
+				out mimeType,
+				out encoding,
+				out fileNameExtension,
+				out streams,
+				out warnings);
+
+			return File(renderedBytes, mimeType);
+		}
+		////Reporte AFP - FIN
+		////-------------------------------------------------------------------------------------------------------------------------------
+
+
+		#endregion
+	}
 }
