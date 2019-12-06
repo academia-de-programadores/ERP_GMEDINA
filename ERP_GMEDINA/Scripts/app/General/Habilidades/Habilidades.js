@@ -1,9 +1,9 @@
 ﻿var id = 0;
 //Funciones GET
-function tablaEditar(btn) {
-    var tr=$(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().id;
+function tablaEditar(id) {
+    //var tr=$(btn).closest("tr");
+    //var row = tabla.row(tr);
+    //id = row.data().id;
     _ajax(null,
         '/Habilidades/Edit/' + id,
         'GET',
@@ -14,10 +14,11 @@ function tablaEditar(btn) {
             }
         });
 }
-function tablaDetalles(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().id;
+function tablaDetalles(id) {
+    //var tr = $(btn).closest("tr");
+    //var row = tabla.row(tr);
+    //id = row.data().id;
+    
     _ajax(null,
         '/Habilidades/Edit/' + id,
         'GET',
