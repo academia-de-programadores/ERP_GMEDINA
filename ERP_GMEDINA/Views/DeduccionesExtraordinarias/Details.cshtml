@@ -1,0 +1,144 @@
+﻿@model ERP_GMEDINA.Models.V_DeduccionesExtraordinarias_Detalles
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
+	<h2>Detalles</h2>
+</div>
+
+<div class="ibox-content">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.eqtra_Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eqtra_Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_ObservacionesComentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_ObservacionesComentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_MontoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_MontoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_MontoRestante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_MontoRestante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_Cuota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_Cuota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cde_DescripcionDeduccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cde_DescripcionDeduccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Empleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.car_Cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.car_Cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.depto_Departamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.depto_Departamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dex_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dex_Activo)
+        </dd>
+
+    </dl>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.dex_IdDeduccionesExtra }, new {@class="btn btn-primary" }) 
+    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
+</p>
+</div>
+</div>
+</div>

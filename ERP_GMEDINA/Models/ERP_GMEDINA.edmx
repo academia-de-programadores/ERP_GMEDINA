@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -5525,6 +5525,96 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="UDP_Plani_EmpleadoComisiones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cc_Id" Type="int" Mode="In" />
+          <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cc_FechaModifcia" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_EmpleadoComisiones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cc_Id" Type="int" Mode="In" />
+          <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cc_FechaModifcia" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_EmpleadoComisiones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
+          <Parameter Name="cc_FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="cc_Pagado" Type="bit" Mode="In" />
+          <Parameter Name="cc_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="cc_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_EmpleadoComisiones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cc_Id" Type="int" Mode="In" />
+          <Parameter Name="EMP_Id" Type="int" Mode="In" />
+          <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cc_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
+          <Parameter Name="cde_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cde_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
+          <Parameter Name="cde_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cde_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cde_DescripcionDedu" Type="nvarchar" Mode="In" />
+          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
+          <Parameter Name="cde_PorcentajeColaborador" Type="decimal" Mode="In" />
+          <Parameter Name="cde_PorcentajeEmpresa" Type="decimal" Mode="In" />
+          <Parameter Name="cde_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="cde_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
+          <Parameter Name="cde_DescripcionDedu" Type="nvarchar" Mode="In" />
+          <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
+          <Parameter Name="cde_PorcentajeColaborador" Type="decimal" Mode="In" />
+          <Parameter Name="cde_PorcentajeEmpresa" Type="decimal" Mode="In" />
+          <Parameter Name="cde_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cde_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDecimoTercerMes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="dtm_DecimoTercer" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="dex_IdDeduccionesExtra" Type="int" Mode="In" />
+          <Parameter Name="dex_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="dex_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="dex_IdDeduccionesExtra" Type="int" Mode="In" />
+          <Parameter Name="dex_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="dex_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="dex_MontoInicial" Type="decimal" Mode="In" />
+          <Parameter Name="dex_MontoRestante" Type="decimal" Mode="In" />
+          <Parameter Name="dex_ObservacionesComentarios" Type="nvarchar" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
+          <Parameter Name="dex_Cuota" Type="decimal" Mode="In" />
+          <Parameter Name="dex_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="dex_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="dex_IdDeduccionesExtra" Type="int" Mode="In" />
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="dex_MontoInicial" Type="decimal" Mode="In" />
+          <Parameter Name="dex_MontoRestante" Type="decimal" Mode="In" />
+          <Parameter Name="dex_ObservacionesComentarios" Type="nvarchar" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
+          <Parameter Name="dex_Cuota" Type="decimal" Mode="In" />
+          <Parameter Name="dex_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="dex_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" Schema="Acce" store:Type="Tables" />
@@ -7260,8 +7350,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -14498,7 +14587,136 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Activar_Result)">
+            <Parameter Name="cc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cc_FechaModifcia" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Inactivar_Result)">
+            <Parameter Name="cc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cc_FechaModifcia" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
+            <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_Pagado" Mode="In" Type="Boolean" />
+            <Parameter Name="cc_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cc_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result)">
+            <Parameter Name="cc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="EMP_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cc_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Activar_Result)">
+            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
+            <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result)">
+            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
+            <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result)">
+            <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
+            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="cde_PorcentajeColaborador" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_PorcentajeEmpresa" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cde_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result)">
+            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
+            <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
+            <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
+            <Parameter Name="cde_PorcentajeColaborador" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_PorcentajeEmpresa" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDecimoTercerMes_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDecimoTercerMes_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="dtm_DecimoTercer" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result)">
+            <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
+            <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result)">
+            <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
+            <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_MontoRestante" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_ObservacionesComentarios" Mode="In" Type="String" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result)">
+            <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_MontoRestante" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_ObservacionesComentarios" Mode="In" Type="String" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadoComisiones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDecimoTercerMes_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16518,6 +16736,97 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoTercerMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoTercerMes_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDecimoTercerMes_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

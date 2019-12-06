@@ -55,7 +55,6 @@ function cargarGridDeducciones() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyDeducciones').html(template);
         });
-    FullBody();
 }
 
 //VALIDAR CREATE//
@@ -100,7 +99,7 @@ $("#btnCreateRegistroDeduccion").click(function () {
         $("#Validation_descipcionA").css("display", "none");
     }
 
-    if (tde_IdTipoDedu == '0') {
+    if (tde_IdTipoDedu == "0" || tde_IdTipoDedu == null) {
         $("#Validation_descipcion2A").css("display", "");
         $("#tde_IdTipoDedu").val("0");
     }
@@ -136,7 +135,6 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            console.log('la data del DDL ES: ' + data);
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
@@ -144,7 +142,6 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $('input[type=text], input[type=number]').val('');
     $("#AgregarCatalogoDeducciones").modal();
     $("#tde_IdTipoDedu").val("0");
 });
@@ -376,7 +373,6 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 //MOSTRAR MODAL INACTIVAR
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#EditarCatalogoDeducciones").modal('hide');
     $("#InactivarCatalogoDeducciones").modal();
 });
 

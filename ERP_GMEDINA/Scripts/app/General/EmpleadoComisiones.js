@@ -50,7 +50,8 @@ function cargarGridComisiones() {
                     '<td>' + ListaComisiones[i].per_Nombres + '</td>' +
                     '<td>' + ListaComisiones[i].per_Apellidos + '</td>' +
                     '<td>' + ListaComisiones[i].cin_DescripcionIngreso + '</td>' +
-                    '<td>' + ListaComisiones[i].cc_Monto + '</td>' +
+                    '<td>' + ListaComisiones[i].cc_PorcentajeComision + '</td>' +
+                      '<td>' + ListaComisiones[i].cc_TotalVenta + '</td>' +
                     '<td>' + FechaRegistro + '</td>' +
                      '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
                     '<td>' +
@@ -80,14 +81,11 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaRegistro = FechaFormato(data.cc_FechaRegistro);
                 $("#Editar #cc_Id").val(data.cc_Id);
-                $("#Editar #cc_Monto").val(data.cc_Monto);
-                $("#Editar #cc_FechaRegistro").val(FechaRegistro);
-                $("#Editar #cc_Pagado").val(data.cc_Pagado);
+                $("#Editar #cc_PorcentajeComision").val(data.cc_PorcentajeComision);
+                $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
-                var SelectedIdCatIngreso = data.cin_IdIngreso;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/EmpleadoComisiones/EditGetDDLEmpleado",
@@ -105,21 +103,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                         });
                     });
 
-                $.ajax({
-                    url: "/EmpleadoComisiones/EditGetDDLIngreso",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #cin_IdIngreso").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $.each(data, function (i, iter) {
-                            $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
                 $("#EditarEmpleadoComisiones").modal();
             }
             else {
@@ -136,7 +119,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisiones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEmpleadoComisiones").serializeArray();
+    var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
@@ -160,11 +143,22 @@ $("#btnUpdateComisiones").click(function () {
     });
 });
 
+
+// EVITAR POSTBACK DE FORMULARIOS
+$("#frmEmpleadoComisiones").submit(function (e) {
+    return false;
+});
+
+// EVITAR POSTBACK DE FORMULARIOS
+$("#frmEmpleadoComisionesEditar").submit(function (e) {
+    return false;
+});
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    var cc_Monto = $('#AgregarEmpleadoComisiones #Monto').val('');
     var cc_Pagado = $('#AgregarEmpleadoComisiones #cc_Pagado').prop('checked', false);
-
+    $("#PorcentajeComision").val('');
+    $("#TotalVenta").val('');
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLEmpleado",
@@ -217,12 +211,13 @@ $('#btnCreateRegistroComisiones').click(function () {
         url: "/EmpleadoComisiones/Create",
         method: "POST",
         data: data
-    }).done(function (data) {
+    })
+        .done(function (data) {
         //CERRAR EL MODAL DE AGREGAR
         $("#AgregarEmpleadoComisiones");
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
-
+            $("#AgregarEmpleadoComisiones").modal('show');
         }
         else {            
             cargarGridComisiones();
@@ -298,11 +293,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                         radioClass: 'iradio_square-green',
                     });
                 }
-
-
-
                 $("#Detallar #cc_Id").val(data[0].cc_Id);
-                $("#Detallar #cc_Monto").val(data[0].cc_Monto);
                 $("#Detallar #cc_FechaRegistro").val(FechaRegistro);
                 $("#Detallar #cc_UsuarioCrea").val(data[0].cc_UsuarioCrea);
                 $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
@@ -312,6 +303,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
                 $("#Detallar #cc_FechaCrea").val(FechaCrea);
                 $("#Detallar #cc_UsuarioModifica").val(data[0].cc_UsuarioModifica);
+                $("#Detallar #cc_PorcentajeComision").val(data[0].cc_PorcentajeComision);
+                $("#Detallar #cc_TotalVenta").val(data[0].cc_TotalVenta);
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cc_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
@@ -412,25 +405,36 @@ $("#btnInactivarRegistroComisiones").click(function () {
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModal").click(function () {
     $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion1").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
-    $("#Monto").val('');
+    $("#PorcentajeComision").val('');
+    $("#TotalVenta").val('');
 });
 
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconoCerrar").click(function () {
     $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion1").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
-    $("#Monto").val('');
+    $("#PorcentajeComision").val('');
+    $("#TotalVenta").val('');
 });
 
 
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnCreateRegistroComisiones").click(function () {
-    var Monto = $("#Monto").val();
+    var PorcentajeComision = $("#PorcentajeComision").val();
+    var TotalVenta = $("#TotalVenta").val();
     var Empleado = $("#emp_IdEmpleado").val();
 
-    if (Monto == "") {
+    if (PorcentajeComision == "") {
+        $("#Validation_descipcion1").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion1").css("display", "none");
+    }
+    if (TotalVenta == "") {
         $("#Validation_descipcion2").css("display", "");
     }
     else {
@@ -450,26 +454,35 @@ $("#btnCreateRegistroComisiones").click(function () {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModaledit").click(function () {
-
+    $("#Validation_descipcion1e").css("display", "none");
     $("#Validation_descipcion2e").css("display", "none");
-    $("#Monto").val('');
+    $("#cc_PorcentajeComision").val('');
+    $("#cc_TotalVenta").val('');
 });
 
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconoCerraredit").click(function () {
-
+    $("#Validation_descipcion1e").css("display", "none");
     $("#Validation_descipcion2e").css("display", "none");
-    $("#Monto").val('');
+    $("#cc_PorcentajeComision").val('');
+    $("#cc_TotalVenta").val('');
 });
 
 
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnUpdateComisiones").click(function () {
-    var MontoE = $("#cc_Monto").val();
+    var PorcentajeComisionE = $("#cc_PorcentajeComision").val();
+    var TotalVentaE = $("#cc_TotalVenta").val();
 
+    if (PorcentajeComisionE == "" || PorcentajeComisionE == null || PorcentajeComisionE == undefined) {
+        $("#Validation_descipcion1e").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion1e").css("display", "none");
+    }
 
-    if (MontoE == "" || MontoE == null || MontoE == undefined) {
+    if (TotalVentaE == "" || TotalVentaE == null || TotalVentaE == undefined) {
         $("#Validation_descipcion2e").css("display", "");
     }
     else {

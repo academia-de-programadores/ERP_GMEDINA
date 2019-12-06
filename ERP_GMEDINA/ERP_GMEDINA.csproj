@@ -184,6 +184,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
+    <Compile Include="Controllers\DecimoTercerMesController.cs" />
+    <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
+    <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -490,6 +494,45 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbUsuario.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDecimoTercerMes_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
@@ -841,7 +884,9 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
+    <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
+    <Content Include="Scripts\app\General\DecimoTercerMes.js" />
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
@@ -1395,6 +1440,27 @@
     <Content Include="Views\ReportesPlanilla\_InstitucionesFinancierasModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\DecimoCuartoMesIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_DecimoCuartoMesModalRPT.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
+    <Content Include="Views\DecimoTercerMes\FechaEspecifica.cshtml" />
+    <Content Include="Views\DecimoTercerMes\Index.cshtml" />
+    <Content Include="Views\DecimoTercerMes\_FechasDecimoTercer.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\Create.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Details.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Edit.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\Index.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1430,7 +1496,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ReportesPlanilla\AFPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\GeneralTotalesRPT.rdlc" />
