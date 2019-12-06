@@ -14,6 +14,13 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbCompetencias
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbCompetencias()
+        {
+            this.tbCompetenciasPersona = new HashSet<tbCompetenciasPersona>();
+            this.tbCompetenciasRequisicion = new HashSet<tbCompetenciasRequisicion>();
+        }
+    
         public int comp_Id { get; set; }
         public string comp_Descripcion { get; set; }
         public bool comp_Estado { get; set; }
@@ -25,5 +32,9 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
     }
 }
