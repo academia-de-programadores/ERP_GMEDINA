@@ -488,6 +488,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 else
                 {
+                    //TODO: Filtrar por el id de la planilla
                     #region Eliminaciones
                     //Eliminar los registros de las deducciones que desmarco el cliente
                     if (listadoDetallePlanillaDeduccionesDelete.Count != 0)

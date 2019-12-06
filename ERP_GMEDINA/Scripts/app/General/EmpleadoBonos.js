@@ -321,6 +321,9 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
                 var FechaCrea = FechaFormato(data.cb_FechaCrea);
                 var FechaModifica = FechaFormato(data.cb_FechaModifica);
+                console.log(data.cb_UsuarioModifica);
+                var usuarioModifica = data.cb_UsuarioModifica == null ? 'Sin modificaciones' : data.cb_UsuarioModifica;
+
                 if (data.cb_Pagado) {
                     $('#Detalles #cb_Pagado').prop('checked', true);
                 } else {
@@ -333,7 +336,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 $("#Detalles #cb_Pagado").val(data.cb_Pagado);
                 $("#Detalles #cb_UsuarioCrea").val(data.cb_UsuarioCrea);
                 $("#Detalles #cb_FechaCrea").val(FechaCrea);
-                $("#Detalles #cb_UsuarioModifica").val(data.cb_UsuarioModifica);
+                $("#Detalles #cb_UsuarioModifica").val(data.cb_UsuarioModifica == null ? '0' : data.cb_UsuarioModifica);
                 $("#Detalles #cb_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;

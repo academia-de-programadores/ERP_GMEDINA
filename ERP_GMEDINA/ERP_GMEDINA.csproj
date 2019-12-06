@@ -196,6 +196,7 @@
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
+    <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\cINFOPRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
+    <Compile Include="Models\cISR.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
@@ -647,6 +649,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbISR_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbISR_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbISR_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbISR_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Activar_Result.cs">
@@ -1103,6 +1117,7 @@
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
+    <Content Include="Scripts\app\General\ISR.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
@@ -1743,6 +1758,14 @@
     <Content Include="Views\TipoDeducciones\Index.cshtml" />
     <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
     <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
+    <Content Include="Views\ISR\Create.cshtml" />
+    <Content Include="Views\ISR\Delete.cshtml" />
+    <Content Include="Views\ISR\Details.cshtml" />
+    <Content Include="Views\ISR\Edit.cshtml" />
+    <Content Include="Views\ISR\Index.cshtml" />
+    <Content Include="Views\ISR\_CreateISR.cshtml" />
+    <Content Include="Views\ISR\_DetailsISR.cshtml" />
+    <Content Include="Views\ISR\_EditISR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -58,9 +58,9 @@ function cargarGridFormaPago() {
                     '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            FullBody();
             $('#tbodyFormaPago').html(template);
         });
-    FullBody();
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE

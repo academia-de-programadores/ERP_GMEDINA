@@ -51,10 +51,10 @@
                 </ul>
             </li>
 
-            <li class="@Html.IsSelected(controller: "Dashboards")">
+            <li class="@Html.IsSelected(controller: "ISR")">
                 <a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.dashboard">Configuracion</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
-                    <li class="@Html.IsSelected(action: "Dashboard_2")"><a href="@Url.Action("Dashboard_2", "Dashboards")">Configuracion</a></li>
+                    <li class="@Html.IsSelected(controller: "ISR")"><a href="@Url.Action("Index", "ISR")">ISR</a></li>
                 </ul>
             </li>
 

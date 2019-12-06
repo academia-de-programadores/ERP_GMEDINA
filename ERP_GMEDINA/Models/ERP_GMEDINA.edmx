@@ -16837,17 +16837,17 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
             <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbISR_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbISR_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbISR_Activar_Result)">
             <Parameter Name="isr_Id" Mode="In" Type="Int32" />
             <Parameter Name="isr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="isr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbISR_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbISR_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbISR_Inactivar_Result)">
             <Parameter Name="isr_Id" Mode="In" Type="Int32" />
             <Parameter Name="isr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="isr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbISR_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbISR_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbISR_Insert_Result)">
             <Parameter Name="isr_RangoInicial" Mode="In" Type="Decimal" />
             <Parameter Name="isr_RangoFinal" Mode="In" Type="Decimal" />
             <Parameter Name="isr_Porcentaje" Mode="In" Type="Decimal" />
@@ -16855,7 +16855,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="isr_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="isr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbISR_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbISR_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbISR_Update_Result)">
             <Parameter Name="isr_Id" Mode="In" Type="Int32" />
             <Parameter Name="isr_RangoInicial" Mode="In" Type="Decimal" />
             <Parameter Name="isr_RangoFinal" Mode="In" Type="Decimal" />
@@ -17737,6 +17737,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbTipoDeduccion_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbISR_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbISR_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbISR_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbISR_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -20354,10 +20366,34 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbISR_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbISR_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbISR_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbISR_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbISR_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbISR_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbPeriodos_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbPeriodos_Activar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbPeriodos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbPeriodos_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbPeriodos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbPeriodos_Insert" />

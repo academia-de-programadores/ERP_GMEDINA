@@ -482,6 +482,9 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css",
                       "~/Content/plugins/iCheck/custom.css"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ISR").Include(
+                "~/Scripts/app/General/ISR.js"));
+
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeIngresos").Include(
                 "~/Scripts/app/General/CatalogoDeIngresos.js"));
