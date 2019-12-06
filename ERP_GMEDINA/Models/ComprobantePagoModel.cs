@@ -28,18 +28,18 @@ namespace ERP_GMEDINA.Models
         public List<IngresosDeduccionesVoucher> Ingresos { get; set; }
 
         [Display(Name = "Colaborador")]
-        public decimal totalDeducciones { get; set; }
+        public decimal? totalDeducciones { get; set; }
 
         [Display(Name = "Colaborador")]
-        public decimal totalIngresos { get; set; }
+        public decimal? totalIngresos { get; set; }
 
         [Display(Name = "Colaborador")]
-        public decimal NetoPagar { get; set; }
+        public decimal? NetoPagar { get; set; }
     }
 
     public class IngresosDeduccionesVoucher
     {
-        public decimal monto { get; set; }
+        public decimal? monto { get; set; }
 
         public string concepto { get; set; }
     }

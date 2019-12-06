@@ -22,10 +22,10 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 
 // EVITAR POSTBACK DE FORMULARIOS 
 $("#frmEditTechosDeducciones").submit(function (e) {
-    return false;
+    e.preventDefault();
 });
 $("#frmTechosDeduccionesCreate").submit(function (e) {
-    return false;
+    e.preventDefault();
 });
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
@@ -43,14 +43,14 @@ function cargarGridTechosDeducciones() {
             var ListaTechosDeducciones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTechosDeducciones.length; i++) {
-                template += '<tr data-id = "' + ListaTechosDeducciones[i].tede_Id + '">' +
-                    '<td>' + ListaTechosDeducciones[i].tede_RangoInicial + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].tede_RangoFinal + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].tede_Porcentaje + '</td>' +
+                template += '<tr data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '">' +
+                    '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeColaboradores + '</td>' +
+                    '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeEmpresa + '</td>' +
+                    '<td>' + ListaTechosDeducciones[i].tddu_Techo + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tede_Id + '" type="button" class="btn btn-primary btn-xs" data-id = "' + ListaTechosDeducciones[i].tede_Id + '" id="btnEditarTechosDeducciones">Editar</button>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tede_Id + '" type="button" class="btn btn-default btn-xs" data-id = "' + ListaTechosDeducciones[i].tede_Id + '" id="btnDetalleTechosDeducciones">Detalle</button>' +
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -88,14 +88,16 @@ $('#btnCreateTechoDeducciones').click(function () {
     var ModelState = true;
     
     //$("#Editar #tede_Id").val() == "" ? ModelState = false : '';
-    $("#Crear #tede_RangoInicial").val() == "" ? ModelState = false : $("#Crear #tede_RangoInicial").val() == "0.00" ? ModelState = false : $("#Crear #tede_RangoInicial").val() == null ? ModelState = false : isNaN($("#Crear #tede_RangoInicial").val()) == true ? ModelState = false : '';
-    $("#Crear #tede_RangoFinal").val() == "" ? ModelState = false : $("#Crear #tede_RangoFinal").val() == "0.00" ? ModelState = false : $("#Crear #tede_RangoFinal").val() == null ? ModelState = false : isNaN($("#Crear #tede_RangoFinal").val()) == true ? ModelState = false : '';
-    $("#Crear #tede_Porcentaje").val() == "" ? ModelState = false : $("#Crear #tede_Porcentaje").val() == "0" ? ModelState = false : $("#Crear #tede_Porcentaje").val() == null ? ModelState = false : isNaN($("#Crear #tede_Porcentaje").val()) == true ? ModelState = false : '';
+    $("#Crear #tddu_Techo").val() == "" ? ModelState = false : $("#Crear #tddu_Techo").val() == "0.00" ? ModelState = false : $("#Crear #tddu_Techo").val() == null ? ModelState = false : isNaN($("#Crear #tddu_Techo").val()) == true ? ModelState = false : '';
+    $("#Crear #tddu_PorcentajeColaboradores").val() == "" ? ModelState = false : $("#Crear #tddu_PorcentajeColaboradores").val() == "0.00" ? ModelState = false : $("#Crear #tddu_PorcentajeColaboradores").val() == null ? ModelState = false : isNaN($("#Crear #tddu_PorcentajeColaboradores").val()) == true ? ModelState = false : '';
+    $("#Crear #tddu_PorcentajeEmpresa").val() == "" ? ModelState = false : $("#Crear #tddu_PorcentajeEmpresa").val() == "0" ? ModelState = false : $("#Crear #tddu_PorcentajeEmpresa").val() == null ? ModelState = false : isNaN($("#Crear #tddu_PorcentajeEmpresa").val()) == true ? ModelState = false : '';
     $("#Crear #cde_IdDeducciones").val() == "" ? ModelState = false : $("#Crear #cde_IdDeducciones").val() == "0" ? ModelState = false : $("#Crear #cde_IdDeducciones").val() == null ? ModelState = false : isNaN($("#Crear #cde_IdDeducciones").val()) == true ? ModelState = false : '';
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     if (ModelState) {
         var data = $("#frmTechosDeduccionesCreate").serializeArray();
+        console.log(data);
+        debugger;
         $.ajax({
             url: "/TechosDeducciones/Create",
             method: "POST",
@@ -143,13 +145,13 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                $("#Editar #tede_Id").val(data.tede_Id);
-                $("#Editar #tede_RangoInicial").val(data.tede_RangoInicial);
-                $("#Editar #tede_RangoFinal").val(data.tede_RangoFinal);
-                $("#Editar #tede_Porcentaje").val(data.tede_Porcentaje);
+                $("#Editar #tddu_IdTechosDeducciones").val(data.tddu_IdTechosDeducciones);
+                $("#Editar #tddu_Techo").val(data.tddu_Techo);
+                $("#Editar #tddu_PorcentajeColaboradores").val(data.tddu_PorcentajeColaboradores);
+                $("#Editar #tddu_PorcentajeEmpresa").val(data.tddu_PorcentajeEmpresa);
                 $("#Editar #cde_IdDeduccion").val(data.cde_IdDeducciones);
                 $(".field-validation-error").css('display', 'none');
-                $("#EditarTechosDeducciones").modal();
+                
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.cde_IdDeducciones;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -169,6 +171,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                             $("#Editar #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
+                $("#EditarTechosDeducciones").modal();
             }
             else {
                 //Mensaje de error si no hay data
@@ -184,10 +187,10 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
 $("#btnEditarTecho").click(function () {
     
     var ModelState = true;
-    $("#Editar #tede_Id").val() == "" ? ModelState = false : $("#Editar #tede_Id").val() == "0" ? ModelState = false : $("#Editar #tede_Id").val() == null ? ModelState= false : '';
-    $("#Editar #tede_RangoInicial").val() == "" ? ModelState = false : $("#Editar #tede_RangoInicial").val() == "0.00" ? ModelState = false : $("#Editar #tede_RangoInicial").val() == null ? ModelState = false : '';
-    $("#Editar #tede_RangoFinal").val() == "" ? ModelState = false : $("#Editar #tede_RangoFinal").val() == "0.00" ? ModelState = false : $("#Editar #tede_RangoFinal").val() == null ? ModelState = false : '';
-    $("#Editar #tede_Porcentaje").val() == "" ? ModelState = false : $("#Editar #tede_Porcentaje").val() == "0" ? ModelState = false : $("#Editar #tede_Porcentaje").val() == null ? ModelState = false : '';
+    $("#Editar #tddu_IdTechosDeducciones").val() == "" ? ModelState = false : $("#Editar #tddu_IdTechosDeducciones").val() == "0" ? ModelState = false : $("#Editar #tddu_IdTechosDeducciones").val() == null ? ModelState = false : '';
+    $("#Editar #tddu_Techo").val() == "" ? ModelState = false : $("#Editar #tddu_Techo").val() == "0.00" ? ModelState = false : $("#Editar #tddu_Techo").val() == null ? ModelState = false : '';
+    $("#Editar #tddu_PorcentajeColaboradores").val() == "" ? ModelState = false : $("#Editar #tddu_PorcentajeColaboradores").val() == "0.00" ? ModelState = false : $("#Editar #tddu_PorcentajeColaboradores").val() == null ? ModelState = false : '';
+    $("#Editar #tddu_PorcentajeEmpresa").val() == "" ? ModelState = false : $("#Editar #tddu_PorcentajeEmpresa").val() == "0" ? ModelState = false : $("#Editar #tddu_PorcentajeEmpresa").val() == null ? ModelState = false : '';
     $("#Editar #cde_IdDeducciones").val() == "" ? ModelState = false : $("#Editar #cde_IdDeducciones").val() == "0" ? ModelState = false : $("#Editar #cde_IdDeducciones").val() == null ? ModelState = false : '';
 
     if (ModelState) {
@@ -285,19 +288,20 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {                
-                var FechaCrea = FechaFormato(data[0].tede_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].tede_FechaModifica);
-                $("#Detalles #tede_Id").val(data[0].tede_Id);
-                $("#Detalles #tede_RangoInicial").val(data[0].tede_RangoInicial);
-                $("#Detalles #tede_RangoFinal").val(data[0].tede_RangoFinal);
-                $("#Detalles #tede_Porcentaje").val(data[0].tede_Porcentaje);
+                var FechaCrea = FechaFormato(data[0].tddu_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].tddu_FechaModifica);
+                $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
                 $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
+
+                $("#Detalles #tddu_PorcentajeColaboradores").val(data[0].tddu_PorcentajeColaboradores);
+                $("#Detalles #tddu_PorcentajeEmpresa").val(data[0].tddu_PorcentajeEmpresa);
+                $("#Detalles #tddu_Techo").val(data[0].tddu_Techo);                
                 $("#Detalles #tede_UsuarioCrea").val(data[0].tede_UsuarioCrea);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #tede_FechaCrea").val(FechaCrea);
-                $("#Detalles #tede_UsuarioModifica").val(data.tede_UsuarioModifica);
+                $("#Detalles #tddu_FechaCrea").val(FechaCrea);
+                $("#Detalles #tddu_UsuarioModifica").val(data.tddu_UsuarioModifica);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #tede_FechaModifica").val(FechaModifica);
+                $("#Detalles #tddu_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].cde_IdDeducciones;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL

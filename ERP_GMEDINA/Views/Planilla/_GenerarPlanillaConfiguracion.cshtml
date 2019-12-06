@@ -1,0 +1,8 @@
+﻿@model ERP_GMEDINA.Models.tbCatalogoDeDeducciones
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmPlanillaConfiguracion" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @*Html.HiddenFor(model => model.cde_IdDeducciones)*@
+    </div>
+}

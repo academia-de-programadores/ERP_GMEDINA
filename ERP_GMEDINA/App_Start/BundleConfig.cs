@@ -468,10 +468,18 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
-
-            //bundles APP/GENERAL
+//bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
-                "~/Scripts/app/General/Planilla.js"));
+                "~/Scripts/app/General/Planilla.js",
+                "~/Scripts/app/General/excelexportjs.js",
+                "~/Scripts/plugins/switchery/switchery.js",
+                "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
+                "~/Scripts/app/FileSaver.min.js"));
+            
+            //planilla
+            bundles.Add(new StyleBundle("~/Panilla/css").Include(
+                      "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css",
+                      "~/Content/plugins/iCheck/custom.css"));
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeIngresos").Include(
@@ -480,9 +488,12 @@ namespace ERP_GMEDINA
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TechosDeducciones").Include(
                 "~/Scripts/app/General/TechosDeducciones.js"));
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/AcumuladosISR").Include(
+                "~/Scripts/app/General/AcumuladosISR.js"));
 
             // SELVIN
-            
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
                 "~/Scripts/app/General/CatalogoPlanillas.js"));
 
@@ -492,6 +503,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new StyleBundle("~/Content/app/General").Include(
                  "~/Content/app/General/catalogoPlanillas.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Liquidacion").Include(
+                "~/Scripts/app/General/Liquidacion.js"));
 
 
             //bundles ScripBase/Validate DataAnnotations

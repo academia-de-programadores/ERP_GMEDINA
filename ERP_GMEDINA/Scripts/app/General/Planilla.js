@@ -12,7 +12,7 @@ function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
         type: type,
-        data: { params },
+        data: params,
         success: function (data) {
             callback(data);
         }
@@ -20,6 +20,7 @@ function _ajax(params, uri, type, callback) {
 }
 //variable para reconocer la planilla actual de la tabla
 var planillaId = '';
+var nombrePlanilla = '';
 
 
 //FUNCION: CARGAR DATA DE UNA PLANILLA ESPECIFICA Y REFRESCAR LA TABLA DEL INDEX ================================
@@ -29,12 +30,15 @@ $('.cargarPlanilla').click(function () {
     var ID = $(this).data('id');
     console.log(ID);
     _ajax(null,
-        '/Planilla/GetPlanilla/'+ID,
+        '/Planilla/GetPlanilla/' + ID,
         'GET',
         (data) => {
             console.log(data);
+
             if (data.length == 0) {
                 //Validar si se genera un error al cargar la data de la planilla especifica
+                $('#btnPlanilla').css('display', '');
+                $('#Cargando').css('display', 'none');
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo cargar la información, contacte al administrador',
@@ -49,12 +53,10 @@ $('.cargarPlanilla').click(function () {
                     '<td>' + PlanillaSeleccionada[i].per_Identidad + '</td>' +
                     '<td>' + PlanillaSeleccionada[i].salarioBase + '</td>' +
                     '<td>' + PlanillaSeleccionada[i].tmon_Descripcion + '</td>' +
-                    '<td>' +
-                    '<button type="button" data-id = "' + PlanillaSeleccionada[i].emp_Id + '" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-                    '</td>' +
                     '</tr>';
             }
-            ID=='' ? planillaId = null : planillaId =  data[0].cpla_IdPlanilla;
+            ID == '' ? planillaId = null : planillaId = data[0].cpla_IdPlanilla;
+            nombrePlanilla = data[0].cpla_DescripcionPlanilla;
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyPreviewPlanilla').html(template);
             ID == '' ? $('#nombrePlanilla').html('') : $('#nombrePlanilla').html(data[0].cpla_DescripcionPlanilla);
@@ -65,278 +67,200 @@ $('.cargarPlanilla').click(function () {
 
 
 
-//GENERAR PLANILLA =======================================================================================
+//CONFIRMAR GENERAR PLANILLA =======================================================================================
 $('#btnPlanilla').click(function () {
-    $('#confirmarGenerarPlanilla').modal();
+    $('#fechaInicio').val('');
+    $('#fechaFin').val('');
+    $('#ConfigurarGenerarPlanilla').modal();
 });
+
+//GENERAR PLANILLA
 $('#btnGenerarPlanilla').click(function () {
-    $('#btnPlanilla').css('display', 'none');
-    $('#Cargando').css('display', '');
-    $('#confirmarGenerarPlanilla').hide();
+
     var ID = planillaId;
-    console.log('ID PLANILLA A GENERAR:  ' + planillaId);
-    _ajax(null,
-        '/Planilla/GenerarPlanilla/' + ID,
-        'GET',
+    var ModelState = true;
+    var GenerarExcel = false, GenerarPDF = false, GenerarCSV = false, EnviarEmailBool = false;
+    EnviarEmailBool = $('#EnviarEmail').is(":checked");
+    GenerarExcel = $('#Excel').is(":checked");
+    GenerarPDF = $('#PDF').is(":checked");
+    GenerarCSV = $('#CSV').is(":checked");
+
+    var fechaInicio = $('#fechaInicio').val();
+    var fechaFin = $('#fechaFin').val();
+
+    fechaInicio == '' ? ModelState = false : fechaInicio == " " ? ModelState = false : fechaInicio == null ? ModelState = false : isNaN(fechaInicio) == false ? ModelState = false : fechaInicio == undefined ? ModelState = false : '';
+    fechaFin == '' ? ModelState = false : fechaFin == " " ? ModelState = false : fechaFin == null ? ModelState = false : isNaN(fechaFin) == false ? ModelState = false : fechaFin == undefined ? ModelState = false : '';
+
+    debugger;
+    if (ModelState) {
+        $('#ConfigurarGenerarPlanilla').modal('hide');
+        $('#btnPlanilla').css('display', 'none');
+        $('#Cargando').css('display', '');
+        $('#confirmarGenerarPlanilla').hide();
+        _ajax({
+            ID: planillaId,
+            enviarEmail: EnviarEmailBool,
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin
+        },
+        '/Planilla/GenerarPlanilla/',
+        'POST',
         (data) => {
             $('#btnPlanilla').css('display', '');
             $('#Cargando').css('display', 'none');
-            console.log(data);
-            if (data.Tipo=='success') {
-                iziToast.success({
-                    title: data.Encabezado,
-                    message: data.Response,
-                });
-            }
-            else if (data.Tipo == 'error') {
-                iziToast.error({
-                    title: data.Encabezado,
-                    message: data.Response,
-                });
-            }
-            else {
-                iziToast.warning({
-                    title: data.Encabezado,
-                    message: data.Response,
+            var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
+
+            //generar csv
+            GenerarCSV == true ? JSONToCSVConvertor(data, nombresArchivos, true) : '';
+
+            //generar excel
+            if (GenerarExcel) {
+                $("#dvjson").excelexportjs({
+                    containerid: "dvjson"
+                       , datatype: 'json'
+                       , dataset: data
+                       , columns: getColumns(data)
                 });
             }
 
-            
+            //if (data.Tipo == 'success') {
+            //    iziToast.success({
+            //        title: data.Encabezado,
+            //        message: data.Response,
+            //    });
+            //}
+            //else if (data.Tipo == 'error') {
+            //    iziToast.error({
+            //        title: data.Encabezado,
+            //        message: data.Response,
+            //    });
+            //}
+            //else {
+            //    iziToast.warning({
+            //        title: data.Encabezado,
+            //        message: data.Response,
+            //    });
+            //}
+
+
             $('.modal-backdrop').css('display', 'none');
             $('.fade').css('display', 'none');
             $('.in').css('display', 'none');
         }
     );
+    }
+    else {
+        iziToast.error({
+            title: 'Error',
+            message: 'Seleccione un rango de fechas válido',
+        });
+    }
 });
 
 
 
 // =====================================================================================================
 
-//FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                console.log('Hla')
-                $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
-                $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
-                $("#Editar #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
-                $("#Editar #cde_PorcentajeEmpresa").val(data.cde_PorcentajeEmpresa);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/CatalogoDeDeducciones/EditGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Editar #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-                $("#EditarCatalogoDeducciones").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
-});
-
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnUpdateDeduccion").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmCatalogoDeducciones").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
-            });
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarCatalogoDeducciones").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
-            });
-        }
+$(document).ready(function () {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
     });
-});
+    //$('.dual_select').bootstrapDualListbox({
+    //    selectorMinimalHeight: 160
+    //});
+    $('#datepicker .input-group.date')
+		.datepicker({
+		    todayBtn: 'linked',
+		    keyboardNavigation: false,
+		    forceParse: false,
+		    calendarWeeks: true,
+		    autoclose: true,
+		    format: 'yyyy/mm/dd'
+		})
 
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/CatalogoDeDeducciones/EditGetDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarCatalogoDeducciones").modal();
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                var FechaCrea = FechaFormato(data.cde_FechaCrea);
-                var FechaModifica = FechaFormato(data.cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data.cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
-                $("#Detalles #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").val(data.cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").val(data.cde_UsuarioCrea);
-                $("#Detalles #cde_FechaCrea").val(FechaCrea);
-                $("#Detalles #cde_UsuarioModifica").val(data.cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").val(FechaModifica);
-                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $.ajax({
-                    url: "/CatalogoDeDeducciones/EditGetDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-                $("#DetallesCatalogoDeducciones").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
 });
 
 
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccion').click(function () {
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarCatalogoDeducciones").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
+function s2ab(s) {
+    var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+    var view = new Uint8Array(buf);  //create uint8array as viewer
+    for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+    return buf;
+}
+
+// exportar a csv
+function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+
+    var CSV = '';
+    //Set Report title in first row or line
+
+    CSV += ReportTitle + '\r\n\n';
+
+    //This condition will generate the Label/Header
+    if (ShowLabel) {
+        var row = "";
+
+        //This loop will extract the label from 1st index of on array
+        for (var index in arrData[0]) {
+
+            //Now convert each value to string and comma-seprated
+            row += index + ',';
         }
-        else {
-            cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
+
+        row = row.slice(0, -1);
+
+        //append Label row with line break
+        CSV += row + '\r\n';
+    }
+
+    //1st loop is to extract each row
+    for (var i = 0; i < arrData.length; i++) {
+        var row = "";
+
+        //2nd loop will extract each column and convert it in string comma-seprated
+        for (var index in arrData[i]) {
+            row += '"' + arrData[i][index] + '",';
         }
-    });
-});
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoDeducciones").modal('hide');
-});
+        row.slice(0, row.length - 1);
 
-$(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal();
-});
+        //add a line break after each row
+        CSV += row + '\r\n';
+    }
 
-//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroDeduccion").click(function () {
+    if (CSV == '') {
+        alert("Invalid data");
+        return;
+    }
 
-    var data = $("#frmCatalogoDeduccionesInactivar").serializeArray();
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Inactivar",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#InactivarCatalogoDeducciones").modal('hide');
-            $("#EditarCatalogoDeducciones").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
-            });
-        }
-    });
-});
+    //Generate a file name
+    var fileName = "Planilla";
+    //this will remove the blank-spaces from the title and replace it with an underscore
+    fileName += ReportTitle.replace(/ /g, "_");
+
+    //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+    // Now the little tricky part.
+    // you can use either>> window.open(uri);
+    // but this will not work in some browsers
+    // or you will not get the correct file extension    
+
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");
+    link.href = uri;
+
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".csv";
+
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 

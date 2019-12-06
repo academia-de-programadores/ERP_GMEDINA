@@ -17,5 +17,6 @@ namespace ERP_GMEDINA.Models
         public int idPlanilla { get; set; }
         public string descripcionPlanilla { get; set; }
         public int frecuenciaDias { get; set; }
+        public string recibeComision { get; set; }
     }
 }

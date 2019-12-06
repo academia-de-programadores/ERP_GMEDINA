@@ -184,11 +184,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
+    <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
+    <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
+    <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -199,6 +204,8 @@
     </Compile>
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Helpers\Liquidacion.cs" />
+    <Compile Include="Models\cAcumuladosISR.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
@@ -235,6 +242,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\LiquidacionViewModel.cs" />
+    <Compile Include="Models\ReportePlanillaViewModel.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -526,6 +535,18 @@
     <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -536,6 +557,27 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result.cs">
@@ -550,6 +592,18 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -557,6 +611,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Select_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
@@ -947,6 +1013,8 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\FileSaver.min.js" />
+    <Content Include="Scripts\app\General\AcumuladosISR.js" />
     <Content Include="Scripts\app\General\AFPRPT.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
@@ -958,10 +1026,12 @@
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
+    <Content Include="Scripts\app\General\excelexportjs.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
+    <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -1536,6 +1606,46 @@
     <Content Include="Views\ReportesPlanilla\_RAPModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\AFPIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\RAPIndexRPT.cshtml" />
+    <Content Include="Views\AcumuladosISR\Create.cshtml" />
+    <Content Include="Views\AcumuladosISR\Delete.cshtml" />
+    <Content Include="Views\AcumuladosISR\Details.cshtml" />
+    <Content Include="Views\AcumuladosISR\Edit.cshtml" />
+    <Content Include="Views\AcumuladosISR\Index.cshtml" />
+    <Content Include="Views\AcumuladosISR\_CreateTechosDeducciones.cshtml" />
+    <Content Include="Views\AcumuladosISR\_DetailsTechosDeducciones.cshtml" />
+    <Content Include="Views\AcumuladosISR\_EditTechosDeducciones.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Create.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Delete.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Details.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Edit.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_DetailCatalogoDeIngreso.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_EditCatalogoDeIngresos.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Create.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleDeduccion.cshtml" />
+    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleIngreso.cshtml" />
+    <Content Include="Views\Planilla\Create.cshtml" />
+    <Content Include="Views\Planilla\Delete.cshtml" />
+    <Content Include="Views\Planilla\Details.cshtml" />
+    <Content Include="Views\Planilla\Edit.cshtml" />
+    <Content Include="Views\Planilla\Index.cshtml" />
+    <Content Include="Views\Planilla\_CatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_CreateCatalogoDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_EditCatalogoDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_GenerarPlanillaConfiguracion.cshtml" />
+    <Content Include="Views\TechosDeducciones\Create.cshtml" />
+    <Content Include="Views\TechosDeducciones\Delete.cshtml" />
+    <Content Include="Views\TechosDeducciones\Details.cshtml" />
+    <Content Include="Views\TechosDeducciones\Edit.cshtml" />
+    <Content Include="Views\TechosDeducciones\Index.cshtml" />
+    <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
+    <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
+    <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

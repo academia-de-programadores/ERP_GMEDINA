@@ -210,6 +210,7 @@ $("#btnInactivarIngresos").click(function () {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
+    $("#Crear #cin_DescripcionIngreso").val('');
     $("#AgregarCatalogoIngresos").modal();
 });
 

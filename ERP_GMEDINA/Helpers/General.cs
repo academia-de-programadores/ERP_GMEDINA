@@ -39,12 +39,12 @@ namespace ERP_GMEDINA.Helpers
                     if (totalIngresos > i)
                     {
                         conceptoIngreso = oIngresosColaborador[i].concepto != null ? Convert.ToString(oIngresosColaborador[i].concepto) : "";
-                        montoIngreso = oIngresosColaborador[i].monto != 0 ? $"L. {Convert.ToString(oIngresosColaborador[i].monto)}": "";
+                        montoIngreso = oIngresosColaborador[i].monto == 0 ? "0" : $"L. {Convert.ToString(oIngresosColaborador[i].monto)}";
                     }
                     if (totalDeducciones > i)
                     {
                         conceptoDeduccion = oDeduccionesColaborador[i].concepto != null ? Convert.ToString(oDeduccionesColaborador[i].concepto) : "";
-                        montoDeduccion = oDeduccionesColaborador[i].monto != 0 ? $"L. {Convert.ToString(oDeduccionesColaborador[i].monto)}" : "";
+                        montoDeduccion = oDeduccionesColaborador[i].monto == 0 ? "0" : $"L. {Convert.ToString(oDeduccionesColaborador[i].monto)}";
                     }
 
                     trDeduccionesIngresosTemplate.Append(
@@ -54,6 +54,10 @@ namespace ERP_GMEDINA.Helpers
                             "<td class='col3'>" + conceptoDeduccion + "</td>" +
                             "<td class='col4'>" + montoDeduccion + "</td>" +
                         "</tr>");
+                    conceptoIngreso = string.Empty;
+                    montoIngreso = string.Empty;
+                    conceptoDeduccion = string.Empty;
+                    montoDeduccion = string.Empty;
                 }
                  
                 using (StreamReader reader = new StreamReader(System.Web.Hosting.HostingEnvironment.MapPath("~/Content/app/Voucher/voucher.html")))
