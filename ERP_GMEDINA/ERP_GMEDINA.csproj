@@ -212,6 +212,7 @@
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cFormaPago.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
+    <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
@@ -1502,6 +1503,7 @@
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\GeneralTotalesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\IHSSRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />

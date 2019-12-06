@@ -7,7 +7,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.hipa_FechaPago, htmlAttributes: new { @class = "font-noraml" }) <br />
             <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dcm_FechaPago", @id = "dcm_FechaPago" } })
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaPago", @id = "hipa_FechaPago" } })
             </div>
             @Html.ValidationMessageFor(model => model.hipa_FechaPago, "", new { @class = "text-danger", @id = "Validation_descipcion" })
         </div>
