@@ -197,6 +197,7 @@
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
@@ -950,6 +951,7 @@
     <Content Include="Content\img\p6.jpg" />
     <Content Include="Content\img\p7.jpg" />
     <Content Include="Content\img\p8.jpg" />
+    <Content Include="Content\img\pago.jpg" />
     <Content Include="Content\img\perspective.png" />
     <Content Include="Content\img\profile.jpg" />
     <Content Include="Content\img\profile_big.jpg" />
