@@ -10856,25 +10856,25 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Razoninactivo" Mode="In" Type="String" />
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result)">
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_descripcion" Mode="In" Type="String" />
             <Parameter Name="area_Descripcion" Mode="In" Type="String" />
             <Parameter Name="area_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechacrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
@@ -10937,35 +10937,35 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Delete_Result)">
             <Parameter Name="habi_id" Mode="In" Type="Int32" />
             <Parameter Name="habi_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Insert_Result)">
             <Parameter Name="habi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Restore_Result)">
             <Parameter Name="habi_id" Mode="In" Type="Int32" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Update_Result)">
             <Parameter Name="habi_Id" Mode="In" Type="Int32" />
             <Parameter Name="habi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Delete_Result)">
             <Parameter Name="hamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_Fecha" Mode="In" Type="DateTime" />
@@ -10973,7 +10973,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="hamo_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Restore_Result)">
             <Parameter Name="hamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaModifica" Mode="In" Type="DateTime" />
@@ -11144,23 +11144,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Delete" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result)">
             <Parameter Name="tsal_id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Insert" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result)">
             <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Restore" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Restore_Result)">
             <Parameter Name="tsal_id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result)">
             <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
@@ -17708,6 +17708,51 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Type="Boolean" Name="tmon_Estado" Nullable="false" />
           <Property Type="String" Name="tmon_RazonInactivo" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Restore_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -20434,10 +20479,34 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Restore" />
@@ -20455,13 +20524,55 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Restore" />
@@ -20497,10 +20608,34 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

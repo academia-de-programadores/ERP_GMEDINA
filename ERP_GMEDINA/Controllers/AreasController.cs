@@ -135,52 +135,8 @@ namespace ERP_GMEDINA.Controllers
             //posteriormente es destruida.
             string result = "";
             //en esta area ingresamos el registro con el procedimiento almacenado
-            try
-            {
-                if (tbAreas.suc_Id == 0 || tbAreas.tbCargos.car_Descripcion == "" || tbAreas.area_Descripcion == "")
-                {
-                    return Json("-2", JsonRequestBehavior.AllowGet);
-                }
-                foreach (var item in tbDepartamentos)
-                {
-                    if (item.depto_Descripcion == "" || item.tbCargos.car_Descripcion=="")
-                    {
-                        return Json("-2", JsonRequestBehavior.AllowGet);
-                    }
-                }   
-                var Usuario = (tbUsuario)Session["Usuario"];
-                using (var scope = new TransactionScope())
-                {
-                    using (db = new ERP_GMEDINAEntities())
-                    {
-                        var list = db.UDP_RRHH_tbAreas_Insert(
-                                                                tbAreas.suc_Id,
-                                                                tbAreas.tbCargos.car_Descripcion,
-                                                                tbAreas.area_Descripcion,
-                                                                Usuario.usu_Id,
-                                                                DateTime.Now);
-                        foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
-                        {
-                            tbAreas.area_Id = int.Parse(item.MensajeError.ToString());
-                        }
-                        if (tbAreas.area_Id==-2)
-                        {
-                            return Json("-2", JsonRequestBehavior.AllowGet);
-                        }
-                        foreach (var item in tbDepartamentos)
-                        {
-                        
-                        }
-
-                    }
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                result = "-2";
-            }
+           
+          
         return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Edit/5

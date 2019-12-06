@@ -11,8 +11,8 @@ namespace ERP_GMEDINA.Models
 {
     using System;
     
-    public partial class UDP_Plani_tbCatalogoDeIngresos_Update_Result
+    public partial class UDP_RRHH_tbTipoSalidas_Restore_Result
     {
-        public string MensajeError { get; set; }
+        public Nullable<int> MensajeError { get; set; }
     }
 }

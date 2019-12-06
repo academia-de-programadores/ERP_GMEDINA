@@ -159,17 +159,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreasController.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
+    <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
+    <Compile Include="Controllers\HistorialCargosController.cs" />
+    <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
+    <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -181,6 +186,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cAreas.cs" />
+    <Compile Include="Models\cCargos.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCompetencias.cs" />
     <Compile Include="Models\cDepartamentos.cs" />
@@ -193,6 +199,7 @@
     <Compile Include="Models\cNacionalidades.cs" />
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cRazonSalidas.cs" />
+    <Compile Include="Models\cRequerimientosEspeciales.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
@@ -503,6 +510,18 @@
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbAreas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbAreas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbAreas_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbAreas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbCargos_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -549,6 +568,27 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbFasesReclutamiento_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHabilidades_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHabilidades_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHabilidades_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHabilidades_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAmonestaciones_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAmonestaciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAmonestaciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbIdiomas_Delete_Result.cs">
@@ -639,6 +679,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoMoneda_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTitulos_Delete_Result.cs">
@@ -1651,6 +1703,18 @@
     <Content Include="Views\TipoSalidas\_Delete.cshtml" />
     <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
     <Content Include="Views\TipoSalidas\_Edit.cshtml" />
+    <Content Include="Views\HistorialAmonestaciones\Create.cshtml" />
+    <Content Include="Views\HistorialAmonestaciones\Delete.cshtml" />
+    <Content Include="Views\HistorialAmonestaciones\Details.cshtml" />
+    <Content Include="Views\HistorialAmonestaciones\Edit.cshtml" />
+    <Content Include="Views\HistorialAmonestaciones\Index.cshtml" />
+    <Content Include="Views\HistorialCargos\Index.cshtml" />
+    <Content Include="Views\HistorialHorasTrabajadas\Index.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\Index.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Create.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Delete.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Detalles.cshtml" />
+    <Content Include="Views\RequerimientosEspeciales\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
