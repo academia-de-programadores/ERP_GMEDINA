@@ -1,15 +1,16 @@
 ﻿function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
-        div = div +
+        div = 
+            div +
             '<div class="col-md-3">' +
                 '<div class="panel panel-default">' +
                 '<div class="panel-body">' +
-                    '<h5>' + index.per_NombreCompleto + '</h5>'
+                    '<h5>' + index.hamo_Observacion + '</h5>'
                     //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.hamo_AmonestacionAnterior + '<br>' +
+                    + index.tamo_Descripcion + '<br>' +
                     //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.tamo_Descripcion + '</div>' +
+                    index.hamo_Fecha + '</div>' +
                 '</div>' +
             '</div>'
     });
