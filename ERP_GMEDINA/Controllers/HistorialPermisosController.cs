@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialPermisos
         public ActionResult Index()
         {
-            var tbHistorialPermisos = db.tbHistorialPermisos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoPermisos).Include(t => t.tbEmpleados);
+            var tbHistorialPermisos = db.tbHistorialPermisos.Include(t => t.tbEmpleados).Include(t => t.tbTipoPermisos).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbHistorialPermisos.ToList());
         }
 
@@ -39,10 +39,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialPermisos/Create
         public ActionResult Create()
         {
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion");
             ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
             return View();
         }
 
@@ -60,10 +60,10 @@ namespace ERP_GMEDINA.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
             ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
             ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
-            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
             return View(tbHistorialPermisos);
         }
 
@@ -79,10 +79,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
             ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
             ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
-            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
             return View(tbHistorialPermisos);
         }
 
@@ -99,10 +99,10 @@ namespace ERP_GMEDINA.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
             ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
             ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
-            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
             return View(tbHistorialPermisos);
         }
 
