@@ -1,18 +1,18 @@
 ﻿//Funcion generica para reutilizar AJAX
 function _ajax(params, uri, type, callback, enviar) {
-	$.ajax({
-		url: uri,
-		type: type,
-		dataType: 'json',
-		contentType: 'application/json; charset=utf-8',
-		data: JSON.stringify(params),
-		beforeSend: function() {
-			enviar();
-		},
-		success: function(data) {
-			callback(data);
-		}
-	});
+    $.ajax({
+        url: uri,
+        type: type,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(params),
+        beforeSend: function() {
+            enviar();
+        },
+        success: function(data) {
+            callback(data);
+        }
+    });
 }
 
 //#region Variables Globales
@@ -49,7 +49,7 @@ const inputFechaFin = $('#fechaFin'),
 
 //Mostrar el spinner
 function spinner() {
-	return `<div class="sk-spinner sk-spinner-wave">
+    return `<div class="sk-spinner sk-spinner-wave">
                 <div class="sk-rect1"></div>
                 <div class="sk-rect2"></div>
                 <div class="sk-rect3"></div>
@@ -59,74 +59,74 @@ function spinner() {
 }
 
 $(ddlEmpleados).change(() => {
-	const ddlEmpleadosLleno = ddlEmpleados.val() != '';
-	if (ddlEmpleadosLleno) validacionSelectEmpleado.hide();
+    const ddlEmpleadosLleno = ddlEmpleados.val() != '';
+    if (ddlEmpleadosLleno) validacionSelectEmpleado.hide();
 
-	const fechaFinVal = inputFechaFin.val();
-	const ddlEmpleadosVal = ddlEmpleados.val();
-	if (ddlEmpleadosLleno && inputFechaFinLlena())
-		if (validarCampos()) {
-			obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal);
-		}
+    const fechaFinVal = inputFechaFin.val();
+    const ddlEmpleadosVal = ddlEmpleados.val();
+    if (ddlEmpleadosLleno && inputFechaFinLlena())
+        if (validarCampos()) {
+            obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal);
+        }
 });
 
 $(inputFechaFin).change(() => {
-	if (inputFechaFinLlena()) validacionSelectFechaFin.hide();
+    if (inputFechaFinLlena()) validacionSelectFechaFin.hide();
 });
 
 $(document).ready(function() {
-	validacionSelectEmpleado.val('');
-	$('#datepicker .input-group.date')
+    validacionSelectEmpleado.val('');
+    $('#datepicker .input-group.date')
 		.datepicker({
-			todayBtn: 'linked',
-			keyboardNavigation: false,
-			forceParse: false,
-			calendarWeeks: true,
-			autoclose: true,
-			format: 'yyyy/mm/dd'
+		    todayBtn: 'linked',
+		    keyboardNavigation: false,
+		    forceParse: false,
+		    calendarWeeks: true,
+		    autoclose: true,
+		    format: 'yyyy/mm/dd'
 		})
 		.on('changeDate', function(e) {
-			if (validarCampos()) {
-				const fechaFinVal = inputFechaFin.val();
-				const ddlEmpleadosVal = ddlEmpleados.val();
-				obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal);
-			}
+		    if (validarCampos()) {
+		        const fechaFinVal = inputFechaFin.val();
+		        const ddlEmpleadosVal = ddlEmpleados.val();
+		        obtenerDatosEmpleados(ddlEmpleadosVal, fechaFinVal);
+		    }
 		});
 
-	//Llengar DDL Areas con Empleados
-	_ajax(
+    //Llengar DDL Areas con Empleados
+    _ajax(
 		null,
 		'Liquidacion/GetEmpleadosAreas',
 		'GET',
 		(data) => {
-			$('#cmbxEmpleados').select2({
-				placeholder: 'Seleccione un empleado',
-				allowClear: true,
-				language: {
-					noResults: function() {
-						return 'Resultados no encontrados.';
-					},
-					searching: function() {
-						return 'Buscando...';
-					}
-				},
-				data: data.results
-			});
+		    $('#cmbxEmpleados').select2({
+		        placeholder: 'Seleccione un empleado',
+		        allowClear: true,
+		        language: {
+		            noResults: function() {
+		                return 'Resultados no encontrados.';
+		            },
+		            searching: function() {
+		                return 'Buscando...';
+		            }
+		        },
+		        data: data.results
+		    });
 		},
 		() => {}
 	);
 });
 function obtenerDatosEmpleados(idEmpleado, fechaFin) {
-	_ajax(
+    _ajax(
 		{
-			idEmpleado: idEmpleado,
-			fechaFin: fechaFin
+		    idEmpleado: idEmpleado,
+		    fechaFin: fechaFin
 		},
 		'/Liquidacion/GetInfoEmpleado',
 		'POST',
 		(data) => {
-			console.log(data);
-			mostrarDatosColaborador(
+		    console.log(data);
+		    mostrarDatosColaborador(
 				data.consulta[0].nombreEmpleado,
 				data.consulta[0].apellidoEmpleado,
 				data.consulta[0].numeroIdentidad,
@@ -146,44 +146,44 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin) {
 				data.salarios.salarioPromedioDiario
 			);
 
-			cargarSpinnerDatosColaborador.html('');
-			cargarSpinnerDatosColaborador.hide();
-			divDatosColaborador.show();
-			cargarSpinnerSalarios.html('');
-			cargarSpinnerSalarios.hide();
-			divSalarios.show();
+		    cargarSpinnerDatosColaborador.html('');
+		    cargarSpinnerDatosColaborador.hide();
+		    divDatosColaborador.show();
+		    cargarSpinnerSalarios.html('');
+		    cargarSpinnerSalarios.hide();
+		    divSalarios.show();
 		},
 		() => {
-			divDatosColaborador.hide();
-			cargarSpinnerDatosColaborador.html(spinner());
-			cargarSpinnerDatosColaborador.show();
-			divSalarios.hide();
-			cargarSpinnerSalarios.html(spinner());
-			cargarSpinnerSalarios.show();
+		    divDatosColaborador.hide();
+		    cargarSpinnerDatosColaborador.html(spinner());
+		    cargarSpinnerDatosColaborador.show();
+		    divSalarios.hide();
+		    cargarSpinnerSalarios.html(spinner());
+		    cargarSpinnerSalarios.show();
 		}
 	);
 }
 
 function inputFechaFinLlena() {
-	return inputFechaFin.val() != '';
+    return inputFechaFin.val() != '';
 }
 
 function validarCampos() {
-	var todoBien = true;
+    var todoBien = true;
 
-	//Validar que el drop down list tenga seleccionado un empleado.
-	if (ddlEmpleados.val() == '') {
-		todoBien = false;
-		validacionSelectEmpleado.show();
-	}
+    //Validar que el drop down list tenga seleccionado un empleado.
+    if (ddlEmpleados.val() == '') {
+        todoBien = false;
+        validacionSelectEmpleado.show();
+    }
 
-	//Validar que no este vacio el campo de fecha de despido.
-	if (inputFechaFin.val() == '') {
-		todoBien = false;
-		validacionSelectFechaFin.show();
-	}
+    //Validar que no este vacio el campo de fecha de despido.
+    if (inputFechaFin.val() == '') {
+        todoBien = false;
+        validacionSelectFechaFin.show();
+    }
 
-	return todoBien;
+    return todoBien;
 }
 
 function mostrarDatosColaborador(
@@ -206,19 +206,19 @@ function mostrarDatosColaborador(
 	salarioPromedioDiario = ''
 ) {
 	spanDiasLaborados.html(dias);
-	spanMesesLaborados.html(meses);
-	spanAniosLaborados.html(anios);
-	spanNombreEmpleado.html(nombreEmpleado);
-	spanApellidoEmpleado.html(apellidoEmpleado);
-	spanEdadEmpleado.html(edadEmpleado);
-	spanSexoEmpleado.html(sexoEmpleado);
-	spanDepartamentoEmpleado.html(descripcionDepartamento);
-	spanIdentidadEmpleado.html(numeroIdentidad);
-	spanSueldoEmpleado.html(cantidadSueldo + ' ' + descripcionMoneda);
-	spanCargoEmpleado.html(descripcionCargo);
-	spanFechaIngresoEmpleado.html(fechaIngreso);
-	spanSalario.html(salario);
-	spanSalarioOrdinarioDiario.html(salarioOrdinarioDiario);
-	spanSalarioOrdinarioPromedioDiario.html(salarioOrdinarioPromedioDiario);
-	spanSalarioPromedioDiario.html(salarioPromedioDiario);
+    spanMesesLaborados.html(meses);
+    spanAniosLaborados.html(anios);
+    spanNombreEmpleado.html(nombreEmpleado);
+    spanApellidoEmpleado.html(apellidoEmpleado);
+    spanEdadEmpleado.html(edadEmpleado);
+    spanSexoEmpleado.html(sexoEmpleado);
+    spanDepartamentoEmpleado.html(descripcionDepartamento);
+    spanIdentidadEmpleado.html(numeroIdentidad);
+    spanSueldoEmpleado.html(cantidadSueldo + ' ' + descripcionMoneda);
+    spanCargoEmpleado.html(descripcionCargo);
+    spanFechaIngresoEmpleado.html(fechaIngreso);
+    spanSalario.html(salario);
+    spanSalarioOrdinarioDiario.html(salarioOrdinarioDiario);
+    spanSalarioOrdinarioPromedioDiario.html(salarioOrdinarioPromedioDiario);
+    spanSalarioPromedioDiario.html(salarioPromedioDiario);
 }

@@ -16559,7 +16559,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
             <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_EmpleadosPorAreas_Select" ReturnType="Collection(String)" />
+          <FunctionImport Name="UDP_Plani_EmpleadosPorAreas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadosPorAreas_Select_Result)" />
           <FunctionImport Name="UDP_Plani_tbAcumuladosISR_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Activar_Result)">
             <Parameter Name="aisr_Id" Mode="In" Type="Int32" />
             <Parameter Name="aisr_UsuarioModifica" Mode="In" Type="Int32" />
@@ -17678,6 +17678,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
         </ComplexType>
         <ComplexType Name="UDP_tbTipoPlanillaDetalleIngreso_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_EmpleadosPorAreas_Select_Result">
+          <Property Type="String" Name="json" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -20040,7 +20043,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadosPorAreas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadosPorAreas_Select" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadosPorAreas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadosPorAreas_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_EmpleadosPorAreas_Select_Result">
+                <ScalarProperty Name="json" ColumnName="json" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAcumuladosISR_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAcumuladosISR_Activar" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAcumuladosISR_Activar_Result">

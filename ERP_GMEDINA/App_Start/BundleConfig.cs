@@ -8,7 +8,7 @@ namespace ERP_GMEDINA
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-
+            #region Plantilla
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
@@ -64,7 +64,7 @@ namespace ERP_GMEDINA
             // Lightbox gallery
             bundles.Add(new ScriptBundle("~/plugins/lightboxGallery").Include(
                       "~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"));
-            
+
             // Sparkline
             bundles.Add(new ScriptBundle("~/plugins/sparkline").Include(
                       "~/Scripts/plugins/sparkline/jquery.sparkline.min.js"));
@@ -104,23 +104,22 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
                       "~/Scripts/plugins/iCheck/icheck.min.js"));
 
-            //
             // dataTables css styles
             bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
                       "~/Content/plugins/dataTables/datatables.min.css"));
-            //
+
             // dataTables 
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
 
-			// dataTables RPT
-			bundles.Add(new ScriptBundle("~/plugins/dataTablesRPT").Include(
-					  "~/Scripts/plugins/dataTables/datatables.min.js",
-					  "~/Scripts/plugins/dataTables/DatatablesConfigurationsRPT.js"));
+            // dataTables RPT
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesRPT").Include(
+                      "~/Scripts/plugins/dataTables/datatables.min.js",
+                      "~/Scripts/plugins/dataTables/DatatablesConfigurationsRPT.js"));
 
-			// jeditable 
-			bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
+            // jeditable 
+            bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
                       "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
 
             // jqGrid styles
@@ -266,7 +265,7 @@ namespace ERP_GMEDINA
             // image cropper styles
             bundles.Add(new StyleBundle("~/plugins/imagecropperStyles").Include(
                       "~/Content/plugins/cropper/cropper.min.css"));
-            
+
             // jsTree
             bundles.Add(new ScriptBundle("~/plugins/jsTree").Include(
                       "~/Scripts/plugins/jsTree/jstree.min.js"));
@@ -459,23 +458,25 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
                       "~/Content/plugins/izitoast/iziToast.min.css"));
+            #endregion
 
-            //EQUIPO FLAMENCO
-
+            #region Equipo Flamenco
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
-            
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
+            #endregion
 
-//bundles APP/GENERAL
+            #region Equipo Willian
+            //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
                 "~/Scripts/app/General/Planilla.js",
                 "~/Scripts/app/General/excelexportjs.js",
                 "~/Scripts/plugins/switchery/switchery.js",
                 "~/Scripts/plugins/dualListbox/jquery.bootstrap-duallistbox.js",
                 "~/Scripts/app/FileSaver.min.js"));
-            
+
             //planilla
             bundles.Add(new StyleBundle("~/Panilla/css").Include(
                       "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css",
@@ -492,8 +493,6 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/AcumuladosISR").Include(
                 "~/Scripts/app/General/AcumuladosISR.js"));
 
-            // SELVIN
-
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
                 "~/Scripts/app/General/CatalogoPlanillas.js"));
 
@@ -506,17 +505,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Liquidacion").Include(
                 "~/Scripts/app/General/Liquidacion.js"));
+            #endregion
 
-
-            //bundles ScripBase/Validate DataAnnotations
-            bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
-                "~/Scripts/Scripts_Base/jquery.validate.js",
-                "~/Scripts/Scripts_Base/jquery.validate.min.js",
-                "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
-                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
-                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
-
-            //==========================EQUIPO MALCOM ===========================
+            #region Equipo Malcom
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoDeducciones").Include(
                 "~/Scripts/app/General/TipoDeducciones.js"));
 
@@ -525,8 +516,16 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FormaPago").Include(
                 "~/Scripts/app/General/FormaPago.js"));
+            #endregion
 
-            //OPTIMIZATION
+            //DataAnnotations
+            bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
+                "~/Scripts/Scripts_Base/jquery.validate.js",
+                "~/Scripts/Scripts_Base/jquery.validate.min.js",
+                "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
+
 
             //Allow any type of Content Delivery Network 
             bundles.UseCdn = true;
@@ -534,9 +533,9 @@ namespace ERP_GMEDINA
             //Execute the Optimization at Bundles in runtime
             BundleTable.EnableOptimizations = true;
 
-            #if DEBUG
-                BundleTable.EnableOptimizations = false;
-            #endif
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#endif
 
         }
     }
