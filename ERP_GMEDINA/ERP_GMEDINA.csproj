@@ -892,6 +892,7 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
@@ -1461,6 +1462,8 @@
     <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
+    <Content Include="Views\ReportesPlanilla\IHSSIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_IHSSModalRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
