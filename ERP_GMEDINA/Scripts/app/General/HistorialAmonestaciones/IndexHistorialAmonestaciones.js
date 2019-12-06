@@ -24,9 +24,10 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.hamo_Id,
+                   Id: value.emp_Id,
+                   Empleado: value.Empleado,
                    Cargo: value.Cargo,
-                   Empleado:value.Empleado.length == 0 ? 'Sin Asignar' : value.Empleado[0]
+                   Departamento: value.Departamento
                });
            });
            tabla.draw();

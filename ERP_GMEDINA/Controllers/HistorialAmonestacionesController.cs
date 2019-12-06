@@ -26,16 +26,16 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var HistorialAmonestaciones = db.tbHistorialAmonestaciones
+                    var Empleados = db.V_EmpleadoAmonestaciones.Where(t => t.emp_Estado == true)
                         .Select(
                         t => new
                         {
-                            hamo_Id = t.hamo_Id,
-                            Cargo = t.tbEmpleados.tbCargos.car_Descripcion,
-                            Empleado= t.tbHistorialAmonestaciones1
-                            .Select(p => p.tbEmpleados.tbPersonas.per_Nombres + " " + p.tbEmpleados.tbPersonas.per_Apellidos)
+                            emp_Id = t.emp_Id,
+                            Empleado= t.emp_NombreCompleto,
+                            Cargo = t.car_Descripcion,
+                            Departamento = t.depto_Descripcion
                         }).ToList();
-                    return Json(HistorialAmonestaciones, JsonRequestBehavior.AllowGet);
+                    return Json(Empleados, JsonRequestBehavior.AllowGet);
                 }
             }
             catch

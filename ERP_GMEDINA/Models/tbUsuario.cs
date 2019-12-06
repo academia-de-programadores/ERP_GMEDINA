@@ -29,6 +29,8 @@ namespace ERP_GMEDINA.Models
             this.tbPersonas1 = new HashSet<tbPersonas>();
             this.tbTipoAmonestaciones = new HashSet<tbTipoAmonestaciones>();
             this.tbTipoAmonestaciones1 = new HashSet<tbTipoAmonestaciones>();
+            this.tbDepartamentos = new HashSet<tbDepartamentos>();
+            this.tbDepartamentos1 = new HashSet<tbDepartamentos>();
         }
     
         public int usu_Id { get; set; }
@@ -66,5 +68,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoAmonestaciones> tbTipoAmonestaciones1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDepartamentos> tbDepartamentos1 { get; set; }
     }
 }

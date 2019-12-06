@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="39baaca949c34bada950c3ca8786b220" Name="Diagram1" ZoomLevel="60">
+      <Diagram DiagramId="39baaca949c34bada950c3ca8786b220" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="0.75" PointY="8.625" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3" PointY="14.625" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="5.25" PointY="10.25" />
@@ -31,6 +31,12 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDepartamentos" Width="1.5" PointX="10.25" PointY="11.375" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
