@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_RAP_RPT
+    public partial class V_AFP_RPT
     {
         public int emp_Id { get; set; }
         public string per_Identidad { get; set; }
@@ -21,11 +21,9 @@ namespace ERP_GMEDINA.Models
         public string depto_descripcion { get; set; }
         public int area_Id { get; set; }
         public string area_Descripcion { get; set; }
+        public decimal hipa_AFP { get; set; }
         public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
-        public int cde_IdDeducciones { get; set; }
-        public string cde_DescripcionDeduccion { get; set; }
-        public Nullable<decimal> hidp_Total { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
     }
 }
