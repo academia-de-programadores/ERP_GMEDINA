@@ -23,10 +23,6 @@
     
 </head>
 <body id="Body">
-
-    <!-- Skin configuration box -->
-    <!-- @Html.Partial("_SkinConfig") -->
-
     <!-- Wrapper-->
     <!-- PageClass give you ability to specify custom style for specific view based on action -->
     <div id="wrapper" class="@Html.PageClass()">
@@ -62,9 +58,6 @@
     @Scripts.Render("~/bundles/inspinia")
     @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations")
-
-    <!-- Skin config script - only for demo purpose-->
-    @Scripts.Render("~/bundles/skinConfig")
 
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
