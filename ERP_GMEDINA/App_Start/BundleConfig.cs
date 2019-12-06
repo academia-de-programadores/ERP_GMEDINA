@@ -478,6 +478,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades").Include(
             "~/Scripts/app/General/Nacionalidades/Nacionalidades.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialCargos").Include(
+            "~/Scripts/app/General/HistorialCargos/HistorialCargos.js"));
+
 
             //OPTIMIZATION
 

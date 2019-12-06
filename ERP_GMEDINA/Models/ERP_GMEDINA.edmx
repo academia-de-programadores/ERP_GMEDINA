@@ -58,6 +58,22 @@
           <Property Name="emp_UsuarioModifica" Type="int" />
           <Property Name="emp_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbHistorialCargos">
+          <Key>
+            <PropertyRef Name="hcar_Id" />
+          </Key>
+          <Property Name="hcar_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="car_IdAnterior" Type="int" />
+          <Property Name="car_IdNuevo" Type="int" Nullable="false" />
+          <Property Name="hcar_Fecha" Type="datetime" />
+          <Property Name="hcar_Estado" Type="bit" Nullable="false" />
+          <Property Name="hcar_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hcar_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hcar_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hcar_UsuarioModifica" Type="int" />
+          <Property Name="hcar_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbNacionalidades">
           <Key>
             <PropertyRef Name="nac_Id" />
@@ -96,15 +112,18 @@
           <Property Name="per_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_RRHH_HistorialCargos">
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialCargos">
           <Key>
+            <PropertyRef Name="hcar_Id" />
             <PropertyRef Name="Nombre Completo" />
-            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="CargoAnterior" />
             <PropertyRef Name="Fecha Crea" />
           </Key>
+          <Property Name="hcar_Id" Type="int" Nullable="false" />
           <Property Name="Nombre Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CargoAnterior" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CargoNuevo" Type="nvarchar" MaxLength="50" />
           <Property Name="Fecha de Historial" Type="datetime" />
           <Property Name="Usuario Crea" Type="varchar" MaxLength="100" />
           <Property Name="Fecha Crea" Type="datetime" Nullable="false" />
@@ -159,6 +178,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="hcar_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="hcar_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
@@ -171,7 +214,31 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbNacionalidades">
+              <PropertyRef Name="nac_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,6 +283,42 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             </Principal>
             <Dependent Role="tbEmpleados">
               <PropertyRef Name="car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="0..1" />
+          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="car_IdAnterior" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo">
+          <End Role="tbCargos" Type="Self.tbCargos" Multiplicity="1" />
+          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="car_IdNuevo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbHistorialCargos" Type="Self.tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -269,18 +372,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbCargos" EntityType="Self.tbCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbHistorialCargos" EntityType="Self.tbHistorialCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbNacionalidades" EntityType="Self.tbNacionalidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="V_RRHH_HistorialCargos" EntityType="Self.V_RRHH_HistorialCargos" store:Type="Views" store:Schema="rrhh">
+          <EntitySet Name="V_HistorialCargos" EntityType="Self.V_HistorialCargos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
-    [V_RRHH_HistorialCargos].[Nombre Completo] AS [Nombre Completo], 
-    [V_RRHH_HistorialCargos].[Cargo] AS [Cargo], 
-    [V_RRHH_HistorialCargos].[Fecha de Historial] AS [Fecha de Historial], 
-    [V_RRHH_HistorialCargos].[Usuario Crea] AS [Usuario Crea], 
-    [V_RRHH_HistorialCargos].[Fecha Crea] AS [Fecha Crea], 
-    [V_RRHH_HistorialCargos].[Usuario Modifica] AS [Usuario Modifica], 
-    [V_RRHH_HistorialCargos].[Fecha Modifica] AS [Fecha Modifica]
-    FROM [rrhh].[V_RRHH_HistorialCargos] AS [V_RRHH_HistorialCargos]</DefiningQuery>
+    [V_HistorialCargos].[hcar_Id] AS [hcar_Id], 
+    [V_HistorialCargos].[Nombre Completo] AS [Nombre Completo], 
+    [V_HistorialCargos].[CargoAnterior] AS [CargoAnterior], 
+    [V_HistorialCargos].[CargoNuevo] AS [CargoNuevo], 
+    [V_HistorialCargos].[Fecha de Historial] AS [Fecha de Historial], 
+    [V_HistorialCargos].[Usuario Crea] AS [Usuario Crea], 
+    [V_HistorialCargos].[Fecha Crea] AS [Fecha Crea], 
+    [V_HistorialCargos].[Usuario Modifica] AS [Usuario Modifica], 
+    [V_HistorialCargos].[Fecha Modifica] AS [Fecha Modifica]
+    FROM [rrhh].[V_HistorialCargos] AS [V_HistorialCargos]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -298,11 +404,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
@@ -317,6 +439,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id">
             <End Role="tbCargos" EntitySet="tbCargos" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" Association="Self.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id">
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
@@ -353,7 +487,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <NavigationProperty Name="tbEmpleados1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
           <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
-        </EntityType>
+          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialCargos" />
+          <NavigationProperty Name="tbHistorialCargos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialCargos" />
+          </EntityType>
         <EntityType Name="tbNacionalidades">
           <Key>
             <PropertyRef Name="nac_Id" />
@@ -430,7 +566,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <EntitySet Name="tbCargos" EntityType="ERP_GMEDINAModel.tbCargos" />
           <EntitySet Name="tbEmpleados" EntityType="ERP_GMEDINAModel.tbEmpleados" />
           <EntitySet Name="tbPersonas" EntityType="ERP_GMEDINAModel.tbPersonas" />
-          <EntitySet Name="V_RRHH_HistorialCargos" EntityType="ERP_GMEDINAModel.V_RRHH_HistorialCargos" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCargos" EntitySet="tbCargos" />
@@ -467,7 +602,29 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="tbHistorialCargos" EntityType="ERP_GMEDINAModel.tbHistorialCargos" />
+          <EntitySet Name="V_HistorialCargos" EntityType="ERP_GMEDINAModel.V_HistorialCargos" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo">
+            <End Role="tbCargos" EntitySet="tbCargos" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialCargos" EntitySet="tbHistorialCargos" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="UDP_RRHH_tbNacionalidades_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -495,6 +652,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" FromRole="tbCargos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioModifica" FromRole="tbCargos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbCargos" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior" FromRole="tbCargos" ToRole="tbHistorialCargos" />
+          <NavigationProperty Name="tbHistorialCargos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" FromRole="tbCargos" ToRole="tbHistorialCargos" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -524,6 +683,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbEmpleados_car_Id" FromRole="tbEmpleados" ToRole="tbCargos" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbHistorialCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialCargos" />
         </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
@@ -552,20 +712,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbPersonas" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbNacionalidades" Relationship="ERP_GMEDINAModel.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" FromRole="tbPersonas" ToRole="tbNacionalidades" />
-        </EntityType>
-        <EntityType Name="V_RRHH_HistorialCargos">
-          <Key>
-            <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Fecha_Crea" />
-          </Key>
-          <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_de_Historial" Type="DateTime" Precision="3" />
-          <Property Name="Usuario_Crea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -675,7 +821,105 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="tbHistorialCargos">
+          <Key>
+            <PropertyRef Name="hcar_Id" />
+          </Key>
+          <Property Name="hcar_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_IdAnterior" Type="Int32" />
+          <Property Name="car_IdNuevo" Type="Int32" Nullable="false" />
+          <Property Name="hcar_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="hcar_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hcar_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hcar_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hcar_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hcar_UsuarioModifica" Type="Int32" />
+          <Property Name="hcar_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea" FromRole="tbHistorialCargos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica" FromRole="tbHistorialCargos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbCargos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior" FromRole="tbHistorialCargos" ToRole="tbCargos" />
+          <NavigationProperty Name="tbCargos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo" FromRole="tbHistorialCargos" ToRole="tbCargos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id" FromRole="tbHistorialCargos" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="V_HistorialCargos">
+          <Key>
+            <PropertyRef Name="hcar_Id" />
+            <PropertyRef Name="Nombre_Completo" />
+            <PropertyRef Name="CargoAnterior" />
+            <PropertyRef Name="Fecha_Crea" />
+          </Key>
+          <Property Name="hcar_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="CargoAnterior" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CargoNuevo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_de_Historial" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Crea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="hcar_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialCargos_hcar_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="hcar_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior">
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="car_IdAnterior" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdNuevo">
+          <End Type="ERP_GMEDINAModel.tbCargos" Role="tbCargos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCargos">
+              <PropertyRef Name="car_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="car_IdNuevo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialCargos_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialCargos" Role="tbHistorialCargos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialCargos">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -804,16 +1048,35 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RRHH_HistorialCargos' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RRHH_HistorialCargos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RRHH_HistorialCargos">
-              <MappingFragment StoreEntitySet="V_RRHH_HistorialCargos">
+          <EntitySetMapping Name="tbHistorialCargos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialCargos">
+              <MappingFragment StoreEntitySet="tbHistorialCargos">
+                <ScalarProperty Name="hcar_FechaModifica" ColumnName="hcar_FechaModifica" />
+                <ScalarProperty Name="hcar_UsuarioModifica" ColumnName="hcar_UsuarioModifica" />
+                <ScalarProperty Name="hcar_FechaCrea" ColumnName="hcar_FechaCrea" />
+                <ScalarProperty Name="hcar_UsuarioCrea" ColumnName="hcar_UsuarioCrea" />
+                <ScalarProperty Name="hcar_RazonInactivo" ColumnName="hcar_RazonInactivo" />
+                <ScalarProperty Name="hcar_Estado" ColumnName="hcar_Estado" />
+                <ScalarProperty Name="hcar_Fecha" ColumnName="hcar_Fecha" />
+                <ScalarProperty Name="car_IdNuevo" ColumnName="car_IdNuevo" />
+                <ScalarProperty Name="car_IdAnterior" ColumnName="car_IdAnterior" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HistorialCargos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialCargos">
+              <MappingFragment StoreEntitySet="V_HistorialCargos">
                 <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha Modifica" />
                 <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario Modifica" />
                 <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha Crea" />
                 <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario Crea" />
                 <ScalarProperty Name="Fecha_de_Historial" ColumnName="Fecha de Historial" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="CargoNuevo" ColumnName="CargoNuevo" />
+                <ScalarProperty Name="CargoAnterior" ColumnName="CargoAnterior" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
+                <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -159,6 +159,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -166,6 +167,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
@@ -186,6 +188,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEmpleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbHistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbNacionalidades.cs">
@@ -209,7 +214,7 @@
     <Compile Include="Models\UDP_RRHH_tbNacionalidades_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_RRHH_HistorialCargos.cs">
+    <Compile Include="Models\V_HistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -432,6 +437,8 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
+    <Content Include="Scripts\app\General\IndexAreas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -957,6 +964,7 @@
     <Content Include="Views\Nacionalidades\_Delete.cshtml" />
     <Content Include="Views\Nacionalidades\_Edit.cshtml" />
     <Content Include="Views\Nacionalidades\_Detalles.cshtml" />
+    <Content Include="Views\HistorialCargos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
