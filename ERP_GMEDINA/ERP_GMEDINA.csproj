@@ -191,6 +191,7 @@
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
@@ -594,6 +595,12 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Activar_Result.cs">
@@ -1099,6 +1106,7 @@
     <Content Include="DataSets\ReportesPlanillaDS.xsc">
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
     </Content>
+    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1651,6 +1659,12 @@
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
     <Content Include="Views\Liquidacion\Index.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
