@@ -2,8 +2,6 @@
     return (number < 10 ? '0' : '') + number
 }
 
-
-
 function FechaFormato(pFecha) {
     if (!pFecha)
         return "Sin modificaciones";
@@ -19,8 +17,6 @@ function FechaFormato(pFecha) {
     return FechaFinal;
 }
 
-
-
 function FechaFormatoNac(pFecha) {
     var fechaString = pFecha.substr(6, 19);
     var fechaActual = new Date(parseInt(fechaString));
@@ -30,8 +26,6 @@ function FechaFormatoNac(pFecha) {
     var FechaFinal = dia + "/" + mes + "/" + anio;
     return FechaFinal;
 }
-
-
 
 function FechaFormatoInvertido(pFecha) {
     var fechaString = pFecha.substr(6, 19);
@@ -44,4 +38,8 @@ function FechaFormatoInvertido(pFecha) {
     var segundos = pad2(fechaActual.getSeconds().toString());
     var FechaFinal = anio + "/" + mes + "/" + dia;
     return FechaFinal;
+}
+
+function FullBody() {
+    $("#Body").css("padding-right", "0px");
 }
