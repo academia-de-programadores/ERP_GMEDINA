@@ -498,6 +498,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
                              "~/Scripts/app/general/Cargos/Cargos.js"));
 
@@ -525,6 +526,9 @@ namespace ERP_GMEDINA
 
               bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
                          "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialCargos").Include(
+                         "~/Scripts/app/General/HistorialCargos/HistorialCargos.js"));
 
 
             //bundles APP/GENERAL
@@ -576,8 +580,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
                "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/General").Include(
-                "~/Scripts/app/General/general.js"));
+      
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

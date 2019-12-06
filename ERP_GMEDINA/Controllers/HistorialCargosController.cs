@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialCargosController : Controller
     {
-        private ERP_GMEDINAEntities1 db = null;
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialCargos
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities1())
+                using (db = new ERP_GMEDINAEntities())
                 {
                     var HistorialCargos = db.tbHistorialCargos
                         .Select(
@@ -38,7 +38,7 @@ namespace ERP_GMEDINA.Controllers
                             Encargado = t.tbCargos.tbEmpleados
                                 .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
                             car_Anterior = t.tbCargos.car_Descripcion,
-                            car_Nuevo = t.tbCargos1.car_Descripcion,
+                            car_Nuevo = t.tbCargos.car_Descripcion,
                             hcar_Fecha = t.hcar_Fecha
 
                         }
@@ -59,7 +59,7 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialCargos> lista = new List<V_HistorialCargos> { };
-            using (db = new ERP_GMEDINAEntities1())
+            using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {

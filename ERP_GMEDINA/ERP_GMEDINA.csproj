@@ -627,6 +627,18 @@
     <Compile Include="Models\UDP_RRHH_tbRazonSalida_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoAmonestaciones_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1083,7 +1095,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\Cargos\Cargos.js" />
+    <Content Include="Scripts\app\General\Cargos\Cargos.js" />
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
     <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
@@ -1094,8 +1106,13 @@
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
+    <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
+    <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
@@ -1661,14 +1678,9 @@
     <Content Include="Views\FasesReclutamiento\_Detalles.cshtml" />
     <Content Include="Views\FasesReclutamiento\_Edit.cshtml" />
     <Content Include="Views\Inicio\Index.cshtml" />
-    <Content Include="Views\Cargos\Create.cshtml" />
-    <Content Include="Views\Cargos\Delete.cshtml" />
-    <Content Include="Views\Cargos\Details.cshtml" />
-    <Content Include="Views\Cargos\Edit.cshtml" />
     <Content Include="Views\Cargos\Index.cshtml" />
     <Content Include="Views\Cargos\_Create.cshtml" />
     <Content Include="Views\Cargos\_Delete.cshtml" />
-    <Content Include="Views\Cargos\_Details.cshtml" />
     <Content Include="Views\Cargos\_Detalles.cshtml" />
     <Content Include="Views\Cargos\_Edit.cshtml" />
     <Content Include="Views\TipoAmonestaciones\Index.cshtml" />

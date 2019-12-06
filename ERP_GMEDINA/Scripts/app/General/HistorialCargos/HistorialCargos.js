@@ -1,4 +1,6 @@
-﻿
+﻿$(document).ready(function () {
+    llenarTabla();
+});
 function llenarTabla() {
     _ajax(null,
        '/HistorialCargos/llenarTabla',
