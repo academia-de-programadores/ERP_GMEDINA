@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-using System.Transactions;
+using System.Activities.Statements;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -49,22 +49,36 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult ChildRowData(int? id)
+        public ActionResult ChildRowData(int id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_Departamentos> lista = new List<V_Departamentos> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.V_Departamentos.Where(x => x.area_Id == id).ToList();
+                    //lista = db.V_Departamentos.ToList();//.Where(x => x.area_Id == id).ToList();
+                    var lista = db.tbDepartamentos
+                        .Where(x => x.area_Id == id)
+                        .Select(depto=>
+                        new {
+                            car_Descripcion=depto.tbCargos.car_Descripcion,
+                            depto_Descripcion = depto.depto_Descripcion,
+                            persona = new {
+                                per_NombreCompleto = depto.tbCargos.tbEmpleados.Select(persona => persona.tbPersonas.per_Nombres + " " + persona.tbPersonas.per_Apellidos),
+                                per_Telefono = depto.tbCargos.tbEmpleados.Select(persona => persona.tbPersonas.per_Telefono),
+                                per_CorreoElectronico = depto.tbCargos.tbEmpleados.Select(persona => persona.tbPersonas.per_CorreoElectronico),
+                            }                          
+                        }).ToList();
+                        return Json(lista, JsonRequestBehavior.AllowGet);
+
                 }
-                catch
+                catch(Exception ex)
                 {
+                    ex.Message.ToString();
+                    return Json(new List<tbDepartamentos> { }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(lista, JsonRequestBehavior.AllowGet);
         }
         public ActionResult llenarDropDowlist()
         {
@@ -137,53 +151,54 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
+            var Usuario =(tbUsuario)Session["Usuario"];
             //en esta area ingresamos el registro con el procedimiento almacenado
             try
             {
-                if (tbAreas.suc_Id == 0 || tbAreas.tbCargos.car_Descripcion == "" || tbAreas.area_Descripcion == "")
+                db = new ERP_GMEDINAEntities();
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    return Json("-2", JsonRequestBehavior.AllowGet);
-                }
-                foreach (var item in tbDepartamentos)
-                {
-                    if (item.depto_Descripcion == "" || item.tbCargos.car_Descripcion=="")
+                    var list=db.UDP_RRHH_tbAreas_Insert(
+                        tbAreas.suc_Id,
+                        tbAreas.tbCargos.car_Descripcion,
+                        tbAreas.area_Descripcion,
+                        Usuario.usu_Id,
+                        DateTime.Now);
+                    foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
                     {
-                        return Json("-2", JsonRequestBehavior.AllowGet);
-                    }
-                }   
-                var Usuario = (tbUsuario)Session["Usuario"];
-                using (var scope = new TransactionScope())
-                {
-                    using (db = new ERP_GMEDINAEntities())
-                    {
-                        var list = db.UDP_RRHH_tbAreas_Insert(
-                                                                tbAreas.suc_Id,
-                                                                tbAreas.tbCargos.car_Descripcion,
-                                                                tbAreas.area_Descripcion,
-                                                                Usuario.usu_Id,
-                                                                DateTime.Now);
-                        foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
-                        {
-                            tbAreas.area_Id = int.Parse(item.MensajeError.ToString());
-                        }
-                        if (tbAreas.area_Id==-2)
-                        {
+                        if (item.MensajeError == "-1")
+                        {                            
                             return Json("-2", JsonRequestBehavior.AllowGet);
                         }
-                        foreach (var item in tbDepartamentos)
-                        {
-                        
-                        }
-
+                        tbAreas.area_Id = int.Parse(item.MensajeError);
                     }
-                }
-                
+                    foreach (tbDepartamentos item in tbDepartamentos)
+                    {
+                        var depto=db.UDP_RRHH_tbDepartamentos_Insert(
+                            tbAreas.area_Id,
+                            item.tbCargos.car_Descripcion,
+                            item.depto_Descripcion,
+                            Usuario.usu_Id,
+                            DateTime.Now);
+                        string mensajeDB="";
+                        foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
+                        {
+                             mensajeDB= i.MensajeError.ToString();
+                        }
+                        if (mensajeDB=="-1")
+                        {
+                            return Json("-2",JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    transaction.Commit();
+                }                
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                result = "-2";
+                return Json("-2", JsonRequestBehavior.AllowGet);
             }
+
         return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Edit/5

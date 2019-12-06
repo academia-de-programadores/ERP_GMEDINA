@@ -232,31 +232,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbCargos_Update_Result>("UDP_RRHH_tbCargos_Update", car_IdParameter, car_DescripcionParameter, car_UsuarioModificaParameter, car_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Insert_Result> UDP_RRHH_tbDepartamentos_Insert(Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
-        {
-            var area_IdParameter = area_Id.HasValue ?
-                new ObjectParameter("area_Id", area_Id) :
-                new ObjectParameter("area_Id", typeof(int));
-    
-            var car_IdParameter = car_Id.HasValue ?
-                new ObjectParameter("car_Id", car_Id) :
-                new ObjectParameter("car_Id", typeof(int));
-    
-            var depto_DescripcionParameter = depto_Descripcion != null ?
-                new ObjectParameter("depto_Descripcion", depto_Descripcion) :
-                new ObjectParameter("depto_Descripcion", typeof(string));
-    
-            var depto_UsuariocreaParameter = depto_Usuariocrea.HasValue ?
-                new ObjectParameter("depto_Usuariocrea", depto_Usuariocrea) :
-                new ObjectParameter("depto_Usuariocrea", typeof(int));
-    
-            var depto_FechaCreaParameter = depto_FechaCrea.HasValue ?
-                new ObjectParameter("depto_FechaCrea", depto_FechaCrea) :
-                new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Insert_Result>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_IdParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Restore_Result> UDP_RRHH_tbDepartamentos_Restore(Nullable<int> depto_Id, Nullable<int> depto_Usuariomodifica, Nullable<System.DateTime> depto_Fechamodifica)
         {
             var depto_IdParameter = depto_Id.HasValue ?
@@ -376,6 +351,52 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Update_Result>("UDP_RRHH_tbAreas_Update", area_IdParameter, car_IdParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Delete_Result> UDP_RRHH_tbDepartamentos_Delete(Nullable<int> depto_Id, string depto_razon_Inactivo, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
+        {
+            var depto_IdParameter = depto_Id.HasValue ?
+                new ObjectParameter("depto_Id", depto_Id) :
+                new ObjectParameter("depto_Id", typeof(int));
+    
+            var depto_razon_InactivoParameter = depto_razon_Inactivo != null ?
+                new ObjectParameter("depto_razon_Inactivo", depto_razon_Inactivo) :
+                new ObjectParameter("depto_razon_Inactivo", typeof(string));
+    
+            var depto_UsuarioModificaParameter = depto_UsuarioModifica.HasValue ?
+                new ObjectParameter("depto_UsuarioModifica", depto_UsuarioModifica) :
+                new ObjectParameter("depto_UsuarioModifica", typeof(int));
+    
+            var depto_FechaModificaParameter = depto_FechaModifica.HasValue ?
+                new ObjectParameter("depto_FechaModifica", depto_FechaModifica) :
+                new ObjectParameter("depto_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Delete_Result>("UDP_RRHH_tbDepartamentos_Delete", depto_IdParameter, depto_razon_InactivoParameter, depto_UsuarioModificaParameter, depto_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Insert_Result> UDP_RRHH_tbDepartamentos_Insert(Nullable<int> area_Id, string car_descripcion, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var car_descripcionParameter = car_descripcion != null ?
+                new ObjectParameter("car_descripcion", car_descripcion) :
+                new ObjectParameter("car_descripcion", typeof(string));
+    
+            var depto_DescripcionParameter = depto_Descripcion != null ?
+                new ObjectParameter("depto_Descripcion", depto_Descripcion) :
+                new ObjectParameter("depto_Descripcion", typeof(string));
+    
+            var depto_UsuariocreaParameter = depto_Usuariocrea.HasValue ?
+                new ObjectParameter("depto_Usuariocrea", depto_Usuariocrea) :
+                new ObjectParameter("depto_Usuariocrea", typeof(int));
+    
+            var depto_FechaCreaParameter = depto_FechaCrea.HasValue ?
+                new ObjectParameter("depto_FechaCrea", depto_FechaCrea) :
+                new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Insert_Result>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_descripcionParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
         }
     }
 }
