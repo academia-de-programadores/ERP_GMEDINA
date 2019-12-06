@@ -45,7 +45,3 @@ function FechaFormatoInvertido(pFecha) {
     var FechaFinal = anio + "/" + mes + "/" + dia;
     return FechaFinal;
 }
-
-function FullBody() {
-    $("#Body").css("padding-right", "0px");
-}
