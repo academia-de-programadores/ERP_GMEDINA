@@ -84,8 +84,8 @@ function cargarGridBonos() {
                     '<td>' + FechaRegistro + '</td>' +
                     '<td>' + Check + '</td>' + //AQUI ENVIA LA VARIABLE
                     '<td>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoBonos">Editar</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>' +
+                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoBonos">Editar</button>' +
+                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -186,7 +186,7 @@ $('#btnCreateRegistroBonos').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     IDInactivar = ID;
     $.ajax({
         url: "/EmpleadoBonos/Edit/" + ID,
@@ -306,7 +306,7 @@ $("#btnUpdateBonos").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos", function () {
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     $.ajax({
         url: "/EmpleadoBonos/Details/" + ID,
         method: "GET",
@@ -321,23 +321,25 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
                 var FechaCrea = FechaFormato(data.cb_FechaCrea);
                 var FechaModifica = FechaFormato(data.cb_FechaModifica);
-                console.log(data.cb_UsuarioModifica);
-                var usuarioModifica = data.cb_UsuarioModifica == null ? 'Sin modificaciones' : data.cb_UsuarioModifica;
+                var usuarioModifica = data.usuarioModifica == null ? 'Sin modificaciones' : data.usuarioModifica;
+                var usuarioCrea = data.NombreUsarioCrea == null ? 'N/A' : data.NombreUsarioCrea;
 
                 if (data.cb_Pagado) {
                     $('#Detalles #cb_Pagado').prop('checked', true);
                 } else {
                     $('#Detalles #cb_Pagado').prop('checked', false);
                 }
-
                 $("#Detalles #cb_Id").val(data.cb_Id);
                 $("#Detalles #cb_Monto").val(data.cb_Monto);
                 $("#Detalles #cb_FechaRegistro").val(FechaRegistro);
                 $("#Detalles #cb_Pagado").val(data.cb_Pagado);
                 $("#Detalles #cb_UsuarioCrea").val(data.cb_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(usuarioCrea);
                 $("#Detalles #cb_FechaCrea").val(FechaCrea);
-                $("#Detalles #cb_UsuarioModifica").val(data.cb_UsuarioModifica == null ? '0' : data.cb_UsuarioModifica);
+                $("#Detalles #cb_UsuarioModifica").val(data.cb_UsuarioModifica);
+                $("#Detalles #tbUsuario1_usu_NombreUsuario").val(usuarioModifica);
                 $("#Detalles #cb_FechaModifica").val(FechaModifica);
+
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdCatIngreso = data.cin_IdIngreso;

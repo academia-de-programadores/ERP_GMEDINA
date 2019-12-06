@@ -23,12 +23,9 @@ namespace ERP_GMEDINA.Controllers
         }
 
         public ActionResult GetData()
-        {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+        {            
             var tbEmpleadoBonos = db.tbEmpleadoBonos
-                        .Select(c => new { cb_Id = c.cb_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cb_Monto = c.cb_Monto, cb_FechaRegistro = c.cb_FechaRegistro, cb_Pagado = c.cb_Pagado, cb_UsuarioCrea = c.cb_UsuarioCrea, cb_FechaCrea = c.cb_FechaCrea, cb_UsuarioModifica = c.cb_UsuarioModifica, cb_FechaModifica = c.cb_FechaModifica, cb_Activo = c.cb_Activo })
+                        .Select(c => new { cb_Id = c.cb_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cb_Monto = c.cb_Monto, cb_FechaRegistro = c.cb_FechaRegistro, cb_Pagado = c.cb_Pagado, NombreUsarioCrea = c.tbUsuario.usu_NombreUsuario, cb_UsuarioCrea = c.cb_UsuarioCrea, cb_FechaCrea = c.cb_FechaCrea, usuarioModifica = c.tbUsuario1.usu_NombreUsuario, cb_UsuarioModifica = c.cb_UsuarioModifica, cb_FechaModifica = c.cb_FechaModifica, cb_Activo = c.cb_Activo })
                         .OrderByDescending(x => x.cb_FechaCrea)
                         .ToList().Where(p => p.cb_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
@@ -69,7 +66,11 @@ namespace ERP_GMEDINA.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             tbEmpleadoBonos tbEmpleadoBonosJSON = db.tbEmpleadoBonos.Find(id);
-            return Json(tbEmpleadoBonosJSON, JsonRequestBehavior.AllowGet);
+            // probando
+            var tbEmpleadoBonos = db.tbEmpleadoBonos
+                        .Select(c => new { cb_Id = c.cb_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cb_Monto = c.cb_Monto, cb_FechaRegistro = c.cb_FechaRegistro, cb_Pagado = c.cb_Pagado, NombreUsarioCrea = c.tbUsuario.usu_NombreUsuario, cb_UsuarioCrea = c.cb_UsuarioCrea, cb_FechaCrea = c.cb_FechaCrea, usuarioModifica = c.tbUsuario1.usu_NombreUsuario, cb_UsuarioModifica = c.cb_UsuarioModifica, cb_FechaModifica = c.cb_FechaModifica, cb_Activo = c.cb_Activo })
+                        .Where(p => p.cb_Id == id).FirstOrDefault();
+            return Json(tbEmpleadoBonos, JsonRequestBehavior.AllowGet);
 
         }
 

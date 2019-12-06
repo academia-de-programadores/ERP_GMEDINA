@@ -49,21 +49,13 @@
                                 @Html.DisplayFor(modelItem => item.cb_Pagado)
                             </td>
                             <td>
-                              <button type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoBonos">Editar</button>
-                              <button type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>
+                              <button data-id="@item.cb_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoBonos">Editar</button>
+                              <button data-id="@item.cb_Id" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>
                             </td>
                         </tr>
                       }
                     </tbody>
                     <tfoot>
-                        <tr role="row">
-                            <th rowspan="1" colspan="1">Nombre</th>
-                            <th rowspan="1" colspan="1">Descripción</th>
-                            <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cb_Monto)</th>
-                            <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cb_FechaRegistro)</th>
-                            <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cb_Pagado)</th>
-                            <th>Acción</th>
-                        </tr>
                     </tfoot>
                   </table>
                 </div>
