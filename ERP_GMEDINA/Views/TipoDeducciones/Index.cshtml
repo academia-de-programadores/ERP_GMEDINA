@@ -1,0 +1,115 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbTipoDeduccion>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de tipos de deducción</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarTipoDeducciones">Nuevo</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                  <table id="tblTipoDeducciones" class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tde_Descripcion)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tde_UsuarioCrea)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tde_FechaCrea)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tde_UsuarioModifica)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tde_FechaModifica)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyTipoDeducciones">
+                      @foreach (var item in Model) {
+                          var Usuario_Modifica =  !(item.tde_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres;
+                          var Fecha_FechaModifica = Convert.ToString(item.tde_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.tde_FechaModifica);
+                        <tr class="gradeA odd" role="row" data-id="@item.tde_IdTipoDedu">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tde_Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_Nombres)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tde_FechaCrea)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Usuario_Modifica)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Fecha_FechaModifica)
+                            </td>
+                            <td>
+                              <button data-id="@item.tde_IdTipoDedu" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>                            
+                            </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+<div class="modal fade" id="AgregarTipoDeducciones" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar datos</h4>
+            </div>
+            @Html.Partial("_CreateTipoDeduccion", new ERP_GMEDINA.Models.tbTipoDeduccion())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditarTipoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edición de datos</h4>
+            </div>
+            @Html.Partial("_EditTipoDeduccion", new ERP_GMEDINA.Models.tbTipoDeduccion())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InactivarTipoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Inactivar el registro</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <p><b>Desea Inactivar el registro?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnInactivarRegistroTipoDeducciones">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/General/TipoDeducciones") 
+    @Scripts.Render("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations") 
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
