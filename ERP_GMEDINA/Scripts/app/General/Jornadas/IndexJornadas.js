@@ -57,12 +57,14 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     else {
         id = row.data().ID;
         hola = row.data().hola;
+        tr.addClass('loading');
         _ajax({ id: parseInt(id) },
             '/Jornadas/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
+                    tr.removeClass('loading');
                     tr.addClass('shown');
                 }
             });

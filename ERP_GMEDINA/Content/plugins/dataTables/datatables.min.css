@@ -25,3 +25,8 @@ td.details-control {
 tr.shown td.details-control {
     background: url(https://datatables.net/examples/resources/details_close.png) no-repeat center center;
 }
+
+tr.loading td.details-control {
+    background: url('../../img/LoadingSpinner.gif') no-repeat center center;
+     background-size: 1em, 1em;
+}

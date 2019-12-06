@@ -525,6 +525,7 @@
     <Content Include="Content\img\header_two.jpg" />
     <Content Include="Content\img\iphone.jpg" />
     <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\off_canvas.jpg" />
     <Content Include="Content\img\otis_redding.png" />
     <Content Include="Content\img\p1.jpg" />
