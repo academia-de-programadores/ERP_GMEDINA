@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Comprobate de pago</title>
+    <link rel=icon href="payroll.png">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+</head>
+<body style="position: relative; width: 21cm; height: 24.7cm; margin: 0 auto; color: #001028; background: #FFFFFF; font-family: 'Questrial', sans-serif; font-size: 12px;">
+    <header class="clearfix" style="content: '';  clear: both; padding: 10px 0; margin-bottom: 30px;">
+        <div id="logo" style="text-align: center;
+        margin-bottom: 10px;">
+            <img src="payroll.png" style="width: 90px;">
+        </div>
+        <h1 style=" border-top 1px solid #5D6975;
+            border-bottom 1px solid #5D6975;
+            color #5D6975;
+            font-size 2.4em;
+            line-height 1.4em;
+            font-weight normal;
+            text-align center;
+            margin 0 0 20px 0;
+            background-color lightgray;">
+            COMPROBANTE DE PAGO
+        </h1>
+        <div id="company" class="clearfix" style="content: '';  display: table; clear: both; float: right;
+        text-align: right;
+        white-space: nowrap;">
+            <div>García Medina</div>
+            <div>Bo. Barandillas,<br /> San Pedro Sula</div>
+            <div>(+504) 2550-0746</div>
+            <div><a href="mailto:empresa@ejemplo.com" style="color: #5D6975;text-decoration: underline;">RecursosHumanos@GMEDINA.com</a></div>
+        </div>
+        <div id="project" style="float: left;">
+            <div>
+                <span style="color: #5D6975;
+            text-align: left;
+            width: 52px;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 0.8em;
+            padding-right: 50px;" class="right">ID DEL COLABORADOR </span>{idColaborador}
+            </div>
+            <div>
+                <span style="color: #5D6975;
+            text-align: left;
+            width: 52px;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 0.8em;
+            padding-right: 50px;" class="right">MOTIVO </span>{EmailAsunto}
+            </div>
+            <div>
+                <span style="color: #5D6975;
+            text-align: left;
+            width: 52px;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 0.8em;
+            padding-right: 50px;" class="right">COLABORADOR </span>{NombreColaborador}
+            </div>
+            <!-- <div><span class="right">DIRECCIÓN</span> Col. Trejo, SPS</div>
+            <div><span class="right">EMAIL</span> <a href="mailto:rodrigo@ejemplo.com">rodrigo@ejemplo.com</a></div> -->
+            <div>
+                <span style="color: #5D6975;
+            text-align: left;
+            width: 52px;
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 0.8em;
+            padding-right: 50px;" class="right">PERÍODO DE PAGO </span>{PeriodoPago}
+            </div>
+            <!-- <div><span class="right">HASTA</span> Septiembre 17, 2019</div> -->
+        </div>
+    </header>
+    <main>
+        <table style="width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th style="text-align: left; width: 200px; padding: 20px;
+                    color: #5D6975;
+                    border-bottom: 1px solid #C1CED9;
+                    white-space: nowrap;
+                    font-weight: normal;
+                    text-align: left;
+                    text-align: center;" class="col1">DESCRIPCIÓN</th>
+                    <th class="col2" style="width: 90px; text-align: left;
+                    padding: 20px;
+                    color: #5D6975;
+                    border-bottom: 1px solid #C1CED9;
+                    white-space: nowrap;
+                    font-weight: normal;
+                    text-align: left;
+                    text-align: center;">INGRESO</th>
+                    <th style="padding: 20px;
+                    color: #5D6975;
+                    border-bottom: 1px solid #C1CED9;
+                    white-space: nowrap;
+                    font-weight: normal;
+                    text-align: left;
+                    text-align: center;">DESCRIPCIÓN</th>
+                    <th style="padding: 20px;
+                    color: #5D6975;
+                    border-bottom: 1px solid #C1CED9;
+                    white-space: nowrap;
+                    font-weight: normal;
+                    text-align: left;
+                    text-align: center;">DEDUCCIÓN</th>
+                    <br>
+                    <br>
+                    <br>
+                </tr>
+            </thead>
+            <tbody>
+                {trDeduccionesIngresos}
+                <tr>
+                    <td style=" padding 20px;
+                        text-align left;
+                        vertical-align center;" colspan="1">
+                        TOTAL INGRESOS
+                    </td>
+                    <td style=" padding 20px;
+                        text-align left;
+                        vertical-align center;" class="">
+                        L. {totalIngresos}
+                    </td>
+                    <td style=" padding 20px;
+                        text-align left;
+                        vertical-align center;"colspan="1">
+                        TOTAL DEDUCCIONES
+                    </td>
+                    <td class="totaldeduc" style="text-align: left;
+                    padding: 20px;
+                    text-align: left;
+                    vertical-align: center;">
+                        L. {TotalDeucciones}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-top: 1px solid #5D6975; text-align: left;
+                    padding: 0px;
+                    font-size: 1.2em;
+                    padding: 20px;
+                    text-align: left;
+                    vertical-align: center;" class="grand col3">
+                        <b>NETO A PAGAR</b>
+                    </td>
+                    <td style="border-top: 1px solid #5D6975; text-align: left;
+                    padding: 0px;
+                    font-size: 1.2em;" class="grand col3">
+                        <b>L. {TotalPagar}</b>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="notices" style="color: #5D6975;
+              font-size: 1.2em;">
+            <div>AVISO:</div>
+            <div class="notice" style="color: #5D6975;
+                  font-size: 1.2em;">Se hará un cargo del 1.5% en nóminas sin pagar después de 30 días.</div>
+        </div>
+        <div id="parent" style="display: flex;
+        margin-top: 9rem">
+            <div id="narrow">
+                <hr style="width: 300px;">
+                <span style="padding-left:90px;">Firma del colaborador</span>
+            </div>
+            <div id="wide" style="flex: 1;">
+                <hr style="width: 300px;">
+                <span style="padding-left:190px;">Firma Autorizada</span>
+            </div>
+        </div>
+    </main>
+    <footer>
+        Este comprobante de pago fue creado automáticamente por una computadora y es válido sin firma y/o sello.
+    </footer>
+</body>
+</html>

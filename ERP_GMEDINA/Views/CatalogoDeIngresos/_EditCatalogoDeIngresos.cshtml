@@ -1,0 +1,56 @@
+﻿@model ERP_GMEDINA.Models.tbCatalogoDeIngresos
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresos" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.cin_IdIngreso)
+        @Html.HiddenFor(model => model.cin_FechaCrea)
+        @Html.HiddenFor(model => model.cin_UsuarioCrea)
+        <div class="form-group">
+            @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tde_IdTipoDedu, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.cde_PorcentajeColaborador, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.cde_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    </div>
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@
+        <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+        <input type="button" class="btn btn-primary" id="btnUpdateIngresos" value="Aceptar"/>
+        <button type="button" class="btn btn-danger" id="btnModalInactivar">Inactivar</button>
+    </div>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cin_IdIngreso)
+    @Html.HiddenFor(model => model.cin_FechaCrea)
+    @Html.HiddenFor(model => model.cin_UsuarioCrea)
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -523,7 +523,61 @@ namespace ERP_GMEDINA
               bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                           "~/Scripts/app/general/Areas/EditArea.js"));
 
+              bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
+                         "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
 
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
+                "~/Scripts/app/General/Planilla.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeIngresos").Include(
+                "~/Scripts/app/General/CatalogoDeIngresos.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TechosDeducciones").Include(
+                "~/Scripts/app/General/TechosDeducciones.js"));
+
+            // SELVIN
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
+                "~/Scripts/app/General/CatalogoPlanillas.js"));
+
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
+                 "~/Scripts/plugins/dataTables/datatables.min.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/app/General").Include(
+                 "~/Content/app/General/catalogoPlanillas.css"));
+
+
+            //bundles ScripBase/Validate DataAnnotations
+            bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
+                "~/Scripts/Scripts_Base/jquery.validate.js",
+                "~/Scripts/Scripts_Base/jquery.validate.min.js",
+                "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
+
+            //==========================EQUIPO MALCOM ===========================
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoDeducciones").Include(
+                "~/Scripts/app/General/TipoDeducciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/EmpleadoBonos").Include(
+                "~/Scripts/app/General/EmpleadoBonos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/FormaPago").Include(
+                "~/Scripts/app/General/FormaPago.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones").Include(
+                "~/Scripts/app/General/CreateHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
+               "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General").Include(
+                "~/Scripts/app/General/general.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

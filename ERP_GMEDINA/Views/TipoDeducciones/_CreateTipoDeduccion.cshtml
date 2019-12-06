@@ -1,0 +1,28 @@
+﻿@model ERP_GMEDINA.Models.tbTipoDeduccion
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTipoDeduccionCreate" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-body" id="Crear">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.tde_IdTipoDedu)
+                    @Html.HiddenFor(model => model.tde_UsuarioCrea)
+                    @Html.HiddenFor(model => model.tde_FechaCrea)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.tde_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.tde_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" id="btnCerrarCrear" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnCreateRegistroTipoDeducciones">Aceptar</button>
+            </div>
+        }
+
+
+
