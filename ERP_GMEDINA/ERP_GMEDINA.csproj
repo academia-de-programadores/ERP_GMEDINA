@@ -236,6 +236,8 @@
     <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
     <Compile Include="Models\cISR.cs" />
+    <Compile Include="Models\cISRRPT.cs" />
+    <Compile Include="Models\cLiquidacionesRPT.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
@@ -1122,7 +1124,9 @@
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\ISR.js" />
+    <Content Include="Scripts\app\General\ISRRPT.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
+    <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -1770,6 +1774,12 @@
     <Content Include="Views\ISR\_CreateISR.cshtml" />
     <Content Include="Views\ISR\_DetailsISR.cshtml" />
     <Content Include="Views\ISR\_EditISR.cshtml" />
+    <Content Include="Views\ReportesPlanilla\GeneralTotalesIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ISRIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\LiquidacionesIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_GeneralTotalesModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_ISRModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_LiquidacionesModalRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1812,6 +1822,8 @@
     <EmbeddedResource Include="ReportesPlanilla\IHSSRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ISRRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\LiquidacionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>

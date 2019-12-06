@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.V_Liquidaciones_RPT>
+
+@{
+    ViewBag.Title = "LiquidacionesIndexRPT";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="modal fade" id="LiquidacionesModalRPT" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Ingrese Datos</h4>
+            </div>
+            @Html.Partial("_LiquidacionesModalRPT", new ERP_GMEDINA.Models.V_Liquidaciones_RPT())
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Liquidaciones</h5>
+                    <div class="ibox-tools" id="boxTools">
+                        <button class="btn btn-primary btn-sm" id="ParametrosLiquidacionesRPT">Reporte Especifico</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblLiquidacionesRPT" class="table table-striped table-bordered table-hover dataTables-example rpt">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.emp_Id)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.NombreCompleto)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.per_Identidad)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.depto_descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.area_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cpla_DescripcionPlanilla)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hliq_fechaIngreso)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hliq_fechaLiquidacion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hliq_PorcentajeLiquidacion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hliq_Observaciones)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyLiquidacionesRPT">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.emp_Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.per_Identidad)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.depto_descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.area_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cpla_DescripcionPlanilla)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hliq_fechaIngreso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hliq_fechaLiquidacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hliq_PorcentajeLiquidacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hliq_Observaciones)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTablesRPT")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/LiquidacionesRPT.js")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

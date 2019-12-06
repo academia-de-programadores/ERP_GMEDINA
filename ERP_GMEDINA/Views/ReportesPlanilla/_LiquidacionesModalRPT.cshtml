@@ -1,0 +1,33 @@
+﻿@model ERP_GMEDINA.Models.V_Liquidaciones_RPT
+
+@using (Html.BeginForm("LiquidacionesParametrosRPT", "ReportesPlanilla"))
+{
+    <div class="modal-body">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hliq_fechaLiquidacion, htmlAttributes: new { @class = "font-noraml" }) <br />
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hliq_fechaLiquidacion, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hliq_fechaLiquidacion", @id = "hliq_fechaLiquidacion" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.hliq_fechaLiquidacion, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "font-noraml" }) <br />
+
+            @Html.DropDownList("cpla_DescripcionPlanilla", (IEnumerable<SelectListItem>)ViewBag.TipoPlanillaDDL, "Seleccione", new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+        </div>
+
+        <input type="hidden" value="pdf" name="id" />
+
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" id="btnCerrarModalRPT">Cerrar</button>
+            <button type="submit" class="btn btn-primary" id="btnEnviarParametros">Aceptar</button>
+        </div>
+
+    </div>
+}
