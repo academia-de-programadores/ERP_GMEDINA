@@ -20,6 +20,74 @@
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="area_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="jor_Id" Type="int" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="fpa_IdFormaPago" Type="int" Nullable="false" />
+          <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
+          <Property Name="emp_Reingreso" Type="bit" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
+          <Property Name="emp_RazonSalida" Type="nvarchar" MaxLength="50" />
+          <Property Name="emp_CargoAnterior" Type="int" />
+          <Property Name="emp_FechaDeSalida" Type="datetime" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="emp_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="emp_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="emp_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="emp_UsuarioModifica" Type="int" />
+          <Property Name="emp_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbHistorialPermisos">
+          <Key>
+            <PropertyRef Name="hper_Id" />
+          </Key>
+          <Property Name="hper_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="tper_Id" Type="int" Nullable="false" />
+          <Property Name="hper_fechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
+          <Property Name="hper_Duracion" Type="int" Nullable="false" />
+          <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
+          <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
+          <Property Name="hper_Estado" Type="bit" Nullable="false" />
+          <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hper_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hper_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hper_UsuarioModifica" Type="int" />
+          <Property Name="hper_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbPersonas">
+          <Key>
+            <PropertyRef Name="per_Id" />
+          </Key>
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="per_Sexo" Type="char" MaxLength="1" />
+          <Property Name="per_Edad" Type="int" />
+          <Property Name="nac_Id" Type="int" Nullable="false" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
+          <Property Name="per_TipoSangre" Type="nvarchar" MaxLength="4" />
+          <Property Name="per_Estado" Type="bit" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="per_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="per_UsuarioModifica" Type="int" />
+          <Property Name="per_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoMonedas">
           <Key>
             <PropertyRef Name="tmon_Id" />
@@ -33,6 +101,92 @@
           <Property Name="tmon_UsuarioModifica" Type="int" />
           <Property Name="tmon_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTipoPermisos">
+          <Key>
+            <PropertyRef Name="tper_Id" />
+          </Key>
+          <Property Name="tper_Id" Type="int" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="tper_GoceDeSueldo" Type="bit" Nullable="false" />
+          <Property Name="tper_Estado" Type="bit" Nullable="false" />
+          <Property Name="tper_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="tper_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="tper_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tper_UsuarioModifica" Type="int" />
+          <Property Name="tper_FechaModifica" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoMonedas" Type="Self.tbTipoMonedas" Multiplicity="*" />
@@ -54,6 +208,66 @@
             </Principal>
             <Dependent Role="tbTipoMonedas">
               <PropertyRef Name="tmon_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoPermisos" Type="Self.tbTipoPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoPermisos">
+              <PropertyRef Name="tper_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoPermisos" Type="Self.tbTipoPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoPermisos">
+              <PropertyRef Name="tper_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="'FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+          <End Role="tbTipoPermisos" Type="Self.tbTipoPermisos" Multiplicity="1" />
+          <End Role="tbHistorialPermisos" Type="Self.tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoPermisos">
+              <PropertyRef Name="tper_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="tper_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -102,21 +316,20 @@
         <Function Name="UDP_Plani_EmpleadoComisiones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
-          <Parameter Name="cc_Monto" Type="decimal" Mode="In" />
           <Parameter Name="cc_FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="cc_Pagado" Type="bit" Mode="In" />
           <Parameter Name="cc_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="cc_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_EmpleadoComisiones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cc_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
-          <Parameter Name="cc_Monto" Type="decimal" Mode="In" />
-          <Parameter Name="cc_FechaRegistro" Type="datetime" Mode="In" />
-          <Parameter Name="cc_Pagado" Type="bit" Mode="In" />
+          <Parameter Name="EMP_Id" Type="int" Mode="In" />
           <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="cc_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="cc_PorcentajeComision" Type="decimal" Mode="In" />
+          <Parameter Name="cc_TotalVenta" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
@@ -164,6 +377,7 @@
           <Parameter Name="cpla_FrecuenciaEnDias" Type="int" Mode="In" />
           <Parameter Name="cpla_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="cpla_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="cpla_RecibeComision" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbCatalogoDePlanillas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
@@ -171,6 +385,7 @@
           <Parameter Name="cpla_FrecuenciaEnDias" Type="int" Mode="In" />
           <Parameter Name="cpla_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="cpla_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="cpla_RecibeComision" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbDecimoTercerMes_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -251,26 +466,26 @@
           <Parameter Name="insf_Activo" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_Id" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="tddu_IdTechosDeducciones" Type="int" Mode="In" />
+          <Parameter Name="tddu_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tddu_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_RangoInicial" Type="decimal" Mode="In" />
-          <Parameter Name="tede_RangoFinal" Type="decimal" Mode="In" />
-          <Parameter Name="tede_Porcentaje" Type="int" Mode="In" />
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="tddu_PorcentajeColaboradores" Type="decimal" Mode="In" />
+          <Parameter Name="tddu_PorcentajeEmpresa" Type="decimal" Mode="In" />
+          <Parameter Name="tddu_Techo" Type="decimal" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
+          <Parameter Name="tddu_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tddu_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTechosDeducciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tede_Id" Type="int" Mode="In" />
-          <Parameter Name="tede_RangoInicial" Type="decimal" Mode="In" />
-          <Parameter Name="tede_RangoFinal" Type="decimal" Mode="In" />
-          <Parameter Name="tede_Porcentaje" Type="int" Mode="In" />
-          <Parameter Name="cde_IdDeduccion" Type="int" Mode="In" />
-          <Parameter Name="tede_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="tede_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="tddu_IdTechosDeducciones" Type="int" Mode="In" />
+          <Parameter Name="tddu_PorcentajeColaboradores" Type="decimal" Mode="In" />
+          <Parameter Name="tddu_PorcentajeEmpresa" Type="decimal" Mode="In" />
+          <Parameter Name="tddu_Techo" Type="decimal" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
+          <Parameter Name="tddu_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tddu_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbTipoDeduccion_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="tde_IdTipoDedu" Type="int" Mode="In" />
@@ -323,6 +538,20 @@
           <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="fare_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbHistorialPermisos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hper_Id" Type="int" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="tper_Id" Type="int" Mode="In" />
+          <Parameter Name="hper_fechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="hper_fechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="hper_Duracion" Type="int" Mode="In" />
+          <Parameter Name="hper_Observacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="hper_PorcentajeIndemnizado" Type="int" Mode="In" />
+          <Parameter Name="hper_Estado" Type="bit" Mode="In" />
+          <Parameter Name="hper_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hper_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hper_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoMoneda_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tmon_Id" Type="int" Mode="In" />
           <Parameter Name="tmon_Descripcion" Type="nvarchar" Mode="In" />
@@ -345,7 +574,35 @@
         </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
+          <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbHistorialPermisos" EntityType="Self.tbHistorialPermisos" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoMonedas" EntityType="Self.tbTipoMonedas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTipoPermisos" EntityType="Self.tbTipoPermisos" Schema="rrhh" store:Type="Tables" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
@@ -353,6 +610,26 @@
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="Self.'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="'FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="Self.'FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -404,21 +681,20 @@
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
-            <Parameter Name="cc_Monto" Mode="In" Type="Decimal" />
             <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="cc_Pagado" Mode="In" Type="Boolean" />
             <Parameter Name="cc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Update" ReturnType="Collection(String)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
-            <Parameter Name="cc_Monto" Mode="In" Type="Decimal" />
-            <Parameter Name="cc_FechaRegistro" Mode="In" Type="DateTime" />
-            <Parameter Name="cc_Pagado" Mode="In" Type="Boolean" />
+            <Parameter Name="EMP_Id" Mode="In" Type="Int32" />
             <Parameter Name="cc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cc_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="cc_PorcentajeComision" Mode="In" Type="Decimal" />
+            <Parameter Name="cc_TotalVenta" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result)">
             <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
@@ -466,6 +742,7 @@
             <Parameter Name="cpla_FrecuenciaEnDias" Mode="In" Type="Int32" />
             <Parameter Name="cpla_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cpla_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="cpla_RecibeComision" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Update" ReturnType="Collection(String)">
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
@@ -473,6 +750,7 @@
             <Parameter Name="cpla_FrecuenciaEnDias" Mode="In" Type="Int32" />
             <Parameter Name="cpla_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="cpla_RecibeComision" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDecimoTercerMes_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -553,26 +831,26 @@
             <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="tede_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tede_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tede_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="tddu_IdTechosDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Insert" ReturnType="Collection(String)">
-            <Parameter Name="tede_RangoInicial" Mode="In" Type="Decimal" />
-            <Parameter Name="tede_RangoFinal" Mode="In" Type="Decimal" />
-            <Parameter Name="tede_Porcentaje" Mode="In" Type="Int32" />
-            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
-            <Parameter Name="tede_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tede_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="tddu_PorcentajeColaboradores" Mode="In" Type="Decimal" />
+            <Parameter Name="tddu_PorcentajeEmpresa" Mode="In" Type="Decimal" />
+            <Parameter Name="tddu_Techo" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Update" ReturnType="Collection(String)">
-            <Parameter Name="tede_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tede_RangoInicial" Mode="In" Type="Decimal" />
-            <Parameter Name="tede_RangoFinal" Mode="In" Type="Decimal" />
-            <Parameter Name="tede_Porcentaje" Mode="In" Type="Int32" />
-            <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
-            <Parameter Name="tede_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tede_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="tddu_IdTechosDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_PorcentajeColaboradores" Mode="In" Type="Decimal" />
+            <Parameter Name="tddu_PorcentajeEmpresa" Mode="In" Type="Decimal" />
+            <Parameter Name="tddu_Techo" Mode="In" Type="Decimal" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tddu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbTipoDeduccion_Inactivar" ReturnType="Collection(String)">
             <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
@@ -653,7 +931,69 @@
             <Parameter Name="tmon_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tbHistorialPermisos" EntityType="ERP_GMEDINAModel.tbHistorialPermisos" />
+          <EntitySet Name="tbTipoPermisos" EntityType="ERP_GMEDINAModel.tbTipoPermisos" />
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <EntitySet Name="tbEmpleados" EntityType="ERP_GMEDINAModel.tbEmpleados" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <EntitySet Name="tbPersonas" EntityType="ERP_GMEDINAModel.tbPersonas" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result)">
+            <Parameter Name="hper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hper_fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hper_fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hper_Duracion" Mode="In" Type="Int32" />
+            <Parameter Name="hper_Observacion" Mode="In" Type="String" />
+            <Parameter Name="hper_PorcentajeIndemnizado" Mode="In" Type="Int32" />
+            <Parameter Name="hper_Estado" Mode="In" Type="Boolean" />
+            <Parameter Name="hper_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -707,6 +1047,14 @@
           <Property Name="usu_SesionesValidas" Type="Byte" />
           <NavigationProperty Name="tbTipoMonedas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
           <NavigationProperty Name="tbTipoMonedas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
+          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
+          <NavigationProperty Name="tbHistorialPermisos1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
+          <NavigationProperty Name="tbTipoPermisos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoPermisos" />
+          <NavigationProperty Name="tbTipoPermisos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoPermisos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbEmpleados1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
         </EntityType>
         <EntityType Name="tbTipoMonedas">
           <Key>
@@ -760,6 +1108,237 @@
           <Property Type="String" Name="tmon_Descripcion" Nullable="false" MaxLength="25" />
           <Property Type="Boolean" Name="tmon_Estado" Nullable="false" />
           <Property Type="String" Name="tmon_RazonInactivo" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="tbHistorialPermisos">
+          <Key>
+            <PropertyRef Name="hper_Id" />
+          </Key>
+          <Property Name="hper_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Id" Type="Int32" Nullable="false" />
+          <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
+          <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
+          <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hper_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_UsuarioModifica" Type="Int32" />
+          <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbTipoPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" FromRole="tbHistorialPermisos" ToRole="tbTipoPermisos" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbHistorialPermisos" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="tbTipoPermisos">
+          <Key>
+            <PropertyRef Name="tper_Id" />
+          </Key>
+          <Property Name="tper_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="tper_GoceDeSueldo" Type="Boolean" Nullable="false" />
+          <Property Name="tper_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tper_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="tper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tper_UsuarioModifica" Type="Int32" />
+          <Property Name="tper_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" FromRole="tbTipoPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" FromRole="tbTipoPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" FromRole="tbTipoPermisos" ToRole="tbHistorialPermisos" />
+        </EntityType>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoPermisos" Role="tbTipoPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoPermisos">
+              <PropertyRef Name="tper_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoPermisos" Role="tbTipoPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoPermisos">
+              <PropertyRef Name="tper_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+          <End Type="ERP_GMEDINAModel.tbTipoPermisos" Role="tbTipoPermisos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoPermisos">
+              <PropertyRef Name="tper_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="tper_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="area_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="jor_Id" Type="Int32" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="fpa_IdFormaPago" Type="Int32" Nullable="false" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Reingreso" Type="Boolean" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_RazonSalida" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CargoAnterior" Type="Int32" />
+          <Property Name="emp_FechaDeSalida" Type="DateTime" Precision="3" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="emp_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="emp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_UsuarioModifica" Type="Int32" />
+          <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialPermisos" />
+          <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="emp_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbPersonas">
+          <Key>
+            <PropertyRef Name="per_Id" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_Edad" Type="Int32" />
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_TipoSangre" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="per_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="per_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="per_UsuarioModifica" Type="Int32" />
+          <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbPersonas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbPersonas" ToRole="tbEmpleados" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPersonas">
+              <PropertyRef Name="per_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
+          <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -919,6 +1498,99 @@
                 <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
                 <ScalarProperty Name="tmon_Estado" ColumnName="tmon_Estado" />
                 <ScalarProperty Name="tmon_RazonInactivo" ColumnName="tmon_RazonInactivo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbHistorialPermisos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialPermisos">
+              <MappingFragment StoreEntitySet="tbHistorialPermisos">
+                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
+                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
+                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
+                <ScalarProperty Name="hper_UsuarioCrea" ColumnName="hper_UsuarioCrea" />
+                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
+                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
+                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
+                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
+                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
+                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
+                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTipoPermisos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoPermisos">
+              <MappingFragment StoreEntitySet="tbTipoPermisos">
+                <ScalarProperty Name="tper_FechaModifica" ColumnName="tper_FechaModifica" />
+                <ScalarProperty Name="tper_UsuarioModifica" ColumnName="tper_UsuarioModifica" />
+                <ScalarProperty Name="tper_FechaCrea" ColumnName="tper_FechaCrea" />
+                <ScalarProperty Name="tper_UsuarioCrea" ColumnName="tper_UsuarioCrea" />
+                <ScalarProperty Name="tper_RazonInactivo" ColumnName="tper_RazonInactivo" />
+                <ScalarProperty Name="tper_Estado" ColumnName="tper_Estado" />
+                <ScalarProperty Name="tper_GoceDeSueldo" ColumnName="tper_GoceDeSueldo" />
+                <ScalarProperty Name="tper_Descripcion" ColumnName="tper_Descripcion" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEmpleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbEmpleados">
+              <MappingFragment StoreEntitySet="tbEmpleados">
+                <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
+                <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
+                <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
+                <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
+                <ScalarProperty Name="emp_RazonInactivo" ColumnName="emp_RazonInactivo" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_FechaDeSalida" ColumnName="emp_FechaDeSalida" />
+                <ScalarProperty Name="emp_CargoAnterior" ColumnName="emp_CargoAnterior" />
+                <ScalarProperty Name="emp_RazonSalida" ColumnName="emp_RazonSalida" />
+                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
+                <ScalarProperty Name="emp_Reingreso" ColumnName="emp_Reingreso" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="fpa_IdFormaPago" ColumnName="fpa_IdFormaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="jor_Id" ColumnName="jor_Id" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="area_Id" ColumnName="area_Id" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPersonas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPersonas">
+              <MappingFragment StoreEntitySet="tbPersonas">
+                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
+                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
+                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
+                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
+                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
+                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
+                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
+                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
+                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
+                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

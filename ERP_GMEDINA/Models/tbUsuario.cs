@@ -19,6 +19,14 @@ namespace ERP_GMEDINA.Models
         {
             this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
             this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
+            this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
+            this.tbHistorialPermisos1 = new HashSet<tbHistorialPermisos>();
+            this.tbTipoPermisos = new HashSet<tbTipoPermisos>();
+            this.tbTipoPermisos1 = new HashSet<tbTipoPermisos>();
+            this.tbEmpleados = new HashSet<tbEmpleados>();
+            this.tbEmpleados1 = new HashSet<tbEmpleados>();
+            this.tbPersonas = new HashSet<tbPersonas>();
+            this.tbPersonas1 = new HashSet<tbPersonas>();
         }
     
         public int usu_Id { get; set; }
@@ -36,5 +44,21 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTipoMonedas> tbTipoMonedas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbEmpleados> tbEmpleados1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPersonas> tbPersonas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPersonas> tbPersonas1 { get; set; }
     }
 }
