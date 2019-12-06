@@ -299,74 +299,74 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte InstitucionesFinancieras - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte InstitucionesFinancieras - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
 
-		//Pendiente
-        #region Reporte IHSS
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte Decimo Tercer Mes - INICIO
 
-        //Index 
-        public ActionResult IHSSIndexRPT()
-        {
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+		#region Reporte IHSS
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Decimo Tercer Mes - INICIO
 
-            return View(db.V_IHSS_RPT.ToList());
-        }
+		//Index 
+		public ActionResult IHSSIndexRPT()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 
-        //Reporte con parametros
-        public ActionResult IHSSParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
-        {
-            LocalReport lr = new LocalReport();
-            string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "IHSSRPT.rdlc");
-            if (System.IO.File.Exists(path))
-            {
-                lr.ReportPath = path;
-            }
-            else
-            {
-                return View("Index");
-            }
-            List<V_IHSS_RPT> cm = new List<V_IHSS_RPT>();
+			return View(db.V_IHSS_RPT.ToList());
+		}
 
-            cm = db.V_IHSS_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+		//Reporte con parametros
+		public ActionResult IHSSParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
+		{
+			LocalReport lr = new LocalReport();
+			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "IHSSRPT.rdlc");
+			if (System.IO.File.Exists(path))
+			{
+				lr.ReportPath = path;
+			}
+			else
+			{
+				return View("Index");
+			}
+			List<V_IHSS_RPT> cm = new List<V_IHSS_RPT>();
 
-            ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
-            lr.DataSources.Add(rd);
-            string reportType = id;
-            string mimeType;
-            string encoding;
-            string fileNameExtension;
-            string deviceInfo =
+			cm = db.V_IHSS_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
 
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
+			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
+			lr.DataSources.Add(rd);
+			string reportType = id;
+			string mimeType;
+			string encoding;
+			string fileNameExtension;
+			string deviceInfo =
 
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
 
-            renderedBytes = lr.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
+			Warning[] warnings;
+			string[] streams;
+			byte[] renderedBytes;
 
-            return File(renderedBytes, mimeType);
-        }
+			renderedBytes = lr.Render(
+				reportType,
+				deviceInfo,
+				out mimeType,
+				out encoding,
+				out fileNameExtension,
+				out streams,
+				out warnings);
+
+			return File(renderedBytes, mimeType);
+		}
 		//Reporte Decimo Tercer Mes - FIN
 		//-------------------------------------------------------------------------------------------------------------------------------
 		#endregion
@@ -650,5 +650,77 @@ namespace ERP_GMEDINA.Controllers
 
 
 		#endregion
+
+
+		#region Reporte General Totales
+
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte General Totales - INICIO
+
+		//Index 
+		public ActionResult GeneralTotalesIndexRPT()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
+			return View(db.V_GeneralTotales_RPT.ToList());
+		}
+
+		//Reporte con parametros
+		public ActionResult GeneralTotalesParametrosRPT(DateTime hipa_FechaPago, int cpla_DescripcionPlanilla, string id)
+		{
+			LocalReport lr = new LocalReport();
+			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "GeneralTotalesRPT.rdlc");
+			if (System.IO.File.Exists(path))
+			{
+				lr.ReportPath = path;
+			}
+			else
+			{
+				return View("Index");
+			}
+			List<V_GeneralTotales_RPT> cm = new List<V_GeneralTotales_RPT>();
+
+			cm = db.V_GeneralTotales_RPT.Where(x => hipa_FechaPago == x.hipa_FechaPago && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+
+			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
+			lr.DataSources.Add(rd);
+			string reportType = id;
+			string mimeType;
+			string encoding;
+			string fileNameExtension;
+			string deviceInfo =
+
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
+
+			Warning[] warnings;
+			string[] streams;
+			byte[] renderedBytes;
+
+			renderedBytes = lr.Render(
+				reportType,
+				deviceInfo,
+				out mimeType,
+				out encoding,
+				out fileNameExtension,
+				out streams,
+				out warnings);
+
+			return File(renderedBytes, mimeType);
+		}
+		//Reporte General Totales Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+
+		#endregion
+
+
 	}
 }
