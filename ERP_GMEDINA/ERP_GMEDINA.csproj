@@ -230,6 +230,7 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
+    <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
     <Compile Include="Models\cRAPRPT.cs" />
