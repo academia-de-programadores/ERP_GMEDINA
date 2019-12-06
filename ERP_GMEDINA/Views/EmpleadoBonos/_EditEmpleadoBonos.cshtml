@@ -1,0 +1,64 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleadoBonos
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonos" }))
+{
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.cb_Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group" style="display: none">
+                @Html.LabelFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso, "cin_IdIngreso", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cb_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="display: none">
+                @Html.LabelFor(model => model.cb_FechaRegistro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cb_FechaRegistro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cb_FechaRegistro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="display: none">
+                @Html.LabelFor(model => model.cb_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <input type="checkbox" name="cb_Pagado" id="cb_Pagado">
+                        @Html.ValidationMessageFor(model => model.cb_Pagado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btnUpdateBonos">Aceptar</button>
+        <button type="button" class="btn btn-danger" id="btnmodalInactivarEmpleadoBonos">Inactivar</button>
+    </div>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonosInactivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cb_Id)
+}

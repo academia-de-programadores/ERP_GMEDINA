@@ -185,17 +185,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
+    <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
+    <Compile Include="Controllers\DecimoCuartoMesController.cs" />
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
+    <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
+    <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -208,6 +213,7 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Helpers\Liquidacion.cs" />
     <Compile Include="Models\cAcumuladosISR.cs" />
+    <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
@@ -552,6 +558,18 @@
     <Compile Include="Models\UDP_Plani_tbAcumuladosISR_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -585,6 +603,9 @@
     <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbDecimoCuartoMes_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -595,6 +616,30 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbFormaPago_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbFormaPago_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbFormaPago_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbFormaPago_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Insert_Result.cs">
@@ -613,6 +658,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Select_Result.cs">
@@ -636,6 +693,7 @@
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleIngreso_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModelDecimoCuartoMes.cs" />
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
@@ -1026,11 +1084,13 @@
     </Content>
     <Content Include="Scripts\app\FileSaver.min.js" />
     <Content Include="Scripts\app\General\AcumuladosISR.js" />
+    <Content Include="Scripts\app\General\AdelantoSueldo.js" />
     <Content Include="Scripts\app\General\AFPRPT.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
+    <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\DecimoTercerMes.js" />
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
@@ -1665,6 +1725,20 @@
     <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
+    <Content Include="Views\DecimoCuartoMes\FechaEspecifica.cshtml" />
+    <Content Include="Views\DecimoCuartoMes\Index.cshtml" />
+    <Content Include="Views\DecimoCuartoMes\_FechasDecimoCuarto.cshtml" />
+    <Content Include="Views\AdelantoSueldo\Index.cshtml" />
+    <Content Include="Views\AdelantoSueldo\_Crear.cshtml" />
+    <Content Include="Views\AdelantoSueldo\_Detalle.cshtml" />
+    <Content Include="Views\AdelantoSueldo\_Editar.cshtml" />
+    <Content Include="Views\EmpleadoBonos\Index.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_CreateEmpleadoBonos.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_DetalleEmpleadoBonos.cshtml" />
+    <Content Include="Views\EmpleadoBonos\_EditEmpleadoBonos.cshtml" />
+    <Content Include="Views\FormaPago\Index.cshtml" />
+    <Content Include="Views\FormaPago\_Create.cshtml" />
+    <Content Include="Views\FormaPago\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

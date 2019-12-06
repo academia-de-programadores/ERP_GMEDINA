@@ -516,6 +516,12 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FormaPago").Include(
                 "~/Scripts/app/General/FormaPago.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/DecimoCuartoMes").Include(
+                "~/Scripts/app/General/DecimoCuartoMes.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/AdelantoSueldo").Include(
+                "~/Scripts/app/General/AdelantoSueldo.js"));
             #endregion
 
             //DataAnnotations

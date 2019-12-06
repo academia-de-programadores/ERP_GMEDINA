@@ -1,0 +1,36 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialDePago
+@using (Ajax.BeginForm("FechaEspecifica", "DecimoTercerMes", new AjaxOptions { HttpMethod = "POST", LoadingElementId = "" }))
+{
+    <div class="modal-body">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hipa_FechaInicio, htmlAttributes: new { @class = "font-noraml" }) <br />
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hipa_FechaFin, htmlAttributes: new { @class = "font-noraml" })
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin" } })
+            </div>
+            @Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+        </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@
+        <button type="button" class="btn btn-white" id="btnCerrarFecha">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btnEnviarFecha">Aceptar</button>
+    </div>
+}
+
+
+
+

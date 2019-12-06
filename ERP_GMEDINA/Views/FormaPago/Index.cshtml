@@ -1,0 +1,115 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbFormaPago>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Formas de pago</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarFormaPago">Nuevo</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                  <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_FechaCrea)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_FechaModifica)</th>       
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFormaPago">
+                      @foreach (var item in Model) {
+                          var UsuarioModifica = !(item.fpa_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+                          var FechaModifica = Convert.ToString(item.fpa_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaModifica);
+                        <tr class="gradeA odd" role="row" data-id="@item.fpa_IdFormaPago">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fpa_Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fpa_FechaCrea)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => UsuarioModifica)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => FechaModifica)
+                            </td>
+                            <td>
+                              @*<button type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>*@
+                              <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>
+                            </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+<div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar datos</h4>
+            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbFormaPago())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbFormaPago())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InactivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar el registro</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <p><b>¿Desea Inactivar el registro?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnInactivarFormaPagoConfirm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")@Scripts.Render("~/plugins/izitoast")
+}
+
+@section Scripts {
+ 
+  @Scripts.Render("~/plugins/dataTables")
+  @Scripts.Render("~/Scripts/app/General/FormaPago")
+  @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
