@@ -1,9 +1,9 @@
-﻿@model ERP_GMEDINA.Models.V_IHSS_RPT
+﻿
+@model ERP_GMEDINA.Models.V_RAP_RPT
 
-@using (Html.BeginForm("IHSSParametrosRPT", "ReportesPlanilla"))
+@using (Html.BeginForm("RAPParametrosRPT", "ReportesPlanilla"))
 {
     <div class="modal-body">
-
         <div class="form-group">
             @Html.LabelFor(model => model.hipa_FechaPago, htmlAttributes: new { @class = "font-noraml" }) <br />
             <div class="input-group date">
@@ -21,7 +21,6 @@
         </div>
 
         <input type="hidden" value="pdf" name="id" />
-
 
 
         <div class="modal-footer">

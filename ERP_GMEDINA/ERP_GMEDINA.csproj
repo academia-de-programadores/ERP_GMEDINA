@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="Helpers\General.cs" />
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\cAFPRPT.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCatalogoDePlanillas.cs" />
@@ -212,9 +213,11 @@
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cFormaPago.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
+    <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
+    <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
@@ -908,6 +911,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\General\AFPRPT.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
@@ -923,6 +927,7 @@
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
+    <Content Include="Scripts\app\General\RAPRPT.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />
     <Content Include="Scripts\app\General\TipoDeducciones.js" />
@@ -1491,6 +1496,10 @@
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
     <Content Include="Views\ReportesPlanilla\IHSSIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_IHSSModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_AFPModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_RAPModalRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\AFPIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\RAPIndexRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1526,9 +1535,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportesPlanilla\AFPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\GeneralTotalesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\IHSSRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />
