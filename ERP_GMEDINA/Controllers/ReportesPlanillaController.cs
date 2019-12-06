@@ -303,7 +303,7 @@ namespace ERP_GMEDINA.Controllers
         //-------------------------------------------------------------------------------------------------------------------------------
         #endregion
 
-
+		//Pendiente
         #region Reporte IHSS
         //-------------------------------------------------------------------------------------------------------------------------------
         //Reporte Decimo Tercer Mes - INICIO
@@ -367,17 +367,17 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte Decimo Tercer Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte Decimo Tercer Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
 
+		//Pendiente
+		#region Reporte Impuesto Sobre la Renta(ISR)
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Decimo Cuarto Mes - INICIO
 
-        #region Reporte Impuesto Sobre la Renta(ISR)
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte Decimo Cuarto Mes - INICIO
-
-        //Index 
-        public ActionResult ISRIndexRPT()
+		//Index 
+		public ActionResult ISRIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -435,17 +435,17 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte Decimo Cuarto Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte Decimo Cuarto Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
 
+		//Pendiente
+		#region Reporte Liquidaciones
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Decimo Cuarto Mes - INICIO
 
-        #region Reporte Liquidaciones
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte Decimo Cuarto Mes - INICIO
-
-        //Index 
-        public ActionResult LiquidacionesIndexRPT()
+		//Index 
+		public ActionResult LiquidacionesIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
