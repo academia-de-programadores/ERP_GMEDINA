@@ -7,265 +7,134 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-//using System.Transactions;
-
 
 namespace ERP_GMEDINA.Controllers
 {
     public class HistorialPermisosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-        // GET: Areas
+
+        // GET: HistorialPermisos
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialPermisos = new List<tbHistorialPermisos> { };
-            return View(tbHistorialPermisos);
+            var tbHistorialPermisos = db.tbHistorialPermisos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbTipoPermisos).Include(t => t.tbEmpleados);
+            return View(tbHistorialPermisos.ToList());
         }
-        public ActionResult llenarTabla()
-        {
-            try
-            {
-                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-                //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var tbHistorialPermisos = db.tbHistorialPermisos
-                        .Select(
-                        t => new
-                        {
-                            hper_Id = t.hper_Id,
-                            hper_Descripcion = t.hper_Observacion,
-                            Encargado = t.tbTipoPermisos.tbHistorialPermisos
 
-                                .Select(p => p.tbEmpleados.tbPersonas.per_Nombres + " " + p.tbEmpleados.tbPersonas.per_Apellidos)
-                        }
-                        )
-                        .ToList();
-                    return Json(tbHistorialPermisos, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch
-            {
-                return Json("-2", JsonRequestBehavior.AllowGet);
-            }
-        }
-        //public ActionResult ChildRowData(int? id)
-        //{
-        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-        //    //posteriormente es destruida.
-        //    List<V_Departamentos> lista = new List<V_Departamentos> { };
-        //    using (db = new ERP_GMEDINAEntities())
-        //    {
-        //        try
-        //        {
-        //            lista = db.V_Departamentos.Where(x => x.area_Id == id).ToList();
-        //        }
-        //        catch
-        //        {
-        //        }
-        //    }
-        //    return Json(lista, JsonRequestBehavior.AllowGet);
-        //}
-        public ActionResult llenarDropDowlist()
-        {
-            var TipoPermisos = new List<object> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    TipoPermisos.Add(new
-                    {
-                        Id = 0,
-                        Descripcion = "**Seleccione una opción**"
-                    });
-                    TipoPermisos.AddRange(db.tbTipoPermisos
-                    .Select(tabla => new { Id = tabla.tper_Id, Descripcion = tabla.tper_Descripcion })
-                    .ToList());
-                }
-                catch
-                {
-                    return Json("-2", 0);
-                }
-
-            }
-            var result = new Dictionary<string, object>();
-            result.Add("Tipo Permiso", TipoPermisos);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        // GET: Areas/Details/5
+        // GET: HistorialPermisos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            tbHistorialPermisos tbHistorialPermisos = null;
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
-                }
-                catch
-                {
-
-                }
-            }
+            tbHistorialPermisos tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
             if (tbHistorialPermisos == null)
             {
                 return HttpNotFound();
             }
             return View(tbHistorialPermisos);
         }
-        // GET: Areas/Create
+
+        // GET: HistorialPermisos/Create
         public ActionResult Create()
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            List<tbHistorialPermisos> HistorialPermisos = new List<tbHistorialPermisos> { };
-            ViewBag.hper_Id = new SelectList(HistorialPermisos, "hper_Id", "hper_Descripcion");
+            ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion");
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
             return View();
         }
-        // POST: Areas/Create
+
+        // POST: HistorialPermisos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(tbHistorialPermisos tbHistorialPermisos, tbPersonas[] tbPersonas)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "hper_Id,emp_Id,tper_Id,hper_fechaInicio,hper_fechaFin,hper_Duracion,hper_Observacion,hper_PorcentajeIndemnizado,hper_Estado,hper_RazonInactivo,hper_UsuarioCrea,hper_FechaCrea,hper_UsuarioModifica,hper_FechaModifica")] tbHistorialPermisos tbHistorialPermisos)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            string result = "";
-            //en esta area ingresamos el registro con el procedimiento almacenado
-            try
+            if (ModelState.IsValid)
             {
-                if (tbHistorialPermisos.hper_Id == 0 || tbHistorialPermisos.tbTipoPermisos.tper_Descripcion == "" || tbHistorialPermisos.hper_Observacion == "")
-                {
-                    return Json("-2", JsonRequestBehavior.AllowGet);
-                }
-                foreach (var item in tbPersonas)
-                {
-                    if (item.per_Nombres == "" || item.per_Apellidos == "")
-                    {
-                        return Json("-2", JsonRequestBehavior.AllowGet);
-                    }
-                }
-                var Usuario = (tbUsuario)Session["Usuario"];
-                //using (var scope = new TransactionScope())
-                //{
-                //    using (db = new ERP_GMEDINAEntities())
-                //    {
-                //        var list = db.UDP_RRHH_tbHistorialPermisos_Insert(
-                //                                                tbHistorialPermisos.hper_Id,
-                //                                                tbHistorialPermisos.tbTipoPermisos.tper_Descripcion,
-                //                                                tbHistorialPermisos.hper_fechaInicio,
-                //                                                Usuario.usu_Id,
-                //                                                DateTime.Now);
-                //        foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
-                //        {
-                //            tbAreas.area_Id = int.Parse(item.MensajeError.ToString());
-                //        }
-                //        if (tbAreas.area_Id == -2)
-                //        {
-                //            return Json("-2", JsonRequestBehavior.AllowGet);
-                //        }
-                //        foreach (var item in tbDepartamentos)
-                //        {
-
-                //        }
-
-                //    }
-                //}
-
+                db.tbHistorialPermisos.Add(tbHistorialPermisos);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                result = "-2";
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+            ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
+            ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            return View(tbHistorialPermisos);
         }
-        // GET: Areas/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-        //    //posteriormente es destruida.
-        //    tbAreas tbAreas = null;
-        //    using (db = new ERP_GMEDINAEntities())
-        //    {
-        //        List<tbSucursales> Sucursales = null;
-        //        try
-        //        {
-        //            tbAreas = db.tbAreas.Find(id);
-        //            Sucursales = db.tbSucursales.ToList();
-        //            ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
-        //        }
-        //        catch
-        //        {
-        //        }
-        //    }
-        //    if (tbAreas == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(new cAreas
-        //    {
-        //        suc_Id = tbAreas.suc_Id,
-        //        area_Descripcion = tbAreas.area_Descripcion
-        //    });
-        //}
-        // POST: Areas/Edit/5
+
+        // GET: HistorialPermisos/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbHistorialPermisos tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
+            if (tbHistorialPermisos == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
+            ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            return View(tbHistorialPermisos);
+        }
+
+        // POST: HistorialPermisos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "area_Id,car_Id,suc_Id,area_Descripcion,area_Estado,area_Razoninactivo,area_Usuariocrea,area_Fechacrea,area_Usuariomodifica,area_Fechamodifica")] tbHistorialPermisos tbHistorialPermisos)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "hper_Id,emp_Id,tper_Id,hper_fechaInicio,hper_fechaFin,hper_Duracion,hper_Observacion,hper_PorcentajeIndemnizado,hper_Estado,hper_RazonInactivo,hper_UsuarioCrea,hper_FechaCrea,hper_UsuarioModifica,hper_FechaModifica")] tbHistorialPermisos tbHistorialPermisos)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            string result = "";
-            using (db = new ERP_GMEDINAEntities())
+            if (ModelState.IsValid)
             {
-                try
-                {
-                    //en esta area actualizamos el registro con el procedimiento almacenado
-                }
-                catch
-                {
-                    result = "-2";
-                }
+                db.Entry(tbHistorialPermisos).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            ViewBag.hper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioCrea);
+            ViewBag.hper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialPermisos.hper_UsuarioModifica);
+            ViewBag.tper_Id = new SelectList(db.tbTipoPermisos, "tper_Id", "tper_Descripcion", tbHistorialPermisos.tper_Id);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialPermisos.emp_Id);
+            return View(tbHistorialPermisos);
         }
-        // POST: Areas/Delete/5
-        [HttpPost]
+
+        // GET: HistorialPermisos/Delete/5
         public ActionResult Delete(int? id)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            string result = "";
-            using (db = new ERP_GMEDINAEntities())
+            if (id == null)
             {
-                try
-                {
-                    //en esta area Inavilitamos el registro con el procedimiento almacenado
-                }
-                catch
-                {
-                    result = "-2";
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            tbHistorialPermisos tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
+            if (tbHistorialPermisos == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbHistorialPermisos);
+        }
+
+        // POST: HistorialPermisos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            tbHistorialPermisos tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
+            db.tbHistorialPermisos.Remove(tbHistorialPermisos);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db != null)
+            if (disposing)
             {
                 db.Dispose();
             }
@@ -273,4 +142,3 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
-
