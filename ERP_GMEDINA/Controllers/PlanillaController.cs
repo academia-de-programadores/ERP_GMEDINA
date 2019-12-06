@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
     {
         /*PENDIENTE
         * CALCULAR ISR
-        * GUARDAR EN LAS TABLAS DE HISTORIALES               
+        * GUARDAR EN LAS TABLAS DE DETALLE DE HISTORIALES               
         */
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
@@ -217,7 +217,7 @@ namespace ERP_GMEDINA.Controllers
                                                                where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
                                                                select tbEmpCom.cc_TotalVenta).FirstOrDefault();
 
-                                                totalComisiones += Math.Round((Decimal)oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision, 2);
+                                                totalComisiones += Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision)/100, 2);
 
                                                 //pasar el estado de las comisiones a pagadas
                                                 oComisionesColaboradoresIterador.cc_Pagado = true;
@@ -228,7 +228,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                                 {
                                                     concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                    monto = Math.Round((Decimal)oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision, 2)
+                                                    monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision)/100, 2)
                                                 });
                                             }
                                         }

@@ -1382,7 +1382,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbInstitucionesFinancieras_Update_Result>("UDP_Plani_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbISR_Activar(Nullable<int> isr_Id, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbISR_Activar_Result> UDP_Plani_tbISR_Activar(Nullable<int> isr_Id, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
         {
             var isr_IdParameter = isr_Id.HasValue ?
                 new ObjectParameter("isr_Id", isr_Id) :
@@ -1396,10 +1396,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("isr_FechaModifica", isr_FechaModifica) :
                 new ObjectParameter("isr_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbISR_Activar", isr_IdParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbISR_Activar_Result>("UDP_Plani_tbISR_Activar", isr_IdParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbISR_Inactivar(Nullable<int> isr_Id, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbISR_Inactivar_Result> UDP_Plani_tbISR_Inactivar(Nullable<int> isr_Id, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
         {
             var isr_IdParameter = isr_Id.HasValue ?
                 new ObjectParameter("isr_Id", isr_Id) :
@@ -1413,10 +1413,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("isr_FechaModifica", isr_FechaModifica) :
                 new ObjectParameter("isr_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbISR_Inactivar", isr_IdParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbISR_Inactivar_Result>("UDP_Plani_tbISR_Inactivar", isr_IdParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbISR_Insert(Nullable<decimal> isr_RangoInicial, Nullable<decimal> isr_RangoFinal, Nullable<decimal> isr_Porcentaje, Nullable<int> tde_IdTipoDedu, Nullable<int> isr_UsuarioCrea, Nullable<System.DateTime> isr_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbISR_Insert_Result> UDP_Plani_tbISR_Insert(Nullable<decimal> isr_RangoInicial, Nullable<decimal> isr_RangoFinal, Nullable<decimal> isr_Porcentaje, Nullable<int> tde_IdTipoDedu, Nullable<int> isr_UsuarioCrea, Nullable<System.DateTime> isr_FechaCrea)
         {
             var isr_RangoInicialParameter = isr_RangoInicial.HasValue ?
                 new ObjectParameter("isr_RangoInicial", isr_RangoInicial) :
@@ -1442,10 +1442,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("isr_FechaCrea", isr_FechaCrea) :
                 new ObjectParameter("isr_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbISR_Insert", isr_RangoInicialParameter, isr_RangoFinalParameter, isr_PorcentajeParameter, tde_IdTipoDeduParameter, isr_UsuarioCreaParameter, isr_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbISR_Insert_Result>("UDP_Plani_tbISR_Insert", isr_RangoInicialParameter, isr_RangoFinalParameter, isr_PorcentajeParameter, tde_IdTipoDeduParameter, isr_UsuarioCreaParameter, isr_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbISR_Update(Nullable<int> isr_Id, Nullable<decimal> isr_RangoInicial, Nullable<decimal> isr_RangoFinal, Nullable<decimal> isr_Porcentaje, Nullable<int> tde_IdTipoDedu, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbISR_Update_Result> UDP_Plani_tbISR_Update(Nullable<int> isr_Id, Nullable<decimal> isr_RangoInicial, Nullable<decimal> isr_RangoFinal, Nullable<decimal> isr_Porcentaje, Nullable<int> tde_IdTipoDedu, Nullable<int> isr_UsuarioModifica, Nullable<System.DateTime> isr_FechaModifica)
         {
             var isr_IdParameter = isr_Id.HasValue ?
                 new ObjectParameter("isr_Id", isr_Id) :
@@ -1475,7 +1475,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("isr_FechaModifica", isr_FechaModifica) :
                 new ObjectParameter("isr_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbISR_Update", isr_IdParameter, isr_RangoInicialParameter, isr_RangoFinalParameter, isr_PorcentajeParameter, tde_IdTipoDeduParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbISR_Update_Result>("UDP_Plani_tbISR_Update", isr_IdParameter, isr_RangoInicialParameter, isr_RangoFinalParameter, isr_PorcentajeParameter, tde_IdTipoDeduParameter, isr_UsuarioModificaParameter, isr_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbPeriodos_Activar(Nullable<int> peri_IdPeriodo, Nullable<int> peri_UsuarioModifica, Nullable<System.DateTime> peri_FechaModifica)
