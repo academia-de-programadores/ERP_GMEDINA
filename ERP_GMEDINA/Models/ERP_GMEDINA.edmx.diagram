@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8ccccbcf4b3d46228f8d5ecdb0bc15e7" Name="Diagram1">
+      <Diagram DiagramId="c79aac7c86d947109ebbcd1e1c56ca65" Name="Diagram1">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="135.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="94.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="98.5" IsExpanded="true" />
@@ -131,6 +131,20 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbCatalogoDeIngresos" Width="1.5" PointX="18.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbEmpleadoComisiones" Width="1.5" PointX="10.75" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_TipoDeduccion" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Datos_Empleado" Width="1.5" PointX="18.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Departamentos" Width="1.5" PointX="18.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Empleados" Width="1.5" PointX="6.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="14.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAudienciaDescargo" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialCargos" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialContrataciones" Width="1.5" PointX="2.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialHorasTrabajadas" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HorariosDetalles" Width="1.5" PointX="20.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbEmpleados" Width="1.5" PointX="20.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas" Width="1.5" PointX="20.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPersonas" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbtiposalidas" Width="1.5" PointX="6.75" PointY="22.75" IsExpanded="true" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbRol_rol_Id_Acce_tbAccesoRol_rol_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Acce_tbAccesoRol_acrol_UsuarioCrea" ManuallyRouted="false" />

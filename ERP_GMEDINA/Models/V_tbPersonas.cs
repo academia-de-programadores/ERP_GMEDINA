@@ -10,9 +10,14 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UDP_Plani_tbCatalogoDeDeducciones_Insert_Result
+    public partial class V_tbPersonas
     {
-        public string MensajeError { get; set; }
+        public Nullable<int> per_Id { get; set; }
+        public Nullable<int> Relacion_Id { get; set; }
+        public string Descripcion { get; set; }
+        public bool Estado { get; set; }
+        public int Relacion { get; set; }
     }
 }

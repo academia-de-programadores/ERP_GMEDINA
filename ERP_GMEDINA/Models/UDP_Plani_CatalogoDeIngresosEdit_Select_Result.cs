@@ -11,8 +11,10 @@ namespace ERP_GMEDINA.Models
 {
     using System;
     
-    public partial class UDP_Plani_EmpleadoComisiones_Insert_Result
+    public partial class UDP_Plani_CatalogoDeIngresosEdit_Select_Result
     {
-        public string MensajeError { get; set; }
+        public int cin_IdIngreso { get; set; }
+        public string cin_DescripcionIngreso { get; set; }
+        public int @checked { get; set; }
     }
 }
