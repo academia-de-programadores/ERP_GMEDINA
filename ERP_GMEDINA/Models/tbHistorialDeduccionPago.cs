@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
     public partial class tbHistorialDeduccionPago
     {
         public int hidp_IdHistorialdeDeduPago { get; set; }
-        public int tpdd_IdPlanillaDetDeduccion { get; set; }
+        public int cde_IdDeducciones { get; set; }
         public int hipa_IdHistorialDePago { get; set; }
         public Nullable<decimal> hidp_Total { get; set; }
         public int hidp_UsuarioCrea { get; set; }
@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
         public virtual tbHistorialDePago tbHistorialDePago { get; set; }
-        public virtual tbTipoPlanillaDetalleDeduccion tbTipoPlanillaDetalleDeduccion { get; set; }
     }
 }

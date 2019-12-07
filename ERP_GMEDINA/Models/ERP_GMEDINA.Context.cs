@@ -48,8 +48,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
-        public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
         public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
@@ -110,7 +108,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTipoHoras> tbTipoHoras { get; set; }
         public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
         public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
-        public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
         public virtual DbSet<tbTipoSalidas> tbTipoSalidas { get; set; }
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
@@ -159,7 +156,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<V_HistorialAudienciaDescargo> V_HistorialAudienciaDescargo { get; set; }
         public virtual DbSet<V_HistorialCargos> V_HistorialCargos { get; set; }
-        public virtual DbSet<V_HistorialContrataciones> V_HistorialContrataciones { get; set; }
         public virtual DbSet<V_HistorialHorasTrabajadas> V_HistorialHorasTrabajadas { get; set; }
         public virtual DbSet<V_HorariosDetalles> V_HorariosDetalles { get; set; }
         public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
@@ -167,6 +163,10 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
         public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
+        public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
+        public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
+        public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
+        public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -2043,15 +2043,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbDepartamentos_Delete", depto_IdParameter, depto_razon_InactivoParameter, depto_UsuarioModificaParameter, depto_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbDepartamentos_Insert(Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
+        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbDepartamentos_Insert(Nullable<int> area_Id, string car_descripcion, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
         {
             var area_IdParameter = area_Id.HasValue ?
                 new ObjectParameter("area_Id", area_Id) :
                 new ObjectParameter("area_Id", typeof(int));
     
-            var car_IdParameter = car_Id.HasValue ?
-                new ObjectParameter("car_Id", car_Id) :
-                new ObjectParameter("car_Id", typeof(int));
+            var car_descripcionParameter = car_descripcion != null ?
+                new ObjectParameter("car_descripcion", car_descripcion) :
+                new ObjectParameter("car_descripcion", typeof(string));
     
             var depto_DescripcionParameter = depto_Descripcion != null ?
                 new ObjectParameter("depto_Descripcion", depto_Descripcion) :
@@ -2065,7 +2065,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("depto_FechaCrea", depto_FechaCrea) :
                 new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_IdParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_descripcionParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbDepartamentos_Restore(Nullable<int> depto_Id, Nullable<int> depto_Usuariomodifica, Nullable<System.DateTime> depto_Fechamodifica)

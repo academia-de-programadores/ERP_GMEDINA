@@ -56,10 +56,6 @@ namespace ERP_GMEDINA.Models
             this.tbEmpleadoComisiones1 = new HashSet<tbEmpleadoComisiones>();
             this.tbFormaPago = new HashSet<tbFormaPago>();
             this.tbFormaPago1 = new HashSet<tbFormaPago>();
-            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeduccionPago1 = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
-            this.tbHistorialDeIngresosPago1 = new HashSet<tbHistorialDeIngresosPago>();
             this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
             this.tbHistorialDePago1 = new HashSet<tbHistorialDePago>();
             this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
@@ -182,8 +178,6 @@ namespace ERP_GMEDINA.Models
             this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidades>();
             this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
             this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
-            this.tbTipoPermisos = new HashSet<tbTipoPermisos>();
-            this.tbTipoPermisos1 = new HashSet<tbTipoPermisos>();
             this.tbTipoSalidas = new HashSet<tbTipoSalidas>();
             this.tbTipoSalidas1 = new HashSet<tbTipoSalidas>();
             this.tbTitulos = new HashSet<tbTitulos>();
@@ -192,6 +186,12 @@ namespace ERP_GMEDINA.Models
             this.tbTitulosPersona1 = new HashSet<tbTitulosPersona>();
             this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
             this.tbTitulosRequisicion1 = new HashSet<tbTitulosRequisicion>();
+            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeduccionPago1 = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
+            this.tbHistorialDeIngresosPago1 = new HashSet<tbHistorialDeIngresosPago>();
+            this.tbTipoPermisos = new HashSet<tbTipoPermisos>();
+            this.tbTipoPermisos1 = new HashSet<tbTipoPermisos>();
         }
     
         public int usu_Id { get; set; }
@@ -283,14 +283,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbFormaPago> tbFormaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFormaPago> tbFormaPago1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -536,10 +528,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPermisos> tbTipoPermisos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPermisos> tbTipoPermisos1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoSalidas> tbTipoSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoSalidas> tbTipoSalidas1 { get; set; }
@@ -555,5 +543,17 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos1 { get; set; }
     }
 }
