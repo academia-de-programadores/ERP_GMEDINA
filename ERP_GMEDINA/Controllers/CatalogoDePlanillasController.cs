@@ -495,7 +495,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         foreach (var i in listadoDetallePlanillaDeduccionesDelete)
                         {
-                            borrarDeduccion = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(i); //Eliminar la deducción de la base de datos
+                            borrarDeduccion = db.UDP_tbTipoPlanillaDetalleDeduccion_Update(id,i); //Eliminar la deducción de la base de datos
 
                             foreach (UDP_tbTipoPlanillaDetalleDeduccion_Update_Result result in borrarDeduccion)
                                 mensajeErrorDeduccion = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
@@ -507,7 +507,8 @@ namespace ERP_GMEDINA.Controllers
                     {
                         foreach (var i in listadoDetallePlanillaIngresosDelete)
                         {
-                            borrarIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Update(i);
+                            //TODO: 
+                            borrarIngresos = db.UDP_tbTipoPlanillaDetalleIngreso_Update(id,i);
                             foreach (UDP_tbTipoPlanillaDetalleIngreso_Update_Result result in borrarIngresos)
                                 mensajeErrorIngreso = result.MensajeError; //TODO: Verificar como detectar si hay errores aqui
                         }
