@@ -497,7 +497,8 @@ namespace ERP_GMEDINA
                                "~/Scripts/app/general/Idiomas/Idiomas.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
-                              "~/Scripts/app/general/Empleados/IndexEmpleados.js"));
+                              "~/Scripts/app/general/Empleados/IndexEmpleados.js",
+                              "~/Scripts/app/general/Empleados/AgregarEmpleado.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
                              "~/Scripts/app/general/Cargos/Cargos.js"));

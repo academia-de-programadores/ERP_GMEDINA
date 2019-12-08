@@ -1103,6 +1103,7 @@
     <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
+    <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
@@ -1170,6 +1171,7 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="Downloadable files\AgregarEmpleados.xlsx" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

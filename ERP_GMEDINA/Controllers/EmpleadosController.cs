@@ -65,7 +65,13 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult DescargarArchivo()
+        {
+            string carpeta = AppDomain.CurrentDomain.BaseDirectory + "Downloadable files/";
+            byte[] ArchivoBytes = System.IO.File.ReadAllBytes(carpeta + "AgregarEmpleados.xlsx");
+            string NombreArchivo = "AgregarEmpleados.xlsx";
+            return File(ArchivoBytes, System.Net.Mime.MediaTypeNames.Application.Octet, NombreArchivo);
+        }
 
 
         // GET: Empleados/Details/5
