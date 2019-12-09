@@ -34,10 +34,8 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbFaseSeleccion tbFaseSeleccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
-        public virtual tbRequisicionPersonal tbRequisicionPersonal { get; set; }
     }
 }

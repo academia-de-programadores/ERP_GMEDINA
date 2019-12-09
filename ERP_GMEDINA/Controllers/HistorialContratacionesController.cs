@@ -10,17 +10,18 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-    public class HistorialHorasTrabajadasController : Controller
+    public class HistorialContratacionesController : Controller
     {
         private ERP_GMEDINAEntities1 db = null;
 
-        // GET: HistorialHorasTrabajadas
+        // GET: HistorialContrataciones
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialHorasTrabajadas = new List<tbHistorialHorasTrabajadas> { };
-            return View(tbHistorialHorasTrabajadas);
+            var tbHistorialContrataciones = new List<tbHistorialContrataciones> { };
+            return View(tbHistorialContrataciones);
         }
+
         public ActionResult llenarTabla()
         {
             try
@@ -29,21 +30,25 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities1())
                 {
-                    var tbHistorialHoras = db.tbHistorialHorasTrabajadas 
+                    var tbHistorialContrataciones = db.tbHistorialContrataciones 
                         .Select(
                         t => new
                         {
-                            htra_Id = t.htra_Id,
-                            emp_Id =t.emp_Id,
-                            Colaborador = t.tbJornadas.tbEmpleados
-                                .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                            jor_Descripcion = t.tbJornadas.jor_Descripcion,
-                            tiho_Recargo = t.tbTipoHoras.tiho_Recargo,
-                            tiho_Descripcion = t.tbTipoHoras.tiho_Descripcion
+                           
+                            hcon_Id = t.hcon_Id,
+                            Colaborador = t.tbDepartamentos.tbEmpleados
+                              .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
+                            dep_Descripcion = t.tbDepartamentos.depto_Descripcion,
+                            area_Descripcion = t.tbDepartamentos.tbAreas.area_Descripcion,
+                            car_Descripcion = t.tbDepartamentos.tbCargos.car_Descripcion,
+                            scan_Fecha = t.tbSeleccionCandidatos.scan_Fecha,
+                            hcon_FechaContratado = t.hcon_FechaContratado
+                            
+
                         }
                         )
                         .ToList();
-                    return Json(tbHistorialHoras, JsonRequestBehavior.AllowGet);
+                    return Json(tbHistorialContrataciones, JsonRequestBehavior.AllowGet);
                 }
             }
             catch
@@ -55,12 +60,12 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_HistorialHorasTrabajadas> lista = new List<V_HistorialHorasTrabajadas> { };
+            List<V_HistorialContrataciones> lista = new List<V_HistorialContrataciones> { };
             using (db = new ERP_GMEDINAEntities1())
             {
                 try
                 {
-                    lista = db.V_HistorialHorasTrabajadas.Where(x => x.Id == id).ToList();
+                    lista = db.V_HistorialContrataciones.Where(x => x.Id== id).ToList();
                 }
                 catch
                 {
@@ -69,10 +74,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db !=null)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
@@ -80,3 +84,6 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
+
+

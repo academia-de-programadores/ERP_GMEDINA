@@ -17,10 +17,8 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbJornadas()
         {
-            this.tbSalarioPorHora = new HashSet<tbSalarioPorHora>();
             this.tbEmpleados = new HashSet<tbEmpleados>();
             this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
-            this.tbHorarios = new HashSet<tbHorarios>();
         }
     
         public int jor_Id { get; set; }
@@ -35,12 +33,8 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSalarioPorHora> tbSalarioPorHora { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHorarios> tbHorarios { get; set; }
     }
 }

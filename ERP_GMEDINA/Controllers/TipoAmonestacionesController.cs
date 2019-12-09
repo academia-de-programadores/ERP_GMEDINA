@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoAmonestacionesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities1 db = new ERP_GMEDINAEntities1();
 
         // GET: TipoAmonestaciones
         public ActionResult Index()
