@@ -17,7 +17,8 @@ namespace ERP_GMEDINA.Controllers
     {
         /*PENDIENTE
         * CALCULAR ISR
-        * GUARDAR EN LAS TABLAS DE DETALLE DE HISTORIALES               
+        * GUARDAR EN LAS TABLAS DE DETALLE DE HISTORIALES
+        * Septimo día               
         */
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
@@ -143,6 +144,7 @@ namespace ERP_GMEDINA.Controllers
                                         int horasExtrasTrabajadas = 0;
                                         decimal? totalHorasExtras = 0;
                                         decimal? totalBonificaciones = 0;
+                                        decimal? totalVacaciones = 0;
                                         decimal? totalIngresosEmpleado = 0;
                                         decimal totalISR = 0;
                                         decimal? colaboradorDeducciones = 0;
@@ -306,6 +308,43 @@ namespace ERP_GMEDINA.Controllers
                                                 });
                                             }
                                         }
+
+                                        //vacaciones
+                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.hvac_Estado == true).ToList();
+                                        if (oVacacionesColaboradores.Count > 0)
+                                        {
+                                            //sumar todas las comisiones
+                                            foreach (var oVacacionesColaboradoresIterador in oVacacionesColaboradores)
+                                            {
+                                                int cantidadDias = 0;
+                                                DateTime VacacionesfechaInicio;
+                                                DateTime VacacionesfechaFin;
+
+                                                VacacionesfechaInicio = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                         where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                         select tbEmpVac.hvac_FechaInicio).FirstOrDefault();
+
+                                                VacacionesfechaFin = (from tbEmpVac in db.tbHistorialVacaciones
+                                                                      where tbEmpVac.hvac_Id == oVacacionesColaboradoresIterador.hvac_Id
+                                                                      select tbEmpVac.hvac_FechaFin).FirstOrDefault();
+
+                                                TimeSpan restaFechas = VacacionesfechaFin - VacacionesfechaInicio;
+                                                cantidadDias = restaFechas.Days;
+
+                                                totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
+
+                                                //cambiar el estado de las vacaciones a pagadas
+                                                //db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
+
+                                                //agregarlas al vocher
+                                                ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                {
+                                                    concepto = $"{cantidadDias} dias de vacaciones",
+                                                    monto = Math.Round((Decimal)(salarioHora * 8) * cantidadDias, 2)
+                                                });
+                                            }
+                                        }
+
                                         //total ingresos
                                         totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones;
 
@@ -445,6 +484,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.horasExtras = horasExtrasTrabajadas;
                                         oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
+                                        oPlanillaEmpleado.totalVacaciones = totalVacaciones;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
                                         oPlanillaEmpleado.totalISR = 0;
                                         oPlanillaEmpleado.totalDeduccionesColaborador = colaboradorDeducciones;
@@ -551,7 +591,7 @@ namespace ERP_GMEDINA.Controllers
                                 dbContextTransaccion.Commit();
                             }
 
-                            //catch por si se produjo un error al procesar una planilla
+                            //catch por si se produjo un error al procesar una sola planilla
                             catch (Exception ex)
                             {
                                 // SI ALGO FALLA, HACER UN ROLLBACK
@@ -562,6 +602,7 @@ namespace ERP_GMEDINA.Controllers
                         }
                     }
                 }
+
                 //enviar resultado al cliente
                 response.Response = $"El proceso de generación de planilla se realizó, con {errores} errores";
                 response.Encabezado = "Exito";
@@ -580,7 +621,7 @@ namespace ERP_GMEDINA.Controllers
                 }
 
             }
-            // catch por si se produjo un error en el proceso generar planilla
+            // catch por si se produjo un error fatal en el proceso generar planilla
             catch (Exception ex)
             {
                 response.Response = "El proceso de generación de planillas falló, contacte al adminstrador.";
@@ -588,7 +629,7 @@ namespace ERP_GMEDINA.Controllers
                 response.Tipo = "error";
             }
             //retornar resultado al cliente
-            return new JsonResult { Data = reporte, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return Json (new { Data = reporte, Response = response },JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

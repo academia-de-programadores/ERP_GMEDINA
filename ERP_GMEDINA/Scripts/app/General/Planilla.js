@@ -111,37 +111,37 @@ $('#btnGenerarPlanilla').click(function () {
             var nombresArchivos = nombrePlanilla == '' ? 'Planilla general' : 'Planilla ' + nombrePlanilla;
 
             //generar csv
-            GenerarCSV == true ? JSONToCSVConvertor(data, nombresArchivos, true) : '';
+            GenerarCSV == true ? JSONToCSVConvertor(data.Data, nombresArchivos, true) : '';
 
             //generar excel
             if (GenerarExcel) {
                 $("#dvjson").excelexportjs({
                     containerid: "dvjson"
                        , datatype: 'json'
-                       , dataset: data
-                       , columns: getColumns(data)
+                       , dataset: data.Data
+                       , columns: getColumns(data.Data)
                 });
             }
+            debugger;
 
-            //if (data.Tipo == 'success') {
-            //    iziToast.success({
-            //        title: data.Encabezado,
-            //        message: data.Response,
-            //    });
-            //}
-            //else if (data.Tipo == 'error') {
-            //    iziToast.error({
-            //        title: data.Encabezado,
-            //        message: data.Response,
-            //    });
-            //}
-            //else {
-            //    iziToast.warning({
-            //        title: data.Encabezado,
-            //        message: data.Response,
-            //    });
-            //}
-
+            if (data.Response.Tipo == 'success') {
+                iziToast.success({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
+            else if (data.Response.Tipo == 'error') {
+                iziToast.error({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
+            else {
+                iziToast.warning({
+                    title: data.Response.Encabezado,
+                    message: data.Response.Response,
+                });
+            }
 
             $('.modal-backdrop').css('display', 'none');
             $('.fade').css('display', 'none');

@@ -65,7 +65,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialPermisos" Width="1.5" PointX="10.5" PointY="202.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialRefrendamientos" Width="1.5" PointX="13.5" PointY="168.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialSalidas" Width="1.5" PointX="7.5" PointY="203.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialVacaciones" PointX="13.5" PointY="158.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialVacaciones" PointX="13.5" PointY="158.5" Width="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHorarios" Width="1.5" PointX="8.25" PointY="181.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbIdiomaPersona" Width="1.5" PointX="11.25" PointY="182.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbIdiomas" Width="1.5" PointX="3" PointY="211" IsExpanded="true" />

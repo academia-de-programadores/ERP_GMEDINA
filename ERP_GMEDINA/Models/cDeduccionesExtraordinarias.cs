@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
+        [Range(0.00, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Models
         public string dex_ObservacionesComentarios { get; set; }
 
 
-        [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
+        [Range(0.00, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }
