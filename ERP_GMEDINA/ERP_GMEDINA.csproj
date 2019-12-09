@@ -201,6 +201,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
+    <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
@@ -218,6 +219,7 @@
     <Compile Include="Models\cAdelantoSueldo.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
+    <Compile Include="Models\cAuxilioDeCesantias.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCatalogoDePlanillas.cs" />
     <Compile Include="Models\cCatalogoIngresos.cs" />
@@ -575,6 +577,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete1_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Insert1_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Update1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
@@ -1112,6 +1123,7 @@
     <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
+    <Content Include="Scripts\app\General\AuxilioCesantia.js" />
     <Content Include="Scripts\app\General\DecimoTercerMes.js" />
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
@@ -1780,6 +1792,8 @@
     <Content Include="Views\ReportesPlanilla\_GeneralTotalesModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_ISRModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\_LiquidacionesModalRPT.cshtml" />
+    <Content Include="Views\AuxilioDeCesantias\Index.cshtml" />
+    <Content Include="Views\AuxilioDeCesantias\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

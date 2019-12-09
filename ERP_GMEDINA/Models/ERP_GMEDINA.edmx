@@ -931,7 +931,7 @@
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
-          <Property Name="hvac_DiasTomados" Type="int" Nullable="false" />
+          <Property Name="hvac_DiasTomados" Type="bit" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_AnioVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_Estado" Type="bit" Nullable="false" />
@@ -5923,6 +5923,25 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UDP_Plani_tbAuxilioDeCesantias_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Delete">
+          <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbAuxilioDeCesantias_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Insert">
+          <Parameter Name="aces_RangoInicioMeses" Type="int" Mode="In" />
+          <Parameter Name="aces_RangoFinMeses" Type="int" Mode="In" />
+          <Parameter Name="aces_DiasAuxilioCesantia" Type="int" Mode="In" />
+          <Parameter Name="aces_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="aces_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="aces_Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbAuxilioDeCesantias_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Update">
+          <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
+          <Parameter Name="aces_RangoInicioMeses" Type="int" Mode="In" />
+          <Parameter Name="aces_RangoFinMeses" Type="int" Mode="In" />
+          <Parameter Name="aces_DiasAuxilioCesantia" Type="int" Mode="In" />
+          <Parameter Name="aces_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aces_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_CatalogoDeduccionesEdit_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
         </Function>
@@ -10236,19 +10255,18 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <Key>
             <PropertyRef Name="hvac_Id" />
           </Key>
-          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hvac_DiasTomados" Type="Int32" Nullable="false" />
-          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
-          <Property Name="hvac_AnioVacaciones" Type="Int32" Nullable="false" />
-          <Property Name="hvac_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hvac_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hvac_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hvac_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hvac_Id" Nullable="false" Type="Int32" />
+          <Property Name="emp_Id" Nullable="false" Type="Int32" />
+          <Property Name="hvac_FechaInicio" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="hvac_FechaFin" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="hvac_MesVacaciones" Nullable="false" Type="Int32" />
+          <Property Name="hvac_AnioVacaciones" Nullable="false" Type="Int32" />
+          <Property Name="hvac_Estado" Nullable="false" Type="Boolean" />
+          <Property Name="hvac_RazonInactivo" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="hvac_UsuarioCrea" Nullable="false" Type="Int32" />
+          <Property Name="hvac_FechaCrea" Nullable="false" Precision="3" Type="DateTime" />
           <Property Name="hvac_UsuarioModifica" Type="Int32" />
-          <Property Name="hvac_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="hvac_FechaModifica" Precision="3" Type="DateTime" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" FromRole="tbHistorialVacaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" FromRole="tbHistorialVacaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" FromRole="tbHistorialVacaciones" ToRole="tbEmpleados" />
@@ -13290,8 +13308,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <End Type="Self.tbUsuario" Multiplicity="1" Role="tbUsuario" />
+          <End Type="Self.tbHistorialVacaciones" Multiplicity="*" Role="tbHistorialVacaciones" />
           <ReferentialConstraint>
             <Principal Role="tbUsuario">
               <PropertyRef Name="usu_Id" />
@@ -13302,8 +13320,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <End Type="Self.tbUsuario" Multiplicity="0..1" Role="tbUsuario" />
+          <End Type="Self.tbHistorialVacaciones" Multiplicity="*" Role="tbHistorialVacaciones" />
           <ReferentialConstraint>
             <Principal Role="tbUsuario">
               <PropertyRef Name="usu_Id" />
@@ -14586,8 +14604,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <End Type="Self.tbEmpleados" Multiplicity="1" Role="tbEmpleados" />
+          <End Type="Self.tbHistorialVacaciones" Multiplicity="*" Role="tbHistorialVacaciones" />
           <ReferentialConstraint>
             <Principal Role="tbEmpleados">
               <PropertyRef Name="emp_Id" />
@@ -15659,12 +15677,12 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbHistorialSalidas" EntitySet="tbHistorialSalidas" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+            <End EntitySet="tbUsuario" Role="tbUsuario" />
+            <End EntitySet="tbHistorialVacaciones" Role="tbHistorialVacaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+            <End EntitySet="tbUsuario" Role="tbUsuario" />
+            <End EntitySet="tbHistorialVacaciones" Role="tbHistorialVacaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHorarios_hor_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHorarios_hor_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -16091,8 +16109,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbHistorialSalidas" EntitySet="tbHistorialSalidas" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+            <End EntitySet="tbEmpleados" Role="tbEmpleados" />
+            <End EntitySet="tbHistorialVacaciones" Role="tbHistorialVacaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -16690,7 +16708,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="tpdd_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleDeduccion_Update_Result)">
-          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Insert_Result)">
@@ -16700,7 +16718,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="tpdi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Update_Result)">
-          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(String)">
@@ -17338,6 +17356,44 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(String)">
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert" ReturnType="Collection(String)">
+            <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="aces_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Update" ReturnType="Collection(String)">
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert1_Result)">
+            <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="aces_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Update1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Update1_Result)">
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
+            <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete1_Result)">
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -17755,6 +17811,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Insert1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Update1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Delete1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18712,11 +18777,11 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <EntitySetMapping Name="tbHistorialVacaciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialVacaciones">
               <MappingFragment StoreEntitySet="tbHistorialVacaciones">
+                <ScalarProperty Name="hvac_Estado" ColumnName="hvac_DiasTomados" />
                 <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
                 <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
-                <ScalarProperty Name="hvac_DiasTomados" ColumnName="hvac_DiasTomados" />
                 <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
                 <ScalarProperty Name="hvac_AnioVacaciones" ColumnName="hvac_AnioVacaciones" />
                 <ScalarProperty Name="hvac_Estado" ColumnName="hvac_Estado" />
@@ -20608,6 +20673,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Update1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
