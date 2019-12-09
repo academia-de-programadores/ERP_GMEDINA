@@ -18,7 +18,8 @@ namespace ERP_GMEDINA.Controllers
         /*PENDIENTE
         * CALCULAR ISR
         * GUARDAR EN LAS TABLAS DE DETALLE DE HISTORIALES
-        * Septimo día               
+        * Septimo día    
+        * sumar horas con permiso justificado           
         */
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
@@ -154,6 +155,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? adelantosSueldo = 0;
                                         decimal? totalDeduccionesEmpleado = 0;
                                         decimal? netoAPagarColaborador = 0;
+                                        //int VerificarHorasTrabajas = 0;
                                         oPlanillaEmpleado = new ReportePlanillaViewModel();
                                         #endregion
 
@@ -344,6 +346,39 @@ namespace ERP_GMEDINA.Controllers
                                                 });
                                             }
                                         }
+                                        ////Septimo Dia
+                                        ////horas normales trabajadas
+                                        //VerificarHorasTrabajas = db.tbHistorialHorasTrabajadas
+                                        //    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo == 0)
+                                        //    .Select(x => x.htra_CantidadHoras)
+                                        //    .DefaultIfEmpty(0)
+                                        //    .Sum();
+
+                                        ////BUSCAR HORAS CON PERMISOS
+                                        //int HorasPermiso = 0;
+                                        //HorasPermiso = db.tbHistorialPermisos
+                                        //    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hper_Estado == true)
+                                        //    .Select(x => x.hper_Duracion)
+                                        //    .DefaultIfEmpty(0)
+                                        //    .Sum();
+
+
+                                        //int frecuenciaDias = iter.cpla_FrecuenciaEnDias;
+                                        //int cantidadSeptimoDias = frecuenciaDias / 7;
+                                        //int horasQueDebenTrabajar = frecuenciaDias * 8;
+                                        
+
+
+                                        //if ((VerificarHorasTrabajas + HorasPermiso) >= horasQueDebenTrabajar)
+                                        //{
+                                        //    //agregarlas al vocher
+                                        //    ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                        //    {
+                                        //        concepto = $"{cantidadSeptimoDias}x Séptimo día",
+                                        //        monto = Math.Round((salarioHora * 8)* cantidadSeptimoDias, 2)
+                                        //    });
+                                        //    totalIngresosEmpleado += Math.Round(((decimal)salarioHora * 8) * cantidadSeptimoDias, 2);
+                                        //}
 
                                         //total ingresos
                                         totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones;
