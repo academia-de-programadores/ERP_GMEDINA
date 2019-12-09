@@ -2,29 +2,26 @@
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/HistorialPermisos/Edit/" + id);
+    $(location).attr('href', "/Areas/Edit/" + id);
 }
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/HistorialPermisos/Edit/" + id);
+    $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Permisos</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
             '<div class="col-md-3">' +
                 '<div class="panel panel-default">' +
                   '<div class="panel-heading">' +
-                     '<h5>' + index.per_NombreCompleto + '</h5>' +
+                     '<h5>' + index.hper_fechaInicio + '</h5>' +
                 '</div>' +
-                '<div class="panel-body">' +
-                    '<h5>' + index.per_Telefono + '</h5>'
-                    //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.per_NombreCompleto + '<br>' +
-                    //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.per_Telefono + '</div>' +
+                '<div class="panel-body">' + 'Hora Inicio: '
+                    + index.hor_hper_fechaInicio.toString() + '<br> Hora Fin: ' +
+                    index.hor_hper_fechaFin + '</div>' +
                 '</div>' +
             '</div>'
     });
@@ -39,9 +36,8 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.area_Id,
-                   Descripcion: value.per_NombreCompleto,
-                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0]
+                   ID: value.jor_Id,
+                   Descripcion: value.hper_Descripcion
                });
            });
            tabla.draw();
@@ -59,14 +55,16 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().Id;
+        id = row.data().ID;
         hola = row.data().hola;
+        tr.addClass('loading');
         _ajax({ id: parseInt(id) },
             '/HistorialPermisos/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
+                    tr.removeClass('loading');
                     tr.addClass('shown');
                 }
             });

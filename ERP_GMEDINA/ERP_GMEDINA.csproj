@@ -465,6 +465,7 @@
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\inspinia.js" />

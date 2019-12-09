@@ -482,6 +482,10 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
                 "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
+            
+            //App/HistorialPermisos
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(
+                "~/Scripts/app/General/HistorialPermisos/IndexHistorialPermisos.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network 
