@@ -5,32 +5,30 @@
 }
 
 <link href="~/Content/plugins/switchery/switchery.css" rel="stylesheet" />
-
-<div class="ibox-title">
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-    <h2>Editar</h2>
-</div>
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 @using (Html.BeginForm())
                 {
+                    <div class="ibox-title">
+                        @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+                        <h2>Editar</h2>
+                    </div>
                     <div class="ibox-content">
                         <div class="form-horizontal">
                             @Html.HiddenFor(model => model.cpla_IdPlanilla)
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
+                                <div class="col-md-5">
                                     @Html.EditorFor(model => model.cpla_DescripcionPlanilla, new { htmlAttributes = new { @class = "form-control" } })
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
+                                <div class="col-md-5">
                                     @Html.EditorFor(model => model.cpla_FrecuenciaEnDias, new { htmlAttributes = new { @class = "form-control" } })
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
                                 </div>
@@ -51,7 +49,7 @@
                     <div class="col-lg-5" id="catalogoDeIngresos">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Lista del catalogo de Ingresos</h5>
+                                <h2>Lista del catalogo de Ingresos</h2>
                             </div>
                             <div class="ibox-content">
                                 <div class="col-xs-offset-1" style="display:none">
@@ -74,7 +72,7 @@
                     <div class="col-lg-5" id="catalogoDeDeducciones">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Lista del catalogo de Deducciones</h5>
+                                <h2>Lista del catalogo de Deducciones</h2>
                             </div>
                             <div class="ibox-content">
                                 <div class="col-xs-offset-1" style="display:none">
@@ -98,23 +96,14 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="button" id="btnEditarCatalogoDePlanillasIngresosDeducciones" value="Editar" class="btn btn-primary" />
+                            <input type="button" id="btnEditarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
                             <div style="display:none" class="btn" id="cargandoEditar">
                             </div>
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                            <button type="button" class="btn btn-danger" id="inactivar">Inactivar</button>
                         </div>
                     </div>
                 }
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-11">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <button class="btn btn-danger btn-lg pull-right" id="inactivar">Inactivar</button>
-                </div>
             </div>
         </div>
     </div>

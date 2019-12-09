@@ -2,10 +2,21 @@
     background: url('../../img/mas.png') no-repeat center center;
     cursor: pointer;
 }
+
 tr.shown td.details-control {
     background: url('../../img/menos.png') no-repeat center center;
 }
 
-#tblCatalogoPlanillas_next{
+#tblCatalogoPlanillas_next {
     background: url(../../img/flecha-derecha.png) no-repeat center left;
+}
+
+.no-sort::after {
+    display: none !important;
+}
+
+.no-sort {
+    pointer-events: none !important;
+    cursor: default !important;
+    padding:13px !important;
 }

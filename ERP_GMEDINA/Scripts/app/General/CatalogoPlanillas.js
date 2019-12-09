@@ -44,24 +44,23 @@ function _ajax(params, uri, type, callback, enviar) {
 		dataType: 'json',
 		contentType: 'application/json; charset=utf-8',
 		data: JSON.stringify(params),
-		beforeSend: function() {
+		beforeSend: function () {
 			enviar();
 		},
-		success: function(data) {
+		success: function (data) {
 			callback(data);
 		}
 	});
 }
 
 // Funcion para crear y editar
-var crearEditar = function(edit) {
+var crearEditar = function (edit) {
 	//Array de Ingresos y deducciones
 	var arrayIngresos = [];
 	var arrayDeducciones = [];
 	//Obtener los valores del catalogo de planillas
 	var descripcionPlanilla = inputDescripcionPlanilla.val();
 	var frecuenciaDias = inputFrecuenciaEnDias.val();
-	var idPlanilla = inputIdPlanilla.val();
 
 	//Obtener las lista del catalogo de ingresos
 	listaCatalogoIngresos(arrayIngresos);
@@ -106,9 +105,10 @@ var crearEditar = function(edit) {
 						ocultarCargandoCrear();
 					}
 				},
-				(enviar) => {}
+				(enviar) => { }
 			);
 		} else {
+			let idPlanilla = inputIdPlanilla.val();
 			mostrarCargandoEditar();
 			_ajax(
 				{
@@ -135,14 +135,14 @@ var crearEditar = function(edit) {
 						ocultarCargandoEditar();
 					}
 				},
-				(enviar) => {}
+				(enviar) => { }
 			);
 		}
 	}
 };
 
 function listaCatalogoDeducciones(arrayDeducciones) {
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function(
+	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -164,7 +164,7 @@ function listaCatalogoDeducciones(arrayDeducciones) {
 }
 
 function listaCatalogoIngresos(arrayIngresos) {
-	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function(
+	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -188,7 +188,7 @@ function listaCatalogoIngresos(arrayIngresos) {
 
 function listaCatalogoDeduccionesFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function(
+	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -213,7 +213,7 @@ function listaCatalogoDeduccionesFalse() {
 
 function listaCatalogoIngresosFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function(
+	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -342,6 +342,7 @@ function listar() {
 			{
 				//Columna 1: el boton de desplegar
 				orderable: false,
+				bSort: false,
 				className: 'details-control', //Estos estilos estan en: Content/app/General
 				data: null,
 				defaultContent: ''
@@ -376,16 +377,8 @@ function listar() {
 			oPaginate: {
 				sFirst: 'Primero',
 				sLast: 'Último',
-				sNext:
-					'<img src = "' +
-					urlProtocoloDominio +
-					'/Content/img/flecha-derecha.svg' +
-					'" width = "25px" height = "15px"/>',
-				sPrevious:
-					'<img src = "' +
-					urlProtocoloDominio +
-					'/Content/img/flecha-hacia-la-izquierda.svg' +
-					'" width = "25px" height = "15px"/>'
+				sNext: 'Siguiente',
+				sPrevious: 'Anterior'
 			},
 			oAria: {
 				sSortAscending:
@@ -395,7 +388,7 @@ function listar() {
 			}
 		}, //Con esto se hace la traducción al español del datatables
 		responsive: false,
-		pageLength: 25,
+		pageLength: 10,
 		dom: '<"html5buttons"B>lTfgitp', //Darle los elementos del DOM que deseo
 		buttons: [
 			//Poner los botones que quiero que aparezcan
@@ -404,28 +397,24 @@ function listar() {
 				title: 'Catalogo de Planillas',
 				exportOptions: {
 					columns: [1, 2]
-				}
-			},
-			{
-				extend: 'csv',
-				title: 'Catalogo de Planillas',
-				exportOptions: {
-					columns: [1, 2]
-				}
+				},
+				text: '<i class="fa fa-copy"></i>'
 			},
 			{
 				extend: 'excelHtml5',
 				title: 'Catalogo de Planillas',
 				exportOptions: {
 					columns: [1, 2]
-				}
+				},
+				text: '<i class="fa fa-file-excel-o"></i>'
 			},
 			{
 				extend: 'pdfHtml5',
 				title: 'Catalogo de Planillas',
 				exportOptions: {
 					columns: [1, 2]
-				}
+				},
+				text: '<i class="fa fa-file-pdf-o"></i>'
 			},
 			{
 				extend: 'print',
@@ -433,7 +422,8 @@ function listar() {
 				exportOptions: {
 					columns: [1, 2]
 				},
-				customize: function(win) {
+				text: '<i class="fa fa-print"></i>',
+				customize: function (win) {
 					$(win.document.body).addClass('white-bg');
 					$(win.document.body).css('font-size', '10px');
 
@@ -458,13 +448,13 @@ function obtenerIdDetallesEditar(tbody, table) {
 		pathname += 'CatalogoDePlanillas/';
 
 	//Cuando de click en editar, que obtenga el id del tr, y que redireccione a la pantalla de Edit
-	$(tbody).on('click', 'button#btnEditarCatalogoDeducciones', function() {
+	$(tbody).on('click', 'button#btnEditarCatalogoDeducciones', function () {
 		var data = table.row($(this).parents('tr')).data();
 		location.href = pathname + 'Edit/' + data.idPlanilla;
 	});
 
 	//Cuando de click en detalles, que obtenga el id del tr, y que redireccione a la pantalla de Details
-	$(tbody).on('click', 'button#btnDetalleCatalogoDeducciones', function() {
+	$(tbody).on('click', 'button#btnDetalleCatalogoDeducciones', function () {
 		var data = table.row($(this).parents('tr')).data();
 		location.href = pathname + 'Details/' + data.idPlanilla;
 	});
@@ -485,7 +475,7 @@ function getIngresos(data) {
                     </tr>
                 </thead>
                 <tbody>`;
-	$.each(data.ingresos, function(index, val) {
+	$.each(data.ingresos, function (index, val) {
 		ingresosPlanillas +=
 			`
                         <tr>
@@ -520,7 +510,7 @@ function getDeducciones(data) {
                     </tr>
                 </thead>
                 <tbody>`;
-	$.each(data.deducciones, function(index, val) {
+	$.each(data.deducciones, function (index, val) {
 		deduccionesPlanilla +=
 			`
                         <tr>
@@ -547,7 +537,7 @@ function obtenerDetalles(id, handleData) {
 		'/CatalogoDePlanillas/getDeduccionIngresos/' + id,
 		'GET',
 		(data) => handleData(data),
-		() => {}
+		() => { }
 	);
 }
 //#endregion
@@ -582,7 +572,7 @@ $(document).ready(() => {
 			$('#checkSeleccionarTodasDeducciones').prop('checked', true);
 		}
 
-		elementsSwitch.forEach(function(html) {
+		elementsSwitch.forEach(function (html) {
 			var switchery = new Switchery(html, {
 				color: '#18a689',
 				jackColor: '#fff',
@@ -598,7 +588,7 @@ $(document).ready(() => {
 			'#catalogoDeDeducciones .js-check-change'
 		);
 
-		catalogoIngresosChangeCheckbox.onchange = function() {
+		catalogoIngresosChangeCheckbox.onchange = function () {
 			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
 			let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
 			if (catalogoIngresosChangeCheckbox.checked) {
@@ -614,7 +604,7 @@ $(document).ready(() => {
 			}
 		};
 
-		catalogoDeduccionesChangeCheckbox.onchange = function() {
+		catalogoDeduccionesChangeCheckbox.onchange = function () {
 			const seleccionarTodasLasDeducciones = $(
 				'#seleccionarTodasLasDeducciones'
 			);
@@ -641,7 +631,7 @@ $(document).ready(() => {
 	}
 
 	//Validar la descripción de la planilla cuando se salga del input
-	inputDescripcionPlanilla.blur(function() {
+	inputDescripcionPlanilla.blur(function () {
 		if (
 			$(this)
 				.val()
@@ -654,7 +644,7 @@ $(document).ready(() => {
 	});
 
 	//Validar la frecuencia en dias cuando se salga del input
-	inputFrecuenciaEnDias.blur(function() {
+	inputFrecuenciaEnDias.blur(function () {
 		if (
 			inputFrecuenciaEnDias.val().trim() != '' &&
 			inputFrecuenciaEnDias.val() != '0' &&
@@ -669,7 +659,7 @@ $(document).ready(() => {
 
 //#region CRUD
 //Cuando de click en el botón de detalles
-$(document).on('click', 'td.details-control', function() {
+$(document).on('click', 'td.details-control', function () {
 	var tr = $(this).closest('tr');
 	var row = table.row(tr);
 
@@ -691,7 +681,7 @@ $(document).on('click', 'td.details-control', function() {
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
 			},
-			() => {}
+			() => { }
 		);
 	}
 });
@@ -700,8 +690,8 @@ $(document).on('click', 'td.details-control', function() {
 $(document).on(
 	'click',
 	'#btnGuardarCatalogoDePlanillasIngresosDeducciones',
-	function() {
-		crearEditar();
+	function () {
+		crearEditar(false);
 	}
 );
 
@@ -709,13 +699,14 @@ $(document).on(
 $(document).on(
 	'click',
 	'#btnEditarCatalogoDePlanillasIngresosDeducciones',
-	function() {
+	function () {
 		crearEditar(true);
 	}
 );
 
 //Inactivar
 $('#inactivar').click(() => {
+	console.log("paso o no?");
 	$('#InactivarCatalogoDeducciones').modal();
 });
 
@@ -739,7 +730,7 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 				});
 			}
 		},
-		(enviar) => {}
+		(enviar) => { }
 	);
 });
 //#endregion

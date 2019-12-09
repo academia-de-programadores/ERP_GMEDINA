@@ -1735,8 +1735,6 @@
     <Content Include="Views\CatalogoDePlanillas\Details.cshtml" />
     <Content Include="Views\CatalogoDePlanillas\Edit.cshtml" />
     <Content Include="Views\CatalogoDePlanillas\Index.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleDeduccion.cshtml" />
-    <Content Include="Views\CatalogoDePlanillas\_IndexTipoPlanillaDetalleIngreso.cshtml" />
     <Content Include="Views\Planilla\Create.cshtml" />
     <Content Include="Views\Planilla\Delete.cshtml" />
     <Content Include="Views\Planilla\Details.cshtml" />
