@@ -13,7 +13,7 @@
                 '<tbody>' +
                 '<tr>' +
                 '<td>'+ index.tamo_Descripcion + '</td>'+
-                '<td>' + index.hamo_Fecha + '</td>' +
+                '<td>' + FechaFormato(index.hamo_Fecha).substring(0,10) + '</td>' +
                 '<td>' + index.hamo_Observacion + '</td>' +
                 '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete()" data-id="@item.hamo_Id">Eliminar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles()"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
                 '</tr>' +
