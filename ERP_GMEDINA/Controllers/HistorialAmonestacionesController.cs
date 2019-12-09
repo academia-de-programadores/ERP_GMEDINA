@@ -52,7 +52,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialAmonestacion.Where(x => x.hamo_Id == id).ToList();
+                    lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id).ToList();
                 }
                 catch
                 {

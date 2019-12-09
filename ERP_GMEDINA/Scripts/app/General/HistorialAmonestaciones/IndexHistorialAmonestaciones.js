@@ -1,26 +1,25 @@
 ﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5></div><div class="ibox-content"><div class="row">';
-    debugger
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+        '<thead>' +
+            '<tr>' +
+                '<th>' + 'Tipo Amostacion' + '</th>' +
+                '<th>' + 'Fecha Amonestacion' + '</th>' +
+                '<th>' + 'Obsevarcion Amonestacion' + '</th>' +
+                '</tr>' +
+                '</thead>';
     obj.forEach(function (index, value) {
         div = div +
-            '<table class="table table-striped table-borderef table-hover dataTables-example"> <thead>' +
-            '<tr>' +
-                '<th>' + 'Tipo Amostacion' + '</th>'+
-                    //'<span class="fa fa-user-o m-r-xs"></span>' +
-                '<th>' + 'Fecha Amonestacion' + '</th>'+
-                    //'<span class="fa fa-phone m-r-xs"></span>' +
-                '<th>'+ 'Obsevarcion Amonestacion' + '</th>'+
-                '</tr>'+
-                '</thead>'+
-                '<tbody>'+'<tr>'+
+                '<tbody>' +
+                '<tr>' +
                 '<td>'+ index.tamo_Descripcion + '</td>'+
                 '<td>'+ index.hamo_Fecha + '</td>'+
                 '<td>'+ index.hamo_Observacion + '</td>'+
-                '</tr>'+ '</tbody>'+
+                '</tr>' +
+                '</tbody>' 
                 '</table>'
          
     });
-    return div + '</div></div></div>';
+    return div + '</div></div>';
 }
 function llenarTabla() {
     _ajax(null,
