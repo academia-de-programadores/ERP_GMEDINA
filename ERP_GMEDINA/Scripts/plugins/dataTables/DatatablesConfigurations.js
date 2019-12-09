@@ -15,13 +15,7 @@ $(document).ready(function () {
                 defaultContent: ''
             });
             col = col + 1;
-        } else if (campo.toUpperCase() == "ID") {
-            columnas.push({
-                data: campo,
-                visible: false
-            });
-            col = col + 1;
-        } else if (campo == "Acciones") {
+        }  else if (campo == "Acciones") {
             columnas.push({
                 data: null,
                 orderable: false,
