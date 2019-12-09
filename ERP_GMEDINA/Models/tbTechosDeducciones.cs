@@ -24,9 +24,20 @@ namespace ERP_GMEDINA.Models
         public System.DateTime tddu_FechaCrea { get; set; }
         public Nullable<int> tddu_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tddu_FechaModifica { get; set; }
+        public int tede_Id { get; set; }
+        public decimal tede_RangoInicial { get; set; }
+        public decimal tede_RangoFinal { get; set; }
+        public decimal tede_Porcentaje { get; set; }
+        public int tede_UsuarioCrea { get; set; }
+        public System.DateTime tede_FechaCrea { get; set; }
+        public Nullable<int> tede_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> tede_FechaModifica { get; set; }
+        public bool tede_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
+        public virtual tbUsuario tbUsuario2 { get; set; }
+        public virtual tbUsuario tbUsuario11 { get; set; }
     }
 }

@@ -189,6 +189,7 @@
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
+    <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -653,6 +654,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbRequerimientosEspeciales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoAmonestaciones_Delete_Result.cs">
@@ -1131,6 +1144,7 @@
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
@@ -1751,6 +1765,11 @@
     <Content Include="Views\Jornadas\Details.cshtml" />
     <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
+    <Content Include="Views\Requisiciones\Create.cshtml" />
+    <Content Include="Views\Requisiciones\Delete.cshtml" />
+    <Content Include="Views\Requisiciones\Details.cshtml" />
+    <Content Include="Views\Requisiciones\Edit.cshtml" />
+    <Content Include="Views\Requisiciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

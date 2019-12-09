@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
         [Display(Name = "Nombres")]
         [MaxLength(50, ErrorMessage = "Excedio el numero maximo de caracteres")]
-        public int per_Nombres { get; set; }
+        public int per_Id { get; set; }
 
         [Display (Name = "Cargo")]
         public int car_Id { get; set; }

@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
     {
         public int cc_Id { get; set; }
         public int emp_Id { get; set; }
-        public Nullable<decimal> cc_Monto { get; set; }
+        public decimal cc_Monto { get; set; }
         public System.DateTime cc_FechaRegistro { get; set; }
         public bool cc_Pagado { get; set; }
         public int cc_UsuarioCrea { get; set; }

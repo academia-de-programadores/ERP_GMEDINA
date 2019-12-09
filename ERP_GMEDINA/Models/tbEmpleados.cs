@@ -38,6 +38,7 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
             this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
             this.tbSueldos = new HashSet<tbSueldos>();
+            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidades>();
         }
     
         public int emp_Id { get; set; }
@@ -60,6 +61,8 @@ namespace ERP_GMEDINA.Models
         public System.DateTime emp_FechaCrea { get; set; }
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
+        public int hor_Id { get; set; }
+        public bool emp_Permanente { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
@@ -112,5 +115,8 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades1 { get; set; }
+        public virtual tbHorarios tbHorarios { get; set; }
     }
 }

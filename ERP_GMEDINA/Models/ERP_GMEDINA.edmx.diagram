@@ -421,6 +421,15 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tede_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tede_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbAdelantoSueldo_cde_IdDeducciones" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbAdelantoSueldo_peri_IdPeriodo" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbDecimoCuartoMes_hipa_IdHistorialDePago" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbCargos_car_Id_rrhh_tbHistorialCargos_car_IdAnterior" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_RRHH_tbDepartamentos_depto_Id_rrhh_tbCargos_depto_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbHorarios_hor_Id_rrhh_tbEmpleados_hor_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

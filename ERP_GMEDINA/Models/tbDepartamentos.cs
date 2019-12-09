@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Models
         {
             this.tbEmpleados = new HashSet<tbEmpleados>();
             this.tbHistorialContrataciones = new HashSet<tbHistorialContrataciones>();
+            this.tbCargos1 = new HashSet<tbCargos>();
         }
     
         public int depto_Id { get; set; }
@@ -40,5 +41,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbCargos> tbCargos1 { get; set; }
     }
 }

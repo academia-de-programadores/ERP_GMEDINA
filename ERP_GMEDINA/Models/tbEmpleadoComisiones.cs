@@ -27,6 +27,7 @@ namespace ERP_GMEDINA.Models
         public decimal cc_PorcentajeComision { get; set; }
         public decimal cc_TotalVenta { get; set; }
         public Nullable<System.DateTime> cc_FechaPagado { get; set; }
+        public decimal cc_Monto { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
