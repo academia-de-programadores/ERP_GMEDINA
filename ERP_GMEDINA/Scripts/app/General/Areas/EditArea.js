@@ -57,10 +57,10 @@ function Add(depto_Descripcion, car_Descripcion) {
     }
 }
 function getJson() {
-    //declaramos una lista para recuperar en un formato 
+    //declaramos una lista para recuperar en un formato
     //especifico el json de datatable.
     list = new Array();
-    //declaramos el objeto que ira dentro de la vista     
+    //declaramos el objeto que ira dentro de la vista
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
 

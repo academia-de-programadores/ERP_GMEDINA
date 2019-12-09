@@ -83,11 +83,11 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             '/Areas/ChildRowData',
             'GET',
             function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {                        
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
                     tr.addClass('shown');
                 }
-            });       
+            });
     }
 
 });

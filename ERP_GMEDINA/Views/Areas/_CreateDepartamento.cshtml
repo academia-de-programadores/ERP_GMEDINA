@@ -5,17 +5,17 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.depto_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.depto_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.depto_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
                     @Html.ValidationMessageFor(model => model.depto_Descripcion, "", new { @class = "text-danger ", @id = "errordepto_Descripcion" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.car_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
                     @Html.ValidationMessageFor(model => model.car_Descripcion, "", new { @class = "text-danger", @id = "errorcar_Descripcion" })
                 </div>
             </div>
-            <input type="button" class="btn btn-primary btn-xs" id="add" value="Agregar" />
+            <input type="button" class="btn btn-primary" id="add" value="Agregar" />
         </div>
     }
