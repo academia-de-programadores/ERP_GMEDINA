@@ -7,6 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using OfficeOpenXml;
+
+//using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -73,6 +77,63 @@ namespace ERP_GMEDINA.Controllers
             return File(ArchivoBytes, System.Net.Mime.MediaTypeNames.Application.Octet, NombreArchivo);
         }
 
+        //public void ArchivoEmpleados()
+        //{
+        //    List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
+        //    ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad ="", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo="", nac_Id="", per_Direccion="", per_Telefono="", per_CorreoElectronico="", per_EstadoCivil="", per_TipoSangre="", car_Id="", area_Id="", depto_Id="", jor_Id="" });
+        //    ExcelPackage Ep = new ExcelPackage();
+        //    ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
+        //    Sheet.Cells["A1"].Value = "Identidad";
+        //    Sheet.Cells["B1"].Value = "Nombres";
+        //    Sheet.Cells["C1"].Value = "Apellidos";
+        //    Sheet.Cells["D1"].Value = "Fecha Nacimiento";
+        //    Sheet.Cells["E1"].Value = "Sexo";
+        //    Sheet.Cells["F1"].Value = "Nacionalidad";
+        //    Sheet.Cells["G1"].Value = "Direccion";
+        //    Sheet.Cells["H1"].Value = "Telefono";
+        //    Sheet.Cells["I1"].Value = "Correo Electronico";
+        //    Sheet.Cells["J1"].Value = "Estado Civil";
+        //    Sheet.Cells["K1"].Value = "Tipo de Sangre";
+        //    Sheet.Cells["L1"].Value = "Cargo";
+        //    Sheet.Cells["LL1"].Value = "Area";
+        //    Sheet.Cells["M1"].Value = "Departamentos";
+        //    Sheet.Cells["N1"].Value = "Jornadas";
+
+
+        //    int row = 2;
+        //    foreach (var item in ExcelEmpleados)
+        //    {
+        //        Sheet.Cells[string.Format("A{0}", row)].Value = item.per_Identidad;
+        //        Sheet.Cells[string.Format("B{0}", row)].Value = item.per_Nombres;
+        //        Sheet.Cells[string.Format("C{0}", row)].Value = item.per_Apellidos;
+        //        Sheet.Cells[string.Format("D{0}", row)].Value = item.per_FechaNacimiento;
+        //        Sheet.Cells[string.Format("E{0}", row)].Value = item.per_Sexo;
+        //        Sheet.Cells[string.Format("F{0}", row)].Value = item.nac_Id;
+        //        Sheet.Cells[string.Format("G{0}", row)].Value = item.per_Direccion;
+        //        Sheet.Cells[string.Format("H{0}", row)].Value = item.per_Telefono;
+        //        Sheet.Cells[string.Format("I{0}", row)].Value = item.per_CorreoElectronico;
+        //        Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
+        //        Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
+        //        Sheet.Cells[string.Format("L{0}", row)].Value = item.car_Id;
+        //        Sheet.Cells[string.Format("LL{0}", row)].Value = item.area_Id;
+        //        Sheet.Cells[string.Format("M{0}", row)].Value = item.depto_Id;
+        //        Sheet.Cells[string.Format("N{0}", row)].Value = item.jor_Id;
+
+        //        row++;
+        //    }
+        //    Sheet.Cells["A:AZ"].AutoFitColumns();
+        //    Response.Clear();
+        //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        //    Response.AddHeader("content-disposition", "attachment: filename=" + $"ArchivoEmpleados_{DateTime.Now.Ticks.ToString()}.xlsx");
+        //    Response.BinaryWrite(Ep.GetAsByteArray());
+        //    Response.End();
+        //}
+
+
+        public void ArchveEmpleados() {
+
+
+        }
 
         // GET: Empleados/Details/5
         public ActionResult Details(int? id)
