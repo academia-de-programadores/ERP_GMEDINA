@@ -89,5 +89,4 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                 }
             });
     }
-
 });
