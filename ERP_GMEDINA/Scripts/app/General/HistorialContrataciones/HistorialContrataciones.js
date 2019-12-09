@@ -1,18 +1,19 @@
-﻿
-function llenarTabla() {
+﻿function llenarTabla() {
     _ajax(null,
-       '/HistorialHorasTrabajadas/llenarTabla',
+       '/HistorialContrataciones/llenarTabla',
        'POST',
        function (Lista) {
            tabla.clear();
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.htra_Id,
+                   Id: value.hcon_Id,
                    Colaborador: value.Colaborador.length == 0 ? 'Sin Asignar' : value.Colaborador[0],
-                   Jornada: value.jor_Descripcion,
-                   Recargo: value.tiho_Recargo,
-                   Descripcion: value.tiho_Descripcion
+                   Departamento: value.dep_Descripcion,
+                   Area: value.area_Descripcion,
+                   Cargo: value.car_Descripcion,
+                   FechaSeleccion: FechaFormato(value.scan_Fecha),
+                   FechaContratado: FechaFormato(value.scan_Fecha)
                });
            });
            tabla.draw();
@@ -34,7 +35,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         id = row.data().Id;
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
-            '/HistorialHorasTrabajadas/ChildRowData',
+            '/HistorialContrataciones/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
