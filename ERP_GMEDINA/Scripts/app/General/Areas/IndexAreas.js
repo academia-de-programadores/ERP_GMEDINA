@@ -1,4 +1,16 @@
-﻿function format(obj) {
+﻿function tablaDetalles(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/"+id);
+}
+function tablaEditar(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/" + id);
+}
+function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
@@ -59,4 +71,5 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                 }
             });       
     }
+
 });

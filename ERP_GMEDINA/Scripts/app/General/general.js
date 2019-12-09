@@ -143,16 +143,14 @@ $(".required").each(function (indice, input) {
     });
     function key(event) {
         var span = $(form).find("#error" + id);
-        $(span).closest("div").removeClass("has-error");
-        $(span).removeClass("text-danger");
         if ($(input).val().length > maxlength) {
             $(span).addClass("text-warning");
             $(span).closest("div").addClass("has-warning");
             span.text(txt_maxlength);
             event.preventDefault();
-        } else {
-            $(span).removeClass("text-warning");
-            $(span).closest("div").removeClass("has-warning");
+        }else {
+            $(span).closest("div").removeClass("has-error has-warning");
+            $(span).removeClass("text-danger text-warning");
             $(form).find("#error" + id).text("");
         }
     }

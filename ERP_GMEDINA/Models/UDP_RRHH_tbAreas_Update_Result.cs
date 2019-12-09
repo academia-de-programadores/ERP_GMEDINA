@@ -13,6 +13,6 @@ namespace ERP_GMEDINA.Models
     
     public partial class UDP_RRHH_tbAreas_Update_Result
     {
-        public Nullable<int> MensajeError { get; set; }
+        public string MensajeError { get; set; }
     }
 }
