@@ -346,7 +346,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         //total ingresos
-                                        totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones;
+                                        totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones;
 
                                         #endregion
 
