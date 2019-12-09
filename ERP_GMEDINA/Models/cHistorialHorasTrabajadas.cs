@@ -38,7 +38,6 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Razon para inactivar")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(100, ErrorMessage = "Exedio el numero maximo de caracteres")]
-
         public string htra_RazonInactivo { get; set; }
 
         public int htra_UsuarioCrea { get; set; }

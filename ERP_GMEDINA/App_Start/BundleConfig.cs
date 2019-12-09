@@ -532,6 +532,12 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialCargos").Include(
                          "~/Scripts/app/General/HistorialCargos/HistorialCargos.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialHorasTrabajadas").Include(
+                "~/Scripts/app/General/HistorialHorasTrabajadas/HistorialHorasTrabajadas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialContrataciones").Include(
+                "~/Scripts/app/General/HistorialContrataciones/HistorialContrataciones.js"));
+
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
