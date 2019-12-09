@@ -12,18 +12,19 @@ function tablaEditar(btn) {
 }
 function format(obj) {
     var div = '<div class="ibox">' +
-                '<div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
+                '<div class="ibox-title"><h5>Departamentos</h5>' +
+                '<div class="ibox-tools">' +
+                        '<a class="collapse-link" onclick="flecha(this)" >' +
+                        '<i class="fa fa-chevron-up"></i>' +
+                        '</a>' +
+                '</div>' +
+                '</div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
             '<div class="col-md-3">'+
                 '<div class="ibox">' +
                   '<div class="ibox-title">' +
-                     '<h5>' + index.depto_Descripcion + '</h5>' +
-                     '<div class="ibox-tools">'+
-                     '<a class="collapse-link" onclick="flecha(this)" >' +
-                     '<i class="fa fa-chevron-up"></i>'+
-                     '</a>'+
-                '</div>'+
+                     '<h5>' + index.depto_Descripcion + '</h5>' +                     
                 '</div>'+
                 '<div class="ibox-content">' +
                     '<h5>' + index.car_Descripcion + '</h5>'

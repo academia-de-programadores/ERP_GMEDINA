@@ -22,16 +22,6 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2><#= ViewDataTypeShortName#></h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>
-
 <#
 }
 else {
@@ -53,14 +43,24 @@ else {
     PushIndent("    ");
 }
 #>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2><#= ViewDataTypeShortName.Substring(2) #></h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de <#= ViewDataTypeShortName #></h5>
+                    <h5>Listado de <#= ViewDataTypeShortName.Substring(2) #></h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar <#= ViewDataTypeShortName #>", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar <#= ViewDataTypeShortName.Substring(2) #>" />
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -70,7 +70,73 @@ else {
 <#
                             IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
                             foreach (PropertyMetadata property in properties) {
-                                if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+						  	string hola = Convert.ToString(property.PropertyName.ToString());
+
+	            int count = 0;
+				bool permiso = true;
+            foreach (var item in hola)
+            {
+                count++;
+            }
+			
+
+				if (count >=6)
+	{
+	if (property.PropertyName.Substring(count - 6) == "Estado")
+	{
+	 permiso = false;
+	}
+	}
+				if (count >=13)
+	{
+	if (property.PropertyName.Substring(count - 13) == "RazonInactivo")
+	{
+	 permiso = false;
+	}
+	}
+
+
+
+					if (count >=11)
+	{
+	if (property.PropertyName.Substring(count - 11) == "UsuarioCrea")
+	{
+	 permiso = false;
+	}
+	}
+
+					if (count >=9)
+	{
+	if (property.PropertyName.Substring(count - 9) == "FechaCrea")
+	{
+	 permiso = false;
+	}
+	}
+
+					if (count >=15)
+	{
+	if (property.PropertyName.Substring(count - 15) == "UsuarioModifica")
+	{
+	 permiso = false;
+	}
+	}
+
+					if (count >=13)
+	{
+	if (property.PropertyName.Substring(count - 13) == "FechaModifica")
+	{
+	 permiso = false;
+	}
+	}
+	
+	if (count >=9)
+	{
+		if (property.PropertyName.Substring(0,9) == "tbUsuario")
+	{
+	 permiso = false;
+	}
+	}
+                                if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey && permiso) {
 #>
 <#
       // This is a temporary work around until core scaffolding provides support for independent associations.
@@ -86,54 +152,17 @@ else {
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-<#
-                      string pkName = GetPrimaryKeyName();
-#>
-                      @foreach (var item in Model) {
-                        <tr class="gradeA odd" role="row" data-id="@item.<#= pkName #>">
-<#
-                          foreach (PropertyMetadata property in properties) {
-                              if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
-#>
-<#
-      // This is a temporary work around until core scaffolding provides support for independent associations.
-                                if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
-                                    continue;
-                                }
-#>
-                            <td>
-                                @Html.DisplayFor(modelItem => <#= "item." + GetValueExpression(property) #>)
-                            </td>
-<#
-                              }
-                          }
-                          if (pkName != null) {
-#>
-                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { id=item.<#= pkName #> },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { id=item.<#= pkName #> }, new {@class = "btn btn-default btn-xs" })
-                            </td>
-<#
-                            }
-                            else {
-#>
-                            <td>
-                              @Html.ActionLink("Detalles", "Details", new { /*id=item.pkName*/ },  new {@class = "btn btn-primary btn-xs" })
-                              @Html.ActionLink("Editar", "Edit", new { /*id=item.pkName*/ }, new {@class = "btn btn-default btn-xs" })
-                            </td>
-<#
-}
-#>
-                        </tr>
-                      }
-                    </tbody>
+                    <tbody></tbody>                       
                   </table>
                 </div>
             </div>
         </div>
     </div>
  </div>
+@Html.Partial("_Create", new <#= ViewDataTypeName #>())
+@Html.Partial("_Delete", new <#= ViewDataTypeName #>())
+@Html.Partial("_Edit", new <#= ViewDataTypeName #>())
+@Html.Partial("_Detalles", new <#= ViewDataTypeName #>())
   <#
   // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
   #>
@@ -146,12 +175,16 @@ else {
 <#
   }
 #>
+<#
+#>
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
-
 @section Scripts {
-  @Scripts.Render("~/plugins/dataTables")
+@Scripts.Render("~/plugins/dataTables")
+@Scripts.Render("~/Scripts/app/general")
+@Scripts.Render("~/Scripts/app/general/<#= ViewDataTypeShortName.Substring(2) #>")
 }
 <#@ include file="ModelMetadataFunctions.cs.include.t4" #>
