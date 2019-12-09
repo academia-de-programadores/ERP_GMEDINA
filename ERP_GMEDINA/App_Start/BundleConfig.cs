@@ -520,6 +520,7 @@ namespace ERP_GMEDINA
               //script de areas
               bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexArea").Include(
               "~/Scripts/app/general/Areas/IndexAreas.js"));
+
               bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
                           "~/Scripts/app/general/Areas/CreateArea.js"));
               bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(

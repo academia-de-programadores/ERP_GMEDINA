@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
         public string per_CorreoElectronico { get; set; }
         public string per_EstadoCivil { get; set; }
         public string per_TipoSangre { get; set; }
-        public string car_Id { get; set; }
+        public IEnumerable<object> Cargo { get; set; }
         public string area_Id { get; set; }
         public string depto_Id { get; set; }
         public string jor_Id { get; set; }
