@@ -44,7 +44,10 @@
         </div>
     </div>
  </div>
-    
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialAmonestaciones())
+@Html.Partial("_Delete",new ERP_GMEDINA.Models.tbHistorialAmonestaciones())
+@Html.Partial("_Detalles",new ERP_GMEDINA.Models.tbHistorialAmonestaciones())
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
