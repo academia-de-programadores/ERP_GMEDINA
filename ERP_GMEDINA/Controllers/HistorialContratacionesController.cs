@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialContratacionesController : Controller
     {
-        private ERP_GMEDINAEntities1 db = null;
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialContrataciones
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities1())
+                using (db = new ERP_GMEDINAEntities())
                 {
                     var tbHistorialContrataciones = db.tbHistorialContrataciones 
                         .Select(
@@ -61,7 +61,7 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialContrataciones> lista = new List<V_HistorialContrataciones> { };
-            using (db = new ERP_GMEDINAEntities1())
+            using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {

@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialHorasTrabajadasController : Controller
     {
-        private ERP_GMEDINAEntities1 db = null;
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialHorasTrabajadas
         public ActionResult Index()
@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities1())
+                using (db = new ERP_GMEDINAEntities())
                 {
                     var tbHistorialHoras = db.tbHistorialHorasTrabajadas 
                         .Select(
@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialHorasTrabajadas> lista = new List<V_HistorialHorasTrabajadas> { };
-            using (db = new ERP_GMEDINAEntities1())
+            using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
