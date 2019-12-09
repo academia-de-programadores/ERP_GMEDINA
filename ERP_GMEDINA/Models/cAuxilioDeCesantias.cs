@@ -7,12 +7,12 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cAuxilioDeCesantias))]
-    public class AuxilioDeCesantias
+    public partial class AuxilioDeCesantias
     {
 
     }
 
-    public partial class cAuxilioDeCesantias
+    public class cAuxilioDeCesantias
     {
         [Display(Name = "Codigo Auxilio Cesantia")]
         public int aces_IdAuxilioCesantia { get; set; }

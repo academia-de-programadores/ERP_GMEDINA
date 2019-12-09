@@ -4,54 +4,90 @@ function _ajax(params, uri, type, callback) {
         url: uri,
         type: type,
         data: { params },
-        success: function (data) {
+        success: function (data)
+        {
             callback(data);
         }
     });
 }
 
-$(document).ready(function () {
-    console.clear();
-});
+function cargarGridAuxilioCesantia() {
+    _ajax(null,
+        '/AuxilioDeCesantias/GetData',
+        'GET',
+        (data) => {
+            if (data.length == 0)
+            {
+                //Validar si se genera un error al cargar de nuevo el grid
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
+            var ListaAuxCes = data, template = '';
+            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            for (var i = 0; i < ListaAuxCes.length; i++)
+            {
+                template += '<tr data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '">' +
+                    '<td>' + ListaAuxCes[i].aces_IdAuxilioCesantia + '</td>' +
+                    '<td>' + ListaAuxCes[i].aces_RangoInicioMeses + '</td>' +
+                    '<td>' + ListaAuxCes[i].aces_RangoFinMeses + '</td>' +
+                    '<td>' + ListaAuxCes[i].aces_DiasAuxilioCesantia + '</td>' +
+                    '<td>' +
+                    '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs" id="btnModalCrear">Editar</button>' +
+                    '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs" id="btnModalCrear">Detalle</button>' +
+                    '</td>' +
+                    '</tr>';
+            }
+            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            $('#tbodyAuxCes').html(template);
+        });
+
+}
+
+
+
 
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnModalCrear", function ()
 {
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#rangoinicio").val('');
-    $("#rangofin").val('');
-    $("#diasauxces").val('');
+    $("#Crear #aces_RangoInicioMeses").val('');
+    $("#Crear #aces_RangoFinMeses").val('');
+    $("#Crear #aces_DiasAuxilioCesantia").val('');
     $("#frmCrearAuxCes").modal();
 });
 
-//$("#frmCrearAuxCes").submit(function (e)
-//{
-//    return false;
-//});
+$("#frmCrearAuxCes").submit(function (e)
+{
+    return false;
+});
 
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCrearAuxCes').click(function ()
 {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCrearAuxCes").serializeArray();
+    var data = $("#frmCrearAuxCess").serializeArray();
 
-    var rangoInicio = $("#rangoinicio").val();
-    var rangoFin = $("#rangofin").val();
-    var diasAuxCes = $("#diasauxces").val();
+    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val();
+    var rangoFin = $("#Crear #aces_RangoFinMeses").val();
+    var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
+
+    console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
 
     //VALIDAMOS LOS CAMPOS
-    if (rangoInicio != '' && rangoInicio != null && rangoInicio != undefined && isNaN(rangoInicio) == true && rangoFin != '' && rangoFin != null && rangoFin != undefined && isNaN(rangoFin) == true
-        && diasAuxCes != '' && diasAuxCes != null && diasAuxCes != undefined && isNaN(diasAuxCes) == true)
-    {
-
+    //if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0)
+    //{
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/AuxilioDeCesantias/Create",
             method: "POST",
             data: data
-        }).done(function (data) {
+        }).done(function (data)
+        {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
 
             if (data == "error")
@@ -59,16 +95,15 @@ $('#btnCrearAuxCes').click(function ()
                 $("#frmCrearAuxCes").modal('hide');
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: 'No se guardó el registro, contacte al administrador',
                 });
             }
-            else
-            {
+            else {
                 $("#frmCrearAuxCes").modal('hide');
-                cargarGridIngresos();
-                $("#rangoinicio").val('');
-                $("#rangofin").val('');
-                $("#diasauxces").val('');
+                cargarGridAuxilioCesantia();
+                $("#Crear #aces_RangoInicioMeses").val('');
+                $("#Crear #aces_RangoFinMeses").val('');
+                $("#Crear #aces_DiasAuxilioCesantia").val('');
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -77,14 +112,15 @@ $('#btnCrearAuxCes').click(function ()
             }
 
         });
-    }
-    else {
-        $("#rangoinicio").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
+    //}
+    //else
+    //{
+    //    $("#rangoinicio").focus();
+    //    iziToast.error({
+    //        title: 'Error',
+    //        message: 'Ingrese datos válidos.',
+    //    });
+    //}
 });
 
 
@@ -110,14 +146,43 @@ $("#IconCerrar").click(function () {
 });
 
 
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-//$("#btnCrearAuxCes").click(function () {
-//    var FechaInicial = $("#hipa_FechaInicio").val();
-//    var FechaFinal = $("#hipa_FechaFin").val();
+// DETALLES
+$(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", function () {
+    var ID = $(this).data('id');
+    $.ajax({
+        url: "/AuxilioDeCesantias/Details/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data)
+        {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data)
+            {
+                console.log(data);
+                //var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
+                //var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
+                $("#aces_IdAuxilioCesantia").val(data[0].aces_IdAuxilioCesantia);
+                $("#aces_RangoInicioMeses").val(data[0].aces_RangoInicioMeses);
+                $("#aces_RangoFinMeses").val(data[0].aces_RangoFinMeses);
+                $("#aces_DiasAuxilioCesantia").val(data[0].aces_DiasAuxilioCesantia);
 
-//    if (FechaInicial == "" || FechaFinal == "") {
-//        $("#Validation_descipcion").css("display", "");
-//        $("#Validation_descipcion2").css("display", "");
-//    }
+                $("#tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#aces_FechaCrea").val(data[0].aces_FechaCrea);
+                data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
+                $("#aces_FechaModifica").val(data[0].aces_FechaModifica);
+                $("#frmDetailAuxCes").modal();
 
-//});
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+        });
+});

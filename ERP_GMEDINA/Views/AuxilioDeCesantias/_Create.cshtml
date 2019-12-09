@@ -1,13 +1,13 @@
 ﻿@model  ERP_GMEDINA.Models.tbAuxilioDeCesantias
-@using (Ajax.BeginForm("Create", "AuxilioDeCesantias", new AjaxOptions { HttpMethod = "POST", LoadingElementId = "" }))
-{
-    <div class="modal-body">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCrearAuxCess" }))
+    {
+    <div class="modal-body" id="Crear">
 
 
         <div class="form-group">
             @Html.LabelFor(model => model.aces_RangoInicioMeses, htmlAttributes: new { @class = "font-noraml" }) <br />
             <div class="input-group date">
-                @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "rangoinicio", @id = "rangoinicio" } })
+                @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoInicioMeses", @id = "aces_RangoInicioMeses" } })
             </div>
             @Html.ValidationMessageFor(model => model.aces_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descipcion" })
         </div>
@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.aces_RangoFinMeses, htmlAttributes: new { @class = "font-noraml" })
             <div class="input-group date">
-                @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "rangofin", @id = "rangofin" } })
+                @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoFinMeses", @id = "aces_RangoFinMeses" } })
             </div>
             @Html.ValidationMessageFor(model => model.aces_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.aces_DiasAuxilioCesantia, htmlAttributes: new { @class = "font-noraml" })
             <div class="input-group date">
-               @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "diasauxces", @id = "diasauxces" } })
+               @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_DiasAuxilioCesantia", @id = "aces_DiasAuxilioCesantia" } })
             </div>
             @Html.ValidationMessageFor(model => model.aces_DiasAuxilioCesantia, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
         </div>

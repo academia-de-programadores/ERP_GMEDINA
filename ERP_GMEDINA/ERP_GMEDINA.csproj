@@ -579,13 +579,10 @@
     <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete1_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Insert1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Update1_Result.cs">
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
@@ -1792,6 +1789,7 @@
     <Content Include="Views\ReportesPlanilla\_LiquidacionesModalRPT.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\Index.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_Create.cshtml" />
+    <Content Include="Views\AuxilioDeCesantias\_DetailsAuxCes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

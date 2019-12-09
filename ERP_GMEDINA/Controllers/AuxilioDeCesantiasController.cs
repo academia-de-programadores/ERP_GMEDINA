@@ -17,28 +17,55 @@ namespace ERP_GMEDINA.Controllers
         // GET: tbAuxilioDeCesantias
         public ActionResult Index()
         {
-            var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.aces_Activo == true);
             return View(tbAuxilioDeCesantias.ToList());
         }
 
-        // GET: tbAuxilioDeCesantias/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult GetData()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbAuxilioDeCesantias tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Find(id);
-            if (tbAuxilioDeCesantias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbAuxilioDeCesantias);
+            var tbAuxilioCesantia1 = db.tbAuxilioDeCesantias
+                        .Select(c => new {
+                            aces_IdAuxilioCesantia = c.aces_IdAuxilioCesantia,
+                            aces_RangoInicioMeses = c.aces_RangoInicioMeses,
+                            aces_RangoFinMeses = c.aces_RangoFinMeses,
+                            aces_DiasAuxilioCesantia = c.aces_DiasAuxilioCesantia,
+                            aces_UsuarioCrea = c.aces_UsuarioCrea,
+                            aces_FechaCrea = c.aces_FechaCrea,
+                            aces_UsuarioModifica = c.aces_UsuarioModifica,
+                            aces_FechaModifica = c.aces_FechaModifica,
+                            aces_Activo = c.aces_Activo
+                        })
+                                           .OrderByDescending(x => x.aces_FechaCrea)
+                                           .Where(x => x.aces_Activo == true).ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbAuxilioCesantia1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult Details(int? ID)
+        {
+            var tbAuxCesanJSON = from tbAuxilioDeCesantias in db.tbAuxilioDeCesantias
+                                           where tbAuxilioDeCesantias.aces_Activo == true && tbAuxilioDeCesantias.aces_IdAuxilioCesantia == ID
+                                           orderby tbAuxilioDeCesantias.aces_FechaCrea descending
+                                           select new
+                                           {
+                                               tbAuxilioDeCesantias.aces_IdAuxilioCesantia,
+                                               tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                                               tbAuxilioDeCesantias.aces_RangoFinMeses,
+                                               tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,
+                                               UsuCrea = tbAuxilioDeCesantias.tbUsuario.usu_NombreUsuario,
+                                               tbAuxilioDeCesantias.aces_FechaCrea,
+                                               tbAuxilioDeCesantias.aces_UsuarioModifica,
+                                               UsuModifica = tbAuxilioDeCesantias.tbUsuario1.usu_NombreUsuario,
+                                               tbAuxilioDeCesantias.aces_FechaModifica
+                                           };
+
+
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(tbAuxCesanJSON, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-       
-        public ActionResult Create([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
+        public ActionResult Create(tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
             #region declaracion de variables
             //Auditoria
@@ -62,7 +89,7 @@ namespace ERP_GMEDINA.Controllers
                                                                                          tbAuxilioDeCesantias.aces_UsuarioCrea,
                                                                                          tbAuxilioDeCesantias.aces_FechaCrea,tbAuxilioDeCesantias.aces_Activo);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbAuxilioDeCesantias_Insert1_Result Resultado in listAuxCesantias)
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Insert_Result Resultado in listAuxCesantias)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -91,24 +118,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: tbAuxilioDeCesantias/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //db.tbAuxilioDeCesantias.Add(tbAuxilioDeCesantias);
-        //        //db.SaveChanges();
-        //        //return RedirectToAction("Index");
-        //    }
-
-        //    //ViewBag.aces_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioCrea);
-        //    //ViewBag.aces_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioModifica);
-        //    return View(tbAuxilioDeCesantias);
-        //}
+      
 
         // GET: tbAuxilioDeCesantias/Edit/5
         //public ActionResult Edit(int? id)
