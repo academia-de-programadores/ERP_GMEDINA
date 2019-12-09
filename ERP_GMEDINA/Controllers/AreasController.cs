@@ -217,7 +217,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     tbAreas = db.tbAreas.Find(id);
-                    Sucursales = db.tbSucursales.ToList();
+                    Sucursales = new List<tbSucursales> { new tbSucursales {suc_Id=tbAreas.suc_Id } }; //db.tbSucursales.ToList();
                     ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
                 }
                 catch

@@ -80,7 +80,20 @@ function Remover(btn) {
            .remove()
            .draw();
 }
+function llenarDropDownList() {
+    _ajax(null,
+       '/Areas/llenarDropDowlist',
+       'POST',
+       function (result) {
+           $.each(result, function (id, Lista) {
+               Lista.forEach(function (value, index) {
+                   $("#" + id).append(new Option(value.Descripcion, value.Id));
+               });
+           });
+       });
+}
 $(document).ready(function () {
+    llenarDropDownList();
     ChildTable = $(ChildDataTable).DataTable({
         pageLength: 3,
         lengthChange: false,
