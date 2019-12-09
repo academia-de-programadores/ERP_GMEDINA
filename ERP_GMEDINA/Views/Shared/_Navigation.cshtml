@@ -36,7 +36,7 @@
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"Cargos",action: "Index")"><a href="@Url.Action("Index", "Cargos")">Cargos</a></li>
                     <li class="@Html.IsSelected(controller:"Empresas",action: "Index")"><a href="@Url.Action("Index", "Empresas")">Empresas</a></li>
-                    @*<li class="@Html.IsSelected(action: "Dashboard_3")"><a href="@Url.Action("Dashboard_3", "Dashboards")">Sucursales</a></li>*@
+                    @*<li class="@Html.IsSelected(controller:"",action: "Index")"><a href="@Url.Action("Dashboard_3", "Dashboards")">Sucursales</a></li>*@
                     <li class="@Html.IsSelected(controller:"Idiomas",action: "Index")"><a href="@Url.Action("Index", "Idiomas")">Idiomas</a></li>
                     <li class="@Html.IsSelected(controller:"TipoMonedas",action: "Index")"><a href="@Url.Action("Index", "TipoMonedas")">Monedas</a></li>
                     <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
@@ -81,6 +81,7 @@
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial Vacaciones</a>
                             </li>
 
+
                         </ul>
                     </li>*@
                     @*VACACIONES*@
@@ -120,11 +121,6 @@
                         </ul>
                     </li>
                     @*Salidas*@
-
-
-
-
-
 
 
 
@@ -176,7 +172,7 @@
                             <li class="@Html.IsSelected(controller:"FasesReclutamiento", action: "Index")">
                                 <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
                             </li>
-                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
+                            @*<li class="@Html.IsSelected(controller:"",action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Personas</a>
                             </li>
                             <li class="@Html.IsSelected(action: "Dashboard_5")">
