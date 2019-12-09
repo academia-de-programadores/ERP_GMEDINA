@@ -122,7 +122,6 @@ $('#btnGenerarPlanilla').click(function () {
                        , columns: getColumns(data.Data)
                 });
             }
-            debugger;
 
             if (data.Response.Tipo == 'success') {
                 iziToast.success({

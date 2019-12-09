@@ -499,6 +499,8 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
 
+                                        //ISR
+
                                         totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP;
                                         netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
 
@@ -590,16 +592,12 @@ namespace ERP_GMEDINA.Controllers
                                         oHistorialPagoEncabezado.hipa_IdHistorialDePago = db.tbHistorialDePago.Max(x => x.hipa_IdHistorialDePago) + contador;
                                         oHistorialPagoEncabezado.emp_Id = empleadoActual.emp_Id;
                                         oHistorialPagoEncabezado.hipa_SueldoNeto = Math.Round((decimal)netoAPagarColaborador, 2);
-
                                         oHistorialPagoEncabezado.hipa_FechaInicio = fechaInicio;
                                         oHistorialPagoEncabezado.hipa_FechaFin = fechaFin;
-
                                         oHistorialPagoEncabezado.hipa_FechaPago = DateTime.Now;
                                         oHistorialPagoEncabezado.hipa_Anio = DateTime.Now.Year;
                                         oHistorialPagoEncabezado.hipa_Mes = DateTime.Now.Month;
-
                                         oHistorialPagoEncabezado.peri_IdPeriodo = 1;
-
                                         oHistorialPagoEncabezado.hipa_UsuarioCrea = 1;
                                         oHistorialPagoEncabezado.hipa_FechaCrea = DateTime.Now;
                                         oHistorialPagoEncabezado.hipa_TotalISR = totalISR;
