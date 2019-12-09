@@ -80,7 +80,7 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.tbCargos.Select(x=> new {id=x.car_Id,desc= x.car_Descripcion } ).ToList(), area_Id = "", depto_Id = "", jor_Id = "" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.tbCargos.Select(x=> new {desc= x.car_Descripcion } ).ToList(), area_Id = "", depto_Id = "", jor_Id = "" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
             Sheet.Cells["A1"].Value = "Identidad";
@@ -122,7 +122,7 @@ namespace ERP_GMEDINA.Controllers
                 //}
                 foreach (var i in item.Cargo)
                 {
-                    Row.Formula.Values.Add("");
+                    Row.Formula.Values.Add(i);
                     //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
 
                 }
