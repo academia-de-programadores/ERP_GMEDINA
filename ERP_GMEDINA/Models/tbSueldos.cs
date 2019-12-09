@@ -23,13 +23,13 @@ namespace ERP_GMEDINA.Models
         public int sue_Id { get; set; }
         public int emp_Id { get; set; }
         public int tmon_Id { get; set; }
-        public Nullable<decimal> sue_Cantidad { get; set; }
+        public decimal sue_Cantidad { get; set; }
         public Nullable<int> sue_SueldoAnterior { get; set; }
         public bool sue_Estado { get; set; }
         public string sue_RazonInactivo { get; set; }
         public int sue_UsuarioCrea { get; set; }
         public Nullable<System.DateTime> sue_FechaCrea { get; set; }
-        public Nullable<int> ue_UsuarioModifica { get; set; }
+        public Nullable<int> sue_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> sue_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }

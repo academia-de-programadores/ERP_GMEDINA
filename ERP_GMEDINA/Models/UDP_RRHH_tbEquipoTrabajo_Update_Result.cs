@@ -11,10 +11,8 @@ namespace ERP_GMEDINA.Models
 {
     using System;
     
-    public partial class UDP_RRHH_tbTipoHoras_Select_Result1
+    public partial class UDP_RRHH_tbEquipoTrabajo_Update_Result
     {
-        public int tiho_Id { get; set; }
-        public string tiho_Descripcion { get; set; }
-        public int tiho_Recargo { get; set; }
+        public Nullable<int> MensajeError { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult llenarTabla()
         {
             List<tbEmpresas> tbEmpresas =
-                new List<Models.tbEmpresas> { };
+                new List<tbEmpresas> { };
             foreach (tbEmpresas x in db.tbEmpresas.ToList().Where(x => x.empr_Estado == true))
             {
                 tbEmpresas.Add(new tbEmpresas
