@@ -18,8 +18,11 @@ namespace ERP_GMEDINA.Models
         public int dex_IdDeduccionesExtra { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
-        [Display(Name = "Id Equipo Empleado")]
+        [Display(Name = "Equipo Empleado")]
         public int eqem_Id { get; set; }
+
+        [Display(Name = "Deducción")]
+        public int cde_IdDeducciones { get; set; }
 
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, a mayor de 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
