@@ -8,13 +8,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
-                @using (Html.BeginForm())
-                {
-                    <div class="ibox-title">
-                        @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-                        <h2>Registrar Planilla</h2>
-                    </div>
-                    <div class="ibox-content">
+                <div class="ibox-title">
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+                    <h2>Registrar Planilla</h2>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm())
+                    {
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -36,72 +36,70 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Recibe Comisiones</label>
                                 <div class="col-md-5">
-                                    <input type="checkbox" checked="@false" class="i-checks" id="check-recibe-comision" /> 
+                                    <input type="checkbox" checked="@false" class="i-checks" id="check-recibe-comision" />
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        
 
-                    <br />
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-5" id="catalogoDeIngresos">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h2>Lista del catalogo de Ingresos</h2>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-                                    <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
-                                    <br />
-                                </div>
-                                &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
-                                <br /><br />
-                                @foreach (var item in ViewBag.CatalogoIngresos)
-                                {
-                                    <div class="form-horizontal col-xs-offset-1">
-                                        <div class="form-group">
-                                            <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
-                                        </div>
+                        <div class="ibox-content">
+                            <div class="col-lg-5" id="catalogoDeIngresos">
+                                <div class="ibox float-e-margins">
+                                    <h3 style="margin-left:85px;">Lista del catalogo de Ingresos</h3>
+                                        <div class="col-lg-offset-2">
+                                            <hr/>
+                                            <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+                                                <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
+                                                <br />
+                                            </div>
+                                            &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
+                                            <br /><br />
+                                            @foreach (var item in ViewBag.CatalogoIngresos)
+                                            {
+                                                <div class="form-horizontal col-xs-offset-1">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
+                                                    </div>
+                                                </div>
+                                            }
                                     </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5" id="catalogoDeDeducciones">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h2>Lista del catalogo de Deducciones</h2>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-                                    <span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
                                 </div>
-                                &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
-                                <br /><br />
-                                @foreach (var item in ViewBag.CatalogoDeducciones)
-                                {
-                                    <div class="form-horizontal col-xs-offset-1">
-                                        <div class="form-group">
-                                            <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
+                            </div>
+
+                            <div class="col-lg-5" id="catalogoDeDeducciones">
+                                <div class="ibox float-e-margins">
+                                    <h3 style="margin-left:85px;">Lista del catalogo de Deducciones</h3>
+                                    <div class="col-lg-offset-2">
+                                        <hr class="" />
+                                        <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+                                            <span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
                                         </div>
+                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
+                                        <br /><br />
+                                        @foreach (var item in ViewBag.CatalogoDeducciones)
+                                        {
+                                            <div class="form-horizontal col-xs-offset-1">
+                                                <div class="form-group">
+                                                    <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                }
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-10">
+                                    <input type="button" id="btnGuardarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
+                                    <div style="display:none" class="btn" id="cargandoCrear">
+                                    </div>
+                                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="clearfix"></div>
 
-                    <div class="clearfix"></div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="button" id="btnGuardarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
-                            <div style="display:none" class="btn" id="cargandoCrear">
-                            </div>
-                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                        </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
