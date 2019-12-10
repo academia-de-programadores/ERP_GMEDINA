@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         public ActionResult Index()
         {
+            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
             var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbHistorialAmonestaciones);
         }
@@ -91,18 +92,42 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialAmonestaciones/Details/5
-        public ActionResult Details(int? id)
+        //Modal de Detalle 
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
-            if (tbHistorialAmonestaciones == null)
+            List<tbHistorialAmonestaciones> tbHistorialAmonestaciones = null;
+            try
             {
+                tbHistorialAmonestaciones = new List<Models.tbHistorialAmonestaciones> { };
+                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Where(x => x.emp_Id == id).Include(t => t.tbTipoAmonestaciones).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            return View(tbHistorialAmonestaciones);
+            Session["id"] = id;
+            var amonestaciones = new tbHistorialAmonestaciones();
+            foreach (var item in tbHistorialAmonestaciones)
+            {
+                 amonestaciones = new tbHistorialAmonestaciones
+                {
+                    hamo_AmonestacionAnterior = item.hamo_AmonestacionAnterior,
+                    hamo_Observacion = item.hamo_Observacion,
+                    tbTipoAmonestaciones = item.tbTipoAmonestaciones,
+                    tbUsuario = item.tbUsuario,
+                    hamo_FechaCrea = item.hamo_FechaCrea,
+                    tbUsuario1 = item.tbUsuario1,
+                    hamo_FechaModifica = item.hamo_FechaModifica
+                };
+
+            }
+            return Json(amonestaciones, JsonRequestBehavior.AllowGet);
         }
 
         // GET: HistorialAmonestaciones/Create
@@ -139,24 +164,24 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: HistorialAmonestaciones/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
-            if (tbHistorialAmonestaciones == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
-            ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
-            ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
-            return View(tbHistorialAmonestaciones);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
+        //    if (tbHistorialAmonestaciones == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
+        //    ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
+        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
+        //    ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
+        //    ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
+        //    return View(tbHistorialAmonestaciones);
+        //}
 
         // POST: HistorialAmonestaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
