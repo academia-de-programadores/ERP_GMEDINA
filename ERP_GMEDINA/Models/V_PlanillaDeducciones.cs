@@ -22,7 +22,7 @@ namespace ERP_GMEDINA.Models
         public string cde_DescripcionDeduccion { get; set; }
         public int tde_IdTipoDedu { get; set; }
         public string tde_Descripcion { get; set; }
-        public decimal cde_PorcentajeColaborador { get; set; }
-        public decimal cde_PorcentajeEmpresa { get; set; }
+        public Nullable<decimal> cde_PorcentajeColaborador { get; set; }
+        public Nullable<decimal> cde_PorcentajeEmpresa { get; set; }
     }
 }

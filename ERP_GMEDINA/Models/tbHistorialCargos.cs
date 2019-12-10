@@ -30,6 +30,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCargos tbCargos { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
-        public virtual tbCargos tbCargos1 { get; set; }
     }
 }

@@ -9,192 +9,121 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
-{				
-	public class RequisicionesController : Controller
+{
+    public class RequisicionesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: /tbRequisiciones/
-        public ActionResult Index()        
-		{           
-		    List<tbRequisiciones> tbRequisiciones = new List<Models.tbRequisiciones> { };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+        // GET: Requisiciones
+        public ActionResult Index()
+        {
+            var tbRequisiciones = db.tbRequisiciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            return View(tbRequisiciones.ToList());
+        }
+
+        // GET: Requisiciones/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+            if (tbRequisiciones == null)
+            {
+                return HttpNotFound();
+            }
             return View(tbRequisiciones);
         }
-		[HttpPost]
-        public JsonResult llenarTabla()
+
+        // GET: Requisiciones/Create
+        public ActionResult Create()
         {
-			List<tbRequisiciones> tbRequisiciones = new List<Models.tbRequisiciones> { };
-            var lista = db.tbRequisiciones.Where(x => x.req_Estado).ToList();
-            foreach (tbRequisiciones x in db.tbRequisiciones.ToList().Where(x => x.req_Estado))
-            {
-                tbRequisiciones.Add(new tbRequisiciones
-                {
-                    req_Id = x.req_Id,
-                    req_Experiencia = x.req_Experiencia,
-                    req_Sexo = x.req_Sexo,
-                    req_Descripcion = x.req_Descripcion,
-                    req_EdadMinima = x.req_EdadMinima,
-                    req_EdadMaxima = x.req_EdadMaxima,
-                    req_EstadoCivil = x.req_EstadoCivil,
-                    req_EducacionSuperior = x.req_EducacionSuperior,
-                    req_Permanente = x.req_Permanente,
-                    req_Duracion = x.req_Duracion,
-                    req_Vacantes = x.req_Vacantes,
-                    req_FechaRequisicion = x.req_FechaRequisicion,
-                    req_FechaContratacion = x.req_FechaContratacion
-                });
-            }
-            return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            return View();
         }
-        // POST: /tbRequisiciones/Create
+
+        // POST: Requisiciones/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JsonResult Create(tbRequisiciones tbRequisiciones)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "req_Id,req_Experiencia,req_Sexo,req_Descripcion,req_EdadMinima,req_EdadMaxima,req_EstadoCivil,req_EducacionSuperior,req_Permanente,req_Duracion,req_Estado,req_RazonInactivo,req_Vacantes,req_FechaRequisicion,req_FechaContratacion,req_UsuarioCrea,req_FechaCrea,req_UsuarioModifica,req_FechaModifica")] tbRequisiciones tbRequisiciones)
         {
-            string msj = "";
-            if (tbRequisiciones.req_Experiencia != "" && tbRequisiciones.req_Sexo != "" && tbRequisiciones.req_Descripcion != "" && tbRequisiciones.req_EstadoCivil != "" &&  tbRequisiciones.req_Duracion != "" && tbRequisiciones.req_Vacantes != "")
-            { 
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-            }
-            else
+            if (ModelState.IsValid)
             {
-                msj = "-3";
+                db.tbRequisiciones.Add(tbRequisiciones);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+
+            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioCrea);
+            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioModifica);
+            return View(tbRequisiciones);
         }
-		// GET: /tbRequisiciones//Edit/5
+
+        // GET: Requisiciones/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            tbRequisiciones tbRequisiciones = null;
-            try
+            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+            if (tbRequisiciones == null)
             {
-                tbRequisiciones = db.tbRequisiciones.Find(id);
-                if (tbRequisiciones == null || !tbRequisiciones.req_Estado)
-                {
-                    return HttpNotFound();
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
                 return HttpNotFound();
-            }            
-            Session["id"] = id;
-            var tabla = new tbRequisiciones
-            {
-				req_Id = tbRequisiciones.req_Id,
-				req_Experiencia = tbRequisiciones.req_Experiencia,
-				req_Sexo = tbRequisiciones.req_Sexo,
-				req_Descripcion = tbRequisiciones.req_Descripcion,
-				req_EdadMinima = tbRequisiciones.req_EdadMinima,
-				req_EdadMaxima = tbRequisiciones.req_EdadMaxima,
-				req_EstadoCivil = tbRequisiciones.req_EstadoCivil,
-				req_EducacionSuperior = tbRequisiciones.req_EducacionSuperior,
-				req_Permanente = tbRequisiciones.req_Permanente,
-				req_Duracion = tbRequisiciones.req_Duracion,
-				req_Estado = tbRequisiciones.req_Estado,
-				req_RazonInactivo = tbRequisiciones.req_RazonInactivo,
-				req_Vacantes = tbRequisiciones.req_Vacantes,
-				req_FechaRequisicion = tbRequisiciones.req_FechaRequisicion,
-				req_FechaContratacion = tbRequisiciones.req_FechaContratacion,
-				req_UsuarioCrea = tbRequisiciones.req_UsuarioCrea,
-				req_FechaCrea = tbRequisiciones.req_FechaCrea,
-				req_UsuarioModifica = tbRequisiciones.req_UsuarioModifica,
-				req_FechaModifica = tbRequisiciones.req_FechaModifica,
-				tbUsuario = new tbUsuario { usu_NombreUsuario= IsNull(tbRequisiciones.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbRequisiciones.tbUsuario1).usu_NombreUsuario }
-            };
-            return Json(tabla, JsonRequestBehavior.AllowGet);
+            }
+            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioCrea);
+            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioModifica);
+            return View(tbRequisiciones);
         }
-        // POST: /tbRequisiciones/Edit/5
+
+        // POST: Requisiciones/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JsonResult Edit(tbRequisiciones tbRequisiciones)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "req_Id,req_Experiencia,req_Sexo,req_Descripcion,req_EdadMinima,req_EdadMaxima,req_EstadoCivil,req_EducacionSuperior,req_Permanente,req_Duracion,req_Estado,req_RazonInactivo,req_Vacantes,req_FechaRequisicion,req_FechaContratacion,req_UsuarioCrea,req_FechaCrea,req_UsuarioModifica,req_FechaModifica")] tbRequisiciones tbRequisiciones)
         {
-            string msj = "";
-            if (tbRequisiciones.req_Id != 0 && tbRequisiciones.req_Experiencia != "" && tbRequisiciones.req_Sexo != "" && tbRequisiciones.req_Descripcion != "" && tbRequisiciones.req_EdadMinima > 0 && tbRequisiciones.req_EstadoCivil != "" && tbRequisiciones.req_Duracion != "" && tbRequisiciones.req_Vacantes != "")
+            if (ModelState.IsValid)
             {
-                var id = (int)Session["id"];
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbRequisiciones_Update(id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbRequisiciones_Update_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-                Session.Remove("id");
+                db.Entry(tbRequisiciones).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioCrea);
+            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioModifica);
+            return View(tbRequisiciones);
         }
-        // GET: /tbRequisiciones//Delete/5
-        [HttpPost]
-        public ActionResult Delete(tbRequisiciones tbRequisiciones)
+
+        // GET: Requisiciones/Delete/5
+        public ActionResult Delete(int? id)
         {
-            string msj = "";
-            if (tbRequisiciones.req_Id != 0 && tbRequisiciones.req_RazonInactivo != "")
+            if (id == null)
             {
-                var id = (int)Session["id"];
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbRequisiciones_Delete(id, tbRequisiciones.req_RazonInactivo, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbRequisiciones_Delete_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-                Session.Remove("id");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+            if (tbRequisiciones == null)
             {
-                msj = "-3";
-            }            
-            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
+                return HttpNotFound();
+            }
+            return View(tbRequisiciones);
         }
-        protected tbUsuario IsNull(tbUsuario valor)
+
+        // POST: Requisiciones/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            if (valor!=null)
-            {
-                return valor;
-            }
-            else
-            {
-                return new tbUsuario {usu_NombreUsuario="" };
-            }
+            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+            db.tbRequisiciones.Remove(tbRequisiciones);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -205,4 +134,3 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////

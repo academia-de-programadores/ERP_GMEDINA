@@ -16,6 +16,6 @@ namespace ERP_GMEDINA.Models
     {
         public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
-        public System.DateTime hipa_FechaPago { get; set; }
+        public Nullable<System.DateTime> hipa_FechaPago { get; set; }
     }
 }

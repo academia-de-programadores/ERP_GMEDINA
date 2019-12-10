@@ -10,13 +10,11 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class V_DeduccionesExtraordinarias_EquipoEmpleado
+    public partial class UDP_RRHH_tbTipoMonedas_Select1_Result
     {
-        public int eqem_Id { get; set; }
-        public int eqtra_Id { get; set; }
-        public string eqtra_Codigo { get; set; }
-        public string per_EquipoEmpleado { get; set; }
+        public string tmon_Descripcion { get; set; }
+        public bool tmon_Estado { get; set; }
+        public string tmon_RazonInactivo { get; set; }
     }
 }

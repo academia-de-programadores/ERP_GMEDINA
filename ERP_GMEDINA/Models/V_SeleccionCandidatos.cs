@@ -12,11 +12,13 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_DeduccionesExtraordinarias_EquipoEmpleado
+    public partial class V_SeleccionCandidatos
     {
-        public int eqem_Id { get; set; }
-        public int eqtra_Id { get; set; }
-        public string eqtra_Codigo { get; set; }
-        public string per_EquipoEmpleado { get; set; }
+        public int Id { get; set; }
+        public string Identidad { get; set; }
+        public string Nombre { get; set; }
+        public string Fase { get; set; }
+        public string Plaza_Disponible { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     }
 }

@@ -192,8 +192,6 @@ namespace ERP_GMEDINA.Models
             this.tbTitulosPersona1 = new HashSet<tbTitulosPersona>();
             this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
             this.tbTitulosRequisicion1 = new HashSet<tbTitulosRequisicion>();
-            this.tbTechosDeducciones2 = new HashSet<tbTechosDeducciones>();
-            this.tbTechosDeducciones11 = new HashSet<tbTechosDeducciones>();
         }
     
         public int usu_Id { get; set; }
@@ -206,7 +204,6 @@ namespace ERP_GMEDINA.Models
         public string usu_RazonInactivo { get; set; }
         public bool usu_EsAdministrador { get; set; }
         public Nullable<byte> usu_SesionesValidas { get; set; }
-        public string su_Nombres { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAccesoRol> tbAccesoRol { get; set; }
@@ -558,9 +555,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTechosDeducciones> tbTechosDeducciones2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTechosDeducciones> tbTechosDeducciones11 { get; set; }
     }
 }

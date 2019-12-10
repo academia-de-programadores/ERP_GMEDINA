@@ -16,9 +16,9 @@ namespace ERP_GMEDINA.Models
     {
         public int saph_Idsaph { get; set; }
         public int rama_Id { get; set; }
-        public decimal saph_SalarioMinimo { get; set; }
+        public Nullable<decimal> saph_SalarioMinimo { get; set; }
         public int jor_Id { get; set; }
-        public decimal saph_Monto { get; set; }
+        public Nullable<decimal> saph_Monto { get; set; }
         public int saph_TamanoEmpresaInicial { get; set; }
         public int saph_TamanoEmpresaFinal { get; set; }
         public int saph_UsuarioCrea { get; set; }

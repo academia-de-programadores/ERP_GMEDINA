@@ -18,7 +18,6 @@ namespace ERP_GMEDINA.Models
         public tbPeriodos()
         {
             this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
-            this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
         }
     
         public int peri_IdPeriodo { get; set; }
@@ -33,7 +32,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
     }
 }

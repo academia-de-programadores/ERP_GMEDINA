@@ -14,12 +14,6 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbTipoPlanillaDetalleIngreso
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoPlanillaDetalleIngreso()
-        {
-            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
-        }
-    
         public int tpdi_IdDetallePlanillaIngreso { get; set; }
         public int cin_IdIngreso { get; set; }
         public int cpla_IdPlanilla { get; set; }
@@ -33,7 +27,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
         public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
     }
 }

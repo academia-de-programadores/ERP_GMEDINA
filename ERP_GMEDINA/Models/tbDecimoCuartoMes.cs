@@ -23,15 +23,9 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         public Nullable<decimal> dcm_Monto { get; set; }
         public string dcm_CodigoPago { get; set; }
-        public int hipa_IdHistorialDePago { get; set; }
-        public System.DateTime dcm_FechaInicio { get; set; }
-        public System.DateTime dcm_FechaFin { get; set; }
-        public int dcm_Anio { get; set; }
-        public bool dcm_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
-        public virtual tbHistorialDePago tbHistorialDePago { get; set; }
     }
 }

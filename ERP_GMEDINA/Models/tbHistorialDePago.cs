@@ -19,12 +19,11 @@ namespace ERP_GMEDINA.Models
         {
             this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
             this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
-            this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMes>();
         }
     
         public int hipa_IdHistorialDePago { get; set; }
         public int emp_Id { get; set; }
-        public decimal hipa_SueldoNeto { get; set; }
+        public Nullable<decimal> hipa_SueldoNeto { get; set; }
         public System.DateTime hipa_FechaInicio { get; set; }
         public System.DateTime hipa_FechaFin { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
@@ -47,7 +46,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual tbPeriodos tbPeriodos { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
     }
 }
