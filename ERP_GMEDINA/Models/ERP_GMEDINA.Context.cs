@@ -87,7 +87,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
         public virtual DbSet<tbHistorialSalidas> tbHistorialSalidas { get; set; }
-        public virtual DbSet<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
         public virtual DbSet<tbHorarios> tbHorarios { get; set; }
         public virtual DbSet<tbIdiomaPersona> tbIdiomaPersona { get; set; }
         public virtual DbSet<tbIdiomas> tbIdiomas { get; set; }
@@ -167,6 +166,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
+        public virtual DbSet<V_DecimoCuartoMes_Pagados> V_DecimoCuartoMes_Pagados { get; set; }
+        public virtual DbSet<V_DecimoTercerMes_Pagados> V_DecimoTercerMes_Pagados { get; set; }
+        public virtual DbSet<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -3966,6 +3968,151 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Plani_tbAuxilioDeCesantias_Delete1", aces_IdAuxilioCesantiaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var hipa_SueldoNetoParameter = hipa_SueldoNeto.HasValue ?
+                new ObjectParameter("hipa_SueldoNeto", hipa_SueldoNeto) :
+                new ObjectParameter("hipa_SueldoNeto", typeof(decimal));
+    
+            var hipa_FechaInicioParameter = hipa_FechaInicio.HasValue ?
+                new ObjectParameter("hipa_FechaInicio", hipa_FechaInicio) :
+                new ObjectParameter("hipa_FechaInicio", typeof(System.DateTime));
+    
+            var hipa_FechaFinParameter = hipa_FechaFin.HasValue ?
+                new ObjectParameter("hipa_FechaFin", hipa_FechaFin) :
+                new ObjectParameter("hipa_FechaFin", typeof(System.DateTime));
+    
+            var hipa_FechaPagoParameter = hipa_FechaPago.HasValue ?
+                new ObjectParameter("hipa_FechaPago", hipa_FechaPago) :
+                new ObjectParameter("hipa_FechaPago", typeof(System.DateTime));
+    
+            var hipa_AnioParameter = hipa_Anio.HasValue ?
+                new ObjectParameter("hipa_Anio", hipa_Anio) :
+                new ObjectParameter("hipa_Anio", typeof(int));
+    
+            var hipa_MesParameter = hipa_Mes.HasValue ?
+                new ObjectParameter("hipa_Mes", hipa_Mes) :
+                new ObjectParameter("hipa_Mes", typeof(int));
+    
+            var peri_IdPeriodoParameter = peri_IdPeriodo.HasValue ?
+                new ObjectParameter("peri_IdPeriodo", peri_IdPeriodo) :
+                new ObjectParameter("peri_IdPeriodo", typeof(int));
+    
+            var hipa_UsuarioCreaParameter = hipa_UsuarioCrea.HasValue ?
+                new ObjectParameter("hipa_UsuarioCrea", hipa_UsuarioCrea) :
+                new ObjectParameter("hipa_UsuarioCrea", typeof(int));
+    
+            var hipa_FechaCreaParameter = hipa_FechaCrea.HasValue ?
+                new ObjectParameter("hipa_FechaCrea", hipa_FechaCrea) :
+                new ObjectParameter("hipa_FechaCrea", typeof(System.DateTime));
+    
+            var hipa_TotalISRParameter = hipa_TotalISR.HasValue ?
+                new ObjectParameter("hipa_TotalISR", hipa_TotalISR) :
+                new ObjectParameter("hipa_TotalISR", typeof(decimal));
+    
+            var hipa_ISRPendienteParameter = hipa_ISRPendiente.HasValue ?
+                new ObjectParameter("hipa_ISRPendiente", hipa_ISRPendiente) :
+                new ObjectParameter("hipa_ISRPendiente", typeof(bool));
+    
+            var hipa_AFPParameter = hipa_AFP.HasValue ?
+                new ObjectParameter("hipa_AFP", hipa_AFP) :
+                new ObjectParameter("hipa_AFP", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbPreaviso_Activar(Nullable<int> prea_IdPreaviso, Nullable<int> prea_UsuarioModifica, Nullable<System.DateTime> prea_FechaModifica)
+        {
+            var prea_IdPreavisoParameter = prea_IdPreaviso.HasValue ?
+                new ObjectParameter("prea_IdPreaviso", prea_IdPreaviso) :
+                new ObjectParameter("prea_IdPreaviso", typeof(int));
+    
+            var prea_UsuarioModificaParameter = prea_UsuarioModifica.HasValue ?
+                new ObjectParameter("prea_UsuarioModifica", prea_UsuarioModifica) :
+                new ObjectParameter("prea_UsuarioModifica", typeof(int));
+    
+            var prea_FechaModificaParameter = prea_FechaModifica.HasValue ?
+                new ObjectParameter("prea_FechaModifica", prea_FechaModifica) :
+                new ObjectParameter("prea_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbPreaviso_Activar", prea_IdPreavisoParameter, prea_UsuarioModificaParameter, prea_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbPreaviso_Inactivar(Nullable<int> prea_IdPreaviso, Nullable<int> prea_UsuarioModifica, Nullable<System.DateTime> prea_FechaModifica)
+        {
+            var prea_IdPreavisoParameter = prea_IdPreaviso.HasValue ?
+                new ObjectParameter("prea_IdPreaviso", prea_IdPreaviso) :
+                new ObjectParameter("prea_IdPreaviso", typeof(int));
+    
+            var prea_UsuarioModificaParameter = prea_UsuarioModifica.HasValue ?
+                new ObjectParameter("prea_UsuarioModifica", prea_UsuarioModifica) :
+                new ObjectParameter("prea_UsuarioModifica", typeof(int));
+    
+            var prea_FechaModificaParameter = prea_FechaModifica.HasValue ?
+                new ObjectParameter("prea_FechaModifica", prea_FechaModifica) :
+                new ObjectParameter("prea_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbPreaviso_Inactivar", prea_IdPreavisoParameter, prea_UsuarioModificaParameter, prea_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbPreaviso_Insert(Nullable<int> prea_RangoInicio, Nullable<int> prea_RangoFin, Nullable<int> prea_DiasPreaviso, Nullable<int> prea_UsuarioCrea, Nullable<System.DateTime> prea_FechaCrea)
+        {
+            var prea_RangoInicioParameter = prea_RangoInicio.HasValue ?
+                new ObjectParameter("prea_RangoInicio", prea_RangoInicio) :
+                new ObjectParameter("prea_RangoInicio", typeof(int));
+    
+            var prea_RangoFinParameter = prea_RangoFin.HasValue ?
+                new ObjectParameter("prea_RangoFin", prea_RangoFin) :
+                new ObjectParameter("prea_RangoFin", typeof(int));
+    
+            var prea_DiasPreavisoParameter = prea_DiasPreaviso.HasValue ?
+                new ObjectParameter("prea_DiasPreaviso", prea_DiasPreaviso) :
+                new ObjectParameter("prea_DiasPreaviso", typeof(int));
+    
+            var prea_UsuarioCreaParameter = prea_UsuarioCrea.HasValue ?
+                new ObjectParameter("prea_UsuarioCrea", prea_UsuarioCrea) :
+                new ObjectParameter("prea_UsuarioCrea", typeof(int));
+    
+            var prea_FechaCreaParameter = prea_FechaCrea.HasValue ?
+                new ObjectParameter("prea_FechaCrea", prea_FechaCrea) :
+                new ObjectParameter("prea_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbPreaviso_Insert", prea_RangoInicioParameter, prea_RangoFinParameter, prea_DiasPreavisoParameter, prea_UsuarioCreaParameter, prea_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbPreaviso_Update(Nullable<int> prea_IdPreaviso, Nullable<int> prea_RangoInicio, Nullable<int> prea_RangoFin, Nullable<int> prea_DiasPreaviso, Nullable<int> prea_UsuarioModifica, Nullable<System.DateTime> prea_FechaModifica)
+        {
+            var prea_IdPreavisoParameter = prea_IdPreaviso.HasValue ?
+                new ObjectParameter("prea_IdPreaviso", prea_IdPreaviso) :
+                new ObjectParameter("prea_IdPreaviso", typeof(int));
+    
+            var prea_RangoInicioParameter = prea_RangoInicio.HasValue ?
+                new ObjectParameter("prea_RangoInicio", prea_RangoInicio) :
+                new ObjectParameter("prea_RangoInicio", typeof(int));
+    
+            var prea_RangoFinParameter = prea_RangoFin.HasValue ?
+                new ObjectParameter("prea_RangoFin", prea_RangoFin) :
+                new ObjectParameter("prea_RangoFin", typeof(int));
+    
+            var prea_DiasPreavisoParameter = prea_DiasPreaviso.HasValue ?
+                new ObjectParameter("prea_DiasPreaviso", prea_DiasPreaviso) :
+                new ObjectParameter("prea_DiasPreaviso", typeof(int));
+    
+            var prea_UsuarioModificaParameter = prea_UsuarioModifica.HasValue ?
+                new ObjectParameter("prea_UsuarioModifica", prea_UsuarioModifica) :
+                new ObjectParameter("prea_UsuarioModifica", typeof(int));
+    
+            var prea_FechaModificaParameter = prea_FechaModifica.HasValue ?
+                new ObjectParameter("prea_FechaModifica", prea_FechaModifica) :
+                new ObjectParameter("prea_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbPreaviso_Update", prea_IdPreavisoParameter, prea_RangoInicioParameter, prea_RangoFinParameter, prea_DiasPreavisoParameter, prea_UsuarioModificaParameter, prea_FechaModificaParameter);
         }
     }
 }
