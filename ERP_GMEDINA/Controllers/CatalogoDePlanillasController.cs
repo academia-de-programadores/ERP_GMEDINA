@@ -118,7 +118,9 @@ namespace ERP_GMEDINA.Controllers
              * tengan algún valor, si no no dejara insertar en la planillas, la validación también
              * se hace en el lado del cliente
              */
-            if (catalogoDePlanillas.Length > 1 && catalogoIngresos.Length > 0 && catalogoDeducciones.Length > 0)
+            if (catalogoDeducciones == null)
+                catalogoDeducciones = new int[0];
+            if (catalogoDePlanillas.Length > 1 && catalogoIngresos.Length > 0)
             {
                 #region Declaración de Variables
                 string MensajeError = "", /*MensajeError es la variable que va a contener el id de la tabla
@@ -193,6 +195,7 @@ namespace ERP_GMEDINA.Controllers
 
                                 #region Insertar en el catalogo de Deducciones
 
+                                if(catalogoDeducciones.Length != 0)
                                 // Recorrer el array catalogoDeducciones
                                 InsertarCatalogoDeducciones(catalogoDeducciones,
                                     ref response,
@@ -432,6 +435,9 @@ namespace ERP_GMEDINA.Controllers
                     /*
                      * Obtener listados de los detalles del lado del cliente
                      */
+
+                    if (catalogoDeducciones == null)
+                        catalogoDeducciones = new int[0];
 
                     //A este listado le eliminare las deducciones que no deseo insertar, entonces si hay algún id dentro de este listado, se insertara.
                     List<int> listadoDetallePlanillaDeduccionesInsert = catalogoDeducciones.ToList();
