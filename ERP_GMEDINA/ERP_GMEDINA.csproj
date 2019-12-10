@@ -1834,6 +1834,7 @@
     <Content Include="Views\AFP\_CreateAFP.cshtml" />
     <Content Include="Views\AFP\_EditAFP.cshtml" />
     <Content Include="Views\AFP\_DetailsAFP.cshtml" />
+    <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
