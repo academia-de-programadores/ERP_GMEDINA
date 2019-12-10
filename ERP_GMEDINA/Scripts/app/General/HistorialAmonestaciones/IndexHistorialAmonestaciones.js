@@ -81,3 +81,17 @@ function llamarmodaldetalles() {
     modaldetalle.modal('show');
 }
 
+function llenarDropDownList() {
+    _ajax(null,
+       '/HistorialAmonestaciones/llenarDropDowlist',
+       'POST',
+       function (result) {
+           $.each(result, function (id, Lista) {
+               Lista.forEach(function (value, index) {
+                   $("#" + id).append(new Option(value.Descripcion, value.Id));
+               });
+           });
+       });
+}
+
+
