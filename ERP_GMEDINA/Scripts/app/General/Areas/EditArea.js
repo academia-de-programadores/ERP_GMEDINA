@@ -34,7 +34,10 @@ function Add(depto_Descripcion, car_Descripcion) {
         ChildTable.row.add(
             {
                 Descripcion: depto_Descripcion.trim(),
-                Cargo: car_Descripcion
+                Cargo: car_Descripcion,
+                Acciones: '<div>' +
+                            '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
+                        '</div>'
             }
             ).draw();
     } else {
@@ -80,20 +83,29 @@ function Remover(btn) {
            .remove()
            .draw();
 }
-function llenarDropDownList() {
-    _ajax(null,
-       '/Areas/llenarDropDowlist',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-               Lista.forEach(function (value, index) {
-                   $("#" + id).append(new Option(value.Descripcion, value.Id));
-               });
-           });
-       });
+function Edit(btn) {
+    var tr = $(btn).closest('tr');
+    var row = ChildTable.row(tr);
+    var id = row.data().Id;
+    console.log(id);
+}
+function llenarChild() {
+    _ajax(JSON.stringify({ id: area_Id }),
+        '/Areas/cargarChild',
+        'POST',
+        function (data) {
+            data.forEach(function (valor,indice) {
+                ChildTable.row.add(
+                    {
+                        Id:valor.car_Id,
+                        Descripcion: valor.depto_Descripcion,
+                        Cargo: valor.car_Descripcion,
+                    });
+            });
+            ChildTable.draw();
+        });    
 }
 $(document).ready(function () {
-    llenarDropDownList();
     ChildTable = $(ChildDataTable).DataTable({
         pageLength: 3,
         lengthChange: false,
@@ -104,13 +116,14 @@ $(document).ready(function () {
                {
                    data: 'Acciones',
                    defaultContent: '<div>' +
-                                          //'<input type="button" class="btn btn-white btn-xs" onclick="Remover(this)" value="Editar" />'+
+                                          '<input type="button" class="btn btn-white btn-xs" onclick="Edit(this)" value="Editar" />'+
                                           '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
                                       '</div>'
                }
          ],
         order: [[0, 'asc']]
     });
+    llenarChild();
 });
 $("#add").click(function () {
     var depto_Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").data("val-maxlength-max");

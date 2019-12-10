@@ -89,4 +89,7 @@
     @Scripts.Render("~/plugins/customdataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/EditArea")
+    <script>
+        var area_Id=@Html.DisplayFor(model => model.area_Id);
+    </script>
 }

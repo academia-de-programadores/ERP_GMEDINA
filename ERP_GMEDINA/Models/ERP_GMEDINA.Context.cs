@@ -324,35 +324,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Insert_Result>("UDP_RRHH_tbAreas_Insert", suc_IdParameter, car_descripcionParameter, area_DescripcionParameter, area_UsuariocreaParameter, area_FechacreaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbAreas_Update_Result> UDP_RRHH_tbAreas_Update(Nullable<int> area_Id, Nullable<int> car_Id, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
-        {
-            var area_IdParameter = area_Id.HasValue ?
-                new ObjectParameter("area_Id", area_Id) :
-                new ObjectParameter("area_Id", typeof(int));
-    
-            var car_IdParameter = car_Id.HasValue ?
-                new ObjectParameter("car_Id", car_Id) :
-                new ObjectParameter("car_Id", typeof(int));
-    
-            var suc_IdParameter = suc_Id.HasValue ?
-                new ObjectParameter("suc_Id", suc_Id) :
-                new ObjectParameter("suc_Id", typeof(int));
-    
-            var area_DescripcionParameter = area_Descripcion != null ?
-                new ObjectParameter("area_Descripcion", area_Descripcion) :
-                new ObjectParameter("area_Descripcion", typeof(string));
-    
-            var area_UsuariomodificaParameter = area_Usuariomodifica.HasValue ?
-                new ObjectParameter("area_Usuariomodifica", area_Usuariomodifica) :
-                new ObjectParameter("area_Usuariomodifica", typeof(int));
-    
-            var area_FechamodificaParameter = area_Fechamodifica.HasValue ?
-                new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
-                new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbAreas_Update_Result>("UDP_RRHH_tbAreas_Update", area_IdParameter, car_IdParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_RRHH_tbDepartamentos_Delete_Result> UDP_RRHH_tbDepartamentos_Delete(Nullable<int> depto_Id, string depto_razon_Inactivo, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
         {
             var depto_IdParameter = depto_Id.HasValue ?
@@ -397,6 +368,39 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbDepartamentos_Insert_Result>("UDP_RRHH_tbDepartamentos_Insert", area_IdParameter, car_descripcionParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbAreas_Update(Nullable<int> area_Id, Nullable<int> car_Id, string car_Descripcion, Nullable<int> suc_Id, string area_Descripcion, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
+        {
+            var area_IdParameter = area_Id.HasValue ?
+                new ObjectParameter("area_Id", area_Id) :
+                new ObjectParameter("area_Id", typeof(int));
+    
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
+    
+            var car_DescripcionParameter = car_Descripcion != null ?
+                new ObjectParameter("Car_Descripcion", car_Descripcion) :
+                new ObjectParameter("Car_Descripcion", typeof(string));
+    
+            var suc_IdParameter = suc_Id.HasValue ?
+                new ObjectParameter("suc_Id", suc_Id) :
+                new ObjectParameter("suc_Id", typeof(int));
+    
+            var area_DescripcionParameter = area_Descripcion != null ?
+                new ObjectParameter("area_Descripcion", area_Descripcion) :
+                new ObjectParameter("area_Descripcion", typeof(string));
+    
+            var area_UsuariomodificaParameter = area_Usuariomodifica.HasValue ?
+                new ObjectParameter("area_Usuariomodifica", area_Usuariomodifica) :
+                new ObjectParameter("area_Usuariomodifica", typeof(int));
+    
+            var area_FechamodificaParameter = area_Fechamodifica.HasValue ?
+                new ObjectParameter("area_Fechamodifica", area_Fechamodifica) :
+                new ObjectParameter("area_Fechamodifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbAreas_Update", area_IdParameter, car_IdParameter, car_DescripcionParameter, suc_IdParameter, area_DescripcionParameter, area_UsuariomodificaParameter, area_FechamodificaParameter);
         }
     }
 }

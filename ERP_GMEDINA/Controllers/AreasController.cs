@@ -31,6 +31,7 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var tbAreas = db.tbAreas
+                        .Where(x=>x.area_Estado==true)
                         .Select(
                         t => new
                         {
@@ -52,14 +53,15 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult ChildRowData(int id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
+            //posteriormente es destruida.           
+            
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
                     //lista = db.V_Departamentos.ToList();//.Where(x => x.area_Id == id).ToList();
                     var lista = db.tbDepartamentos
-                        .Where(x => x.area_Id == id)
+                        .Where(x => x.area_Id == id && x.depto_Estado==true)
                         .Select(depto=>
                         new {
                             car_Descripcion=depto.tbCargos.car_Descripcion,
@@ -78,6 +80,22 @@ namespace ERP_GMEDINA.Controllers
                     ex.Message.ToString();
                     return Json(new List<tbDepartamentos> { }, JsonRequestBehavior.AllowGet);
                 }
+            }
+        }
+        public ActionResult cargarChild(int id)
+        {
+            using (db = new ERP_GMEDINAEntities())
+            {
+                var lista = db.tbDepartamentos
+                    .Where(x => x.area_Id == id && x.depto_Estado==true)
+                    .Select(depto =>
+                    new
+                    {
+                        car_Id = depto.tbCargos.car_Id,
+                        car_Descripcion = depto.tbCargos.car_Descripcion,
+                        depto_Descripcion = depto.depto_Descripcion
+                    }).ToList();
+                return Json(lista, JsonRequestBehavior.AllowGet);
             }
         }
         public ActionResult llenarDropDowlist()
@@ -210,48 +228,99 @@ namespace ERP_GMEDINA.Controllers
             }
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            tbAreas tbAreas = null;
             using (db = new ERP_GMEDINAEntities())
             {
                 List<tbSucursales> Sucursales = null;
                 try
                 {
-                    tbAreas = db.tbAreas.Find(id);
-                    Sucursales = new List<tbSucursales> { new tbSucursales {suc_Id=tbAreas.suc_Id } }; //db.tbSucursales.ToList();
+                    var tbAreas = db.tbAreas
+                        .Select(tabla => new cAreas
+                        {
+                            area_Id = tabla.area_Id,
+                            suc_Id = tabla.suc_Id,
+                            area_Descripcion = tabla.area_Descripcion,
+                            car_Descripcion = tabla.tbCargos.car_Descripcion,
+                            area_Estado=tabla.area_Estado
+                        }).ToList()
+                        .Where(x=>x.area_Id==id)
+                        .First();
+                    Sucursales = db.tbSucursales.ToList();
                     ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
+                    if (tbAreas.area_Estado==false)
+                    {
+                        return HttpNotFound();
+                    }
+                    if (tbAreas == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tbAreas);  
                 }
                 catch
                 {
+                    return HttpNotFound();
                 }
             }
-            if (tbAreas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(new cAreas{
-                suc_Id =tbAreas.suc_Id,
-                area_Descripcion =tbAreas.area_Descripcion });
         }
         // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "area_Id,car_Id,suc_Id,area_Descripcion,area_Estado,area_Razoninactivo,area_Usuariocrea,area_Fechacrea,area_Usuariomodifica,area_Fechamodifica")] tbAreas tbAreas)
+        public ActionResult Edit(cAreas cAreas,object[] Departamentos,int[] inactivar)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
-            using (db = new ERP_GMEDINAEntities())
+            var Usuario = (tbUsuario)Session["Usuario"];
+            //en esta area ingresamos el registro con el procedimiento almacenado
+            try
             {
-                try
+                db = new ERP_GMEDINAEntities();
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    //en esta area actualizamos el registro con el procedimiento almacenado
-                }
-                catch
-                {
-                    result = "-2";
+                    var list = db.UDP_RRHH_tbAreas_Update(
+                        cAreas.area_Id,
+                        cAreas.car_Id,
+                        cAreas.car_Descripcion,
+                        cAreas.suc_Id,
+                        cAreas.area_Descripcion,
+                        Usuario.usu_Id,
+                        DateTime.Now);
+                    //foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
+                    //{
+                    //    if (item.MensajeError == "-1")
+                    //    {
+                    //        return Json("-2", JsonRequestBehavior.AllowGet);
+                    //    }
+                    //    tbAreas.area_Id = int.Parse(item.MensajeError);
+                    //}
+                    //foreach (tbDepartamentos item in tbDepartamentos)
+                    //{
+                    //    var depto = db.UDP_RRHH_tbDepartamentos_Insert(
+                    //        tbAreas.area_Id,
+                    //        item.tbCargos.car_Descripcion,
+                    //        item.depto_Descripcion,
+                    //        Usuario.usu_Id,
+                    //        DateTime.Now);
+                    //    string mensajeDB = "";
+                    //    foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
+                    //    {
+                    //        mensajeDB = i.MensajeError.ToString();
+                    //    }
+                    //    if (mensajeDB == "-1")
+                    //    {
+                    //        return Json("-2", JsonRequestBehavior.AllowGet);
+                    //    }
+                    //}
+                    //transaction.Commit();
                 }
             }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
