@@ -470,6 +470,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(
                 "~/Scripts/app/General/DeduccionAFP.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/AFP").Include(
+                "~/Scripts/app/General/AFP.js"));
+
             #endregion
 
             #region Equipo Willian

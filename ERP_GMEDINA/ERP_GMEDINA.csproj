@@ -186,6 +186,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
+    <Compile Include="Controllers\AFPController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Helpers\Liquidacion.cs" />
     <Compile Include="Models\cAcumuladosISR.cs" />
     <Compile Include="Models\cAdelantoSueldo.cs" />
+    <Compile Include="Models\cAFP.cs" />
     <Compile Include="Models\cAFPRPT.cs" />
     <Compile Include="Models\CatalogoDeIngresosViewModel.cs" />
     <Compile Include="Models\cAuxilioDeCesantias.cs" />
@@ -1145,6 +1147,7 @@
     <Content Include="Scripts\app\FileSaver.min.js" />
     <Content Include="Scripts\app\General\AcumuladosISR.js" />
     <Content Include="Scripts\app\General\AdelantoSueldo.js" />
+    <Content Include="Scripts\app\General\AFP.js" />
     <Content Include="Scripts\app\General\AFPRPT.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
@@ -1827,6 +1830,10 @@
     <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
+    <Content Include="Views\AFP\Index.cshtml" />
+    <Content Include="Views\AFP\_CreateAFP.cshtml" />
+    <Content Include="Views\AFP\_EditAFP.cshtml" />
+    <Content Include="Views\AFP\_DetailsAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

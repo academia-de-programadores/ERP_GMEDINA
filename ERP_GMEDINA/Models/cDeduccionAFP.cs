@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
 
         [Range(0.00, 9999999999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Aporte")]
         public decimal dafp_AporteLps { get; set; }
 
