@@ -420,6 +420,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DatosRequisicion" Width="1.5" PointX="15.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

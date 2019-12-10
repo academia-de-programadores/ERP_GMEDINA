@@ -2060,6 +2060,17 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Datos_Empleado' does not have 
           <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_DatosRequisicion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_DatosRequisicion">
+          <Key>
+            <PropertyRef Name="TipoDato" />
+            <PropertyRef Name="req_Id" />
+          </Key>
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="TipoDato" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="req_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Departamentos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Departamentos">
           <Key>
@@ -7568,6 +7579,13 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
     [V_Datos_Empleado].[jor_Descripcion] AS [jor_Descripcion]
     FROM [rrhh].[V_Datos_Empleado] AS [V_Datos_Empleado]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_DatosRequisicion" EntityType="Self.V_DatosRequisicion" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_DatosRequisicion].[Descripcion] AS [Descripcion], 
+    [V_DatosRequisicion].[TipoDato] AS [TipoDato], 
+    [V_DatosRequisicion].[req_Id] AS [req_Id]
+    FROM [rrhh].[V_DatosRequisicion] AS [V_DatosRequisicion]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_Departamentos" EntityType="Self.V_Departamentos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_Departamentos].[depto_Id] AS [depto_Id], 
@@ -11764,6 +11782,7 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <EntitySet Name="V_DatosRequisicion" EntityType="ERP_GMEDINAModel.V_DatosRequisicion" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -18320,6 +18339,15 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_DatosRequisicion">
+          <Key>
+            <PropertyRef Name="TipoDato" />
+            <PropertyRef Name="req_Id" />
+          </Key>
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="req_Id" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -21205,6 +21233,15 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
                 <ScalarProperty Name="tsal_Estado" ColumnName="tsal_Estado" />
                 <ScalarProperty Name="tsal_Descripcion" ColumnName="tsal_Descripcion" />
                 <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DatosRequisicion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DatosRequisicion">
+              <MappingFragment StoreEntitySet="V_DatosRequisicion">
+                <ScalarProperty Name="req_Id" ColumnName="req_Id" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
