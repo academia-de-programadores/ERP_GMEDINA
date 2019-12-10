@@ -80,7 +80,7 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.tbCargos.Select(x=> new {desc= x.car_Descripcion } ).ToList(), area_Id = "", depto_Id = "", jor_Id = "" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
             Sheet.Cells["A1"].Value = "Identidad";
@@ -100,6 +100,7 @@ namespace ERP_GMEDINA.Controllers
             Sheet.Cells["N1"].Value = "Jornadas";
 
 
+
             int row = 2;
             foreach (var item in ExcelEmpleados)
             {
@@ -115,6 +116,8 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
                 Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
 
+
+
                 var Row = Sheet.DataValidations.AddListValidation("L2");
                 //for (int index = 1; index <= item.Cargo.Count; index++)
                 //{
@@ -124,7 +127,9 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Row.Formula.Values.Add(i.car_Descripcion);
                     //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
-                
+
+
+
 
                 }
 

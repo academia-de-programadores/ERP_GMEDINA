@@ -23,7 +23,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> depto_Fechamodifica { get; set; }
         public int car_Id { get; set; }
         public string car_Descripcion { get; set; }
-        public int per_Id { get; set; }
+        public Nullable<int> per_Id { get; set; }
         public string per_NombreCompleto { get; set; }
         public string per_Telefono { get; set; }
         public string per_CorreoElectronico { get; set; }

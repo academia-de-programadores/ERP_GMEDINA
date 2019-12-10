@@ -10,9 +10,15 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UDP_RRHH_tbCargos_Delete_Result
+    public partial class V_SeleccionCandidatos
     {
-        public string MensajeError { get; set; }
+        public int Id { get; set; }
+        public string Identidad { get; set; }
+        public string Nombre { get; set; }
+        public string Fase { get; set; }
+        public string Plaza_Disponible { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     }
 }
