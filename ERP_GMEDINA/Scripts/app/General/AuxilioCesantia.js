@@ -286,3 +286,47 @@ $("#btnUpdateAuxCes").click(function () {
     }
 });
 
+
+// INACTIVAR 
+$("#btnModalInactivar").click(function () {
+    $("#EditarCatalogoIngresos").modal('hide');
+    $("#InactivarCatalogoIngresos").modal();
+});
+
+$("#btnInactivarIngresos").click(function () {
+    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    var data = $("#frmInactivarCatalogoIngresos").serializeArray();
+    var ID = InactivarID;
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/CatalogoDeIngresos/Inactivar/" + ID,
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            $("#InactivarCatalogoIngresos").modal('hide');
+            $("#EditarCatalogoIngresos").modal('hide');
+            cargarGridIngresos();
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue inactivado de forma exitosa!',
+            });
+        }
+    });
+});
+
+
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    $("#EditarCatalogoIngresos").modal('hide');
+    $("#frmCatalogoIngresosCreate").modal('hide');
+});
+
