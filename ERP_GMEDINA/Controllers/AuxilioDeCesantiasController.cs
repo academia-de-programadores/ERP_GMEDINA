@@ -14,13 +14,14 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: tbAuxilioDeCesantias
+        // Obtenet: tbAuxilioDeCesantias
         public ActionResult Index()
         {
             var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.aces_Activo == true);
             return View(tbAuxilioDeCesantias.ToList());
         }
 
+        //Metodo para refrescar la tabla(Index)
         public ActionResult GetData()
         {
             var tbAuxilioCesantia1 = db.tbAuxilioDeCesantias
@@ -41,6 +42,7 @@ namespace ERP_GMEDINA.Controllers
             return new JsonResult { Data = tbAuxilioCesantia1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        //Metodo para mostrar los detalles del registro seleccionado
         public JsonResult Details(int? ID)
         {
             var tbAuxCesanJSON = from tbAuxilioDeCesantias in db.tbAuxilioDeCesantias
@@ -64,6 +66,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbAuxCesanJSON, JsonRequestBehavior.AllowGet);
         }
 
+        //Metodo de Creacion de Nuevo registro para la tabla AuxilioCesantia
         [HttpPost]
         public ActionResult Create(tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
@@ -117,59 +120,65 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.aces_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioModifica);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        
 
-      
+        // Obtener: Registro de la tabla AuxilioDeCesantias/Edit
+        public JsonResult Edit(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbAuxilioDeCesantias tbAuxilioCesEditJSON = db.tbAuxilioDeCesantias.Find(ID);
+            return Json(tbAuxilioCesEditJSON, JsonRequestBehavior.AllowGet);
+        }
 
-        // GET: tbAuxilioDeCesantias/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbAuxilioDeCesantias tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Find(id);
-        //    if (tbAuxilioDeCesantias == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.aces_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioCrea);
-        //    ViewBag.aces_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioModifica);
-        //    return View(tbAuxilioDeCesantias);
-        //}
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
+        {
+            #region declaracion de variables 
+            //LLENAR DATA DE AUDITORIA
+            tbAuxilioDeCesantias.aces_UsuarioModifica = 1;
+            tbAuxilioDeCesantias.aces_FechaModifica = DateTime.Now;
+            string response = String.Empty;
+            IEnumerable<object> listAuxCes = null;
+            string MensajeError = "";
+            #endregion
 
-        // POST: tbAuxilioDeCesantias/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(tbAuxilioDeCesantias).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.aces_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioCrea);
-        //    ViewBag.aces_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbAuxilioDeCesantias.aces_UsuarioModifica);
-        //    return View(tbAuxilioDeCesantias);
-        //}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update1(tbAuxilioDeCesantias.aces_IdAuxilioCesantia,tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                                                                                            tbAuxilioDeCesantias.aces_RangoFinMeses,
+                                                                                            tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,tbAuxilioDeCesantias.aces_UsuarioModifica,tbAuxilioDeCesantias.aces_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Update1_Result Resultado in listAuxCes)
+                        MensajeError = Resultado.MensajeError;
 
-        // GET: tbAuxilioDeCesantias/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbAuxilioDeCesantias tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Find(id);
-        //    if (tbAuxilioDeCesantias == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbAuxilioDeCesantias);
-        //}
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+                }
+                catch (Exception)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                    response = "error";
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
+        
         // POST: tbAuxilioDeCesantias/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]

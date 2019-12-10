@@ -2,97 +2,39 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesAuxCess" }))
 {
 <div class="ibox-content">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_IdAuxilioCesantia)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.aces_IdAuxilioCesantia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_RangoInicioMeses)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_RangoInicioMeses)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_RangoFinMeses)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_RangoFinMeses)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_DiasAuxilioCesantia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_DiasAuxilioCesantia)
-        </dd>
-
-
-    </dl>
-   
-    <hr>
-
-    @*<dl class="dl-horizontal">
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_FechaCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aces_Activo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aces_Activo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dd>
-
-    </dl>*@
-
-    <p>
-        @*@Html.ActionLink("Editar", "Edit", new { id = Model.aces_IdAuxilioCesantia }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })*@
-    </p>
-
+    <div class="form-horizontal">
+        <table class="table no-borders">
+            <thead>
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Código Auxilio Cesantia)</td>
+                    <td>@Html.EditorFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                </tr>
+                <tr>
+                    <td>Rango Inicio (Meses)</td>
+                    <td>@Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                </tr>
+                <tr>
+                    <td> Rango Fin (Meses)</td>
+                    <td>@Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                </tr>
+                <tr>
+                    <td> Auxilio Cesantia (Dias)</td>
+                    <td>@Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h2>Auditoría</h2>
+        <h4>Auditoría</h4>
     </div>
     <div class="ibox-content">
         <div class="form-horizontal">
@@ -120,9 +62,6 @@
                 </tbody>
             </table>
         </div>
-        @*<div class="footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
-            </div>*@
     </div>
 </div>
 }

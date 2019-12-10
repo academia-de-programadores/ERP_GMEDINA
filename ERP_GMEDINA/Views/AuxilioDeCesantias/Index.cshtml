@@ -93,11 +93,32 @@
                 @Html.Partial("_DetailsAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="frmEditarAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Edición de datos</h4>
+            </div>
+            <div class="modal-body" id="Editar">
+                @*Mandamos un nuevo modelo solo para poder cargar la página *@
+                @Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+                <input type="button" class="btn btn-primary" id="btnUpdateAuxCes" value="Aceptar" />
+                <button type="button" class="btn btn-danger" id="btnModalInactivar">Inactivar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
