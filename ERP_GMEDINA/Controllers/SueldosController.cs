@@ -37,7 +37,16 @@ namespace ERP_GMEDINA.Controllers
                             Nombre = t.Nombre,
                             Sueldo = t.Sueldo,
                             Tipo_Moneda = t.Tipo_Moneda,
-                            Cuenta = t.Cuenta                                                     
+                            Cuenta = t.Cuenta,
+                            Sueldo_Anterior = t.Sueldo_Anterior,
+                            Area = t.Area,
+                            Cargo = t.Cargo,
+                            Usuario_Nombre = t.Usuario_Nombre,
+                            Usuario_Crea = t.Usuario_Crea,
+                            Usuario_Fecha = t.Usuario_Fecha,
+                            Usuario_Modifica = t.Usuario_Modifica,
+                            Fecha_Modifica = t.Fecha_Modifica
+
                         }
 
                         )

@@ -1104,6 +1104,27 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="CodeTemplates\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\DetailsForModal.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ListModals.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Detalles.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
+    <Content Include="CodeTemplates\_Create.cs.t4" />
+    <Content Include="CodeTemplates\_Delete.cs.t4" />
+    <Content Include="CodeTemplates\_Detalles.cs.t4" />
+    <Content Include="CodeTemplates\_Edit.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1545,7 +1566,10 @@
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Scripts_Base\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Sueldos\_Detalles.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1662,6 +1686,7 @@
     <Content Include="Views\Sueldos\Details.cshtml" />
     <Content Include="Views\Sueldos\Edit.cshtml" />
     <Content Include="Views\Sueldos\Index.cshtml" />
+    <Content Include="Views\Sueldos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

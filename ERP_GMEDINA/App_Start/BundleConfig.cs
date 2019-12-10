@@ -8,7 +8,6 @@ namespace ERP_GMEDINA
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",

@@ -25,7 +25,6 @@
                 <div class="ibox-title">
                     <h5>Listado de Sueldos</h5>
                     <div class="ibox-tools">
-                        @Html.ActionLink("Registrar Area", "Create", null, new { @class = "btn btn-primary btn-xs" })
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -33,12 +32,9 @@
                         <thead>
                             <tr role="row">
                                 <th></th>
-                                
-                                <th>Identidad</th>
                                 <th>Nombre</th>
                                 <th>Sueldo</th>
-                                <th>Tipo_Moneda</th>
-                                <th>Cuenta</th>
+                                <th>Area</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -49,6 +45,10 @@
         </div>
     </div>
  </div>
+
+@Html.Partial("_Edit", new ERP_GMEDINA.Models.V_Sueldos())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.V_Sueldos())
+
 
     
 @section Styles {

@@ -1479,6 +1479,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
             <PropertyRef Name="Nombre" />
             <PropertyRef Name="Sueldo" />
             <PropertyRef Name="Tipo_Moneda" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Usuario_Crea" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
@@ -1486,6 +1489,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
           <Property Name="Sueldo" Type="decimal" Precision="8" Scale="4" Nullable="false" />
           <Property Name="Tipo_Moneda" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Cuenta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sueldo_Anterior" Type="int" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usuario_Nombre" Type="varchar" MaxLength="150" />
+          <Property Name="Usuario_Crea" Type="int" Nullable="false" />
+          <Property Name="Usuario_Fecha" Type="datetime" />
+          <Property Name="Usuario_Modifica" Type="datetime" />
+          <Property Name="Fecha_Modifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5256,11 +5267,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="sue_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="sue_FechaCrea" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbSueldos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="sue_Id" Type="int" Mode="In" />
-          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbSueldos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="sue_Id" Type="int" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -5653,7 +5659,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
     [V_Sueldos].[Nombre] AS [Nombre], 
     [V_Sueldos].[Sueldo] AS [Sueldo], 
     [V_Sueldos].[Tipo_Moneda] AS [Tipo_Moneda], 
-    [V_Sueldos].[Cuenta] AS [Cuenta]
+    [V_Sueldos].[Cuenta] AS [Cuenta], 
+    [V_Sueldos].[Sueldo_Anterior] AS [Sueldo_Anterior], 
+    [V_Sueldos].[Area] AS [Area], 
+    [V_Sueldos].[Cargo] AS [Cargo], 
+    [V_Sueldos].[Usuario_Nombre] AS [Usuario_Nombre], 
+    [V_Sueldos].[Usuario_Crea] AS [Usuario_Crea], 
+    [V_Sueldos].[Usuario_Fecha] AS [Usuario_Fecha], 
+    [V_Sueldos].[Usuario_Modifica] AS [Usuario_Modifica], 
+    [V_Sueldos].[Fecha_Modifica] AS [Fecha_Modifica]
     FROM [rrhh].[V_Sueldos] AS [V_Sueldos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
@@ -8808,6 +8822,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <PropertyRef Name="Nombre" />
             <PropertyRef Name="Sueldo" />
             <PropertyRef Name="Tipo_Moneda" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Usuario_Crea" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
@@ -8815,6 +8832,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="Sueldo" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
           <Property Name="Tipo_Moneda" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sueldo_Anterior" Type="Int32" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usuario_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -15714,6 +15739,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySetMapping Name="V_Sueldos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Sueldos">
               <MappingFragment StoreEntitySet="V_Sueldos">
+                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
+                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
+                <ScalarProperty Name="Usuario_Fecha" ColumnName="Usuario_Fecha" />
+                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
+                <ScalarProperty Name="Usuario_Nombre" ColumnName="Usuario_Nombre" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Sueldo_Anterior" ColumnName="Sueldo_Anterior" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -16329,7 +16362,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Update_Result">

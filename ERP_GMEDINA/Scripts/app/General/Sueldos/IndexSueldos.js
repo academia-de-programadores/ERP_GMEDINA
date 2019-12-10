@@ -7,7 +7,7 @@
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
-    id = row.data().Id;
+    id = row.data().id;
     $(location).attr('href', "/Sueldos/Edit/" + id);
 }
 function format(obj) {
@@ -17,14 +17,14 @@ function format(obj) {
             '<div class="col-md-3">' +
                 '<div class="panel panel-default">' +
                   '<div class="panel-heading">' +
-                     '<h5>' + index.sue_Cantidad + '</h5>' +
+                     '<h5>' + index.Cargo + '</h5>' +
                 '</div>' +
                 '<div class="panel-body">' +
-                    '<h5>' + index.sue_Cantidad + '</h5>'
+                    '<h5>' + index.Sueldo_Anterior + '</h5>'
                     //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.per_NombreCompleto + '<br>' +
+                    + index.Tipo_Moneda + '<br>' +
                     //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.emp_Cuentabancaria + '</div>' +
+                    index.Cuenta + '</div>' +
                 '</div>' +
             '</div>'
     });
@@ -42,11 +42,19 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id:value.Id,
-                   Identidad: value.Identidad,
+                   Identidad :value.Identidad,
                    Nombre: value.Nombre,
-                   Sueldo: value.Sueldo,
-                   Tipo_Moneda: value.Tipo_Moneda,
-                   Cuenta: value.Cuenta
+                   Sueldo :value.Sueldo,
+                   Tipo_Moneda:value.Tipo_Moneda,
+                   Cuenta :value.Cuenta,
+                   Sueldo_Anterior: value.Sueldo_Anterior,
+                   Area: value.Area,
+                   Cargo: value.Cargo,
+                   Usuario_Nombre : value.Usuario_Nombre,
+                   Usuario_Crea : value.Usuario_Crea,
+                   Usuario_Fecha : value.Usuario_Fecha,
+                   Usuario_Modifica : value.Usuario_Modifica,
+                   Fecha_Modifica: value.Fecha_Modifica
                });
            });
            tabla.draw();
@@ -78,3 +86,18 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
 
 });
+
+
+function CallEditar() {
+    var modalnuevo = $("#ModalEditar");
+    modalnuevo.modal('show');
+}
+
+
+function CallDetalles() {
+    var modalnuevo = $("#ModalDetalles");
+    modalnuevo.modal('show');
+}
+
+
+
