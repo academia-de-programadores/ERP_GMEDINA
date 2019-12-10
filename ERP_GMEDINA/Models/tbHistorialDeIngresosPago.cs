@@ -26,10 +26,12 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hip_FechaCrea { get; set; }
         public Nullable<int> hip_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hip_FechaModifica { get; set; }
+        public int cin_IdIngreso { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbHistorialDePago tbHistorialDePago { get; set; }
         public virtual tbTipoPlanillaDetalleIngreso tbTipoPlanillaDetalleIngreso { get; set; }
+        public virtual tbCatalogoDeIngresos tbCatalogoDeIngresos { get; set; }
     }
 }

@@ -297,7 +297,7 @@
             <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
           </Key>
           <Property Name="hidp_IdHistorialdeDeduPago" Type="int" Nullable="false" />
-          <Property Name="tpdd_IdPlanillaDetDeduccion" Type="int" Nullable="false" />
+          <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hidp_UsuarioCrea" Type="int" Nullable="false" />
@@ -316,7 +316,7 @@
           <Property Name="hip_UnidadesPagar" Type="int" Nullable="false" />
           <Property Name="hip_MedidaUnitaria" Type="int" Nullable="false" />
           <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="tpdi_IdDetallePlanillaIngreso" Type="int" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
           <Property Name="hip_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="hip_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hip_UsuarioModifica" Type="int" />
@@ -1244,7 +1244,6 @@
           </Key>
           <Property Name="tper_Id" Type="int" Nullable="false" />
           <Property Name="tper_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="tper_GoceDeSueldo" Type="bit" Nullable="false" />
           <Property Name="tper_Estado" Type="bit" Nullable="false" />
           <Property Name="tper_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="tper_UsuarioCrea" Type="int" Nullable="false" />
@@ -1568,8 +1567,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Det
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="dex_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="usu_UsuarioCrea" Type="varchar" MaxLength="100" />
           <Property Name="dex_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="dex_UsuarioModifica" Type="int" />
+          <Property Name="usu_UsuarioModifica" Type="varchar" MaxLength="100" />
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
@@ -1967,7 +1968,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlanilla' does not 
           </Key>
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="date" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2224,8 +2225,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Departamentos' does not have a 
             <PropertyRef Name="depto_Fechacrea" />
             <PropertyRef Name="car_Id" />
             <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="per_Id" />
             <PropertyRef Name="per_NombreCompleto" />
+            <PropertyRef Name="per_Id" />
           </Key>
           <Property Name="depto_Id" Type="int" Nullable="false" />
           <Property Name="area_Id" Type="int" Nullable="false" />
@@ -2269,11 +2270,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <PropertyRef Name="tamo_Id" />
             <PropertyRef Name="tamo_Descripcion" />
             <PropertyRef Name="hamo_Id" />
-            <PropertyRef Name="hamo_Fecha" />
             <PropertyRef Name="hamo_AmonestacionAnterior" />
             <PropertyRef Name="hamo_Estado" />
             <PropertyRef Name="hamo_UsuarioCrea" />
             <PropertyRef Name="hamo_FechaCrea" />
+            <PropertyRef Name="hamo_Fecha" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -2281,7 +2282,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="tamo_Id" Type="int" Nullable="false" />
           <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hamo_Id" Type="int" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="date" Nullable="false" />
           <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
           <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
           <Property Name="hamo_Estado" Type="bit" Nullable="false" />
@@ -2344,15 +2345,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialCargos' does not have 
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialContrataciones">
           <Key>
-            <PropertyRef Name="hcon_Id" />
+            <PropertyRef Name="Id" />
             <PropertyRef Name="Nombre Completo" />
             <PropertyRef Name="Departamento" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Fecha Contrato" />
             <PropertyRef Name="Fecha Crea" />
           </Key>
-          <Property Name="hcon_Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="Departamento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha Seleccion Candidato" Type="datetime" />
+          <Property Name="Fecha Contrato" Type="date" Nullable="false" />
           <Property Name="Usuario Crea" Type="varchar" MaxLength="100" />
           <Property Name="Fecha Crea" Type="datetime" Nullable="false" />
           <Property Name="Usuario Modifica" Type="varchar" MaxLength="100" />
@@ -2468,89 +2475,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas' does not ha
           <Property Name="hsal_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hsal_UsuarioModifica" Type="int" />
           <Property Name="hsal_FechaModifica" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_Completo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_tbHistorialSalidas_Completo">
-          <Key>
-            <PropertyRef Name="hsal_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="tsal_Id" />
-            <PropertyRef Name="rsal_Id" />
-            <PropertyRef Name="hsal_FechaSalida" />
-            <PropertyRef Name="hsal_Estado" />
-            <PropertyRef Name="hsal_UsuarioCrea" />
-            <PropertyRef Name="hsal_FechaCrea" />
-          </Key>
-          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
-          <Property Name="hsal_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="tsal_Id" Type="int" Nullable="false" />
-          <Property Name="rsal_Id" Type="int" Nullable="false" />
-          <Property Name="hsal_FechaSalida" Type="date" Nullable="false" />
-          <Property Name="hsal_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hsal_Estado" Type="bit" Nullable="false" />
-          <Property Name="hsal_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="hsal_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hsal_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hsal_UsuarioModifica" Type="int" />
-          <Property Name="hsal_FechaModifica" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_tbHistorialSalidas_tbPersonas">
-          <Key>
-            <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="hsal_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="tsal_Id" />
-            <PropertyRef Name="rsal_Id" />
-            <PropertyRef Name="hsal_FechaSalida" />
-            <PropertyRef Name="hsal_Estado" />
-            <PropertyRef Name="hsal_UsuarioCrea" />
-            <PropertyRef Name="hsal_FechaCrea" />
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="per_FechaNacimiento" />
-            <PropertyRef Name="nac_Id" />
-            <PropertyRef Name="per_Estado" />
-            <PropertyRef Name="per_UsuarioCrea" />
-            <PropertyRef Name="per_FechaCrea" />
-          </Key>
-          <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="hsal_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="tsal_Id" Type="int" Nullable="false" />
-          <Property Name="rsal_Id" Type="int" Nullable="false" />
-          <Property Name="hsal_FechaSalida" Type="date" Nullable="false" />
-          <Property Name="hsal_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hsal_Estado" Type="bit" Nullable="false" />
-          <Property Name="hsal_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="hsal_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hsal_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hsal_UsuarioModifica" Type="int" />
-          <Property Name="hsal_FechaModifica" Type="datetime" />
-          <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="per_FechaNacimiento" Type="date" Nullable="false" />
-          <Property Name="per_Sexo" Type="char" MaxLength="1" />
-          <Property Name="per_Edad" Type="int" />
-          <Property Name="nac_Id" Type="int" Nullable="false" />
-          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
-          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
-          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
-          <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
-          <Property Name="per_TipoSangre" Type="nvarchar" MaxLength="4" />
-          <Property Name="per_Estado" Type="bit" Nullable="false" />
-          <Property Name="per_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="per_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="per_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="per_UsuarioModifica" Type="int" />
-          <Property Name="per_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4749,6 +4673,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones">
+          <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="1" />
+          <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDeDeducciones">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Principal>
+            <Dependent Role="tbHistorialDeduccionPago">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTechosDeducciones_cde_IdDeducciones">
           <End Role="tbCatalogoDeDeducciones" Type="Self.tbCatalogoDeDeducciones" Multiplicity="1" />
           <End Role="tbTechosDeducciones" Type="Self.tbTechosDeducciones" Multiplicity="*" />
@@ -4793,6 +4729,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               <PropertyRef Name="cin_IdIngreso" />
             </Principal>
             <Dependent Role="tbEmpleadoComisiones">
+              <PropertyRef Name="cin_IdIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso">
+          <End Role="tbCatalogoDeIngresos" Type="Self.tbCatalogoDeIngresos" Multiplicity="1" />
+          <End Role="tbHistorialDeIngresosPago" Type="Self.tbHistorialDeIngresosPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDeIngresos">
+              <PropertyRef Name="cin_IdIngreso" />
+            </Principal>
+            <Dependent Role="tbHistorialDeIngresosPago">
               <PropertyRef Name="cin_IdIngreso" />
             </Dependent>
           </ReferentialConstraint>
@@ -4986,30 +4934,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             </Principal>
             <Dependent Role="tbISR">
               <PropertyRef Name="tde_IdTipoDedu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_IdPlanillaDetDeduccion_Plani_tbHistorialDeduccionPago_tpdd_IdPlanillaDetDeduccion">
-          <End Role="tbTipoPlanillaDetalleDeduccion" Type="Self.tbTipoPlanillaDetalleDeduccion" Multiplicity="1" />
-          <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoPlanillaDetalleDeduccion">
-              <PropertyRef Name="tpdd_IdPlanillaDetDeduccion" />
-            </Principal>
-            <Dependent Role="tbHistorialDeduccionPago">
-              <PropertyRef Name="tpdd_IdPlanillaDetDeduccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plani_tbTipoPlanillaDetalleIngreso_tpdi_IdDetallePlanillaIngreso_Plani_tbHistorialDeIngresosPago_tpdi_IdDetallePlanillaIngres">
-          <End Role="tbTipoPlanillaDetalleIngreso" Type="Self.tbTipoPlanillaDetalleIngreso" Multiplicity="1" />
-          <End Role="tbHistorialDeIngresosPago" Type="Self.tbHistorialDeIngresosPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoPlanillaDetalleIngreso">
-              <PropertyRef Name="tpdi_IdDetallePlanillaIngreso" />
-            </Principal>
-            <Dependent Role="tbHistorialDeIngresosPago">
-              <PropertyRef Name="tpdi_IdDetallePlanillaIngreso" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5895,9 +5819,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
         <Function Name="UDP_Plani_CatalogoDeIngresosEdit_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
         </Function>
-        <Function Name="UDP_Plani_DecimoTercerMes_RPT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_Plani_EmpleadoComisiones_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cc_Id" Type="int" Mode="In" />
           <Parameter Name="cc_UsuarioModifica" Type="int" Mode="In" />
@@ -6307,7 +6228,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="tpdd_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tpdd_IdPlanillaDetDeduccion" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
@@ -6316,7 +6238,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="tpdi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tpdi_IdDetallePlanillaIngreso" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -6336,6 +6259,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="area_Usuariomodifica" Type="int" Mode="In" />
           <Parameter Name="area_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbAreas_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
@@ -6360,6 +6284,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="car_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="car_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbCargos_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbCargos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="car_Descripcion" Type="nvarchar" Mode="In" />
@@ -6396,7 +6321,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
         </Function>
         <Function Name="UDP_RRHH_tbDepartamentos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="car_descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_Usuariocrea" Type="int" Mode="In" />
           <Parameter Name="depto_FechaCrea" Type="datetime" Mode="In" />
@@ -6406,6 +6331,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="depto_Usuariomodifica" Type="int" Mode="In" />
           <Parameter Name="depto_Fechamodifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -6572,7 +6498,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="rsal_Id" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaSalida" Type="datetime" Mode="In" />
           <Parameter Name="hsal_Observacion" Type="nvarchar" Mode="In" />
-          <Parameter Name="hsal_Estado" Type="bit" Mode="In" />
           <Parameter Name="hsal_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -6652,6 +6577,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="jor_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="jor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbJornadas_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbJornadas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Descripcion" Type="nvarchar" Mode="In" />
@@ -6674,6 +6600,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="nac_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="nac_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbNacionalidades_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="nac_Id" Type="int" Mode="In" />
           <Parameter Name="nac_Descripcion" Type="nvarchar" Mode="In" />
@@ -7135,8 +7062,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
     [V_DeduccionesExtraordinarias_Detalles].[cde_IdDeducciones] AS [cde_IdDeducciones], 
     [V_DeduccionesExtraordinarias_Detalles].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioCrea] AS [dex_UsuarioCrea], 
+    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioCrea] AS [usu_UsuarioCrea], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_FechaCrea] AS [dex_FechaCrea], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioModifica] AS [dex_UsuarioModifica], 
+    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioModifica] AS [usu_UsuarioModifica], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_FechaModifica] AS [dex_FechaModifica], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtraordinarias_Detalles] AS [V_DeduccionesExtraordinarias_Detalles]</DefiningQuery>
@@ -7608,10 +7537,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           </EntitySet>
           <EntitySet Name="V_HistorialContrataciones" EntityType="Self.V_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
-    [V_HistorialContrataciones].[hcon_Id] AS [hcon_Id], 
+    [V_HistorialContrataciones].[Id] AS [Id], 
     [V_HistorialContrataciones].[Nombre Completo] AS [Nombre Completo], 
     [V_HistorialContrataciones].[Departamento] AS [Departamento], 
+    [V_HistorialContrataciones].[Area] AS [Area], 
+    [V_HistorialContrataciones].[Cargo] AS [Cargo], 
     [V_HistorialContrataciones].[Fecha Seleccion Candidato] AS [Fecha Seleccion Candidato], 
+    [V_HistorialContrataciones].[Fecha Contrato] AS [Fecha Contrato], 
     [V_HistorialContrataciones].[Usuario Crea] AS [Usuario Crea], 
     [V_HistorialContrataciones].[Fecha Crea] AS [Fecha Crea], 
     [V_HistorialContrataciones].[Usuario Modifica] AS [Usuario Modifica], 
@@ -7687,59 +7619,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
     [V_tbHistorialSalidas].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica], 
     [V_tbHistorialSalidas].[hsal_FechaModifica] AS [hsal_FechaModifica]
     FROM [rrhh].[V_tbHistorialSalidas] AS [V_tbHistorialSalidas]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_tbHistorialSalidas_Completo" EntityType="Self.V_tbHistorialSalidas_Completo" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialSalidas_Completo].[tsal_Descripcion] AS [tsal_Descripcion], 
-    [V_tbHistorialSalidas_Completo].[hsal_Id] AS [hsal_Id], 
-    [V_tbHistorialSalidas_Completo].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialSalidas_Completo].[tsal_Id] AS [tsal_Id], 
-    [V_tbHistorialSalidas_Completo].[rsal_Id] AS [rsal_Id], 
-    [V_tbHistorialSalidas_Completo].[hsal_FechaSalida] AS [hsal_FechaSalida], 
-    [V_tbHistorialSalidas_Completo].[hsal_Observacion] AS [hsal_Observacion], 
-    [V_tbHistorialSalidas_Completo].[hsal_Estado] AS [hsal_Estado], 
-    [V_tbHistorialSalidas_Completo].[hsal_RazonInactivo] AS [hsal_RazonInactivo], 
-    [V_tbHistorialSalidas_Completo].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea], 
-    [V_tbHistorialSalidas_Completo].[hsal_FechaCrea] AS [hsal_FechaCrea], 
-    [V_tbHistorialSalidas_Completo].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica], 
-    [V_tbHistorialSalidas_Completo].[hsal_FechaModifica] AS [hsal_FechaModifica]
-    FROM [rrhh].[V_tbHistorialSalidas_Completo] AS [V_tbHistorialSalidas_Completo]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_tbHistorialSalidas_tbPersonas" EntityType="Self.V_tbHistorialSalidas_tbPersonas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialSalidas_tbPersonas].[Nombre_Completo] AS [Nombre_Completo], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_Id] AS [hsal_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[tsal_Id] AS [tsal_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[rsal_Id] AS [rsal_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_FechaSalida] AS [hsal_FechaSalida], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_Observacion] AS [hsal_Observacion], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_Estado] AS [hsal_Estado], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_RazonInactivo] AS [hsal_RazonInactivo], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_FechaCrea] AS [hsal_FechaCrea], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica], 
-    [V_tbHistorialSalidas_tbPersonas].[hsal_FechaModifica] AS [hsal_FechaModifica], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Id] AS [per_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Identidad] AS [per_Identidad], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Nombres] AS [per_Nombres], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Apellidos] AS [per_Apellidos], 
-    [V_tbHistorialSalidas_tbPersonas].[per_FechaNacimiento] AS [per_FechaNacimiento], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Sexo] AS [per_Sexo], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Edad] AS [per_Edad], 
-    [V_tbHistorialSalidas_tbPersonas].[nac_Id] AS [nac_Id], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Direccion] AS [per_Direccion], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Telefono] AS [per_Telefono], 
-    [V_tbHistorialSalidas_tbPersonas].[per_CorreoElectronico] AS [per_CorreoElectronico], 
-    [V_tbHistorialSalidas_tbPersonas].[per_EstadoCivil] AS [per_EstadoCivil], 
-    [V_tbHistorialSalidas_tbPersonas].[per_TipoSangre] AS [per_TipoSangre], 
-    [V_tbHistorialSalidas_tbPersonas].[per_Estado] AS [per_Estado], 
-    [V_tbHistorialSalidas_tbPersonas].[per_RazonInactivo] AS [per_RazonInactivo], 
-    [V_tbHistorialSalidas_tbPersonas].[per_UsuarioCrea] AS [per_UsuarioCrea], 
-    [V_tbHistorialSalidas_tbPersonas].[per_FechaCrea] AS [per_FechaCrea], 
-    [V_tbHistorialSalidas_tbPersonas].[per_UsuarioModifica] AS [per_UsuarioModifica], 
-    [V_tbHistorialSalidas_tbPersonas].[per_FechaModifica] AS [per_FechaModifica]
-    FROM [rrhh].[V_tbHistorialSalidas_tbPersonas] AS [V_tbHistorialSalidas_tbPersonas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -8478,6 +8357,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" Association="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones">
+            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
+            <End Role="tbHistorialDeduccionPago" EntitySet="tbHistorialDeduccionPago" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTechosDeducciones_cde_IdDeducciones" Association="Self.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTechosDeducciones_cde_IdDeducciones">
             <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
             <End Role="tbTechosDeducciones" EntitySet="tbTechosDeducciones" />
@@ -8493,6 +8376,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <AssociationSet Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" Association="Self.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso">
             <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
             <End Role="tbEmpleadoComisiones" EntitySet="tbEmpleadoComisiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" Association="Self.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso">
+            <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
+            <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
           </AssociationSet>
           <AssociationSet Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso" Association="Self.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso">
             <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
@@ -8557,14 +8444,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <AssociationSet Name="FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu" Association="Self.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbISR_tde_IdTipoDedu">
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbISR" EntitySet="tbISR" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_IdPlanillaDetDeduccion_Plani_tbHistorialDeduccionPago_tpdd_IdPlanillaDetDeduccion" Association="Self.FK_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_IdPlanillaDetDeduccion_Plani_tbHistorialDeduccionPago_tpdd_IdPlanillaDetDeduccion">
-            <End Role="tbTipoPlanillaDetalleDeduccion" EntitySet="tbTipoPlanillaDetalleDeduccion" />
-            <End Role="tbHistorialDeduccionPago" EntitySet="tbHistorialDeduccionPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plani_tbTipoPlanillaDetalleIngreso_tpdi_IdDetallePlanillaIngreso_Plani_tbHistorialDeIngresosPago_tpdi_IdDetallePlanillaIngres" Association="Self.FK_Plani_tbTipoPlanillaDetalleIngreso_tpdi_IdDetallePlanillaIngreso_Plani_tbHistorialDeIngresosPago_tpdi_IdDetallePlanillaIngres">
-            <End Role="tbTipoPlanillaDetalleIngreso" EntitySet="tbTipoPlanillaDetalleIngreso" />
-            <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -9102,7 +8981,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tpdd_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" ReturnType="Collection(String)">
-          <Parameter Name="tpdd_IdPlanillaDetDeduccion" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" ReturnType="Collection(String)">
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
@@ -9111,7 +8991,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tpdi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(String)">
-          <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHora_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHora_Update_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
@@ -10890,7 +10771,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbDepartamentos_Insert" ReturnType="Collection(Int32)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaCrea" Mode="In" Type="DateTime" />
@@ -10909,7 +10790,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Delete" ReturnType="Collection(Int32)">
             <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
@@ -11022,7 +10903,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaSalida" Mode="In" Type="DateTime" />
             <Parameter Name="hsal_Observacion" Mode="In" Type="String" />
-            <Parameter Name="hsal_Estado" Mode="In" Type="Boolean" />
             <Parameter Name="hsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -11120,7 +11000,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(String)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -11166,6 +11046,19 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones">
+            <End Role="tbCatalogoDeDeducciones" EntitySet="tbCatalogoDeDeducciones" />
+            <End Role="tbHistorialDeduccionPago" EntitySet="tbHistorialDeduccionPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso">
+            <End Role="tbCatalogoDeIngresos" EntitySet="tbCatalogoDeIngresos" />
+            <End Role="tbHistorialDeIngresosPago" EntitySet="tbHistorialDeIngresosPago" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbAreas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbCargos_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" ReturnType="Collection(String)" />
+          <FunctionImport Name="UDP_RRHH_tbJornadas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11698,6 +11591,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbTechosDeducciones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTechosDeducciones_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbTechosDeducciones" />
           <NavigationProperty Name="tbTipoPlanillaDetalleDeduccion" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbTipoPlanillaDetalleDeduccion_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbTipoPlanillaDetalleDeduccion" />
           <NavigationProperty Name="tbTipoDeduccion" Relationship="ERP_GMEDINAModel.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbCatalogoDeDeducciones_tde_IdTipoDedu" FromRole="tbCatalogoDeDeducciones" ToRole="tbTipoDeduccion" />
+          <NavigationProperty Name="tbHistorialDeduccionPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" FromRole="tbCatalogoDeDeducciones" ToRole="tbHistorialDeduccionPago" />
         </EntityType>
         <EntityType Name="tbCatalogoDeIngresos">
           <Key>
@@ -11715,6 +11609,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoBonos_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbEmpleadoBonos" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbEmpleadoComisiones_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbEmpleadoComisiones" />
           <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbTipoPlanillaDetalleIngreso_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbTipoPlanillaDetalleIngreso" />
+          <NavigationProperty Name="tbHistorialDeIngresosPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" FromRole="tbCatalogoDeIngresos" ToRole="tbHistorialDeIngresosPago" />
         </EntityType>
         <EntityType Name="tbCatalogoDePlanillas">
           <Key>
@@ -11905,6 +11800,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeduccionPago_hidp_UsuarioModifica" FromRole="tbHistorialDeduccionPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeduccionPago" ToRole="tbHistorialDePago" />
           <NavigationProperty Name="tbTipoPlanillaDetalleDeduccion" Relationship="ERP_GMEDINAModel.FK_Plani_tbTipoPlanillaDetalleDeduccion_tpdd_IdPlanillaDetDeduccion_Plani_tbHistorialDeduccionPago_tpdd_IdPlanillaDetDeduccion" FromRole="tbHistorialDeduccionPago" ToRole="tbTipoPlanillaDetalleDeduccion" />
+          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbCatalogoDeDeducciones" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" FromRole="tbHistorialDeduccionPago" ToRole="tbCatalogoDeDeducciones" />
         </EntityType>
         <EntityType Name="tbHistorialDeIngresosPago">
           <Key>
@@ -11926,6 +11823,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbHistorialDeIngresosPago_hip_UsuarioModifica" FromRole="tbHistorialDeIngresosPago" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeIngresosPago_hipa_IdHistorialDePago" FromRole="tbHistorialDeIngresosPago" ToRole="tbHistorialDePago" />
           <NavigationProperty Name="tbTipoPlanillaDetalleIngreso" Relationship="ERP_GMEDINAModel.FK_Plani_tbTipoPlanillaDetalleIngreso_tpdi_IdDetallePlanillaIngreso_Plani_tbHistorialDeIngresosPago_tpdi_IdDetallePlanillaIngres" FromRole="tbHistorialDeIngresosPago" ToRole="tbTipoPlanillaDetalleIngreso" />
+          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbCatalogoDeIngresos" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" FromRole="tbHistorialDeIngresosPago" ToRole="tbCatalogoDeIngresos" />
         </EntityType>
         <EntityType Name="tbHistorialDePago">
           <Key>
@@ -13450,6 +13349,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="dex_UsuarioModifica" Type="Int32" />
           <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
+          <Property Name="usu_UsuarioCrea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="usu_UsuarioModifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_DeduccionesExtraordinarias_Empleados">
           <Key>
@@ -13813,7 +13714,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           </Key>
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_Plani_TipoPlani">
           <Key>
@@ -14099,7 +14000,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="tamo_Id" Type="Int32" Nullable="false" />
           <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Id" Type="Int32" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
           <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
@@ -14160,6 +14061,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <PropertyRef Name="Nombre_Completo" />
             <PropertyRef Name="Departamento" />
             <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Fecha_Contrato" />
           </Key>
           <Property Name="hcon_Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
@@ -14169,6 +14074,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Contrato" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_HistorialHorasTrabajadas">
           <Key>
@@ -17765,6 +17674,42 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
         <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <Association Name="FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDeDeducciones" Role="tbCatalogoDeDeducciones" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDeduccionPago" Role="tbHistorialDeduccionPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDeDeducciones">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Principal>
+            <Dependent Role="tbHistorialDeduccionPago">
+              <PropertyRef Name="cde_IdDeducciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDeIngresos" Role="tbCatalogoDeIngresos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialDeIngresosPago" Role="tbHistorialDeIngresosPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDeIngresos">
+              <PropertyRef Name="cin_IdIngreso" />
+            </Principal>
+            <Dependent Role="tbHistorialDeIngresosPago">
+              <PropertyRef Name="cin_IdIngreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbAreas_tbEmpleados_Select_Result">
+          <Property Type="String" Name="area_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_tbEmpleados_Select_Result">
+          <Property Type="String" Name="car_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_tbEmpleados_Select_Result">
+          <Property Type="String" Name="jor_Descripcion" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result">
+          <Property Type="String" Name="nac_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18484,13 +18429,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySetMapping Name="tbHistorialDeduccionPago">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialDeduccionPago">
               <MappingFragment StoreEntitySet="tbHistorialDeduccionPago">
+                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
                 <ScalarProperty Name="hidp_FechaModifica" ColumnName="hidp_FechaModifica" />
                 <ScalarProperty Name="hidp_UsuarioModifica" ColumnName="hidp_UsuarioModifica" />
                 <ScalarProperty Name="hidp_FechaCrea" ColumnName="hidp_FechaCrea" />
                 <ScalarProperty Name="hidp_UsuarioCrea" ColumnName="hidp_UsuarioCrea" />
                 <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
                 <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
-                <ScalarProperty Name="tpdd_IdPlanillaDetDeduccion" ColumnName="tpdd_IdPlanillaDetDeduccion" />
                 <ScalarProperty Name="hidp_IdHistorialdeDeduPago" ColumnName="hidp_IdHistorialdeDeduPago" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -18498,11 +18443,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySetMapping Name="tbHistorialDeIngresosPago">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialDeIngresosPago">
               <MappingFragment StoreEntitySet="tbHistorialDeIngresosPago">
+                <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
                 <ScalarProperty Name="hip_FechaModifica" ColumnName="hip_FechaModifica" />
                 <ScalarProperty Name="hip_UsuarioModifica" ColumnName="hip_UsuarioModifica" />
                 <ScalarProperty Name="hip_FechaCrea" ColumnName="hip_FechaCrea" />
                 <ScalarProperty Name="hip_UsuarioCrea" ColumnName="hip_UsuarioCrea" />
-                <ScalarProperty Name="tpdi_IdDetallePlanillaIngreso" ColumnName="tpdi_IdDetallePlanillaIngreso" />
                 <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
                 <ScalarProperty Name="hip_MedidaUnitaria" ColumnName="hip_MedidaUnitaria" />
                 <ScalarProperty Name="hip_UnidadesPagar" ColumnName="hip_UnidadesPagar" />
@@ -19498,7 +19443,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
                 <ScalarProperty Name="tper_UsuarioCrea" ColumnName="tper_UsuarioCrea" />
                 <ScalarProperty Name="tper_RazonInactivo" ColumnName="tper_RazonInactivo" />
                 <ScalarProperty Name="tper_Estado" ColumnName="tper_Estado" />
-                <ScalarProperty Name="tper_GoceDeSueldo" ColumnName="tper_GoceDeSueldo" />
                 <ScalarProperty Name="tper_Descripcion" ColumnName="tper_Descripcion" />
                 <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
               </MappingFragment>
@@ -19725,6 +19669,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySetMapping Name="V_DeduccionesExtraordinarias_Detalles">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles">
               <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Detalles">
+                <ScalarProperty Name="usu_UsuarioModifica" ColumnName="usu_UsuarioModifica" />
+                <ScalarProperty Name="usu_UsuarioCrea" ColumnName="usu_UsuarioCrea" />
                 <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
                 <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
                 <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
@@ -20280,6 +20226,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySetMapping Name="V_HistorialContrataciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialContrataciones">
               <MappingFragment StoreEntitySet="V_HistorialContrataciones">
+                <ScalarProperty Name="Fecha_Contrato" ColumnName="Fecha Contrato" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha Modifica" />
                 <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario Modifica" />
                 <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha Crea" />
@@ -20287,7 +20237,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
                 <ScalarProperty Name="Fecha_Seleccion_Candidato" ColumnName="Fecha Seleccion Candidato" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
-                <ScalarProperty Name="hcon_Id" ColumnName="hcon_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -20369,63 +20318,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_tbHistorialSalidas_Completo">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialSalidas_Completo">
-              <MappingFragment StoreEntitySet="V_tbHistorialSalidas_Completo">
-                <ScalarProperty Name="hsal_FechaModifica" ColumnName="hsal_FechaModifica" />
-                <ScalarProperty Name="hsal_UsuarioModifica" ColumnName="hsal_UsuarioModifica" />
-                <ScalarProperty Name="hsal_FechaCrea" ColumnName="hsal_FechaCrea" />
-                <ScalarProperty Name="hsal_UsuarioCrea" ColumnName="hsal_UsuarioCrea" />
-                <ScalarProperty Name="hsal_RazonInactivo" ColumnName="hsal_RazonInactivo" />
-                <ScalarProperty Name="hsal_Estado" ColumnName="hsal_Estado" />
-                <ScalarProperty Name="hsal_Observacion" ColumnName="hsal_Observacion" />
-                <ScalarProperty Name="hsal_FechaSalida" ColumnName="hsal_FechaSalida" />
-                <ScalarProperty Name="rsal_Id" ColumnName="rsal_Id" />
-                <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
-                <ScalarProperty Name="tsal_Descripcion" ColumnName="tsal_Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_tbHistorialSalidas_tbPersonas">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialSalidas_tbPersonas">
-              <MappingFragment StoreEntitySet="V_tbHistorialSalidas_tbPersonas">
-                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
-                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
-                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
-                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
-                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
-                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
-                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
-                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
-                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
-                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
-                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
-                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
-                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
-                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
-                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-                <ScalarProperty Name="hsal_FechaModifica" ColumnName="hsal_FechaModifica" />
-                <ScalarProperty Name="hsal_UsuarioModifica" ColumnName="hsal_UsuarioModifica" />
-                <ScalarProperty Name="hsal_FechaCrea" ColumnName="hsal_FechaCrea" />
-                <ScalarProperty Name="hsal_UsuarioCrea" ColumnName="hsal_UsuarioCrea" />
-                <ScalarProperty Name="hsal_RazonInactivo" ColumnName="hsal_RazonInactivo" />
-                <ScalarProperty Name="hsal_Estado" ColumnName="hsal_Estado" />
-                <ScalarProperty Name="hsal_Observacion" ColumnName="hsal_Observacion" />
-                <ScalarProperty Name="hsal_FechaSalida" ColumnName="hsal_FechaSalida" />
-                <ScalarProperty Name="rsal_Id" ColumnName="rsal_Id" />
-                <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
-                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_tbPersonas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
               <MappingFragment StoreEntitySet="V_tbPersonas">
@@ -20437,21 +20329,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_DecimoTercerMes_RPT" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_DecimoTercerMes_RPT">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_DecimoTercerMes_RPT_Result">
-                <ScalarProperty Name="dtm_IdDecimoTercerMes" ColumnName="dtm_IdDecimoTercerMes" />
-                <ScalarProperty Name="dtm_FechaPago" ColumnName="dtm_FechaPago" />
-                <ScalarProperty Name="dtm_UsuarioCrea" ColumnName="dtm_UsuarioCrea" />
-                <ScalarProperty Name="dtm_FechaCrea" ColumnName="dtm_FechaCrea" />
-                <ScalarProperty Name="dtm_UsuarioModifica" ColumnName="dtm_UsuarioModifica" />
-                <ScalarProperty Name="dtm_FechaModifica" ColumnName="dtm_FechaModifica" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
-                <ScalarProperty Name="dtm_CodigoPago" ColumnName="dtm_CodigoPago" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadoComisiones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadoComisiones_Activar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_EmpleadosPorAreas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_EmpleadosPorAreas_Select" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAcumuladosISR_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAcumuladosISR_Activar" />
@@ -20669,6 +20546,35 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result">
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_tbEmpleados_Select_Result">
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_tbEmpleados_Select" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_tbEmpleados_Select_Result">
+                <ScalarProperty Name="jor_Descripcion" ColumnName="jor_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result">
+                <ScalarProperty Name="nac_Descripcion" ColumnName="nac_Descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
