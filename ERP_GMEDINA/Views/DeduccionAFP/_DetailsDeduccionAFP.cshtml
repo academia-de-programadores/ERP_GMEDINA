@@ -1,0 +1,66 @@
+﻿@model ERP_GMEDINA.Models.tbDeduccionAFP
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="emp_Id" name="emp_Id" class="form-control" disabled></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.afp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="afp_Id" name="afp_Id" class="form-control" disabled></select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h2>Auditoría</h2>
+        </div>
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <table class="table table-striped table-bordered dataTable">
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            @Html.HiddenFor(model => model.dafp_UsuarioCrea)
+                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            @Html.HiddenFor(model => model.dafp_UsuarioModifica)
+                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+}
+

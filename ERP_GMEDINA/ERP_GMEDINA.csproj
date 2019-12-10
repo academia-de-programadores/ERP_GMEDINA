@@ -191,6 +191,7 @@
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
     <Compile Include="Controllers\DecimoCuartoMesController.cs" />
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
+    <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\cDecimoCuartoMesRPT.cs" />
     <Compile Include="Models\cDecimoTercerMes.cs" />
     <Compile Include="Models\cDecimoTercerMesRPT.cs" />
+    <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
@@ -579,6 +581,18 @@
     <Compile Include="Models\UDP_Plani_tbAdelantoSueldo_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -619,6 +633,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDecimoCuartoMes_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionAFP_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionAFP_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionAFP_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionAFP_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result.cs">
@@ -1129,6 +1155,7 @@
     <Content Include="Scripts\app\General\AuxilioCesantia.js" />
     <Content Include="Scripts\app\General\DecimoTercerMes.js" />
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
+    <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
@@ -1796,6 +1823,10 @@
     <Content Include="Views\AuxilioDeCesantias\Index.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_Create.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_DetailsAuxCes.cshtml" />
+    <Content Include="Views\DeduccionAFP\Index.cshtml" />
+    <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
+    <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
+    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
