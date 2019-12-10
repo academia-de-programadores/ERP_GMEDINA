@@ -122,7 +122,7 @@ namespace ERP_GMEDINA.Controllers
                 //}
                 foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
                 {
-                    Row.Formula.Values.Add(i);
+                    Row.Formula.Values.Add(i.car_Descripcion);
                     //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
                 
 
