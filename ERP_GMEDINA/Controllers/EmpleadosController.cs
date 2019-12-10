@@ -124,6 +124,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Row.Formula.Values.Add(i);
                     //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
+                
 
                 }
 
