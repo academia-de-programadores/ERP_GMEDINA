@@ -17359,7 +17359,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(String)">
             <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert_Result)">
             <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
@@ -17375,7 +17375,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert1_Result)">
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert1">
             <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
@@ -17391,7 +17391,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete1_Result)">
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete1">
             <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -17811,13 +17811,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Insert1_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Update1_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Delete1_Result">
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -20674,14 +20671,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert">
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert1_Result">
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert">
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update">
             <ResultMapping>
@@ -20691,11 +20689,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete1_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
