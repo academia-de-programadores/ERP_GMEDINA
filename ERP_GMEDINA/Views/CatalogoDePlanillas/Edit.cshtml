@@ -22,28 +22,14 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-5">
-                                    @if (Model.cpla_DescripcionPlanilla != "Decimo Cuarto Mes" && Model.cpla_DescripcionPlanilla != "Decimo Tercer Mes")
-                                    {
-                                        <input class="form-control text-box single-line valid" id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
-                                    }
-                                    else
-                                    {
-                                        <input class="form-control text-box single-line valid" id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" disabled value="@Model.cpla_DescripcionPlanilla">
-                                    }
+                                    <input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-5">
-                                    @if (Model.cpla_DescripcionPlanilla != "Decimo Cuarto Mes" && Model.cpla_DescripcionPlanilla != "Decimo Tercer Mes")
-                                    {
-                                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field Frecuencia en días must be a number." data-val-required="El campo Frecuencia en días es obligatorio." id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" type="number" value="@Model.cpla_FrecuenciaEnDias">
-                                    }
-                                    else
-                                    {
-                                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field Frecuencia en días must be a number." data-val-required="El campo Frecuencia en días es obligatorio." id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" type="number" disabled value="@Model.cpla_FrecuenciaEnDias">
-                                    }
+                                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field Frecuencia en días must be a number." data-val-required="El campo Frecuencia en días es obligatorio." id="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) name="cpla_FrecuenciaEnDias" type="number" value="@Model.cpla_FrecuenciaEnDias">
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
                                 </div>
                             </div>
@@ -76,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div class="col-lg-5" id="catalogoDeDeducciones">
                                 <div class="ibox float-e-margins">
                                     <h3 style="margin-left:85px;">Lista del catalogo de Deducciones</h3>
@@ -109,44 +95,45 @@
                                     <div style="display:none" class="btn" id="cargandoEditar">
                                     </div>
                                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                                    <button type="button" class="btn btn-danger" id="inactivar">Inactivar</button>
+                                    <button type="button" class="btn btn-danger" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="inactivar">Inactivar</button>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     }
-                    </div>
                 </div>
             </div>
-            <br />
-            <div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title">Inactivar</h4>
-                        </div>
-                        <div class="modal-body" id="Inactivar">
-                            ¿Esta seguro que desea Inactivar este registro?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger " id="btnInactivarPlanilla">Inactivar</button>
-                        </div>
+        </div>
+        <br />
+        <div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Inactivar</h4>
+                    </div>
+                    <div class="modal-body" id="Inactivar">
+                        ¿Esta seguro que desea Inactivar este registro?
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="btnInactivarPlanilla">Inactivar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
-        <script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
-        <script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
-        <script src="~/Scripts/plugins/switchery/switchery.js"></script>
-        @section Scripts {
-            @Scripts.Render("~/plugins/iCheck")
-        }
-                        @section Styles {
-                            @Styles.Render("~/Content/plugins/izitoast/iziToast")
-                        }
+    </div>
+    <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
+    <script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
+    <script src="~/Scripts/plugins/switchery/switchery.js"></script>
+    @section Scripts {
+        @Scripts.Render("~/plugins/iCheck")
+    }
+    @section Styles {
+        @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    }
 
 
-                        <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
