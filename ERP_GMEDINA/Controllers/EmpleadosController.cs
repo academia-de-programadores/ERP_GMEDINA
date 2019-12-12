@@ -116,19 +116,6 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
                 Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
 
-                //ExcelWorksheet ws = Ep.Workbook.Worksheets.Add("DDL");
-                //ws.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
-                //foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
-                //{
-
-                //ws.Cells["B1"].Value = "Here we have to add long text";
-                //ws.Cells["B2"].Value = "All list values combined have to have more then 255 chars";
-                //ws.Cells["B3"].Value = "more text 1 more text more text more text";
-                //ws.Cells["B4"].Value = "more text 2 more text more text more text";
-                //ws.Cells["B5"].Value = "more text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore";
-
-
-                //}
                 var lol = db.tbCargos
                     .Select(tabla=>tabla.car_Descripcion)
                     .ToArray();
@@ -138,31 +125,6 @@ namespace ERP_GMEDINA.Controllers
                 val.Formula.ExcelFormula = "$O$1:$O$"+lol.Length;
                 Sheet.Column(15).Hidden = true;
                 Sheet.Cells.AutoFitColumns(8.43, 100);
-
-
-                //var Row = Sheet.DataValidations.AddListValidation("L2");
-                //for (int index = 1; index <= item.Cargo.Count; index++)
-                //{
-                //    Sheet.Cells[index, 1].Value = item.Cargo[index - 1].id;
-                //}
-                //foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
-                //{
-                //    Row.Formula.Values.Add("Hola");
-                //    //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
-
-
-
-
-                //}
-
-                //foreach (tbCargos i in item.Cargo)
-                //{
-                //    Row.Formula.Values.Add("");
-                //    //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
-
-                //}
-
-                //Sheet.Cells[string.Format("L{0}", row)].Value = item.Cargo;
 
                 Sheet.Cells[string.Format("LL{0}", row)].Value = item.area_Id;
                 Sheet.Cells[string.Format("M{0}", row)].Value = item.depto_Id;
