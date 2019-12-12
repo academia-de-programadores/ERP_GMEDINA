@@ -172,6 +172,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\cHistorialAmonestaciones.cs" />
+    <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
