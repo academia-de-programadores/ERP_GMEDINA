@@ -126,7 +126,7 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Column(339).Style.Font.Color.SetColor(System.Drawing.Color.White);
                 Sheet.Column(15).Hidden = true;
                 Sheet.Cells.AutoFitColumns(8.43, 100);
-
+                //agregar parte de :"FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO"
                 Sheet.Cells[string.Format("M{0}", row)].Value = item.area_Id;
                 Sheet.Cells[string.Format("N{0}", row)].Value = item.depto_Id;
                 Sheet.Cells[string.Format("O{0}", row)].Value = item.jor_Id;
