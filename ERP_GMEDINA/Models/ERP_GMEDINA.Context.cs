@@ -137,8 +137,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
         public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_EmpleadoPorPlanilla> V_Plani_EmpleadoPorPlanilla { get; set; }
-        public virtual DbSet<V_Plani_FechaPlani> V_Plani_FechaPlani { get; set; }
-        public virtual DbSet<V_Plani_FechaPlanilla> V_Plani_FechaPlanilla { get; set; }
         public virtual DbSet<V_Plani_TipoPlani> V_Plani_TipoPlani { get; set; }
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
@@ -159,7 +157,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_HorariosDetalles> V_HorariosDetalles { get; set; }
         public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
         public virtual DbSet<V_tbHistorialSalidas> V_tbHistorialSalidas { get; set; }
-        public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
         public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }

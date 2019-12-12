@@ -2010,15 +2010,6 @@ warning 6013: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' does not hav
         </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlanilla' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_Plani_FechaPlanilla">
-          <Key>
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="int" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_TipoPlani' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_TipoPlani">
@@ -7490,13 +7481,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_Plani_EmpleadoPorPlanilla].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago]
     FROM [Plani].[V_Plani_EmpleadoPorPlanilla] AS [V_Plani_EmpleadoPorPlanilla]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_Plani_FechaPlanilla" EntityType="Self.V_Plani_FechaPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_FechaPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Plani_FechaPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_Plani_FechaPlanilla].[hipa_FechaPago] AS [hipa_FechaPago]
-    FROM [Plani].[V_Plani_FechaPlanilla] AS [V_Plani_FechaPlanilla]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_Plani_TipoPlani].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
@@ -11321,20 +11305,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="V_Plani_FechaPlani">
-          <Key>
-            <PropertyRef Name="hipa_FechaPago" />
-          </Key>
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_Plani_FechaPlanilla">
-          <Key>
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="V_Plani_TipoPlani">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -11764,61 +11734,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="hsal_UsuarioCrea" />
             <PropertyRef Name="hsal_FechaCrea" />
           </Key>
-          <Property Name="hsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="tsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="rsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="hsal_FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hsal_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hsal_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hsal_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hsal_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hsal_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hsal_UsuarioModifica" Type="Int32" />
-          <Property Name="hsal_FechaModifica" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_tbHistorialSalidas_completa">
-          <Key>
-            <PropertyRef Name="rsal_Descripcion" />
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="per_FechaNacimiento" />
-            <PropertyRef Name="nac_Id" />
-            <PropertyRef Name="per_Estado" />
-            <PropertyRef Name="per_UsuarioCrea" />
-            <PropertyRef Name="per_FechaCrea" />
-            <PropertyRef Name="hsal_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="tsal_Id" />
-            <PropertyRef Name="rsal_Id" />
-            <PropertyRef Name="hsal_FechaSalida" />
-            <PropertyRef Name="hsal_Estado" />
-            <PropertyRef Name="hsal_UsuarioCrea" />
-            <PropertyRef Name="hsal_FechaCrea" />
-          </Key>
-          <Property Name="tsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="rsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="per_Edad" Type="Int32" />
-          <Property Name="nac_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="per_TipoSangre" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="per_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="per_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="per_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="per_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="per_UsuarioModifica" Type="Int32" />
-          <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="hsal_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="tsal_Id" Type="Int32" Nullable="false" />
@@ -15126,8 +15041,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_ISR_RPT" EntityType="Self.V_ISR_RPT" />
           <EntitySet Name="V_Liquidaciones_RPT" EntityType="Self.V_Liquidaciones_RPT" />
           <EntitySet Name="V_Plani_EmpleadoPorPlanilla" EntityType="Self.V_Plani_EmpleadoPorPlanilla" />
-          <EntitySet Name="V_Plani_FechaPlani" EntityType="Self.V_Plani_FechaPlani" />
-          <EntitySet Name="V_Plani_FechaPlanilla" EntityType="Self.V_Plani_FechaPlanilla" />
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" />
           <EntitySet Name="V_PlanillaDeducciones" EntityType="Self.V_PlanillaDeducciones" />
           <EntitySet Name="V_PlanillaIngresos" EntityType="Self.V_PlanillaIngresos" />
@@ -15148,7 +15061,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_HorariosDetalles" EntityType="Self.V_HorariosDetalles" />
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" />
           <EntitySet Name="V_tbHistorialSalidas" EntityType="Self.V_tbHistorialSalidas" />
-          <EntitySet Name="V_tbHistorialSalidas_completa" EntityType="Self.V_tbHistorialSalidas_completa" />
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" />
           <EntitySet Name="V_tbtiposalidas" EntityType="Self.V_tbtiposalidas" />
           <AssociationSet Name="FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id" Association="Self.FK_Acce_tbObjeto_obj_Id_Acce_tbAccesoRol_obj_Id">
@@ -19715,14 +19627,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
                 <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Plani_FechaPlanilla">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_FechaPlanilla">
-              <MappingFragment StoreEntitySet="V_Plani_FechaPlanilla">
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
