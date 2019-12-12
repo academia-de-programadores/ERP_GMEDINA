@@ -116,6 +116,24 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
                 Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
 
+                ExcelWorksheet ws = Ep.Workbook.Worksheets.Add("DDL");
+
+                //var val = ws.DataValidations.AddListValidation("A1"); 
+                //val.Formula.Values.Add("Here we have to add long text");
+                //val.Formula.Values.Add("All list values combined have to have more then 255 chars");
+                //val.Formula.Values.Add("more text 1 more text more text more text"); 
+                //val.Formula.Values.Add("more text 2 more text more text more text"); 
+
+                ws.Cells["B1"].Value = "Here we have to add long text";
+                ws.Cells["B2"].Value = "All list values combined have to have more then 255 chars";
+                ws.Cells["B3"].Value = "more text 1 more text more text more text";
+                ws.Cells["B4"].Value = "more text 2 more text more text more text";
+                ws.Cells["B5"].Value = "more text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore";
+
+                var val = ws.DataValidations.AddListValidation("L2");
+                val.Formula.ExcelFormula = "B1:B5";
+
+               
 
 
                 var Row = Sheet.DataValidations.AddListValidation("L2");
@@ -125,7 +143,7 @@ namespace ERP_GMEDINA.Controllers
                 //}
                 foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
                 {
-                    Row.Formula.Values.Add(i.car_Descripcion);
+                    Row.Formula.Values.Add("Hola");
                     //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
 
 
