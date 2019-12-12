@@ -120,15 +120,16 @@ namespace ERP_GMEDINA.Controllers
                     .Select(tabla=>tabla.car_Descripcion)
                     .ToArray();
 
-                Sheet.Cells["O1"].LoadFromCollection<string>(lol.ToList<string>());
+                Sheet.Cells["MA1"].LoadFromCollection<string>(lol.ToList<string>());
                 var val = Sheet.DataValidations.AddListValidation("L2");
-                val.Formula.ExcelFormula = "$O$1:$O$"+lol.Length;
+                val.Formula.ExcelFormula = "$MA$1:$MA$"+lol.Length;
+                Sheet.Column(339).Style.Font.Color.SetColor(System.Drawing.Color.White);
                 Sheet.Column(15).Hidden = true;
                 Sheet.Cells.AutoFitColumns(8.43, 100);
 
-                Sheet.Cells[string.Format("LL{0}", row)].Value = item.area_Id;
-                Sheet.Cells[string.Format("M{0}", row)].Value = item.depto_Id;
-                Sheet.Cells[string.Format("N{0}", row)].Value = item.jor_Id;
+                Sheet.Cells[string.Format("M{0}", row)].Value = item.area_Id;
+                Sheet.Cells[string.Format("N{0}", row)].Value = item.depto_Id;
+                Sheet.Cells[string.Format("O{0}", row)].Value = item.jor_Id;
 
                 row++;
             }
