@@ -47,9 +47,6 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        // POST: InstitucionesFinancieras/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
@@ -127,16 +124,12 @@ namespace ERP_GMEDINA.Controllers
             return View(tbInstitucionesFinancieras);
         }
 
-        // POST: InstitucionesFinancieras/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             tbInstitucionesFinancieras.insf_UsuarioModifica = 1;
             tbInstitucionesFinancieras.insf_FechaModifica = DateTime.Now;
-            //--listInstitucionesFinancieras = listInFs
             IEnumerable<object> listInFs = null;
             string MensajeError = "";
             if (ModelState.IsValid)
@@ -227,16 +220,17 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 return Content("Error de Conexion" + ex.ToString());
-
             }
-           
+
             return View("CargaDocumento");
         }
 
         [HttpPost]
         public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS,string cboIdDeduccion)
         {
-            
+            string response = String.Empty;
+            string MensajeError = "";
+
             //Verificacion del objetto recibido (archivo excel), si esta vacio retornara un error, de lo contrario continuara con el proceso.
             if (archivoexcel != null && archivoexcel.ContentLength > 0)
             {
@@ -255,12 +249,12 @@ namespace ERP_GMEDINA.Controllers
 
                     if (!idsDeducciones.Contains(idCatDeduc))
                     {
-                        ViewBag.error = "Error: Debe seleccionar una opcion.";
+                        response = "error";
 
                     }
                     else if (!idsDeducciones.Contains(IdInsF))
                     {
-                        ViewBag.error = "Error: Debe seleccionar una opcion.";
+                        response = "error";
                     }
                     else
                     {
@@ -313,24 +307,45 @@ namespace ERP_GMEDINA.Controllers
                                 }
                                 else
                                 {
-                                    //return Content("Error, contacte al administrador.");
                                     return RedirectToAction("CargaDocumento");
                                 }
                                 iRow++;
                             }
                         }
+                        response = "bien";
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
-                    ViewBag.error = Ex.ToString();
+                    response="error";
                 }
             }
             else
             {
-                ViewBag.sms = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
+                MensajeError = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
             }
-            return RedirectToAction("Index");
+
+            List<tbCatalogoDeDeducciones> OCatalogoDeducciones = db.tbCatalogoDeDeducciones.Where(x => x.cde_Activo == true).ToList();
+            ViewBag.Deducciones = OCatalogoDeducciones;
+            var listaINFS = from INFS in db.tbInstitucionesFinancieras
+                            select new
+                            {
+                                idinfs = INFS.insf_IdInstitucionFinanciera,
+                                descinfs = INFS.insf_DescInstitucionFinanc
+                            };
+            var list = new SelectList(listaINFS, "idinfs", "descinfs");
+            ViewData["INFS"] = list;
+
+            if (response == "error")
+            {
+                ViewBag.MensajeError = "error";
+            }
+            else
+            {
+                ViewBag.MensajeError = "bien";
+            }
+
+            return View("CargaDocumento");
         }
 
     }

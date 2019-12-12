@@ -69,7 +69,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                       
+
                                         <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                             <div class="form-control" data-trigger="fileinput">
                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
@@ -98,8 +98,27 @@
                         </div>
 
                         <br>
-                        <button class="btn btn-primary col-md-offset-5 demo1" type="submit"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Enviar Documento</span></button>
+                        <button class="btn btn-primary col-md-offset-5 demo1" type="submit" id="btnCargarPlanilla" name="btnCargarPlanilla"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Enviar Documento</span></button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="frmOpcionesINFS" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title">Excelente</h4>
+                </div>
+                <div class="modal-body" id="Exito">
+                    ¡La planilla ha sido cargada al Sistema Exitosamente!
+                    ¿Desea cargar una nueva planilla o volver a la tabla principal?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal"> Cargar Nueva Planilla</button>
+                    <a href="index" class="btn btn-success" >Pagina Principal (Inicio)</a>
                 </div>
             </div>
         </div>
@@ -110,80 +129,112 @@
     <!-- Mainly scripts -->
 
     <script src="~/Scripts/jquery-2.1.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
-    <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
+        <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
     <!-- Custom and plugin javascript -->
-    <script src="~/Scripts/app/inspinia.js"></script>
-   
+        <script src="~/Scripts/app/inspinia.js"></script>
+        <script src="~/Scripts/app/General/InstitucionesFinancieras.js"></script>
+
 
     <!-- Jasny -->
 
-    <script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
+        <script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
     <!-- DROPZONE -->
 
-    <script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
+        <script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
     <!-- CodeMirror -->
-    <script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
-    <script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
+        <script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
+        <script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
 
-    <script>
 
-    $(document).ready(function () {
+        @section Scripts {
+            @Scripts.Render("~/plugins/izitoast")
+        }
 
-        $('.demo1').click(function(){
-            swal({
-                title: "Carga en Proceso",
-                text: "Su archivo se esta cargando al sistema. Favor esperar pacientemente. Cuando se finalice la carga, sera redirigido a la pagina principal."
+
+        @section Styles {
+            @Styles.Render("~/Content/plugins/izitoast/iziToast")
+
+        }
+
+
+    if (ViewBag.MensajeError == "bien")
+    {
+        <script type="text/javascript">
+            $('#frmOpcionesINFS').modal();
+        </script>
+    }
+    else if (ViewBag.MensajeError == "error")
+    {
+        <script type="text/javascript">
+        iziToast.error({
+            title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+        });
+        </script>
+    }
+
+
+    @*  <script>
+
+        $(document).ready(function () {
+
+            $('.demo1').click(function(){
+                swal({
+                    title: "Carga en Proceso",
+                    text: "Su archivo se esta cargando al sistema. Favor esperar pacientemente. Cuando se finalice la carga, sera redirigido a la pagina principal."
+                });
             });
-        });
 
-        $('.demo2').click(function(){
-            swal({
-                title: "Good job!",
-                text: "You clicked the button!",
-                type: "success"
+            $('.demo2').click(function(){
+                swal({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    type: "success"
+                });
             });
-        });
 
-        $('.demo3').click(function () {
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }, function () {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            $('.demo3').click(function () {
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                }, function () {
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                });
             });
+
+            $('.demo4').click(function () {
+                swal({
+                            title: "Are you sure?",
+                            text: "Your will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Yes, delete it!",
+                            cancelButtonText: "No, cancel plx!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                            } else {
+                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                            }
+                        });
+            });
+
+
         });
 
-        $('.demo4').click(function () {
-            swal({
-                        title: "Are you sure?",
-                        text: "Your will not be able to recover this imaginary file!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Yes, delete it!",
-                        cancelButtonText: "No, cancel plx!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                        } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                        }
-                    });
-        });
+        </script>*@
 
-
-    });
-
-    </script>
 
 }
 

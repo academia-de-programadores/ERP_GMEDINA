@@ -70,16 +70,15 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Create(tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
-            #region declaracion de variables
+            //Declaracion de variables
             //Auditoria
             tbAuxilioDeCesantias.aces_UsuarioCrea = 1;
             tbAuxilioDeCesantias.aces_FechaCrea = DateTime.Now;
             tbAuxilioDeCesantias.aces_Activo = true;
-
             string response = String.Empty;
             IEnumerable<object> listAuxCesantias = null;
             string MensajeError = "";
-            #endregion
+            
 
             if (ModelState.IsValid)
             {
