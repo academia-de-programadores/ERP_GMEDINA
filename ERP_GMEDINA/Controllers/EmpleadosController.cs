@@ -116,40 +116,44 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
                 Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
 
-                ExcelWorksheet ws = Ep.Workbook.Worksheets.Add("DDL");
+                //ExcelWorksheet ws = Ep.Workbook.Worksheets.Add("DDL");
+                //ws.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
+                //foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
+                //{
 
-                //var val = ws.DataValidations.AddListValidation("A1"); 
-                //val.Formula.Values.Add("Here we have to add long text");
-                //val.Formula.Values.Add("All list values combined have to have more then 255 chars");
-                //val.Formula.Values.Add("more text 1 more text more text more text"); 
-                //val.Formula.Values.Add("more text 2 more text more text more text"); 
-
-                ws.Cells["B1"].Value = "Here we have to add long text";
-                ws.Cells["B2"].Value = "All list values combined have to have more then 255 chars";
-                ws.Cells["B3"].Value = "more text 1 more text more text more text";
-                ws.Cells["B4"].Value = "more text 2 more text more text more text";
-                ws.Cells["B5"].Value = "more text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore";
-
-                var val = ws.DataValidations.AddListValidation("L2");
-                val.Formula.ExcelFormula = "B1:B5";
-
-               
+                //ws.Cells["B1"].Value = "Here we have to add long text";
+                //ws.Cells["B2"].Value = "All list values combined have to have more then 255 chars";
+                //ws.Cells["B3"].Value = "more text 1 more text more text more text";
+                //ws.Cells["B4"].Value = "more text 2 more text more text more text";
+                //ws.Cells["B5"].Value = "more text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore text 2 more text more text more textmore";
 
 
-                var Row = Sheet.DataValidations.AddListValidation("L2");
+                //}
+                var lol = db.tbCargos
+                    .Select(tabla=>tabla.car_Descripcion)
+                    .ToArray();
+
+                Sheet.Cells["O1"].LoadFromCollection<string>(lol.ToList<string>());
+                var val = Sheet.DataValidations.AddListValidation("L2");
+                val.Formula.ExcelFormula = "$O$1:$O$"+lol.Length;
+                Sheet.Column(15).Hidden = true;
+                Sheet.Cells.AutoFitColumns(8.43, 100);
+
+
+                //var Row = Sheet.DataValidations.AddListValidation("L2");
                 //for (int index = 1; index <= item.Cargo.Count; index++)
                 //{
                 //    Sheet.Cells[index, 1].Value = item.Cargo[index - 1].id;
                 //}
-                foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
-                {
-                    Row.Formula.Values.Add("Hola");
-                    //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
+                //foreach (UDP_RRHH_tbCargos_tbEmpleados_Select_Result i in item.Cargo)
+                //{
+                //    Row.Formula.Values.Add("Hola");
+                //    //Sheet.Cells[string.Format("L{1}", row)].Value = item.Cargo(i);
 
 
 
 
-                }
+                //}
 
                 //foreach (tbCargos i in item.Cargo)
                 //{

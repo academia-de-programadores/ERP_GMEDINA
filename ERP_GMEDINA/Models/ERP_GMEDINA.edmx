@@ -9412,26 +9412,26 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Razoninactivo" Mode="In" Type="String" />
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result)">
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_descripcion" Mode="In" Type="String" />
             <Parameter Name="area_Descripcion" Mode="In" Type="String" />
             <Parameter Name="area_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechacrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbAreas_tbEmpleados_Select" ReturnType="Collection(String)" />
-          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbAreas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
@@ -9440,71 +9440,71 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="area_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="area_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCargos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCargos_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCargos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result)">
             <Parameter Name="car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="car_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCargos_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCargos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Restore_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbCargos_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_tbEmpleados_Select_Result)" />
-          <FunctionImport Name="UDP_RRHH_tbCargos_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCargos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result)">
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="car_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="car_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCompetencias_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCompetencias_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Delete_Result)">
             <Parameter Name="comp_Id" Mode="In" Type="Int32" />
             <Parameter Name="comp_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="comp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="comp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCompetencias_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCompetencias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Insert_Result)">
             <Parameter Name="comp_Descripcion" Mode="In" Type="String" />
             <Parameter Name="comp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="comp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCompetencias_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCompetencias_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Restore_Result)">
             <Parameter Name="comp_Id" Mode="In" Type="Int32" />
             <Parameter Name="comp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="comp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbCompetencias_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbCompetencias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Update_Result)">
             <Parameter Name="comp_Id" Mode="In" Type="Int32" />
             <Parameter Name="comp_Descripcion" Mode="In" Type="String" />
             <Parameter Name="comp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="comp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Delete" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Delete_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Insert" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Insert_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Restore_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Usuariomodifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_Fechamodifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" ReturnType="Collection(String)" />
-          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
@@ -9512,18 +9512,18 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Insert_Result)">
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Restore_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
@@ -9531,7 +9531,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
@@ -9563,57 +9563,57 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result)">
             <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Restore_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbFasesReclutamiento_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_Descripcion" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Delete_Result)">
             <Parameter Name="habi_id" Mode="In" Type="Int32" />
             <Parameter Name="habi_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Insert_Result)">
             <Parameter Name="habi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Restore_Result)">
             <Parameter Name="habi_id" Mode="In" Type="Int32" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidades_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHabilidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Update_Result)">
             <Parameter Name="habi_Id" Mode="In" Type="Int32" />
             <Parameter Name="habi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="habi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Delete_Result)">
             <Parameter Name="hamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_Fecha" Mode="In" Type="DateTime" />
@@ -9621,18 +9621,18 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hamo_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAmonestaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Restore_Result)">
             <Parameter Name="hamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="hamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result)">
             <Parameter Name="aude_Id" Mode="In" Type="Int32" />
             <Parameter Name="aude_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="aude_Descripcion" Mode="In" Type="String" />
             <Parameter Name="aude_FechaAudiencia" Mode="In" Type="DateTime" />
@@ -9641,7 +9641,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="aude_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="aude_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result)">
             <Parameter Name="aude_Id" Mode="In" Type="Int32" />
             <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
@@ -9652,25 +9652,25 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Delete_Result)">
             <Parameter Name="hcon_Id" Mode="In" Type="Int32" />
             <Parameter Name="hcon_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hcon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hcon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Insert_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="hcon_FechaContratado" Mode="In" Type="DateTime" />
             <Parameter Name="hcon_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hcon_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Restore_Result)">
             <Parameter Name="hcon_Id" Mode="In" Type="Int32" />
             <Parameter Name="hcon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hcon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialContrataciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Update_Result)">
             <Parameter Name="hcon_Id" Mode="In" Type="Int32" />
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
@@ -9678,13 +9678,13 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hcon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hcon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Delete_Result)">
             <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
             <Parameter Name="hinc_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Insert_Result)">
             <Parameter Name="Emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
             <Parameter Name="hinc_Dias" Mode="In" Type="Int32" />
@@ -9696,18 +9696,18 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hinc_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result)">
             <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
             <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Delete" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Delete_Result)">
             <Parameter Name="hper_Id" Mode="In" Type="Int32" />
             <Parameter Name="hper_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="hper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result)">
             <Parameter Name="hper_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -9722,13 +9722,13 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Delete_Result)">
             <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
@@ -9737,18 +9737,18 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Restore_Result)">
             <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result)">
             <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
             <Parameter Name="hvac_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="hvac_FechaFin" Mode="In" Type="DateTime" />
@@ -9757,18 +9757,18 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hvac_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result)">
             <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
             <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Delete_Result)">
             <Parameter Name="hor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHorarios_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Insert_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="hor_HoraInicio" Mode="In" Type="Time" />
@@ -9777,13 +9777,13 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Restore_Result)">
             <Parameter Name="hor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result)">
             <Parameter Name="hor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="hor_HoraInicio" Mode="In" Type="Time" />
@@ -9792,35 +9792,35 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbIdiomas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result)">
             <Parameter Name="idi_Id" Mode="In" Type="Int32" />
             <Parameter Name="idi_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbIdiomas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result)">
             <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="idi_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="idi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbIdiomas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Restore_Result)">
             <Parameter Name="idi_Id" Mode="In" Type="Int32" />
             <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbIdiomas_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbIdiomas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result)">
             <Parameter Name="idi_Id" Mode="In" Type="Int32" />
             <Parameter Name="idi_Descripcion" Mode="In" Type="String" />
             <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Delete" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="jor_Estado" Mode="In" Type="Boolean" />
@@ -9828,98 +9828,98 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Restore" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Restore_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_tbEmpleados_Select" ReturnType="Collection(String)" />
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbJornadas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Delete_Result)">
             <Parameter Name="nac_id" Mode="In" Type="Int32" />
             <Parameter Name="nac_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Insert_Result)">
             <Parameter Name="nac_Descripcion" Mode="In" Type="String" />
             <Parameter Name="nac_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="nac_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Restore_Result)">
             <Parameter Name="nac_id" Mode="In" Type="Int32" />
             <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" ReturnType="Collection(String)" />
-          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result)" />
+          <FunctionImport Name="UDP_RRHH_tbNacionalidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Update_Result)">
             <Parameter Name="nac_Id" Mode="In" Type="Int32" />
             <Parameter Name="nac_Descripcion" Mode="In" Type="String" />
             <Parameter Name="nac_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="nac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbPermisos_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbPermisos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPermisos_Update_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRazonSalida_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRazonSalida_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalida_Update_Result)">
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="rsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Delete_Result)">
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="rsal_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Insert_Result)">
             <Parameter Name="rsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="rsal_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="rsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRazonSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Restore_Result)">
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="rsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="rsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Delete_Result)">
             <Parameter Name="resp_id" Mode="In" Type="Int32" />
             <Parameter Name="resp_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="resp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="resp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Insert_Result)">
             <Parameter Name="resp_Descripcion" Mode="In" Type="String" />
             <Parameter Name="resp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="resp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Restore_Result)">
             <Parameter Name="resp_id" Mode="In" Type="Int32" />
             <Parameter Name="resp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="resp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspeciales_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Update_Result)">
             <Parameter Name="resp_Id" Mode="In" Type="Int32" />
             <Parameter Name="resp_Descripcion" Mode="In" Type="String" />
             <Parameter Name="resp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="resp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Delete_Result)">
             <Parameter Name="req_id" Mode="In" Type="Int32" />
             <Parameter Name="req_razonInactivo" Mode="In" Type="String" />
             <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result)">
             <Parameter Name="req_Experiencia" Mode="In" Type="String" />
             <Parameter Name="req_Sexo" Mode="In" Type="String" />
             <Parameter Name="req_Descripcion" Mode="In" Type="String" />
@@ -9935,12 +9935,12 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="req_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Restore_Result)">
             <Parameter Name="req_id" Mode="In" Type="Int32" />
             <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbRequisiciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result)">
             <Parameter Name="req_Id" Mode="In" Type="Int32" />
             <Parameter Name="req_Experiencia" Mode="In" Type="String" />
             <Parameter Name="req_Sexo" Mode="In" Type="String" />
@@ -9957,13 +9957,13 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="req_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="req_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result)">
             <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="tamo_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result)">
             <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tamo_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tamo_FechaCrea" Mode="In" Type="DateTime" />
@@ -9973,26 +9973,26 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoAmonestaciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result)">
             <Parameter Name="tamo_Id" Mode="In" Type="Int32" />
             <Parameter Name="tamo_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tamo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tamo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoHora_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoHora_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHora_Update_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
             <Parameter Name="tiho_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tiho_Recargo" Mode="In" Type="Int32" />
             <Parameter Name="tiho_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Delete_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
             <Parameter Name="tiho_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tiho_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Insert_Result)">
             <Parameter Name="tiho_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tiho_Recargo" Mode="In" Type="Int32" />
             <Parameter Name="tiho_UsuarioCrea" Mode="In" Type="Int32" />
@@ -10006,46 +10006,46 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
             <Parameter Name="ticn_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Insert_Result)">
             <Parameter Name="ticn_Descripcion" Mode="In" Type="String" />
             <Parameter Name="ticn_Usuariocrea" Mode="In" Type="Int32" />
             <Parameter Name="ticn_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Restore_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
             <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Update_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
             <Parameter Name="ticn_Descripcion" Mode="In" Type="String" />
             <Parameter Name="ticn_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ticn_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMoneda_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoMoneda_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMoneda_Update_Result)">
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
             <Parameter Name="tmon_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Delete_Result)">
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
             <Parameter Name="tmon_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Insert_Result)">
             <Parameter Name="tmon_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tmon_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tmon_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Restore_Result)">
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
             <Parameter Name="tmon_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
@@ -10053,67 +10053,67 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Delete_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Insert_Result)">
             <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tper_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Restore_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Update_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
             <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Delete" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result)">
             <Parameter Name="tsal_id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Insert" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result)">
             <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Restore" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Restore_Result)">
             <Parameter Name="tsal_id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbTipoSalidas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result)">
             <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTitulos_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Delete_Result)">
             <Parameter Name="titu_id" Mode="In" Type="Int32" />
             <Parameter Name="titu_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTitulos_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Insert_Result)">
             <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
             <Parameter Name="titu_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTitulos_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Restore_Result)">
             <Parameter Name="titu_id" Mode="In" Type="Int32" />
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTitulos_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTitulos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result)">
             <Parameter Name="titu_Id" Mode="In" Type="Int32" />
             <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
@@ -10148,6 +10148,330 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbCargos_tbEmpleados_Select_Result">
           <Property Type="String" Name="car_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTitulos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Restore_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoPermisos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoPermisos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoPermisos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoPermisos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoMoneda_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoIncapacidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoHoras_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoHoras_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoHora_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequisiciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalida_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbPermisos_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result">
+          <Property Type="String" Name="nac_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbNacionalidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_tbEmpleados_Select_Result">
+          <Property Type="String" Name="jor_Descripcion" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbIdiomas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialContrataciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialContrataciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialContrataciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialContrataciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHabilidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_tbEmpleados_Select_Result">
+          <Property Type="String" Name="area_Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbAreas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCargos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCompetencias_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCompetencias_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCompetencias_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbCompetencias_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_tbEmpleados_Select_Result">
+          <Property Type="String" Name="depto_Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbDepartamentos_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpresas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbFasesReclutamiento_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbRazonSalidas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11337,14 +11661,62 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImportMapping FunctionImportName="UDP_dbo_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_dbo_tbFasesReclutamiento_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_dbo_tbFasesReclutamiento_SELECT" FunctionName="ERP_GMEDINAModel.Store.UDP_dbo_tbFasesReclutamiento_SELECT" />
           <FunctionImportMapping FunctionImportName="UDP_dbo_tbFasesReclutamiento_UPDATE" FunctionName="ERP_GMEDINAModel.Store.UDP_dbo_tbFasesReclutamiento_UPDATE" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_tbEmpleados_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result">
+                <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_tbEmpleados_Select" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_tbEmpleados_Select_Result">
@@ -11352,19 +11724,97 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_tbEmpleados_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCargos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCargos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCargos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetencias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetencias_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetencias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_tbEmpleados_Select_Result">
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbDepartamentos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbDepartamentos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result">
@@ -11374,79 +11824,481 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpresas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpresas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAmonestaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAmonestaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_tbEmpleados_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_tbEmpleados_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPermisos_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalida_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialContrataciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialContrataciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialContrataciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_tbEmpleados_Select_Result">
+                <ScalarProperty Name="jor_Descripcion" ColumnName="jor_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_tbEmpleados_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_tbEmpleados_Select" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_tbEmpleados_Select_Result">
+                <ScalarProperty Name="nac_Descripcion" ColumnName="nac_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbNacionalidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbNacionalidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbNacionalidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPermisos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPermisos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalida_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalida_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalida_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRazonSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRazonSalidas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRazonSalidas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequisiciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequisiciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequisiciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHora_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHora_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHora_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHora_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHora_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Select">
             <ResultMapping>
@@ -11457,14 +12309,62 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMoneda_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMoneda_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoIncapacidades_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoIncapacidades_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMoneda_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMoneda_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMoneda_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoMonedas_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoMonedas_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result">
@@ -11474,18 +12374,90 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoPermisos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
