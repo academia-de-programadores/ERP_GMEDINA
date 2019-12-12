@@ -226,8 +226,11 @@
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cCatalogoDePlanillas.cs" />
     <Compile Include="Models\cCatalogoIngresos.cs" />
+    <Compile Include="Models\cDecimoCuartoMes.cs" />
+    <Compile Include="Models\cDecimoCuartoMesPagado.cs" />
     <Compile Include="Models\cDecimoCuartoMesRPT.cs" />
     <Compile Include="Models\cDecimoTercerMes.cs" />
+    <Compile Include="Models\cDecimoTercerMesPagado.cs" />
     <Compile Include="Models\cDecimoTercerMesRPT.cs" />
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
@@ -641,6 +644,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDecimoCuartoMes_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDecimoTercerMes_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbDeduccionAFP_Activar_Result.cs">
@@ -1832,6 +1838,8 @@
     <Content Include="Views\AFP\_EditAFP.cshtml" />
     <Content Include="Views\AFP\_DetailsAFP.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
+    <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
+    <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

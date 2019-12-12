@@ -922,7 +922,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDecimoCuartoMes_Insert_Result>("UDP_Plani_tbDecimoCuartoMes_Insert", emp_IdParameter, dtm_DecimoCuartoMontoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbDecimoTercerMes_Insert(Nullable<int> emp_Id, Nullable<decimal> dtm_DecimoTercer)
+        public virtual ObjectResult<UDP_Plani_tbDecimoTercerMes_Insert_Result> UDP_Plani_tbDecimoTercerMes_Insert(Nullable<int> emp_Id, Nullable<decimal> dtm_DecimoTercer)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -932,7 +932,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dtm_DecimoTercer", dtm_DecimoTercer) :
                 new ObjectParameter("dtm_DecimoTercer", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDecimoTercerMes_Insert", emp_IdParameter, dtm_DecimoTercerParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDecimoTercerMes_Insert_Result>("UDP_Plani_tbDecimoTercerMes_Insert", emp_IdParameter, dtm_DecimoTercerParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbDeduccionAFP_Activar_Result> UDP_Plani_tbDeduccionAFP_Activar(Nullable<int> dafp_Id, Nullable<int> dafp_UsuarioModifica, Nullable<System.DateTime> dafp_FechaModifica)
