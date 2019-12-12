@@ -119,13 +119,13 @@ namespace ERP_GMEDINA.Controllers
                 var lol = db.tbCargos
                     .Select(tabla=>tabla.car_Descripcion)
                     .ToArray();
-
                 Sheet.Cells["MA1"].LoadFromCollection<string>(lol.ToList<string>());
                 var val = Sheet.DataValidations.AddListValidation("L2");
                 val.Formula.ExcelFormula = "$MA$1:$MA$"+lol.Length;
                 Sheet.Column(339).Style.Font.Color.SetColor(System.Drawing.Color.White);
-                Sheet.Column(15).Hidden = true;
-                Sheet.Cells.AutoFitColumns(8.43, 100);
+                //Sheet.Column(15).Hidden = true;
+                //Sheet.Cells.AutoFitColumns(8.43, 100);
+
                 //agregar parte de :"FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO"
                 Sheet.Cells[string.Format("M{0}", row)].Value = item.area_Id;
                 Sheet.Cells[string.Format("N{0}", row)].Value = item.depto_Id;
