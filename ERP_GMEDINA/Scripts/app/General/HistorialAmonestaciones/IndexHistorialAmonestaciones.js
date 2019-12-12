@@ -123,6 +123,8 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);

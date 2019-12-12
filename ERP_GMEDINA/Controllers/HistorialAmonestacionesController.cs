@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id).ToList();
+                    lista = db.V_HistorialAmonestacion.Where(x => x.emp_Id == id && x.hamo_Estado == true).ToList();
                 }
                 catch
                 {
@@ -62,34 +62,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult llenarDropDowlist()
-        {
-            var TipoAmonestacion = new List<object> { };
-            using(db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    TipoAmonestacion.Add(new
-                    {
-                        Id = 0,
-                        Descripcion = "**Seleccione una opción**"
-                    });
-                    TipoAmonestacion.AddRange(db.tbTipoAmonestaciones
-                        .Select(tabla => new { id = tabla.tamo_Id, Descripcion = tabla.tamo_Descripcion })
-                        .ToList());
-                       
-                }
-                catch
-                {
-                    return Json("-2", 0);
-                }
-            }
-            var result = new Dictionary<string, object>();
-            result.Add("TipoAmonestacion", TipoAmonestacion);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-
+       
 
         // GET: HistorialAmonestaciones/Details/5
         //Modal de Detalle 
