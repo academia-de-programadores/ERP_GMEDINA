@@ -9,20 +9,16 @@
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
-        if (index.hamo_Estado == 1) {
-            
             div = div +
                     '<tbody>' +
                     '<tr>' +
                     '<td>' + index.tamo_Descripcion + '</td>' +
                     '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
                     '<td>' + index.hamo_Observacion + '</td>' +
-                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + this + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
+                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
                     '</tr>' +
                     '</tbody>'
             '</table>'
-        }
-         
     });
     return div + '</div></div>';
 }
@@ -107,7 +103,6 @@ function llamarmodaldetalles() {
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
-    debugger
     data = serializar(data);
     if (data != null) {
         data = JSON.stringify({ tbHistorialAmonestaciones: data });
