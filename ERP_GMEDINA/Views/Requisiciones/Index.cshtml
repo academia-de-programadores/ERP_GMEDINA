@@ -29,6 +29,7 @@
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
+                            <th></th>
                             <th>@Html.DisplayNameFor(model => model.req_Experiencia)</th>
                             <th>@Html.DisplayNameFor(model => model.req_Sexo)</th>
                             <th>@Html.DisplayNameFor(model => model.req_Descripcion)</th>
@@ -41,31 +42,9 @@
                             <th>@Html.DisplayNameFor(model => model.req_Vacantes)</th>
                             <th>@Html.DisplayNameFor(model => model.req_FechaRequisicion)</th>
                             <th>@Html.DisplayNameFor(model => model.req_FechaContratacion)</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.req_Id">
-                            <td>@Html.DisplayFor(modelItem => item.req_Experiencia)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_Sexo)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_Descripcion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_EdadMinima)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_EdadMaxima)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_EstadoCivil)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_EducacionSuperior)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_Permanente)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_Duracion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_Vacantes)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_FechaRequisicion)</td>
-                            <td>@Html.DisplayFor(modelItem => item.req_FechaContratacion)</td>
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.req_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.req_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
                     </tbody>                       
                   </table>
                 </div>

@@ -63,6 +63,56 @@ namespace ERP_GMEDINA.Controllers
             return View(tbRequisiciones);
         }
 
+        public JsonResult llenarTabla()
+        {
+            List<tbRequisiciones> tbRequisiciones =
+                new List<Models.tbRequisiciones> { };
+            foreach (tbRequisiciones x in db.tbRequisiciones.ToList().Where(x => x.req_Estado == true))
+            {
+                tbRequisiciones.Add(new tbRequisiciones
+                {
+                    req_Id = x.req_Id,
+                    req_Experiencia = x.req_Experiencia,
+                    req_Sexo = x.req_Sexo,
+                    req_Descripcion = x.req_Descripcion,
+                    req_EdadMinima = x.req_EdadMinima,
+                    req_EdadMaxima = x.req_EdadMaxima,
+                    req_EstadoCivil = x.req_EstadoCivil,
+                    req_EducacionSuperior = x.req_EducacionSuperior,
+                    req_Permanente = x.req_Permanente,
+                    req_Duracion = x.req_Duracion,
+                    req_Vacantes = x.req_Vacantes,
+                    req_FechaRequisicion = x.req_FechaRequisicion,
+                    req_FechaContratacion = x.req_FechaContratacion
+                });
+            }
+            return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            //List<tbHorarios> lista = new List<tbHorarios> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    List<object> lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
+                        .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList<object>();
+                    foreach(object x in lista)
+                    {
+                        
+                    }
+                    return Json(lista, JsonRequestBehavior.AllowGet);
+                }
+                catch()
+                {
+                }
+            }
+            return Json("-2", JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Requisiciones/Edit/5
         public ActionResult Edit(int? id)
         {

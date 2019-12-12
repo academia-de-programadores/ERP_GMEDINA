@@ -552,6 +552,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
+            //dataTables.buttons.min.js
 
             bundles.Add(new StyleBundle("~/Content/app/General").Include(
                  "~/Content/app/General/catalogoPlanillas.css"));
@@ -583,6 +584,11 @@ namespace ERP_GMEDINA
             //App/Jornadas
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
                 "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
+
+            //~/Scripts/app/general/Requisiciones
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
 
 
 

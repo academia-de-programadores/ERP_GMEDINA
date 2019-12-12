@@ -35,7 +35,7 @@ $(document).ready(function () {
             columnas.push({
                 data: null,
                 orderable: false,
-                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                defaultContent: "<div>" +
                                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
                                 "</div>"
@@ -59,7 +59,9 @@ $(document).ready(function () {
     tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         pageLength: 25,
-        dom: '<"html5buttons"B>lTfgitp',
+        "scrollX": true,
+        "autoWidth": false,
+        dom: 'Bfrtip',
         buttons: [
             {
                 extend: 'copy',
@@ -108,6 +110,7 @@ $(document).ready(function () {
         //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes
         columns: columnas,
         order: [[col, 'asc']],
+        
     });
 });
 

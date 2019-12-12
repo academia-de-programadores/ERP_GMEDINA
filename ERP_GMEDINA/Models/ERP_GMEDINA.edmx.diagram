@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="10">
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="69">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="181.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="216.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="165.25" />
@@ -92,7 +92,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulos" Width="1.5" PointX="3" PointY="99.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulosPersona" Width="1.5" PointX="7.5" PointY="139.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTitulosRequisicion" Width="1.5" PointX="8.25" PointY="193.125" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_AFP_RPT" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_AFP_RPT" Width="1.5" PointX="0.5" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_BonosColaborador" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDeIngresos" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDePlanillasConIngresosYDeducciones" Width="1.5" PointX="4.75" PointY="4.75" />

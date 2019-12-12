@@ -1,5 +1,61 @@
 ﻿var id = 0;
 //Funciones GET
+function tablaDetalles(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/" + id);
+}
+function tablaEditar(btn) {
+    var tr = $(btn).closest("tr");
+    var row = tabla.row(tr);
+    id = row.data().Id;
+    $(location).attr('href', "/Areas/Edit/" + id);
+}
+function format(obj) {
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5></div><div class="ibox-content"><div class="row">';
+    obj.forEach(function (index, value) {
+        div = div +
+            '<div class="col-md-3">' +
+                '<div class="panel panel-default">' +
+                  '<div class="panel-heading">' +
+                     '<h5>' + index.hor_descripcion + '</h5>' +
+                '</div>' +
+                '<div class="panel-body">' + 'Hora Inicio: '
+                    + index.hor_HoraInicio.toString() + '<br> Hora Fin: ' +
+                    index.hor_HoraFin + '</div>' +
+                '</div>' +
+            '</div>'
+    });
+    return div + '</div></div></div>';
+}
+
+$('#IndexTable tbody').on('click', 'td.details-control', function () {
+    var tr = $(this).closest('tr');
+    var row = tabla.row(tr);
+
+    if (row.child.isShown()) {
+        row.child.hide();
+        tr.removeClass('shown');
+    }
+    else {
+        id = row.data().ID;
+        hola = row.data().hola;
+        tr.addClass('loading');
+        _ajax({ id: parseInt(id) },
+            '/Requisiciones/ChildRowData',
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    row.child(format(obj)).show();
+                    tr.removeClass('loading');
+                    tr.addClass('shown');
+                }
+            });
+    }
+
+});
+
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
@@ -66,19 +122,19 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 tabla.row.add({
-                    id: value.req_Id,
+                    ID: value.req_Id,
                     Experiencia: value.req_Experiencia,
                     Sexo: value.req_Sexo,
                     Descripcion: value.req_Descripcion,
                     EdadMinima: value.req_EdadMinima,
                     EdadMaxima: value.req_EdadMaxima,
                     EstadoCivil: value.req_EstadoCivil,
-                    EducacionSuperior: value.req_EducacionSuperior,
-                    Permanente: value.req_Permanente,
+                    EducacionSuperior: BinToCheckBox(value.req_EducacionSuperior),
+                    Permanente: BinToCheckBox(value.req_Permanente),
                     Duracion: value.req_Duracion,
                     Vacantes: value.req_Vacantes,
-                    FechaRequisicion: value.req_FechaRequisicion,
-                    FechaContratacion: value.req_FechaContratacion
+                    FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),
+                    FechaContratacion: FechaFormatoSimple(value.req_FechaContratacion)
                 });
             });
             tabla.draw();

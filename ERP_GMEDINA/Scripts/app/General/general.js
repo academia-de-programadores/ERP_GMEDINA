@@ -38,6 +38,7 @@ function serializar(data) {
         return null;
     }
 }
+
 function FechaFormato(pFecha) {
     if (pFecha != null && pFecha != undefined) {
         var fechaString = pFecha.substr(6);
@@ -53,6 +54,32 @@ function FechaFormato(pFecha) {
     }
     return '';
 }
+
+function BinToCheckBox(BinVal)
+{
+    if(BinVal == true)
+        return '<input type="checkbox" checked disabled>'
+    else if(BinVal == false)
+        return '<input type="checkbox" disabled>'
+}
+
+function FechaFormatoSimple(pFecha) {
+    if (pFecha != null && pFecha != undefined) {
+        var fechaString = pFecha.substr(6);
+        var fechaActual = new Date(parseInt(fechaString));
+        var mes = fechaActual.getMonth() + 1;
+        var dia = pad2(fechaActual.getDate());
+        var anio = fechaActual.getFullYear();
+        var hora = pad2(fechaActual.getHours());
+        var minutos = pad2(fechaActual.getMinutes());
+        var segundos = pad2(fechaActual.getSeconds().toString());
+        var FechaFinal = dia + "/" + mes + "/" + anio;
+        return FechaFinal;
+    }
+    return '';
+}
+
+
 function pad2(number) {
     return (number < 10 ? '0' : '') + number
 }

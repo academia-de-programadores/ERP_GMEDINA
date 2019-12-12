@@ -216,6 +216,7 @@
     <Compile Include="Models\cPersonas.cs" />
     <Compile Include="Models\cRazonSalidas.cs" />
     <Compile Include="Models\cRequerimientosEspeciales.cs" />
+    <Compile Include="Models\cRequisiciones.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
@@ -239,6 +240,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ExcelEmpleados.cs" />
+    <Compile Include="Models\RequisicionesData.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1420,6 +1422,8 @@
     <Content Include="Scripts\plugins\d3\d3.min.js" />
     <Content Include="Scripts\plugins\datamaps\datamaps.all.min.js" />
     <Content Include="Scripts\plugins\datapicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\plugins\dataTables\colvis.min.js" />
+    <Content Include="Scripts\plugins\dataTables\dataTables.buttons.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
