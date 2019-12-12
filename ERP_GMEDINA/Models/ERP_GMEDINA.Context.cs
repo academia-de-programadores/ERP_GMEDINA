@@ -1634,7 +1634,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbSueldos_Restore", sue_IdParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbSueldos_Update_Result> UDP_RRHH_tbSueldos_Update(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbSueldos_Update_Result> UDP_RRHH_tbSueldos_Update(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
                 new ObjectParameter("sue_Id", sue_Id) :
@@ -1652,10 +1652,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("sue_Cantidad", sue_Cantidad) :
                 new ObjectParameter("sue_Cantidad", typeof(decimal));
     
-            var sue_SueldoAnteriorParameter = sue_SueldoAnterior.HasValue ?
-                new ObjectParameter("sue_SueldoAnterior", sue_SueldoAnterior) :
-                new ObjectParameter("sue_SueldoAnterior", typeof(int));
-    
             var sue_UsuarioModificaParameter = sue_UsuarioModifica.HasValue ?
                 new ObjectParameter("sue_UsuarioModifica", sue_UsuarioModifica) :
                 new ObjectParameter("sue_UsuarioModifica", typeof(int));
@@ -1664,7 +1660,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("sue_FechaModifica", sue_FechaModifica) :
                 new ObjectParameter("sue_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Update_Result>("UDP_RRHH_tbSueldos_Update", sue_IdParameter, emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_SueldoAnteriorParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Update_Result>("UDP_RRHH_tbSueldos_Update", sue_IdParameter, emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbTipoAmonestaciones_Delete_Result> UDP_RRHH_tbTipoAmonestaciones_Delete(Nullable<int> tamo_Id, string tamo_razon_Inactivo, Nullable<int> tamo_UsuarioModifica, Nullable<System.DateTime> tamo_FechaModifica)

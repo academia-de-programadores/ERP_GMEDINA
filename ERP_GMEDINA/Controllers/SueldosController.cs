@@ -22,6 +22,7 @@ namespace ERP_GMEDINA.Controllers
             return View(tbSueldos);
         }
 
+        [HttpPost]
         public ActionResult llenarTabla()
         {
             try
@@ -43,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
                             Cargo = t.Cargo,
                             Usuario_Nombre = t.Usuario_Nombre,
                             Usuario_Crea = t.Usuario_Crea,
-                            Usuario_Fecha = t.Usuario_Fecha,
+                            Fecha_Crea = t.Fecha_Crea,
                             Usuario_Modifica = t.Usuario_Modifica,
                             Fecha_Modifica = t.Fecha_Modifica
 
@@ -112,16 +113,11 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: /Sueldos/Create
 
-        public ActionResult Create()
-        {
-            List<tbSueldos> sueldos = new List<tbSueldos> { };
-            ViewBag.sue_Id = new SelectList(sueldos, "sue_Id", "sue_Cantidad");
-            return View();
-        }
+
 
 
         [HttpPost]
-        public ActionResult Create(tbSueldos tbsueldos, tbEmpleados tbempleados)
+        public ActionResult Create(V_Sueldos vsueldos)
         {
             string msj = "";
             using (db = new ERP_GMEDINAEntities())
@@ -130,10 +126,10 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.emp_Id,
-                                                            tbsueldos.tmon_Id,
-                                                            tbsueldos.sue_Cantidad,
-                                                            tbsueldos.sue_SueldoAnterior,
+                    var list = db.UDP_RRHH_tbSueldos_Insert(vsueldos.Id_Empleado,
+                                                            vsueldos.Id_Amonestacion,
+                                                            vsueldos.Sueldo,
+                                                            vsueldos.Sueldo_Anterior,
                                                             usuario.usu_Id,
                                                             DateTime.Now);
 
@@ -152,7 +148,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-		// GET: /Sueldos//Edit/5
+        // GET: /Sueldos//Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -160,43 +157,58 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            tbSueldos tbSueldos = null;
-            using (db = new ERP_GMEDINAEntities())
+            V_Sueldos VSueldos = null;
+
+            try
             {
-                List <tbEmpleados> tbempleados = null;
-            
-                try
-                {
-                    tbSueldos = db.tbSueldos.Find(id);
-                    tbempleados = db.tbEmpleados.ToList();
-                    ViewBag.emp_Id = new SelectList(tbempleados, "emp_Id");
-                 
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-                 }          
-          if (tbSueldos == null)
+                VSueldos = db.V_Sueldos.Find(id);
+                if (VSueldos == null || !VSueldos.Estado)
                 {
                     return HttpNotFound();
-
                 }
-                return View(tbSueldos);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var sueldos = new V_Sueldos
+            {
+                Id = VSueldos.Id,
+                Id_Empleado = VSueldos.Id_Empleado,
+                Id_Amonestacion = VSueldos.Id_Amonestacion,
+                Identidad = VSueldos.Identidad,
+                Nombre = VSueldos.Nombre,
+                Sueldo = VSueldos.Sueldo,
+                Tipo_Moneda = VSueldos.Tipo_Moneda,
+                Cuenta = VSueldos.Cuenta,
+                Sueldo_Anterior = VSueldos.Sueldo_Anterior,
+                Area = VSueldos.Area,
+                Cargo = VSueldos.Cargo,
+                Usuario_Nombre = VSueldos.Usuario_Nombre,
+                Usuario_Crea = VSueldos.Usuario_Crea,
+                Fecha_Crea = VSueldos.Fecha_Crea,
+                Usuario_Modifica = VSueldos.Usuario_Modifica,
+                Fecha_Modifica = VSueldos.Fecha_Modifica,
+                Estado = VSueldos.Estado,
+                RazonInactivo = VSueldos.RazonInactivo
+            };
+            return Json(sueldos, JsonRequestBehavior.AllowGet);
         }
-        // POST: /Sueldos/Edit/5
+          
         [HttpPost]
-        public ActionResult Edit(tbSueldos tbSueldos)
+        public JsonResult Edit(V_Sueldos vSueldos)
         {
             string msj = "";
-            if (tbSueldos.sue_Id != 0 && tbSueldos.emp_Id != 0 && tbSueldos.tmon_Id != 0 && tbSueldos.sue_Cantidad !=0  && tbSueldos.sue_SueldoAnterior !=0)            
+            if (vSueldos.Id != 0 && vSueldos.Id_Empleado != 0 && vSueldos.Id_Amonestacion != 0 && vSueldos.Sueldo !=0  && vSueldos.Sueldo_Anterior !=0)            
 			{
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Update(id, tbSueldos.emp_Id, tbSueldos.tmon_Id, tbSueldos.sue_Cantidad, tbSueldos.sue_SueldoAnterior, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbSueldos_Update_Result item in list)
+                    var list = db.UDP_RRHH_tbSueldos_Insert(vSueldos.Id_Empleado, vSueldos.Id_Amonestacion, vSueldos.Sueldo, vSueldos.Sueldo_Anterior, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }

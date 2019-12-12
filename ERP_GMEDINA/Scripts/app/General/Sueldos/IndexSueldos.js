@@ -1,4 +1,24 @@
-﻿function tablaDetalles(btn) {
+﻿$(document).ready(function () {
+    llenarTabla();
+});
+var id = 0;
+
+function tablaEditar(ID) {
+    id = ID;
+    _ajax(null,
+        '/Sueldos/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#FormEditar").find("#Sueldo").val(obj.Sueldo);
+                $("#ModalEditar").modal('show');
+            }
+        });
+}
+
+
+
+function tablaDetalles(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
@@ -8,7 +28,7 @@ function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().id;
-    $(location).attr('href', "/Sueldos/Edit/" + id);
+    $(location).attr('href',"/Sueldos/Edit/" + id);
 }
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Sueldos</h5></div><div class="ibox-content"><div class="row">';
@@ -52,7 +72,7 @@ function llenarTabla() {
                    Cargo: value.Cargo,
                    Usuario_Nombre : value.Usuario_Nombre,
                    Usuario_Crea : value.Usuario_Crea,
-                   Usuario_Fecha : value.Usuario_Fecha,
+                   Fecha_Crea: value.Fecha_Crea,
                    Usuario_Modifica : value.Usuario_Modifica,
                    Fecha_Modifica: value.Fecha_Modifica
                });
@@ -86,18 +106,62 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
 
 });
-
-
 function CallEditar() {
-    var modalnuevo = $("#ModalEditar");
-    modalnuevo.modal('show');
+    var modaleditar = $("#ModalEditar");
+    modaleditar.modal('show');
 }
+$("#btnEditar").click(function () {
+    _ajax(null,
+        '/Sueldos/Edit'+ id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+                $("#FormEditar").find("#Sueldo").val(obj.Sueldo);
+
+            }
+        });
+});
+
+
 
 
 function CallDetalles() {
     var modalnuevo = $("#ModalDetalles");
     modalnuevo.modal('show');
+
 }
+
+
+
+
+$("#btnActualizar").click(function () {
+    var data = $("#FormEditar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.Id = id;
+        data = JSON.stringify({ V_Sueldos: data });
+        _ajax(data,
+            '/Sueldos/Edit',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
+
+
+
 
 
 

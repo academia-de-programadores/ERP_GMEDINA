@@ -25,8 +25,12 @@ namespace ERP_GMEDINA.Models
         public string Cargo { get; set; }
         public string Usuario_Nombre { get; set; }
         public int Usuario_Crea { get; set; }
-        public Nullable<System.DateTime> Usuario_Fecha { get; set; }
         public Nullable<System.DateTime> Usuario_Modifica { get; set; }
         public Nullable<System.DateTime> Fecha_Modifica { get; set; }
+        public int Id_Empleado { get; set; }
+        public int Id_Amonestacion { get; set; }
+        public Nullable<System.DateTime> Fecha_Crea { get; set; }
+        public bool Estado { get; set; }
+        public string RazonInactivo { get; set; }
     }
 }
