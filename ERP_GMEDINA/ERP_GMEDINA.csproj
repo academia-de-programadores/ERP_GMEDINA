@@ -1655,6 +1655,9 @@
     <Content Include="Views\Jornadas\Details.cshtml" />
     <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
+    <Content Include="Views\Jornadas\_Create.cshtml" />
+    <Content Include="Views\Jornadas\_Detalles.cshtml" />
+    <Content Include="Views\Jornadas\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

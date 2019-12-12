@@ -22,7 +22,8 @@
                 <div class="ibox-title">
                     <h5>Listado de tbJornadas</h5>
                     <div class="ibox-tools">
-                       @Html.ActionLink("Registrar tbJornadas", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                       @*@Html.ActionLink("Registrar tbJornadas", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Resgistrar Jornadas"/>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -42,13 +43,17 @@
         </div>
     </div>
  </div>
+
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbJornadas())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 
 @section Scripts {
-  @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/General/Jornadas")
-@Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general")
 }
