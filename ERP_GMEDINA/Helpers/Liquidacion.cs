@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Helpers
                 {
                     fechaInicio = db.tbEmpleados.Where(x => x.emp_Id == idEmpleado).Select(x => x.emp_Fechaingreso).FirstOrDefault();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

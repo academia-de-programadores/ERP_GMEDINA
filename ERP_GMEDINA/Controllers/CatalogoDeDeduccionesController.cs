@@ -238,7 +238,7 @@ namespace PruebaPlanilla.Controllers
                         response = "error";
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
                     response = "error";
                 }

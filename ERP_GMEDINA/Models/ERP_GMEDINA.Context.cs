@@ -3837,15 +3837,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia)
-        {
-            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
-                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
-                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAuxilioDeCesantias_Delete", aces_IdAuxilioCesantiaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Insert_Result> UDP_Plani_tbAuxilioDeCesantias_Insert(Nullable<int> aces_RangoInicioMeses, Nullable<int> aces_RangoFinMeses, Nullable<int> aces_DiasAuxilioCesantia, Nullable<int> aces_UsuarioCrea, Nullable<System.DateTime> aces_FechaCrea, Nullable<bool> aces_Activo)
         {
             var aces_RangoInicioMesesParameter = aces_RangoInicioMeses.HasValue ?
@@ -4047,6 +4038,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Update_Result>("UDP_Plani_tbAuxilioDeCesantias_Update", aces_IdAuxilioCesantiaParameter, aces_RangoInicioMesesParameter, aces_RangoFinMesesParameter, aces_DiasAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Delete_Result1> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia)
+        {
+            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
+                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
+                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Delete_Result1>("UDP_Plani_tbAuxilioDeCesantias_Delete", aces_IdAuxilioCesantiaParameter);
         }
     }
 }

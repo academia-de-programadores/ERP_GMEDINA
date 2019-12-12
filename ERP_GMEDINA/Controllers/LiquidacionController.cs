@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
                     json = new { consulta, anios, meses, dias, salarios };
                     return Json(json, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
             }
@@ -96,7 +96,7 @@ namespace ERP_GMEDINA.Controllers
                         json = result.json;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

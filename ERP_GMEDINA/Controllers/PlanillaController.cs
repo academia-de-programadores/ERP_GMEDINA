@@ -578,7 +578,7 @@ namespace ERP_GMEDINA.Controllers
                                                 }
 
                                             }
-                                            catch (Exception ex)
+                                            catch (Exception)
                                             {
                                                 errores++;
                                             }
@@ -610,7 +610,7 @@ namespace ERP_GMEDINA.Controllers
 
                                     }
                                     //catch por si hubo un error al generar la planilla de un empleado
-                                    catch (Exception ex)
+                                    catch (Exception)
                                     {
                                         // mensaje del error en el registro del colaborador
                                         dt.Rows.Add(empleadoActual.tbPersonas.per_Nombres + ' ' + empleadoActual.tbPersonas.per_Apellidos,
@@ -625,7 +625,7 @@ namespace ERP_GMEDINA.Controllers
                             }
 
                             //catch por si se produjo un error al procesar una sola planilla
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 // SI ALGO FALLA, HACER UN ROLLBACK
                                 dbContextTransaccion.Rollback();
@@ -646,7 +646,7 @@ namespace ERP_GMEDINA.Controllers
                     oSLDocument.ImportDataTable(1, 1, dt, true);
                     oSLDocument.SaveAs(direccion);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     response.Response = "Planilla generada, error al crear documento excel.";
                     response.Encabezado = "Advertencia";
@@ -655,7 +655,7 @@ namespace ERP_GMEDINA.Controllers
 
             }
             // catch por si se produjo un error fatal en el proceso generar planilla
-            catch (Exception ex)
+            catch (Exception)
             {
                 response.Response = "El proceso de generación de planillas falló, contacte al adminstrador.";
                 response.Encabezado = "Error";

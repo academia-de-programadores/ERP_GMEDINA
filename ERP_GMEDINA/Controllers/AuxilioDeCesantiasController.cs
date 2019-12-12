@@ -101,7 +101,6 @@ namespace ERP_GMEDINA.Controllers
                         ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
                         response = "error";
                     }
-
                 }
                 catch (Exception Ex)
                 {
@@ -121,7 +120,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         
-
         // Obtener: Registro de la tabla AuxilioDeCesantias/Edit
         public JsonResult Edit(int? ID)
         {
@@ -133,15 +131,14 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "aces_IdAuxilioCesantia,aces_RangoInicioMeses,aces_RangoFinMeses,aces_DiasAuxilioCesantia,aces_UsuarioCrea,aces_FechaCrea,aces_UsuarioModifica,aces_FechaModifica,aces_Activo")] tbAuxilioDeCesantias tbAuxilioDeCesantias)
         {
-            #region declaracion de variables 
+            //Declaracion de variables 
             //LLENAR DATA DE AUDITORIA
             tbAuxilioDeCesantias.aces_UsuarioModifica = 1;
             tbAuxilioDeCesantias.aces_FechaModifica = DateTime.Now;
             string response = String.Empty;
             IEnumerable<object> listAuxCes = null;
             string MensajeError = "";
-            #endregion
-
+           
             if (ModelState.IsValid)
             {
                 try
@@ -178,17 +175,44 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        
-        // POST: tbAuxilioDeCesantias/Delete/5
-        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    tbAuxilioDeCesantias tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Find(id);
-        //    db.tbAuxilioDeCesantias.Remove(tbAuxilioDeCesantias);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult Inactivar(int ID)
+        {
+            string response = String.Empty;
+            IEnumerable<object> listAuxilioCesantia = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID);
+
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result1 Resultado in listAuxilioCesantia)
+                        MensajeError = Resultado.MensajeError;
+
+
+                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                    response = "bien";
+                }
+                catch (Exception)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
+                    response = "error";
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

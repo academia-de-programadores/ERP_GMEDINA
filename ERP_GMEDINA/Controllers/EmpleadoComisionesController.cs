@@ -213,7 +213,7 @@ namespace ERP_GMEDINA.Controllers
                     }
 
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
                     //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
@@ -270,7 +270,7 @@ namespace ERP_GMEDINA.Controllers
                         response = "error";
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
                     response = "error";
                 }

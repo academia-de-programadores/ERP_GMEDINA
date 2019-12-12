@@ -17212,9 +17212,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(String)">
-          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert_Result)">
             <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
@@ -17289,6 +17286,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="aces_DiasAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result1)">
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -17840,6 +17840,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Delete_Result1">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         </Schema>
@@ -20658,7 +20664,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert_Result">
@@ -20722,6 +20727,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result1">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

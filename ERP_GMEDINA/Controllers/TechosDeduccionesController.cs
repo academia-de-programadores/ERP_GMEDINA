@@ -213,7 +213,7 @@ namespace ERP_GMEDINA.Controllers
                         response = "error";
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
                     response = "error";
                 }
@@ -253,7 +253,7 @@ namespace ERP_GMEDINA.Controllers
                         response = "error";
                     }
                 }
-                catch (Exception Ex)
+                catch (Exception)
                 {
                     response = "error";
                 }

@@ -7,7 +7,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>tbAuxilioDeCesantias</h2>
+        <h2>Auxilio de Cesantias</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
@@ -20,9 +20,8 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de tbAuxilioDeCesantias</h5>
+                    <h5>Listado de Auxilio de Cesantias</h5>
                     <div class="ibox-tools">
-                       @*@Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
                         <input type="button" value="Nuevo" name="btnModalCrear" id="btnModalCrear" class="btn btn-primary btn-xs"/>
                     </div>
                 </div>
@@ -107,19 +106,18 @@
                 <h4 class="modal-title">Edición de datos</h4>
             </div>
             <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
                 <input type="button" class="btn btn-primary" id="btnUpdateAuxCes" value="Aceptar" />
-                <button type="button" class="btn btn-danger" id="btnModalInactivar">Inactivar</button>
+                <button type="button" class="btn btn-danger" id="btnModalEliminar">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="EliminarAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="frmEliminarAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -131,13 +129,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger " id="btnInactivarIngresos">Eliminar</button>
+                <button type="button" class="btn btn-danger " id="btnEliminarAuxCes">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
-
-
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")

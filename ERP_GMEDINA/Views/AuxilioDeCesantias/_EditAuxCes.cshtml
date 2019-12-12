@@ -13,6 +13,7 @@
                 <tbody>
                     <tr>
                         <td>Código Auxilio Cesantia)</td>
+                        @Html.HiddenFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line" } })
                         <td>@Html.EditorFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
                     </tr>
                     <tr>
