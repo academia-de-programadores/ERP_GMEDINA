@@ -12,6 +12,7 @@
                 <div class="ibox-title">
                     <h5>Decimo Cuarto Mes</h5>
                     <div class="ibox-tools" id="boxTools">
+						@Html.ActionLink("Pagados", "IndexPagado", null, new { @class = "btn btn-primary btn-xs", @type = "button" })
                         <input type="button" id="btnFechaEspecifica" value="Fecha Especifica" class="btn btn-primary btn-xs" />
                         <input type="button" id="btnProcesar" value="Procesar Decimo Cuarto Mes" class="btn btn-primary btn-xs" />
                     </div>
@@ -56,18 +57,7 @@
                                     </td>
                                 </tr>
                             }
-                        </tbody>
-                        <tfoot>
-                            <tr role="row">
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.emp_Id)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Nombre)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Apellido)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Cargo)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Planilla)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.Monto)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.CuentaBancaria)</th>
-                            </tr>
-                        </tfoot>
+                        </tbody>        
                     </table>
                 </div>
             </div>

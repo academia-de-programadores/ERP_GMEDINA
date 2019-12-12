@@ -10,9 +10,9 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-//$(document).ready(function () {
-//    console.clear();
-//});
+$(document).ready(function () {
+	console.clear();
+});
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
@@ -57,7 +57,7 @@ $("body").on("click", "#btnProcesar", function () {
         DC.dcm_Monto = row.find("TD").eq(5).html();
         DecimoCuarto.push(DC);
     });
-    console.log(DecimoCuarto);
+
     //Envíe la matriz JSON al controlador con AJAX.
     $.ajax({
         type: "POST",
@@ -74,44 +74,12 @@ $("body").on("click", "#btnProcesar", function () {
         error: function (e) {
             iziToast.error({
                 title: 'Decimo Cuarto Mes',
-                message: "Los registros no se procesaron."
+                message: "No puede procesar dos veces un pago."
             });
         }
     });
 });
 
-$("body").on("click", "#btnProcesarFE", function () {
-    //Recorra las filas de la tabla y cree una matriz JSON.
-    var DecimoCuarto = new Array();
-    $("#tblDecimoCuartoMesFE TBODY TR").each(function () {
-        var row = $(this);
-        var DC = {};
-        DC.emp_Id = row.find("TD").eq(0).html();
-        DC.dtm_Monto = row.find("TD").eq(5).html();
-        DecimoCuarto.push(DC);
-    });
-    
-    //Envíe la matriz JSON al controlador con AJAX.
-    $.ajax({
-        type: "POST",
-        url: "/DecimoCuartoMes/InsertDecimoCuartoMes",
-        data: JSON.stringify(DecimoCuarto),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (r) {
-            iziToast.success({
-                title: 'Decimo Cuarto Mes',
-                message: "Registros procesados !"
-            });
-        },
-        error: function (e) {
-            iziToast.error({
-                title: 'Decimo Cuarto Mes',
-                message: "Los registros no se procesaron."
-            });
-        }
-    });
-});
 
 // MOSTRAR MODAL DE FECHAS
 $(document).on("click", "#btnFechaEspecifica", function () {
