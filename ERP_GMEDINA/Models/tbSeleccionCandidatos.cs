@@ -39,5 +39,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
         public virtual tbRequisiciones tbRequisiciones { get; set; }
+        public virtual tbFasesReclutamiento tbFasesReclutamiento { get; set; }
     }
 }

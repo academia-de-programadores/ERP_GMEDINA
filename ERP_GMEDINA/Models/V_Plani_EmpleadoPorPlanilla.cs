@@ -27,5 +27,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> hip_TotalPagar { get; set; }
         public string cde_DescripcionDeduccion { get; set; }
         public Nullable<decimal> hidp_Total { get; set; }
+        public int hipa_IdHistorialDePago { get; set; }
     }
 }
