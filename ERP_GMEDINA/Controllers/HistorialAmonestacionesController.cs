@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialAmonestaciones
         public ActionResult Index()
         {
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
+            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion"); 
             var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbHistorialAmonestaciones);
         }
@@ -131,37 +131,51 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: HistorialAmonestaciones/Create
-        public ActionResult Create()
+        public JsonResult Create(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
-            ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
-            ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion");
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion");
-            return View();
+            string msj = "";
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Insert(tbHistorialAmonestaciones.emp_Id,
+                                                                            tbHistorialAmonestaciones.tamo_Id,
+                                                                            DateTime.Now,
+                                                                            tbHistorialAmonestaciones.hamo_Observacion,
+                                                                            1,
+                                                                            DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAmonestaciones_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // POST: HistorialAmonestaciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_Observacion,hamo_Estado,hamo_RazonInactivo,hamo_UsuarioCrea,hamo_FechaCrea,hamo_UsuarioModifica,hamo_FechaModifica")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tbHistorialAmonestaciones.Add(tbHistorialAmonestaciones);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
-            ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
-            ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
-            return View(tbHistorialAmonestaciones);
-        }
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_Observacion,hamo_Estado,hamo_RazonInactivo,hamo_UsuarioCrea,hamo_FechaCrea,hamo_UsuarioModifica,hamo_FechaModifica")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tbHistorialAmonestaciones.Add(tbHistorialAmonestaciones);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
+        //    ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
+        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
+        //    ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
+        //    ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
+        //    return View(tbHistorialAmonestaciones);
+        //}
 
         // GET: HistorialAmonestaciones/Edit/5
         //public ActionResult Edit(int? id)
@@ -186,42 +200,67 @@ namespace ERP_GMEDINA.Controllers
         // POST: HistorialAmonestaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_Observacion,hamo_Estado,hamo_RazonInactivo,hamo_UsuarioCrea,hamo_FechaCrea,hamo_UsuarioModifica,hamo_FechaModifica")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbHistorialAmonestaciones).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
-            ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
-            ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
-            ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
-            return View(tbHistorialAmonestaciones);
-        }
+
+        //public ActionResult Edit([Bind(Include = "hamo_Id,emp_Id,tamo_Id,hamo_Fecha,hamo_AmonestacionAnterior,hamo_Observacion,hamo_Estado,hamo_RazonInactivo,hamo_UsuarioCrea,hamo_FechaCrea,hamo_UsuarioModifica,hamo_FechaModifica")] tbHistorialAmonestaciones tbHistorialAmonestaciones)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(tbHistorialAmonestaciones).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.hamo_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioCrea);
+        //    ViewBag.hamo_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialAmonestaciones.hamo_UsuarioModifica);
+        //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialAmonestaciones.emp_Id);
+        //    ViewBag.hamo_AmonestacionAnterior = new SelectList(db.tbHistorialAmonestaciones, "hamo_Id", "hamo_Observacion", tbHistorialAmonestaciones.hamo_AmonestacionAnterior);
+        //    ViewBag.tamo_Id = new SelectList(db.tbTipoAmonestaciones, "tamo_Id", "tamo_Descripcion", tbHistorialAmonestaciones.tamo_Id);
+        //    return View(tbHistorialAmonestaciones);
+        //}
 
         // GET: HistorialAmonestaciones/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
-            if (tbHistorialAmonestaciones == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbHistorialAmonestaciones);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
+        //    if (tbHistorialAmonestaciones == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tbHistorialAmonestaciones);
+        //}
 
         // POST: HistorialAmonestaciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Delete(tbHistorialAmonestaciones tbHistorialAmonestaciones)
+        {
+            string msj = "";
+            if (tbHistorialAmonestaciones.hamo_Id != 0 && tbHistorialAmonestaciones.hamo_RazonInactivo != "")
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, tbHistorialAmonestaciones.hamo_RazonInactivo, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAmonestaciones_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult DeleteConfirmed(int id)
         {
             tbHistorialAmonestaciones tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);

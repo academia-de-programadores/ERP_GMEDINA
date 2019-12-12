@@ -6,39 +6,21 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Agregar Amonestación</h4>
             </div>
-            <div class="modal-body">
-                @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
+            <div  class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
                 {
+                    <div hidden="hidden" class="col-md-8">
+                        <input  id="emp_Id" name="emp_Id" type="text" value="">
+                    </div>
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
 							@Html.LabelFor(model => model.emp_Id, "Tipo Amonestación", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 							@Html.DropDownList("tamo_Id", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.tamo_Id, "", new { @class = "text-danger", @id = "Id" })
+                                @Html.ValidationMessageFor(model => model.tamo_Id, "", new { @class = "text-danger", @id = "errorhamo_Id" })
                             </div>
                         </div>
-                        @*<div class="form-group">
-							@Html.LabelFor(model => model.tamo_Id, "tamo_Id", htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-							@Html.DropDownList("tamo_Id", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.tamo_Id, "", new { @class = "text-danger", @id = "errortamo_Id" })
-                            </div>
-                        </div>*@
-                        <div class="form-group">
-							@Html.LabelFor(model => model.hamo_Fecha, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.hamo_Fecha, new { htmlAttributes = new { @class = "form-contro required valid" } })
-								@Html.ValidationMessageFor(model => model.hamo_Fecha, "", new { @class = "text-danger", @id = "errorhamo_Fecha" })
-                            </div>
-                        </div>
-                        @*<div class="form-group">
-							@Html.LabelFor(model => model.hamo_AmonestacionAnterior, "hamo_AmonestacionAnterior", htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-							@Html.DropDownList("hamo_AmonestacionAnterior", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.hamo_AmonestacionAnterior, "", new { @class = "text-danger", @id = "errorhamo_AmonestacionAnterior" })
-                            </div>
-                        </div>*@
                         <div class="form-group">
 							@Html.LabelFor(model => model.hamo_Observacion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">

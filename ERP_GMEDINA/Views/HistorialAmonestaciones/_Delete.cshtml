@@ -9,6 +9,9 @@
             <div class="modal-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
                 {
+                    <div  class="col-md-8">
+                        <input id="hamo_Id" name="hamo_Id" type="text" value="">
+                    </div>
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
