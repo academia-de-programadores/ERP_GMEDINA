@@ -1,5 +1,7 @@
 ﻿var ChildTable = null;
 var list = [];
+var inactivar = [];
+var dRow = null;
 function Remove(Id, lista) {
     var list = [];
     lista.forEach(function (value, index) {
@@ -10,9 +12,10 @@ function Remove(Id, lista) {
     return list;
 }
 function Add(depto_Descripcion, car_Descripcion) {
+    var info = ChildTable.rows().data();
     if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
-            var Fila = ChildTable.rows().data()[i];
+            var Fila = info[i];
             if (Fila.Descripcion == depto_Descripcion || Fila.Cargo == car_Descripcion) {
                 if (Fila.Cargo == car_Descripcion) {
                     var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
@@ -37,7 +40,8 @@ function Add(depto_Descripcion, car_Descripcion) {
                 Cargo: car_Descripcion,
                 Acciones: '<div>' +
                             '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
-                        '</div>'
+                        '</div>',
+                Accion:'i'
             }
             ).draw();
     } else {
@@ -63,31 +67,44 @@ function getJson() {
     //declaramos una lista para recuperar en un formato 
     //especifico el json de datatable.
     list = new Array();
-    //declaramos el objeto que ira dentro de la vista     
+    //declaramos el objeto que ira dentro de la vista    
+    var info=ChildTable.rows().data();
     for (var i = 0; i < ChildTable.data().length; i++) {
-        var fila = ChildTable.rows().data()[i];
-
+        var fila = info[i];
         var tbDepartamentos =
          {
              Id: i,
              depto_Descripcion: fila.Descripcion,
-             tbCargos: { car_Descripcion: fila.Cargo }
+             car_Descripcion: fila.Cargo,
+             Accion: fila.Accion
          };
         list.push(tbDepartamentos);
     }
     return list;
 }
 function Remover(btn) {
+    var tr = $(btn).closest('tr');
+    var row = ChildTable.row(tr);
+    var id = row.data().Id;
+    if (id != undefined) {
+        inactivar.push(id);
+    } 
     ChildTable
-           .row($(btn).parents('tr'))
-           .remove()
-           .draw();
+            .row($(btn).parents('tr'))
+            .remove()
+            .draw();
 }
 function Edit(btn) {
     var tr = $(btn).closest('tr');
     var row = ChildTable.row(tr);
-    var id = row.data().Id;
-    console.log(id);
+    var datos=row.data();
+    dRow = row;
+    $('#ModalEditar').find("#depto_Descripcion").val(datos.Descripcion);
+    $('#ModalEditar').find("#car_Descripcion").val(datos.Cargo);
+
+    $('#ModalEditar').modal('toggle');
+    $('#ModalEditar').modal('show');
+    $('#ModalEditar').modal('hide');
 }
 function llenarChild() {
     _ajax(JSON.stringify({ id: area_Id }),
@@ -152,17 +169,18 @@ $("#btnCrear").click(function () {
         {
             suc_Id: $("#Sucursales").val(),
             area_Descripcion: $("#area_Descripcion").val(),
-            tbCargos: { car_Descripcion: $("#car_Descripcion").val() },
+            car_Descripcion: $("#car_Descripcion").val(),
         };
     var lista = getJson();
 
     if (tbAreas != null) {
         data = JSON.stringify({
-            tbAreas: tbAreas,
-            tbDepartamentos: lista
+            cAreas: tbAreas,
+            Departamentos: lista,
+            inactivar: inactivar
         });
         _ajax(data,
-            '/Areas/Create',
+            '/Areas/Edit',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -191,6 +209,21 @@ $("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
     var id = $(this).attr("id");
     var form = $(this).closest("form");
     limpiarSpan(id, form);
+});
+
+$("#ModalEditar").find("#btnActualizar").on("click", function () {
+    var depto =
+        {
+            Id:dRow.data().Id,
+            Descripcion: $('#ModalEditar').find("#depto_Descripcion").val(),
+            Cargo:$('#ModalEditar').find("#car_Descripcion").val(),
+            Accion:'e'
+        }
+    
+    dRow = null;
+});
+$("#ModalInhabilitar").find("#InActivar").on("click", function () {
+
 });
 function limpiarSpan(id, form) {
     var span = $(form).find("#error" + id);

@@ -1030,6 +1030,7 @@
     <Content Include="Views\Areas\Index.cshtml" />
     <Content Include="Views\Areas\_CreateDepartamento.cshtml" />
     <Content Include="Views\Areas\_EditDepartamento.cshtml" />
+    <Content Include="Views\Areas\_DeleteDepartamento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

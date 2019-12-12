@@ -9,8 +9,8 @@ namespace ERP_GMEDINA.Models
     [MetadataType(typeof(cDepartamentos))]
     public partial class tbDepartamentos
     {
-
         public string car_Descripcion { get; set; }
+        public string Accion { get; set; }
     }
     public class cDepartamentos
     {
@@ -32,9 +32,11 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> depto_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> depto_FechaModifica { get; set; }
 
+        //Propiedades extra...
         [Display(Name = "Cargo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string car_Descripcion { get; set; }
+        public string Accion { get; set; }
     }
 }

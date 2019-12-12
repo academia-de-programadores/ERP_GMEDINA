@@ -233,6 +233,7 @@ namespace ERP_GMEDINA.Controllers
                 List<tbSucursales> Sucursales = null;
                 try
                 {
+                    Session["area_Id"] = id;
                     var tbAreas = db.tbAreas
                         .Select(tabla => new cAreas
                         {
@@ -266,11 +267,12 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(cAreas cAreas,object[] Departamentos,int[] inactivar)
+        public ActionResult Edit(cAreas cAreas, cDepartamentos[] Departamentos,cDepartamentos[] inactivar)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
+            cAreas.area_Id =(int) Session["area_Id"];
             var Usuario = (tbUsuario)Session["Usuario"];
             //en esta area ingresamos el registro con el procedimiento almacenado
             try
@@ -280,39 +282,59 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var list = db.UDP_RRHH_tbAreas_Update(
                         cAreas.area_Id,
-                        cAreas.car_Id,
                         cAreas.car_Descripcion,
                         cAreas.suc_Id,
                         cAreas.area_Descripcion,
                         Usuario.usu_Id,
                         DateTime.Now);
-                    //foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
-                    //{
-                    //    if (item.MensajeError == "-1")
-                    //    {
-                    //        return Json("-2", JsonRequestBehavior.AllowGet);
-                    //    }
-                    //    tbAreas.area_Id = int.Parse(item.MensajeError);
-                    //}
-                    //foreach (tbDepartamentos item in tbDepartamentos)
-                    //{
-                    //    var depto = db.UDP_RRHH_tbDepartamentos_Insert(
-                    //        tbAreas.area_Id,
-                    //        item.tbCargos.car_Descripcion,
-                    //        item.depto_Descripcion,
-                    //        Usuario.usu_Id,
-                    //        DateTime.Now);
-                    //    string mensajeDB = "";
-                    //    foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
-                    //    {
-                    //        mensajeDB = i.MensajeError.ToString();
-                    //    }
-                    //    if (mensajeDB == "-1")
-                    //    {
-                    //        return Json("-2", JsonRequestBehavior.AllowGet);
-                    //    }
-                    //}
-                    //transaction.Commit();
+                    foreach (UDP_RRHH_tbAreas_Update_Result item in list)
+                    {
+                        if (item.MensajeError == "-1")
+                        {
+                            return Json("-2", JsonRequestBehavior.AllowGet);
+                        }
+                        cAreas.area_Id = int.Parse(item.MensajeError);
+                    }
+                    foreach (cDepartamentos item in Departamentos)
+                    {
+                        if (item.Accion=="i")
+                        {
+                            var depto = db.UDP_RRHH_tbDepartamentos_Insert(
+                                cAreas.area_Id,
+                                item.car_Descripcion,
+                                item.depto_Descripcion,
+                                Usuario.usu_Id,
+                                DateTime.Now);
+                            string mensajeDB = "";
+                            foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
+                            {
+                                mensajeDB = i.MensajeError.ToString();
+                            }
+                            if (mensajeDB == "-1")
+                            {
+                                return Json("-2", JsonRequestBehavior.AllowGet);
+                            }
+                        }
+                        else if (item.Accion=="e")
+                        {
+                            //var depto = db.UDP_RRHH_tbDepartamentos_Update(
+                            //    cAreas.area_Id,
+                            //    item.car_Descripcion,
+                            //    item.depto_Descripcion,
+                            //    Usuario.usu_Id,
+                            //    DateTime.Now);
+                            //string mensajeDB = "";
+                            //foreach (UDP_RRHH_tbDepartamentos_Update_Result i in depto)
+                            //{
+                            //    mensajeDB = i.MensajeError.ToString();
+                            //}
+                            //if (mensajeDB == "-1")
+                            //{
+                            //    return Json("-2", JsonRequestBehavior.AllowGet);
+                            //}
+                        }
+                    }
+                    transaction.Commit();
                 }
             }
             catch (Exception ex)
