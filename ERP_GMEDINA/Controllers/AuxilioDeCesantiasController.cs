@@ -147,11 +147,11 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update1(tbAuxilioDeCesantias.aces_IdAuxilioCesantia,tbAuxilioDeCesantias.aces_RangoInicioMeses,
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Update(tbAuxilioDeCesantias.aces_IdAuxilioCesantia,tbAuxilioDeCesantias.aces_RangoInicioMeses,
                                                                                             tbAuxilioDeCesantias.aces_RangoFinMeses,
                                                                                             tbAuxilioDeCesantias.aces_DiasAuxilioCesantia,tbAuxilioDeCesantias.aces_UsuarioModifica,tbAuxilioDeCesantias.aces_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbAuxilioDeCesantias_Update1_Result Resultado in listAuxCes)
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Update_Result Resultado in listAuxCes)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))

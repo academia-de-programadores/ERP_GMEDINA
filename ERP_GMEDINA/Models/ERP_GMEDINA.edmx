@@ -2014,7 +2014,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlanilla' does not 
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -11332,11 +11331,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
           </Key>
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="V_Plani_TipoPlani">
           <Key>
@@ -17373,7 +17370,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Update_Result)">
             <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
             <Parameter Name="aces_RangoFinMeses" Mode="In" Type="Int32" />
@@ -17930,6 +17927,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19723,7 +19723,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               <MappingFragment StoreEntitySet="V_Plani_FechaPlanilla">
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -20816,7 +20815,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
