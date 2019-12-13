@@ -13,21 +13,35 @@ function tablaEditar(btn) {
     $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5></div><div class="ibox-content"><div class="row">';
-    obj.forEach(function (index, value) {
-        div = div +
-            '<div class="col-md-3">' +
-                '<div class="panel panel-default">' +
-                  '<div class="panel-heading">' +
-                     '<h5>' + index.hor_descripcion + '</h5>' +
-                '</div>' +
-                '<div class="panel-body">' + 'Hora Inicio: '
-                    + index.hor_HoraInicio.toString() + '<br> Hora Fin: ' +
-                    index.hor_HoraFin + '</div>' +
-                '</div>' +
-            '</div>'
+    var div = "";
+    div +=
+        '<div class="col-lg-9">'
+        + '<div class="ibox ">'
+        + '<div class="ibox-content">'
+        + '<div class="panel-body">'
+        + '<div class="panel-group" id="accordion">'
+        + '<div class="panel panel-default">'
+        + '<div class="panel-heading">'
+        + '<h5 class="panel-title">'
+        + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTitulos">Titulos solicitados</a>' //Nombre recuadro
+        + '</h5>'
+        + '</div>'
+        + '<div id="collapseTitulos" class="panel-collapse collapse in">'
+        + '<div class="panel-body">';
+    if(obj.Titulos.length > 0)
+    obj.Titulos.forEach(function (index, value) {
+        div += index.Descripcion.toString() + '<br>';
     });
-    return div + '</div></div></div>';
+
+    div = + '</div>'
+     + '</div>'
+     + '</div>'
+     + '</div>'
+     + '</div>'
+     + '</div>'
+     + '</div>'
+     + '</div>';
+    return div;
 }
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {

@@ -98,15 +98,49 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    List<object> lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
-                        .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList<object>();
-                    foreach(object x in lista)
+                    var lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
+                        .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList();
+                    RequisicionesData Data = new RequisicionesData();
+
+                    foreach(var X in lista)
                     {
-                        
+                        switch(X.TipoDato)
+                        {
+                            case "C":
+                                tbCompetencias Comp = new tbCompetencias();
+                                Comp.comp_Descripcion = X.Descripcion;
+                                Data.Competencias.Add(Comp);
+                                break;
+
+                            case "H":
+                                tbHabilidades Habi = new tbHabilidades();
+                                Habi.habi_Descripcion = X.Descripcion;
+                                Data.Habilidaes.Add(Habi);
+                                break;
+
+                            case "I":
+                                tbIdiomas Idi = new tbIdiomas();
+                                Idi.idi_Descripcion = X.Descripcion;
+                                Data.Idiomas.Add(Idi);
+                                break;
+
+                            case "T":
+                                tbTitulos Titu = new tbTitulos();
+                                Titu.titu_Descripcion = X.Descripcion;
+                                Data.Titulos.Add(Titu);
+                                break;
+
+                            case "R":
+                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+                                Reqs.resp_Descripcion = X.Descripcion;
+                                Data.ReqEspeciales.Add(Reqs);
+                                break;
+                        }
                     }
-                    return Json(lista, JsonRequestBehavior.AllowGet);
+                    
+                    return Json(Data, JsonRequestBehavior.AllowGet);
                 }
-                catch()
+                catch
                 {
                 }
             }
