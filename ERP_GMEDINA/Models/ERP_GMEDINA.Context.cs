@@ -1588,35 +1588,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Delete_Result>("UDP_RRHH_tbSueldos_Delete", sue_IdParameter, sue_RazonInactivoParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbSueldos_Insert_Result> UDP_RRHH_tbSueldos_Insert(Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<int> sue_UsuarioCrea, Nullable<System.DateTime> sue_FechaCrea)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var tmon_IdParameter = tmon_Id.HasValue ?
-                new ObjectParameter("tmon_Id", tmon_Id) :
-                new ObjectParameter("tmon_Id", typeof(int));
-    
-            var sue_CantidadParameter = sue_Cantidad.HasValue ?
-                new ObjectParameter("sue_Cantidad", sue_Cantidad) :
-                new ObjectParameter("sue_Cantidad", typeof(decimal));
-    
-            var sue_SueldoAnteriorParameter = sue_SueldoAnterior.HasValue ?
-                new ObjectParameter("sue_SueldoAnterior", sue_SueldoAnterior) :
-                new ObjectParameter("sue_SueldoAnterior", typeof(int));
-    
-            var sue_UsuarioCreaParameter = sue_UsuarioCrea.HasValue ?
-                new ObjectParameter("sue_UsuarioCrea", sue_UsuarioCrea) :
-                new ObjectParameter("sue_UsuarioCrea", typeof(int));
-    
-            var sue_FechaCreaParameter = sue_FechaCrea.HasValue ?
-                new ObjectParameter("sue_FechaCrea", sue_FechaCrea) :
-                new ObjectParameter("sue_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Insert_Result>("UDP_RRHH_tbSueldos_Insert", emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_SueldoAnteriorParameter, sue_UsuarioCreaParameter, sue_FechaCreaParameter);
-        }
-    
         public virtual int UDP_RRHH_tbSueldos_Restore(Nullable<int> sue_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
@@ -2219,6 +2190,35 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("titu_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbSueldos_Insert_Result> UDP_RRHH_tbSueldos_Insert(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_UsuarioCrea, Nullable<System.DateTime> sue_FechaCrea)
+        {
+            var sue_IdParameter = sue_Id.HasValue ?
+                new ObjectParameter("sue_Id", sue_Id) :
+                new ObjectParameter("sue_Id", typeof(int));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var tmon_IdParameter = tmon_Id.HasValue ?
+                new ObjectParameter("tmon_Id", tmon_Id) :
+                new ObjectParameter("tmon_Id", typeof(int));
+    
+            var sue_CantidadParameter = sue_Cantidad.HasValue ?
+                new ObjectParameter("sue_Cantidad", sue_Cantidad) :
+                new ObjectParameter("sue_Cantidad", typeof(decimal));
+    
+            var sue_UsuarioCreaParameter = sue_UsuarioCrea.HasValue ?
+                new ObjectParameter("sue_UsuarioCrea", sue_UsuarioCrea) :
+                new ObjectParameter("sue_UsuarioCrea", typeof(int));
+    
+            var sue_FechaCreaParameter = sue_FechaCrea.HasValue ?
+                new ObjectParameter("sue_FechaCrea", sue_FechaCrea) :
+                new ObjectParameter("sue_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Insert_Result>("UDP_RRHH_tbSueldos_Insert", sue_IdParameter, emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_UsuarioCreaParameter, sue_FechaCreaParameter);
         }
     }
 }

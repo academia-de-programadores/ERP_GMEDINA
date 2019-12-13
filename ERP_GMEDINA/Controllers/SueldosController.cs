@@ -117,7 +117,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(V_Sueldos vsueldos)
+        public ActionResult Create(tbSueldos vsueldos)
         {
             string msj = "";
             using (db = new ERP_GMEDINAEntities())
@@ -126,7 +126,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(vsueldos.Id_Empleado,
+                  /*  var list = db.UDP_RRHH_tbSueldos_Insert(vsueldos.Id_Empleado,
                                                             vsueldos.Id_Amonestacion,
                                                             vsueldos.Sueldo,
                                                             vsueldos.Sueldo_Anterior,
@@ -136,7 +136,7 @@ namespace ERP_GMEDINA.Controllers
                     foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
-                    }
+                    }*/
                 }
                 catch (Exception ex)
                 {
@@ -157,12 +157,12 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            V_Sueldos VSueldos = null;
+            tbSueldos tbsueldos = null;
 
             try
             {
-                VSueldos = db.V_Sueldos.Find(id);
-                if (VSueldos == null || !VSueldos.Estado)
+                tbsueldos = db.tbSueldos.Find(id);
+                if (tbsueldos == null || !tbsueldos.sue_Estado)
                 {
                     return HttpNotFound();
                 }
@@ -173,41 +173,37 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var sueldos = new V_Sueldos
+            var sueldos = new tbSueldos
             {
-                Id = VSueldos.Id,
-                Id_Empleado = VSueldos.Id_Empleado,
-                Id_Amonestacion = VSueldos.Id_Amonestacion,
-                Identidad = VSueldos.Identidad,
-                Nombre = VSueldos.Nombre,
-                Sueldo = VSueldos.Sueldo,
-                Tipo_Moneda = VSueldos.Tipo_Moneda,
-                Cuenta = VSueldos.Cuenta,
-                Sueldo_Anterior = VSueldos.Sueldo_Anterior,
-                Area = VSueldos.Area,
-                Cargo = VSueldos.Cargo,
-                Usuario_Nombre = VSueldos.Usuario_Nombre,
-                Usuario_Crea = VSueldos.Usuario_Crea,
-                Fecha_Crea = VSueldos.Fecha_Crea,
-                Usuario_Modifica = VSueldos.Usuario_Modifica,
-                Fecha_Modifica = VSueldos.Fecha_Modifica,
-                Estado = VSueldos.Estado,
-                RazonInactivo = VSueldos.RazonInactivo
+              sue_Id = tbsueldos.sue_Id,
+             emp_Id = tbsueldos.emp_Id,
+             tmon_Id = tbsueldos.tmon_Id,
+             sue_Cantidad = tbsueldos.sue_Cantidad,
+             sue_SueldoAnterior = tbsueldos.sue_SueldoAnterior,
+             sue_Estado = tbsueldos.sue_Estado,
+             sue_RazonInactivo = tbsueldos.sue_RazonInactivo,
+             sue_UsuarioCrea = tbsueldos.sue_UsuarioCrea,
+             sue_FechaCrea = tbsueldos.sue_FechaCrea,
+             sue_UsuarioModifica = tbsueldos.sue_UsuarioModifica,
+             sue_FechaModifica = tbsueldos.sue_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbsueldos.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbsueldos.tbUsuario).usu_NombreUsuario }
+
             };
             return Json(sueldos, JsonRequestBehavior.AllowGet);
         }
           
         [HttpPost]
-        public JsonResult Edit(V_Sueldos vSueldos)
+        public JsonResult Edit(tbSueldos Sueldos)
         {
             string msj = "";
-            if (vSueldos.Id != 0 && vSueldos.Id_Empleado != 0 && vSueldos.Id_Amonestacion != 0 && vSueldos.Sueldo !=0  && vSueldos.Sueldo_Anterior !=0)            
-			{
-                var id = (int)Session["id"];
+            if ( Sueldos.sue_Cantidad != 0)
+            {
+                /* var id = (int)Session["id"];*/
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(vSueldos.Id_Empleado, vSueldos.Id_Amonestacion, vSueldos.Sueldo, vSueldos.Sueldo_Anterior, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSueldos_Insert(Sueldos.emp_Id, Sueldos.tmon_Id, Convert.ToInt16(Sueldos.sue_Cantidad), Sueldos.sue_SueldoAnterior, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -219,6 +215,7 @@ namespace ERP_GMEDINA.Controllers
                     ex.Message.ToString();
                 }
                 Session.Remove("id");
+
             }
             else
             {
