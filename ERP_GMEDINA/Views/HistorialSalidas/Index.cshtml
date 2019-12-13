@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialSalidas>
 
 @{
-                /**/
+        /**/
 
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_LayoutBase.cshtml";
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -38,7 +38,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
                         </tbody>
                     </table>
                 </div>
@@ -50,7 +49,6 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
-
 @section Scripts {
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/plugins/dataTables")

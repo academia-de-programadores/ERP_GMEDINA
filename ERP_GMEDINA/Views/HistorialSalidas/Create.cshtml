@@ -25,7 +25,8 @@
                         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormHistorialSalidas" }))
                         {
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            //---TipoSalida---
+                            //---TipoSalidas---
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.tsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -33,7 +34,9 @@
                                     @Html.ValidationMessageFor(model => model.tsal_Id, "", new { @class = "text-danger", @id = "errorTipoSalidas" })
                                 </div>
                             </div>
+
                             //---RazonSalida---
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.rsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -41,6 +44,7 @@
                                     @Html.ValidationMessageFor(model => model.rsal_Id, "", new { @class = "text-danger", @id = "errorRazonSalidas" })
                                 </div>
                             </div>
+
                             //---Observaciones---
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hsal_Observacion, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -61,7 +65,7 @@
                             </div>
                             <div class="ibox-content" style="">
                                 <div class="row">
-                                    @Html.Partial("_AddEmpleado", new ERP_GMEDINA.Models.cEmpleados())
+                                    @*@Html.Partial("_AddEmpleado", new ERP_GMEDINA.Models.cEmpleados())*@
                                     <div class="col-lg-8">
                                         <table class="table" id="ChildDataTable">
                                             <thead>
@@ -97,4 +101,5 @@
     @Scripts.Render("~/plugins/customdataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/CreateArea")
+    @Scripts.Render("~/Scripts/app/general/CreateHistorialSalidas")
 }

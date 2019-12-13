@@ -481,10 +481,13 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
                         "~/Scripts/app/general/Areas/CreateArea.js"));
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
-                        "~/Scripts/app/general/Areas/EditArea.js")); 
+                        "~/Scripts/app/general/Areas/EditArea.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/IndexHistorialSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
+            "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
 
 

@@ -12,28 +12,24 @@ function tablaEditar(btn) {
 }
 function format(obj) {
     var EstadoCivil = '';
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion personal y de contacto:</h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         index.per_EstadoCivil.toUpperCase() == ('S') ? EstadoCivil = 'Soltero(a)'
     :   index.per_EstadoCivil.toUpperCase() == ('C') ? EstadoCivil = 'Casado(a)'
     :   index.per_EstadoCivil.toUpperCase() == ('D') ? EstadoCivil = 'Divorciado(a)'
     :   index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
-
         div = div +
         '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
-        + '<div class="col-md-5"><B>Correo electrónico:</b>' + index.per_CorreoElectronico + '</div>'
+        + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
         + '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
         + '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
         + '<div class="col-md-5"><b>Estado civil: </b>' + EstadoCivil + '</div>'
         + '<div class="col-md-5"><b>Teléfono: </b>' + index.per_Telefono + '</div>'
         + '<div class="col-md-10"><h3><b>•Razon salida: </b>' + index.rsal_Descripcion + '</h3></div>'
-
-
-
-            +'</div>' +
-            '</div>' +
-            '</div>'
+        + '</div>' +
+        '</div>' +
+        '</div>'
     });
     return div + '</div></div></div>';
 }

@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
+            ViewBag.rsal_Id = new SelectList(db.tbRazonSalidas, "rsal_Id", "rsal_Descripcion");
             var tbHistorialSalidas = new List<tbHistorialSalidas> { };
             return View(tbHistorialSalidas);
         }
@@ -82,17 +83,17 @@ namespace ERP_GMEDINA.Controllers
         //Tipo salidas
         public ActionResult llenarDropDowlistTipoSalida()
         {
-            var tbTipoSalidas = new List<object> { };
+            var TipoSalidas = new List<object> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    tbTipoSalidas.Add(new
+                    TipoSalidas.Add(new
                     {
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
                     });
-                    tbTipoSalidas.AddRange(db.tbTipoSalidas
+                    TipoSalidas.AddRange(db.tbTipoSalidas
                     .Select(tabla => new {
                         Id = tabla.tsal_Id,
                         Descripcion = tabla.tsal_Descripcion
@@ -106,37 +107,37 @@ namespace ERP_GMEDINA.Controllers
 
             }
             var result = new Dictionary<string, object>();
-            result.Add("tbTipoSalidas", tbTipoSalidas);
+            result.Add("TipoSalidas", TipoSalidas);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //Razon salidas
         public ActionResult llenarDropDowlistRazonSalida()
         {
-            var tbRazonSalidas = new List<object> { };
+            var RazonSalidas = new List<object> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    tbRazonSalidas.Add(new
+                    RazonSalidas.Add(new
                     {
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
                     });
-                    tbRazonSalidas.AddRange(db.tbRazonSalidas
+                    RazonSalidas.AddRange(db.tbRazonSalidas
                     .Select(tabla => new {
                         Id = tabla.rsal_Id,
                         Descripcion = tabla.rsal_Descripcion
                     })
                     .ToList());
                 }
-                catch
+                catch(Exception ex)
                 {
                     return Json("-2", 0);
                 }
 
             }
             var result = new Dictionary<string, object>();
-            result.Add("tbRazonSalidas", tbRazonSalidas);
+            result.Add("RazonSalidas", RazonSalidas);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         //--------------------------------------------cerrarDESPLEGABLES--------------------------------------------

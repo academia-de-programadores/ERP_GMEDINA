@@ -74,13 +74,27 @@ function getJson() {
     }
     return list;
 }
-function llenarDropDownList() {
+//Tipo de salida
+function llenarDropDowlistTipoSalida() {
     _ajax(null,
-       '/Areas/llenarDropDowlist',
+       '/HistorialSalidas/llenarDropDowlistTipoSalida',
        'POST',
        function (result) {
            $.each(result, function (id, Lista) {
-               Lista.forEach(function (value,index) {
+               Lista.forEach(function (value, index) {
+                   $("#" + id).append(new Option(value.Descripcion, value.Id));
+               });
+           });
+       });
+}
+//Razon Salida
+function llenarDropDowlistRazonSalida() {
+    _ajax(null,
+       '/HistorialSalidas/llenarDropDowlistRazonSalida',
+       'POST',
+       function (result) {
+           $.each(result, function (id, Lista) {
+               Lista.forEach(function (value, index) {
                    $("#" + id).append(new Option(value.Descripcion, value.Id));
                });
            });
@@ -92,8 +106,10 @@ function Remover(btn) {
         .remove()
         .draw();
 }
+//Llamamos los dropdowns
 $(document).ready(function () {
-    llenarDropDownList();
+    llenarDropDowlistTipoSalida();
+    //llenarDropDowlistRazonSalida();
     ChildTable = $(ChildDataTable).DataTable({
         pageLength: 3,
         lengthChange: false,
@@ -104,7 +120,6 @@ $(document).ready(function () {
             {
              data: 'Acciones',
              defaultContent: '<div>' +
-                                    //'<input type="button" class="btn btn-white btn-xs" onclick="Remover(this)" value="Editar" />'+
                                     '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
                                 '</div>'
             }
