@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -1018,6 +1018,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does n
         <EntityType Name="V_HistorialContrataciones">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="Nombre Completo" />
             <PropertyRef Name="Departamento" />
             <PropertyRef Name="Area" />
@@ -1026,6 +1027,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does n
             <PropertyRef Name="Fecha Crea" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
           <Property Name="Nombre Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="Departamento" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1872,12 +1874,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" />-->
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialRefrendamientos_href_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialRefrendamientos" Type="Self.tbHistorialRefrendamientos" Multiplicity="*" />
@@ -2766,9 +2762,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" />-->
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialRefrendamientos_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialRefrendamientos" Type="Self.tbHistorialRefrendamientos" Multiplicity="*" />
@@ -3249,9 +3242,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" />-->
         <Association Name="FK_rrhh_tbTipoSalidas_tsal_Id_rrhh_tbHistorialSalidas_tsal_Id">
           <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="1" />
           <End Role="tbHistorialSalidas" Type="Self.tbHistorialSalidas" Multiplicity="*" />
@@ -3355,7 +3345,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <Function Name="UDP_RRHH_tbAreas_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="suc_Id" Type="int" Mode="In" />
           <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
@@ -3429,7 +3418,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
@@ -3674,8 +3663,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="hvac_FechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="hvac_FechaFin" Type="datetime" Mode="In" />
-          <Parameter Name="hvac_MesVacaciones" Type="int" Mode="In" />
-          <Parameter Name="hvac_AnioVacaciones" Type="int" Mode="In" />
           <Parameter Name="hvac_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hvac_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -3743,10 +3730,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Parameter Name="jor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbJornadas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="jor_Estado" Type="bit" Mode="In" />
-          <Parameter Name="jor_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="jor_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="jor_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -4211,6 +4195,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySet Name="V_HistorialContrataciones" EntityType="Self.V_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_HistorialContrataciones].[Id] AS [Id], 
+    [V_HistorialContrataciones].[IdEmpleado] AS [IdEmpleado], 
     [V_HistorialContrataciones].[Nombre Completo] AS [Nombre Completo], 
     [V_HistorialContrataciones].[Departamento] AS [Departamento], 
     [V_HistorialContrataciones].[Area] AS [Area], 
@@ -5026,8 +5011,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -6374,6 +6358,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <PropertyRef Name="Cargo" />
             <PropertyRef Name="Fecha_Contrato" />
             <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -6386,6 +6371,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_HistorialHorasTrabajadas">
           <Key>
@@ -9398,7 +9384,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_dbo_tbFasesReclutamiento_DELETE">
-            <Parameter Name="fare_id" Mode="In" Type="Int32" />
+          <Parameter Name="fare_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_dbo_tbFasesReclutamiento_Insert">
             <Parameter Name="fare_id" Mode="In" Type="Int32" />
@@ -9433,7 +9419,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbAreas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result)" />
           <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Descripcion" Mode="In" Type="String" />
@@ -9507,7 +9492,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
@@ -9529,7 +9514,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
@@ -9752,8 +9737,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="hvac_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="hvac_MesVacaciones" Mode="In" Type="Int32" />
-            <Parameter Name="hvac_AnioVacaciones" Mode="In" Type="Int32" />
             <Parameter Name="hvac_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -9821,10 +9804,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result)">
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="jor_Estado" Mode="In" Type="Boolean" />
-            <Parameter Name="jor_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10004,7 +9984,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
@@ -10051,7 +10031,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Delete_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -10290,9 +10270,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
@@ -10471,6 +10448,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbRazonSalidas_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -11485,6 +11465,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySetMapping Name="V_HistorialContrataciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialContrataciones">
               <MappingFragment StoreEntitySet="V_HistorialContrataciones">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />

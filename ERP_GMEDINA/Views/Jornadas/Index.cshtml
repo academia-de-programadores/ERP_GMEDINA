@@ -47,9 +47,11 @@
 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbJornadas())
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbJornadas())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbJornadas())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 
 @section Scripts {
