@@ -13,34 +13,114 @@ function tablaEditar(btn) {
     $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
-    var div = "";
-    div +=
-        '<div class="col-lg-9">'
-        + '<div class="ibox ">'
-        + '<div class="ibox-content">'
-        + '<div class="panel-body">'
-        + '<div class="panel-group" id="accordion">'
-        + '<div class="panel panel-default">'
+    var div = '<div class="ibox-title">'
++ '<h5>Datos del perfil</h5>'
++ '</div>';
+    
+   div += '<div class="ibox-content">'
+  + '<div class="panel-body">'
+    + '<div class="panel-group" id="accordion">'
+      + '<div class="panel panel-default">'
         + '<div class="panel-heading">'
-        + '<h5 class="panel-title">'
-        + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTitulos">Titulos solicitados</a>' //Nombre recuadro
-        + '</h5>'
+          + '<h5 class="panel-title">'
+            + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseCompetencias' + obj.req_Id + '" class="" aria-expanded="true">Competencias</a>'
+          + '</h5>'
         + '</div>'
-        + '<div id="collapseTitulos" class="panel-collapse collapse in">'
-        + '<div class="panel-body">';
-    if(obj.Titulos.length > 0)
-    obj.Titulos.forEach(function (index, value) {
-        div += index.Descripcion.toString() + '<br>';
-    });
+        + '<div id="collapseCompetencias' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
+          + '<div class="panel-body">';
 
-    div = + '</div>'
-     + '</div>'
-     + '</div>'
-     + '</div>'
-     + '</div>'
-     + '</div>'
-     + '</div>'
-     + '</div>';
+    if (obj.Competencias.length > 0)
+        obj.Competencias.forEach(function (index, value) {
+            div = div + index.comp_Descripcion + '<br>';
+        })
+    else
+        div += "<h5>Sin datos que mostrar.*</h5>";
+
+ div +=   '</div>'
+ + '</div>'
++ '</div>'
++ '<div class="panel panel-default">'
+ + '<div class="panel-heading">'
+   + '<h5 class="panel-title">'
+     + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseHabilidades' + obj.req_Id+ '" class="" aria-expanded="true">Habilidades</a>'
+   + '</h5>'
+ + '</div>'
+ + '<div id="collapseHabilidades' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
+   + '<div class="panel-body">';
+
+ if (obj.Habilidaes.length > 0)
+     obj.Habilidaes.forEach(function (index, value) {
+         div = div + index.habi_Descripcion + '<br>';
+     })
+ else
+     div += "<h5>Sin datos que mostrar.*</h5>";
+
+ div += '</div>'
+  + '</div>'
++ '</div>'
++ '<div class="panel panel-default">'
+  + '<div class="panel-heading">'
+    + '<h4 class="panel-title">'
+      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseIdiomas' + obj.req_Id+ '" class="" aria-expanded="true">Idiomas</a>'
+    + '</h4>'
+  + '</div>'
+  + '<div id="collapseIdiomas' + obj.req_Id+ '" class="panel-collapse collapse in">'
+    + '<div class="panel-body">';
+
+    if (obj.Idiomas.length > 0)
+        obj.Idiomas.forEach(function (index, value) {
+            div = div + index.idi_Descripcion + '<br>';
+        })
+    else
+        div += "<h5>Sin datos que mostrar.*</h5>";
+
+    div += '</div>'
+  + '</div>'
++ '</div>'
++ '<div class="panel panel-default">'
+  + '<div class="panel-heading">'
+    + '<h4 class="panel-title">'
+      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseRequisitos' + obj.req_Id+ '"  class="" aria-expanded="true">Requisitos especiales</a>'
+    + '</h4>'
+  + '</div>'
+  + '<div id="collapseRequisitos' + obj.req_Id+ '" class="panel-collapse collapse in">'
+    + '<div class="panel-body">';
+
+    if (obj.ReqEspeciales.length > 0)
+        obj.ReqEspeciales.forEach(function (index, value) {
+            div = div + index.resp_Descripcion + '<br>';
+        })
+    else
+        div += "<h5>Sin datos que mostrar.*</h5>";
+
+    div += '</div>'
+  + '</div>'
++ '</div>'
++ '<div class="panel panel-default">'
+  + '<div class="panel-heading">'
+    + '<h5 class="panel-title">'
+      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTitulos' + obj.req_Id+ '" class="" aria-expanded="true">Titulos</a>'
+    + '</h5>'
+  + '</div>'
+  + '<div id="collapseTitulos' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
+    + '<div class="panel-body">';
+
+    if (obj.Titulos.length > 0)
+        obj.Titulos.forEach(function (index, value) {
+        div = div + index.titu_Descripcion + '<br>';
+        })
+    else
+        div += "<h5>Sin datos que mostrar.*</h5>";
+
+    div += '</div>'
+        + '</div>'
+      + '</div>'
+    + '</div>'
+  + '</div>'
++ '</div>';
+
+
+    ///
     return div;
 }
 
