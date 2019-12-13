@@ -84,7 +84,7 @@ $('#btnCrearAuxCes').click(function ()
     var rangoFin = $("#Crear #aces_RangoFinMeses").val();
     var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
 
-    console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
+   // console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
 
     //VALIDAMOS LOS CAMPOS
     if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0)

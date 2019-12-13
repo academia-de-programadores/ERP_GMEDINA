@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cAuxilioDeCesantias))]
-    public partial class AuxilioDeCesantias
+    public partial class tbAuxilioDeCesantias
     {
 
     }
 
-    public class cAuxilioDeCesantias
+    public partial class cAuxilioDeCesantias
     {
         [Display(Name = "Codigo Auxilio Cesantia")]
         public int aces_IdAuxilioCesantia { get; set; }
         [Display(Name = "Rango Inicio (Meses)")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         public int aces_RangoInicioMeses { get; set; }
         [Display(Name = "Rango Fin (Meses)")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         public int aces_RangoFinMeses { get; set; }
         [Display(Name = "Auxilio Cesantia (Dias)")]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         public int aces_DiasAuxilioCesantia { get; set; }
         [Display(Name = "Usuario Creacion")]
         public int aces_UsuarioCrea { get; set; }
