@@ -101,7 +101,7 @@ namespace ERP_GMEDINA.Controllers
                     var lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
                         .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList();
                     RequisicionesData Data = new RequisicionesData();
-
+                    Data.req_Id = Convert.ToInt32(id);
                     foreach(var X in lista)
                     {
                         switch(X.TipoDato)

@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Models
         public List<tbIdiomas> Idiomas { get; set; }
         public List<tbRequerimientosEspeciales> ReqEspeciales { get; set; }
         public List<tbTitulos> Titulos { get; set; }
-
+        public int req_Id { get; set; }
         public RequisicionesData()
         {
             this.Competencias = new List<tbCompetencias>();
