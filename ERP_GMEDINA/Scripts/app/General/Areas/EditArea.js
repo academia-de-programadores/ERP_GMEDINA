@@ -2,15 +2,16 @@
 var list = [];
 var inactivar = [];
 var dRow = null;
-function Remove(Id, lista) {
-    var list = [];
-    lista.forEach(function (value, index) {
-        if (value.Id != Id) {
-            list.push(value);
-        }
-    });
-    return list;
-}
+var Entidad='';
+//function Remove(Id, lista) {
+//    var list = [];
+//    lista.forEach(function (value, index) {
+//        if (value.Id != Id) {
+//            list.push(value);
+//        }
+//    });
+//    return list;
+//}
 function Add(depto_Descripcion, car_Descripcion) {
     var info = ChildTable.rows().data();
     if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
@@ -83,12 +84,6 @@ function getJson() {
     return list;
 }
 function Remover(btn) {
-    var tr = $(btn).closest('tr');
-    var row = ChildTable.row(tr);
-    var id = row.data().Id;
-    if (id != undefined) {
-        inactivar.push(id);
-    } 
     ChildTable
             .row($(btn).parents('tr'))
             .remove()
@@ -104,7 +99,7 @@ function Edit(btn) {
 
     $('#ModalEditar').modal('toggle');
     $('#ModalEditar').modal('show');
-    $('#ModalEditar').modal('hide');
+    //$('#ModalEditar').modal('hide');
 }
 function llenarChild() {
     _ajax(JSON.stringify({ id: area_Id }),
@@ -134,7 +129,6 @@ $(document).ready(function () {
                    data: 'Acciones',
                    defaultContent: '<div>' +
                                           '<input type="button" class="btn btn-white btn-xs" onclick="Edit(this)" value="Editar" />'+
-                                          '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
                                       '</div>'
                }
          ],
@@ -219,11 +213,67 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
             Cargo:$('#ModalEditar').find("#car_Descripcion").val(),
             Accion:'e'
         }
-    
+    if (depto.Descripcion != "" || depto.Cargo != "") {
+        ChildTable
+        .row(dRow)
+        .remove();
+
+        ChildTable
+        .row
+        .add(depto)
+        .draw();
+        $('#ModalEditar').modal('hide');
+    }
     dRow = null;
 });
 $("#ModalInhabilitar").find("#InActivar").on("click", function () {
-
+    if (Entidad == 'Depto')
+    {
+        var depto =
+       {
+           depto_Id: dRow.data().Id,
+           depto_RazonInactivo: $("#ModalInhabilitar").find("#depto_RazonInactivo").val(),
+       };
+        if (depto.depto_RazonInactivo.trim()=='') {
+            return null;
+        }
+        inactivar.push(depto);
+        ChildTable
+            .row(dRow)
+            .remove()
+            .draw();
+        dRow = null;
+        $('#ModalInhabilitar').modal('hide');
+    } else
+    {
+        var area_Razoninactivo=$("#ModalInhabilitar").find("#depto_RazonInactivo").val()
+        _ajax(JSON.stringify({ area_Razoninactivo: area_Razoninactivo }),
+            '/Areas/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
+                    $(location).attr('href', '/Areas');
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    }
+});
+$("#btnInhabilitar").on("click", function () {
+    $("#depto_RazonInactivo").val("");
+    $('#ModalEditar').modal('hide');
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Depto";
+});
+$("#btnInactivarArea").on("click", function () {
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Area";
 });
 function limpiarSpan(id, form) {
     var span = $(form).find("#error" + id);
