@@ -95,9 +95,9 @@ namespace ERP_GMEDINA.Controllers
             Sheet.Cells["J1"].Value = "Estado Civil";
             Sheet.Cells["K1"].Value = "Tipo de Sangre";
             Sheet.Cells["L1"].Value = "Cargo";
-            Sheet.Cells["LL1"].Value = "Area";
-            Sheet.Cells["M1"].Value = "Departamentos";
-            Sheet.Cells["N1"].Value = "Jornadas";
+            Sheet.Cells["M1"].Value = "Area";
+            Sheet.Cells["N1"].Value = "Departamentos";
+            Sheet.Cells["O1"].Value = "Jornadas";
 
 
 
@@ -109,27 +109,57 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("C{0}", row)].Value = item.per_Apellidos;
                 Sheet.Cells[string.Format("D{0}", row)].Value = item.per_FechaNacimiento;
                 Sheet.Cells[string.Format("E{0}", row)].Value = item.per_Sexo;
-                Sheet.Cells[string.Format("F{0}", row)].Value = item.nac_Id;
+
+                var Nacionalidades = db.tbNacionalidades
+                    .Select(tabla => tabla.nac_Descripcion)
+                    .ToArray();
+                Sheet.Cells["MB1"].LoadFromCollection<string>(Nacionalidades.ToList<string>());
+                var Nac_val = Sheet.DataValidations.AddListValidation("F2");
+                Nac_val.Formula.ExcelFormula = "$MB$1:$MB$" + Nacionalidades.Length;
+                Sheet.Column(340).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
                 Sheet.Cells[string.Format("G{0}", row)].Value = item.per_Direccion;
                 Sheet.Cells[string.Format("H{0}", row)].Value = item.per_Telefono;
                 Sheet.Cells[string.Format("I{0}", row)].Value = item.per_CorreoElectronico;
                 Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
                 Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
 
-                var lol = db.tbCargos
+                var Cargos = db.tbCargos
                     .Select(tabla=>tabla.car_Descripcion)
                     .ToArray();
-                Sheet.Cells["MA1"].LoadFromCollection<string>(lol.ToList<string>());
-                var val = Sheet.DataValidations.AddListValidation("L2");
-                val.Formula.ExcelFormula = "$MA$1:$MA$"+lol.Length;
+                Sheet.Cells["MA1"].LoadFromCollection<string>(Cargos.ToList<string>());
+                var Car_val = Sheet.DataValidations.AddListValidation("L2");
+                Car_val.Formula.ExcelFormula = "$MA$1:$MA$"+ Cargos.Length;
                 Sheet.Column(339).Style.Font.Color.SetColor(System.Drawing.Color.White);
                 //Sheet.Column(15).Hidden = true;
                 //Sheet.Cells.AutoFitColumns(8.43, 100);
 
                 //agregar parte de :"FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO"
-                Sheet.Cells[string.Format("M{0}", row)].Value = item.area_Id;
-                Sheet.Cells[string.Format("N{0}", row)].Value = item.depto_Id;
-                Sheet.Cells[string.Format("O{0}", row)].Value = item.jor_Id;
+
+                var Areas = db.tbAreas
+                .Select(tabla => tabla.area_Descripcion)
+                .ToArray();
+                Sheet.Cells["MC1"].LoadFromCollection<string>(Areas.ToList<string>());
+                var area_val = Sheet.DataValidations.AddListValidation("M2");
+                area_val.Formula.ExcelFormula = "$MC$1:$MC$" + Areas.Length;
+                Sheet.Column(341).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
+
+                var Dpto = db.tbDepartamentos
+                .Select(tabla => tabla.depto_Descripcion)
+                .ToArray();
+                Sheet.Cells["MD1"].LoadFromCollection<string>(Dpto.ToList<string>());
+                var Dpto_val = Sheet.DataValidations.AddListValidation("N2");
+                Dpto_val.Formula.ExcelFormula = "$MD$1:$MD$" + Dpto.Length;
+                Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
+                var Jor = db.tbJornadas
+               .Select(tabla => tabla.jor_Descripcion)
+               .ToArray();
+                Sheet.Cells["ME1"].LoadFromCollection<string>(Jor.ToList<string>());
+                var jor_val = Sheet.DataValidations.AddListValidation("O2");
+                jor_val.Formula.ExcelFormula = "$ME$1:$ME$" + Jor.Length;
+                Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
                 row++;
             }
