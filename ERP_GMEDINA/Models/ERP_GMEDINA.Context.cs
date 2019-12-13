@@ -29,11 +29,11 @@ namespace ERP_GMEDINA.Models
     
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
-        public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<tbPersonas> tbPersonas { get; set; }
         public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
         public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
         public virtual DbSet<V_HistorialPermisos> V_HistorialPermisos { get; set; }
+        public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1047,7 +1047,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Select_Result>("UDP_RRHH_tbTipoMonedas_Select", tmon_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Insert_Result> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> hper_Id, Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, Nullable<int> hper_Duracion, string hper_Observacion, Nullable<int> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, Nullable<bool> hper_Estado, string hper_RazonInactivo, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Insert_Result> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> hper_Id, Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, Nullable<int> hper_Duracion, string hper_Observacion, Nullable<bool> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, string hper_RazonInactivo, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
         {
             var hper_IdParameter = hper_Id.HasValue ?
                 new ObjectParameter("hper_Id", hper_Id) :
@@ -1079,15 +1079,11 @@ namespace ERP_GMEDINA.Models
     
             var hper_JustificadoParameter = hper_Justificado.HasValue ?
                 new ObjectParameter("hper_Justificado", hper_Justificado) :
-                new ObjectParameter("hper_Justificado", typeof(int));
+                new ObjectParameter("hper_Justificado", typeof(bool));
     
             var hper_PorcentajeIndemnizadoParameter = hper_PorcentajeIndemnizado.HasValue ?
                 new ObjectParameter("hper_PorcentajeIndemnizado", hper_PorcentajeIndemnizado) :
                 new ObjectParameter("hper_PorcentajeIndemnizado", typeof(int));
-    
-            var hper_EstadoParameter = hper_Estado.HasValue ?
-                new ObjectParameter("hper_Estado", hper_Estado) :
-                new ObjectParameter("hper_Estado", typeof(bool));
     
             var hper_RazonInactivoParameter = hper_RazonInactivo != null ?
                 new ObjectParameter("hper_RazonInactivo", hper_RazonInactivo) :
@@ -1101,7 +1097,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hper_FechaCrea", hper_FechaCrea) :
                 new ObjectParameter("hper_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", hper_IdParameter, emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_DuracionParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_EstadoParameter, hper_RazonInactivoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", hper_IdParameter, emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_DuracionParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_RazonInactivoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbHistorialPermisos_Delete(Nullable<int> hper_Id, string hper_razon_Inactivo, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)

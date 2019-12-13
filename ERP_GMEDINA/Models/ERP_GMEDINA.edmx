@@ -532,9 +532,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
           <Parameter Name="hper_fechaFin" Type="datetime" Mode="In" />
           <Parameter Name="hper_Duracion" Type="int" Mode="In" />
           <Parameter Name="hper_Observacion" Type="nvarchar" Mode="In" />
-          <Parameter Name="hper_Justificado" Type="int" Mode="In" />
+          <Parameter Name="hper_Justificado" Type="bit" Mode="In" />
           <Parameter Name="hper_PorcentajeIndemnizado" Type="int" Mode="In" />
-          <Parameter Name="hper_Estado" Type="bit" Mode="In" />
           <Parameter Name="hper_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hper_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hper_FechaCrea" Type="datetime" Mode="In" />
@@ -941,16 +940,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             <Parameter Name="hper_fechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="hper_Duracion" Mode="In" Type="Int32" />
             <Parameter Name="hper_Observacion" Mode="In" Type="String" />
-            <Parameter Name="hper_Justificado" Mode="In" Type="Int32" />
+            <Parameter Name="hper_Justificado" Mode="In" Type="Boolean" />
             <Parameter Name="hper_PorcentajeIndemnizado" Mode="In" Type="Int32" />
-            <Parameter Name="hper_Estado" Mode="In" Type="Boolean" />
             <Parameter Name="hper_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbUsuario" EntityType="ERP_GMEDINAModel.tbUsuario" />
           <EntitySet Name="tbEmpleados" EntityType="ERP_GMEDINAModel.tbEmpleados" />
-          <EntitySet Name="tbHistorialPermisos" EntityType="ERP_GMEDINAModel.tbHistorialPermisos" />
           <EntitySet Name="tbPersonas" EntityType="ERP_GMEDINAModel.tbPersonas" />
           <EntitySet Name="tbTipoPermisos" EntityType="ERP_GMEDINAModel.tbTipoPermisos" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea">
@@ -960,14 +957,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -985,17 +974,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
           </AssociationSet>
-          <AssociationSet Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-          </AssociationSet>
-          <AssociationSet Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
-            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
-            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
           <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Delete" ReturnType="Collection(Int32)">
             <Parameter Name="hper_Id" Mode="In" Type="Int32" />
@@ -1018,6 +999,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             <End Role="tbTipoMonedas" EntitySet="tbTipoMonedas" />
           </AssociationSet>
           <EntitySet Name="V_HistorialPermisos" EntityType="ERP_GMEDINAModel.V_HistorialPermisos" />
+          <EntitySet Name="tbHistorialPermisos" EntityType="ERP_GMEDINAModel.tbHistorialPermisos" />
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
+          <AssociationSet Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+            <End Role="tbTipoPermisos" EntitySet="tbTipoPermisos" />
+            <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1087,14 +1085,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
           <Property Name="usu_SesionesValidas" Type="Byte" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbEmpleados1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
-          <NavigationProperty Name="tbHistorialPermisos1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
           <NavigationProperty Name="tbPersonas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
           <NavigationProperty Name="tbTipoPermisos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoPermisos" />
           <NavigationProperty Name="tbTipoPermisos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoPermisos" />
           <NavigationProperty Name="tbTipoMonedas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
           <NavigationProperty Name="tbTipoMonedas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoMonedas" />
+          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
+          <NavigationProperty Name="tbHistorialPermisos1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialPermisos" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -1122,32 +1120,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
           <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioCrea" FromRole="tbEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbEmpleados_emp_UsuarioModifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialPermisos" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
-        </EntityType>
-        <EntityType Name="tbHistorialPermisos">
-          <Key>
-            <PropertyRef Name="hper_Id" />
-          </Key>
-          <Property Name="hper_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="tper_Id" Type="Int32" Nullable="false" />
-          <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
-          <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
-          <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
-          <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hper_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_UsuarioModifica" Type="Int32" />
-          <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbHistorialPermisos" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbTipoPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" FromRole="tbHistorialPermisos" ToRole="tbTipoPermisos" />
+          <NavigationProperty Name="tbHistorialPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialPermisos" />
         </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
@@ -1216,30 +1190,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialPermisos">
-              <PropertyRef Name="hper_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
-          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialPermisos">
-              <PropertyRef Name="hper_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="*" />
@@ -1288,18 +1238,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
-          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialPermisos">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id">
           <End Type="ERP_GMEDINAModel.tbPersonas" Role="tbPersonas" Multiplicity="1" />
           <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
@@ -1309,18 +1247,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
             </Principal>
             <Dependent Role="tbEmpleados">
               <PropertyRef Name="per_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
-          <End Type="ERP_GMEDINAModel.tbTipoPermisos" Role="tbTipoPermisos" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoPermisos">
-              <PropertyRef Name="tper_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialPermisos">
-              <PropertyRef Name="tper_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1392,6 +1318,78 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
           <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="tbHistorialPermisos">
+          <Key>
+            <PropertyRef Name="hper_Id" />
+          </Key>
+          <Property Name="hper_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Id" Type="Int32" Nullable="false" />
+          <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
+          <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
+          <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hper_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_UsuarioModifica" Type="Int32" />
+          <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" FromRole="tbHistorialPermisos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" FromRole="tbHistorialPermisos" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbTipoPermisos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" FromRole="tbHistorialPermisos" ToRole="tbTipoPermisos" />
+        </EntityType>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="hper_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id">
+          <End Type="ERP_GMEDINAModel.tbTipoPermisos" Role="tbTipoPermisos" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialPermisos" Role="tbHistorialPermisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoPermisos">
+              <PropertyRef Name="tper_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialPermisos">
+              <PropertyRef Name="tper_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1536,27 +1534,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbHistorialPermisos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialPermisos">
-              <MappingFragment StoreEntitySet="tbHistorialPermisos">
-                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
-                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
-                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
-                <ScalarProperty Name="hper_UsuarioCrea" ColumnName="hper_UsuarioCrea" />
-                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
-                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
-                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
-                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
-                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
-                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
-                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
-                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
-                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbPersonas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPersonas">
               <MappingFragment StoreEntitySet="tbPersonas">
@@ -1630,6 +1607,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos' does not hav
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbHistorialPermisos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialPermisos">
+              <MappingFragment StoreEntitySet="tbHistorialPermisos">
+                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
+                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
+                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
+                <ScalarProperty Name="hper_UsuarioCrea" ColumnName="hper_UsuarioCrea" />
+                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
+                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
+                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
+                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
+                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
+                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
+                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
+                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

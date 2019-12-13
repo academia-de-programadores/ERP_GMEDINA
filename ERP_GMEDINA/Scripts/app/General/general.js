@@ -132,7 +132,7 @@ $(".required").each(function (indice, input) {
     });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
-        if ($(input).val().trim() == "") {
+        if ($(input).val() == null || $(input).val() == 0 || $(input).val().trim() == "") {
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $(span).addClass("text-danger");
@@ -151,8 +151,8 @@ $(".required").each(function (indice, input) {
             span.text(txt_maxlength);
             event.preventDefault();
         } else {
-            $(span).removeClass("text-warning");
-            $(span).closest("div").removeClass("has-warning");
+            $(span).closest("div").removeClass("has-error has-warning");
+            $(span).removeClass("text-danger text-warning");
             $(form).find("#error" + id).text("");
         }
     }
@@ -161,4 +161,4 @@ formularios.forEach(function (formulario) {
     $("#" + formulario).submit(function (e) {
         e.preventDefault();
     });
-})
+});

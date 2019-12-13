@@ -2,13 +2,13 @@
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/Areas/Edit/" + id);
+    $(location).attr('href', "/HistorialPermisos/Edit/" + id);
 }
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/Areas/Edit/" + id);
+    $(location).attr('href', "/HistorialPermisos/Edit/" + id);
 }
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Permisos</h5></div><div class="ibox-content"><div class="row">';
@@ -20,8 +20,8 @@ function format(obj) {
                      '<h5>' + index.hper_fechaInicio + '</h5>' +
                 '</div>' +
                 '<div class="panel-body">' + 'Hora Inicio: '
-                    + index.hor_hper_fechaInicio.toString() + '<br> Hora Fin: ' +
-                    index.hor_hper_fechaFin + '</div>' +
+                    + index.hper_fechaInicio.toString() + '<br> Hora Fin: ' +
+                    index.hper_fechaFin + '</div>' +
                 '</div>' +
             '</div>'
     });
@@ -36,8 +36,16 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   ID: value.jor_Id,
-                   Descripcion: value.hper_Descripcion
+                   Id: value.hper_Id,
+                   tper_Id: value.Id_Permiso,
+                   tper_Descripcion: value.Descripcion_Permiso,
+                   hper_fechaInicio: value.Fecha_Inicial,
+                   hper_fechaFin: value.Fecha_Fin,
+                   hper_Duracion: value.Duracion,
+                   hper_Justificado: value.Justificado,
+                   per_Nombres: value.Nombre_Completo,
+                   //Descripcion: value.area_Descripcion,
+                   //Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0]
                });
            });
            tabla.draw();

@@ -88,6 +88,16 @@
                   </div>
 
                   <div class="form-group">
+                    @Html.LabelFor(model => model.hper_Justificado, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      <div class="checkbox">
+                          @Html.EditorFor(model => model.hper_Justificado)
+                          @Html.ValidationMessageFor(model => model.hper_Justificado, "", new { @class = "text-danger" })
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
                     @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                       @Html.EditorFor(model => model.hper_PorcentajeIndemnizado, new { htmlAttributes = new { @class = "form-control" } })
