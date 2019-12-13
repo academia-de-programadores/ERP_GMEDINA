@@ -86,6 +86,38 @@
 //    $(location).attr('href', "/Areas/Edit/" + id);
 //}
 
+
+$(document).ready(function () {
+    llenarTabla();
+});
+function llenarTabla() {
+    _ajax(null,
+       '/Jornadas/llenarTabla',
+       'POST',
+       function (Lista) {
+           tabla.clear();
+           tabla.draw();
+           $.each(Lista, function (index, value) {
+               tabla.row.add({
+                   ID: value.jor_Id,
+                   Descripcion: value.jor_Descripcion
+               });
+           });
+           tabla.draw();
+       });
+}
+function tablaEditar(ID) {
+    id = ID;
+    _ajax(null,
+        '/Jornadas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#FormEditar").find("#jor_Descripcion").val(obj.jor_Descripcion);
+                $('#ModalEditar').modal('show');
+            }
+        });
+}
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -102,18 +134,6 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
-            }
-        });
-}
-function tablaEditar(ID) {
-    id = ID;
-    _ajax(null,
-        '/Jornadas/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#jor_Descripcion").val(obj.jor_Descripcion);
-                $('#ModalEditar').modal('show');
             }
         });
 }
@@ -134,25 +154,8 @@ function format(obj) {
     });
     return div + '</div></div></div>';
 }
-function llenarTabla() {
-    _ajax(null,
-       '/Jornadas/llenarTabla',
-       'POST',
-       function (Lista) {
-           tabla.clear();
-           tabla.draw();
-           $.each(Lista, function (index, value) {
-               tabla.row.add({
-                   ID: value.jor_Id,
-                   Descripcion: value.jor_Descripcion
-               });
-           });
-           tabla.draw();
-       });
-}
-$(document).ready(function () {
-    llenarTabla();
-});
+
+
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);

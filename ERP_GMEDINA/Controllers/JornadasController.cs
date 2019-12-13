@@ -42,15 +42,7 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var tbJornadas = db.tbJornadas
-                        .Select(
-                        t => new
-                        {
-                            jor_Id = t.jor_Id,
-                            jor_Descripcion = t.jor_Descripcion
-                        }
-                        )
-                        .ToList();
+                    var tbJornadas = db.tbJornadas.Select(t => new {jor_Id = t.jor_Id, jor_Descripcion = t.jor_Descripcion, t.jor_Estado}).Where(x => x.jor_Estado == true).ToList();
                     return Json(tbJornadas, JsonRequestBehavior.AllowGet);
                 }
             }
