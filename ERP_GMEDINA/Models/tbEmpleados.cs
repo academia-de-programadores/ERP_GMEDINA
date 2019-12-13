@@ -17,26 +17,7 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEmpleados()
         {
-            this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
-            this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMes>();
-            this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
-            this.tbEmpleadoBonos = new HashSet<tbEmpleadoBonos>();
-            this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
-            this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
-            this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
-            this.tbEquipoEmpleados = new HashSet<tbEquipoEmpleados>();
-            this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
-            this.tbHistorialAudienciaDescargo = new HashSet<tbHistorialAudienciaDescargo>();
-            this.tbHistorialCargos = new HashSet<tbHistorialCargos>();
-            this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
-            this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
-            this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
-            this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamientos>();
             this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
-            this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
-            this.tbSueldos = new HashSet<tbSueldos>();
-            this.tbVacaciones = new HashSet<tbVacaciones>();
         }
     
         public int emp_Id { get; set; }
@@ -63,51 +44,7 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
-        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
-        public virtual tbFormaPago tbFormaPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidaciones> tbLiquidaciones { get; set; }
-        public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
-        public virtual tbDepartamentos tbDepartamentos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialCargos> tbHistorialCargos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialSalidas> tbHistorialSalidas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldos> tbSueldos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacaciones> tbVacaciones { get; set; }
-        public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
     }
 }

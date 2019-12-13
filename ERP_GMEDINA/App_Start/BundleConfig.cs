@@ -453,11 +453,39 @@ namespace ERP_GMEDINA
             // Touch Spin Styless
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
-                      "~/Content/plugins/izitoast/iziToast.min.css"));   
+                      "~/Content/plugins/izitoast/iziToast.min.css"));
+            //script con funciones generales
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+            "~/Scripts/plugins/iziToast/iziToast.js",
+            "~/Scripts/plugins/iziToast/iziToast.min.js",
+            "~/Scripts/app/general/general.js",
+            "~/Scripts/plugins/validate/jquery.validate.min.js"));
+
+            //scriipt para tablas personalizadas detalles con datatable
+            bundles.Add(new ScriptBundle("~/plugins/customdataTables").Include(
+                      "~/Scripts/plugins/dataTables/datatables.min.js"));
 
             //bundles APP/GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
+            
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
+            "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+            //script de areas
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexArea").Include(
+            "~/Scripts/app/general/Areas/IndexAreas.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
+                        "~/Scripts/app/general/Areas/CreateArea.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
+                        "~/Scripts/app/general/Areas/EditArea.js")); 
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexHistorialSalidas").Include(
+            "~/Scripts/app/general/HistorialSalidas/IndexHistorialSalidas.js"));
+
 
 
             //OPTIMIZATION
