@@ -39,6 +39,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Requisiciones/Create
         public ActionResult Create()
         {
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
@@ -49,18 +50,31 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "req_Id,req_Experiencia,req_Sexo,req_Descripcion,req_EdadMinima,req_EdadMaxima,req_EstadoCivil,req_EducacionSuperior,req_Permanente,req_Duracion,req_Estado,req_RazonInactivo,req_Vacantes,req_FechaRequisicion,req_FechaContratacion,req_UsuarioCrea,req_FechaCrea,req_UsuarioModifica,req_FechaModifica")] tbRequisiciones tbRequisiciones)
+        public JsonResult Create([Bind(Include = "req_Id,req_Experiencia,req_Sexo,req_Descripcion,req_EdadMinima,req_EdadMaxima,req_EstadoCivil,req_EducacionSuperior,req_Permanente,req_Duracion,req_Estado,req_RazonInactivo,req_Vacantes,req_FechaRequisicion,req_FechaContratacion,req_UsuarioCrea,req_FechaCrea,req_UsuarioModifica,req_FechaModifica")] tbRequisiciones tbRequisiciones)
         {
-            if (ModelState.IsValid)
+            string msj = "...";
+            if (tbRequisiciones.req_Descripcion != "")
             {
-                db.tbRequisiciones.Add(tbRequisiciones);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + "";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
             }
-
-            ViewBag.req_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioCrea);
-            ViewBag.req_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbRequisiciones.req_UsuarioModifica);
-            return View(tbRequisiciones);
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult llenarTabla()
