@@ -114,7 +114,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ISR_RPT" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Liquidaciones_RPT" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_EmpleadoPorPlanilla" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_TipoPlani" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_PlanillaDeducciones" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_PlanillaIngresos" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
@@ -422,6 +421,23 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_AnioPlanilla" Width="1.5" PointX="3.75" PointY="20.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoCuarto" Width="1.5" PointX="23.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoTercer" Width="1.5" PointX="23.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DesplegableHistorialPlanilla" Width="1.5" PointX="23.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla" Width="1.5" PointX="23.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" Width="1.5" PointX="23.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" Width="1.5" PointX="23.75" PointY="18.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_Prueba" Width="1.5" PointX="23.75" PointY="21.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoIncapacidades" Width="1.5" PointX="0.75" PointY="24.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialContrataciones" Width="1.5" PointX="13.75" PointY="24.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialIncapacidades" Width="1.5" PointX="25.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Historialvacaciones" Width="1.5" PointX="2.75" PointY="25.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" Width="1.5" PointX="25.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" Width="1.5" PointX="25.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" Width="1.5" PointX="25.75" PointY="13.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoCuartoMes_cpla_IdPlanilla" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_Plani_tbDecimoTercerMes_cpla_IdPlanilla" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -828,6 +828,9 @@
     <Compile Include="Models\V_EmpleadoBonos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_EmpleadoIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -846,10 +849,22 @@
     <Compile Include="Models\V_HistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_HistorialContrataciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HistorialHorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_HistorialIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Historialvacaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HorariosDetalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_IHSS_RPT.cs">
@@ -876,7 +891,28 @@
     <Compile Include="Models\V_PlanillaIngresos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_Plani_EmpleadoPorPlanilla.cs">
+    <Compile Include="Models\V_Plani_AnioPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_DecimoCuarto.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_DecimoTercer.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_DesplegableHistorialPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_EncabezadoHistorialPlanilla.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_HistorialDeducciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_HistorialIngreso.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Plani_Prueba.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_Plani_TipoPlani.cs">
@@ -886,6 +922,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RAP_RPT.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbAdelantoSueldo.cs">
@@ -904,6 +943,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbHistorialSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbHistorialSalidas_completa.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbPersonas.cs">

@@ -17,9 +17,7 @@ namespace ERP_GMEDINA.Controllers
     {
         /*PENDIENTE
         * CALCULAR ISR
-        * GUARDAR EN LAS TABLAS DE DETALLE DE HISTORIALES
-        * Septimo día    
-        * sumar horas con permiso justificado           
+        * Septimo día
         */
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
@@ -42,7 +40,6 @@ namespace ERP_GMEDINA.Controllers
                 PreviewPlanilla = db.V_PreviewPlanilla.ToList();
             return Json(PreviewPlanilla, JsonRequestBehavior.AllowGet);
         }
-
 
         //[HttpPost]
         public ActionResult GenerarPlanilla(int? ID, bool? enviarEmail, DateTime fechaInicio, DateTime fechaFin)
@@ -98,35 +95,37 @@ namespace ERP_GMEDINA.Controllers
                 {
                     List<tbCatalogoDePlanillas> oIDSPlanillas = new List<tbCatalogoDePlanillas>();
 
-                    using (var dbContextTransaccion = db.Database.BeginTransaction())
+                    //seleccionar las planillas que se van a generar
+                    if (ID != null)
+                        oIDSPlanillas = db.tbCatalogoDePlanillas.Where(X => X.cpla_IdPlanilla == ID).ToList();
+                    else
+                        oIDSPlanillas = db.tbCatalogoDePlanillas.Where(x => x.cpla_Activo == true).ToList();
+
+                    //procesar todas las planillas seleccionadas
+                    foreach (var iter in oIDSPlanillas)
                     {
 
-                        //seleccionar las planillas que se van a generar
-                        if (ID != null)
-                            oIDSPlanillas = db.tbCatalogoDePlanillas.Where(X => X.cpla_IdPlanilla == ID).ToList();
-                        else
-                            oIDSPlanillas = db.tbCatalogoDePlanillas.Where(x => x.cpla_Activo == true).ToList();
-
-                        //procesar todas las planillas seleccionadas
-                        foreach (var iter in oIDSPlanillas)
+                        try
                         {
-                            try
+                            //planilla actual del foreach
+                            tbCatalogoDePlanillas oPlanilla = db.tbCatalogoDePlanillas.Find(iter.cpla_IdPlanilla);
+
+                            //ingresos de la planilla actual
+                            List<V_PlanillaIngresos> oIngresos = db.V_PlanillaIngresos.Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla).ToList();
+
+                            //deducciones de la planilla actual
+                            List<V_PlanillaDeducciones> oDeducciones = db.V_PlanillaDeducciones.Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla).ToList();
+
+                            //empleados de la planilla actual
+                            List<tbEmpleados> oEmpleados = db.tbEmpleados.Where(emp => emp.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla && emp.emp_Estado == true).ToList();
+
+                            int contador = 1;
+                            int idDetalleDeduccionHisotorialesContador = 1;
+                            int idDetalleIngresoHisotorialesContador = 1;
+                            //procesar planilla empleado por empleado
+                            foreach (var empleadoActual in oEmpleados)
                             {
-                                //planilla actual del foreach
-                                tbCatalogoDePlanillas oPlanilla = db.tbCatalogoDePlanillas.Find(iter.cpla_IdPlanilla);
-
-                                //ingresos de la planilla actual
-                                List<V_PlanillaIngresos> oIngresos = db.V_PlanillaIngresos.Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla).ToList();
-
-                                //deducciones de la planilla actual
-                                List<V_PlanillaDeducciones> oDeducciones = db.V_PlanillaDeducciones.Where(x => x.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla).ToList();
-
-                                //empleados de la planilla actual
-                                List<tbEmpleados> oEmpleados = db.tbEmpleados.Where(emp => emp.cpla_IdPlanilla == oPlanilla.cpla_IdPlanilla && emp.emp_Estado == true).ToList();
-
-                                int contador = 1;
-                                //procesar planilla empleado por empleado
-                                foreach (var empleadoActual in oEmpleados)
+                                using (var dbContextTransaccion = db.Database.BeginTransaction())
                                 {
                                     try
                                     {
@@ -144,6 +143,7 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? totalComisiones = 0;
                                         int horasExtrasTrabajadas = 0;
                                         decimal? totalHorasExtras = 0;
+                                        decimal? totalHorasPermiso = 0;
                                         decimal? totalBonificaciones = 0;
                                         decimal? totalVacaciones = 0;
                                         decimal? totalIngresosEmpleado = 0;
@@ -157,12 +157,19 @@ namespace ERP_GMEDINA.Controllers
                                         decimal? netoAPagarColaborador = 0;
                                         //int VerificarHorasTrabajas = 0;
                                         oPlanillaEmpleado = new ReportePlanillaViewModel();
+                                        //variables para insertar en los historiales de pago
+                                        IEnumerable<object> listHistorialPago = null;
+                                        string MensajeError = "";
+                                        List<tbHistorialDeduccionPago> lisHistorialDeducciones = new List<tbHistorialDeduccionPago>();
+                                        List<tbHistorialDeIngresosPago> lisHistorialIngresos = new List<tbHistorialDeIngresosPago>();
+
+
                                         #endregion
+
+                                        #region Procesar ingresos
 
                                         //informacion del colaborador actual
                                         V_InformacionColaborador InformacionDelEmpleadoActual = db.V_InformacionColaborador.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
-
-                                        #region Procesar ingresos
 
                                         //salario base del colaborador actual
                                         SalarioBase = Math.Round((Decimal)InformacionDelEmpleadoActual.SalarioBase, 2);
@@ -172,6 +179,14 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             concepto = "Sueldo base",
                                             monto = SalarioBase
+                                        });
+                                        //Historial de ingresos
+                                        lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                        {
+                                            hip_UnidadesPagar = 1,
+                                            hip_MedidaUnitaria = 1,
+                                            hip_TotalPagar = SalarioBase,
+                                            cin_IdIngreso = 7
                                         });
 
                                         //horas normales trabajadas
@@ -190,7 +205,7 @@ namespace ERP_GMEDINA.Controllers
                                         //salario por hora
                                         salarioHora = Math.Round((Decimal)SalarioBase / 240, 2);
 
-                                        //para el voucer
+                                        //para el voucher
                                         ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                         {
                                             concepto = "Sueldo hora",
@@ -205,6 +220,48 @@ namespace ERP_GMEDINA.Controllers
                                             concepto = "Total sueldo",
                                             monto = totalSalario
                                         });
+                                        //Historial de ingresos (horas normales trabajadas)
+                                        lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                        {
+                                            hip_UnidadesPagar = horasTrabajadas,
+                                            hip_MedidaUnitaria = 1,
+                                            hip_TotalPagar = totalSalario,
+                                            cin_IdIngreso = 11
+                                        });
+
+                                        //horas con permiso justificado
+                                        List<tbHistorialPermisos> horasConPermiso = db.tbHistorialPermisos
+                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hper_Estado == true)
+                                            .ToList();
+
+                                        if (horasConPermiso.Count > 0)
+                                        {
+                                            int CantidadHorasPermisoActual = 0;
+                                            //sumar todas las horas extras
+                                            foreach (var iterHorasPermiso in horasConPermiso)
+                                            {
+                                                CantidadHorasPermisoActual = iterHorasPermiso.hper_Duracion;
+
+                                                totalHorasPermiso += Math.Round(CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100)), 2);
+
+
+                                                //para el voucher
+                                                ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                                {
+                                                    concepto = $"{CantidadHorasPermisoActual} horas permiso indemnizado {iterHorasPermiso.hper_PorcentajeIndemnizado} %",
+                                                    monto = Math.Round(CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100)), 2)
+                                                });
+
+                                                //Historial de ingresos (horas con permiso)
+                                                lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                {
+                                                    hip_UnidadesPagar = CantidadHorasPermisoActual,
+                                                    hip_MedidaUnitaria = 1,
+                                                    hip_TotalPagar = Math.Round(CantidadHorasPermisoActual * (((iterHorasPermiso.hper_PorcentajeIndemnizado * salarioHora) / 100)), 2),
+                                                    cin_IdIngreso = 12
+                                                });
+                                            }
+                                        }
 
                                         //comisiones
                                         List<tbEmpleadoComisiones> oComisionesColaboradores = db.tbEmpleadoComisiones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cc_Activo == true && x.cc_Pagado == false).ToList();
@@ -221,7 +278,7 @@ namespace ERP_GMEDINA.Controllers
                                                                where tbEmpCom.cc_Id == oComisionesColaboradoresIterador.cc_Id
                                                                select tbEmpCom.cc_TotalVenta).FirstOrDefault();
 
-                                                totalComisiones += Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision)/100, 2);
+                                                totalComisiones += Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2);
 
                                                 //pasar el estado de las comisiones a pagadas
                                                 oComisionesColaboradoresIterador.cc_Pagado = true;
@@ -232,7 +289,15 @@ namespace ERP_GMEDINA.Controllers
                                                 ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                                 {
                                                     concepto = oComisionesColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
-                                                    monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision)/100, 2)
+                                                    monto = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2)
+                                                });
+                                                //Historial de ingresos (Comisiones)
+                                                lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                {
+                                                    hip_UnidadesPagar = 1,
+                                                    hip_MedidaUnitaria = 1,
+                                                    hip_TotalPagar = Math.Round((Decimal)(oComisionesColaboradoresIterador.cc_TotalVenta * oComisionesColaboradoresIterador.cc_PorcentajeComision) / 100, 2),
+                                                    cin_IdIngreso = 8
                                                 });
                                             }
                                         }
@@ -273,14 +338,22 @@ namespace ERP_GMEDINA.Controllers
                                                 totalHorasExtras += Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2);
 
 
-                                                //para el voucer
+                                                //para el voucher
                                                 ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                                 {
                                                     concepto = $"{CantidadHorasExtrasActual} horas {iterHorasExtras.tbTipoHoras.tiho_Descripcion} al {iterHorasExtras.tbTipoHoras.tiho_Recargo} %",
                                                     monto = Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2)
                                                 });
+                                                //Historial de ingresos (horas extras)
+                                                lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                {
+                                                    hip_UnidadesPagar = 1,
+                                                    hip_MedidaUnitaria = 1,
+                                                    hip_TotalPagar = Math.Round((Decimal)CantidadHorasExtrasActual * (salarioHora + ((iterHorasExtras.tbTipoHoras.tiho_Recargo * salarioHora) / 100)), 2),
+                                                    cin_IdIngreso = 3
+                                                });
                                             }
-                                            //para el voucer
+                                            //para el voucher
                                             ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
                                             {
                                                 concepto = "Total horas extras",
@@ -308,11 +381,19 @@ namespace ERP_GMEDINA.Controllers
                                                     concepto = oBonosColaboradoresIterador.tbCatalogoDeIngresos.cin_DescripcionIngreso,
                                                     monto = Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2)
                                                 });
+                                                //Historial de ingresos (bonos)
+                                                lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                {
+                                                    hip_UnidadesPagar = 1,
+                                                    hip_MedidaUnitaria = 1,
+                                                    hip_TotalPagar = Math.Round((Decimal)oBonosColaboradoresIterador.cb_Monto, 2),
+                                                    cin_IdIngreso = oBonosColaboradoresIterador.cin_IdIngreso
+                                                });
                                             }
                                         }
 
                                         //vacaciones
-                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.hvac_Estado == true).ToList();
+                                        List<tbHistorialVacaciones> oVacacionesColaboradores = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && x.hvac_DiasPagados == false && x.hvac_Estado == true).ToList();
                                         if (oVacacionesColaboradores.Count > 0)
                                         {
                                             //sumar todas las comisiones
@@ -336,7 +417,8 @@ namespace ERP_GMEDINA.Controllers
                                                 totalVacaciones += Math.Round((salarioHora * 8) * cantidadDias, 2);
 
                                                 //cambiar el estado de las vacaciones a pagadas
-                                                //db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
+                                                oVacacionesColaboradoresIterador.hvac_DiasPagados = true;
+                                                db.Entry(oVacacionesColaboradoresIterador).State = EntityState.Modified;
 
                                                 //agregarlas al vocher
                                                 ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
@@ -344,44 +426,64 @@ namespace ERP_GMEDINA.Controllers
                                                     concepto = $"{cantidadDias} dias de vacaciones",
                                                     monto = Math.Round((Decimal)(salarioHora * 8) * cantidadDias, 2)
                                                 });
+                                                //Historial de ingresos (vacaciones)
+                                                lisHistorialIngresos.Add(new tbHistorialDeIngresosPago
+                                                {
+                                                    hip_UnidadesPagar = cantidadDias,
+                                                    hip_MedidaUnitaria = 1,
+                                                    hip_TotalPagar = Math.Round((Decimal)(salarioHora * 8) * cantidadDias, 2),
+                                                    cin_IdIngreso = 12
+                                                });
                                             }
                                         }
-                                        ////Septimo Dia
-                                        ////horas normales trabajadas
-                                        //VerificarHorasTrabajas = db.tbHistorialHorasTrabajadas
-                                        //    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.htra_Estado == true && x.tbTipoHoras.tiho_Recargo == 0)
-                                        //    .Select(x => x.htra_CantidadHoras)
-                                        //    .DefaultIfEmpty(0)
-                                        //    .Sum();
+                                        #region Septimo Dia
+                                        DateTime inicioFecha = fechaInicio;
+                                        DateTime finFecha = fechaFin;
+                                        TimeSpan restaFechasSeptimo = finFecha - inicioFecha;
+                                        int cantidadDiasSeptimo = restaFechasSeptimo.Days + 1;
+                                        DateTime fechaIterador = inicioFecha;
+                                        int cantHoras = 0;
+                                        int cantHorasPermiso = 0;
+                                        int cantidadSeptimosDias = 0;
+                                        int contadorSeptimosDias = 1;
 
-                                        ////BUSCAR HORAS CON PERMISOS
-                                        //int HorasPermiso = 0;
-                                        //HorasPermiso = db.tbHistorialPermisos
-                                        //    .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hper_Estado == true)
-                                        //    .Select(x => x.hper_Duracion)
-                                        //    .DefaultIfEmpty(0)
-                                        //    .Sum();
+                                        for (int i = 1; i <= cantidadDiasSeptimo; i++)
+                                        {
+                                            if (fechaIterador.DayOfWeek.ToString() != "Sunday")
+                                            {
+                                                cantHoras += db.tbHistorialHorasTrabajadas.Where(x => x.htra_Fecha == fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.htra_CantidadHoras).FirstOrDefault();
+                                                cantHorasPermiso += db.tbHistorialPermisos.Where(x => x.hper_fechaInicio <= fechaIterador && x.hper_fechaFin >= fechaIterador && x.emp_Id == empleadoActual.emp_Id).Select(x => x.hper_Duracion).FirstOrDefault();
 
+                                                if ((cantHoras + (cantHorasPermiso * 8)) >= 48 && contadorSeptimosDias == 7)
+                                                {
+                                                    cantidadSeptimosDias++;
+                                                    contadorSeptimosDias = 0;
+                                                    cantHoras = 0;
+                                                }
+                                            }
+                                            if (contadorSeptimosDias == 7)
+                                            {
+                                                cantHoras = 0;
+                                                contadorSeptimosDias = 0;
+                                            }
+                                            fechaIterador = fechaIterador.Add(new TimeSpan(1, 0, 0, 0, 0));
+                                            contadorSeptimosDias++;
+                                        }
 
-                                        //int frecuenciaDias = iter.cpla_FrecuenciaEnDias;
-                                        //int cantidadSeptimoDias = frecuenciaDias / 7;
-                                        //int horasQueDebenTrabajar = frecuenciaDias * 8;
-                                        
-
-
-                                        //if ((VerificarHorasTrabajas + HorasPermiso) >= horasQueDebenTrabajar)
-                                        //{
-                                        //    //agregarlas al vocher
-                                        //    ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
-                                        //    {
-                                        //        concepto = $"{cantidadSeptimoDias}x Séptimo día",
-                                        //        monto = Math.Round((salarioHora * 8)* cantidadSeptimoDias, 2)
-                                        //    });
-                                        //    totalIngresosEmpleado += Math.Round(((decimal)salarioHora * 8) * cantidadSeptimoDias, 2);
-                                        //}
+                                        decimal resultSeptimoDia = (salarioHora * 8) * cantidadSeptimosDias;
+                                        if (resultSeptimoDia > 0)
+                                        {
+                                            //agregarlas al vocher
+                                            ListaIngresosVoucher.Add(new IngresosDeduccionesVoucher
+                                            {
+                                                concepto = $"{cantidadSeptimosDias}x séptimo día",
+                                                monto = Math.Round(resultSeptimoDia, 2)
+                                            });
+                                        }
+                                        #endregion
 
                                         //total ingresos
-                                        totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones;
+                                        totalIngresosEmpleado = totalSalario + totalComisiones + totalHorasExtras + totalBonificaciones + totalVacaciones + totalHorasPermiso + resultSeptimoDia;
 
                                         #endregion
 
@@ -408,11 +510,18 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                             //sumar las deducciones
                                             colaboradorDeducciones += Math.Round((decimal)(SalarioBase * porcentajeColaborador) / 100, 2);
-
+                                            //Voucher
                                             ListaDeduccionesVoucher.Add(new IngresosDeduccionesVoucher
                                             {
                                                 concepto = iterDeducciones.cde_DescripcionDeduccion,
                                                 monto = Math.Round((decimal)(SalarioBase * porcentajeColaborador) / 100, 2)
+                                            });
+
+                                            //Historial de deducciones
+                                            lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                            {
+                                                cde_IdDeducciones = iterDeducciones.cde_IdDeducciones,
+                                                hidp_Total = Math.Round((decimal)(SalarioBase * porcentajeColaborador) / 100, 2)
                                             });
                                         }
 
@@ -433,6 +542,12 @@ namespace ERP_GMEDINA.Controllers
                                                 {
                                                     concepto = $"{oDeduInstiFinancierasIterador.tbInstitucionesFinancieras.insf_DescInstitucionFinanc} {oDeduInstiFinancierasIterador.deif_Comentarios}",
                                                     monto = Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2)
+                                                });
+                                                //Historial de deducciones
+                                                lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                                {
+                                                    cde_IdDeducciones = oDeduInstiFinancierasIterador.cde_IdDeducciones,
+                                                    hidp_Total = Math.Round((decimal)oDeduInstiFinancierasIterador.deif_Monto, 2)
                                                 });
                                             }
                                         }
@@ -475,6 +590,13 @@ namespace ERP_GMEDINA.Controllers
                                                     concepto = oDeduccionesExtrasColaboradorIterador.dex_ObservacionesComentarios,
                                                     monto = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
                                                 });
+
+                                                //Historial de deducciones
+                                                lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                                {
+                                                    cde_IdDeducciones = oDeduccionesExtrasColaboradorIterador.cde_IdDeducciones,
+                                                    hidp_Total = Math.Round((decimal)oDeduccionesExtrasColaboradorIterador.dex_Cuota, 2)
+                                                });
                                             }
                                         }
 
@@ -496,11 +618,28 @@ namespace ERP_GMEDINA.Controllers
                                                     concepto = $"Adelanto sueldo ({oAdelantosSueldoIterador.adsu_RazonAdelanto})",
                                                     monto = Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2)
                                                 });
+                                                //Historial de deducciones
+                                                lisHistorialDeducciones.Add(new tbHistorialDeduccionPago
+                                                {
+                                                    cde_IdDeducciones = 9,
+                                                    hidp_Total = Math.Round((decimal)oAdelantosSueldoIterador.adsu_Monto, 2)
+                                                });
                                             }
                                         }
 
                                         //ISR
+                                        decimal rentaNetaGravable = (decimal)320902.78;
+                                        tbISR oRangoInicial = db.tbISR.Take(1).OrderByDescending(x => x.isr_RangoInicial).FirstOrDefault();
+                                        tbISR oRangoFinal = db.tbISR.Take(1).OrderByDescending(x => x.isr_RangoFinal).FirstOrDefault();
+                                        List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
 
+
+
+
+
+
+
+                                        //totales
                                         totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP;
                                         netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
 
@@ -519,6 +658,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalVentas = totalVentas;
                                         oPlanillaEmpleado.totalComisiones = totalComisiones;
                                         oPlanillaEmpleado.horasExtras = horasExtrasTrabajadas;
+                                        oPlanillaEmpleado.totalHorasPermiso = totalHorasPermiso;
                                         oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
@@ -553,7 +693,7 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         #region Enviar comprobante de pago por email
-                                        if (enviarEmail!=null && enviarEmail ==true)
+                                        if (enviarEmail != null && enviarEmail == true)
                                         {
                                             oComprobantePagoModel.EmailAsunto = "Comprobante de pago";
                                             oComprobantePagoModel.NombreColaborador = empleadoActual.tbPersonas.per_Nombres + " " + empleadoActual.tbPersonas.per_Apellidos;
@@ -578,17 +718,16 @@ namespace ERP_GMEDINA.Controllers
                                                 }
 
                                             }
-                                            catch (Exception)
+                                            catch (Exception ex)
                                             {
                                                 errores++;
                                             }
-                                        }                                        
+                                        }
                                         #endregion
 
-                                        #region guardar en el historial de pago
+                                        #region guardar en el historial de pago                                     
 
-                                        tbHistorialDePago oHistorialPagoEncabezado = new tbHistorialDePago();                                        
-
+                                        tbHistorialDePago oHistorialPagoEncabezado = new tbHistorialDePago();
                                         oHistorialPagoEncabezado.hipa_IdHistorialDePago = db.tbHistorialDePago.Max(x => x.hipa_IdHistorialDePago) + contador;
                                         oHistorialPagoEncabezado.emp_Id = empleadoActual.emp_Id;
                                         oHistorialPagoEncabezado.hipa_SueldoNeto = Math.Round((decimal)netoAPagarColaborador, 2);
@@ -603,37 +742,97 @@ namespace ERP_GMEDINA.Controllers
                                         oHistorialPagoEncabezado.hipa_TotalISR = totalISR;
                                         oHistorialPagoEncabezado.hipa_ISRPendiente = true;
                                         oHistorialPagoEncabezado.hipa_AFP = totalAFP;
-                                        db.tbHistorialDePago.Add(oHistorialPagoEncabezado);
+
+                                        //db.tbHistorialDePago.Add(oHistorialPagoEncabezado);
+                                        //Ejecutar el procedimiento almacenado
+                                        listHistorialPago = db.UDP_Plani_tbHistorialDePago_Insert(oHistorialPagoEncabezado.emp_Id,
+                                                                                                oHistorialPagoEncabezado.hipa_SueldoNeto,
+                                                                                                oHistorialPagoEncabezado.hipa_FechaInicio,
+                                                                                                oHistorialPagoEncabezado.hipa_FechaFin,
+                                                                                                oHistorialPagoEncabezado.hipa_FechaPago,
+                                                                                                oHistorialPagoEncabezado.hipa_Anio,
+                                                                                                oHistorialPagoEncabezado.hipa_Mes,
+                                                                                                oHistorialPagoEncabezado.peri_IdPeriodo,
+                                                                                                oHistorialPagoEncabezado.hipa_UsuarioCrea,
+                                                                                                oHistorialPagoEncabezado.hipa_FechaCrea,
+                                                                                                oHistorialPagoEncabezado.hipa_TotalISR,
+                                                                                                oHistorialPagoEncabezado.hipa_ISRPendiente,
+                                                                                                oHistorialPagoEncabezado.hipa_AFP);
+
+                                        //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                                        foreach (UDP_Plani_tbHistorialDePago_Insert_Result Resultado in listHistorialPago)
+                                            MensajeError = Resultado.MensajeError;
+
+
+                                        if (MensajeError.StartsWith("-1"))
+                                        {
+                                            //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                                            dt.Rows.Add(empleadoActual.tbPersonas.per_Nombres + ' ' + empleadoActual.tbPersonas.per_Apellidos,
+                                                    "Ocurrió un error al generar la planilla de este empleado.");
+                                            errores++;
+                                        }
+                                        //si el encabezado del historial de pago se registró correctamente, guardar los detalles
+                                        else
+                                        {
+                                            //guardar en el detalle de deducciones del historial de pago
+                                            foreach (var hisorialDeduccioneIterado in lisHistorialDeducciones)
+                                            {
+                                                int idDetalle = db.tbHistorialDeduccionPago.DefaultIfEmpty().Max(x => x.hidp_IdHistorialdeDeduPago);
+                                                hisorialDeduccioneIterado.hidp_IdHistorialdeDeduPago = idDetalle != null ? idDetalle + idDetalleDeduccionHisotorialesContador : 1;
+                                                hisorialDeduccioneIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
+                                                hisorialDeduccioneIterado.hidp_UsuarioCrea = 1;
+                                                hisorialDeduccioneIterado.hidp_FechaCrea = DateTime.Now;
+                                                db.tbHistorialDeduccionPago.Add(hisorialDeduccioneIterado);
+                                                idDetalleDeduccionHisotorialesContador++;
+
+                                            }
+                                            //guardar en el detalle de ingresos del historial de pago
+                                            foreach (var hisorialIngresosIterado in lisHistorialIngresos)
+                                            {
+                                                int idDetalle = db.tbHistorialDeIngresosPago.DefaultIfEmpty().Max(x => x.hip_IdHistorialDeIngresosPago);
+                                                hisorialIngresosIterado.hip_IdHistorialDeIngresosPago = idDetalle != null ? idDetalle + idDetalleIngresoHisotorialesContador : 1;
+                                                hisorialIngresosIterado.hipa_IdHistorialDePago = int.Parse(MensajeError);
+                                                hisorialIngresosIterado.hip_FechaInicio = fechaInicio;
+                                                hisorialIngresosIterado.hip_FechaFinal = fechaFin;
+                                                hisorialIngresosIterado.hip_UsuarioCrea = 1;
+                                                hisorialIngresosIterado.hip_FechaCrea = DateTime.Now;
+                                                db.tbHistorialDeIngresosPago.Add(hisorialIngresosIterado);
+                                                idDetalleIngresoHisotorialesContador++;
+                                            }
+                                        }
+
+
                                         contador++;
                                         #endregion
 
-
+                                        //guardar cambios en la bbdd
+                                        db.SaveChanges();
+                                        dbContextTransaccion.Commit();
                                     }
                                     //catch por si hubo un error al generar la planilla de un empleado
-                                    catch (Exception)
+                                    catch (Exception ex)
                                     {
+                                        // SI ALGO FALLA, HACER UN ROLLBACK
+                                        dbContextTransaccion.Rollback();
                                         // mensaje del error en el registro del colaborador
                                         dt.Rows.Add(empleadoActual.tbPersonas.per_Nombres + ' ' + empleadoActual.tbPersonas.per_Apellidos,
                                                     "Ocurrió un error al generar la planilla de este empleado.");
                                         errores++;
 
-                                    }                                    
+                                    }
                                 }
-                                //guardar cambios en la bbdd
-                                db.SaveChanges();
-                                dbContextTransaccion.Commit();
                             }
 
-                            //catch por si se produjo un error al procesar una sola planilla
-                            catch (Exception)
-                            {
-                                // SI ALGO FALLA, HACER UN ROLLBACK
-                                dbContextTransaccion.Rollback();
-                                errores++;
-                                dt.Rows.Add($"Ocurrió un error al generar la planilla {nombrePlanilla}.");
-                            }
+                        }
+                        //catch por si se produjo un error al procesar una sola planilla
+                        catch (Exception ex)
+                        {
+
+                            errores++;
+                            dt.Rows.Add($"Ocurrió un error al generar la planilla {nombrePlanilla}.");
                         }
                     }
+
                 }
 
                 //enviar resultado al cliente
@@ -646,7 +845,7 @@ namespace ERP_GMEDINA.Controllers
                     oSLDocument.ImportDataTable(1, 1, dt, true);
                     oSLDocument.SaveAs(direccion);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     response.Response = "Planilla generada, error al crear documento excel.";
                     response.Encabezado = "Advertencia";
@@ -655,14 +854,14 @@ namespace ERP_GMEDINA.Controllers
 
             }
             // catch por si se produjo un error fatal en el proceso generar planilla
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.Response = "El proceso de generación de planillas falló, contacte al adminstrador.";
                 response.Encabezado = "Error";
                 response.Tipo = "error";
             }
             //retornar resultado al cliente
-            return Json (new { Data = reporte, Response = response },JsonRequestBehavior.AllowGet);
+            return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
