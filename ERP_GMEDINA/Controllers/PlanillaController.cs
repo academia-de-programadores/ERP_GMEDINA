@@ -635,8 +635,6 @@ namespace ERP_GMEDINA.Controllers
                                         int AnioActual = DateTime.Now.Year;
                                         DateTime AnioInicio = new DateTime(DateTime.Now.Year, 1, 1);
                                         DateTime AnioFin = new DateTime(DateTime.Now.Year, 12, 31);
-                                        DateTime AnioDC = new DateTime(DateTime.Now.Year, 6, 30);
-                                        DateTime AnioDCA = AnioDC.AddYears(-1);
                                         decimal? ExcesoDecimoTercer = 0;
                                         decimal? ExcesoVacaciones = 0;
                                         decimal? ExcesoDecimoCuarto = 0;
@@ -685,91 +683,74 @@ namespace ERP_GMEDINA.Controllers
                                         #region Excesos
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
-                                        List<V_DecimoTercerMes_Pagados> DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
-                                        foreach (var oDecimo in DecimoTercer)
-                                        {
-                                            if (AnioActual == Convert.ToInt32(oDecimo.dtm_FechaPago.Year))
+                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+                                            if (AnioActual == Convert.ToInt32(DecimoTercer.dtm_FechaPago.Year))
                                             {
                                                 //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                                 Exceso = SalarioMinimo * 10;
 
-                                                if (oDecimo.dtm_Monto > Exceso)
+                                                if  (DecimoTercerdtm_Monto > Exceso)
                                                 {
-                                                    ExcesoDecimoTercer = oDecimo.dtm_Monto - Exceso;
+                                                    ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
                                                 }
                                                 else
                                                 {
                                                     ExcesoDecimoTercer = 0;
                                                 }
                                             }
-                                        }
                                         //-----------------------------------------------------------------------------------------------------------------------------
 
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
-                                        List<V_DecimoCuartoMes_Pagados> DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
-                                        foreach (var oDecimos in DecimoCuarto)
-                                        {
+                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
 
-                                            if (AnioActual == Convert.ToInt32(oDecimos.dcm_FechaPago.Year))
+                                            if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
                                             {
                                                 if (oDecimos.dcm_Monto > Exceso)
                                                 {
-                                                    ExcesoDecimoCuarto = oDecimos.dcm_Monto - Exceso;
+                                                    ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
                                                 }
                                                 else
                                                 {
                                                     ExcesoDecimoCuarto = 0;
                                                 }
                                             }
-                                        }
                                         //-----------------------------------------------------------------------------------------------------------------------------
 
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
-                                        List<tbHistorialDeIngresosPago> objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" || x.cin_IdIngreso == 12).ToList();
+                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).ToList();
 
-                                        foreach (var ovACA in objVacaciones)
-                                        {
-                                            if (ovACA.hip_UnidadesPagar > 30)
+                                            if (objVacaciones.hip_UnidadesPagar > 30)
                                             {
-                                                ExcesoVacaciones = ((ovACA.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
+                                                ExcesoVacaciones = ((objVacaciones.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
                                             }
                                             else
                                             {
                                                 ExcesoVacaciones = 0;
                                             }
-                                        }
 
                                         #endregion
 
                                         #region Gastos Médicos
 
-                                        List<tbAcumuladosISR> objAcumuladosISRMe = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).ToList();
-                                        List<tbAcumuladosISR> objAcumuladosISRMa = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).ToList();
-                                        List<tbEmpleados> objEmpleados = db.tbEmpleados.Where(x => x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).ToList();
+                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).ToList();
+                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).ToList();
+                                        var objEmpleados = db.tbEmpleados.Where(x => x => x.emp_Id == empleadoActual.emp_Id && x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).ToList();
 
-                                        foreach (var oAcumuladoISR in objAcumuladosISRMe)
-                                        {
-                                            foreach (var oAcumuladosISR in objAcumuladosISRMa)
-                                            {
-                                                foreach (var oEmps in objEmpleados)
-                                                {
-                                                    if (oEmps.tbPersonas.per_Edad < 60)
+                                                    if (objEmpleados.tbPersonas.per_Edad < 60)
                                                     {
-                                                        GastosMedicos = oAcumuladoISR.aisr_Monto;
+                                                        GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
                                                     }
                                                     else
                                                     {
-                                                        GastosMedicos = oAcumuladosISR.aisr_Monto;
+                                                        GastosMedicos = objAcumuladosISRMayor.aisr_Monto;
                                                     }
-                                                }
-                                            }
-                                        }
 
                                         #endregion
 
@@ -788,46 +769,34 @@ namespace ERP_GMEDINA.Controllers
                                         //Cálculo con la Tabla Progresiva ISR
                                         RentaNetaGravable = (Decimal)320902.78;
                                         //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
-                                        List<tbISR> objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).ToList();
-                                        List<tbISR> objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).ToList();
-                                        List<tbISR> objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).ToList();
-                                        List<tbISR> objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).ToList();
+                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).ToList();
+                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).ToList();
+                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).ToList();
+                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).ToList();
 
-                                        foreach (var oExcento in objISRExcento)
+                                        if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
                                         {
-                                            foreach (var oBajo in objISRBajo)
-                                            {
-                                                foreach (var oMedio in objISRMedio)
-                                                {
-                                                    foreach (var oAlto in objISRAlto)
-                                                    {
-                                                        if (RentaNetaGravable > oAlto.isr_RangoInicial)
-                                                        {
-                                                            ISR = (RentaNetaGravable - oAlto.isr_RangoInicial) *
-                                                                  (oAlto.isr_Porcentaje / 100) + (oMedio.isr_RangoFinal - oMedio.isr_RangoInicial) *
-                                                                  (oMedio.isr_Porcentaje / 100) + (oBajo.isr_RangoFinal - oBajo.isr_RangoInicial) *
-                                                                  (oBajo.isr_Porcentaje / 100);
-                                                        }
-                                                        else if (RentaNetaGravable > oMedio.isr_RangoInicial)
-                                                        {
-                                                            ISR = (RentaNetaGravable - oMedio.isr_RangoInicial) *
-                                                                  (oMedio.isr_Porcentaje / 100) + (oBajo.isr_RangoFinal - oBajo.isr_RangoInicial) *
-                                                                  (oBajo.isr_Porcentaje / 100);
-                                                        }
-                                                        else if (RentaNetaGravable > oBajo.isr_RangoInicial)
-                                                        {
-                                                            ISR = (RentaNetaGravable - oBajo.isr_RangoInicial) *
-                                                                  (oBajo.isr_Porcentaje / 100);
-                                                        }
-                                                        else if (RentaNetaGravable <= oExcento.isr_RangoFinal)
-                                                        {
-                                                            ISR = (RentaNetaGravable - oExcento.isr_RangoFinal) *
-                                                                  (oExcento.isr_Porcentaje / 100);
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                            ISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
+                                                  (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
+                                                  (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                  (objISRBajo.isr_Porcentaje / 100);
                                         }
+                                        else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
+                                        {
+                                            ISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
+                                                  (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                  (objISRBajo.isr_Porcentaje / 100);
+                                        }
+                                        else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
+                                        {
+                                            ISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
+                                                  (objISRBajo.isr_Porcentaje / 100);
+                                        }
+                                        else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
+                                        {
+                                            ISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
+                                                  (objISRExcento.isr_Porcentaje / 100);
+                                        }   
                                         #endregion
                                         #endregion
 
