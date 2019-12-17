@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             var tbRequisiciones = db.tbRequisiciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+
             return View(tbRequisiciones.ToList());
         }
 
@@ -129,7 +130,7 @@ namespace ERP_GMEDINA.Controllers
                             case "H":
                                 tbHabilidades Habi = new tbHabilidades();
                                 Habi.habi_Descripcion = X.Descripcion;
-                                Data.Habilidaes.Add(Habi);
+                                Data.Habilidades.Add(Habi);
                                 break;
 
                             case "I":

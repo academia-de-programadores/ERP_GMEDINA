@@ -48,8 +48,8 @@ function format(obj) {
  + '<div id="collapseHabilidades' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
    + '<div class="panel-body">';
 
- if (obj.Habilidaes.length > 0)
-     obj.Habilidaes.forEach(function (index, value) {
+ if (obj.Habilidades.length > 0)
+     obj.Habilidades.forEach(function (index, value) {
          div = div + index.habi_Descripcion + '<br>';
      })
  else
