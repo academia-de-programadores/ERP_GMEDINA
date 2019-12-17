@@ -21,6 +21,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hper_fechaFin { get; set; }
         public int hper_Duracion { get; set; }
         public string hper_Observacion { get; set; }
+        public Nullable<bool> hper_Justificado { get; set; }
         public int hper_PorcentajeIndemnizado { get; set; }
         public bool hper_Estado { get; set; }
         public string hper_RazonInactivo { get; set; }
@@ -28,7 +29,6 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hper_FechaCrea { get; set; }
         public Nullable<int> hper_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hper_FechaModifica { get; set; }
-        public Nullable<bool> hper_Justificado { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

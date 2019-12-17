@@ -268,12 +268,6 @@
     </Compile>
     <Compile Include="Models\LiquidacionViewModel.cs" />
     <Compile Include="Models\ReportePlanillaViewModel.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -544,9 +538,6 @@
     <Compile Include="Models\UDP_Plani_CatalogoDeIngresosEdit_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_EmpleadoComisiones_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -598,7 +589,7 @@
     <Compile Include="Models\UDP_Plani_tbAFP_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete_Result.cs">
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete_Result1.cs">
@@ -673,9 +664,6 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -685,9 +673,6 @@
     <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbFormaPago_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbFormaPago_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -695,6 +680,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbFormaPago_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbHistorialDePago_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Insert_Result.cs">
@@ -727,9 +715,6 @@
     <Compile Include="Models\UDP_Plani_tbTechosDeducciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Activar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -737,15 +722,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbTipoDeduccion_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbEmpresas_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result.cs">
@@ -1272,13 +1248,6 @@
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Scripts\api\spanish.json" />
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-    </Content>
     <Content Include="DataSets\ReportesPlanillaDS.xsc">
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
     </Content>
@@ -1290,6 +1259,13 @@
     </None>
     <Content Include="DataSets\ReportesPlanillaDS.xss">
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

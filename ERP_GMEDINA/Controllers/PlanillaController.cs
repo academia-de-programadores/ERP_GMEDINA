@@ -627,23 +627,219 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
 
-                                        //ISR
-                                        decimal rentaNetaGravable = (decimal)320902.78;
-                                        tbISR oRangoInicial = db.tbISR.Take(1).OrderByDescending(x => x.isr_RangoInicial).FirstOrDefault();
-                                        tbISR oRangoFinal = db.tbISR.Take(1).OrderByDescending(x => x.isr_RangoFinal).FirstOrDefault();
-                                        List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
+                                        #region ISR
+
+                                        #region Declaracion de Variables
+                                        decimal ISR = 0;
+                                        decimal SalarioMinimo = 9443.24M;
+                                        int AnioActual = DateTime.Now.Year;
+                                        DateTime AnioInicio = new DateTime(DateTime.Now.Year, 1, 1);
+                                        DateTime AnioFin = new DateTime(DateTime.Now.Year, 12, 31);
+                                        DateTime AnioDC = new DateTime(DateTime.Now.Year, 6, 30);
+                                        DateTime AnioDCA = AnioDC.AddYears(-1);
+                                        decimal? ExcesoDecimoTercer = 0;
+                                        decimal? ExcesoVacaciones = 0;
+                                        decimal? ExcesoDecimoCuarto = 0;
+                                        decimal Exceso = 0;
+                                        decimal SueldoAnual = 0;
+                                        decimal GastosMedicos = 0;
+                                        decimal TotalIngresosGravables = 0;
+                                        decimal SueldoBaseActual = 0;
+                                        decimal TotalDeduccionesGravables = 0;
+                                        decimal RentaNetaGravable = 0;
+                                        var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
+                                        #endregion
+
+                                        #region Sueldo Promedio Anual
+                                        //Sueldo redondeado del Colaborador
+                                        DateTime anioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
+                                        decimal SueldoAnualISR = 0;
+
+                                        //Obtener los pagos mensuales totales
+                                        var mesesPago = (db.tbHistorialDePago
+                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == anioActualEnero.Year)
+                                            .OrderBy(x => x.hipa_Mes)
+                                            .GroupBy(x => x.hipa_Mes).Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
+
+                                        DateTime fechaIngresoEmpleado = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                                        bool esMensual = false;
+
+                                        TimeSpan diferencia = anioActualEnero - fechaIngresoEmpleado;
+
+                                        if (TimeSpan.Zero > diferencia)
+                                            esMensual = true;
 
 
+                                        //Saber que mes entro
+                                        int mes = fechaIngresoEmpleado.Month;
+                                        decimal SalarioPromedioAnualPagadoAlAnio = 0;
+                                        decimal salarioPromedioAnualPagadoAlMes = 0;
+                                        decimal totalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
+                                        ref SueldoAnualISR,
+                                        mesesPago,
+                                        esMensual,
+                                        ref SalarioPromedioAnualPagadoAlAnio,
+                                        ref salarioPromedioAnualPagadoAlMes);
+                                        #endregion
+
+                                        #region Excesos
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Décimo Tercer Mes
+                                        List<V_DecimoTercerMes_Pagados> DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+                                        foreach (var oDecimo in DecimoTercer)
+                                        {
+                                            if (AnioActual == Convert.ToInt32(oDecimo.dtm_FechaPago.Year))
+                                            {
+                                                //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                                Exceso = SalarioMinimo * 10;
+
+                                                if (oDecimo.dtm_Monto > Exceso)
+                                                {
+                                                    ExcesoDecimoTercer = oDecimo.dtm_Monto - Exceso;
+                                                }
+                                                else
+                                                {
+                                                    ExcesoDecimoTercer = 0;
+                                                }
+                                            }
+                                        }
+                                        //-----------------------------------------------------------------------------------------------------------------------------
 
 
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Décimo Cuarto Mes
+                                        List<V_DecimoCuartoMes_Pagados> DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+                                        foreach (var oDecimos in DecimoCuarto)
+                                        {
+                                            //Salario Mínimo Mensual por 10 Meses (Según SAR)
+                                            Exceso = SalarioMinimo * 10;
+
+                                            if (AnioActual == Convert.ToInt32(oDecimos.dcm_FechaPago.Year))
+                                            {
+                                                if (oDecimos.dcm_Monto > Exceso)
+                                                {
+                                                    ExcesoDecimoCuarto = oDecimos.dcm_Monto - Exceso;
+                                                }
+                                                else
+                                                {
+                                                    ExcesoDecimoCuarto = 0;
+                                                }
+                                            }
+                                        }
+                                        //-----------------------------------------------------------------------------------------------------------------------------
 
 
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Exceso Vacaciones
+                                        List<tbHistorialDeIngresosPago> objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" || x.cin_IdIngreso == 12).ToList();
+
+                                        foreach (var ovACA in objVacaciones)
+                                        {
+                                            if (ovACA.hip_UnidadesPagar > 30)
+                                            {
+                                                ExcesoVacaciones = ((ovACA.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
+                                            }
+                                            else
+                                            {
+                                                ExcesoVacaciones = 0;
+                                            }
+                                        }
+
+                                        #endregion
+
+                                        #region Gastos Médicos
+
+                                        List<tbAcumuladosISR> objAcumuladosISRMe = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).ToList();
+                                        List<tbAcumuladosISR> objAcumuladosISRMa = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).ToList();
+                                        List<tbEmpleados> objEmpleados = db.tbEmpleados.Where(x => x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).ToList();
+
+                                        foreach (var oAcumuladoISR in objAcumuladosISRMe)
+                                        {
+                                            foreach (var oAcumuladosISR in objAcumuladosISRMa)
+                                            {
+                                                foreach (var oEmps in objEmpleados)
+                                                {
+                                                    if (oEmps.tbPersonas.per_Edad < 60)
+                                                    {
+                                                        GastosMedicos = oAcumuladoISR.aisr_Monto;
+                                                    }
+                                                    else
+                                                    {
+                                                        GastosMedicos = oAcumuladosISR.aisr_Monto;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        #endregion
+
+                                        #region Total ISR Calcular
+                                        //-----------------------------------------------------------------------------------------------------------------------------
+                                        //Total Ingresos Gravables
+                                        TotalIngresosGravables = SueldoAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones /*+ totalBonificaciones + totalHorasExtras + totalComisiones*/;
+
+                                        //Total Deducciones Gravables
+                                        TotalDeduccionesGravables = GastosMedicos;
+
+                                        //Renta Neta Gravable
+                                        RentaNetaGravable = TotalIngresosGravables + TotalDeduccionesGravables;
+
+                                        #region Tabla Progresiva para Deducir ISR
+                                        //Cálculo con la Tabla Progresiva ISR
+                                        RentaNetaGravable = (Decimal)320902.78;
+                                        //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
+                                        List<tbISR> objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).ToList();
+                                        List<tbISR> objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).ToList();
+                                        List<tbISR> objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).ToList();
+                                        List<tbISR> objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).ToList();
+
+                                        foreach (var oExcento in objISRExcento)
+                                        {
+                                            foreach (var oBajo in objISRBajo)
+                                            {
+                                                foreach (var oMedio in objISRMedio)
+                                                {
+                                                    foreach (var oAlto in objISRAlto)
+                                                    {
+                                                        if (RentaNetaGravable > oAlto.isr_RangoInicial)
+                                                        {
+                                                            ISR = (RentaNetaGravable - oAlto.isr_RangoInicial) *
+                                                                  (oAlto.isr_Porcentaje / 100) + (oMedio.isr_RangoFinal - oMedio.isr_RangoInicial) *
+                                                                  (oMedio.isr_Porcentaje / 100) + (oBajo.isr_RangoFinal - oBajo.isr_RangoInicial) *
+                                                                  (oBajo.isr_Porcentaje / 100);
+                                                        }
+                                                        else if (RentaNetaGravable > oMedio.isr_RangoInicial)
+                                                        {
+                                                            ISR = (RentaNetaGravable - oMedio.isr_RangoInicial) *
+                                                                  (oMedio.isr_Porcentaje / 100) + (oBajo.isr_RangoFinal - oBajo.isr_RangoInicial) *
+                                                                  (oBajo.isr_Porcentaje / 100);
+                                                        }
+                                                        else if (RentaNetaGravable > oBajo.isr_RangoInicial)
+                                                        {
+                                                            ISR = (RentaNetaGravable - oBajo.isr_RangoInicial) *
+                                                                  (oBajo.isr_Porcentaje / 100);
+                                                        }
+                                                        else if (RentaNetaGravable <= oExcento.isr_RangoFinal)
+                                                        {
+                                                            ISR = (RentaNetaGravable - oExcento.isr_RangoFinal) *
+                                                                  (oExcento.isr_Porcentaje / 100);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        #endregion
+                                        #endregion
+
+                                        #endregion
+
+                                        #endregion
 
                                         //totales
                                         totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP;
                                         netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
 
-                                        #endregion
+
 
                                         #region crear registro de la planilla del colaborador para el reporte
 
@@ -872,6 +1068,46 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, ref decimal SueldoAnualISR, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
+        {
+            if (esMensual)
+            {
+                //Si es el primer mes a cobrar
+                if (mesesPago == null)
+                    SueldoAnualISR = ((netoAPagarColaborador * 12) / 12) ?? 0;
+
+
+                int cantidadMesesPagados = mesesPago.Count;
+
+
+                decimal promedioMesesPago = mesesPago.Average();
+
+
+                decimal sueldoProyeccion = 0;
+
+
+                //TODO: faltan los meses que no se le va a pagar
+                //Sacar el sueldo de los meses restantes
+                for (int i = cantidadMesesPagados; i <= 12; i++)
+                {
+                    sueldoProyeccion += promedioMesesPago;
+                }
+
+
+                salarioPromedioAnualPagadoAlMes = mesesPago.Sum() + sueldoProyeccion;
+            }
+            else
+            {
+                if (DateTime.Now.Month == 12)
+                    //Calcular todas las fechas de este año, aunque haya entrado 
+                    SalarioPromedioAnualPagadoAlAnio = mesesPago.Sum();
+            }
+
+
+            return (salarioPromedioAnualPagadoAlMes > 0) ? salarioPromedioAnualPagadoAlMes : SalarioPromedioAnualPagadoAlAnio;
+        }
+
     }
 
     class iziToast
