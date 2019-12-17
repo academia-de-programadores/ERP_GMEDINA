@@ -689,7 +689,7 @@ namespace ERP_GMEDINA.Controllers
                                                 //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                                 Exceso = SalarioMinimo * 10;
 
-                                                if  (DecimoTercer,dtm_Monto > Exceso)
+                                                if  (DecimoTercer.dtm_Monto > Exceso)
                                                 {
                                                     ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
                                                 }
@@ -724,7 +724,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
-                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
+                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbHistorialDePago.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
 
                                             if (objVacaciones.hip_UnidadesPagar > 30)
                                             {
@@ -741,7 +741,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
                                         var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
-                                        var objEmpleados = db.tbEmpleados.Where(x => x => x.emp_Id == empleadoActual.emp_Id && x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
+                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
 
                                                     if (objEmpleados.tbPersonas.per_Edad < 60)
                                                     {
