@@ -683,13 +683,13 @@ namespace ERP_GMEDINA.Controllers
                                         #region Excesos
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
-                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
                                             if (AnioActual == Convert.ToInt32(DecimoTercer.dtm_FechaPago.Year))
                                             {
                                                 //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                                 Exceso = SalarioMinimo * 10;
 
-                                                if  (DecimoTercerdtm_Monto > Exceso)
+                                                if  (DecimoTercer,dtm_Monto > Exceso)
                                                 {
                                                     ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
                                                 }
@@ -703,14 +703,14 @@ namespace ERP_GMEDINA.Controllers
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
-                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).ToList();
+                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
 
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
 
                                             if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
                                             {
-                                                if (oDecimos.dcm_Monto > Exceso)
+                                                if (DecimoCuarto.dcm_Monto > Exceso)
                                                 {
                                                     ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
                                                 }
@@ -724,7 +724,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
-                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).ToList();
+                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
 
                                             if (objVacaciones.hip_UnidadesPagar > 30)
                                             {
@@ -739,9 +739,9 @@ namespace ERP_GMEDINA.Controllers
 
                                         #region Gastos Médicos
 
-                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).ToList();
-                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).ToList();
-                                        var objEmpleados = db.tbEmpleados.Where(x => x => x.emp_Id == empleadoActual.emp_Id && x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).ToList();
+                                        var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
+                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
+                                        var objEmpleados = db.tbEmpleados.Where(x => x => x.emp_Id == empleadoActual.emp_Id && x.emp_Estado == true).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
 
                                                     if (objEmpleados.tbPersonas.per_Edad < 60)
                                                     {
@@ -769,10 +769,10 @@ namespace ERP_GMEDINA.Controllers
                                         //Cálculo con la Tabla Progresiva ISR
                                         RentaNetaGravable = (Decimal)320902.78;
                                         //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
-                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).ToList();
-                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).ToList();
-                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).ToList();
-                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).ToList();
+                                        var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
+                                        var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
+                                        var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();
+                                        var objISRAlto = db.tbISR.Where(x => x.isr_Id == 4).FirstOrDefault();
 
                                         if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
                                         {
