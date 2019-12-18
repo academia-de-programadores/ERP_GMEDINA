@@ -31,6 +31,8 @@ namespace ERP_GMEDINA.Models
             this.tbTipoAmonestaciones1 = new HashSet<tbTipoAmonestaciones>();
             this.tbDepartamentos = new HashSet<tbDepartamentos>();
             this.tbDepartamentos1 = new HashSet<tbDepartamentos>();
+            this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
+            this.tbHistorialVacaciones1 = new HashSet<tbHistorialVacaciones>();
         }
     
         public int usu_Id { get; set; }
@@ -72,5 +74,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDepartamentos> tbDepartamentos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones1 { get; set; }
     }
 }

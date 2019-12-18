@@ -37,6 +37,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
+        public virtual DbSet<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
+        public virtual DbSet<V_Historialvacaciones> V_Historialvacaciones { get; set; }
+        public virtual DbSet<V_HVacacionesEmpleados> V_HVacacionesEmpleados { get; set; }
     
         public virtual ObjectResult<UDP_Plani_CatalogoDeduccionesEdit_Select_Result1> UDP_Plani_CatalogoDeduccionesEdit_Select(Nullable<int> cpla_IdPlanilla)
         {
@@ -2940,6 +2943,69 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Delete_Result> UDP_RRHH_tbHistorialVacaciones_Delete(Nullable<int> hvac_Id, string hvac_RazonInactivo, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
+        {
+            var hvac_IdParameter = hvac_Id.HasValue ?
+                new ObjectParameter("hvac_Id", hvac_Id) :
+                new ObjectParameter("hvac_Id", typeof(int));
+    
+            var hvac_RazonInactivoParameter = hvac_RazonInactivo != null ?
+                new ObjectParameter("hvac_RazonInactivo", hvac_RazonInactivo) :
+                new ObjectParameter("hvac_RazonInactivo", typeof(string));
+    
+            var hvac_UsuarioModificaParameter = hvac_UsuarioModifica.HasValue ?
+                new ObjectParameter("hvac_UsuarioModifica", hvac_UsuarioModifica) :
+                new ObjectParameter("hvac_UsuarioModifica", typeof(int));
+    
+            var hvac_FechaModificaParameter = hvac_FechaModifica.HasValue ?
+                new ObjectParameter("hvac_FechaModifica", hvac_FechaModifica) :
+                new ObjectParameter("hvac_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Delete_Result>("UDP_RRHH_tbHistorialVacaciones_Delete", hvac_IdParameter, hvac_RazonInactivoParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Insert_Result> UDP_RRHH_tbHistorialVacaciones_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> hvac_FechaInicio, Nullable<System.DateTime> hvac_FechaFin, Nullable<int> hvac_UsuarioCrea, Nullable<System.DateTime> hvac_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var hvac_FechaInicioParameter = hvac_FechaInicio.HasValue ?
+                new ObjectParameter("hvac_FechaInicio", hvac_FechaInicio) :
+                new ObjectParameter("hvac_FechaInicio", typeof(System.DateTime));
+    
+            var hvac_FechaFinParameter = hvac_FechaFin.HasValue ?
+                new ObjectParameter("hvac_FechaFin", hvac_FechaFin) :
+                new ObjectParameter("hvac_FechaFin", typeof(System.DateTime));
+    
+            var hvac_UsuarioCreaParameter = hvac_UsuarioCrea.HasValue ?
+                new ObjectParameter("hvac_UsuarioCrea", hvac_UsuarioCrea) :
+                new ObjectParameter("hvac_UsuarioCrea", typeof(int));
+    
+            var hvac_FechaCreaParameter = hvac_FechaCrea.HasValue ?
+                new ObjectParameter("hvac_FechaCrea", hvac_FechaCrea) :
+                new ObjectParameter("hvac_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Insert_Result>("UDP_RRHH_tbHistorialVacaciones_Insert", emp_IdParameter, hvac_FechaInicioParameter, hvac_FechaFinParameter, hvac_UsuarioCreaParameter, hvac_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialVacaciones_Restore_Result> UDP_RRHH_tbHistorialVacaciones_Restore(Nullable<int> hvac_Id, Nullable<int> hvac_UsuarioModifica, Nullable<System.DateTime> hvac_FechaModifica)
+        {
+            var hvac_IdParameter = hvac_Id.HasValue ?
+                new ObjectParameter("hvac_Id", hvac_Id) :
+                new ObjectParameter("hvac_Id", typeof(int));
+    
+            var hvac_UsuarioModificaParameter = hvac_UsuarioModifica.HasValue ?
+                new ObjectParameter("hvac_UsuarioModifica", hvac_UsuarioModifica) :
+                new ObjectParameter("hvac_UsuarioModifica", typeof(int));
+    
+            var hvac_FechaModificaParameter = hvac_FechaModifica.HasValue ?
+                new ObjectParameter("hvac_FechaModifica", hvac_FechaModifica) :
+                new ObjectParameter("hvac_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialVacaciones_Restore_Result>("UDP_RRHH_tbHistorialVacaciones_Restore", hvac_IdParameter, hvac_UsuarioModificaParameter, hvac_FechaModificaParameter);
         }
     }
 }

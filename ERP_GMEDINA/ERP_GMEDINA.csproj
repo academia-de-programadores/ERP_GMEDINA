@@ -168,6 +168,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
+    <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +203,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbHistorialAudienciaDescargo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbHistorialVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
@@ -375,6 +379,15 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -397,6 +410,12 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Historialvacaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -644,6 +663,7 @@
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />
@@ -1244,6 +1264,12 @@
     <Content Include="Views\HistorialAmonestaciones\_Create.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\_Delete.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\_Detalles.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Create.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Delete.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Details.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Edit.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Index.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,6 +37,12 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialVacaciones" Width="1.5" PointX="10.5" PointY="5.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Historialvacaciones" Width="1.5" PointX="12.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" Width="1.5" PointX="9.375" PointY="0.75" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

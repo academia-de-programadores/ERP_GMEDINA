@@ -107,6 +107,25 @@
           <Property Name="aude_UsuarioModifica" Type="int" />
           <Property Name="aude_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbHistorialVacaciones">
+          <Key>
+            <PropertyRef Name="hvac_Id" />
+          </Key>
+          <Property Name="hvac_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hvac_CantDias" Type="int" />
+          <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_AnioVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_Estado" Type="bit" Nullable="false" />
+          <Property Name="hvac_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hvac_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hvac_UsuarioModifica" Type="int" />
+          <Property Name="hvac_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -195,6 +214,60 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hamo_UsuarioModifica" Type="int" />
           <Property Name="hamo_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Historialvacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Historialvacaciones">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="hvac_Id" />
+            <PropertyRef Name="hvac_FechaInicio" />
+            <PropertyRef Name="hvac_FechaFin" />
+            <PropertyRef Name="hvac_DiasPagados" />
+            <PropertyRef Name="hvac_MesVacaciones" />
+            <PropertyRef Name="hvac_AnioVacaciones" />
+            <PropertyRef Name="hvac_Estado" />
+            <PropertyRef Name="hvac_UsuarioCrea" />
+            <PropertyRef Name="hvac_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="hvac_Id" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
+          <Property Name="hvac_CantDias" Type="int" />
+          <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_AnioVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_Estado" Type="bit" Nullable="false" />
+          <Property Name="hvac_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hvac_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hvac_UsuarioModifica" Type="int" />
+          <Property Name="hvac_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HVacacionesEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_NombreCompleto" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
@@ -316,6 +389,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="hvac_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="hvac_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
@@ -424,6 +521,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbHistorialVacaciones" Type="Self.tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="1" />
           <End Role="tbHistorialAmonestaciones1" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
@@ -460,37 +569,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="UDP_dbo_tbFasesReclutamiento_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fare_id" Type="int" Mode="In" />
         </Function>
@@ -886,12 +964,29 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialContrataciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hcon_Id" Type="int" Mode="In" />
           <Parameter Name="scan_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="hcon_FechaContratado" Type="date" Mode="In" />
           <Parameter Name="hcon_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hcon_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hvac_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hvac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="hvac_FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="hvac_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hvac_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_Id" Type="int" Mode="In" />
@@ -1186,6 +1281,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialAmonestaciones" EntityType="Self.tbHistorialAmonestaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialAudienciaDescargo" EntityType="Self.tbHistorialAudienciaDescargo" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbHistorialVacaciones" EntityType="Self.tbHistorialVacaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="Self.V_EmpleadoAmonestaciones" store:Type="Views" store:Schema="rrhh">
@@ -1217,6 +1313,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
     [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
     [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
     FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Historialvacaciones" EntityType="Self.V_Historialvacaciones" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_Historialvacaciones].[emp_Id] AS [emp_Id], 
+    [V_Historialvacaciones].[emp_nombre] AS [emp_nombre], 
+    [V_Historialvacaciones].[emp_Estado] AS [emp_Estado], 
+    [V_Historialvacaciones].[hvac_Id] AS [hvac_Id], 
+    [V_Historialvacaciones].[hvac_FechaInicio] AS [hvac_FechaInicio], 
+    [V_Historialvacaciones].[hvac_FechaFin] AS [hvac_FechaFin], 
+    [V_Historialvacaciones].[hvac_CantDias] AS [hvac_CantDias], 
+    [V_Historialvacaciones].[hvac_DiasPagados] AS [hvac_DiasPagados], 
+    [V_Historialvacaciones].[hvac_MesVacaciones] AS [hvac_MesVacaciones], 
+    [V_Historialvacaciones].[hvac_AnioVacaciones] AS [hvac_AnioVacaciones], 
+    [V_Historialvacaciones].[hvac_Estado] AS [hvac_Estado], 
+    [V_Historialvacaciones].[hvac_RazonInactivo] AS [hvac_RazonInactivo], 
+    [V_Historialvacaciones].[hvac_UsuarioCrea] AS [hvac_UsuarioCrea], 
+    [V_Historialvacaciones].[hvac_FechaCrea] AS [hvac_FechaCrea], 
+    [V_Historialvacaciones].[hvac_UsuarioModifica] AS [hvac_UsuarioModifica], 
+    [V_Historialvacaciones].[hvac_FechaModifica] AS [hvac_FechaModifica]
+    FROM [rrhh].[V_Historialvacaciones] AS [V_Historialvacaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HVacacionesEmpleados" EntityType="Self.V_HVacacionesEmpleados" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HVacacionesEmpleados].[emp_Id] AS [emp_Id], 
+    [V_HVacacionesEmpleados].[emp_NombreCompleto] AS [emp_NombreCompleto], 
+    [V_HVacacionesEmpleados].[car_Id] AS [car_Id], 
+    [V_HVacacionesEmpleados].[car_Descripcion] AS [car_Descripcion], 
+    [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id], 
+    [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion], 
+    [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado]
+    FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -1258,6 +1385,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
@@ -1293,6 +1428,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="Self.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
@@ -1605,7 +1744,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <Parameter Name="tpdd_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleDeduccion_Update_Result)">
-          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Insert_Result)">
@@ -1615,7 +1754,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <Parameter Name="tpdi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Update_Result)">
-          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(Int32)">
@@ -2241,6 +2380,39 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
           <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" />
+          <EntitySet Name="tbHistorialVacaciones" EntityType="ERP_GMEDINAModel.tbHistorialVacaciones" />
+          <EntitySet Name="V_Historialvacaciones" EntityType="ERP_GMEDINAModel.V_Historialvacaciones" />
+          <EntitySet Name="V_HVacacionesEmpleados" EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result)">
+            <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hvac_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hvac_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result)">
+            <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -2472,6 +2644,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamentos" />
           <NavigationProperty Name="tbDepartamentos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbHistorialVacaciones" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialVacaciones" />
+          <NavigationProperty Name="tbHistorialVacaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialVacaciones" />
         </EntityType>
         <EntityType Name="tbCargos">
           <Key>
@@ -2521,6 +2695,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAudienciaDescargo" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" FromRole="tbEmpleados" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbHistorialVacaciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialVacaciones" />
         </EntityType>
         <EntityType Name="tbHistorialAmonestaciones">
           <Key>
@@ -2939,6 +3114,123 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbHistorialVacaciones">
+          <Key>
+            <PropertyRef Name="hvac_Id" />
+          </Key>
+          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_CantDias" Type="Int32" />
+          <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_AnioVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hvac_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hvac_UsuarioModifica" Type="Int32" />
+          <Property Name="hvac_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea" FromRole="tbHistorialVacaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica" FromRole="tbHistorialVacaciones" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id" FromRole="tbHistorialVacaciones" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="V_Historialvacaciones">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="hvac_Id" />
+            <PropertyRef Name="hvac_FechaInicio" />
+            <PropertyRef Name="hvac_FechaFin" />
+            <PropertyRef Name="hvac_DiasPagados" />
+            <PropertyRef Name="hvac_MesVacaciones" />
+            <PropertyRef Name="hvac_AnioVacaciones" />
+            <PropertyRef Name="hvac_Estado" />
+            <PropertyRef Name="hvac_UsuarioCrea" />
+            <PropertyRef Name="hvac_FechaCrea" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_CantDias" Type="Int32" />
+          <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_AnioVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hvac_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hvac_UsuarioModifica" Type="Int32" />
+          <Property Name="hvac_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_HVacacionesEmpleados">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_NombreCompleto" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialVacaciones" Role="tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="hvac_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialVacaciones_hvac_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialVacaciones" Role="tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="hvac_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialVacaciones_emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialVacaciones" Role="tbHistorialVacaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialVacaciones">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3463,6 +3755,82 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbHistorialVacaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialVacaciones">
+              <MappingFragment StoreEntitySet="tbHistorialVacaciones">
+                <ScalarProperty Name="hvac_FechaModifica" ColumnName="hvac_FechaModifica" />
+                <ScalarProperty Name="hvac_UsuarioModifica" ColumnName="hvac_UsuarioModifica" />
+                <ScalarProperty Name="hvac_FechaCrea" ColumnName="hvac_FechaCrea" />
+                <ScalarProperty Name="hvac_UsuarioCrea" ColumnName="hvac_UsuarioCrea" />
+                <ScalarProperty Name="hvac_RazonInactivo" ColumnName="hvac_RazonInactivo" />
+                <ScalarProperty Name="hvac_Estado" ColumnName="hvac_Estado" />
+                <ScalarProperty Name="hvac_AnioVacaciones" ColumnName="hvac_AnioVacaciones" />
+                <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
+                <ScalarProperty Name="hvac_DiasPagados" ColumnName="hvac_DiasPagados" />
+                <ScalarProperty Name="hvac_CantDias" ColumnName="hvac_CantDias" />
+                <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
+                <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Historialvacaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Historialvacaciones">
+              <MappingFragment StoreEntitySet="V_Historialvacaciones">
+                <ScalarProperty Name="hvac_FechaModifica" ColumnName="hvac_FechaModifica" />
+                <ScalarProperty Name="hvac_UsuarioModifica" ColumnName="hvac_UsuarioModifica" />
+                <ScalarProperty Name="hvac_FechaCrea" ColumnName="hvac_FechaCrea" />
+                <ScalarProperty Name="hvac_UsuarioCrea" ColumnName="hvac_UsuarioCrea" />
+                <ScalarProperty Name="hvac_RazonInactivo" ColumnName="hvac_RazonInactivo" />
+                <ScalarProperty Name="hvac_Estado" ColumnName="hvac_Estado" />
+                <ScalarProperty Name="hvac_AnioVacaciones" ColumnName="hvac_AnioVacaciones" />
+                <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
+                <ScalarProperty Name="hvac_DiasPagados" ColumnName="hvac_DiasPagados" />
+                <ScalarProperty Name="hvac_CantDias" ColumnName="hvac_CantDias" />
+                <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
+                <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
+                <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_nombre" ColumnName="emp_nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HVacacionesEmpleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HVacacionesEmpleados">
+              <MappingFragment StoreEntitySet="V_HVacacionesEmpleados">
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="emp_NombreCompleto" ColumnName="emp_NombreCompleto" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
