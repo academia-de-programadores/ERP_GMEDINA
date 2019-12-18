@@ -630,11 +630,8 @@ namespace ERP_GMEDINA.Controllers
                                         #region ISR
 
                                         #region Declaracion de Variables
-                                        decimal ISR = 0;
                                         decimal SalarioMinimo = 9443.24M;
                                         int AnioActual = DateTime.Now.Year;
-                                        DateTime AnioInicio = new DateTime(DateTime.Now.Year, 1, 1);
-                                        DateTime AnioFin = new DateTime(DateTime.Now.Year, 12, 31);
                                         decimal? ExcesoDecimoTercer = 0;
                                         decimal? ExcesoVacaciones = 0;
                                         decimal? ExcesoDecimoCuarto = 0;
@@ -642,7 +639,6 @@ namespace ERP_GMEDINA.Controllers
                                         decimal SueldoAnual = 0;
                                         decimal GastosMedicos = 0;
                                         decimal TotalIngresosGravables = 0;
-                                        decimal SueldoBaseActual = 0;
                                         decimal TotalDeduccionesGravables = 0;
                                         decimal RentaNetaGravable = 0;
                                         var tablaEmp = db.tbSueldos.Where(x => x.emp_Id == empleadoActual.emp_Id).OrderBy(x => x.sue_FechaCrea);
@@ -650,30 +646,32 @@ namespace ERP_GMEDINA.Controllers
 
                                         #region Sueldo Promedio Anual
                                         //Sueldo redondeado del Colaborador
-                                        DateTime anioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
-                                        decimal SueldoAnualISR = 0;
+                                        DateTime AnioActualEnero = new DateTime(DateTime.Now.Year, 1, 1);
 
                                         //Obtener los pagos mensuales totales
                                         var mesesPago = (db.tbHistorialDePago
-                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == anioActualEnero.Year)
+                                            .Where(x => x.emp_Id == empleadoActual.emp_Id && x.hipa_Anio == AnioActualEnero.Year)
                                             .OrderBy(x => x.hipa_Mes)
-                                            .GroupBy(x => x.hipa_Mes).Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
+                                            .GroupBy(x => x.hipa_Mes)
+                                            .Select(x => x.Sum(y => (Decimal)y.hipa_SueldoNeto))).ToList();
 
-                                        DateTime fechaIngresoEmpleado = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Select(x => x.emp_Fechaingreso).FirstOrDefault();
+                                        DateTime FechaIngresoEmpleado = db.tbEmpleados
+                                                                        .Where(x => x.emp_Id == empleadoActual.emp_Id)
+                                                                        .Select(x => x.emp_Fechaingreso).FirstOrDefault();
                                         bool esMensual = false;
 
-                                        TimeSpan diferencia = anioActualEnero - fechaIngresoEmpleado;
+                                        TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
 
                                         if (TimeSpan.Zero > diferencia)
                                             esMensual = true;
 
 
                                         //Saber que mes entro
-                                        int mes = fechaIngresoEmpleado.Month;
+                                        int mes = FechaIngresoEmpleado.Month;
                                         decimal SalarioPromedioAnualPagadoAlAnio = 0;
                                         decimal salarioPromedioAnualPagadoAlMes = 0;
-                                        decimal totalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
-                                        ref SueldoAnualISR,
+                                        decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
+                                        ref SueldoAnual,
                                         mesesPago,
                                         esMensual,
                                         ref SalarioPromedioAnualPagadoAlAnio,
@@ -757,17 +755,17 @@ namespace ERP_GMEDINA.Controllers
                                         #region Total ISR Calcular
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Total Ingresos Gravables
-                                        TotalIngresosGravables = SueldoAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones /*+ totalBonificaciones + totalHorasExtras + totalComisiones*/;
+                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones /*+ totalBonificaciones + totalHorasExtras + totalComisiones*/;
 
                                         //Total Deducciones Gravables
                                         TotalDeduccionesGravables = GastosMedicos;
 
                                         //Renta Neta Gravable
-                                        RentaNetaGravable = TotalIngresosGravables + TotalDeduccionesGravables;
+                                        RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
 
                                         #region Tabla Progresiva para Deducir ISR
                                         //Cálculo con la Tabla Progresiva ISR
-                                        RentaNetaGravable = (Decimal)320902.78;
+                                        //RentaNetaGravable = (Decimal)320902.78;
                                         //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
                                         var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
                                         var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
@@ -776,26 +774,26 @@ namespace ERP_GMEDINA.Controllers
 
                                         if (RentaNetaGravable > objISRAlto.isr_RangoInicial)
                                         {
-                                            ISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
-                                                  (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
-                                                  (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                  (objISRBajo.isr_Porcentaje / 100);
+                                            totalISR = (RentaNetaGravable - objISRAlto.isr_RangoInicial) *
+                                                       (objISRAlto.isr_Porcentaje / 100) + (objISRMedio.isr_RangoFinal - objISRMedio.isr_RangoInicial) *
+                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
                                         }
                                         else if (RentaNetaGravable > objISRMedio.isr_RangoInicial)
                                         {
-                                            ISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
-                                                  (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
-                                                  (objISRBajo.isr_Porcentaje / 100);
+                                            totalISR = (RentaNetaGravable - objISRMedio.isr_RangoInicial) *
+                                                       (objISRMedio.isr_Porcentaje / 100) + (objISRBajo.isr_RangoFinal - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
                                         }
                                         else if (RentaNetaGravable > objISRBajo.isr_RangoInicial)
                                         {
-                                            ISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
-                                                  (objISRBajo.isr_Porcentaje / 100);
+                                            totalISR = (RentaNetaGravable - objISRBajo.isr_RangoInicial) *
+                                                       (objISRBajo.isr_Porcentaje / 100);
                                         }
                                         else if (RentaNetaGravable <= objISRExcento.isr_RangoFinal)
                                         {
-                                            ISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
-                                                  (objISRExcento.isr_Porcentaje / 100);
+                                            totalISR = (RentaNetaGravable - objISRExcento.isr_RangoFinal) *
+                                                       (objISRExcento.isr_Porcentaje / 100);
                                         }   
                                         #endregion
                                         #endregion
@@ -805,7 +803,7 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         //totales
-                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP;
+                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + totalISR;
                                         netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
 
 
@@ -828,7 +826,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
-                                        oPlanillaEmpleado.totalISR = 0;
+                                        oPlanillaEmpleado.totalISR = totalISR;
                                         oPlanillaEmpleado.totalDeduccionesColaborador = colaboradorDeducciones;
                                         oPlanillaEmpleado.totalAFP = totalAFP;
                                         oPlanillaEmpleado.totalInstitucionesFinancieras = totalInstitucionesFinancieras;
