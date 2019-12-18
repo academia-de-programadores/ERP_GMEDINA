@@ -1270,6 +1270,8 @@
     <Content Include="Views\HistorialVacaciones\Edit.cshtml" />
     <Content Include="Views\HistorialVacaciones\Index.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Delete.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

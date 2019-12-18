@@ -19,7 +19,7 @@
                 '<td>' + index.hvac_CantDias + '</td>' +
                 '<td>' + index.hvac_MesVacaciones + '</td>' +
                 '<td>' + index.hvac_AnioVacaciones + '</td>' +
-                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + IdEmpleado + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + IdEmpleado + ')"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
+                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>' + '</td>' +
                 '</tr>' +
                 '</tbody>'
         '</table>'
@@ -80,28 +80,39 @@ function llamarmodal() {
 }
 function llamarmodaldelete(ID) {
     var modaldelete = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hamo_Id").val(ID);
+    $("#ModalInhabilitar").find("#hvac_Id").val(ID);
     modaldelete.modal('show');
 }
+
+//function llamarmodaldetalles(ID) {
+//    var modaldetalle = $("#ModalDetalles");
+//    $("#ModalDetalles").find("#hvac_Id").val(ID);
+//    id = ID;
 
 function llamarmodaldetalles() {
     var modaldetalle = $("#ModalDetalles");
     id = IdEmpleado;
     debugger
-    _ajax(null,
-        '/HistorialAmonestaciones/Edit/' + id,
+    _ajax({ id: parseInt(id) },
+        '/HistorialVacaciones/Edit',
         'GET',
         function (obj) {
+            $('#ModalDetalles').modal('show');
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hamo_AmonestacionAnterior")["0"].innerText = obj.hamo_AmonestacionAnterior;
-                $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
-                $("#ModalDetalles").find("#tbTipoAmonestaciones")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = obj.hamo_FechaCrea;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaModifica")["0"].innerText = obj.hamo_FechaModifica;
+                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj.hvac_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj.hvac_FechaFin).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj.hvac_CantDias;
+                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj.hvac_DiasPagados;
+                $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj.hvac_MesVacaciones;
+                $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj.hvac_AnioVacaciones;
+                $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj.hvac_Estado;
+                $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj.hvac_RazonInactivo;
+                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj.hvac_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_UsuarioCrea")["0"].innerText = obj.hvac_UsuarioCrea;
+                $("#ModalDetalles").find("#hvac_UsuarioModifica")["0"].innerText = obj.hvac_UsuarioModifica;
+                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj.hvac_FechaModifica).substring(0, 10);
                 debugger
-                $('#ModalDetalles').modal('show');
+
             }
         });
 }
@@ -109,16 +120,17 @@ function llamarmodaldetalles() {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
+    debugger
     if (data != null) {
-        data = JSON.stringify({ tbHistorialAmonestaciones: data });
+        data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
-            '/HistorialAmonestaciones/Delete',
+            '/HistorialVacaciones/Delete',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["hamo_Id", "hamo_RazonInactivo"]);
+                    LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
