@@ -9,14 +9,14 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
-{				
+{
 	public class SueldosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: /Sueldos/
-        public ActionResult Index()        
-		{           
+        public ActionResult Index()
+		{
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             List<tbSueldos> tbSueldos = new List<tbSueldos> { };
             return View(tbSueldos);
@@ -52,7 +52,7 @@ namespace ERP_GMEDINA.Controllers
                         )
                         .ToList();
                     return Json(tbsueldos, JsonRequestBehavior.AllowGet);
-                        
+
                 }
             }
             catch
@@ -98,7 +98,7 @@ namespace ERP_GMEDINA.Controllers
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
-                    
+
                 }
             }
             if (tbSueldos == null)
@@ -123,7 +123,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(V_Sueldos vsueldos)
+        public ActionResult Create(tbSueldos vsueldos)
         {
             string msj = "";
             using (db = new ERP_GMEDINAEntities())
@@ -181,7 +181,7 @@ namespace ERP_GMEDINA.Controllers
             Session["id"] = id;
             var sueldos = new tbSueldos
             {
-               
+
                 sue_Id = VSueldos.sue_Id,
                 emp_Id = VSueldos.emp_Id,
                 tmon_Id = VSueldos.tmon_Id,
@@ -193,17 +193,17 @@ namespace ERP_GMEDINA.Controllers
                 sue_FechaCrea = VSueldos.sue_FechaCrea,
                 sue_UsuarioModifica = VSueldos.sue_UsuarioModifica,
                 sue_FechaModifica = VSueldos.sue_FechaModifica,
-           
+
 
             };
             return Json(sueldos, JsonRequestBehavior.AllowGet);
         }
-          
+
         [HttpPost]
         public JsonResult Edit(tbSueldos tbsueldos)
         {
             string msj = "";
-            if (tbsueldos.sue_Id != 0 && tbsueldos.emp_Id != 0 && tbsueldos.tmon_Id != 0 && tbsueldos.sue_Cantidad !=0  && tbsueldos.sue_SueldoAnterior !=0)            
+            if (tbsueldos.sue_Id != 0 && tbsueldos.emp_Id != 0 && tbsueldos.tmon_Id != 0 && tbsueldos.sue_Cantidad !=0  && tbsueldos.sue_SueldoAnterior !=0)
 			{
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
@@ -221,11 +221,12 @@ namespace ERP_GMEDINA.Controllers
                     ex.Message.ToString();
                 }
                 Session.Remove("id");
+
             }
             else
             {
                 msj = "-3";
-            }            
+            }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 		// GET: /Sueldos//Delete/5
@@ -255,7 +256,7 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 msj = "-3";
-            }            
+            }
             return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
         protected tbUsuario IsNull(tbUsuario valor)

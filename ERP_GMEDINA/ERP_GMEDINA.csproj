@@ -676,6 +676,9 @@
     <Compile Include="Models\UDP_RRHH_tbSueldos_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbSueldos_Insert_Result1.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbSueldos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1687,6 +1690,7 @@
     <Content Include="Views\Sueldos\Edit.cshtml" />
     <Content Include="Views\Sueldos\Index.cshtml" />
     <Content Include="Views\Sueldos\_Edit.cshtml" />
+    <Content Include="Views\Sueldos\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditar" }))
                 {
                         <div class="form-horizontal">
-                      
+
                         <div class="form-group">
 							@Html.LabelFor(model => model.sue_Cantidad, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
@@ -18,16 +18,27 @@
 								@Html.ValidationMessageFor(model => model.sue_Cantidad, "", new { @class = "text-danger", @id = "errorsue_Cantidad" })
                             </div>
                         </div>
-                     
+
 					</div>
 				}
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
 				<button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
-				<button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
-			</div>
+s			</div>
 		</div>
 	</div>
 </div>
 
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General")
+    @Scripts.Render("~/Scripts/app/General/Sueldos")
+    @Scripts.Render("~/Scripts/app/General/IndexSueldos.js")
+
+}

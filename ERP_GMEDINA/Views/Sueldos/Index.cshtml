@@ -35,7 +35,6 @@
                                 <th>Nombre</th>
                                 <th>Sueldo</th>
                                 <th>Area</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -48,6 +47,10 @@
 
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbSueldos())
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.V_Sueldos())
+
+
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbSueldos())
+
 
 
     
