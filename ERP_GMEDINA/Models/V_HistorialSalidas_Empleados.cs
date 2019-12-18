@@ -10,9 +10,15 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UDP_RRHH_tbTipoSalidas_Insert_Result
+    public partial class V_HistorialSalidas_Empleados
     {
-        public Nullable<int> MensajeError { get; set; }
+        public string Identidad { get; set; }
+        public string Nombre { get; set; }
+        public string Sexo { get; set; }
+        public Nullable<int> Edad { get; set; }
+        public int Id { get; set; }
+        public string Razon { get; set; }
     }
 }

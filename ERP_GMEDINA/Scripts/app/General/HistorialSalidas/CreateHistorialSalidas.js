@@ -90,15 +90,30 @@ function llenarDropDowlistTipoSalida() {
 //Razon Salida
 function llenarDropDowlistRazonSalida() {
     _ajax(null,
-       '/HistorialSalidas/llenarDropDowlistRazonSalida',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-               Lista.forEach(function (value, index) {
-                   $("#" + id).append(new Option(value.Descripcion, value.Id));
-               });
-           });
-       });
+        '/HistorialSalidas/llenarDropDowlistRazonSalida',
+        'POST',
+        function (result) {
+            $.each(result, function (id, Lista) {
+                Lista.forEach(function (value, index) {
+                    $("#" + id).append(new Option(value.Descripcion, value.Id));
+                });
+            });
+        });
+}
+//Empleados
+function llenarDropDowlistEmpleados() {
+    _ajax(null,
+        '/HistorialSalidas/llenarDropDowlistEmpleados',
+        'POST',
+        function (result) {
+            $.each(result, function (id, Lista) {
+                Lista.forEach(function (value, index) {
+                    $("#" + id).append(new Option(value.Descripcion, value.Id));
+                    //console.log(value.Id);
+                    //console.log(value.Descripcion);
+                });
+            });
+        });
 }
 function Remover(btn) {
  ChildTable
@@ -108,8 +123,9 @@ function Remover(btn) {
 }
 //Llamamos los dropdowns
 $(document).ready(function () {
+    llenarDropDowlistEmpleados();
     llenarDropDowlistTipoSalida();
-    //llenarDropDowlistRazonSalida();
+    llenarDropDowlistRazonSalida();
     ChildTable = $(ChildDataTable).DataTable({
         pageLength: 3,
         lengthChange: false,

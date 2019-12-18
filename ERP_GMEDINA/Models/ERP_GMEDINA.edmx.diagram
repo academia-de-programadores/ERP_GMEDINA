@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="62">
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbUsuario" Width="1.5" PointX="5.375" PointY="9.125" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="9.875" PointY="6.625" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialSalidas" Width="1.5" PointX="12.125" PointY="13.375" />
@@ -26,6 +26,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbRazonSalidas_rsal_Id_rrhh_tbHistorialSalidas_rsal_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoSalidas_tsal_Id_rrhh_tbHistorialSalidas_tsal_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" Width="1.5" PointX="3.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

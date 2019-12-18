@@ -20,10 +20,10 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
                 [Display(Name = "Id tipo salida")]
-                [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+                //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int tsal_Id { get; set; }
                 [Display(Name = "Id razon salida")]
-                [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+                //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int rsal_Id { get; set; }
         [Display(Name = "Observaciones")]
         [MaxLength(25, ErrorMessage = "Exedio el numero maximo de caracteres")]

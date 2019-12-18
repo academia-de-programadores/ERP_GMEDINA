@@ -13,11 +13,10 @@ namespace ERP_GMEDINA.Controllers
     public class HistorialSalidasController : Controller
     {
         private ERP_GMEDINAEntities db = null;
-
         // GET: Areas
         public ActionResult Index()
         {
-            ViewBag.rsal_Id = new SelectList(db.tbRazonSalidas, "rsal_Id", "rsal_Descripcion");
+            //ViewBag.tsal_Id = new SelectList(db.tbTipoSalidas, "tsal_Id", "tsal_Descripcion");
             var tbHistorialSalidas = new List<tbHistorialSalidas> { };
             return View(tbHistorialSalidas);
         }
@@ -140,6 +139,36 @@ namespace ERP_GMEDINA.Controllers
             result.Add("RazonSalidas", RazonSalidas);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        //Empleados
+        public ActionResult llenarDropDowlistEmpleados()
+        {
+            var Empleados = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Empleados.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Empleados.AddRange(db.V_HistorialSalidas_Empleados
+                    .Select(tabla => new {
+                        Id = tabla.Id,
+                        Descripcion = tabla.Nombre
+                    })
+                    .ToList());
+                }
+                catch (Exception ex)
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Empleados", Empleados);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         //--------------------------------------------cerrarDESPLEGABLES--------------------------------------------
 
         // GET: Areas/Details/5
@@ -176,6 +205,10 @@ namespace ERP_GMEDINA.Controllers
             //posteriormente es destruida.
             List<tbTipoSalidas> TipoSalidas = new List<tbTipoSalidas> { };
             ViewBag.Tsal_Id = new SelectList(TipoSalidas, "Tsal_Id", "Tsal_Descripcion");
+            List<tbRazonSalidas> RazonSalidas = new List<tbRazonSalidas> { };
+            ViewBag.rsal_Id = new SelectList(RazonSalidas, "rsal_Id", "rsal_Descripcion");
+            List<V_HistorialSalidas_Empleados> Empleados = new List<V_HistorialSalidas_Empleados> { };
+            ViewBag.Id = new SelectList(Empleados, "Id", "Nombre");
             return View();
         }
         // POST: Areas/Create

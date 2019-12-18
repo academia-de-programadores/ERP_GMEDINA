@@ -112,8 +112,23 @@
           <Property Name="tsal_UsuarioModifica" Type="int" />
           <Property Name="tsal_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialSalidas_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_HistorialSalidas_Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Edad" Type="int" />
+          <Property Name="Razon" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbHistorialSalidas_completa">
           <Key>
             <PropertyRef Name="rsal_Descripcion" />
@@ -381,6 +396,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' do
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoSalidas" EntityType="Self.tbTipoSalidas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="Self.V_HistorialSalidas_Empleados" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HistorialSalidas_Empleados].[Id] AS [Id], 
+    [V_HistorialSalidas_Empleados].[Identidad] AS [Identidad], 
+    [V_HistorialSalidas_Empleados].[Nombre] AS [Nombre], 
+    [V_HistorialSalidas_Empleados].[Sexo] AS [Sexo], 
+    [V_HistorialSalidas_Empleados].[Edad] AS [Edad], 
+    [V_HistorialSalidas_Empleados].[Razon] AS [Razon]
+    FROM [rrhh].[V_HistorialSalidas_Empleados] AS [V_HistorialSalidas_Empleados]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_tbHistorialSalidas_completa" EntityType="Self.V_tbHistorialSalidas_completa" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbHistorialSalidas_completa].[tsal_Descripcion] AS [tsal_Descripcion], 
@@ -600,6 +625,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' do
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" />
         </EntityContainer>
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
@@ -977,6 +1003,19 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' do
           <Property Name="hsal_UsuarioModifica" Type="Int32" />
           <Property Name="hsal_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="V_HistorialSalidas_Empleados">
+          <Key>
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Edad" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Razon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1159,6 +1198,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_completa' do
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Delete1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Delete" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Restore1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Restore" />
+          <EntitySetMapping Name="V_HistorialSalidas_Empleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialSalidas_Empleados">
+              <MappingFragment StoreEntitySet="V_HistorialSalidas_Empleados">
+                <ScalarProperty Name="Razon" ColumnName="Razon" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

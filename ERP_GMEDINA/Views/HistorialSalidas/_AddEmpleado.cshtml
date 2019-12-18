@@ -1,31 +1,25 @@
-﻿@model ERP_GMEDINA.Models.cEmpleados
+﻿@model ERP_GMEDINA.Models.cHistorialSalidas_Empleados
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEmpleados" }))
     {
-        <div class="col-md-4 b-r">
-            @*@*//---emp_Id---*@
-            <div class="form-group">
-                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control required", @id = "Empleado" })
-                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "errorEmpleado" })
-                    </div>
-            </div>
-            @*//---emp_RazonInactivo---*@
-            <div class="form-group">
-                @Html.LabelFor(model => model.emp_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.emp_RazonInactivo, new { htmlAttributes = new { @class = "form-control required" } })
-                    @Html.ValidationMessageFor(model => model.emp_RazonInactivo, "", new { @class = "text-danger", @id = "erroremp_RazonInactivo" })
-                </div>
-            </div>
-            @*//---emp_RazonSalida---*@
-            <div class="form-group">
-                @Html.LabelFor(model => model.emp_RazonSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.emp_RazonSalida, new { htmlAttributes = new { @class = "form-control required" } })
-                    @Html.ValidationMessageFor(model => model.emp_RazonSalida, "", new { @class = "text-danger", @id = "erroremp_RazonSalida" })
-                </div>
-            </div>
-            <input type="button" class="btn btn-primary" id="add" value="Agregar" />
+<div class="col-md-4 b-r">
+    @*@*//---emp_Id---*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Id", null, htmlAttributes: new { @class = "form-control required", @id = "Empleados" })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger", @id = "errorEmpleados" })
         </div>
+    </div>
+
+    @*//---emp_RazonInactivo---*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.Razon, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Razon, new { htmlAttributes = new { @class = "form-control required" } })
+            @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger", @id = "erroremp_RazonInactivo" })
+        </div>
+    </div>
+    <input type="button" class="btn btn-primary" id="add" value="Agregar" />
+</div>
     }

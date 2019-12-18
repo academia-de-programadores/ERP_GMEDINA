@@ -171,6 +171,7 @@
     <Compile Include="Models\cAreas.cs" />
     <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cDropDownList.cs" />
+    <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
@@ -221,6 +222,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialSalidas_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbHistorialSalidas_completa.cs">
@@ -989,12 +993,6 @@
     <Content Include="Views\TipoSalidas\_Edit.cshtml" />
     <Content Include="Views\TipoSalidas\Index.cshtml" />
     <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
-    <Content Include="Views\Areas\Create.cshtml" />
-    <Content Include="Views\Areas\Delete.cshtml" />
-    <Content Include="Views\Areas\Details.cshtml" />
-    <Content Include="Views\Areas\Edit.cshtml" />
-    <Content Include="Views\Areas\Index.cshtml" />
-    <Content Include="Views\Areas\_CreateDepartamento.cshtml" />
     <Content Include="Views\HistorialSalidas\Delete.cshtml" />
     <Content Include="Views\HistorialSalidas\Details.cshtml" />
     <Content Include="Views\HistorialSalidas\Edit.cshtml" />
