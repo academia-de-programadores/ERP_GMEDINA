@@ -22,7 +22,6 @@ namespace ERP_GMEDINA.Controllers
             return View(tbSueldos);
         }
 
-        [HttpPost]
         public ActionResult llenarTabla()
         {
             try
@@ -114,7 +113,14 @@ namespace ERP_GMEDINA.Controllers
         // POST: /Sueldos/Create
 
 
-
+        public ActionResult Create()
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<tbSueldos> sueldos = new List<tbSueldos> { };
+            ViewBag.sue_Id = new SelectList(sueldos, "sue_Id", "sue_cantidad");
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Create(V_Sueldos vsueldos)
@@ -126,17 +132,17 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(vsueldos.Id_Empleado,
-                                                            vsueldos.Id_Amonestacion,
-                                                            vsueldos.Sueldo,
-                                                            vsueldos.Sueldo_Anterior,
-                                                            usuario.usu_Id,
-                                                            DateTime.Now);
+                    //var list = db.UDP_RRHH_tbSueldos_Insert(vsueldos.Id_Empleado,
+                    //                                        vsueldos.Id_Amonestacion,
+                    //                                        vsueldos.Sueldo,
+                    //                                        vsueldos.Sueldo_Anterior,
+                    //                                        usuario.usu_Id,
+                    //                                        DateTime.Now);
 
-                    foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
+                    //foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
+                    //{
+                    //    msj = item.MensajeError + " ";
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -157,12 +163,12 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            V_Sueldos VSueldos = null;
+            tbSueldos VSueldos = null;
 
             try
             {
-                VSueldos = db.V_Sueldos.Find(id);
-                if (VSueldos == null || !VSueldos.Estado)
+                VSueldos = db.tbSueldos.Find(id);
+                if (VSueldos == null || !VSueldos.sue_Estado)
                 {
                     return HttpNotFound();
                 }
@@ -173,41 +179,37 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var sueldos = new V_Sueldos
+            var sueldos = new tbSueldos
             {
-                Id = VSueldos.Id,
-                Id_Empleado = VSueldos.Id_Empleado,
-                Id_Amonestacion = VSueldos.Id_Amonestacion,
-                Identidad = VSueldos.Identidad,
-                Nombre = VSueldos.Nombre,
-                Sueldo = VSueldos.Sueldo,
-                Tipo_Moneda = VSueldos.Tipo_Moneda,
-                Cuenta = VSueldos.Cuenta,
-                Sueldo_Anterior = VSueldos.Sueldo_Anterior,
-                Area = VSueldos.Area,
-                Cargo = VSueldos.Cargo,
-                Usuario_Nombre = VSueldos.Usuario_Nombre,
-                Usuario_Crea = VSueldos.Usuario_Crea,
-                Fecha_Crea = VSueldos.Fecha_Crea,
-                Usuario_Modifica = VSueldos.Usuario_Modifica,
-                Fecha_Modifica = VSueldos.Fecha_Modifica,
-                Estado = VSueldos.Estado,
-                RazonInactivo = VSueldos.RazonInactivo
+               
+                sue_Id = VSueldos.sue_Id,
+                emp_Id = VSueldos.emp_Id,
+                tmon_Id = VSueldos.tmon_Id,
+                sue_Cantidad = VSueldos.sue_Cantidad,
+                sue_SueldoAnterior = VSueldos.sue_SueldoAnterior,
+                sue_Estado = VSueldos.sue_Estado,
+                sue_RazonInactivo = VSueldos.sue_RazonInactivo,
+                sue_UsuarioCrea = VSueldos.sue_UsuarioCrea,
+                sue_FechaCrea = VSueldos.sue_FechaCrea,
+                sue_UsuarioModifica = VSueldos.sue_UsuarioModifica,
+                sue_FechaModifica = VSueldos.sue_FechaModifica,
+           
+
             };
             return Json(sueldos, JsonRequestBehavior.AllowGet);
         }
           
         [HttpPost]
-        public JsonResult Edit(V_Sueldos vSueldos)
+        public JsonResult Edit(tbSueldos tbsueldos)
         {
             string msj = "";
-            if (vSueldos.Id != 0 && vSueldos.Id_Empleado != 0 && vSueldos.Id_Amonestacion != 0 && vSueldos.Sueldo !=0  && vSueldos.Sueldo_Anterior !=0)            
+            if (tbsueldos.sue_Id != 0 && tbsueldos.emp_Id != 0 && tbsueldos.tmon_Id != 0 && tbsueldos.sue_Cantidad !=0  && tbsueldos.sue_SueldoAnterior !=0)            
 			{
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(vSueldos.Id_Empleado, vSueldos.Id_Amonestacion, vSueldos.Sueldo, vSueldos.Sueldo_Anterior, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSueldos_Insert(id, tbsueldos.emp_Id, tbsueldos.tmon_Id, tbsueldos.sue_Cantidad, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";

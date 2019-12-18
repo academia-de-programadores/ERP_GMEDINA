@@ -3,6 +3,9 @@
 });
 var id = 0;
 
+
+
+
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
@@ -10,7 +13,7 @@ function tablaEditar(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#Sueldo").val(obj.Sueldo);
+                $("#FormEditar").find("#sue_Cantidad").val(obj.sue_Cantidad);
                 $("#ModalEditar").modal('show');
             }
         });
@@ -18,18 +21,9 @@ function tablaEditar(ID) {
 
 
 
-function tablaDetalles(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().Id;
-    $(location).attr('href', "/Sueldos/Edit/" + id);
-}
-function tablaEditar(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().id;
-    $(location).attr('href',"/Sueldos/Edit/" + id);
-}
+
+
+
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Sueldos</h5></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
@@ -110,15 +104,16 @@ function CallEditar() {
     var modaleditar = $("#ModalEditar");
     modaleditar.modal('show');
 }
+
 $("#btnEditar").click(function () {
     _ajax(null,
-        '/Sueldos/Edit'+ id,
+        'Sueldos/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 $('#ModalEditar').modal('show');
-                $("#FormEditar").find("#Sueldo").val(obj.Sueldo);
+                $("#FormEditar").find("#sue_Cantidad").val(obj.sue_Cantidad);
 
             }
         });
@@ -127,21 +122,13 @@ $("#btnEditar").click(function () {
 
 
 
-function CallDetalles() {
-    var modalnuevo = $("#ModalDetalles");
-    modalnuevo.modal('show');
-
-}
-
-
-
 
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.Id = id;
-        data = JSON.stringify({ V_Sueldos: data });
+        data.sue_Id = id;
+        data = JSON.stringify({ tbSueldos: data });
         _ajax(data,
             '/Sueldos/Edit',
             'POST',
@@ -163,5 +150,11 @@ $("#btnActualizar").click(function () {
 
 
 
+
+function CallDetalles() {
+    var modalnuevo = $("#ModalDetalles");
+    modalnuevo.modal('show');
+
+}
 
 
