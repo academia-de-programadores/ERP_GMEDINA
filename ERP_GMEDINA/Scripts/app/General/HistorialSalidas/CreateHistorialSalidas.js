@@ -9,50 +9,50 @@ function Remove(Id, lista) {
     });
     return list;
 }
-function Add(depto_Descripcion, car_Descripcion) {
-    if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
+function Add(Nombre, Observacion) {
+    if (Nombre.trim().length != 0 && Observacion.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Descripcion == depto_Descripcion || Fila.Cargo == car_Descripcion) {            
-                if (Fila.Cargo == car_Descripcion) {
-                    var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
+            if (Fila.Nombre == Nombre || Fila.Observacion == Observacion) {            
+                if (Fila.Observacion == Observacion) {
+                    var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
-                    span.text('El cargo "' + car_Descripcion + '" ya existe');
-                    $("#FormDepartamentos").find("#car_Descripcion").focus();
+                    span.text('El cargo "' + Observacion + '" ya existe');
+                    $("#FormEmpleados").find("#Observacion").focus();
                 }
-                if (Fila.Descripcion == depto_Descripcion) {
-                    var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
+                if (Fila.Descripcion == Nombre) {
+                    var span = $("#FormEmpleados").find("#errorNombre");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
-                    span.text('La Descripcion "' + depto_Descripcion + '" ya existe');
-                    $("#FormDepartamentos").find("#depto_Descripcion").focus();
+                    span.text('La Nombre "' + Nombre + '" ya existe');
+                    $("#FormEmpleados").find("#Nombre").focus();
                 }            
                 return null;
             }
         }
         ChildTable.row.add(
             {
-                Descripcion: depto_Descripcion.trim(),
-                Cargo: car_Descripcion
+                Descripcion: Nombre.trim(),
+                Cargo: Observacion
             }
             ).draw();
     } else {
-        if (car_Descripcion.trim().length == 0) {
-            var txt_required = $("#FormDepartamentos").find("#car_Descripcion").data("val-required");
-            var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
+        if (Observacion.trim().length == 0) {
+            var txt_required = $("#FormEmpleados").find("#Observacion").data("val-required");
+            var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
             $(span).addClass("text-danger");
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
-            $("#FormDepartamentos").find("#car_Descripcion").focus();
+            $("#FormEmpleados").find("#Observacion").focus();
         }
-        if (depto_Descripcion.trim().length == 0) {
-            var txt_required = $("#FormDepartamentos").find("#depto_Descripcion").data("val-required");
-            var span = $("#FormDepartamentos").find("#errordepto_Descripcion");
+        if (Nombre.trim().length == 0) {
+            var txt_required = $("#FormEmpleados").find("#Nombre").data("val-required");
+            var span = $("#FormEmpleados").find("#errorNombre");
             $(span).addClass("text-danger");
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
-            $("#FormDepartamentos").find("#depto_Descripcion").focus();
+            $("#FormEmpleados").find("#Nombre").focus();
         }
     }
 }
@@ -64,13 +64,13 @@ function getJson() {
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
 
-        var tbDepartamentos =
+        var tbEmpleados =
          {
              Id: i,
-             depto_Descripcion: fila.Descripcion,
-             tbCargos: { car_Descripcion: fila.Cargo }
+             Nombre: fila.Descripcion,
+             tbCargos: { Observacion: fila.Cargo }
          };
-        list.push(tbDepartamentos);
+        list.push(tbEmpleados);
     }
     return list;
 }
@@ -131,21 +131,21 @@ $(document).ready(function () {
         lengthChange: false,
      columns: 
       [
-            { data: 'Descripcion' },
-            { data: 'Cargo' },
+            { data: 'Nombre' },
+            { data: 'Observacion' },
             {
-             data: 'Acciones',
-             defaultContent: '<div>' +
-                                    '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
-                                '</div>'
+            data: 'Acciones',
+            defaultContent: '<div>' +
+                            '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
+                        '</div>'
             }
       ],
         order: [[0, 'asc']]
     });
 });
 $("#add").click(function () {
-    var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();    
-    var Cargo = $("#FormDepartamentos").find("#car_Descripcion").val();
+    var Descripcion = $("#FormEmpleados").find("#Nombre").val();    
+    var Cargo = $("#FormEmpleados").find("#Observacion").val();
     var valores=Descripcion + Cargo;
     for (var i = 0; i < valores.length; i++) {
         if (valores[i] == ">" || valores[i] == "<") {
@@ -155,7 +155,7 @@ $("#add").click(function () {
     }
  //Add(Descripcion, Cargo);
 
-    $("#FormDepartamentos").validate();
+    $("#FormEmpleados").validate();
 });
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
@@ -166,7 +166,7 @@ var tbAreas =
     {
         suc_Id: $("#Sucursales").val(),
         area_Descripcion: $("#area_Descripcion").val(),
-        tbCargos:{car_Descripcion: $("#car_Descripcion").val()},
+        tbCargos:{Observacion: $("#Observacion").val()},
     };
 var lista = getJson();
 
@@ -190,12 +190,12 @@ var lista = getJson();
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-$("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
+$("#FormEmpleados").find("#Nombre").keypress(function (envet) {
     var id = $(this).attr("id");
     var form = $(this).closest("form");
     limpiarSpan(id,form);
 });
-$("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
+$("#FormEmpleados").find("#Observacion").keypress(function (envet) {
     var id = $(this).attr("id");
     var form = $(this).closest("form");
     limpiarSpan(id,form);
