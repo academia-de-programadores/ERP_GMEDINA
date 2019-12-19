@@ -29,7 +29,11 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-5">
-                                    <input class="form-control text-box single-line" data-val="true" data-val-number="The field Frecuencia en días must be a number." data-val-required="El campo Frecuencia en días es obligatorio." id="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) name="cpla_FrecuenciaEnDias" type="number" value="@Model.cpla_FrecuenciaEnDias">
+                                    <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
+                                        <option value="7" @(Model.cpla_FrecuenciaEnDias == 7 ? "selected='selected'" : "")>Semanal</option>
+                                        <option value="15" @(Model.cpla_FrecuenciaEnDias == 15 ? "selected='selected'" : "")>Quincenal</option>
+                                        <option value="30" @(Model.cpla_FrecuenciaEnDias == 30 ? "selected='selected'" : "")>Mensual</option>
+                                    </select>
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
                                 </div>
                             </div>
@@ -124,16 +128,17 @@
             </div>
         </div>
     </div>
-    <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
-    <script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
-    <script src="~/Scripts/plugins/switchery/switchery.js"></script>
-    @section Scripts {
-        @Scripts.Render("~/plugins/iCheck")
-    }
-    @section Styles {
-        @Styles.Render("~/Content/plugins/izitoast/iziToast")
-    }
+</div>
+<script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
+<script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
+<script src="~/Scripts/plugins/switchery/switchery.js"></script>
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+}
+@section Styles {
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
 
 
-    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+<link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
