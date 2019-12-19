@@ -7,40 +7,51 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cSueldos))]
-    public partial class V_Sueldos
+    public partial class TbSueldos
     {
     }
     public class cSueldos
     {
-        public int Id { get; set; }
-        public string Identidad { get; set; }
-        public string Nombre { get; set; }
-        public decimal Sueldo { get; set; }
-        public string Tipo_Moneda { get; set; }
-        public string Cuenta { get; set; }
-        public Nullable<int> Sueldo_Anterior { get; set; }
-        public string Area { get; set; }
-        public string Cargo { get; set; }
-        public string Usuario_Nombre { get; set; }
-        public int Usuario_Crea { get; set; }
-        public Nullable<System.DateTime> Usuario_Modifica { get; set; }
-        public Nullable<System.DateTime> Fecha_Modifica { get; set; }
-        public int Id_Empleado { get; set; }
-        public int Id_Amonestacion { get; set; }
-        public Nullable<System.DateTime> Fecha_Crea { get; set; }
-        public bool Estado { get; set; }
-        public string RazonInactivo { get; set; }
+       
+       
 
+        [Display(Name = "ID")]
         public int sue_Id { get; set; }
+
+        [Display(Name = "Empleado Id")]
         public int emp_Id { get; set; }
+
+        [Display(Name = "Tipo Moneda Id")]
         public int tmon_Id { get; set; }
-        public Nullable<decimal> sue_Cantidad { get; set; }
+
+        [Display(Name = "Sueldo")]
+        public decimal sue_Cantidad { get; set; }
+
+        [Display(Name = "Sueldo Anterior")]
         public Nullable<int> sue_SueldoAnterior { get; set; }
+        
+        [Display(Name = "Estado")]
         public bool sue_Estado { get; set; }
+
+        [Display(Name = "Razon Inactivo")]
         public string sue_RazonInactivo { get; set; }
+
+        [Display(Name = "Usuario Crea")]
         public int sue_UsuarioCrea { get; set; }
+
+        [Display(Name = "Fecha Crea")]
         public Nullable<System.DateTime> sue_FechaCrea { get; set; }
+
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> sue_UsuarioModifica { get; set; }
+
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> sue_FechaModifica { get; set; }
+
+        [Display(Name = "Usuario")]
+        public virtual tbUsuario tbUsuario { get; set; }
+
+        [Display(Name = "Usuario1")]
+        public virtual tbUsuario tbUsuario1 { get; set; }
     }
 }

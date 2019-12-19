@@ -49,6 +49,13 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbtitulos, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Create()
+        {
+            ViewBag.titu_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.titu_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            return View();
+        }
+
 
         [HttpPost]
         public JsonResult Create(tbTitulos tbtitulos)
@@ -153,7 +160,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
         public ActionResult Delete(tbTitulos tbtitulos)
         {
             string msj = "";

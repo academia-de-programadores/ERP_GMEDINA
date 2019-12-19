@@ -13769,14 +13769,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbSueldos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Insert_Result)">
-            <Parameter Name="sue_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
-            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
-            <Parameter Name="sue_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="sue_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbSueldos_Restore">
             <Parameter Name="sue_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
@@ -13952,6 +13944,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSueldos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Insert_Result)">
+            <Parameter Name="sue_Id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
+            <Parameter Name="sue_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="sue_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="UDP_RRHH_tbEmpresas_Select_Result">
@@ -16377,13 +16377,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Update_Result">
@@ -16601,6 +16594,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

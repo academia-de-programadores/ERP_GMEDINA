@@ -1,9 +1,4 @@
-﻿@model ERP_GMEDINA.Models.V_Sueldos
-
-
-
-
-
+﻿@model ERP_GMEDINA.Models.tbSueldos
 <div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
@@ -12,40 +7,45 @@
                 <h4 class="modal-title">Detalle Sueldos</h4>
             </div>
             <div class="modal-body">
-                    <dl class="dl-horizontal">
-                        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
-                        <dd id="Id"></dd>
+                <dl class="dl-horizontal">
 
-                        <dt>@Html.DisplayNameFor(model => model.Nombre)</dt>
-                        <dd id="Nombre"></dd>
+                    <dt>@Html.DisplayNameFor(model => model.sue_SueldoAnterior)</dt>
+                    <dd id="sue_SueldoAnterior"></dd>
 
+					<dt>@Html.DisplayNameFor(model => model.sue_Cantidad)</dt>
+                    <dd id="sue_Cantidad"></dd>
 
-                        <dt>@Html.DisplayNameFor(model => model.Cuenta)</dt>
-                        <dd id="Cuenta"></dd>
+                   
 
-                        <dt>@Html.DisplayNameFor(model => model.Sueldo_Anterior)</dt>
-                        <dd id="Sueldo_Anterior"></dd>
+					<dt>@Html.DisplayNameFor(model => model.sue_Estado)</dt>
+                    <dd id="sue_Estado"></dd>
 
-                        <dt>@Html.DisplayNameFor(model => model.Usuario_Crea)</dt>
-                        <dd id="Usuario_Crea"></dd>
+					<dt>@Html.DisplayNameFor(model => model.sue_RazonInactivo)</dt>
+                    <dd id="sue_RazonInactivo"></dd>
 
-                        <dt>@Html.DisplayNameFor(model => model.Fecha_Crea)</dt>
-                        <dd id="Fecha_Crea"></dd>
+                    <dt>@Html.DisplayNameFor(model => model.sue_UsuarioCrea)</dt>
+                    <dd id="sue_UsuarioCrea"></dd>
 
+					<dt>@Html.DisplayNameFor(model => model.sue_FechaCrea)</dt>
+                    <dd id="sue_FechaCrea"></dd>
 
+                 
+                   
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
 
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>
 
+					
 
-
-   
-
-                    </dl>
+				</dl>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
-            </div>
-        </div>
-    </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+			</div>
+		</div>
+	</div>
 </div>
 

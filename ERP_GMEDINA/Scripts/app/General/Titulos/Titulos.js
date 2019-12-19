@@ -1,34 +1,33 @@
 ﻿$(document).ready(function () {
     llenarTabla();
 });
-var id = 0;
 
 function tablaEditar(ID)
 {
+    id = ID;
+    _ajax(null,
+    '/Titulos/Edit/' + ID,
+    'GET',
+    function (obj) {
+        if (obj != "-1" && obj != "-2" && obj != "-3") {
+            $("#FormEditar").find("#titu_Descripcion").val(obj.titu_Descripcion); 
+            $("#ModalEditar").modal('show');
+        }
+    });
+}
+
+function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
         '/Titulos/Edit/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#FormEditar").find("#titu_Descripcion").val(obj.titu_Descripcion);
-                $("#ModalEditar").modal('show');
-            }
-        });
-}
-
-function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        'Titulos/Edit/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#titu_Descripcion")["0"].innerText = obj.titu_Descripcion;
                 $("#ModalDetalles").find("#titu_Estado")["0"].innerText = obj.titu_Estado;
                 $("#ModalDetalles").find("#titu_RazonInactivo")["0"].innerText = obj.titu_RazonInactivo;
-                $("#ModalDetalles").find("#titu_FechaCrea")["0"].innerText = obj.FechaCrea;
-                $("#ModalDetalles").find("#titu_FechaModifica")["0"].innerText = obj.FechaModifica;
+                $("#ModalDetalles").find("#titu_FechaCrea")["0"].innerText = FechaFormato(obj.titu_FechaCrea);
+                $("#ModalDetalles").find("#titu_FechaModifica")["0"].innerText = FechaFormato(obj.titu_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
@@ -66,7 +65,7 @@ $("#btnAgregar").click(function () {
 
 $("#btnEditar").click(function () {
     _ajax(null,
-        'Titulos/Edit/' + id,
+        '/Titulos/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -135,6 +134,7 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);

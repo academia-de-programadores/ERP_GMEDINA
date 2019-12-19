@@ -10,13 +10,13 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-	public class SueldosController : Controller
+    public class SueldosController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: /Sueldos/
         public ActionResult Index()
-		{
+        {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             List<tbSueldos> tbSueldos = new List<tbSueldos> { };
             return View(tbSueldos);
@@ -34,6 +34,7 @@ namespace ERP_GMEDINA.Controllers
                         {
                             Id = t.Id,
                             Identidad = t.Identidad,
+                            Id_Amonestacion=t.Id_Amonestacion,
                             Nombre = t.Nombre,
                             Sueldo = t.Sueldo,
                             Tipo_Moneda = t.Tipo_Moneda,
@@ -46,7 +47,7 @@ namespace ERP_GMEDINA.Controllers
                             Fecha_Crea = t.Fecha_Crea,
                             Usuario_Modifica = t.Usuario_Modifica,
                             Fecha_Modifica = t.Fecha_Modifica
-
+                     
                         }
 
                         )
@@ -61,7 +62,6 @@ namespace ERP_GMEDINA.Controllers
 
             }
         }
-
 
         public ActionResult ChildRowData(int? id)
         {
@@ -81,39 +81,12 @@ namespace ERP_GMEDINA.Controllers
 
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id== null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            tbSueldos tbSueldos = null;
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    tbSueldos = db.tbSueldos.Find(id);
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-
-                }
-            }
-            if (tbSueldos == null)
-            {
-                return HttpNotFound();
-
-            }
-            return View(tbSueldos);
-        }
 
 
         // POST: /Sueldos/Create
 
 
-        public ActionResult Create()
+/*        public ActionResult Create()
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
@@ -152,7 +125,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
         // GET: /Sueldos//Edit/5
         [HttpGet]
@@ -193,6 +166,8 @@ namespace ERP_GMEDINA.Controllers
                 sue_FechaCrea = VSueldos.sue_FechaCrea,
                 sue_UsuarioModifica = VSueldos.sue_UsuarioModifica,
                 sue_FechaModifica = VSueldos.sue_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(VSueldos.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(VSueldos.tbUsuario).usu_NombreUsuario }
 
 
             };
@@ -203,14 +178,13 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbSueldos tbsueldos)
         {
             string msj = "";
-            if (tbsueldos.sue_Id != 0 && tbsueldos.emp_Id != 0 && tbsueldos.tmon_Id != 0 && tbsueldos.sue_Cantidad !=0  && tbsueldos.sue_SueldoAnterior !=0)
-			{
-                var id = (int)Session["id"];
+            if (tbsueldos.sue_Id!=0 && tbsueldos.emp_Id != 0  && tbsueldos.tmon_Id != 0  && tbsueldos.sue_Cantidad != 0 )
+            {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(id, tbsueldos.emp_Id, tbsueldos.tmon_Id, tbsueldos.sue_Cantidad, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
+                    var list = db.UDP_RRHH_tbSueldos_Update(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id, tbsueldos.sue_Cantidad,tbsueldos.sue_SueldoAnterior, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbSueldos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -220,8 +194,6 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
-
             }
             else
             {
@@ -229,7 +201,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-		// GET: /Sueldos//Delete/5
+        // GET: /Sueldos//Delete/5
         [HttpPost]
         public ActionResult Delete(tbSueldos tbSueldos)
         {
@@ -257,17 +229,46 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tbSueldos tbSueldos = null;
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    tbSueldos = db.tbSueldos.Find(id);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+
+                }
+            }
+            if (tbSueldos == null)
+            {
+                return HttpNotFound();
+
+            }
+            return View(tbSueldos);
+        }
+
         protected tbUsuario IsNull(tbUsuario valor)
         {
-            if (valor!=null)
+            if (valor != null)
             {
                 return valor;
             }
             else
             {
-                return new tbUsuario {usu_NombreUsuario="" };
+                return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
         protected override void Dispose(bool disposing)
@@ -280,3 +281,4 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
