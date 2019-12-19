@@ -22,8 +22,8 @@
                 <div class="ibox-title">
                     <h5>Listado Instituciones Financieras</h5>
                     <div class="ibox-tools">
-                        @Html.ActionLink("Cargar Planilla Deduccion", "CargaDocumento", null, new { @class = "btn btn-success btn-sm" })
-                       @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary btn-sm"})
+                        @Html.ActionLink("Cargar Planilla Deduccion", "CargaDocumento", null, new { @class = "btn btn-primary btn-xs" })
+                       @Html.ActionLink("Nuevo", "Create", null, new { @class = "btn btn-primary btn-xs"})
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -56,13 +56,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.insf_Correo)
                             </td>
-                            <td>
-                              @*<button type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>
-                              <button type="button" class="btn btn-default btn-xs" id="btnEditar">Editar</button>*@
-                                @Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
-                                @Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
-                                @Html.ActionLink("Eliminar", "Delete", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-danger btn-xs" })
-                            </td>
+							<td>
+								@*<button type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>
+		<button type="button" class="btn btn-default btn-xs" id="btnEditar">Editar</button>*@
+								@Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
+								@Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
+								@Html.ActionLink("Eliminar", "Delete", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-danger btn-xs" })
+							</td>
                         </tr>
                       }
                     </tbody>
