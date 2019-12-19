@@ -5,7 +5,7 @@
 
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.hipa_FechaInicio, htmlAttributes: new { @class = "font-noraml" }) <br />
+			<label class="font-noraml">Año</label>
 			<div class="input-group date">
 				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "number", @name="hipa_FechaInicio", @id= "hipa_FechaInicio" } })       
 			</div>
