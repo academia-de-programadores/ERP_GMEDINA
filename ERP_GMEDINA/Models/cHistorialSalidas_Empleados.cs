@@ -9,13 +9,14 @@ namespace ERP_GMEDINA.Models
     [MetadataType(typeof(cHistorialSalidas_Empleados))]
     public class cHistorialSalidas_Empleados
     {
-        [Display(Name = "Identidad")]
         //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Identidad { get; set; }
         public string Nombre { get; set; }
         public string Sexo { get; set; }
         public Nullable<int> Edad { get; set; }
+        [Display(Name = "Id")]
         public int Id { get; set; }
+        [Display(Name = "Razon")]
         public string Razon { get; set; }
     }
 }
