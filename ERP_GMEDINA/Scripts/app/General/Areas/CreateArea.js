@@ -37,6 +37,9 @@ function Add(depto_Descripcion, car_Descripcion) {
                 Cargo: car_Descripcion
             }
             ).draw();
+            $("#FormDepartamentos").find("#depto_Descripcion").val("");
+            $("#FormDepartamentos").find("#car_Descripcion").val("");
+            $("#FormDepartamentos").find("#depto_Descripcion").focus();
     } else {
         if (car_Descripcion.trim().length == 0) {
             var txt_required = $("#FormDepartamentos").find("#car_Descripcion").data("val-required");
@@ -74,6 +77,12 @@ function getJson() {
     }
     return list;
 }
+function Remover(btn) {
+ ChildTable
+        .row($(btn).parents('tr'))
+        .remove()
+        .draw();
+}
 function llenarDropDownList() {
     _ajax(null,
        '/Areas/llenarDropDowlist',
@@ -85,12 +94,6 @@ function llenarDropDownList() {
                });
            });
        });
-}
-function Remover(btn) {
- ChildTable
-        .row($(btn).parents('tr'))
-        .remove()
-        .draw();
 }
 $(document).ready(function () {
     llenarDropDownList();
@@ -113,18 +116,22 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
+    var depto_Descripcion=$("#FormDepartamentos").find("#depto_Descripcion").data("val-maxlength-max");
+    var car_Descripcion=$("#FormDepartamentos").find("#car_Descripcion").data("val-maxlength-max");    
     var Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").val();    
     var Cargo = $("#FormDepartamentos").find("#car_Descripcion").val();
+    if (Descripcion.length > depto_Descripcion || Cargo.length > car_Descripcion) {
+        MsgError("Error", "una caja de texto tiene muchos caracteres");
+        return null;
+    }
     var valores=Descripcion + Cargo;
     for (var i = 0; i < valores.length; i++) {
         if (valores[i] == ">" || valores[i] == "<") {
-            MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.");
+            MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.('>' ó '<')");
             return null;
         }
     }
- //Add(Descripcion, Cargo);
-
-    $("#FormDepartamentos").validate();
+    Add(Descripcion, Cargo);    
 });
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
@@ -160,20 +167,37 @@ var lista = getJson();
     }
 });
 $("#FormDepartamentos").find("#depto_Descripcion").keypress(function (envet) {
+    if (alerta($(this).closest("div"))) {
+        return null;
+    }
     var id = $(this).attr("id");
     var form = $(this).closest("form");
-    limpiarSpan(id,form);
+    limpiarSpan(id, form);    
 });
 $("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
+    if (alerta($(this).closest("div"))) {
+        return null;
+    }
     var id = $(this).attr("id");
     var form = $(this).closest("form");
     limpiarSpan(id,form);
 });
 function limpiarSpan(id,form) {
     var span = $(form).find("#error" + id);
-    $(span).closest("div").removeClass("has-error");
-    $(span).removeClass("text-danger");
-    $(span).closest("div").removeClass("has-warning");
-    $(span).removeClass("text-warning");
-    span["0"].innerText = "";
+    $(span).closest("div").removeClass("has-error has-warning");
+    $(span).removeClass("text-danger text-warning");
+    $(form).find("#error" + id).text("");
+}
+function alerta(div) {
+    var val_maxlength = $(div).find("input").data("val-maxlength-max");
+    if ($(div).find("input").val().trim().length >= val_maxlength) {
+        var txt_maxlength = $(div).find("input").data("val-maxlength");
+        var span = $(div).find("span");
+        $(span).addClass("text-warning");
+        $(span).closest("div").addClass("has-warning");
+        span.text(txt_maxlength);
+        event.preventDefault();
+        return true;
+    }
+    return false;
 }
