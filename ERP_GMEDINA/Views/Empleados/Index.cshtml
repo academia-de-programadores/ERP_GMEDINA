@@ -67,6 +67,14 @@
                 @Html.ActionLink("Descargar Archivo", "ArchivoEmpleados", null, new { @class = "btn btn-primary " })
 
 
+                <p>
+                   Al terminar de ingresar los datos en el Archivo, use el siguiente boton para subir y guardar los datos.
+                </p>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span><input type="file" name="..."  accept=".xls,.xlsx" id="btnUpload"></span>
+                    <span class="fileinput-filename"></span>
+                    <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
@@ -81,9 +89,12 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+@Styles.Render("~/plugins/jasnyBootstrapStyles")
+
 }
 @section Scripts {
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/Empleados")
+@Scripts.Render("~/plugins/jasnyBootstrap")
 }
