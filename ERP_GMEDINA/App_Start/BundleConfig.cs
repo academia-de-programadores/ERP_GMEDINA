@@ -427,7 +427,7 @@ namespace ERP_GMEDINA
 
             // Duallist Styless
             bundles.Add(new StyleBundle("~/plugins/duallistStyles").Include(
-                      "~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"));
+                      "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css"));
 
             // Duallist
             bundles.Add(new ScriptBundle("~/plugins/duallist").Include(
@@ -589,6 +589,12 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
                 "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
+
+
 
 
 

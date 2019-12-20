@@ -2060,14 +2060,27 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Datos_Empleado' does not have 
           <Property Name="jor_Descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_DatosProfesionales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_DatosProfesionales">
+          <Key>
+            <PropertyRef Name="TipoDato" />
+            <PropertyRef Name="Data_Id" />
+          </Key>
+          <Property Name="TipoDato" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Data_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_DatosRequisicion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DatosRequisicion">
           <Key>
             <PropertyRef Name="TipoDato" />
+            <PropertyRef Name="Data_Id" />
             <PropertyRef Name="req_Id" />
           </Key>
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
-          <Property Name="TipoDato" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="TipoDato" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Data_Id" Type="int" Nullable="false" />
           <Property Name="req_Id" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -2098,46 +2111,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Departamentos' does not have a
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_EmpleadoAmonestaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_EmpleadoAmonestaciones">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_NombreCompleto" />
-            <PropertyRef Name="car_Id" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="depto_Id" />
-            <PropertyRef Name="depto_Descripcion" />
-            <PropertyRef Name="emp_Estado" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="car_Id" Type="int" Nullable="false" />
-          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="depto_Id" Type="int" Nullable="false" />
-          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="emp_Estado" Type="bit" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_EmpleadoIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_EmpleadoIncapacidades">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_NombreCompleto" />
-            <PropertyRef Name="car_Id" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="depto_Id" />
-            <PropertyRef Name="depto_Descripcion" />
-            <PropertyRef Name="emp_Estado" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="car_Id" Type="int" Nullable="false" />
-          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="depto_Id" Type="int" Nullable="false" />
-          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="emp_Estado" Type="bit" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Empleados">
           <Key>
@@ -2154,67 +2127,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_Empleados' does not have a pri
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="per_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_HistorialAmonestacion">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_Nombre" />
-            <PropertyRef Name="emp_Estado" />
-            <PropertyRef Name="tamo_Id" />
-            <PropertyRef Name="tamo_Descripcion" />
-            <PropertyRef Name="hamo_Id" />
-            <PropertyRef Name="hamo_AmonestacionAnterior" />
-            <PropertyRef Name="hamo_Estado" />
-            <PropertyRef Name="hamo_UsuarioCrea" />
-            <PropertyRef Name="hamo_FechaCrea" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="emp_Estado" Type="bit" Nullable="false" />
-          <Property Name="tamo_Id" Type="int" Nullable="false" />
-          <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hamo_Id" Type="int" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="date" />
-          <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
-          <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
-          <Property Name="hamo_Estado" Type="bit" Nullable="false" />
-          <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="hamo_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hamo_UsuarioModifica" Type="int" />
-          <Property Name="hamo_FechaModifica" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_HistorialAudienciaDescargo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_HistorialAudienciaDescargo">
-          <Key>
-            <PropertyRef Name="aude_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_Nombre" />
-            <PropertyRef Name="emp_Estado" />
-            <PropertyRef Name="aude_Descripcion" />
-            <PropertyRef Name="aude_FechaAudiencia" />
-            <PropertyRef Name="aude_Testigo" />
-            <PropertyRef Name="aude_Estado" />
-            <PropertyRef Name="aude_UsuarioCrea" />
-            <PropertyRef Name="aude_FechaCrea" />
-          </Key>
-          <Property Name="aude_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="emp_Estado" Type="bit" Nullable="false" />
-          <Property Name="aude_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="aude_FechaAudiencia" Type="datetime" Nullable="false" />
-          <Property Name="aude_Testigo" Type="bit" Nullable="false" />
-          <Property Name="aude_DireccionArchivo" Type="nvarchar" MaxLength="25" />
-          <Property Name="aude_Estado" Type="bit" Nullable="false" />
-          <Property Name="aude_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="aude_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="aude_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="aude_UsuarioModifica" Type="int" />
-          <Property Name="aude_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7579,10 +7491,18 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
     [V_Datos_Empleado].[jor_Descripcion] AS [jor_Descripcion]
     FROM [rrhh].[V_Datos_Empleado] AS [V_Datos_Empleado]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_DatosProfesionales" EntityType="Self.V_DatosProfesionales" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_DatosProfesionales].[TipoDato] AS [TipoDato], 
+    [V_DatosProfesionales].[Descripcion] AS [Descripcion], 
+    [V_DatosProfesionales].[Data_Id] AS [Data_Id]
+    FROM [rrhh].[V_DatosProfesionales] AS [V_DatosProfesionales]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_DatosRequisicion" EntityType="Self.V_DatosRequisicion" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_DatosRequisicion].[Descripcion] AS [Descripcion], 
     [V_DatosRequisicion].[TipoDato] AS [TipoDato], 
+    [V_DatosRequisicion].[Data_Id] AS [Data_Id], 
     [V_DatosRequisicion].[req_Id] AS [req_Id]
     FROM [rrhh].[V_DatosRequisicion] AS [V_DatosRequisicion]</DefiningQuery>
           </EntitySet>
@@ -7603,28 +7523,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
     [V_Departamentos].[per_CorreoElectronico] AS [per_CorreoElectronico]
     FROM [rrhh].[V_Departamentos] AS [V_Departamentos]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="Self.V_EmpleadoAmonestaciones" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_EmpleadoAmonestaciones].[emp_Id] AS [emp_Id], 
-    [V_EmpleadoAmonestaciones].[emp_NombreCompleto] AS [emp_NombreCompleto], 
-    [V_EmpleadoAmonestaciones].[car_Id] AS [car_Id], 
-    [V_EmpleadoAmonestaciones].[car_Descripcion] AS [car_Descripcion], 
-    [V_EmpleadoAmonestaciones].[depto_Id] AS [depto_Id], 
-    [V_EmpleadoAmonestaciones].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_EmpleadoAmonestaciones].[emp_Estado] AS [emp_Estado]
-    FROM [rrhh].[V_EmpleadoAmonestaciones] AS [V_EmpleadoAmonestaciones]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_EmpleadoIncapacidades" EntityType="Self.V_EmpleadoIncapacidades" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_EmpleadoIncapacidades].[emp_Id] AS [emp_Id], 
-    [V_EmpleadoIncapacidades].[emp_NombreCompleto] AS [emp_NombreCompleto], 
-    [V_EmpleadoIncapacidades].[car_Id] AS [car_Id], 
-    [V_EmpleadoIncapacidades].[car_Descripcion] AS [car_Descripcion], 
-    [V_EmpleadoIncapacidades].[depto_Id] AS [depto_Id], 
-    [V_EmpleadoIncapacidades].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_EmpleadoIncapacidades].[emp_Estado] AS [emp_Estado]
-    FROM [rrhh].[V_EmpleadoIncapacidades] AS [V_EmpleadoIncapacidades]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_Empleados" EntityType="Self.V_Empleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_Empleados].[emp_Id] AS [emp_Id], 
@@ -7634,43 +7532,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
     [V_Empleados].[per_NombreCompleto] AS [per_NombreCompleto], 
     [V_Empleados].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_Empleados] AS [V_Empleados]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialAmonestacion].[emp_Id] AS [emp_Id], 
-    [V_HistorialAmonestacion].[emp_Nombre] AS [emp_Nombre], 
-    [V_HistorialAmonestacion].[emp_Estado] AS [emp_Estado], 
-    [V_HistorialAmonestacion].[tamo_Id] AS [tamo_Id], 
-    [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion], 
-    [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id], 
-    [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha], 
-    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior], 
-    [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion], 
-    [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado], 
-    [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo], 
-    [V_HistorialAmonestacion].[hamo_UsuarioCrea] AS [hamo_UsuarioCrea], 
-    [V_HistorialAmonestacion].[hamo_FechaCrea] AS [hamo_FechaCrea], 
-    [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
-    [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
-    FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_HistorialAudienciaDescargo" EntityType="Self.V_HistorialAudienciaDescargo" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialAudienciaDescargo].[aude_Id] AS [aude_Id], 
-    [V_HistorialAudienciaDescargo].[emp_Id] AS [emp_Id], 
-    [V_HistorialAudienciaDescargo].[emp_Nombre] AS [emp_Nombre], 
-    [V_HistorialAudienciaDescargo].[emp_Estado] AS [emp_Estado], 
-    [V_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion], 
-    [V_HistorialAudienciaDescargo].[aude_FechaAudiencia] AS [aude_FechaAudiencia], 
-    [V_HistorialAudienciaDescargo].[aude_Testigo] AS [aude_Testigo], 
-    [V_HistorialAudienciaDescargo].[aude_DireccionArchivo] AS [aude_DireccionArchivo], 
-    [V_HistorialAudienciaDescargo].[aude_Estado] AS [aude_Estado], 
-    [V_HistorialAudienciaDescargo].[aude_RazonInactivo] AS [aude_RazonInactivo], 
-    [V_HistorialAudienciaDescargo].[aude_UsuarioCrea] AS [aude_UsuarioCrea], 
-    [V_HistorialAudienciaDescargo].[aude_FechaCrea] AS [aude_FechaCrea], 
-    [V_HistorialAudienciaDescargo].[aude_UsuarioModifica] AS [aude_UsuarioModifica], 
-    [V_HistorialAudienciaDescargo].[aude_FechaModifica] AS [aude_FechaModifica]
-    FROM [rrhh].[V_HistorialAudienciaDescargo] AS [V_HistorialAudienciaDescargo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialCargos" EntityType="Self.V_HistorialCargos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -10658,11 +10519,7 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
           <EntitySet Name="V_TipoDeduccion" EntityType="ERP_GMEDINAModel.V_TipoDeduccion" />
           <EntitySet Name="V_Datos_Empleado" EntityType="ERP_GMEDINAModel.V_Datos_Empleado" />
           <EntitySet Name="V_Departamentos" EntityType="ERP_GMEDINAModel.V_Departamentos" />
-          <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" />
-          <EntitySet Name="V_EmpleadoIncapacidades" EntityType="ERP_GMEDINAModel.V_EmpleadoIncapacidades" />
           <EntitySet Name="V_Empleados" EntityType="ERP_GMEDINAModel.V_Empleados" />
-          <EntitySet Name="V_HistorialAmonestacion" EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" />
-          <EntitySet Name="V_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_HistorialAudienciaDescargo" />
           <EntitySet Name="V_HistorialCargos" EntityType="ERP_GMEDINAModel.V_HistorialCargos" />
           <EntitySet Name="V_HistorialContrataciones" EntityType="ERP_GMEDINAModel.V_HistorialContrataciones" />
           <EntitySet Name="V_HistorialHorasTrabajadas" EntityType="ERP_GMEDINAModel.V_HistorialHorasTrabajadas" />
@@ -11783,6 +11640,7 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
           <EntitySet Name="V_DatosRequisicion" EntityType="ERP_GMEDINAModel.V_DatosRequisicion" />
+          <EntitySet Name="V_DatosProfesionales" EntityType="ERP_GMEDINAModel.V_DatosProfesionales" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -14641,42 +14499,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="V_EmpleadoAmonestaciones">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_NombreCompleto" />
-            <PropertyRef Name="car_Id" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="depto_Id" />
-            <PropertyRef Name="depto_Descripcion" />
-            <PropertyRef Name="emp_Estado" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="car_Id" Type="Int32" Nullable="false" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="depto_Id" Type="Int32" Nullable="false" />
-          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_EmpleadoIncapacidades">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_NombreCompleto" />
-            <PropertyRef Name="car_Id" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="depto_Id" />
-            <PropertyRef Name="depto_Descripcion" />
-            <PropertyRef Name="emp_Estado" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="car_Id" Type="Int32" Nullable="false" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="depto_Id" Type="Int32" Nullable="false" />
-          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="V_Empleados">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -14692,63 +14514,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
           <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_HistorialAmonestacion">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_Nombre" />
-            <PropertyRef Name="emp_Estado" />
-            <PropertyRef Name="tamo_Id" />
-            <PropertyRef Name="tamo_Descripcion" />
-            <PropertyRef Name="hamo_Id" />
-            <PropertyRef Name="hamo_AmonestacionAnterior" />
-            <PropertyRef Name="hamo_Estado" />
-            <PropertyRef Name="hamo_UsuarioCrea" />
-            <PropertyRef Name="hamo_FechaCrea" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="tamo_Id" Type="Int32" Nullable="false" />
-          <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hamo_Id" Type="Int32" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="DateTime" Precision="0" />
-          <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
-          <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hamo_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hamo_UsuarioModifica" Type="Int32" />
-          <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_HistorialAudienciaDescargo">
-          <Key>
-            <PropertyRef Name="aude_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_Nombre" />
-            <PropertyRef Name="emp_Estado" />
-            <PropertyRef Name="aude_Descripcion" />
-            <PropertyRef Name="aude_FechaAudiencia" />
-            <PropertyRef Name="aude_Testigo" />
-            <PropertyRef Name="aude_Estado" />
-            <PropertyRef Name="aude_UsuarioCrea" />
-            <PropertyRef Name="aude_FechaCrea" />
-          </Key>
-          <Property Name="aude_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="aude_FechaAudiencia" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="aude_Testigo" Type="Boolean" Nullable="false" />
-          <Property Name="aude_DireccionArchivo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="aude_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="aude_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="aude_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="aude_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="aude_UsuarioModifica" Type="Int32" />
-          <Property Name="aude_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="V_HistorialCargos">
           <Key>
@@ -18343,10 +18108,21 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
           <Key>
             <PropertyRef Name="TipoDato" />
             <PropertyRef Name="req_Id" />
+            <PropertyRef Name="Data_Id" />
           </Key>
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="req_Id" Type="Int32" Nullable="false" />
+          <Property Name="Data_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_DatosProfesionales">
+          <Key>
+            <PropertyRef Name="TipoDato" />
+            <PropertyRef Name="Data_Id" />
+          </Key>
+          <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Data_Id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -20952,32 +20728,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_EmpleadoAmonestaciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EmpleadoAmonestaciones">
-              <MappingFragment StoreEntitySet="V_EmpleadoAmonestaciones">
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
-                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
-                <ScalarProperty Name="emp_NombreCompleto" ColumnName="emp_NombreCompleto" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_EmpleadoIncapacidades">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EmpleadoIncapacidades">
-              <MappingFragment StoreEntitySet="V_EmpleadoIncapacidades">
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
-                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
-                <ScalarProperty Name="emp_NombreCompleto" ColumnName="emp_NombreCompleto" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_Empleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Empleados">
               <MappingFragment StoreEntitySet="V_Empleados">
@@ -20987,47 +20737,6 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
                 <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
                 <ScalarProperty Name="per_Id" ColumnName="per_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_HistorialAmonestacion">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAmonestacion">
-              <MappingFragment StoreEntitySet="V_HistorialAmonestacion">
-                <ScalarProperty Name="hamo_FechaModifica" ColumnName="hamo_FechaModifica" />
-                <ScalarProperty Name="hamo_UsuarioModifica" ColumnName="hamo_UsuarioModifica" />
-                <ScalarProperty Name="hamo_FechaCrea" ColumnName="hamo_FechaCrea" />
-                <ScalarProperty Name="hamo_UsuarioCrea" ColumnName="hamo_UsuarioCrea" />
-                <ScalarProperty Name="hamo_RazonInactivo" ColumnName="hamo_RazonInactivo" />
-                <ScalarProperty Name="hamo_Estado" ColumnName="hamo_Estado" />
-                <ScalarProperty Name="hamo_Observacion" ColumnName="hamo_Observacion" />
-                <ScalarProperty Name="hamo_AmonestacionAnterior" ColumnName="hamo_AmonestacionAnterior" />
-                <ScalarProperty Name="hamo_Fecha" ColumnName="hamo_Fecha" />
-                <ScalarProperty Name="hamo_Id" ColumnName="hamo_Id" />
-                <ScalarProperty Name="tamo_Descripcion" ColumnName="tamo_Descripcion" />
-                <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="emp_Nombre" ColumnName="emp_Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_HistorialAudienciaDescargo">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAudienciaDescargo">
-              <MappingFragment StoreEntitySet="V_HistorialAudienciaDescargo">
-                <ScalarProperty Name="aude_FechaModifica" ColumnName="aude_FechaModifica" />
-                <ScalarProperty Name="aude_UsuarioModifica" ColumnName="aude_UsuarioModifica" />
-                <ScalarProperty Name="aude_FechaCrea" ColumnName="aude_FechaCrea" />
-                <ScalarProperty Name="aude_UsuarioCrea" ColumnName="aude_UsuarioCrea" />
-                <ScalarProperty Name="aude_RazonInactivo" ColumnName="aude_RazonInactivo" />
-                <ScalarProperty Name="aude_Estado" ColumnName="aude_Estado" />
-                <ScalarProperty Name="aude_DireccionArchivo" ColumnName="aude_DireccionArchivo" />
-                <ScalarProperty Name="aude_Testigo" ColumnName="aude_Testigo" />
-                <ScalarProperty Name="aude_FechaAudiencia" ColumnName="aude_FechaAudiencia" />
-                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="emp_Nombre" ColumnName="emp_Nombre" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -21239,9 +20948,19 @@ warning 6002: The table/view 'ERP_GMEDINA2.rrhh.V_tbtiposalidas' does not have a
           <EntitySetMapping Name="V_DatosRequisicion">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DatosRequisicion">
               <MappingFragment StoreEntitySet="V_DatosRequisicion">
+                <ScalarProperty Name="Data_Id" ColumnName="Data_Id" />
                 <ScalarProperty Name="req_Id" ColumnName="req_Id" />
                 <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DatosProfesionales">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DatosProfesionales">
+              <MappingFragment StoreEntitySet="V_DatosProfesionales">
+                <ScalarProperty Name="Data_Id" ColumnName="Data_Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

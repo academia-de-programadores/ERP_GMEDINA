@@ -178,7 +178,6 @@
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
-    <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -775,6 +774,9 @@
     <Compile Include="Models\V_ComisionesColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DatosProfesionales.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_DatosRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -817,25 +819,13 @@
     <Compile Include="Models\V_Departamentos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_EmpleadoAmonestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_EmpleadoBonos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_EmpleadoIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_FormaDePago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_HistorialAmonestacion.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_HistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialCargos.cs">
@@ -1152,6 +1142,7 @@
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />

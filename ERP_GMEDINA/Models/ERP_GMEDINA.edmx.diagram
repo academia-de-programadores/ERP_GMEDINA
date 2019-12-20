@@ -127,11 +127,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_TipoDeduccion" Width="1.5" PointX="16.75" PointY="8.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Datos_Empleado" Width="1.5" PointX="16.75" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Departamentos" Width="1.5" PointX="16.75" PointY="16.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" Width="1.5" PointX="8.75" PointY="17.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoIncapacidades" Width="1.5" PointX="18.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Empleados" Width="1.5" PointX="18.75" PointY="4.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="18.75" PointY="7.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAudienciaDescargo" Width="1.5" PointX="18.75" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialCargos" Width="1.5" PointX="18.75" PointY="17.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialContrataciones" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialHorasTrabajadas" Width="1.5" PointX="2.75" PointY="19.75" />
@@ -421,6 +417,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DatosRequisicion" Width="1.5" PointX="15.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DatosProfesionales" Width="1.5" PointX="17.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

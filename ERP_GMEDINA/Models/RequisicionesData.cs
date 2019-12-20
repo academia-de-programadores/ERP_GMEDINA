@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ERP_GMEDINA.Models
 {
-    public class RequisicionesData
+    public class DatosProfesionales
     {
         public List<tbCompetencias> Competencias { get; set; }
         public List<tbHabilidades>Habilidades { get; set; }
@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
         public List<tbRequerimientosEspeciales> ReqEspeciales { get; set; }
         public List<tbTitulos> Titulos { get; set; }
         public int req_Id { get; set; }
-        public RequisicionesData()
+        public DatosProfesionales()
         {
             this.Competencias = new List<tbCompetencias>();
             this.Habilidades = new List<tbHabilidades>();
