@@ -79,22 +79,26 @@ function llamarmodaldelete(ID) {
     modaldelete.modal('show');
 }
 
-function llamarmodaldetalles() {
+function llamarmodaldetalles(ID) {
     var modaldetalle = $("#ModalDetalles");
-    id = IdEmpleado;
+    //$("#ModalDetalles").find("#hamo_Id").val(ID);
     debugger
-    _ajax(null,
-        '/HistorialAmonestaciones/Edit/' + id,
+    _ajax({ ID: parseInt(ID) },
+        '/HistorialAmonestaciones/Edit/',
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hamo_AmonestacionAnterior")["0"].innerText = obj.hamo_AmonestacionAnterior;
+                $("#ModalDetalles").find("#emp_Id")[0].innerText = obj.emp_Id;
                 $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
-                $("#ModalDetalles").find("#tbTipoAmonestaciones")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = obj.hamo_FechaCrea;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaModifica")["0"].innerText = obj.hamo_FechaModifica;
+                //$("#ModalDetalles").find("#tamo_Id")[0].innerText = obj.tamo_Id;
+               // $("#ModalDetalles").find("#tbTipoAmonestaciones")[0].innerText = obj.tbTipoAmonestacion.tamo_Descripcion;
+                //$("#ModalDetalles").find("#hamo_AmonestacionAnterior")["0"].innerText = obj.hamo_AmonestacionAnterior;
+                //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.emp_Id;
+                //$("#ModalDetalles").find("#tamo_Descripcion")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
+                //$("#ModalDetalles").find("#hamo_UsuarioCrea")["0"].innerText = obj.hamo_UsuarioCrea;
+                //$("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = FechaFormato(obj.hamo_FechaCrea).substring(0,10);
+                ////$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetalles").find("#hamo_FechaModifica")["0"].innerText = obj.hamo_FechaModifica;
                 debugger
                 $('#ModalDetalles').modal('show');
             }

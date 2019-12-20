@@ -76,8 +76,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbHistorialAmonestaciones = new List<Models.tbHistorialAmonestaciones> { };
-                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Where(x => x.emp_Id == id).Include(t => t.tbTipoAmonestaciones).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                
+                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Where(x => x.hamo_Id == id).Include(t => t.tbTipoAmonestaciones).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
             }
             catch (Exception ex)
             {
@@ -88,16 +87,11 @@ namespace ERP_GMEDINA.Controllers
             var amonestaciones = new tbHistorialAmonestaciones();
             foreach (var item in tbHistorialAmonestaciones)
             {
-                 amonestaciones = new tbHistorialAmonestaciones
+                amonestaciones = new tbHistorialAmonestaciones
                 {
-                    hamo_AmonestacionAnterior = item.hamo_AmonestacionAnterior,
-                    hamo_Observacion = item.hamo_Observacion,
-                    tbTipoAmonestaciones = item.tbTipoAmonestaciones,
-                    tbUsuario = item.tbUsuario,
-                    hamo_FechaCrea = item.hamo_FechaCrea,
-                    tbUsuario1 = item.tbUsuario1,
-                    hamo_FechaModifica = item.hamo_FechaModifica
-                };
+                   emp_Id = item.emp_Id,
+                   hamo_Observacion = item.hamo_Observacion,
+                 };
 
             }
             return Json(amonestaciones, JsonRequestBehavior.AllowGet);
