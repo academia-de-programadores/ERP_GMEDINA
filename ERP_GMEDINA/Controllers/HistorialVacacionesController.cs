@@ -55,6 +55,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id && x.hvac_Estado == true).ToList();
+                    if(lista == null)
+                    {
+                        lista.Add(new V_Historialvacaciones {  });
+                    }
                 }
                 catch
                 {
@@ -231,19 +235,19 @@ namespace ERP_GMEDINA.Controllers
         //}
 
         // GET: HistorialVacaciones/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbHistorialVacaciones tbHistorialVacaciones = db.tbHistorialVacaciones.Find(id);
-        //    if (tbHistorialVacaciones == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbHistorialVacaciones);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbHistorialVacaciones tbHistorialVacaciones = db.tbHistorialVacaciones.Find(id);
+            if (tbHistorialVacaciones == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbHistorialVacaciones);
+        }
 
         // POST: HistorialVacaciones/Delete/5
         [HttpPost, ActionName("Delete")]
