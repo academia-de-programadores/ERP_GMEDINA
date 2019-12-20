@@ -5,12 +5,22 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-sm-4">
+		<h2>Decimo Tercer Mes</h2>
+		<ol class="breadcrumb">
+			<li class="active">
+			</li>
+		</ol>
+	</div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Decimo Tercer Mes</h5>
+                    <h5>Listado Decimo Tercer Mes</h5>
                     <div class="ibox-tools" id="boxTools">						
 						@Html.ActionLink("Pagados", "IndexPagado", null, new { @class = "btn btn-primary btn-xs", @type="button" })
                         <input type="button" id="btnFechaEspecifica" value="Fecha Especifica" class="btn btn-primary btn-xs" />
@@ -70,7 +80,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Ingrese Fechas</h4>
+                <h4 class="modal-title">Ingrese Año</h4>
             </div>
 
             @Html.Partial("_FechasDecimoTercer", new ERP_GMEDINA.Models.tbHistorialDePago())           

@@ -29,7 +29,11 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2">Frecuencia en días</label>
                                 <div class="col-md-5">
-                                    @Html.EditorFor(model => model.cpla_FrecuenciaEnDias, new { htmlAttributes = new { @class = "form-control" } })
+                                    <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" class="form-control valid">
+                                        <option value="30" selected>Mensual</option>
+                                        <option value="7">Semanal</option>
+                                        <option value="15">Quincenal</option>
+                                    </select>
                                     <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
                                 </div>
                             </div>
@@ -40,28 +44,28 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         <div class="ibox-content">
                             <div class="col-lg-5" id="catalogoDeIngresos">
                                 <div class="ibox float-e-margins">
                                     <h3 style="margin-left:85px;">Lista del catalogo de Ingresos</h3>
-                                        <div class="col-lg-offset-2">
-                                            <hr/>
-                                            <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-                                                <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
-                                                <br />
-                                            </div>
-                                            &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
-                                            <br /><br />
-                                            @foreach (var item in ViewBag.CatalogoIngresos)
-                                            {
-                                                <div class="form-horizontal col-xs-offset-1">
-                                                    <div class="form-group">
-                                                        <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
-                                                    </div>
+                                    <div class="col-lg-offset-2">
+                                        <hr />
+                                        <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+                                            <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
+                                            <br />
+                                        </div>
+                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
+                                        <br /><br />
+                                        @foreach (var item in ViewBag.CatalogoIngresos)
+                                        {
+                                            <div class="form-horizontal col-xs-offset-1">
+                                                <div class="form-group">
+                                                    <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
                                                 </div>
-                                            }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

@@ -292,7 +292,7 @@ function verificarCampos(
 	catalogoIngresos,
 	catalogoDeducciones
 ) {
-	var todoBien = true;
+    var todoBien = true;
 	//Validar que la descripción este bien
 	if (descripcionPlanilla.trim() == '') {
 		scrollArriba();
@@ -301,7 +301,7 @@ function verificarCampos(
 		todoBien = false;
 	} else validacionDescripcionPlanilla.hide();
 	//Validar que la frecuencia en días esté bien
-	if (frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0) {
+	if ( frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0 ) {
 		scrollArriba();
 		validacionFrecuenciaDias.show();
 		if (todoBien) inputFrecuenciaEnDias.focus();
@@ -439,8 +439,6 @@ function listar() {
 	});
 	//Cuando le de click en detalles, o editar, le pasare el id
 	obtenerIdDetallesEditar('#tblCatalogoPlanillas tbody', table);
-
-	console.log($('#tblCatalogoPlanillas'));
 }
 
 //Redireccionar a Edit o Details
@@ -710,7 +708,6 @@ $(document).on(
 
 //Inactivar
 $('#inactivar').click(() => {
-	console.log('paso o no?');
 	$('#InactivarCatalogoDeducciones').modal();
 });
 

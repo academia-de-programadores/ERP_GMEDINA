@@ -39,9 +39,10 @@
                 @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id= "Validation_descipcion4A" })
             </div>
         </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary col-md-2" id="btnCreateRegistroDeduccion">Guardar</button>
+            <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarCrear">Cerrar</button>
+        </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarCrear">Cerrar</button>
-        <button type="submit" class="btn btn-primary" id="btnCreateRegistroDeduccion">Agregar</button>
-    </div>
+    
 }

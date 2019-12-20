@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>Catálogo de Deducciones</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Nuevo</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deduccion</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -43,8 +43,8 @@
                                         @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
                                     </td>
                                     <td>
-                                        <button data-id="@item.cde_IdDeducciones" type="button" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-                                        <button  data-id="@item.cde_IdDeducciones"  type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
+                                        <button  data-id="@item.cde_IdDeducciones"  type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+                                        <button data-id="@item.cde_IdDeducciones" type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
                                     </td>
                                 </tr>
                             }
@@ -62,7 +62,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Edición de datos</h4>
+                <h2 class="col-md-offset-4"><strong>Editar Deducción</strong></h2>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -76,7 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarCreate"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h2 class="col-md-offset-4"><strong>Agregar Deducción</strong></h2>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
@@ -117,7 +117,7 @@
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")
-    @Scripts.Render("~/Scripts/app/general/CatalogoDeducciones")
+    @Scripts.Render("~/Scripts/app/general/CatalogoDeducciones.js")
 }
 
 @section Styles {
