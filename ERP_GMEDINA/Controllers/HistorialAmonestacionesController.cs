@@ -72,11 +72,14 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<tbHistorialAmonestaciones> tbHistorialAmonestaciones = null;
+            tbHistorialAmonestaciones tbHistorialAmonestaciones = null;
             try
             {
-                tbHistorialAmonestaciones = new List<Models.tbHistorialAmonestaciones> { };
-                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Where(x => x.hamo_Id == id).Include(t => t.tbTipoAmonestaciones).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Find(id);
+                if(tbHistorialAmonestaciones == null || !tbHistorialAmonestaciones.hamo_Estado)
+                {
+                    return HttpNotFound();
+                }
             }
             catch (Exception ex)
             {
@@ -84,17 +87,39 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var amonestaciones = new tbHistorialAmonestaciones();
-            foreach (var item in tbHistorialAmonestaciones)
+            var amonestaciones = new tbHistorialAmonestaciones
             {
-                amonestaciones = new tbHistorialAmonestaciones
-                {
-                   emp_Id = item.emp_Id,
-                   hamo_Observacion = item.hamo_Observacion,
-                 };
-
-            }
+                emp_Id = tbHistorialAmonestaciones.emp_Id,
+                hamo_Observacion = tbHistorialAmonestaciones.hamo_Observacion,
+                tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Descripcion = IsNull(tbHistorialAmonestaciones.tbTipoAmonestaciones).tamo_Descripcion },
+                hamo_Fecha = tbHistorialAmonestaciones.hamo_Fecha,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistorialAmonestaciones.tbUsuario).usu_NombreUsuario},
+                hamo_FechaCrea = tbHistorialAmonestaciones.hamo_FechaCrea
+             };
             return Json(amonestaciones, JsonRequestBehavior.AllowGet);
+        }
+
+        private  tbTipoAmonestaciones IsNull(tbTipoAmonestaciones valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbTipoAmonestaciones { tamo_Descripcion = "" };
+            }
+        }
+        private tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
         }
 
         // GET: HistorialAmonestaciones/Create
