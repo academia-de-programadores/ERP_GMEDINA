@@ -19,6 +19,17 @@ namespace ERP_GMEDINA.Controllers
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             List<tbSueldos> tbSueldos = new List<tbSueldos> { };
+            try
+            {
+                tbSueldos = db.tbSueldos.Where(x => x.sue_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbSueldos);
+            }
+            catch (Exception ex)
+            {
+
+                ex.Message.ToString();
+                tbSueldos.Add(new tbSueldos { sue_Id = 0 });
+            }
             return View(tbSueldos);
         }
 
@@ -34,7 +45,8 @@ namespace ERP_GMEDINA.Controllers
                         {
                             Id = t.Id,
                             Identidad = t.Identidad,
-                            Id_Amonestacion=t.Id_Amonestacion,
+                            Id_Empleado =t.Id_Empleado,
+                            Id_Amonestacion =t.Id_Amonestacion,
                             Nombre = t.Nombre,
                             Sueldo = t.Sueldo,
                             Tipo_Moneda = t.Tipo_Moneda,
@@ -46,12 +58,13 @@ namespace ERP_GMEDINA.Controllers
                             Usuario_Crea = t.Usuario_Crea,
                             Fecha_Crea = t.Fecha_Crea,
                             Usuario_Modifica = t.Usuario_Modifica,
-                            Fecha_Modifica = t.Fecha_Modifica
+                            Fecha_Modifica = t.Fecha_Modifica,
+                            Estado = t.Estado
                      
                         }
 
                         )
-                        .ToList();
+                        .Where(x => x.Estado == true).ToList();
                     return Json(tbsueldos, JsonRequestBehavior.AllowGet);
 
                 }
@@ -70,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_Sueldos.Where(x => x.Id == id).ToList();
+                    lista = db.V_Sueldos.OrderByDescending(x => x.Id).Where(x => x.Id_Empleado == id && x.Estado==false ).ToList();
                 }
                 catch
                 {
@@ -183,8 +196,8 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Update(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id, tbsueldos.sue_Cantidad,tbsueldos.sue_SueldoAnterior, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbSueldos_Update_Result item in list)
+                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id,tbsueldos.sue_Cantidad, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -212,11 +225,11 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Delete(id, tbSueldos.sue_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                   /* var list = db.UDP_RRHH_tbSueldos_Delete(id, tbSueldos.sue_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbSueldos_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
-                    }
+                    }*/
                 }
                 catch (Exception ex)
                 {

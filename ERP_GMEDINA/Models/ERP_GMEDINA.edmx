@@ -1128,7 +1128,7 @@
           <Property Name="sue_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="tmon_Id" Type="int" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="decimal" Precision="16" Scale="4" />
           <Property Name="sue_SueldoAnterior" Type="int" />
           <Property Name="sue_Estado" Type="bit" Nullable="false" />
           <Property Name="sue_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -5260,12 +5260,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="resp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="resp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbSueldos_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="sue_Id" Type="int" Mode="In" />
-          <Parameter Name="sue_RazonInactivo" Type="nvarchar" Mode="In" />
-          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
         <Function Name="UDP_RRHH_tbSueldos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="sue_Id" Type="int" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -5273,15 +5267,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="sue_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="sue_FechaCrea" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbSueldos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="sue_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="tmon_Id" Type="int" Mode="In" />
-          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
-          <Parameter Name="sue_SueldoAnterior" Type="int" Mode="In" />
-          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tamo_Id" Type="int" Mode="In" />
@@ -8466,7 +8451,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="sue_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="tmon_Id" Type="Int32" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="sue_SueldoAnterior" Type="Int32" />
           <Property Name="sue_Estado" Type="Boolean" Nullable="false" />
           <Property Name="sue_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -13763,12 +13748,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="resp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="resp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbSueldos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Delete_Result)">
-            <Parameter Name="sue_Id" Mode="In" Type="Int32" />
-            <Parameter Name="sue_RazonInactivo" Mode="In" Type="String" />
-            <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbSueldos_Restore">
             <Parameter Name="sue_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
@@ -16370,20 +16349,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoAmonestaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoAmonestaciones_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoAmonestaciones_Delete_Result">
@@ -16598,7 +16563,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Insert">
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbSueldos_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />

@@ -36,18 +36,16 @@ function format(obj) {
                 '<th>' + 'Id del empleado' + '</th>' +
                 '<th>' + 'Cuenta Bancaria' + '</th>' +
                 '<th>' + 'Cargo' + '</th>' +
-                '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                '<td>' + index.Sueldo_Anterior + '</td>' +
+                '<td>' + index.Sueldo + ' '+ index.Tipo_Moneda + '</td>' +
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +
-                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.Id + ')" data-id="@item.Id">Inactivar</button> ' + '</td>' +
                 '</tr>' +
                 '</tbody>'
         '</table>'
@@ -66,6 +64,7 @@ function llenarTabla() {
 
                    ID: value.Id,
                    Identidad: value.Identidad,
+                   Id_Empleado :value.Id_Empleado,
                    Id_Amonestacion : value.Id_Amonestacion,
                    Nombre: value.Nombre,
                    Sueldo: value.Sueldo,
@@ -94,15 +93,13 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#sue_SueldoAnterior")["0"].innerText = obj.sue_SueldoAnterior;
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj.sue_Cantidad;
                 $("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
                 $("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
                 $("#ModalDetalles").find("#sue_UsuarioCrea")["0"].innerText = obj.sue_UsuarioCrea;
                 $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj.sue_FechaCrea);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-        
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;       
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
             }
@@ -113,16 +110,10 @@ function tablaDetalles(ID) {
 
 
 
-
-
-
-
 $(document).ready(function () {
     llenarTabla();
 });
-var sue_Id = 0;
-var vemp_Id = 0;
-var vtmon_Id = 0;
+
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
@@ -130,15 +121,14 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     if (row.child.isShown()) {
         row.child.hide();
         tr.removeClass('shown');
+        debugger
     }
     else {
-        id = row.data().Id;
-        id_emp = row.data().Identidad;
-        sue_Id = id;
-        vemp_Id = row.data().
+        id = row.data().Id_Empleado;
+        console.log(id);
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
-            '/Sueldos/ChildRowData',
+            '/Sueldos/ChildRowData' ,
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -156,9 +146,10 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 $("#btnActualizar").click(function () {
     console.log("sf");
-    var data = $("#FormEditar").serializeArray();
+    var data = $('#ModalEditar').serializeArray();
     data = serializar(data);
     if (data != null) {
+
         data = JSON.stringify({ tbsueldos: data });
         _ajax(data,
             '/Sueldos/Edit',
@@ -167,7 +158,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["sue_Id","emp_Id","tamo_Id","sue_Cantidad"]);
+                    LimpiarControles(["sue_Id","sue_Cantidad"]);
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
@@ -177,6 +168,11 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+
+
+
+
 
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -188,68 +184,7 @@ $("#btnEditar").click(function () {
                 $('#ModalEditar').modal('show');
                 $("#ModalEditar").find("#sue_Cantidad").val(obj.sue_Cantidad);
                 $("#ModalEditar").find("#sue_Cantidad").focus();
+
             }
         });
 });
-
-
-
-
-
-
-function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#Id").val(IdSueldo);
-    modaldelete.modal('show');
-}
-
-
-
-
-
-$("#InActivar").click(function () {
-    console.log("Lupe")
-    var data = $("#FormInactivar").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialAmonestaciones: data });
-        _ajax(data,
-            '/Sueldos/Delete',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["sue_Id", "sue_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
-});
-
-
-function llamarmodaldetalles() {
-    var modaldetalle = $("#ModalDetalles");
-    id = IdSueldo;
-    _ajax(null,
-        '/Sueldos/Edit/' + id,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-
-
-                $("#ModalDetalles").find("#Nombre")["0"].innerText = obj.Nombre;
-                $("#ModalDetalles").find("#Cuenta")["0"].innerText = obj.Cuenta;
-                $("#ModalDetalles").find("#Sueldo_Anterior")["0"].innerText = obj.Sueldo_Anterior;
-                $("#ModalDetalles").find("#Usuario_Crea")["0"].innerText = obj.Usuario_Crea;
-                $("#ModalDetalles").find("#Fecha_Crea")["0"].innerText = obj.Fecha_Crea;
-
-
-                $('#ModalDetalles').modal('show');
-            }
-        });
-}

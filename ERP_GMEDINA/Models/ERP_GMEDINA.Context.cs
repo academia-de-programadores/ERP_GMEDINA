@@ -1567,27 +1567,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequerimientosEspeciales_Update_Result>("UDP_RRHH_tbRequerimientosEspeciales_Update", resp_IdParameter, resp_DescripcionParameter, resp_UsuarioModificaParameter, resp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbSueldos_Delete_Result> UDP_RRHH_tbSueldos_Delete(Nullable<int> sue_Id, string sue_RazonInactivo, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
-        {
-            var sue_IdParameter = sue_Id.HasValue ?
-                new ObjectParameter("sue_Id", sue_Id) :
-                new ObjectParameter("sue_Id", typeof(int));
-    
-            var sue_RazonInactivoParameter = sue_RazonInactivo != null ?
-                new ObjectParameter("sue_RazonInactivo", sue_RazonInactivo) :
-                new ObjectParameter("sue_RazonInactivo", typeof(string));
-    
-            var sue_UsuarioModificaParameter = sue_UsuarioModifica.HasValue ?
-                new ObjectParameter("sue_UsuarioModifica", sue_UsuarioModifica) :
-                new ObjectParameter("sue_UsuarioModifica", typeof(int));
-    
-            var sue_FechaModificaParameter = sue_FechaModifica.HasValue ?
-                new ObjectParameter("sue_FechaModifica", sue_FechaModifica) :
-                new ObjectParameter("sue_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Delete_Result>("UDP_RRHH_tbSueldos_Delete", sue_IdParameter, sue_RazonInactivoParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
-        }
-    
         public virtual int UDP_RRHH_tbSueldos_Restore(Nullable<int> sue_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
