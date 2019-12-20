@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducciones Extraordinarias")]
         public int dex_IdDeduccionesExtra { get; set; }
 
-        [Required(ErrorMessage = "Campo requerido")]
+        [Required(ErrorMessage = "El campo Equipo Empleado es requerido")]
         [Display(Name = "Equipo Empleado")]
         public int eqem_Id { get; set; }
 
@@ -25,25 +25,25 @@ namespace ERP_GMEDINA.Models
         public int cde_IdDeducciones { get; set; }
 
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, a mayor de 10 dígitos")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "El campo Monto Inicial es Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
         [Range(0.00, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "El campo Monto Restante es Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
 
         [MaxLength (100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "El campo Observaciones es Requerido")]
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
 
 
         [Range(0.00, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
-        [Required(ErrorMessage = "Campo Requerido")]
+        [Required(ErrorMessage = "El campo Cuota es Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }

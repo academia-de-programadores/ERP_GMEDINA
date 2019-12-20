@@ -206,7 +206,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                             $("#Editar #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-
+                $("#DetallesDeduccionAFP").modal('hide');
                 $("#EditarDeduccionAFP").modal();
 
             }

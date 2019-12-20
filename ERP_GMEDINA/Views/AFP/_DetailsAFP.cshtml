@@ -2,89 +2,96 @@
 
 @using (Html.BeginForm())
 {
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.afp_Id)
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="ibox-content">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.afp_Id)
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_Descripcion)
+                </dt>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.afp_Descripcion, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <dd>
+                    @Html.DisplayFor(model => model.afp_Descripcion)
+                </dd>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_AporteMinimoLps, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_AporteMinimoLps)
+                </dt>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_InteresAporte, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <dd>
+                    @Html.DisplayFor(model => model.afp_AporteMinimoLps)
+                </dd>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_InteresAnual, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_InteresAporte)
+                </dt>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" disabled></select>
-                </div>
-            </div>
+                <dd>
+                    @Html.DisplayFor(model => model.afp_InteresAporte)
+                </dd>
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h2>Auditoría</h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="form-horizontal">
-                        <table class="table table-striped table-bordered dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Acción</th>
-                                    <th>Usuario</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Creado</td>
-                                    @Html.HiddenFor(model => model.afp_UsuarioCrea)
-                                    <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.afp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                </tr>
-                                <tr>
-                                    <td>Modificado</td>
-                                    @Html.HiddenFor(model => model.afp_UsuarioModifica)
-                                    <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.afp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="footer">
-                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_InteresAnual)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.afp_InteresAnual)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tde_IdTipoDedu)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbTipoDeduccion.tde_Descripcion)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_UsuarioCrea)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_UsuarioModifica)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_FechaCrea)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.afp_FechaCrea)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_FechaModifica)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.afp_FechaModifica)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.afp_Activo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.afp_Activo)
+                </dd>
+            </dl>
+            <div class="footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white pull-left" id="btnEditarAFP">Editar</button>
             </div>
         </div>
-    </div>
 }
 
 

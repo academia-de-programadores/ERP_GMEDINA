@@ -231,6 +231,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
+                $("#DetallesAFP").modal('hide');
                 $("#EditarAFP").modal();
             }
             else {

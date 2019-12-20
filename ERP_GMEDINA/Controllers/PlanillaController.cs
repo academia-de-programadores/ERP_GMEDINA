@@ -681,12 +681,16 @@ namespace ERP_GMEDINA.Controllers
                                         #region Excesos
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
+                                        //Variable para llamar en duro los empleados con Décimo Tercer Mes
                                         var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+
+                                        //Validar primero si es en el año actual el proceso de este calculo
                                             if (AnioActual == Convert.ToInt32(DecimoTercer.dtm_FechaPago.Year))
                                             {
                                                 //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                                 Exceso = SalarioMinimo * 10;
 
+                                                //Validar si el Décimo Tercer es mayor al Exceso
                                                 if  (DecimoTercer.dtm_Monto > Exceso)
                                                 {
                                                     ExcesoDecimoTercer = DecimoTercer.dtm_Monto - Exceso;
@@ -701,14 +705,18 @@ namespace ERP_GMEDINA.Controllers
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
+                                        //Variable para llamar en duro los empleados con Décimo Cuarto Mes
                                         var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+
+                                        //Validar primero si es en el año actual el proceso de este calculo
+                                        if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
+                                            {
 
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
 
-                                            if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
-                                            {
-                                                if (DecimoCuarto.dcm_Monto > Exceso)
+                                            //Validar si el Décimo Cuarto es mayor al Exceso
+                                            if (DecimoCuarto.dcm_Monto > Exceso)
                                                 {
                                                     ExcesoDecimoCuarto = DecimoCuarto.dcm_Monto - Exceso;
                                                 }
@@ -722,8 +730,10 @@ namespace ERP_GMEDINA.Controllers
 
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
+                                        //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
                                         var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbHistorialDePago.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
 
+                                        //Validar si los dias a Pagar es mayor a 30 dias 
                                             if (objVacaciones.hip_UnidadesPagar > 30)
                                             {
                                                 ExcesoVacaciones = ((objVacaciones.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
@@ -736,11 +746,16 @@ namespace ERP_GMEDINA.Controllers
                                         #endregion
 
                                         #region Gastos Médicos
-
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
                                         var objAcumuladosISRMenor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 1).FirstOrDefault();
-                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
-                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
 
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 70,000.00
+                                        var objAcumuladosISRMayor = db.tbAcumuladosISR.Where(x => x.aisr_Activo && x.aisr_Id == 2).FirstOrDefault();
+
+                                        //Variable para llamar en duro el monto de Gastos Médicos de 40,000.00
+                                        var objEmpleados = db.tbEmpleados.Where(x => x.emp_Id == empleadoActual.emp_Id).Include(x => x.tbPersonas).Where(x => x.tbPersonas.per_Estado == true).FirstOrDefault();
+                                                    
+                                                    //Validar si el Empleado tiene menos de 60 años para saber cuanto se le cobrará de Gastos Médicos
                                                     if (objEmpleados.tbPersonas.per_Edad < 60)
                                                     {
                                                         GastosMedicos = objAcumuladosISRMenor.aisr_Monto;
@@ -767,6 +782,8 @@ namespace ERP_GMEDINA.Controllers
                                         //Cálculo con la Tabla Progresiva ISR
                                         //RentaNetaGravable = (Decimal)320902.78;
                                         //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
+
+                                        //Variable para llamar cada uno de los Porcentajes y Techos del ISR
                                         var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
                                         var objISRBajo = db.tbISR.Where(x => x.isr_Id == 2).FirstOrDefault();
                                         var objISRMedio = db.tbISR.Where(x => x.isr_Id == 3).FirstOrDefault();

@@ -47,8 +47,8 @@
                                         @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
                                     </td>
                                     <td>
+                                        <button type="button" data-id="@item.afp_Id" class="btn btn-default btn-xs" id="btnDetalleAFP">Detalles</button>
                                         <button type="button" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnEditarAFP">Editar</button>
-                                        <button type="button" data-id="@item.afp_Id" class="btn btn-default btn-xs" id="btnDetalleAFP">Detalle</button>
                                     </td>
                                 </tr>
                             }
@@ -87,7 +87,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Edición de AFP</h4>
+                <h4 class="modal-title">Editar AFP</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -121,14 +121,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar AFP</h4>
+                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inactivar este registro?
+                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger " id="btnInactivarRegistroAFP">Inactivar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarRegistroAFP">Inhabilitar</button>
             </div>
         </div>
     </div>
