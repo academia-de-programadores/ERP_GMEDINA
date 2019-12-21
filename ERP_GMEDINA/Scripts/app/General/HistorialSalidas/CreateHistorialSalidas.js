@@ -176,21 +176,22 @@ $("#FormCreate").submit(function (e) {
 });
 $("#btnCrear").click(function () {
  //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-var tbAreas =
+    var tbHistorialSalidas =
     {
-        suc_Id: $("#Sucursales").val(),
-        area_Descripcion: $("#area_Descripcion").val(),
-        tbCargos:{Razon: $("#Razon").val()},
+        tsal_Id: $("#TipoSalidas").val(),
+        rsal_Id: $("#RazonSalidas").val(),
+        hsal_Observacion: $("#hsal_Observacion").val()
+        //tbCargos:{Razon: $("#Razon").val()},
     };
 var lista = getJson();
 
-    if (tbAreas != null) {
-         data = JSON.stringify({
-          tbAreas: tbAreas,
-          tbDepartamentos: lista
+    if (tbHistorialSalidas != null) {
+        data = JSON.stringify({
+          tbHistorialSalidas: tbHistorialSalidas,
+          V_HistorialSalidas_Empleados: lista
          });
          _ajax(data,
-             '/Areas/Create',
+             '/HistorialSalidas/Create',
              'POST',
              function (obj) {
               if (obj != "-1" && obj != "-2" && obj != "-3") {

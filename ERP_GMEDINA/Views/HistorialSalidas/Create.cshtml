@@ -1,6 +1,8 @@
 ﻿@model ERP_GMEDINA.Models.cHistorialSalidas
 
 @{
+    /**/
+
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
@@ -53,6 +55,23 @@
                                     @Html.ValidationMessageFor(model => model.hsal_Observacion, "", new { @class = "text-danger", @id = "errorhsal_Observacion" })
                                 </div>
                             </div>
+                            //---Fechasalida---
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                            @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control required" }, type = "date", max = "DateTime.Now.ToShortDateString();" })
+                                            @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            //@Html.TextBoxFor(model => model.EndTime, new { type = "time" })
+
                         }
                         <div class="ibox">
                             <div class="ibox-title">
@@ -97,9 +116,12 @@
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
+
 @section Scripts {
     @Scripts.Render("~/plugins/customdataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/CreateArea")
     @Scripts.Render("~/Scripts/app/general/CreateHistorialSalidas")
+    @Scripts.Render("~/plugins/select2Styles")
+    @Scripts.Render("~/plugins/select2")
 }
