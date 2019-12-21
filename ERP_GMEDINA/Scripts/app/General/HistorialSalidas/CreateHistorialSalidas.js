@@ -3,76 +3,86 @@ var list = [];
 function Remove(Id, lista) {
     var list = [];
     lista.forEach(function (value, index) {
-        if (value.Id!=Id) {
+        if (value.Id != Id) {
             list.push(value);
         }
     });
     return list;
 }
-function Add(Nombre, Observacion) {
-    if (Nombre.trim().length != 0 && Observacion.trim().length != 0) {
+function Add(Empleados, Razon ,ver) {
+    if (Empleados.trim().length != 0 && Razon.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Nombre == Nombre || Fila.Observacion == Observacion) {            
-                if (Fila.Observacion == Observacion) {
-                    var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
+            if (Fila.Empleados == Empleados || Fila.Razon == Razon) {
+                //if (Fila.Razon == Razon) {
+                //    var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
+                //    $(span).addClass("text-warning");
+                //    $(span).closest("div").addClass("has-warning");
+                //    span.text('El cargo "' + car_Descripcion + '" ya existe');
+                //    $("#FormDepartamentos").find("#car_Descripcion").focus();
+                //}
+                if (Fila.Empleados == Empleados) {
+                    var span = $("#FormEmpleados").find("#errorEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
-                    span.text('El cargo "' + Observacion + '" ya existe');
-                    $("#FormEmpleados").find("#Observacion").focus();
+                    span.text('El empleado "' + Empleados + '" ya existe');
+                    $("#FormEmpleados").find("#Empleados").focus();
                 }
-                if (Fila.Descripcion == Nombre) {
-                    var span = $("#FormEmpleados").find("#errorNombre");
-                    $(span).addClass("text-warning");
-                    $(span).closest("div").addClass("has-warning");
-                    span.text('La Nombre "' + Nombre + '" ya existe');
-                    $("#FormEmpleados").find("#Nombre").focus();
-                }            
                 return null;
             }
         }
         ChildTable.row.add(
             {
-                Descripcion: Nombre.trim(),
-                Cargo: Observacion
+                Empleados: ver,//Empleados.trim(),
+                Razon: Razon
             }
-            ).draw();
+        ).draw();
+        $("#FormEmpleados").find("#Empleados").val("");
+        $("#FormEmpleados").find("#Razon").val("");
+        $("#FormEmpleados").find("#Empleados").focus();
     } else {
-        if (Observacion.trim().length == 0) {
-            var txt_required = $("#FormEmpleados").find("#Observacion").data("val-required");
+        if (Razon.trim().length == 0) {
+            var txt_required = $("#FormEmpleados").find("#Razon").data("val-required");
             var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
             $(span).addClass("text-danger");
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
-            $("#FormEmpleados").find("#Observacion").focus();
+            $("#FormEmpleados").find("#Razon").focus();
         }
-        if (Nombre.trim().length == 0) {
-            var txt_required = $("#FormEmpleados").find("#Nombre").data("val-required");
-            var span = $("#FormEmpleados").find("#errorNombre");
+        if (Empleados.trim().length == 0) {
+            var txt_required = $("#FormEmpleados").find("#Empleados").data("val-required");
+            var span = $("#FormEmpleados").find("#errorEmpleados");
             $(span).addClass("text-danger");
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
-            $("#FormEmpleados").find("#Nombre").focus();
+            $("#FormEmpleados").find("#Empleados").focus();
         }
     }
 }
 function getJson() {
- //declaramos una lista para recuperar en un formato 
- //especifico el json de datatable.
-     list = new Array();
- //declaramos el objeto que ira dentro de la vista     
+    //declaramos una lista para recuperar en un formato 
+    //especifico el json de datatable.
+    list = new Array();
+    //declaramos el objeto que ira dentro de la vista     
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
 
         var tbEmpleados =
-         {
-             Id: i,
-             Nombre: fila.Descripcion,
-             tbCargos: { Observacion: fila.Cargo }
-         };
+        {
+            Id: i,
+            tbEmpleados: fila.Empleados,
+            tbEmpleados: fila.Razon
+            //,tbCargos: { car_Descripcion: fila.Cargo }
+        };
         list.push(tbEmpleados);
     }
     return list;
+}
+function Remover(btn) {
+    ChildTable
+        .row($(btn).parents('tr'))
+        .remove()
+        .draw();
 }
 //Tipo de salida
 function llenarDropDowlistTipoSalida() {
@@ -131,8 +141,8 @@ $(document).ready(function () {
         lengthChange: false,
      columns: 
       [
-            { data: 'Nombre' },
-            { data: 'Observacion' },
+            { data: 'Empleados' },
+            { data: 'Razon' },
             {
             data: 'Acciones',
             defaultContent: '<div>' +
@@ -144,16 +154,20 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
-    var Descripcion = $("#FormEmpleados").find("#Nombre").val();    
-    var Cargo = $("#FormEmpleados").find("#Observacion").val();
-    var valores=Descripcion + Cargo;
+    var Id = $("#FormEmpleados").find("#Empleados").val();    
+    var Razon = $("#FormEmpleados").find("#Razon").val();
+    var ver = $('#Empleados option:selected').html();
+    console.log(Id);
+    console.log(Razon);
+    console.log(ver);
+    var valores = Id + Razon + ver;
     for (var i = 0; i < valores.length; i++) {
         if (valores[i] == ">" || valores[i] == "<") {
             MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.");
             return null;
         }
     }
- //Add(Descripcion, Cargo);
+    Add(Id, Razon ,ver);
 
     $("#FormEmpleados").validate();
 });
@@ -166,7 +180,7 @@ var tbAreas =
     {
         suc_Id: $("#Sucursales").val(),
         area_Descripcion: $("#area_Descripcion").val(),
-        tbCargos:{Observacion: $("#Observacion").val()},
+        tbCargos:{Razon: $("#Razon").val()},
     };
 var lista = getJson();
 
@@ -190,21 +204,38 @@ var lista = getJson();
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-$("#FormEmpleados").find("#Nombre").keypress(function (envet) {
+$("#FormEmpleados").find("#Empleados").keypress(function (envet) {
+    if (alerta($(this).closest("div"))) {
+        return null;
+    }
     var id = $(this).attr("id");
     var form = $(this).closest("form");
-    limpiarSpan(id,form);
+    limpiarSpan(id, form);
 });
-$("#FormEmpleados").find("#Observacion").keypress(function (envet) {
+$("#FormEmpleados").find("#Razon").keypress(function (envet) {
+    if (alerta($(this).closest("div"))) {
+        return null;
+    }
     var id = $(this).attr("id");
     var form = $(this).closest("form");
-    limpiarSpan(id,form);
+    limpiarSpan(id, form);
 });
-function limpiarSpan(id,form) {
+function limpiarSpan(id, form) {
     var span = $(form).find("#error" + id);
-    $(span).closest("div").removeClass("has-error");
-    $(span).removeClass("text-danger");
-    $(span).closest("div").removeClass("has-warning");
-    $(span).removeClass("text-warning");
-    span["0"].innerText = "";
+    $(span).closest("div").removeClass("has-error has-warning");
+    $(span).removeClass("text-danger text-warning");
+    $(form).find("#error" + id).text("");
+}
+function alerta(div) {
+    var val_maxlength = $(div).find("input").data("val-maxlength-max");
+    if ($(div).find("input").val().trim().length >= val_maxlength) {
+        var txt_maxlength = $(div).find("input").data("val-maxlength");
+        var span = $(div).find("span");
+        $(span).addClass("text-warning");
+        $(span).closest("div").addClass("has-warning");
+        span.text(txt_maxlength);
+        event.preventDefault();
+        return true;
+    }
+    return false;
 }
