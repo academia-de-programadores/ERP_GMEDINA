@@ -46,23 +46,24 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult ChildRowData(int? id)
-        {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            List<V_Departamentos> lista = new List<V_Departamentos> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    lista = db.V_Departamentos.Where(x => x.area_Id == id).ToList();
-                }
-                catch
-                {
-                }
-            }
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult ChildRowData(int? id)
+        //{
+        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+        //    //posteriormente es destruida.
+        //    //List<V_Departamentos> lista = new List<V_Departamentos> { };
+        //    //using (db = new ERP_GMEDINAEntities())
+        //    //{
+        //    //    try
+        //    //    {
+        //    //        lista = db.V_Departamentos.Where(x => x.area_Id == id).ToList();
+        //    //    }
+        //    //    catch
+        //    //    {
+        //    //    }
+        //    //}
+
+        //    return Json(lista, JsonRequestBehavior.AllowGet);
+        //}
         public ActionResult llenarDropDowlist()
         {
             var Sucursales = new List<object> { };

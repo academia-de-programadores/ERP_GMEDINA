@@ -47,14 +47,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         public virtual DbSet<tbFormaPago> tbFormaPago { get; set; }
-        public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
         public virtual DbSet<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidaciones> tbLiquidaciones { get; set; }
-        public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
         public virtual DbSet<tbMotivoLiquidaciones> tbMotivoLiquidaciones { get; set; }
         public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
         public virtual DbSet<tbPreaviso> tbPreaviso { get; set; }
@@ -123,10 +120,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
         public virtual DbSet<V_DecimoCuartoMes_RPT> V_DecimoCuartoMes_RPT { get; set; }
         public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
-        public virtual DbSet<V_DecimoTercerMes_Pagados> V_DecimoTercerMes_Pagados { get; set; }
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
         public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
@@ -135,34 +130,23 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
         public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
-        public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_FechaPlani> V_Plani_FechaPlani { get; set; }
         public virtual DbSet<V_Plani_FechaPlanilla> V_Plani_FechaPlanilla { get; set; }
         public virtual DbSet<V_Plani_TipoPlani> V_Plani_TipoPlani { get; set; }
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
-        public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_Datos_Empleado> V_Datos_Empleado { get; set; }
-        public virtual DbSet<V_Departamentos> V_Departamentos { get; set; }
         public virtual DbSet<V_Empleados> V_Empleados { get; set; }
         public virtual DbSet<V_HistorialCargos> V_HistorialCargos { get; set; }
-        public virtual DbSet<V_HistorialContrataciones> V_HistorialContrataciones { get; set; }
         public virtual DbSet<V_HistorialHorasTrabajadas> V_HistorialHorasTrabajadas { get; set; }
-        public virtual DbSet<V_HistorialIncapacidades> V_HistorialIncapacidades { get; set; }
         public virtual DbSet<V_HorariosDetalles> V_HorariosDetalles { get; set; }
-        public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
-        public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
-        public virtual DbSet<V_tbHistorialSalidas> V_tbHistorialSalidas { get; set; }
-        public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
+        public virtual DbSet<V_DatosProfesionalesP> V_DatosProfesionalesP { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
-        public virtual DbSet<V_tbtiposalidas> V_tbtiposalidas { get; set; }
-        public virtual DbSet<V_DatosRequisicion> V_DatosRequisicion { get; set; }
-        public virtual DbSet<V_DatosProfesionales> V_DatosProfesionales { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1002,17 +986,13 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result>("UDP_tbTipoPlanillaDetalleDeduccion_Insert", cde_IdDeduccionesParameter, cpla_IdPlanillaParameter, tpdd_UsuarioCreaParameter, tpdd_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_tbTipoPlanillaDetalleDeduccion_Update(Nullable<int> cpla_IdPlanilla, Nullable<int> cde_IdDeducciones)
+        public virtual ObjectResult<string> UDP_tbTipoPlanillaDetalleDeduccion_Update(Nullable<int> tpdd_IdPlanillaDetDeduccion)
         {
-            var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
-                new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
-                new ObjectParameter("cpla_IdPlanilla", typeof(int));
+            var tpdd_IdPlanillaDetDeduccionParameter = tpdd_IdPlanillaDetDeduccion.HasValue ?
+                new ObjectParameter("tpdd_IdPlanillaDetDeduccion", tpdd_IdPlanillaDetDeduccion) :
+                new ObjectParameter("tpdd_IdPlanillaDetDeduccion", typeof(int));
     
-            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
-                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
-                new ObjectParameter("cde_IdDeducciones", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleDeduccion_Update", cpla_IdPlanillaParameter, cde_IdDeduccionesParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleDeduccion_Update", tpdd_IdPlanillaDetDeduccionParameter);
         }
     
         public virtual ObjectResult<string> UDP_tbTipoPlanillaDetalleIngreso_Insert(Nullable<int> cin_IdIngreso, Nullable<int> cpla_IdPlanilla, Nullable<int> tpdi_UsuarioCrea, Nullable<System.DateTime> tpdi_FechaCrea)
@@ -1036,17 +1016,13 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Insert", cin_IdIngresoParameter, cpla_IdPlanillaParameter, tpdi_UsuarioCreaParameter, tpdi_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_tbTipoPlanillaDetalleIngreso_Update(Nullable<int> cpla_IdPlanilla, Nullable<int> cin_IdIngreso)
+        public virtual ObjectResult<string> UDP_tbTipoPlanillaDetalleIngreso_Update(Nullable<int> tpdi_IdDetallePlanillaIngreso)
         {
-            var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
-                new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
-                new ObjectParameter("cpla_IdPlanilla", typeof(int));
+            var tpdi_IdDetallePlanillaIngresoParameter = tpdi_IdDetallePlanillaIngreso.HasValue ?
+                new ObjectParameter("tpdi_IdDetallePlanillaIngreso", tpdi_IdDetallePlanillaIngreso) :
+                new ObjectParameter("tpdi_IdDetallePlanillaIngreso", typeof(int));
     
-            var cin_IdIngresoParameter = cin_IdIngreso.HasValue ?
-                new ObjectParameter("cin_IdIngreso", cin_IdIngreso) :
-                new ObjectParameter("cin_IdIngreso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Update", cpla_IdPlanillaParameter, cin_IdIngresoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_tbTipoPlanillaDetalleIngreso_Update", tpdi_IdDetallePlanillaIngresoParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbTipoHora_Update_Result> UDP_RRHH_tbTipoHora_Update(Nullable<int> tiho_Id, string tiho_Descripcion, Nullable<int> tiho_Recargo, Nullable<int> tiho_UsuarioModifica, Nullable<System.DateTime> tiho_FechaModifica)
@@ -5080,15 +5056,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCargos_tbEmpleados_Select");
         }
     
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbDepartamentos_Insert1(Nullable<int> area_Id, string car_descripcion, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
+        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbDepartamentos_Insert1(Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_Usuariocrea, Nullable<System.DateTime> depto_FechaCrea)
         {
             var area_IdParameter = area_Id.HasValue ?
                 new ObjectParameter("area_Id", area_Id) :
                 new ObjectParameter("area_Id", typeof(int));
     
-            var car_descripcionParameter = car_descripcion != null ?
-                new ObjectParameter("car_descripcion", car_descripcion) :
-                new ObjectParameter("car_descripcion", typeof(string));
+            var car_IdParameter = car_Id.HasValue ?
+                new ObjectParameter("car_Id", car_Id) :
+                new ObjectParameter("car_Id", typeof(int));
     
             var depto_DescripcionParameter = depto_Descripcion != null ?
                 new ObjectParameter("depto_Descripcion", depto_Descripcion) :
@@ -5102,7 +5078,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("depto_FechaCrea", depto_FechaCrea) :
                 new ObjectParameter("depto_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbDepartamentos_Insert1", area_IdParameter, car_descripcionParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbDepartamentos_Insert1", area_IdParameter, car_IdParameter, depto_DescripcionParameter, depto_UsuariocreaParameter, depto_FechaCreaParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbDepartamentos_Update1(Nullable<int> depto_Id, Nullable<int> area_Id, Nullable<int> car_Id, string depto_Descripcion, Nullable<int> depto_UsuarioModifica, Nullable<System.DateTime> depto_FechaModifica)
@@ -5542,7 +5518,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Delete1", hsal_IdParameter, hsal_RazonInactivoParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Insert1(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
+        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Insert1(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, Nullable<bool> hsal_Estado, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -5564,6 +5540,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hsal_Observacion", hsal_Observacion) :
                 new ObjectParameter("hsal_Observacion", typeof(string));
     
+            var hsal_EstadoParameter = hsal_Estado.HasValue ?
+                new ObjectParameter("hsal_Estado", hsal_Estado) :
+                new ObjectParameter("hsal_Estado", typeof(bool));
+    
             var hsal_UsuarioCreaParameter = hsal_UsuarioCrea.HasValue ?
                 new ObjectParameter("hsal_UsuarioCrea", hsal_UsuarioCrea) :
                 new ObjectParameter("hsal_UsuarioCrea", typeof(int));
@@ -5572,7 +5552,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hsal_FechaCrea", hsal_FechaCrea) :
                 new ObjectParameter("hsal_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Insert1", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Insert1", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, hsal_EstadoParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Restore1(Nullable<int> hsal_Id, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)

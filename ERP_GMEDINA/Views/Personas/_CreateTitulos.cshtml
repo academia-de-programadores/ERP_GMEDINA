@@ -1,0 +1,19 @@
+﻿@model ERP_GMEDINA.Models.tbTitulosPersona
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+							@Html.LabelFor(model => model.titu_Id, "titu_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("titu_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.titu_Id, "", new { @class = "text-danger", @id = "errortitu_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.titu_Anio, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.titu_Anio, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.ValidationMessageFor(model => model.titu_Anio, "", new { @class = "text-danger", @id = "errortitu_Anio" })
+                            </div>
+                        </div>
+                        <input type="button" class="btn btn-primary btn-xs" id="add" value="Agregar" />
+

@@ -56,10 +56,6 @@ namespace ERP_GMEDINA.Models
             this.tbEmpleadoComisiones1 = new HashSet<tbEmpleadoComisiones>();
             this.tbFormaPago = new HashSet<tbFormaPago>();
             this.tbFormaPago1 = new HashSet<tbFormaPago>();
-            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeduccionPago1 = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
-            this.tbHistorialDeIngresosPago1 = new HashSet<tbHistorialDeIngresosPago>();
             this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
             this.tbHistorialDePago1 = new HashSet<tbHistorialDePago>();
             this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
@@ -70,8 +66,6 @@ namespace ERP_GMEDINA.Models
             this.tbISR1 = new HashSet<tbISR>();
             this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
             this.tbLiquidaciones1 = new HashSet<tbLiquidaciones>();
-            this.tbLiquidacionVacaciones = new HashSet<tbLiquidacionVacaciones>();
-            this.tbLiquidacionVacaciones1 = new HashSet<tbLiquidacionVacaciones>();
             this.tbMotivoLiquidaciones = new HashSet<tbMotivoLiquidaciones>();
             this.tbMotivoLiquidaciones1 = new HashSet<tbMotivoLiquidaciones>();
             this.tbPeriodos = new HashSet<tbPeriodos>();
@@ -284,14 +278,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbFormaPago> tbFormaPago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago1 { get; set; }
@@ -311,10 +297,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbLiquidaciones> tbLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbLiquidaciones> tbLiquidaciones1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacionVacaciones> tbLiquidacionVacaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbMotivoLiquidaciones> tbMotivoLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

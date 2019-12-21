@@ -109,56 +109,56 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             //List<tbHorarios> lista = new List<tbHorarios> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    var lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
-                        .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList();
-                    DatosProfesionales Data = new DatosProfesionales();
-                    Data.req_Id = Convert.ToInt32(id);
-                    foreach(var X in lista)
-                    {
-                        switch(X.TipoDato)
-                        {
-                            case "C":
-                                tbCompetencias Comp = new tbCompetencias();
-                                Comp.comp_Descripcion = X.Descripcion;
-                                Data.Competencias.Add(Comp);
-                                break;
+            //using (db = new ERP_GMEDINAEntities())
+            //{
+            //    try
+            //    {
+            //        var lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
+            //            .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList();
+            //        DatosProfesionales Data = new DatosProfesionales();
+            //        Data.req_Id = Convert.ToInt32(id);
+            //        foreach(var X in lista)
+            //        {
+            //            switch(X.TipoDato)
+            //            {
+            //                case "C":
+            //                    tbCompetencias Comp = new tbCompetencias();
+            //                    Comp.comp_Descripcion = X.Descripcion;
+            //                    Data.Competencias.Add(Comp);
+            //                    break;
 
-                            case "H":
-                                tbHabilidades Habi = new tbHabilidades();
-                                Habi.habi_Descripcion = X.Descripcion;
-                                Data.Habilidades.Add(Habi);
-                                break;
+            //                case "H":
+            //                    tbHabilidades Habi = new tbHabilidades();
+            //                    Habi.habi_Descripcion = X.Descripcion;
+            //                    Data.Habilidades.Add(Habi);
+            //                    break;
 
-                            case "I":
-                                tbIdiomas Idi = new tbIdiomas();
-                                Idi.idi_Descripcion = X.Descripcion;
-                                Data.Idiomas.Add(Idi);
-                                break;
+            //                case "I":
+            //                    tbIdiomas Idi = new tbIdiomas();
+            //                    Idi.idi_Descripcion = X.Descripcion;
+            //                    Data.Idiomas.Add(Idi);
+            //                    break;
 
-                            case "T":
-                                tbTitulos Titu = new tbTitulos();
-                                Titu.titu_Descripcion = X.Descripcion;
-                                Data.Titulos.Add(Titu);
-                                break;
+            //                case "T":
+            //                    tbTitulos Titu = new tbTitulos();
+            //                    Titu.titu_Descripcion = X.Descripcion;
+            //                    Data.Titulos.Add(Titu);
+            //                    break;
 
-                            case "R":
-                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
-                                Reqs.resp_Descripcion = X.Descripcion;
-                                Data.ReqEspeciales.Add(Reqs);
-                                break;
-                        }
-                    }
+            //                case "R":
+            //                    tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+            //                    Reqs.resp_Descripcion = X.Descripcion;
+            //                    Data.ReqEspeciales.Add(Reqs);
+            //                    break;
+            //            }
+            //        }
                     
-                    return Json(Data, JsonRequestBehavior.AllowGet);
-                }
-                catch
-                {
-                }
-            }
+            //        return Json(Data, JsonRequestBehavior.AllowGet);
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
 
@@ -167,60 +167,60 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             //List<tbHorarios> lista = new List<tbHorarios> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    var lista = db.V_DatosProfesionales.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id , Descripcion = tabla.Descripcion }).ToList();
-                    DatosProfesionales Data = new DatosProfesionales();
-                    foreach (var X in lista)
-                    {
-                        switch (X.TipoDato)
-                        {
-                            case "C":
-                                tbCompetencias Comp = new tbCompetencias();
-                                Comp.comp_Descripcion = X.Descripcion;
-                                Comp.comp_Id = X.Id;
-                                Data.Competencias.Add(Comp);
-                                break;
+            //using (db = new ERP_GMEDINAEntities())
+            //{
+            //    try
+            //    {
+            //        var lista = db.V_DatosProfesionales.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id , Descripcion = tabla.Descripcion }).ToList();
+            //        DatosProfesionales Data = new DatosProfesionales();
+            //        foreach (var X in lista)
+            //        {
+            //            switch (X.TipoDato)
+            //            {
+            //                case "C":
+            //                    tbCompetencias Comp = new tbCompetencias();
+            //                    Comp.comp_Descripcion = X.Descripcion;
+            //                    Comp.comp_Id = X.Id;
+            //                    Data.Competencias.Add(Comp);
+            //                    break;
 
-                            case "H":
-                                tbHabilidades Habi = new tbHabilidades();
-                                Habi.habi_Descripcion = X.Descripcion;
-                                Habi.habi_Id = X.Id;
-                                Data.Habilidades.Add(Habi);
-                                break;
+            //                case "H":
+            //                    tbHabilidades Habi = new tbHabilidades();
+            //                    Habi.habi_Descripcion = X.Descripcion;
+            //                    Habi.habi_Id = X.Id;
+            //                    Data.Habilidades.Add(Habi);
+            //                    break;
 
-                            case "I":
-                                tbIdiomas Idi = new tbIdiomas();
-                                Idi.idi_Descripcion = X.Descripcion;
-                                Idi.idi_Id = X.Id;
-                                Data.Idiomas.Add(Idi);
-                                break;
+            //                case "I":
+            //                    tbIdiomas Idi = new tbIdiomas();
+            //                    Idi.idi_Descripcion = X.Descripcion;
+            //                    Idi.idi_Id = X.Id;
+            //                    Data.Idiomas.Add(Idi);
+            //                    break;
 
-                            case "T":
-                                tbTitulos Titu = new tbTitulos();
-                                Titu.titu_Descripcion = X.Descripcion;
-                                Titu.titu_Id = X.Id;
-                                Data.Titulos.Add(Titu);
-                                break;
+            //                case "T":
+            //                    tbTitulos Titu = new tbTitulos();
+            //                    Titu.titu_Descripcion = X.Descripcion;
+            //                    Titu.titu_Id = X.Id;
+            //                    Data.Titulos.Add(Titu);
+            //                    break;
 
-                            case "R":
-                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
-                                Reqs.resp_Descripcion = X.Descripcion;
-                                Reqs.resp_Id = X.Id;
-                                Data.ReqEspeciales.Add(Reqs);
-                                break;
-                        }
-                    }
+            //                case "R":
+            //                    tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+            //                    Reqs.resp_Descripcion = X.Descripcion;
+            //                    Reqs.resp_Id = X.Id;
+            //                    Data.ReqEspeciales.Add(Reqs);
+            //                    break;
+            //            }
+            //        }
 
-                    return Json(Data, JsonRequestBehavior.AllowGet);
-                }
-                catch(Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-            }
+            //        return Json(Data, JsonRequestBehavior.AllowGet);
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        ex.Message.ToString();
+            //    }
+            //}
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
 

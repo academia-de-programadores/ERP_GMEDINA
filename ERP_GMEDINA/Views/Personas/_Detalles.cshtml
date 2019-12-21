@@ -1,0 +1,78 @@
+﻿@model ERP_GMEDINA.Models.tbPersonas
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle Personas</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+                    <dt>Id</dt>
+                    <dd id="per_Id"></dd>
+
+					<dt>Identidad</dt>
+                    <dd id="per_Identidad"></dd>
+
+					@*<dt>@Html.DisplayNameFor(model => model.per_Nombres)</dt>
+                    <dd id="per_Nombres"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Apellidos)</dt>
+                    <dd id="per_Apellidos"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_FechaNacimiento)</dt>
+                    <dd id="per_FechaNacimiento"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Sexo)</dt>
+                    <dd id="per_Sexo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Edad)</dt>
+                    <dd id="per_Edad"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbNacionalidades.nac_Descripcion)</dt>
+                    <dd id="tbNacionalidades"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Direccion)</dt>
+                    <dd id="per_Direccion"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Telefono)</dt>
+                    <dd id="per_Telefono"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_CorreoElectronico)</dt>
+                    <dd id="per_CorreoElectronico"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_EstadoCivil)</dt>
+                    <dd id="per_EstadoCivil"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_TipoSangre)</dt>
+                    <dd id="per_TipoSangre"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Estado)</dt>
+                    <dd id="per_Estado"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_RazonInactivo)</dt>
+                    <dd id="per_RazonInactivo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_FechaCrea)</dt>
+                    <dd id="per_FechaCrea"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_FechaModifica)</dt>
+                    <dd id="per_FechaModifica"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>*@
+
+
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				@*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
+			</div>
+		</div>
+	</div>
+</div>
+

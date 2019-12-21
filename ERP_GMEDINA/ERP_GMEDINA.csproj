@@ -185,6 +185,7 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\JornadasController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
+    <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
@@ -351,12 +352,6 @@
     <Compile Include="Models\tbHistorialContrataciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbHistorialDeduccionPago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbHistorialDeIngresosPago.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbHistorialDePago.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -403,9 +398,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbLiquidaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbMotivoLiquidaciones.cs">
@@ -774,10 +766,7 @@
     <Compile Include="Models\V_ComisionesColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_DatosProfesionales.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DatosRequisicion.cs">
+    <Compile Include="Models\V_DatosProfesionalesP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_Datos_Empleado.cs">
@@ -792,16 +781,10 @@
     <Compile Include="Models\V_DecimoTercerMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_DecimoTercerMes_Pagados.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_DecimoTercerMes_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DeduccionesExtraordinarias.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_DeduccionesExtraordinarias_Detalles.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_DeduccionesExtraordinarias_Empleados.cs">
@@ -816,9 +799,6 @@
     <Compile Include="Models\V_DeduccionesInstitucionesFinancierasColaboradres.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_Departamentos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_EmpleadoBonos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -831,13 +811,7 @@
     <Compile Include="Models\V_HistorialCargos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_HistorialContrataciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_HistorialHorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_HistorialIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HorariosDetalles.cs">
@@ -847,9 +821,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_ISR_RPT.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_Liquidaciones_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_PlanillaDeducciones.cs">
@@ -870,12 +841,6 @@
     <Compile Include="Models\V_PreviewPlanilla.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_SeleccionCandidatos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbAdelantoSueldo.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_tbCatalogoDeDeducciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -885,19 +850,7 @@
     <Compile Include="Models\V_tbEmpleadoComisiones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_tbEmpleados.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbHistorialSalidas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbHistorialSalidas_completa.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_tbPersonas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_tbtiposalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_TipoDeduccion.cs">
@@ -1140,6 +1093,9 @@
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
+    <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
+    <Content Include="Scripts\app\General\Personas\StepsPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
@@ -1771,6 +1727,17 @@
     <Content Include="Views\Requisiciones\Details.cshtml" />
     <Content Include="Views\Requisiciones\Edit.cshtml" />
     <Content Include="Views\Requisiciones\Index.cshtml" />
+    <Content Include="Views\Personas\Create.cshtml" />
+    <Content Include="Views\Personas\Delete.cshtml" />
+    <Content Include="Views\Personas\Details.cshtml" />
+    <Content Include="Views\Personas\Edit.cshtml" />
+    <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Personas\_CreateCompetencias.cshtml" />
+    <Content Include="Views\Personas\_CreateHabilidades.cshtml" />
+    <Content Include="Views\Personas\_CreateIdiomas.cshtml" />
+    <Content Include="Views\Personas\_CreateRequerimientosEspeciales.cshtml" />
+    <Content Include="Views\Personas\_CreateTitulos.cshtml" />
+    <Content Include="Views\Personas\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
