@@ -235,30 +235,10 @@ namespace ERP_GMEDINA.Controllers
         //}
 
         // GET: HistorialVacaciones/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbHistorialVacaciones tbHistorialVacaciones = db.tbHistorialVacaciones.Find(id);
-            if (tbHistorialVacaciones == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbHistorialVacaciones);
-        }
+       
 
         // POST: HistorialVacaciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbHistorialVacaciones tbHistorialVacaciones = db.tbHistorialVacaciones.Find(id);
-            db.tbHistorialVacaciones.Remove(tbHistorialVacaciones);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+   
 
         protected override void Dispose(bool disposing)
         {

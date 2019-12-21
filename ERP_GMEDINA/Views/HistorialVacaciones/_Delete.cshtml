@@ -15,6 +15,9 @@
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         
+                        <div @*hidden="hidden"*@ class="col-md-8">
+                            <input id="hvac_Id" name="hvac_Id" type="text" value="">
+                        </div>
 
                         <div class="form-group">
 							@Html.LabelFor(model => model.hvac_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-3" })

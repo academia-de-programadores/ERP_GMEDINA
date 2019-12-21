@@ -80,7 +80,7 @@ function llamarmodal() {
 }
 function llamarmodaldelete(ID) {
     var modaldelete = $("#ModalInhabilitar");
-    IdEmpleado= ID;
+    $("#ModalInhabilitar").find("#hvac_Id").val(ID);
     modaldelete.modal('show');
 }
 
@@ -122,7 +122,6 @@ $("#InActivar").click(function () {
     data = serializar(data);
     debugger
     if (data != null) {
-        data.hvac_Id = IdEmpleado;
         data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
             '/HistorialVacaciones/Delete',
