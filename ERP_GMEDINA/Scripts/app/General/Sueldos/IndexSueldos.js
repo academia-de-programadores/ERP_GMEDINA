@@ -7,6 +7,8 @@ var id = 0;
 
 
 function tablaEditar(ID) {
+    console.log("woman :3333");
+
     id = ID;
     _ajax(null,
 
@@ -146,7 +148,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 $("#btnActualizar").click(function () {
     console.log("sf");
-    var data = $('#ModalEditar').serializeArray();
+    var data = $('#FormEditar').serializeArray();
     data = serializar(data);
     if (data != null) {
 
@@ -174,17 +176,24 @@ $("#btnActualizar").click(function () {
 
 
 
-$("#btnEditar").click(function () {
+$("#btnEditar").click(function tablaEditar() {
+    console.log("woman :3");
     _ajax(null,
         '/Sueldos/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                $('#ModalEditar').modal('show');
+                $("#ModalEditar").modal('show');
+                $("#ModalEditar").find("#sue_Id").val(id);
+                $("#ModalEditar").find("#emp_Id").val(obj.emp_Id);
+                $("#ModalEditar").find("#tmon_Id").val(obj.tmon_Id);
                 $("#ModalEditar").find("#sue_Cantidad").val(obj.sue_Cantidad);
                 $("#ModalEditar").find("#sue_Cantidad").focus();
 
             }
+
+
+
         });
 });
