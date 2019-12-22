@@ -59,14 +59,10 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    <div class="input-group date">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                            @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control required" }, type = "date", max = "DateTime.Now.ToShortDateString();" })
-                                            @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
-                                        </span>
-                                    </div>
+                                <div class="col-md-5">
+                                    <i class="fa fa-calendar"></i>
+                                    @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
+                                    @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
                                 </div>
                             </div>
 
@@ -115,6 +111,7 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/plugins/select2Styles")
 }
 
 @section Scripts {
@@ -122,6 +119,5 @@
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/CreateArea")
     @Scripts.Render("~/Scripts/app/general/CreateHistorialSalidas")
-    @Scripts.Render("~/plugins/select2Styles")
     @Scripts.Render("~/plugins/select2")
 }
