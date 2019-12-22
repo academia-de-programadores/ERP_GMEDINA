@@ -9,35 +9,33 @@ function Remove(Id, lista) {
     });
     return list;
 }
-function Add(Empleados, Razon ,ver) {
-    if (Empleados.trim().length != 0 && Razon.trim().length != 0) {
+function Add(Empleados, Razon, ver) {
+    if (Empleados.trim().length != 0 || Razon.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Empleados == Empleados || Fila.Razon == Razon) {
-                //if (Fila.Razon == Razon) {
-                //    var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
-                //    $(span).addClass("text-warning");
-                //    $(span).closest("div").addClass("has-warning");
-                //    span.text('El cargo "' + car_Descripcion + '" ya existe');
-                //    $("#FormDepartamentos").find("#car_Descripcion").focus();
-                //}
-                if (Fila.Empleados == Empleados) {
+            if (Fila.Empleados == ver || Fila.Empleados == '0') {
+                if (Fila.Empleados == ver) {
                     var span = $("#FormEmpleados").find("#errorEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
-                    span.text('El empleado "' + Empleados + '" ya existe');
+                    span.text('Seleccione otra opción');
                     $("#FormEmpleados").find("#Empleados").focus();
                 }
                 return null;
+            }
+            else {
+                var span = $("#FormEmpleados").find("#errorEmpleados");
+                $(span).removeClass("text-warning");
+                span.text('');
             }
         }
         ChildTable.row.add(
             {
                 Empleados: ver,//Empleados.trim(),
+                Usar: Empleados,
                 Razon: Razon
             }
         ).draw();
-        $("#FormEmpleados").find("#Empleados").val("");
         $("#FormEmpleados").find("#Razon").val("");
         $("#FormEmpleados").find("#Empleados").focus();
     } else {
@@ -48,14 +46,6 @@ function Add(Empleados, Razon ,ver) {
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $("#FormEmpleados").find("#Razon").focus();
-        }
-        if (Empleados.trim().length == 0) {
-            var txt_required = $("#FormEmpleados").find("#Empleados").data("val-required");
-            var span = $("#FormEmpleados").find("#errorEmpleados");
-            $(span).addClass("text-danger");
-            $(span).closest("div").addClass("has-error");
-            span.text(txt_required);
-            $("#FormEmpleados").find("#Empleados").focus();
         }
     }
 }
@@ -70,7 +60,7 @@ function getJson() {
         var tbEmpleados =
         {
             Id: i,
-            tbEmpleados: fila.Empleados,
+            tbEmpleados: fila.Usar,
             tbEmpleados: fila.Razon
             //,tbCargos: { car_Descripcion: fila.Cargo }
         };
@@ -119,8 +109,6 @@ function llenarDropDowlistEmpleados() {
             $.each(result, function (id, Lista) {
                 Lista.forEach(function (value, index) {
                     $("#" + id).append(new Option(value.Descripcion, value.Id));
-                    //console.log(value.Id);
-                    //console.log(value.Descripcion);
                 });
             });
         });
@@ -133,7 +121,7 @@ function Remover(btn) {
 }
 //Llamamos los dropdowns
 $(document).ready(function () {
-
+    $("#Empleados").select2();
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -144,7 +132,6 @@ $(document).ready(function () {
     if (mm < 10) {
         mm = '0' + mm
     }
-
     today = yyyy + '-' + mm + '-' + dd;
     $("#hsal_FechaSalida").attr("max", today);
 
@@ -153,18 +140,22 @@ $(document).ready(function () {
     llenarDropDowlistRazonSalida(); 
 
     ChildTable = $(ChildDataTable).DataTable({
-        pageLength: 3,
+        pageLength: 4,
         lengthChange: false,
      columns: 
-      [
-            { data: 'Empleados' },
-            { data: 'Razon' },
+         [
+             { data: 'Empleados' },
+             { data: 'Razon' },
+             {
+                 data: 'Usar',
+                 "visible": false
+             },
             {
             data: 'Acciones',
             defaultContent: '<div>' +
                             '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
                         '</div>'
-            }
+             }
       ],
         order: [[0, 'asc']]
     });

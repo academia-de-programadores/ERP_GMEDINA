@@ -465,26 +465,10 @@ namespace ERP_GMEDINA
             //scriipt para tablas personalizadas detalles con datatable
             bundles.Add(new ScriptBundle("~/plugins/customdataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js"));
-
-            ////bundles APP/GENERAL
-            //bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
-            //    "~/Scripts/app/General/CatalogoDeducciones.js"));
-
-            //bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
-            //"~/Scripts/app/general/Habilidades/Habilidades.js"));
-
+            
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
             "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
-            ////script de areas
-            //bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexArea").Include(
-            //"~/Scripts/app/general/Areas/IndexAreas.js"));
-
-            //bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
-            //            "~/Scripts/app/general/Areas/CreateArea.js"));
-
-            //bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
-            //            "~/Scripts/app/general/Areas/EditArea.js"));
-
+            
             bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/IndexHistorialSalidas.js"));
 

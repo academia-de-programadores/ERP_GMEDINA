@@ -20,10 +20,10 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
 
-                [Display(Name = "Id tipo salida")]
+                [Display(Name = "Seleccione el tipo de salida")]
                 //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int tsal_Id { get; set; }
-                [Display(Name = "Id razon salida")]
+                [Display(Name = "Seleccione la razon de la salida")]
                 //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int rsal_Id { get; set; }
 
