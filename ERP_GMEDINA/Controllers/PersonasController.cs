@@ -17,8 +17,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: Personas
         public ActionResult Index()
         {
-            var tbPersonas = db.tbPersonas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            return View(tbPersonas.ToList());
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            var tbPersonas = new List<tbPersonas> { };
+            return View(tbPersonas);
         }
         // GET: Personas/Details
         public ActionResult Details(int? id)
@@ -102,6 +103,10 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
             ViewBag.sexo = new SelectList(Sexo, "Id", "Descripcion");
 
+            //Nacionalidades
+            List<tbNacionalidades> Nacionalidades = new List<tbNacionalidades> { };
+            ViewBag.nac_Id = new SelectList(Nacionalidades, "nac_Id", "nac_Descripcion");
+
             return View();
         }
         // POST: Areas/Create
@@ -159,30 +164,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        
-        public ActionResult ChildRowData(int? id)
-        {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            
-            List<V_tbPersonas> lista = new List<V_tbPersonas> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
-                    if(lista.Count == 0)
-                    {
-                        lista.Add(new V_tbPersonas { per_Id = id,Relacion_Id =0,Descripcion ="",Relacion = "" });
-                    }
-                }
-                catch(Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-            }
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
+        //Llenar Drop Nacionalidades
         public ActionResult llenarDropDowlistNacionalidades()
         {
             var Nacionalidades = new List<object> { };
@@ -209,37 +191,115 @@ namespace ERP_GMEDINA.Controllers
             result.Add("nac_Id", Nacionalidades);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        //Competencias
-        public ActionResult llenarDropDowlistCompetencias()
+        public ActionResult ChildRowData(int? id)
         {
-            var Competencias = new List<object> { };
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            
+            List<V_tbPersonas> lista = new List<V_tbPersonas> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    Competencias.Add(new
+                    lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
+                    if(lista.Count == 0)
                     {
-                        Id = 0,
-                        Descripcion = "**Seleccione una opción**"
-                    });
-                    Competencias.AddRange(db.tbCompetencias
-                    .Select(tabla => new { Id = tabla.comp_Id, Descripcion = tabla.comp_Descripcion})
-                    .ToList());
+                        lista.Add(new V_tbPersonas { per_Id = id,Relacion_Id =0,Descripcion ="",Relacion = "" });
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return Json("-2", 0);
+                    ex.Message.ToString();
                 }
-
             }
-            var result = new Dictionary<string, object>();
-            result.Add("comp_Id", Competencias);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
-        // GET: Areas/Details/5
-       
-        // GET: Areas/Create
-        
+        public ActionResult DualListBoxData()
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            //List<tbHorarios> lista = new List<tbHorarios> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                    DatosProfesionales Data = new DatosProfesionales();
+                    foreach (var X in lista)
+                    {
+                        switch (X.TipoDato)
+                        {
+                            case "C":
+                                tbCompetencias Comp = new tbCompetencias();
+                                Comp.comp_Descripcion = X.Descripcion;
+                                Comp.comp_Id = X.Id;
+                                Data.Competencias.Add(Comp);
+                                break;
+
+                            case "H":
+                                tbHabilidades Habi = new tbHabilidades();
+                                Habi.habi_Descripcion = X.Descripcion;
+                                Habi.habi_Id = X.Id;
+                                Data.Habilidades.Add(Habi);
+                                break;
+
+                            case "I":
+                                tbIdiomas Idi = new tbIdiomas();
+                                Idi.idi_Descripcion = X.Descripcion;
+                                Idi.idi_Id = X.Id;
+                                Data.Idiomas.Add(Idi);
+                                break;
+
+                            case "T":
+                                tbTitulos Titu = new tbTitulos();
+                                Titu.titu_Descripcion = X.Descripcion;
+                                Titu.titu_Id = X.Id;
+                                Data.Titulos.Add(Titu);
+                                break;
+
+                            case "R":
+                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+                                Reqs.resp_Descripcion = X.Descripcion;
+                                Reqs.resp_Id = X.Id;
+                                Data.ReqEspeciales.Add(Reqs);
+                                break;
+                        }
+                    }
+
+                    return Json(Data, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                }
+            }
+            return Json("-2", JsonRequestBehavior.AllowGet);
+        }
+        //Detalles
+        public ActionResult Detalles(int? id)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbPersonas = db.tbPersonas
+                        .Select(
+                        p => new
+                        {
+                            per_Id = p.per_Id,
+                            per_Identidad = p.per_Identidad
+                            //Nombre = p.per_Nombres + " " + p.per_Apellidos,
+                            //CorreoElectronico = p.per_CorreoElectronico
+                        })
+                        .Where(x=> x.per_Id == id).ToList();
+                    return Json(tbPersonas, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
 
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)

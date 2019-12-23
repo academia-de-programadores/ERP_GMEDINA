@@ -240,6 +240,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ExcelEmpleados.cs" />
+    <Compile Include="Models\PersonasData.cs" />
     <Compile Include="Models\RequisicionesData.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
@@ -1094,8 +1095,8 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
+    <Content Include="Scripts\app\General\Personas\FinalPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
-    <Content Include="Scripts\app\General\Personas\StepsPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
@@ -1732,11 +1733,6 @@
     <Content Include="Views\Personas\Details.cshtml" />
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
-    <Content Include="Views\Personas\_CreateCompetencias.cshtml" />
-    <Content Include="Views\Personas\_CreateHabilidades.cshtml" />
-    <Content Include="Views\Personas\_CreateIdiomas.cshtml" />
-    <Content Include="Views\Personas\_CreateRequerimientosEspeciales.cshtml" />
-    <Content Include="Views\Personas\_CreateTitulos.cshtml" />
     <Content Include="Views\Personas\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>

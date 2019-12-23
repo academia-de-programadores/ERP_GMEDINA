@@ -8,23 +8,24 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="col-md-offset-11">
-        @Html.ActionLink("Regresar", "Index")
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
+
+@Html.AntiForgeryToken()
+<div class="col-md-offset-11">
+    @Html.ActionLink("Regresar", "Index")
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>
 
 
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormPersonas" }))
+        {
             <div class="col-lg-12">
                 <div class="float-e-margins">
 
 
 
-                    <div id="Persona">
+                    <div id="Wizard">
                         <h1>Datos Personales</h1>
                         <div class="form-horizontal">
 
@@ -68,7 +69,7 @@
                                 @Html.LabelFor(model => model.per_Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.DropDownList("Sexo", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.per_Sexo, "", new { @class = "text-danger" , @onchange="OnSelectionChange" })
+                                    @Html.ValidationMessageFor(model => model.per_Sexo, "", new { @class = "text-danger", @onchange = "OnSelectionChange" })
                                 </div>
                             </div>
 
@@ -83,7 +84,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.nac_Id, "nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("nac_Id", null, htmlAttributes: new { @class = "form-control" , @name="NacionalidadesDual"})
+                                    @Html.DropDownList("nac_Id", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.nac_Id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -133,7 +134,32 @@
                         <!--Competencias-->
                         <h1>Competencias</h1>
                         <div>
-                            @Html.Partial("_CreateCompetencias", new ERP_GMEDINA.Models.tbCompetenciasPersona())
+                            <h2>Competencias</h2>
+                            <select multiple name="SlctCompetencias" class="form-control dual_select SlctCompetencias"></select>
+                        </div>
+                        <!--Habilidades-->
+                        <h1>Habilidades</h1>
+                        <div>
+                            <h2>Habilidades</h2>
+                            <select multiple name="SlctHabilidades" class="form-control dual_select SlctHabilidades"></select>
+                        </div>
+                        <!--Idiomas-->
+                        <h1>Idiomas</h1>
+                        <div>
+                            <h2>Idiomas</h2>
+                            <select multiple name="SlctIdiomas" class="form-control dual_select SlctIdiomas"></select>
+                        </div>
+                        <!--RequerimientosEspeciales-->
+                        <h1>Requisitos Especiales</h1>
+                        <div>
+                            <h2>Requisitos Especiales</h2>
+                            <select multiple name="SlctReqEspeciales" class="form-control dual_select SlctReqEspeciales"></select>
+                        </div>
+                        <!--Titulos-->
+                        <h1>Titulos</h1>
+                        <div>
+                            <h2>Titulos</h2>
+                            <select multiple name="SlctTitulos" class="form-control dual_select SlctTitulos"></select>
                         </div>
                     </div>
                     <div>
@@ -141,25 +167,28 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br /><br />
-        <br />
+
+
+        }
+
     </div>
-
-}
-
-
+    <br /><br />
+    <br />
+</div>
 
 <script src="~/Scripts/plugins/pace/pace.min.js"></script>
 
 
 @section Styles {
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/duallistStyles")
+    @Styles.Render("~/plugins/wizardStepsStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 
 @section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/plugins/duallist")
+    @Scripts.Render("~/plugins/wizardSteps")
 }
 <script src="~/Scripts/app/General/Personas/CreatePersonas.js"></script>
