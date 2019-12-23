@@ -7,10 +7,11 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cHistorialSalidas))]
-    //public partial class tbHistorialSalidas
-    //{
-    //    public string car_Descripcion { get; set; }
-    //}
+
+    public partial class tbHistorialSalidas
+    {
+        public string emp_RazonInactivo { get; set; }
+    }
     public class cHistorialSalidas
     {
         [Display(Name = "Id historial salida")]

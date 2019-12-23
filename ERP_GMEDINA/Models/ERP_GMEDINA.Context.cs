@@ -116,39 +116,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Delete_Result>("UDP_RRHH_tbHistorialSalidas_Delete", hsal_IdParameter, hsal_RazonInactivoParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Insert_Result> UDP_RRHH_tbHistorialSalidas_Insert(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var tsal_IdParameter = tsal_Id.HasValue ?
-                new ObjectParameter("tsal_Id", tsal_Id) :
-                new ObjectParameter("tsal_Id", typeof(int));
-    
-            var rsal_IdParameter = rsal_Id.HasValue ?
-                new ObjectParameter("rsal_Id", rsal_Id) :
-                new ObjectParameter("rsal_Id", typeof(int));
-    
-            var hsal_FechaSalidaParameter = hsal_FechaSalida.HasValue ?
-                new ObjectParameter("hsal_FechaSalida", hsal_FechaSalida) :
-                new ObjectParameter("hsal_FechaSalida", typeof(System.DateTime));
-    
-            var hsal_ObservacionParameter = hsal_Observacion != null ?
-                new ObjectParameter("hsal_Observacion", hsal_Observacion) :
-                new ObjectParameter("hsal_Observacion", typeof(string));
-    
-            var hsal_UsuarioCreaParameter = hsal_UsuarioCrea.HasValue ?
-                new ObjectParameter("hsal_UsuarioCrea", hsal_UsuarioCrea) :
-                new ObjectParameter("hsal_UsuarioCrea", typeof(int));
-    
-            var hsal_FechaCreaParameter = hsal_FechaCrea.HasValue ?
-                new ObjectParameter("hsal_FechaCrea", hsal_FechaCrea) :
-                new ObjectParameter("hsal_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Insert_Result>("UDP_RRHH_tbHistorialSalidas_Insert", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Restore_Result> UDP_RRHH_tbHistorialSalidas_Restore(Nullable<int> hsal_Id, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
         {
             var hsal_IdParameter = hsal_Id.HasValue ?
@@ -166,28 +133,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Restore_Result>("UDP_RRHH_tbHistorialSalidas_Restore", hsal_IdParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Delete1(Nullable<int> hsal_Id, string hsal_RazonInactivo, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
-        {
-            var hsal_IdParameter = hsal_Id.HasValue ?
-                new ObjectParameter("Hsal_Id", hsal_Id) :
-                new ObjectParameter("Hsal_Id", typeof(int));
-    
-            var hsal_RazonInactivoParameter = hsal_RazonInactivo != null ?
-                new ObjectParameter("hsal_RazonInactivo", hsal_RazonInactivo) :
-                new ObjectParameter("hsal_RazonInactivo", typeof(string));
-    
-            var hsal_UsuarioModificaParameter = hsal_UsuarioModifica.HasValue ?
-                new ObjectParameter("hsal_UsuarioModifica", hsal_UsuarioModifica) :
-                new ObjectParameter("hsal_UsuarioModifica", typeof(int));
-    
-            var hsal_FechaModificaParameter = hsal_FechaModifica.HasValue ?
-                new ObjectParameter("hsal_FechaModifica", hsal_FechaModifica) :
-                new ObjectParameter("hsal_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Delete1", hsal_IdParameter, hsal_RazonInactivoParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Insert1(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Insert_Result> UDP_RRHH_tbHistorialSalidas_Insert(Nullable<int> emp_Id, Nullable<int> tsal_Id, Nullable<int> rsal_Id, Nullable<System.DateTime> hsal_FechaSalida, string hsal_Observacion, string emp_RazonInactivo, Nullable<int> hsal_UsuarioCrea, Nullable<System.DateTime> hsal_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -209,6 +155,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hsal_Observacion", hsal_Observacion) :
                 new ObjectParameter("hsal_Observacion", typeof(string));
     
+            var emp_RazonInactivoParameter = emp_RazonInactivo != null ?
+                new ObjectParameter("emp_RazonInactivo", emp_RazonInactivo) :
+                new ObjectParameter("emp_RazonInactivo", typeof(string));
+    
             var hsal_UsuarioCreaParameter = hsal_UsuarioCrea.HasValue ?
                 new ObjectParameter("hsal_UsuarioCrea", hsal_UsuarioCrea) :
                 new ObjectParameter("hsal_UsuarioCrea", typeof(int));
@@ -217,24 +167,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hsal_FechaCrea", hsal_FechaCrea) :
                 new ObjectParameter("hsal_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Insert1", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Restore1(Nullable<int> hsal_Id, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> hsal_FechaModifica)
-        {
-            var hsal_IdParameter = hsal_Id.HasValue ?
-                new ObjectParameter("Hsal_Id", hsal_Id) :
-                new ObjectParameter("Hsal_Id", typeof(int));
-    
-            var hsal_UsuarioModificaParameter = hsal_UsuarioModifica.HasValue ?
-                new ObjectParameter("hsal_UsuarioModifica", hsal_UsuarioModifica) :
-                new ObjectParameter("hsal_UsuarioModifica", typeof(int));
-    
-            var hsal_FechaModificaParameter = hsal_FechaModifica.HasValue ?
-                new ObjectParameter("hsal_FechaModifica", hsal_FechaModifica) :
-                new ObjectParameter("hsal_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Restore1", hsal_IdParameter, hsal_UsuarioModificaParameter, hsal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Insert_Result>("UDP_RRHH_tbHistorialSalidas_Insert", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, emp_RazonInactivoParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
         }
     }
 }

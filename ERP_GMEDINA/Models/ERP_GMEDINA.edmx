@@ -364,6 +364,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <Parameter Name="rsal_Id" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaSalida" Type="datetime" Mode="In" />
           <Parameter Name="hsal_Observacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="emp_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hsal_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -528,15 +529,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Insert_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
-            <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_FechaSalida" Mode="In" Type="DateTime" />
-            <Parameter Name="hsal_Observacion" Mode="In" Type="String" />
-            <Parameter Name="hsal_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Restore_Result)">
             <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
@@ -605,41 +597,28 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             <End Role="tbHistorialSalidas" EntitySet="tbHistorialSalidas" />
           </AssociationSet>
           <EntitySet Name="V_tbHistorialSalidas_completa" EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" />
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Delete1" ReturnType="Collection(String)">
-            <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_RazonInactivo" Mode="In" Type="String" />
-            <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Insert1" ReturnType="Collection(String)">
+          <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" />
+          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaSalida" Mode="In" Type="DateTime" />
             <Parameter Name="hsal_Observacion" Mode="In" Type="String" />
+            <Parameter Name="emp_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Restore1" ReturnType="Collection(String)">
-            <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="hsal_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" />
         </EntityContainer>
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Insert_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+          <Property Name="MensajeError" Nullable="true" Type="Int32" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Update_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Restore_Result">
@@ -1016,6 +995,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Razon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1029,7 +1011,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert" >
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoSalidas_Insert">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoSalidas_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
@@ -1195,9 +1177,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Delete1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Delete" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Restore1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Restore" />
           <EntitySetMapping Name="V_HistorialSalidas_Empleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialSalidas_Empleados">
               <MappingFragment StoreEntitySet="V_HistorialSalidas_Empleados">
@@ -1210,6 +1189,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -50,7 +50,6 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> emp_FechaDeSalida { get; set; }
         [Display(Name = "Estado")]
         public bool emp_Estado { get; set; }
-        [Display(Name = "Razon inactivo")]
         [MaxLength(100, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string emp_RazonInactivo { get; set; }
         [Display(Name = "Ingresado por")]

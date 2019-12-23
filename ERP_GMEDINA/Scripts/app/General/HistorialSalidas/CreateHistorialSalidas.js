@@ -32,7 +32,7 @@ function Add(Empleados, Razon, ver) {
         ChildTable.row.add(
             {
                 Empleados: ver,//Empleados.trim(),
-                Usar: Empleados,
+                emp_Id: Empleados,
                 Razon: Razon
             }
         ).draw();
@@ -56,12 +56,11 @@ function getJson() {
     //declaramos el objeto que ira dentro de la vista     
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
-
         var tbEmpleados =
         {
             Id: i,
-            tbEmpleados: fila.Usar,
-            tbEmpleados: fila.Razon
+            emp_Id: fila.emp_Id,
+            emp_RazonInactivo: fila.Razon
             //,tbCargos: { car_Descripcion: fila.Cargo }
         };
         list.push(tbEmpleados);
@@ -147,7 +146,7 @@ $(document).ready(function () {
              { data: 'Empleados' },
              { data: 'Razon' },
              {
-                 data: 'Usar',
+                 data: 'emp_Id',
                  "visible": false
              },
             {
@@ -164,9 +163,6 @@ $("#add").click(function () {
     var Id = $("#FormEmpleados").find("#Empleados").val();    
     var Razon = $("#FormEmpleados").find("#Razon").val();
     var ver = $('#Empleados option:selected').html();
-    console.log(Id);
-    console.log(Razon);
-    console.log(ver);
     var valores = Id + Razon + ver;
     for (var i = 0; i < valores.length; i++) {
         if (valores[i] == ">" || valores[i] == "<") {
@@ -175,7 +171,6 @@ $("#add").click(function () {
         }
     }
     Add(Id, Razon ,ver);
-
     $("#FormEmpleados").validate();
 });
 $("#FormCreate").submit(function (e) {
@@ -187,15 +182,15 @@ $("#btnCrear").click(function () {
     {
         tsal_Id: $("#TipoSalidas").val(),
         rsal_Id: $("#RazonSalidas").val(),
-        hsal_Observacion: $("#hsal_Observacion").val()
-        //tbCargos:{Razon: $("#Razon").val()},
+        hsal_Observacion: $("#hsal_Observacion").val(),
+        hsal_FechaSalida: $("#hsal_FechaSalida").val()
     };
 var lista = getJson();
 
     if (tbHistorialSalidas != null) {
         data = JSON.stringify({
           tbHistorialSalidas: tbHistorialSalidas,
-          V_HistorialSalidas_Empleados: lista
+          tbEmpleados: lista
          });
          _ajax(data,
              '/HistorialSalidas/Create',

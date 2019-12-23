@@ -212,62 +212,74 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Create(tbHistorialSalidas tbHistorialSalidas, V_HistorialSalidas_Empleados[] V_HistorialSalidas_Empleados)
-        //{
-        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-        //    //posteriormente es destruida.
-        //    string result = "";
-        //    var Usuario = (tbUsuario)Session["Usuario"];
-        //    //en esta area ingresamos el registro con el procedimiento almacenado
-        //    try
-        //    {
-        //        db = new ERP_GMEDINAEntities();
-        //        using (var transaction = db.Database.BeginTransaction())
-        //        {
-        //            var list = db.UDP_RRHH_tbHistorialSalidas_Insert(
-        //                tbAreas.suc_Id,
-        //                tbAreas.tbCargos.car_Descripcion,
-        //                tbAreas.area_Descripcion,
-        //                Usuario.usu_Id,
-        //                DateTime.Now);
-        //            foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
-        //            {
-        //                if (item.MensajeError == "-1")
-        //                {
-        //                    return Json("-2", JsonRequestBehavior.AllowGet);
-        //                }
-        //                tbAreas.area_Id = int.Parse(item.MensajeError);
-        //            }
-        //            foreach (tbDepartamentos item in tbDepartamentos)
-        //            {
-        //                var depto = db.UDP_RRHH_tbDepartamentos_Insert(
-        //                    tbAreas.area_Id,
-        //                    item.tbCargos.car_Descripcion,
-        //                    item.depto_Descripcion,
-        //                    Usuario.usu_Id,
-        //                    DateTime.Now);
-        //                string mensajeDB = "";
-        //                foreach (UDP_RRHH_tbDepartamentos_Insert_Result i in depto)
-        //                {
-        //                    mensajeDB = i.MensajeError.ToString();
-        //                }
-        //                if (mensajeDB == "-1")
-        //                {
-        //                    return Json("-2", JsonRequestBehavior.AllowGet);
-        //                }
-        //            }
-        //            transaction.Commit();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ex.Message.ToString();
-        //        return Json("-2", JsonRequestBehavior.AllowGet);
-        //    }
+        [HttpPost]
+        public ActionResult Create(tbHistorialSalidas tbHistorialSalidas, tbEmpleados[] tbEmpleados)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            //en esta area ingresamos el registro con el procedimiento almacenado
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    //var list = db.UDP_RRHH_tbHistorialSalidas_Insert(//aqui se desrulle
+                    //    tbHistorialSalidas.emp_Id,
+                    //    tbHistorialSalidas.tsal_Id,
+                    //    tbHistorialSalidas.rsal_Id,
+                    //    tbHistorialSalidas.hsal_FechaSalida,
+                    //    tbHistorialSalidas.hsal_Observacion,
+                    //    tbHistorialSalidas.emp_RazonInactivo,
+                    //    Usuario.usu_Id,
+                    //    DateTime.Now);
+                    //foreach (UDP_RRHH_tbHistorialSalidas_Insert_Result item in list)
+                    //{
+                    //    if (item.MensajeError == "-1")
+                    //    {
+                    //        return Json("-2", JsonRequestBehavior.AllowGet);
+                    //    }
+                    //    tbHistorialSalidas.tsal_Id = int.Parse(item.MensajeError);
+                    //}
+                    foreach (tbEmpleados item in tbEmpleados)
+                    {
+                        var emp = db.UDP_RRHH_tbHistorialSalidas_Insert(
+                        item.emp_Id,
+                        tbHistorialSalidas.tsal_Id,
+                        tbHistorialSalidas.rsal_Id,
+                        tbHistorialSalidas.hsal_FechaSalida,
+                        tbHistorialSalidas.hsal_Observacion,
+                        item.emp_RazonInactivo,
+                        Usuario.usu_Id,
+                        DateTime.Now);
+                        ////aqui
+                        //tbAreas.area_Id,
+                        //item.tbCargos.car_Descripcion,
+                        //item.depto_Descripcion,
+                        //Usuario.usu_Id,
+                        //DateTime.Now);
+                        string mensajeDB = "";
+                        foreach (UDP_RRHH_tbHistorialSalidas_Insert_Result i in emp)
+                        {
+                            mensajeDB = i.MensajeError.ToString();
+                        }
+                        if (mensajeDB == "-1")
+                        {
+                            return Json("-2", JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
 
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult Delete(int? id)
