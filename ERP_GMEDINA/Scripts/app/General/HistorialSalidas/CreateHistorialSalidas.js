@@ -146,8 +146,8 @@ $(document).ready(function () {
              { data: 'Empleados' },
              { data: 'Razon' },
              {
-                 data: 'emp_Id',
-                 "visible": false
+                data: 'emp_Id',
+                "visible": false
              },
             {
             data: 'Acciones',

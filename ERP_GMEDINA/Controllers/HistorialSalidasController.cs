@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             //ViewBag.tsal_Id = new SelectList(db.tbTipoSalidas, "tsal_Id", "tsal_Descripcion");
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbHistorialSalidas = new List<tbHistorialSalidas> { };
             return View(tbHistorialSalidas);
         }
@@ -225,40 +226,17 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
                 using (var transaction = db.Database.BeginTransaction())
                 {
-                    //var list = db.UDP_RRHH_tbHistorialSalidas_Insert(//aqui se desrulle
-                    //    tbHistorialSalidas.emp_Id,
-                    //    tbHistorialSalidas.tsal_Id,
-                    //    tbHistorialSalidas.rsal_Id,
-                    //    tbHistorialSalidas.hsal_FechaSalida,
-                    //    tbHistorialSalidas.hsal_Observacion,
-                    //    tbHistorialSalidas.emp_RazonInactivo,
-                    //    Usuario.usu_Id,
-                    //    DateTime.Now);
-                    //foreach (UDP_RRHH_tbHistorialSalidas_Insert_Result item in list)
-                    //{
-                    //    if (item.MensajeError == "-1")
-                    //    {
-                    //        return Json("-2", JsonRequestBehavior.AllowGet);
-                    //    }
-                    //    tbHistorialSalidas.tsal_Id = int.Parse(item.MensajeError);
-                    //}
-                    foreach (tbEmpleados item in tbEmpleados)
+                    foreach (tbEmpleados em in tbEmpleados)
                     {
                         var emp = db.UDP_RRHH_tbHistorialSalidas_Insert(
-                        item.emp_Id,
+                        em.emp_Id,
                         tbHistorialSalidas.tsal_Id,
                         tbHistorialSalidas.rsal_Id,
                         tbHistorialSalidas.hsal_FechaSalida,
                         tbHistorialSalidas.hsal_Observacion,
-                        item.emp_RazonInactivo,
+                        em.emp_RazonInactivo,
                         Usuario.usu_Id,
                         DateTime.Now);
-                        ////aqui
-                        //tbAreas.area_Id,
-                        //item.tbCargos.car_Descripcion,
-                        //item.depto_Descripcion,
-                        //Usuario.usu_Id,
-                        //DateTime.Now);
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbHistorialSalidas_Insert_Result i in emp)
                         {

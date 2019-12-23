@@ -7,7 +7,6 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cHistorialSalidas))]
-
     public partial class tbHistorialSalidas
     {
         public string emp_RazonInactivo { get; set; }
