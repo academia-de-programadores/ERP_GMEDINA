@@ -22,7 +22,9 @@ namespace ERP_GMEDINA.Models
         public string area_Id { get; set; }
         public string depto_Id { get; set; }
         public string jor_Id { get; set; }
-       
+        public string cpla_IdPlanilla { get; set; }
+        public string fpa_IdFormaPago { get; set; }
+
 
     }
 }

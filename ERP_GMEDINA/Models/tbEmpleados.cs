@@ -77,5 +77,7 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
+        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
+        public virtual tbFormaPago tbFormaPago { get; set; }
     }
 }

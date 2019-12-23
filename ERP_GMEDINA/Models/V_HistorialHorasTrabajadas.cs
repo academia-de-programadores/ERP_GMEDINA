@@ -23,5 +23,8 @@ namespace ERP_GMEDINA.Models
         public System.DateTime Fecha_Crea { get; set; }
         public string Usuario_Modifica { get; set; }
         public Nullable<System.DateTime> Fecha_Modifica { get; set; }
+        public string Departamento { get; set; }
+        public string Area { get; set; }
+        public string Cargo { get; set; }
     }
 }

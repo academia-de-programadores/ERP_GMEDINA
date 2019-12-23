@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using OfficeOpenXml;
+using LinqToExcel;
 
 //using Excel = Microsoft.Office.Interop.Excel;
 
@@ -81,7 +82,7 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla="", fpa_IdFormaPago="" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
             Sheet.Cells["A1:O3"].Merge = true;
@@ -115,6 +116,8 @@ namespace ERP_GMEDINA.Controllers
             Sheet.Cells["M4"].Value = "Area";
             Sheet.Cells["N4"].Value = "Departamentos";
             Sheet.Cells["O4"].Value = "Jornadas";
+            Sheet.Cells["P4"].Value = "Planilla";
+            Sheet.Cells["Q4"].Value = "FormadePago";
 
 
 
@@ -188,6 +191,23 @@ namespace ERP_GMEDINA.Controllers
                 jor_val.Formula.ExcelFormula = "$ME$1:$ME$" + Jor.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
+                var Plani = db.tbCatalogoDePlanillas
+               .Select(tabla => tabla.cpla_DescripcionPlanilla)
+               .ToArray();
+                Sheet.Cells["MF1"].LoadFromCollection<string>(Plani.ToList<string>());
+                var Plani_val = Sheet.DataValidations.AddListValidation("P5");
+                Plani_val.Formula.ExcelFormula = "$MF$1:$MF$" + Plani.Length;
+                Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
+                var Fpago = db.tbFormaPago
+           .Select(tabla => tabla.fpa_Descripcion)
+           .ToArray();
+                Sheet.Cells["MG1"].LoadFromCollection<string>(Fpago.ToList<string>());
+                var Fpago_val = Sheet.DataValidations.AddListValidation("Q5");
+                Fpago_val.Formula.ExcelFormula = "$MQ$1:$MQ$" + Fpago.Length;
+                Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
+
                 row++;
             }
             Sheet.Cells["A:AZ"].AutoFitColumns();
@@ -199,69 +219,112 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadEmpleados(string FilePath) {
-            ////foreach (string upload in Request.Files)
-            ////{
-            ////    if (Request.Files[upload].FileName != "")
-            ////    {
-            ////        string path = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/uploads/";
-            ////        string filename = Path.GetFileName(Request.Files[upload].FileName);
-            ////        Request.Files[upload].SaveAs(Path.Combine(path, filename));
-            ////    }
-            ////}
-            ////return View("Upload");
-            //string filePath = string.Empty;
-            //if (postedFile != null)
-            //{
-            //    string path = Server.MapPath("~/Uploads/");
-            //    if (!Directory.Exists(path))
-            //    {
-            //        Directory.CreateDirectory(path);
-            //    }
+        public ActionResult UploadEmpleados(tbPersonas personas,tbEmpleados empleados, HttpPostedFileBase FileUpload)
+        {
 
-            //}
-            FileInfo existingFile = new FileInfo(FilePath);
-            using (ExcelPackage package = new ExcelPackage(existingFile))
+            ERP_GMEDINAEntities objEntity = new ERP_GMEDINAEntities();
+            string data = "";
+            if (FileUpload != null)
             {
-                //get the first worksheet in the workbook
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
-                int colCount = worksheet.Dimension.End.Column;  //get Column Count
-                int rowCount = worksheet.Dimension.End.Row;     //get row count
-                string queryString = "INSERT INTO tableName VALUES";        //Here I am using "blind insert". You can specify the column names Blient inset is strongly not recommanded
-                string eachVal = "";
+                if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                {
+                    string filename = FileUpload.FileName;
+
+                    if (filename.EndsWith(".xlsx"))
+                    {
+                        string targetpath = Server.MapPath("~/Downloadable files/");
+                        FileUpload.SaveAs(targetpath + filename);
+                        string pathToExcelFile = targetpath + filename;
+
+                        string sheetName = "ArchivoEmpleados";
+
+                        var excelFile = new ExcelQueryFactory(pathToExcelFile);
+                        var PERDetails = from a in excelFile.Worksheet<tbPersonas>(sheetName) select a;
+                        //var empDetails = from ba in excelFile.Worksheet<tbEmpleados>(sheetName) select ba;
+                        foreach (var a in PERDetails)
+                        {
+                            if (a.per_Nombres != null)
+                            {
+
+                                DateTime? myBirthdate = null;
+
+
+                                if (a.per_Identidad.Length > 12)
+                                {  
+                                    data = "Numero de identidad mayor a 12";
+                                    ViewBag.Message = data;
+
+                                }
+                                var nac_id = objEntity.tbNacionalidades.Where(x => x.nac_Descripcion == a.tbNacionalidades.nac_Descripcion).Select(x => x.nac_Descripcion);
+
+                                myBirthdate = Convert.ToDateTime(a.per_FechaNacimiento);
+
+
+                                //var resullt = PostExcelData(a.per_Identidad, a.per_Nombres, a.per_Apellidos, myBirthdate, a.per_Sexo, a.nac_Id, a.per_Direccion, a.per_Telefono,a.per_CorreoElectronico,a.per_EstadoCivil,a.per_TipoSangre,a.tbEmpleados);
+                                if (resullt <= 0)
+                                {
+                                    data = "Hello User, Found some duplicate values! Only unique employee number has inserted and duplicate values(s) are not inserted";
+                                    ViewBag.Message = data;
+                                    continue;
+
+                                }
+                                else
+                                {
+                                    data = "Successful upload records";
+                                    ViewBag.Message = data;
+                                }
+                            }
+
+                            else
+                            {
+                                data = a.per_Nombres + "Some fields are null, Please check your excel sheet";
+                                ViewBag.Message = data;
+                                return View("ExcelUpload");
+                            }
+
+                        }
+                    }
+
+                    else
+                    {
+                        data = "This file is not valid format";
+                        ViewBag.Message = data;
+                    }
+                    return View("ExcelUpload");
+                }
+                else
+                {
+
+                    data = "Only Excel file format is allowed";
+
+                    ViewBag.Message = data;
+                    return View("ExcelUpload");
+
+                }
+
             }
-            //    bool status;
-            //    for (int row = 1; row <= rowCount; row++)
-            //    {
-            //        queryString += "(";
-            //        for (int col = 1; col <= colCount; col++)
-            //        {
-            //            eachVal = worksheet.Cells[row, col].Value.ToString().Trim();
-            //            queryString += "'" + eachVal + "',";
-            //        }
-            //        queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
-            //        if (row % 1000 == 0)        //On every 1000 query will execute, as maximum of 1000 will be executed at a time. 
-            //        {
-            //            queryString += ")";
-            //            status = this.runQuery(queryString);    //executing query
-            //            if (status == false)
-            //                return status;
-            //            queryString = "INSERT INTO tableName VALUES";
-            //        }
-            //        else
-            //        {
-            //            queryString += "),";
-            //        }
-            //    }
-            //    queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
-            //    status = this.runQuery(queryString);    //executing query
-            //    return status;
-            //}
-            //return status;
-            return View("Upload");
+            else
+            {
+
+                if (FileUpload == null)
+                {
+                    data = "Please choose Excel file";
+                }
+                ViewBag.Message = data;
+                return View("ExcelUpload");
+            }
         }
 
 
+        //public int PostExcelData(string Identidad, string Nombres, string Apellidos, DateTime? FechaNacimiento, string Sexo,int edad, int Nacionalidad, string Direccion, string Telefono,string CorreoElectronico,string EstadoCivil,string TipodeSangre,int Cargo,int Area,int Departamentos,int Jornadas,int Planillas,int FormadePago)
+        //{
+        //    ERP_GMEDINAEntities DbEntity = new ERP_GMEDINAEntities();
+        //    //aqui es donde se le dice al PA que es lo que va a insertar y en que campos.
+        //    var InsertExcelData = DbEntity.UDP_RRHH_tbEmpleados_Insert(Identidad,Nombres,Apellidos,FechaNacimiento,Sexo,edad,Nacionalidad,Direccion,Telefono,CorreoElectronico,EstadoCivil,TipodeSangre,Cargo,Area,Departamentos,Jornadas,Planillas,FormadePago);
+
+        //     return InsertExcelData;
+            
+        //}
 
 
         // GET: Empleados/Details/5

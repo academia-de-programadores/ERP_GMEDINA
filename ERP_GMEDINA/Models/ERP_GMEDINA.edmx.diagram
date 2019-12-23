@@ -248,6 +248,14 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCatalogoDePlanillas" Width="1.5" PointX="3" PointY="101.875" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbFormaPago" Width="1.5" PointX="3" PointY="98.25" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -77,6 +77,32 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbCatalogoDePlanillas">
+          <Key>
+            <PropertyRef Name="cpla_IdPlanilla" />
+          </Key>
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_FrecuenciaEnDias" Type="int" Nullable="false" />
+          <Property Name="cpla_RecibeComision" Type="bit" Nullable="false" />
+          <Property Name="cpla_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="cpla_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="cpla_UsuarioModifica" Type="int" />
+          <Property Name="cpla_FechaModifica" Type="datetime" />
+          <Property Name="cpla_Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbFormaPago">
+          <Key>
+            <PropertyRef Name="fpa_IdFormaPago" />
+          </Key>
+          <Property Name="fpa_IdFormaPago" Type="int" Nullable="false" />
+          <Property Name="fpa_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fpa_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="fpa_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="fpa_UsuarioModifica" Type="int" />
+          <Property Name="fpa_FechaModifica" Type="datetime" />
+          <Property Name="fpa_Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbAreas">
           <Key>
@@ -1018,6 +1044,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does n
         <EntityType Name="V_HistorialContrataciones">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="Nombre Completo" />
             <PropertyRef Name="Departamento" />
             <PropertyRef Name="Area" />
@@ -1026,6 +1053,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialContrataciones' does n
             <PropertyRef Name="Fecha Crea" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="int" Nullable="false" />
           <Property Name="Nombre Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="Departamento" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1043,6 +1071,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Nombre Completo" />
+            <PropertyRef Name="Departamento" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
             <PropertyRef Name="Jornada" />
             <PropertyRef Name="Tipo Horas" />
             <PropertyRef Name="Recargo" />
@@ -1050,6 +1081,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Jornada" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Tipo Horas" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Recargo" Type="int" Nullable="false" />
@@ -1117,14 +1151,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not h
             <PropertyRef Name="Identidad" />
             <PropertyRef Name="Nombre" />
             <PropertyRef Name="Fase" />
-            <PropertyRef Name="Plaza_Disponible" />
+            <PropertyRef Name="Plaza_Solicitada" />
+            <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="Usuario_Crea" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Plaza_Disponible" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plaza_Solicitada" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="date" />
+          <Property Name="Fecha_Crea" Type="datetime" Nullable="false" />
+          <Property Name="Usuario_Crea" Type="int" Nullable="false" />
+          <Property Name="Fecha_Modifica" Type="datetime" />
+          <Property Name="Usuario_Modifica" Type="int" />
+          <Property Name="Razon_Inactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1365,6 +1406,54 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Principal>
             <Dependent Role="tbRolesUsuario">
               <PropertyRef Name="usu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbFormaPago" Type="Self.tbFormaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFormaPago">
+              <PropertyRef Name="fpa_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbFormaPago" Type="Self.tbFormaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFormaPago">
+              <PropertyRef Name="fpa_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1872,12 +1961,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" />-->
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialRefrendamientos_href_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbHistorialRefrendamientos" Type="Self.tbHistorialRefrendamientos" Multiplicity="*" />
@@ -2574,6 +2657,30 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+          <End Role="tbCatalogoDePlanillas" Type="Self.tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
+          <End Role="tbFormaPago" Type="Self.tbFormaPago" Multiplicity="1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFormaPago">
+              <PropertyRef Name="fpa_IdFormaPago" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="fpa_IdFormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
           <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
           <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
@@ -2766,9 +2873,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" />-->
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialRefrendamientos_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbHistorialRefrendamientos" Type="Self.tbHistorialRefrendamientos" Multiplicity="*" />
@@ -3249,9 +3353,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a relationship, but cannot be found.
-        <Association Name="'FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" />-->
         <Association Name="FK_rrhh_tbTipoSalidas_tsal_Id_rrhh_tbHistorialSalidas_tsal_Id">
           <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="1" />
           <End Role="tbHistorialSalidas" Type="Self.tbHistorialSalidas" Multiplicity="*" />
@@ -3355,7 +3456,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <Function Name="UDP_RRHH_tbAreas_tbEmpleados_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh" />
         <Function Name="UDP_RRHH_tbAreas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="suc_Id" Type="int" Mode="In" />
           <Parameter Name="area_Descripcion" Type="nvarchar" Mode="In" />
@@ -3429,10 +3529,30 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <Function Name="UDP_RRHH_tbDepartamentos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
-          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="Car_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="per_Identidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Nombres" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="per_Sexo" Type="char" Mode="In" />
+          <Parameter Name="per_Edad" Type="int" Mode="In" />
+          <Parameter Name="nac_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_CorreoElectronico" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_EstadoCivil" Type="char" Mode="In" />
+          <Parameter Name="per_TipoSangre" Type="nvarchar" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="jor_Id" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEmpresas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
@@ -3656,6 +3776,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Parameter Name="rsal_Id" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaSalida" Type="datetime" Mode="In" />
           <Parameter Name="hsal_Observacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="emp_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hsal_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hsal_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -3674,8 +3795,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="hvac_FechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="hvac_FechaFin" Type="datetime" Mode="In" />
-          <Parameter Name="hvac_MesVacaciones" Type="int" Mode="In" />
-          <Parameter Name="hvac_AnioVacaciones" Type="int" Mode="In" />
           <Parameter Name="hvac_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hvac_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -3743,10 +3862,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Parameter Name="jor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbJornadas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="jor_Estado" Type="bit" Mode="In" />
-          <Parameter Name="jor_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="jor_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="jor_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -4048,6 +4164,8 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySet Name="tbRolesUsuario" EntityType="Self.tbRolesUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCatalogoDePlanillas" EntityType="Self.tbCatalogoDePlanillas" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbFormaPago" EntityType="Self.tbFormaPago" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbAreas" EntityType="Self.tbAreas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbCargos" EntityType="Self.tbCargos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbCompetencias" EntityType="Self.tbCompetencias" Schema="rrhh" store:Type="Tables" />
@@ -4211,6 +4329,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySet Name="V_HistorialContrataciones" EntityType="Self.V_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_HistorialContrataciones].[Id] AS [Id], 
+    [V_HistorialContrataciones].[IdEmpleado] AS [IdEmpleado], 
     [V_HistorialContrataciones].[Nombre Completo] AS [Nombre Completo], 
     [V_HistorialContrataciones].[Departamento] AS [Departamento], 
     [V_HistorialContrataciones].[Area] AS [Area], 
@@ -4227,6 +4346,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <DefiningQuery>SELECT 
     [V_HistorialHorasTrabajadas].[Id] AS [Id], 
     [V_HistorialHorasTrabajadas].[Nombre Completo] AS [Nombre Completo], 
+    [V_HistorialHorasTrabajadas].[Departamento] AS [Departamento], 
+    [V_HistorialHorasTrabajadas].[Area] AS [Area], 
+    [V_HistorialHorasTrabajadas].[Cargo] AS [Cargo], 
     [V_HistorialHorasTrabajadas].[Jornada] AS [Jornada], 
     [V_HistorialHorasTrabajadas].[Tipo Horas] AS [Tipo Horas], 
     [V_HistorialHorasTrabajadas].[Recargo] AS [Recargo], 
@@ -4275,8 +4397,13 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
     [V_SeleccionCandidatos].[Identidad] AS [Identidad], 
     [V_SeleccionCandidatos].[Nombre] AS [Nombre], 
     [V_SeleccionCandidatos].[Fase] AS [Fase], 
-    [V_SeleccionCandidatos].[Plaza_Disponible] AS [Plaza_Disponible], 
-    [V_SeleccionCandidatos].[Fecha] AS [Fecha]
+    [V_SeleccionCandidatos].[Plaza_Solicitada] AS [Plaza_Solicitada], 
+    [V_SeleccionCandidatos].[Fecha] AS [Fecha], 
+    [V_SeleccionCandidatos].[Fecha_Crea] AS [Fecha_Crea], 
+    [V_SeleccionCandidatos].[Usuario_Crea] AS [Usuario_Crea], 
+    [V_SeleccionCandidatos].[Fecha_Modifica] AS [Fecha_Modifica], 
+    [V_SeleccionCandidatos].[Usuario_Modifica] AS [Usuario_Modifica], 
+    [V_SeleccionCandidatos].[Razon_Inactivo] AS [Razon_Inactivo]
     FROM [rrhh].[V_SeleccionCandidatos] AS [V_SeleccionCandidatos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
@@ -4388,6 +4515,22 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Acce_tbRolesUsuario_usu_Id" Association="Self.FK_Acce_tbUsuario_usu_Id_Acce_tbRolesUsuario_usu_Id">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRolesUsuario" EntitySet="tbRolesUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -4789,6 +4932,14 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" Association="Self.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" Association="Self.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
             <End Role="tbAreas" EntitySet="tbAreas" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
@@ -5026,8 +5177,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -5217,6 +5367,10 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <NavigationProperty Name="tbTitulosPersona1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosPersona_tipe_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosPersona" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbTitulosRequisicion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbCatalogoDePlanillas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbFormaPago" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFormaPago" />
+          <NavigationProperty Name="tbFormaPago1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFormaPago" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -5383,6 +5537,8 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <NavigationProperty Name="tbSueldos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbSueldos_emp_Id" FromRole="tbEmpleados" ToRole="tbSueldos" />
           <NavigationProperty Name="tbJornadas" Relationship="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbEmpleados_jor_Id" FromRole="tbEmpleados" ToRole="tbJornadas" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbEmpleados" ToRole="tbCatalogoDePlanillas" />
+          <NavigationProperty Name="tbFormaPago" Relationship="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" FromRole="tbEmpleados" ToRole="tbFormaPago" />
         </EntityType>
         <EntityType Name="tbEmpresas">
           <Key>
@@ -6374,6 +6530,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <PropertyRef Name="Cargo" />
             <PropertyRef Name="Fecha_Contrato" />
             <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="IdEmpleado" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -6386,6 +6543,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_HistorialHorasTrabajadas">
           <Key>
@@ -6395,6 +6553,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <PropertyRef Name="Tipo_Horas" />
             <PropertyRef Name="Recargo" />
             <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="Departamento" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -6405,6 +6566,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Usuario_Modifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="Departamento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_HistorialIncapacidades">
           <Key>
@@ -6460,6 +6624,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <PropertyRef Name="Nombre" />
             <PropertyRef Name="Fase" />
             <PropertyRef Name="Plaza_Disponible" />
+            <PropertyRef Name="Plaza_Solicitada" />
+            <PropertyRef Name="Fecha_Crea" />
+            <PropertyRef Name="Usuario_Crea" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
@@ -6467,6 +6634,12 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <Property Name="Fase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Plaza_Disponible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Modifica" Type="Int32" />
+          <Property Name="Razon_Inactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -9398,7 +9571,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_dbo_tbFasesReclutamiento_DELETE">
-            <Parameter Name="fare_id" Mode="In" Type="Int32" />
+          <Parameter Name="fare_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_dbo_tbFasesReclutamiento_Insert">
             <Parameter Name="fare_id" Mode="In" Type="Int32" />
@@ -9433,7 +9606,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbAreas_tbEmpleados_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_tbEmpleados_Select_Result)" />
           <FunctionImport Name="UDP_RRHH_tbAreas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbAreas_Update_Result)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="suc_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Descripcion" Mode="In" Type="String" />
@@ -9507,7 +9679,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <FunctionImport Name="UDP_RRHH_tbDepartamentos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbDepartamentos_Update_Result)">
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
-            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Car_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="depto_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
@@ -9529,7 +9701,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
@@ -9734,6 +9906,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="rsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaSalida" Mode="In" Type="DateTime" />
             <Parameter Name="hsal_Observacion" Mode="In" Type="String" />
+            <Parameter Name="emp_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="hsal_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hsal_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -9752,8 +9925,6 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="hvac_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="hvac_MesVacaciones" Mode="In" Type="Int32" />
-            <Parameter Name="hvac_AnioVacaciones" Mode="In" Type="Int32" />
             <Parameter Name="hvac_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hvac_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -9821,10 +9992,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result)">
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="jor_Estado" Mode="In" Type="Boolean" />
-            <Parameter Name="jor_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10004,7 +10172,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
@@ -10051,7 +10219,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Delete_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -10118,6 +10286,52 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
             <Parameter Name="titu_Descripcion" Mode="In" Type="String" />
             <Parameter Name="titu_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="titu_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbCatalogoDePlanillas" EntityType="ERP_GMEDINAModel.tbCatalogoDePlanillas" />
+          <EntitySet Name="tbFormaPago" EntityType="ERP_GMEDINAModel.tbFormaPago" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+            <End Role="tbCatalogoDePlanillas" EntitySet="tbCatalogoDePlanillas" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" Association="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
+            <End Role="tbFormaPago" EntitySet="tbFormaPago" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbEmpleados_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
+            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -10473,6 +10687,110 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
         <ComplexType Name="UDP_RRHH_tbRazonSalidas_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbCatalogoDePlanillas">
+          <Key>
+            <PropertyRef Name="cpla_IdPlanilla" />
+          </Key>
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpla_FrecuenciaEnDias" Type="Int32" Nullable="false" />
+          <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
+          <Property Name="cpla_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="cpla_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cpla_UsuarioModifica" Type="Int32" />
+          <Property Name="cpla_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica" FromRole="tbCatalogoDePlanillas" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbCatalogoDePlanillas" ToRole="tbEmpleados" />
+        </EntityType>
+        <EntityType Name="tbFormaPago">
+          <Key>
+            <PropertyRef Name="fpa_IdFormaPago" />
+          </Key>
+          <Property Name="fpa_IdFormaPago" Type="Int32" Nullable="false" />
+          <Property Name="fpa_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fpa_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="fpa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fpa_UsuarioModifica" Type="Int32" />
+          <Property Name="fpa_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="fpa_Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea" FromRole="tbFormaPago" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica" FromRole="tbFormaPago" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago" FromRole="tbFormaPago" ToRole="tbEmpleados" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbCatalogoDePlanillas_cpla_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbFormaPago" Role="tbFormaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFormaPago">
+              <PropertyRef Name="fpa_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbFormaPago_fpa_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbFormaPago" Role="tbFormaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFormaPago">
+              <PropertyRef Name="fpa_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla">
+          <End Type="ERP_GMEDINAModel.tbCatalogoDePlanillas" Role="tbCatalogoDePlanillas" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCatalogoDePlanillas">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="cpla_IdPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plani_tbFormaPago_fpa_IdFormaPago_rrhh_tbEmpleados_fpa_IdFormaPago">
+          <End Type="ERP_GMEDINAModel.tbFormaPago" Role="tbFormaPago" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFormaPago">
+              <PropertyRef Name="fpa_IdFormaPago" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="fpa_IdFormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11485,6 +11803,7 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySetMapping Name="V_HistorialContrataciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialContrataciones">
               <MappingFragment StoreEntitySet="V_HistorialContrataciones">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
                 <ScalarProperty Name="Departamento" ColumnName="Departamento" />
@@ -11502,6 +11821,9 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySetMapping Name="V_HistorialHorasTrabajadas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialHorasTrabajadas">
               <MappingFragment StoreEntitySet="V_HistorialHorasTrabajadas">
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre Completo" />
                 <ScalarProperty Name="Jornada" ColumnName="Jornada" />
@@ -11554,11 +11876,16 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
           <EntitySetMapping Name="V_SeleccionCandidatos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_SeleccionCandidatos">
               <MappingFragment StoreEntitySet="V_SeleccionCandidatos">
+                <ScalarProperty Name="Razon_Inactivo" ColumnName="Razon_Inactivo" />
+                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
+                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
+                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
+                <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha_Crea" />
+                <ScalarProperty Name="Plaza_Solicitada" ColumnName="Plaza_Solicitada" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Fase" ColumnName="Fase" />
-                <ScalarProperty Name="Plaza_Disponible" ColumnName="Plaza_Disponible" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -12458,6 +12785,35 @@ error 6004: The table 'ERP_GMEDINA.rrhh.tbHistorialPermisos' is referenced by a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbCatalogoDePlanillas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbCatalogoDePlanillas">
+              <MappingFragment StoreEntitySet="tbCatalogoDePlanillas">
+                <ScalarProperty Name="cpla_Activo" ColumnName="cpla_Activo" />
+                <ScalarProperty Name="cpla_FechaModifica" ColumnName="cpla_FechaModifica" />
+                <ScalarProperty Name="cpla_UsuarioModifica" ColumnName="cpla_UsuarioModifica" />
+                <ScalarProperty Name="cpla_FechaCrea" ColumnName="cpla_FechaCrea" />
+                <ScalarProperty Name="cpla_UsuarioCrea" ColumnName="cpla_UsuarioCrea" />
+                <ScalarProperty Name="cpla_RecibeComision" ColumnName="cpla_RecibeComision" />
+                <ScalarProperty Name="cpla_FrecuenciaEnDias" ColumnName="cpla_FrecuenciaEnDias" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbFormaPago">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbFormaPago">
+              <MappingFragment StoreEntitySet="tbFormaPago">
+                <ScalarProperty Name="fpa_Activo" ColumnName="fpa_Activo" />
+                <ScalarProperty Name="fpa_FechaModifica" ColumnName="fpa_FechaModifica" />
+                <ScalarProperty Name="fpa_UsuarioModifica" ColumnName="fpa_UsuarioModifica" />
+                <ScalarProperty Name="fpa_FechaCrea" ColumnName="fpa_FechaCrea" />
+                <ScalarProperty Name="fpa_UsuarioCrea" ColumnName="fpa_UsuarioCrea" />
+                <ScalarProperty Name="fpa_Descripcion" ColumnName="fpa_Descripcion" />
+                <ScalarProperty Name="fpa_IdFormaPago" ColumnName="fpa_IdFormaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
