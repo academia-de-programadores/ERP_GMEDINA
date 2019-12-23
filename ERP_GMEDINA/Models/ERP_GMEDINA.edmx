@@ -1145,28 +1145,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_SeleccionCandidatos">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Fase" />
-            <PropertyRef Name="Plaza_Solicitada" />
-            <PropertyRef Name="Fecha_Crea" />
-            <PropertyRef Name="Usuario_Crea" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Plaza_Solicitada" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Fecha" Type="date" />
-          <Property Name="Fecha_Crea" Type="datetime" Nullable="false" />
-          <Property Name="Usuario_Crea" Type="int" Nullable="false" />
-          <Property Name="Fecha_Modifica" Type="datetime" />
-          <Property Name="Usuario_Modifica" Type="int" />
-          <Property Name="Razon_Inactivo" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbEmpleados">
@@ -4391,21 +4369,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HorariosDetalles].[hor_FechaModifica] AS [hor_FechaModifica]
     FROM [rrhh].[V_HorariosDetalles] AS [V_HorariosDetalles]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_SeleccionCandidatos].[Id] AS [Id], 
-    [V_SeleccionCandidatos].[Identidad] AS [Identidad], 
-    [V_SeleccionCandidatos].[Nombre] AS [Nombre], 
-    [V_SeleccionCandidatos].[Fase] AS [Fase], 
-    [V_SeleccionCandidatos].[Plaza_Solicitada] AS [Plaza_Solicitada], 
-    [V_SeleccionCandidatos].[Fecha] AS [Fecha], 
-    [V_SeleccionCandidatos].[Fecha_Crea] AS [Fecha_Crea], 
-    [V_SeleccionCandidatos].[Usuario_Crea] AS [Usuario_Crea], 
-    [V_SeleccionCandidatos].[Fecha_Modifica] AS [Fecha_Modifica], 
-    [V_SeleccionCandidatos].[Usuario_Modifica] AS [Usuario_Modifica], 
-    [V_SeleccionCandidatos].[Razon_Inactivo] AS [Razon_Inactivo]
-    FROM [rrhh].[V_SeleccionCandidatos] AS [V_SeleccionCandidatos]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbEmpleados].[NombreCompleto] AS [NombreCompleto], 
@@ -6617,30 +6580,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hor_UsuarioModifica" Type="Int32" />
           <Property Name="hor_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="V_SeleccionCandidatos">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Fase" />
-            <PropertyRef Name="Plaza_Disponible" />
-            <PropertyRef Name="Plaza_Solicitada" />
-            <PropertyRef Name="Fecha_Crea" />
-            <PropertyRef Name="Usuario_Crea" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Fase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Plaza_Disponible" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Precision="0" />
-          <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
-          <Property Name="Usuario_Modifica" Type="Int32" />
-          <Property Name="Razon_Inactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="V_tbEmpleados">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -8851,7 +8790,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_HistorialHorasTrabajadas" EntityType="Self.V_HistorialHorasTrabajadas" />
           <EntitySet Name="V_HistorialIncapacidades" EntityType="Self.V_HistorialIncapacidades" />
           <EntitySet Name="V_HorariosDetalles" EntityType="Self.V_HorariosDetalles" />
-          <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" />
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" />
           <EntitySet Name="V_tbHistorialSalidas" EntityType="Self.V_tbHistorialSalidas" />
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" />
@@ -11870,23 +11808,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="hor_FechaCrea" ColumnName="hor_FechaCrea" />
                 <ScalarProperty Name="hor_UsuarioModifica" ColumnName="hor_UsuarioModifica" />
                 <ScalarProperty Name="hor_FechaModifica" ColumnName="hor_FechaModifica" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_SeleccionCandidatos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_SeleccionCandidatos">
-              <MappingFragment StoreEntitySet="V_SeleccionCandidatos">
-                <ScalarProperty Name="Razon_Inactivo" ColumnName="Razon_Inactivo" />
-                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
-                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
-                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
-                <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha_Crea" />
-                <ScalarProperty Name="Plaza_Solicitada" ColumnName="Plaza_Solicitada" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Fase" ColumnName="Fase" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

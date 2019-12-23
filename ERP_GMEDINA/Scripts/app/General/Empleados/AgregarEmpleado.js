@@ -9,24 +9,24 @@ $("#btnUpload").change(function () {
         MsgError("¡Error!", "Debe Agregar el archivo de excel correspondiente");
     }
 });
-$("#btnGuardar").click(function () {
-    var data = new FormData();
-    var Archivo="ArchivoEmpleados";
-    var files = $("#btnUpload").get(0).files;
-    if (files.length == 0) {
-        MsgError("¡Error!", "Debe Agregar el archivo de excel");
+//$("#btnGuardar").click(function () {
+//    var data = new FormData();
+//    //var Archivo="ArchivoEmpleados";
+//    var files = $("#btnUpload").get(0).files;
+//    if (files.length == 0) {
+//        MsgError("¡Error!", "Debe Agregar el archivo de excel");
 
-    } else {
-        data.append("UploadedFile", files[0]);
+//    } else {
+//        data.append("UploadedFile", files[0]);
 
-    }
-    var ajaxRequest = $.ajax({
-        type: "POST",
-        url: '/Empleados/UploadEmpleados',
-        contentType: false,
-        processData: false,
-        data: data
-    });
+//    }
+//    //var ajaxRequest = $.ajax({
+//    //    type: "POST",
+//    //    url: '/Empleados/UploadEmpleados',
+//    //    contentType: false,
+//    //    processData: false,
+//    //    data: data
+//    //});
 
           
-});
+//});

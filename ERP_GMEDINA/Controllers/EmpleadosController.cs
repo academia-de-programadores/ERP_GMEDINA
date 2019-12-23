@@ -219,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadEmpleados(tbPersonas personas,tbEmpleados empleados, HttpPostedFileBase FileUpload)
+        public ActionResult UploadEmpleados( HttpPostedFileBase FileUpload)
         {
 
             ERP_GMEDINAEntities objEntity = new ERP_GMEDINAEntities();
@@ -259,8 +259,8 @@ namespace ERP_GMEDINA.Controllers
 
                                 myBirthdate = Convert.ToDateTime(a.per_FechaNacimiento);
 
-
-                                //var resullt = PostExcelData(a.per_Identidad, a.per_Nombres, a.per_Apellidos, myBirthdate, a.per_Sexo, a.nac_Id, a.per_Direccion, a.per_Telefono,a.per_CorreoElectronico,a.per_EstadoCivil,a.per_TipoSangre,a.tbEmpleados);
+                                int resullt = 0;
+                                //int resullt = PostExcelData(a.per_Identidad, a.per_Nombres, a.per_Apellidos, myBirthdate, a.per_Sexo, a.nac_Id, a.per_Direccion, a.per_Telefono,a.per_CorreoElectronico,a.per_EstadoCivil,a.per_TipoSangre,a.tbEmpleados);
                                 if (resullt <= 0)
                                 {
                                     data = "Hello User, Found some duplicate values! Only unique employee number has inserted and duplicate values(s) are not inserted";
@@ -316,14 +316,14 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        //public int PostExcelData(string Identidad, string Nombres, string Apellidos, DateTime? FechaNacimiento, string Sexo,int edad, int Nacionalidad, string Direccion, string Telefono,string CorreoElectronico,string EstadoCivil,string TipodeSangre,int Cargo,int Area,int Departamentos,int Jornadas,int Planillas,int FormadePago)
+        //public int PostExcelData(string Identidad, string Nombres, string Apellidos, DateTime? FechaNacimiento, string Sexo, int edad, int Nacionalidad, string Direccion, string Telefono, string CorreoElectronico, string EstadoCivil, string TipodeSangre, int Cargo, int Area, int Departamentos, int Jornadas, int Planillas, int FormadePago)
         //{
         //    ERP_GMEDINAEntities DbEntity = new ERP_GMEDINAEntities();
         //    //aqui es donde se le dice al PA que es lo que va a insertar y en que campos.
-        //    var InsertExcelData = DbEntity.UDP_RRHH_tbEmpleados_Insert(Identidad,Nombres,Apellidos,FechaNacimiento,Sexo,edad,Nacionalidad,Direccion,Telefono,CorreoElectronico,EstadoCivil,TipodeSangre,Cargo,Area,Departamentos,Jornadas,Planillas,FormadePago);
+        //    var InsertExcelData = DbEntity.UDP_RRHH_tbEmpleados_Insert(Identidad, Nombres, Apellidos, FechaNacimiento, Sexo, edad, Nacionalidad, Direccion, Telefono, CorreoElectronico, EstadoCivil, TipodeSangre, Cargo, Area, Departamentos, Jornadas, Planillas, FormadePago);
 
-        //     return InsertExcelData;
-            
+        //    return InsertExcelData;
+
         //}
 
 
