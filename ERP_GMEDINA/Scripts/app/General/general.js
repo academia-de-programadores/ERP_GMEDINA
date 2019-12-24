@@ -39,6 +39,20 @@ function serializar(data) {
     }
 }
 
+function serializarPro(data) {
+    var Data = new Object();
+    $.each(data, function (index, valor) {
+        var value = valor.value.trim();
+        if (value != "") {
+            Data[valor.name] = value;
+        } else {
+            Data[valor.name] = "";
+        }
+    });
+
+    return Data;
+}
+
 function FechaFormato(pFecha) {
     if (pFecha != null && pFecha != undefined) {
         var fechaString = pFecha.substr(6);
@@ -55,11 +69,10 @@ function FechaFormato(pFecha) {
     return '';
 }
 
-function BinToCheckBox(BinVal)
-{
-    if(BinVal == true)
+function BinToCheckBox(BinVal) {
+    if (BinVal == true)
         return '<input type="checkbox" checked disabled>'
-    else if(BinVal == false)
+    else if (BinVal == false)
         return '<input type="checkbox" disabled>'
 }
 
@@ -159,7 +172,7 @@ $(".required").each(function (indice, input) {
     });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
-        if ($(input).val() == null || $(input).val()==0 || $(input).val().trim() == "") {
+        if ($(input).val() == null || $(input).val() == 0 || $(input).val().trim() == "") {
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $(span).addClass("text-danger");
@@ -177,7 +190,7 @@ $(".required").each(function (indice, input) {
             $(span).closest("div").addClass("has-warning");
             span.text(txt_maxlength);
             event.preventDefault();
-        }else {
+        } else {
             $(span).closest("div").removeClass("has-error has-warning");
             $(span).removeClass("text-danger text-warning");
             $(form).find("#error" + id).text("");
@@ -185,7 +198,7 @@ $(".required").each(function (indice, input) {
     }
 });
 formularios.forEach(function (formulario) {
- $("#" + formulario).submit(function (e) {
-  e.preventDefault();
- });
+    $("#" + formulario).submit(function (e) {
+        e.preventDefault();
+    });
 });

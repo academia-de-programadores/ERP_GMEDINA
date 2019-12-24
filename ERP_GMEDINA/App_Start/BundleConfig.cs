@@ -595,7 +595,8 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
 
 
-
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
+                "~/Scripts/app/General/Personas/CreatePersonas.js"));
 
 
             //OPTIMIZATION

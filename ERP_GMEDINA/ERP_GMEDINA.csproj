@@ -224,6 +224,7 @@
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
+    <Compile Include="Models\DatosProfesionalesArray.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

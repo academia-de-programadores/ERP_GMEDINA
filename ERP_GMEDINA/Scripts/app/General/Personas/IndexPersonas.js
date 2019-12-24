@@ -100,8 +100,18 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#per_Id")["0"].innerText = obj[0].per_Id ;
                 $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj[0].per_Identidad;
+                $("#ModalDetalles").find("#per_Nombres")["0"].innerText = obj[0].per_Nombres + ' ' + obj[0].per_Apellidos;
+                $("#ModalDetalles").find("#tbNacionalidades")["0"].innerText = obj[0].nac_Id;
+                $("#ModalDetalles").find("#per_Edad")["0"].innerText = obj[0].per_Edad + ' años';
+                $("#ModalDetalles").find("#per_TipoSangre")["0"].innerText = obj[0].per_TipoSangre;
+                $("#ModalDetalles").find("#per_Direccion")["0"].innerText = obj[0].per_Direccion;
+                $("#ModalDetalles").find("#per_Telefono")["0"].innerText = obj[0].per_Telefono;
+                $("#ModalDetalles").find("#per_CorreoElectronico")["0"].innerText = obj[0].per_CorreoElectronico;
+                $("#ModalDetalles").find("#per_FechaCrea")["0"].innerText = FechaFormato(obj[0].per_FechaCrea);
+                $("#ModalDetalles").find("#per_FechaModifica")["0"].innerText = FechaFormato(obj[0].per_FechaModifica);
+                $("#ModalDetalles").find("#per_UsuarioCrea")["0"].innerText = obj[0].per_UsuarioCrea;
+                $("#ModalDetalles").find("#per_UsuarioModifica")["0"].innerText = obj[0].per_UsuarioModifica;
 
                 $('#ModalDetalles').modal('show');
             }

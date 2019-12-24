@@ -6,12 +6,11 @@ function llenarDropDownList() {
        function (result) {
            $.each(result, function (id, Lista) {
                Lista.forEach(function (value, index) {
-                   $("#nac_Id" ).append(new Option(value.Descripcion, value.Id));
+                   $("#nac_Id" ).append('<option value="' + value.Id + '">' + value.Descripcion + '</option>');
                });
            });
        });
 }
-
 function ListFill(obj) {
     var SlctCompetencias = $(".SlctCompetencias");
     var SlctHabilidades = $(".SlctHabilidades");
@@ -44,3 +43,43 @@ function ListFill(obj) {
     SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160 });
     SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160 });
 };
+
+$(document).ready(function () {
+    llenarDropDownList();
+    _ajax(null,
+            '/Personas/DualListBoxData',
+            'GET',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    ListFill(obj);
+                }
+            })
+
+    var wizard = $("#Wizard").steps({
+        enableCancelButton: false,
+        onFinished: function () {
+            var SlctCompetencias = $(".SlctCompetencias");
+            var SlctHabilidades = $(".SlctHabilidades");
+            var SlctIdiomas = $(".SlctIdiomas");
+            var SlctReqEspeciales = $(".SlctReqEspeciales");
+            var SlctTitulos = $(".SlctTitulos");
+
+            var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+            var Form = $("#tbPersonas").find("select, input").serializeArray();
+            Form = serializarPro(Form);
+            Form = JSON.stringify({ tbPersonas: Form, DatosProfesionales: data });
+            console.log(Form);
+
+            _ajax(Form,
+            '/Personas/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+        },
+    });
+});

@@ -99,9 +99,9 @@ namespace ERP_GMEDINA.Controllers
                 Id = "A-",
                 Descripcion = "A-"
             });
-            ViewBag.TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
-            ViewBag.EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
-            ViewBag.sexo = new SelectList(Sexo, "Id", "Descripcion");
+            ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
+            ViewBag.per_EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
+            ViewBag.per_Sexo = new SelectList(Sexo, "Id", "Descripcion");
 
             //Nacionalidades
             List<tbNacionalidades> Nacionalidades = new List<tbNacionalidades> { };
@@ -114,7 +114,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Create([Bind(Include = "per_Id,per_Identidad,per_Nombres,per_Apellidos,per_FechaNacimiento,per_Sexo,per_Edad,nac_Id,per_Direccion,per_Telefono,per_CorreoElectronico,per_EstadoCivil,per_TipoSangre,per_Estado,per_RazonInactivo,per_UsuarioCrea,per_FechaCrea,per_UsuarioModifica,per_FechaModifica")] tbPersonas tbPersonas)
+        public JsonResult Create(tbPersonas tbPersonas, DatosProfesionalesArray DatosProfesionales)
         {
             string msj = "...";
             if (tbPersonas.per_Identidad != "")
@@ -178,7 +178,7 @@ namespace ERP_GMEDINA.Controllers
                         Descripcion = "**Seleccione una opción**"
                     });
                     Nacionalidades.AddRange(db.tbNacionalidades
-                    .Select(tabla => new { id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
+                    .Select(tabla => new { Id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
                     .ToList());
                 }
                 catch
@@ -287,9 +287,19 @@ namespace ERP_GMEDINA.Controllers
                         p => new
                         {
                             per_Id = p.per_Id,
-                            per_Identidad = p.per_Identidad
-                            //Nombre = p.per_Nombres + " " + p.per_Apellidos,
-                            //CorreoElectronico = p.per_CorreoElectronico
+                            per_Identidad = p.per_Identidad,
+                            per_Nombres = p.per_Nombres,
+                            per_Apellidos =p.per_Apellidos,
+                            nac_Id = p.tbNacionalidades.nac_Descripcion,
+                            per_Edad = p.per_Edad,
+                            per_TipoSangre = p.per_TipoSangre,
+                            per_Direccion = p.per_Direccion,
+                            per_Telefono = p.per_Telefono,
+                            per_CorreoElectronico = p.per_CorreoElectronico,
+                            per_FechaCrea = p.per_FechaCrea,
+                            per_FechaModifca = p.per_FechaModifica,
+                            per_UsuarioCrea = p.tbUsuario.usu_Nombres,
+                            per_UsuarioModifica = p.tbUsuario.usu_Nombres
                         })
                         .Where(x=> x.per_Id == id).ToList();
                     return Json(tbPersonas, JsonRequestBehavior.AllowGet);
