@@ -67,7 +67,7 @@ $(document).ready(function () {
             var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, input").serializeArray();
             Form = serializarPro(Form);
-            Form = JSON.stringify({ tbPersonas: Form, DatosProfesionales: data });
+            Form = JSON.stringify({ Personas: Form, DatosProfesionales: data });
             console.log(Form);
 
             _ajax(Form,

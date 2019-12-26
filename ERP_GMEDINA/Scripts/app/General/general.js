@@ -52,7 +52,6 @@ function serializarPro(data) {
 
     return Data;
 }
-
 function FechaFormato(pFecha) {
     if (pFecha != null && pFecha != undefined) {
         var fechaString = pFecha.substr(6);

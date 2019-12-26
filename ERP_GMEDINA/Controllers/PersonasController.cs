@@ -35,6 +35,34 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbPersonas);
         }
+
+        public ActionResult llenarDropDowlistNacionalidades()
+        {
+            var Nacionalidades = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Nacionalidades.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Nacionalidades.AddRange(db.tbNacionalidades
+                    .Select(tabla => new { Id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
+                    .ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("nac_Id", Nacionalidades);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Create()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -59,7 +87,7 @@ namespace ERP_GMEDINA.Controllers
             var EstadoCivil = new List<object> { };
             EstadoCivil.Add(new
             {
-                Id = 0,
+                Id = 0, 
                 Descripcion = "**Seleccione una opción**",
             });
             EstadoCivil.Add(new
@@ -81,22 +109,22 @@ namespace ERP_GMEDINA.Controllers
             });
             TipoSangre.Add(new
             {
-                Id = "O+",
+                Id = "Op",
                 Descripcion = "O+"
             });
             TipoSangre.Add(new
             {
-                Id = "O-",
+                Id = "On",
                 Descripcion = "O-"
             });
             TipoSangre.Add(new
             {
-                Id = "A",
+                Id = "Ap",
                 Descripcion = "A+"
             });
             TipoSangre.Add(new
             {
-                Id = "A-",
+                Id = "An",
                 Descripcion = "A-"
             });
             ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
@@ -113,11 +141,11 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Create(tbPersonas tbPersonas, DatosProfesionalesArray DatosProfesionales)
+        public JsonResult Create(Personas Personas,DatosProfesionalesArray DatosProfesionalesArray)
         {
+
             string msj = "...";
-            if (tbPersonas.per_Identidad != "")
+            if (Personas.per_Identidad != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -128,7 +156,7 @@ namespace ERP_GMEDINA.Controllers
                     // msj= item.MensajeError + "";
                     //}
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
@@ -165,32 +193,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         //Llenar Drop Nacionalidades
-        public ActionResult llenarDropDowlistNacionalidades()
-        {
-            var Nacionalidades = new List<object> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    Nacionalidades.Add(new
-                    {
-                        Id = 0,
-                        Descripcion = "**Seleccione una opción**"
-                    });
-                    Nacionalidades.AddRange(db.tbNacionalidades
-                    .Select(tabla => new { Id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
-                    .ToList());
-                }
-                catch
-                {
-                    return Json("-2", 0);
-                }
-
-            }
-            var result = new Dictionary<string, object>();
-            result.Add("nac_Id", Nacionalidades);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.

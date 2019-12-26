@@ -65,7 +65,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.per_FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.TextBoxFor(model => model.per_FechaNacimiento, new { @class = "form-control", @type = "date" })
+                                                @Html.EditorFor(model => model.per_FechaNacimiento, new { @class = "form-control", @type = "date" })
                                                 @Html.ValidationMessageFor(model => model.per_FechaNacimiento, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.nac_Id, "nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.nac_Id,null, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.DropDownList("nac_Id", null, htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.nac_Id, "", new { @class = "text-danger" })
@@ -183,8 +183,6 @@
     </div>
 </div>
 
-
-<script src="~/Scripts/plugins/pace/pace.min.js"></script>
 @section Styles {
     @Styles.Render("~/plugins/duallistStyles")
     @Styles.Render("~/plugins/wizardStepsStyles")
@@ -192,7 +190,7 @@
 }
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/plugins/duallist")
     @Scripts.Render("~/plugins/wizardSteps")

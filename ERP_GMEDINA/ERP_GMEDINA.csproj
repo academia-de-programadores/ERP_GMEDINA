@@ -241,6 +241,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ExcelEmpleados.cs" />
+    <Compile Include="Models\Personas.cs" />
     <Compile Include="Models\PersonasData.cs" />
     <Compile Include="Models\RequisicionesData.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
