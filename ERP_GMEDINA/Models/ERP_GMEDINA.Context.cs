@@ -5651,5 +5651,175 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Select1_Result>("UDP_RRHH_tbTipoMonedas_Select1", tmon_IdParameter);
         }
+    
+        public virtual ObjectResult<string> rrhh_tbCompetenciasPersona_Insert(Nullable<int> per_Id, Nullable<int> comp_Id, Nullable<int> cope_UsuarioCrea, Nullable<System.DateTime> cope_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var comp_IdParameter = comp_Id.HasValue ?
+                new ObjectParameter("comp_Id", comp_Id) :
+                new ObjectParameter("comp_Id", typeof(int));
+    
+            var cope_UsuarioCreaParameter = cope_UsuarioCrea.HasValue ?
+                new ObjectParameter("cope_UsuarioCrea", cope_UsuarioCrea) :
+                new ObjectParameter("cope_UsuarioCrea", typeof(int));
+    
+            var cope_FechaCreaParameter = cope_FechaCrea.HasValue ?
+                new ObjectParameter("cope_FechaCrea", cope_FechaCrea) :
+                new ObjectParameter("cope_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbCompetenciasPersona_Insert", per_IdParameter, comp_IdParameter, cope_UsuarioCreaParameter, cope_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbHabilidadesPersona_Insert(Nullable<int> per_Id, Nullable<int> habi_Id, Nullable<int> hape_UsuarioCrea, Nullable<System.DateTime> hape_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var habi_IdParameter = habi_Id.HasValue ?
+                new ObjectParameter("habi_Id", habi_Id) :
+                new ObjectParameter("habi_Id", typeof(int));
+    
+            var hape_UsuarioCreaParameter = hape_UsuarioCrea.HasValue ?
+                new ObjectParameter("hape_UsuarioCrea", hape_UsuarioCrea) :
+                new ObjectParameter("hape_UsuarioCrea", typeof(int));
+    
+            var hape_FechaCreaParameter = hape_FechaCrea.HasValue ?
+                new ObjectParameter("hape_FechaCrea", hape_FechaCrea) :
+                new ObjectParameter("hape_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbHabilidadesPersona_Insert", per_IdParameter, habi_IdParameter, hape_UsuarioCreaParameter, hape_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbIdiomasPersona_Insert(Nullable<int> per_Id, Nullable<int> idi_Id, Nullable<int> idpe_UsuarioCrea, Nullable<System.DateTime> idpe_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var idi_IdParameter = idi_Id.HasValue ?
+                new ObjectParameter("idi_Id", idi_Id) :
+                new ObjectParameter("idi_Id", typeof(int));
+    
+            var idpe_UsuarioCreaParameter = idpe_UsuarioCrea.HasValue ?
+                new ObjectParameter("idpe_UsuarioCrea", idpe_UsuarioCrea) :
+                new ObjectParameter("idpe_UsuarioCrea", typeof(int));
+    
+            var idpe_FechaCreaParameter = idpe_FechaCrea.HasValue ?
+                new ObjectParameter("idpe_FechaCrea", idpe_FechaCrea) :
+                new ObjectParameter("idpe_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbIdiomasPersona_Insert", per_IdParameter, idi_IdParameter, idpe_UsuarioCreaParameter, idpe_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbPersonas_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> per_Edad, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea)
+        {
+            var per_IdentidadParameter = per_Identidad != null ?
+                new ObjectParameter("per_Identidad", per_Identidad) :
+                new ObjectParameter("per_Identidad", typeof(string));
+    
+            var per_NombresParameter = per_Nombres != null ?
+                new ObjectParameter("per_Nombres", per_Nombres) :
+                new ObjectParameter("per_Nombres", typeof(string));
+    
+            var per_ApellidosParameter = per_Apellidos != null ?
+                new ObjectParameter("per_Apellidos", per_Apellidos) :
+                new ObjectParameter("per_Apellidos", typeof(string));
+    
+            var per_FechaNacimientoParameter = per_FechaNacimiento.HasValue ?
+                new ObjectParameter("per_FechaNacimiento", per_FechaNacimiento) :
+                new ObjectParameter("per_FechaNacimiento", typeof(System.DateTime));
+    
+            var per_SexoParameter = per_Sexo != null ?
+                new ObjectParameter("per_Sexo", per_Sexo) :
+                new ObjectParameter("per_Sexo", typeof(string));
+    
+            var per_EdadParameter = per_Edad.HasValue ?
+                new ObjectParameter("per_Edad", per_Edad) :
+                new ObjectParameter("per_Edad", typeof(int));
+    
+            var nac_IdParameter = nac_Id.HasValue ?
+                new ObjectParameter("nac_Id", nac_Id) :
+                new ObjectParameter("nac_Id", typeof(int));
+    
+            var per_DireccionParameter = per_Direccion != null ?
+                new ObjectParameter("per_Direccion", per_Direccion) :
+                new ObjectParameter("per_Direccion", typeof(string));
+    
+            var per_TelefonoParameter = per_Telefono != null ?
+                new ObjectParameter("per_Telefono", per_Telefono) :
+                new ObjectParameter("per_Telefono", typeof(string));
+    
+            var per_CorreoElectronicoParameter = per_CorreoElectronico != null ?
+                new ObjectParameter("per_CorreoElectronico", per_CorreoElectronico) :
+                new ObjectParameter("per_CorreoElectronico", typeof(string));
+    
+            var per_EstadoCivilParameter = per_EstadoCivil != null ?
+                new ObjectParameter("per_EstadoCivil", per_EstadoCivil) :
+                new ObjectParameter("per_EstadoCivil", typeof(string));
+    
+            var per_TipoSangreParameter = per_TipoSangre != null ?
+                new ObjectParameter("per_TipoSangre", per_TipoSangre) :
+                new ObjectParameter("per_TipoSangre", typeof(string));
+    
+            var per_UsuarioCreaParameter = per_UsuarioCrea.HasValue ?
+                new ObjectParameter("per_UsuarioCrea", per_UsuarioCrea) :
+                new ObjectParameter("per_UsuarioCrea", typeof(int));
+    
+            var per_FechaCreaParameter = per_FechaCrea.HasValue ?
+                new ObjectParameter("per_FechaCrea", per_FechaCrea) :
+                new ObjectParameter("per_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbPersonas_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, per_EdadParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbRequerimientosEspecialesPersona_Insert(Nullable<int> per_Id, Nullable<int> resp_Id, Nullable<int> rep_UsuarioCrea, Nullable<System.DateTime> rep_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var resp_IdParameter = resp_Id.HasValue ?
+                new ObjectParameter("resp_Id", resp_Id) :
+                new ObjectParameter("resp_Id", typeof(int));
+    
+            var rep_UsuarioCreaParameter = rep_UsuarioCrea.HasValue ?
+                new ObjectParameter("rep_UsuarioCrea", rep_UsuarioCrea) :
+                new ObjectParameter("rep_UsuarioCrea", typeof(int));
+    
+            var rep_FechaCreaParameter = rep_FechaCrea.HasValue ?
+                new ObjectParameter("rep_FechaCrea", rep_FechaCrea) :
+                new ObjectParameter("rep_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbRequerimientosEspecialesPersona_Insert", per_IdParameter, resp_IdParameter, rep_UsuarioCreaParameter, rep_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbTitulosPersona_Insert(Nullable<int> per_Id, Nullable<int> titu_Id, Nullable<int> titu_Anio, Nullable<int> tipe_UsuarioCrea, Nullable<System.DateTime> tipe_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var titu_IdParameter = titu_Id.HasValue ?
+                new ObjectParameter("titu_Id", titu_Id) :
+                new ObjectParameter("titu_Id", typeof(int));
+    
+            var titu_AnioParameter = titu_Anio.HasValue ?
+                new ObjectParameter("titu_Anio", titu_Anio) :
+                new ObjectParameter("titu_Anio", typeof(int));
+    
+            var tipe_UsuarioCreaParameter = tipe_UsuarioCrea.HasValue ?
+                new ObjectParameter("tipe_UsuarioCrea", tipe_UsuarioCrea) :
+                new ObjectParameter("tipe_UsuarioCrea", typeof(int));
+    
+            var tipe_FechaCreaParameter = tipe_FechaCrea.HasValue ?
+                new ObjectParameter("tipe_FechaCrea", tipe_FechaCrea) :
+                new ObjectParameter("tipe_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbTitulosPersona_Insert", per_IdParameter, titu_IdParameter, titu_AnioParameter, tipe_UsuarioCreaParameter, tipe_FechaCreaParameter);
+        }
     }
 }
