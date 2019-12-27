@@ -43,8 +43,9 @@ function cargarGridIngresos() {
                     '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
                     '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso">Editar</button>' +
-                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-default btn-xs" id="btnDetalle">Detalle</button>' +
+                    
+                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>' +
+                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-default btn-xs" id="btnEditarIngreso">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -188,7 +189,7 @@ $("#btnInactivarIngresos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -198,7 +199,7 @@ $("#btnInactivarIngresos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue inactivado de forma exitosa!',
+                message: 'El registro fue Inhabilitado de forma exitosa!',
             });
         }
     });

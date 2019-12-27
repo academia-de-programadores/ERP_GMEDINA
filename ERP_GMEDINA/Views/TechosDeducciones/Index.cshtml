@@ -5,25 +5,15 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<!-- BARRAR BLANCA QUE APARECE SOBRE EL DATATABLE-->
-<!--<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-12">
-        <h2>Índice</h2>
-        <div class="row">
-            <div class="col-md-2">
-                <ol class="breadcrumb">
-                    <li class="active">
-                        @*<strong>tbTechosDeducciones</strong>*@
-                    </li>
-                </ol>
-            </div>
-            <div class="col-md-10">
-                <button type="button" class="btn btn-primary pull-right animated fadeInRight" id="btnAgregarTechosDeducciones">Nuevo</button>
-            </div>
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Techos de las Deducciones</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
     </div>
 </div>
--->
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -65,8 +55,9 @@
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
                                     </td>
                                     <td>
-                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnEditarTechosDeducciones">Editar</button>
-                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnDetalleTechosDeducciones">Detalle</button>                                        
+                                       
+                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalle</button>       
+                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnEditarTechosDeducciones">Editar</button>                                 
                                         @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
                                     </td>
                                 </tr>
@@ -93,7 +84,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Edición de datos</h4>
             </div>
             <div class="modal-body" id="Editar">
@@ -108,7 +99,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
@@ -123,7 +114,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Detalles del registro</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -141,15 +132,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inhabilitar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Está seguro que desea Inactivar este registro?
+                ¿Está seguro que desea Inhabilitar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger " id="btnInactivarTechosDeducciones">Inactivar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarTechosDeducciones">Inhabilitar</button>
             </div>
         </div>
     </div>

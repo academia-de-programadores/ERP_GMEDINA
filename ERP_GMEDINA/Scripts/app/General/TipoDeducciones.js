@@ -54,7 +54,7 @@ function cargarGridTipoDeducciones() {
                     '<td>' + UsuarioModifica + '</td>' +
                     '<td>' + FechaModifica + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
                     //'<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeduccion">Detalle</button>' +
                     '</td>' +
                     '</tr>';
@@ -197,7 +197,7 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
-            message: 'Se ha inactivado el registro',
+            message: '¡El registro fue Inhabilitado de forma exitosa!',
         });
     });
 });

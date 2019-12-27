@@ -49,8 +49,9 @@ function cargarGridTechosDeducciones() {
                     '<td>' + ListaTechosDeducciones[i].tddu_Techo + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
+                    
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -257,7 +258,7 @@ $("#btnInactivarTechosDeducciones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -267,7 +268,7 @@ $("#btnInactivarTechosDeducciones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro fue Inhabilitado de forma exitosa!',
             });
         }
     });

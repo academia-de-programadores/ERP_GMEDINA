@@ -49,8 +49,9 @@ function cargarGridISR() {
                     '<td>' + ListaISR[i].isr_Porcentaje + '</td>' +
                     '<td>' + ListaISR[i].tde_Descripcion + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnModalEditarISR">Editar</button>' +
-                    '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnDetalleISR">Detalle</button>' +
+                   
+                    '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalle</button>' +
+                     '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -255,7 +256,7 @@ $("#btnInactivarISR").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -265,7 +266,7 @@ $("#btnInactivarISR").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro fue Inhabilitado de forma exitosa!',
             });
         }
     });

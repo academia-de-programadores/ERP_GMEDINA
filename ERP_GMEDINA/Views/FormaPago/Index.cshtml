@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Formas de pago</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -12,7 +22,7 @@
                 <div class="ibox-title">
                     <h5>Formas de pago</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarFormaPago">Nuevo</button>
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarFormaPago">Agregar Forma de Pago</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -49,7 +59,7 @@
                             </td>
                             <td>
                               @*<button type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>*@
-                              <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>
+                              <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
                             </td>
                         </tr>
                       }
@@ -90,14 +100,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar el registro</h4>
+                <h4 class="modal-title">Inhabilitar el registro</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                <p><b>¿Desea Inactivar el registro?</b></p>
+                ¿Esta seguro que desea Inhabilitar este Registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary" id="btnInactivarFormaPagoConfirm">Aceptar</button>
+                <button type="button" class="btn btn-white pull-right" id="btnCerrar" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-danger pull-left" id="btnInactivarFormaPagoConfirm">Inhabilitar</button>
             </div>
         </div>
     </div>

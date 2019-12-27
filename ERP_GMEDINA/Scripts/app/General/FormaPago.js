@@ -52,7 +52,7 @@ function cargarGridFormaPago() {
                     '<td>' + UsuarioModifica + '</td>' +
                     '<td>' + FechaModifica + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>' +
+                    '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>' +
                     //'<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-default btn-xs" id="btnDetalleFormaPago">Detalle</button>' +
                     '</td>' +
                     '</tr>';
@@ -185,7 +185,7 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -196,7 +196,7 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro fue Inhabiltado de forma exitosa!',
             });
         }
     });

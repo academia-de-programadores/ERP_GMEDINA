@@ -55,8 +55,9 @@ function cargarGridComisiones() {
                     '<td>' + FechaRegistro + '</td>' +
                      '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
                     '<td>' +
-                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
-                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
+                    
+                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
+                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -381,7 +382,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -394,7 +395,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro fue Inhabilitado de forma exitosa!',
             });
         }
     });

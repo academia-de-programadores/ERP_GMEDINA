@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Bonos por Colaborador</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -12,7 +21,7 @@
                 <div class="ibox-title">
                     <h5>Lista de Bonos por Colaborador</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarEmpleadoBonos">Nuevo</button>
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarEmpleadoBonos">Agregar Bono</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -49,8 +58,9 @@
                                 @Html.DisplayFor(modelItem => item.cb_Pagado)
                             </td>
                             <td>
-                              <button data-id="@item.cb_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoBonos">Editar</button>
-                              <button data-id="@item.cb_Id" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>
+                              
+                              <button data-id="@item.cb_Id" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>
+                                <button data-id="@item.cb_Id" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>
                             </td>
                         </tr>
                       }
@@ -68,7 +78,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             @Html.Partial("_CreateEmpleadoBonos", new ERP_GMEDINA.Models.tbEmpleadoBonos())
@@ -80,7 +90,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Detalles</h4>
             </div>
             @Html.Partial("_DetalleEmpleadoBonos", new ERP_GMEDINA.Models.tbEmpleadoBonos())
@@ -92,7 +102,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Edición de datos</h4>
             </div>
             @*Mandamos un nuevo modelo solo para poder cargar la página*@
@@ -106,15 +116,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inhabilitar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inactivar este registro?
+                ¿Esta seguro que desea Inhabilitar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger " id="btnInactivarRegistroBono">Inactivar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarRegistroBono">Inhabilitar</button>
             </div>
         </div>
     </div>

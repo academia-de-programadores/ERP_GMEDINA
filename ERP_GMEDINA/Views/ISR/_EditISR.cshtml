@@ -49,12 +49,12 @@
         </div>
         <div class="modal-footer">
             @*data-dismiss="modal"*@
-            <input type="submit" class="btn btn-primary" id="btnEditarISR" value="Aceptar">
+            <input type="submit" class="btn btn-primary pull-left" id="btnEditarISR" value="Actualizar">
 
 
             @*<button type="button" class="btn btn-primary" id="btnEditarTecho">Aceptar</button>*@
-            <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnModalInactivarISR">Inactivar</button>
-            <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="btnModalInactivarISR">Inhabilitar</button>
+            <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
         </div>
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarISR" }))
