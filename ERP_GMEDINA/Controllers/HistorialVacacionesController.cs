@@ -235,10 +235,42 @@ namespace ERP_GMEDINA.Controllers
         //}
 
         // GET: HistorialVacaciones/Delete/5
-       
+
 
         // POST: HistorialVacaciones/Delete/5
-   
+        public ActionResult Detalles(int? id)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbHistorialVacaciones = db.tbHistorialVacaciones
+                        .Select(
+                        p => new
+                        {
+                            hvac_Id = p.hvac_Id,
+                            hvac_FechaInicio = p.hvac_FechaInicio,
+                            hvac_FechaFin = p.hvac_FechaFin,
+                            hvac_CantDias = p.hvac_CantDias,
+                            hvac_DiasPagados = p.hvac_DiasPagados,
+                            hvac_MesVacaciones = p.hvac_MesVacaciones,
+                            hvac_AnioVacaciones = p.hvac_AnioVacaciones,
+                            hvac_Estado = p.hvac_Estado,
+                            hvac_RazonInactivo = p.hvac_RazonInactivo,
+                            hvac_FechaCrea = p.hvac_FechaCrea,
+                            hvac_FechaModifca = p.hvac_FechaModifica,
+                            hvac_UsuarioCrea = p.tbUsuario.usu_Nombres,
+                            hvac_UsuarioModifica = p.tbUsuario.usu_Nombres
+                        })
+                        .Where(x => x.hvac_Id == id).ToList();
+                    return Json(tbHistorialVacaciones, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

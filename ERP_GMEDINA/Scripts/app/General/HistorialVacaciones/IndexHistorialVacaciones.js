@@ -1,7 +1,8 @@
 ﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Vacaciones</button> </div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Vacaciones</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
+                
                 '<th>' + 'Fecha inicio' + '</th>' +
                 '<th>' + 'Fecha fin' + '</th>' +
                 '<th>' + 'Cantidad dias' + '</th>' +
@@ -14,6 +15,7 @@
         div = div +
                 '<tbody>' +
                 '<tr>' +
+                
                 '<td>' + FechaFormato(index.hvac_FechaInicio).substring(0, 10) + '</td>' +
                 '<td>' + FechaFormato(index.hvac_FechaFin).substring(0, 10) + '</td>' +
                 '<td>' + index.hvac_CantDias + '</td>' +
@@ -89,28 +91,34 @@ function llamarmodaldelete(ID) {
 //    $("#ModalDetalles").find("#hvac_Id").val(ID);
 //    id = ID;
 
-function llamarmodaldetalles() {
-    var modaldetalle = $("#ModalDetalles");
-    id = IdEmpleado;
+function llamarmodaldetalles(ID) {
+    debugger
+    //var modaldetalle = $("#ModalDetalles");
+    //$('#Prueba tbody tr').on('click', function () {
+    //    var tr = $(this).closest('tr');
+    //    var row = tabla.row(tr);
+    //    var id = row.data().id;
+    //});
+    id = ID;
     debugger
     _ajax({ id: parseInt(id) },
-        '/HistorialVacaciones/Edit',
+        '/HistorialVacaciones/Detalles',
         'GET',
         function (obj) {
             $('#ModalDetalles').modal('show');
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj.hvac_FechaInicio).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj.hvac_FechaFin).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj.hvac_CantDias;
-                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj.hvac_DiasPagados;
-                $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj.hvac_MesVacaciones;
-                $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj.hvac_AnioVacaciones;
-                $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj.hvac_Estado;
-                $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj.hvac_RazonInactivo;
-                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj.hvac_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_UsuarioCrea")["0"].innerText = obj.hvac_UsuarioCrea;
-                $("#ModalDetalles").find("#hvac_UsuarioModifica")["0"].innerText = obj.hvac_UsuarioModifica;
-                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj.hvac_FechaModifica).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj[0].hvac_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj[0].hvac_FechaFin).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj[0].hvac_CantDias;
+                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados;
+                $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj[0].hvac_MesVacaciones;
+                $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj[0].hvac_AnioVacaciones;
+                $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;
+                $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj[0].hvac_RazonInactivo;
+                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj[0].hvac_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_UsuarioCrea")["0"].innerText = obj[0].hvac_UsuarioCrea;
+                $("#ModalDetalles").find("#hvac_UsuarioModifica")["0"].innerText = obj[0].hvac_UsuarioModifica;
+                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj[0].hvac_FechaModifica).substring(0, 10);
                 debugger
 
             }
