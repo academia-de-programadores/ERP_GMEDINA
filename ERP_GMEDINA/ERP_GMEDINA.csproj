@@ -1031,6 +1031,7 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\Horarios\Horarios.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
@@ -1659,6 +1660,7 @@
     <Content Include="Views\Jornadas\_Detalles.cshtml" />
     <Content Include="Views\Jornadas\_Edit.cshtml" />
     <Content Include="Views\Jornadas\_Delete.cshtml" />
+    <Content Include="Views\Jornadas\_CreateHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,6 +24,7 @@
                     <div class="ibox-tools">
                        @*@Html.ActionLink("Registrar tbJornadas", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
                         <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Resgistrar Jornadas"/>
+                        <input type="button" id="btnAgregarHorarios" class="btn btn-primary btn-xs" value="Resgistrar Horarios" />
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -48,6 +49,7 @@
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbJornadas())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbJornadas())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbJornadas())
+
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

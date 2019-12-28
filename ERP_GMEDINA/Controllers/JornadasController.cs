@@ -53,6 +53,26 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        public ActionResult llenarDropDownList()
+        {
+            var tbHorarios = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    tbHorarios.Add(new { Id = 0, Descripcion = "** Seleccione una opcion **" });
+                    tbHorarios.AddRange(db.tbHorarios.Select(t => new { Id = t.hor_Id, Descripcion = t.hor_Descripcion, t.hor_Estado }).Where(t => t.hor_Estado == true).ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("tbHorarios", tbHorarios);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Jornadas
         public ActionResult Index()
         {
