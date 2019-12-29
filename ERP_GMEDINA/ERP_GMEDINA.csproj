@@ -1015,6 +1015,7 @@
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Downloadable files\AgregarEmpleados.xlsx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -1101,7 +1102,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Downloadable files\AgregarEmpleados.xlsx" />
     <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using OfficeOpenXml;
 using LinqToExcel;
+using Microsoft.Office.Interop.Excel;
 
 //using Excel = Microsoft.Office.Interop.Excel;
 
@@ -218,101 +219,215 @@ namespace ERP_GMEDINA.Controllers
             Response.End();
         }
 
+        //public bool readXLS(string FilePath)
+        //{
+        //    FileInfo existingFile = new FileInfo(FilePath);
+        //    using (ExcelPackage package = new ExcelPackage(existingFile))
+        //    {
+        //        //get the first worksheet in the workbook
+        //        ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+        //        int colCount = worksheet.Dimension.End.Column;  //get Column Count
+        //        int rowCount = worksheet.Dimension.End.Row;     //get row count
+        //        string queryString = "INSERT INTO tableName VALUES";        //Here I am using "blind insert". You can specify the column names Blient inset is strongly not recommanded
+        //        string eachVal = "";
+        //        bool status;
+        //        for (int row = 1; row <= rowCount; row++)
+        //        {
+        //            queryString += "(";
+        //            for (int col = 1; col <= colCount; col++)
+        //            {
+        //                eachVal = worksheet.Cells[row, col].Value.ToString().Trim();
+        //                queryString += "'" + eachVal + "',";
+        //            }
+        //            queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
+        //            if (row % 1000 == 0)        //On every 1000 query will execute, as maximum of 1000 will be executed at a time. 
+        //            {
+        //                queryString += ")";
+        //               // status = this.runQuery(queryString);    //executing query
+        //                //if (status == false)
+        //                //    return status;
+        //                //queryString = "INSERT INTO tableName VALUES";
+        //            }
+        //            else
+        //            {
+        //                queryString += "),";
+        //            }
+        //        }
+        //        queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
+        //                                                                        // status = this.runQuery(queryString);    //executing query
+        //        status = true;
+        //        return status;
+        //    }
+        //}
+
         [HttpPost]
         public ActionResult UploadEmpleados( HttpPostedFileBase FileUpload)
         {
 
-            ERP_GMEDINAEntities objEntity = new ERP_GMEDINAEntities();
-            string data = "";
-            if (FileUpload != null)
+            //ERP_GMEDINAEntities objEntity = new ERP_GMEDINAEntities();
+            //string data = "";
+            //if (FileUpload != null)
+            //{
+            //    if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            //    {
+            //        string filename = FileUpload.FileName;
+
+            //        if (filename.EndsWith(".xlsx"))
+            //        {
+            //            string targetpath = Server.MapPath("~/Downloadable files/");
+            //            FileUpload.SaveAs(targetpath + filename);
+            //            string pathToExcelFile = targetpath + filename;
+
+            //            string sheetName = "ArchivoEmpleados";
+
+            //            var excelFile = new ExcelQueryFactory(pathToExcelFile);
+            //            var PERDetails = from a in excelFile.Worksheet<tbPersonas>(sheetName) select a;
+            //            //var empDetails = from ba in excelFile.Worksheet<tbEmpleados>(sheetName) select ba;
+            //            foreach (var a in PERDetails)
+            //            {
+            //                if (a.per_Nombres != null)
+            //                {
+
+            //                    DateTime? myBirthdate = null;
+
+
+            //                    if (a.per_Identidad.Length > 12)
+            //                    {  
+            //                        data = "Numero de identidad mayor a 12";
+            //                        ViewBag.Message = data;
+
+            //                    }
+            //                    var nac_id = objEntity.tbNacionalidades.Where(x => x.nac_Descripcion == a.tbNacionalidades.nac_Descripcion).Select(x => x.nac_Descripcion);
+
+            //                    myBirthdate = Convert.ToDateTime(a.per_FechaNacimiento);
+
+            //                    int resullt = 0;
+            //                    //int resullt = PostExcelData(a.per_Identidad, a.per_Nombres, a.per_Apellidos, myBirthdate, a.per_Sexo, a.nac_Id, a.per_Direccion, a.per_Telefono,a.per_CorreoElectronico,a.per_EstadoCivil,a.per_TipoSangre,a.tbEmpleados);
+            //                    if (resullt <= 0)
+            //                    {
+            //                        data = "Hello User, Found some duplicate values! Only unique employee number has inserted and duplicate values(s) are not inserted";
+            //                        ViewBag.Message = data;
+            //                        continue;
+
+            //                    }
+            //                    else
+            //                    {
+            //                        data = "Successful upload records";
+            //                        ViewBag.Message = data;
+            //                    }
+            //                }
+
+            //                else
+            //                {
+            //                    data = a.per_Nombres + "Some fields are null, Please check your excel sheet";
+            //                    ViewBag.Message = data;
+            //                    return View("ExcelUpload");
+            //                }
+
+            //            }
+            //        }
+
+            //        else
+            //        {
+            //            data = "This file is not valid format";
+            //            ViewBag.Message = data;
+            //        }
+            //        return View("ExcelUpload");
+            //    }
+            //    else
+            //    {
+
+            //        data = "Only Excel file format is allowed";
+
+            //        ViewBag.Message = data;
+            //        return View("ExcelUpload");
+
+            //    }
+
+            //}
+            //else
+            //{
+
+            //    if (FileUpload == null)
+            //    {
+            //        data = "Please choose Excel file";
+            //    }
+            //    ViewBag.Message = data;
+            //    return View("ExcelUpload");
+            //}
+            //FileInfo existingFile = new FileInfo(FileUpload);
+            //using (ExcelPackage package = new ExcelPackage(existingFile))
+            //{
+            //    //get the first worksheet in the workbook
+            //    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+            //    int colCount = worksheet.Dimension.End.Column;  //get Column Count
+            //    int rowCount = worksheet.Dimension.End.Row;     //get row count
+            //    string queryString = "INSERT INTO tableName VALUES";        //Here I am using "blind insert". You can specify the column names Blient inset is strongly not recommanded
+            //    string eachVal = "";
+            //    bool status;
+            //    for (int row = 1; row <= rowCount; row++)
+            //    {
+            //        queryString += "(";
+            //        for (int col = 1; col <= colCount; col++)
+            //        {
+            //            eachVal = worksheet.Cells[row, col].Value.ToString().Trim();
+            //            queryString += "'" + eachVal + "',";
+            //        }
+            //        queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
+            //        if (row % 1000 == 0)        //On every 1000 query will execute, as maximum of 1000 will be executed at a time. 
+            //        {
+            //            queryString += ")";
+            //            // status = this.runQuery(queryString);    //executing query
+            //            //if (status == false)
+            //            //    return status;
+            //            //queryString = "INSERT INTO tableName VALUES";
+            //        }
+            //        else
+            //        {
+            //            queryString += "),";
+            //        }
+            //    }
+            //    queryString = queryString.Remove(queryString.Length - 1, 1);    //removing last comma (,) from the string
+            //                                                                    // status = this.runQuery(queryString);    //executing query
+
+            //    return View();
+            //}
+
+            //Add this to the using statements after adding a refrence to Microsoft.Office.Interop.Excel.dll - using Excel = Microsoft.Office.Interop.Excel; 
+            if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
             {
-                if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
+                if (!System.IO.File.Exists(path))
                 {
-                    string filename = FileUpload.FileName;
+                    FileUpload.SaveAs(path);
+                    Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
+                    Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
+                    Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
+                    Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
 
-                    if (filename.EndsWith(".xlsx"))
+                    for (int i = 2; i < range.Rows.Count + 1; i++)
                     {
-                        string targetpath = Server.MapPath("~/Downloadable files/");
-                        FileUpload.SaveAs(targetpath + filename);
-                        string pathToExcelFile = targetpath + filename;
+                        string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
+                        string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
+                        string  apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
+                        DateTime fechanacimiento= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
+                        string sexo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
+                        string nacionalidad= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+                        string direccion= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
+                        string telefono= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
+                        string correo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
+                        string estadocivil= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
+                        string tiposangre= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
 
-                        string sheetName = "ArchivoEmpleados";
-
-                        var excelFile = new ExcelQueryFactory(pathToExcelFile);
-                        var PERDetails = from a in excelFile.Worksheet<tbPersonas>(sheetName) select a;
-                        //var empDetails = from ba in excelFile.Worksheet<tbEmpleados>(sheetName) select ba;
-                        foreach (var a in PERDetails)
-                        {
-                            if (a.per_Nombres != null)
-                            {
-
-                                DateTime? myBirthdate = null;
-
-
-                                if (a.per_Identidad.Length > 12)
-                                {  
-                                    data = "Numero de identidad mayor a 12";
-                                    ViewBag.Message = data;
-
-                                }
-                                var nac_id = objEntity.tbNacionalidades.Where(x => x.nac_Descripcion == a.tbNacionalidades.nac_Descripcion).Select(x => x.nac_Descripcion);
-
-                                myBirthdate = Convert.ToDateTime(a.per_FechaNacimiento);
-
-                                int resullt = 0;
-                                //int resullt = PostExcelData(a.per_Identidad, a.per_Nombres, a.per_Apellidos, myBirthdate, a.per_Sexo, a.nac_Id, a.per_Direccion, a.per_Telefono,a.per_CorreoElectronico,a.per_EstadoCivil,a.per_TipoSangre,a.tbEmpleados);
-                                if (resullt <= 0)
-                                {
-                                    data = "Hello User, Found some duplicate values! Only unique employee number has inserted and duplicate values(s) are not inserted";
-                                    ViewBag.Message = data;
-                                    continue;
-
-                                }
-                                else
-                                {
-                                    data = "Successful upload records";
-                                    ViewBag.Message = data;
-                                }
-                            }
-
-                            else
-                            {
-                                data = a.per_Nombres + "Some fields are null, Please check your excel sheet";
-                                ViewBag.Message = data;
-                                return View("ExcelUpload");
-                            }
-
-                        }
+                        string cargodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i,11]).Text;
+                        string areadescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
+                        string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
+                        string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+                        //Write the logic to add the values to the database
                     }
-
-                    else
-                    {
-                        data = "This file is not valid format";
-                        ViewBag.Message = data;
-                    }
-                    return View("ExcelUpload");
                 }
-                else
-                {
-
-                    data = "Only Excel file format is allowed";
-
-                    ViewBag.Message = data;
-                    return View("ExcelUpload");
-
-                }
-
             }
-            else
-            {
-
-                if (FileUpload == null)
-                {
-                    data = "Please choose Excel file";
-                }
-                ViewBag.Message = data;
-                return View("ExcelUpload");
-            }
+            return View();
         }
 
 
