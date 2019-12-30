@@ -249,16 +249,36 @@ namespace ERP_GMEDINA.Controllers
 
                         string direccion= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
                         string telefono= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
-                        string correo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
-                        string estadocivil= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
-                        string tiposangre= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
+                        string correo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
+                        string estadocivil= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
+                        string tiposangre= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
 
-                        string cargodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i,11]).Text;
-                        string areadescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
-                        string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
-                        string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
-                        string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
-                        string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
+                        string cargodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i,12]).Text;
+                        var cargo_id = db.tbCargos.Where(car => car.car_Descripcion == cargodescrip)
+                            .Select(car => car.car_Id);
+                        int ID_CARGO = Convert.ToInt32(cargo_id);
+
+                        string areadescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
+                        var areas_id = db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
+                            .Select(Areas => Areas.area_Id);
+
+                        string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+                        var dpto_id = db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
+                          .Select(dpto => dpto.depto_Id);
+
+                        string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
+                        var jor_id = db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
+                        .Select(jor => jor.jor_Id);
+
+                        string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
+                        var plani_id = db.tbCatalogoDePlanillas.Where(plani => plani.cpla_DescripcionPlanilla == Planidescrip)
+                        .Select(plani => plani.cpla_IdPlanilla);
+
+                        string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
+                        var formpago_id = db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
+                       .Select(formpago => formpago.fpa_IdFormaPago);
+
+                        db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id);
                         //Write the logic to add the values to the database
                     }
                 }

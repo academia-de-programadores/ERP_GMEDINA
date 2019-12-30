@@ -1144,8 +1144,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have
           <Property Name="hor_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -3518,7 +3516,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
           <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
           <Parameter Name="per_Sexo" Type="char" Mode="In" />
-          <Parameter Name="per_Edad" Type="int" Mode="In" />
           <Parameter Name="nac_Id" Type="int" Mode="In" />
           <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
           <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
@@ -10257,7 +10254,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="per_Apellidos" Mode="In" Type="String" />
             <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
             <Parameter Name="per_Sexo" Mode="In" Type="String" />
-            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
             <Parameter Name="nac_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_Direccion" Mode="In" Type="String" />
             <Parameter Name="per_Telefono" Mode="In" Type="String" />
