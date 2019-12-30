@@ -71,23 +71,28 @@
                 <p>
                    Al terminar de ingresar los datos en el Archivo, use el siguiente boton para subir y guardar los datos.
                 </p>
-            @using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            @*@using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data" }))
             {
+               
+            }*@
+
                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                    <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
-                    <input type="file" name="FileUpload"  accept=".xls,.xlsx" id="btnUpload"></span>
+                    <span class="btn btn-default btn-file">
+                        <span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
+                        <input type="file" name="FileUpload" accept=".xls,.xlsx" id="btnUpload">
+                    </span>
                     <span class="fileinput-filename"></span>
                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                 </div>
 
-                @*<input type="file" id="fileUpload" class="btn btn-primary" name="FileUpload" /><br />
-                <input type="submit" class="btn btn-primary" name="UploadNewEmployee" id="fileUploadExcel" value="Upload New Employee Details" />*@
 
-                <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
-            }
+              
+        
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
+                <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
                 
             </div>
         </div>

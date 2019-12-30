@@ -9,24 +9,37 @@ $("#btnUpload").change(function () {
         MsgError("¡Error!", "Debe Agregar el archivo de excel correspondiente");
     }
 });
-//$("#btnGuardar").click(function () {
-//    var data = new FormData();
-//    //var Archivo="ArchivoEmpleados";
-//    var files = $("#btnUpload").get(0).files;
-//    if (files.length == 0) {
-//        MsgError("¡Error!", "Debe Agregar el archivo de excel");
+$("#btnGuardar").click(function () {
+    //var data = new FormData();
+    //var Archivo="ArchivoEmpleados";
+    var $file = $("#btnUpload").get(0).files;
+    $formData = new FormData();
 
-//    } else {
-//        data.append("UploadedFile", files[0]);
+   // var files = $("#btnUpload").get(0).files;
+    if ($file.length == 0) {
+        MsgError("¡Error!", "Debe Agregar el archivo de excel");
 
-//    }
-//    //var ajaxRequest = $.ajax({
-//    //    type: "POST",
-//    //    url: '/Empleados/UploadEmpleados',
-//    //    contentType: false,
-//    //    processData: false,
-//    //    data: data
-//    //});
+    } else {
+        $formData.append("UploadedFile", $file);
+
+    }
+
+    //if ($file.files.length > 0) {
+    //    for (var i = 0; i < $file.files.length; i++) {
+    //        $formData.append('file-' + i, $file.files[i]);
+    //    }
+    //}
+    $.ajax({
+        url: '/Empleados/UploadEmpleados',
+        type: 'POST',
+        data: $file,
+        //dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function ($data) {
+
+        }
+    });
 
           
-//});
+});
