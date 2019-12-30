@@ -86,23 +86,25 @@ namespace ERP_GMEDINA.Controllers
             ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla="", fpa_IdFormaPago="" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
-            Sheet.Cells["A1:O3"].Merge = true;
-            Sheet.Cells["A1:O3"].Style.Font.Size = 16;
-            Sheet.Cells["A1:O3"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:O3"].Value = "FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO";
-            Sheet.Cells["A1:O3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            Sheet.Cells["A1:O3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-            Sheet.Cells["A1:O3"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:O3"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:O3"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:O3"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:O3"].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:O3"].Style.Border.Left.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:O3"].Style.Border.Right.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:O3"].Style.Border.Bottom.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:O3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-            Sheet.Cells["A1:O3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#f0f3f5"));
+            Sheet.Cells["A1:Q3"].Merge = true;
+            Sheet.Cells["A1:Q3"].Style.Font.Size = 16;
+            Sheet.Cells["A1:Q3"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:Q3"].Value = "FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO";
+            Sheet.Cells["A1:Q3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            Sheet.Cells["A1:Q3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            Sheet.Cells["A1:Q3"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:Q3"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:Q3"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:Q3"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:Q3"].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:Q3"].Style.Border.Left.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:Q3"].Style.Border.Right.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:Q3"].Style.Border.Bottom.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:Q3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            Sheet.Cells["A1:Q3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#f0f3f5"));
             Sheet.Cells["A4"].Value = "Identidad";
+            Sheet.Cells["A5:A10000"].Style.Numberformat.Format= "0000-0000-00000";
+
             Sheet.Cells["B4"].Value = "Nombres";
             Sheet.Cells["C4"].Value = "Apellidos";
             Sheet.Cells["D4"].Value = "Fecha Nacimiento";
@@ -205,7 +207,7 @@ namespace ERP_GMEDINA.Controllers
            .ToArray();
                 Sheet.Cells["MG1"].LoadFromCollection<string>(Fpago.ToList<string>());
                 var Fpago_val = Sheet.DataValidations.AddListValidation("Q5");
-                Fpago_val.Formula.ExcelFormula = "$MQ$1:$MQ$" + Fpago.Length;
+                Fpago_val.Formula.ExcelFormula = "$MG$1:$MG$" + Fpago.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
 
@@ -233,14 +235,18 @@ namespace ERP_GMEDINA.Controllers
                     Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.ActiveSheet;
                     Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
 
-                    for (int i = 2; i < range.Rows.Count + 1; i++)
+                    for (int i = 5; i < range.Rows.Count + 1; i++)
                     {
                         string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
                         string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
                         string  apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
-                        DateTime fechanacimiento= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
+                        string fechanacimiento= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
                         string sexo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
                         string nacionalidad= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+
+                        var nac_id = db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
+                            .Select(nac => nac.nac_Id);
+
                         string direccion= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
                         string telefono= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
                         string correo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
@@ -251,27 +257,18 @@ namespace ERP_GMEDINA.Controllers
                         string areadescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
                         string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
                         string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+                        string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
+                        string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
                         //Write the logic to add the values to the database
                     }
                 }
-                else
-                {
-                   
-                }
+              
             }
             return View();
         }
 
 
-        //public int PostExcelData(string Identidad, string Nombres, string Apellidos, DateTime? FechaNacimiento, string Sexo, int edad, int Nacionalidad, string Direccion, string Telefono, string CorreoElectronico, string EstadoCivil, string TipodeSangre, int Cargo, int Area, int Departamentos, int Jornadas, int Planillas, int FormadePago)
-        //{
-        //    ERP_GMEDINAEntities DbEntity = new ERP_GMEDINAEntities();
-        //    //aqui es donde se le dice al PA que es lo que va a insertar y en que campos.
-        //    var InsertExcelData = DbEntity.UDP_RRHH_tbEmpleados_Insert(Identidad, Nombres, Apellidos, FechaNacimiento, Sexo, edad, Nacionalidad, Direccion, Telefono, CorreoElectronico, EstadoCivil, TipodeSangre, Cargo, Area, Departamentos, Jornadas, Planillas, FormadePago);
-
-        //    return InsertExcelData;
-
-        //}
+       
 
 
         // GET: Empleados/Details/5
