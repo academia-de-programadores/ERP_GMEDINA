@@ -49,8 +49,7 @@ namespace ERP_GMEDINA.Controllers
                             per_Direccion = t.per_Direccion,
                             per_Edad = t.per_Edad,
                             per_EstadoCivil = t.per_EstadoCivil,
-                            hsal_Observacion = t.hsal_Observacion,
-                            hsal_FechaSalida = t.hsal_FechaSalida
+                            hsal_Observacion = t.hsal_Observacion
                         }
                         )
                         .ToList();
@@ -229,14 +228,12 @@ namespace ERP_GMEDINA.Controllers
                 {
                     foreach (tbEmpleados em in tbEmpleados)
                     {
-                        var observacion = tbHistorialSalidas.hsal_Observacion == null ? "Ninguna" : tbHistorialSalidas.hsal_Observacion;
-                        //var razon = em.emp_RazonInactivo == null ? "Ninguna" : em.emp_RazonInactivo;
                         var emp = db.UDP_RRHH_tbHistorialSalidas_Insert(
                         em.emp_Id,
                         tbHistorialSalidas.tsal_Id,
                         tbHistorialSalidas.rsal_Id,
-                        tbHistorialSalidas.hsal_FechaSalida, 
-                        observacion,
+                        tbHistorialSalidas.hsal_FechaSalida,
+                        tbHistorialSalidas.hsal_Observacion,
                         em.emp_RazonInactivo,
                         Usuario.usu_Id,
                         DateTime.Now);
