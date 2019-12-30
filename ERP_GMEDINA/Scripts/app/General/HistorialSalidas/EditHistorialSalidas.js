@@ -1,39 +1,55 @@
-﻿$(function () {
- // Initialize form validation on the registration form.
- // It has the name attribute "registration"
- $("form[name='registration']").validate({
-  // Specify validation rules
-  rules: {
-   // The key name on the left side is the name attribute
-   // of an input field. Validation rules are defined
-   // on the right side
-   firstname: "required",
-   lastname: "required",
-   email: {
-    required: true,
-    // Specify that email should be validated
-    // by the built-in "email" rule
-    email: true
-   },
-   password: {
-    required: true,
-    minlength: 5
-   }
-  },
-  // Specify validation error messages
-  messages: {
-   firstname: "Please enter your firstname",
-   lastname: "Please enter your lastname",
-   password: {
-    required: "Please provide a password",
-    minlength: "Your password must be at least 5 characters long"
-   },
-   email: "Please enter a valid email address"
-  },
-  // Make sure the form is submitted to the destination defined
-  // in the "action" attribute of the form when valid
-  submitHandler: function (form) {
-   form.submit();
-  }
- });
+﻿var ChildTable = null;
+var list = [];
+var inactivar = [];
+var dRow = null;
+var Entidad = '';
+
+$("#btnInhabilitar").on("click", function () {
+    $("#depto_RazonInactivo").val("");
+    $('#ModalEditar').modal('hide');
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Depto";
+});
+
+$("#btnInactivarArea").on("click", function () {
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Area";
+});
+
+$("#ModalInhabilitar").find("#InActivar").on("click", function () {
+    if (Entidad == 'Depto') {
+        var depto =
+        {
+            depto_Id: dRow.data().Id,
+            depto_RazonInactivo: $("#ModalInhabilitar").find("#depto_RazonInactivo").val(),
+        };
+        if (depto.depto_RazonInactivo.trim() == '') {
+            return null;
+        }
+        inactivar.push(depto);
+        ChildTable
+            .row(dRow)
+            .remove()
+            .draw();
+        dRow = null;
+        $('#ModalInhabilitar').modal('hide');
+    } else {
+        var area_Razoninactivo = $("#ModalInhabilitar").find("#depto_RazonInactivo").val()
+        _ajax(JSON.stringify({ area_Razoninactivo: area_Razoninactivo }),
+            '/Areas/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
+                    $(location).attr('href', '/Areas');
+                } else {
+                    MsgError("Error", "Codigo: " + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    }
 });
