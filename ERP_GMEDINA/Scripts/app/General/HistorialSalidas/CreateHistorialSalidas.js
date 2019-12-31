@@ -198,7 +198,8 @@ var lista = getJson();
              function (obj) {
               if (obj != "-1" && obj != "-2" && obj != "-3") {
                //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-               MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                  MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                  location.href = "/HistorialSalidas/Index";
               } else {
                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
               }
