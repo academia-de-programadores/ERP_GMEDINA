@@ -214,6 +214,9 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialSalidas_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialSalidas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoSalidas_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -451,7 +454,6 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
-    <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
@@ -959,11 +961,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -983,6 +980,9 @@
     <Content Include="Views\HistorialSalidas\Index.cshtml" />
     <Content Include="Views\HistorialSalidas\Create.cshtml" />
     <Content Include="Views\HistorialSalidas\_AddEmpleado.cshtml" />
+    <Content Include="Views\HistorialSalidas\_DetallesHistorialSalidas.cshtml" />
+    <Content Include="Views\HistorialSalidas\_EditHistorialSalidas.cshtml" />
+    <Content Include="Views\HistorialSalidas\_InhabilitarHistorialSalidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

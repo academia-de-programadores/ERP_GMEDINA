@@ -171,36 +171,7 @@ namespace ERP_GMEDINA.Controllers
             result.Add("Empleados", Empleados);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        //--------------------------------------------cerrarDESPLEGABLES--------------------------------------------
 
-        // GET: Areas/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-        //    //posteriormente es destruida.
-        //    tbAreas tbAreas = null;
-        //    using (db = new ERP_GMEDINAEntities())
-        //    {
-        //        try
-        //        {
-        //            tbAreas = db.tbAreas.Find(id);
-        //        }
-        //        catch
-        //        {
-
-        //        }
-        //    }
-        //    if (tbAreas == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbAreas);
-        //}
-        // GET: Areas/Create
         public ActionResult Create()
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -261,25 +232,124 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost]
-        public ActionResult Delete(int? id)
+        ///EDIT Y UPDATE
+        ///
+        public ActionResult Edit(int? id)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            string result = "";
-            using (db = new ERP_GMEDINAEntities())
+            if (id == null)
             {
-                try
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbHistorialSalidas tbHistorialSalidas = null;
+            try
+            {
+                tbHistorialSalidas = db.tbHistorialSalidas.Find(id);
+                if (tbHistorialSalidas == null || !tbHistorialSalidas.hsal_Estado)
                 {
-                    //en esta area Inavilitamos el registro con el procedimiento almacenado
-                }
-                catch
-                {
-                    result = "-2";
+                    return HttpNotFound();
                 }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return HttpNotFound();
+            }
+            Session["id"] = id;
+            var HistorialSalidas = new tbHistorialSalidas
+            {
+                hsal_Id = tbHistorialSalidas.hsal_Id,
+                hsal_Observacion = tbHistorialSalidas.hsal_Observacion,
+                hsal_Estado = tbHistorialSalidas.hsal_Estado,
+                hsal_RazonInactivo = tbHistorialSalidas.hsal_RazonInactivo,
+                hsal_UsuarioCrea = tbHistorialSalidas.hsal_UsuarioCrea,
+                hsal_FechaCrea = tbHistorialSalidas.hsal_FechaCrea,
+                hsal_UsuarioModifica = tbHistorialSalidas.hsal_UsuarioModifica,
+                hsal_FechaModifica = tbHistorialSalidas.hsal_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistorialSalidas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbHistorialSalidas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(HistorialSalidas, JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: Habilidades/Edit/5
+        [HttpPost]
+        public JsonResult Edit(string hsal_Observacion)
+        {
+            string msj = "";
+            tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas();
+            //tbTipoHoras.tiho_Id = id;
+            tbHistorialSalidas.hsal_Observacion = hsal_Observacion;
+            if (tbHistorialSalidas.hsal_Observacion != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Update(id, tbHistorialSalidas.hsal_Observacion,Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialSalidas_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Habilidades/Delete/5
+        [HttpPost]
+        public ActionResult Delete(string hsal_RazonInactivo)
+        {
+            string msj = "";
+            tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas();
+            //tbTipoHoras.tiho_Id = id;
+            tbHistorialSalidas.hsal_RazonInactivo = hsal_RazonInactivo;
+
+            if (tbHistorialSalidas.hsal_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Delete(id, tbHistorialSalidas.hsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialSalidas_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,87 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialSalidas
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.hsal_Observacion)
+    </dt>
+
+    <dd id="tiho_Descripcion">
+        @Html.DisplayFor(model => model.hsal_Observacion)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.hsal_Estado)
+    </dt>
+
+    <dd id="tiho_Estado">
+        @Html.DisplayFor(model => model.hsal_Estado)
+    </dd>
+
+
+    <dt>
+        @Html.DisplayNameFor(model => model.hsal_FechaCrea)
+    </dt>
+
+    <dd id="tiho_FechaCrea">
+        @Html.DisplayFor(model => model.hsal_FechaCrea)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.hsal_FechaModifica)
+    </dt>
+
+    <dd id="tiho_FechaModifica">
+        @Html.DisplayFor(model => model.hsal_FechaModifica)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+    </dt>
+
+    <dd id="tbUsuario_usu_NombreUsuario">
+        @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+    </dt>
+
+    <dd id="tbUsuario1_usu_NombreUsuario">
+        @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+    </dd>
+
+</dl>
+
+
+
+@*MODAL EDITAR*@
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+
+                <h4 class="modal-title">Editar Horario</h4>
+
+            </div>
+            <div class="modal-body" id="ModalEdit">
+
+
+                @Html.Partial("_EditHistorialSalidas", new ERP_GMEDINA.Models.tbHistorialSalidas())
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="btnEditarModal" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitarModal" data-toggle="modal" data-target="#ModalInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-white  pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general/IndexHistorialSalidas")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

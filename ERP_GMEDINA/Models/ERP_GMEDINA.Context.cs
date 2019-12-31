@@ -169,5 +169,26 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Insert_Result>("UDP_RRHH_tbHistorialSalidas_Insert", emp_IdParameter, tsal_IdParameter, rsal_IdParameter, hsal_FechaSalidaParameter, hsal_ObservacionParameter, emp_RazonInactivoParameter, hsal_UsuarioCreaParameter, hsal_FechaCreaParameter);
         }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Update_Result> UDP_RRHH_tbHistorialSalidas_Update(Nullable<int> hsal_Id, string hsal_Observacion, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        {
+            var hsal_IdParameter = hsal_Id.HasValue ?
+                new ObjectParameter("hsal_Id", hsal_Id) :
+                new ObjectParameter("hsal_Id", typeof(int));
+    
+            var hsal_ObservacionParameter = hsal_Observacion != null ?
+                new ObjectParameter("hsal_Observacion", hsal_Observacion) :
+                new ObjectParameter("hsal_Observacion", typeof(string));
+    
+            var hsal_UsuarioModificaParameter = hsal_UsuarioModifica.HasValue ?
+                new ObjectParameter("hsal_UsuarioModifica", hsal_UsuarioModifica) :
+                new ObjectParameter("hsal_UsuarioModifica", typeof(int));
+    
+            var fare_FechaModificaParameter = fare_FechaModifica.HasValue ?
+                new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
+                new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Update_Result>("UDP_RRHH_tbHistorialSalidas_Update", hsal_IdParameter, hsal_ObservacionParameter, hsal_UsuarioModificaParameter, fare_FechaModificaParameter);
+        }
     }
 }

@@ -1,15 +1,124 @@
-﻿function tablaDetalles(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().Id;
-    $(location).attr('href', "/HistorialSalidas/Edit/" + id);
+﻿var id = 0;
+
+//Funciones GET
+function tablaEditar(ID) {
+    id = ID;
+    _ajax(null,
+        '/HistorialSalidas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
+                $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
+                $('#ModalEditar').modal('show');
+            }
+        });
 }
-function tablaEditar(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().Id;
-    $(location).attr('href', "/HistorialSalidas/Edit/" + id);
+
+function tablaDetalles(ID) {
+    id = ID;
+    _ajax(null,
+        '/HistorialSalidas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalDetallesR").find("#hsal_Observacion")["0"].innerText = obj.hsal_Observacion;
+                $("#ModalDetallesR").find("#hsal_Estado")["0"].innerText = obj.hsal_Estado;
+                $("#ModalDetallesR").find("#hsal_FechaCrea")["0"].innerText = FechaFormato(obj.hsal_FechaCrea);
+                $("#ModalDetallesR").find("#hsal_FechaModifica")["0"].innerText = FechaFormato(obj.hsal_FechaModifica);
+                $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $('#ModalDetalles').modal('show');
+            }
+        });
 }
+function llenarTabla() {
+    console.log('Prueba');
+    _ajax(null,
+        '/HistorialSalidas/llenarTabla',
+        'POST',
+        function (Lista) {
+            tabla.clear();
+            tabla.draw();
+            $.each(Lista, function (index, value) {
+                tabla.row.add({
+                    Id: value.hsal_Id,
+                    tsal_Id: value.tsal_Id,
+                    TipoSalida: value.tsal_Descripcion,
+                    rsal_Id: value.rsal_Id,
+                    rsal_Descripcion: value.rsal_Descripcion,
+                    NombreCompleto: value.per_Nombres,
+                    per_CorreoElectronico: value.per_CorreoElectronico,
+                    per_Telefono: value.per_Telefono,
+                    per_Direccion: value.per_Direccion,
+                    per_Edad: value.per_Edad,
+                    per_EstadoCivil: value.per_EstadoCivil,
+                    hsal_Observacion: value.hsal_Observacion,
+                    hsal_FechaSalida: value.hsal_FechaSalida
+                });
+            });
+            tabla.draw();
+        });
+}
+$("#btnEditar").click(function () {
+    _ajax(null,
+        '/HistorialSalidas/Edit/' + id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+                $("#FormEditar").find("#hsal_Observacion").val(obj.hsal_Observacion);
+            }
+        });
+});
+
+$("#btnInhabilitar").click(function () {
+    CierraPopups();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#hsal_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#hsal_RazonInactivo").focus();
+});
+
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        //data.tiho_Id = id;
+        // data = JSON.stringify({ tbTipoHoras: data });
+        $.post("/HistorialSalidas/Delete", data).done(function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                llenarTabla();
+                LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
+                MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            }
+        });
+    }
+});
+
+$("#btnActualizar").click(function () {
+    var data = $("#FormEditar").serializeArray();
+    //data = serializar(data);
+    if (data != null) {
+        data.tiho_Id = id;
+        //data = JSON.stringify({ tbTipoHoras: data });
+        $.post("/HistorialSalidas/Edit", data).done(function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                llenarTabla();
+                LimpiarControles(["hsal_Observacion"]);
+                MsgSuccess("¡Exito!", "Se ha editado el registro");
+            } else {
+                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            }
+        });
+    }
+});
+//aqui estaba
 function format(obj) {
     var EstadoCivil = '';
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",];
@@ -39,12 +148,6 @@ function format(obj) {
         var annio = fecha.getFullYear();
         var hora = fecha.getHours();
         var fechamnsj = dia + " de " + mes + " del " + annio;
-        //getDate(): It is used to get the day as a number(1 - 31).
-        //    getFullYear(): It is used to get the year.
-        //        getHours(): It is used to get the hour(0 - 23).
-        //            getMilliseconds(): It is used to get the milliseconds(0 - 999).
-        //                getMinutes(): It is used to get the minutes(0 - 59).
-        //                    getMonth(): It is used to get the month(0 - 11).
         div = div
             + '<div class="col-md-2"><b>Tipo de salida: </b></div><div class="col-md-10">' + index.rsal_Descripcion + '</div>'
             + '<div class="col-md-2"><b>Razon salida: </b></div><div class="col-md-10">' + index.tsal_Descripcion + '</div>'
@@ -56,34 +159,7 @@ function format(obj) {
     });
     return div + '</div></div></div>';
 }
-function llenarTabla() {
-    console.log('Prueba');
-    _ajax(null,
-       '/HistorialSalidas/llenarTabla',
-       'POST',
-       function (Lista) {
-           tabla.clear();
-           tabla.draw();
-           $.each(Lista, function (index, value) {
-               tabla.row.add({
-                   Id : value.hsal_Id,
-                   tsal_Id : value.tsal_Id,
-                   TipoSalida : value.tsal_Descripcion,
-                   rsal_Id : value.rsal_Id,
-                   rsal_Descripcion : value.rsal_Descripcion,
-                   NombreCompleto: value.per_Nombres,
-                   per_CorreoElectronico : value.per_CorreoElectronico,
-                   per_Telefono : value.per_Telefono,
-                   per_Direccion : value.per_Direccion,
-                   per_Edad : value.per_Edad,
-                   per_EstadoCivil : value.per_EstadoCivil,
-                   hsal_Observacion: value.hsal_Observacion,
-                   hsal_FechaSalida: value.hsal_FechaSalida
-               });
-           });
-           tabla.draw();
-       });
-}
+
 $(document).ready(function () {
     llenarTabla();
 });
