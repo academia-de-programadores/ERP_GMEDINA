@@ -26,17 +26,48 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                         <thead>
                             <tr role="row">
                                 <th></th>
-                                <th>Nombre Completo</th>
-                                <th>Tipo Salida</th>
+                                <th>@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Nombres)</th>
+                                <th>@Html.DisplayNameFor(model => model.tbTipoSalidas.tsal_Descripcion)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody id="tbody">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd" role="row" data-id="@item.hsal_Id">
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbTipoSalidas.tsal_Descripcion)
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.hsal_Id)">Detalles</a>
+                                        <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.hsal_Id)">Editar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
