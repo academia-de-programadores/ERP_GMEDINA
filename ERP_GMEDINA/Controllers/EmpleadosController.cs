@@ -24,6 +24,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Empleados
         public ActionResult Index()
         {
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbEmpleados = new List < tbEmpleados >{ };
             return View(tbEmpleados);
         }
@@ -225,10 +226,10 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult UploadEmpleados( HttpPostedFileBase FileUpload)
         {
             if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
-            {
+            {//OPEN IF 
                 string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
                 if (!System.IO.File.Exists(path))
-                {
+                {//OPEN IF 
                     FileUpload.SaveAs(path);
                     Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
                     Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
@@ -236,7 +237,7 @@ namespace ERP_GMEDINA.Controllers
                     Microsoft.Office.Interop.Excel.Range range = worksheet.UsedRange;
 
                     for (int i = 5; i < range.Rows.Count + 1; i++)
-                    {
+                    {//OPEN FOR
                         string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
                         string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
                         string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
@@ -261,12 +262,12 @@ namespace ERP_GMEDINA.Controllers
                         string areadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
                         int areas_id = Convert.ToInt32(db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
                             .Select(Areas => Areas.area_Id).ToList()[0]);
-                            
-                        string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+
+                        string dptodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
                         int dpto_id = Convert.ToInt32(db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
                           .Select(dpto => dpto.depto_Id).ToList()[0]);
 
-                        string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
+                        string jordescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
                         int jor_id = Convert.ToInt32(db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
                         .Select(jor => jor.jor_Id).ToList()[0]);
 
@@ -278,13 +279,38 @@ namespace ERP_GMEDINA.Controllers
                         int formpago_id = Convert.ToInt32(db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
                        .Select(formpago => formpago.fpa_IdFormaPago).ToList()[0]);
 
-                       db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id);
-                        //Write the logic to add the values to the database
-                    }
-                }
-              
-            }
-            return View();
+                        if (identidad != "" && nombre != "" && apellidos != "")
+                        {//open if 
+                            var Usuario = (tbUsuario)Session["Usuario"];
+                            
+                            IEnumerable<object> listEmpleados = null;
+                            string MensajeError = "";
+                            listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre,Usuario.usu_Id,DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id,Usuario.usu_Id,DateTime.Now);
+                          
+                            foreach (UDP_RRHH_tbEmpleados_Insert_Result Item in listEmpleados)
+                            {
+                                MensajeError = Item.MensajeError;
+                            }
+                            if (!string.IsNullOrEmpty(MensajeError))
+                            {//OPEN IF 
+                                if (MensajeError.StartsWith("-1"))
+                                {
+                                    ModelState.AddModelError("", "1. No se pudo editar el registro");
+                                    return View();
+                                }
+                            }//CLOSE IF 
+                            return RedirectToAction("Index");
+                        }//close if 
+                        else {//OPEN ELSE 
+                            string msj = "-3";
+                            return Content(msj);
+
+                        }//CLOSE ELSE
+                    }//CLOSE FOR
+                }//CLOSE IF 
+                return RedirectToAction("Index");
+            }//CLOSE IF 
+            return RedirectToAction("Index");
         }
 
 

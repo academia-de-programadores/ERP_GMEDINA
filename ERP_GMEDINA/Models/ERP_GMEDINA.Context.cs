@@ -2727,7 +2727,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbEmpleados_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago)
+        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Insert_Result> UDP_RRHH_tbEmpleados_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
         {
             var per_IdentidadParameter = per_Identidad != null ?
                 new ObjectParameter("per_Identidad", per_Identidad) :
@@ -2773,6 +2773,14 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("per_TipoSangre", per_TipoSangre) :
                 new ObjectParameter("per_TipoSangre", typeof(string));
     
+            var per_UsuarioCreaParameter = per_UsuarioCrea.HasValue ?
+                new ObjectParameter("per_UsuarioCrea", per_UsuarioCrea) :
+                new ObjectParameter("per_UsuarioCrea", typeof(int));
+    
+            var per_FechaCreaParameter = per_FechaCrea.HasValue ?
+                new ObjectParameter("per_FechaCrea", per_FechaCrea) :
+                new ObjectParameter("per_FechaCrea", typeof(System.DateTime));
+    
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
                 new ObjectParameter("car_Id", typeof(int));
@@ -2797,7 +2805,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("fpa_IdFormaPago", fpa_IdFormaPago) :
                 new ObjectParameter("fpa_IdFormaPago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbEmpleados_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter);
+            var emp_UsuarioCreaParameter = emp_UsuarioCrea.HasValue ?
+                new ObjectParameter("emp_UsuarioCrea", emp_UsuarioCrea) :
+                new ObjectParameter("emp_UsuarioCrea", typeof(int));
+    
+            var emp_FechaCreaParameter = emp_FechaCrea.HasValue ?
+                new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
+                new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Insert_Result>("UDP_RRHH_tbEmpleados_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
         }
     }
 }
