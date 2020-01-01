@@ -239,46 +239,46 @@ namespace ERP_GMEDINA.Controllers
                     {
                         string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
                         string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
-                        string  apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
-                        string fechanacimiento= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
-                        string sexo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
-                        string nacionalidad= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+                        string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
+                        string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
+                        DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
+                        string sexo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
+                        string nacionalidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
 
-                        var nac_id = db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
-                            .Select(nac => nac.nac_Id);
+                        int nac_id = Convert.ToInt32(db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
+                            .Select(nac => nac.nac_Id).ToList()[0]);
 
-                        string direccion= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
-                        string telefono= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
-                        string correo= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
-                        string estadocivil= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
-                        string tiposangre= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
+                        string direccion = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
+                        string telefono = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
+                        string correo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
+                        string estadocivil = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
+                        string tiposangre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
 
-                        string cargodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i,12]).Text;
-                        var cargo_id = db.tbCargos.Where(car => car.car_Descripcion == cargodescrip)
-                            .Select(car => car.car_Id);
-                        int ID_CARGO = Convert.ToInt32(cargo_id);
+                        string cargodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
+                        int cargo_id = Convert.ToInt32(db.tbCargos.Where(car => car.car_Descripcion == cargodescrip)
+                            .Select(car => car.car_Id).ToList()[0]);
 
-                        string areadescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
-                        var areas_id = db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
-                            .Select(Areas => Areas.area_Id);
-
+                        string areadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
+                        int areas_id = Convert.ToInt32(db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
+                            .Select(Areas => Areas.area_Id).ToList()[0]);
+                            
                         string dptodescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
-                        var dpto_id = db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
-                          .Select(dpto => dpto.depto_Id);
+                        int dpto_id = Convert.ToInt32(db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
+                          .Select(dpto => dpto.depto_Id).ToList()[0]);
 
                         string jordescrip= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
-                        var jor_id = db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
-                        .Select(jor => jor.jor_Id);
+                        int jor_id = Convert.ToInt32(db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
+                        .Select(jor => jor.jor_Id).ToList()[0]);
 
                         string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
-                        var plani_id = db.tbCatalogoDePlanillas.Where(plani => plani.cpla_DescripcionPlanilla == Planidescrip)
-                        .Select(plani => plani.cpla_IdPlanilla);
+                        int plani_id = Convert.ToInt32(db.tbCatalogoDePlanillas.Where(plani => plani.cpla_DescripcionPlanilla == Planidescrip)
+                        .Select(plani => plani.cpla_IdPlanilla).ToList()[0]);
 
                         string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
-                        var formpago_id = db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
-                       .Select(formpago => formpago.fpa_IdFormaPago);
+                        int formpago_id = Convert.ToInt32(db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
+                       .Select(formpago => formpago.fpa_IdFormaPago).ToList()[0]);
 
-                        db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, fechanacimiento, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id);
+                       db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id);
                         //Write the logic to add the values to the database
                     }
                 }
