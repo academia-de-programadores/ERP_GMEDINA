@@ -35,21 +35,21 @@ function tablaDetalles(ID) {
 }
 function llenarTabla() {
     _ajax(null,
-        '/TipoSalidas/llenarTabla',
+        '/HistorialSalidas/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
-            tabla.draw();
+            var IndexTable = $('#IndexTable').DataTable();
+            IndexTable.clear();
+            IndexTable.draw();
             $.each(Lista, function (index, value) {
                 IndexTable.row.add([
                     '<tr data-id = "' + value.hsal_Id + '">' +
-                        value.per_Nombres,
-                        value.tsal_Descripcion,
-                        "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tsal_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tsal_Id + ")'>Editar</a>" +
-                        "</div>"
-                    ]).draw();
+                    value.emp_Id,
+                    value.tsal_Id,
+                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalles(" + value.hsal_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
+                    "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + value.hsal_Id + ")' data-target='#ModalEditar'>Editar</button>" +
+                    "</div>"]).draw();
             });
         });
 }

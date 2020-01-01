@@ -20,7 +20,8 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbHistorialSalidas = db.tbHistorialSalidas.Where(x => x.hsal_Estado == true).Include(t => t.tbEmpleados).Include(t => t.tbTipoSalidas).Include(t => t.tbRazonSalidas).Include(t => t.tbEmpleados.tbPersonas).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbHistorialSalidas = db.tbHistorialSalidas.Where(x => x.hsal_Estado == true).Include(t => t.tbEmpleados).Include(t => t.tbTipoSalidas).Include(t => t.tbRazonSalidas).Include(t => t.tbEmpleados.tbPersonas).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                tbHistorialSalidas = db.tbHistorialSalidas.Where(x => x.hsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbHistorialSalidas);
             }
             catch (Exception ex)
@@ -46,69 +47,29 @@ namespace ERP_GMEDINA.Controllers
         {
             List<tbHistorialSalidas> tbHistorialSalidas =
                 new List<Models.tbHistorialSalidas> { };
-            foreach (tbHistorialSalidas t in db.tbHistorialSalidas.ToList().Where(x => x.hsal_Estado == true))
+            foreach (tbHistorialSalidas t in db.tbHistorialSalidas.ToList().Where(t => t.hsal_Estado == true))
             {
                 tbHistorialSalidas.Add(new tbHistorialSalidas
                 {
                     hsal_Id = t.hsal_Id,
-                    tsal_Id = t.tsal_Id,
-                    tsal_Descripcion = t.tbTipoSalidas.tsal_Descripcion,
-                    rsal_Id = t.rsal_Id,
-                    rsal_Descripcion = t.tbRazonSalidas.rsal_Descripcion,
-                    per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres + " " + t.tbEmpleados.tbPersonas.per_Apellidos,
-                    per_CorreoElectronico = t.per_CorreoElectronico,
-                    per_Telefono = t.per_Telefono,
-                    per_Direccion = t.per_Direccion,
-                    per_Edad = t.per_Edad,
-                    per_EstadoCivil = t.per_EstadoCivil,
-                    hsal_Observacion = t.hsal_Observacion,
-                    hsal_FechaSalida = t.hsal_FechaSalida
+                    //tsal_Id = t.tsal_Id,
+                    //tsal_Descripcion = t.tbTipoSalidas.tsal_Descripcion,
+                    //rsal_Id = t.rsal_Id,
+                    //rsal_Descripcion = t.tbRazonSalidas.rsal_Descripcion,
+                    //per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres + " " + t.tbEmpleados.tbPersonas.per_Apellidos,
+                    //per_CorreoElectronico = t.per_CorreoElectronico,
+                    //per_Telefono = t.per_Telefono,
+                    //per_Direccion = t.per_Direccion,
+                    //per_Edad = t.per_Edad,
+                    //per_EstadoCivil = t.per_EstadoCivil,
+                    emp_Id = t.emp_Id,
+                    tsal_Id = t.tsal_Id
+                    //hsal_Observacion = t.hsal_Observacion
+                    //hsal_FechaSalida = t.hsal_FechaSalida
                 });
             }
             return Json(tbHistorialSalidas, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult llenarTabla()
-        //{
-        //    //string estado = 
-        //    try
-        //    {
-        //        //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-        //        //posteriormente es destruida.
-        //        using (db = new ERP_GMEDINAEntities())
-        //        {
-
-
-        //          var V_tbHistorialSalidas_completa = db.V_tbHistorialSalidas_completa
-        //                .Select(
-        //                t => new
-        //                {
-        //                    // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
-
-        //                    hsal_Id = t.hsal_Id,
-        //                    tsal_Id = t.tsal_Id,
-        //                    tsal_Descripcion = t.tsal_Descripcion,
-        //                    rsal_Id = t.rsal_Id,
-        //                    rsal_Descripcion = t.rsal_Descripcion,
-        //                    per_Nombres = t.per_Nombres + " " + t.per_Apellidos,
-        //                    per_CorreoElectronico = t.per_CorreoElectronico,
-        //                    per_Telefono = t.per_Telefono,
-        //                    per_Direccion = t.per_Direccion,
-        //                    per_Edad = t.per_Edad,
-        //                    per_EstadoCivil = t.per_EstadoCivil,
-        //                    hsal_Observacion = t.hsal_Observacion,
-        //                    hsal_FechaSalida = t.hsal_FechaSalida
-        //                }
-        //                )
-        //                .ToList();
-        //            return Json(V_tbHistorialSalidas_completa, JsonRequestBehavior.AllowGet);
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-
-        //        return Json("-2", JsonRequestBehavior.AllowGet);
-        //    }
-        //}
 
 
 
@@ -400,10 +361,10 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db != null)
+            db = new ERP_GMEDINAEntities();
+            if (disposing)
             {
                 db.Dispose();
             }

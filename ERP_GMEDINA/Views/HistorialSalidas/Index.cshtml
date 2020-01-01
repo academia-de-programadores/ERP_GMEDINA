@@ -31,25 +31,21 @@
                         <thead>
                             <tr role="row">
                                 <th></th>
-                                <th>@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Nombres)</th>
-                                <th>@Html.DisplayNameFor(model => model.tbTipoSalidas.tsal_Descripcion)</th>
+                                <th>@Html.DisplayNameFor(model => model.emp_Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.tsal_Id)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tbody">
-                            @foreach (var item in Model)
-                            {
+                            @foreach(var item in Model){
                                 <tr class="gradeA odd" role="row" data-id="@item.hsal_Id">
+                                    <td></td>
                                     <td>
-
+                                        @Html.DisplayFor(modelItem => item.emp_Id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
+                                        @Html.DisplayFor(modelItem => item.tsal_Id)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.tbTipoSalidas.tsal_Descripcion)
-                                    </td>
-
                                     <td>
                                         <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.hsal_Id)">Detalles</a>
                                         <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.hsal_Id)">Editar</a>
@@ -138,7 +134,6 @@
             <div class="modal-body" id="ModalDetallesR">
                 <p>
                     @Html.Partial("_DetallesHistorialSalidas", new ERP_GMEDINA.Models.tbHistorialSalidas())
-
                 </p>
 
             </div>
