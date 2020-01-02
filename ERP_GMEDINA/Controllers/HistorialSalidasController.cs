@@ -236,6 +236,7 @@ namespace ERP_GMEDINA.Controllers
         ///
         public ActionResult Edit(int? id)
         {
+            db = new ERP_GMEDINAEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -276,13 +277,14 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(string hsal_Observacion)
         {
             string msj = "";
+            db = new ERP_GMEDINAEntities();
             tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas();
             //tbTipoHoras.tiho_Id = id;
             tbHistorialSalidas.hsal_Observacion = hsal_Observacion;
             if (tbHistorialSalidas.hsal_Observacion != "")
             {
-                var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
+                var id = (int)Session["id"];
                 try
                 {
                     var list = db.UDP_RRHH_tbHistorialSalidas_Update(id, tbHistorialSalidas.hsal_Observacion,Usuario.usu_Id, DateTime.Now);
@@ -310,14 +312,15 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(string hsal_RazonInactivo)
         {
             string msj = "";
+            db = new ERP_GMEDINAEntities();
             tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas();
             //tbTipoHoras.tiho_Id = id;
             tbHistorialSalidas.hsal_RazonInactivo = hsal_RazonInactivo;
 
             if (tbHistorialSalidas.hsal_RazonInactivo != "")
             {
-                var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
+                var id = (int)Session["id"];
                 try
                 {
                     var list = db.UDP_RRHH_tbHistorialSalidas_Delete(id, tbHistorialSalidas.hsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);

@@ -23,9 +23,9 @@ function tablaDetalles(ID) {
         '/HistorialSalidas/Edit/' + ID,
         'GET',
         function (obj) {
+            var o = obj.hsal_Observacion == null ? "Ninguna" : obj.hsal_Observacion;
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText =            obj.hsal_Observacion;
-                $("#ModalDetallesAX").find("#hsal_Estado")["0"].innerText =                 obj.hsal_Estado;
+                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText =            o;
                 $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText =              FechaFormato(obj.hsal_FechaCrea);
                 $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText =          FechaFormato(obj.hsal_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -150,10 +150,11 @@ function format(obj) {
         var annio = fecha.getFullYear();
         var hora = fecha.getHours();
         var fechamnsj = dia + " de " + mes + " del " + annio;
+        var observa = index.hsal_Observacion == null ? "Ninguna" : index.hsal_Observacion;
         div = div
             + '<div class="col-md-2"><b>Tipo de salida: </b></div><div class="col-md-10">' + index.rsal_Descripcion + '</div>'
             + '<div class="col-md-2"><b>Razon salida: </b></div><div class="col-md-10">' + index.tsal_Descripcion + '</div>'
-            + '<div class="col-md-2"><b>Observaciones: </b></div><div class="col-md-10">' + index.hsal_Observacion + '</div>'
+            + '<div class="col-md-2"><b>Observaciones: </b></div><div class="col-md-10">' + observa + '</div>'
             + '<div class="col-md-2"><b>Fecha salida: </b></div><div class="col-md-10">' + fechamnsj + '</div>'
             + '</div>' +
             '</div>' +
