@@ -1,4 +1,4 @@
-//
+﻿//
 var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
 function CierraPopups() {
@@ -105,7 +105,7 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-    $(form).find("#form").serializeArray().forEach(function (id, valor) {
+    $(form).find("form").serializeArray().forEach(function (id, valor) {
         div.find("#error" + id.name).text("");
     });
 }
@@ -132,7 +132,7 @@ $(".required").each(function (indice, input) {
     });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
-        if ($(input).val().trim() == "") {
+        if ($(input).val() == null || $(input).val() == 0 || $(input).val().trim() == "") {
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $(span).addClass("text-danger");
@@ -161,4 +161,4 @@ formularios.forEach(function (formulario) {
     $("#" + formulario).submit(function (e) {
         e.preventDefault();
     });
-})
+});

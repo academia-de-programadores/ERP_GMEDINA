@@ -34,82 +34,33 @@ function tablaDetalles(ID) {
         });
 }
 function llenarTabla() {
+    console.log('Prueba');
     _ajax(null,
         '/HistorialSalidas/llenarTabla',
         'POST',
         function (Lista) {
-            var IndexTable = $('#IndexTable').DataTable();
-            IndexTable.clear();
-            IndexTable.draw();
+            tabla.clear();
+            tabla.draw();
             $.each(Lista, function (index, value) {
-                IndexTable.row.add([
-                    '<tr data-id = "' + value.hsal_Id + '">' +
-                    value.emp_Id,
-                    value.tsal_Id,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalles(" + value.hsal_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
-                    "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + value.hsal_Id + ")' data-target='#ModalEditar'>Editar</button>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    Id: value.hsal_Id,
+                    tsal_Id: value.tsal_Id,
+                    TipoSalida: value.tsal_Descripcion,
+                    rsal_Id: value.rsal_Id,
+                    rsal_Descripcion: value.rsal_Descripcion,
+                    NombreCompleto: value.per_Nombres,
+                    per_CorreoElectronico: value.per_CorreoElectronico,
+                    per_Telefono: value.per_Telefono,
+                    per_Direccion: value.per_Direccion,
+                    per_Edad: value.per_Edad,
+                    per_EstadoCivil: value.per_EstadoCivil,
+                    hsal_Observacion: value.hsal_Observacion,
+                    hsal_FechaSalida: value.hsal_FechaSalida
+                });
             });
+            tabla.draw();
         });
 }
-//function llenarTabla() {
-//    _ajax(null,
-//        '/HistorialSalidas/llenarTabla',
-//        'POST',
-//        function (Lista) {
-//            var IndexTable = $('#IndexTable').DataTable();
-//            IndexTable.clear();
-//            IndexTable.draw();
-//            $.each(Lista, function (index, value) {
-//                //console.log(item.tiho_Descripcion);
-//                IndexTable.row.add(['<tr data-id = "' + value.hsal_Id + '">' +
-//                    value.per_Nombres + " " + value.per_Apellidos,
-//                    value.tiho_Recargo,
-//                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-//                    "<button type='button' class='btn btn-primary btn-xs tablaDetalle' id='btnDetalle' data-toggle='modal' onclick='tablaDetalles(" + value.hsal_Id + ")' data-target='#ModalDetalles'>Detalle</button>" +
-//                "<button type='button' class='btn btn-default btn-xs tablaEditar' id='btnEditarR' data-toggle='modal' onclick='tablaEditar(" + value.hasal + ")' data-target='#ModalEditar'>Editar</button>" +
-//                "</div>"]).draw();
-//            });
-//        });
-//}
-
-
-
-//function llenarTabla() {
-//    console.log('Prueba');
-//    _ajax(null,
-//        '/HistorialSalidas/llenarTabla',
-//        'POST',
-//        function (Lista) {
-//            tabla.clear();
-//            tabla.draw();
-//            $.each(Lista, function (index, value) {
-//                tabla.row.add([
-//                    value.hsal_Id,
-//                    value.tsal_Id,
-//                    value.tsal_Descripcion,
-//                    value.rsal_Id,
-//                    value.rsal_Descripcion,
-//                    value.per_Nombres,
-//                    value.per_CorreoElectronico,
-//                    value.per_Telefono,
-//                    value.per_Direccion,
-//                    value.per_Edad,
-//                    value.per_EstadoCivil,
-//                    value.hsal_Observacion,
-//                    value.hsal_FechaSalida,
-//                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-//                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")' >Detalles</a>" +
-//                    "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>" +
-//                    "</div>"
-//                ]).draw();
-//            });
-//        })
-//}
-
-
-
 $("#btnEditar").click(function () {
     _ajax(null,
         '/HistorialSalidas/Edit/' + id,
@@ -208,6 +159,10 @@ function format(obj) {
     });
     return div + '</div></div></div>';
 }
+
+$(document).ready(function () {
+    llenarTabla();
+});
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     console.log('Casi');

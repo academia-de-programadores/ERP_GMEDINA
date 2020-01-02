@@ -160,6 +160,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,6 +171,7 @@
     <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
+    <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,6 +456,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -965,6 +969,11 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
+    <Content Include="Views\TipoSalidas\_Create.cshtml" />
+    <Content Include="Views\TipoSalidas\_Delete.cshtml" />
+    <Content Include="Views\TipoSalidas\_Edit.cshtml" />
+    <Content Include="Views\TipoSalidas\Index.cshtml" />
+    <Content Include="Views\TipoSalidas\_Detalles.cshtml" />
     <Content Include="Views\HistorialSalidas\Delete.cshtml" />
     <Content Include="Views\HistorialSalidas\Details.cshtml" />
     <Content Include="Views\HistorialSalidas\Edit.cshtml" />
@@ -993,6 +1002,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Project_Readme.html" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\api\typehead_collection.json" />

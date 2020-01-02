@@ -1,0 +1,96 @@
+﻿@model ERP_GMEDINA.Models.tbAreas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
+	<h2>Details</h2>
+</div>
+
+<div class="ibox-content">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.suc_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suc_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Razoninactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Razoninactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Fechacrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Fechacrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.area_Fechamodifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.area_Fechamodifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
+        </dd>
+
+    </dl>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.area_Id }, new {@class="btn btn-primary" }) 
+    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
+</p>
+</div>
+</div>
+</div>
