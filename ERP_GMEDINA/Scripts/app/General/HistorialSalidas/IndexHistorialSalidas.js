@@ -2,6 +2,7 @@
 
 //Funciones GET
 function tablaEditar(ID) {
+    alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,
@@ -16,6 +17,7 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
+    console.log(ID)
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,
@@ -55,7 +57,9 @@ function llenarTabla() {
                     per_Edad: value.per_Edad,
                     per_EstadoCivil: value.per_EstadoCivil,
                     hsal_Observacion: value.hsal_Observacion,
-                    hsal_FechaSalida: value.hsal_FechaSalida
+                    hsal_FechaSalida: value.hsal_FechaSalida,
+                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>"
+                    /*"<button onclick=(alert('Id: " + value.hsal_Id +"'))></button>"*/
                 });
             });
             tabla.draw();
