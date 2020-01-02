@@ -5,7 +5,7 @@
         @Html.DisplayNameFor(model => model.hsal_Observacion)
     </dt>
 
-    <dd id="tiho_Descripcion">
+    <dd id="hsal_Observacion">
         @Html.DisplayFor(model => model.hsal_Observacion)
     </dd>
 
@@ -13,7 +13,7 @@
         @Html.DisplayNameFor(model => model.hsal_Estado)
     </dt>
 
-    <dd id="tiho_Estado">
+    <dd id="hsal_Estado">
         @Html.DisplayFor(model => model.hsal_Estado)
     </dd>
 
@@ -22,7 +22,7 @@
         @Html.DisplayNameFor(model => model.hsal_FechaCrea)
     </dt>
 
-    <dd id="tiho_FechaCrea">
+    <dd id="hsal_FechaCrea">
         @Html.DisplayFor(model => model.hsal_FechaCrea)
     </dd>
 
@@ -30,7 +30,7 @@
         @Html.DisplayNameFor(model => model.hsal_FechaModifica)
     </dt>
 
-    <dd id="tiho_FechaModifica">
+    <dd id="hsal_FechaModifica">
         @Html.DisplayFor(model => model.hsal_FechaModifica)
     </dd>
 
@@ -61,11 +61,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
 
-                <h4 class="modal-title">Editar Horario</h4>
+                <h4 class="modal-title">Editar salida</h4>
 
             </div>
             <div class="modal-body" id="ModalEdit">
-
 
                 @Html.Partial("_EditHistorialSalidas", new ERP_GMEDINA.Models.tbHistorialSalidas())
 

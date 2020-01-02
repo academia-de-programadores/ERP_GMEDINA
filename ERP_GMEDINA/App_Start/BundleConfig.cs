@@ -476,6 +476,8 @@ namespace ERP_GMEDINA
             "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
+                "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
 
             //OPTIMIZATION
 

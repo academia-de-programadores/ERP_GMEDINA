@@ -35,6 +35,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTipoSalidas> tbTipoSalidas { get; set; }
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<V_HistorialSalidas_Empleados> V_HistorialSalidas_Empleados { get; set; }
+        public virtual DbSet<tbTipoHoras> tbTipoHoras { get; set; }
     
         public virtual ObjectResult<UDP_RRHH_tbTipoSalidas_Delete_Result> UDP_RRHH_tbTipoSalidas_Delete(Nullable<int> tsal_id, string tsal_razon_Inactivo, Nullable<int> tsal_UsuarioModifica, Nullable<System.DateTime> tsal_FechaModifica)
         {

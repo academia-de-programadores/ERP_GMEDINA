@@ -99,6 +99,20 @@
           <Property Name="rsal_UsuarioModifica" Type="int" />
           <Property Name="rsal_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTipoHoras">
+          <Key>
+            <PropertyRef Name="tiho_Id" />
+          </Key>
+          <Property Name="tiho_Id" Type="int" Nullable="false" />
+          <Property Name="tiho_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="tiho_Recargo" Type="int" Nullable="false" />
+          <Property Name="tiho_Estado" Type="bit" Nullable="false" />
+          <Property Name="tiho_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="tiho_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="tiho_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tiho_UsuarioModifica" Type="int" />
+          <Property Name="tiho_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoSalidas">
           <Key>
             <PropertyRef Name="tsal_Id" />
@@ -280,6 +294,30 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoHoras" Type="Self.tbTipoHoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoHoras">
+              <PropertyRef Name="tiho_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoHoras" Type="Self.tbTipoHoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoHoras">
+              <PropertyRef Name="tiho_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbTipoSalidas" Type="Self.tbTipoSalidas" Multiplicity="*" />
@@ -402,6 +440,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <EntitySet Name="tbHistorialSalidas" EntityType="Self.tbHistorialSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTipoHoras" EntityType="Self.tbTipoHoras" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoSalidas" EntityType="Self.tbTipoSalidas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="Self.V_HistorialSalidas_Empleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -481,6 +520,14 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRazonSalidas" EntitySet="tbRazonSalidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -620,6 +667,15 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
             <Parameter Name="hsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fare_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbTipoHoras" EntityType="ERP_GMEDINAModel.tbTipoHoras" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoHoras" EntitySet="tbTipoHoras" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="UDP_RRHH_tbTipoSalidas_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
@@ -660,6 +716,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
           <NavigationProperty Name="tbRazonSalidas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
           <NavigationProperty Name="tbTipoSalidas" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
           <NavigationProperty Name="tbTipoSalidas1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoSalidas_tsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoSalidas" />
+          <NavigationProperty Name="tbTipoHoras" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoHoras" />
+          <NavigationProperty Name="tbTipoHoras1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoHoras" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -1013,6 +1071,46 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
         <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="tbTipoHoras">
+          <Key>
+            <PropertyRef Name="tiho_Id" />
+          </Key>
+          <Property Name="tiho_Id" Type="Int32" Nullable="false" />
+          <Property Name="tiho_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="tiho_Recargo" Type="Int32" Nullable="false" />
+          <Property Name="tiho_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="tiho_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tiho_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="tiho_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tiho_UsuarioModifica" Type="Int32" />
+          <Property Name="tiho_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" FromRole="tbTipoHoras" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" FromRole="tbTipoHoras" ToRole="tbUsuario" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoHoras" Role="tbTipoHoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoHoras">
+              <PropertyRef Name="tiho_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoHoras" Role="tbTipoHoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoHoras">
+              <PropertyRef Name="tiho_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1218,6 +1316,21 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas_comple
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbTipoHoras">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoHoras">
+              <MappingFragment StoreEntitySet="tbTipoHoras">
+                <ScalarProperty Name="tiho_FechaModifica" ColumnName="tiho_FechaModifica" />
+                <ScalarProperty Name="tiho_UsuarioModifica" ColumnName="tiho_UsuarioModifica" />
+                <ScalarProperty Name="tiho_FechaCrea" ColumnName="tiho_FechaCrea" />
+                <ScalarProperty Name="tiho_UsuarioCrea" ColumnName="tiho_UsuarioCrea" />
+                <ScalarProperty Name="tiho_RazonInactivo" ColumnName="tiho_RazonInactivo" />
+                <ScalarProperty Name="tiho_Estado" ColumnName="tiho_Estado" />
+                <ScalarProperty Name="tiho_Recargo" ColumnName="tiho_Recargo" />
+                <ScalarProperty Name="tiho_Descripcion" ColumnName="tiho_Descripcion" />
+                <ScalarProperty Name="tiho_Id" ColumnName="tiho_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

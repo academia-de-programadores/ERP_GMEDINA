@@ -49,37 +49,37 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Habilidades/Create
-        [HttpPost]
-        public JsonResult Create(string tiho_Descripcion, int tiho_Recargo)
-        {
-            string msj = "";
-            tbTipoHoras tbTipoHoras = new tbTipoHoras();
-            tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
-            tbTipoHoras.tiho_Recargo = tiho_Recargo;
-            if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbTipoHoras_Insert(tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHoras_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-            }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //// POST: Habilidades/Create
+        //[HttpPost]
+        //public JsonResult Create(string tiho_Descripcion, int tiho_Recargo)
+        //{
+        //    string msj = "";
+        //    tbTipoHoras tbTipoHoras = new tbTipoHoras();
+        //    tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
+        //    tbTipoHoras.tiho_Recargo = tiho_Recargo;
+        //    if (tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
+        //    {
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbTipoHoras_Insert(tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
+        //            foreach (UDP_RRHH_tbTipoHoras_Insert_Result item in list)
+        //            {
+        //                msj = item.MensajeError + " ";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
 
         // GET: Habilidades/Edit/5
         public ActionResult Edit(int? id)
@@ -121,75 +121,75 @@ namespace ERP_GMEDINA.Controllers
             return Json(TipoHoras, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Habilidades/Edit/5
-        [HttpPost]
-        public JsonResult Edit(string tiho_Descripcion, int tiho_Recargo)
-        {
-            string msj = "";
-            tbTipoHoras tbTipoHoras = new tbTipoHoras();
-            //tbTipoHoras.tiho_Id = id;
-            tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
-            tbTipoHoras.tiho_Recargo = tiho_Recargo;
-            if ( tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
-            {
-                var id = (int)Session["id"];
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbTipoHora_Update(id, tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHora_Update_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-                Session.Remove("id");
-            }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //// POST: Habilidades/Edit/5
+        //[HttpPost]
+        //public JsonResult Edit(string tiho_Descripcion, int tiho_Recargo)
+        //{
+        //    string msj = "";
+        //    tbTipoHoras tbTipoHoras = new tbTipoHoras();
+        //    //tbTipoHoras.tiho_Id = id;
+        //    tbTipoHoras.tiho_Descripcion = tiho_Descripcion;
+        //    tbTipoHoras.tiho_Recargo = tiho_Recargo;
+        //    if ( tbTipoHoras.tiho_Descripcion != "" && tbTipoHoras.tiho_Recargo != 0)
+        //    {
+        //        var id = (int)Session["id"];
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbTipoHora_Update(id, tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
+        //            foreach (UDP_RRHH_tbTipoHora_Update_Result item in list)
+        //            {
+        //                msj = item.MensajeError + " ";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //        Session.Remove("id");
+        //    }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
 
-        // GET: Habilidades/Delete/5
-        [HttpPost]
-        public ActionResult Delete(string tiho_RazonInactivo)
-        {
-            string msj = "";
-            tbTipoHoras tbTipoHoras = new tbTipoHoras();
-            //tbTipoHoras.tiho_Id = id;
-            tbTipoHoras.tiho_RazonInactivo = tiho_RazonInactivo;
+        //// GET: Habilidades/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(string tiho_RazonInactivo)
+        //{
+        //    string msj = "";
+        //    tbTipoHoras tbTipoHoras = new tbTipoHoras();
+        //    //tbTipoHoras.tiho_Id = id;
+        //    tbTipoHoras.tiho_RazonInactivo = tiho_RazonInactivo;
 
-            if ( tbTipoHoras.tiho_RazonInactivo != "")
-            {
-                var id = (int)Session["id"];
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbTipoHoras_Delete(id, tbTipoHoras.tiho_RazonInactivo, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoHoras_Delete_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-                Session.Remove("id");
-            }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //    if ( tbTipoHoras.tiho_RazonInactivo != "")
+        //    {
+        //        var id = (int)Session["id"];
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbTipoHoras_Delete(id, tbTipoHoras.tiho_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+        //            foreach (UDP_RRHH_tbTipoHoras_Delete_Result item in list)
+        //            {
+        //                msj = item.MensajeError + " ";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //        Session.Remove("id");
+        //    }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
 
         protected tbUsuario IsNull(tbUsuario valor)
         {

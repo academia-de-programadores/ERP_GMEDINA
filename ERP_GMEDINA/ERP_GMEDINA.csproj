@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -171,6 +172,7 @@
     <Compile Include="Models\cDepartamentos.cs" />
     <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
+    <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
@@ -197,6 +199,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRazonSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoHoras.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoSalidas.cs">
@@ -456,6 +461,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -983,6 +989,11 @@
     <Content Include="Views\HistorialSalidas\_DetallesHistorialSalidas.cshtml" />
     <Content Include="Views\HistorialSalidas\_EditHistorialSalidas.cshtml" />
     <Content Include="Views\HistorialSalidas\_InhabilitarHistorialSalidas.cshtml" />
+    <Content Include="Views\TipoHoras\Index.cshtml" />
+    <Content Include="Views\TipoHoras\_CreateTipoHorarios.cshtml" />
+    <Content Include="Views\TipoHoras\_DetallesTipoHorarios.cshtml" />
+    <Content Include="Views\TipoHoras\_EditTipoHorarios.cshtml" />
+    <Content Include="Views\TipoHoras\_InhabilitarTipoHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

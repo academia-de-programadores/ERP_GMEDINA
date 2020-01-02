@@ -2,7 +2,7 @@
 
 //Funciones GET
 function tablaEditar(ID) {
-    alert(ID);
+    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,
@@ -17,26 +17,25 @@ function tablaEditar(ID) {
 }
 
 function tablaDetalles(ID) {
-    console.log(ID)
+    //alert(ID);
     id = ID;
     _ajax(null,
         '/HistorialSalidas/Edit/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesR").find("#hsal_Observacion")["0"].innerText = obj.hsal_Observacion;
-                $("#ModalDetallesR").find("#hsal_Estado")["0"].innerText = obj.hsal_Estado;
-                $("#ModalDetallesR").find("#hsal_FechaCrea")["0"].innerText = FechaFormato(obj.hsal_FechaCrea);
-                $("#ModalDetallesR").find("#hsal_FechaModifica")["0"].innerText = FechaFormato(obj.hsal_FechaModifica);
-                $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText =            obj.hsal_Observacion;
+                $("#ModalDetallesAX").find("#hsal_Estado")["0"].innerText =                 obj.hsal_Estado;
+                $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText =              FechaFormato(obj.hsal_FechaCrea);
+                $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText =          FechaFormato(obj.hsal_FechaModifica);
+                $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText= obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
 }
 function llenarTabla() {
-    console.log('Prueba');
     _ajax(null,
         '/HistorialSalidas/llenarTabla',
         'POST',
@@ -59,7 +58,6 @@ function llenarTabla() {
                     hsal_Observacion: value.hsal_Observacion,
                     hsal_FechaSalida: value.hsal_FechaSalida,
                     Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>"
-                    /*"<button onclick=(alert('Id: " + value.hsal_Id +"'))></button>"*/
                 });
             });
             tabla.draw();

@@ -27,6 +27,9 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoSalidas_tsal_Id_rrhh_tbHistorialSalidas_tsal_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoHoras" Width="1.5" PointX="7.625" PointY="11.125" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioCrea" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoHoras_tiho_UsuarioModifica" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
