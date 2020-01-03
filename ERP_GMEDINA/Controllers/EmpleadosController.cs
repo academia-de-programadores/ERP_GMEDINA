@@ -84,44 +84,48 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla="", fpa_IdFormaPago="" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "", per_Apellidos = "", per_FechaNacimiento = "",per_Edad="", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", Cargo = db.UDP_RRHH_tbCargos_tbEmpleados_Select().ToList(), area_Id = "", depto_Id = "", jor_Id = "", cpla_IdPlanilla="", fpa_IdFormaPago="",emp_FechaIngreso="",emp_CuentaBancaria="" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
-            Sheet.Cells["A1:Q3"].Merge = true;
-            Sheet.Cells["A1:Q3"].Style.Font.Size = 16;
-            Sheet.Cells["A1:Q3"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:Q3"].Value = "FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO";
-            Sheet.Cells["A1:Q3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            Sheet.Cells["A1:Q3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-            Sheet.Cells["A1:Q3"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:Q3"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:Q3"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:Q3"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-            Sheet.Cells["A1:Q3"].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:Q3"].Style.Border.Left.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:Q3"].Style.Border.Right.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:Q3"].Style.Border.Bottom.Color.SetColor(System.Drawing.Color.Red);
-            Sheet.Cells["A1:Q3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-            Sheet.Cells["A1:Q3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#f0f3f5"));
+            Sheet.Cells["A1:T3"].Merge = true;
+            Sheet.Cells["A1:T3"].Style.Font.Size = 16;
+            Sheet.Cells["A1:T3"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:T3"].Value = "FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO";
+            Sheet.Cells["A1:T3"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+            Sheet.Cells["A1:T3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            Sheet.Cells["A1:T3"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:T3"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:T3"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:T3"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            Sheet.Cells["A1:T3"].Style.Border.Top.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:T3"].Style.Border.Left.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:T3"].Style.Border.Right.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:T3"].Style.Border.Bottom.Color.SetColor(System.Drawing.Color.Red);
+            Sheet.Cells["A1:T3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            Sheet.Cells["A1:T3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#f0f3f5"));
             Sheet.Cells["A4"].Value = "Identidad";
             Sheet.Cells["A5:A10000"].Style.Numberformat.Format= "0000-0000-00000";
 
             Sheet.Cells["B4"].Value = "Nombres";
             Sheet.Cells["C4"].Value = "Apellidos";
             Sheet.Cells["D4"].Value = "Fecha Nacimiento";
-            Sheet.Cells["E4"].Value = "Sexo";
-            Sheet.Cells["F4"].Value = "Nacionalidad";
-            Sheet.Cells["G4"].Value = "Direccion";
-            Sheet.Cells["H4"].Value = "Telefono";
-            Sheet.Cells["I4"].Value = "Correo Electronico";
-            Sheet.Cells["J4"].Value = "Estado Civil";
-            Sheet.Cells["K4"].Value = "Tipo de Sangre";
-            Sheet.Cells["L4"].Value = "Cargo";
-            Sheet.Cells["M4"].Value = "Area";
-            Sheet.Cells["N4"].Value = "Departamentos";
-            Sheet.Cells["O4"].Value = "Jornadas";
-            Sheet.Cells["P4"].Value = "Planilla";
-            Sheet.Cells["Q4"].Value = "FormadePago";
+            Sheet.Cells["E4"].Value = "Edad";
+
+            Sheet.Cells["F4"].Value = "Sexo";
+            Sheet.Cells["G4"].Value = "Nacionalidad";
+            Sheet.Cells["H4"].Value = "Direccion";
+            Sheet.Cells["I4"].Value = "Telefono";
+            Sheet.Cells["J4"].Value = "Correo Electronico";
+            Sheet.Cells["K4"].Value = "Estado Civil";
+            Sheet.Cells["L4"].Value = "Tipo de Sangre";
+            Sheet.Cells["M4"].Value = "Cargo";
+            Sheet.Cells["N4"].Value = "Area";
+            Sheet.Cells["O4"].Value = "Departamentos";
+            Sheet.Cells["P4"].Value = "Jornadas";
+            Sheet.Cells["Q4"].Value = "Planilla";
+            Sheet.Cells["R4"].Value = "FormadePago";
+            Sheet.Cells["S4"].Value = "Fecha Ingreso";
+            Sheet.Cells["T4"].Value = "Cuenta Bancaria";
 
 
 
@@ -132,10 +136,10 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells[string.Format("B{0}", row)].Value = item.per_Nombres;
                 Sheet.Cells[string.Format("C{0}", row)].Value = item.per_Apellidos;
                 Sheet.Cells[string.Format("D{0}", row)].Value = item.per_FechaNacimiento;
-                Sheet.Cells["D5"].Style.Numberformat.Format = "yyyy-mm-dd";
+                Sheet.Cells["D5:D1000"].Style.Numberformat.Format = "yyyy-mm-dd";
                 //Sheet.Cells["D5"].Formula = "=DATE(2014,10,5)";
 
-                var per_Sexo = Sheet.DataValidations.AddListValidation("E5");
+                var per_Sexo = Sheet.DataValidations.AddListValidation("F5:F1000");
                 per_Sexo.Formula.Values.Add("F");
                 per_Sexo.Formula.Values.Add("M");
                 //Sheet.Cells[string.Format("E{0}", row)].Value = item.per_Sexo;
@@ -144,37 +148,37 @@ namespace ERP_GMEDINA.Controllers
                     .Select(tabla => tabla.nac_Descripcion)
                     .ToArray();
                 Sheet.Cells["MB1"].LoadFromCollection<string>(Nacionalidades.ToList<string>());
-                var Nac_val = Sheet.DataValidations.AddListValidation("F5");
+                var Nac_val = Sheet.DataValidations.AddListValidation("G5:G1000");
                 Nac_val.Formula.ExcelFormula = "$MB$1:$MB$" + Nacionalidades.Length;
                 Sheet.Column(340).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
-                Sheet.Cells[string.Format("G{0}", row)].Value = item.per_Direccion;
-                Sheet.Cells[string.Format("H{0}", row)].Value = item.per_Telefono;
-                Sheet.Cells[string.Format("I{0}", row)].Value = item.per_CorreoElectronico;
+                Sheet.Cells[string.Format("H{0}", row)].Value = item.per_Direccion;
+                Sheet.Cells[string.Format("I{0}", row)].Value = item.per_Telefono;
+                Sheet.Cells[string.Format("J{0}", row)].Value = item.per_CorreoElectronico;
 
-                var per_EstadoCivil = Sheet.DataValidations.AddListValidation("J5");
+                var per_EstadoCivil = Sheet.DataValidations.AddListValidation("K5:K1000");
                 per_EstadoCivil.Formula.Values.Add("S");
                 per_EstadoCivil.Formula.Values.Add("C");
                 per_EstadoCivil.Formula.Values.Add("D");
                 per_EstadoCivil.Formula.Values.Add("V");
                 //Sheet.Cells[string.Format("J{0}", row)].Value = item.per_EstadoCivil;
-                Sheet.Cells[string.Format("K{0}", row)].Value = item.per_TipoSangre;
+                Sheet.Cells[string.Format("L{0}", row)].Value = item.per_TipoSangre;
 
                 var Cargos = db.tbCargos
-                    .Select(tabla=>tabla.car_Descripcion)
+                    .Select(tabla => tabla.car_Descripcion)
                     .ToArray();
                 Sheet.Cells["MA1"].LoadFromCollection<string>(Cargos.ToList<string>());
-                var Car_val = Sheet.DataValidations.AddListValidation("L5");
-                Car_val.Formula.ExcelFormula = "$MA$1:$MA$"+ Cargos.Length;
+                var Car_val = Sheet.DataValidations.AddListValidation("M5:M1000");
+                Car_val.Formula.ExcelFormula = "$MA$1:$MA$" + Cargos.Length;
                 Sheet.Column(339).Style.Font.Color.SetColor(System.Drawing.Color.White);
-            
+
                 //agregar parte de :"FAVOR LLENAR UNICAMENTE LA INFORMACION SOLICITADA, NO CAMBIAR NINGUNA CONFIGURACION DE ESTE DOCUMENTO"
 
                 var Areas = db.tbAreas
                 .Select(tabla => tabla.area_Descripcion)
                 .ToArray();
                 Sheet.Cells["MC1"].LoadFromCollection<string>(Areas.ToList<string>());
-                var area_val = Sheet.DataValidations.AddListValidation("M5");
+                var area_val = Sheet.DataValidations.AddListValidation("N5:N1000");
                 area_val.Formula.ExcelFormula = "$MC$1:$MC$" + Areas.Length;
                 Sheet.Column(341).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
@@ -183,7 +187,7 @@ namespace ERP_GMEDINA.Controllers
                 .Select(tabla => tabla.depto_Descripcion)
                 .ToArray();
                 Sheet.Cells["MD1"].LoadFromCollection<string>(Dpto.ToList<string>());
-                var Dpto_val = Sheet.DataValidations.AddListValidation("N5");
+                var Dpto_val = Sheet.DataValidations.AddListValidation("O5:O1000");
                 Dpto_val.Formula.ExcelFormula = "$MD$1:$MD$" + Dpto.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
@@ -191,7 +195,7 @@ namespace ERP_GMEDINA.Controllers
                .Select(tabla => tabla.jor_Descripcion)
                .ToArray();
                 Sheet.Cells["ME1"].LoadFromCollection<string>(Jor.ToList<string>());
-                var jor_val = Sheet.DataValidations.AddListValidation("O5");
+                var jor_val = Sheet.DataValidations.AddListValidation("P5:P1000");
                 jor_val.Formula.ExcelFormula = "$ME$1:$ME$" + Jor.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
@@ -199,7 +203,7 @@ namespace ERP_GMEDINA.Controllers
                .Select(tabla => tabla.cpla_DescripcionPlanilla)
                .ToArray();
                 Sheet.Cells["MF1"].LoadFromCollection<string>(Plani.ToList<string>());
-                var Plani_val = Sheet.DataValidations.AddListValidation("P5");
+                var Plani_val = Sheet.DataValidations.AddListValidation("Q5:Q1000");
                 Plani_val.Formula.ExcelFormula = "$MF$1:$MF$" + Plani.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
 
@@ -207,9 +211,16 @@ namespace ERP_GMEDINA.Controllers
            .Select(tabla => tabla.fpa_Descripcion)
            .ToArray();
                 Sheet.Cells["MG1"].LoadFromCollection<string>(Fpago.ToList<string>());
-                var Fpago_val = Sheet.DataValidations.AddListValidation("Q5");
+                var Fpago_val = Sheet.DataValidations.AddListValidation("R5:R1000");
                 Fpago_val.Formula.ExcelFormula = "$MG$1:$MG$" + Fpago.Length;
                 Sheet.Column(342).Style.Font.Color.SetColor(System.Drawing.Color.White);
+
+                //Fecha Ingreso
+                Sheet.Cells[string.Format("S{0}", row)].Value = item.emp_FechaIngreso;
+                Sheet.Cells["S5:S1000"].Style.Numberformat.Format = "yyyy-mm-dd";
+
+                Sheet.Cells[string.Format("T{0}", row)].Value = item.emp_CuentaBancaria;
+                Sheet.Cells["T5:T10000"].Style.Numberformat.Format = "00000000000000000000";
 
 
                 row++;
@@ -243,41 +254,49 @@ namespace ERP_GMEDINA.Controllers
                         string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
                         string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
                         DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
-                        string sexo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
-                        string nacionalidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+                        string EDAD= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
+                        int Edad = Convert.ToInt32(EDAD);
+                        string sexo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 6]).Text;
+                        string nacionalidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
 
                         int nac_id = Convert.ToInt32(db.tbNacionalidades.Where(nac => nac.nac_Descripcion == nacionalidad)
                             .Select(nac => nac.nac_Id).ToList()[0]);
 
-                        string direccion = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 7]).Text;
-                        string telefono = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
-                        string correo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
-                        string estadocivil = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
-                        string tiposangre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
+                        string direccion = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 8]).Text;
+                        string telefono = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 9]).Text;
+                        string correo = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 10]).Text;
+                        string estadocivil = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 11]).Text;
+                        string tiposangre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
 
-                        string cargodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 12]).Text;
+                        string cargodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
                         int cargo_id = Convert.ToInt32(db.tbCargos.Where(car => car.car_Descripcion == cargodescrip)
                             .Select(car => car.car_Id).ToList()[0]);
 
-                        string areadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 13]).Text;
+                        string areadescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
                         int areas_id = Convert.ToInt32(db.tbAreas.Where(Areas => Areas.area_Descripcion == areadescrip)
                             .Select(Areas => Areas.area_Id).ToList()[0]);
 
-                        string dptodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 14]).Text;
+                        string dptodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
                         int dpto_id = Convert.ToInt32(db.tbDepartamentos.Where(dpto => dpto.depto_Descripcion == dptodescrip)
                           .Select(dpto => dpto.depto_Id).ToList()[0]);
 
-                        string jordescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 15]).Text;
+                        string jordescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
                         int jor_id = Convert.ToInt32(db.tbJornadas.Where(jor => jor.jor_Descripcion == jordescrip)
                         .Select(jor => jor.jor_Id).ToList()[0]);
 
-                        string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 16]).Text;
+                        string Planidescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
                         int plani_id = Convert.ToInt32(db.tbCatalogoDePlanillas.Where(plani => plani.cpla_DescripcionPlanilla == Planidescrip)
                         .Select(plani => plani.cpla_IdPlanilla).ToList()[0]);
 
-                        string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 17]).Text;
+                        string formapagodescrip = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 18]).Text;
                         int formpago_id = Convert.ToInt32(db.tbFormaPago.Where(formpago => formpago.fpa_Descripcion == formapagodescrip)
                        .Select(formpago => formpago.fpa_IdFormaPago).ToList()[0]);
+
+                        string fechaingreso= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 19]).Text;
+                        DateTime FECHAINGRESO = Convert.ToDateTime(fechaingreso);
+
+                        string CuentaBancaria = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 20]).Text;
+
 
                         if (identidad != "" && nombre != "" && apellidos != "")
                         {//open if 
@@ -285,7 +304,7 @@ namespace ERP_GMEDINA.Controllers
                             
                             IEnumerable<object> listEmpleados = null;
                             string MensajeError = "";
-                            listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC, sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre,Usuario.usu_Id,DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id,Usuario.usu_Id,DateTime.Now);
+                            listEmpleados = db.UDP_RRHH_tbEmpleados_Insert(identidad, nombre, apellidos, FECHANAC,Edad ,sexo, nac_id, direccion, telefono, correo, estadocivil, tiposangre,Usuario.usu_Id,DateTime.Now, cargo_id, areas_id, dpto_id, jor_id, plani_id, formpago_id,Usuario.usu_Id,DateTime.Now, FECHAINGRESO,CuentaBancaria);
                           
                             foreach (UDP_RRHH_tbEmpleados_Insert_Result Item in listEmpleados)
                             {

@@ -23,7 +23,7 @@ $("#btnUpload").change(function () {
 //        $formData.append("UploadedFile", $file);
 
 //    }
-
+//INTENTAR CON POST
 //    //if ($file.files.length > 0) {
 //    //    for (var i = 0; i < $file.files.length; i++) {
 //    //        $formData.append('file-' + i, $file.files[i]);

@@ -11,6 +11,7 @@ namespace ERP_GMEDINA.Models
         public string per_Nombres { get; set; }
         public string per_Apellidos { get; set; }
         public string per_FechaNacimiento { get; set; }
+        public string per_Edad { get; set; }
         public string per_Sexo { get; set; }
         public string nac_Id { get; set; }
         public string per_Direccion { get; set; }
@@ -24,6 +25,9 @@ namespace ERP_GMEDINA.Models
         public string jor_Id { get; set; }
         public string cpla_IdPlanilla { get; set; }
         public string fpa_IdFormaPago { get; set; }
+        public string emp_FechaIngreso { get; set; }
+        public string emp_CuentaBancaria { get; set; }
+
 
 
     }

@@ -2727,7 +2727,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Insert_Result> UDP_RRHH_tbEmpleados_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Insert_Result> UDP_RRHH_tbEmpleados_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, Nullable<int> per_Edad, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea, Nullable<System.DateTime> emp_FechaIngreso, string emp_CuentaBancaria)
         {
             var per_IdentidadParameter = per_Identidad != null ?
                 new ObjectParameter("per_Identidad", per_Identidad) :
@@ -2744,6 +2744,10 @@ namespace ERP_GMEDINA.Models
             var per_FechaNacimientoParameter = per_FechaNacimiento.HasValue ?
                 new ObjectParameter("per_FechaNacimiento", per_FechaNacimiento) :
                 new ObjectParameter("per_FechaNacimiento", typeof(System.DateTime));
+    
+            var per_EdadParameter = per_Edad.HasValue ?
+                new ObjectParameter("per_Edad", per_Edad) :
+                new ObjectParameter("per_Edad", typeof(int));
     
             var per_SexoParameter = per_Sexo != null ?
                 new ObjectParameter("per_Sexo", per_Sexo) :
@@ -2813,7 +2817,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
                 new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Insert_Result>("UDP_RRHH_tbEmpleados_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
+            var emp_FechaIngresoParameter = emp_FechaIngreso.HasValue ?
+                new ObjectParameter("emp_FechaIngreso", emp_FechaIngreso) :
+                new ObjectParameter("emp_FechaIngreso", typeof(System.DateTime));
+    
+            var emp_CuentaBancariaParameter = emp_CuentaBancaria != null ?
+                new ObjectParameter("emp_CuentaBancaria", emp_CuentaBancaria) :
+                new ObjectParameter("emp_CuentaBancaria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Insert_Result>("UDP_RRHH_tbEmpleados_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_EdadParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter, emp_FechaIngresoParameter, emp_CuentaBancariaParameter);
         }
     }
 }
