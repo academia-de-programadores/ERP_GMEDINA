@@ -160,7 +160,16 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
-    var Id = $("#FormEmpleados").find("#Empleados").val();    
+    var Id = $("#FormEmpleados").find("#Empleados").val();
+    if (Id == 0) {
+        var span = $("#FormEmpleados").find("#errorEmpleados");
+        $(span).addClass("text-warning");
+        $(span).closest("div").addClass("has-warning");
+        span.text('Seleccione otra opción');
+        $("#FormEmpleados").find("#Empleados").focus();
+    }
+    else {
+    var Id = $("#FormEmpleados").find("#Empleados").val();
     var Razon = $("#FormEmpleados").find("#Razon").val();
     var ver = $('#Empleados option:selected').html();
     var valores = Id + Razon + ver;
@@ -170,14 +179,23 @@ $("#add").click(function () {
             return null;
         }
     }
-    Add(Id, Razon ,ver);
+    Add(Id, Razon, ver);
     $("#FormEmpleados").validate();
+}
 });
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
 });
 $("#btnCrear").click(function () {
- //declaramos el objeto principal de nuestra tabla y asignamos sus valores
+    //declaramos el objeto principal de nuestra tabla y asignamos sus valores
+    if ($("#TipoSalidas").val() == 0) {
+        MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida");
+    } else if ($("#RazonSalidas").val() == 0) {
+        MsgWarning("Error", "Es nesesario seleccionar la razon de la salida");
+    } else if ($("#hsal_FechaSalida").val() == "") {
+        MsgWarning("Error", "Es nesesario seleccionar la fecha en que desocuparon su pueso de trabajo");
+    } else {
+    //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     var tbHistorialSalidas =
     {
         tsal_Id: $("#TipoSalidas").val(),
@@ -185,28 +203,32 @@ $("#btnCrear").click(function () {
         hsal_Observacion: $("#hsal_Observacion").val(),
         hsal_FechaSalida: $("#hsal_FechaSalida").val()
     };
-var lista = getJson();
-
-    if (tbHistorialSalidas != null) {
-        data = JSON.stringify({
-          tbHistorialSalidas: tbHistorialSalidas,
-          tbEmpleados: lista
-         });
-         _ajax(data,
-             '/HistorialSalidas/Create',
-             'POST',
-             function (obj) {
-              if (obj != "-1" && obj != "-2" && obj != "-3") {
-               //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                  MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                  location.href = "/HistorialSalidas/Index";
-              } else {
-               MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-              }
-             });
+        var lista = getJson();
+        if (lista == "") {
+            MsgWarning("Error", "Es nesesario seleccionar al menos 1 colaborador");
         } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
+            if (tbHistorialSalidas != null) {
+                data = JSON.stringify({
+                    tbHistorialSalidas: tbHistorialSalidas,
+                    tbEmpleados: lista
+                });
+                _ajax(data,
+                    '/HistorialSalidas/Create',
+                    'POST',
+                    function (obj) {
+                        if (obj != "-1" && obj != "-2" && obj != "-3") {
+                            //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                            MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                            location.href = "/HistorialSalidas/Index";
+                        } else {
+                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                        }
+                    });
+            } else {
+                MsgError("Error", "por favor llene todas las cajas de texto");
+            }
+        }
+}
 });
 $("#FormEmpleados").find("#Empleados").keypress(function (envet) {
     if (alerta($(this).closest("div"))) {
