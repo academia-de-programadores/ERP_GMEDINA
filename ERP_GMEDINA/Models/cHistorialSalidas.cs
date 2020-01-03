@@ -35,6 +35,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool hsal_Estado { get; set; }
         [Display(Name = "Razon inactivo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string hsal_RazonInactivo { get; set; }
         [Display(Name = "Agregado por")]
         public int hsal_UsuarioCrea { get; set; }

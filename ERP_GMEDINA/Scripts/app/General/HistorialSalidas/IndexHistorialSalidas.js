@@ -82,7 +82,7 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("#hsal_RazonInactivo").val("");
     $("#ModalInhabilitar").find("#hsal_RazonInactivo").focus();
 });
-
+//aqui
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -99,6 +99,8 @@ $("#InActivar").click(function () {
                 MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
             }
         });
+    } else {
+        MsgWarning(" ", "la eliminación de información debe ser justificada");
     }
 });
 
