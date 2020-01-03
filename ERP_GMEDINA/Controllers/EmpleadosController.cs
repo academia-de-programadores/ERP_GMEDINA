@@ -220,7 +220,8 @@ namespace ERP_GMEDINA.Controllers
                 Sheet.Cells["S5:S1000"].Style.Numberformat.Format = "yyyy-mm-dd";
 
                 Sheet.Cells[string.Format("T{0}", row)].Value = item.emp_CuentaBancaria;
-                Sheet.Cells["T5:T10000"].Style.Numberformat.Format = "00000000000000000000";
+                // Sheet.Cells["T5:T10000"].Style.Numberformat.Format = "00000000000000000000";
+                Sheet.Cells["T5:T10000"].Style.Numberformat.Format = "@";
 
 
                 row++;
@@ -252,7 +253,9 @@ namespace ERP_GMEDINA.Controllers
                         string identidad = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 1]).Text;
                         string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
                         string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
-                        string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
+                        if (identidad != "" && nombre != "" && apellidos != "")
+                        {//open if 
+                            string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
                         DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
                         string EDAD= ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
                         int Edad = Convert.ToInt32(EDAD);
@@ -298,8 +301,7 @@ namespace ERP_GMEDINA.Controllers
                         string CuentaBancaria = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 20]).Text;
 
 
-                        if (identidad != "" && nombre != "" && apellidos != "")
-                        {//open if 
+                     
                             var Usuario = (tbUsuario)Session["Usuario"];
                             
                             IEnumerable<object> listEmpleados = null;
@@ -318,11 +320,11 @@ namespace ERP_GMEDINA.Controllers
                                     return View();
                                 }
                             }//CLOSE IF 
-                            return RedirectToAction("Index");
+                            //return RedirectToAction("Index");
                         }//close if 
                         else {//OPEN ELSE 
                             string msj = "-3";
-                            return Content(msj);
+                            //return Content(msj);
 
                         }//CLOSE ELSE
                     }//CLOSE FOR
