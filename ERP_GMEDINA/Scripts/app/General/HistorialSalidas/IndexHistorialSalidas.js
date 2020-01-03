@@ -170,7 +170,6 @@ $(document).ready(function () {
 });
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
-    console.log('Casi');
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);
     if (row.child.isShown()) {
