@@ -323,7 +323,9 @@ namespace ERP_GMEDINA.Controllers
                             //return RedirectToAction("Index");
                         }//close if 
                         else {//OPEN ELSE 
-                            string msj = "-3";
+                            //string msj = "-3";
+                            break;
+
                             //return Content(msj);
 
                         }//CLOSE ELSE
