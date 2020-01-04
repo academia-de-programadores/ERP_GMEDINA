@@ -2,7 +2,7 @@
 var list = [];
 var inactivar = [];
 var dRow = null;
-var Entidad='';
+var Entidad = '';
 //function Remove(Id, lista) {
 //    var list = [];
 //    lista.forEach(function (value, index) {
@@ -74,7 +74,7 @@ function getJson() {
         var fila = info[i];
         var tbDepartamentos =
          {
-             Id: i,
+             depto_Id: info[i].Id,
              depto_Descripcion: fila.Descripcion,
              car_Descripcion: fila.Cargo,
              Accion: fila.Accion
@@ -94,6 +94,7 @@ function Edit(btn) {
     var row = ChildTable.row(tr);
     var datos=row.data();
     dRow = row;
+    depto_Id = datos.Id;
     $('#ModalEditar').find("#depto_Descripcion").val(datos.Descripcion);
     $('#ModalEditar').find("#car_Descripcion").val(datos.Cargo);
 

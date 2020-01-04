@@ -317,21 +317,22 @@ namespace ERP_GMEDINA.Controllers
                         }
                         else if (item.Accion=="e")
                         {
-                            //var depto = db.UDP_RRHH_tbDepartamentos_Update(
-                            //    cAreas.area_Id,
-                            //    item.car_Descripcion,
-                            //    item.depto_Descripcion,
-                            //    Usuario.usu_Id,
-                            //    DateTime.Now);
-                            //string mensajeDB = "";
-                            //foreach (UDP_RRHH_tbDepartamentos_Update_Result i in depto)
-                            //{
-                            //    mensajeDB = i.MensajeError.ToString();
-                            //}
-                            //if (mensajeDB == "-1")
-                            //{
-                            //    return Json("-2", JsonRequestBehavior.AllowGet);
-                            //}
+                            var depto = db.UDP_RRHH_tbDepartamentos_Update(
+                                item.depto_Id,
+                                cAreas.area_Id,
+                                item.car_Descripcion,
+                                item.depto_Descripcion,
+                                Usuario.usu_Id,
+                                DateTime.Now);
+                            string mensajeDB = "";
+                            foreach (UDP_RRHH_tbDepartamentos_Update_Result i in depto)
+                            {
+                                mensajeDB = i.MensajeError.ToString();
+                            }
+                            if (mensajeDB == "-1")
+                            {
+                                return Json("-2", JsonRequestBehavior.AllowGet);
+                            }
                         }
                     }
                     transaction.Commit();
