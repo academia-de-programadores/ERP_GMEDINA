@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class PersonasController : Controller
     {
-        private ERP_GMEDINAEntities db = null;
+        public ERP_GMEDINAEntities db = null;
 
         // GET: Personas
         public ActionResult Index()
@@ -45,7 +45,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Nacionalidades.Add(new
                     {
-                        Id = 0,
+                        Id = "",
                         Descripcion = "**Seleccione una opción**"
                     });
                     Nacionalidades.AddRange(db.tbNacionalidades
@@ -70,7 +70,7 @@ namespace ERP_GMEDINA.Controllers
             var Sexo = new List<object> { };
             Sexo.Add(new
             {
-                Id = 0,
+                Id = "",
                 Descripcion = "**Seleccione una opción**"
             });
             Sexo.Add(new
@@ -87,7 +87,7 @@ namespace ERP_GMEDINA.Controllers
             var EstadoCivil = new List<object> { };
             EstadoCivil.Add(new
             {
-                Id = 0, 
+                Id = "", 
                 Descripcion = "**Seleccione una opción**",
             });
             EstadoCivil.Add(new
@@ -104,27 +104,27 @@ namespace ERP_GMEDINA.Controllers
             var TipoSangre = new List<object> { };
             TipoSangre.Add(new
             {
-                Id = 0,
+                Id = "",
                 Descripcion = "**Seleccione una opción**",
             });
             TipoSangre.Add(new
             {
-                Id = "Op",
+                Id = "O+",
                 Descripcion = "O+"
             });
             TipoSangre.Add(new
             {
-                Id = "On",
+                Id = "O-",
                 Descripcion = "O-"
             });
             TipoSangre.Add(new
             {
-                Id = "Ap",
+                Id = "A+",
                 Descripcion = "A+"
             });
             TipoSangre.Add(new
             {
-                Id = "An",
+                Id = "A-",
                 Descripcion = "A-"
             });
             ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
@@ -134,27 +134,88 @@ namespace ERP_GMEDINA.Controllers
             //Nacionalidades
             List<tbNacionalidades> Nacionalidades = new List<tbNacionalidades> { };
             ViewBag.nac_Id = new SelectList(Nacionalidades, "nac_Id", "nac_Descripcion");
-
             return View();
         }
         // POST: Areas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JsonResult Create(Personas Personas,DatosProfesionalesArray DatosProfesionalesArray)
+        public ActionResult Create(Personas tbPersonas,DatosProfesionalesArray DatosProfesionalesArray)//,)
         {
-
             string msj = "...";
-            if (Personas.per_Identidad != "")
+            if (tbPersonas != null)
             {
-                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //var PA
-                    //recorro el result
-                    //{
-                    // msj= item.MensajeError + "";
-                    //}
+                    using (db = new ERP_GMEDINAEntities())
+                    {
+                        var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.per_Edad, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
+
+                        foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)
+                        {
+                            msj = item.MensajeError + "";
+                            //Competencias
+                            if(DatosProfesionalesArray.Competencias != null & msj != "-1")
+                            {
+                               for( int i =0;i < DatosProfesionalesArray.Competencias.Length;i++)
+                                {
+                                    var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(Int32.Parse(msj),DatosProfesionalesArray.Competencias[i],1,DateTime.Now);
+                                    foreach(UDP_RRHH_tbCompetenciasPersona_Insert_Result comp in Competencias )
+                                    {
+                                        var result = comp.MensajeError + "";
+                                    }
+                                }   
+                            }
+                            //Habilidades
+                            if (DatosProfesionalesArray.Habilidades != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionalesArray.Competencias.Length; i++)
+                                {
+                                    var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(Int32.Parse(msj), DatosProfesionalesArray.Habilidades[i], 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbHabilidadesPersona_Insert_Result hab in Habilidades)
+                                    {
+                                        var result = hab.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Idiomas
+                            if (DatosProfesionalesArray.Idiomas != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionalesArray.Idiomas.Length; i++)
+                                {
+                                    var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Insert(Int32.Parse(msj), DatosProfesionalesArray.Idiomas[i], 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbIdiomasPersona_Insert_Result idi in Idiomas)
+                                    {
+                                        var result = idi.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Requerimientos Especiales
+                            if (DatosProfesionalesArray.ReqEspeciales != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionalesArray.ReqEspeciales.Length; i++)
+                                {
+                                    var ReqEspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(Int32.Parse(msj), DatosProfesionalesArray.ReqEspeciales[i], 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result rep in ReqEspeciales)
+                                    {
+                                        var result = rep.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Titulos
+                            if (DatosProfesionalesArray.Titulos != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionalesArray.Titulos.Length; i++)
+                                {
+                                    var Titulos = db.UDP_RRHH_tbTitulosPersona_Insert(Int32.Parse(msj), DatosProfesionalesArray.Titulos[i],2000, 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbTitulosPersona_Insert_Result rep in Titulos)
+                                    {
+                                        var result = rep.MensajeError + "";
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -354,13 +415,14 @@ namespace ERP_GMEDINA.Controllers
         }
         // POST: Areas/Delete/5
         [HttpPost]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Personas tbPersonas)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
             string result = "";
             using (db = new ERP_GMEDINAEntities())
             {
+
+                List<V_tbPersonas> lista = new List<V_tbPersonas> { };
+                lista = db.V_tbPersonas.Where(x => x.per_Id == tbPersonas.per_Id).ToList();
                 try
                 {
                     //en esta area Inavilitamos el registro con el procedimiento almacenado

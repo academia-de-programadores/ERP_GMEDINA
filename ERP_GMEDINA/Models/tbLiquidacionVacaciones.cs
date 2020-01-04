@@ -12,28 +12,26 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoPlanillaDetalleDeduccion
+    public partial class tbLiquidacionVacaciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoPlanillaDetalleDeduccion()
+        public tbLiquidacionVacaciones()
         {
-            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
+            this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
         }
     
-        public int tpdd_IdPlanillaDetDeduccion { get; set; }
-        public int cpla_IdPlanilla { get; set; }
-        public int cde_IdDeducciones { get; set; }
-        public int tpdd_UsuarioCrea { get; set; }
-        public System.DateTime tpdd_FechaCrea { get; set; }
-        public Nullable<int> tpdd_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tpdd_FechaModifica { get; set; }
-        public bool tpdd_Activo { get; set; }
+        public int pvac_IdPagoVacaciones { get; set; }
+        public int pvac_Antiguedad { get; set; }
+        public int pvac_dias { get; set; }
+        public int pvac_UsuarioCrea { get; set; }
+        public System.DateTime pvac_FechaCrea { get; set; }
+        public Nullable<int> pvac_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> pvac_FechaModifica { get; set; }
+        public bool pvac_Activo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
-        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
+        public virtual ICollection<tbLiquidaciones> tbLiquidaciones { get; set; }
     }
 }

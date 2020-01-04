@@ -48,6 +48,35 @@
     div += '</div>';
     return div ;
 }
+$("#btnInhabilitar").click(function () {
+    CierraPopups();
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#per_RazonInactivo").val("");
+    $("#ModalInhabilitar").find("#per_RazonInactivo").focus();
+});
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.per_Id = id;
+        data = JSON.stringify({ tbPersonas: data });
+        _ajax(data,
+            '/Personas/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["rsal_Descripcion", "rsal_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 function llenarTabla() {
     _ajax(null,
        '/Personas/llenarTabla',

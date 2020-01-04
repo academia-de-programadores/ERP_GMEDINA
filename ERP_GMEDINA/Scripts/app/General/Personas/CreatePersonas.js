@@ -1,5 +1,4 @@
-﻿
-function llenarDropDownList() {
+﻿function llenarDropDownList() {
     _ajax(null,
        '/Personas/llenarDropDowlistNacionalidades',
        'POST',
@@ -43,7 +42,6 @@ function ListFill(obj) {
     SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160 });
     SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160 });
 };
-
 $(document).ready(function () {
     llenarDropDownList();
     _ajax(null,
@@ -64,22 +62,29 @@ $(document).ready(function () {
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
 
-            var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
-            var Form = $("#tbPersonas").find("select, input").serializeArray();
-            Form = serializarPro(Form);
-            Form = JSON.stringify({ Personas: Form, DatosProfesionales: data });
-            console.log(Form);
+            var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+            var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
+            tbPersonas = serializarPro(Form);
+            data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
+            console.log(data);
 
-            _ajax(Form,
-            '/Personas/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
+            if (Form != null)
+            {
+                _ajax(data,
+                '/Personas/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    } else {
+                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    }
+                });
+            }
+            else {
+                MsgError("Error", "por favor llene todas las cajas de texto");
+            }
+
         },
     });
 });
