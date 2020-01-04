@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class PersonasController : Controller
     {
-        public ERP_GMEDINAEntities db = null;
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Personas
         public ActionResult Index()
@@ -35,7 +35,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbPersonas);
         }
-
+        // GET : Personas/Llenar DDL
         public ActionResult llenarDropDowlistNacionalidades()
         {
             var Nacionalidades = new List<object> { };
@@ -62,7 +62,7 @@ namespace ERP_GMEDINA.Controllers
             result.Add("nac_Id", Nacionalidades);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        // GET : Personas/Create
         public ActionResult Create()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
@@ -130,15 +130,165 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
             ViewBag.per_EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
             ViewBag.per_Sexo = new SelectList(Sexo, "Id", "Descripcion");
-
             //Nacionalidades
             List<tbNacionalidades> Nacionalidades = new List<tbNacionalidades> { };
             ViewBag.nac_Id = new SelectList(Nacionalidades, "nac_Id", "nac_Descripcion");
             return View();
         }
-        // POST: Areas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET : Personas/LlenarTabla
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbPersonas = db.tbPersonas
+                        .Select(
+                        p => new
+                        {
+                            Id = p.per_Id,
+                            Identidad = p.per_Identidad,
+                            Nombre = p.per_Nombres + " " + p.per_Apellidos,
+                            CorreoElectronico = p.per_CorreoElectronico,
+                            Estado = p.per_Estado
+                        })
+                        .Where(p => p.Estado == true)
+                        .ToList();
+                    return Json(tbPersonas, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+        // GET : Personas/ChildRowData
+        public ActionResult ChildRowData(int? id)
+        {
+            
+            using (db = new ERP_GMEDINAEntities())
+            {
+                List<V_tbPersonas> lista = null;
+                using (db = new ERP_GMEDINAEntities())
+                try
+                {
+                    lista =new List<V_tbPersonas> { };     
+                    var Competencias = db.tbCompetenciasPersona.Select(c => new { cope_Id = c.cope_Id, per_Id = c.per_Id , Descripcion = c.tbCompetencias.comp_Descripcion}).ToList();
+                    foreach (var X in Competencias)
+                    {
+                        if(X.per_Id == id)
+                        {
+                            lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.cope_Id, Descripcion = X.Descripcion, Relacion = "Competencias" });
+                        }
+                    }
+                    var Habilidades = db.tbHabilidadesPersona.Select(h => new { hape_Id = h.hape_Id, per_Id = h.per_Id, Descripcion = h.tbHabilidades.habi_Descripcion }).ToList();
+                    foreach (var X in Habilidades)
+                    {
+                        if(X.per_Id == id)
+                        {
+                            lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.hape_Id, Descripcion = X.Descripcion, Relacion = "Habilidades" });
+                        }
+                    }
+                    var Idiomas = db.tbIdiomaPersona.Select(i => new { idpe_Id = i.idpe_Id, per_Id = i.per_Id, Descripcion = i.tbIdiomas.idi_Descripcion }).ToList();
+                    foreach (var X in Idiomas)
+                    {
+                        if (X.per_Id == id)
+                        {
+                            lista.Add(new V_tbPersonas { per_Id = X.per_Id.Value, Relacion_Id = X.idpe_Id, Descripcion = X.Descripcion, Relacion = "Idiomas" });
+                        }
+                    }
+                    var ReEspeciales = db.tbRequerimientosEspecialesPersona.Select(rep => new { rep_Id = rep.rep_Id, per_Id = rep.per_Id, Descripcion = rep.tbRequerimientosEspeciales.resp_Descripcion }).ToList();
+                    foreach (var X in ReEspeciales)
+                    {
+                        if (X.per_Id == id)
+                        {
+                            lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.rep_Id, Descripcion = X.Descripcion, Relacion = "Requerimientos_Especiales" });
+                        }
+                    }
+                    var Titulos = db.tbTitulosPersona.Select(t => new { tipe_Id = t.tipe_Id, per_Id = t.per_Id, Descripcion = t.tbTitulos.titu_Descripcion }).ToList();
+                    foreach (var X in Titulos)
+                    {
+                        if (X.per_Id == id)
+                        {
+                            lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.tipe_Id, Descripcion = X.Descripcion, Relacion = "Titulos" });
+                        }
+                    }
+                        if (lista.Count == 0)
+                    {
+                        lista.Add(new V_tbPersonas { per_Id = id.Value, Relacion_Id = 0, Descripcion = "", Relacion = "" });
+                    }
+
+                    return Json(lista, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                }
+                return Json(lista, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        // GET : Personas/Create
+        public ActionResult DualListBoxData()
+        {
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                    DatosProfesionales Data = new DatosProfesionales();
+                    foreach (var X in lista)
+                    {
+                        switch (X.TipoDato)
+                        {
+                            case "C":
+                                tbCompetencias Comp = new tbCompetencias();
+                                Comp.comp_Descripcion = X.Descripcion;
+                                Comp.comp_Id = X.Id;
+                                Data.Competencias.Add(Comp);
+                                break;
+
+                            case "H":
+                                tbHabilidades Habi = new tbHabilidades();
+                                Habi.habi_Descripcion = X.Descripcion;
+                                Habi.habi_Id = X.Id;
+                                Data.Habilidades.Add(Habi);
+                                break;
+
+                            case "I":
+                                tbIdiomas Idi = new tbIdiomas();
+                                Idi.idi_Descripcion = X.Descripcion;
+                                Idi.idi_Id = X.Id;
+                                Data.Idiomas.Add(Idi);
+                                break;
+
+                            case "T":
+                                tbTitulos Titu = new tbTitulos();
+                                Titu.titu_Descripcion = X.Descripcion;
+                                Titu.titu_Id = X.Id;
+                                Data.Titulos.Add(Titu);
+                                break;
+
+                            case "R":
+                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
+                                Reqs.resp_Descripcion = X.Descripcion;
+                                Reqs.resp_Id = X.Id;
+                                Data.ReqEspeciales.Add(Reqs);
+                                break;
+                        }
+                    }
+
+                    return Json(Data, JsonRequestBehavior.AllowGet);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                }
+            }
+            return Json("-2", JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: Personas/Create
         [HttpPost]
         public ActionResult Create(Personas tbPersonas,DatosProfesionalesArray DatosProfesionalesArray)//,)
         {
@@ -228,117 +378,7 @@ namespace ERP_GMEDINA.Controllers
                 msj = "-3";
             }
             return Json(msj, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult llenarTabla()
-        {
-            try
-            {
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var tbPersonas = db.tbPersonas
-                        .Select(
-                        p => new
-                        {
-                            Id = p.per_Id,
-                            Identidad = p.per_Identidad,
-                            Nombre = p.per_Nombres + " " + p.per_Apellidos,
-                            CorreoElectronico = p.per_CorreoElectronico
-                        })
-                        .ToList();
-                    return Json(tbPersonas, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch
-            {
-                return Json("-2", JsonRequestBehavior.AllowGet);
-            }
-        }
-        //Llenar Drop Nacionalidades
-        
-        public ActionResult ChildRowData(int? id)
-        {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            
-            List<V_tbPersonas> lista = new List<V_tbPersonas> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
-                    if(lista.Count == 0)
-                    {
-                        lista.Add(new V_tbPersonas { per_Id = id,Relacion_Id =0,Descripcion ="",Relacion = "" });
-                    }
-                }
-                catch(Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-            }
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult DualListBoxData()
-        {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            //List<tbHorarios> lista = new List<tbHorarios> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
-                    DatosProfesionales Data = new DatosProfesionales();
-                    foreach (var X in lista)
-                    {
-                        switch (X.TipoDato)
-                        {
-                            case "C":
-                                tbCompetencias Comp = new tbCompetencias();
-                                Comp.comp_Descripcion = X.Descripcion;
-                                Comp.comp_Id = X.Id;
-                                Data.Competencias.Add(Comp);
-                                break;
-
-                            case "H":
-                                tbHabilidades Habi = new tbHabilidades();
-                                Habi.habi_Descripcion = X.Descripcion;
-                                Habi.habi_Id = X.Id;
-                                Data.Habilidades.Add(Habi);
-                                break;
-
-                            case "I":
-                                tbIdiomas Idi = new tbIdiomas();
-                                Idi.idi_Descripcion = X.Descripcion;
-                                Idi.idi_Id = X.Id;
-                                Data.Idiomas.Add(Idi);
-                                break;
-
-                            case "T":
-                                tbTitulos Titu = new tbTitulos();
-                                Titu.titu_Descripcion = X.Descripcion;
-                                Titu.titu_Id = X.Id;
-                                Data.Titulos.Add(Titu);
-                                break;
-
-                            case "R":
-                                tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
-                                Reqs.resp_Descripcion = X.Descripcion;
-                                Reqs.resp_Id = X.Id;
-                                Data.ReqEspeciales.Add(Reqs);
-                                break;
-                        }
-                    }
-
-                    return Json(Data, JsonRequestBehavior.AllowGet);
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-            }
-            return Json("-2", JsonRequestBehavior.AllowGet);
-        }
+        }        
         //Detalles
         public ActionResult Detalles(int? id)
         {
@@ -392,13 +432,9 @@ namespace ERP_GMEDINA.Controllers
             return View(tbPersonas);
         }
         // POST: Areas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Edit([Bind(Include = "area_Id,car_Id,suc_Id,area_Descripcion,area_Estado,area_Razoninactivo,area_Usuariocrea,area_Fechacrea,area_Usuariomodifica,area_Fechamodifica")] tbAreas tbAreas)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
             string result = "";
             using (db = new ERP_GMEDINAEntities())
             {
@@ -417,22 +453,87 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Delete(Personas tbPersonas)
         {
+            string msj = "";
             string result = "";
             using (db = new ERP_GMEDINAEntities())
             {
-
-                List<V_tbPersonas> lista = new List<V_tbPersonas> { };
-                lista = db.V_tbPersonas.Where(x => x.per_Id == tbPersonas.per_Id).ToList();
                 try
                 {
-                    //en esta area Inavilitamos el registro con el procedimiento almacenado
+                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,tbPersonas.per_RazonInactivo,1,DateTime.Now);
+                    foreach(UDP_RRHH_tbPersonas_Inactivar_Result item in _list)
+                    {
+                        msj = item.MensajeError + "";
+                        if(msj != "-1")
+                        {
+                            var Competencias = db.tbCompetenciasPersona.Select(c => new { cope_Id = c.cope_Id, per_Id = c.per_Id }).ToList();
+                            foreach (var X in Competencias)
+                            {
+                                if (X.per_Id == tbPersonas.per_Id)
+                                    {
+                                        var Comp = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(X.cope_Id,"Persona Inactivada",1,DateTime.Now);
+                                        foreach(UDP_RRHH_tbCompetenciasPersona_Inactivar_Result cmp in Comp)
+                                        {
+                                            result = cmp.MensajeError + "";
+                                        }
+                                    }
+                            }
+                            var Habilidades = db.tbHabilidadesPersona.Select(h => new { hape_Id = h.hape_Id , per_Id = h.per_Id }).ToList();
+                            foreach(var x in Habilidades)
+                            {
+                                if(x.per_Id == tbPersonas.per_Id)
+                                    {
+                                        var Habi = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(x.hape_Id,"Personas Inactivada",1,DateTime.Now);
+                                        foreach(UDP_RRHH_tbHabilidadesPersona_Inactivar_Result hab in Habi)
+                                        {
+                                            result = hab.MensajeError + "";
+                                        }
+                                    }
+                            }
+                            var Idiomas = db.tbIdiomaPersona.Select(i => new { idpe_Id = i.idpe_Id, per_Id = i.per_Id }).ToList();
+                            foreach (var x in Idiomas)
+                            {
+                                if (x.per_Id == tbPersonas.per_Id)
+                                {
+                                    var Idim = db.UDP_RRHH_tbIdiomasPersona_Inactivar(x.idpe_Id, "Personas Inactivada", 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbIdiomasPersona_Inactivar_Result idi in Idim)
+                                    {
+                                        result = idi.MensajeError + "";
+                                    }
+                                }
+                            }
+                            var REspeciales = db.tbRequerimientosEspecialesPersona.Select(re => new { rep_Id = re.rep_Id, per_Id = re.per_Id }).ToList();
+                            foreach (var x in REspeciales)
+                            {
+                                if (x.per_Id == tbPersonas.per_Id)
+                                {
+                                    var ReEs = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(x.rep_Id, "Personas Inactivada", 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result resp in ReEs)
+                                    {
+                                        result = resp.MensajeError + "";
+                                    }
+                                }
+                            }
+                            var Titulos = db.tbTitulosPersona.Select(t => new { tipe_Id = t.tipe_Id, per_Id = t.per_Id }).ToList();
+                            foreach (var x in Titulos)
+                            {
+                                if (x.per_Id == tbPersonas.per_Id)
+                                {
+                                    var Titu = db.UDP_RRHH_tbTitulosPersona_Inactivar(x.tipe_Id, "Personas Inactivada", 1, DateTime.Now);
+                                    foreach (UDP_RRHH_tbTitulosPersona_Inactivar_Result tit in Titu)
+                                    {
+                                        result = tit.MensajeError + "";
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 catch
                 {
-                    result = "-2";
+                    msj = "-2";
                 }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
         protected tbUsuario IsNull(tbUsuario valor)

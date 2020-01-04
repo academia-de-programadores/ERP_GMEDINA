@@ -2621,10 +2621,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbNacionalidades' does not have
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbPersonas">
           <Key>
+            
+            
             <PropertyRef Name="Relacion" />
           </Key>
-          <Property Name="per_Id" Type="int" />
-          <Property Name="Relacion_Id" Type="int" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="Relacion_Id" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Relacion" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
@@ -6465,6 +6467,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbCompetenciasPersona_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="cope_Id" Type="int" Mode="In" />
+          <Parameter Name="cope_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="cope_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="cope_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -6597,6 +6600,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbHabilidadesPersona_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hape_Id" Type="int" Mode="In" />
+          <Parameter Name="hape_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hape_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hape_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -6732,6 +6736,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbIdiomasPersona_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="idpe_Id" Type="int" Mode="In" />
+          <Parameter Name="idpe_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="idpe_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="idpe_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -6796,6 +6801,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbPersonas_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="per_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="per_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="per_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -6861,6 +6867,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="rep_Id" Type="int" Mode="In" />
+          <Parameter Name="rep_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="rep_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="rep_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -7034,6 +7041,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Function>
         <Function Name="UDP_RRHH_tbTitulosPersona_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tipe_Id" Type="int" Mode="In" />
+          <Parameter Name="tipe_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="tipe_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="tipe_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -11883,21 +11891,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
-          <FunctionImport Name="UDP_RRHH_tbCompetenciasPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Inactivar_Result)">
-            <Parameter Name="cope_Id" Mode="In" Type="Int32" />
-            <Parameter Name="cope_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="cope_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbCompetenciasPersona_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Insert_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="comp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cope_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cope_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHabilidadesPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidadesPersona_Inactivar_Result)">
-            <Parameter Name="hape_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hape_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="hape_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHabilidadesPersona_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidadesPersona_Insert_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
@@ -11905,21 +11903,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <Parameter Name="hape_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hape_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbIdiomasPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Inactivar_Result)">
-            <Parameter Name="idpe_Id" Mode="In" Type="Int32" />
-            <Parameter Name="idpe_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="idpe_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbIdiomasPersona_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Insert_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="idi_Id" Mode="In" Type="Int32" />
             <Parameter Name="idpe_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="idpe_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbPersonas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Inactivar_Result)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="per_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbPersonas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Insert_Result)">
             <Parameter Name="per_Identidad" Mode="In" Type="String" />
@@ -11937,21 +11925,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <Parameter Name="per_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="per_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result)">
-            <Parameter Name="rep_Id" Mode="In" Type="Int32" />
-            <Parameter Name="rep_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="rep_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="resp_Id" Mode="In" Type="Int32" />
             <Parameter Name="rep_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="rep_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTitulosPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Inactivar_Result)">
-            <Parameter Name="tipe_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tipe_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTitulosPersona_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Insert_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
@@ -11959,6 +11937,42 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <Parameter Name="titu_Anio" Mode="In" Type="Int32" />
             <Parameter Name="tipe_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tipe_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbCompetenciasPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Inactivar_Result)">
+            <Parameter Name="cope_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cope_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="cope_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cope_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHabilidadesPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHabilidadesPersona_Inactivar_Result)">
+            <Parameter Name="hape_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hape_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hape_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hape_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbIdiomasPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Inactivar_Result)">
+            <Parameter Name="idpe_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idpe_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="idpe_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="idpe_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbPersonas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Inactivar_Result)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result)">
+            <Parameter Name="rep_Id" Mode="In" Type="Int32" />
+            <Parameter Name="rep_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="rep_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="rep_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbTitulosPersona_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Inactivar_Result)">
+            <Parameter Name="tipe_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tipe_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="tipe_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -13514,8 +13528,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <Key>
             <PropertyRef Name="Relacion" />
           </Key>
-          <Property Name="per_Id" Type="Int32" />
-          <Property Name="Relacion_Id" Type="Int32" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="Relacion_Id" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Relacion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -18693,10 +18707,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         <ComplexType Name="UDP_RRHH_tbIdiomasPersona_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result">
+        <ComplexType Name="UDP_RRHH_tbPersonas_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbPersonas_Inactivar_Result">
+        <ComplexType Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTitulosPersona_Inactivar_Result">
@@ -21640,23 +21654,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetenciasPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetenciasPersona_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Inactivar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetenciasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetenciasPersona_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidadesPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidadesPersona_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidadesPersona_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -21668,23 +21668,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomasPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomasPersona_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Inactivar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomasPersona_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -21696,13 +21682,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspecialesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result">
@@ -21710,16 +21689,51 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Inactivar" >
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Inactivar_Result">
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Insert" >
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetenciasPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetenciasPersona_Inactivar" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Insert_Result">
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbCompetenciasPersona_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidadesPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidadesPersona_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHabilidadesPersona_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomasPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomasPersona_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbIdiomasPersona_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

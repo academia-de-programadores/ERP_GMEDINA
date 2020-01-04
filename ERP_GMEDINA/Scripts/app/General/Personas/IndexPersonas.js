@@ -15,7 +15,7 @@
             Hab += '<label>' + index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Idiomas")
             Idi += '<label>' + index.Descripcion.toString() + '</label><br>';
-        else if (index.Relacion == "Requerimientoss_Especiales")
+        else if (index.Relacion == "Requerimientos_Especiales")
             ReEs += '<label>' + index.Descripcion.toString() + '</label><br>';
         else if (index.Relacion == "Titulos")
             Tit += '<label>' + index.Descripcion.toString() + '</label><br>';
@@ -67,7 +67,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["rsal_Descripcion", "rsal_RazonInactivo"]);
+                    LimpiarControles(["per_Descripcion", "per_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
