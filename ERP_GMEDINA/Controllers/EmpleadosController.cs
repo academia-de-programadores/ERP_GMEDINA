@@ -237,6 +237,7 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult UploadEmpleados( HttpPostedFileBase FileUpload)
         {
+            var archivo = Request.Files;
             if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
             {//OPEN IF 
                 string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);

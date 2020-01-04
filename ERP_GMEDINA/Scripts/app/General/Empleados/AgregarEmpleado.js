@@ -9,13 +9,22 @@ $("#btnUpload").change(function () {
         MsgError("¡Error!", "Debe Agregar el archivo de excel correspondiente");
     }
 });
-//$("#btnGuardar").click(function () {
-//    //var data = new FormData();
-//    //var Archivo="ArchivoEmpleados";
-//    var $file = $("#btnUpload").get(0).files;
-//    $formData = new FormData();
+$("#btnGuardar").click(function () {
 
-//   // var files = $("#btnUpload").get(0).files;
+    var inputFileImage = document.getElementById("#btnUpload").value;
+    //var texto = document.getElementById("texto").value;
+    //alert(texto + inputFileImage);
+    $.ajax({
+        url: '/Empleados/UploadEmpleados',
+        type: "POST",
+        data: { FileUpload: inputFileImage }
+    });
+    //var data = new FormData();
+    //var Archivo="ArchivoEmpleados";
+//    var $file = $("#btnUpload").get(0).files;
+//    var $formData = new FormData();
+
+//   //// var files = $("#btnUpload").get(0).files;
 //    if ($file.length == 0) {
 //        MsgError("¡Error!", "Debe Agregar el archivo de excel");
 
@@ -23,7 +32,13 @@ $("#btnUpload").change(function () {
 //        $formData.append("UploadedFile", $file);
 
 //    }
-//INTENTAR CON POST
+//    //var data = new FormData();
+//    //jQuery.each(jQuery('#btnUpload')[0].files, function (i, file) {
+//    //    data.append('btnUpload-' + i, file);
+//    //});
+
+
+//////INTENTAR CON POST
 //    //if ($file.files.length > 0) {
 //    //    for (var i = 0; i < $file.files.length; i++) {
 //    //        $formData.append('file-' + i, $file.files[i]);
@@ -31,15 +46,13 @@ $("#btnUpload").change(function () {
 //    //}
 //    $.ajax({
 //        url: '/Empleados/UploadEmpleados',
-//        type: 'POST',
-//        data: $file,
-//        //dataType: 'json',
+//        type: "post",
+//        //dataType: "html",
+//        data: $formData,
+//        cache: false,
 //        contentType: false,
-//        processData: false,
-//        success: function ($data) {
-
-//        }
-//    });
-
+//        processData: false
+//    })
+//    //$.post('/Empleados/UploadEmpleados', formData);
           
-//});
+});
