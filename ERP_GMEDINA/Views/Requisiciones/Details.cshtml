@@ -1,0 +1,168 @@
+﻿@model ERP_GMEDINA.Models.tbRequisiciones
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
+	<h2>Details</h2>
+</div>
+
+<div class="ibox-content">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Experiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Experiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Sexo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Sexo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EdadMinima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_EdadMinima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EdadMaxima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_EdadMaxima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EstadoCivil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_EstadoCivil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EducacionSuperior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_EducacionSuperior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Permanente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Permanente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Vacantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_Vacantes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaRequisicion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_FechaRequisicion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaContratacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_FechaContratacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+    </dl>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.req_Id }, new {@class="btn btn-primary" }) 
+    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
+</p>
+</div>
+</div>
+</div>

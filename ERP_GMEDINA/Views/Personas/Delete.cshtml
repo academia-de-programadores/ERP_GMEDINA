@@ -1,0 +1,169 @@
+﻿@model ERP_GMEDINA.Models.tbPersonas
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbPersonas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Identidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Identidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Apellidos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Apellidos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_FechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_FechaNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Sexo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Sexo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Edad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_CorreoElectronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_EstadoCivil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_EstadoCivil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_TipoSangre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_TipoSangre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.per_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.per_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbNacionalidades.nac_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbNacionalidades.nac_Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

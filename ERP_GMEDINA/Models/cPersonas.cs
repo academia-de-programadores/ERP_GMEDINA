@@ -28,6 +28,10 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Nombre")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string per_Nombres { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
+        [Display(Name = "Apellidos")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string per_Apellidos { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]

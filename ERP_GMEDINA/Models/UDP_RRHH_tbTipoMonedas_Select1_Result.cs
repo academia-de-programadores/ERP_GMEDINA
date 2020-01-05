@@ -10,13 +10,11 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class V_tbPersonas
+    public partial class UDP_RRHH_tbTipoMonedas_Select1_Result
     {
-        public int per_Id { get; set; }
-        public int Relacion_Id { get; set; }
-        public string Descripcion { get; set; }
-        public string Relacion { get; set; }
+        public string tmon_Descripcion { get; set; }
+        public bool tmon_Estado { get; set; }
+        public string tmon_RazonInactivo { get; set; }
     }
 }

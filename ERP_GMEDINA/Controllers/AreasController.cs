@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult ChildRowData(int id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.           
+            //posteriormente es destruida.
 
             using (db = new ERP_GMEDINAEntities())
             {
@@ -158,7 +158,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         // POST: Areas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
@@ -261,7 +261,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
         // POST: Areas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Edit(cAreas cAreas, cDepartamentos[] Departamentos, cDepartamentos[] inactivar)

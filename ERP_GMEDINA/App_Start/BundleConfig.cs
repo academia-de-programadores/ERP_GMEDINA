@@ -427,7 +427,7 @@ namespace ERP_GMEDINA
 
             // Duallist Styless
             bundles.Add(new StyleBundle("~/plugins/duallistStyles").Include(
-                      "~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"));
+                      "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css"));
 
             // Duallist
             bundles.Add(new ScriptBundle("~/plugins/duallist").Include(
@@ -559,6 +559,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
+            //dataTables.buttons.min.js
 
             bundles.Add(new StyleBundle("~/Content/app/General").Include(
                  "~/Content/app/General/catalogoPlanillas.css"));
@@ -591,6 +592,18 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
                 "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
 
+            //~/Scripts/app/general/Requisiciones
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
+                "~/Scripts/app/General/Personas/CreatePersonas.js"));
 
 
             //OPTIMIZATION

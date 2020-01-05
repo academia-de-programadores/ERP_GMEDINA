@@ -1,0 +1,61 @@
+﻿@model ERP_GMEDINA.Models.tbPersonas
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle Personas</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+                    @*<dt>Id</dt>
+                    <dd id="per_Id"></dd>*@
+
+					<dt>Identidad</dt>
+                    <dd id="per_Identidad"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.per_Nombres)</dt>
+                    <dd id="per_Nombres"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbNacionalidades.nac_Descripcion)</dt>
+                    <dd id="tbNacionalidades"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.per_Edad)</dt>
+                    <dd id="per_Edad"></dd>        
+                    
+                    <dt>@Html.DisplayNameFor(model => model.per_TipoSangre)</dt>
+                    <dd id="per_TipoSangre"></dd>            
+
+                    <dt>@Html.DisplayNameFor(model => model.per_Direccion)</dt>
+                    <dd id="per_Direccion"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.per_Telefono)</dt>
+                    <dd id="per_Telefono"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.per_CorreoElectronico)</dt>
+                    <dd id="per_CorreoElectronico"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.per_FechaCrea)</dt>
+                    <dd id="per_FechaCrea"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.per_FechaModifica)</dt>
+                    <dd id="per_FechaModifica"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+                    <dd id="per_UsuarioCrea"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
+                    <dd id="per_UsuarioModifica"></dd>
+
+
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" data-id="" id="btnInhabilitar">Inactivar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
