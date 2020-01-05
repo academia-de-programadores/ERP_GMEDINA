@@ -1,19 +1,26 @@
 ﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" data-id="@item.cin_IdIngreso">Audiecia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+        '<thead>' +
+            '<tr>' +
+                '<th>' + 'Tipo Amonestacion' + '</th>' +
+                '<th>' + 'Fecha' + '</th>' +
+                '<th>' + 'Obsevarcion' + '</th>' +
+                '<th>' + 'Acciones' + '</th>' +
+                '</tr>' +
+                '</thead>';
     obj.forEach(function (index, value) {
-        div = div +
-            '<div class="col-md-3">' +
-                '<div class="panel panel-default">' +
-                '<div class="panel-body">' +
-                    '<h5>' + index.per_NombreCompleto + '</h5>'
-                    //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.hamo_AmonestacionAnterior + '<br>' +
-                    //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.tamo_Descripcion + '</div>' +
-                '</div>' +
-            '</div>'
+            div = div +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td>' + index.tamo_Descripcion + '</td>' +
+                    '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
+                    '<td>' + index.hamo_Observacion + '</td>' +
+                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalle</button>' + '</td>' +
+                    '</tr>' +
+                    '</tbody>'
+            '</table>'
     });
-    return div + '</div></div></div>';
+    return div + '</div></div>';
 }
 function llenarTabla() {
     _ajax(null,
@@ -24,9 +31,10 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.hamo_Id,
+                   Id: value.emp_Id,
+                   Empleado: value.Empleado,
                    Cargo: value.Cargo,
-                   Empleado:value.Empleado.length == 0 ? 'Sin Asignar' : value.Empleado[0]
+                   Departamento: value.Departamento
                });
            });
            tabla.draw();
@@ -35,7 +43,7 @@ function llenarTabla() {
 $(document).ready(function () {
     llenarTabla();
 });
-
+var IdEmpleado = 0;
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);
@@ -45,6 +53,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
     else {
         id = row.data().Id;
+        IdEmpleado = id;
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/HistorialAmonestaciones/ChildRowData',
@@ -52,8 +61,89 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
+                    tr.removeClass('loading');
                     tr.addClass('shown');
                 }
             });
     }
 });
+
+
+function llamarmodal() {
+    var modalnuevo = $("#ModalNuevo");
+    $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
+    modalnuevo.modal('show');
+}
+function llamarmodaldelete(ID) {
+    var modaldelete = $("#ModalInhabilitar");
+    $("#ModalInhabilitar").find("#hamo_Id").val(ID);
+    modaldelete.modal('show');
+}
+
+function llamarmodaldetalles(ID) {
+    var modaldetalle = $("#ModalDetalles");
+    _ajax({ ID: parseInt(ID) },
+        '/HistorialAmonestaciones/Edit/',
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalDetalles").find("#emp_Id")[0].innerText = obj.emp_Id;
+                $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
+                $("#ModalDetalles").find("#tbTipoAmonestaciones_tamo_Descripcion")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
+                $("#ModalDetalles").find("#hamo_Fecha")["0"].innerText = FechaFormato(obj.hamo_Fecha).substring(0, 10);
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = FechaFormato(obj.hamo_FechaCrea).substring(0, 10);
+                $('#ModalDetalles').modal('show');
+            }
+        }); 
+}
+
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialAmonestaciones: data });
+        _ajax(data,
+            '/HistorialAmonestaciones/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["hamo_Id", "hamo_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
+
+$("#btnGuardar").click(function () {
+    var data = $("#FormNuevo").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialAmonestaciones: data });
+        _ajax(data,
+            '/HistorialAmonestaciones/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
+
+
