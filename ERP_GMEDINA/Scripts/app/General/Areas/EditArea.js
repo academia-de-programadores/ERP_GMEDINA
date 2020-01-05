@@ -110,7 +110,7 @@ function llenarChild() {
             data.forEach(function (valor,indice) {
                 ChildTable.row.add(
                     {
-                        Id:valor.car_Id,
+                     Id: valor.depto_Id,
                         Descripcion: valor.depto_Descripcion,
                         Cargo: valor.car_Descripcion,
                     });

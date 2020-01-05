@@ -37,6 +37,7 @@ namespace ERP_GMEDINA.Controllers
                         {
                             area_Id = t.area_Id,
                             area_Descripcion = t.area_Descripcion,
+                            Sucursales=t.tbSucursales.suc_Descripcion,
                             Encargado = t.tbCargos.tbEmpleados
                                 .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos)
                         }
@@ -91,6 +92,7 @@ namespace ERP_GMEDINA.Controllers
                     .Select(depto =>
                     new
                     {
+                        depto_Id = depto.depto_Id,
                         car_Id = depto.tbCargos.car_Id,
                         car_Descripcion = depto.tbCargos.car_Descripcion,
                         depto_Descripcion = depto.depto_Descripcion
@@ -134,18 +136,12 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             tbAreas tbAreas = null;
-            using (db = new ERP_GMEDINAEntities())
+            db = new ERP_GMEDINAEntities();
+            try
             {
-                try
-                {
-                    tbAreas = db.tbAreas.Find(id);
-                }
-                catch
-                {
-
-                }
+                tbAreas = db.tbAreas.Find(id);
             }
-            if (tbAreas == null)
+            catch
             {
                 return HttpNotFound();
             }
@@ -294,6 +290,25 @@ namespace ERP_GMEDINA.Controllers
                             return Json("-2", JsonRequestBehavior.AllowGet);
                         }
                         cAreas.area_Id = int.Parse(item.MensajeError);
+                    }
+                    inactivar = inactivar == null ? new cDepartamentos[] { } : inactivar;
+                    Departamentos = Departamentos == null ? new cDepartamentos[] { } :Departamentos;
+                    foreach (cDepartamentos item in inactivar)
+                    {
+                        var depto = db.UDP_RRHH_tbDepartamentos_Delete(
+                                item.depto_Id,
+                                item.depto_RazonInactivo,
+                                Usuario.usu_Id,
+                                DateTime.Now);
+                        string mensajeDB = "";
+                        foreach (UDP_RRHH_tbDepartamentos_Delete_Result i in depto)
+                        {
+                            mensajeDB = i.MensajeError.ToString();
+                        }
+                        if (mensajeDB == "-1")
+                        {
+                            return Json("-2", JsonRequestBehavior.AllowGet);
+                        }
                     }
                     foreach (cDepartamentos item in Departamentos)
                     {

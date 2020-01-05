@@ -1,6 +1,7 @@
 ﻿//
 var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
+
 function CierraPopups() {
     $.each(modal, function (index, valor) {
         $("#" + valor).modal('hide');//ocultamos el modal

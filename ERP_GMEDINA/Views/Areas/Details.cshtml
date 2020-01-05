@@ -6,91 +6,117 @@
 }
 
 <div class="col-lg-12">
-<div class="ibox float-e-margins">
-<div class="ibox-title">
-	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
-	<h2>Details</h2>
-</div>
+ <div class="ibox float-e-margins">
+  <div class="ibox-title">
+   @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+   <h2>Details</h2>
+  </div>
 
-<div class="ibox-content">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.suc_Id)
-        </dt>
+  <div class="ibox-content">
+   <div class="row">
+    <div class="col-md-6">
+     <dl class="dl-horizontal">
+      <dt>
+       @Html.DisplayNameFor(model => model.suc_Id)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.suc_Id)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.tbSucursales.suc_Descripcion)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area_Descripcion)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.area_Descripcion)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.area_Descripcion)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.area_Descripcion)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area_Estado)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.area_Estado)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.area_Estado)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.area_Estado)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area_Razoninactivo)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.area_Razoninactivo)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.area_Razoninactivo)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.area_Razoninactivo)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area_Fechacrea)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.area_Fechacrea)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.area_Fechacrea)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.area_Fechacrea)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.area_Fechamodifica)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.area_Fechamodifica)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.area_Fechamodifica)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.area_Fechamodifica)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
-        </dt>
+      <dt>
+       @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
+      </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
-        </dd>
+      <dd>
+       @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
+      </dd>
 
-    </dl>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.area_Id }, new {@class="btn btn-primary" }) 
-    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
-</p>
-</div>
-</div>
+     </dl>
+    </div>
+    <div class="col-md-6">
+     <h3 class="title">Departamentos</h3>
+     <table class="table">
+      <thead>
+       <tr>
+        <th>@Html.DisplayNameFor(model => model.tbDepartamentos.First().depto_Descripcion)</th>
+        <th>@Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)</th>
+       </tr>
+      </thead>
+      <tbody>
+       @foreach (var item in Model.tbDepartamentos)
+       {
+           <tr>
+            <td>@item.depto_Descripcion</td>
+            <td>@item.tbCargos.car_Descripcion</td>
+         </tr>
+       }
+      </tbody>
+     </table>
+    </div>
+    <div class="col-lg-12">
+    <p>
+     @Html.ActionLink("Editar", "Edit", new { id = Model.area_Id }, new { @class = "btn btn-primary" })
+     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+    </p>
+   </div>
+   </div>
+  </div>
+ </div>
 </div>
