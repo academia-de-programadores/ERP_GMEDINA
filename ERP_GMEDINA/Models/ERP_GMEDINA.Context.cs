@@ -93,7 +93,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_HistorialHorasTrabajadas> V_HistorialHorasTrabajadas { get; set; }
         public virtual DbSet<V_HistorialIncapacidades> V_HistorialIncapacidades { get; set; }
         public virtual DbSet<V_HorariosDetalles> V_HorariosDetalles { get; set; }
-        public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
         public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
         public virtual DbSet<V_tbHistorialSalidas> V_tbHistorialSalidas { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }

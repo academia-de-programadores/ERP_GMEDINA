@@ -781,9 +781,6 @@
     <Compile Include="Models\V_HorariosDetalles.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_SeleccionCandidatos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_tbEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1659,6 +1656,7 @@
     <Content Include="Views\Jornadas\_Detalles.cshtml" />
     <Content Include="Views\Jornadas\_Edit.cshtml" />
     <Content Include="Views\Jornadas\_Delete.cshtml" />
+    <Content Include="Views\Jornadas\_CreateHorario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
