@@ -59,9 +59,9 @@ function format(obj) {
                   '<div class="panel-heading">' +
                      '<h5>' + index.hor_descripcion + '</h5>' +
                 '</div>' +
-                '<div class="panel-body">' + 'Hora Inicio: '
-                    + index.hor_HoraInicio.toString() + '<br> Hora Fin: ' +
-                    index.hor_HoraFin + '</div>' +
+                '<div class="panel-body">' +
+                'Hora Inicio: ' + index.hor_HoraInicio.toString() +
+                '<br> Hora Fin: ' + index.hor_HoraFin + '</div>' +                
                 '</div>' +
             '</div>'
     });
@@ -199,3 +199,8 @@ $("#InActivar").click(function () {
     }
 });
 
+
+$(document).on("click", "#IndexTable tbody tr td button#btnAgregarHorarios", function () {
+    var Id = $(this).closest('tr').data('id');
+    console.log(Id);
+})
