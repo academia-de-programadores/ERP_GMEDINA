@@ -1563,15 +1563,11 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Restore_Result>("UDP_RRHH_tbHorarios_Restore", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHorarios_Update_Result> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Update_Result> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
             var hor_idParameter = hor_id.HasValue ?
                 new ObjectParameter("hor_id", hor_id) :
                 new ObjectParameter("hor_id", typeof(int));
-    
-            var jor_IdParameter = jor_Id.HasValue ?
-                new ObjectParameter("jor_Id", jor_Id) :
-                new ObjectParameter("jor_Id", typeof(int));
     
             var hor_DescripcionParameter = hor_Descripcion != null ?
                 new ObjectParameter("hor_Descripcion", hor_Descripcion) :
@@ -1593,7 +1589,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, jor_IdParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbIdiomas_Delete_Result> UDP_RRHH_tbIdiomas_Delete(Nullable<int> idi_Id, string idi_razon_Inactivo, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
@@ -2847,7 +2843,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialPermisos_Restore", hper_IdParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialSalidas_Update(Nullable<int> hsal_Id, string hsal_Observacion, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialSalidas_Update_Result> UDP_RRHH_tbHistorialSalidas_Update(Nullable<int> hsal_Id, string hsal_Observacion, Nullable<int> hsal_UsuarioModifica, Nullable<System.DateTime> fare_FechaModifica)
         {
             var hsal_IdParameter = hsal_Id.HasValue ?
                 new ObjectParameter("hsal_Id", hsal_Id) :
@@ -2865,7 +2861,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("fare_FechaModifica", fare_FechaModifica) :
                 new ObjectParameter("fare_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialSalidas_Update", hsal_IdParameter, hsal_ObservacionParameter, hsal_UsuarioModificaParameter, fare_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialSalidas_Update_Result>("UDP_RRHH_tbHistorialSalidas_Update", hsal_IdParameter, hsal_ObservacionParameter, hsal_UsuarioModificaParameter, fare_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbSueldos_Update(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
