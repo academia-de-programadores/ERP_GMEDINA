@@ -39,14 +39,18 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                tabla.row.add([value.tsal_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tsal_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tsal_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+             tabla.row.add(
+              {
+               id: value.tsal_Id,
+               Descripcion: value.tsal_Descripcion
+              }
+              ).draw();
             });
         });
 }
+$(document).ready(function () {
+ llenarTabla();
+});
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
