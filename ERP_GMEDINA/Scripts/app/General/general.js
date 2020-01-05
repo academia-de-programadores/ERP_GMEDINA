@@ -105,7 +105,7 @@ function limpiarClases(form) {
         div = $(input).closest("div");
         div.removeClass("has-error has-warning");
     });
-    $(form).find("#form").serializeArray().forEach(function (id, valor) {
+    $(form).find("form").serializeArray().forEach(function (id, valor) {
         div.find("#error" + id.name).text("");
     });
 }
@@ -151,8 +151,8 @@ $(".required").each(function (indice, input) {
             span.text(txt_maxlength);
             event.preventDefault();
         } else {
-            $(span).closest("div").removeClass("has-error has-warning");
-            $(span).removeClass("text-danger text-warning");
+            $(span).removeClass("text-warning");
+            $(span).closest("div").removeClass("has-warning");
             $(form).find("#error" + id).text("");
         }
     }

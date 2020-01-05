@@ -10,7 +10,7 @@ $(document).ready(function () {
         campo = valor.innerText;
         //Quita los espacios del enacabezado.
         //El nombre del campo en el Json sera el DisplayName de la clase parcial SIN espacios, respetando mayusculas.
-        campo = campo.replace(/\s/g, '');
+        campo = campo.replace(' ','');
         //Si la primera columna no tiene encabezado, sera la columna de botones de expandir
         if (campo == "") {
             columnas.push({
@@ -29,8 +29,7 @@ $(document).ready(function () {
             });
             col = col + 1;
         }
-
-            //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
+        //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
                 data: null,
@@ -40,24 +39,14 @@ $(document).ready(function () {
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
                                 "</div>"
             });
-        }
-            //else if (campo == "Reportes") {
-            //    columnas.push({
-            //        data: null,
-            //        orderable: false,
-            //        defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-            //                            "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Horas Trabajadas</a>" +
-            //                            "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Perfil Profesional</a>" +
-            //                        "</div>"
-            //    });
-            //}
-        else {
+        } else {
             columnas.push({ data: campo });
             botones.push(contador);
         }
     });
     tabla = $('#IndexTable').DataTable({
         "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+        responsive: true,
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
@@ -96,8 +85,6 @@ $(document).ready(function () {
                 customize: function (win) {
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
-
-
 
                     $(win.document.body).find('table')
                             .addClass('compact')
