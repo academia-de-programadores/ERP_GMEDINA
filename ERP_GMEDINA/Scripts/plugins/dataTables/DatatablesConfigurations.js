@@ -142,7 +142,7 @@ $(document).ready(function () {
         //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes
         columns: columnas,
         order: [[col, 'asc']],
-        
+
     });
 });
 
