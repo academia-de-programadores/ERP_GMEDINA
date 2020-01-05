@@ -74,7 +74,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
    
-
+  
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
@@ -352,6 +352,7 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
+            //tbEmpleados.tbPersonas = db.tbPersonas.Find(tbEmpleados.per_Id);
             if (tbEmpleados == null)
             {
                 return HttpNotFound();

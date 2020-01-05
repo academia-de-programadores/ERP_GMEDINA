@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID")]
         public int car_Id { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Cargo")]
         public string car_Descripcion { get; set; }
 
         [Display(Name = "Estado")]

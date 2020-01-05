@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id")]
         public int jor_Id { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Jornada")]
         public string jor_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
