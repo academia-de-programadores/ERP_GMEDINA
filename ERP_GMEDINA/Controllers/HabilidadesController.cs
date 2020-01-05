@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HabilidadesController : Controller
     {
-        private ERP_GMEDINAEntities db =  new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: Habilidades
         public ActionResult Index()
@@ -24,18 +24,18 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbHabilidades> tbHabilidades =
-                new List<Models.tbHabilidades> { };
-            var lista = db.tbHabilidades.Where(x => x.habi_Estado == true).ToList();
-            foreach (tbHabilidades x in lista)
-            {
-                tbHabilidades.Add(new tbHabilidades
-                {
-                    habi_Id = x.habi_Id,
-                    habi_Descripcion = x.habi_Descripcion
-                });
-            }
-            return Json(tbHabilidades, JsonRequestBehavior.AllowGet);
+            var lista = db.tbHabilidades
+                .Where(x => x.habi_Estado == true)
+                .Select(
+                    t =>
+                    new
+                    {
+                        habi_Id = t.habi_Id,
+                        habi_Descripcion = t.habi_Descripcion
+                    }
+                )
+                .ToList();
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Create

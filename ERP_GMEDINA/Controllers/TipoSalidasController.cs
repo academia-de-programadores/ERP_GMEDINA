@@ -34,17 +34,17 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTipoSalidas> tbTipoSalidas =
-                new List<Models.tbTipoSalidas> { };
-            foreach (tbTipoSalidas x in db.tbTipoSalidas.ToList().Where(x => x.tsal_Estado == true))
-            {
-                tbTipoSalidas.Add(new tbTipoSalidas
+            var lista = db.tbTipoSalidas
+                .Where(x => x.tsal_Estado == true)
+                .Select(
+                t =>
+                new
                 {
-                    tsal_Id = x.tsal_Id,
-                    tsal_Descripcion = x.tsal_Descripcion
-                });
-            }
-            return Json(tbTipoSalidas, JsonRequestBehavior.AllowGet);
+                    tsal_Id = t.tsal_Id,
+                    tsal_Descripcion = t.tsal_Descripcion
+                })
+                .ToList();
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Habilidades/Create
