@@ -52,10 +52,10 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().id;
+        ID = row.data().ID;
         hola = row.data();
         tr.addClass('loading');
-        _ajax({ id: parseInt(id) },
+        _ajax({ ID: parseInt(ID) },
             '/Empleados/ChildRowData',
             'GET',
             function (obj) {
