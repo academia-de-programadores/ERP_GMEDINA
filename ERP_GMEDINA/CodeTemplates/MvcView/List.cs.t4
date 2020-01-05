@@ -78,7 +78,7 @@ else {
             {
                 count++;
             }
-			
+
 
 				if (count >=6)
 	{
@@ -128,7 +128,7 @@ else {
 	 permiso = false;
 	}
 	}
-	
+
 	if (count >=9)
 	{
 		if (property.PropertyName.Substring(0,9) == "tbUsuario")
@@ -156,7 +156,7 @@ else {
 <#
                       string pkName = GetPrimaryKeyName();
 #>
-                      @foreach (var item in Model) 
+                      @foreach (var item in Model)
                       {
                         <tr class="gradeA odd" role="row" data-id="@item.<#= pkName #>">
 <#
@@ -169,7 +169,7 @@ else {
             {
                 count++;
             }
-			
+
 
 				if (count >=6)
 	{
@@ -259,7 +259,7 @@ else {
 #>
                         </tr>
                       }
-                    </tbody>                       
+                    </tbody>
                   </table>
                 </div>
             </div>

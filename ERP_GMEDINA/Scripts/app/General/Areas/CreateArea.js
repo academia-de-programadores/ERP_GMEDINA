@@ -77,6 +77,12 @@ function getJson() {
     }
     return list;
 }
+function Remover(btn) {
+ ChildTable
+        .row($(btn).parents('tr'))
+        .remove()
+        .draw();
+}
 function llenarDropDownList() {
     _ajax(null,
        '/Areas/llenarDropDowlist',
@@ -88,12 +94,6 @@ function llenarDropDownList() {
                });
            });
        });
-}
-function Remover(btn) {
- ChildTable
-        .row($(btn).parents('tr'))
-        .remove()
-        .draw();
 }
 $(document).ready(function () {
     llenarDropDownList();

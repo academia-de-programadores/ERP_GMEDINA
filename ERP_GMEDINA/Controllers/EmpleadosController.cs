@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
             catch
             {
                 return Json("-2", JsonRequestBehavior.AllowGet);
-            }            
+            }
         }
         public ActionResult ChildRowData(int id)
         {
@@ -73,8 +73,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
-   
-  
+
+
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
@@ -234,10 +234,10 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 if ((FileUpload.ContentLength != 0) && (FileUpload.FileName.EndsWith("xls") || FileUpload.FileName.EndsWith("xlsx")))
-                {//OPEN IF 
+                {//OPEN IF
                     string path = Server.MapPath("~/Downloadable files/" + FileUpload.FileName);
                     if (!System.IO.File.Exists(path))
-                    {//OPEN IF 
+                    {//OPEN IF
                         FileUpload.SaveAs(path);
                         Microsoft.Office.Interop.Excel.Application application = new Microsoft.Office.Interop.Excel.Application();
                         Microsoft.Office.Interop.Excel.Workbook workbook = application.Workbooks.Open(path);
@@ -250,7 +250,7 @@ namespace ERP_GMEDINA.Controllers
                             string nombre = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 2]).Text;
                             string apellidos = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 3]).Text;
                             if (identidad != "" && nombre != "" && apellidos != "")
-                            {//open if 
+                            {//open if
                                 string fechanacimiento = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 4]).Text;
                                 DateTime FECHANAC = Convert.ToDateTime(fechanacimiento);
                                 string EDAD = ((Microsoft.Office.Interop.Excel.Range)range.Cells[i, 5]).Text;
@@ -309,17 +309,17 @@ namespace ERP_GMEDINA.Controllers
                                     MensajeError = Item.MensajeError;
                                 }
                                 if (!string.IsNullOrEmpty(MensajeError))
-                                {//OPEN IF 
+                                {//OPEN IF
                                     if (MensajeError.StartsWith("-1"))
                                     {
                                         ModelState.AddModelError("", "1. No se pudo Agregar el registro");
                                         return Json(-1, JsonRequestBehavior.AllowGet);
                                     }
-                                }//CLOSE IF 
+                                }//CLOSE IF
                                 //return RedirectToAction("Index");
-                            }//close if 
+                            }//close if
                             else
-                            {//OPEN ELSE 
+                            {//OPEN ELSE
                                 break;
 
                             }//CLOSE ELSE
@@ -329,8 +329,8 @@ namespace ERP_GMEDINA.Controllers
                     else
                     {
                         return Json(-3, JsonRequestBehavior.AllowGet);
-                    } 
-                }//CLOSE IF 
+                    }
+                }//CLOSE IF
             }
             catch (Exception ex)
             {
@@ -341,7 +341,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-       
+
 
 
         // GET: Empleados/Details/5
@@ -372,7 +372,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Empleados/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -414,7 +414,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Empleados/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

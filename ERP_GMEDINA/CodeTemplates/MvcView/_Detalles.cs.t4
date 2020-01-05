@@ -84,7 +84,7 @@ if (ReferenceScriptLibraries) {
 foreach (PropertyMetadata property in ModelMetadata.Properties) {
 
 
-			
+
 
 if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
 #>

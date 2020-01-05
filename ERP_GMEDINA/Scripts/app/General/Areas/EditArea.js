@@ -1,18 +1,22 @@
 ﻿var ChildTable = null;
 var list = [];
-function Remove(Id, lista) {
-    var list = [];
-    lista.forEach(function (value, index) {
-        if (value.Id != Id) {
-            list.push(value);
-        }
-    });
-    return list;
-}
+var inactivar = [];
+var dRow = null;
+var Entidad = '';
+//function Remove(Id, lista) {
+//    var list = [];
+//    lista.forEach(function (value, index) {
+//        if (value.Id != Id) {
+//            list.push(value);
+//        }
+//    });
+//    return list;
+//}
 function Add(depto_Descripcion, car_Descripcion) {
+    var info = ChildTable.rows().data();
     if (depto_Descripcion.trim().length != 0 && car_Descripcion.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
-            var Fila = ChildTable.rows().data()[i];
+            var Fila = info[i];
             if (Fila.Descripcion == depto_Descripcion || Fila.Cargo == car_Descripcion) {
                 if (Fila.Cargo == car_Descripcion) {
                     var span = $("#FormDepartamentos").find("#errorcar_Descripcion");
@@ -34,7 +38,11 @@ function Add(depto_Descripcion, car_Descripcion) {
         ChildTable.row.add(
             {
                 Descripcion: depto_Descripcion.trim(),
-                Cargo: car_Descripcion
+                Cargo: car_Descripcion,
+                Acciones: '<div>' +
+                            '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
+                        '</div>',
+                Accion:'i'
             }
             ).draw();
     } else {
@@ -61,14 +69,15 @@ function getJson() {
     //especifico el json de datatable.
     list = new Array();
     //declaramos el objeto que ira dentro de la vista
+    var info=ChildTable.rows().data();
     for (var i = 0; i < ChildTable.data().length; i++) {
-        var fila = ChildTable.rows().data()[i];
-
+        var fila = info[i];
         var tbDepartamentos =
          {
-             Id: i,
+             depto_Id: info[i].Id,
              depto_Descripcion: fila.Descripcion,
-             tbCargos: { car_Descripcion: fila.Cargo }
+             car_Descripcion: fila.Cargo,
+             Accion: fila.Accion
          };
         list.push(tbDepartamentos);
     }
@@ -76,9 +85,38 @@ function getJson() {
 }
 function Remover(btn) {
     ChildTable
-           .row($(btn).parents('tr'))
-           .remove()
-           .draw();
+            .row($(btn).parents('tr'))
+            .remove()
+            .draw();
+}
+function Edit(btn) {
+    var tr = $(btn).closest('tr');
+    var row = ChildTable.row(tr);
+    var datos=row.data();
+    dRow = row;
+    depto_Id = datos.Id;
+    $('#ModalEditar').find("#depto_Descripcion").val(datos.Descripcion);
+    $('#ModalEditar').find("#car_Descripcion").val(datos.Cargo);
+
+    $('#ModalEditar').modal('toggle');
+    $('#ModalEditar').modal('show');
+    //$('#ModalEditar').modal('hide');
+}
+function llenarChild() {
+    _ajax(JSON.stringify({ id: area_Id }),
+        '/Areas/cargarChild',
+        'POST',
+        function (data) {
+            data.forEach(function (valor,indice) {
+                ChildTable.row.add(
+                    {
+                     Id: valor.depto_Id,
+                        Descripcion: valor.depto_Descripcion,
+                        Cargo: valor.car_Descripcion,
+                    });
+            });
+            ChildTable.draw();
+        });
 }
 $(document).ready(function () {
     ChildTable = $(ChildDataTable).DataTable({
@@ -91,13 +129,13 @@ $(document).ready(function () {
                {
                    data: 'Acciones',
                    defaultContent: '<div>' +
-                                          //'<input type="button" class="btn btn-white btn-xs" onclick="Remover(this)" value="Editar" />'+
-                                          '<input type="button" class="btn btn-danger btn-xs" onclick="Remover(this)" value="Remover" />' +
+                                          '<input type="button" class="btn btn-white btn-xs" onclick="Edit(this)" value="Editar" />'+
                                       '</div>'
                }
          ],
         order: [[0, 'asc']]
     });
+    llenarChild();
 });
 $("#add").click(function () {
     var depto_Descripcion = $("#FormDepartamentos").find("#depto_Descripcion").data("val-maxlength-max");
@@ -126,17 +164,18 @@ $("#btnCrear").click(function () {
         {
             suc_Id: $("#Sucursales").val(),
             area_Descripcion: $("#area_Descripcion").val(),
-            tbCargos: { car_Descripcion: $("#car_Descripcion").val() },
+            car_Descripcion: $("#car_Descripcion").val(),
         };
     var lista = getJson();
 
     if (tbAreas != null) {
         data = JSON.stringify({
-            tbAreas: tbAreas,
-            tbDepartamentos: lista
+            cAreas: tbAreas,
+            Departamentos: lista,
+            inactivar: inactivar
         });
         _ajax(data,
-            '/Areas/Create',
+            '/Areas/Edit',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -165,6 +204,77 @@ $("#FormDepartamentos").find("#car_Descripcion").keypress(function (envet) {
     var id = $(this).attr("id");
     var form = $(this).closest("form");
     limpiarSpan(id, form);
+});
+
+$("#ModalEditar").find("#btnActualizar").on("click", function () {
+    var depto =
+        {
+            Id:dRow.data().Id,
+            Descripcion: $('#ModalEditar').find("#depto_Descripcion").val(),
+            Cargo:$('#ModalEditar').find("#car_Descripcion").val(),
+            Accion:'e'
+        }
+    if (depto.Descripcion != "" || depto.Cargo != "") {
+        ChildTable
+        .row(dRow)
+        .remove();
+
+        ChildTable
+        .row
+        .add(depto)
+        .draw();
+        $('#ModalEditar').modal('hide');
+    }
+    dRow = null;
+});
+$("#ModalInhabilitar").find("#InActivar").on("click", function () {
+    if (Entidad == 'Depto')
+    {
+        var depto =
+       {
+           depto_Id: dRow.data().Id,
+           depto_RazonInactivo: $("#ModalInhabilitar").find("#depto_RazonInactivo").val(),
+       };
+        if (depto.depto_RazonInactivo.trim()=='') {
+            return null;
+        }
+        inactivar.push(depto);
+        ChildTable
+            .row(dRow)
+            .remove()
+            .draw();
+        dRow = null;
+        $('#ModalInhabilitar').modal('hide');
+    } else
+    {
+        var area_Razoninactivo=$("#ModalInhabilitar").find("#depto_RazonInactivo").val()
+        _ajax(JSON.stringify({ area_Razoninactivo: area_Razoninactivo }),
+            '/Areas/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
+                    $(location).attr('href', '/Areas');
+                } else {
+                    MsgError("Error", "Codigo: " + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    }
+});
+$("#btnInhabilitar").on("click", function () {
+    $("#depto_RazonInactivo").val("");
+    $('#ModalEditar').modal('hide');
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Depto";
+});
+$("#btnInactivarArea").on("click", function () {
+    $('#ModalInhabilitar').modal('toggle');
+    $('#ModalInhabilitar').modal('show');
+    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    Entidad = "Area";
 });
 function limpiarSpan(id, form) {
     var span = $(form).find("#error" + id);

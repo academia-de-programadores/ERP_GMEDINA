@@ -2,7 +2,7 @@
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/Areas/Edit/"+id);
+    $(location).attr('href', "/Areas/details/" + id);
 }
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
@@ -11,15 +11,22 @@ function tablaEditar(btn) {
     $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Departamentos</h5></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox">' +
+                '<div class="ibox-title"><h5>Departamentos</h5>' +
+                '<div class="ibox-tools">' +
+                        '<a class="collapse-link" onclick="flecha(this)" >' +
+                        '<i class="fa fa-chevron-up"></i>' +
+                        '</a>' +
+                '</div>' +
+                '</div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
             '<div class="col-md-3">'+
-                '<div class="panel panel-default">' +
-                  '<div class="panel-heading">' +
-                     '<h5>' + index.depto_Descripcion + '</h5>' +
+                '<div class="ibox">' +
+                  '<div class="ibox-title">' +
+                     '<h5>' + index.depto_Descripcion + '</h5>' +                     
                 '</div>'+
-                '<div class="panel-body">' +
+                '<div class="ibox-content">' +
                     '<h5>' + index.car_Descripcion + '</h5>'
                     //'<span class="fa fa-user-o m-r-xs"></span>' +
                     + index.per_NombreCompleto + '<br>' +
@@ -41,11 +48,24 @@ function llenarTabla() {
                tabla.row.add({
                    Id: value.area_Id,
                    Descripcion: value.area_Descripcion,
-                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0]
+                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                   Sucursales: value.Sucursales
                });
            });
            tabla.draw();
        });
+}
+function flecha(obj) {
+    var ibox = $(obj).closest('div.ibox');
+    var button = $(obj).find('i');
+    var content = ibox.find('div.ibox-content');
+    content.slideToggle(200);
+    button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+    ibox.toggleClass('').toggleClass('border-bottom');
+    setTimeout(function () {
+        ibox.resize();
+        ibox.find('[id^=map-]').resize();
+    }, 50);
 }
 $(document).ready(function () {
     llenarTabla();
@@ -71,5 +91,4 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                 }
             });
     }
-
 });

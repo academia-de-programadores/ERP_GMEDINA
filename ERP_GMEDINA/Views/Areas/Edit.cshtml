@@ -12,8 +12,6 @@
                     @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
                     <h2>Create</h2>
                 </div>
-
-
                 <div class="ibox-content">
                     <div class="form-horizontal">
                         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormAreas" }))
@@ -71,6 +69,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear" />
+                                <input type="button" value="Inactivar" class="btn btn-danger" id="btnInactivarArea" />
                                 @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                             </div>
                         </div>
@@ -78,6 +77,8 @@
                 </div>
             </div>
         </div>
+                @Html.Partial("_DeleteDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
+                @Html.Partial("_EditDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
     </div>
 </div>
 
@@ -90,4 +91,7 @@
     @Scripts.Render("~/plugins/customdataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/EditArea")
+    <script>
+        var area_Id=@Html.DisplayFor(model => model.area_Id);
+    </script>
 }
