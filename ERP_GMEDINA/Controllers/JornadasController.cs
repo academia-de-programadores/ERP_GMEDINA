@@ -56,27 +56,28 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        public ActionResult llenarDropDownList()
-        {
-            var tbHorarios = new List<object> { };
-            using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    tbHorarios.Add(new { Id = 0, Descripcion = "** Seleccione una opcion **" });
-                    tbHorarios.AddRange(db.tbHorarios.Select(t => new { Id = t.hor_Id, Descripcion = t.hor_Descripcion, t.hor_Estado }).Where(t => t.hor_Estado == true).ToList());
-                }
-                catch
-                {
-                    return Json("-2", 0);
-                }
-            }
-            var result = new Dictionary<string, object>();
-            result.Add("tbHorarios", tbHorarios);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult llenarDropDownList()
+        //{
+        //    var tbHorarios = new List<object> { };
+        //    using (db = new ERP_GMEDINAEntities())
+        //    {
+        //        try
+        //        {
+        //            tbHorarios.Add(new { Id = 0, Descripcion = "** Seleccione una opcion **" });
+        //            tbHorarios.AddRange(db.tbHorarios.Select(t => new { Id = t.hor_Id, Descripcion = t.hor_Descripcion, t.hor_Estado }).Where(t => t.hor_Estado == true).ToList());
+        //        }
+        //        catch
+        //        {
+        //            return Json("-2", 0);
+        //        }
+        //    }
+        //    var result = new Dictionary<string, object>();
+        //    result.Add("tbHorarios", tbHorarios);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
         // GET: Jornadas
+
         public ActionResult Index()
         {
             //var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
@@ -119,7 +120,8 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
-        }        
+        }
+        
 
         // POST: Jornadas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

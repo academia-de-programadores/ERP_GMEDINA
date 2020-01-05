@@ -51,7 +51,7 @@ function tablaDetalles(ID) {
 function format(obj) {
     //var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5><button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button></div></div><div class="ibox-content"><div class="row">';</div><div class="ibox-content"><div class="row">';
     //<button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button></div></div><div class="ibox-content"><div class="row">';
-    var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right"><button data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Agregar </button></div></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right"><button id = "btnAgregarHorarios" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-paste"></i> Agregar </button></div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
             '<div class="col-md-3">' +
@@ -100,6 +100,16 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#jor_Descripcion").val("");
     $(modalnuevo).find("#jor_Descripcion").focus();
 })
+
+$("#btnAgregarHorarios").click(function () {
+    var modalnuevo = $('#ModalNuevoHorarios');
+    modalnuevo.modal('show');
+    $(modalnuevo).find("#hor_Descripcion").val("");
+    $(modalnuevo).find("#hor_Descripcion").focus();
+    $(modalnuevo).find("#hor_HoraInicio").val("");
+    $(modalnuevo).find("#hor_HoraFin").val("");
+})
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/Jornadas/Edit/' + id,
