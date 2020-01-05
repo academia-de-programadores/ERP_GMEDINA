@@ -47,3 +47,9 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
         }
     });
 });
+
+
+function tablaDetalles(ID) {
+    id = ID;
+    $(location).attr('href', "/Empleados/details/" + id);
+}

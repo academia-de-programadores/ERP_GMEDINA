@@ -1,176 +1,236 @@
 ﻿@model ERP_GMEDINA.Models.tbEmpleados
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles de Empleado";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <div class="col-lg-12">
-<div class="ibox float-e-margins">
-<div class="ibox-title">
-	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
-	<h2>Details</h2>
-</div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+            <h2>Detalles del Empleado</h2>
+        </div>
 
-<div class="ibox-content">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.depto_Id)
-        </dt>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Datos Personales
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Identidad)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.depto_Id)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_Identidad)
+                                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.jor_Id)
-        </dt>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Nombres)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.jor_Id)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_Nombres)
+                                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.cpla_IdPlanilla)
-        </dt>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Apellidos)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.cpla_IdPlanilla)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_Apellidos)
+                                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fpa_IdFormaPago)
-        </dt>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.tbPersonas.per_CorreoElectronico)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fpa_IdFormaPago)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_CorreoElectronico)
+                                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_CuentaBancaria)
-        </dt>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Telefono)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_CuentaBancaria)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_Sexo)
+                                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_Reingreso)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.tbPersonas.per_Sexo)
+                                    </dd>
+                                </dl>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Datos del Empleado
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_Reingreso)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_CuentaBancaria)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_Fechaingreso)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_CuentaBancaria)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_Fechaingreso)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_Fechaingreso)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_RazonSalida)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_Fechaingreso)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_RazonSalida)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_Reingreso)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_CargoAnterior)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_Reingreso)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_CargoAnterior)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_FechaDeSalida)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_FechaDeSalida)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbDepartamentos.depto_Descripcion)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_Estado)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_Estado)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbJornadas.jor_Descripcion)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_RazonInactivo)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_RazonInactivo)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_FechaCrea)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbFormaPago.fpa_Descripcion)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_FechaCrea)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.emp_FechaModifica)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.emp_FechaModifica)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
+                                @*<dt>
+                                        @Html.DisplayNameFor(model => model.emp_RazonSalida)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.emp_RazonSalida)
+                                    </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_CargoAnterior)
+                                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dd>
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_CargoAnterior)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)
-        </dt>
+                                @*<dt>
+                                        @Html.DisplayNameFor(model => model.emp_FechaDeSalida)
+                                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbAreas.area_Descripcion)
-        </dd>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.emp_FechaDeSalida)
+                                    </dd>*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
-        </dd>
+                                @*<dt>
+                                        @Html.DisplayNameFor(model => model.emp_RazonInactivo)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbPersonas.per_Identidad)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.emp_RazonInactivo)
+                                    </dd>*@
 
-        <dd>
-            @Html.DisplayFor(model => model.tbPersonas.per_Identidad)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_FechaCrea)
+                                </dt>
 
-    </dl>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.emp_Id }, new {@class="btn btn-primary" }) 
-    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
-</p>
-</div>
-</div>
-</div>
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_FechaCrea)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.emp_FechaModifica)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.emp_FechaModifica)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbAreas.area_Descripcion)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
+                                </dd>
+                            </dl>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <p>
+            @*@Html.ActionLink("Editar", "Edit", new { id = Model.emp_Id }, new {@class="btn btn-primary" })*@
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+            </div>
+        </div>

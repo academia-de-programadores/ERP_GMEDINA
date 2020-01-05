@@ -41,16 +41,16 @@ $(document).ready(function () {
                                 "</div>"
             });
         }
-        //else if (campo == "Reportes") {
-        //    columnas.push({
-        //        data: null,
-        //        orderable: false,
-        //        defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-        //                            "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Horas Trabajadas</a>" +
-        //                            "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Perfil Profesional</a>" +
-        //                        "</div>"
-        //    });
-        //}
+        else if (campo == "Info") {
+            columnas.push({
+                data: null,
+                orderable: false,
+                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                                    "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
+                                    
+                                "</div>"
+            });
+        }
         else {
             columnas.push({ data: campo });
             botones.push(contador);

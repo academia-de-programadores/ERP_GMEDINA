@@ -34,12 +34,19 @@ namespace ERP_GMEDINA.Models
         public int jor_Id { get; set; }
 
         public int cpla_IdPlanilla { get; set; }
+
         public int fpa_IdFormaPago { get; set; }
+        [Display(Name = "Cuenta Bancaria ")]
         public string emp_CuentaBancaria { get; set; }
+        [Display(Name = "Reingreso")]
         public bool emp_Reingreso { get; set; }
+        [Display(Name = "Fecha de Ingreso")]
         public System.DateTime emp_Fechaingreso { get; set; }
+        [Display(Name = "Razon Salida")]
         public string emp_RazonSalida { get; set; }
+        [Display(Name = "Cargo Anterior")]
         public Nullable<int> emp_CargoAnterior { get; set; }
+        [Display(Name = "Fecha de Salida")]
         public Nullable<System.DateTime> emp_FechaDeSalida { get; set; }
         public bool emp_Estado { get; set; }
         public string emp_RazonInactivo { get; set; }

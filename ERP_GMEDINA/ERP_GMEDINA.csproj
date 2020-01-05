@@ -883,6 +883,9 @@
     <Content Include="Content\img\email_1.jpg" />
     <Content Include="Content\img\email_2.jpg" />
     <Content Include="Content\img\email_3.jpg" />
+    <Content Include="Content\img\flecha-derecha.png" />
+    <Content Include="Content\img\flecha-derecha.svg" />
+    <Content Include="Content\img\flecha-hacia-la-izquierda.svg" />
     <Content Include="Content\img\full_height.jpg" />
     <Content Include="Content\img\header-profile-skin-1.png" />
     <Content Include="Content\img\header-profile-skin-2.png" />
@@ -893,6 +896,7 @@
     <Content Include="Content\img\header_two.jpg" />
     <Content Include="Content\img\iphone.jpg" />
     <Content Include="Content\img\laptop.png" />
+    <Content Include="Content\img\LoadingSpinner.gif" />
     <Content Include="Content\img\off_canvas.jpg" />
     <Content Include="Content\img\otis_redding.png" />
     <Content Include="Content\img\p1.jpg" />
@@ -1601,10 +1605,7 @@
     <Content Include="Views\Idiomas\_Delete.cshtml" />
     <Content Include="Views\Idiomas\_Detalles.cshtml" />
     <Content Include="Views\Idiomas\_Edit.cshtml" />
-    <Content Include="Views\Empleados\Create.cshtml" />
-    <Content Include="Views\Empleados\Delete.cshtml" />
     <Content Include="Views\Empleados\Details.cshtml" />
-    <Content Include="Views\Empleados\Edit.cshtml" />
     <Content Include="Views\Empleados\Index.cshtml" />
     <Content Include="Views\Competencias\Index.cshtml" />
     <Content Include="Views\Competencias\_Create.cshtml" />
