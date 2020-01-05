@@ -115,6 +115,9 @@
                             <li class="@Html.IsSelected(controller:"TipoSalidas",action: "Index")">
                                 <a href="@Url.Action("Index", "TipoSalidas")">Tipos de Salidas</a>
                             </li>
+                            <li class="@Html.IsSelected(controller:"HistorialSalidas",action: "Index")">
+                                <a href="@Url.Action("Index", "HistorialSalidas")">Historial de Salidas</a>
+                            </li>
                             @*<li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Amonestaciones</a>
                             </li>*@
@@ -181,6 +184,10 @@
                             <li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Seleccion de Candidatos</a>
                             </li>*@
+
+                            <li class="@Html.IsSelected(controller:"RequerimientosEspeciales", action: "Index")">
+                                <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>
+                            </li>
                         </ul>
                     </li>
                     @*RECLUTAMIENTO*@
