@@ -167,6 +167,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
+    <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
     <Compile Include="Models\cTipoPermisos.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
@@ -226,7 +227,13 @@
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoMonedas_Delete_Result.cs">
@@ -241,7 +248,13 @@
     <Compile Include="Models\UDP_RRHH_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_HistorialPermisos.cs">
+    <Compile Include="Models\V_HistorialPermisos_Empleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbHistorialPermisos.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbHistorialPermisos_completa.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -465,6 +478,7 @@
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\HistorialPermisos\CreateHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
@@ -993,6 +1007,10 @@
     <Content Include="Views\HistorialPermisos\Details.cshtml" />
     <Content Include="Views\HistorialPermisos\Edit.cshtml" />
     <Content Include="Views\HistorialPermisos\Index.cshtml" />
+    <Content Include="Views\HistorialPermisos\_DetallesHistorialPermisos.cshtml" />
+    <Content Include="Views\HistorialPermisos\_EditHistorialPermisos.cshtml" />
+    <Content Include="Views\HistorialPermisos\_AddEmpleado.cshtml" />
+    <Content Include="Views\HistorialPermisos\_InhabilitarHistorialPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

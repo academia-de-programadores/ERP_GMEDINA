@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="72">
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoPermisos_tper_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" />
@@ -29,12 +29,14 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoMonedas" Width="1.5" PointX="3" PointY="9.125" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoMonedas_tmon_UsuarioModifica" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialPermisos" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialPermisos" Width="1.5" PointX="7.5" PointY="8.25" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialPermisos_emp_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbTipoPermisos_tper_Id_rrhh_tbHistorialPermisos_tper_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialPermisos_Empleados" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos" Width="1.5" PointX="3" PointY="0.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos_completa" Width="1.5" PointX="5.75" PointY="0.5" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

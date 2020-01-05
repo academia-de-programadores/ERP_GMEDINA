@@ -60,34 +60,34 @@ namespace ERP_GMEDINA.Controllers
         // POST: TipoMonedas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public JsonResult Create(tbTipoMonedas tbTipoMonedas)
-        {
-            string msj = "...";
-            if (tbTipoMonedas.tmon_Descripcion != "")
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-            }
+        //[HttpPost]
+        //public JsonResult Create(tbTipoMonedas tbTipoMonedas)
+        //{
+        //    string msj = "...";
+        //    if (tbTipoMonedas.tmon_Descripcion != "")
+        //    {
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
+        //            foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
+        //            {
+        //                msj = item.MensajeError;
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //    }
 
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
         // GET: TipoMonedas/Edit/5
         public ActionResult Edit(int? id)
         {

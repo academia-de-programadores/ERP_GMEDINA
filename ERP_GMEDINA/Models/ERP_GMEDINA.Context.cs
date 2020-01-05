@@ -32,8 +32,10 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbPersonas> tbPersonas { get; set; }
         public virtual DbSet<tbTipoPermisos> tbTipoPermisos { get; set; }
         public virtual DbSet<tbTipoMonedas> tbTipoMonedas { get; set; }
-        public virtual DbSet<V_HistorialPermisos> V_HistorialPermisos { get; set; }
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
+        public virtual DbSet<V_HistorialPermisos_Empleados> V_HistorialPermisos_Empleados { get; set; }
+        public virtual DbSet<V_tbHistorialPermisos> V_tbHistorialPermisos { get; set; }
+        public virtual DbSet<V_tbHistorialPermisos_completa> V_tbHistorialPermisos_completa { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -1021,7 +1023,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Delete_Result>("UDP_RRHH_tbTipoMonedas_Delete", tmon_IdParameter, tmon_razon_InactivoParameter, tmon_UsuarioModificaParameter, tmon_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Insert_Result> UDP_RRHH_tbTipoMonedas_Insert(string tmon_Descripcion, Nullable<int> tmon_UsuarioCrea, Nullable<System.DateTime> tmon_FechaCrea)
+        public virtual int UDP_RRHH_tbTipoMonedas_Insert(string tmon_Descripcion, Nullable<int> tmon_UsuarioCrea, Nullable<System.DateTime> tmon_FechaCrea)
         {
             var tmon_DescripcionParameter = tmon_Descripcion != null ?
                 new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
@@ -1035,7 +1037,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tmon_FechaCrea", tmon_FechaCrea) :
                 new ObjectParameter("tmon_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Insert_Result>("UDP_RRHH_tbTipoMonedas_Insert", tmon_DescripcionParameter, tmon_UsuarioCreaParameter, tmon_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbTipoMonedas_Insert", tmon_DescripcionParameter, tmon_UsuarioCreaParameter, tmon_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Select_Result> UDP_RRHH_tbTipoMonedas_Select(Nullable<int> tmon_Id)
@@ -1045,80 +1047,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tmon_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Select_Result>("UDP_RRHH_tbTipoMonedas_Select", tmon_IdParameter);
-        }
-    
-        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Insert_Result> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> hper_Id, Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, Nullable<int> hper_Duracion, string hper_Observacion, Nullable<bool> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, string hper_RazonInactivo, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
-        {
-            var hper_IdParameter = hper_Id.HasValue ?
-                new ObjectParameter("hper_Id", hper_Id) :
-                new ObjectParameter("hper_Id", typeof(int));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var tper_IdParameter = tper_Id.HasValue ?
-                new ObjectParameter("tper_Id", tper_Id) :
-                new ObjectParameter("tper_Id", typeof(int));
-    
-            var hper_fechaInicioParameter = hper_fechaInicio.HasValue ?
-                new ObjectParameter("hper_fechaInicio", hper_fechaInicio) :
-                new ObjectParameter("hper_fechaInicio", typeof(System.DateTime));
-    
-            var hper_fechaFinParameter = hper_fechaFin.HasValue ?
-                new ObjectParameter("hper_fechaFin", hper_fechaFin) :
-                new ObjectParameter("hper_fechaFin", typeof(System.DateTime));
-    
-            var hper_DuracionParameter = hper_Duracion.HasValue ?
-                new ObjectParameter("hper_Duracion", hper_Duracion) :
-                new ObjectParameter("hper_Duracion", typeof(int));
-    
-            var hper_ObservacionParameter = hper_Observacion != null ?
-                new ObjectParameter("hper_Observacion", hper_Observacion) :
-                new ObjectParameter("hper_Observacion", typeof(string));
-    
-            var hper_JustificadoParameter = hper_Justificado.HasValue ?
-                new ObjectParameter("hper_Justificado", hper_Justificado) :
-                new ObjectParameter("hper_Justificado", typeof(bool));
-    
-            var hper_PorcentajeIndemnizadoParameter = hper_PorcentajeIndemnizado.HasValue ?
-                new ObjectParameter("hper_PorcentajeIndemnizado", hper_PorcentajeIndemnizado) :
-                new ObjectParameter("hper_PorcentajeIndemnizado", typeof(int));
-    
-            var hper_RazonInactivoParameter = hper_RazonInactivo != null ?
-                new ObjectParameter("hper_RazonInactivo", hper_RazonInactivo) :
-                new ObjectParameter("hper_RazonInactivo", typeof(string));
-    
-            var hper_UsuarioCreaParameter = hper_UsuarioCrea.HasValue ?
-                new ObjectParameter("hper_UsuarioCrea", hper_UsuarioCrea) :
-                new ObjectParameter("hper_UsuarioCrea", typeof(int));
-    
-            var hper_FechaCreaParameter = hper_FechaCrea.HasValue ?
-                new ObjectParameter("hper_FechaCrea", hper_FechaCrea) :
-                new ObjectParameter("hper_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", hper_IdParameter, emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_DuracionParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_RazonInactivoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbHistorialPermisos_Delete(Nullable<int> hper_Id, string hper_razon_Inactivo, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
-        {
-            var hper_IdParameter = hper_Id.HasValue ?
-                new ObjectParameter("hper_Id", hper_Id) :
-                new ObjectParameter("hper_Id", typeof(int));
-    
-            var hper_razon_InactivoParameter = hper_razon_Inactivo != null ?
-                new ObjectParameter("hper_razon_Inactivo", hper_razon_Inactivo) :
-                new ObjectParameter("hper_razon_Inactivo", typeof(string));
-    
-            var hper_UsuarioModificaParameter = hper_UsuarioModifica.HasValue ?
-                new ObjectParameter("hper_UsuarioModifica", hper_UsuarioModifica) :
-                new ObjectParameter("hper_UsuarioModifica", typeof(int));
-    
-            var hper_FechaModificaParameter = hper_FechaModifica.HasValue ?
-                new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
-                new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbHistorialPermisos_Delete", hper_IdParameter, hper_razon_InactivoParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbHistorialPermisos_Restore(Nullable<int> hper_Id, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
@@ -1136,6 +1064,106 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialPermisos_Restore", hper_IdParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Update_Result> UDP_RRHH_tbHistorialPermisos_Update(Nullable<int> hper_Id, string hper_Observacion, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
+        {
+            var hper_IdParameter = hper_Id.HasValue ?
+                new ObjectParameter("hper_Id", hper_Id) :
+                new ObjectParameter("hper_Id", typeof(int));
+    
+            var hper_ObservacionParameter = hper_Observacion != null ?
+                new ObjectParameter("hper_Observacion", hper_Observacion) :
+                new ObjectParameter("hper_Observacion", typeof(string));
+    
+            var hper_UsuarioModificaParameter = hper_UsuarioModifica.HasValue ?
+                new ObjectParameter("hper_UsuarioModifica", hper_UsuarioModifica) :
+                new ObjectParameter("hper_UsuarioModifica", typeof(int));
+    
+            var hper_FechaModificaParameter = hper_FechaModifica.HasValue ?
+                new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
+                new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Update_Result>("UDP_RRHH_tbHistorialPermisos_Update", hper_IdParameter, hper_ObservacionParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Delete_Result> UDP_RRHH_tbHistorialPermisos_Delete(Nullable<int> hper_Id, string hper_razon_Inactivo, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
+        {
+            var hper_IdParameter = hper_Id.HasValue ?
+                new ObjectParameter("hper_Id", hper_Id) :
+                new ObjectParameter("hper_Id", typeof(int));
+    
+            var hper_razon_InactivoParameter = hper_razon_Inactivo != null ?
+                new ObjectParameter("hper_razon_Inactivo", hper_razon_Inactivo) :
+                new ObjectParameter("hper_razon_Inactivo", typeof(string));
+    
+            var hper_UsuarioModificaParameter = hper_UsuarioModifica.HasValue ?
+                new ObjectParameter("hper_UsuarioModifica", hper_UsuarioModifica) :
+                new ObjectParameter("hper_UsuarioModifica", typeof(int));
+    
+            var hper_FechaModificaParameter = hper_FechaModifica.HasValue ?
+                new ObjectParameter("hper_FechaModifica", hper_FechaModifica) :
+                new ObjectParameter("hper_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Delete_Result>("UDP_RRHH_tbHistorialPermisos_Delete", hper_IdParameter, hper_razon_InactivoParameter, hper_UsuarioModificaParameter, hper_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbTipoMonedas_Insert_Result> UDP_RRHH_tbTipoMonedas_Insert1(string tmon_Descripcion, Nullable<int> tmon_UsuarioCrea, Nullable<System.DateTime> tmon_FechaCrea)
+        {
+            var tmon_DescripcionParameter = tmon_Descripcion != null ?
+                new ObjectParameter("tmon_Descripcion", tmon_Descripcion) :
+                new ObjectParameter("tmon_Descripcion", typeof(string));
+    
+            var tmon_UsuarioCreaParameter = tmon_UsuarioCrea.HasValue ?
+                new ObjectParameter("tmon_UsuarioCrea", tmon_UsuarioCrea) :
+                new ObjectParameter("tmon_UsuarioCrea", typeof(int));
+    
+            var tmon_FechaCreaParameter = tmon_FechaCrea.HasValue ?
+                new ObjectParameter("tmon_FechaCrea", tmon_FechaCrea) :
+                new ObjectParameter("tmon_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoMonedas_Insert_Result>("UDP_RRHH_tbTipoMonedas_Insert1", tmon_DescripcionParameter, tmon_UsuarioCreaParameter, tmon_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialPermisos_Insert_Result> UDP_RRHH_tbHistorialPermisos_Insert(Nullable<int> emp_Id, Nullable<int> tper_Id, Nullable<System.DateTime> hper_fechaInicio, Nullable<System.DateTime> hper_fechaFin, string hper_Observacion, Nullable<bool> hper_Justificado, Nullable<int> hper_PorcentajeIndemnizado, Nullable<int> hper_UsuarioCrea, Nullable<System.DateTime> hper_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var tper_IdParameter = tper_Id.HasValue ?
+                new ObjectParameter("tper_Id", tper_Id) :
+                new ObjectParameter("tper_Id", typeof(int));
+    
+            var hper_fechaInicioParameter = hper_fechaInicio.HasValue ?
+                new ObjectParameter("hper_fechaInicio", hper_fechaInicio) :
+                new ObjectParameter("hper_fechaInicio", typeof(System.DateTime));
+    
+            var hper_fechaFinParameter = hper_fechaFin.HasValue ?
+                new ObjectParameter("hper_fechaFin", hper_fechaFin) :
+                new ObjectParameter("hper_fechaFin", typeof(System.DateTime));
+    
+            var hper_ObservacionParameter = hper_Observacion != null ?
+                new ObjectParameter("hper_Observacion", hper_Observacion) :
+                new ObjectParameter("hper_Observacion", typeof(string));
+    
+            var hper_JustificadoParameter = hper_Justificado.HasValue ?
+                new ObjectParameter("hper_Justificado", hper_Justificado) :
+                new ObjectParameter("hper_Justificado", typeof(bool));
+    
+            var hper_PorcentajeIndemnizadoParameter = hper_PorcentajeIndemnizado.HasValue ?
+                new ObjectParameter("hper_PorcentajeIndemnizado", hper_PorcentajeIndemnizado) :
+                new ObjectParameter("hper_PorcentajeIndemnizado", typeof(int));
+    
+            var hper_UsuarioCreaParameter = hper_UsuarioCrea.HasValue ?
+                new ObjectParameter("hper_UsuarioCrea", hper_UsuarioCrea) :
+                new ObjectParameter("hper_UsuarioCrea", typeof(int));
+    
+            var hper_FechaCreaParameter = hper_FechaCrea.HasValue ?
+                new ObjectParameter("hper_FechaCrea", hper_FechaCrea) :
+                new ObjectParameter("hper_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿@model ERP_GMEDINA.Models.cHistorialPermisos_Empleados
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEmpleados" }))
+{
+    <div class="col-md-4 b-r">
+        @*@*//---emp_Id---*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id", null, htmlAttributes: new { @class = "form-control required", @id = "Empleados" })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger", @id = "errorEmpleados" })
+            </div>
+        </div>
+        @*@*//---emp_RazonInactivo---*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Razon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Razon, new { htmlAttributes = new { @class = "form-control required" } })
+                @Html.ValidationMessageFor(model => model.Razon, "", new { @class = "text-danger", @id = "erroremp_RazonInactivo" })
+            </div>
+        </div>*@
+        <input type="button" class="btn btn-primary" id="add" value="Agregar" />
+    </div>
+}
