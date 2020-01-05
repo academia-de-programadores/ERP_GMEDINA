@@ -319,7 +319,7 @@ namespace ERP_GMEDINA.Controllers
                                     if (MensajeError.StartsWith("-1"))
                                     {
                                         ModelState.AddModelError("", "1. No se pudo Agregar el registro");
-                                        return Json("-1", JsonRequestBehavior.AllowGet);
+                                        return Json(-1, JsonRequestBehavior.AllowGet);
                                     }
                                 }//CLOSE IF 
                                 //return RedirectToAction("Index");
@@ -341,9 +341,9 @@ namespace ERP_GMEDINA.Controllers
             catch (Exception ex)
             {
                 ex.ToString();
-                return Json("-2", JsonRequestBehavior.AllowGet);
+                return Json(-2, JsonRequestBehavior.AllowGet);
             }
-            return Json("1", JsonRequestBehavior.AllowGet);
+            return Json(1, JsonRequestBehavior.AllowGet);
         }
 
 

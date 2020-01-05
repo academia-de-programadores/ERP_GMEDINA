@@ -42,7 +42,7 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
         }
         else if (res == "1") {
             MsgSuccess("Exito", "Se han agregado los registros con exito");
-            llenartabla();
+            llenarTabla();
             $('#ModalNuevo').modal('hide');
         }
     });
