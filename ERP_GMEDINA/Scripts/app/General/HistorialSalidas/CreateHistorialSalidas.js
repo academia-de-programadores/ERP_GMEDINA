@@ -159,6 +159,31 @@ $(document).ready(function () {
         order: [[0, 'asc']]
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $("#add").click(function () {
     var Id = $("#FormEmpleados").find("#Empleados").val();
     if (Id == 0) {
@@ -183,9 +208,26 @@ $("#add").click(function () {
     $("#FormEmpleados").validate();
 }
 });
+
+
+
 $("#FormCreate").submit(function (e) {
     e.preventDefault();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#TipoSalidas").val() == 0) {

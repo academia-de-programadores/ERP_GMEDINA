@@ -47,7 +47,7 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         [Display(Name = "Usuario modifica")]
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
-        public virtual tbTipoPermisos tbTipoPermisos { get; set; }
+        //public virtual tbEmpleados tbEmpleados { get; set; }
+        //public virtual tbTipoPermisos tbTipoPermisos { get; set; }
     }
 }

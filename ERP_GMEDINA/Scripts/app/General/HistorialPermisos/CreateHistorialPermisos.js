@@ -9,45 +9,73 @@ function Remove(Id, lista) {
     });
     return list;
 }
-function Add(Empleados, Razon, ver) {
-    if (Empleados.trim().length != 0 || Razon.trim().length != 0) {
+//alert("a");
+function Add(Empleados, Salida, Regreso, ver, justificado) {
+    if (Empleados.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Empleados == ver || Fila.Empleados == '0') {
-                if (Fila.Empleados == ver) {
+            if (Fila.Empleados == '0' /*|| () &&*/) {
                     var span = $("#FormEmpleados").find("#errorEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
                     span.text('Seleccione otra opción');
                     $("#FormEmpleados").find("#Empleados").focus();
-                }
                 return null;
             }
             else {
-                var span = $("#FormEmpleados").find("#errorEmpleados");
-                $(span).removeClass("text-warning");
-                span.text('');
+                if (Fila.Empleados == ver && Salida < Fila.Regreso){
+                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    $(span).addClass("text-warning");
+                    $(span).closest("div").addClass("has-warning");
+                    span.text('Fecha ya amparada');
+                    $("#FormEmpleados").find("#hper_fechaInicio").focus();
+                    return null;
+                }
+                else if (Regreso <= Salida) {
+                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    $(span).addClass("text-warning");
+                    $(span).closest("div").addClass("has-warning");
+                    span.text('Orden de fecha erroneo');
+                    $("#FormEmpleados").find("#hper_fechaInicio").focus();
+                    return null;
+                }
+                else if (Fila.Empleados == ver && (Regreso < Fila.Regreso || Regreso < Fila.Salida)) {
+                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    $(span).addClass("text-warning");
+                    $(span).closest("div").addClass("has-warning");
+                    span.text('Fecha ya amparada');
+                    $("#FormEmpleados").find("#hper_fechaFin").focus();
+                    return null;
+                }
+                else {
+                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    $(span).removeClass("text-warning");
+                    span.text('');
+                }
             }
         }
         ChildTable.row.add(
             {
                 Empleados: ver,//Empleados.trim(),
+                Salida: Salida,
+                Regreso: Regreso,
                 emp_Id: Empleados,
-                Razon: Razon
+                justificado:justificado
             }
         ).draw();
-        $("#FormEmpleados").find("#Razon").val("");
+        //$("#FormEmpleados").find("#Razon").val("");
         $("#FormEmpleados").find("#Empleados").focus();
-    } else {
-        if (Razon.trim().length == 0) {
-            var txt_required = $("#FormEmpleados").find("#Razon").data("val-required");
-            var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
-            $(span).addClass("text-danger");
-            $(span).closest("div").addClass("has-error");
-            span.text(txt_required);
-            $("#FormEmpleados").find("#Razon").focus();
-        }
     }
+    //else {
+    //    if (Razon.trim().length == 0) {
+    //        var txt_required = $("#FormEmpleados").find("#Razon").data("val-required");
+    //        var span = $("#FormEmpleados").find("#erroremp_RazonInactivo");
+    //        $(span).addClass("text-danger");
+    //        $(span).closest("div").addClass("has-error");
+    //        span.text(txt_required);
+    //        $("#FormEmpleados").find("#Razon").focus();
+    //    }
+    //}
 }
 function getJson() {
     //declaramos una lista para recuperar en un formato 
@@ -60,7 +88,9 @@ function getJson() {
         {
             Id: i,
             emp_Id: fila.emp_Id,
-            emp_RazonInactivo: fila.Razon
+            hper_fechaInicio: fila.Salida,
+            hper_fechaFin: fila.Regreso,
+            hper_Justificado: fila.justificado
             //,tbCargos: { car_Descripcion: fila.Cargo }
         };
         list.push(tbEmpleados);
@@ -121,32 +151,37 @@ function llenarDropDowlistEmpleados() {
 //Llamamos los dropdowns
 $(document).ready(function () {
     $("#Empleados").select2();
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-    if (mm < 10) {
-        mm = '0' + mm
-    }
-    today = yyyy + '-' + mm + '-' + dd;
-    $("#hsal_FechaSalida").attr("max", today);
+    //var today = new Date();
+    //var dd = today.getDate();
+    //var mm = today.getMonth() + 1; //January is 0!
+    //var yyyy = today.getFullYear();
+    //if (dd < 10) {
+    //    dd = '0' + dd
+    //}
+    //if (mm < 10) {
+    //    mm = '0' + mm
+    //}
+    //today = yyyy + '-' + mm + '-' + dd;
+    //$("#hsal_FechaSalida").attr("max", today);
 
     llenarDropDowlistEmpleados();
     llenarDropDowlistTipoPermisos();
     //llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
-        pageLength: 4,
+        pageLength: 6,
         lengthChange: false,
         columns:
             [
                 { data: 'Empleados' },
-                { data: 'Razon' },
+                { data: 'Salida' },
+                { data: 'Regreso' },
                 {
                     data: 'emp_Id',
+                    "visible": false
+                },
+                {
+                    data: 'justificado',
                     "visible": false
                 },
                {
@@ -168,18 +203,22 @@ $("#add").click(function () {
         span.text('Seleccione otra opción');
         $("#FormEmpleados").find("#Empleados").focus();
     }
+        //hsal_FechaSalida: $("#hsal_FechaSalida").val()
     else {
         var Id = $("#FormEmpleados").find("#Empleados").val();
-        var Razon = $("#FormEmpleados").find("#Razon").val();
+        //var Razon = $("#FormEmpleados").find("#Razon").val();
         var ver = $('#Empleados option:selected').html();
-        var valores = Id + Razon + ver;
+        var Salida = $("#hper_fechaInicio").val();
+        var Regreso = $("#hper_fechaFin").val();
+        var justificado = $("#hper_Justificado").val();
+        var valores = Id + Salida + Regreso + ver + justificado;
         for (var i = 0; i < valores.length; i++) {
             if (valores[i] == ">" || valores[i] == "<") {
                 MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.");
                 return null;
             }
         }
-        Add(Id, Razon, ver);
+        Add(Id, Salida, Regreso, ver, justificado);
         $("#FormEmpleados").validate();
     }
 });
@@ -189,19 +228,16 @@ $("#FormCreate").submit(function (e) {
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#TipoPermisos").val() == 0) {
-        MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida");
-    //} else if ($("#RazonPermisos").val() == 0) {
-    //    MsgWarning("Error", "Es nesesario seleccionar la razon de la salida");
-    //} else if ($("#hsal_FechaSalida").val() == "") {
-    //    MsgWarning("Error", "Es nesesario seleccionar la fecha en que desocuparon su pueso de trabajo");
+        MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida"); 
+    } else if ($("#hper_PorcentajeIndemnizado").val() == "") {
+        MsgWarning("Error", "Es nesesario es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso"); 
     } else {
         //declaramos el objeto principal de nuestra tabla y asignamos sus valores
         var tbHistorialPermisos =
         {
             tper_Id: $("#TipoPermisos").val(),
-            //rsal_Id: $("#RazonPermisos").val(),
             hper_Observacion: $("#hper_Observacion").val(),
-            //hsal_FechaSalida: $("#hsal_FechaSalida").val()
+            hper_PorcentajeIndemnizado: $("#hper_PorcentajeIndemnizado").val()
         };
         var lista = getJson();
         if (lista == "") {
@@ -212,6 +248,7 @@ $("#btnCrear").click(function () {
                     tbHistorialPermisos: tbHistorialPermisos,
                     tbEmpleados: lista
                 });
+                //alert(lista);
                 _ajax(data,
                     '/HistorialPermisos/Create',
                     'POST',

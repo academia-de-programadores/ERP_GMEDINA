@@ -7,7 +7,7 @@ using System.Web;
 namespace ERP_GMEDINA.Models
 {
     [MetadataType(typeof(cHistorialPermisos_Empleados))]
-    //public partial class tbHistorialPermisos
+    //public partial class tbEmpleados
     //{
     //    public System.DateTime hper_fechaInicio { get; set; }
     //    public System.DateTime hper_fechaFin { get; set; }
