@@ -1560,27 +1560,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomas_Update_Result>("UDP_RRHH_tbIdiomas_Update", idi_IdParameter, idi_DescripcionParameter, idi_UsuarioModificaParameter, idi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbJornadas_Delete_Result> UDP_RRHH_tbJornadas_Delete(Nullable<int> jor_Id, string jor_razon_Inactivo, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
-        {
-            var jor_IdParameter = jor_Id.HasValue ?
-                new ObjectParameter("jor_Id", jor_Id) :
-                new ObjectParameter("jor_Id", typeof(int));
-    
-            var jor_razon_InactivoParameter = jor_razon_Inactivo != null ?
-                new ObjectParameter("jor_razon_Inactivo", jor_razon_Inactivo) :
-                new ObjectParameter("jor_razon_Inactivo", typeof(string));
-    
-            var jor_UsuarioModificaParameter = jor_UsuarioModifica.HasValue ?
-                new ObjectParameter("jor_UsuarioModifica", jor_UsuarioModifica) :
-                new ObjectParameter("jor_UsuarioModifica", typeof(int));
-    
-            var jor_FechaModificaParameter = jor_FechaModifica.HasValue ?
-                new ObjectParameter("jor_FechaModifica", jor_FechaModifica) :
-                new ObjectParameter("jor_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Delete_Result>("UDP_RRHH_tbJornadas_Delete", jor_IdParameter, jor_razon_InactivoParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_RRHH_tbJornadas_Insert_Result> UDP_RRHH_tbJornadas_Insert(string jor_Descripcion, Nullable<int> jor_UsuarioCrea, Nullable<System.DateTime> jor_FechaCrea)
         {
             var jor_DescripcionParameter = jor_Descripcion != null ?
@@ -2715,6 +2694,27 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbJornadas_Delete_Result> UDP_RRHH_tbJornadas_Delete(Nullable<int> jor_Id, string jor_razon_Inactivo, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
+        {
+            var jor_IdParameter = jor_Id.HasValue ?
+                new ObjectParameter("jor_Id", jor_Id) :
+                new ObjectParameter("jor_Id", typeof(int));
+    
+            var jor_razon_InactivoParameter = jor_razon_Inactivo != null ?
+                new ObjectParameter("jor_razon_Inactivo", jor_razon_Inactivo) :
+                new ObjectParameter("jor_razon_Inactivo", typeof(string));
+    
+            var jor_UsuarioModificaParameter = jor_UsuarioModifica.HasValue ?
+                new ObjectParameter("jor_UsuarioModifica", jor_UsuarioModifica) :
+                new ObjectParameter("jor_UsuarioModifica", typeof(int));
+    
+            var jor_FechaModificaParameter = jor_FechaModifica.HasValue ?
+                new ObjectParameter("jor_FechaModifica", jor_FechaModifica) :
+                new ObjectParameter("jor_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbJornadas_Delete_Result>("UDP_RRHH_tbJornadas_Delete", jor_IdParameter, jor_razon_InactivoParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
         }
     }
 }

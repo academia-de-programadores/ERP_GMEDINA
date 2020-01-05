@@ -247,6 +247,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHorarios_hor_UsuarioCrea" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHorarios_hor_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHorarios_jor_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

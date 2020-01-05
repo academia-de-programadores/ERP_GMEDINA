@@ -668,6 +668,7 @@
           <Property Name="scan_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="scan_UsuarioModifica" Type="int" />
           <Property Name="scan_FechaModifica" Type="datetime" />
+          <Property Name="req_Id" Type="int" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -2823,18 +2824,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id">
-          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
-          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbFasesReclutamiento">
-              <PropertyRef Name="fare_Id" />
-            </Principal>
-            <Dependent Role="tbFaseSeleccion">
-              <PropertyRef Name="fare_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
           <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
           <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
@@ -3123,15 +3112,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id">
-          <End Role="tbRequisiciones" Type="Self.tbRequisiciones" Multiplicity="1" />
+        <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+          <End Role="tbRequisiciones" Type="Self.tbRequisiciones" Multiplicity="0..1" />
           <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbRequisiciones">
               <PropertyRef Name="req_Id" />
             </Principal>
             <Dependent Role="tbSeleccionCandidatos">
-              <PropertyRef Name="rper_Id" />
+              <PropertyRef Name="req_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4843,10 +4832,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id">
-            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
-            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
@@ -4943,7 +4928,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbRequerimientosEspecialesRequisicion" EntitySet="tbRequerimientosEspecialesRequisicion" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id">
+          <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
@@ -5920,6 +5905,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbRequerimientosEspecialesRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbRequerimientosEspecialesRequisicion" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbTitulosRequisicion" />
+          <NavigationProperty Name="tbSeleccionCandidatos1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
         </EntityType>
         <EntityType Name="tbSeleccionCandidatos">
           <Key>
@@ -5942,6 +5928,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbSeleccionCandidatos" ToRole="tbPersonas" />
           <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
+          <Property Name="req_Id" Type="Int32" />
+          <NavigationProperty Name="tbRequisiciones1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -9670,12 +9658,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="idi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="idi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbJornadas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result)">
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
-            <Parameter Name="jor_razon_Inactivo" Mode="In" Type="String" />
-            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result)">
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
@@ -10013,6 +9995,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+            <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -10182,9 +10174,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="String" Name="jor_Descripcion" Nullable="false" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbIdiomas_Update_Result">
@@ -10422,6 +10411,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+          <End Type="ERP_GMEDINAModel.tbRequisiciones" Role="tbRequisiciones" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbSeleccionCandidatos" Role="tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRequisiciones">
+              <PropertyRef Name="req_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="req_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11105,6 +11109,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbSeleccionCandidatos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbSeleccionCandidatos">
               <MappingFragment StoreEntitySet="tbSeleccionCandidatos">
+                <ScalarProperty Name="req_Id" ColumnName="req_Id" />
                 <ScalarProperty Name="scan_Id" ColumnName="scan_Id" />
                 <ScalarProperty Name="per_Id" ColumnName="per_Id" />
                 <ScalarProperty Name="fare_Id" ColumnName="fare_Id" />
@@ -11991,13 +11996,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Delete" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result">
@@ -12396,6 +12394,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

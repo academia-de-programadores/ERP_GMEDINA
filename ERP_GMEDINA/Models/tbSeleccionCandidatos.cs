@@ -31,6 +31,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime scan_FechaCrea { get; set; }
         public Nullable<int> scan_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> scan_FechaModifica { get; set; }
+        public Nullable<int> req_Id { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
@@ -39,5 +40,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
         public virtual tbRequisiciones tbRequisiciones { get; set; }
+        public virtual tbRequisiciones tbRequisiciones1 { get; set; }
     }
 }
