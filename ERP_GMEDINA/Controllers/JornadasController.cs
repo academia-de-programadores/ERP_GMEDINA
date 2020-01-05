@@ -23,7 +23,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var lista = db.V_HorariosDetalles.Where(x => x.jor_Id == id)
+                    var lista = db.V_HorariosDetalles.Where(x => x.jor_Id == id && x.hor_Estado == true)
                         .Select(tabla => new { hor_HoraInicio = tabla.hor_HoraInicio, hor_HoraFin = tabla.hor_HoraFin, hor_descripcion = tabla.hor_Descripcion }).ToList();
                     return Json(lista, JsonRequestBehavior.AllowGet);
                 }
