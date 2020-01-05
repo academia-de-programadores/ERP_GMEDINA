@@ -2688,15 +2688,11 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Restore_Result>("UDP_RRHH_tbHorarios_Restore", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHorarios_Update_Result> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHorarios_Update_Result> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
             var hor_idParameter = hor_id.HasValue ?
                 new ObjectParameter("hor_id", hor_id) :
                 new ObjectParameter("hor_id", typeof(int));
-    
-            var jor_IdParameter = jor_Id.HasValue ?
-                new ObjectParameter("jor_Id", jor_Id) :
-                new ObjectParameter("jor_Id", typeof(int));
     
             var hor_DescripcionParameter = hor_Descripcion != null ?
                 new ObjectParameter("hor_Descripcion", hor_Descripcion) :
@@ -2718,7 +2714,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, jor_IdParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHorarios_Update_Result>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     }
 }

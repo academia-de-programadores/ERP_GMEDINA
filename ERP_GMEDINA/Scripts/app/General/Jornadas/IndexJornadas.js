@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var jor_Id = 0;
+$(document).ready(function () {
     llenarTabla();
 });
 function llenarTabla() {
@@ -48,16 +49,17 @@ function tablaDetalles(ID) {
             }
         });
 }
-function format(obj) {
-    //var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5><button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button></div></div><div class="ibox-content"><div class="row">';</div><div class="ibox-content"><div class="row">';
-    //<button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button></div></div><div class="ibox-content"><div class="row">';
-    var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right"><button id = "btnAgregarHorarios" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-paste"></i> Agregar </button></div></div><div class="ibox-content"><div class="row">';
+function format(obj, jor_Id) {
+    var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right">' +
+        '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>' +
+        '</div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
             '<div class="col-md-3">' +
                 '<div class="panel panel-default">' +
                   '<div class="panel-heading">' +
                      '<h5>' + index.hor_descripcion + '</h5>' +
+                     '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-primary btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
                 '</div>' +
                 '<div class="panel-body">' +
                 'Hora Inicio: ' + index.hor_HoraInicio.toString() +
@@ -86,7 +88,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    row.child(format(obj)).show();
+                    row.child(format(obj, id)).show();
                     tr.removeClass('loading');
                     tr.addClass('shown');
                 }
@@ -101,14 +103,33 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#jor_Descripcion").focus();
 })
 
-$("#btnAgregarHorarios").click(function () {
+function showmodal(btn) {
+    jor_Id = $(btn).data('id');
     var modalnuevo = $('#ModalNuevoHorarios');
-    modalnuevo.modal('show');
+    modalnuevo.modal('show');    
     $(modalnuevo).find("#hor_Descripcion").val("");
     $(modalnuevo).find("#hor_Descripcion").focus();
     $(modalnuevo).find("#hor_HoraInicio").val("");
     $(modalnuevo).find("#hor_HoraFin").val("");
-})
+}
+function showmodaledit(btn) {
+    jor_Id = $(btn).data('id');
+    _ajax(null,
+        '/Jornadas/EditHorario/' + jor_Id,
+        'GET',        
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();
+                var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
+                var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
+                $('#ModalEditarHorarios').modal('show');
+                $("#ModalEditarHorarios").find("#hor_Descripcion").val(obj.hor_Descripcion);
+                $("#ModalEditarHorarios").find("#hor_Descripcion").focus();
+                $("#ModalEditarHorarios").find("#hor_HoraInicio").val(hor_HoraInicio);
+                $("#ModalEditarHorarios").find("#hor_HoraFin").val(hor_HoraFin);
+            }
+        });
+}
 
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -153,6 +174,29 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+$("#btnGuardarHorario").click(function () {
+    var data = $("#FormNuevoHorario").serializeArray();
+    data = serializar(data);
+    data.jor_Id = jor_Id;
+    if (data != null) {
+        data = JSON.stringify({ tbHorarios: data });
+        _ajax(data,
+            '/Jornadas/CreateHorario',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $('#btnCerrarModal').click();
+                    llenarTabla();
+                    LimpiarControles(["hor_Descripcion","hor_HoraInicio","hor_HoraFin"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
@@ -175,6 +219,31 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+$("#btnActualizarHorario").click(function () {
+    var data = $("#FormEditarHorarios").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.hor_Id = id;
+        data = JSON.stringify({ tbHorarios: data });
+        _ajax(data,
+            '/Jornadas/EditHorario',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalEditarHorarios").modal('hide');//ocultamos el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -200,7 +269,8 @@ $("#InActivar").click(function () {
 });
 
 
+
 $(document).on("click", "#IndexTable tbody tr td button#btnAgregarHorarios", function () {
-    var Id = $(this).closest('tr').data('id');
+    var Id = $(this).data('id');
     console.log(Id);
 })

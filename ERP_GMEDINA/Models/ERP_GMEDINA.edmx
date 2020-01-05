@@ -1118,8 +1118,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have
           <Property Name="hor_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -3685,7 +3683,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_id" Type="int" Mode="In" />
-          <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="hor_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="hor_HoraIncio" Type="time" Mode="In" />
           <Parameter Name="hor_HoraFin" Type="time" Mode="In" />
@@ -10010,7 +10007,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result)">
             <Parameter Name="hor_id" Mode="In" Type="Int32" />
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
             <Parameter Name="hor_HoraIncio" Mode="In" Type="Time" />
             <Parameter Name="hor_HoraFin" Mode="In" Type="Time" />
@@ -10421,10 +10417,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbHorarios_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
+        <ComplexType Name="UDP_RRHH_tbHorarios_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Restore_Result">
+        <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
