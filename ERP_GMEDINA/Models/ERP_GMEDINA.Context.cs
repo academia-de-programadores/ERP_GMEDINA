@@ -2725,63 +2725,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTitulos_Update_Result>("UDP_RRHH_tbTitulos_Update", titu_IdParameter, titu_DescripcionParameter, titu_UsuarioModificaParameter, titu_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Insert_Result> UDP_RRHH_tbEmpleados_Insert(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, Nullable<int> per_Edad, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea, Nullable<System.DateTime> emp_FechaIngreso, string emp_CuentaBancaria)
+        public virtual ObjectResult<UDP_RRHH_tbEmpleados_Insert_Result> UDP_RRHH_tbEmpleados_Insert(Nullable<int> scan_Id, Nullable<int> per_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<int> cpla_IdPlanilla, Nullable<int> fpa_IdFormaPago, string emp_CuentaBancaria, Nullable<bool> emp_Reingreso, Nullable<System.DateTime> emp_Fechaingreso, Nullable<int> emp_UsuarioCrea, Nullable<System.DateTime> emp_FechaCrea)
         {
-            var per_IdentidadParameter = per_Identidad != null ?
-                new ObjectParameter("per_Identidad", per_Identidad) :
-                new ObjectParameter("per_Identidad", typeof(string));
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
     
-            var per_NombresParameter = per_Nombres != null ?
-                new ObjectParameter("per_Nombres", per_Nombres) :
-                new ObjectParameter("per_Nombres", typeof(string));
-    
-            var per_ApellidosParameter = per_Apellidos != null ?
-                new ObjectParameter("per_Apellidos", per_Apellidos) :
-                new ObjectParameter("per_Apellidos", typeof(string));
-    
-            var per_FechaNacimientoParameter = per_FechaNacimiento.HasValue ?
-                new ObjectParameter("per_FechaNacimiento", per_FechaNacimiento) :
-                new ObjectParameter("per_FechaNacimiento", typeof(System.DateTime));
-    
-            var per_EdadParameter = per_Edad.HasValue ?
-                new ObjectParameter("per_Edad", per_Edad) :
-                new ObjectParameter("per_Edad", typeof(int));
-    
-            var per_SexoParameter = per_Sexo != null ?
-                new ObjectParameter("per_Sexo", per_Sexo) :
-                new ObjectParameter("per_Sexo", typeof(string));
-    
-            var nac_IdParameter = nac_Id.HasValue ?
-                new ObjectParameter("nac_Id", nac_Id) :
-                new ObjectParameter("nac_Id", typeof(int));
-    
-            var per_DireccionParameter = per_Direccion != null ?
-                new ObjectParameter("per_Direccion", per_Direccion) :
-                new ObjectParameter("per_Direccion", typeof(string));
-    
-            var per_TelefonoParameter = per_Telefono != null ?
-                new ObjectParameter("per_Telefono", per_Telefono) :
-                new ObjectParameter("per_Telefono", typeof(string));
-    
-            var per_CorreoElectronicoParameter = per_CorreoElectronico != null ?
-                new ObjectParameter("per_CorreoElectronico", per_CorreoElectronico) :
-                new ObjectParameter("per_CorreoElectronico", typeof(string));
-    
-            var per_EstadoCivilParameter = per_EstadoCivil != null ?
-                new ObjectParameter("per_EstadoCivil", per_EstadoCivil) :
-                new ObjectParameter("per_EstadoCivil", typeof(string));
-    
-            var per_TipoSangreParameter = per_TipoSangre != null ?
-                new ObjectParameter("per_TipoSangre", per_TipoSangre) :
-                new ObjectParameter("per_TipoSangre", typeof(string));
-    
-            var per_UsuarioCreaParameter = per_UsuarioCrea.HasValue ?
-                new ObjectParameter("per_UsuarioCrea", per_UsuarioCrea) :
-                new ObjectParameter("per_UsuarioCrea", typeof(int));
-    
-            var per_FechaCreaParameter = per_FechaCrea.HasValue ?
-                new ObjectParameter("per_FechaCrea", per_FechaCrea) :
-                new ObjectParameter("per_FechaCrea", typeof(System.DateTime));
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
     
             var car_IdParameter = car_Id.HasValue ?
                 new ObjectParameter("car_Id", car_Id) :
@@ -2807,6 +2759,18 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("fpa_IdFormaPago", fpa_IdFormaPago) :
                 new ObjectParameter("fpa_IdFormaPago", typeof(int));
     
+            var emp_CuentaBancariaParameter = emp_CuentaBancaria != null ?
+                new ObjectParameter("emp_CuentaBancaria", emp_CuentaBancaria) :
+                new ObjectParameter("emp_CuentaBancaria", typeof(string));
+    
+            var emp_ReingresoParameter = emp_Reingreso.HasValue ?
+                new ObjectParameter("emp_Reingreso", emp_Reingreso) :
+                new ObjectParameter("emp_Reingreso", typeof(bool));
+    
+            var emp_FechaingresoParameter = emp_Fechaingreso.HasValue ?
+                new ObjectParameter("emp_Fechaingreso", emp_Fechaingreso) :
+                new ObjectParameter("emp_Fechaingreso", typeof(System.DateTime));
+    
             var emp_UsuarioCreaParameter = emp_UsuarioCrea.HasValue ?
                 new ObjectParameter("emp_UsuarioCrea", emp_UsuarioCrea) :
                 new ObjectParameter("emp_UsuarioCrea", typeof(int));
@@ -2815,15 +2779,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("emp_FechaCrea", emp_FechaCrea) :
                 new ObjectParameter("emp_FechaCrea", typeof(System.DateTime));
     
-            var emp_FechaIngresoParameter = emp_FechaIngreso.HasValue ?
-                new ObjectParameter("emp_FechaIngreso", emp_FechaIngreso) :
-                new ObjectParameter("emp_FechaIngreso", typeof(System.DateTime));
-    
-            var emp_CuentaBancariaParameter = emp_CuentaBancaria != null ?
-                new ObjectParameter("emp_CuentaBancaria", emp_CuentaBancaria) :
-                new ObjectParameter("emp_CuentaBancaria", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Insert_Result>("UDP_RRHH_tbEmpleados_Insert", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_EdadParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter, emp_FechaIngresoParameter, emp_CuentaBancariaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Insert_Result>("UDP_RRHH_tbEmpleados_Insert", scan_IdParameter, per_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, cpla_IdPlanillaParameter, fpa_IdFormaPagoParameter, emp_CuentaBancariaParameter, emp_ReingresoParameter, emp_FechaingresoParameter, emp_UsuarioCreaParameter, emp_FechaCreaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbHistorialPermisos_Restore(Nullable<int> hper_Id, Nullable<int> hper_UsuarioModifica, Nullable<System.DateTime> hper_FechaModifica)
@@ -3191,6 +3147,102 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("idpe_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbIdiomasPersona_Insert_Result>("UDP_RRHH_tbIdiomasPersona_Insert", per_IdParameter, idi_IdParameter, idpe_UsuarioCreaParameter, idpe_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbSeleccionCandidatos_Delete(Nullable<int> scan_Id, string scan_RazonInactivo, Nullable<int> scan_UsuarioModifica, Nullable<System.DateTime> scan_FechaModifica)
+        {
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
+    
+            var scan_RazonInactivoParameter = scan_RazonInactivo != null ?
+                new ObjectParameter("scan_RazonInactivo", scan_RazonInactivo) :
+                new ObjectParameter("scan_RazonInactivo", typeof(string));
+    
+            var scan_UsuarioModificaParameter = scan_UsuarioModifica.HasValue ?
+                new ObjectParameter("scan_UsuarioModifica", scan_UsuarioModifica) :
+                new ObjectParameter("scan_UsuarioModifica", typeof(int));
+    
+            var scan_FechaModificaParameter = scan_FechaModifica.HasValue ?
+                new ObjectParameter("scan_FechaModifica", scan_FechaModifica) :
+                new ObjectParameter("scan_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbSeleccionCandidatos_Delete", scan_IdParameter, scan_RazonInactivoParameter, scan_UsuarioModificaParameter, scan_FechaModificaParameter);
+        }
+    
+        public virtual int UDP_RRHH_tbSeleccionCandidatos_Insert(Nullable<int> per_Id, Nullable<int> fare_Id, Nullable<System.DateTime> scan_Fecha, Nullable<int> req_Id, Nullable<int> scan_UsuarioCrea, Nullable<System.DateTime> scan_FechaCrea)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var scan_FechaParameter = scan_Fecha.HasValue ?
+                new ObjectParameter("scan_Fecha", scan_Fecha) :
+                new ObjectParameter("scan_Fecha", typeof(System.DateTime));
+    
+            var req_IdParameter = req_Id.HasValue ?
+                new ObjectParameter("req_Id", req_Id) :
+                new ObjectParameter("req_Id", typeof(int));
+    
+            var scan_UsuarioCreaParameter = scan_UsuarioCrea.HasValue ?
+                new ObjectParameter("scan_UsuarioCrea", scan_UsuarioCrea) :
+                new ObjectParameter("scan_UsuarioCrea", typeof(int));
+    
+            var scan_FechaCreaParameter = scan_FechaCrea.HasValue ?
+                new ObjectParameter("scan_FechaCrea", scan_FechaCrea) :
+                new ObjectParameter("scan_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbSeleccionCandidatos_Insert", per_IdParameter, fare_IdParameter, scan_FechaParameter, req_IdParameter, scan_UsuarioCreaParameter, scan_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbSeleccionCandidatos_Restore(Nullable<int> scan_Id, Nullable<int> scan_UsuarioModifica, Nullable<System.DateTime> scan_FechaModifica)
+        {
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
+    
+            var scan_UsuarioModificaParameter = scan_UsuarioModifica.HasValue ?
+                new ObjectParameter("scan_UsuarioModifica", scan_UsuarioModifica) :
+                new ObjectParameter("scan_UsuarioModifica", typeof(int));
+    
+            var scan_FechaModificaParameter = scan_FechaModifica.HasValue ?
+                new ObjectParameter("scan_FechaModifica", scan_FechaModifica) :
+                new ObjectParameter("scan_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbSeleccionCandidatos_Restore", scan_IdParameter, scan_UsuarioModificaParameter, scan_FechaModificaParameter);
+        }
+    
+        public virtual int UDP_RRHH_tbSeleccionCandidatos_Update(Nullable<int> scan_Id, Nullable<int> fare_Id, Nullable<System.DateTime> scan_Fecha, Nullable<int> req_Id, Nullable<int> scan_UsuarioModifica, Nullable<System.DateTime> scan_FechaModifica)
+        {
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
+    
+            var fare_IdParameter = fare_Id.HasValue ?
+                new ObjectParameter("fare_Id", fare_Id) :
+                new ObjectParameter("fare_Id", typeof(int));
+    
+            var scan_FechaParameter = scan_Fecha.HasValue ?
+                new ObjectParameter("scan_Fecha", scan_Fecha) :
+                new ObjectParameter("scan_Fecha", typeof(System.DateTime));
+    
+            var req_IdParameter = req_Id.HasValue ?
+                new ObjectParameter("req_Id", req_Id) :
+                new ObjectParameter("req_Id", typeof(int));
+    
+            var scan_UsuarioModificaParameter = scan_UsuarioModifica.HasValue ?
+                new ObjectParameter("scan_UsuarioModifica", scan_UsuarioModifica) :
+                new ObjectParameter("scan_UsuarioModifica", typeof(int));
+    
+            var scan_FechaModificaParameter = scan_FechaModifica.HasValue ?
+                new ObjectParameter("scan_FechaModifica", scan_FechaModifica) :
+                new ObjectParameter("scan_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbSeleccionCandidatos_Update", scan_IdParameter, fare_IdParameter, scan_FechaParameter, req_IdParameter, scan_UsuarioModificaParameter, scan_FechaModificaParameter);
         }
     }
 }

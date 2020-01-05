@@ -25,5 +25,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> Fecha_Modifica { get; set; }
         public Nullable<int> Usuario_Modifica { get; set; }
         public string Razon_Inactivo { get; set; }
+        public int IdPersona { get; set; }
+        public int FaseReclutamientoId { get; set; }
+        public int RequisionId { get; set; }
+        public bool Estado { get; set; }
     }
 }

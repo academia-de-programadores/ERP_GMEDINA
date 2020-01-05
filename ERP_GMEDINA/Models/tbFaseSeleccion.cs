@@ -23,9 +23,11 @@ namespace ERP_GMEDINA.Models
         public System.DateTime fsel_FechaCrea { get; set; }
         public Nullable<int> fsel_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> fsel_FechaModifica { get; set; }
+        public int scan_Id { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbFasesReclutamiento tbFasesReclutamiento { get; set; }
+        public virtual tbSeleccionCandidatos tbSeleccionCandidatos { get; set; }
     }
 }
