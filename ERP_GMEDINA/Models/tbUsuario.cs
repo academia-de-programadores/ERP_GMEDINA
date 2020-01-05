@@ -74,8 +74,6 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialSalidas1 = new HashSet<tbHistorialSalidas>();
             this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
             this.tbHistorialVacaciones1 = new HashSet<tbHistorialVacaciones>();
-            this.tbHorarios = new HashSet<tbHorarios>();
-            this.tbHorarios1 = new HashSet<tbHorarios>();
             this.tbIdiomaPersona = new HashSet<tbIdiomaPersona>();
             this.tbIdiomaPersona1 = new HashSet<tbIdiomaPersona>();
             this.tbIdiomas = new HashSet<tbIdiomas>();
@@ -126,6 +124,8 @@ namespace ERP_GMEDINA.Models
             this.tbTitulosPersona1 = new HashSet<tbTitulosPersona>();
             this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
             this.tbTitulosRequisicion1 = new HashSet<tbTitulosRequisicion>();
+            this.tbHorarios = new HashSet<tbHorarios>();
+            this.tbHorarios1 = new HashSet<tbHorarios>();
         }
     
         public int usu_Id { get; set; }
@@ -254,10 +254,6 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHorarios> tbHorarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHorarios> tbHorarios1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona1 { get; set; }
@@ -357,5 +353,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHorarios> tbHorarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHorarios> tbHorarios1 { get; set; }
     }
 }

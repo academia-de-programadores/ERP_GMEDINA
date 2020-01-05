@@ -20,5 +20,11 @@ namespace ERP_GMEDINA.Models
         public string Fase { get; set; }
         public string Plaza_Disponible { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public string Plaza_Solicitada { get; set; }
+        public System.DateTime Fecha_Crea { get; set; }
+        public int Usuario_Crea { get; set; }
+        public Nullable<System.DateTime> Fecha_Modifica { get; set; }
+        public Nullable<int> Usuario_Modifica { get; set; }
+        public string Razon_Inactivo { get; set; }
     }
 }
