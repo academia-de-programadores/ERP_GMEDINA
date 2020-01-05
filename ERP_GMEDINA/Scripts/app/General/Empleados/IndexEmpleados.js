@@ -1,5 +1,6 @@
 ﻿
 function format(obj) {
+    
     var div = '<div class="ibox"><div class="ibox-title"> <i class="fa fa-newspaper-o"> </i><strong class="mr-auto m-l-sm">Datos de Empleado</strong><div class="btn-group pull-right"><button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button><ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Horas Trabajadas</a></li><li><a class="dropdown-item" href="#">Perfil Profesional</a></li></ul> </div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
