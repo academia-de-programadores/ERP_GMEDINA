@@ -37,6 +37,13 @@ namespace ERP_GMEDINA.Models
         public decimal hipa_TotalISR { get; set; }
         public Nullable<bool> hipa_ISRPendiente { get; set; }
         public decimal hipa_AFP { get; set; }
+        public Nullable<decimal> hipa_TotalHorasConPermisoJustificado { get; set; }
+        public Nullable<decimal> hipa_TotalComisiones { get; set; }
+        public Nullable<decimal> hipa_TotalHorasExtras { get; set; }
+        public Nullable<decimal> hipa_TotalVacaciones { get; set; }
+        public Nullable<decimal> hipa_TotalSeptimoDia { get; set; }
+        public Nullable<decimal> hipa_AdelantoSueldo { get; set; }
+        public Nullable<decimal> hipa_TotalSalario { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }

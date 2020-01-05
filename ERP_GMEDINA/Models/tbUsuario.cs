@@ -62,6 +62,8 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialDeIngresosPago1 = new HashSet<tbHistorialDeIngresosPago>();
             this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
             this.tbHistorialDePago1 = new HashSet<tbHistorialDePago>();
+            this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
+            this.tbHistorialLiquidaciones1 = new HashSet<tbHistorialLiquidaciones>();
             this.tbInstitucionesFinancieras = new HashSet<tbInstitucionesFinancieras>();
             this.tbInstitucionesFinancieras1 = new HashSet<tbInstitucionesFinancieras>();
             this.tbISR = new HashSet<tbISR>();
@@ -190,8 +192,6 @@ namespace ERP_GMEDINA.Models
             this.tbTitulosPersona1 = new HashSet<tbTitulosPersona>();
             this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
             this.tbTitulosRequisicion1 = new HashSet<tbTitulosRequisicion>();
-            this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
-            this.tbHistorialLiquidaciones1 = new HashSet<tbHistorialLiquidaciones>();
         }
     
         public int usu_Id { get; set; }
@@ -295,6 +295,10 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialDePago> tbHistorialDePago1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -551,9 +555,5 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones1 { get; set; }
     }
 }

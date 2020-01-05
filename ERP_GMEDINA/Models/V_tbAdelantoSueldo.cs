@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Models
         public int adsu_IdAdelantoSueldo { get; set; }
         public int emp_Id { get; set; }
         public string per_Nombres { get; set; }
+        public string per_Identidad { get; set; }
         public System.DateTime adsu_FechaAdelanto { get; set; }
         public string adsu_RazonAdelanto { get; set; }
         public Nullable<decimal> adsu_Monto { get; set; }
