@@ -41,7 +41,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
              tabla.row.add(
               {
-               id: value.tsal_Id,
+                  ID: value.tsal_Id,
                Descripcion: value.tsal_Descripcion
               }
               ).draw();

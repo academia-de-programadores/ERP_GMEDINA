@@ -1,4 +1,4 @@
-﻿var id = 0;
+﻿var ID = 0;
 //Funciones GET
 function tablaEditar(id) {
     //var tr=$(btn).closest("tr");
@@ -9,6 +9,7 @@ function tablaEditar(id) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
+                ID = obj.habi_Id;
                 $("#FormEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
                 $('#ModalEditar').modal('show');
             }
@@ -24,6 +25,7 @@ function tablaDetalles(id) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
+                ID = obj.habi_Id;
                 $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
                 $("#ModalDetalles").find("#habi_Estado")["0"].innerText = obj.habi_Estado;
                 $("#ModalDetalles").find("#habi_RazonInactivo")["0"].innerText = obj.habi_RazonInactivo;
@@ -45,7 +47,7 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 tabla.row.add({
-                    id: value.habi_Id,
+                    ID: value.habi_Id,
                     Descripcion: value.habi_Descripcion
                 });
             });
@@ -64,10 +66,11 @@ $("#btnAgregar").click(function () {
 });
 $("#btnEditar").click(function () {
     _ajax(null,
-        '/Habilidades/Edit/' + id,
+        '/Habilidades/Edit/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
+                ID = obj.habi_Id;
                 CierraPopups();
                 $('#ModalEditar').modal('show');
                 $("#ModalEditar").find("#habi_Descripcion").val(obj.habi_Descripcion);
@@ -108,7 +111,7 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.habi_Id = id;
+        data.habi_Id = ID;
         data = JSON.stringify({ tbHabilidades: data });
         _ajax(data,
             '/Habilidades/Delete',
@@ -131,7 +134,7 @@ $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data!=null) {
-        data.habi_Id = id;
+        data.habi_Id = ID;
         data = JSON.stringify({ tbHabilidades: data });
         _ajax(data,
             '/Habilidades/Edit',
