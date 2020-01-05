@@ -176,7 +176,7 @@ namespace ERP_GMEDINA.Controllers
                         observacion,
                         tbHistorialPermisos.hper_Justificado,
                         tbHistorialPermisos.hper_PorcentajeIndemnizado,
-                        Usuario.usu_Id,
+                        1,
                         DateTime.Now);
                         string mensajeDB = "";
                         foreach (UDP_RRHH_tbHistorialPermisos_Insert_Result i in emp)

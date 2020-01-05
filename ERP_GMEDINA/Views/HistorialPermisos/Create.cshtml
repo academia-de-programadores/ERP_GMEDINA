@@ -44,35 +44,6 @@
                                     @Html.ValidationMessageFor(model => model.hper_Observacion, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>
-                            @*//---FechaInicio---
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.hper_fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-5">
-                                        <i class="fa fa-calendar"></i>
-                                        @Html.TextBoxFor(model => model.hper_fechaInicio, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
-                                        @Html.ValidationMessageFor(model => model.hper_fechaInicio, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
-                                    </div>
-                                </div>
-                                //---FechaFin---
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.hper_fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-5">
-                                        <i class="fa fa-calendar"></i>
-                                        @Html.TextBoxFor(model => model.hper_fechaFin, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
-                                        @Html.ValidationMessageFor(model => model.hper_fechaFin, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
-                                    </div>
-                                </div>
-                                //---Justificacion---
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.hper_Justificado, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-                                            @Html.EditorFor(model => model.hper_Justificado)
-                                            @Html.ValidationMessageFor(model => model.hper_Justificado, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>*@
-                            //---Porcentaje---
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-9">
@@ -80,18 +51,43 @@
                                     @Html.ValidationMessageFor(model => model.hper_PorcentajeIndemnizado, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hper_Justificado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.hper_Justificado)
+                                        @Html.ValidationMessageFor(model => model.hper_Justificado, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hper_fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    <i class="fa fa-calendar"></i>
+                                    @Html.TextBoxFor(model => model.hper_fechaInicio, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date" })
+                                    @Html.ValidationMessageFor(model => model.hper_fechaInicio, "", new { @class = "text-danger", @id = "errorhper_fechaInicio" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hper_fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    <i class="fa fa-calendar"></i>
+                                    @Html.TextBoxFor(model => model.hper_fechaFin, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", min = "2018-12-31" })
+                                    @Html.ValidationMessageFor(model => model.hper_fechaFin, "", new { @class = "text-danger", @id = "errorhper_fechaFin" })
+                                </div>
+                            </div>
                             @*@Html.TextBoxFor(model => model.EndTime, new { type = "time" })*@
 
                             @*//---Fechasalida---
 
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-5">
-                                        <i class="fa fa-calendar"></i>
-                                        @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
-                                        @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
-                                    </div>
-                                </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    <i class="fa fa-calendar"></i>
+                    @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
+                    @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
+                </div>
+            </div>*@
 
                             @*@Html.TextBoxFor(model => model.EndTime, new { type = "time" })*@
 
@@ -113,10 +109,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nombre</th>
-                                                    <th>Salida</th>
-                                                    <th>Regreso</th>
                                                     <th style="visibility:hidden;">Usar</th>
-                                                    <th style="visibility:hidden;">justificado</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>

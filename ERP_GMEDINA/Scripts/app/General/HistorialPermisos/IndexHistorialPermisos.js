@@ -143,14 +143,15 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("#hper_RazonInactivo").val("");
     $("#ModalInhabilitar").find("#hper_RazonInactivo").focus();
 });
-//aqui
+//llamado
 $("#InActivar").click(function () {
+    //alert($("#hper_RazonInactivo").val());
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
         //data.tiho_Id = id;
         // data = JSON.stringify({ tbTipoHoras: data });
-        $.post("/HistorialSalidas/Delete", data).done(function (obj) {
+        $.post("/HistorialPermisos/Delete", data).done(function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 llenarTabla();

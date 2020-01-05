@@ -10,11 +10,11 @@ function Remove(Id, lista) {
     return list;
 }
 //alert("a");
-function Add(Empleados, Salida, Regreso, ver, justificado) {
+function Add(Empleados,ver) {
     if (Empleados.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Empleados == '0' /*|| () &&*/) {
+            if (Fila.Empleados == '0' || Fila.Empleados == ver) {
                     var span = $("#FormEmpleados").find("#errorEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
@@ -23,44 +23,15 @@ function Add(Empleados, Salida, Regreso, ver, justificado) {
                 return null;
             }
             else {
-                if (Fila.Empleados == ver && Salida < Fila.Regreso){
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
-                    $(span).addClass("text-warning");
-                    $(span).closest("div").addClass("has-warning");
-                    span.text('Fecha ya amparada');
-                    $("#FormEmpleados").find("#hper_fechaInicio").focus();
-                    return null;
-                }
-                else if (Regreso <= Salida) {
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
-                    $(span).addClass("text-warning");
-                    $(span).closest("div").addClass("has-warning");
-                    span.text('Orden de fecha erroneo');
-                    $("#FormEmpleados").find("#hper_fechaInicio").focus();
-                    return null;
-                }
-                else if (Fila.Empleados == ver && (Regreso < Fila.Regreso || Regreso < Fila.Salida)) {
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
-                    $(span).addClass("text-warning");
-                    $(span).closest("div").addClass("has-warning");
-                    span.text('Fecha ya amparada');
-                    $("#FormEmpleados").find("#hper_fechaFin").focus();
-                    return null;
-                }
-                else {
                     var span = $("#FormEmpleados").find("#errorEmpleados");
                     $(span).removeClass("text-warning");
                     span.text('');
-                }
             }
         }
         ChildTable.row.add(
             {
-                Empleados: ver,//Empleados.trim(),
-                Salida: Salida,
-                Regreso: Regreso,
-                emp_Id: Empleados,
-                justificado:justificado
+                Empleados: ver,
+                emp_Id: Empleados
             }
         ).draw();
         //$("#FormEmpleados").find("#Razon").val("");
@@ -87,11 +58,12 @@ function getJson() {
         var tbEmpleados =
         {
             Id: i,
-            emp_Id: fila.emp_Id,
-            hper_fechaInicio: fila.Salida,
-            hper_fechaFin: fila.Regreso,
-            hper_Justificado: fila.justificado
-            //,tbCargos: { car_Descripcion: fila.Cargo }
+            emp_Id: fila.emp_Id
+            //,
+            //hper_fechaInicio: fila.Salida,
+            //hper_fechaFin: fila.Regreso,
+            //hper_Justificado: fila.justificado
+            ////,tbCargos: { car_Descripcion: fila.Cargo }
         };
         list.push(tbEmpleados);
     }
@@ -169,19 +141,13 @@ $(document).ready(function () {
     //llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
-        pageLength: 6,
+        pageLength: 3,
         lengthChange: false,
         columns:
             [
                 { data: 'Empleados' },
-                { data: 'Salida' },
-                { data: 'Regreso' },
                 {
                     data: 'emp_Id',
-                    "visible": false
-                },
-                {
-                    data: 'justificado',
                     "visible": false
                 },
                {
@@ -208,17 +174,17 @@ $("#add").click(function () {
         var Id = $("#FormEmpleados").find("#Empleados").val();
         //var Razon = $("#FormEmpleados").find("#Razon").val();
         var ver = $('#Empleados option:selected').html();
-        var Salida = $("#hper_fechaInicio").val();
-        var Regreso = $("#hper_fechaFin").val();
-        var justificado = $("#hper_Justificado").val();
-        var valores = Id + Salida + Regreso + ver + justificado;
+        //var Salida = $("#hper_fechaInicio").val();
+        //var Regreso = $("#hper_fechaFin").val();
+        //var justificado = $("#hper_Justificado").val();
+        var valores = Id + ver;
         for (var i = 0; i < valores.length; i++) {
             if (valores[i] == ">" || valores[i] == "<") {
                 MsgError("Error", "La cadena de entrada contiene caracteres no permitidos.");
                 return null;
             }
         }
-        Add(Id, Salida, Regreso, ver, justificado);
+        Add(Id, ver);
         $("#FormEmpleados").validate();
     }
 });
@@ -237,12 +203,24 @@ $("#btnCrear").click(function () {
         {
             tper_Id: $("#TipoPermisos").val(),
             hper_Observacion: $("#hper_Observacion").val(),
-            hper_PorcentajeIndemnizado: $("#hper_PorcentajeIndemnizado").val()
+            hper_PorcentajeIndemnizado: $("#hper_PorcentajeIndemnizado").val(), 
+            hper_fechaInicio: $("#hper_fechaInicio").val(),
+            hper_fechaFin : $("#hper_fechaFin").val(),
+            hper_Justificado : $("#hper_Justificado").val()
         };
         var lista = getJson();
         if (lista == "") {
             MsgWarning("Error", "Es nesesario seleccionar al menos 1 colaborador");
-        } else {
+        }
+        //else if ($("#hper_PorcentajeIndemnizado").val() < '0' || $("#hper_PorcentajeIndemnizado").val() == "") {
+        //    MsgWarning("Error", "Es nesesario especificar el porcenaje del suelo del cual gozara el colaborador durante laduración del permiso");
+        //}
+        else if ($("#hper_fechaInicio").val() == "") {
+            MsgWarning("Error", "Es nesesario seleccionar la fecha de salida");
+        } else if ($("#hper_fechaFin").val() == "") {
+            MsgWarning("Error", "Es nesesario seleccionar la fecha de regreso");
+        }
+        else {
             if (tbHistorialPermisos != null) {
                 data = JSON.stringify({
                     tbHistorialPermisos: tbHistorialPermisos,

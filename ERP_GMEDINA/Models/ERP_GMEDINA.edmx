@@ -1452,9 +1452,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_compl
         <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbTipoMonedas_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -1518,6 +1515,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_compl
           <Property Name="hper_UsuarioModifica" Type="Int32" />
           <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
