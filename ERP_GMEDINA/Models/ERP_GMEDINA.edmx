@@ -115,8 +115,8 @@
           <Property Name="tper_UsuarioModifica" Type="int" />
           <Property Name="tper_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_HistorialPermisos_Empleados">
           <Key>
             <PropertyRef Name="Id" />
@@ -129,39 +129,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' do
           <Property Name="Sexo" Type="char" MaxLength="1" />
           <Property Name="Edad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_tbHistorialPermisos">
-          <Key>
-            <PropertyRef Name="hper_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="tper_Id" />
-            <PropertyRef Name="hper_fechaInicio" />
-            <PropertyRef Name="hper_fechaFin" />
-            <PropertyRef Name="hper_Duracion" />
-            <PropertyRef Name="hper_PorcentajeIndemnizado" />
-            <PropertyRef Name="hper_Estado" />
-            <PropertyRef Name="hper_UsuarioCrea" />
-            <PropertyRef Name="hper_FechaCrea" />
-          </Key>
-          <Property Name="hper_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="tper_Id" Type="int" Nullable="false" />
-          <Property Name="hper_fechaInicio" Type="datetime" Nullable="false" />
-          <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
-          <Property Name="hper_Duracion" Type="int" Nullable="false" />
-          <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hper_Justificado" Type="bit" />
-          <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
-          <Property Name="hper_Estado" Type="bit" Nullable="false" />
-          <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
-          <Property Name="hper_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="hper_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="hper_UsuarioModifica" Type="int" />
-          <Property Name="hper_FechaModifica" Type="datetime" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_tbHistorialPermisos_completa">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -174,6 +143,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <PropertyRef Name="per_UsuarioCrea" />
             <PropertyRef Name="per_FechaCrea" />
             <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="tper_Descripcion" />
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="tper_Id" />
             <PropertyRef Name="hper_fechaInicio" />
@@ -203,6 +173,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="per_UsuarioModifica" Type="int" />
           <Property Name="per_FechaModifica" Type="datetime" />
           <Property Name="hper_Id" Type="int" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="tper_Id" Type="int" Nullable="false" />
           <Property Name="hper_fechaInicio" Type="datetime" Nullable="false" />
@@ -650,25 +621,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
     [V_HistorialPermisos_Empleados].[Edad] AS [Edad]
     FROM [rrhh].[V_HistorialPermisos_Empleados] AS [V_HistorialPermisos_Empleados]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_tbHistorialPermisos" EntityType="Self.V_tbHistorialPermisos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialPermisos].[hper_Id] AS [hper_Id], 
-    [V_tbHistorialPermisos].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialPermisos].[tper_Id] AS [tper_Id], 
-    [V_tbHistorialPermisos].[hper_fechaInicio] AS [hper_fechaInicio], 
-    [V_tbHistorialPermisos].[hper_fechaFin] AS [hper_fechaFin], 
-    [V_tbHistorialPermisos].[hper_Duracion] AS [hper_Duracion], 
-    [V_tbHistorialPermisos].[hper_Observacion] AS [hper_Observacion], 
-    [V_tbHistorialPermisos].[hper_Justificado] AS [hper_Justificado], 
-    [V_tbHistorialPermisos].[hper_PorcentajeIndemnizado] AS [hper_PorcentajeIndemnizado], 
-    [V_tbHistorialPermisos].[hper_Estado] AS [hper_Estado], 
-    [V_tbHistorialPermisos].[hper_RazonInactivo] AS [hper_RazonInactivo], 
-    [V_tbHistorialPermisos].[hper_UsuarioCrea] AS [hper_UsuarioCrea], 
-    [V_tbHistorialPermisos].[hper_FechaCrea] AS [hper_FechaCrea], 
-    [V_tbHistorialPermisos].[hper_UsuarioModifica] AS [hper_UsuarioModifica], 
-    [V_tbHistorialPermisos].[hper_FechaModifica] AS [hper_FechaModifica]
-    FROM [rrhh].[V_tbHistorialPermisos] AS [V_tbHistorialPermisos]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="Self.V_tbHistorialPermisos_completa" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbHistorialPermisos_completa].[per_Id] AS [per_Id], 
@@ -691,6 +643,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
     [V_tbHistorialPermisos_completa].[per_UsuarioModifica] AS [per_UsuarioModifica], 
     [V_tbHistorialPermisos_completa].[per_FechaModifica] AS [per_FechaModifica], 
     [V_tbHistorialPermisos_completa].[hper_Id] AS [hper_Id], 
+    [V_tbHistorialPermisos_completa].[tper_Descripcion] AS [tper_Descripcion], 
     [V_tbHistorialPermisos_completa].[emp_Id] AS [emp_Id], 
     [V_tbHistorialPermisos_completa].[tper_Id] AS [tper_Id], 
     [V_tbHistorialPermisos_completa].[hper_fechaInicio] AS [hper_fechaInicio], 
@@ -1116,8 +1069,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <End Role="tbHistorialPermisos" EntitySet="tbHistorialPermisos" />
           </AssociationSet>
           <EntitySet Name="V_HistorialPermisos_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialPermisos_Empleados" />
-          <EntitySet Name="V_tbHistorialPermisos" EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos" />
-          <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos_completa" />
           <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Update_Result)">
             <Parameter Name="hper_Id" Mode="In" Type="Int32" />
             <Parameter Name="hper_Observacion" Mode="In" Type="String" />
@@ -1146,6 +1097,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos_completa" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1497,35 +1449,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Edad" Type="Int32" />
         </EntityType>
-        <EntityType Name="V_tbHistorialPermisos">
-          <Key>
-            <PropertyRef Name="hper_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="tper_Id" />
-            <PropertyRef Name="hper_fechaInicio" />
-            <PropertyRef Name="hper_fechaFin" />
-            <PropertyRef Name="hper_Duracion" />
-            <PropertyRef Name="hper_PorcentajeIndemnizado" />
-            <PropertyRef Name="hper_Estado" />
-            <PropertyRef Name="hper_UsuarioCrea" />
-            <PropertyRef Name="hper_FechaCrea" />
-          </Key>
-          <Property Name="hper_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="tper_Id" Type="Int32" Nullable="false" />
-          <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
-          <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
-          <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
-          <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hper_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="hper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hper_UsuarioModifica" Type="Int32" />
-          <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
-        </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         <EntityType Name="V_tbHistorialPermisos_completa">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -1538,6 +1473,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <PropertyRef Name="per_UsuarioCrea" />
             <PropertyRef Name="per_FechaCrea" />
             <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="tper_Descripcion" />
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="tper_Id" />
             <PropertyRef Name="hper_fechaInicio" />
@@ -1567,6 +1503,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="per_UsuarioModifica" Type="Int32" />
           <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="hper_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="tper_Id" Type="Int32" Nullable="false" />
           <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
@@ -1581,18 +1518,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="hper_UsuarioModifica" Type="Int32" />
           <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbTipoMonedas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1811,66 +1736,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_tbHistorialPermisos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialPermisos">
-              <MappingFragment StoreEntitySet="V_tbHistorialPermisos">
-                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
-                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
-                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
-                <ScalarProperty Name="hper_UsuarioCrea" ColumnName="hper_UsuarioCrea" />
-                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
-                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
-                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
-                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
-                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
-                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
-                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
-                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
-                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_tbHistorialPermisos_completa">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialPermisos_completa">
-              <MappingFragment StoreEntitySet="V_tbHistorialPermisos_completa">
-                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
-                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
-                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
-                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
-                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
-                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
-                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
-                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
-                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
-                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
-                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
-                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
-                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
-                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
-                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
-                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
-                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
-                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
-                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
-                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
-                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
-                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
-                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
-                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
-                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
-                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
-                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Update">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Update_Result">
@@ -1899,6 +1764,46 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_tbHistorialPermisos_completa">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialPermisos_completa">
+              <MappingFragment StoreEntitySet="V_tbHistorialPermisos_completa">
+                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
+                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
+                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
+                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
+                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
+                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
+                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
+                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
+                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
+                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
+                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="tper_Descripcion" ColumnName="tper_Descripcion" />
+                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
+                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
+                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
+                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
+                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
+                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
+                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
+                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
+                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
+                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
+                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

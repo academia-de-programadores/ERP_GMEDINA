@@ -31,14 +31,11 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-
-
                     var V_tbHistorialPermisos_completa = db.V_tbHistorialPermisos_completa
                           .Select(
                           t => new
                           {
                             // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
-
                               hper_Id = t.hper_Id,
                               hper_Justificado = t.hper_Justificado,
                               per_Nombres = t.per_Nombres + " " + t.per_Apellidos,
@@ -51,7 +48,9 @@ namespace ERP_GMEDINA.Controllers
                               hper_fechaInicio = t.hper_fechaInicio,
                               hper_fechaFin=t.hper_fechaFin,
                               hper_Duracion=t.hper_Duracion,
-                              hper_PorcentajeIndemnizado=t.hper_PorcentajeIndemnizado
+                              hper_PorcentajeIndemnizado=t.hper_PorcentajeIndemnizado,
+                              tper_Id = t.tper_Id,
+                              tper_Descripcion = t.tper_Descripcion
                           }
                           )
                           .ToList();
@@ -60,7 +59,6 @@ namespace ERP_GMEDINA.Controllers
             }
             catch (Exception ex)
             {
-
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
@@ -81,7 +79,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
-
         //--------------------------------------------DESPLEGABLES--------------------------------------------
         //Tipo salidas
         public ActionResult llenarDropDowlistTipoPermisos()

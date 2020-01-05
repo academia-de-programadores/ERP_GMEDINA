@@ -36,8 +36,6 @@ namespace ERP_GMEDINA.Controllers
                         .Select(
                         t => new
                         {
-                            // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
-
                             hsal_Id = t.hsal_Id,
                             tsal_Id = t.tsal_Id,
                             tsal_Descripcion = t.tsal_Descripcion,

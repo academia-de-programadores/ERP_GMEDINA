@@ -33,24 +33,6 @@
                                     @Html.ValidationMessageFor(model => model.tper_Id, "", new { @class = "text-danger", @id = "errorTipoPermisos" })
                                 </div>
                             </div>
-                            //---Empleadoss---
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.tbEmpleados.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("Id", null, htmlAttributes: new { @class = "form-control required", @id = "Empleados" })
-                                    @Html.ValidationMessageFor(model => model.tbEmpleados.emp_Id, "", new { @class = "text-danger", @id = "errorEmpleados" })
-                                </div>
-                            </div>
-                            @*//---RazonSalida---
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.rsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("rsal_Id", null, htmlAttributes: new { @class = "form-control required", @id = "RazonSalidas" })
-                                    @Html.ValidationMessageFor(model => model.rsal_Id, "", new { @class = "text-danger", @id = "errorRazonSalidas" })
-                                </div>
-                            </div>*@
 
                             //---Observaciones---
                             <div class="form-group">
@@ -60,7 +42,7 @@
                                     @Html.ValidationMessageFor(model => model.hper_Observacion, "", new { @class = "text-danger", @id = "errorhper_Observacion" })
                                 </div>
                             </div>
-                            //---FechaInicio---
+                            @*//---FechaInicio---
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-5">
@@ -87,7 +69,7 @@
                                         @Html.ValidationMessageFor(model => model.hper_Justificado, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                             //---Porcentaje---
                             <div class="form-group">
                                 @Html.LabelFor(model => model.hper_PorcentajeIndemnizado, htmlAttributes: new { @class = "control-label col-md-2" })
