@@ -178,10 +178,10 @@
                             </li>
                             @*<li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Requisicion</a>
-                            </li>
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Seleccion de Candidatos</a>
                             </li>*@
+                            <li class="@Html.IsSelected(controller:"SeleccionCandidatos",action: "Index")">
+                                <a href="@Url.Action("Index", "SeleccionCandidatos")">Seleccion de Candidatos</a>
+                            </li>
 
                             <li class="@Html.IsSelected(controller:"RequerimientosEspeciales", action: "Index")">
                                 <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>

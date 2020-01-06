@@ -208,6 +208,7 @@
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
+    <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
@@ -227,7 +228,14 @@
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
+    <Compile Include="Models\cFormaPago.cs" />
     <Compile Include="Models\cHabilidades.cs" />
+    <Compile Include="Models\cHistorialAmonestaciones.cs" />
+    <Compile Include="Models\cHistorialCargos.cs" />
+    <Compile Include="Models\cHistorialDePago.cs" />
+    <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\cHistorialSalidas.cs" />
+    <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cJornadas.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
@@ -235,6 +243,8 @@
     <Compile Include="Models\cRazonSalidas.cs" />
     <Compile Include="Models\cRequerimientosEspeciales.cs" />
     <Compile Include="Models\cRequisiciones.cs" />
+    <Compile Include="Models\cSeleccionCandidatos.cs" />
+    <Compile Include="Models\cSueldos.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
@@ -1166,6 +1176,9 @@
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
+    <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
+    <Content Include="Scripts\app\General\Sueldos\Sueldos.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
@@ -1810,6 +1823,14 @@
     <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Delete.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Detalles.cshtml" />
+    <Content Include="Views\Sueldos\Create.cshtml" />
+    <Content Include="Views\Sueldos\Delete.cshtml" />
+    <Content Include="Views\Sueldos\Details.cshtml" />
+    <Content Include="Views\Sueldos\Edit.cshtml" />
+    <Content Include="Views\Sueldos\Index.cshtml" />
+    <Content Include="Views\Sueldos\_Delete.cshtml" />
+    <Content Include="Views\Sueldos\_Detalles.cshtml" />
+    <Content Include="Views\Sueldos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
