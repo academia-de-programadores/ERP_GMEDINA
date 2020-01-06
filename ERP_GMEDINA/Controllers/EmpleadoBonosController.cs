@@ -50,7 +50,7 @@ namespace ERP_GMEDINA.Controllers
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
             from CatIngreso in db.tbCatalogoDeIngresos
-            where CatIngreso.cin_DescripcionIngreso == "Bonos" || CatIngreso.cin_IdIngreso == 5
+            //where CatIngreso.cin_DescripcionIngreso == "Bonos" || CatIngreso.cin_IdIngreso == 5
             //join EmpBonos in db.tbEmpleadoBonos on CatIngreso.cin_IdIngreso equals EmpBonos.cin_IdIngreso
             select new
             {
