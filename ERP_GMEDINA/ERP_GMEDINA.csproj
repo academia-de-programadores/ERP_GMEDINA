@@ -1833,12 +1833,19 @@
     <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
     <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
     <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
+    <Content Include="Views\Preaviso\Delete.cshtml" />
+    <Content Include="Views\Preaviso\Index.cshtml" />
+    <Content Include="Views\Preaviso\_Create.cshtml" />
+    <Content Include="Views\Preaviso\_Details.cshtml" />
+    <Content Include="Views\Preaviso\_Edit.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Periodos\_Create.cshtml" />
+    <Content Include="Views\Periodos\_Details.cshtml" />
+    <Content Include="Views\Periodos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\plugins\dataTables\RPT\" />
-    <Folder Include="Views\Periodos\" />
-    <Folder Include="Views\Preaviso\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
