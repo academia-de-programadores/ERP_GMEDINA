@@ -8,7 +8,6 @@ namespace ERP_GMEDINA
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
@@ -523,6 +522,7 @@ namespace ERP_GMEDINA
 
               bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
                           "~/Scripts/app/general/Areas/CreateArea.js"));
+
               bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                           "~/Scripts/app/general/Areas/EditArea.js"));
 
@@ -620,6 +620,11 @@ namespace ERP_GMEDINA
 
                 bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
                    "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexSueldos").Include(
+                         "~/Scripts/app/general/Sueldos/IndexSueldos.js"));
+
 
 
             //OPTIMIZATION

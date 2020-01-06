@@ -1,0 +1,45 @@
+﻿@model ERP_GMEDINA.Models.tbSueldos
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar Sueldos</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditar" }))
+                {
+
+
+                    <div class="col-md-8" hidden="hidden">
+                        <input data-val="true" data-val-number="The field sue_Cantidad must be a number." data-val-required="El campo sue_Cantidad es obligatorio." id="sue_Id" name="sue_Id" type="text" value="">
+                    </div>
+
+                    <div class="col-md-8" hidden="hidden">
+                        <input data-val="true" data-val-number="The field tmon_Id must be a number." data-val-required="El campo sue_Cantidad es obligatorio." id="tmon_Id" name="tmon_Id" type="text" value="">
+                    </div>
+
+                    <div class="col-md-8" hidden="hidden">
+                        <input data-val="true" data-val-number="The field emp_Id must be a number." data-val-required="El campo sue_Cantidad es obligatorio." id="emp_Id" name="emp_Id" type="text" value="">
+                    </div>
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sue_Cantidad, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.sue_Cantidad, new { htmlAttributes = new { @class = "form-control required valid" } })
+                                @Html.ValidationMessageFor(model => model.sue_Cantidad, "", new { @class = "text-danger", @id = "errorsue_Cantidad" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
