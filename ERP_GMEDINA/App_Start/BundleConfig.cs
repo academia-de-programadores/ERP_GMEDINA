@@ -637,6 +637,9 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
 
+                                  bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
+                                      "~/Scripts/app/TipoPermisos/TipoPermisos.js"));
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network
@@ -645,9 +648,9 @@ namespace ERP_GMEDINA
             //Execute the Optimization at Bundles in runtime
             BundleTable.EnableOptimizations = true;
 
-            #if DEBUG
-                BundleTable.EnableOptimizations = false;
-            #endif
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#endif
 
         }
     }
