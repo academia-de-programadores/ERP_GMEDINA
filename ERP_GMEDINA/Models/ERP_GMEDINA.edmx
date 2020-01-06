@@ -3774,6 +3774,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="depto_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="depto_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEmpleados_Contratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="jor_Id" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
+          <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
+          <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="emp_Fechaingreso" Type="datetime" Mode="In" />
+          <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="per_Identidad" Type="nvarchar" Mode="In" />
           <Parameter Name="per_Nombres" Type="nvarchar" Mode="In" />
@@ -3800,7 +3815,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="emp_FechaIngreso" Type="date" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbEmpleados_Recontratacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+        <Function Name="UDP_RRHH_tbEmpleados_Recontratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
           <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
@@ -10666,6 +10681,36 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_DatosProfesionalesP" EntityType="ERP_GMEDINAModel.V_DatosProfesionalesP" />
           <FunctionImport Name="UDP_RRHH_tbCargos_tbEmpleados_Select" ReturnType="Collection(String)" />
           <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
+          <FunctionImport Name="UDP_RRHH_tbEmpleados_Contratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Contratar_Result)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
+            <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_Fechaingreso" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
+            <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_Fechareingreso" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11667,6 +11712,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Relacion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbEmpleados_Contratar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEmpleados_Recontratar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13796,13 +13847,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Recontratacion" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Recontratacion" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratacion_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Restore" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Restore_Result">
@@ -13868,6 +13912,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Contratar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Contratar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Contratar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Recontratar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Recontratar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
