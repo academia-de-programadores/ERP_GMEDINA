@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         public int tiho_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Hora")]
         [MaxLength(25, ErrorMessage = "Excedio el numero maximo de caracteres")]
         public string tiho_Descripcion { get; set; }
 

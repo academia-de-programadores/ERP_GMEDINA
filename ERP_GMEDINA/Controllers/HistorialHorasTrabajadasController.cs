@@ -29,17 +29,15 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var tbHistorialHoras = db.tbHistorialHorasTrabajadas 
+                    var tbHistorialHoras = db.V_HistorialHorasTrabajadas
                         .Select(
                         t => new
                         {
-                            htra_Id = t.htra_Id,
-                            emp_Id =t.emp_Id,
-                            Colaborador = t.tbJornadas.tbEmpleados
-                                .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                            jor_Descripcion = t.tbJornadas.jor_Descripcion,
-                            tiho_Recargo = t.tbTipoHoras.tiho_Recargo,
-                            tiho_Descripcion = t.tbTipoHoras.tiho_Descripcion
+                            htra_Id = t.Id,
+                            Colaborador = t.Nombre_Completo,
+                           
+                            tiho_Recargo = t.Recargo,
+                            tiho_Descripcion = t.Tipo_Horas
                         }
                         )
                         .ToList();
@@ -72,7 +70,7 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db !=null)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

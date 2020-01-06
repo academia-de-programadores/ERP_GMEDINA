@@ -1,13 +1,7 @@
-﻿function tablaDetalles(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().Id;
+﻿function tablaDetalles(id) {
     $(location).attr('href', "/Areas/details/" + id);
 }
-function tablaEditar(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().Id;
+function tablaEditar(id) {
     $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
@@ -42,17 +36,24 @@ function llenarTabla() {
        '/Areas/llenarTabla',
        'POST',
        function (Lista) {
-           tabla.clear();
-           tabla.draw();
-           $.each(Lista, function (index, value) {
-               tabla.row.add({
-                   Id: value.area_Id,
-                   Area: value.area_Descripcion,
-                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
-                   Sucursales: value.Sucursales
+           if (Lista!="-1" || Lista!="-2") {
+               tabla.clear();
+               tabla.draw();
+               $.each(Lista, function (index, value) {
+                   tabla.row.add({
+                       ID: value.area_Id,
+                       Area: value.area_Descripcion,
+                       Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                       Sucursales: value.Sucursales
+                   });
                });
-           });
-           tabla.draw();
+               tabla.draw();
+           } else if (Lista==[]) {
+               zeroresult();
+           } else {
+               ErrorDeRed();
+           }
+
        });
 }
 function flecha(obj) {
@@ -79,7 +80,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().Id;
+        id = row.data().ID;
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/Areas/ChildRowData',

@@ -12,7 +12,7 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    ID: value.jor_Id,
-                   Descripcion: value.jor_Descripcion
+                   Jornada: value.jor_Descripcion
                });
            });
            tabla.draw();

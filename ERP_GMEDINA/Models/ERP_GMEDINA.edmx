@@ -10711,6 +10711,56 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Delete_Result)">
+            <Parameter Name="hor_id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_razonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Insert_Result)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="hor_HoraIncio" Mode="In" Type="Time" />
+            <Parameter Name="hor_HoraFin" Mode="In" Type="Time" />
+            <Parameter Name="hor_usuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hor_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(String)">
+            <Parameter Name="hor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result)">
+            <Parameter Name="hor_id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="hor_HoraIncio" Mode="In" Type="Time" />
+            <Parameter Name="hor_HoraFin" Mode="In" Type="Time" />
+            <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result)">
+            <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Restore" ReturnType="Collection(Int32)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbJornadas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result)">
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -10873,21 +10923,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbNacionalidades_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Update_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_tbEmpleados_Select_Result">
-          <Property Type="String" Name="jor_Descripcion" Nullable="false" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Restore_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
-          <Property Type="Int32" Name="MensajeError" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="UDP_RRHH_tbIdiomas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
@@ -10898,18 +10933,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbIdiomas_Delete_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Restore_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHorarios_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Restore_Result">
@@ -11717,6 +11740,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbEmpleados_Recontratar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHorarios_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Delete_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbJornadas_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13922,6 +13963,50 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Recontratar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Recontratar" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHorarios_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHorarios_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
