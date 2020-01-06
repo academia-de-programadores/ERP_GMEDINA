@@ -133,8 +133,8 @@
                                 <a href="@Url.Action("Index", "TipoPermisos")">Tipo de Permisos</a>
                             </li>
                   
-                            <li class="@Html.IsSelected(controller:"",action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Permisos</a>
+                            <li class="@Html.IsSelected(controller:"HistorialPermisos",action: "Index")">
+                                <a href="@Url.Action("Index", "HistorialPermisos")">Historial de Permisos</a>
                             </li>
                         </ul>
                     </li>
@@ -149,9 +149,9 @@
                                 <a href="@Url.Action("Index", "TipoIncapacidades")">Tipos de Incapacidades</a>
                             </li>
            
-                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Incapacidades</a>
-                            </li>*@
+                            <li class="@Html.IsSelected(controller:"HistorialPermisos",action: "Index")">
+                                <a href="@Url.Action("Index", "HistorialPermisos")">Historial de Incapacidades</a>
+                            </li>
                         </ul>
                     </li>
                     @*INCAPACIDADES*@

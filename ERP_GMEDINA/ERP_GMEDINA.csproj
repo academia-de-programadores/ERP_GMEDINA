@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
+    <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -237,6 +238,8 @@
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\cHistorialPermisos.cs" />
+    <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
     <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
     <Compile Include="Models\cHorarios.cs" />
@@ -628,6 +631,9 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialPermisos_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialSalidas_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -895,6 +901,9 @@
     <Compile Include="Models\V_HistorialIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_HistorialPermisos_Empleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HistorialSalidas_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -914,6 +923,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbEmpleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_tbHistorialPermisos_completa.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_tbHistorialSalidas.cs">
@@ -1167,6 +1179,8 @@
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\HistorialPermisos\CreateHistorialPermisos.js" />
+    <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
@@ -1849,6 +1863,15 @@
     <Content Include="Views\TipoPermisos\_Delete.cshtml" />
     <Content Include="Views\TipoPermisos\_Detalles.cshtml" />
     <Content Include="Views\TipoPermisos\_Edit.cshtml" />
+    <Content Include="Views\HistorialPermisos\Create.cshtml" />
+    <Content Include="Views\HistorialPermisos\Delete.cshtml" />
+    <Content Include="Views\HistorialPermisos\Details.cshtml" />
+    <Content Include="Views\HistorialPermisos\Edit.cshtml" />
+    <Content Include="Views\HistorialPermisos\Index.cshtml" />
+    <Content Include="Views\HistorialPermisos\_AddEmpleado.cshtml" />
+    <Content Include="Views\HistorialPermisos\_DetallesHistorialPermisos.cshtml" />
+    <Content Include="Views\HistorialPermisos\_EditHistorialPermisos.cshtml" />
+    <Content Include="Views\HistorialPermisos\_InhabilitarHistorialPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1151,6 +1151,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialPermisos_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialPermisos_Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Edad" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialSalidas_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialSalidas_Empleados">
           <Key>
@@ -1293,7 +1307,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
           <Property Name="Id_Amonestacion" Type="int" Nullable="false" />
           <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Sueldo" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="Sueldo" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="Tipo_Moneda" Type="varchar" MaxLength="3" />
           <Property Name="Cuenta" Type="nvarchar" MaxLength="100" />
           <Property Name="Sueldo_Anterior" Type="int" />
@@ -1347,6 +1361,65 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a pr
           <Property Name="emp_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="emp_UsuarioModifica" Type="int" />
           <Property Name="emp_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_tbHistorialPermisos_completa">
+          <Key>
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="per_FechaNacimiento" />
+            <PropertyRef Name="nac_Id" />
+            <PropertyRef Name="per_Estado" />
+            <PropertyRef Name="per_UsuarioCrea" />
+            <PropertyRef Name="per_FechaCrea" />
+            <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="tper_Descripcion" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="tper_Id" />
+            <PropertyRef Name="hper_fechaInicio" />
+            <PropertyRef Name="hper_fechaFin" />
+            <PropertyRef Name="hper_Duracion" />
+            <PropertyRef Name="hper_PorcentajeIndemnizado" />
+            <PropertyRef Name="hper_Estado" />
+            <PropertyRef Name="hper_FechaCrea" />
+          </Key>
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="per_Sexo" Type="char" MaxLength="1" />
+          <Property Name="per_Edad" Type="int" />
+          <Property Name="nac_Id" Type="int" Nullable="false" />
+          <Property Name="per_Direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+          <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
+          <Property Name="per_TipoSangre" Type="nvarchar" MaxLength="4" />
+          <Property Name="per_Estado" Type="bit" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="per_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="per_UsuarioModifica" Type="int" />
+          <Property Name="per_FechaModifica" Type="datetime" />
+          <Property Name="hper_Id" Type="int" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="tper_Id" Type="int" Nullable="false" />
+          <Property Name="hper_fechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
+          <Property Name="hper_Duracion" Type="int" Nullable="false" />
+          <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
+          <Property Name="hper_Justificado" Type="bit" />
+          <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
+          <Property Name="hper_Estado" Type="bit" Nullable="false" />
+          <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hper_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hper_UsuarioModifica" Type="int" />
+          <Property Name="hper_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialSalidas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4043,22 +4116,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="hper_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialPermisos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hper_Id" Type="int" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="tper_Id" Type="int" Mode="In" />
           <Parameter Name="hper_fechaInicio" Type="datetime" Mode="In" />
           <Parameter Name="hper_fechaFin" Type="datetime" Mode="In" />
-          <Parameter Name="hper_Duracion" Type="int" Mode="In" />
           <Parameter Name="hper_Observacion" Type="nvarchar" Mode="In" />
-          <Parameter Name="hper_Justificado" Type="int" Mode="In" />
+          <Parameter Name="hper_Justificado" Type="bit" Mode="In" />
           <Parameter Name="hper_PorcentajeIndemnizado" Type="int" Mode="In" />
-          <Parameter Name="hper_Estado" Type="bit" Mode="In" />
-          <Parameter Name="hper_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hper_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hper_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialPermisos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hper_Id" Type="int" Mode="In" />
+          <Parameter Name="hper_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hper_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialPermisos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hper_Id" Type="int" Mode="In" />
+          <Parameter Name="hper_Observacion" Type="nvarchar" Mode="In" />
           <Parameter Name="hper_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hper_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -4777,6 +4852,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HistorialIncapacidades].[hinc_RazonInactivo] AS [hinc_RazonInactivo]
     FROM [rrhh].[V_HistorialIncapacidades] AS [V_HistorialIncapacidades]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_HistorialPermisos_Empleados" EntityType="Self.V_HistorialPermisos_Empleados" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HistorialPermisos_Empleados].[Id] AS [Id], 
+    [V_HistorialPermisos_Empleados].[Identidad] AS [Identidad], 
+    [V_HistorialPermisos_Empleados].[Nombre] AS [Nombre], 
+    [V_HistorialPermisos_Empleados].[Sexo] AS [Sexo], 
+    [V_HistorialPermisos_Empleados].[Edad] AS [Edad]
+    FROM [rrhh].[V_HistorialPermisos_Empleados] AS [V_HistorialPermisos_Empleados]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="Self.V_HistorialSalidas_Empleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_HistorialSalidas_Empleados].[Id] AS [Id], 
@@ -4898,6 +4982,44 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_tbEmpleados].[emp_UsuarioModifica] AS [emp_UsuarioModifica], 
     [V_tbEmpleados].[emp_FechaModifica] AS [emp_FechaModifica]
     FROM [rrhh].[V_tbEmpleados] AS [V_tbEmpleados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="Self.V_tbHistorialPermisos_completa" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_tbHistorialPermisos_completa].[per_Id] AS [per_Id], 
+    [V_tbHistorialPermisos_completa].[per_Identidad] AS [per_Identidad], 
+    [V_tbHistorialPermisos_completa].[per_Nombres] AS [per_Nombres], 
+    [V_tbHistorialPermisos_completa].[per_Apellidos] AS [per_Apellidos], 
+    [V_tbHistorialPermisos_completa].[per_FechaNacimiento] AS [per_FechaNacimiento], 
+    [V_tbHistorialPermisos_completa].[per_Sexo] AS [per_Sexo], 
+    [V_tbHistorialPermisos_completa].[per_Edad] AS [per_Edad], 
+    [V_tbHistorialPermisos_completa].[nac_Id] AS [nac_Id], 
+    [V_tbHistorialPermisos_completa].[per_Direccion] AS [per_Direccion], 
+    [V_tbHistorialPermisos_completa].[per_Telefono] AS [per_Telefono], 
+    [V_tbHistorialPermisos_completa].[per_CorreoElectronico] AS [per_CorreoElectronico], 
+    [V_tbHistorialPermisos_completa].[per_EstadoCivil] AS [per_EstadoCivil], 
+    [V_tbHistorialPermisos_completa].[per_TipoSangre] AS [per_TipoSangre], 
+    [V_tbHistorialPermisos_completa].[per_Estado] AS [per_Estado], 
+    [V_tbHistorialPermisos_completa].[per_RazonInactivo] AS [per_RazonInactivo], 
+    [V_tbHistorialPermisos_completa].[per_UsuarioCrea] AS [per_UsuarioCrea], 
+    [V_tbHistorialPermisos_completa].[per_FechaCrea] AS [per_FechaCrea], 
+    [V_tbHistorialPermisos_completa].[per_UsuarioModifica] AS [per_UsuarioModifica], 
+    [V_tbHistorialPermisos_completa].[per_FechaModifica] AS [per_FechaModifica], 
+    [V_tbHistorialPermisos_completa].[hper_Id] AS [hper_Id], 
+    [V_tbHistorialPermisos_completa].[tper_Descripcion] AS [tper_Descripcion], 
+    [V_tbHistorialPermisos_completa].[emp_Id] AS [emp_Id], 
+    [V_tbHistorialPermisos_completa].[tper_Id] AS [tper_Id], 
+    [V_tbHistorialPermisos_completa].[hper_fechaInicio] AS [hper_fechaInicio], 
+    [V_tbHistorialPermisos_completa].[hper_fechaFin] AS [hper_fechaFin], 
+    [V_tbHistorialPermisos_completa].[hper_Duracion] AS [hper_Duracion], 
+    [V_tbHistorialPermisos_completa].[hper_Observacion] AS [hper_Observacion], 
+    [V_tbHistorialPermisos_completa].[hper_Justificado] AS [hper_Justificado], 
+    [V_tbHistorialPermisos_completa].[hper_PorcentajeIndemnizado] AS [hper_PorcentajeIndemnizado], 
+    [V_tbHistorialPermisos_completa].[hper_Estado] AS [hper_Estado], 
+    [V_tbHistorialPermisos_completa].[hper_RazonInactivo] AS [hper_RazonInactivo], 
+    [V_tbHistorialPermisos_completa].[hper_FechaCrea] AS [hper_FechaCrea], 
+    [V_tbHistorialPermisos_completa].[hper_UsuarioModifica] AS [hper_UsuarioModifica], 
+    [V_tbHistorialPermisos_completa].[hper_FechaModifica] AS [hper_FechaModifica]
+    FROM [rrhh].[V_tbHistorialPermisos_completa] AS [V_tbHistorialPermisos_completa]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbHistorialSalidas" EntityType="Self.V_tbHistorialSalidas" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -10093,21 +10215,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hper_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hper_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result)">
-            <Parameter Name="hper_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tper_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hper_fechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="hper_fechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="hper_Duracion" Mode="In" Type="Int32" />
-            <Parameter Name="hper_Observacion" Mode="In" Type="String" />
-            <Parameter Name="hper_Justificado" Mode="In" Type="Int32" />
-            <Parameter Name="hper_PorcentajeIndemnizado" Mode="In" Type="Int32" />
-            <Parameter Name="hper_Estado" Mode="In" Type="Boolean" />
-            <Parameter Name="hper_RazonInactivo" Mode="In" Type="String" />
-            <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistorialSalidas_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Delete_Result)">
             <Parameter Name="Hsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="hsal_RazonInactivo" Mode="In" Type="String" />
@@ -10761,6 +10868,25 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="jor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_HistorialPermisos_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialPermisos_Empleados" />
+          <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="ERP_GMEDINAModel.V_tbHistorialPermisos_completa" />
+          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Update_Result)">
+            <Parameter Name="hper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hper_Observacion" Mode="In" Type="String" />
+            <Parameter Name="hper_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hper_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialPermisos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hper_fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hper_fechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hper_Observacion" Mode="In" Type="String" />
+            <Parameter Name="hper_Justificado" Mode="In" Type="Boolean" />
+            <Parameter Name="hper_PorcentajeIndemnizado" Mode="In" Type="Int32" />
+            <Parameter Name="hper_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hper_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -10952,9 +11078,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialSalidas_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Delete_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
@@ -11527,7 +11650,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Id_Amonestacion" Type="Int32" Nullable="false" />
           <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="Sueldo" Type="Decimal" Nullable="false" Precision="8" Scale="4" />
+          <Property Name="Sueldo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
           <Property Name="Tipo_Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Sueldo_Anterior" Type="Int32" />
@@ -11758,6 +11881,81 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbJornadas_Update_Result">
           <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="V_HistorialPermisos_Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Edad" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_tbHistorialPermisos_completa">
+          <Key>
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="per_FechaNacimiento" />
+            <PropertyRef Name="nac_Id" />
+            <PropertyRef Name="per_Estado" />
+            <PropertyRef Name="per_UsuarioCrea" />
+            <PropertyRef Name="per_FechaCrea" />
+            <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="tper_Descripcion" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="tper_Id" />
+            <PropertyRef Name="hper_fechaInicio" />
+            <PropertyRef Name="hper_fechaFin" />
+            <PropertyRef Name="hper_Duracion" />
+            <PropertyRef Name="hper_PorcentajeIndemnizado" />
+            <PropertyRef Name="hper_Estado" />
+            <PropertyRef Name="hper_FechaCrea" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_Edad" Type="Int32" />
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_TipoSangre" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="per_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="per_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="per_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="per_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="per_UsuarioModifica" Type="Int32" />
+          <Property Name="per_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="hper_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="tper_Id" Type="Int32" Nullable="false" />
+          <Property Name="hper_fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
+          <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
+          <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hper_UsuarioModifica" Type="Int32" />
+          <Property Name="hper_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialPermisos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13182,13 +13380,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialSalidas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialSalidas_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialSalidas_Delete_Result">
@@ -14007,6 +14198,71 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbJornadas_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="V_HistorialPermisos_Empleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialPermisos_Empleados">
+              <MappingFragment StoreEntitySet="V_HistorialPermisos_Empleados">
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_tbHistorialPermisos_completa">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbHistorialPermisos_completa">
+              <MappingFragment StoreEntitySet="V_tbHistorialPermisos_completa">
+                <ScalarProperty Name="hper_FechaModifica" ColumnName="hper_FechaModifica" />
+                <ScalarProperty Name="hper_UsuarioModifica" ColumnName="hper_UsuarioModifica" />
+                <ScalarProperty Name="hper_FechaCrea" ColumnName="hper_FechaCrea" />
+                <ScalarProperty Name="hper_RazonInactivo" ColumnName="hper_RazonInactivo" />
+                <ScalarProperty Name="hper_Estado" ColumnName="hper_Estado" />
+                <ScalarProperty Name="hper_PorcentajeIndemnizado" ColumnName="hper_PorcentajeIndemnizado" />
+                <ScalarProperty Name="hper_Justificado" ColumnName="hper_Justificado" />
+                <ScalarProperty Name="hper_Observacion" ColumnName="hper_Observacion" />
+                <ScalarProperty Name="hper_Duracion" ColumnName="hper_Duracion" />
+                <ScalarProperty Name="hper_fechaFin" ColumnName="hper_fechaFin" />
+                <ScalarProperty Name="hper_fechaInicio" ColumnName="hper_fechaInicio" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="tper_Descripcion" ColumnName="tper_Descripcion" />
+                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
+                <ScalarProperty Name="per_FechaModifica" ColumnName="per_FechaModifica" />
+                <ScalarProperty Name="per_UsuarioModifica" ColumnName="per_UsuarioModifica" />
+                <ScalarProperty Name="per_FechaCrea" ColumnName="per_FechaCrea" />
+                <ScalarProperty Name="per_UsuarioCrea" ColumnName="per_UsuarioCrea" />
+                <ScalarProperty Name="per_RazonInactivo" ColumnName="per_RazonInactivo" />
+                <ScalarProperty Name="per_Estado" ColumnName="per_Estado" />
+                <ScalarProperty Name="per_TipoSangre" ColumnName="per_TipoSangre" />
+                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
+                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
+                <ScalarProperty Name="per_FechaNacimiento" ColumnName="per_FechaNacimiento" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialPermisos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialPermisos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialPermisos_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
