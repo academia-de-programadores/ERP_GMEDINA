@@ -781,7 +781,6 @@ namespace ERP_GMEDINA.Controllers
                                         dbContextTransaccion.Rollback();
                                         // mensaje del error en el registro del colaborador
                                         errores++;
-
                                     }
                                 }
                             }
@@ -793,7 +792,6 @@ namespace ERP_GMEDINA.Controllers
                             errores++;
                         }
                     }
-
                 }
 
                 //enviar resultado al cliente
