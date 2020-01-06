@@ -44,7 +44,7 @@ function llenarTabla() {
                 console.log(value.car_Descripcion);
                 tabla.row.add({
                     ID: value.car_Id,
-                    Descripcion: value.car_Descripcion
+                    Cargo: value.car_Descripcion
                 }).draw();
             });
         });
