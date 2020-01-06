@@ -162,11 +162,12 @@ function CallEditar(btn) {
 
     tablaEditar(id);
 }
-function zeroresult() {
-    $("#ibox1").find(".ibox-content").hide();
-    $("#ibox1").append('No hay registros.');
-}
-function ErrorDeRed() {
-    $("#ibox1").find(".ibox-content").hide();
-    $("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+function validarDT(obj) {
+    if (obj == "-2") {
+        $("#ibox1").find(".ibox-content").hide();
+        $("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+    } if (obj == []) {
+        $("#ibox1").find(".ibox-content").hide();
+        $("#ibox1").append('No hay registros.');
+    }
 }
