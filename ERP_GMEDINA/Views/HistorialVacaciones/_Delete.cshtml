@@ -1,0 +1,60 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialVacaciones
+<div class="modal inmodal" id="ModalInhabilitar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
+                {
+                    @*<div  class="col-md-8">
+                        <input id="hvac_Id" name="hvac_Id" type="text" value="">
+                    </div>*@
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        
+                        <div @*hidden="hidden"*@ class="col-md-8">
+                            <input id="hvac_Id" name="hvac_Id" type="text" value="">
+                        </div>
+
+                        <div class="form-group">
+							@Html.LabelFor(model => model.hvac_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.hvac_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.hvac_RazonInactivo, "", new { @class = "text-danger", @id = "errorhvac_RazonInactivo" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.hvac_Id, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.hvac_Id, new { htmlAttributes = new { @class = "form-control", @id = "hvac_Id" } })
+                                @Html.ValidationMessageFor(model => model.hvac_Id, "", new { @class = "text-danger", @id = "errorhvac_Id" })
+                            </div>
+                        </div>*@
+
+
+					</div>
+					}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="InActivar">Guardar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    @section Styles {
+        @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/plugins/dataTables")
+        @Scripts.Render("~/Scripts/app/General")
+        @Scripts.Render("~/Scripts/app/General/HistorialVacaciones")
+        @Scripts.Render("~/Scripts/app/General/IndexHistorialVacaciones")
+
+    }
+

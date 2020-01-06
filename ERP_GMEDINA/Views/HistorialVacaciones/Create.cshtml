@@ -1,0 +1,167 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialVacaciones
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Create</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>tbHistorialVacaciones</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+        	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
+        	<h2>Create</h2>
+        </div>
+
+
+        @using (Html.BeginForm())
+        {
+          <div class="ibox-content">
+            @Html.AntiForgeryToken()
+              <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_Id, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_Id, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control" })
+                      @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_FechaInicio, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_FechaFin, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_FechaFin, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_CantDias, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_CantDias, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_CantDias, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_DiasPagados, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      <div class="checkbox">
+                          @Html.EditorFor(model => model.hvac_DiasPagados)
+                          @Html.ValidationMessageFor(model => model.hvac_DiasPagados, "", new { @class = "text-danger" })
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_MesVacaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_MesVacaciones, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_MesVacaciones, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_AnioVacaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_AnioVacaciones, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_AnioVacaciones, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      <div class="checkbox">
+                          @Html.EditorFor(model => model.hvac_Estado)
+                          @Html.ValidationMessageFor(model => model.hvac_Estado, "", new { @class = "text-danger" })
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_RazonInactivo, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_UsuarioCrea, "hvac_UsuarioCrea", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.DropDownList("hvac_UsuarioCrea", null, htmlAttributes: new { @class = "form-control" })
+                      @Html.ValidationMessageFor(model => model.hvac_UsuarioCrea, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_FechaCrea, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_FechaCrea, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_FechaCrea, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_UsuarioModifica, "hvac_UsuarioModifica", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.DropDownList("hvac_UsuarioModifica", null, htmlAttributes: new { @class = "form-control" })
+                      @Html.ValidationMessageFor(model => model.hvac_UsuarioModifica, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.hvac_FechaModifica, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                      @Html.EditorFor(model => model.hvac_FechaModifica, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.hvac_FechaModifica, "", new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                      <input type="submit" value="Guardar" class="btn btn-primary" />
+      	            @Html.ActionLink("Cancelar", "Index", null, new { @class="btn btn-default"})
+                    </div>
+                  </div>
+                </div>
+              </div>
+          }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
