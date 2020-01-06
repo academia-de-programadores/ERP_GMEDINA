@@ -18,7 +18,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             var tbEmpleadoBonos = db.tbEmpleadoBonos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas).OrderByDescending(x => x.cb_FechaCrea);
-
+            //throw new Exception();
+            //tbEmpleadoBonos = null;
             return View(tbEmpleadoBonos.ToList().Where(p => p.cb_Activo == true));
         }
 

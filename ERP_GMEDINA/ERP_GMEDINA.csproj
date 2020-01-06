@@ -106,6 +106,10 @@
       <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SpreadsheetLight, Version=3.4.11.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
       <HintPath>..\packages\SpreadsheetLight.3.4.11\lib\net40\SpreadsheetLight.dll</HintPath>
       <Private>True</Private>
@@ -196,6 +200,7 @@
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
@@ -1133,6 +1138,10 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\FileSaver.min.js" />
     <Content Include="Scripts\app\General\AcumuladosISR.js" />
     <Content Include="Scripts\app\General\AdelantoSueldo.js" />
@@ -1219,6 +1228,7 @@
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
     </Content>
     <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1827,6 +1837,8 @@
     <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
     <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
     <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
+    <Content Include="Views\ErrorPages\InternalServerError.cshtml" />
+    <Content Include="Views\ErrorPages\NotFoundError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
