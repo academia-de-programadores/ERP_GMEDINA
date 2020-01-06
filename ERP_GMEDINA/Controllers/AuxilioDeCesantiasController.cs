@@ -189,7 +189,7 @@ namespace ERP_GMEDINA.Controllers
                     listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result1 Resultado in listAuxilioCesantia)
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result Resultado in listAuxilioCesantia)
                         MensajeError = Resultado.MensajeError;
 
 
