@@ -754,8 +754,6 @@ namespace ERP_GMEDINA.Controllers
 
                                         #region Tabla Progresiva para Deducir ISR
                                         //Cálculo con la Tabla Progresiva ISR
-                                        //RentaNetaGravable = (Decimal)320902.78;
-                                        //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
 
                                         //Variable para llamar cada uno de los Porcentajes y Techos del ISR
                                         var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
@@ -1014,7 +1012,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 //Si es el primer mes a cobrar
                 if (mesesPago == null)
-                    SueldoAnualISR = ((netoAPagarColaborador * 12) / 12) ?? 0;
+                    SueldoAnualISR = ((netoAPagarColaborador * 12)) ?? 0;
 
 
                 int cantidadMesesPagados = mesesPago.Count;
