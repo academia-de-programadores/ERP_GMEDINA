@@ -108,7 +108,7 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #emp_IdEmpleado").empty();
-            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
+            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecionar colaborador...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
@@ -124,6 +124,7 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #cin_IdIngreso").empty();
+            $("#Crear #cin_IdIngreso").append("<option value='0'>Selecionar bono...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
