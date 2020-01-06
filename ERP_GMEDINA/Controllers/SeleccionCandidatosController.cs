@@ -76,7 +76,7 @@ namespace ERP_GMEDINA.Controllers
                         .Select(
                         t => new
                         {
-                            Id= t.Id,
+                            Id = t.Id,
                             Identidad = t.Identidad,
                             Nombre = t.Nombre,
                             Fase = t.Fase,
@@ -162,8 +162,8 @@ namespace ERP_GMEDINA.Controllers
             var SeleccionCandidatos = new tbSeleccionCandidatos
             {
                 per_Id = tbSeleccionCandidatos.per_Id,
-                tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres , per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos},
-                fare_Id = tbSeleccionCandidatos.fare_Id ,
+                tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos },
+                fare_Id = tbSeleccionCandidatos.fare_Id,
                 tbFasesReclutamiento = new tbFasesReclutamiento { fare_Descripcion = IsNull(tbSeleccionCandidatos.tbFasesReclutamiento).fare_Descripcion },
                 req_Id = tbSeleccionCandidatos.req_Id,
                 tbRequisiciones = new tbRequisiciones { req_Descripcion = IsNull(tbSeleccionCandidatos.tbRequisiciones).req_Descripcion },
@@ -186,7 +186,7 @@ namespace ERP_GMEDINA.Controllers
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Update(id, tbSeleccionCandidatos.fare_Id, tbSeleccionCandidatos.scan_Fecha,tbSeleccionCandidatos.req_Id, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSeleccionCandidatos_Update(id, tbSeleccionCandidatos.fare_Id, tbSeleccionCandidatos.scan_Fecha, tbSeleccionCandidatos.req_Id, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbSeleccionCandidatos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -312,9 +312,7 @@ namespace ERP_GMEDINA.Controllers
             var SeleccionCandidatos = new tbSeleccionCandidatos
             {
                 per_Id = tbSeleccionCandidatos.per_Id,
-
-
-
+                tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos },
             };
             Session["per_id"] = SeleccionCandidatos.per_Id;
             return Json(SeleccionCandidatos, JsonRequestBehavior.AllowGet);

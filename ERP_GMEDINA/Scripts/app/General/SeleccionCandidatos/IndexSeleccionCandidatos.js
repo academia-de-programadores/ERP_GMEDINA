@@ -61,15 +61,13 @@ function tablaEditar(id) {
                $("#ModalEditar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
                $("#ModalEditar").find("#fare_Id").val(obj.fare_Id);
                $("#ModalEditar").find("#req_Id").val(obj.req_Id);
-               if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/")
-               {
+               if (FechaFormato(obj.scan_Fecha).substring(5, 6) == "/") {
                    $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(6, 10) + "-" + FechaFormato(obj.scan_Fecha).substring(3, 5) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
                }
-               else
-               {
+               else {
                    $("#ModalEditar").find("#scan_Fecha").val(FechaFormato(obj.scan_Fecha).substring(5, 9) + "-0" + FechaFormato(obj.scan_Fecha).substring(3, 4) + "-" + FechaFormato(obj.scan_Fecha).substring(0, 2));
 
-               }             
+               }
                $('#ModalEditar').modal('show');
 
            }
@@ -78,10 +76,10 @@ function tablaEditar(id) {
 }
 
 function CallEditar(btn) {
-        var tr = $(btn).closest('tr');
-        var row = tabla.row(tr);
-        var id = row.data().ID; 
-        tablaEditar(id);
+    var tr = $(btn).closest('tr');
+    var row = tabla.row(tr);
+    var id = row.data().ID;
+    tablaEditar(id);
 
 }
 
@@ -141,19 +139,19 @@ function btnAgregar() {
 
 $("#btnGuardar").click(function () {
     var data1 = $("#FormNuevo").serializeArray();
-    data = serializar(data1);    
-    if (data != null) {       
-        data = JSON.stringify({ tbSeleccionCandidatos: data });       
+    data = serializar(data1);
+    if (data != null) {
+        data = JSON.stringify({ tbSeleccionCandidatos: data });
         _ajax(data,
             '/SeleccionCandidatos/Create',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalNuevo").find("#per_Id").find("option[value='" + $("#ModalNuevo").find("#per_Id").val() + "']").remove();                   
+                    $("#ModalNuevo").find("#per_Id").find("option[value='" + $("#ModalNuevo").find("#per_Id").val() + "']").remove();
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
-                    
+
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
@@ -161,7 +159,7 @@ $("#btnGuardar").click(function () {
             });
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
-    } 
+    }
 
 });
 
@@ -185,13 +183,13 @@ function CallEliminar(btn) {
            }
        });
 
- 
+
 }
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    
+
     $("#ModalNuevo").find("#per_Id").append('<option value="' + data.per_Id + '">' + data.per_Descripcion + '</option>');
     if (data != null) {
         data = JSON.stringify({ tbSeleccionCandidatos: data });
@@ -212,9 +210,6 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
-
-
 
 
 function btnInactivar() {
@@ -256,17 +251,15 @@ function CallContratar(btn) {
         '/SeleccionCandidatos/Contratar/' + id,
         'GET',
         function (obj) {
+            $("#ModalContratar").find("#Candidato").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+
         });
-
-
 
     $('#ModalContratar').modal('show');
 
 
 
 }
-
-
 
 
 $("#btnContratar").click(function () {

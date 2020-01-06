@@ -196,6 +196,7 @@
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialCargosController.cs" />
+    <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
+    <Compile Include="Controllers\SeleccionCandidatosController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
@@ -515,10 +517,16 @@
     <Compile Include="Models\UDP_RRHH_tbDepartamentos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEmpleados_Contratar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpleados_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpleados_Recontratacion_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEmpleados_Recontratar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpleados_Restore_Result.cs">
@@ -1163,6 +1171,7 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
+    <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
@@ -1175,6 +1184,7 @@
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
@@ -1448,6 +1458,7 @@
     <Content Include="Scripts\plugins\datapicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\DatatablesConfigurations.js" />
+    <Content Include="Scripts\plugins\dataTables\Datatables_SeleccionCandidatos.js" />
     <Content Include="Scripts\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Scripts\plugins\diff_match_patch\javascript\diff_match_patch.js" />
     <Content Include="Scripts\plugins\diff_match_patch\README.txt" />
@@ -1831,6 +1842,13 @@
     <Content Include="Views\Sueldos\_Delete.cshtml" />
     <Content Include="Views\Sueldos\_Detalles.cshtml" />
     <Content Include="Views\Sueldos\_Edit.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Contratar.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
+    <Content Include="Views\HistorialContrataciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

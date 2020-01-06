@@ -37,12 +37,12 @@ $(document).ready(function () {
             col = col + 1;
         }
 
-        //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
+            //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
                 data: null,
                 orderable: false,
-                defaultContent: "<div>" +
+                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
                                 "</div>"
@@ -64,36 +64,34 @@ $(document).ready(function () {
         }
     });
     tabla = $('#IndexTable').DataTable({
-     //"language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-     "language": {
-      "sProcessing": "Procesando...",
-      "sLengthMenu": "Mostrar _MENU_ registros",
-      "sZeroRecords": "No se encontraron resultados",
-      "sEmptyTable": htmlSpiner,
-      "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix": "",
-      "sSearch": "Buscar:",
-      "sUrl": "",
-      "sInfoThousands": ",",
-      "sLoadingRecords": "Cargando...",
-      "oPaginate": {
-       "sFirst": "Primero",
-       "sLast": "Último",
-       "sNext": "Siguiente",
-       "sPrevious": "Anterior"
-      },
-      "oAria": {
-       "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-       "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-      }
-     },
+        //"language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": htmlSpiner,
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
         responsive: true,
         pageLength: 25,
-        "scrollX": true,
-        "autoWidth": false,
-        dom: 'Bfrtip',
+        dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             {
                 extend: 'copy',
@@ -142,7 +140,6 @@ $(document).ready(function () {
         //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes
         columns: columnas,
         order: [[col, 'asc']],
-
     });
 });
 

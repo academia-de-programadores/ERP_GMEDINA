@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
         public int depto_Id { get; set; }
         public int area_Id { get; set; }
         public int car_Id { get; set; }
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Departamento")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string depto_Descripcion { get; set; }
@@ -33,9 +33,9 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> depto_FechaModifica { get; set; }
 
         //Propiedades extra...
-        [Display(Name = "Cargo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        //[Display(Name = "Cargo")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        //[MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string car_Descripcion { get; set; }
         public string Accion { get; set; }
     }
