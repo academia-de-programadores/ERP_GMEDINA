@@ -1,0 +1,205 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbPreaviso>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Preavisos</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de Preavisos</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary pull-right btn-xs" id="btnAgregarPreaviso">Nuevo</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblPreaviso" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th>@Html.DisplayNameFor(model => model.prea_RangoInicioMeses)</th>
+                                <th>@Html.DisplayNameFor(model => model.prea_RangoFinMeses)</th>
+                                <th>@Html.DisplayNameFor(model => model.prea_DiasPreaviso)</th>
+                                <th>@Html.DisplayNameFor(model => model.prea_FechaCrea)</th>
+                                <th>@Html.DisplayNameFor(model => model.prea_UsuarioCrea)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPreaviso">
+                            @foreach (var item in Model)
+                            {
+                                var UsuarioModifica = !(item.prea_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+                                var UsuarioCrea = !(item.prea_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
+                                var FechaCrea = Convert.ToString(item.prea_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.prea_FechaCrea);
+                                var FechaModifica = Convert.ToString(item.prea_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.prea_FechaModifica);
+                                <tr class="gradeA odd" role="row" data-id="@item.prea_IdPreaviso">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.prea_RangoInicioMeses)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.prea_RangoFinMeses)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.prea_DiasPreaviso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.prea_FechaCrea)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => UsuarioCrea)
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.prea_IdPreaviso" type="button" class="btn btn-primary btn-xs" id="btnEditarPreaviso">Editar</button>
+                                        <button data-id="@item.prea_IdPreaviso" type="button" class="btn btn-default btn-xs" id="btnDetallePreaviso">Detalle</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CrearPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Agregar datos</h4>
+            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InactivarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar el registro</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <p><b>¿Esta Seguro Que Desea Inactivar el registro?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnInactivarPreavisoConfirmar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DetallarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Detalle</h4>
+            </div>
+            @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPreaviso())
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Scripts.Render("~/plugins/izitoast")
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/Preaviso")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.prea_RangoInicioMeses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prea_RangoFinMeses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prea_DiasPreaviso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prea_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prea_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbUsuario2.usu_NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.prea_RangoInicioMeses)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prea_RangoFinMeses)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prea_DiasPreaviso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prea_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prea_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbUsuario2.usu_NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.prea_IdPreaviso }) |
+            @Html.ActionLink("Details", "Details", new { id=item.prea_IdPreaviso }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.prea_IdPreaviso })
+        </td>
+    </tr>
+}
+
+</table>*@

@@ -1,0 +1,68 @@
+﻿@model ERP_GMEDINA.Models.tbPeriodos
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsPeriodo" }))
+{
+    <div class="modal-body" id="Detalles">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.peri_IdPeriodo)
+
+            <div class="form-group">
+                <label class="control-label col-md-2">ID</label>  @*@Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.peri_IdPeriodo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Descripción</label>  @*@Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+        </div>
+
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h2>Auditoría</h2>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <table class="table table-striped table-bordered dataTable">
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Creado</td>
+                                @Html.HiddenFor(model => model.peri_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td>@Html.EditorFor(model => model.peri_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            </tr>
+                            <tr>
+                                <td>Modificado</td>
+                                @Html.HiddenFor(model => model.peri_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td>@Html.EditorFor(model => model.peri_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+    </div>
+}
