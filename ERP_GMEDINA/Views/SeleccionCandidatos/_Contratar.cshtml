@@ -1,0 +1,87 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleados
+<div class="modal inmodal" id="ModalContratar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Contratar Candidato</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormContratar" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+							@Html.LabelFor(model => model.per_Id, "per_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("per_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.per_Id, "", new { @class = "text-danger", @id = "errorper_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.car_Id, "car_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("car_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger", @id = "errorcar_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.area_Id, "area_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("area_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.depto_Id, "depto_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("depto_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.jor_Id, "jor_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("jor_Id", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.jor_Id, "", new { @class = "text-danger", @id = "errorjor_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.cpla_IdPlanilla, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+							@Html.DropDownList("cpla_IdPlanilla", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger", @id = "errorcpla_IdPlanilla" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.fpa_IdFormaPago, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+                                @Html.DropDownList("fpa_IdFormaPago", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.fpa_IdFormaPago, "", new { @class = "text-danger", @id = "errorfpa_IdFormaPago" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.emp_CuentaBancaria, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.emp_CuentaBancaria, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.ValidationMessageFor(model => model.emp_CuentaBancaria, "", new { @class = "text-danger", @id = "erroremp_CuentaBancaria" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="emp_Fechaingreso">Fecha</label>
+                            <div class="col-md-8 has-error">
+                                <input class="form-contro required valid text-box single-line" data-val="true" data-val-date="The field emp_Fechaingreso must be a date." id="scan_Fecha" name="emp_Fechaingreso" type="date" value="">
+                                <span class="field-validation-valid text-danger" data-valmsg-for="emp_Fechaingreso" data-valmsg-replace="true" id="erroremp_Fechaingreso"></span>
+                            </div>
+                        </div>                                              
+					</div>
+				}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnContratar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

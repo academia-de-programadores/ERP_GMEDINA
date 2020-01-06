@@ -117,7 +117,7 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.titu_Id = id;
+        data.ticn_Id = id;
         data = JSON.stringify({ tbTipoIncapacidades: data });
         _ajax(data,
             '/TipoIncapacidades/Delete',
@@ -136,11 +136,12 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.titu_Id = id;
+        data.ticn_Id = id;
         data = JSON.stringify({ tbTipoIncapacidades: data });
         _ajax(data,
             '/TipoIncapacidades/Edit',
