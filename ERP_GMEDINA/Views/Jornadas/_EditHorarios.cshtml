@@ -1,42 +1,4 @@
-﻿@*@model ERP_GMEDINA.Models.tbHorarios
-                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditarHorarios" }))
-                {
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })                        
-                        <div class="form-group">
-							@Html.LabelFor(model => model.hor_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.hor_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" } })
-								@Html.ValidationMessageFor(model => model.hor_Descripcion, "", new { @class = "text-danger", @id = "errorhor_Descripcion" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-							@Html.LabelFor(model => model.hor_HoraInicio, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.hor_HoraInicio, new { htmlAttributes = new { @class = "form-control required valid" } })
-								@Html.ValidationMessageFor(model => model.hor_HoraInicio, "", new { @class = "text-danger", @id = "errorhor_HoraInicio" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-							@Html.LabelFor(model => model.hor_HoraFin, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.hor_HoraFin, new { htmlAttributes = new { @class = "form-control required valid" } })
-								@Html.ValidationMessageFor(model => model.hor_HoraFin, "", new { @class = "text-danger", @id = "errorhor_HoraFin" })
-                            </div>
-                        </div>                        
-					</div>
-				}
-            </div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-				<button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
-				<button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
-			</div>
-		</div>
-	</div>
-</div>*@
-
-
+﻿
 @model ERP_GMEDINA.Models.tbHorarios
 <div class="modal inmodal" id="ModalEditarHorarios" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
@@ -77,7 +39,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" id="btnCerrarModalEditar" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary pull-left" id="btnActualizarHorario">Actualizar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitarHoraio" data-toggle="ModalInhabilitarHorario" onclick="showmodalDelete(this)">Inhabilitar</button>
             </div>
         </div>
     </div>

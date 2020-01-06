@@ -131,6 +131,18 @@ function showmodaledit(btn) {
         });
 }
 
+function showmodalDelete(btn) {
+    jor_Id = $(btn).data('id');
+    var modalnuevo = $('#ModalInhabilitarHorario');
+    modalnuevo.modal('show');
+    $("#ModalEditarHorarios").modal('hide');//ocultamos el modal
+    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+    $(modalnuevo).find("#hor_RazonInactivo").val("");
+    $(modalnuevo).find("#hor_RazonInactivo").focus();
+}
+
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/Jornadas/Edit/' + id,
@@ -150,6 +162,13 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("#jor_RazonInactivo").val("");
     $("#ModalInhabilitar").find("#jor_RazonInactivo").focus();
 });
+
+//$("#ModalInhabilitarHorario").click(function () {
+//    CierraPopups();
+//    $('#ModalInhabilitarHorario').modal('show');
+//    $("#ModalInhabilitarHorario").find("#hor_RazonInactivo").val("");
+//    $("#ModalInhabilitarHorario").find("#hor_RazonInactivo").focus();
+//});
 
 
 $("#btnGuardar").click(function () {
@@ -268,6 +287,31 @@ $("#InActivar").click(function () {
     }
 });
 
+$("#InActivarHorario").click(function () {
+    var data = $("#FormInactivarHorario").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.hor_Id = id;
+        data = JSON.stringify({ tbHorarios: data });
+        _ajax(data,
+            '/Jornadas/DeleteHorario',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalInhabilitarHorario").modal('hide');//ocultamos el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal
+                    llenarTabla();
+                    LimpiarControles(["hor_Descripcion", "hor_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ha Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 
 
 $(document).on("click", "#IndexTable tbody tr td button#btnAgregarHorarios", function () {

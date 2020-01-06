@@ -1658,6 +1658,7 @@
     <Content Include="Views\Jornadas\_Delete.cshtml" />
     <Content Include="Views\Jornadas\_CreateHorario.cshtml" />
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
+    <Content Include="Views\Jornadas\_DeleteHorario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
