@@ -193,6 +193,7 @@
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
+    <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialCargosController.cs" />
@@ -1876,6 +1877,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Downloadable files\" />
+    <Folder Include="Views\General\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
