@@ -21,10 +21,8 @@
             <div class="float-e-margins">
                 <div class="ibox-title">
                     <h5>Listado de Jornadas</h5>
-                    <div class="ibox-tools">
-                       @*@Html.ActionLink("Registrar tbJornadas", "Create", null, new { @class = "btn btn-primary btn-xs"})*@
-                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Resgistrar Jornadas"/>
-                        @*<input type="button" id="btnAgregarHorarios" class="btn btn-primary btn-xs" value="Resgistrar Horarios" />*@
+                    <div class="ibox-tools">                       
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Resgistrar Jornadas"/>                        
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -52,6 +50,7 @@
 @Html.Partial("_CreateHorario", new ERP_GMEDINA.Models.tbHorarios())
 @Html.Partial("_EditHorarios", new ERP_GMEDINA.Models.tbHorarios())
 @Html.Partial("_DeleteHorario", new ERP_GMEDINA.Models.tbHorarios())
+@Html.Partial("_DetallesHorarios", new ERP_GMEDINA.Models.tbHorarios())
 
     
 @section Styles {

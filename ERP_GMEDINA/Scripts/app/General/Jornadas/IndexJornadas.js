@@ -59,7 +59,8 @@ function format(obj, jor_Id) {
                 '<div class="panel panel-default">' +
                   '<div class="panel-heading">' +
                      '<h5>' + index.hor_descripcion + '</h5>' +
-                     '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-primary btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                     '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
+                     '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
                 '</div>' +
                 '<div class="panel-body">' +
                 'Hora Inicio: ' + index.hor_HoraInicio.toString() +
@@ -69,7 +70,6 @@ function format(obj, jor_Id) {
     });
     return div + '</div></div></div>';
 }
-
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
@@ -130,7 +130,6 @@ function showmodaledit(btn) {
             }
         });
 }
-
 function showmodalDelete(btn) {
     jor_Id = $(btn).data('id');
     var modalnuevo = $('#ModalInhabilitarHorario');
@@ -140,6 +139,33 @@ function showmodalDelete(btn) {
     $('.modal-backdrop').remove();//eliminamos el backdrop del modal
     $(modalnuevo).find("#hor_RazonInactivo").val("");
     $(modalnuevo).find("#hor_RazonInactivo").focus();
+}
+function showmodalDetalle(btn) {
+    jor_Id = $(btn).data('id');
+    _ajax(null,
+        '/Jornadas/EditHorario/' + jor_Id,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                CierraPopups();                
+                var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
+                var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
+                $('#ModalDetallesHorario').modal('show');
+                $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;
+                //$("#ModalDetallesHorario").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;
+                $("#ModalDetallesHorario").find("#hor_HoraInicio")["0"].innerText = hor_HoraInicio;
+                $("#ModalDetallesHorario").find("#hor_HoraFin")["0"].innerText = hor_HoraFin;
+                $("#ModalDetallesHorario").find("#hor_CantidadHoras")["0"].innerText = obj.hor_CantidadHoras;
+                $("#ModalDetallesHorario").find("#hor_Estado")["0"].innerText = obj.hor_Estado;
+                $("#ModalDetallesHorario").find("#hor_RazonInactivo")["0"].innerText = obj.hor_RazonInactivo;
+                $("#ModalDetallesHorario").find("#hor_FechaCrea")["0"].innerText = FechaFormato(obj.hor_FechaCrea);
+                $("#ModalDetallesHorario").find("#hor_FechaModifica")["0"].innerText = FechaFormato(obj.hor_FechaModifica);
+                $("#ModalDetallesHorario").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetallesHorario").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetallesHorario").find("#btnEditar")["0"].dataset.id = ID;
+                $('#ModalDetallesHorario').modal('show');
+            }
+        });
 }
 
 
@@ -162,15 +188,6 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("#jor_RazonInactivo").val("");
     $("#ModalInhabilitar").find("#jor_RazonInactivo").focus();
 });
-
-//$("#ModalInhabilitarHorario").click(function () {
-//    CierraPopups();
-//    $('#ModalInhabilitarHorario').modal('show');
-//    $("#ModalInhabilitarHorario").find("#hor_RazonInactivo").val("");
-//    $("#ModalInhabilitarHorario").find("#hor_RazonInactivo").focus();
-//});
-
-
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
@@ -262,7 +279,6 @@ $("#btnActualizarHorario").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -286,7 +302,6 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
 $("#InActivarHorario").click(function () {
     var data = $("#FormInactivarHorario").serializeArray();
     data = serializar(data);

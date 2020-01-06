@@ -209,6 +209,7 @@
     <Compile Include="Models\cEmpresas.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cHabilidades.cs" />
+    <Compile Include="Models\cHorarios.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cJornadas.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
@@ -1647,10 +1648,6 @@
     <Content Include="Views\RequerimientosEspeciales\_Delete.cshtml" />
     <Content Include="Views\RequerimientosEspeciales\_Detalles.cshtml" />
     <Content Include="Views\RequerimientosEspeciales\_Edit.cshtml" />
-    <Content Include="Views\Jornadas\Create.cshtml" />
-    <Content Include="Views\Jornadas\Delete.cshtml" />
-    <Content Include="Views\Jornadas\Details.cshtml" />
-    <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
     <Content Include="Views\Jornadas\_Create.cshtml" />
     <Content Include="Views\Jornadas\_Detalles.cshtml" />
@@ -1659,6 +1656,7 @@
     <Content Include="Views\Jornadas\_CreateHorario.cshtml" />
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
     <Content Include="Views\Jornadas\_DeleteHorario.cshtml" />
+    <Content Include="Views\Jornadas\_DetallesHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

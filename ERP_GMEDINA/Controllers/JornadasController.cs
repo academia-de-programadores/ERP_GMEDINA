@@ -66,27 +66,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-        //public ActionResult llenarDropDownList()
-        //{
-        //    var tbHorarios = new List<object> { };
-        //    using (db = new ERP_GMEDINAEntities())
-        //    {
-        //        try
-        //        {
-        //            tbHorarios.Add(new { Id = 0, Descripcion = "** Seleccione una opcion **" });
-        //            tbHorarios.AddRange(db.tbHorarios.Select(t => new { Id = t.hor_Id, Descripcion = t.hor_Descripcion, t.hor_Estado }).Where(t => t.hor_Estado == true).ToList());
-        //        }
-        //        catch
-        //        {
-        //            return Json("-2", 0);
-        //        }
-        //    }
-        //    var result = new Dictionary<string, object>();
-        //    result.Add("tbHorarios", tbHorarios);
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-
-        // GET: Jornadas
+        //GET: Jornadas
 
         public ActionResult Index()
         {
@@ -303,6 +283,7 @@ namespace ERP_GMEDINA.Controllers
                 hor_Descripcion = tbHorarios.hor_Descripcion,
                 hor_HoraInicio = tbHorarios.hor_HoraInicio,
                 hor_HoraFin = tbHorarios.hor_HoraFin,
+                hor_CantidadHoras = tbHorarios.hor_CantidadHoras,
                 hor_Estado = tbHorarios.hor_Estado,
                 hor_RazonInactivo = tbHorarios.hor_RazonInactivo,
                 hor_UsuarioCrea = tbHorarios.hor_UsuarioCrea,
