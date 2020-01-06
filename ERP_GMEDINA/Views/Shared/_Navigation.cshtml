@@ -1,4 +1,4 @@
-﻿<nav class="navbar-default navbar-static-side" role="navigation">
+﻿}<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
@@ -50,9 +50,9 @@
                             @*<li class="@Html.IsSelected(action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Sueldos</a>
                             </li>*@
-                            @*<li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas",action: "Index")">
+                            <li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas",action: "Index")">
                                 <a href="@Url.Action("Index", "HistorialHorasTrabajadas")">Historial de Horas Trabajadas</a>
-                            </li>*@
+                            </li>
                             <li class="@Html.IsSelected(controller:"HistorialCargos",action: "Index")">
                                 <a href="@Url.Action("Index", "HistorialCargos")">Historial de Cargos</a>
                             </li>
@@ -73,17 +73,17 @@
                 <a href="@Url.Action("General_1", "Acciones de Personal")"><i class="fa fa-th-fa fa-users"></i> <span class="nav-label" data-i18n="nav.dashboard">Acciones de Personal</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
                     @*VACACIONES*@
-                    @*<li class="@Html.IsSelected(action: "Dashboard_5")">
+                    <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Vacaciones <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                    
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial Vacaciones</a>
+                            <li class="@Html.IsSelected(controller:"HistorialVacaciones",action: "Index")">
+                                <a href="@Url.Action("Index", "HistorialVacaciones")">Historial de Vacaciones</a>
                             </li>
 
 
                         </ul>
-                    </li>*@
+                    </li>
                     @*VACACIONES*@
 
 
@@ -118,9 +118,7 @@
                             <li class="@Html.IsSelected(controller:"HistorialSalidas",action: "Index")">
                                 <a href="@Url.Action("Index", "HistorialSalidas")">Historial de Salidas</a>
                             </li>
-                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Amonestaciones</a>
-                            </li>*@
+                    
                         </ul>
                     </li>
                     @*Salidas*@
