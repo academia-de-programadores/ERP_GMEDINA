@@ -1,0 +1,58 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialPermisos
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.hper_Observacion)
+    </dt>
+    <dd id="hper_Observacion">
+        @Html.DisplayFor(model => model.hper_Observacion)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.hper_FechaCrea)
+    </dt>
+    <dd id="hper_FechaCrea">
+        @Html.DisplayFor(model => model.hper_FechaCrea)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.hper_FechaModifica)
+    </dt>
+    <dd id="hper_FechaModifica">
+        @Html.DisplayFor(model => model.hper_FechaModifica)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+    </dt>
+    <dd id="tbUsuario_usu_NombreUsuario">
+        @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+    </dt>
+    <dd id="tbUsuario1_usu_NombreUsuario">
+        @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+    </dd>
+</dl>
+
+@*MODAL EDITAR*@
+<div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar salida</h4>
+            </div>
+            <div class="modal-body" id="ModalEdit">
+                @Html.Partial("_EditHistorialPermisos", new ERP_GMEDINA.Models.tbHistorialPermisos())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="btnEditarModal" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitarModal" data-toggle="modal" data-target="#ModalInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-white  pull-right" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general/IndexHistorialPermisos")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
