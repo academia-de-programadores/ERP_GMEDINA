@@ -126,18 +126,18 @@
 
 
                     @*PERMISOS*@
-                    @*<li class="@Html.IsSelected(action: "Dashboard_5")">
+                    <li class="@Html.IsSelected(action: "Dashboard_5")">
                         <a href="#">Permisos <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Tipo de Permisos</a>
+                            <li class="@Html.IsSelected(controller:"TipoPermisos",action: "Index")">
+                                <a href="@Url.Action("Index", "TipoPermisos")">Tipo de Permisos</a>
                             </li>
                   
-                            <li class="@Html.IsSelected(action: "Dashboard_5")">
+                            <li class="@Html.IsSelected(controller:"",action: "Dashboard_5")">
                                 <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Permisos</a>
                             </li>
                         </ul>
-                    </li>*@
+                    </li>
                     @*PERMISOS*@
 
 

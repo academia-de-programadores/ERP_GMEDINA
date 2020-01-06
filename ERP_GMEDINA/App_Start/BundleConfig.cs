@@ -594,7 +594,7 @@ namespace ERP_GMEDINA
 
             //~/Scripts/app/general/Requisiciones
             bundles.Add(new ScriptBundle("~/Scripts/app/general/RequerimientosEspeciales").Include(
-                "~/Scripts/app/General/RequerimientosEspeciales/RequerimientosEspeciales.js"));
+                "~/Scripts/app/General/RequerimientosEspeciale/RequerimientosEspeciales.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
                 "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
@@ -638,7 +638,7 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
 
                                   bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
-                                      "~/Scripts/app/TipoPermisos/TipoPermisos.js"));
+                                      "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
 
             //OPTIMIZATION
 

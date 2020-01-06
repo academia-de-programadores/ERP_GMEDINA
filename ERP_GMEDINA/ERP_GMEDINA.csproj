@@ -215,6 +215,7 @@
     <Compile Include="Controllers\TipoHorasController.cs" />
     <Compile Include="Controllers\TipoIncapacidadesController.cs" />
     <Compile Include="Controllers\TipoMonedasController.cs" />
+    <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -238,6 +239,7 @@
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
     <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
+    <Compile Include="Models\cHorarios.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cJornadas.cs" />
     <Compile Include="Models\cNacionalidades.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Models\cTipoHoras.cs" />
     <Compile Include="Models\cTipoIncapacidades.cs" />
     <Compile Include="Models\cTipoMonedas.cs" />
+    <Compile Include="Models\cTipoPermisos.cs" />
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
@@ -1185,6 +1188,7 @@
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
+    <Content Include="Scripts\app\General\TipoPermisos\TipoPermisos.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -1840,6 +1844,11 @@
     <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
     <Content Include="Views\HistorialContrataciones\Index.cshtml" />
+    <Content Include="Views\TipoPermisos\Index.cshtml" />
+    <Content Include="Views\TipoPermisos\_Create.cshtml" />
+    <Content Include="Views\TipoPermisos\_Delete.cshtml" />
+    <Content Include="Views\TipoPermisos\_Detalles.cshtml" />
+    <Content Include="Views\TipoPermisos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
