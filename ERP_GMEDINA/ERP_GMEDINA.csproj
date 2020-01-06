@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
+    <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -1142,7 +1143,6 @@
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
     <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
-    <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
@@ -1157,6 +1157,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
+    <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
@@ -1801,6 +1802,14 @@
     <Content Include="Views\HistorialAmonestaciones\_Create.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\_Delete.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\_Detalles.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Create.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Delete.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Details.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Edit.cshtml" />
+    <Content Include="Views\HistorialVacaciones\Index.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Delete.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

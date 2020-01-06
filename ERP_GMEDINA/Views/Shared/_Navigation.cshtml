@@ -47,9 +47,9 @@
                             <li class="@Html.IsSelected(controller:"Empleados",action: "Index")">
                                 <a href="@Url.Action("Index", "Empleados")">Listado de Empleados</a>
                             </li>
-                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Historial de Sueldos</a>
-                            </li>*@
+                            <li class="@Html.IsSelected(controller:"Sueldos",action: "Index")">
+                                <a href="@Url.Action("Index", "Sueldos")">Listado de Sueldos</a>
+                            </li>
                             <li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas",action: "Index")">
                                 <a href="@Url.Action("Index", "HistorialHorasTrabajadas")">Historial de Horas Trabajadas</a>
                             </li>
