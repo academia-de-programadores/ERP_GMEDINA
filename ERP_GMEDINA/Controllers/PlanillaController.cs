@@ -943,7 +943,7 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
-                                        oPlanillaEmpleado.totalISR = 0;
+                                        oPlanillaEmpleado.totalISR = totalISR;
                                         oPlanillaEmpleado.totalDeduccionesColaborador = colaboradorDeducciones;
                                         oPlanillaEmpleado.totalAFP = totalAFP;
                                         oPlanillaEmpleado.totalInstitucionesFinancieras = totalInstitucionesFinancieras;
