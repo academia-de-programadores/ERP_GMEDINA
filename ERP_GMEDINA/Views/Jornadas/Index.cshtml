@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbJornadas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Jornadas";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>tbJornadas</h2>
+        <h2>Jornadas</h2>
         <ol class="breadcrumb">
             <li class="active">
             </li>
@@ -20,9 +20,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de tbJornadas</h5>
-                    <div class="ibox-tools">
-                       @Html.ActionLink("Registrar tbJornadas", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                    <h5>Listado de Jornadas</h5>
+                    <div class="ibox-tools">                       
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Resgistrar Jornadas"/>                        
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -42,13 +42,24 @@
         </div>
     </div>
  </div>
+
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbJornadas())
+@Html.Partial("_CreateHorario", new ERP_GMEDINA.Models.tbHorarios())
+@Html.Partial("_EditHorarios", new ERP_GMEDINA.Models.tbHorarios())
+@Html.Partial("_DeleteHorario", new ERP_GMEDINA.Models.tbHorarios())
+@Html.Partial("_DetallesHorarios", new ERP_GMEDINA.Models.tbHorarios())
+
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 
 @section Scripts {
-  @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/General/Jornadas")
-@Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general")
 }
