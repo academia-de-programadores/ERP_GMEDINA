@@ -44,8 +44,8 @@ namespace ERP_GMEDINA.Controllers
 
             personasddl = personasddl.Except(candidatosddl).ToList();
             personasddl = personasddl.Except(empleadosddl).ToList();
- 
- 
+
+
             //CARGAR DDL DE SELECCION CANDIDATOS
             ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
             ViewBag.per_Id = new SelectList(personasddl, "per_Id", "per_descripcion");
@@ -66,7 +66,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult llenarTabla()
         {
 
-      
+
 
             try
             {
@@ -225,7 +225,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     msj = "-2";
                     ex.Message.ToString();
-                }             
+                }
             }
             else
             {
@@ -353,11 +353,11 @@ namespace ERP_GMEDINA.Controllers
                     }
                     else
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Recontratacion(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, true, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
 
-                        foreach (UDP_RRHH_tbEmpleados_Recontratacion_Result item in list)
+                        foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
                         }
@@ -381,7 +381,7 @@ namespace ERP_GMEDINA.Controllers
         {
             if (disposing)
             {
-                db.Dispose();   
+                db.Dispose();
             }
             base.Dispose(disposing);
         }
