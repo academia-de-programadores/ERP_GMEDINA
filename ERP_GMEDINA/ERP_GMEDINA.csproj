@@ -1851,12 +1851,6 @@
     <Content Include="Views\Sueldos\_Delete.cshtml" />
     <Content Include="Views\Sueldos\_Detalles.cshtml" />
     <Content Include="Views\Sueldos\_Edit.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Contratar.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
     <Content Include="Views\HistorialContrataciones\Index.cshtml" />
     <Content Include="Views\TipoPermisos\Index.cshtml" />
     <Content Include="Views\TipoPermisos\_Create.cshtml" />
@@ -1872,6 +1866,12 @@
     <Content Include="Views\HistorialPermisos\_DetallesHistorialPermisos.cshtml" />
     <Content Include="Views\HistorialPermisos\_EditHistorialPermisos.cshtml" />
     <Content Include="Views\HistorialPermisos\_InhabilitarHistorialPermisos.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Contratar.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

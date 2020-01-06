@@ -89,24 +89,28 @@
                     }*@
                 @using (Html.BeginForm("UploadEmpleados", "Empleados", FormMethod.Post, new { @enctype = "multipart/form-data", @Id = "FormEmpleados" }))
                 {
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <span class="btn btn-default btn-file">
-                            <span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
-                            <input type="file" name="FileUpload" accept=".xls,.xlsx" id="btnUpload">
-                        </span>
-                        <span class="fileinput-filename"></span>
-                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileinput-new">Seleccionar</span><span class="fileinput-exists">Cambiar </span>
+                                    <input type="file" name="FileUpload" accept=".xls,.xlsx" id="btnUpload">
+                                </span>
+                                <span class="fileinput-filename"></span>
+                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 float-e-margins">
+                            <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
+                        </div>
                     </div>
-                    <input type="submit" class="btn btn-primary pull-left" id="btnGuardar" value="Guardar" />
-
-
                 }
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                    @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                            @*<button type="button" class="btn btn-primary pull-left" id="btnGuardar" >Guardar</button>*@
 
-                </div>
-            </div>
+                        </div>
+                    </div>
         </div>
     </div>
 </div>
