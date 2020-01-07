@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
     llenarTabla();
+    $(".drop li a")
+       .on('click', function (e) {
+           e.stopPropagation();
+       });
 });
 var id = 0;
 //Funciones GET

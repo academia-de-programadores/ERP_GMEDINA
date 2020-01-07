@@ -2,6 +2,23 @@
     llenarTabla();
 });
 var id = 0;
+
+function llenarTabla() {
+    _ajax(null,
+        '/Cargos/llenarTabla',
+        'POST',
+        function (Lista) {
+            tabla.clear().draw();
+            $.each(Lista, function (index, value) {
+                console.log(value.car_Descripcion);
+                tabla.row.add({
+                    ID: value.car_Id,
+                    Cargo: value.car_Descripcion
+                }).draw();
+            });
+        });
+}
+
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -34,21 +51,7 @@ function tablaDetalles(ID) {
             }
         });
 }
-function llenarTabla() {
-    _ajax(null,
-        '/Cargos/llenarTabla',
-        'POST',
-        function (Lista) {
-            tabla.clear().draw();
-            $.each(Lista, function (index, value) {
-                console.log(value.car_Descripcion);
-                tabla.row.add({
-                    ID: value.car_Id,
-                    Cargo: value.car_Descripcion
-                }).draw();
-            });
-        });
-}
+
 
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
