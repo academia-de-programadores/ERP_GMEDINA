@@ -606,6 +606,9 @@ namespace ERP_GMEDINA.Controllers
                                         #region Declaracion de Variables
                                         decimal SalarioMinimo = 9443.24M;
                                         int AnioActual = DateTime.Now.Year;
+                                        decimal? TotalBonos = 0;
+                                        decimal? TotalHrsExtra = 0;
+                                        decimal? TotalComisiones = 0;
                                         decimal? ExcesoDecimoTercer = 0;
                                         decimal? ExcesoVacaciones = 0;
                                         decimal? ExcesoDecimoCuarto = 0;
@@ -656,10 +659,10 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
                                         //Variable para llamar en duro los empleados con Décimo Tercer Mes
-                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
-                                        if (AnioActual == Convert.ToInt32(DecimoTercer.dtm_FechaPago.Year))
+                                        if (DecimoTercer != null)
                                         {
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
@@ -680,12 +683,11 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
                                         //Variable para llamar en duro los empleados con Décimo Cuarto Mes
-                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
-                                        if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
+                                        if (DecimoCuarto != null)
                                         {
-
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
 
@@ -705,12 +707,12 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
                                         //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
-                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbHistorialDePago.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
+                                        var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
 
                                         //Validar si los dias a Pagar es mayor a 30 dias 
-                                        if (objVacaciones.hip_UnidadesPagar > 30)
+                                        if (objVacaciones > 30)
                                         {
-                                            ExcesoVacaciones = ((objVacaciones.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
+                                            ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
                                         }
                                         else
                                         {
@@ -740,11 +742,22 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         #endregion
+                                        /*
+                                        TotalBonos = (db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalBonos))).FirstOrDefault();
+                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras).FirstOrDefault();
+                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones).FirstOrDefault();
+                                        */
+                                        if (TotalBonos == null || TotalHrsExtra == null || TotalComisiones == null)
+                                        {
+                                            TotalBonos = 0;
+                                            TotalHrsExtra = 0;
+                                            TotalComisiones = 0;
+                                        }
 
                                         #region Total ISR Calcular
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Total Ingresos Gravables
-                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones /*+ totalBonificaciones + totalHorasExtras + totalComisiones*/;
+                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
 
                                         //Total Deducciones Gravables
                                         TotalDeduccionesGravables = GastosMedicos;
