@@ -355,6 +355,13 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
         });
 });
 
+$(document).on("click", "#btnEdicionDeduccionAFP", function () {
+    //MOSTRAR EL MODAL DE Editar
+    $("#EditarDeduccionAFP").modal();
+    $("#DetallesDeduccionAFP").modal('hide');
+});
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

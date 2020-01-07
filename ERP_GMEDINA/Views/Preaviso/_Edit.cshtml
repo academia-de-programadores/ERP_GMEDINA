@@ -1,0 +1,43 @@
+﻿@model ERP_GMEDINA.Models.tbPreaviso
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditPreaviso" }))
+{
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.prea_IdPreaviso)
+            @Html.HiddenFor(model => model.prea_UsuarioModifica)
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Rango de Inicio de Mes</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Rango de Fin de Mes</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Dias Preaviso</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default" />
+        <input type="submit" value="Aceptar" id="btnUpdatePreaviso" class="btn btn-primary" />
+        <input type="button" value="Inactivar" id="btnInactivarPreaviso" class="btn btn-danger" />
+    </div>
+}
