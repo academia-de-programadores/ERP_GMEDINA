@@ -1873,6 +1873,14 @@
     <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
     <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
+    <Content Include="Views\Jornadas\_Create.cshtml" />
+    <Content Include="Views\Jornadas\_CreateHorario.cshtml" />
+    <Content Include="Views\Jornadas\_Delete.cshtml" />
+    <Content Include="Views\Jornadas\_DeleteHorario.cshtml" />
+    <Content Include="Views\Jornadas\_Detalles.cshtml" />
+    <Content Include="Views\Jornadas\_DetallesHorarios.cshtml" />
+    <Content Include="Views\Jornadas\_Edit.cshtml" />
+    <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

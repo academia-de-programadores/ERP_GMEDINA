@@ -42,7 +42,9 @@ function llenarTabla() {
 }
 $(document).ready(function () {
     llenarTabla();
+
 });
+
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);
