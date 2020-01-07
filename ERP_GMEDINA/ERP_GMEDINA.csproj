@@ -1207,6 +1207,7 @@
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />
+    <Content Include="Scripts\app\Menu\Menu.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

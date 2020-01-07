@@ -20,7 +20,8 @@ namespace ERP_GMEDINA
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.1.1.min.js"));
+                        "~/Scripts/jquery-2.1.1.min.js",
+                        "~/Scripts/app/Menu/Menu.js"));
 
             // jQueryUI CSS
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
