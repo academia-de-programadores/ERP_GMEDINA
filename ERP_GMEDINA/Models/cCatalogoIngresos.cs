@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         public int cin_IdIngreso { get; set; }
 
         [Required]
-        [Display(Name = "Descripcion Ingresos")]
+        [Display(Name = "Descripción Ingresos")]
         public string cin_DescripcionIngreso { get; set; }
 
         [Display(Name = "Usuario Crea")]

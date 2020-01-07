@@ -76,16 +76,6 @@
                             }
                         </tbody>
                         <tfoot>
-                            <tr role="row">
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
-                                @*<th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_UsuarioCrea)</th>
-                                    <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_FechaCrea)</th>
-                                    <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_UsuarioModifica)</th>
-                                    <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.cin_FechaModifica)</th>*@
-                                <th rowspan="1" colspan="1">Acción</th>
-
-                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -132,7 +122,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle datos</h4>
+                <h4 class="modal-title">Detalles</h4>
             </div>
             <div class="modal-body" id="Detallar">
                 @Html.Partial("_DetailCatalogoDeIngreso", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
