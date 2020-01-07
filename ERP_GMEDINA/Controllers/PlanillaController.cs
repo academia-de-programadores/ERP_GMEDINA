@@ -600,6 +600,12 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
 
+                                        //totales
+                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo;
+                                        netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
+
+                                        #endregion
+
                                         //ISR
                                         #region ISR
 
@@ -635,7 +641,7 @@ namespace ERP_GMEDINA.Controllers
                                         DateTime FechaIngresoEmpleado = db.tbEmpleados
                                                                         .Where(x => x.emp_Id == empleadoActual.emp_Id)
                                                                         .Select(x => x.emp_Fechaingreso).FirstOrDefault();
-                                        bool esMensual = false;
+                                        bool esMensual = true;
 
                                         TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
 
@@ -648,7 +654,6 @@ namespace ERP_GMEDINA.Controllers
                                         decimal SalarioPromedioAnualPagadoAlAnio = 0;
                                         decimal salarioPromedioAnualPagadoAlMes = 0;
                                         decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
-                                        ref SueldoAnual,
                                         mesesPago,
                                         esMensual,
                                         ref SalarioPromedioAnualPagadoAlAnio,
@@ -742,17 +747,19 @@ namespace ERP_GMEDINA.Controllers
                                         }
 
                                         #endregion
-                                        /*
-                                        TotalBonos = (db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalBonos))).FirstOrDefault();
-                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras).FirstOrDefault();
-                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones).FirstOrDefault();
-                                        */
-                                        if (TotalBonos == null || TotalHrsExtra == null || TotalComisiones == null)
-                                        {
+
+                                        TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
+                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
+                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
+
+                                        if (TotalBonos == null)
                                             TotalBonos = 0;
+
+                                        if (TotalHrsExtra == null)
                                             TotalHrsExtra = 0;
+
+                                        if (TotalComisiones == null)
                                             TotalComisiones = 0;
-                                        }
 
                                         #region Total ISR Calcular
                                         //-----------------------------------------------------------------------------------------------------------------------------
@@ -803,11 +810,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
-                                        //totales
-                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo;
-                                        netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
-
-                                        #endregion                                        
+                                        netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
                                         #region Enviar comprobante de pago por email
                                         if (enviarEmail != null && enviarEmail == true)
@@ -1019,33 +1022,36 @@ namespace ERP_GMEDINA.Controllers
             return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
         }
 
-        private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, ref decimal SueldoAnualISR, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
+        private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
         {
+            decimal sueldoProyeccion = 0;
             if (esMensual)
             {
                 //Si es el primer mes a cobrar
                 if (mesesPago == null)
-                    SueldoAnualISR = ((netoAPagarColaborador * 12)) ?? 0;
+                    sueldoProyeccion = ((netoAPagarColaborador * 12)) ?? 0;
 
 
                 int cantidadMesesPagados = mesesPago.Count;
-
+                //if (netoAPagarColaborador == 0)
+                //    netoAPagarColaborador = 37350.66M;
+                mesesPago.Add((Decimal)netoAPagarColaborador);
 
                 decimal promedioMesesPago = mesesPago.Average();
 
 
-                decimal sueldoProyeccion = 0;
 
 
                 //TODO: faltan los meses que no se le va a pagar
                 //Sacar el sueldo de los meses restantes
+
                 for (int i = cantidadMesesPagados; i <= 12; i++)
                 {
                     sueldoProyeccion += promedioMesesPago;
                 }
 
 
-                salarioPromedioAnualPagadoAlMes = mesesPago.Sum() + sueldoProyeccion;
+                salarioPromedioAnualPagadoAlMes = sueldoProyeccion;
             }
             else
             {
