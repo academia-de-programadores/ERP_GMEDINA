@@ -122,6 +122,7 @@ $("#btnUpdateComisiones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    mostrarCargandoEditar()
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
         method: "POST",
@@ -139,7 +140,7 @@ $("#btnUpdateComisiones").click(function () {
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
-
+            ocultarCargandoEditar();
         }
     });
 });
@@ -204,32 +205,43 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 });
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroComisiones').click(function () {
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var Empleado = $("#Crear #emp_IdEmpleado").val();
 
-    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+    if (Empleado == "0") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
 
-    $.ajax({
-        url: "/EmpleadoComisiones/Create",
-        method: "POST",
-        data: data
-    })
-        .done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarEmpleadoComisiones");
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            $("#AgregarEmpleadoComisiones").modal('show');
-        }
-        else {            
-            cargarGridComisiones();
-            $("#AgregarEmpleadoComisiones").modal('hide');
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
+        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+        
+        mostrarCargandoCrear()
+        $.ajax({
+            url: "/EmpleadoComisiones/Create",
+            method: "POST",
+            data: data
+        })
+            .done(function (data) {
+                //CERRAR EL MODAL DE AGREGAR
+                $("#AgregarEmpleadoComisiones");
+                //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+                if (data == "error") {
+                    $("#AgregarEmpleadoComisiones").modal('show');
+                }
+                else {
+                    cargarGridComisiones();
+                    $("#AgregarEmpleadoComisiones").modal('hide');
+                    // Mensaje de exito cuando un registro se ha guardado bien
+                    iziToast.success({
+                        title: 'Exito',
+                        message: 'El registro fue registrado de forma exitosa!',
+                    });
+                }
+                    ocultarCargandoCrear();
             });
-        }
-    });
+    }
+    
 
 });
 
@@ -471,6 +483,8 @@ $("#IconoCerraredit").click(function () {
 });
 
 
+
+
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnUpdateComisiones").click(function () {
     var PorcentajeComisionE = $("#cc_PorcentajeComision").val();
@@ -495,3 +509,76 @@ $("#btnUpdateComisiones").click(function () {
 $("#frmEmpleadoComisionesCreate").submit(function (e) {
     e.preventDefault();
 });
+
+
+  
+function mostrarCargandoCrear(){
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear(){
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+    
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
+
+    
+
+const btnGuardar = $('#btnCreateRegistroComisiones'),
+
+cargandoCrearcargandoCrear=$('#cargandoCrear')
+
+cargandoCrear=$('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+
+
+
+
+
+function mostrarCargandoEditar(){
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
+function ocultarCargandoEditar(){
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+    
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
+
+    
+
+const btnEditar = $('#btnUpdateComisiones'),
+
+cargandoEditarcargandoEditar = $('#cargandoEditar')
+
+cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
