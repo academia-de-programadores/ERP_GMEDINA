@@ -18,7 +18,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             var tbEmpleadoBonos = db.tbEmpleadoBonos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas).OrderByDescending(x => x.cb_FechaCrea);
-
+            //throw new Exception();
+            //tbEmpleadoBonos = null;
             return View(tbEmpleadoBonos.ToList().Where(p => p.cb_Activo == true));
         }
 
@@ -36,11 +37,10 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from Personas in db.tbPersonas
-            join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id 
-            select new { Id = Empleados.emp_Id, Descripcion = Personas.per_Nombres
-            //+ " " + Personas.per_Apellidos
-            };
+            from Personas in db.tbPersonas            
+            join Empleados in db.tbEmpleados on Personas.per_Id equals Empleados.per_Id
+            where Empleados.emp_Estado == true
+            select new { Id = Empleados.emp_Id, Descripcion = Personas.per_Nombres + " " + Personas.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -50,6 +50,7 @@ namespace ERP_GMEDINA.Controllers
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
             from CatIngreso in db.tbCatalogoDeIngresos
+            where CatIngreso.cin_Activo == true
             //where CatIngreso.cin_DescripcionIngreso == "Bonos" || CatIngreso.cin_IdIngreso == 5
             //join EmpBonos in db.tbEmpleadoBonos on CatIngreso.cin_IdIngreso equals EmpBonos.cin_IdIngreso
             select new

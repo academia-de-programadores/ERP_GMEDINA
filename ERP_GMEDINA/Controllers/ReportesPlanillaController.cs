@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using ERP_GMEDINA.DataSets;
+using Rotativa;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -716,11 +717,20 @@ namespace ERP_GMEDINA.Controllers
 
 			return File(renderedBytes, mimeType);
 		}
-		//Reporte General Totales Mes - FIN
-		//-------------------------------------------------------------------------------------------------------------------------------
+        //Reporte General Totales Mes - FIN
+        //-------------------------------------------------------------------------------------------------------------------------------
 
-		#endregion
+        #endregion
+
+        #region Rotativa
+
+        //public Action printPrueba()
+        //{
+        //    return new ActionAsPdf("index");
+        //}
+
+        #endregion
 
 
-	}
+    }
 }

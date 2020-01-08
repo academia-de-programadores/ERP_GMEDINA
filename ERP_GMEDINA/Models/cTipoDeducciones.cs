@@ -19,6 +19,8 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripcion")]
         [Required(ErrorMessage = "El campo descripción no puede quedar vacío")]
+        [StringLength(100, MinimumLength = 3)]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
         public string tde_Descripcion { get; set; }
 
         [Display(Name = "Usuario Crea")]

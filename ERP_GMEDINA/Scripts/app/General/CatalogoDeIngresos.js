@@ -1,7 +1,6 @@
 ﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
       console.log("No se pudo recuperar Script SerializeDate");
@@ -69,7 +68,6 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
                 var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
                 $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
@@ -153,8 +151,8 @@ $("#btnUpdateIngresos").click(function () {
                 cargarGridIngresos();
 
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                    title: 'Éxito',
+                    message: '¡El registro fue editado de forma exitosa!',
                 });
             }
         });
@@ -163,7 +161,7 @@ $("#btnUpdateIngresos").click(function () {
         $("#Editar #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
-            message: 'Ingrese datos válidos.',
+            message: 'Ingrese datos válidos',
         });
     }
 });
@@ -189,7 +187,7 @@ $("#btnInactivarIngresos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: 'No se pudo inhabilitar el registro, contacte al administrador',
             });
         }
         else {
@@ -198,8 +196,8 @@ $("#btnInactivarIngresos").click(function () {
             cargarGridIngresos();
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inhabilitado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro fue inhabilitado de forma exitosa!',
             });
         }
     });
@@ -251,8 +249,8 @@ $('#btnCreateRegistroIngresos').click(function () {
                 $("#Crear #cin_DescripcionIngreso").val('');
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    title: 'Éxito',
+                    message: '¡El registro fue guardado de forma exitosa!',
                 });
             }
 
@@ -262,7 +260,7 @@ $('#btnCreateRegistroIngresos').click(function () {
         $("#Crear #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
-            message: 'Ingrese datos válidos.',
+            message: 'Ingrese datos válidos',
         });
     }
 });

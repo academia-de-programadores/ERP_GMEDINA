@@ -1,6 +1,5 @@
 ﻿@model ERP_GMEDINA.Models.tbAdelantoSueldo
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonosDetalle" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonos" }))
 {
     <div class="modal-body" id="Editar">
         @Html.AntiForgeryToken()
@@ -12,71 +11,40 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                    <select id="emp_Id" name="emp_Id" class="form-control"></select>
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.adsu_RazonAdelanto)
-                        @Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger" })
-                    </div>
+                    <input type="text" autocomplete="off" class="form-control" id="adsu_RazonAdelanto" name="adsu_RazonAdelanto"/>
+                    @*@Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new {@autocomplete = "off" } })*@
+                    <label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo razón es obligatorio.</label>
+                    @*@Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.adsu_Monto)
-                    @Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" , @autocomplete = "off" } })
+                    <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo monto es obligatorio.</label>
+                    @*@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.adsu_FechaAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.adsu_FechaAdelanto)
-                    @Html.ValidationMessageFor(model => model.adsu_FechaAdelanto, "", new { @class = "text-danger" })
-                </div>
+            <div id = "inactivar" class="modal-footer" hidden>
+                <button type="button" class="btn btn-primary pull-left" id="btnUpdateAdelantos">Actualizar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarAdelantoSueldo">Inhabilitar</button>
+                <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
             </div>
 
-            @*<div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h2>Auditoría</h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="form-horizontal">
-                        <table class="table table-striped table-bordered dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Acción</th>
-                                    <th>Usuario</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Creado</td>
-                                    <td>@Html.EditorFor(model => model.adsu_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.adsu_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                </tr>
-                                <tr>
-                                    <td>Modificado</td>
-                                    <td>@Html.EditorFor(model => model.adsu_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                    <td>@Html.EditorFor(model => model.adsu_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>*@
-                    <div class="footer">
-                        <button type="button" id="btnUpdateAdelantos" class="btn btn-primary">Aceptar</button>
-                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                    </div>
-                @*</div>
-            </div>*@
+            <div id="activar" class="modal-footer" hidden>
+                <button type="button" class="btn btn-primary pull-left" id="btnUpdateAdelantos2">Actualizar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnActivarAdelantoSueldo">Habilitar</button>
+                <button type="button" class="btn btn-white" id="btnCerrarEditar2">Cerrar</button>
+            </div>
         </div>
     </div>
 }
