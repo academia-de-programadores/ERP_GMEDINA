@@ -292,7 +292,7 @@ function verificarCampos(
 	catalogoIngresos,
 	catalogoDeducciones
 ) {
-    var todoBien = true;
+	var todoBien = true;
 	//Validar que la descripción este bien
 	if (descripcionPlanilla.trim() == '') {
 		scrollArriba();
@@ -301,7 +301,7 @@ function verificarCampos(
 		todoBien = false;
 	} else validacionDescripcionPlanilla.hide();
 	//Validar que la frecuencia en días esté bien
-	if ( frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0 ) {
+	if (frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0) {
 		scrollArriba();
 		validacionFrecuenciaDias.show();
 		if (todoBien) inputFrecuenciaEnDias.focus();
@@ -547,7 +547,6 @@ function obtenerDetalles(id, handleData) {
 $(document).ready(() => {
 	//Validar que no haya un /Index en la URL, si no falla el AJAX
 	let ubicacionIndexUrl = URLactual.indexOf('/Index');
-	let urlConSlash = URLactual.indexOf('CatalogoDePlanillas/');
 
 	if (ubicacionIndexUrl > 0) {
 		location.href = URLactual.replace('/Index', '');
@@ -566,10 +565,12 @@ $(document).ready(() => {
 			radioClass: 'iradio_square-green'
 		});
 
+		//Activar switch seleccionar todos en ingresos
 		if (listaCatalogoIngresosFalse()) {
 			$('#checkSeleccionarTodosIngresos').prop('checked', true);
 		}
 
+		//Activar switch seleccionar todos en deducciones
 		if (listaCatalogoDeduccionesFalse()) {
 			$('#checkSeleccionarTodasDeducciones').prop('checked', true);
 		}
@@ -589,6 +590,30 @@ $(document).ready(() => {
 		var catalogoDeduccionesChangeCheckbox = document.querySelector(
 			'#catalogoDeDeducciones .js-check-change'
 		);
+
+		$('#noAplica').on('ifChecked', () => {
+			catalogoDeduccionesInputs.iCheck('uncheck');
+
+			const seleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones');
+			if (seleccionarTodasLasDeducciones.is(':checked'))
+				seleccionarTodasLasDeducciones.click();
+			console.log($('#checkSeleccionarTodasDeducciones').checked);
+		});
+
+		$(catalogoDeduccionesInputs).on('ifChecked', () => {
+			$('#noAplica').iCheck('uncheck');
+			if (listaCatalogoDeduccionesFalse()) {
+				if (!$('#checkSeleccionarTodasDeducciones').is(':checked'))
+					$('#checkSeleccionarTodasDeducciones').click();
+			}
+		});
+
+		$(catalogoIngresosInputs).on('ifChecked', () => {
+			if (listaCatalogoIngresosFalse()) {
+				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
+					$('#checkSeleccionarTodosIngresos').click();
+			}
+		});
 
 		catalogoIngresosChangeCheckbox.onchange = function () {
 			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
