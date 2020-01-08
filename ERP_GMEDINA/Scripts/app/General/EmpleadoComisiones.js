@@ -220,7 +220,8 @@ $('#btnCreateRegistroComisiones').click(function () {
         if (data == "error") {
             $("#AgregarEmpleadoComisiones").modal('show');
         }
-        else {            
+        else {
+           
             cargarGridComisiones();
             $("#AgregarEmpleadoComisiones").modal('hide');
             // Mensaje de exito cuando un registro se ha guardado bien

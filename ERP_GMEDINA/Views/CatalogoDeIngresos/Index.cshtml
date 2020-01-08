@@ -32,10 +32,6 @@
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 456px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
-                                @*<th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cin_UsuarioCrea)</th>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cin_FechaCrea)</th>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cin_UsuarioModifica)</th>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cin_FechaModifica)</th>*@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 180px;">Acción</th>
 
                             </tr>
@@ -50,27 +46,12 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
                                     </td>
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.cin_UsuarioCrea)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.cin_FechaCrea)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.cin_UsuarioModifica)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.cin_FechaModifica)
-                                        </td>*@
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.cin_Activo)
-                                        </td>*@
+                                  
 
                                     <td>
                                         
                                         <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalle</button>
                                         <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
-                                        @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarCatalogoIngresos">Inactivar</button>*@
                                     </td>
                                 </tr>
                             }
@@ -105,7 +86,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" id="IconCerrarCreate" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
