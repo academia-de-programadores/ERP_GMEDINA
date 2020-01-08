@@ -532,6 +532,12 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/AdelantoSueldo").Include(
                 "~/Scripts/app/General/AdelantoSueldo.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Period").Include(
+                 "~/Scripts/app/General/Periodos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Preaviso").Include(
+                "~/Scripts/app/General/Preaviso.js"));
             #endregion
 
             //DataAnnotations

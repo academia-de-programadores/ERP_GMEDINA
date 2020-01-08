@@ -600,12 +600,21 @@ namespace ERP_GMEDINA.Controllers
                                             }
                                         }
 
+                                        //totales
+                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo;
+                                        netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
+
+                                        #endregion
+
                                         //ISR
                                         #region ISR
 
                                         #region Declaracion de Variables
                                         decimal SalarioMinimo = 9443.24M;
                                         int AnioActual = DateTime.Now.Year;
+                                        decimal? TotalBonos = 0;
+                                        decimal? TotalHrsExtra = 0;
+                                        decimal? TotalComisiones = 0;
                                         decimal? ExcesoDecimoTercer = 0;
                                         decimal? ExcesoVacaciones = 0;
                                         decimal? ExcesoDecimoCuarto = 0;
@@ -632,7 +641,7 @@ namespace ERP_GMEDINA.Controllers
                                         DateTime FechaIngresoEmpleado = db.tbEmpleados
                                                                         .Where(x => x.emp_Id == empleadoActual.emp_Id)
                                                                         .Select(x => x.emp_Fechaingreso).FirstOrDefault();
-                                        bool esMensual = false;
+                                        bool esMensual = true;
 
                                         TimeSpan diferencia = AnioActualEnero - FechaIngresoEmpleado;
 
@@ -645,7 +654,6 @@ namespace ERP_GMEDINA.Controllers
                                         decimal SalarioPromedioAnualPagadoAlAnio = 0;
                                         decimal salarioPromedioAnualPagadoAlMes = 0;
                                         decimal TotalSalarioAnual = SalarioPromedioAnualISR(netoAPagarColaborador,
-                                        ref SueldoAnual,
                                         mesesPago,
                                         esMensual,
                                         ref SalarioPromedioAnualPagadoAlAnio,
@@ -656,10 +664,10 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Tercer Mes
                                         //Variable para llamar en duro los empleados con Décimo Tercer Mes
-                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+                                        var DecimoTercer = db.V_DecimoTercerMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dtm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
-                                        if (AnioActual == Convert.ToInt32(DecimoTercer.dtm_FechaPago.Year))
+                                        if (DecimoTercer != null)
                                         {
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
@@ -680,12 +688,11 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Décimo Cuarto Mes
                                         //Variable para llamar en duro los empleados con Décimo Cuarto Mes
-                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id).FirstOrDefault();
+                                        var DecimoCuarto = db.V_DecimoCuartoMes_Pagados.Where(x => x.emp_Id == empleadoActual.emp_Id && x.dcm_FechaPago.Year == AnioActual).FirstOrDefault();
 
                                         //Validar primero si es en el año actual el proceso de este calculo
-                                        if (AnioActual == Convert.ToInt32(DecimoCuarto.dcm_FechaPago.Year))
+                                        if (DecimoCuarto != null)
                                         {
-
                                             //Salario Mínimo Mensual por 10 Meses (Según SAR)
                                             Exceso = SalarioMinimo * 10;
 
@@ -705,12 +712,12 @@ namespace ERP_GMEDINA.Controllers
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Exceso Vacaciones
                                         //Variable para llamar en duro las Vacaciones Pagadas del Historial de Ingresos de Pago
-                                        var objVacaciones = db.tbHistorialDeIngresosPago.Where(x => x.tbHistorialDePago.emp_Id == empleadoActual.emp_Id && x.tbCatalogoDeIngresos.cin_DescripcionIngreso == "Vacaciones" && x.cin_IdIngreso == 12).FirstOrDefault();
+                                        var objVacaciones = db.tbHistorialVacaciones.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hvac_AnioVacaciones && x.hvac_DiasPagados == true).Select(x => x.hvac_CantDias).FirstOrDefault();
 
                                         //Validar si los dias a Pagar es mayor a 30 dias 
-                                        if (objVacaciones.hip_UnidadesPagar > 30)
+                                        if (objVacaciones > 30)
                                         {
-                                            ExcesoVacaciones = ((objVacaciones.hip_UnidadesPagar - 30) * (SueldoAnual / 360));
+                                            ExcesoVacaciones = ((objVacaciones - 30) * (SueldoAnual / 360));
                                         }
                                         else
                                         {
@@ -741,10 +748,23 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
+                                        TotalBonos = db.tbEmpleadoBonos.Where(x => x.emp_Id == empleadoActual.emp_Id && x.cb_Pagado == true && AnioActualEnero == x.cb_FechaPagado).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.cb_Monto)).FirstOrDefault();
+                                        TotalHrsExtra = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalHorasExtras)).FirstOrDefault();
+                                        TotalComisiones = db.tbHistorialDePago.Where(x => x.emp_Id == empleadoActual.emp_Id && AnioActual == x.hipa_Anio).GroupBy(x => x.emp_Id).Select(x => x.Sum(y => y.hipa_TotalComisiones)).FirstOrDefault();
+
+                                        if (TotalBonos == null)
+                                            TotalBonos = 0;
+
+                                        if (TotalHrsExtra == null)
+                                            TotalHrsExtra = 0;
+
+                                        if (TotalComisiones == null)
+                                            TotalComisiones = 0;
+
                                         #region Total ISR Calcular
                                         //-----------------------------------------------------------------------------------------------------------------------------
                                         //Total Ingresos Gravables
-                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones /*+ totalBonificaciones + totalHorasExtras + totalComisiones*/;
+                                        TotalIngresosGravables = TotalSalarioAnual + (Decimal)ExcesoDecimoTercer + (Decimal)ExcesoDecimoCuarto + (Decimal)ExcesoVacaciones + (Decimal)TotalBonos + (Decimal)TotalHrsExtra + (Decimal)TotalComisiones;
 
                                         //Total Deducciones Gravables
                                         TotalDeduccionesGravables = GastosMedicos;
@@ -754,8 +774,6 @@ namespace ERP_GMEDINA.Controllers
 
                                         #region Tabla Progresiva para Deducir ISR
                                         //Cálculo con la Tabla Progresiva ISR
-                                        //RentaNetaGravable = (Decimal)320902.78;
-                                        //List<tbISR> tablaProgresiva = db.tbISR.OrderByDescending(x => x.isr_RangoInicial).ToList();
 
                                         //Variable para llamar cada uno de los Porcentajes y Techos del ISR
                                         var objISRExcento = db.tbISR.Where(x => x.isr_Id == 1).FirstOrDefault();
@@ -792,11 +810,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
-                                        //totales
-                                        totalDeduccionesEmpleado = Math.Round((decimal)totalOtrasDeducciones, 2) + totalInstitucionesFinancieras + colaboradorDeducciones + totalAFP + adelantosSueldo;
-                                        netoAPagarColaborador = totalIngresosEmpleado - totalDeduccionesEmpleado;
-
-                                        #endregion                                        
+                                        netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
                                         #region Enviar comprobante de pago por email
                                         if (enviarEmail != null && enviarEmail == true)
@@ -967,7 +981,6 @@ namespace ERP_GMEDINA.Controllers
                                         dbContextTransaccion.Rollback();
                                         // mensaje del error en el registro del colaborador
                                         errores++;
-
                                     }
                                 }
                             }
@@ -979,7 +992,6 @@ namespace ERP_GMEDINA.Controllers
                             errores++;
                         }
                     }
-
                 }
 
                 //enviar resultado al cliente
@@ -1010,33 +1022,36 @@ namespace ERP_GMEDINA.Controllers
             return Json(new { Data = reporte, Response = response }, JsonRequestBehavior.AllowGet);
         }
 
-        private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, ref decimal SueldoAnualISR, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
+        private static decimal SalarioPromedioAnualISR(decimal? netoAPagarColaborador, List<decimal> mesesPago, bool esMensual, ref decimal SalarioPromedioAnualPagadoAlAnio, ref decimal salarioPromedioAnualPagadoAlMes)
         {
+            decimal sueldoProyeccion = 0;
             if (esMensual)
             {
                 //Si es el primer mes a cobrar
                 if (mesesPago == null)
-                    SueldoAnualISR = ((netoAPagarColaborador * 12) / 12) ?? 0;
+                    sueldoProyeccion = ((netoAPagarColaborador * 12)) ?? 0;
 
 
                 int cantidadMesesPagados = mesesPago.Count;
-
+                //if (netoAPagarColaborador == 0)
+                //    netoAPagarColaborador = 37350.66M;
+                mesesPago.Add((Decimal)netoAPagarColaborador);
 
                 decimal promedioMesesPago = mesesPago.Average();
 
 
-                decimal sueldoProyeccion = 0;
 
 
                 //TODO: faltan los meses que no se le va a pagar
                 //Sacar el sueldo de los meses restantes
+
                 for (int i = cantidadMesesPagados; i <= 12; i++)
                 {
                     sueldoProyeccion += promedioMesesPago;
                 }
 
 
-                salarioPromedioAnualPagadoAlMes = mesesPago.Sum() + sueldoProyeccion;
+                salarioPromedioAnualPagadoAlMes = sueldoProyeccion;
             }
             else
             {

@@ -9,7 +9,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
             </div>
         </div>

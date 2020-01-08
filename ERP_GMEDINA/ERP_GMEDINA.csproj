@@ -106,6 +106,10 @@
       <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SpreadsheetLight, Version=3.4.11.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
       <HintPath>..\packages\SpreadsheetLight.3.4.11\lib\net40\SpreadsheetLight.dll</HintPath>
       <Private>True</Private>
@@ -196,12 +200,15 @@
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
+    <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
+    <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
@@ -248,6 +255,8 @@
     <Compile Include="Models\cISRRPT.cs" />
     <Compile Include="Models\cLiquidacionesRPT.cs" />
     <Compile Include="Models\ComprobantePagoModel.cs" />
+    <Compile Include="Models\cPeriodos.cs" />
+    <Compile Include="Models\cPreaviso.cs" />
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
@@ -1139,6 +1148,10 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\FileSaver.min.js" />
     <Content Include="Scripts\app\General\AcumuladosISR.js" />
     <Content Include="Scripts\app\General\AdelantoSueldo.js" />
@@ -1168,7 +1181,9 @@
     <Content Include="Scripts\app\General\ISRRPT.js" />
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
+    <Content Include="Scripts\app\General\Periodos.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
+    <Content Include="Scripts\app\General\Preaviso.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />
@@ -1225,6 +1240,7 @@
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
     </Content>
     <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1833,6 +1849,18 @@
     <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
     <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
     <Content Include="Views\Liquidacion\Index.cshtml" />
+    <Content Include="Views\ErrorPages\InternalServerError.cshtml" />
+    <Content Include="Views\ErrorPages\NotFoundError.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Periodos\_Create.cshtml" />
+    <Content Include="Views\Periodos\_Details.cshtml" />
+    <Content Include="Views\Periodos\_Edit.cshtml" />
+    <Content Include="Views\Preaviso\Delete.cshtml" />
+    <Content Include="Views\Preaviso\Index.cshtml" />
+    <Content Include="Views\Preaviso\_Create.cshtml" />
+    <Content Include="Views\Preaviso\_Details.cshtml" />
+    <Content Include="Views\Preaviso\_Edit.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
