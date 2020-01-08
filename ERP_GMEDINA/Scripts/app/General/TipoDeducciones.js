@@ -48,14 +48,10 @@ function cargarGridTipoDeducciones() {
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
 
                 template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
-                    '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' + ListaTipoDeducciones[i].NombreUsuarioCrea + '</td>' +
-                    '<td>' + FechaCrea + '</td>' +
-                    '<td>' + UsuarioModifica + '</td>' +
-                    '<td>' + FechaModifica + '</td>' +
+                    '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +       
                     '<td>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
-                    //'<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeduccion">Detalle</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeducciones">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -176,6 +172,60 @@ $("#btnUpdateTipoDeducciones").click(function () {
     }
 });
 
+$(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
+    var ID = $(this).data('id');
+    console.log(ID);
+    $.ajax({        
+        url: "/TipoDeducciones/Details/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                var FechaCrea = FechaFormato(data[0].tde_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
+                $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
+                $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
+                $("#Detalles #tde_Descripcion").val(data[0].tde_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#Detalles #tde_FechaCrea").val(FechaCrea);
+                $("#Detalles #tde_UsuarioModifica").val(data.tde_UsuarioModifica);
+                $("#Detalles #tde_FechaModifica").val(FechaModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);                
+                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                //var SelectedId = data[0].cde_IdDeducciones;
+                ////CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                //$.ajax({
+                //    url: "/TechosDeducciones/EditGetDDL",
+                //    method: "GET",
+                //    dataType: "json",
+                //    contentType: "application/json; charset=utf-8",
+                //    data: JSON.stringify({ ID })
+                //})
+                    //.done(function (data) {
+                    //    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                    //    $("#Detalles #cde_IdDeducciones").empty();
+                    //    //LLENAR EL DROPDOWNLIST
+                    //    $("#Detalles #cde_IdDeducciones").append("<option value=0>Selecione una opción...</option>");
+                    //    $.each(data, function (i, iter) {
+                    //        $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                    //    });
+                    //});
+                $("#DetailsTipoDeducciones").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+        });
+});
+
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
 $("#btnInactivarTipoDeducciones").click(function () {
     $("#EditarTipoDeducciones").modal('hide');
@@ -197,7 +247,7 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
-            message: '¡El registro fue Inhabilitado de forma exitosa!',
+            message: 'Se ha inactivado el registro',
         });
     });
 });

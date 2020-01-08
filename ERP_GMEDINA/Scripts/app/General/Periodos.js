@@ -1,4 +1,8 @@
 ﻿var IDInactivar = 0;
+
+const btnGuardar = $('#btnCrearPreavisoConfirmar'),
+cargandoCrearcargandoCrear = $('#cargandoCrear'),
+cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
@@ -46,8 +50,6 @@ function cargarGridPeriodo() {
 
                 template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
                     '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
-                    '<td>' + FechaCrea + '</td>' +
-                    '<td>' + ListPeriodo[i].NombreUsuarioCrea + '</td>' +
                     '<td>' +
                     '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalle</button>' +
                     '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs" id="btnEditarPeriodo">Editar</button>' +
@@ -64,7 +66,7 @@ function cargarGridPeriodo() {
 $(document).on("click", "#btnAgregarPeriodo", function () {
     console.log("btn Agregar Periodo");
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearPeriodo #fpa_Descripcion").val('');
+    $("#CrearPeriodo #peri_DescripPeriodo").val('');
     $("#CrearPeriodo").modal();
     $("#CrearPeriodo #Validation_descripcion").css("display", "none");
 });
@@ -81,6 +83,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearPeriodo #Crear #fpa_Descripcion").val() != "") {
+        mostrarCargandoCrear();
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -97,6 +100,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
                     title: 'Exito',
                     message: '¡Se registró de forma exitosa!',
                 });
+                ocultarCargandoCrear();
             }
         });
     }
@@ -263,6 +267,32 @@ $("#btnCerrarCrear").click(function () {
 $("#frmCreatePeriodo").submit(function (event) {
     event.preventDefault();
 });
+
+
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
 
 //*****************EDITAR******************//
 

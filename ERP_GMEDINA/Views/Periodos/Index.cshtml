@@ -30,8 +30,6 @@
                     <thead>
                         <tr role="row">
                             <th>@Html.DisplayNameFor(model => model.peri_DescripPeriodo)</th>
-                            <th>@Html.DisplayNameFor(model => model.peri_FechaCrea)</th>
-                            <th>@Html.DisplayNameFor(model => model.peri_UsuarioCrea)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -45,12 +43,6 @@
                         <tr class="gradeA odd" role="row" data-id="@item.peri_IdPeriodo">
                             <td>
                                 @Html.DisplayFor(modelItem => item.peri_DescripPeriodo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.peri_FechaCrea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => UsuarioCrea)
                             </td>
                             <td>
                                 <button data-id="@item.peri_IdPeriodo" type="button" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalle</button>

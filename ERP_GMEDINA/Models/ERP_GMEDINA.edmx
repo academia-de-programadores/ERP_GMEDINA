@@ -438,6 +438,19 @@
           <Property Name="pvac_FechaModifica" Type="datetime" />
           <Property Name="pvac_Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="moli_IdMotivo" Type="int" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="moli_UsuarioCrea" Type="int" />
+          <Property Name="moli_FechaCrea" Type="datetime" />
+          <Property Name="moli_UsuarioModifica" Type="int" />
+          <Property Name="moli_FechaModifica" Type="datetime" />
+          <Property Name="moli_Activo" Type="bit" />
+          <Property Name="moli_RazonInactivo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbMotivoLiquidaciones">
           <Key>
             <PropertyRef Name="mliq_IdMotivoLiquidacion" />
@@ -462,6 +475,24 @@
           <Property Name="peri_UsuarioModifica" Type="int" />
           <Property Name="peri_FechaModifica" Type="datetime" />
           <Property Name="peri_Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPorcentajeMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="pml_IdPorcentajeMotivoLiquidacion" />
+          </Key>
+          <Property Name="pml_IdPorcentajeMotivoLiquidacion" Type="int" Nullable="false" />
+          <Property Name="moli_IdMotivo" Type="int" />
+          <Property Name="pml_Preaviso" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Cesantia" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoTercerProp" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoCuartoProp" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Vacaciones" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_UsuarioCrea" Type="int" />
+          <Property Name="pml_FechaCrea" Type="datetime" />
+          <Property Name="pml_UsuarioModifica" Type="int" />
+          <Property Name="pml_FechaModifica" Type="datetime" />
+          <Property Name="pml_Activo" Type="bit" />
+          <Property Name="pml_RazonInactivo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbPreaviso">
           <Key>
@@ -2011,17 +2042,21 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
         <EntityType Name="V_Plani_EncabezadoHistorialPlanilla">
           <Key>
             <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="NombreColaborador" />
             <PropertyRef Name="car_Descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="fpa_Descripcion" />
             <PropertyRef Name="peri_DescripPeriodo" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="NombreColaborador" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="area_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="fpa_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="date" />
@@ -2997,30 +3032,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbLiquidacionVacaciones">
               <PropertyRef Name="pvac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbMotivoLiquidaciones" Type="Self.tbMotivoLiquidaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbMotivoLiquidaciones">
-              <PropertyRef Name="mliq_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbMotivoLiquidaciones" Type="Self.tbMotivoLiquidaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbMotivoLiquidaciones">
-              <PropertyRef Name="mliq_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5544,6 +5555,66 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="UDP_Plani_tbAuxilioDeCesantias_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Delete">
           <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
         </Function>
@@ -5863,8 +5934,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="hdli_SalarioPromedioMensual_Liql" Type="decimal" Mode="In" />
           <Parameter Name="hdli_SalarioOrdinarioDiario_Liq" Type="decimal" Mode="In" />
           <Parameter Name="hdli_SalarioPromedioDiario_Liq" Type="decimal" Mode="In" />
-          <Parameter Name="hdli_Preaviso_Liq" Type="int" Mode="In" />
-          <Parameter Name="hdli_Cesantia_Liq" Type="int" Mode="In" />
+          <Parameter Name="hdli_Preaviso_Liq" Type="decimal" Mode="In" />
+          <Parameter Name="hdli_Cesantia_Liq" Type="decimal" Mode="In" />
           <Parameter Name="hdli_DecimoTercerMesProporcional_Liq" Type="decimal" Mode="In" />
           <Parameter Name="hdli_DecimoCuartoMesProporcional_Liq" Type="decimal" Mode="In" />
           <Parameter Name="hdli_VacacionesPendientes_Liq" Type="decimal" Mode="In" />
@@ -5877,14 +5948,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="hdli_ReajusteSalarial" Type="decimal" Mode="In" />
           <Parameter Name="hdli_DecimoTercerMesAdeudado" Type="decimal" Mode="In" />
           <Parameter Name="hdli_DecimoCuartoMesAdeudado" Type="decimal" Mode="In" />
-          <Parameter Name="hdli_BonificacionVacaciones" Type="int" Mode="In" />
+          <Parameter Name="hdli_BonificacionVacaciones" Type="decimal" Mode="In" />
           <Parameter Name="hdli_PagoPorEmbarazo" Type="decimal" Mode="In" />
           <Parameter Name="hdli_PagoPorLactancia" Type="decimal" Mode="In" />
           <Parameter Name="hdli_PrePosNatal" Type="decimal" Mode="In" />
           <Parameter Name="hdli_PagoPorDiasFeriado" Type="decimal" Mode="In" />
           <Parameter Name="hdli_MontoTotalLiquidacion" Type="decimal" Mode="In" />
           <Parameter Name="hdli_liqu_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="hdli_liqu_FechaCrea" Type="int" Mode="In" />
+          <Parameter Name="hdli_liqu_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbHistorialDePago_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -6098,8 +6169,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbISR" EntityType="Self.tbISR" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbLiquidaciones" EntityType="Self.tbLiquidaciones" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbLiquidacionVacaciones" EntityType="Self.tbLiquidacionVacaciones" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbMotivoLiquidacion" EntityType="Self.tbMotivoLiquidacion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbMotivoLiquidaciones" EntityType="Self.tbMotivoLiquidaciones" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPeriodos" EntityType="Self.tbPeriodos" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="Self.tbPorcentajeMotivoLiquidacion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPreaviso" EntityType="Self.tbPreaviso" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbRamaActividad" EntityType="Self.tbRamaActividad" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbSalarioPorHora" EntityType="Self.tbSalarioPorHora" Schema="Plani" store:Type="Tables" />
@@ -6592,9 +6665,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_Plani_EncabezadoHistorialPlanilla" EntityType="Self.V_Plani_EncabezadoHistorialPlanilla" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_Plani_EncabezadoHistorialPlanilla].[emp_Id] AS [emp_Id], 
+    [V_Plani_EncabezadoHistorialPlanilla].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
     [V_Plani_EncabezadoHistorialPlanilla].[NombreColaborador] AS [NombreColaborador], 
     [V_Plani_EncabezadoHistorialPlanilla].[car_Descripcion] AS [car_Descripcion], 
     [V_Plani_EncabezadoHistorialPlanilla].[area_Descripcion] AS [area_Descripcion], 
+    [V_Plani_EncabezadoHistorialPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
     [V_Plani_EncabezadoHistorialPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
     [V_Plani_EncabezadoHistorialPlanilla].[fpa_Descripcion] AS [fpa_Descripcion], 
     [V_Plani_EncabezadoHistorialPlanilla].[hipa_FechaPago] AS [hipa_FechaPago], 
@@ -7001,14 +7076,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbLiquidacionVacaciones" EntitySet="tbLiquidacionVacaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbMotivoLiquidaciones" EntitySet="tbMotivoLiquidaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbMotivoLiquidaciones_mliq_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbMotivoLiquidaciones" EntitySet="tbMotivoLiquidaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -7850,6 +7917,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" Association="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -8103,6 +8190,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbTitulosPersona1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosPersona_tipe_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosPersona" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbTitulosRequisicion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
+          <NavigationProperty Name="tbMotivoLiquidacion" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" FromRole="tbUsuario" ToRole="tbMotivoLiquidacion" />
+          <NavigationProperty Name="tbMotivoLiquidacion1" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbUsuario" ToRole="tbMotivoLiquidacion" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -10343,6 +10434,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="fpa_Descripcion" />
             <PropertyRef Name="peri_DescripPeriodo" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="NombreColaborador" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -10353,6 +10446,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="hipa_FechaPago" Type="DateTime" Precision="0" />
           <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="peri_DescripPeriodo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -15368,36 +15463,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="fpa_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbHistorialDeLiquidaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hdli_FechaLiquidacion" Mode="In" Type="DateTime" />
-            <Parameter Name="hdli_SalarioOrdinarioMensual_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_SalarioPromedioMensual_Liql" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_SalarioOrdinarioDiario_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_SalarioPromedioDiario_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_Preaviso_Liq" Mode="In" Type="Int32" />
-            <Parameter Name="hdli_Cesantia_Liq" Mode="In" Type="Int32" />
-            <Parameter Name="hdli_DecimoTercerMesProporcional_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_DecimoCuartoMesProporcional_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_VacacionesPendientes_Liq" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_SalariosAdeudados" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_OtrosPagos" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_PagoHEPendiente" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_ValorBonoEducativo" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_PagoSeptimoDia" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_BonoPorVacaciones" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_ReajusteSalarial" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_DecimoTercerMesAdeudado" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_DecimoCuartoMesAdeudado" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_BonificacionVacaciones" Mode="In" Type="Int32" />
-            <Parameter Name="hdli_PagoPorEmbarazo" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_PagoPorLactancia" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_PrePosNatal" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_PagoPorDiasFeriado" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_MontoTotalLiquidacion" Mode="In" Type="Decimal" />
-            <Parameter Name="hdli_liqu_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="hdli_liqu_FechaCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Insert_Result)">
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
             <Parameter Name="insf_Contacto" Mode="In" Type="String" />
@@ -15580,6 +15645,58 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="hipa_AdelantoSueldo" Mode="In" Type="Decimal" />
             <Parameter Name="hipa_TotalSalario" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbHistorialDeLiquidaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hdli_FechaLiquidacion" Mode="In" Type="DateTime" />
+            <Parameter Name="hdli_SalarioOrdinarioMensual_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_SalarioPromedioMensual_Liql" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_SalarioOrdinarioDiario_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_SalarioPromedioDiario_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_Preaviso_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_Cesantia_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_DecimoTercerMesProporcional_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_DecimoCuartoMesProporcional_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_VacacionesPendientes_Liq" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_SalariosAdeudados" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_OtrosPagos" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PagoHEPendiente" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_ValorBonoEducativo" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PagoSeptimoDia" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_BonoPorVacaciones" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_ReajusteSalarial" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_DecimoTercerMesAdeudado" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_DecimoCuartoMesAdeudado" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_BonificacionVacaciones" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PagoPorEmbarazo" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PagoPorLactancia" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PrePosNatal" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_PagoPorDiasFeriado" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_MontoTotalLiquidacion" Mode="In" Type="Decimal" />
+            <Parameter Name="hdli_liqu_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hdli_liqu_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion" />
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" Association="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" Association="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <EntitySet Name="tbMotivoLiquidacion" EntityType="ERP_GMEDINAModel.tbMotivoLiquidacion" />
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" Association="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" Association="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" Association="ERP_GMEDINAModel.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -15738,9 +15855,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbFormaPago_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
@@ -15822,6 +15936,106 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbHistorialDePago_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="tbPorcentajeMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="pml_IdPorcentajeMotivoLiquidacion" />
+          </Key>
+          <Property Name="pml_IdPorcentajeMotivoLiquidacion" Type="Int32" Nullable="false" />
+          <Property Name="moli_IdMotivo" Type="Int32" />
+          <Property Name="pml_Preaviso" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Cesantia" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoTercerProp" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoCuartoProp" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Vacaciones" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_UsuarioCrea" Type="Int32" />
+          <Property Name="pml_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="pml_UsuarioModifica" Type="Int32" />
+          <Property Name="pml_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbUsuario" />
+          <Property Name="pml_Activo" Type="Boolean" />
+          <Property Name="pml_RazonInactivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbMotivoLiquidacion" Relationship="ERP_GMEDINAModel.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbMotivoLiquidacion" />
+        </EntityType>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion" Role="tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion" Role="tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="moli_IdMotivo" Type="Int32" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="moli_UsuarioCrea" Type="Int32" />
+          <Property Name="moli_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="moli_UsuarioModifica" Type="Int32" />
+          <Property Name="moli_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="moli_Activo" Type="Boolean" />
+          <Property Name="moli_RazonInactivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="ERP_GMEDINAModel.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" FromRole="tbMotivoLiquidacion" ToRole="tbPorcentajeMotivoLiquidacion" />
+        </EntityType>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbMotivoLiquidacion" Role="tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbMotivoLiquidacion" Role="tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+          <End Type="ERP_GMEDINAModel.tbMotivoLiquidacion" Role="tbMotivoLiquidacion" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion" Role="tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17705,6 +17919,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySetMapping Name="V_Plani_EncabezadoHistorialPlanilla">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla">
               <MappingFragment StoreEntitySet="V_Plani_EncabezadoHistorialPlanilla">
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="NombreColaborador" ColumnName="NombreColaborador" />
                 <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
@@ -18272,13 +18488,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbHistorialDeLiquidaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbHistorialDeLiquidaciones_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Insert_Result">
@@ -18468,6 +18677,46 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbHistorialDeLiquidaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbHistorialDeLiquidaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbPorcentajeMotivoLiquidacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion">
+              <MappingFragment StoreEntitySet="tbPorcentajeMotivoLiquidacion">
+                <ScalarProperty Name="pml_RazonInactivo" ColumnName="pml_RazonInactivo" />
+                <ScalarProperty Name="pml_Activo" ColumnName="pml_Activo" />
+                <ScalarProperty Name="pml_FechaModifica" ColumnName="pml_FechaModifica" />
+                <ScalarProperty Name="pml_UsuarioModifica" ColumnName="pml_UsuarioModifica" />
+                <ScalarProperty Name="pml_FechaCrea" ColumnName="pml_FechaCrea" />
+                <ScalarProperty Name="pml_UsuarioCrea" ColumnName="pml_UsuarioCrea" />
+                <ScalarProperty Name="pml_Vacaciones" ColumnName="pml_Vacaciones" />
+                <ScalarProperty Name="pml_DecimoCuartoProp" ColumnName="pml_DecimoCuartoProp" />
+                <ScalarProperty Name="pml_DecimoTercerProp" ColumnName="pml_DecimoTercerProp" />
+                <ScalarProperty Name="pml_Cesantia" ColumnName="pml_Cesantia" />
+                <ScalarProperty Name="pml_Preaviso" ColumnName="pml_Preaviso" />
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+                <ScalarProperty Name="pml_IdPorcentajeMotivoLiquidacion" ColumnName="pml_IdPorcentajeMotivoLiquidacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMotivoLiquidacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbMotivoLiquidacion">
+              <MappingFragment StoreEntitySet="tbMotivoLiquidacion">
+                <ScalarProperty Name="moli_RazonInactivo" ColumnName="moli_RazonInactivo" />
+                <ScalarProperty Name="moli_Activo" ColumnName="moli_Activo" />
+                <ScalarProperty Name="moli_FechaModifica" ColumnName="moli_FechaModifica" />
+                <ScalarProperty Name="moli_UsuarioModifica" ColumnName="moli_UsuarioModifica" />
+                <ScalarProperty Name="moli_FechaCrea" ColumnName="moli_FechaCrea" />
+                <ScalarProperty Name="moli_UsuarioCrea" ColumnName="moli_UsuarioCrea" />
+                <ScalarProperty Name="moli_Descripcion" ColumnName="moli_Descripcion" />
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

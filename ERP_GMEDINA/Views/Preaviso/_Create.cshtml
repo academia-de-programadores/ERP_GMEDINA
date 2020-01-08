@@ -35,5 +35,8 @@
     </div>
             <div class="modal-footer">
                 <input type="button" value="Cancelar" id="btnCerrarCrear" class="btn btn-default" />
-                <input type="submit" value="Guardar" id="btnCrearPreavisoConfirmar" class="btn btn-primary" />
+                <input type="submit" id="btnCrearPreavisoConfirmar" value="Guardar" class="btn btn-primary" />
+                <div style="display:none" class="btn" id="cargandoCrear">
+                </div>
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
             </div>}
