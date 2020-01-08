@@ -206,7 +206,6 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 $('#btnCreateRegistroComisiones').click(function () {
     var Empleado = $("#Crear #emp_IdEmpleado").val();
 
-        url: "/EmpleadoComisiones/Create",
     if (Empleado == "0") {
         $("#Validation_descipcion").css("display", "");
     }
