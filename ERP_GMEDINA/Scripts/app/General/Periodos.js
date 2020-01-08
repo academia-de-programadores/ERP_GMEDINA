@@ -64,7 +64,7 @@ function cargarGridPeriodo() {
 $(document).on("click", "#btnAgregarPeriodo", function () {
     console.log("btn Agregar Periodo");
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearPeriodo #fpa_Descripcion").val('');
+    $("#CrearPeriodo #peri_DescripPeriodo").val('');
     $("#CrearPeriodo").modal();
     $("#CrearPeriodo #Validation_descripcion").css("display", "none");
 });
