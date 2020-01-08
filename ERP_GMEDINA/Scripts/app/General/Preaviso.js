@@ -51,8 +51,8 @@ function cargarGridPreaviso() {
                     '<td>' + FechaCrea + '</td>' +
                     '<td>' + ListaPreaviso[i].NombreUsuarioCrea + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs" id="btnEditarPreaviso">Editar</button>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs" id="btnDetallePreaviso">Detalles</button>' +
+                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePreaviso">Detalle</button>' +
+                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs" id="btnEditarPreaviso">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
