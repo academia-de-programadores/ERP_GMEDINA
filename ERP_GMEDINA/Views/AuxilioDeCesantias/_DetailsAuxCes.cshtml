@@ -14,19 +14,19 @@
             <tbody>
                 <tr>
                     <td>Código Auxilio Cesantia)</td>
-                    <td>@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                    <td><span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span></td>
                 </tr>
                 <tr>
                     <td>Rango Inicio (Meses)</td>
-                    <td>@Html.DisplayFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                    <td><span id="aces_RangoInicioMeses">@Html.DisplayFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })</span></td>
                 </tr>
                 <tr>
                     <td> Rango Fin (Meses)</td>
-                    <td>@Html.DisplayFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                    <td><span id="aces_RangoFinMeses">@Html.DisplayFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span></td>
                 </tr>
                 <tr>
                     <td> Auxilio Cesantia (Dias)</td>
-                    <td>@Html.DisplayFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</td>
+                    <td><span id="aces_DiasAuxilioCesantia">@Html.DisplayFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span></td>
                 </tr>
             </tbody>
         </table>
@@ -50,14 +50,14 @@
                     <tr>
                         <td>Creado</td>
                         @Html.HiddenFor(model => model.aces_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                        <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                        <td>@Html.EditorFor(model => model.aces_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="aces_FechaCrea">@Html.DisplayFor(model => model.aces_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                     </tr>
                     <tr>
                         <td>Modificado</td>
                         @Html.HiddenFor(model => model.aces_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                        <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                        <td>@Html.EditorFor(model => model.aces_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="aces_FechaModifica">@Html.DisplayFor(model => model.aces_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                     </tr>
                 </tbody>
             </table>
