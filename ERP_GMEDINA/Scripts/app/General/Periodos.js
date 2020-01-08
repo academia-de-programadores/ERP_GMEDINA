@@ -190,7 +190,6 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 
                     var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
-        		    $("#Detalles #peri_IdPeriodo").val(iter.peri_IdPeriodo);
         		    $("#Detalles #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
         		    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
         		    $("#Detalles #peri_UsuarioCrea").val(iter.peri_UsuarioCrea);
