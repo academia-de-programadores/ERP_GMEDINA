@@ -4500,6 +4500,11 @@ body.modal-open {
 body:not(.modal-open){
   padding-right: 0px !important;
 }
+.modal.fade.hide{
+    overflow:auto;
+  padding-right:0 !important;
+}
+
 body.modal-open .animated {
   animation-fill-mode: initial;
   z-index: inherit;
