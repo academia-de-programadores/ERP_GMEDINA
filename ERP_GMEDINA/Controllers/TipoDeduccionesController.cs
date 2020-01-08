@@ -134,19 +134,29 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: Details
-            //public ActionResult Details(int? id)
-            //{
-            //    if (id == null)
-            //    {
-            //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //    }
-            //    tbTipoDeduccion tbTipoDeduccion = db.tbTipoDeduccion.Find(id);
-            //    if (tbTipoDeduccion == null)
-            //    {
-            //        return HttpNotFound();
-            //    }
-            //    return View(tbTipoDeduccion);
-            //}
+        public JsonResult Details(int? ID)
+        {
+            var tbTechosDeduccionesJSON = from tbTipoDeducciones in db.tbTipoDeduccion
+                                          where tbTipoDeducciones.tde_Activo == true && tbTipoDeducciones.tde_IdTipoDedu == ID
+                                          select new
+                                          {
+                                              tbTipoDeducciones.tde_IdTipoDedu,
+                                              tbTipoDeducciones.tde_Descripcion,
+
+                                              tbTipoDeducciones.tde_UsuarioCrea,
+                                              UsuCrea = tbTipoDeducciones.tbUsuario.usu_NombreUsuario,
+                                              tbTipoDeducciones.tde_FechaCrea,
+
+                                              tbTipoDeducciones.tde_UsuarioModifica,
+                                              UsuModifica = tbTipoDeducciones.tbUsuario1.usu_NombreUsuario,
+                                              tbTipoDeducciones.tde_FechaModifica
+                                          };
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            return Json(tbTechosDeduccionesJSON, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region POST: Editar
