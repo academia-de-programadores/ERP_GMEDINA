@@ -5,15 +5,7 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Auxilio de Cesantias</h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>
+
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -22,7 +14,7 @@
                 <div class="ibox-title">
                     <h5>Listado de Auxilio de Cesantias</h5>
                     <div class="ibox-tools">
-                        <input type="button" value="Nuevo" name="btnModalCrear" id="btnModalCrear" class="btn btn-primary btn-xs"/>
+                        <input type="button" value="Registrar Auxilio Cesantia" name="btnModalCrear" id="btnModalCrear" class="btn btn-primary btn-xs"/>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -51,9 +43,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.aces_DiasAuxilioCesantia)
                             </td>
-                            <td>                           
-                                <button type="button" class="btn btn-primary btn-xs" id="btnModalEdit" data-id="@item.aces_IdAuxilioCesantia">Editar</button>
-                                <button type="button" class="btn btn-default btn-xs" id="btnModalDetalles" data-id="@item.aces_IdAuxilioCesantia">Detalles</button>
+                            <td>         
+								<button type="button" class="btn btn-primary btn-xs" id="btnModalDetalles" data-id="@item.aces_IdAuxilioCesantia">Detalles</button>                  
+                                <button type="button" class="btn btn-default btn-xs" id="btnModalEdit" data-id="@item.aces_IdAuxilioCesantia">Editar</button>                                
                             </td>
                         </tr>
                       }
@@ -71,7 +63,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Nuevo Registro Auxilio Cesantia</h4>
+                <h4 class="modal-title">Crear Auxilio Cesantia</h4>
             </div>
             
                 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
@@ -86,7 +78,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Detalle Registro</h4>
+                <h4 class="modal-title">Detalle Auxilio de Cesantia</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
@@ -103,15 +95,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Edición de datos</h4>
+                <h4 class="modal-title">Editar Auxilio de Cesantia</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
-                <input type="button" class="btn btn-primary" id="btnUpdateAuxCes" value="Aceptar" />
-                <button type="button" class="btn btn-danger" id="btnModalEliminar">Eliminar</button>
+				<input type="button" class="btn btn-primary pull-left" id="btnUpdateAuxCes" value="Actualizar" />
+				<button type="button" class="btn btn-danger pull-left" id="btnModalEliminar">Inhabilitar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
+                
+                
             </div>
         </div>
     </div>
