@@ -49,21 +49,81 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' +
                     '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalle</a>' +
-                    '<button iddeduccionesextra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
+                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' +                    
                     '</td>' +
                     '</tr>';
             }
 
             //Refrescar el tbody de la Tabla del Index
-            $('#tbodyDeduccionesExtraordinarias').html(template);
+            $("#tbodyDeduccionesExtraordinarias").html(template);
         });
 }
 
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
+$('#btnAgregarI').on('click', function () {
+    debugger;
+    $.ajax({
+    type: 'POST',
+    url: $("form").attr("action"),
+    data: $("form").serialize(), 
+    //or your custom data either as object {foo: "bar", ...} or foo=bar&...
+    success: function (response) {
+        debugger;
+        console.log(response);
+    }
+    }); 
+})
+
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+cargandoEditar = $('#cargandoEditar')
+cargandoInhabilitar = $('#cargandoInhabilitar')
+
+
+//Validaciones de Botones de las Pantallas
+const btnAgregar = $('#btnAgregarI')
+const btnEditar = $('#btnEditarI')
+const btnInhabilitar = $('#btnInactivar')
+
+function mostrarCargandoCrear() {
+    btnAgregar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnAgregar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoEditar() {
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
+function ocultarCargandoEditar() {
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+
+
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
-
     //Mostrar el Modal de Inactivar
     $("#InactivarDeduccionesExtraordinarias").modal();
 
@@ -91,22 +151,37 @@ $("#btnInactivar").click(function () {
             });
         }
         else {
+                
+            function mostrarCargandoInhabilitar() {
+                btnInhabilitar.hide();
+                cargandoInhabilitar.show();
+                cargandoInhabilitar.html(spinner());
+                btnEditar.hide();
+                cargandoEditar.html(spinner());
+                cargandoEditar.show();
+            }
 
-            // Actualizar el Index para ver los cambios
-            location.href = "/DeduccionesExtraordinarias/Index";
+            function ocultarCargandoInhabilitar() {
+                btnInhabilitar.show();
+                cargandoInhabilitar.html('');
+                cargandoInhabilitar.hide();
+            }
 
-            cargarGridDeducciones();
+                // Actualizar el Index para ver los cambios
+                location.href = "/DeduccionesExtraordinarias/Index";
 
-            //Ya actualizado, se oculta el Modal
-            $("#InactivarDeduccionesExtraordinarias").modal('hide');
+                cargarGridDeducciones();
 
-            //Mensaje de Éxito de la Inactivación
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
-            });
+                //Ya actualizado, se oculta el Modal
+                $("#InactivarDeduccionesExtraordinarias").modal('hide');
 
-        }
+                //Mensaje de Éxito de la Inactivación
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro se inhabilitó de forma exitosa!',
+                });
+
+            }
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal

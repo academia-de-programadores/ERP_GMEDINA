@@ -140,7 +140,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
+                message: 'El registro se agregó de forma exitosa!',
             });
 
             $("#Crear #dafp_AporteLps").val('');
@@ -253,7 +253,7 @@ $("#btnEditDeduccionAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                message: 'El registro se editó de forma exitosa!',
             });
         }
     });
@@ -398,7 +398,7 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro se inhabilitó de forma exitosa!',
             });
         }
     });

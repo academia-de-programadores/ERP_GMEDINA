@@ -76,6 +76,35 @@ $("#btnIconCerrar").click(function () {
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+
+const btnGuardar = $('#btnCreateRegistroAFP')
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+        </div>`;
+}
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
 $(document).on("click", "#btnAgregarAFP", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
@@ -99,6 +128,7 @@ $(document).on("click", "#btnAgregarAFP", function () {
     $("#Crear #afp_InteresAnual").val('');
 });
 
+
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -109,35 +139,40 @@ $('#btnCreateRegistroAFP').click(function () {
     var val4 = $("#Crear #afp_InteresAporte").val();
     var val5 = $("#Crear #afp_InteresAnual").val();
 
-    if (val2 == "") {
-        $("#Crear #validation1").css("display", "");
-    }
-    else {
-        $("#Crear #validation1").css("display", "none");
-    }
 
-    if (val3 == "" || val3 == null || val3 == undefined) {
-        $("#Crear #validation2").css("display", "");
-    }
-    else {
-        $("#Crear #validation2").css("display", "none");
-    }
+        if (val2 == "") {
+            $("#Crear #validation1").css("display", "");
+        }
+        else {
+            $("#Crear #validation1").css("display", "none");
+        }
 
-    if (val4 == "" || val4 == null || val4 == undefined) {
-        $("#Crear #validation3").css("display", "");
-    }
-    else {
-        $("#Crear #validation3").css("display", "none");
-    }
-    if (val5 == "" || val5 == null || val5 == undefined) {
-        $("#Crear #validation4").css("display", "");
-    }
-    else {
-        $("#Crear #validation4").css("display", "none");
-    }
+        if (val3 == "" || val3 == null || val3 == undefined) {
+            $("#Crear #validation2").css("display", "");
+        }
+        else {
+            $("#Crear #validation2").css("display", "none");
+        }
+
+        if (val4 == "" || val4 == null || val4 == undefined) {
+            $("#Crear #validation3").css("display", "");
+        }
+        else {
+            $("#Crear #validation3").css("display", "none");
+        }
+        if (val5 == "" || val5 == null || val5 == undefined) {
+            $("#Crear #validation4").css("display", "");
+        }
+        else {
+            $("#Crear #validation4").css("display", "none");
+        }
+        
+        mostrarCargandoCrear();
+
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateAFP").serializeArray();
+        var data = $("#frmCreateAFP").serializeArray();
+
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
     $.ajax({
         url: "/AFP/Create",
@@ -161,9 +196,10 @@ $('#btnCreateRegistroAFP').click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
+                message: 'El registro se agregó de forma exitosa!',
             });
         }
+        ocultarCargandoCrear();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -300,7 +336,7 @@ $("#btnEditAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                message: 'El registro se editó de forma exitosa!',
             });
 
         }
@@ -416,7 +452,7 @@ $("#btnInactivarRegistroAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro se inhabilitó de forma exitosa!',
             });
         }
     });
