@@ -86,13 +86,9 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
         }).done(function (data) {
             //CERRAR EL MODAL DE AGREGAR
             if ($("#tde_Descripcion").val())
-                $("#AgregarTipoDeducciones").modal('hide');
+                //$("#AgregarTipoDeducciones").modal('hide');
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
             }
             else {
                 cargarGridTipoDeducciones();

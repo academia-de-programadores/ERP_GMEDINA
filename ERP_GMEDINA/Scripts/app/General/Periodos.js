@@ -1,4 +1,8 @@
 ﻿var IDInactivar = 0;
+
+const btnGuardar = $('#btnCrearPreavisoConfirmar'),
+cargandoCrearcargandoCrear = $('#cargandoCrear'),
+cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
@@ -79,6 +83,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearPeriodo #Crear #fpa_Descripcion").val() != "") {
+        mostrarCargandoCrear();
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -95,6 +100,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
                     title: 'Exito',
                     message: '¡Se registró de forma exitosa!',
                 });
+                ocultarCargandoCrear();
             }
         });
     }
@@ -184,7 +190,6 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 
                     var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
-        		    $("#Detalles #peri_IdPeriodo").val(iter.peri_IdPeriodo);
         		    $("#Detalles #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
         		    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
         		    $("#Detalles #peri_UsuarioCrea").val(iter.peri_UsuarioCrea);
@@ -261,6 +266,32 @@ $("#btnCerrarCrear").click(function () {
 $("#frmCreatePeriodo").submit(function (event) {
     event.preventDefault();
 });
+
+
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
 
 //*****************EDITAR******************//
 
