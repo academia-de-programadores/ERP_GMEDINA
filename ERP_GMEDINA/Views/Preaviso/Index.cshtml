@@ -32,8 +32,6 @@
                                 <th>@Html.DisplayNameFor(model => model.prea_RangoInicioMeses)</th>
                                 <th>@Html.DisplayNameFor(model => model.prea_RangoFinMeses)</th>
                                 <th>@Html.DisplayNameFor(model => model.prea_DiasPreaviso)</th>
-                                <th>@Html.DisplayNameFor(model => model.prea_FechaCrea)</th>
-                                <th>@Html.DisplayNameFor(model => model.prea_UsuarioCrea)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -53,12 +51,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.prea_DiasPreaviso)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.prea_FechaCrea)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => UsuarioCrea)
                                     </td>
                                     <td>
                                         <button data-id="@item.prea_IdPreaviso" type="button" class="btn btn-primary btn-xs" id="btnDetallePreaviso">Detalle</button>

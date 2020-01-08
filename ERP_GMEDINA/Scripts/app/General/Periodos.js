@@ -46,8 +46,6 @@ function cargarGridPeriodo() {
 
                 template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
                     '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
-                    '<td>' + FechaCrea + '</td>' +
-                    '<td>' + ListPeriodo[i].NombreUsuarioCrea + '</td>' +
                     '<td>' +
                     '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalle</button>' +
                     '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs" id="btnEditarPeriodo">Editar</button>' +
