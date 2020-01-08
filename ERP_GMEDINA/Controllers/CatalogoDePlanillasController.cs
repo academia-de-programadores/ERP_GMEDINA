@@ -24,9 +24,9 @@ namespace ERP_GMEDINA.Controllers
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
             var tbCatalogoDePlanillas = db.tbCatalogoDePlanillas
-                .Where(x => x.cpla_Activo == true)
                 .OrderByDescending(x => x.cpla_FechaCrea)
-                .Select(x => new CatalogoDePlanillasViewModel { idPlanilla = x.cpla_IdPlanilla, descripcionPlanilla = x.cpla_DescripcionPlanilla, frecuenciaDias = x.cpla_FrecuenciaEnDias, recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No") });
+				.OrderByDescending(x=> x.cpla_Activo)
+                .Select(x => new CatalogoDePlanillasViewModel { idPlanilla = x.cpla_IdPlanilla, descripcionPlanilla = x.cpla_DescripcionPlanilla, frecuenciaDias = x.cpla_FrecuenciaEnDias, recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"), activo = x.cpla_Activo });
             object json = new { data = tbCatalogoDePlanillas };
             return Json(json, JsonRequestBehavior.AllowGet);
         }

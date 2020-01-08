@@ -32,8 +32,6 @@
                                 <th>@Html.DisplayNameFor(model => model.prea_RangoInicioMeses)</th>
                                 <th>@Html.DisplayNameFor(model => model.prea_RangoFinMeses)</th>
                                 <th>@Html.DisplayNameFor(model => model.prea_DiasPreaviso)</th>
-                                <th>@Html.DisplayNameFor(model => model.prea_FechaCrea)</th>
-                                <th>@Html.DisplayNameFor(model => model.prea_UsuarioCrea)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -53,12 +51,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.prea_DiasPreaviso)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.prea_FechaCrea)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => UsuarioCrea)
                                     </td>
                                     <td>
                                         <button data-id="@item.prea_IdPreaviso" type="button" class="btn btn-primary btn-xs" id="btnDetallePreaviso">Detalle</button>
@@ -103,10 +95,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar el registro</h4>
+                <h4 class="modal-title">Inhabilitar el registro</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                <p><b>¿Esta Seguro Que Desea Inactivar el registro?</b></p>
+                <p><b>¿Esta Seguro Que Desea Inhabilitar el registro?</b></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">Cerrar</button>
