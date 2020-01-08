@@ -1160,7 +1160,6 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
-    <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\AuxilioCesantia.js" />
