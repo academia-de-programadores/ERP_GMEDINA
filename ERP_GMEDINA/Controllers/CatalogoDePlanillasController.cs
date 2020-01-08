@@ -120,6 +120,7 @@ namespace ERP_GMEDINA.Controllers
              */
             if (catalogoDeducciones == null)
                 catalogoDeducciones = new int[0];
+
             if (catalogoDePlanillas.Length > 1 && catalogoIngresos.Length > 0)
             {
                 #region Declaración de Variables
@@ -410,6 +411,7 @@ namespace ERP_GMEDINA.Controllers
                 cpla_FrecuenciaEnDias = int.Parse(catalogoDePlanillas[1]); //Frecuencia en días para generar la planilla
             DateTime cpla_FechaModifica = DateTime.Now;
             #endregion
+
             using (var dbContextTransaccion = db.Database.BeginTransaction())
             {
                 try
@@ -421,10 +423,10 @@ namespace ERP_GMEDINA.Controllers
                      */
 
                     //Lista de deducciones de la planilla que estan en la base de datos
-                    var listadoDetallePlanillaDeduccionesBaseDeDatos = db.tbTipoPlanillaDetalleDeduccion.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cde_IdDeducciones).ToList();
+                    List<int> listadoDetallePlanillaDeduccionesBaseDeDatos = db.tbTipoPlanillaDetalleDeduccion.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cde_IdDeducciones).ToList();
 
                     //Lista los ingresos de la planilla que estan en la base de datos
-                    var listadoDetallePlanillaIngresosBaseDeDatos = db.tbTipoPlanillaDetalleIngreso.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cin_IdIngreso).ToList();
+                    List<int> listadoDetallePlanillaIngresosBaseDeDatos = db.tbTipoPlanillaDetalleIngreso.Where(x => x.cpla_IdPlanilla == id).Select(x => x.cin_IdIngreso).ToList();
 
                     //A este listado despues le elimino los id de las deducciones que no quiero eliminar (ni se insertaran), y los que queden entonces los eliminare
                     List<int> listadoDetallePlanillaDeduccionesDelete = new List<int>(listadoDetallePlanillaDeduccionesBaseDeDatos);

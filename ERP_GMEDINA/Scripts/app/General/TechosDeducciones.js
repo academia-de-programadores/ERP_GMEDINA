@@ -117,7 +117,7 @@ $('#btnCreateTechoDeducciones').click(function () {
                 console.log(data);
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
+                    title: 'Éxito',
                     message: 'El registro fue registrado de forma exitosa!',
                 });
             }
