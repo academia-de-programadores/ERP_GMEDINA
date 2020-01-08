@@ -166,18 +166,21 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", functio
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data)
             {
+                console.log('la data es:');
+                console.log(data);
                 console.log(data);
                 var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
-                $("#aces_IdAuxilioCesantia").val(data[0].aces_IdAuxilioCesantia);
-                $("#frmDetallesAuxCess #aces_RangoInicioMeses").val(data[0].aces_RangoInicioMeses);
-                $("#frmDetallesAuxCess #aces_RangoFinMeses").val(data[0].aces_RangoFinMeses);
-                $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").val(data[0].aces_DiasAuxilioCesantia);
-                $("#tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#aces_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
+                $("#frmDetallesAuxCess #aces_RangoInicioMeses").html(data[0].aces_RangoInicioMeses);
+                //$("frmDetallesAuxCess #aces_RangoInicioMeses2").html(data[0].aces_RangoInicioMeses);
+                $("#frmDetallesAuxCess #aces_RangoFinMeses").html(data[0].aces_RangoFinMeses);
+                $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").html(data[0].aces_DiasAuxilioCesantia);
+                $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#aces_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
-                $("#aces_FechaModifica").val(FechaModifica);
+                $("#aces_FechaModifica").html(FechaModifica);
                 $("#frmDetailAuxCes").modal();
 
             }
