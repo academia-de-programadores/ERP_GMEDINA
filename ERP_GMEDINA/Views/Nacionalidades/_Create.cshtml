@@ -14,7 +14,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.nac_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.nac_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.EditorFor(model => model.nac_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid", maxlength = 50 } })
 								@Html.ValidationMessageFor(model => model.nac_Descripcion, "", new { @class = "text-danger", @id = "errornac_Descripcion" })
                             </div>
                         </div>

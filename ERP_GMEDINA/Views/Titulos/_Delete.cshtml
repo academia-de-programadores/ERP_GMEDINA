@@ -14,7 +14,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.titu_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.titu_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.EditorFor(model => model.titu_RazonInactivo, new { htmlAttributes = new { @class = "form-control", maxlenght = 100 } })
 								@Html.ValidationMessageFor(model => model.titu_RazonInactivo, "", new { @class = "text-danger", @id = "errortitu_RazonInactivo" })
                             </div>
                         </div>

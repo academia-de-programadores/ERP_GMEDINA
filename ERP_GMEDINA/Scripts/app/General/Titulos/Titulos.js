@@ -24,8 +24,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#titu_Descripcion")["0"].innerText = obj.titu_Descripcion;
-                $("#ModalDetalles").find("#titu_Estado")["0"].innerText = obj.titu_Estado;
-                $("#ModalDetalles").find("#titu_RazonInactivo")["0"].innerText = obj.titu_RazonInactivo;
                 $("#ModalDetalles").find("#titu_FechaCrea")["0"].innerText = FechaFormato(obj.titu_FechaCrea);
                 $("#ModalDetalles").find("#titu_FechaModifica")["0"].innerText = FechaFormato(obj.titu_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -47,7 +45,7 @@ function llenarTabla() {
                 console.log(value.titu_Descripcion);
                 tabla.row.add({
                     ID: value.titu_Id,
-                    Descripcion: value.titu_Descripcion
+                    Titulos: value.titu_Descripcion
                 }).draw();
 
             });
@@ -99,10 +97,10 @@ $("#btnGuardar").click(function() {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 }
                 else {
-                    MsgError("Error", "Codigo:" + obj + ".contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador(Verifique si el registro ya existe).");
                 }
             });
     } else {
@@ -125,13 +123,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 
@@ -150,10 +148,10 @@ $("#btnActualizar").click(function () {
                     llenarTabla();
                     MsgSuccess("¡Exito!", "Se ah actualizado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + " contacte al administrador(Verifique si el registro ya existe).");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });

@@ -24,8 +24,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#tmon_Descripcion")["0"].innerText = obj.tmon_Descripcion;
-                $("#ModalDetalles").find("#tmon_Estado")["0"].innerText = obj.tmon_Estado;
-                $("#ModalDetalles").find("#tmon_RazonInactivo")["0"].innerText = obj.tmon_RazonInactivo;
                 $("#ModalDetalles").find("#tmon_FechaCrea")["0"].innerText = FechaFormato(obj.tmon_FechaCrea);
                 $("#ModalDetalles").find("#tmon_FechaModifica")["0"].innerText = FechaFormato(obj.tmon_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -47,7 +45,7 @@ function llenarTabla() {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add({
                     ID:value.tmon_Id,
-                    Descripcion:value.tmon_Descripcion
+                    Monedas:value.tmon_Descripcion
                 }).draw();
             });
         });
@@ -92,13 +90,13 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["tmon_Descripcion"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 $("#InActivar").click(function () {
@@ -115,13 +113,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["tmon_Descripcion", "tmon_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 $("#btnActualizar").click(function () {
@@ -137,12 +135,12 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha actualizado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador(Verifique si el registro ya existe).");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });

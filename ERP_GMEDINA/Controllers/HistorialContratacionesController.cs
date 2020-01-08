@@ -30,20 +30,19 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var tbHistorialContrataciones = db.tbHistorialContrataciones 
+                    var tbHistorialContrataciones = db.V_HistorialContrataciones
                         .Select(
                         t => new
                         {
-                           
-                            hcon_Id = t.hcon_Id,
-                            Colaborador = t.tbDepartamentos.tbEmpleados
-                              .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                            dep_Descripcion = t.tbDepartamentos.depto_Descripcion,
-                            area_Descripcion = t.tbDepartamentos.tbAreas.area_Descripcion,
-                            car_Descripcion = t.tbDepartamentos.tbCargos.car_Descripcion,
-                            scan_Fecha = t.tbSeleccionCandidatos.scan_Fecha,
-                            hcon_FechaContratado = t.hcon_FechaContratado
-                            
+
+                            hcon_Id = t.Id,
+                            Colaborador = t.Nombre_Completo,
+                            dep_Descripcion = t.Departamento,
+                            area_Descripcion = t.Area,
+                            car_Descripcion = t.Cargo,
+                            scan_Fecha = t.Fecha_Seleccion_Candidato,
+                            hcon_FechaContratado = t.Fecha_Contrato
+
 
                         }
                         )
@@ -65,7 +64,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialContrataciones.Where(x => x.Id== id).ToList();
+                    lista = db.V_HistorialContrataciones.Where(x => x.Id == id).ToList();
                 }
                 catch
                 {

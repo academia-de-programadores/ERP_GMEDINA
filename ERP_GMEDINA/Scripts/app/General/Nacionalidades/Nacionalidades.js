@@ -25,8 +25,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#nac_Descripcion")["0"].innerText = obj.nac_Descripcion;
-                $("#ModalDetalles").find("#nac_Estado")["0"].innerText = obj.nac_Estado;
-                $("#ModalDetalles").find("#nac_RazonInactivo")["0"].innerText = obj.nac_RazonInactivo;
                 $("#ModalDetalles").find("#nac_FechaCrea")["0"].innerText = FechaFormato(obj.nac_FechaCrea);
                 $("#ModalDetalles").find("#nac_FechaModifica")["0"].innerText = FechaFormato(obj.nac_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -41,15 +39,24 @@ function llenarTabla() {
         '/Nacionalidades/llenarTabla',
         'POST',
         function (Lista) {
+           if (Lista!="-1" || Lista!="-2") {
+
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                //console.log(value.nac_Descripcion);
+             
                 tabla.row.add({
                     ID: value.nac_Id,
-                    Descripción:value.nac_Descripcion
-                }).draw();
-            });
+                    Nacionalidades: value.nac_Descripcion
+                });
+            });tabla.draw();
+            } else if (Lista==[]) {
+                zeroresult();
+            } else {
+               ErrorDeRed();
+        }
+
+           
         });
 }
 //Botones GET
@@ -91,13 +98,13 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["nac_Descripcion", "nac_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + "Contacte al administrador(Verifique si el registro ya existe).");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 $("#InActivar").click(function () {
@@ -114,13 +121,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["nac_Descripcion", "nac_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "Codigo:" + obj + " contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });
 $("#btnActualizar").click(function () {
@@ -136,12 +143,12 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha actualizado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador(Verifique si el registro ya existe).");
                 }
             });
     } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+        MsgError("Error", "Por favor llene todas las cajas de texto");
     }
 });

@@ -1253,6 +1253,7 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\api\spanish.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

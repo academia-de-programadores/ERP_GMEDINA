@@ -20,8 +20,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#tsal_Descripcion")["0"].innerText = obj.tsal_Descripcion;
-                $("#ModalDetalles").find("#tsal_Estado")["0"].innerText = obj.tsal_Estado;
-                $("#ModalDetalles").find("#tsal_RazonInactivo")["0"].innerText = obj.tsal_RazonInactivo;
                 $("#ModalDetalles").find("#tsal_FechaCrea")["0"].innerText = FechaFormato(obj.tsal_FechaCrea);
                 $("#ModalDetalles").find("#tsal_FechaModifica")["0"].innerText = FechaFormato(obj.tsal_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -42,7 +40,7 @@ function llenarTabla() {
              tabla.row.add(
               {
                   ID: value.tsal_Id,
-               Descripcion: value.tsal_Descripcion
+                  Salidas: value.tsal_Descripcion
               }
               ).draw();
             });
