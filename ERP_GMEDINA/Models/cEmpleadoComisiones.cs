@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 
 namespace ERP_GMEDINA.Models
 {
@@ -52,13 +53,15 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Porcentaje Comision")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [Range(0, 1000000000, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [RegularExpression("^\\d+$", ErrorMessage = "El Porcentaje Comision debe contener sólo números.")]
         public decimal cc_PorcentajeComision { get; set; }
 
 
         [Display(Name = "Total Venta")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [Range(0, 1000000000, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [RegularExpression("^\\d+$", ErrorMessage = "El Total Venta debe contener sólo números.")]
         public decimal cc_TotalVenta { get; set; }
 
         public virtual tbUsuario tbUsuario { get; set; }

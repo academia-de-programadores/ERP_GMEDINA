@@ -185,7 +185,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
                 $("#cde_PorcentajeEmpresaA").val("");
                 $("#tde_IdTipoDedu").val("0");
             }
-        });
+        }); 
     } 
 });
 
