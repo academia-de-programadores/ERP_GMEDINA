@@ -43,15 +43,23 @@ function cargarGridTechosDeducciones() {
             var ListaTechosDeducciones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTechosDeducciones.length; i++) {
+                var Activo;
+                if(ListaTechosDeducciones[i].tddu_Activo) 
+                    Activo = "Activo"
+                else
+                    Activo = "Inactivo";
                 template += '<tr data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '">' +
+                    '<td>' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeColaboradores + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_Techo + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].cde_DescripcionDeduccion + '</td>' +
+                    '<td>' + Activo + '</td>' +
                     '<td>' +
 
                     '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
                     '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' +                    
                     '</td>' +
                     '</tr>';
             }
@@ -322,6 +330,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 //        });
                 //    });
+                $('body').css("overflow", "hidden");
                 $("#DetailsTechosDeducciones").modal();
             }
             else {

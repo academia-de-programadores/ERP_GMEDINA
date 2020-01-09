@@ -17,10 +17,12 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example animated fadeInRight" id="tblTechosDeducciones">
                         <thead>
                             <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tddu_PorcentajeColaboradores)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tddu_PorcentajeEmpresa)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tddu_Techo)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tddu_Activo)</th>
                                 <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Acciones</th>
                             </tr>
                         </thead>
@@ -28,6 +30,9 @@
                             @foreach (var item in Model)
                             {
                                 <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tddu_IdTechosDeducciones)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.tddu_PorcentajeColaboradores)
                                     </td>
@@ -41,9 +46,16 @@
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
                                     </td>
                                     <td>
+                                        @{ var Activo = (item.tddu_Activo) ? "Activo" : "Inactivo"; }
+                                        @Html.DisplayFor(modelItem => Activo)
+                                        </td>
+    
+                                        <td>
+    
 
-                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalles</button>
+                                            <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalles</button>
                                         <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnEditarTechosDeducciones">Editar</button>
+                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnActivarTechosDeducciones">Activar</button>                                        
                                         @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
                                     </td>
                                 </tr>
@@ -51,10 +63,12 @@
                         </tbody>
                         <tfoot>
                             <tr role="row">
+                                <th rowspan="1" colspan="1">Número</th>
                                 <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tddu_PorcentajeColaboradores)</th>
                                 <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tddu_PorcentajeEmpresa)</th>
                                 <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tddu_Techo)</th>
                                 <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
+                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tddu_Activo)</th>
                                 <th rowspan="1" colspan="1">Acciones</th>
                             </tr>
                         </tfoot>
@@ -101,7 +115,7 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Detalle del techo de la deducción</h4>
             </div>
-            <div class="modal-body" id="Detalles">
+            <div class="modal-body" style="padding-bottom:0px;" id="Detalles">
                 @Html.Partial("_DetailsTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
             </div>
             <div class="modal-footer">
@@ -116,7 +130,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inhabilitar</h4>
+                <h4 class="modal-title">Inhabilitar techo de la deducción</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Está seguro que desea Eliminar este registro?
