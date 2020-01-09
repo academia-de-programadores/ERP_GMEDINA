@@ -89,6 +89,7 @@ $(document).on("click", "#btnFechaEspecifica", function () {
 // OCULTAR MODAL DE FECHAS
 $("#btnCerrarFecha").click(function () {
     $("#frmFechaDecimoCuarto").modal('hide');
+    $("#hipa_FechaInicio").val('');
 });
 
 
@@ -96,6 +97,7 @@ $("#btnCerrarFecha").click(function () {
 $("#btnCerrarFecha").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
+    $("#hipa_FechaInicio").val('');
 });
 
 
@@ -103,6 +105,7 @@ $("#btnCerrarFecha").click(function () {
 $("#IconCerrar").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
+    $("#hipa_FechaInicio").val('');
 });
 
 

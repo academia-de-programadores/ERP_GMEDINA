@@ -103,11 +103,8 @@ namespace ERP_GMEDINA.Controllers
 										 join C in db.tbCargos on E.car_Id equals C.car_Id
 										 join CP in db.tbCatalogoDePlanillas on E.cpla_IdPlanilla equals CP.cpla_IdPlanilla
 										 where
-										 (HP.hipa_FechaInicio >= hipa_FechaInicio2 &&
-										 HP.hipa_FechaInicio <= hipa_FechaFin) &&
-
-										 (HP.hipa_FechaFin >= hipa_FechaInicio2 &&
-										 HP.hipa_FechaFin <= hipa_FechaFin) &&
+										 (HP.hipa_FechaPago >= hipa_FechaInicio2 &&
+										 HP.hipa_FechaPago <= hipa_FechaFin) &&									
 
 										 CP.cpla_IdPlanilla != 2
 										 group HP by new

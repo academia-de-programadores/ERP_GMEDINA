@@ -1851,7 +1851,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\plugins\dataTables\RPT\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
