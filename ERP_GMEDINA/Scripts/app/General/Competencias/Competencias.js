@@ -41,6 +41,9 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             tabla.clear().draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 console.log(value.comp_Descripcion);
                 tabla.row.add({

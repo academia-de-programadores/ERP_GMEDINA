@@ -39,24 +39,18 @@ function llenarTabla() {
         '/Nacionalidades/llenarTabla',
         'POST',
         function (Lista) {
-           if (Lista!="-1" || Lista!="-2") {
-
             tabla.clear();
             tabla.draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
              
                 tabla.row.add({
                     ID: value.nac_Id,
                     Nacionalidades: value.nac_Descripcion
                 });
-            });tabla.draw();
-            } else if (Lista==[]) {
-                zeroresult();
-            } else {
-               ErrorDeRed();
-        }
-
-           
+            });tabla.draw();           
         });
 }
 //Botones GET

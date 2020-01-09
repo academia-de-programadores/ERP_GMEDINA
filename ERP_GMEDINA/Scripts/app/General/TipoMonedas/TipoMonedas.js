@@ -41,6 +41,9 @@ function llenarTabla() {
             var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add({

@@ -40,7 +40,10 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             var tabla = $("#IndexTable").DataTable();
-           tabla.clear().draw();
+            tabla.clear().draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 console.log(value.idi_Descripcion);
                 tabla.row.add({
