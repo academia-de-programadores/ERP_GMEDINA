@@ -433,15 +433,12 @@
     <Compile Include="Models\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
     <Compile Include="Models\tbMotivoLiquidacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbMotivoLiquidaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
->>>>>>> 299c2a578864f25fb04173ded2323f6cb6f31b20
     <Compile Include="Models\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
