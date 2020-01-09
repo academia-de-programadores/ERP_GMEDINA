@@ -361,13 +361,13 @@ function listar() {
 				render: function (data) {
 					if (data)
 						return `
-                        <button type="button" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-						<button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
+						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+                        <button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
 					`
 					else
 						return `
-						<button type="button" class="btn btn-primary btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
-						<button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
+						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+						<button type="button" class="btn btn-default btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
 						<button type="button" class="btn btn-success btn-xs" id="btnInactivar">Activar</button>
 						`;
 				}
