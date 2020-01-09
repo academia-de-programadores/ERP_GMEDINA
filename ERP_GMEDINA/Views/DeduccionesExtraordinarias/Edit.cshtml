@@ -71,7 +71,9 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            <input type="submit" id="btnEditarI" value="Guardar" class="btn btn-primary" />
+                            <div style="display:none" class="btn" id="cargandoEditar">
+                            </div>
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                             <button type="button" iddeduccionesextra="iddeduccionesextraordinarias" name="iddeduccionesextraordinarias" class="btn btn-danger" id="btnInactivarDeduccionesExtraordinarias">Inhabilitar</button>
                         </div>
@@ -102,6 +104,8 @@
                 @*data-dismiss="modal"*@
                 <button type="button" class="btn btn-default" id="btnCerrarInactivar">Cancelar</button>
                 <button type="button" class="btn btn-primary" id="btnInactivar">Aceptar</button>
+                <div style="display:none" class="btn" id="cargandoInhabilitar">
+                </div>
             </div>
         </div>
     </div>

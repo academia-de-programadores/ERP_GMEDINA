@@ -39,7 +39,7 @@
                                         @Html.DisplayFor(modelItem => item.tbAFP.afp_Descripcion)
                                     </td>
                                     <td>
-                                        <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalle</button>
+                                        <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalles</button>
                                         <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP">Editar</button>
                                     </td>
                                 </tr>
@@ -62,12 +62,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Agregar Deducción AFP</h4>
+                <h4 class="modal-title">Crear Deducción AFP</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
             </div>
-
         </div>
     </div>
 </div>
@@ -79,7 +78,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Edición de Deducción AFP</h4>
+                <h4 class="modal-title">Editar Deducción AFP</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -97,7 +96,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalles</h4>
+                <h4 class="modal-title">Detalle de Deducción AFP</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
@@ -112,14 +111,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-
+                ¿Esta seguro que desea Eliminar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger " id="btnInactivarRegistroDeduccionAFP">Inactivar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger " id="btnInactivarRegistroDeduccionAFP">Eliminar</button>
+                <div style="display:none" class="btn pull-left" id="cargandoInhabilitar"></div>
             </div>
         </div>
     </div>

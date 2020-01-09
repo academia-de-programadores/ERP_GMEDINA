@@ -70,8 +70,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
             if (data) {
                 var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
-                $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
-                $("#Detallar #cin_DescripcionIngreso").val(data[0].cin_DescripcionIngreso);
+                $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
+                $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
                 $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
                 $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
                 $("#Detallar #cin_FechaCrea").val(FechaCrea);
@@ -127,37 +127,33 @@ $("#btnUpdateIngresos").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoIngresos").serializeArray();
-    var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
+    var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS
-    if (descripcionEditar != '' && descripcionEditar != null && descripcionEditar != undefined && isNaN(descripcionEditar) == true) {
-
+    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
+        mostrarcargandoEditar();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
             data: data
         }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
-            }
-            else {
+
+            if (data != "error") {
+                
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarCatalogoIngresos").modal('hide');
                 cargarGridIngresos();
-
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro fue editado de forma exitosa!',
                 });
+                ocultarcargandoEditar();
             }
         });
     }
     else {
+        $("#validareditar").css("display", "");
         $("#Editar #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
@@ -165,6 +161,24 @@ $("#btnUpdateIngresos").click(function () {
         });
     }
 });
+
+const btneditar = $('#btnUpdateIngresos'),
+
+cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
+
+function mostrarcargandoEditar() {
+    btneditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+ 
+function ocultarcargandoEditar() {
+    btneditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+
+
 
 
 // INACTIVAR 
@@ -227,7 +241,7 @@ $('#btnCreateRegistroIngresos').click(function () {
 
     //VALIDAMOS LOS CAMPOS
     if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
-
+        mostrarCargandoCrear()
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Create",
@@ -236,32 +250,26 @@ $('#btnCreateRegistroIngresos').click(function () {
         }).done(function (data) {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
 
-            if (data == "error") {
-                $("#AgregarCatalogoIngresos").modal('hide');
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
-            }
-            else {
+            if (data != "error") {       
                 $("#AgregarCatalogoIngresos").modal('hide');
                 cargarGridIngresos();
-                $("#Crear #cin_DescripcionIngreso").val('');
+                
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro fue guardado de forma exitosa!',
                 });
+                ocultarCargandoCrear()
+                $("#Crear #cin_DescripcionIngreso").val('');
+                
+
             }
 
         });
     }
     else {
+        $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
     }
 });
 
@@ -270,4 +278,70 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
     $("#frmCatalogoIngresosCreate").modal('hide');
 });
+
+
+////////////////////////EDITAR
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
+
+
+
+
+
+
+
+////////////////////////CREAR
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarCrear").click(function () {
+    $("#descripcioncrear").css("display", "none");
+});
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarCreate").click(function () {
+    $("#descripcioncrear").css("display", "none");
+});
+
+
+
+
+
+
+const btnGuardar = $('#btnCreateRegistroIngresos'),
+
+cargandoCrearcargandoCrear = $('#cargandoCrear'),
+
+cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+function mostrarCargandoCrear(){
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+ 
+function ocultarCargandoCrear(){
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner(){
+    return`<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
 

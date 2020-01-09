@@ -1,69 +1,41 @@
 ﻿@model  ERP_GMEDINA.Models.tbAuxilioDeCesantias
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCrearAuxCess" }))
-    {
+{
     <div class="modal-body" id="Crear">
 
-        <table class="table">
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <div class="input-group date">
-                            Rango Inicio (Meses)
-                            @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoInicioMeses", @id = "aces_RangoInicioMeses" } })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.aces_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group date">
+                        Rango Inicio (Meses)
+                        @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoInicioMeses", @id = "aces_RangoInicioMeses" } })
                     </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <div class="input-group date">
-                            Rango Fin (Meses)
-                            @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoFinMeses", @id = "aces_RangoFinMeses" } })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.aces_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                    @Html.ValidationMessageFor(model => model.aces_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group date">
+                        Rango Fin (Meses)
+                        @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoFinMeses", @id = "aces_RangoFinMeses" } })
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <div class="input-group date">
-                            Auxilio Cesantia (Dias)
-                            @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_DiasAuxilioCesantia", @id = "aces_DiasAuxilioCesantia" } })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.aces_DiasAuxilioCesantia, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
-                    </div>
-                </td>
-            </tr>
-
-        </table>
-
-        @*<div class="form-group">
-            <div class="input-group date">
-                Rango Inicio (Meses)
-                @Html.EditorFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoInicioMeses", @id = "aces_RangoInicioMeses" } })
+                    @Html.ValidationMessageFor(model => model.aces_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                </div>
             </div>
-            @Html.ValidationMessageFor(model => model.aces_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descipcion" })
         </div>
 
         <div class="form-group">
-            <div class="input-group date">
-                Rango Fin (Meses)
-                @Html.EditorFor(model => model.aces_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_RangoFinMeses", @id = "aces_RangoFinMeses" } })
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group date">
+                        Auxilio Cesantia (Dias)
+                        @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_DiasAuxilioCesantia", @id = "aces_DiasAuxilioCesantia" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.aces_DiasAuxilioCesantia, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
+                </div>
             </div>
-            @Html.ValidationMessageFor(model => model.aces_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
         </div>
-
-        <div class="form-group">
-            <div class="input-group date">
-                Auxilio Cesantia (Dias)
-               @Html.EditorFor(model => model.aces_DiasAuxilioCesantia, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "aces_DiasAuxilioCesantia", @id = "aces_DiasAuxilioCesantia" } })
-            </div>
-            @Html.ValidationMessageFor(model => model.aces_DiasAuxilioCesantia, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
-        </div>*@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" id="btnCerrarCrearAuxCes">Cerrar</button>
-        <button type="submit" class="btn btn-primary" id="btnCrearAuxCes">Aceptar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnCrearAuxCes">Guardar</button>
     </div>
 }

@@ -232,16 +232,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-
-        // GET: EmpleadoComisiones/Inactivar
-      
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
-            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int id)

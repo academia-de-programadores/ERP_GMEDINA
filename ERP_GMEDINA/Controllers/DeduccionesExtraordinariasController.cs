@@ -57,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
 			V_DeduccionesExtraordinarias_Detalles oDeduccionesExtraordinarias_Detalles = db.V_DeduccionesExtraordinarias_Detalles.Where(x => x.dex_IdDeduccionesExtra == id).FirstOrDefault();
+            
 			if (oDeduccionesExtraordinarias_Detalles == null)
 			{
 				return HttpNotFound();
@@ -73,6 +74,7 @@ namespace ERP_GMEDINA.Controllers
 			ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado");
 			return View();
 		}
+
 
 		// POST: DeduccionesExtraordinarias/Create
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 

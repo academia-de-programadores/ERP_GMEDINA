@@ -351,15 +351,26 @@ function listar() {
 			},
 			{ data: 'descripcionPlanilla' }, //Columna 2: descripción de la planilla, esto viene de la petición que se hizo al servidor
 			{ data: 'frecuenciaDias' }, //Columna 3: frecuencia en días de la planilla, esto viene de la petición que se hizo al servidor
-			{ data: 'recibeComision' },
+			{
+				data: 'recibeComision'
+			},
 			{
 				//Columna 4: los botones que tendrá cada fila, editar y detalles de la planilla
 				orderable: false,
-				data: null,
-				defaultContent: `
-                        <button type="button" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-                        <button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
-                    `
+				data: 'activo',
+				render: function (data) {
+					if (data)
+						return `
+						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+                        <button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
+					`
+					else
+						return `
+						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+						<button type="button" class="btn btn-default btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
+						<button type="button" class="btn btn-success btn-xs" id="btnInactivar">Activar</button>
+						`;
+				}
 			}
 		],
 		language: {
@@ -459,6 +470,11 @@ function obtenerIdDetallesEditar(tbody, table) {
 	$(tbody).on('click', 'button#btnDetalleCatalogoDeducciones', function () {
 		var data = table.row($(this).parents('tr')).data();
 		location.href = pathname + 'Details/' + data.idPlanilla;
+	});
+
+	$(tbody).on('click', 'button#btnInactivar', function () {
+		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
+		$('#frmInactivarCatalogoPlanilla').modal();
 	});
 }
 
@@ -736,6 +752,7 @@ $('#inactivar').click(() => {
 	$('#InactivarCatalogoDeducciones').modal();
 });
 
+
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	var id = inputIdPlanilla.val();
 	_ajax(
@@ -758,5 +775,28 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 		},
 		(enviar) => { }
 	);
+});
+
+$('#btnEliminarCatatalogoPlanilla').click(() => {
+	let id = localStorage.getItem('id');
+
+	_ajax({ id: id },
+		'/CatalogoDePlanillas/ActivarPlanilla',
+		'POST',
+		(data) => {
+			console.log(data);
+			if (data == 'bien') {
+				iziToast.success({
+					title: 'Éxito',
+					message: 'El registro se activo correctamente.'
+				});
+				$('#frmInactivarCatalogoPlanilla').modal('hide');
+			}
+
+		},
+		() => {
+			console.log('Enviando');
+
+		})
 });
 //#endregion

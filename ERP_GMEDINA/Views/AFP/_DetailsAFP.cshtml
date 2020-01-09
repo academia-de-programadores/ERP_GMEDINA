@@ -8,48 +8,58 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.afp_Descripcion, htmlAttributes: new { @class = "text-box single-line", @disabled = "disabled" })
+                </div>
+                <div class="col-md-6">
+                    <span id="afp_Descripcion">@Html.DisplayFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     @Html.ValidationMessageFor(model => model.afp_Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.afp_AporteMinimoLps, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.afp_AporteMinimoLps, htmlAttributes: new { @class = "text-box single-line", @disabled = "disabled" })
+                </div>
+                <div class="col-md-6">
+                    <span id="afp_AporteMinimoLps">@Html.DisplayFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                     @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.afp_InteresAporte, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.afp_InteresAporte, htmlAttributes: new { @class = "text-box single-line", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                           <span id="afp_InteresAporte">@Html.DisplayFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                             @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.afp_InteresAnual, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.afp_InteresAnual, htmlAttributes: new { @class = "text-box single-line", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            <span id="afp_InteresAnual">@Html.DisplayFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                             @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" disabled></select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "text-box single-line", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="text-box single-line" disabled></select>
                         </div>
                     </div>
 
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h2>Auditoría</h2>
+                            <h4>Auditoría</h4>
                         </div>
                         <div class="ibox-content">
                             <div class="form-horizontal">
@@ -65,25 +75,22 @@
                                         <tr>
                                             <td>Creado</td>
                                             @Html.HiddenFor(model => model.afp_UsuarioCrea)
-                                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                            <td>@Html.EditorFor(model => model.afp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                            <td><span id="afp_FechaCrea">@Html.DisplayFor(model => model.afp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                                         </tr>
                                         <tr>
                                             <td>Modificado</td>
                                             @Html.HiddenFor(model => model.afp_UsuarioModifica)
-                                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                            <td>@Html.EditorFor(model => model.afp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                            <td><span id="afp_FechaModifica">@Html.DisplayFor(model => model.afp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
-                <div class="footer">
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
-                </div>
             </div>
         </div>
         </div>

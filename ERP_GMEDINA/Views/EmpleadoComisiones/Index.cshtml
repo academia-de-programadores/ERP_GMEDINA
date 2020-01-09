@@ -5,15 +5,8 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Comisiones Por Empleado</h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>
+
+
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -67,9 +60,9 @@
 
                                     </td>
                                     <td>
-                                        
                                         <button data-id="@item.cc_Id" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
                                         <button data-id="@item.cc_Id" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
+                                        
                                     </td>
                                 </tr>
                             }
@@ -90,7 +83,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconoCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h4 class="modal-title">Crear Comisiones al Empleado</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
@@ -106,7 +99,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" id="IconoCerraredit">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Edición de datos</h4>
+                <h4 class="modal-title">Editar Empleado Comisión</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página*@
@@ -122,15 +115,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle datos</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Detalle Empleado Comisión</h4>
             </div>
             <div class="modal-body" id="Detallar">
                 @Html.Partial("_DetalleEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="btnEditarEmpleadoComisiones">Editar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+            </div>*@
         </div>
     </div>
 </div>
@@ -139,15 +133,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inhabilitar</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inhabilitar este Registro?
+                ¿Esta seguro que desea Eliminar este Registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnInactivarRegistroComisiones">Inhabilitar</button>
+                <button type="button" class="btn btn-danger pull-right" id="btnInactivarRegistroComisiones">Eliminar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cancelar</button>
+                
             </div>
         </div>
     </div>

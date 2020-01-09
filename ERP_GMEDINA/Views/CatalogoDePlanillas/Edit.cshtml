@@ -19,28 +19,43 @@
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">
                             @Html.HiddenFor(model => model.cpla_IdPlanilla)
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-5">
-                                    <input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
-                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
+                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.cpla_FrecuenciaEnDias, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-5">
-                                    <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
-                                        <option value="7" @(Model.cpla_FrecuenciaEnDias == 7 ? "selected='selected'" : "")>Semanal</option>
-                                        <option value="15" @(Model.cpla_FrecuenciaEnDias == 15 ? "selected='selected'" : "")>Quincenal</option>
-                                        <option value="30" @(Model.cpla_FrecuenciaEnDias == 30 ? "selected='selected'" : "")>Mensual</option>
-                                    </select>
-                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Frecuencia de pago</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
+                                            <option value="7" @(Model.cpla_FrecuenciaEnDias == 7 ? "selected='selected'" : "")>Semanal</option>
+                                            <option value="15" @(Model.cpla_FrecuenciaEnDias == 15 ? "selected='selected'" : "")>Quincenal</option>
+                                            <option value="30" @(Model.cpla_FrecuenciaEnDias == 30 ? "selected='selected'" : "")>Mensual</option>
+                                        </select>
+                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Recibe Comisiones</label>
-                                <div class="col-md-5">
-                                    <input type="checkbox" checked="@Model.cpla_RecibeComision" class="i-checks" id="check-recibe-comision" />
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Recibe Comisiones</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" checked="@Model.cpla_RecibeComision" class="i-checks" id="check-recibe-comision" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

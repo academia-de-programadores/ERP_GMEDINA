@@ -1,4 +1,9 @@
-﻿//
+﻿const btnGuardar = $('#btnCreateRegistroDeduccion')
+const btnGuardarEditar = $('#btnUpdateDeduccion')
+cargandoCrearcargandoCrear = $('#cargandoCrear')
+cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+//
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
@@ -47,8 +52,8 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
                     '<td>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
+                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
+                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -71,6 +76,7 @@ $("#btnCerrarCrear").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
+    ocultarCargandoCrear(); 
 });
 
 
@@ -84,6 +90,7 @@ $("#IconCerrarCreate").click(function () {
     $("#cde_PorcentajeColaboradorA").val("");
     $("#cde_PorcentajeEmpresaA").val("");
     $("#tde_IdTipoDedu").val("0");
+    ocultarCargandoCrear();
 });
 
 
@@ -150,7 +157,19 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccion').click(function () {
+    
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var cde_DescripcionDeduccionA = $("#cde_DescripcionDeduccionA").val();
+    var cde_PorcentajeColaboradorA = $("#cde_PorcentajeColaboradorA").val();
+    var cde_PorcentajeEmpresaA = $("#cde_PorcentajeEmpresaA").val();
+
+    if (cde_DescripcionDeduccionA == "") {
+        $("#Validation_descipcionA").css("display", "");
+    }
+    else {
+        $("#Validation_descipcionA").css("display", "none");
+    }
+ 
     var tde_IdTipoDeduc = $("#Crear #tde_IdTipoDedu").val();
 
     if (tde_IdTipoDeduc == "0" || tde_IdTipoDeduc == null) {
@@ -158,6 +177,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#tde_IdTipoDedu").val("0");
     }
     else {
+
+        mostrarCargandoCrear();
         $("#Validation_descipcion2A").css("display", "none");
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
@@ -177,16 +198,32 @@ $('#btnCreateRegistroDeduccion').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    message: 'El registro fue agregado de forma exitosa!',
                 });
+
+                ocultarCargandoCrear();
 
                 $("#cde_DescripcionDeduccionA").val("");
                 $("#cde_PorcentajeColaboradorA").val("");
                 $("#cde_PorcentajeEmpresaA").val("");
                 $("#tde_IdTipoDedu").val("0");
             }
-        });
-    } 
+        }); 
+    }
+
+    if (cde_PorcentajeColaboradorA == "0.00" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA <= 0) {
+        $("#Validation_descipcion3A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3A").css("display", "none");
+    }
+
+    if (cde_PorcentajeEmpresaA == "0.00" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA <= 0) {
+        $("#Validation_descipcion4A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion4A").css("display", "none");
+    }
 });
 
 // EVITAR POSTBACK DE FORMULARIOS
@@ -201,6 +238,7 @@ $("#btnCerrarEditar").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
     $("#Validation_descipcion3").css("display", "none");
+    ocultarCargandoEditar();
 });
 
 
@@ -209,39 +247,40 @@ $("#IconCerrarEdit").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
     $("#Validation_descipcion3").css("display", "none");
+    ocultarCargandoEditar();
 
 });
 
 
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-$("#btnUpdateDeduccion").click(function () {
-    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
-    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
-    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
+//$("#btnUpdateDeduccion").click(function () {
+//    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
+//    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
+//    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
 
 
-    if (cde_DescripcionDeduccionE == "") {
-        $("#Validation_descipcion").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion").css("display", "none");
-    }
+//    if (cde_DescripcionDeduccionE == "") {
+//        $("#Validation_descipcion").css("display", "");
+//    }
+//    else {
+//        $("#Validation_descipcion").css("display", "none");
+//    }
 
-    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
-        $("#Validation_descipcion2").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion2").css("display", "none");
-    }
+//    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
+//        $("#Validation_descipcion2").css("display", "");
+//    }
+//    else {
+//        $("#Validation_descipcion2").css("display", "none");
+//    }
 
-    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
-        $("#Validation_descipcion3").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion3").css("display", "none");
-    }
+//    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
+//        $("#Validation_descipcion3").css("display", "");
+//    }
+//    else {
+//        $("#Validation_descipcion3").css("display", "none");
+//    }
 
-});
+//});
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -294,10 +333,25 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
+    var cde_DescripcionDeduccionE = $("#Editar #cde_DescripcionDeduccion").val();
+    var cde_PorcentajeColaboradorE = $("#Editar #cde_PorcentajeColaborador").val();
+    var cde_PorcentajeEmpresaE = $("#Editar #cde_PorcentajeEmpresa").val();
+
+    if (cde_DescripcionDeduccionE == "" || cde_PorcentajeColaboradorE <= 0.00 || cde_PorcentajeColaboradorE == 0 || cde_PorcentajeEmpresaE <= 0.00 || cde_PorcentajeEmpresaE == 0)
+    {
+        $("#Validation_descipcion").css("display", "");
+        $("#Validation_descipcion2").css("display", "");
+        $("#Validation_descipcion3").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+        $("#Validation_descipcion3").css("display", "none");
+        mostrarCargandoEditar();
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmCatalogoDeducciones").serializeArray();
 
-            //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeDeducciones/Edit",
             method: "POST",
@@ -305,6 +359,7 @@ $("#btnUpdateDeduccion").click(function () {
         })
         .done(function (data) {
             if (data != "error") {
+                
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
 
@@ -316,8 +371,10 @@ $("#btnUpdateDeduccion").click(function () {
                     title: 'Exito',
                     message: 'El registro fue editado de forma exitosa!',
                 });
+                ocultarCargandoEditar();
             }
         });
+    } 
 });  
 
 // EVITAR POSTBACK DE FORMULARIOS
@@ -344,16 +401,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 console.log(data);
                 var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data[0].cde_DescripcionDeduccion);
-                $("#Detalles #cde_PorcentajeColaborador").val(data[0].cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").val(data[0].cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").val(data[0].cde_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #cde_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
+                $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
+                $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #cde_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").val(FechaModifica);
+                $("#Detalles #cde_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].TipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -432,6 +489,43 @@ $("#btnInactivarRegistroDeduccion").click(function () {
         }
     });
 });
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoEditar() {
+    btnGuardarEditar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoEditar() {
+    btnGuardarEditar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
+
 
 
 
