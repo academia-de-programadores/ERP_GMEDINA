@@ -44,8 +44,8 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
                     '<td>'+
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' +
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' +
+                    '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
