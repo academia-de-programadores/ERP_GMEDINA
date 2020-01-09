@@ -14,7 +14,8 @@ namespace ERP_GMEDINA.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Collections.Generic;
+
     public partial class ERP_GMEDINAEntities : DbContext
     {
         public ERP_GMEDINAEntities()
@@ -192,7 +193,12 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Insert_Result>("UDP_Plani_tbAuxilioDeCesantias_Insert", aces_RangoInicioMesesParameter, aces_RangoFinMesesParameter, aces_DiasAuxilioCesantiaParameter, aces_UsuarioCreaParameter, aces_FechaCreaParameter, aces_ActivoParameter);
         }
-    
+
+        internal IEnumerable<object> UDP_Plani_EmpleadoComisiones_Inactivar(int iD)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Update_Result> UDP_Plani_tbAuxilioDeCesantias_Update(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_RangoInicioMeses, Nullable<int> aces_RangoFinMeses, Nullable<int> aces_DiasAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
         {
             var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?

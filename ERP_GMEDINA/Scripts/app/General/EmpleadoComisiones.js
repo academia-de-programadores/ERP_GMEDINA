@@ -262,32 +262,43 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 });
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroComisiones').click(function () {
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var Empleado = $("#Crear #emp_IdEmpleado").val();
+   
 
-    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+   if (Empleado == "0") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+       $("#Validation_descipcion").css("display", "none");
 
-    $.ajax({
-        url: "/EmpleadoComisiones/Create",
-        method: "POST",
-        data: data
-    })
+
+
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+        $.ajax({
+            url: "/EmpleadoComisiones/Create",
+            method: "POST",
+            data: data
+        })
         .done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarEmpleadoComisiones");
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            $("#AgregarEmpleadoComisiones").modal('show');
-        }
-        else {            
-            cargarGridComisiones();
-            $("#AgregarEmpleadoComisiones").modal('hide');
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarEmpleadoComisiones");
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                $("#AgregarEmpleadoComisiones").modal('show');
+            }
+            else {
+                cargarGridComisiones();
+                $("#AgregarEmpleadoComisiones").modal('hide');
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue registrado de forma exitosa!',
+                });
+            }
+        });
+    }
+    
 
 });
 

@@ -2,15 +2,65 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesCreate" }))
 {
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
-                </div>
+    <div class="modal-body" id="Crear">
+
+        <table class="table">
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="input-group date">
+                            Empleado
+                            <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
+                        </div>
+                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group" style="display:none">
+                        <div class="input-group date">
+                           Ingreso
+                            <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <div class="input-group date">
+                            Porcentaje de Comisión
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "PorcentajeComision" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                    </div>
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="input-group date">
+                            Total de Venta
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "TotalVenta" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+
+
+        @*<div class="ibox-content">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
+                    </div>
                     <div class="col-md-6">
                         <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -18,47 +68,47 @@
                 </div>
 
 
-            <div class="form-group" style="display:none">
-                @Html.LabelFor(model => model.cin_IdIngreso, "cin_IdIngreso", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control",@id="PorcentajeComision"} })
-                    @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "TotalVenta" } })
-                    @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
-                </div>
-            </div>
-
-
-            <div class="form-group" style="display:none">
-                @Html.LabelFor(model => model.cc_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.cc_Pagado)                        
+                <div class="form-group" style="display:none">
+                    @Html.LabelFor(model => model.cin_IdIngreso, "cin_IdIngreso", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "PorcentajeComision" } })
+                        @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "TotalVenta" } })
+                        @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+                    </div>
+                </div>
+
+
+                <div class="form-group" style="display:none">
+                    @Html.LabelFor(model => model.cc_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.cc_Pagado)
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+        </div>*@
 
-
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModal">Cerrar</button>
+            <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroComisiones">Guardar</button>
         </div>
-    </div>
-
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModal">Cerrar</button>
-        <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroComisiones">Guardar</button>
-    </div>
-}
+        }
 
 
 
