@@ -10,11 +10,20 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UDP_Plani_CatalogoDeduccionesEdit_Select_Result
+    public partial class V_Deducciones_RPT
     {
+        public int emp_Id { get; set; }
+        public string per_Nombres { get; set; }
+        public string per_Apellidos { get; set; }
         public int cde_IdDeducciones { get; set; }
         public string cde_DescripcionDeduccion { get; set; }
-        public int @checked { get; set; }
+        public Nullable<decimal> hidp_Total { get; set; }
+        public System.DateTime hipa_FechaInicio { get; set; }
+        public System.DateTime hipa_FechaFin { get; set; }
+        public System.DateTime hipa_FechaPago { get; set; }
+        public int cpla_IdPlanilla { get; set; }
+        public string cpla_DescripcionPlanilla { get; set; }
     }
 }

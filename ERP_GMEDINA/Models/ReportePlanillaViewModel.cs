@@ -22,6 +22,7 @@ namespace ERP_GMEDINA.Models
         public decimal? TotalIngresosHorasExtras { get; set; }
         public decimal? totalBonificaciones { get; set; }
         public decimal? totalVacaciones { get; set; }
+        public decimal? totalSeptimoDia { get; set; }
         public decimal? totalIngresos { get; set; }
         public decimal? totalISR { get; set; }
         public decimal? totalDeduccionesColaborador { get; set; }

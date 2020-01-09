@@ -36,7 +36,7 @@
                 </ul>
             </li>
 
-			<li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "CatalogoDeIngresos")  @Html.IsSelected(controller: "InstitucionesFinancieras")  @Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "EmpleadoBonos") @Html.IsSelected(controller: "EmpleadoComisiones") @Html.IsSelected(controller: "AFP") ">
+			<li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "CatalogoDeIngresos")  @Html.IsSelected(controller: "InstitucionesFinancieras")  @Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "EmpleadoBonos") @Html.IsSelected(controller: "EmpleadoComisiones") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") @Html.IsSelected(controller: "AcumuladosISR") ">
 				<a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.dashboard">Configuraciones</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
 					<li class="@Html.IsSelected(controller: "CatalogoDeIngresos")"><a href="@Url.Action("Index", "CatalogoDeIngresos")">Ingresos</a></li>
@@ -50,6 +50,7 @@
 					<li class="@Html.IsSelected(controller: "TipoDeducciones")"><a href="@Url.Action("Index", "TipoDeducciones")">Tipo de Deducciones</a></li>
 					<li class="@Html.IsSelected(controller: "InstitucionesFinancieras")"><a href="@Url.Action("Index", "InstitucionesFinancieras")">Instituciones Financieras</a></li>
 					<li class="@Html.IsSelected(controller: "ISR")"><a href="@Url.Action("Index", "ISR")">ISR</a></li>
+                    <li class="@Html.IsSelected(controller: "AcumuladosISR")"><a href="@Url.Action("Index", "AcumuladosISR")">Acumulados ISR</a></li>
                     <li class="@Html.IsSelected(controller: "AFP")"><a href="@Url.Action("Index", "AFP")">AFP</a></li>
                     <li class="@Html.IsSelected(controller: "AuxilioDeCesantias")"><a href="@Url.Action("Index", "AuxilioDeCesantias")">Auxilio de Cesantias</a></li>
                     <li class="@Html.IsSelected(controller: "Periodos")"><a href="@Url.Action("Index", "Periodos")">Periodos de pago</a></li>

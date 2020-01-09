@@ -12,17 +12,20 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbHistorialDePago
+    public partial class V_ReportesVarios
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbHistorialDePago()
-        {
-            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
-        }
-    
-        public int hipa_IdHistorialDePago { get; set; }
+        public int per_Id { get; set; }
+        public string per_Nombres { get; set; }
+        public string per_Apellidos { get; set; }
         public int emp_Id { get; set; }
+        public string emp_CuentaBancaria { get; set; }
+        public System.DateTime emp_Fechaingreso { get; set; }
+        public bool emp_Estado { get; set; }
+        public int cpla_IdPlanilla { get; set; }
+        public string cpla_DescripcionPlanilla { get; set; }
+        public bool cpla_RecibeComision { get; set; }
+        public bool cpla_Activo { get; set; }
+        public int hipa_IdHistorialDePago { get; set; }
         public Nullable<decimal> hipa_SueldoNeto { get; set; }
         public System.DateTime hipa_FechaInicio { get; set; }
         public System.DateTime hipa_FechaFin { get; set; }
@@ -30,10 +33,7 @@ namespace ERP_GMEDINA.Models
         public int hipa_Anio { get; set; }
         public int hipa_Mes { get; set; }
         public int peri_IdPeriodo { get; set; }
-        public int hipa_UsuarioCrea { get; set; }
         public System.DateTime hipa_FechaCrea { get; set; }
-        public Nullable<int> hipa_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> hipa_FechaModifica { get; set; }
         public decimal hipa_TotalISR { get; set; }
         public Nullable<bool> hipa_ISRPendiente { get; set; }
         public decimal hipa_AFP { get; set; }
@@ -44,14 +44,5 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> hipa_TotalSeptimoDia { get; set; }
         public Nullable<decimal> hipa_AdelantoSueldo { get; set; }
         public Nullable<decimal> hipa_TotalSalario { get; set; }
-    
-        public virtual tbUsuario tbUsuario { get; set; }
-        public virtual tbUsuario tbUsuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
-        public virtual tbPeriodos tbPeriodos { get; set; }
-        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

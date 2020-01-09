@@ -47,8 +47,8 @@ function cargarGridAcumuladosISR() {
                     '<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
                     '<td>' + ListaAcumuladosISR[i].aisr_Monto + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' +
-                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnDetalleAcumuladosISR">Detalle</button>' +
+                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' +
+                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -60,7 +60,6 @@ function cargarGridAcumuladosISR() {
 
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
-    
     //MOSTRAR EL MODAL DE AGREGAR
     $(".field-validation-error").css('display', 'none');
     $('#Crear input[type=text], input[type=number]').val('');
@@ -103,13 +102,6 @@ $('#btnCreateAcumuladosISR').click(function () {
             }
         });
     }
-    else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
-
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -133,7 +125,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 $("#Editar #aisr_Descripcion").val(data.aisr_Descripcion);
                 $("#Editar #aisr_Monto").val(data.aisr_Monto);
                 $(".field-validation-error").css('display', 'none');
-               
+
                 $("#EditarAcumuladosISR").modal();
             }
             else {
@@ -182,12 +174,6 @@ $("#btnEditarAcumulado").click(function () {
             }
         });
     }
-    else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -195,15 +181,10 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarAcumuladosISR").modal('hide');
 });
 
-
-
-
 $(document).on("click", "#btnInactivarAcumuladosISR", function () {
     $("#EditarAcumuladosISR").modal('hide');
     $("#InactivarAcumuladosISR").modal();
 });
-
-
 
 //Inactivar registro Techos Deducciones    
 $("#btnInactivarAcumuladosISREjecutar").click(function () {
@@ -251,18 +232,18 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
             if (data) {
                 var FechaCrea = FechaFormato(data[0].aisr_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].aisr_FechaModifica);
-                $("#Detalles #aisr_UsuarioCrea").val(data[0].aisr_UsuarioCrea);
+                $("#Detalles #aisr_UsuarioCrea").html(data[0].aisr_UsuarioCrea);
 
-                $("#Detalles #aisr_Descripcion").val(data[0].aisr_Descripcion);
-                $("#Detalles #aisr_Monto").val(data[0].aisr_Monto);
+                $("#Detalles #aisr_Descripcion").html(data[0].aisr_Descripcion);
+                $("#Detalles #aisr_Monto").html(data[0].aisr_Monto);
 
-                $("#Detalles #aisr_UsuarioCrea").val(data[0].aisr_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #aisr_FechaCrea").val(FechaCrea);
+                $("#Detalles #aisr_UsuarioCrea").html(data[0].aisr_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #aisr_FechaCrea").html(FechaCrea);
 
-                $("#Detalles #aisr_UsuarioModifica").val(data.aisr_UsuarioModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #aisr_FechaModifica").val(FechaModifica);                
+                $("#Detalles #aisr_UsuarioModifica").html(data.aisr_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #aisr_FechaModifica").html(FechaModifica);
                 $("#DetailsAcumuladosISR").modal();
             }
             else {
@@ -273,4 +254,39 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnDetalleAcumuladosISR"
                 });
             }
         });
+});
+
+$(document).ready(function () {
+    $(document).ready(function () {
+        $('.dataTables-AcumuladosISR').DataTable({
+            "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+            responsive: true,
+            pageLength: 10,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="fa fa-copy btn-xs"></i>',
+                    titleAttr: 'Copiar',
+                    exportOptions: {
+                        columns: [0, 1],
+                    },
+                    className: 'btn btn-primary'
+
+                },
+
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o btn-xs"></i>',
+                    titleAttr: 'Excel',
+                    exportOptions: {
+                        columns: [0, 1],
+                    },
+                    className: 'btn btn-primary',
+                    title: 'Acumulados ISR'
+                }
+
+            ]
+        });
+    });
 });
