@@ -13,8 +13,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Menu
         public ActionResult Index()
         {
-            //simular la sesión del usuario
-            tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 2).FirstOrDefault();
+            tbUsuario sesionUsuario = db.tbUsuario.Where(x => x.usu_Id == 1).FirstOrDefault();
             Session["sesionUsuario"] = sesionUsuario;
             return View();
         }

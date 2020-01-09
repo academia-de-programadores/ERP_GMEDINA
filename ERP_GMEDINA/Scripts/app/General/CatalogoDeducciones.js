@@ -46,17 +46,35 @@ function cargarGridDeducciones() {
             var ListaDeducciones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeducciones.length; i++) {
+                var estadoCDD = ListaDeducciones[i].cde_Activo == false ? "Inactivo" : "Activo";
+                console.log(estadoCDD);
                 template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
+                  '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                   '<td>' + estadoCDD + '</td>' +
+                   '<td>' + ((ListaDeducciones[i].cde_Activo == true) ?
+                   '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Detalles</button>' +
+                   '<button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Editar</button>' :
+                   '<button type="button" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Activar</button>') + '</td> </tr>';
             }
+
+            //for (var i = 0; i < ListaDeducciones.length; i++) {
+            //    template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
+            //        '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
+            //        '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_Activo + '</td>' +
+            //        '<td>' +
+            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
+            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
+            //        '</td>' +
+            //        '</tr>';
+            //}
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             FullBody();
             $('#tbodyDeducciones').html(template);
@@ -308,12 +326,18 @@ $("#btnUpdateDeduccion").click(function () {
 
     if (cde_DescripcionDeduccionE == "" || cde_PorcentajeColaboradorE <= 0.00 || cde_PorcentajeColaboradorE == 0 || cde_PorcentajeEmpresaE <= 0.00 || cde_PorcentajeEmpresaE == 0)
     {
+        $("#Validation_descipcion").css("display", "");
+        $("#Validation_descipcion2").css("display", "");
+        $("#Validation_descipcion3").css("display", "");
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos validos',
         });
     }
     else {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+        $("#Validation_descipcion3").css("display", "none");
         mostrarCargandoEditar();
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmCatalogoDeducciones").serializeArray();

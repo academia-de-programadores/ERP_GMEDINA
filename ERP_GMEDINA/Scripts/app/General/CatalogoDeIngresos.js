@@ -37,16 +37,23 @@ function cargarGridIngresos() {
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaIngresos = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+          
             for (var i = 0; i < ListaIngresos.length; i++) {
-                template += '<tr data-id = "' + ListaIngresos[i].cin_IdIngresos + '">' +
+                var estadoIng = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
+                console.log(estadoIng);
+                template += '<tr  class="gradeA odd" role="row"  data-id = "' + ListaIngresos[i].cin_IdIngresos + '">' +
                     '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
                     '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
+                    '<td>' + estadoIng + '</td>' +
                     '<td>' +
-                    
-                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>' +
-                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-default btn-xs" id="btnEditarIngreso">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    ((ListaIngresos[i].cin_Activo == true) ?
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos +'">Detalles</button>' +
+                    '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' :
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>')
+                    +'</td> </tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyIngresos').html(template);
@@ -150,6 +157,12 @@ $("#btnUpdateIngresos").click(function () {
                 });
                 ocultarcargandoEditar();
             }
+
+        });
+
+        // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+        $("#frmCatalogoIngresos").submit(function (e) {
+            return false;
         });
     }
     else {
@@ -215,7 +228,12 @@ $("#btnInactivarIngresos").click(function () {
             });
         }
     });
-});
+    $("#frmCatalogoIngresos").submit(function (e) {
+        return false;
+    });
+}
+
+);
 
 
 

@@ -46,12 +46,21 @@ function cargarGridTipoDeducciones() {
                 var FechaModifica = FechaFormato(ListaTipoDeducciones[i].tde_FechaModifica);
 
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
+                var activo;
+                if (ListaTipoDeducciones[i].tde_Activo)
+                     activo = "Activo";
+                else activo = "Inactivo";
+                
+
 
                 template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
+                    '<td>' + ListaTipoDeducciones[i].tde_IdTipoDedu + '</td>' +
                     '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
+                    '<td>' + activo + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeducciones">Detalle</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleTipoDeducciones">Detalles</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +                    
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnActivarTipoDeducciones">Activar</button>' +
                     '</td>' +
                     '</tr>';
             }
