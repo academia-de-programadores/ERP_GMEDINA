@@ -49,8 +49,9 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>' +
-                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' +                    
+                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>' +
+                    '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' +
+                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>' +
                     '</td>' +
                     '</tr>';
             }
@@ -59,6 +60,14 @@ function cargarGridDeducciones() {
             $("#tbodyDeduccionesExtraordinarias").html(template);
         });
 }
+
+
+function EvitarSubmit() {
+    $("form").submit(function (e) {
+        e.preventDefault();
+    });
+}
+
 
 //Mostrar el spinner
 function spinner() {
@@ -71,31 +80,13 @@ function spinner() {
  </div>`;
 }
 
-$('#btnAgregarI').on('click', function () {
-    debugger;
-    $.ajax({
-    type: 'POST',
-    url: $("form").attr("action"),
-    data: $("form").serialize(), 
-    //or your custom data either as object {foo: "bar", ...} or foo=bar&...
-    success: function (response) {
-        debugger;
-        console.log(response);
-    }
-    }); 
-})
-
 
 //Div que aparecera cuando se le de click en crear
 cargandoCrear = $('#cargandoCrear')
-cargandoEditar = $('#cargandoEditar')
-cargandoInhabilitar = $('#cargandoInhabilitar')
 
 
 //Validaciones de Botones de las Pantallas
-const btnAgregar = $('#btnAgregarI')
-const btnEditar = $('#btnEditarI')
-const btnInhabilitar = $('#btnInactivar')
+const btnAgregar = $('#btnAgregar')
 
 function mostrarCargandoCrear() {
     btnAgregar.hide();
@@ -109,17 +100,27 @@ function ocultarCargandoCrear() {
     cargandoCrear.hide();
 }
 
-function mostrarCargandoEditar() {
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarCargandoEditar() {
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
+//Agregar
+$(document).on("click", "#btnAgregar", function () {
+    $.ajax({
+        url: "/DeduccionesExtraordinarias/Create",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "Error")
+        {
+            ocultarCargandoCrear();
+        }
+        else if (data == "Exito")
+        {
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro se agregó de forma exitosa!',
+            });
+            mostrarCargandoCrear();
+        }
+    })
+});
 
 
 //Modal de Inactivar

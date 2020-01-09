@@ -14,17 +14,17 @@ namespace ERP_GMEDINA.Controllers
 	{
 		private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-		// GET: DeduccionesExtraordinarias
-		public ActionResult Index()
+        #region Index Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias
+        public ActionResult Index()
 		{
-			var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Where(t => t.dex_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados).OrderBy(d => d.dex_FechaCrea);
+			var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.OrderBy(t => t.dex_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
 			return View(tbDeduccionesExtraordinarias.ToList());
 		}
 
 		// GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
 		public ActionResult GetData()
 		{
-
 			//Variable para Guardar el Select List que llamará el js en el FrontEnd
 			var tbDeduccionesExtraordinariasD = db.tbDeduccionesExtraordinarias
 				.Select(d => new
@@ -48,25 +48,11 @@ namespace ERP_GMEDINA.Controllers
 			//Retornamos un Json en el FrontEnd
 			return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 		}
+        #endregion
 
-		// GET: DeduccionesExtraordinarias/Details/5
-		public ActionResult Details(int? id)
-		{
-			if (id == null)
-			{
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			V_DeduccionesExtraordinarias_Detalles oDeduccionesExtraordinarias_Detalles = db.V_DeduccionesExtraordinarias_Detalles.Where(x => x.dex_IdDeduccionesExtra == id).FirstOrDefault();
-            
-			if (oDeduccionesExtraordinarias_Detalles == null)
-			{
-				return HttpNotFound();
-			}
-			return View(oDeduccionesExtraordinarias_Detalles);
-		}
-
-		// GET: DeduccionesExtraordinarias/Create
-		public ActionResult Create()
+        #region Crear Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Create
+        public ActionResult Create()
 		{
 
 			//Viewbag para llenar sus respectivos Dropdownlist
@@ -83,7 +69,6 @@ namespace ERP_GMEDINA.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
 		{
-
 			//Para llenar los campos de auditoria
 			tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
 			tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
@@ -92,6 +77,10 @@ namespace ERP_GMEDINA.Controllers
 			string Response = String.Empty;
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
 			string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                Response = "Error";
+            }
 			if (ModelState.IsValid)
 			{
 				try
@@ -143,9 +132,11 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
+#endregion
 
-		// GET: DeduccionesExtraordinarias/Edit/5
-		public ActionResult Edit(int? id)
+        #region Editar Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Edit/5
+        public ActionResult Edit(int? id)
 		{
 			if (id == null)
 			{
@@ -229,9 +220,29 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
+        #endregion
 
-		//GET: DeduccionesExtraordinarias/Inactivar
-		public ActionResult Inactivar(int? ID)
+        #region Detalles Deducciones Extraordinarias
+        // GET: DeduccionesExtraordinarias/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            V_DeduccionesExtraordinarias_Detalles oDeduccionesExtraordinarias_Detalles = db.V_DeduccionesExtraordinarias_Detalles.Where(x => x.dex_IdDeduccionesExtra == id).FirstOrDefault();
+
+            if (oDeduccionesExtraordinarias_Detalles == null)
+            {
+                return HttpNotFound();
+            }
+            return View(oDeduccionesExtraordinarias_Detalles);
+        }
+        #endregion
+
+        #region Inhabilitar Deducciones Extraordinarias
+        //GET: DeduccionesExtraordinarias/Inactivar
+        public ActionResult Inactivar(int? ID)
 		{
 			db.Configuration.ProxyCreationEnabled = false;
 			tbDeduccionesExtraordinarias tbDeduccionesExtraordinariasJSON = db.tbDeduccionesExtraordinarias.Find(ID);
@@ -297,8 +308,10 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
+        #endregion
 
-		protected override void Dispose(bool disposing)
+        #region Ejecutable Deducciones Extraordinarias
+        protected override void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
@@ -306,5 +319,7 @@ namespace ERP_GMEDINA.Controllers
 			}
 			base.Dispose(disposing);
 		}
-	}
+        #endregion
+
+    }
 }

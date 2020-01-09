@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> cin_FechaModifica { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "Estado")]
         public bool cin_Activo { get; set; }
 
     }
