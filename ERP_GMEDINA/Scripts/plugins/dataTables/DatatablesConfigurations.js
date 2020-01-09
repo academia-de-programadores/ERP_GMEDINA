@@ -1,6 +1,6 @@
 ﻿var tabla = null;
 var botones = [];
-var htmlSpiner = '<div class="ibox-content sk-loading">' +
+var htmlSpiner = '<div id="ibox1" class="ibox-content sk-loading">' +
 '<div class="sk-spinner sk-spinner-double-bounce">' +
 '<div class="sk-double-bounce1"></div>' +
 '<div class="sk-double-bounce2"></div>' +
@@ -164,10 +164,18 @@ function CallEditar(btn) {
 }
 function validarDT(obj) {
     if (obj == "-2") {
-        $("#ibox1").find(".ibox-content").hide();
-        $("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
-    } if (obj == []) {
-        $("#ibox1").find(".ibox-content").hide();
-        $("#ibox1").append('No hay registros.');
+        //$("#ibox1").find(".ibox-content").hide();
+        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+        var ventana = $('#IndexTable tbody td.dataTables_empty');
+        ventana[0].innerHTML = "verifique su conexion a internet. (Sí el problema persiste llame al administrador)";
+        return true;
+    } else {
+        if (obj.Length==0) {
+            $("#ibox1").find(".ibox-content").hide();
+            $("#ibox1").append('No hay registros para mostrar.');
+        } else {
+            return false;
+        }
+        return true;
     }
 }

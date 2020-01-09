@@ -7,8 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
-
-
 namespace ERP_GMEDINA.Controllers
 {
     public class AreasController : Controller
@@ -27,7 +25,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-                //posteriormente es destruida.
+                //posteriormente es destruida. 
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var tbAreas = db.tbAreas

@@ -27,8 +27,6 @@ function tablaDetalles(id) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 ID = obj.habi_Id;
                 $("#ModalDetalles").find("#habi_Descripcion")["0"].innerText = obj.habi_Descripcion;
-                $("#ModalDetalles").find("#habi_Estado")["0"].innerText = obj.habi_Estado;
-                $("#ModalDetalles").find("#habi_RazonInactivo")["0"].innerText = obj.habi_RazonInactivo;
                 $("#ModalDetalles").find("#habi_FechaCrea")["0"].innerText = FechaFormato(obj.habi_FechaCrea);
                 $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -43,6 +41,9 @@ function llenarTabla() {
         '/Habilidades/llenarTabla',
         'POST',
         function (Lista) {
+            if (validarDT(Lista)) {
+                return null;
+            }
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {

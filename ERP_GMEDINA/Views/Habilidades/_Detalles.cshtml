@@ -14,50 +14,37 @@
 
                         <dd id="habi_Descripcion">
                         </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.habi_Estado)
-                        </dt>
-
-                        <dd id="habi_Estado">
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.habi_RazonInactivo)
-                        </dt>
-
-                        <dd id="habi_RazonInactivo">
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.habi_FechaCrea)
-                        </dt>
-
-                        <dd id="habi_FechaCrea">
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.habi_FechaModifica)
-                        </dt>
-
-                        <dd id="habi_FechaModifica">
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-                        </dt>
-
-                        <dd id="tbUsuario_usu_NombreUsuario">
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-                        </dt>
-
-                        <dd id="tbUsuario1_usu_NombreUsuario">
-                        </dd>
-
                     </dl>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>Auditoría</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <table class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Acción</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="habi_FechaCrea">@Html.DisplayFor(model => model.habi_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modificado</td>
+                                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="habi_FechaModifica">@Html.DisplayFor(model => model.habi_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
