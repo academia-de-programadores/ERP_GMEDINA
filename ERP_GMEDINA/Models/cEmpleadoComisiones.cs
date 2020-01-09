@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
     public class cEmpleadoComisiones
     {
 
-        [Display(Name = "ID Empleado Comision")]
+        [Display(Name = "Numero")]
         public int cc_Id { get; set; }
 
 
@@ -47,7 +47,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha Modificacion")]
         public Nullable<System.DateTime> cc_FechaModifica { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "Estado")]
         public bool cc_Activo { get; set; }
 
 
