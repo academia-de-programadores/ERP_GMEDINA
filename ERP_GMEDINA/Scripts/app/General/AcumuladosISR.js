@@ -30,6 +30,7 @@ $("#frmAcumuladosISRCreate").submit(function (e) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridAcumuladosISR() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/AcumuladosISR/GetData',
         'GET',
@@ -41,16 +42,39 @@ function cargarGridAcumuladosISR() {
                 });
             }
             var ListaAcumuladosISR = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //Recorrer la data y crear el template que se pondrá en el tbody
             for (var i = 0; i < ListaAcumuladosISR.length; i++) {
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAcumuladosISR[i].aisr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAcumuladosISR">Activar</button>' : '' : '';
+
+
+
                 template += '<tr data-id = "' + ListaAcumuladosISR[i].aisr_Id + '">' +
                     '<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
                     '<td>' + ListaAcumuladosISR[i].aisr_Monto + '</td>' +
-                    '<td>' +
-                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' +
-                    '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
+
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyAcumuladosISR').html(template);
