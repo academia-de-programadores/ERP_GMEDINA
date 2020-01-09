@@ -15,17 +15,25 @@ function format(obj) {
                 '</div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
-            '<div class="col-md-3">'+
+            '<div class="col-md-3">' +
                 '<div class="ibox">' +
                   '<div class="ibox-title">' +
-                     '<h5>' + index.depto_Descripcion + '</h5>' +                     
-                '</div>'+
+                     '<h5>' + index.depto_Descripcion + '</h5>' +
+                '</div>' +
                 '<div class="ibox-content">' +
-                    '<h5>' + index.car_Descripcion + '</h5>'
-                    //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.per_NombreCompleto + '<br>' +
-                    //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.per_Telefono + '</div>' +
+                    '<h5>' + index.car_Descripcion + '</h5>';
+        if (index.persona.per_NombreCompleto[0] != undefined) {
+            div = div +
+                '<i class="fa fa-user margin "></i>' + index.persona.per_NombreCompleto[0] + '<br>' +
+                '<i class="fa fa-phone margin "></i>' + index.persona.per_Telefono[0] + '<br>'+ 
+                '<i class="fa fa-envelope-square"></i>' + index.persona.per_CorreoElectronico[0] + '</div></div></div>';
+        }
+        else {
+            div = div +
+                '<i class="fa fa-user margin "></i>Sin asignar <br>' +
+                '<i class="fa fa-phone margin "></i> No aplica <br>'+
+                '<i class="fa fa-envelope-square"></i>No aplica <br></div></div></div>';
+        }
                 '</div>'+
             '</div>'
     });
@@ -36,24 +44,21 @@ function llenarTabla() {
        '/Areas/llenarTabla',
        'POST',
        function (Lista) {
-           if (Lista!="-1" || Lista!="-2") {
-               tabla.clear();
-               tabla.draw();
-               $.each(Lista, function (index, value) {
-                   tabla.row.add({
-                       ID: value.area_Id,
-                       Area: value.area_Descripcion,
-                       Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
-                       Sucursales: value.Sucursales
-                   });
-               });
-               tabla.draw();
-           } else if (Lista==[]) {
-               zeroresult();
-           } else {
-               ErrorDeRed();
-           }
-
+            tabla.clear();
+            tabla.draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
+            $.each(Lista, function (index, value) {
+                    tabla.row.add({
+                        ID: value.area_Id,
+                        Area: value.area_Descripcion,
+                        Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                        Sucursales: value.Sucursales,
+                        Acciones:"lol"
+                    });
+            });
+            tabla.draw();
        });
 }
 function flecha(obj) {

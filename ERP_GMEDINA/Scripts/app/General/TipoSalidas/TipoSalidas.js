@@ -34,6 +34,9 @@ function llenarTabla() {
         '/TipoSalidas/llenarTabla',
         'POST',
         function (Lista) {
+            if (validarDT(Lista)) {
+                return null;
+            }
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {

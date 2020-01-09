@@ -6,11 +6,11 @@ var id = 0;
 
 function tablaEditar(ID) {
     id = ID;
-    _ajax(null,        
+    _ajax(null,
         '/TipoIncapacidades/Edit/' + ID,
         'GET',
         function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {                
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
                 $("#ModalEditar").modal('show');
             }
@@ -27,7 +27,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#ticn_Descripcion")["0"].innerText = obj.ticn_Descripcion;
                 //Campos Estado y Razon Inactivo ya no se muestran en el modal de detalle
                 //$("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
-                //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;                
+                //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;
                 $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea).substring(0, FechaFormato(obj.ticn_FechaCrea).length - 8);
                 $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica).substring(0, FechaFormato(obj.ticn_FechaModifica).length - 8);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -45,7 +45,11 @@ function llenarTabla() {
         function (lista) {
             tabla.clear();
             tabla.draw();
-            $.each(lista, function (index, value) {                
+            if (validarDT(Lista)) {
+                return null;
+            }
+            $.each(lista, function (index, value) {
+                console.log(value.ticn_Descripcion);
                 tabla.row.add({
                     ID:value.ticn_Id,
                     Descripción:value.ticn_Descripcion
@@ -153,5 +157,3 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
-

@@ -41,6 +41,9 @@ function llenarTabla() {
         function (lista) {
             tabla.clear();
             tabla.draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(lista, function (index, value) {
                 console.log(value.titu_Descripcion);
                 tabla.row.add({

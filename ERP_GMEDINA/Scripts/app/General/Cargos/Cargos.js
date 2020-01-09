@@ -40,6 +40,9 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             tabla.clear().draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 console.log(value.car_Descripcion);
                 tabla.row.add({

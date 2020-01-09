@@ -37,6 +37,9 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             tabla.clear().draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
                 console.log(value.tper_Descripcion);
                 tabla.row.add([value.tper_Descripcion,

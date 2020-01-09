@@ -1789,7 +1789,6 @@
     <Content Include="Views\Areas\Edit.cshtml" />
     <Content Include="Views\Areas\Index.cshtml" />
     <Content Include="Views\Areas\_CreateDepartamento.cshtml" />
-    <Content Include="Views\Habilidades\Details.cshtml" />
     <Content Include="Views\Habilidades\Index.cshtml" />
     <Content Include="Views\Habilidades\_Create.cshtml" />
     <Content Include="Views\Habilidades\_Delete.cshtml" />

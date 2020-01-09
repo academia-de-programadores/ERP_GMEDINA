@@ -17,49 +17,35 @@
         <dd id="tiho_Recargo">
             @Html.DisplayFor(model => model.tiho_Recargo)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tiho_Estado)
-        </dt>
-
-        <dd id="tiho_Estado">
-            @Html.DisplayFor(model => model.tiho_Estado)
-        </dd>
-
-     
-        <dt>
-            @Html.DisplayNameFor(model => model.tiho_FechaCrea)
-        </dt>
-
-        <dd id="tiho_FechaCrea">
-            @Html.DisplayFor(model => model.tiho_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tiho_FechaModifica)
-        </dt>
-
-        <dd id="tiho_FechaModifica">
-            @Html.DisplayFor(model => model.tiho_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
-
-        <dd id="tbUsuario_usu_NombreUsuario">
-            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
-
-        <dd id="tbUsuario1_usu_NombreUsuario">
-            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dd>
-
     </dl>
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <table class="table table-striped table-bordered dataTable">
+                <thead>
+                    <tr>
+                        <th>Acción</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Creado</td>
+                        @Html.HiddenFor(model => model.tiho_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="tiho_FechaCrea">@Html.DisplayFor(model => model.tiho_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    </tr>
+                    <tr>
+                        <td>Modificado</td>
+                        @Html.HiddenFor(model => model.tiho_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="tiho_FechaModifica">@Html.DisplayFor(model => model.tiho_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+                
 
 
 
