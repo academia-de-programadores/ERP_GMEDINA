@@ -38,25 +38,41 @@
                             </tr>
                         </thead>
                         <tbody id="tbodyIngresos">
-                            @foreach (var item in Model)
-                            {
-                                <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.cin_IdIngreso)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.cin_Activo)
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
-                                        <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+
+
+    @foreach (var item in Model)
+    {
+        string estadoIng = item.cin_Activo == false ? "Inactivo" : "Activo";
+
+        bool esAdministrador = true;
+
+        <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
+            <td>
+                @Html.DisplayFor(modelItem => item.cin_IdIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
+            </td>
+            <td>
+                @estadoIng
+            </td>
+            <td>
+                @{
+                    if (item.cin_Activo == true)
+                    {
+                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
+                        <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
+                    }
+                    if (esAdministrador == true && item.cin_Activo == false)
+                    {
+                                                 <!-- ACTIVAR -->
+                        <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
+                    }
+                }
+            </td>
+        </tr>
+                    }
+    </tbody>
                         <tfoot>
                         </tfoot>
                     </table>

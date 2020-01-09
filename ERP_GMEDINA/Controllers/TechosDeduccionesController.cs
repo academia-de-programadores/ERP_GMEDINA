@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         //GET: TechosDeducciones
         public ActionResult Index()
         {
-            var tbTechosDeducciones = db.tbTechosDeducciones.Where(d => d.tddu_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).OrderBy(t => t.tddu_FechaCrea);
+            var tbTechosDeducciones = db.tbTechosDeducciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).OrderBy(t => t.tddu_FechaCrea);
             return View(tbTechosDeducciones.ToList());
         }
 
@@ -26,7 +26,13 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbTechosDeducciones = db.tbTechosDeducciones
-                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion, tddu_IdTechosDeducciones = c.tddu_IdTechosDeducciones, tddu_PorcentajeEmpresa = c.tddu_PorcentajeEmpresa, tddu_PorcentajeColaboradores = c.tddu_PorcentajeColaboradores, tddu_Techo = c.tddu_Techo, tede_Activo = c.tddu_Activo, tede_FechaCrea = c.tddu_FechaCrea }).Where(c => c.tede_Activo == true).OrderByDescending(c => c.tede_FechaCrea)
+                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                            tddu_IdTechosDeducciones = c.tddu_IdTechosDeducciones,
+                            tddu_PorcentajeEmpresa = c.tddu_PorcentajeEmpresa,
+                            tddu_PorcentajeColaboradores = c.tddu_PorcentajeColaboradores,
+                            tddu_Techo = c.tddu_Techo,
+                            tddu_Activo = c.tddu_Activo,
+                            tede_FechaCrea = c.tddu_FechaCrea }).OrderByDescending(c => c.tede_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE
@@ -37,7 +43,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbTechosDeduccionesJSON = from tbTechosDeducciones in db.tbTechosDeducciones
-                                          where tbTechosDeducciones.tddu_Activo == true && tbTechosDeducciones.tddu_IdTechosDeducciones == ID
+                                          where tbTechosDeducciones.tddu_IdTechosDeducciones == ID
                                           select new
                                           {
                                               tbTechosDeducciones.tddu_IdTechosDeducciones,
@@ -182,7 +188,6 @@ namespace ERP_GMEDINA.Controllers
             var DDL =
             from CatDeduc in db.tbCatalogoDeDeducciones
             join TechDeduc in db.tbTechosDeducciones on CatDeduc.cde_IdDeducciones equals TechDeduc.cde_IdDeducciones into prodGroup
-            where CatDeduc.cde_Activo == true
             select new { Id = CatDeduc.cde_IdDeducciones, Descripcion = CatDeduc.cde_DescripcionDeduccion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);

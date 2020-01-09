@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
 
     public partial class cAuxilioDeCesantias
     {
-        [Display(Name = "Codigo Auxilio Cesantia")]
+        [Display(Name = "Número Auxilio Cesantia")]
         public int aces_IdAuxilioCesantia { get; set; }
         [Display(Name = "Rango Inicio (Meses)")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
