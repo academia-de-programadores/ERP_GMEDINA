@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP
         public ActionResult Index()
         {
-            var tbDeduccionAFP = db.tbDeduccionAFP.Where(t => t.dafp_Activo == true).OrderBy(t => t.dafp_FechaCrea).Include(t => t.tbAFP).Include(t => t.tbEmpleados);
+            var tbDeduccionAFP = db.tbDeduccionAFP.OrderBy(t => t.dafp_FechaCrea).Include(t => t.tbAFP).Include(t => t.tbEmpleados);
             return View(tbDeduccionAFP.ToList());
         }
 
@@ -262,7 +262,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inactivar Deducción AFP
+        #region Inhabilitar Deducción AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int dafp_Id)
