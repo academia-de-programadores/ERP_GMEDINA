@@ -6,33 +6,40 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.emp_Id)
+            </div>
+            <div class="col-md-9">
                 <select id="emp_Id" name="emp_Id" class="form-control"></select>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.dafp_AporteLps)
+            </div>           
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @id = "dafp_AporteLps" } })
                 @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation1d" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.afp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.afp_Id)
+            </div>
+            <div class="col-md-9">
                 <select id="afp_Id" name="afp_Id" class="form-control"></select>
             </div>
         </div>
 
 
     </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>
-                    <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroDeduccionAFP">Guardar</button>
-                </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-white pull-right" id="btnCerrarAgregar">Cerrar</button>
+    <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroDeduccionAFP">Guardar</button>
+    <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
+</div>
 }
 
 

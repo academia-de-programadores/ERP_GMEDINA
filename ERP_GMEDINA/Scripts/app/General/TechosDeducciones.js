@@ -20,7 +20,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
       console.log("No se pudo recuperar Script SerializeDate");
   });
 
-// EVITAR POSTBACK DE FORMULARIOS 
+// EVITAR POSTBACK DE FORMULARIOS
 $("#frmEditTechosDeducciones").submit(function (e) {
     e.preventDefault();
 });
@@ -44,7 +44,7 @@ function cargarGridTechosDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTechosDeducciones.length; i++) {
                 var Activo;
-                if(ListaTechosDeducciones[i].tddu_Activo) 
+                if(ListaTechosDeducciones[i].tddu_Activo)
                     Activo = "Activo"
                 else
                     Activo = "Inactivo";
@@ -59,7 +59,7 @@ function cargarGridTechosDeducciones() {
 
                     '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
                     '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' +                    
+                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -126,7 +126,7 @@ $('#btnCreateTechoDeducciones').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro se agregó de forma exitosa!',
+                    message: 'El registro fue registrado de forma exitosa!',
                 });
             }
         });
@@ -253,7 +253,7 @@ $(document).on("click", "#btnInactivarTechoDeducciones", function () {
 
 
 
-//Inactivar registro Techos Deducciones    
+//Inactivar registro Techos Deducciones
 $("#btnInactivarTechosDeducciones").click(function () {
     var data = $("#frmInactivarTechosDeducciones").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -299,18 +299,18 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
             if (data) {
                 var FechaCrea = FechaFormato(data[0].tddu_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].tddu_FechaModifica);
-                $("#Detalles #tddu_UsuarioCrea").html(data[0].tddu_UsuarioCrea);
-                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
+                $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
 
-                $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores);
-                $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa);
-                $("#Detalles #tddu_Techo").html(data[0].tddu_Techo);
-                $("#Detalles #tede_UsuarioCrea").html(data[0].tede_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #tddu_FechaCrea").html(FechaCrea);
-                $("#Detalles #tddu_UsuarioModifica").html(data.tddu_UsuarioModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #tddu_FechaModifica").html(FechaModifica);
+                $("#Detalles #tddu_PorcentajeColaboradores").val(data[0].tddu_PorcentajeColaboradores);
+                $("#Detalles #tddu_PorcentajeEmpresa").val(data[0].tddu_PorcentajeEmpresa);
+                $("#Detalles #tddu_Techo").val(data[0].tddu_Techo);
+                $("#Detalles #tede_UsuarioCrea").val(data[0].tede_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#Detalles #tddu_FechaCrea").val(FechaCrea);
+                $("#Detalles #tddu_UsuarioModifica").val(data.tddu_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #tddu_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].cde_IdDeducciones;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL

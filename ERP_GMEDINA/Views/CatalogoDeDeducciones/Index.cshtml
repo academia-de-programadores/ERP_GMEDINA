@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Catálogo de Deducciones</h5>
+                    <h5>Listado de Catálogo de Deducciones</h5>
                     <div class="ibox-tools">
                         <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deduccion</button>
                     </div>
@@ -19,17 +19,25 @@
                     <table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 160px;">@Html.DisplayNameFor(model => model.cde_DescripcionDeduccion)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 160px;">@Html.DisplayNameFor(model => model.cde_PorcentajeColaborador)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 140px;">@Html.DisplayNameFor(model => model.cde_PorcentajeEmpresa)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 40px;">Numero</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 140px;">@Html.DisplayNameFor(model => model.cde_DescripcionDeduccion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 100px;">@Html.DisplayNameFor(model => model.cde_PorcentajeColaborador)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 100px;">@Html.DisplayNameFor(model => model.cde_PorcentajeEmpresa)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">Tipo de Deducción</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 80px;">Estado</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
+
                         <tbody id="tbodyDeducciones">
                             @foreach (var item in Model)
                             {
-                                <tr class="gradeA odd" role="row">
+                                string estadoCDD = item.cde_Activo == false ? "Inactivo" : "Activo";
+                                bool esAdministrador = true;
+                                <tr class="gradeA odd" role="row" data-id="@item.cde_IdDeducciones">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cde_IdDeducciones)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cde_DescripcionDeduccion)
                                     </td>
@@ -40,16 +48,29 @@
                                         @Html.DisplayFor(modelItem => item.cde_PorcentajeEmpresa)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
+                                        @Html.DisplayFor(modelItem => item.cde_DescripcionDeduccion)
                                     </td>
-                                    <td>
-                                        <button  data-id="@item.cde_IdDeducciones"  type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
-                                        <button data-id="@item.cde_IdDeducciones" type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                        <td>
+                                            @estadoCDD
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (item.cde_Activo == true)
+                                                {
+                                                    <button data-id="@item.cde_IdDeducciones" type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+                                                    <button data-id="@item.cde_IdDeducciones" type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
+                                                }
+                                                if (esAdministrador == true)
+                                                {
+                                                 <!-- ACTIVAR -->
+                                                    <button type="button" data-id="@item.cde_IdDeducciones" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones">Activar</button>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                  }
+                                </tbody>
+                        </table>
                 </div>
             </div>
         </div>
@@ -62,13 +83,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="col-md-offset-4"><strong>Editar Deducción</strong></h2>
+                <h4 class="modal-title">Editar Deducción</h4>
             </div>
             <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
-            </div>     
-        </div>
+            </div>
+
+            </div>
     </div>
 </div>
 <div class="modal fade" id="AgregarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
@@ -76,11 +97,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarCreate"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="col-md-offset-4"><strong>Agregar Deducción</strong></h2>
+                <h4 class="modal-title">Crear Deducción</h4>
             </div>
-            <div class="modal-body" id="Crear">
+            
                 @Html.Partial("_CreateCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
-            </div>
+           
         </div>
     </div>
 </div>
@@ -89,7 +110,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Detalles</h4>
+                <h4 class="modal-title">Detalle Deducción</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetalleCatalogoDeDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
@@ -97,19 +118,19 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
-        <div class="modal-content animated fadeIn">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Seguro que desea inhabilitar el registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary pull-left" id="btnInactivarRegistroDeduccion">Actualizar</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarInhabilitar">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnInactivarRegistroDeduccion">Eliminar</button>
             </div>
         </div>
     </div>

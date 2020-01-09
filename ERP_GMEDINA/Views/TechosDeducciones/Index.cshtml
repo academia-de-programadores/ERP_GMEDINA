@@ -1,16 +1,30 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbTechosDeducciones>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Techos de las Deducciones</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de techos de las deducciones</h5>
+                    <h5>Techos de las Deducciones</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarTechosDeducciones">Registrar techo de deducción</button>
+                        <ul>
+                            <li><button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarTechosDeducciones">Registrar techo de deducción</button></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -49,13 +63,13 @@
                                         @{ var Activo = (item.tddu_Activo) ? "Activo" : "Inactivo"; }
                                         @Html.DisplayFor(modelItem => Activo)
                                         </td>
-    
+
                                         <td>
-    
+
 
                                             <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnDetalleTechosDeducciones">Detalles</button>
                                         <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-default btn-xs" id="btnEditarTechosDeducciones">Editar</button>
-                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnActivarTechosDeducciones">Activar</button>                                        
+                                        <button type="button" data-id="@item.tddu_IdTechosDeducciones" class="btn btn-primary btn-xs" id="btnActivarTechosDeducciones">Activar</button>
                                         @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
                                     </td>
                                 </tr>
@@ -78,13 +92,14 @@
         </div>
     </div>
 </div>
+
 @* MODAL DE EDICIÓN *@
 <div class="modal fade" id="EditarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar techo de la deducción</h4>
+                <h4 class="modal-title">Edición de datos</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -96,10 +111,10 @@
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
-        <div class="modal-content col-md-12">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Crear techo de una deducción</h4>
+                <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
@@ -107,13 +122,14 @@
         </div>
     </div>
 </div>
+
 @* MODAL DE DETALLES *@
 <div class="modal fade" id="DetailsTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle del techo de la deducción</h4>
+                <h4 class="modal-title">Detalles del registro</h4>
             </div>
             <div class="modal-body" style="padding-bottom:0px;" id="Detalles">
                 @Html.Partial("_DetailsTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
@@ -124,6 +140,7 @@
         </div>
     </div>
 </div>
+
 @* Modal de confirmación inactivar *@
 <div class="modal fade" id="InactivarTechosDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -133,11 +150,11 @@
                 <h4 class="modal-title">Inhabilitar techo de la deducción</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Está seguro que desea Eliminar este registro?
+                ¿Está seguro que desea Inhabilitar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btnInactivarTechosDeducciones">Eliminar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarTechosDeducciones">Inhabilitar</button>
             </div>
         </div>
     </div>
@@ -147,6 +164,7 @@
     @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/app/General/TechosDeducciones")
 }
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")

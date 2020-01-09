@@ -17,7 +17,7 @@ namespace PruebaPlanilla.Controllers
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
-            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario);
+            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario).OrderByDescending(x => x.cde_FechaCrea);
             return View(tbCatalogoDeDeducciones.ToList());
         }
 
@@ -28,7 +28,8 @@ namespace PruebaPlanilla.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbCatalogoDeDeducciones1 = db.tbCatalogoDeDeducciones
-                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica }).Where(c => c.cde_Activo == true)
+                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica })
+                        .OrderByDescending(x => x.cde_FechaCrea)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeDeducciones1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -175,6 +176,7 @@ namespace PruebaPlanilla.Controllers
             var DDL =
             from TipoDedu in db.tbTipoDeduccion
             join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            where TipoDedu.tde_Activo == true
             select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);

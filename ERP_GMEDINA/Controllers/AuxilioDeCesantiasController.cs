@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // Obtenet: tbAuxilioDeCesantias
         public ActionResult Index()
         {
-            var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.aces_Activo == true);
+            var tbAuxilioDeCesantias = db.tbAuxilioDeCesantias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbAuxilioDeCesantias.ToList());
         }
 
@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
                             aces_Activo = c.aces_Activo
                         })
                                            .OrderByDescending(x => x.aces_FechaCrea)
-                                           .Where(x => x.aces_Activo == true).ToList();
+                                           /*.Where(x => x.aces_Activo == true)*/.ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbAuxilioCesantia1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

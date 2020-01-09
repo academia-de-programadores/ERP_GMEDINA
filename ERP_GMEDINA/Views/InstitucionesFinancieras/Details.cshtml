@@ -9,51 +9,52 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-            <h2>Detalles de Regsitro</h2>
+            <h2>Detalle de Institucion Financiera</h2>
         </div>
 
         <div class="ibox-content">
-            <dl class="dl-horizontal">
-                <dt >
-                    @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @width = "100" })
-                </dt>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @width = "100" })
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.insf_DescInstitucionFinanc)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_DescInstitucionFinanc)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.insf_Contacto)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.insf_Contacto)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Contacto)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Contacto)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.insf_Telefono)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.insf_Telefono)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Telefono)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Telefono)
+                    </dd>
 
-                <dt>
-                    @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @width = 150 })
-                </dt>
+                    <dt>
+                        @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @width = 150 })
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Correo)
-                </dd>
-            </dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Correo)
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
+
 
 
 
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h3>Auditoría</h3>
+            <h4>Auditoría</h4>
         </div>
         <div class="ibox-content">
             <div class="form-horizontal">
@@ -68,12 +69,12 @@
                     <tbody>
                         <tr>
                             <td>Creado</td>
-                            <td>@Html.DisplayFor(model => model.insf_UsuarioCrea)</td>
+                            <td>@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)</td>
                             <td>@Html.DisplayFor(model => model.insf_FechaCrea)</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
-                            <td>@Html.DisplayFor(model => model.insf_UsuarioModifica)</td>
+                            <td>@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)</td>
                             <td>@Html.DisplayFor(model => model.insf_FechaModifica)</td>
                         </tr>
                     </tbody>

@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: TipoDeducciones
         public ActionResult Index()
         {
-            var tbTipoDeduccion = db.tbTipoDeduccion.Where(x => x.tde_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(c => c.tde_FechaCrea);
+            var tbTipoDeduccion = db.tbTipoDeduccion.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(c => c.tde_FechaCrea);
             return View(tbTipoDeduccion.ToList());
         }
         #endregion
@@ -44,8 +44,7 @@ namespace ERP_GMEDINA.Controllers
                     tde_FechaModifica = c.tde_FechaModifica,
                     tde_IdTipoDedu = c.tde_IdTipoDedu,
                     tde_Activo = c.tde_Activo
-                })
-                .Where(x => x.tde_Activo == true)
+                })                
                 .OrderByDescending(c => c.tde_FechaCrea).ToList();
 
             return new JsonResult { Data = tbTipoDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

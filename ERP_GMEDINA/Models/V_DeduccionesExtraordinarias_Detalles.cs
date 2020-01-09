@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Models
         public string depto_Departamento { get; set; }
         public string area_Area { get; set; }
         public string dex_ObservacionesComentarios { get; set; }
-        public int eqtra_Id { get; set; }
+        public Nullable<int> eqtra_Id { get; set; }
         public string eqtra_Codigo { get; set; }
         public string eqtra_Descripcion { get; set; }
         public Nullable<decimal> dex_MontoInicial { get; set; }

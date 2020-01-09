@@ -2,55 +2,42 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresos" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.cin_IdIngreso)
-        @Html.HiddenFor(model => model.cin_FechaCrea)
-        @Html.HiddenFor(model => model.cin_UsuarioCrea)
-        <div class="form-group">
-            @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tde_IdTipoDedu, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.cde_PorcentajeColaborador, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.cde_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-    </div>
-    <div class="modal-footer">
-        @*data-dismiss="modal"*@
-        <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-        <input type="button" class="btn btn-primary pull-left" id="btnUpdateIngresos" value="Actualizar"/>
-        <button type="button" class="btn btn-danger pull-left" id="btnModalInactivar">Inhabilitar</button>
-    </div>
+    @Html.HiddenFor(model => model.cin_IdIngreso)
+    @Html.HiddenFor(model => model.cin_FechaCrea)
+    @Html.HiddenFor(model => model.cin_UsuarioCrea)
+   
+                    @*<div class="ibox-content">
+                        <div class="form-horizontal">*@
+                            <div class="form-group">
+                                <div class="row">
+                                       <div class="col-md-6">
+                                        @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "cin_DescripcionIngreso" } })
+                                            @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "validareditar" })
+                                        </div>
+                                 </div>
+                             </div>
+                         
+                    @*</div>
+
+                    </div>*@
+            
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
-{
+ {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.cin_IdIngreso)
     @Html.HiddenFor(model => model.cin_FechaCrea)
     @Html.HiddenFor(model => model.cin_UsuarioCrea)
+
 }
+                  
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                       
+    @Scripts.Render("~/bundles/jqueryval")                 
+  
+ }

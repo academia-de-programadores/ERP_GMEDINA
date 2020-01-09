@@ -8,10 +8,8 @@
 <div class="col-lg-12">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-            <h2>Edicion de Registro</h2>
+            <h2>Editar Institucion Financiera</h2>
         </div>
-
 
         @using (Html.BeginForm())
         {
@@ -59,6 +57,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @*@Html.ActionLink("Eliminar", "Delete",new { model => model.insf_IdInstitucionFinanciera } @*new { id = item.insf_IdInstitucionFinanciera }*@, new { @class = "btn btn-danger btn-xs" })*@
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                         </div>
                     </div>
@@ -71,7 +70,7 @@
 </div>
 
 
-    <div class="ibox float-e-margins">
+    @*<div class="ibox float-e-margins">
         <div class="ibox-title">
             <h2>Auditoría</h2>
         </div>
@@ -103,7 +102,7 @@
     </div>
 
 <br>
-<br>
+<br>*@
 
 <script type="text/javascript">
         $(function () {

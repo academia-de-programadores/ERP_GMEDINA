@@ -9,7 +9,7 @@
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-            <h2>Editar Deducción Extraordinaria</h2>
+            <h2>Detalle de Deducción Extraordinaria</h2>
         </div>
 
         <div class="ibox-content">
@@ -94,45 +94,38 @@
                     @Html.DisplayFor(model => model.depto_Departamento)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.dex_UsuarioCrea)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.usu_UsuarioCrea)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.dex_UsuarioModifica)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.usu_UsuarioModifica)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.dex_FechaCrea)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.dex_FechaCrea)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.dex_FechaModifica)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.dex_FechaModifica)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.dex_Activo)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.dex_Activo)
-                </dd>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>Auditoría</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <table class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Acción</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        @Html.HiddenFor(model => model.dex_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="usu_UsuarioCrea">@Html.DisplayFor(model => model.usu_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="dex_FechaCrea">@Html.DisplayFor(model => model.dex_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modificado</td>
+                                        @Html.HiddenFor(model => model.dex_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="usu_UsuarioModifica">@Html.DisplayFor(model => model.usu_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="dex_FechaModifica">@Html.DisplayFor(model => model.dex_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </dl>
             <p>

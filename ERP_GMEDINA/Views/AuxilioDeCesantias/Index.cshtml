@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbAuxilioDeCesantias>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
+
+
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -18,16 +21,23 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="tblAuxCesantia">
                         <thead>
                             <tr role="row">
-                                <th>Codigo</th>
-                                <th>Rando Inicio (Meses)</th>
+                                <th>Numero</th>
+                                <th>Rango Inicio (Meses)</th>
                                 <th>Rango Final (Meses)</th>
                                 <th>Auxilio Cesantia (Dias)</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyAuxCes" name="tbodyAuxCes">
                             @foreach (var item in Model)
                             {
+                                string estado = item.aces_Activo == false ? "Inactivo" : "Activo";
+
+                                var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                                bool esAdministrador = true;
+
                                 <tr class="gradeA odd" role="row" data-id="@item.aces_IdAuxilioCesantia">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.aces_IdAuxilioCesantia)
@@ -42,11 +52,27 @@
                                         @Html.DisplayFor(modelItem => item.aces_DiasAuxilioCesantia)
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnModalDetalles" data-id="@item.aces_IdAuxilioCesantia">Detalles</button>
-                                        <button type="button" class="btn btn-default btn-xs" id="btnModalEdit" data-id="@item.aces_IdAuxilioCesantia">Editar</button>
+                                        @estado @*Html.DisplayFor(modelItem => item.aces_Activo)*@
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.aces_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalDetalles">Detalles</button>
+                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-default btn-xs" id="btnModalEdit">Editar</button>
+                                            }
+                                            if (oUsuario.usu_EsAdministrador == true && item.aces_Activo == false)
+                                            {
+                                                 <!-- ACTIVAR -->
+                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnActivarAuxCes">Activar</button>
+                                            }
+                                        }
+
+                                        @*<button type="button" class="btn btn-primary btn-xs" id="btnModalDetalles" data-id="@item.aces_IdAuxilioCesantia">Detalles</button>
+                                            <button type="button" class="btn btn-default btn-xs" id="btnModalEdit" data-id="@item.aces_IdAuxilioCesantia">Editar</button>*@
                                     </td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                     </table>
                 </div>
@@ -55,6 +81,7 @@
     </div>
 </div>
 
+
 <div class="modal fade" id="frmCrearAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -62,12 +89,13 @@
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Crear Auxilio Cesantia</h4>
             </div>
-
-            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
-
+            
+                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
+            
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="frmDetailAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -85,6 +113,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="frmEditarAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -96,38 +125,38 @@
                 @Html.Partial("_EditAuxCes", new ERP_GMEDINA.Models.tbAuxilioDeCesantias())
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-primary pull-left" id="btnUpdateAuxCes" value="Actualizar" />
-                <button type="button" class="btn btn-danger pull-left" id="btnModalEliminar">Inhabilitar</button>
-                <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-
-
+				<input type="button" class="btn btn-primary pull-left" id="btnUpdateAuxCes" value="Actualizar" />
+				<button type="button" class="btn btn-danger pull-left" id="btnModalEliminar">Inhabilitar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>               
             </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="frmEliminarAuxCes" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Eliminar">
-                ¿Esta seguro que desea Eliminar este registro?
+                ¿Esta seguro que desea Inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger " id="btnEliminarAuxCes">Eliminar</button>
+                <button type="button" class="btn btn-danger " id="btnEliminarAuxCes">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")
     @Scripts.Render("~/Scripts/app/general/AuxilioCesantia.js")
 }
-
+    
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")

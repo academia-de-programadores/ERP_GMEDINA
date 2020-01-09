@@ -15,9 +15,6 @@ namespace ERP_GMEDINA.Controllers
 {
     public class PlanillaController : Controller
     {
-        /*PENDIENTE
-        * CALCULAR ISR
-        */
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: Planilla
@@ -772,6 +769,20 @@ namespace ERP_GMEDINA.Controllers
                                         //Renta Neta Gravable
                                         RentaNetaGravable = TotalIngresosGravables - TotalDeduccionesGravables;
 
+                                        #region ISR Dinámico en Proceso
+                                        //Tabla Progresiva ISR Dinámica
+
+                                        /*List<tbISR> objDeduccionISR = db.tbISR.Where(x => x.isr_Activo == true).ToList();
+
+                                        foreach(var oISR in objDeduccionISR)
+                                        {
+                                            if ()
+                                            {
+
+                                            }
+                                        }*/
+                                        #endregion
+
                                         #region Tabla Progresiva para Deducir ISR
                                         //Cálculo con la Tabla Progresiva ISR
 
@@ -810,7 +821,7 @@ namespace ERP_GMEDINA.Controllers
 
                                         #endregion
 
-                                        //netoAPagarColaborador = netoAPagarColaborador - totalISR;
+                                        netoAPagarColaborador = netoAPagarColaborador - totalISR;
 
                                         #region Enviar comprobante de pago por email
                                         if (enviarEmail != null && enviarEmail == true)
@@ -956,7 +967,6 @@ namespace ERP_GMEDINA.Controllers
                                         oPlanillaEmpleado.TotalIngresosHorasExtras = totalHorasExtras;
                                         oPlanillaEmpleado.totalBonificaciones = totalBonificaciones;
                                         oPlanillaEmpleado.totalVacaciones = totalVacaciones;
-                                        oPlanillaEmpleado.totalSeptimoDia = resultSeptimoDia;
                                         oPlanillaEmpleado.totalIngresos = Math.Round((decimal)totalIngresosEmpleado, 2);
                                         oPlanillaEmpleado.totalISR = totalISR;
                                         oPlanillaEmpleado.totalDeduccionesColaborador = colaboradorDeducciones;
