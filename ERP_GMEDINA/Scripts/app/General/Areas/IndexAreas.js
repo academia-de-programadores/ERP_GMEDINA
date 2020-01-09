@@ -15,17 +15,25 @@ function format(obj) {
                 '</div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index,value) {
         div = div +
-            '<div class="col-md-3">'+
+            '<div class="col-md-3">' +
                 '<div class="ibox">' +
                   '<div class="ibox-title">' +
-                     '<h5>' + index.depto_Descripcion + '</h5>' +                     
-                '</div>'+
+                     '<h5>' + index.depto_Descripcion + '</h5>' +
+                '</div>' +
                 '<div class="ibox-content">' +
-                    '<h5>' + index.car_Descripcion + '</h5>'
-                    //'<span class="fa fa-user-o m-r-xs"></span>' +
-                    + index.per_NombreCompleto + '<br>' +
-                    //'<span class="fa fa-phone m-r-xs"></span>' +
-                    index.per_Telefono + '</div>' +
+                    '<h5>' + index.car_Descripcion + '</h5>';
+        if (index.persona.per_NombreCompleto[0] != undefined) {
+            div = div +
+                '<i class="fa fa-user margin "></i>' + index.persona.per_NombreCompleto[0] + '<br>' +
+                '<i class="fa fa-phone margin "></i>' + index.persona.per_Telefono[0] + '<br>'+ 
+                '<i class="fa fa-envelope-square"></i>' + index.persona.per_CorreoElectronico[0] + '</div>';
+        }
+        else {
+            div = div +
+                '<i class="fa fa-user margin "></i>Sin asignar <br>' +
+                '<i class="fa fa-phone margin "></i> No aplica <br>'+
+                '<i class="fa fa-envelope-square"></i>No aplica <br>';
+        }
                 '</div>'+
             '</div>'
     });
@@ -44,7 +52,8 @@ function llenarTabla() {
                        ID: value.area_Id,
                        Area: value.area_Descripcion,
                        Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
-                       Sucursales: value.Sucursales
+                       Sucursales: value.Sucursales,
+                       Acciones:"lol"
                    });
                });
                tabla.draw();
