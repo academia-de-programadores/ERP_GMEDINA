@@ -127,14 +127,18 @@ $(document).on("click", "#btnAgregarAFP", function () {
     $("#Crear #afp_AporteMinimoLps").val('');
     $("#Crear #afp_InteresAporte").val('');
     $("#Crear #afp_InteresAnual").val('');
+
 });
 
+$("#validatione1").css("display", "none");
+$("#validatione2").css("display", "none");
+$("#validatione3").css("display", "none");
+$("#validatione4").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #tde_IdTipoDedu").val();
-    console.log(val1)
     var val2 = $("#Crear #afp_Descripcion").val();
     var val3 = $("#Crear #afp_AporteMinimoLps").val();
     var val4 = $("#Crear #afp_InteresAporte").val();
@@ -200,6 +204,13 @@ $('#btnCreateRegistroAFP').click(function () {
                 message: 'El registro se agregó de forma exitosa!',
             });
         }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Datos Invalidos!',
+            });
+        }
+        
         ocultarCargandoCrear();
     });
 
@@ -360,6 +371,13 @@ $("#btnEditAFP").click(function () {
             });
 
         }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Datos Invalidos!',
+            });
+        }
+        
         ocultarCargandoEditar();
     });
 
@@ -441,6 +459,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 
 //Inactivar//
 $(document).on("click", "#btnInactivarAFP", function () {
+    $("#EditarAFP").modal('hide');
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarAFP").modal();
 });
@@ -495,6 +514,7 @@ $("#btnInactivarRegistroAFP").click(function () {
                 message: 'El registro se inhabilitó de forma exitosa!',
             });
         }
+        ocultarCargandoInhabilitar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
