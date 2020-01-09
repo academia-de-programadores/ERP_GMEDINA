@@ -12,29 +12,26 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTitulos
+    public partial class tbMotivoLiquidacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTitulos()
+        public tbMotivoLiquidacion()
         {
-            this.tbTitulosPersona = new HashSet<tbTitulosPersona>();
-            this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
+            this.tbPorcentajeMotivoLiquidacion = new HashSet<tbPorcentajeMotivoLiquidacion>();
         }
     
-        public int titu_Id { get; set; }
-        public string titu_Descripcion { get; set; }
-        public bool titu_Estado { get; set; }
-        public string titu_RazonInactivo { get; set; }
-        public int titu_UsuarioCrea { get; set; }
-        public System.DateTime titu_FechaCrea { get; set; }
-        public Nullable<int> titu_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> titu_FechaModifica { get; set; }
+        public int moli_IdMotivo { get; set; }
+        public string moli_Descripcion { get; set; }
+        public Nullable<int> moli_UsuarioCrea { get; set; }
+        public Nullable<System.DateTime> moli_FechaCrea { get; set; }
+        public Nullable<int> moli_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> moli_FechaModifica { get; set; }
+        public Nullable<bool> moli_Activo { get; set; }
+        public string moli_RazonInactivo { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosPersona> tbTitulosPersona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
+        public virtual ICollection<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
     }
 }
