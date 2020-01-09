@@ -43,9 +43,9 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                    '<td>' +
-                    '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP">Editar</button>' +
-                    '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-default btn-xs" id="btnDetalleDeduccionAFP">Detalle</button>' +
+                    '<td>'+
+                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' +
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -66,6 +66,35 @@ $("#btnIconCerrar").click(function () {
 });
 
 //Agregar//
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+        </div>`;
+}
+
+const btnGuardar = $('#btnCreateRegistroDeduccionAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
@@ -119,6 +148,7 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
     else {
         $("#Crear #validation1d").css("display", "none");
     }
+    mostrarCargandoCrear();
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreateDeduccionAFP").serializeArray();
@@ -145,12 +175,31 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
 
             $("#Crear #dafp_AporteLps").val('');
         }
+        ocultarCargandoCrear();
     });
 });
 
 
 
 //Editar//
+
+const btnEditar = $('#btnEditDeduccionAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoEditar = $('#cargandoEditar')
+
+function ocultarCargandoEditar() {
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+
+function mostrarCargandoEditar() {
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     var ID = $(this).data('id');
@@ -226,12 +275,13 @@ $("#btnEditDeduccionAFP").click(function () {
     var vale1 = $("#Editar #dafp_AporteLps").val();
     debugger
     console.log(vale1)
-    if (vale1 == "") {
+    if (vale1 == "" || vale1 == null || vale1 == undefined) {
         $("#Editar #validatione1").css("display", "");
     }
     else {
         $("#Editar #validatione1").css("display", "none");
     }
+    mostrarCargandoEditar();
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditDeduccionAFP").serializeArray();
@@ -256,6 +306,7 @@ $("#btnEditDeduccionAFP").click(function () {
                 message: 'El registro se editó de forma exitosa!',
             });
         }
+        ocultarCargandoEditar
     });
 });
 
@@ -290,19 +341,19 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
             if (data) {
                 var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
-                $("#Detalles #dafp_Id").val(data[0].dafp_Id);
-                $("#Detalles #emp_Id").val(data[0].emp_Id);
-                $("#Detalles #per_Nombres + #per_Apellidos").val(data[0].per_Nombres + data[0].per_Apellidos);
-                $("#Detalles #emp_CuentaBancaria").val(data[0].emp_CuentaBancaria);
-                $("#Detalles #dafp_AporteLps").val(data[0].dafp_AporteLps);
-                $("#Detalles #afp_Id").val(data[0].afp_Id);
-                $("#Detalles #afp_Descripcion").val(data[0].afp_Descripcion);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #dafp_UsuarioCrea").val(data[0].dafp_UsuarioCrea);
-                $("#Detalles #dafp_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #dafp_UsuarioModifica").val(data[0].dafp_UsuarioModifica);
-                $("#Detalles #dafp_FechaModifica").val(FechaModifica);
+                $("#Detalles #dafp_Id").html(data[0].dafp_Id);
+                $("#Detalles #emp_Id").html(data[0].emp_Id);
+                $("#Detalles #per_Nombres + #per_Apellidos").html(data[0].per_Nombres + data[0].per_Apellidos);
+                $("#Detalles #emp_CuentaBancaria").html(data[0].emp_CuentaBancaria);
+                $("#Detalles #dafp_AporteLps").html(data[0].dafp_AporteLps);
+                $("#Detalles #afp_Id").html(data[0].afp_Id);
+                $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #dafp_UsuarioCrea").html(data[0].dafp_UsuarioCrea);
+                $("#Detalles #dafp_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #dafp_UsuarioModifica").html(data[0].dafp_UsuarioModifica);
+                $("#Detalles #dafp_FechaModifica").html(FechaModifica);
 
                 var SelectedIdEmpleado = data[0].emp_Id;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
@@ -371,6 +422,22 @@ $(document).on("click", "#btnInactivarDeduccionAFP", function () {
     $("#InactivarDeduccionAFP").modal();
 });
 
+const btnInhabilitar = $('#btnInactivarRegistroDeduccionAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoInhabilitar = $('#cargandoInhabilitar')
+
+function ocultarCargandoInhabilitar() {
+    btnInhabilitar.show();
+    cargandoInhabilitar.html('');
+    cargandoInhabilitar.hide();
+}
+
+function mostrarCargandoInhabilitar() {
+    btnInhabilitar.hide();
+    cargandoInhabilitar.html(spinner());
+    cargandoInhabilitar.show();
+}
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionAFP").click(function () {
@@ -390,6 +457,7 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
             });
         }
         else {
+            mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
