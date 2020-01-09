@@ -252,37 +252,6 @@ $("#IconCerrarEdit").click(function () {
 });
 
 
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-//$("#btnUpdateDeduccion").click(function () {
-//    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
-//    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
-//    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
-
-
-//    if (cde_DescripcionDeduccionE == "") {
-//        $("#Validation_descipcion").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion").css("display", "none");
-//    }
-
-//    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
-//        $("#Validation_descipcion2").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion2").css("display", "none");
-//    }
-
-//    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
-//        $("#Validation_descipcion3").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion3").css("display", "none");
-//    }
-
-//});
-
-
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
@@ -339,14 +308,12 @@ $("#btnUpdateDeduccion").click(function () {
 
     if (cde_DescripcionDeduccionE == "" || cde_PorcentajeColaboradorE <= 0.00 || cde_PorcentajeColaboradorE == 0 || cde_PorcentajeEmpresaE <= 0.00 || cde_PorcentajeEmpresaE == 0)
     {
-        $("#Validation_descipcion").css("display", "");
-        $("#Validation_descipcion2").css("display", "");
-        $("#Validation_descipcion3").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos validos',
+        });
     }
     else {
-        $("#Validation_descipcion").css("display", "none");
-        $("#Validation_descipcion2").css("display", "none");
-        $("#Validation_descipcion3").css("display", "none");
         mostrarCargandoEditar();
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmCatalogoDeducciones").serializeArray();
