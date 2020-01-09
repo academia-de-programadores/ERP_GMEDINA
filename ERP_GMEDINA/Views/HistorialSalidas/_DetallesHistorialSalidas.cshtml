@@ -8,40 +8,39 @@
     <dd id="hsal_Observacion">
         @Html.DisplayFor(model => model.hsal_Observacion)
     </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.hsal_FechaCrea)
-    </dt>
-
-    <dd id="hsal_FechaCrea">
-        @Html.DisplayFor(model => model.hsal_FechaCrea)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.hsal_FechaModifica)
-    </dt>
-
-    <dd id="hsal_FechaModifica">
-        @Html.DisplayFor(model => model.hsal_FechaModifica)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-    </dt>
-
-    <dd id="tbUsuario_usu_NombreUsuario"> 
-        @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-    </dt>
-
-    <dd id="tbUsuario1_usu_NombreUsuario">
-        @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-    </dd>
-
 </dl>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h4>Auditoría</h4>
+    </div>
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <table class="table table-striped table-bordered dataTable">
+                <thead>
+                    <tr>
+                        <th>Acción</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Creado</td>
+                        @Html.HiddenFor(model => model.hsal_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="hsal_FechaCrea">@Html.DisplayFor(model => model.hsal_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    </tr>
+                    <tr>
+                        <td>Modificado</td>
+                        @Html.HiddenFor(model => model.hsal_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                        <td><span id="hsal_FechaModifica">@Html.DisplayFor(model => model.hsal_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 
 

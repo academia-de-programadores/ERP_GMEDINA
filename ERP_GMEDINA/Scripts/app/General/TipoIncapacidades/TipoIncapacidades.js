@@ -6,13 +6,11 @@ var id = 0;
 
 function tablaEditar(ID) {
     id = ID;
-    _ajax(null,
-        //Nombre del Controlador
+    _ajax(null,        
         '/TipoIncapacidades/Edit/' + ID,
         'GET',
         function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                //
+            if (obj != "-1" && obj != "-2" && obj != "-3") {                
                 $("#FormEditar").find("#ticn_Descripcion").val(obj.ticn_Descripcion);
                 $("#ModalEditar").modal('show');
             }
@@ -27,10 +25,11 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#ticn_Descripcion")["0"].innerText = obj.ticn_Descripcion;
-                $("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
-                $("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;
-                $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = obj.FechaCrea;
-                $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = obj.FechaModifica;
+                //Campos Estado y Razon Inactivo ya no se muestran en el modal de detalle
+                //$("#ModalDetalles").find("#ticn_Estado")["0"].innerText = obj.ticn_Estado;
+                //$("#ModalDetalles").find("#ticn_RazonInactivo")["0"].innerText = obj.ticn_RazonInactivo;                
+                $("#ModalDetalles").find("#ticn_FechaCrea")["0"].innerText = FechaFormato(obj.ticn_FechaCrea).substring(0, FechaFormato(obj.ticn_FechaCrea).length - 8);
+                $("#ModalDetalles").find("#ticn_FechaModifica")["0"].innerText = FechaFormato(obj.ticn_FechaModifica).substring(0, FechaFormato(obj.ticn_FechaModifica).length - 8);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
@@ -46,8 +45,7 @@ function llenarTabla() {
         function (lista) {
             tabla.clear();
             tabla.draw();
-            $.each(lista, function (index, value) {
-                console.log(value.ticn_Descripcion);
+            $.each(lista, function (index, value) {                
                 tabla.row.add({
                     ID:value.ticn_Id,
                     Descripción:value.ticn_Descripcion
@@ -63,8 +61,6 @@ $("#btnAgregar").click(function () {
     $("#FormEditar").find("#ticn_Descripcion").focus();
     modalnuevo.modal('show');
 });
-
-
 
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -87,7 +83,6 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("ticn_Descripcion").focus();
 });
 
-
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
@@ -101,7 +96,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["ticn_Descripcion", "ticn_RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 }
                 else {
                     MsgError("Error", "Codigo:" + obj + ".contacte al administrador.(Verifique si el registro ya existe)");
@@ -111,7 +106,6 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "Por favor llene todas las cajas de textos");
     }
 });
-
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
@@ -127,7 +121,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["ticn_Descripcion", "ticn_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -150,9 +144,9 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha actualizado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Código:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {

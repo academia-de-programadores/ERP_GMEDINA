@@ -20,10 +20,10 @@ namespace ERP_GMEDINA.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
 
-                [Display(Name = "Seleccione el tipo de salida")]
+                [Display(Name = "Tipo de salida")]
                 //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int tsal_Id { get; set; }
-                [Display(Name = "Seleccione la razon de la salida")]
+                [Display(Name = "Razon de la salida")]
                 //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
                 public int rsal_Id { get; set; }
 
@@ -39,11 +39,11 @@ namespace ERP_GMEDINA.Models
         public string hsal_RazonInactivo { get; set; }
         [Display(Name = "Agregado por")]
         public int hsal_UsuarioCrea { get; set; }
-        [Display(Name = "Fecha agregación")]
+        [Display(Name = "Fecha Crea")]
         public System.DateTime hsal_FechaCrea { get; set; }
         [Display(Name = "Modificado por")]
         public Nullable<int> hsal_UsuarioModifica { get; set; }
-        [Display(Name = "Fecha modificadción")]
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> hsal_FechaModifica { get; set; }
     }
 }

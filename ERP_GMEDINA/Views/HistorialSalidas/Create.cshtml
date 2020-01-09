@@ -7,11 +7,6 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Hisorial de salidas</h2>
-    </div>
-</div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -114,11 +109,9 @@
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
     @Styles.Render("~/plugins/select2Styles")
 }
-
 @section Scripts {
-    @Scripts.Render("~/plugins/customdataTables")
     @Scripts.Render("~/Scripts/app/general")
-    @Scripts.Render("~/Scripts/app/general/CreateArea")
+    @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general/CreateHistorialSalidas")
     @Scripts.Render("~/plugins/select2")
 }

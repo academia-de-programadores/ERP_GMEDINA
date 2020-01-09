@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Models
         public int ticn_Id { get; set; }
 
         [Display(Name = "Descripción")]
+        [MaxLength(25, ErrorMessage = "Excedió el numero máximo de caracteres")]
         public string ticn_Descripcion { get; set; }
 
         [Display(Name = "Estado")]

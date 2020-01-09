@@ -50,10 +50,10 @@ function Add(Empleados, Razon, ver) {
     }
 }
 function getJson() {
-    //declaramos una lista para recuperar en un formato 
+    //declaramos una lista para recuperar en un formato
     //especifico el json de datatable.
     list = new Array();
-    //declaramos el objeto que ira dentro de la vista     
+    //declaramos el objeto que ira dentro de la vista
     for (var i = 0; i < ChildTable.data().length; i++) {
         var fila = ChildTable.rows().data()[i];
         var tbEmpleados =
@@ -136,12 +136,12 @@ $(document).ready(function () {
 
     llenarDropDowlistEmpleados();
     llenarDropDowlistTipoSalida();
-    llenarDropDowlistRazonSalida(); 
+    llenarDropDowlistRazonSalida();
 
     ChildTable = $(ChildDataTable).DataTable({
         pageLength: 4,
         lengthChange: false,
-     columns: 
+     columns:
          [
              { data: 'Empleados' },
              { data: 'Razon' },
@@ -179,8 +179,7 @@ $("#add").click(function () {
             return null;
         }
     }
-    Add(Id, Razon, ver);
-    $("#FormEmpleados").validate();
+    Add(Id, Razon, ver);    
 }
 });
 $("#FormCreate").submit(function (e) {
@@ -218,8 +217,9 @@ $("#btnCrear").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                            MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                            location.href = "/HistorialSalidas/Index";
+                            MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                            setTimeout(function () { location.href = "/HistorialSalidas/Index"; }, 5000);
+                            $("#btnCrear").attr("disabled", "disabled");
                         } else {
                             MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                         }
