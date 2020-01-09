@@ -54,13 +54,33 @@
                                     <td>
                                         @Html.ActionLink("Detalle", "Details", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-primary btn-xs" })
                                         @Html.ActionLink("Editar", "Edit", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-default btn-xs" })
+                                        <button type="button" data-id="@item.dex_IdDeduccionesExtra" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias">Activar</button>
                                     </td>
-
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Activar*@
+<div class="modal fade" id="ActivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnActivarRegistroDeduccionesExtraordinarias">Activar</button>
+                <div style="display:none" class="btn pull-left" id="cargandoActivar"></div>
             </div>
         </div>
     </div>
