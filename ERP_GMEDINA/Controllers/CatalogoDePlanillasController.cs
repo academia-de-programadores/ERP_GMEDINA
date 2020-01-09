@@ -602,13 +602,31 @@ namespace ERP_GMEDINA.Controllers
         {
             string response = "bien";
             string mensajeError = "";
+            int usuarioModifica = 1; //TOOD: Agregar usuario modifica
+            DateTime fechaModifica = DateTime.Now;
             IEnumerable<object> planillaActivada = null;
             using (var dbContextTransaccion = db.Database.BeginTransaction())
             {
-                
+                try
+                {
+                    planillaActivada = db.UDP_Plani_tbCatalogoDePlanillas_Activar(id, usuarioModifica, fechaModifica);
+
+                    foreach (UDP_Plani_tbCatalogoDePlanillas_Activar_Result result in planillaActivada)
+                        mensajeError = result.MensajeError;
+
+                    if (mensajeError.StartsWith("-1"))
+                        response = "error";
+
+                    dbContextTransaccion.Commit();
+                }
+                catch (Exception)
+                {
+                    dbContextTransaccion.Rollback();
+                    response = "error";
+                }
             }
 
-            return Json("ok", JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -777,5 +777,26 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	);
 });
 
-$('#btnEliminarCatatalogoPlanilla').click(() => console.log(localStorage.getItem('id')))
+$('#btnEliminarCatatalogoPlanilla').click(() => {
+	let id = localStorage.getItem('id');
+
+	_ajax({ id: id },
+		'/CatalogoDePlanillas/ActivarPlanilla',
+		'POST',
+		(data) => {
+			console.log(data);
+			if (data == 'bien') {
+				iziToast.success({
+					title: 'Éxito',
+					message: 'El registro se activo correctamente.'
+				});
+				$('#frmInactivarCatalogoPlanilla').modal('hide');
+			}
+
+		},
+		() => {
+			console.log('Enviando');
+
+		})
+});
 //#endregion
