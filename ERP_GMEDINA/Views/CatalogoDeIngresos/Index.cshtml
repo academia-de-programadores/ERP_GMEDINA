@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
+@*<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
         <h2>Catalogo de ingresos</h2>
         <ol class="breadcrumb">
@@ -13,7 +13,7 @@
             </li>
         </ol>
     </div>
-</div>
+</div>*@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -21,9 +21,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Catalogo de ingresos</h5>
+                    <h5>Listado de Catálogo de Ingresos</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoIngresos">Registrar ingreso</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoIngresos">Registrar Catálogo de Ingreso</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -50,7 +50,7 @@
 
                                     <td>
                                         
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalle</button>
+                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
                                         <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
                                     </td>
                                 </tr>
@@ -70,12 +70,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Edición de datos</h4>
+                <h4 class="modal-title">Editar Catalogo de Ingreso</h4>
             </div>
-            <div class="modal-body" id="Editar">
+           
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
-            </div>            
+        
         </div>
     </div>
 </div>
@@ -87,12 +87,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" id="IconCerrarCreate" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h4 class="modal-title">Crear Catálogo de Ingreso</h4>
             </div>
-            <div class="modal-body" id="Crear">
+           
                 @Html.Partial("_CreateCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
-            </div>
-            
+          
         </div>
     </div>
 </div>
