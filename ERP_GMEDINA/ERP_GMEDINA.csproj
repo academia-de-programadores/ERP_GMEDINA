@@ -204,7 +204,6 @@
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
-    <Compile Include="Controllers\LiquidacionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
@@ -433,12 +432,6 @@
     <Compile Include="Models\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbMotivoLiquidacion.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbMotivoLiquidaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -449,9 +442,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbPorcentajeMotivoLiquidacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPreaviso.cs">

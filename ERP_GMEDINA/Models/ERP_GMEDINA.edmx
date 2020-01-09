@@ -2060,7 +2060,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PreviewPlanilla' does not have
           <Property Name="per_Telefono" Type="nvarchar" MaxLength="20" />
           <Property Name="per_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="per_EstadoCivil" Type="char" MaxLength="1" />
-          <Property Name="salarioBase" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="salarioBase" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="tmon_Id" Type="int" Nullable="false" />
           <Property Name="tmon_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
@@ -9881,7 +9881,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="salarioBase" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="salarioBase" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="tmon_Id" Type="Int32" Nullable="false" />
           <Property Name="tmon_Descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
