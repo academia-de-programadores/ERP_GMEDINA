@@ -1849,7 +1849,6 @@
     <Content Include="Views\DeduccionAFP\Index.cshtml" />
     <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
-    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\AFP\Index.cshtml" />
     <Content Include="Views\AFP\_CreateAFP.cshtml" />
     <Content Include="Views\AFP\_EditAFP.cshtml" />
@@ -1870,6 +1869,7 @@
     <Content Include="Views\Preaviso\_Details.cshtml" />
     <Content Include="Views\Preaviso\_Edit.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

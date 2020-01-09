@@ -62,13 +62,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h2 class="col-md-offset-4"><strong>Editar Deducción</strong></h2>
+                <h4 class="modal-title">Editar Deducción</h4>
             </div>
             <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
-            </div>     
-        </div>
+            </div>
+
+            </div>
     </div>
 </div>
 <div class="modal fade" id="AgregarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
@@ -78,9 +78,9 @@
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarCreate"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Crear Deducción</h4>
             </div>
-            <div class="modal-body" id="Crear">
+            
                 @Html.Partial("_CreateCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
-            </div>
+           
         </div>
     </div>
 </div>
@@ -89,7 +89,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Detalles</h4>
+                <h4 class="modal-title">Detalle Deducción</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetalleCatalogoDeDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())
@@ -97,19 +97,19 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Seguro que desea inhabilitar el registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary pull-left" id="btnInactivarRegistroDeduccion">Actualizar</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarInhabilitar">Cerrar</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarInhabilitar">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnInactivarRegistroDeduccion">Eliminar</button>
             </div>
         </div>
     </div>

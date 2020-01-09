@@ -8,24 +8,30 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="emp_Id" name="emp_Id" class="form-control"></select>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.emp_Id)
+            </div>
+            <div class="col-md-9">
+                <select id="emp_Id" name="emp_Id" class="text-box single-line"></select>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.dafp_AporteLps)
+            </div>            
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "text-box single-line" } })
                 @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.afp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="afp_Id" name="afp_Id" class="form-control"></select>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.afp_Id)
+            </div>            
+            <div class="col-md-9">
+                <select id="afp_Id" name="afp_Id" class="text-box single-line"></select>
             </div>
         </div>
 

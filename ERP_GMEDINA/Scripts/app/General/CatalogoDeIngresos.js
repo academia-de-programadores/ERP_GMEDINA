@@ -70,8 +70,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
             if (data) {
                 var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
-                $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
-                $("#Detallar #cin_DescripcionIngreso").val(data[0].cin_DescripcionIngreso);
+                $("#Detallar #cin_IdIngreso").html(data[0].cin_IdIngreso);
+                $("#Detallar #cin_DescripcionIngreso").html(data[0].cin_DescripcionIngreso);
                 $("#Detallar #cin_UsuarioCrea").val(data[0].cin_UsuarioCrea);
                 $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
                 $("#Detallar #cin_FechaCrea").val(FechaCrea);
@@ -127,38 +127,33 @@ $("#btnUpdateIngresos").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoIngresos").serializeArray();
-    var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
+    var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS
-    if (descripcionEditar != '' && descripcionEditar != null && descripcionEditar != undefined && isNaN(descripcionEditar) == true) {
-        mostrarcargandoEditar()
+    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
+        mostrarcargandoEditar();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
             data: data
         }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
-            }
-            else {
+
+            if (data != "error") {
+                
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarCatalogoIngresos").modal('hide');
                 cargarGridIngresos();
-                ocultarcargandoEditar()
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro fue editado de forma exitosa!',
                 });
+                ocultarcargandoEditar();
             }
         });
     }
     else {
-        $("#descripcioncrear").css("display", "");
+        $("#validareditar").css("display", "");
         $("#Editar #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
@@ -246,8 +241,6 @@ $('#btnCreateRegistroIngresos').click(function () {
 
     //VALIDAMOS LOS CAMPOS
     if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
-        
-
         mostrarCargandoCrear()
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -286,6 +279,27 @@ $("#btnCerrarEditar").click(function () {
     $("#frmCatalogoIngresosCreate").modal('hide');
 });
 
+
+////////////////////////EDITAR
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
+
+
+
+
+
+
+
+////////////////////////CREAR
+
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
     $("#descripcioncrear").css("display", "none");
@@ -295,6 +309,11 @@ $("#btnCerrarCrear").click(function () {
 $("#IconCerrarCreate").click(function () {
     $("#descripcioncrear").css("display", "none");
 });
+
+
+
+
+
 
 const btnGuardar = $('#btnCreateRegistroIngresos'),
 
