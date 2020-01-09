@@ -433,6 +433,15 @@
     <Compile Include="Models\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Models\tbMotivoLiquidacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbMotivoLiquidaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+>>>>>>> 299c2a578864f25fb04173ded2323f6cb6f31b20
     <Compile Include="Models\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -443,6 +452,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPorcentajeMotivoLiquidacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPreaviso.cs">
@@ -1136,7 +1148,6 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
-    <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\AuxilioCesantia.js" />
@@ -1773,7 +1784,6 @@
     <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\Liquidacion\Index.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
@@ -1825,6 +1835,7 @@
     <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
     <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
     <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
+    <Content Include="Views\Liquidacion\Index.cshtml" />
     <Content Include="Views\ErrorPages\InternalServerError.cshtml" />
     <Content Include="Views\ErrorPages\NotFoundError.cshtml" />
     <Content Include="Views\Periodos\Index.cshtml" />

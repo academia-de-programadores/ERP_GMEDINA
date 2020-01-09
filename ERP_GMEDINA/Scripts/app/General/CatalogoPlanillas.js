@@ -351,15 +351,26 @@ function listar() {
 			},
 			{ data: 'descripcionPlanilla' }, //Columna 2: descripción de la planilla, esto viene de la petición que se hizo al servidor
 			{ data: 'frecuenciaDias' }, //Columna 3: frecuencia en días de la planilla, esto viene de la petición que se hizo al servidor
-			{ data: 'recibeComision' },
+			{
+				data: 'recibeComision'
+			},
 			{
 				//Columna 4: los botones que tendrá cada fila, editar y detalles de la planilla
 				orderable: false,
-				data: null,
-				defaultContent: `
+				data: 'activo',
+				render: function (data) {
+					if (data)
+						return `
                         <button type="button" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-                        <button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
-                    `
+						<button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
+					`
+					else
+						return `
+						<button type="button" class="btn btn-primary btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
+						<button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
+						<button type="button" class="btn btn-warning btn-xs" id="btnInactivar">Activar</button>
+						`;
+				}
 			}
 		],
 		language: {
@@ -459,6 +470,10 @@ function obtenerIdDetallesEditar(tbody, table) {
 	$(tbody).on('click', 'button#btnDetalleCatalogoDeducciones', function () {
 		var data = table.row($(this).parents('tr')).data();
 		location.href = pathname + 'Details/' + data.idPlanilla;
+	});
+
+	$(tbody).on('click', 'button#btnInactivar', function(){
+		console.log(table.row($(this).parents('tr')).data().idPlanilla);
 	});
 }
 
@@ -730,11 +745,6 @@ $(document).on(
 		crearEditar(true);
 	}
 );
-
-//Inactivar
-$('#inactivar').click(() => {
-	$('#InactivarCatalogoDeducciones').modal();
-});
 
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	var id = inputIdPlanilla.val();

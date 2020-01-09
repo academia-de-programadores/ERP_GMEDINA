@@ -19,17 +19,16 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripcion")]
         [Required(ErrorMessage = "El campo descripción no puede quedar vacío")]
-        [StringLength(100, MinimumLength = 3)]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
         public string tde_Descripcion { get; set; }
 
-        [Display(Name = "Usuario Crea")]
+        [Display(Name = "Creado Por")]
         public int tde_UsuarioCrea { get; set; }
 
         [Display(Name = "Fecha de Creación")]
         public System.DateTime tde_FechaCrea { get; set; }
 
-        [Display(Name = "Usuario Modifica")]
+        [Display(Name = "Modificado Por")]
         public Nullable<int> tde_UsuarioModifica { get; set; }
 
         [Display(Name = "Fecha de Modificación")]
