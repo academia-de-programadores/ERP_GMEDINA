@@ -8,12 +8,14 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
-                @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
-                <div class="col-md-10">
-                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>  
-                    <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>           
-                </div> 
-            </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
+                </div>
+                    <div class="col-md-6">
+                        <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
+                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                    </div>
+                </div>
 
 
             <div class="form-group" style="display:none">
@@ -53,11 +55,8 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModal">Cancelar</button>
-        
-        <input type="submit" id="btnCreateRegistroComisiones" value="Guardar" class="btn btn-primary pull-left" />
-        <div style="display:none" class="btn pull-left" id="cargandoCrear">
-        </div>
+        <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModal">Cerrar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroComisiones">Guardar</button>
     </div>
 }
 

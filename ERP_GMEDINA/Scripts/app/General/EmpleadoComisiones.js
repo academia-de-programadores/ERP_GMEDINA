@@ -1,4 +1,4 @@
-﻿//OBTENER SCRIPT DE FORMATEO DE FECHA //
+﻿//OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
     })
@@ -55,8 +55,9 @@ function cargarGridComisiones() {
                     '<td>' + FechaRegistro + '</td>' +
                      '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
                     '<td>' +
+                   
 
-                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
+                   '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
                     '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
                     '</td>' +
                     '</tr>';
@@ -105,6 +106,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                     });
 
                 $("#EditarEmpleadoComisiones").modal();
+                //$("#DetalleEmpleadoComisiones").modal(hide);
             }
             else {
                 //Mensaje de error si no hay data
@@ -117,12 +119,67 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         });
 });
 
+$(document).on("click", "#btnEditarEmpleadoComisiones", function () {
+    var data = $("#frmEmpleadoComisionesDetalle").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    var ID = $(this).data('Idinactivar');
+    Idinactivar = Editar;
+    $.ajax({
+        url: "/EmpleadoComisiones/Edit/" + Editar,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                $("#Editar #cc_Id").val(data.cc_Id);
+                $("#Editar #cc_PorcentajeComision").val(data.cc_PorcentajeComision);
+                $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
+                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                var SelectedIdEmp = data.emp_Id;
+                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                $.ajax({
+                    url: "/EmpleadoComisiones/EditGetDDLEmpleado",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID })
+                })
+                    .done(function (data) {
+                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                        $("#Editar #emp_IdEmpleado").empty();
+                        //LLENAR EL DROPDOWNLIST
+                        $.each(data, function (i, iter) {
+                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        });
+                    });
+
+                $("#EditarEmpleadoComisiones").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+            Check = "";
+        });
+});
+$(document).on("click", "#btnEditarEmpleadoComisiones", function () {
+    //MOSTRAR EL MODAL DE INACTIVAR
+    $("#DetalleEmpleadoComisiones").modal('hide');
+
+});
+
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisiones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    mostrarCargandoEditar()
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
         method: "POST",
@@ -130,7 +187,7 @@ $("#btnUpdateComisiones").click(function () {
     }).done(function (data) {
         if (data == "error") {
         }
-        else {
+        else {            
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridComisiones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
@@ -140,7 +197,7 @@ $("#btnUpdateComisiones").click(function () {
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
-            ocultarCargandoEditar();
+
         }
     });
 });
@@ -205,7 +262,9 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 });
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroComisiones').click(function () {
-    var Empleado = $("#Crear #emp_IdEmpleado").val();
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+
+    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
 
     $.ajax({
         url: "/EmpleadoComisiones/Create",
@@ -219,8 +278,7 @@ $('#btnCreateRegistroComisiones').click(function () {
         if (data == "error") {
             $("#AgregarEmpleadoComisiones").modal('show');
         }
-        else {
-
+        else {            
             cargarGridComisiones();
             $("#AgregarEmpleadoComisiones").modal('hide');
             // Mensaje de exito cuando un registro se ha guardado bien
@@ -228,17 +286,19 @@ $('#btnCreateRegistroComisiones').click(function () {
                 title: 'Exito',
                 message: 'El registro fue registrado de forma exitosa!',
             });
-    }
-
+        }
+    });
 
 });
 
 
-//FUNCION: Detail
+//FUNCION: Detail 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoComisiones", function () {
 
     var ID = $(this).data('id');
+    Editar = ID;
+
     $.ajax({
         url: "/EmpleadoComisiones/Details/" + ID,
         method: "GET",
@@ -295,19 +355,19 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                     });
                 }
                 $("#Detallar #cc_Id").val(data[0].cc_Id);
-                $("#Detallar #cc_FechaRegistro").val(FechaRegistro);
+                $("#Detallar #cc_FechaRegistro").html(FechaRegistro);
                 $("#Detallar #cc_UsuarioCrea").val(data[0].cc_UsuarioCrea);
-                $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#Detallar #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").val(data[0].Ingreso);
                 $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
-                $("#Detallar #emp_Id").val(data[0].emp_Id);
-                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
-                $("#Detallar #cc_FechaCrea").val(FechaCrea);
+                $("#Detallar #emp_Id").html(data[0].emp_Id);
+                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").html(data[0].NombreEmpleado + ' ' + data[0].ApellidosEmpleado);
+                $("#Detallar #cc_FechaCrea").html(FechaCrea);
                 $("#Detallar #cc_UsuarioModifica").val(data[0].cc_UsuarioModifica);
-                $("#Detallar #cc_PorcentajeComision").val(data[0].cc_PorcentajeComision);
-                $("#Detallar #cc_TotalVenta").val(data[0].cc_TotalVenta);
-                data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detallar #cc_FechaModifica").val(FechaModifica);
+                $("#Detallar #cc_PorcentajeComision").html(data[0].cc_PorcentajeComision);
+                $("#Detallar #cc_TotalVenta").html(data[0].cc_TotalVenta);
+                data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detallar #cc_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data[0].emp_Id;
                 var SelectedIdCatIngreso = data[0].cin_IdIngreso;
@@ -382,7 +442,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -395,7 +455,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inhabilitado de forma exitosa!',
+                message: 'El registro fue Inactivado de forma exitosa!',
             });
         }
     });
@@ -471,8 +531,6 @@ $("#IconoCerraredit").click(function () {
 });
 
 
-
-
 //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
 $("#btnUpdateComisiones").click(function () {
     var PorcentajeComisionE = $("#cc_PorcentajeComision").val();
@@ -497,76 +555,3 @@ $("#btnUpdateComisiones").click(function () {
 $("#frmEmpleadoComisionesCreate").submit(function (e) {
     e.preventDefault();
 });
-
-
-
-function mostrarCargandoCrear(){
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear(){
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-
-
-
-const btnGuardar = $('#btnCreateRegistroComisiones'),
-
-cargandoCrearcargandoCrear=$('#cargandoCrear')
-
-cargandoCrear=$('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
-
-
-
-
-
-function mostrarCargandoEditar(){
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarCargandoEditar(){
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
-
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-
-
-
-const btnEditar = $('#btnUpdateComisiones'),
-
-cargandoEditarcargandoEditar = $('#cargandoEditar')
-
-cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
