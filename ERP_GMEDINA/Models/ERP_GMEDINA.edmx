@@ -405,6 +405,19 @@
           <Property Name="pvac_FechaModifica" Type="datetime" />
           <Property Name="pvac_Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="moli_IdMotivo" Type="int" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="moli_UsuarioCrea" Type="int" />
+          <Property Name="moli_FechaCrea" Type="datetime" />
+          <Property Name="moli_UsuarioModifica" Type="int" />
+          <Property Name="moli_FechaModifica" Type="datetime" />
+          <Property Name="moli_Activo" Type="bit" />
+          <Property Name="moli_RazonInactivo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbPeriodos">
           <Key>
             <PropertyRef Name="peri_IdPeriodo" />
@@ -416,6 +429,24 @@
           <Property Name="peri_UsuarioModifica" Type="int" />
           <Property Name="peri_FechaModifica" Type="datetime" />
           <Property Name="peri_Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPorcentajeMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="pml_IdPorcentajeMotivoLiquidacion" />
+          </Key>
+          <Property Name="pml_IdPorcentajeMotivoLiquidacion" Type="int" Nullable="false" />
+          <Property Name="moli_IdMotivo" Type="int" />
+          <Property Name="pml_Preaviso" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Cesantia" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoTercerProp" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoCuartoProp" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Vacaciones" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pml_UsuarioCrea" Type="int" />
+          <Property Name="pml_FechaCrea" Type="datetime" />
+          <Property Name="pml_UsuarioModifica" Type="int" />
+          <Property Name="pml_FechaModifica" Type="datetime" />
+          <Property Name="pml_Activo" Type="bit" />
+          <Property Name="pml_RazonInactivo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbPreaviso">
           <Key>
@@ -635,6 +666,19 @@
           <Property Name="eqtra_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="eqtra_UsuarioModifica" Type="int" />
           <Property Name="eqtra_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbFaseSeleccion">
+          <Key>
+            <PropertyRef Name="fsel_Id" />
+          </Key>
+          <Property Name="fsel_Id" Type="int" Nullable="false" />
+          <Property Name="fsel_Estado" Type="bit" Nullable="false" />
+          <Property Name="fsel_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="fsel_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="fsel_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="fsel_UsuarioModifica" Type="int" />
+          <Property Name="fsel_FechaModifica" Type="datetime" />
+          <Property Name="scan_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbFasesReclutamiento">
           <Key>
@@ -1049,6 +1093,22 @@
           <Property Name="req_UsuarioModifica" Type="int" />
           <Property Name="req_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbSeleccionCandidatos">
+          <Key>
+            <PropertyRef Name="scan_Id" />
+          </Key>
+          <Property Name="scan_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="fare_Id" Type="int" Nullable="false" />
+          <Property Name="scan_Fecha" Type="datetime" />
+          <Property Name="scan_Estado" Type="bit" Nullable="false" />
+          <Property Name="scan_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="scan_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="scan_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="scan_UsuarioModifica" Type="int" />
+          <Property Name="scan_FechaModifica" Type="datetime" />
+          <Property Name="req_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
             <PropertyRef Name="suc_Id" />
@@ -1205,6 +1265,16 @@
           <Property Name="treq_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="treq_UsuarioModifica" Type="int" />
           <Property Name="treq_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.EmpleadosVendedores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmpleadosVendedores">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="101" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_AFP_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1509,29 +1579,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Det
             <PropertyRef Name="dex_UsuarioCrea" />
             <PropertyRef Name="dex_FechaCrea" />
             <PropertyRef Name="dex_Activo" />
-            <PropertyRef Name="car_Cargo" />
-            <PropertyRef Name="depto_Departamento" />
-            <PropertyRef Name="area_Area" />
-            <PropertyRef Name="eqtra_Id" />
-            <PropertyRef Name="eqtra_Codigo" />
-            <PropertyRef Name="eqtra_Descripcion" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
           </Key>
           <Property Name="dex_IdDeduccionesExtra" Type="int" Nullable="false" />
           <Property Name="eqem_Id" Type="int" Nullable="false" />
           <Property Name="per_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="car_Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="depto_Departamento" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="area_Area" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_Cargo" Type="nvarchar" MaxLength="50" />
+          <Property Name="depto_Departamento" Type="nvarchar" MaxLength="100" />
+          <Property Name="area_Area" Type="nvarchar" MaxLength="50" />
           <Property Name="dex_ObservacionesComentarios" Type="nvarchar" MaxLength="100" />
-          <Property Name="eqtra_Id" Type="int" Nullable="false" />
-          <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="eqtra_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eqtra_Id" Type="int" />
+          <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" />
+          <Property Name="eqtra_Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="dex_MontoInicial" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dex_MontoRestante" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" />
           <Property Name="dex_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="usu_UsuarioCrea" Type="varchar" MaxLength="100" />
           <Property Name="dex_FechaCrea" Type="datetime" Nullable="false" />
@@ -1797,6 +1860,33 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InformacionColaborador' does n
           <Property Name="fpa_Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="car_Id" Type="int" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Ingresos_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Ingresos_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="cin_IdIngreso" />
+            <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaInicio" />
+            <PropertyRef Name="hipa_FechaFin" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
+          <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InstitucionesFinancieras_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3332,6 +3422,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="*" />
@@ -3977,6 +4091,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbRequisiciones">
               <PropertyRef Name="req_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4904,6 +5042,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="1" />
           <End Role="tbHabilidadesPersona" Type="Self.tbHabilidadesPersona" Multiplicity="*" />
@@ -5072,6 +5222,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id">
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id">
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
           <End Role="tbTitulosPersona" Type="Self.tbTitulosPersona" Multiplicity="*" />
@@ -5168,6 +5330,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+          <End Role="tbRequisiciones" Type="Self.tbRequisiciones" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRequisiciones">
+              <PropertyRef Name="req_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="req_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id">
           <End Role="tbRequisiciones" Type="Self.tbRequisiciones" Multiplicity="1" />
           <End Role="tbTitulosRequisicion" Type="Self.tbTitulosRequisicion" Multiplicity="*" />
@@ -5177,6 +5351,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbTitulosRequisicion">
               <PropertyRef Name="req_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="scan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id">
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="1" />
+          <End Role="tbHistorialContrataciones" Type="Self.tbHistorialContrataciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialContrataciones">
+              <PropertyRef Name="scan_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5300,6 +5498,97 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="UDP_Plani_tbAuxilioDeCesantias_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Delete">
           <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
         </Function>
@@ -5479,6 +5768,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="cin_DescripcionIngreso" Type="nvarchar" Mode="In" />
           <Parameter Name="cin_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="cin_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbCatalogoDePlanillas_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="cpla_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cpla_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
@@ -5852,7 +6146,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbISR" EntityType="Self.tbISR" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbLiquidacionVacaciones" EntityType="Self.tbLiquidacionVacaciones" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbMotivoLiquidacion" EntityType="Self.tbMotivoLiquidacion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPeriodos" EntityType="Self.tbPeriodos" Schema="Plani" store:Type="Tables" />
+          <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="Self.tbPorcentajeMotivoLiquidacion" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbPreaviso" EntityType="Self.tbPreaviso" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbTechosDeducciones" EntityType="Self.tbTechosDeducciones" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbTipoDeduccion" EntityType="Self.tbTipoDeduccion" Schema="Plani" store:Type="Tables" />
@@ -5868,6 +6164,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEquipoEmpleados" EntityType="Self.tbEquipoEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbEquipoTrabajo" EntityType="Self.tbEquipoTrabajo" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbFaseSeleccion" EntityType="Self.tbFaseSeleccion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbFasesReclutamiento" EntityType="Self.tbFasesReclutamiento" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHabilidadesPersona" EntityType="Self.tbHabilidadesPersona" Schema="rrhh" store:Type="Tables" />
@@ -5894,6 +6191,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbRequerimientosEspecialesPersona" EntityType="Self.tbRequerimientosEspecialesPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbRequerimientosEspecialesRequisicion" EntityType="Self.tbRequerimientosEspecialesRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbRequisiciones" EntityType="Self.tbRequisiciones" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbSeleccionCandidatos" EntityType="Self.tbSeleccionCandidatos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSucursales" EntityType="Self.tbSucursales" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
@@ -5905,6 +6203,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="EmpleadosVendedores" EntityType="Self.EmpleadosVendedores" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [EmpleadosVendedores].[Id] AS [Id], 
+    [EmpleadosVendedores].[Descripcion] AS [Descripcion]
+    FROM [Plani].[EmpleadosVendedores] AS [EmpleadosVendedores]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_AFP_RPT" EntityType="Self.V_AFP_RPT" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_AFP_RPT].[emp_Id] AS [emp_Id], 
@@ -6271,6 +6575,21 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_InformacionColaborador].[car_Id] AS [car_Id], 
     [V_InformacionColaborador].[car_Descripcion] AS [car_Descripcion]
     FROM [Plani].[V_InformacionColaborador] AS [V_InformacionColaborador]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Ingresos_RPT" EntityType="Self.V_Ingresos_RPT" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_Ingresos_RPT].[emp_Id] AS [emp_Id], 
+    [V_Ingresos_RPT].[per_Nombres] AS [per_Nombres], 
+    [V_Ingresos_RPT].[per_Apellidos] AS [per_Apellidos], 
+    [V_Ingresos_RPT].[cin_IdIngreso] AS [cin_IdIngreso], 
+    [V_Ingresos_RPT].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
+    [V_Ingresos_RPT].[hip_TotalPagar] AS [hip_TotalPagar], 
+    [V_Ingresos_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
+    [V_Ingresos_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
+    [V_Ingresos_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
+    [V_Ingresos_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+    [V_Ingresos_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
+    FROM [Plani].[V_Ingresos_RPT] AS [V_Ingresos_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="Self.V_InstitucionesFinancieras_RPT" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -6915,6 +7234,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
@@ -7130,6 +7457,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRequisiciones_req_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequisiciones_req_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -7439,6 +7774,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id" Association="Self.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
             <End Role="tbHabilidadesPersona" EntitySet="tbHabilidadesPersona" />
@@ -7495,6 +7834,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbRequerimientosEspecialesPersona" EntitySet="tbRequerimientosEspecialesPersona" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id">
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbTitulosPersona" EntitySet="tbTitulosPersona" />
@@ -7527,9 +7870,21 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbRequerimientosEspecialesRequisicion" EntitySet="tbRequerimientosEspecialesRequisicion" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+            <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" Association="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" Association="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id">
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+            <End Role="tbHistorialContrataciones" EntitySet="tbHistorialContrataciones" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" Association="Self.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id">
             <End Role="tbSucursales" EntitySet="tbSucursales" />
@@ -7570,6 +7925,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" Association="Self.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id">
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" Association="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -7736,6 +8111,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbEquipoEmpleados1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoEmpleados_eqem_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEquipoEmpleados" />
           <NavigationProperty Name="tbEquipoTrabajo" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioCrea" FromRole="tbUsuario" ToRole="tbEquipoTrabajo" />
           <NavigationProperty Name="tbEquipoTrabajo1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" FromRole="tbUsuario" ToRole="tbEquipoTrabajo" />
+          <NavigationProperty Name="tbFaseSeleccion" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbFaseSeleccion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbFasesReclutamiento" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbFasesReclutamiento1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbUsuario" ToRole="tbFasesReclutamiento" />
           <NavigationProperty Name="tbHabilidades" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHabilidades_habi_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHabilidades" />
@@ -7790,6 +8167,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbRequerimientosEspecialesRequisicion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequerimientosEspecialesRequisicion_rer_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRequerimientosEspecialesRequisicion" />
           <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequisiciones_req_UsuarioCrea" FromRole="tbUsuario" ToRole="tbRequisiciones" />
           <NavigationProperty Name="tbRequisiciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequisiciones_req_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRequisiciones" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSeleccionCandidatos" />
+          <NavigationProperty Name="tbSeleccionCandidatos1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSucursales" />
           <NavigationProperty Name="tbSucursales1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSucursales" />
           <NavigationProperty Name="tbSueldos" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSueldos_sue_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSueldos" />
@@ -7812,6 +8191,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbTitulosPersona1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosPersona_tipe_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosPersona" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbTitulosRequisicion1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTitulosRequisicion" />
+          <NavigationProperty Name="tbMotivoLiquidacion" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" FromRole="tbUsuario" ToRole="tbMotivoLiquidacion" />
+          <NavigationProperty Name="tbMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbUsuario" ToRole="tbMotivoLiquidacion" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPorcentajeMotivoLiquidacion" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -8236,6 +8619,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioCrea" FromRole="tbLiquidacionVacaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbLiquidacionVacaciones_pvac_UsuarioModifica" FromRole="tbLiquidacionVacaciones" ToRole="tbUsuario" />
         </EntityType>
+        <EntityType Name="tbMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="moli_IdMotivo" Type="Int32" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="moli_UsuarioCrea" Type="Int32" />
+          <Property Name="moli_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="moli_UsuarioModifica" Type="Int32" />
+          <Property Name="moli_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="moli_Activo" Type="Boolean" />
+          <Property Name="moli_RazonInactivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" FromRole="tbMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbPorcentajeMotivoLiquidacion" Relationship="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" FromRole="tbMotivoLiquidacion" ToRole="tbPorcentajeMotivoLiquidacion" />
+        </EntityType>
         <EntityType Name="tbPeriodos">
           <Key>
             <PropertyRef Name="peri_IdPeriodo" />
@@ -8250,6 +8649,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioCrea" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_Plani_tbPeriodos_peri_UsuarioModifica" FromRole="tbPeriodos" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbPeriodos_peri_IdPeriodo_Plani_tbHistorialDePago_peri_IdPeriodo" FromRole="tbPeriodos" ToRole="tbHistorialDePago" />
+        </EntityType>
+        <EntityType Name="tbPorcentajeMotivoLiquidacion">
+          <Key>
+            <PropertyRef Name="pml_IdPorcentajeMotivoLiquidacion" />
+          </Key>
+          <Property Name="pml_IdPorcentajeMotivoLiquidacion" Type="Int32" Nullable="false" />
+          <Property Name="moli_IdMotivo" Type="Int32" />
+          <Property Name="pml_Preaviso" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Cesantia" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoTercerProp" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_DecimoCuartoProp" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_Vacaciones" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pml_UsuarioCrea" Type="Int32" />
+          <Property Name="pml_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="pml_UsuarioModifica" Type="Int32" />
+          <Property Name="pml_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="pml_Activo" Type="Boolean" />
+          <Property Name="pml_RazonInactivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbMotivoLiquidacion" Relationship="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" FromRole="tbPorcentajeMotivoLiquidacion" ToRole="tbMotivoLiquidacion" />
         </EntityType>
         <EntityType Name="tbPreaviso">
           <Key>
@@ -8557,6 +8977,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbEquipoTrabajo_eqtra_UsuarioModifica" FromRole="tbEquipoTrabajo" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEquipoEmpleados" Relationship="Self.FK_rrhh_tbEquipoTrabajo_eqtra_Id_rrhh_tbEquipoEmpleados_eqtra_Id" FromRole="tbEquipoTrabajo" ToRole="tbEquipoEmpleados" />
         </EntityType>
+        <EntityType Name="tbFaseSeleccion">
+          <Key>
+            <PropertyRef Name="fsel_Id" />
+          </Key>
+          <Property Name="fsel_Id" Type="Int32" Nullable="false" />
+          <Property Name="fsel_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="fsel_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fsel_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="fsel_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fsel_UsuarioModifica" Type="Int32" />
+          <Property Name="fsel_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="scan_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" FromRole="tbFaseSeleccion" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbFaseSeleccion" ToRole="tbSeleccionCandidatos" />
+        </EntityType>
         <EntityType Name="tbFasesReclutamiento">
           <Key>
             <PropertyRef Name="fare_Id" />
@@ -8571,6 +9007,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="fare_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbFasesReclutamiento" ToRole="tbSeleccionCandidatos" />
         </EntityType>
         <EntityType Name="tbHabilidades">
           <Key>
@@ -8705,6 +9142,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialContrataciones_hcon_UsuarioCrea" FromRole="tbHistorialContrataciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialContrataciones_hcon_UsuarioModifica" FromRole="tbHistorialContrataciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbDepartamentos" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbHistorialContrataciones_depto_Id" FromRole="tbHistorialContrataciones" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" FromRole="tbHistorialContrataciones" ToRole="tbSeleccionCandidatos" />
         </EntityType>
         <EntityType Name="tbHistorialHorasTrabajadas">
           <Key>
@@ -8978,6 +9416,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbIdiomaPersona" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbIdiomaPersona_per_Id" FromRole="tbPersonas" ToRole="tbIdiomaPersona" />
           <NavigationProperty Name="tbNacionalidades" Relationship="Self.FK_rrhh_tbNacionalidades_nac_Id_rrhh_tbPersonas_nac_Id" FromRole="tbPersonas" ToRole="tbNacionalidades" />
           <NavigationProperty Name="tbRequerimientosEspecialesPersona" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbRequerimientosEspecialesPersona_per_Id" FromRole="tbPersonas" ToRole="tbRequerimientosEspecialesPersona" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbPersonas" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbTitulosPersona" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id" FromRole="tbPersonas" ToRole="tbTitulosPersona" />
         </EntityType>
         <EntityType Name="tbRazonSalidas">
@@ -9078,7 +9517,31 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbHabilidadesRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbHabilidadesRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbHabilidadesRequisicion" />
           <NavigationProperty Name="tbIdiomasRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbIdiomasRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbIdiomasRequisicion" />
           <NavigationProperty Name="tbRequerimientosEspecialesRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbRequerimientosEspecialesRequisicion" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbTitulosRequisicion" />
+        </EntityType>
+        <EntityType Name="tbSeleccionCandidatos">
+          <Key>
+            <PropertyRef Name="scan_Id" />
+          </Key>
+          <Property Name="scan_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="fare_Id" Type="Int32" Nullable="false" />
+          <Property Name="scan_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="scan_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="scan_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="scan_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="scan_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="scan_UsuarioModifica" Type="Int32" />
+          <Property Name="scan_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="req_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea" FromRole="tbSeleccionCandidatos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica" FromRole="tbSeleccionCandidatos" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbFaseSeleccion" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbFasesReclutamiento" Relationship="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFasesReclutamiento" />
+          <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbHistorialContrataciones" />
+          <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbSeleccionCandidatos" ToRole="tbPersonas" />
+          <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -9276,6 +9739,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" FromRole="tbTitulosRequisicion" ToRole="tbUsuario" />
           <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbTitulosRequisicion" ToRole="tbRequisiciones" />
           <NavigationProperty Name="tbTitulos" Relationship="Self.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" FromRole="tbTitulosRequisicion" ToRole="tbTitulos" />
+        </EntityType>
+        <EntityType Name="EmpleadosVendedores">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="V_AFP_RPT">
           <Key>
@@ -9502,6 +9973,31 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
+        <EntityType Name="V_Deducciones_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="cde_IdDeducciones" />
+            <PropertyRef Name="cde_DescripcionDeduccion" />
+            <PropertyRef Name="hipa_FechaInicio" />
+            <PropertyRef Name="hipa_FechaFin" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
+          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="V_DeduccionesExtraordinarias">
           <Key>
             <PropertyRef Name="per_DeduccionEmpleado" />
@@ -9515,46 +10011,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_DeduccionesExtraordinarias_Detalles">
-          <Key>
-            <PropertyRef Name="dex_IdDeduccionesExtra" />
-            <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="per_Empleado" />
-            <PropertyRef Name="car_Cargo" />
-            <PropertyRef Name="depto_Departamento" />
-            <PropertyRef Name="area_Area" />
-            <PropertyRef Name="eqtra_Id" />
-            <PropertyRef Name="eqtra_Codigo" />
-            <PropertyRef Name="eqtra_Descripcion" />
-            <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-            <PropertyRef Name="dex_UsuarioCrea" />
-            <PropertyRef Name="dex_FechaCrea" />
-            <PropertyRef Name="dex_Activo" />
-          </Key>
-          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
-          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Empleado" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="car_Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="depto_Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="area_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
-          <Property Name="eqtra_Codigo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="eqtra_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dex_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="usu_UsuarioCrea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dex_UsuarioModifica" Type="Int32" />
-          <Property Name="usu_UsuarioModifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="V_DeduccionesExtraordinarias_Empleados">
           <Key>
@@ -9794,6 +10250,31 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="car_Id" Type="Int32" />
           <Property Name="car_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="V_Ingresos_RPT">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="cin_IdIngreso" />
+            <PropertyRef Name="cin_DescripcionIngreso" />
+            <PropertyRef Name="hipa_FechaInicio" />
+            <PropertyRef Name="hipa_FechaFin" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
+          <Property Name="cin_DescripcionIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="V_InstitucionesFinancieras_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -9927,26 +10408,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <EntityType Name="V_Plani_EncabezadoHistorialPlanilla">
           <Key>
             <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
             <PropertyRef Name="NombreColaborador" />
             <PropertyRef Name="car_Descripcion" />
             <PropertyRef Name="area_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
             <PropertyRef Name="cpla_DescripcionPlanilla" />
             <PropertyRef Name="fpa_Descripcion" />
             <PropertyRef Name="peri_DescripPeriodo" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="NombreColaborador" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="car_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="area_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="fpa_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="DateTime" Precision="0" />
           <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="peri_DescripPeriodo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -10024,6 +10505,48 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cde_PorcentajeColaborador" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cde_PorcentajeEmpresa" Type="Decimal" Precision="16" Scale="4" />
         </EntityType>
+        <EntityType Name="V_PlanillaIngresos">
+          <Key>
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cpla_FrecuenciaEnDias" />
+            <PropertyRef Name="tpdi_IdDetallePlanillaIngreso" />
+            <PropertyRef Name="cin_IdIngreso" />
+            <PropertyRef Name="cin_DescripcionIngreso" />
+          </Key>
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cpla_FrecuenciaEnDias" Type="Int32" Nullable="false" />
+          <Property Name="tpdi_IdDetallePlanillaIngreso" Type="Int32" Nullable="false" />
+          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
+          <Property Name="cin_DescripcionIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_PreviewPlanilla">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="salarioBase" />
+            <PropertyRef Name="tmon_Id" />
+            <PropertyRef Name="tmon_Descripcion" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="per_Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="per_Edad" Type="Int32" />
+          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="salarioBase" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="tmon_Id" Type="Int32" Nullable="false" />
+          <Property Name="tmon_Descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="V_RAP_RPT">
           <Key>
             <PropertyRef Name="emp_Id" />
@@ -10052,6 +10575,60 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_ReportesVarios">
+          <Key>
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Fechaingreso" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="cpla_IdPlanilla" />
+            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="cpla_RecibeComision" />
+            <PropertyRef Name="cpla_Activo" />
+            <PropertyRef Name="hipa_IdHistorialDePago" />
+            <PropertyRef Name="hipa_FechaInicio" />
+            <PropertyRef Name="hipa_FechaFin" />
+            <PropertyRef Name="hipa_FechaPago" />
+            <PropertyRef Name="hipa_Anio" />
+            <PropertyRef Name="hipa_Mes" />
+            <PropertyRef Name="peri_IdPeriodo" />
+            <PropertyRef Name="hipa_FechaCrea" />
+            <PropertyRef Name="hipa_TotalISR" />
+            <PropertyRef Name="hipa_AFP" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
+          <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
+          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
+          <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
+          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hipa_TotalISR" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_ISRPendiente" Type="Boolean" />
+          <Property Name="hipa_AFP" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="4" />
         </EntityType>
         <EntityType Name="V_tbAdelantoSueldo">
           <Key>
@@ -11188,6 +11765,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fsel_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="*" />
@@ -11836,6 +12437,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbSucursales" Type="Self.tbSucursales" Multiplicity="*" />
@@ -12097,6 +12722,54 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbTitulosRequisicion">
               <PropertyRef Name="treq_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="pml_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12484,6 +13157,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+          <End Role="tbMotivoLiquidacion" Type="Self.tbMotivoLiquidacion" Multiplicity="0..1" />
+          <End Role="tbPorcentajeMotivoLiquidacion" Type="Self.tbPorcentajeMotivoLiquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Principal>
+            <Dependent Role="tbPorcentajeMotivoLiquidacion">
+              <PropertyRef Name="moli_IdMotivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
           <End Role="tbAreas" Type="Self.tbAreas" Multiplicity="1" />
           <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="*" />
@@ -12820,6 +13505,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="1" />
+          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_Id" />
+            </Principal>
+            <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="scan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
           <End Role="tbHabilidades" Type="Self.tbHabilidades" Multiplicity="1" />
           <End Role="tbHabilidadesPersona" Type="Self.tbHabilidadesPersona" Multiplicity="*" />
@@ -12889,6 +13598,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbHistorialAmonestaciones">
               <PropertyRef Name="tamo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id">
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="1" />
+          <End Role="tbHistorialContrataciones" Type="Self.tbHistorialContrataciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSeleccionCandidatos">
+              <PropertyRef Name="scan_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialContrataciones">
+              <PropertyRef Name="scan_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13048,6 +13769,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id">
+          <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPersonas">
+              <PropertyRef Name="per_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="per_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id">
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="1" />
           <End Role="tbTitulosPersona" Type="Self.tbTitulosPersona" Multiplicity="*" />
@@ -13092,6 +13825,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               <PropertyRef Name="req_Id" />
             </Principal>
             <Dependent Role="tbRequerimientosEspecialesRequisicion">
+              <PropertyRef Name="req_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+          <End Role="tbRequisiciones" Type="Self.tbRequisiciones" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRequisiciones">
+              <PropertyRef Name="req_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
               <PropertyRef Name="req_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -13184,7 +13929,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" />
           <EntitySet Name="tbISR" EntityType="Self.tbISR" />
           <EntitySet Name="tbLiquidacionVacaciones" EntityType="Self.tbLiquidacionVacaciones" />
+          <EntitySet Name="tbMotivoLiquidacion" EntityType="Self.tbMotivoLiquidacion" />
           <EntitySet Name="tbPeriodos" EntityType="Self.tbPeriodos" />
+          <EntitySet Name="tbPorcentajeMotivoLiquidacion" EntityType="Self.tbPorcentajeMotivoLiquidacion" />
           <EntitySet Name="tbPreaviso" EntityType="Self.tbPreaviso" />
           <EntitySet Name="tbTechosDeducciones" EntityType="Self.tbTechosDeducciones" />
           <EntitySet Name="tbTipoDeduccion" EntityType="Self.tbTipoDeduccion" />
@@ -13200,6 +13947,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" />
           <EntitySet Name="tbEquipoEmpleados" EntityType="Self.tbEquipoEmpleados" />
           <EntitySet Name="tbEquipoTrabajo" EntityType="Self.tbEquipoTrabajo" />
+          <EntitySet Name="tbFaseSeleccion" EntityType="Self.tbFaseSeleccion" />
           <EntitySet Name="tbFasesReclutamiento" EntityType="Self.tbFasesReclutamiento" />
           <EntitySet Name="tbHabilidades" EntityType="Self.tbHabilidades" />
           <EntitySet Name="tbHabilidadesPersona" EntityType="Self.tbHabilidadesPersona" />
@@ -13226,6 +13974,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbRequerimientosEspecialesPersona" EntityType="Self.tbRequerimientosEspecialesPersona" />
           <EntitySet Name="tbRequerimientosEspecialesRequisicion" EntityType="Self.tbRequerimientosEspecialesRequisicion" />
           <EntitySet Name="tbRequisiciones" EntityType="Self.tbRequisiciones" />
+          <EntitySet Name="tbSeleccionCandidatos" EntityType="Self.tbSeleccionCandidatos" />
           <EntitySet Name="tbSucursales" EntityType="Self.tbSucursales" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" />
@@ -13237,6 +13986,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" />
+          <EntitySet Name="EmpleadosVendedores" EntityType="Self.EmpleadosVendedores" />
           <EntitySet Name="V_AFP_RPT" EntityType="Self.V_AFP_RPT" />
           <EntitySet Name="V_BonosColaborador" EntityType="Self.V_BonosColaborador" />
           <EntitySet Name="V_CatalogoDeIngresos" EntityType="Self.V_CatalogoDeIngresos" />
@@ -13249,8 +13999,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" />
           <EntitySet Name="V_DecimoTercerMes_Pagados" EntityType="Self.V_DecimoTercerMes_Pagados" />
           <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="Self.V_DecimoTercerMes_RPT" />
+          <EntitySet Name="V_Deducciones_RPT" EntityType="Self.V_Deducciones_RPT" />
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" />
-          <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="Self.V_DeduccionesExtraordinarias_Detalles" />
           <EntitySet Name="V_DeduccionesExtraordinarias_Empleados" EntityType="Self.V_DeduccionesExtraordinarias_Empleados" />
           <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="Self.V_DeduccionesExtraordinarias_EquipoEmpleado" />
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" />
@@ -13261,6 +14011,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_IHSS_RPT" EntityType="Self.V_IHSS_RPT" />
           <EntitySet Name="V_INFOP_RPT" EntityType="Self.V_INFOP_RPT" />
           <EntitySet Name="V_InformacionColaborador" EntityType="Self.V_InformacionColaborador" />
+          <EntitySet Name="V_Ingresos_RPT" EntityType="Self.V_Ingresos_RPT" />
           <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="Self.V_InstitucionesFinancieras_RPT" />
           <EntitySet Name="V_ISR_RPT" EntityType="Self.V_ISR_RPT" />
           <EntitySet Name="V_Liquidaciones_RPT" EntityType="Self.V_Liquidaciones_RPT" />
@@ -13274,7 +14025,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" />
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" />
           <EntitySet Name="V_PlanillaDeducciones" EntityType="Self.V_PlanillaDeducciones" />
+          <EntitySet Name="V_PlanillaIngresos" EntityType="Self.V_PlanillaIngresos" />
+          <EntitySet Name="V_PreviewPlanilla" EntityType="Self.V_PreviewPlanilla" />
           <EntitySet Name="V_RAP_RPT" EntityType="Self.V_RAP_RPT" />
+          <EntitySet Name="V_ReportesVarios" EntityType="Self.V_ReportesVarios" />
           <EntitySet Name="V_tbAdelantoSueldo" EntityType="Self.V_tbAdelantoSueldo" />
           <EntitySet Name="V_tbCatalogoDeDeducciones" EntityType="Self.V_tbCatalogoDeDeducciones" />
           <EntitySet Name="V_tbCatalogoDeIngresos" EntityType="Self.V_tbCatalogoDeIngresos" />
@@ -13624,6 +14378,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
@@ -13840,6 +14602,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSeleccionCandidatos_scan_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbSucursales" EntitySet="tbSucursales" />
@@ -13927,6 +14697,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbMotivoLiquidacion_moli_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica" Association="Self.PK_Plani_tbUsuario_usu_Id_tbPorcentajeMotivoLiquidacion_pml_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_Plani_tbAdelantoSueldo_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -14056,6 +14842,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTipoDeduccion" EntitySet="tbTipoDeduccion" />
             <End Role="tbISR" EntitySet="tbISR" />
           </AssociationSet>
+          <AssociationSet Name="PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo" Association="Self.PK_Plani_tbMotivoLiquidacion_moli_IdMotivo_tbPorcentajeMotivoLiquidacion_moli_IdMotivo">
+            <End Role="tbMotivoLiquidacion" EntitySet="tbMotivoLiquidacion" />
+            <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id" Association="Self.FK_rrhh_tbAreas_area_Id_rrhh_tbDepartamentos_area_Id">
             <End Role="tbAreas" EntitySet="tbAreas" />
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
@@ -14168,6 +14958,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id" Association="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbFaseSeleccion_scan_Id">
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id" Association="Self.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
             <End Role="tbHabilidadesPersona" EntitySet="tbHabilidadesPersona" />
@@ -14191,6 +14989,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="Self.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" Association="Self.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id">
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+            <End Role="tbHistorialContrataciones" EntitySet="tbHistorialContrataciones" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id" Association="Self.FK_rrhh_tbJornadas_jor_Id_rrhh_tbHistorialHorasTrabajadas_jor_Id">
             <End Role="tbJornadas" EntitySet="tbJornadas" />
@@ -14244,6 +15046,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbRequerimientosEspecialesPersona" EntitySet="tbRequerimientosEspecialesPersona" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id">
+            <End Role="tbPersonas" EntitySet="tbPersonas" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id" Association="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id">
             <End Role="tbPersonas" EntitySet="tbPersonas" />
             <End Role="tbTitulosPersona" EntitySet="tbTitulosPersona" />
@@ -14259,6 +15065,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbRequerimientosEspecialesRequisicion" EntitySet="tbRequerimientosEspecialesRequisicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id">
+            <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" Association="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
@@ -14280,6 +15090,36 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ERP_GMEDINAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ERP_GMEDINAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result)">
           <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -14460,6 +15300,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cin_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cin_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result)">
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result)">
           <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -14622,6 +15467,28 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="hdli_liqu_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hdli_liqu_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbHistorialDePago_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbHistorialDePago_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_SueldoNeto" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hipa_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hipa_FechaPago" Mode="In" Type="DateTime" />
+            <Parameter Name="hipa_Anio" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_Mes" Mode="In" Type="Int32" />
+            <Parameter Name="peri_IdPeriodo" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hipa_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="hipa_TotalISR" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_ISRPendiente" Mode="In" Type="Boolean" />
+            <Parameter Name="hipa_AFP" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalHorasConPermisoJustificado" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalComisiones" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalHorasExtras" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalVacaciones" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalSeptimoDia" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_AdelantoSueldo" Mode="In" Type="Decimal" />
+            <Parameter Name="hipa_TotalSalario" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Insert_Result)">
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
             <Parameter Name="insf_Contacto" Mode="In" Type="String" />
@@ -14782,33 +15649,19 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbHistorialDePago_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbHistorialDePago_Insert_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hipa_SueldoNeto" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="hipa_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="hipa_FechaPago" Mode="In" Type="DateTime" />
-            <Parameter Name="hipa_Anio" Mode="In" Type="Int32" />
-            <Parameter Name="hipa_Mes" Mode="In" Type="Int32" />
-            <Parameter Name="peri_IdPeriodo" Mode="In" Type="Int32" />
-            <Parameter Name="hipa_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="hipa_FechaCrea" Mode="In" Type="DateTime" />
-            <Parameter Name="hipa_TotalISR" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_ISRPendiente" Mode="In" Type="Boolean" />
-            <Parameter Name="hipa_AFP" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalHorasConPermisoJustificado" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalComisiones" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalHorasExtras" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalVacaciones" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalSeptimoDia" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_AdelantoSueldo" Mode="In" Type="Decimal" />
-            <Parameter Name="hipa_TotalSalario" Mode="In" Type="Decimal" />
-          </FunctionImport>
-          <EntitySet Name="V_ReportesVarios" EntityType="ERP_GMEDINAModel.V_ReportesVarios" />
-          <EntitySet Name="V_Deducciones_RPT" EntityType="ERP_GMEDINAModel.V_Deducciones_RPT" />
-          <EntitySet Name="V_PlanillaIngresos" EntityType="ERP_GMEDINAModel.V_PlanillaIngresos" />
-          <EntitySet Name="V_PreviewPlanilla" EntityType="ERP_GMEDINAModel.V_PreviewPlanilla" />
+          <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
           <Property Type="String" Name="cde_DescripcionDeduccion" Nullable="true" MaxLength="50" />
@@ -14903,6 +15756,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbCatalogoDeIngresos_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
@@ -14967,6 +15823,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbHistorialDePago_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Insert_Result">
@@ -15047,129 +15906,38 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_tbTipoPlanillaDetalleIngreso_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbHistorialDePago_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <EntityType Name="V_ReportesVarios">
+        <EntityType Name="V_DeduccionesExtraordinarias_Detalles">
           <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="emp_Fechaingreso" />
-            <PropertyRef Name="emp_Estado" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="cpla_RecibeComision" />
-            <PropertyRef Name="cpla_Activo" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="hipa_FechaInicio" />
-            <PropertyRef Name="hipa_FechaFin" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="hipa_Anio" />
-            <PropertyRef Name="hipa_Mes" />
-            <PropertyRef Name="peri_IdPeriodo" />
-            <PropertyRef Name="hipa_FechaCrea" />
-            <PropertyRef Name="hipa_TotalISR" />
-            <PropertyRef Name="hipa_AFP" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_RecibeComision" Type="Boolean" Nullable="false" />
-          <Property Name="cpla_Activo" Type="Boolean" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_Anio" Type="Int32" Nullable="false" />
-          <Property Name="hipa_Mes" Type="Int32" Nullable="false" />
-          <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="hipa_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_ISRPendiente" Type="Boolean" />
-          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasConPermisoJustificado" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalComisiones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalHorasExtras" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalVacaciones" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSeptimoDia" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_AdelantoSueldo" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_TotalSalario" Type="Decimal" Precision="16" Scale="4" />
-        </EntityType>
-        <EntityType Name="V_Deducciones_RPT">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="dex_IdDeduccionesExtra" />
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="per_Empleado" />
             <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-            <PropertyRef Name="hipa_FechaInicio" />
-            <PropertyRef Name="hipa_FechaFin" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
+            <PropertyRef Name="dex_UsuarioCrea" />
+            <PropertyRef Name="dex_FechaCrea" />
+            <PropertyRef Name="dex_Activo" />
           </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="car_Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="area_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Id" Type="Int32" />
+          <Property Name="eqtra_Codigo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dex_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_PlanillaIngresos">
-          <Key>
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-            <PropertyRef Name="cpla_FrecuenciaEnDias" />
-            <PropertyRef Name="tpdi_IdDetallePlanillaIngreso" />
-            <PropertyRef Name="cin_IdIngreso" />
-            <PropertyRef Name="cin_DescripcionIngreso" />
-          </Key>
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_FrecuenciaEnDias" Type="Int32" Nullable="false" />
-          <Property Name="tpdi_IdDetallePlanillaIngreso" Type="Int32" Nullable="false" />
-          <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
-          <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_PreviewPlanilla">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombres" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="salarioBase" />
-            <PropertyRef Name="tmon_Id" />
-            <PropertyRef Name="tmon_Descripcion" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="per_Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="per_Edad" Type="Int32" />
-          <Property Name="per_Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="per_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_EstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="salarioBase" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="tmon_Id" Type="Int32" Nullable="false" />
-          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="usu_UsuarioCrea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dex_UsuarioModifica" Type="Int32" />
+          <Property Name="usu_UsuarioModifica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15604,6 +16372,20 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbMotivoLiquidacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbMotivoLiquidacion">
+              <MappingFragment StoreEntitySet="tbMotivoLiquidacion">
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+                <ScalarProperty Name="moli_Descripcion" ColumnName="moli_Descripcion" />
+                <ScalarProperty Name="moli_UsuarioCrea" ColumnName="moli_UsuarioCrea" />
+                <ScalarProperty Name="moli_FechaCrea" ColumnName="moli_FechaCrea" />
+                <ScalarProperty Name="moli_UsuarioModifica" ColumnName="moli_UsuarioModifica" />
+                <ScalarProperty Name="moli_FechaModifica" ColumnName="moli_FechaModifica" />
+                <ScalarProperty Name="moli_Activo" ColumnName="moli_Activo" />
+                <ScalarProperty Name="moli_RazonInactivo" ColumnName="moli_RazonInactivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbPeriodos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPeriodos">
               <MappingFragment StoreEntitySet="tbPeriodos">
@@ -15614,6 +16396,25 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="peri_UsuarioModifica" ColumnName="peri_UsuarioModifica" />
                 <ScalarProperty Name="peri_FechaModifica" ColumnName="peri_FechaModifica" />
                 <ScalarProperty Name="peri_Activo" ColumnName="peri_Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPorcentajeMotivoLiquidacion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPorcentajeMotivoLiquidacion">
+              <MappingFragment StoreEntitySet="tbPorcentajeMotivoLiquidacion">
+                <ScalarProperty Name="pml_IdPorcentajeMotivoLiquidacion" ColumnName="pml_IdPorcentajeMotivoLiquidacion" />
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+                <ScalarProperty Name="pml_Preaviso" ColumnName="pml_Preaviso" />
+                <ScalarProperty Name="pml_Cesantia" ColumnName="pml_Cesantia" />
+                <ScalarProperty Name="pml_DecimoTercerProp" ColumnName="pml_DecimoTercerProp" />
+                <ScalarProperty Name="pml_DecimoCuartoProp" ColumnName="pml_DecimoCuartoProp" />
+                <ScalarProperty Name="pml_Vacaciones" ColumnName="pml_Vacaciones" />
+                <ScalarProperty Name="pml_UsuarioCrea" ColumnName="pml_UsuarioCrea" />
+                <ScalarProperty Name="pml_FechaCrea" ColumnName="pml_FechaCrea" />
+                <ScalarProperty Name="pml_UsuarioModifica" ColumnName="pml_UsuarioModifica" />
+                <ScalarProperty Name="pml_FechaModifica" ColumnName="pml_FechaModifica" />
+                <ScalarProperty Name="pml_Activo" ColumnName="pml_Activo" />
+                <ScalarProperty Name="pml_RazonInactivo" ColumnName="pml_RazonInactivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -15848,6 +16649,20 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="eqtra_FechaCrea" ColumnName="eqtra_FechaCrea" />
                 <ScalarProperty Name="eqtra_UsuarioModifica" ColumnName="eqtra_UsuarioModifica" />
                 <ScalarProperty Name="eqtra_FechaModifica" ColumnName="eqtra_FechaModifica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbFaseSeleccion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbFaseSeleccion">
+              <MappingFragment StoreEntitySet="tbFaseSeleccion">
+                <ScalarProperty Name="fsel_Id" ColumnName="fsel_Id" />
+                <ScalarProperty Name="fsel_Estado" ColumnName="fsel_Estado" />
+                <ScalarProperty Name="fsel_RazonInactivo" ColumnName="fsel_RazonInactivo" />
+                <ScalarProperty Name="fsel_UsuarioCrea" ColumnName="fsel_UsuarioCrea" />
+                <ScalarProperty Name="fsel_FechaCrea" ColumnName="fsel_FechaCrea" />
+                <ScalarProperty Name="fsel_UsuarioModifica" ColumnName="fsel_UsuarioModifica" />
+                <ScalarProperty Name="fsel_FechaModifica" ColumnName="fsel_FechaModifica" />
+                <ScalarProperty Name="scan_Id" ColumnName="scan_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -16290,6 +17105,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbSeleccionCandidatos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbSeleccionCandidatos">
+              <MappingFragment StoreEntitySet="tbSeleccionCandidatos">
+                <ScalarProperty Name="scan_Id" ColumnName="scan_Id" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="fare_Id" ColumnName="fare_Id" />
+                <ScalarProperty Name="scan_Fecha" ColumnName="scan_Fecha" />
+                <ScalarProperty Name="scan_Estado" ColumnName="scan_Estado" />
+                <ScalarProperty Name="scan_RazonInactivo" ColumnName="scan_RazonInactivo" />
+                <ScalarProperty Name="scan_UsuarioCrea" ColumnName="scan_UsuarioCrea" />
+                <ScalarProperty Name="scan_FechaCrea" ColumnName="scan_FechaCrea" />
+                <ScalarProperty Name="scan_UsuarioModifica" ColumnName="scan_UsuarioModifica" />
+                <ScalarProperty Name="scan_FechaModifica" ColumnName="scan_FechaModifica" />
+                <ScalarProperty Name="req_Id" ColumnName="req_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbSucursales">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbSucursales">
               <MappingFragment StoreEntitySet="tbSucursales">
@@ -16455,6 +17287,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="treq_FechaCrea" ColumnName="treq_FechaCrea" />
                 <ScalarProperty Name="treq_UsuarioModifica" ColumnName="treq_UsuarioModifica" />
                 <ScalarProperty Name="treq_FechaModifica" ColumnName="treq_FechaModifica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadosVendedores">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.EmpleadosVendedores">
+              <MappingFragment StoreEntitySet="EmpleadosVendedores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -16632,6 +17472,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_Deducciones_RPT">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Deducciones_RPT">
+              <MappingFragment StoreEntitySet="V_Deducciones_RPT">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
+                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
+                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
+                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
+                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_DeduccionesExtraordinarias">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias">
               <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias">
@@ -16642,34 +17499,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
                 <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DeduccionesExtraordinarias_Detalles">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles">
-              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Detalles">
-                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
-                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
-                <ScalarProperty Name="car_Cargo" ColumnName="car_Cargo" />
-                <ScalarProperty Name="depto_Departamento" ColumnName="depto_Departamento" />
-                <ScalarProperty Name="area_Area" ColumnName="area_Area" />
-                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
-                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
-                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
-                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
-                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
-                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
-                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
-                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
-                <ScalarProperty Name="usu_UsuarioCrea" ColumnName="usu_UsuarioCrea" />
-                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
-                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
-                <ScalarProperty Name="usu_UsuarioModifica" ColumnName="usu_UsuarioModifica" />
-                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
-                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -16858,6 +17687,23 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_Ingresos_RPT">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Ingresos_RPT">
+              <MappingFragment StoreEntitySet="V_Ingresos_RPT">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
+                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
+                <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
+                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
+                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_InstitucionesFinancieras_RPT">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT">
               <MappingFragment StoreEntitySet="V_InstitucionesFinancieras_RPT">
@@ -16957,12 +17803,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySetMapping Name="V_Plani_EncabezadoHistorialPlanilla">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_EncabezadoHistorialPlanilla">
               <MappingFragment StoreEntitySet="V_Plani_EncabezadoHistorialPlanilla">
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
                 <ScalarProperty Name="NombreColaborador" ColumnName="NombreColaborador" />
                 <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
                 <ScalarProperty Name="area_Descripcion" ColumnName="area_Descripcion" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
                 <ScalarProperty Name="fpa_Descripcion" ColumnName="fpa_Descripcion" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
@@ -17035,6 +17881,38 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_PlanillaIngresos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_PlanillaIngresos">
+              <MappingFragment StoreEntitySet="V_PlanillaIngresos">
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_FrecuenciaEnDias" ColumnName="cpla_FrecuenciaEnDias" />
+                <ScalarProperty Name="tpdi_IdDetallePlanillaIngreso" ColumnName="tpdi_IdDetallePlanillaIngreso" />
+                <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
+                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_PreviewPlanilla">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_PreviewPlanilla">
+              <MappingFragment StoreEntitySet="V_PreviewPlanilla">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
+                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
+                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
+                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
+                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
+                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
+                <ScalarProperty Name="salarioBase" ColumnName="salarioBase" />
+                <ScalarProperty Name="tmon_Id" ColumnName="tmon_Id" />
+                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_RAP_RPT">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RAP_RPT">
               <MappingFragment StoreEntitySet="V_RAP_RPT">
@@ -17051,6 +17929,42 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
                 <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
                 <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ReportesVarios">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_ReportesVarios">
+              <MappingFragment StoreEntitySet="V_ReportesVarios">
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
+                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
+                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
+                <ScalarProperty Name="cpla_RecibeComision" ColumnName="cpla_RecibeComision" />
+                <ScalarProperty Name="cpla_Activo" ColumnName="cpla_Activo" />
+                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
+                <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
+                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
+                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
+                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
+                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
+                <ScalarProperty Name="hipa_Mes" ColumnName="hipa_Mes" />
+                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
+                <ScalarProperty Name="hipa_FechaCrea" ColumnName="hipa_FechaCrea" />
+                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
+                <ScalarProperty Name="hipa_ISRPendiente" ColumnName="hipa_ISRPendiente" />
+                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
+                <ScalarProperty Name="hipa_TotalHorasConPermisoJustificado" ColumnName="hipa_TotalHorasConPermisoJustificado" />
+                <ScalarProperty Name="hipa_TotalComisiones" ColumnName="hipa_TotalComisiones" />
+                <ScalarProperty Name="hipa_TotalHorasExtras" ColumnName="hipa_TotalHorasExtras" />
+                <ScalarProperty Name="hipa_TotalVacaciones" ColumnName="hipa_TotalVacaciones" />
+                <ScalarProperty Name="hipa_TotalSeptimoDia" ColumnName="hipa_TotalSeptimoDia" />
+                <ScalarProperty Name="hipa_AdelantoSueldo" ColumnName="hipa_AdelantoSueldo" />
+                <ScalarProperty Name="hipa_TotalSalario" ColumnName="hipa_TotalSalario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -17133,6 +18047,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ERP_GMEDINAModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ERP_GMEDINAModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ERP_GMEDINAModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ERP_GMEDINAModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ERP_GMEDINAModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ERP_GMEDINAModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ERP_GMEDINAModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result">
@@ -17347,6 +18285,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Inactivar" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result">
@@ -17497,6 +18442,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbHistorialDeLiquidaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbHistorialDeLiquidaciones_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbHistorialDePago_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbHistorialDePago_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbHistorialDePago_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -17683,95 +18635,31 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbHistorialDePago_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbHistorialDePago_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbHistorialDePago_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="V_ReportesVarios">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_ReportesVarios">
-              <MappingFragment StoreEntitySet="V_ReportesVarios">
-                <ScalarProperty Name="hipa_TotalSalario" ColumnName="hipa_TotalSalario" />
-                <ScalarProperty Name="hipa_AdelantoSueldo" ColumnName="hipa_AdelantoSueldo" />
-                <ScalarProperty Name="hipa_TotalSeptimoDia" ColumnName="hipa_TotalSeptimoDia" />
-                <ScalarProperty Name="hipa_TotalVacaciones" ColumnName="hipa_TotalVacaciones" />
-                <ScalarProperty Name="hipa_TotalHorasExtras" ColumnName="hipa_TotalHorasExtras" />
-                <ScalarProperty Name="hipa_TotalComisiones" ColumnName="hipa_TotalComisiones" />
-                <ScalarProperty Name="hipa_TotalHorasConPermisoJustificado" ColumnName="hipa_TotalHorasConPermisoJustificado" />
-                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
-                <ScalarProperty Name="hipa_ISRPendiente" ColumnName="hipa_ISRPendiente" />
-                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
-                <ScalarProperty Name="hipa_FechaCrea" ColumnName="hipa_FechaCrea" />
-                <ScalarProperty Name="peri_IdPeriodo" ColumnName="peri_IdPeriodo" />
-                <ScalarProperty Name="hipa_Mes" ColumnName="hipa_Mes" />
-                <ScalarProperty Name="hipa_Anio" ColumnName="hipa_Anio" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
-                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
-                <ScalarProperty Name="hipa_SueldoNeto" ColumnName="hipa_SueldoNeto" />
-                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
-                <ScalarProperty Name="cpla_Activo" ColumnName="cpla_Activo" />
-                <ScalarProperty Name="cpla_RecibeComision" ColumnName="cpla_RecibeComision" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Deducciones_RPT">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Deducciones_RPT">
-              <MappingFragment StoreEntitySet="V_Deducciones_RPT">
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="hipa_FechaFin" ColumnName="hipa_FechaFin" />
-                <ScalarProperty Name="hipa_FechaInicio" ColumnName="hipa_FechaInicio" />
-                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
+          <EntitySetMapping Name="V_DeduccionesExtraordinarias_Detalles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles">
+              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Detalles">
+                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
+                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
+                <ScalarProperty Name="usu_UsuarioModifica" ColumnName="usu_UsuarioModifica" />
+                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
+                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
+                <ScalarProperty Name="usu_UsuarioCrea" ColumnName="usu_UsuarioCrea" />
+                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
                 <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
                 <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_PlanillaIngresos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_PlanillaIngresos">
-              <MappingFragment StoreEntitySet="V_PlanillaIngresos">
-                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
-                <ScalarProperty Name="cin_IdIngreso" ColumnName="cin_IdIngreso" />
-                <ScalarProperty Name="tpdi_IdDetallePlanillaIngreso" ColumnName="tpdi_IdDetallePlanillaIngreso" />
-                <ScalarProperty Name="cpla_FrecuenciaEnDias" ColumnName="cpla_FrecuenciaEnDias" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_PreviewPlanilla">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_PreviewPlanilla">
-              <MappingFragment StoreEntitySet="V_PreviewPlanilla">
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
-                <ScalarProperty Name="tmon_Id" ColumnName="tmon_Id" />
-                <ScalarProperty Name="salarioBase" ColumnName="salarioBase" />
-                <ScalarProperty Name="per_EstadoCivil" ColumnName="per_EstadoCivil" />
-                <ScalarProperty Name="per_CorreoElectronico" ColumnName="per_CorreoElectronico" />
-                <ScalarProperty Name="per_Telefono" ColumnName="per_Telefono" />
-                <ScalarProperty Name="per_Direccion" ColumnName="per_Direccion" />
-                <ScalarProperty Name="per_Edad" ColumnName="per_Edad" />
-                <ScalarProperty Name="per_Sexo" ColumnName="per_Sexo" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
+                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
+                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
+                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
+                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
+                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
+                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
+                <ScalarProperty Name="area_Area" ColumnName="area_Area" />
+                <ScalarProperty Name="depto_Departamento" ColumnName="depto_Departamento" />
+                <ScalarProperty Name="car_Cargo" ColumnName="car_Cargo" />
+                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
+                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

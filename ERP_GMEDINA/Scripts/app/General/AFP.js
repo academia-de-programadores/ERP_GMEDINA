@@ -46,8 +46,9 @@ function cargarGridDeducciones() {
                     '<td>' + ListaAFP[i].afp_InteresAnual + '</td>' +
                     '<td>' + ListaAFP[i].tde_Descripcion + '</td>' +
                     '<td>' +
-                    '<button type="button" data-id = "' + ListaAFP[i].afp_Id + '" class="btn btn-primary btn-xs" id="btnEditarAFP">Editar</button>' +
-                    '<button type="button" data-id = "' + ListaAFP[i].afp_Id + '" class="btn btn-default btn-xs" id="btnDetalleAFP">Detalle</button>' +
+
+                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' +
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -76,6 +77,35 @@ $("#btnIconCerrar").click(function () {
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+        </div>`;
+}
+
+const btnGuardar = $('#btnCreateRegistroAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
 $(document).on("click", "#btnAgregarAFP", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
@@ -97,47 +127,57 @@ $(document).on("click", "#btnAgregarAFP", function () {
     $("#Crear #afp_AporteMinimoLps").val('');
     $("#Crear #afp_InteresAporte").val('');
     $("#Crear #afp_InteresAnual").val('');
+
 });
+
+$("#validatione1").css("display", "none");
+$("#validatione2").css("display", "none");
+$("#validatione3").css("display", "none");
+$("#validatione4").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #tde_IdTipoDedu").val();
-    console.log(val1)
     var val2 = $("#Crear #afp_Descripcion").val();
     var val3 = $("#Crear #afp_AporteMinimoLps").val();
     var val4 = $("#Crear #afp_InteresAporte").val();
     var val5 = $("#Crear #afp_InteresAnual").val();
 
-    if (val2 == "") {
-        $("#Crear #validation1").css("display", "");
-    }
-    else {
-        $("#Crear #validation1").css("display", "none");
-    }
 
-    if (val3 == "" || val3 == null || val3 == undefined) {
-        $("#Crear #validation2").css("display", "");
-    }
-    else {
-        $("#Crear #validation2").css("display", "none");
-    }
+        if (val2 == "") {
+            $("#Crear #validation1").css("display", "");
+        }
+        else {
+            $("#Crear #validation1").css("display", "none");
+        }
 
-    if (val4 == "" || val4 == null || val4 == undefined) {
-        $("#Crear #validation3").css("display", "");
-    }
-    else {
-        $("#Crear #validation3").css("display", "none");
-    }
-    if (val5 == "" || val5 == null || val5 == undefined) {
-        $("#Crear #validation4").css("display", "");
-    }
-    else {
-        $("#Crear #validation4").css("display", "none");
-    }
+        if (val3 == "" || val3 == null || val3 == undefined) {
+            $("#Crear #validation2").css("display", "");
+        }
+        else {
+            $("#Crear #validation2").css("display", "none");
+        }
+
+        if (val4 == "" || val4 == null || val4 == undefined) {
+            $("#Crear #validation3").css("display", "");
+        }
+        else {
+            $("#Crear #validation3").css("display", "none");
+        }
+        if (val5 == "" || val5 == null || val5 == undefined) {
+            $("#Crear #validation4").css("display", "");
+        }
+        else {
+            $("#Crear #validation4").css("display", "none");
+        }
+        
+        mostrarCargandoCrear();
+
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateAFP").serializeArray();
+        var data = $("#frmCreateAFP").serializeArray();
+
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
     $.ajax({
         url: "/AFP/Create",
@@ -161,9 +201,17 @@ $('#btnCreateRegistroAFP').click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
+                message: 'El registro se agregó de forma exitosa!',
             });
         }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Datos Invalidos!',
+            });
+        }
+        
+        ocultarCargandoCrear();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -194,6 +242,24 @@ $("#btnIconCerrare").click(function () {
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+
+const btnEditar = $('#btnEditAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoEditar = $('#cargandoEditar')
+
+function ocultarCargandoEditar() {
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+
+function mostrarCargandoEditar() {
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
 $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
     var ID = $(this).data('id');
     $.ajax({
@@ -279,6 +345,7 @@ $("#btnEditAFP").click(function () {
     else {
         $("#Editar #validatione4").css("display", "none");
     }
+    mostrarCargandoEditar();
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditarAFP").serializeArray();
@@ -300,10 +367,18 @@ $("#btnEditAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                message: 'El registro se editó de forma exitosa!',
             });
 
         }
+        else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Datos Invalidos!',
+            });
+        }
+        
+        ocultarCargandoEditar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -335,18 +410,18 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 var FechaCrea = FechaFormato(data[0].afp_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].afp_FechaModifica);
                 $(".field-validation-error").css('display', 'none');
-                $("#Detalles #afp_Id").val(data[0].afp_Id);
-                $("#Detalles #afp_Descripcion").val(data[0].afp_Descripcion);
-                $("#Detalles #afp_AporteMinimoLps").val(data[0].afp_AporteMinimoLps);
-                $("#Detalles #afp_InteresAporte").val(data[0].afp_InteresAporte);
-                $("#Detalles #afp_InteresAnual").val(data[0].afp_InteresAnual);
-                $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #afp_UsuarioCrea").val(data[0].afp_UsuarioCrea);
-                $("#Detalles #afp_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #afp_UsuarioModifica").val(data[0].afp_UsuarioModifica);
-                $("#Detalles #afp_FechaModifica").val(FechaModifica);
+                $("#Detalles #afp_Id").html(data[0].afp_Id);
+                $("#Detalles #afp_Descripcion").html(data[0].afp_Descripcion);
+                $("#Detalles #afp_AporteMinimoLps").html(data[0].afp_AporteMinimoLps);
+                $("#Detalles #afp_InteresAporte").html(data[0].afp_InteresAporte);
+                $("#Detalles #afp_InteresAnual").html(data[0].afp_InteresAnual);
+                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #afp_UsuarioCrea").html(data[0].afp_UsuarioCrea);
+                $("#Detalles #afp_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #afp_UsuarioModifica").html(data[0].afp_UsuarioModifica);
+                $("#Detalles #afp_FechaModifica").html(FechaModifica);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].tde_IdTipoDedu;
@@ -384,9 +459,28 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 
 //Inactivar//
 $(document).on("click", "#btnInactivarAFP", function () {
+    $("#EditarAFP").modal('hide');
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarAFP").modal();
 });
+
+const btnInhabilitar = $('#btnInactivarRegistroAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoInhabilitar = $('#cargandoInhabilitar')
+
+function ocultarCargandoInhabilitar() {
+    btnInhabilitar.show();
+    cargandoInhabilitar.html('');
+    cargandoInhabilitar.hide();
+}
+
+function mostrarCargandoInhabilitar() {
+    btnInhabilitar.hide();
+    cargandoInhabilitar.html(spinner());
+    cargandoInhabilitar.show();
+}
+
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroAFP").click(function () {
@@ -406,6 +500,7 @@ $("#btnInactivarRegistroAFP").click(function () {
             });
         }
         else {
+            mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
 
@@ -416,9 +511,10 @@ $("#btnInactivarRegistroAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro se inhabilitó de forma exitosa!',
             });
         }
+        ocultarCargandoInhabilitar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal

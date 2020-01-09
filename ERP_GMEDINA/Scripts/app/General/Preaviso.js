@@ -1,4 +1,8 @@
 ﻿var IDInactivar = 0;
+
+const btnGuardar = $('#btnCrearPreavisoConfirmar'),
+cargandoCrearcargandoCrear = $('#cargandoCrear'),
+cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
@@ -48,11 +52,9 @@ function cargarGridPreaviso() {
                     '<td>' + ListaPreaviso[i].prea_RangoInicioMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_RangoFinMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_DiasPreaviso + '</td>' +
-                    '<td>' + FechaCrea + '</td>' +
-                    '<td>' + ListaPreaviso[i].NombreUsuarioCrea + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs" id="btnEditarPreaviso">Editar</button>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs" id="btnDetallePreaviso">Detalles</button>' +
+                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePreaviso">Detalle</button>' +
+                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs" id="btnEditarPreaviso">Editar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -80,6 +82,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     var data = $("#frmCreatePreaviso").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearPreaviso #Crear #prea_RangoInicioMeses").val() != "") {
+        mostrarCargandoCrear();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/Preaviso/Create",
@@ -95,6 +98,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
                     title: 'Exito',
                     message: '¡Se registró de forma exitosa!',
                 });
+                ocultarCargandoCrear();
             }
         });
     }
@@ -236,6 +240,29 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function
             }
         });
 });
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
 
 //*****************CREAR******************//
 

@@ -18,8 +18,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: tbCatalogoDeIngresos
         public ActionResult Index()
         {
-            var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.cin_FechaCrea);
-            //.Where(x => x.cin_Activo == true)
+            var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1)
+           .OrderByDescending(x => x.cin_FechaCrea);
+            //.Where(x => x.cin_Activo == true);
             return View(tbCatalogoDeIngresos.ToList());
         }
 
@@ -29,13 +30,13 @@ namespace ERP_GMEDINA.Controllers
                         .Select(c => new {
                                            cin_IdIngresos = c.cin_IdIngreso,
                                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
-                                           cin_Activo = c.cin_Activo,
+                                           cin_Activo = ((c.cin_Activo == true)? "Activo" : "Inactivo"),
                                            cin_UsuarioCrea = c.cin_UsuarioCrea,
                                            cin_FechaCrea = c.cin_FechaCrea,
                                            cin_UsuarioModifica= c.cin_UsuarioModifica,
                                            cin_FechaModifica = c.cin_FechaModifica})
                                            .OrderByDescending(x => x.cin_FechaCrea)
-                                           //.Where(x => x.cin_Activo == true)
+                                          // .Where(x => x.cin_Activo == true)
                                            .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

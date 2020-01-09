@@ -1,79 +1,69 @@
 ﻿@model ERP_GMEDINA.Models.tbTechosDeducciones
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsTechosDeducciones" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="ibox-content" style="border-color:#fff;">
+{ 
+@Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-md-2">Deducción</label>
+        <div class="col-md-10">
+            <select id="cde_IdDeducciones" name="cde_IdDeducciones" class="form-control" disabled="disabled"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Techo</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.tddu_Techo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">% colaboradores</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.tddu_PorcentajeColaboradores, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class = "control-label col-md-2">% empresa</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.tddu_PorcentajeEmpresa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    
+</div>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h2>Auditoría</h2>
+    </div>
+    <div class="ibox-content">
         <div class="form-horizontal">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="">Deducción</label>
-                </div>
-                <div class="col-md-6">
-                    <span id="cde_IdDeducciones" name="cde_IdDeducciones"></span>
-                </div>
-            </div><br>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="">Techo</label>
-                </div>
-                <div class="col-md-6">
-                    <span id="tddu_Techo">@Html.DisplayFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                </div>
-            </div><br>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="">% colaboradores</label>
-                </div>
-                <div class="col-md-6">
-                    <span id="tddu_PorcentajeColaboradores">@Html.DisplayFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                </div>
-            </div><br>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="">% empresa</label>
-                </div>
-                <div class="col-md-6">
-                    <span id="tddu_PorcentajeEmpresa">@Html.DisplayFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
-                </div>
-            </div>
+            <table class="table table-striped table-bordered dataTable">
+                <thead>
+                    <tr>
+                        <th>Acción</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Creado</td>
+                        @Html.HiddenFor(model => model.tddu_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        <td>@Html.EditorFor(model => model.tddu_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                    </tr>
+                    <tr>
+                        <td>Modificado</td>
+                        @Html.HiddenFor(model => model.tddu_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                        <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                        <td>@Html.EditorFor(model => model.tddu_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h3>Auditoría</h3>
-        </div>
-        <div class="ibox-content">
-            <div class="form-horizontal">
-                <table class="table table-striped table-bordered dataTable">
-                    <thead>
-                        <tr>
-                            <th>Acción</th>
-                            <th>Usuario</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Creado</td>
-                            @Html.HiddenFor(model => model.tddu_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                            <td><span id="tddu_FechaCrea">@Html.DisplayFor(model => model.tddu_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                        </tr>
-                        <tr>
-                            <td>Modificado</td>
-                            @Html.HiddenFor(model => model.tddu_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                            <td><span id="tddu_FechaModifica">@Html.DisplayFor(model => model.tddu_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+</div>
 }

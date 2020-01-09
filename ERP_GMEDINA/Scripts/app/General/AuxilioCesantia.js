@@ -4,7 +4,8 @@ function _ajax(params, uri, type, callback) {
         url: uri,
         type: type,
         data: { params },
-        success: function (data) {
+        success: function (data)
+        {
             callback(data);
         }
     });
@@ -28,7 +29,8 @@ function cargarGridAuxilioCesantia() {
         '/AuxilioDeCesantias/GetData',
         'GET',
         (data) => {
-            if (data.length == 0) {
+            if (data.length == 0)
+            {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
@@ -38,7 +40,8 @@ function cargarGridAuxilioCesantia() {
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaAuxCes = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaAuxCes.length; i++) {
+            for (var i = 0; i < ListaAuxCes.length; i++)
+            {
                 template += '<tr data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '">' +
                     '<td>' + ListaAuxCes[i].aces_IdAuxilioCesantia + '</td>' +
                     '<td>' + ListaAuxCes[i].aces_RangoInicioMeses + '</td>' +
@@ -57,7 +60,8 @@ function cargarGridAuxilioCesantia() {
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnModalCrear", function () {
+$(document).on("click", "#btnModalCrear", function ()
+{
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #aces_RangoInicioMeses").val('');
     $("#Crear #aces_RangoFinMeses").val('');
@@ -65,12 +69,14 @@ $(document).on("click", "#btnModalCrear", function () {
     $("#frmCrearAuxCes").modal();
 });
 
-$("#frmCrearAuxCes").submit(function (e) {
+$("#frmCrearAuxCes").submit(function (e)
+{
     return false;
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCrearAuxCes').click(function () {
+$('#btnCrearAuxCes').click(function ()
+{
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCrearAuxCess").serializeArray();
 
@@ -78,19 +84,22 @@ $('#btnCrearAuxCes').click(function () {
     var rangoFin = $("#Crear #aces_RangoFinMeses").val();
     var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
 
-    // console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
+   // console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
 
     //VALIDAMOS LOS CAMPOS
-    if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0) {
+    if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0)
+    {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/AuxilioDeCesantias/Create",
             method: "POST",
             data: data
-        }).done(function (data) {
+        }).done(function (data)
+        {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
 
-            if (data == "error") {
+            if (data == "error")
+            {
                 $("#frmCrearAuxCes").modal('hide');
                 iziToast.error({
                     title: 'Error',
@@ -112,7 +121,8 @@ $('#btnCrearAuxCes').click(function () {
 
         });
     }
-    else {
+    else
+    {
         $("#rangoinicio").focus();
         iziToast.error({
             title: 'Error',
@@ -151,9 +161,11 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", functio
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data) {
+        .done(function (data)
+        {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
+            if (data)
+            {
                 console.log('la data es:');
                 console.log(data);
                 console.log(data);
@@ -193,9 +205,11 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalEdit", function ()
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data) {
+        .done(function (data)
+        {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
+            if (data)
+            {
                 var FechaModifica = FechaFormato(data.aces_FechaModifica);
                 $("#frmEditarAuxCes #aces_IdAuxilioCesantia").val(data.aces_IdAuxilioCesantia);
                 $("#frmEditarAuxCes #aces_RangoInicioMeses").val(data.aces_RangoInicioMeses);
@@ -205,7 +219,8 @@ $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalEdit", function ()
                 $("#aces_FechaModifica").val(FechaModifica);
                 $("#frmEditarAuxCes").modal();
             }
-            else {
+            else
+            {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
@@ -220,7 +235,7 @@ $("#btnUpdateAuxCes").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditarAuxCesan").serializeArray();
-    // var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
+   // var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
     var rangoInicio = $("#Editar #aces_RangoInicioMeses").val();
     var rangoFin = $("#Editar #aces_RangoFinMeses").val();
     var diasAuxCes = $("#Editar #aces_DiasAuxilioCesantia").val();
@@ -228,7 +243,8 @@ $("#btnUpdateAuxCes").click(function () {
     debugger;
 
     //VALIDAMOS LOS CAMPOS
-    if (rangoInicio >= 0 && rangoInicio < rangoFin && rangoFin > 0 && diasAuxCes > 0) {
+    if (rangoInicio >= 0 && rangoInicio < rangoFin && rangoFin > 0 && diasAuxCes > 0)
+    {
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/AuxilioDeCesantias/Edit",

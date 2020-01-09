@@ -70,7 +70,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                                    <input type="button" id="btnAgregarI" value="Guardar" class="btn btn-primary" />
+                                    <div style="display:none" class="btn" id="cargandoCrear">
+                                    </div>
                                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                                 </div>
                             </div>
@@ -81,3 +83,14 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/DeduccionesExtraordinarias")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

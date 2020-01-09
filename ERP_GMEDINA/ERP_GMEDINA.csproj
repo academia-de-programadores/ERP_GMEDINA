@@ -260,6 +260,9 @@
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
+    <Compile Include="Models\EmpleadosVendedores.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -277,6 +280,12 @@
     </Compile>
     <Compile Include="Models\LiquidacionViewModel.cs" />
     <Compile Include="Models\ReportePlanillaViewModel.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -353,6 +362,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbEquipoTrabajo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbFaseSeleccion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbFasesReclutamiento.cs">
@@ -433,6 +445,9 @@
     <Compile Include="Models\tbLiquidacionVacaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbMotivoLiquidacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbNacionalidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -443,6 +458,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPersonas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPorcentajeMotivoLiquidacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPreaviso.cs">
@@ -467,6 +485,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRolesUsuario.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbSeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSucursales.cs">
@@ -605,6 +626,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeIngresos_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result.cs">
@@ -829,6 +853,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_InformacionColaborador.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_Ingresos_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_InstitucionesFinancieras_RPT.cs">
@@ -1142,7 +1169,6 @@
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\CatalogoDeIngresos.js" />
     <Content Include="Scripts\app\General\CatalogoPlanillas.js" />
-    <Content Include="Scripts\app\General\CatalogoPlanillas.min.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMes.js" />
     <Content Include="Scripts\app\General\DecimoCuartoMesRPT.js" />
     <Content Include="Scripts\app\General\AuxilioCesantia.js" />
@@ -1223,6 +1249,7 @@
     </Content>
     <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1779,7 +1806,6 @@
     <Content Include="Views\TechosDeducciones\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\Liquidacion\Index.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
@@ -1823,7 +1849,6 @@
     <Content Include="Views\DeduccionAFP\Index.cshtml" />
     <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
-    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\AFP\Index.cshtml" />
     <Content Include="Views\AFP\_CreateAFP.cshtml" />
     <Content Include="Views\AFP\_EditAFP.cshtml" />
@@ -1831,6 +1856,7 @@
     <Content Include="Views\AuxilioDeCesantias\_EditAuxCes.cshtml" />
     <Content Include="Views\DecimoCuartoMes\IndexPagado.cshtml" />
     <Content Include="Views\DecimoTercerMes\IndexPagado.cshtml" />
+    <Content Include="Views\Liquidacion\Index.cshtml" />
     <Content Include="Views\ErrorPages\InternalServerError.cshtml" />
     <Content Include="Views\ErrorPages\NotFoundError.cshtml" />
     <Content Include="Views\Periodos\Index.cshtml" />
@@ -1843,11 +1869,10 @@
     <Content Include="Views\Preaviso\_Details.cshtml" />
     <Content Include="Views\Preaviso\_Edit.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
+    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\plugins\dataTables\RPT\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -10,11 +10,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>AFP</h5>
+                    <h5>Listado de AFPs</h5>
                     <div class="ibox-tools">
-                        <ul>
                             <button type="button" class="btn btn-primary btn-xs" id="btnAgregarAFP">Registrar AFP</button>
-                        </ul>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -49,8 +47,9 @@
                                         @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
                                     </td>
                                     <td>
-                                        <button type="button" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnDetalleAFP">Detalle</button>
+                                        <button type="button" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnDetalleAFP">Detalles</button>
                                         <button type="button" data-id="@item.afp_Id" class="btn btn-default btn-xs" id="btnEditarAFP">Editar</button>
+                                        <button type="button" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnActivarAFP">Activar</button>
                                     </td>
                                 </tr>
                             }
@@ -63,7 +62,7 @@
 </div>
 
 
-@*Modales de Agregar, Editar, Detalles e Inactivar*@
+@*Modales de Agregar, Editar, Detalles, Inhabilitar y Activar*@
 
 
 @*Agregar*@
@@ -72,7 +71,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Agregar AFP</h4>
+                <h4 class="modal-title">Crear AFP</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateAFP", new ERP_GMEDINA.Models.tbAFP())
@@ -107,7 +106,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalles de AFP</h4>
+                <h4 class="modal-title">Detalle de AFP</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsAFP", new ERP_GMEDINA.Models.tbAFP())
@@ -123,14 +122,35 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                
+                ¿Esta seguro que desea Eliminar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnInactivarRegistroAFP">Inhabilitar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarRegistroAFP">Eliminar</button>
+                <div style="display:none" class="btn pull-left" id="cargandoInhabilitar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Activar*@
+<div class="modal fade" id="ActivarAFP" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnActivarRegistroAFP">Activar</button>
+                <div style="display:none" class="btn pull-left" id="cargandoActivar"></div>
             </div>
         </div>
     </div>
