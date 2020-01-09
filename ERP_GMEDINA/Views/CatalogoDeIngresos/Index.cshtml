@@ -31,8 +31,9 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 456px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 180px;">Acción</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_Activo)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 240px;">Acción</th>
 
                             </tr>
                         </thead>
@@ -46,12 +47,12 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
                                     </td>
-                                  
-
                                     <td>
-                                        
+                                        @Html.DisplayFor(modelItem => item.cin_Activo)
+                                    <td>
                                         <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
                                         <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
+                                        <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
                                     </td>
                                 </tr>
                             }
