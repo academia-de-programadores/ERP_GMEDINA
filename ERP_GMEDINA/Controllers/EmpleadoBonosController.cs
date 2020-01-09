@@ -20,15 +20,17 @@ namespace ERP_GMEDINA.Controllers
             var tbEmpleadoBonos = db.tbEmpleadoBonos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas).OrderByDescending(x => x.cb_FechaCrea);
             //throw new Exception();
             //tbEmpleadoBonos = null;
-            return View(tbEmpleadoBonos.ToList().Where(p => p.cb_Activo == true));
+            //.Where(p => p.cb_Activo == true)
+            return View(tbEmpleadoBonos.ToList());
         }
 
         public ActionResult GetData()
-        {            
+        {
             var tbEmpleadoBonos = db.tbEmpleadoBonos
                         .Select(c => new { cb_Id = c.cb_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cb_Monto = c.cb_Monto, cb_FechaRegistro = c.cb_FechaRegistro, cb_Pagado = c.cb_Pagado, NombreUsarioCrea = c.tbUsuario.usu_NombreUsuario, cb_UsuarioCrea = c.cb_UsuarioCrea, cb_FechaCrea = c.cb_FechaCrea, usuarioModifica = c.tbUsuario1.usu_NombreUsuario, cb_UsuarioModifica = c.cb_UsuarioModifica, cb_FechaModifica = c.cb_FechaModifica, cb_Activo = c.cb_Activo })
                         .OrderByDescending(x => x.cb_FechaCrea)
-                        .ToList().Where(p => p.cb_Activo == true);
+                        .ToList();
+                        //.Where(p => p.cb_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoBonos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -255,6 +257,51 @@ namespace ERP_GMEDINA.Controllers
 
                 //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                 foreach (UDP_Plani_tbEmpleadoBonos_Inactivar_Result Resultado in listEmpleadoBonos)
+                    MensajeError = Resultado.MensajeError;
+
+                if (MensajeError.StartsWith("-1"))
+                {
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                    response = "error";
+                }
+
+            }
+            catch (Exception Ex)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = Ex.Message.ToString();
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Activar(int? Id)
+        {
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = "bien";
+            IEnumerable<object> listEmpleadoBonos = null;
+            string MensajeError = "";
+            //Validar que el Id no sea null
+            if (Id == null)
+            {
+                return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            //LLENAR DATA DE AUDITORIA
+            tbEmpleadoBonos tbEmpleadoBonos = new tbEmpleadoBonos();
+            tbEmpleadoBonos.cb_Id = (int)Id;
+            tbEmpleadoBonos.cb_UsuarioModifica = 1;
+            tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listEmpleadoBonos = db.UDP_Plani_tbEmpleadoBonos_Activar(tbEmpleadoBonos.cb_Id,
+                                                                            tbEmpleadoBonos.cb_UsuarioModifica,
+                                                                            tbEmpleadoBonos.cb_FechaModifica);
+
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbEmpleadoBonos_Activar_Result Resultado in listEmpleadoBonos)
                     MensajeError = Resultado.MensajeError;
 
                 if (MensajeError.StartsWith("-1"))

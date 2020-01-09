@@ -1,5 +1,5 @@
-﻿//VARIABLE PARA INACTIVACION DE REGISTROS
-var IDInactivar = 0;
+﻿//VARIABLES PARA INACTIVACION Y ACTIVACION DE REGISTROS
+var IDInactivar = 0, IDActivar = 0;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
@@ -63,10 +63,17 @@ function cargarGridBonos() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaBonos = data, template = '';
+            var ListaBonos = data, template = '', botones = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaBonos.length; i++) {
                 var FechaRegistro = FechaFormato(ListaBonos[i].cb_FechaRegistro);
+                var Estado = ListaBonos[i].cb_Activo == true ? 'Activo' : 'Inactivo';
+                if (ListaBonos[i].cb_Activo) {
+                    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>' +
+                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>';
+                } else {
+                    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>';
+                }
 
                 //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
@@ -77,16 +84,18 @@ function cargarGridBonos() {
                     Check = '<input type="checkbox" id="cb_Pagado" name="cb_Pagado" disabled>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
                 }
 
+                
+
                 template += '<tr data-id = "' + ListaBonos[i].cb_Id + '">' +
+                    '<td>' + ListaBonos[i].cb_Id  + '</td>' +
                     '<td>' + ListaBonos[i].per_Nombres + ' ' + ListaBonos[i].per_Apellidos + '</td>' +
                     '<td>' + ListaBonos[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' + ListaBonos[i].cb_Monto + '</td>' +
                     '<td>' + FechaRegistro + '</td>' +
                     '<td>' + Check + '</td>' + //AQUI ENVIA LA VARIABLE
+                    '<td>' + Estado + '</td>' +
                     '<td>' +
-                    
-                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalle</button>' +
-                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>' +
+                    botones +
                     '</td>' +
                     '</tr>';
             }
@@ -139,9 +148,11 @@ $('#btnCreateRegistroBonos').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
     var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
+    var IdIngreso = $("#Crear #cin_IdIngreso").val();
     var Monto = $("#Crear #cb_Monto").val();
 
     if (IdEmpleado != 0 &&
+        IdIngreso != 0 &&
         Monto != "" && Monto != null && Monto != undefined && Monto > 0) {
 
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
@@ -177,12 +188,15 @@ $('#btnCreateRegistroBonos').click(function () {
         if (IdEmpleado == 0) {
             $("#Crear #emp_IdEmpleado").focus;
             mostrarError('Ingrese un colaborador válido');
+        }else if (IdIngreso == 0) {
+            $("#Crear #cin_IdIngreso").focus;
+            mostrarError('Ingrese un bono válido');
         }
 
-        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Crear #cb_Monto").focus;
-            mostrarError('Ingrese un Monto válido');
-        }
+        //if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+        //    $("#Crear #cb_Monto").focus;
+        //    mostrarError('Ingrese un Monto válido');
+        //}
     }
 });
 
@@ -245,7 +259,6 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #cin_IdIngreso").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #cin_IdIngreso").append("<option value=0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
@@ -275,12 +288,13 @@ $("#btnUpdateBonos").click(function () {
     
     var data = $("#frmEmpleadoBonos").serializeArray();
 
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/EmpleadoBonos/Edit",
+        url: "/EmpleadoBonos/edit",
         method: "POST",
         data: data
     }).done(function (data) {
+        console.log("fue al controlador");
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
@@ -327,24 +341,41 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 var usuarioCrea = data.NombreUsarioCrea == null ? 'N/A' : data.NombreUsarioCrea;
 
                 if (data.cb_Pagado) {
-                    $('#Detalles #cb_Pagado').prop('checked', true);
+                    //$('#Detalles #cb_Pagado').prop('checked', true);
+                    $("#Detalles #cb_Pagado").html("Si");
                 } else {
-                    $('#Detalles #cb_Pagado').prop('checked', false);
+                    $("#Detalles #cb_Pagado").html("No");
                 }
                 $("#Detalles #cb_Id").val(data.cb_Id);
-                $("#Detalles #cb_Monto").val(data.cb_Monto);
-                $("#Detalles #cb_FechaRegistro").val(FechaRegistro);
-                $("#Detalles #cb_Pagado").val(data.cb_Pagado);
-                $("#Detalles #cb_UsuarioCrea").val(data.cb_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(usuarioCrea);
-                $("#Detalles #cb_FechaCrea").val(FechaCrea);
-                $("#Detalles #cb_UsuarioModifica").val(data.cb_UsuarioModifica);
-                $("#Detalles #tbUsuario1_usu_NombreUsuario").val(usuarioModifica);
-                $("#Detalles #cb_FechaModifica").val(FechaModifica);
+                $("#Detalles #cb_Monto").html(data.cb_Monto);
+                $("#Detalles #cb_FechaRegistro").html(FechaRegistro);
+                //$("#Detalles #cb_Pagado").val(data.cb_Pagado);
+                $("#Detalles #cb_UsuarioCrea").html(data.cb_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(usuarioCrea);
+                $("#Detalles #cb_FechaCrea").html(FechaCrea);
+                $("#Detalles #cb_UsuarioModifica").html(data.cb_UsuarioModifica);
+                $("#Detalles #tbUsuario1_usu_NombreUsuario").html(usuarioModifica);
+                $("#Detalles #cb_FechaModifica").html(FechaModifica);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedIdEmp = data.emp_Id;
                 var SelectedIdCatIngreso = data.cin_IdIngreso;
+
+                $.ajax({
+                    url: "/EmpleadoBonos/EditGetDDLIngreso",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID })
+                }).done(function (data) {
+                    //-----------------------------------------NO ENTRA EN ESTE each
+                    $.each(data, function (i, iter) {
+                        if (iter.Id == SelectedIdCatIngreso) {
+                            console.log(iter.Descripcion);
+                            $("#Detalles #cin_IdIngreso").html(iter.Descripcion);
+                        }
+                    });
+                });
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/EmpleadoBonos/EditGetDDLEmpleado",
@@ -355,31 +386,18 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #emp_IdEmpleado").empty();
+                        //$("#Detalles #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
+                        //$("#Detalles #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Detalles #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            //$("#Detalles #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            if (iter.Id == SelectedIdEmp) {
+                                $("#Detalles #emp_Id").html(iter.Descripcion);
+                            }
+                            
                         });
                     });
-
-                $.ajax({
-                    url: "/EmpleadoBonos/EditGetDDLIngreso",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                }).done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #cin_IdIngreso").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #cin_IdIngreso").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Detalles #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-
-
+                
                 $("#DetallesEmpleadoBonos").modal();
             }
             else {
@@ -430,3 +448,37 @@ $("#btnInactivarRegistroBono").click(function () {
     IDInactivar = 0;
 });
 
+//FUNCION: MOSTRAR EL MODAL DE ACTIVAR
+$(document).on("click", "#tblEmpleadoBonos tbody tr td #btnActivarEmpleadoBonos", function () {
+    IDActivar = $(this).data('id');
+    $("#ActivarEmpleadoBonos").modal();
+});
+
+//EJECUTAR LA ACTIVACION DEL REGISTRO
+$("#btnActivarRegistroBono").click(function () {
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/EmpleadoBonos/Activar/" + IDActivar,
+        method: "POST"
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridBonos();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarEmpleadoBonos").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
+            });
+        }
+    });
+    IDActivar = 0;
+});
