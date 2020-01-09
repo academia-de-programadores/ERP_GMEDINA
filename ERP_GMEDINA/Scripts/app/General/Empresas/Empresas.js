@@ -9,9 +9,6 @@ function llenarTabla() {
             var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
-            if (validarDT(Lista)) {
-                return null;
-            }
             $.each(Lista, function (index, value) {
                 console.log(value.empr_Nombre);
                 tabla.row.add({
@@ -43,8 +40,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
-                $("#ModalDetalles").find("#empr_Estado")["0"].innerText = obj.empr_Estado;
-                $("#ModalDetalles").find("#empr_RazonInactivo")["0"].innerText = obj.empr_RazonInactivo;
                 $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
                 $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -99,9 +94,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["empr_Nombre"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + " contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
@@ -122,7 +117,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha editado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -146,7 +141,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ha Inactivado el registro");
+                    MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }

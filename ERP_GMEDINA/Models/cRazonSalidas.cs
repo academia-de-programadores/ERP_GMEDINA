@@ -14,11 +14,16 @@ namespace ERP_GMEDINA.Models
     {
         [Display(Name = "ID")]
         public int rsal_Id { get; set; }
-        [Display(Name = "Descripcion")]
+
+        [Display(Name = "Razón de Salida")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
         public string rsal_Descripcion { get; set; }
         [Display(Name = "Estado")]
         public bool rsal_Estado { get; set; }
-        [Display(Name = "Razon Inactivo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
+        [Display(Name = "Razón Inactivo")]
         public string rsal_RazonInactivo { get; set; }
         [Display(Name = "Usuario Crea")]
         public int rsal_UsuarioCrea { get; set; }

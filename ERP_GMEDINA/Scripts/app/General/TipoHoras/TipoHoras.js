@@ -30,7 +30,6 @@ function tablaDetalles(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetallesR").find("#tiho_Descripcion")["0"].innerText = obj.tiho_Descripcion;
                 $("#ModalDetallesR").find("#tiho_Recargo")["0"].innerText = obj.tiho_Recargo;
-                $("#ModalDetallesR").find("#tiho_Estado")["0"].innerText = obj.tiho_Estado;
                 $("#ModalDetallesR").find("#tiho_FechaCrea")["0"].innerText = FechaFormato(obj.tiho_FechaCrea);
                 $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(obj.tiho_FechaModifica);
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -47,9 +46,6 @@ function llenarTabla() {
         function (Lista) {
             tabla.clear();
             tabla.draw();
-            if (validarDT(Lista)) {
-                return null;
-            }
             $.each(Lista, function (index, value) {
                 //console.log(item.tiho_Descripcion);
            
