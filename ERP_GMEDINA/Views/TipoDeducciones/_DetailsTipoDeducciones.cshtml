@@ -1,20 +1,24 @@
 ﻿@model ERP_GMEDINA.Models.tbTipoDeduccion
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsTipoDeducciones" }))
-{ 
-@Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="control-label col-md-2">Descripción</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.tde_Descripcion, "", new { @class = "text-danger" })
+{
+    @Html.AntiForgeryToken()
+    <!-- Nuevo diseño -->
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    Descripción
+                </div>
+                <div class="col-md-6">
+                    <span id="tde_Descripcion">@Html.DisplayFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "text-box single-line" } })</span>
+                </div>
             </div>
         </div>
     </div>
-
+    <!-- Auditoria -->
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h2>Auditoría</h2>
+            <h4>Auditoría</h4>
         </div>
         <div class="ibox-content">
             <div class="form-horizontal">
@@ -30,14 +34,14 @@
                         <tr>
                             <td>Creado</td>
                             @Html.HiddenFor(model => model.tde_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                            <td>@Html.EditorFor(model => model.tde_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            <td><span id="tde_FechaCrea">@Html.DisplayFor(model => model.tde_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
                             @Html.HiddenFor(model => model.tde_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                            <td>@Html.EditorFor(model => model.tde_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            <td><span id="tde_FechaModifica">@Html.DisplayFor(model => model.tde_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                         </tr>
                     </tbody>
                 </table>

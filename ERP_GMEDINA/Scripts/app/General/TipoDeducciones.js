@@ -1,10 +1,5 @@
 ﻿//VARIABLE GLOBAL PARA INACTIVAR
 var inactivar = 0;
-const btnGuardar = $('#btnCreateRegistroTipoDeducciones'),
-cargandoCrearcargandoCrear=$('#cargandoCrear'),
-cargandoCrear=$('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
-
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -53,7 +48,7 @@ function cargarGridTipoDeducciones() {
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
 
                 template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
-                    '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +       
+                    '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
                     '<td>' +
                     '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
                     '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeducciones">Detalle</button>' +
@@ -81,10 +76,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmTipoDeduccionCreate").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#Crear #tde_Descripcion").val())
-    {
-        console.log('asddd');
-        mostrarCargandoCrear();
+    if ($("#Crear #tde_Descripcion").val()) {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/TipoDeducciones/Create",
@@ -93,7 +85,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
         }).done(function (data) {
             //CERRAR EL MODAL DE AGREGAR
             if ($("#tde_Descripcion").val())
-                //$("#AgregarTipoDeducciones").modal('hide');
+                $("#AgregarTipoDeducciones").modal('hide');
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
             }
@@ -104,10 +96,6 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
                     title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
-                //CERRAR EL MODAL DE AGREGAR
-                if ($("#tde_Descripcion").val())
-                    $("#AgregarTipoDeducciones").modal('hide');
-                ocultarCargandoCrear();                
             }
         });
     }
@@ -150,8 +138,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmTipoDeduccionEdit").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#Editar #tde_Descripcion").val())
-    {   //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    if ($("#Editar #tde_Descripcion").val()) {   //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/TipoDeducciones/Edit",
             method: "POST",
@@ -168,7 +155,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridTipoDeducciones();
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                    $("#EditarTipoDeducciones").modal('hide');
+                $("#EditarTipoDeducciones").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
@@ -182,7 +169,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
     var ID = $(this).data('id');
     console.log(ID);
-    $.ajax({        
+    $.ajax({
         url: "/TipoDeducciones/Details/" + ID,
         method: "GET",
         dataType: "json",
@@ -196,31 +183,14 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
                 var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
                 $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
                 $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
-                $("#Detalles #tde_Descripcion").val(data[0].tde_Descripcion);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #tde_FechaCrea").val(FechaCrea);
-                $("#Detalles #tde_UsuarioModifica").val(data.tde_UsuarioModifica);
-                $("#Detalles #tde_FechaModifica").val(FechaModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);                
+                $("#Detalles #tde_Descripcion").html(data[0].tde_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #tde_FechaCrea").html(FechaCrea);
+                $("#Detalles #tde_UsuarioModifica").html(data.tde_UsuarioModifica);
+                $("#Detalles #tde_FechaModifica").html(FechaModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                //var SelectedId = data[0].cde_IdDeducciones;
-                ////CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                //$.ajax({
-                //    url: "/TechosDeducciones/EditGetDDL",
-                //    method: "GET",
-                //    dataType: "json",
-                //    contentType: "application/json; charset=utf-8",
-                //    data: JSON.stringify({ ID })
-                //})
-                    //.done(function (data) {
-                    //    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                    //    $("#Detalles #cde_IdDeducciones").empty();
-                    //    //LLENAR EL DROPDOWNLIST
-                    //    $("#Detalles #cde_IdDeducciones").append("<option value=0>Selecione una opción...</option>");
-                    //    $.each(data, function (i, iter) {
-                    //        $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                    //    });
-                    //});
+                
                 $("#DetailsTipoDeducciones").modal();
             }
             else {
@@ -259,30 +229,6 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
     });
 });
 
-
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
 //FUNCION: OCULTAR MODAL DE CREACION
 $("#btnCerrarCrear").click(function () {
     $("#Crear #Validation_descripcion").css("display", "none");
@@ -317,15 +263,3 @@ $("#frmTipoDeduccionCreate").submit(function (event) {
 $("#frmTipoDeduccionEdit").submit(function (event) {
     event.preventDefault();
 });
-
-// validar si un string contiene caracteres numericos
-var numeros = "0123456789";
-
-function tiene_numeros(texto) {
-    for (i = 0; i < texto.length; i++) {
-        if (numeros.indexOf(texto.charAt(i), 0) != -1) {
-            return 1;
-        }
-    }
-    return 0;
-}
