@@ -401,16 +401,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 console.log(data);
                 var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data[0].cde_DescripcionDeduccion);
-                $("#Detalles #cde_PorcentajeColaborador").val(data[0].cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").val(data[0].cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").val(data[0].cde_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #cde_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
+                $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
+                $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #cde_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").val(FechaModifica);
+                $("#Detalles #cde_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].TipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
