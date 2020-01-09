@@ -49,13 +49,9 @@ function cargarGridTipoDeducciones() {
 
                 template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
                     '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' + ListaTipoDeducciones[i].NombreUsuarioCrea + '</td>' +
-                    '<td>' + FechaCrea + '</td>' +
-                    '<td>' + UsuarioModifica + '</td>' +
-                    '<td>' + FechaModifica + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
-                    //'<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeduccion">Detalle</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +
+                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnDetalleTipoDeducciones">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -80,8 +76,7 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmTipoDeduccionCreate").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#Crear #tde_Descripcion").val())
-    {
+    if ($("#Crear #tde_Descripcion").val()) {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/TipoDeducciones/Create",
@@ -93,17 +88,13 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
                 $("#AgregarTipoDeducciones").modal('hide');
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
             }
             else {
                 cargarGridTipoDeducciones();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    title: 'Éxito',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
@@ -147,8 +138,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmTipoDeduccionEdit").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#Editar #tde_Descripcion").val())
-    {   //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    if ($("#Editar #tde_Descripcion").val()) {   //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/TipoDeducciones/Edit",
             method: "POST",
@@ -165,7 +155,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridTipoDeducciones();
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                    $("#EditarTipoDeducciones").modal('hide');
+                $("#EditarTipoDeducciones").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
@@ -174,6 +164,43 @@ $("#btnUpdateTipoDeducciones").click(function () {
             }
         });
     }
+});
+
+$(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
+    var ID = $(this).data('id');
+    console.log(ID);
+    $.ajax({
+        url: "/TipoDeducciones/Details/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                var FechaCrea = FechaFormato(data[0].tde_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
+                $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
+                $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
+                $("#Detalles #tde_Descripcion").html(data[0].tde_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #tde_FechaCrea").html(FechaCrea);
+                $("#Detalles #tde_UsuarioModifica").html(data.tde_UsuarioModifica);
+                $("#Detalles #tde_FechaModifica").html(FechaModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                
+                $("#DetailsTipoDeducciones").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+        });
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
@@ -197,7 +224,7 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
-            message: '¡El registro fue Inhabilitado de forma exitosa!',
+            message: 'Se ha inactivado el registro',
         });
     });
 });
