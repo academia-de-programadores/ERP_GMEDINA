@@ -16,17 +16,17 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducción AFP")]
         public int dafp_Id { get; set; }
 
-        [Range(0, 9999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
         [Required(ErrorMessage = "El campo Aporte es Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Aporte")]
         public decimal dafp_AporteLps { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo AFP es Requerido")]
         [Display(Name = "AFP")]
         public int afp_Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo Empleado es Requerido")]
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
