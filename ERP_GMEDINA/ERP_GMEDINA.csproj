@@ -1222,6 +1222,7 @@
     </Content>
     <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
