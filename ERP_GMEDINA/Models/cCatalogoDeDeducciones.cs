@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripcion Deduccion")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud de {1}")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud minima de 20")]
         public string cde_DescripcionDeduccion { get; set; }
 
         [Display(Name = "Tipo Deduccion")]
