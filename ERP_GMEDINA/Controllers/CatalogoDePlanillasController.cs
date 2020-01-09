@@ -597,6 +597,20 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult ActivarPlanilla(int id)
+        {
+            string response = "bien";
+            string mensajeError = "";
+            IEnumerable<object> planillaActivada = null;
+            using (var dbContextTransaccion = db.Database.BeginTransaction())
+            {
+                
+            }
+
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

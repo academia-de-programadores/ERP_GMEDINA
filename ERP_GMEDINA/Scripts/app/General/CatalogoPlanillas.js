@@ -368,7 +368,7 @@ function listar() {
 						return `
 						<button type="button" class="btn btn-primary btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
 						<button type="button" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>
-						<button type="button" class="btn btn-warning btn-xs" id="btnInactivar">Activar</button>
+						<button type="button" class="btn btn-success btn-xs" id="btnInactivar">Activar</button>
 						`;
 				}
 			}
@@ -472,8 +472,9 @@ function obtenerIdDetallesEditar(tbody, table) {
 		location.href = pathname + 'Details/' + data.idPlanilla;
 	});
 
-	$(tbody).on('click', 'button#btnInactivar', function(){
-		console.log(table.row($(this).parents('tr')).data().idPlanilla);
+	$(tbody).on('click', 'button#btnInactivar', function () {
+		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
+		$('#frmInactivarCatalogoPlanilla').modal();
 	});
 }
 
@@ -746,6 +747,12 @@ $(document).on(
 	}
 );
 
+//Inactivar
+$('#inactivar').click(() => {
+	$('#InactivarCatalogoDeducciones').modal();
+});
+
+
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	var id = inputIdPlanilla.val();
 	_ajax(
@@ -769,4 +776,6 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 		(enviar) => { }
 	);
 });
+
+$('#btnEliminarCatatalogoPlanilla').click(() => console.log(localStorage.getItem('id')))
 //#endregion
