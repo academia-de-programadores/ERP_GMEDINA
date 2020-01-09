@@ -21,6 +21,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" id="btnCerrarCrear" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary" id="btnCreateRegistroTipoDeducciones">Aceptar</button>
+                <div style="display:none" class="btn" id="cargandoCrear">
+                </div>
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
             </div>
         }
 

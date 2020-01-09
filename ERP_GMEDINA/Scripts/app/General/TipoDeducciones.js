@@ -1,5 +1,10 @@
 ﻿//VARIABLE GLOBAL PARA INACTIVAR
 var inactivar = 0;
+const btnGuardar = $('#btnCreateRegistroTipoDeducciones'),
+cargandoCrearcargandoCrear=$('#cargandoCrear'),
+cargandoCrear=$('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -78,15 +83,15 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#Crear #tde_Descripcion").val())
     {
+        console.log('asddd');
+        mostrarCargandoCrear();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/TipoDeducciones/Create",
             method: "POST",
             data: data
         }).done(function (data) {
-            //CERRAR EL MODAL DE AGREGAR
-            if ($("#tde_Descripcion").val())
-                $("#AgregarTipoDeducciones").modal('hide');
+                
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 iziToast.error({
@@ -98,9 +103,13 @@ $('#btnCreateRegistroTipoDeducciones').click(function () {
                 cargarGridTipoDeducciones();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    title: 'Éxito',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
+                //CERRAR EL MODAL DE AGREGAR
+                if ($("#tde_Descripcion").val())
+                    $("#AgregarTipoDeducciones").modal('hide');
+                ocultarCargandoCrear();                
             }
         });
     }
@@ -252,6 +261,30 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
     });
 });
 
+
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
 //FUNCION: OCULTAR MODAL DE CREACION
 $("#btnCerrarCrear").click(function () {
     $("#Crear #Validation_descripcion").css("display", "none");
@@ -286,3 +319,15 @@ $("#frmTipoDeduccionCreate").submit(function (event) {
 $("#frmTipoDeduccionEdit").submit(function (event) {
     event.preventDefault();
 });
+
+// validar si un string contiene caracteres numericos
+var numeros = "0123456789";
+
+function tiene_numeros(texto) {
+    for (i = 0; i < texto.length; i++) {
+        if (numeros.indexOf(texto.charAt(i), 0) != -1) {
+            return 1;
+        }
+    }
+    return 0;
+}
