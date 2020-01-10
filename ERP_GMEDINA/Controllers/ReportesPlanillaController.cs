@@ -657,80 +657,27 @@ namespace ERP_GMEDINA.Controllers
 		#endregion
 
 		#region Reporte Liquidaciones
-		//-------------------------------------------------------------------------------------------------------------------------------
-		//Reporte Decimo Cuarto Mes - INICIO
 
-		//Index 
-		public ActionResult LiquidacionesIndexRPT()
-		{
-			//Cargar DDL del modal (Tipo de planilla a seleccionar)
-			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+        //
+        //ACCIONES DE LOS REPORTES DE LIQUIDACION
 
-			return View(db.V_Liquidaciones_RPT.ToList());
-		}
+        public ActionResult LiquidacionRPT_Index()
+        {
+            var ListaHistorialLiquidacion = db.V_HistorialEmpleadosLiquidados;
+            return View(ListaHistorialLiquidacion.ToList());
+        }
+        //Reporte Decimo Cuarto Mes - FIN
+        //-------------------------------------------------------------------------------------------------------------------------------
+        #endregion
 
-		//Reporte con parametros
-		public ActionResult LiquidacionesParametrosRPT(DateTime hliq_fechaLiquidacion, int cpla_DescripcionPlanilla, string id)
-		{
-			LocalReport lr = new LocalReport();
-			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "LiquidacionesRPT.rdlc");
-			if (System.IO.File.Exists(path))
-			{
-				lr.ReportPath = path;
-			}
-			else
-			{
-				return View("Index");
-			}
-			List<V_Liquidaciones_RPT> cm = new List<V_Liquidaciones_RPT>();
+        //ROTATIVA REPORTS
 
-			cm = db.V_Liquidaciones_RPT.Where(x => hliq_fechaLiquidacion == x.hliq_fechaLiquidacion && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+        #region Rotativa
 
-			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
-			lr.DataSources.Add(rd);
-			string reportType = id;
-			string mimeType;
-			string encoding;
-			string fileNameExtension;
-			string deviceInfo =
-
-			"<DeviceInfo>" +
-			"  <OutputFormat>" + id + "</OutputFormat>" +
-			"  <PageWidth>11in</PageWidth>" +
-			"  <PageHeight>8.5in</PageHeight>" +
-			"  <MarginTop>0.1in</MarginTop>" +
-			"  <MarginLeft>0.1in</MarginLeft>" +
-			"  <MarginRight>0.1in</MarginRight>" +
-			"  <MarginBottom>0.1in</MarginBottom>" +
-			"</DeviceInfo>";
-
-			Warning[] warnings;
-			string[] streams;
-			byte[] renderedBytes;
-
-			renderedBytes = lr.Render(
-				reportType,
-				deviceInfo,
-				out mimeType,
-				out encoding,
-				out fileNameExtension,
-				out streams,
-				out warnings);
-
-			return File(renderedBytes, mimeType);
-		}
-		//Reporte Decimo Cuarto Mes - FIN
-		//-------------------------------------------------------------------------------------------------------------------------------
-		#endregion
-
-		//ROTATIVA REPORTS
-
-		#region Rotativa
-
-		#region deducciones
-		//---------------------------------DEDUCCIONES---------------------------------//
-		//vista inicial
-		public ActionResult Deducciones()
+        #region deducciones
+        //---------------------------------DEDUCCIONES---------------------------------//
+        //vista inicial
+        public ActionResult Deducciones()
 		{
 			//Cargar DDL del modal (Tipo de planilla a seleccionar)
 			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
