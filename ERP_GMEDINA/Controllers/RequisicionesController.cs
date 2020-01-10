@@ -95,6 +95,15 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
+                        //if(tbRequisiciones.req_Sexo == "N")
+                        //{
+                        //    tbRequisiciones.req_Sexo = null;
+                        //}
+
+                        //if(tbRequisiciones.req_EstadoCivil == "N")
+                        //{
+                        //    tbRequisiciones.req_EstadoCivil = null;
+                        //}
 
                         var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
 

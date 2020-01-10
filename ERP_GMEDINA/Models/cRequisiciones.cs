@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
         public string req_EstadoCivil { get; set; }
         [Display(Name = "Educacion Superior")]
         public bool req_EducacionSuperior { get; set; }
-        [Display(Name = "Permanente")]
+        [Display(Name = "Temporal")]
         public bool req_Permanente { get; set; }
         [Display(Name = "Duracion")]
         public string req_Duracion { get; set; }

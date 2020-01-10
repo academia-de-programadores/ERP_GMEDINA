@@ -48,10 +48,17 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Sexo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.DropDownList("req_Sexo", new List<SelectListItem>
+                                                    {
+                                                       new SelectListItem{ Text="Indiferente", Value = "N" },
+                                                       new SelectListItem{ Text="Masculino", Value = "M" },
+                                                       new SelectListItem{ Text="Femenino", Value = "F" },
+                                                        }
+                                           , htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.req_Sexo, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -80,7 +87,14 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_EstadoCivil, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_EstadoCivil, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.DropDownList("req_EstadoCivil", new List<SelectListItem>
+                                                    {
+                                                       new SelectListItem{ Text="Indiferente", Value = "N" },
+                                                       new SelectListItem{ Text="Casado", Value = "C" },
+                                                       new SelectListItem{ Text="Soltero", Value = "S" },
+                                                    }
+                                           , htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.req_Sexo, "", new { @class = "text-danger" })
                                                 @Html.ValidationMessageFor(model => model.req_EstadoCivil, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
