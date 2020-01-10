@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
     public class cEmpleadoComisiones
     {
 
-        [Display(Name = "Numero")]
+        [Display(Name = "Número")]
         public int cc_Id { get; set; }
 
 

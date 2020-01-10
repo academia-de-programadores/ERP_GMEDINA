@@ -177,23 +177,25 @@ $(document).ready(function() {
 		        data: data.results
 		    });
 		},
-		() => {}
-	);
+		() => {
+		
+		    //LLENAR EL DDL DE MOTIVOS 
+		    $.ajax({
+		        url: "/Liquidacion/GetMotivoLiquidacion",
+		        method: "GET",
+		        dataType: "json",
+		        contentType: "application/json; charset=utf-8"
+		    }).done(function (data) {
+		        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+		        $("#cmbxMotivos").empty();
+		        $("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
+		        $.each(data, function (i, iter) {
+		            $("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+		        });
+		    });
 
-    //LLENAR EL DDL DE MOTIVOS 
-    $.ajax({
-        url: "/Liquidacion/GetMotivoLiquidacion",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    }).done(function (data) {
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        $("#cmbxMotivos").empty();
-        $("#cmbxMotivos").append("<option value='0'>Selecione un motivo...</option>");
-        $.each(data, function (i, iter) {
-            $("#cmbxMotivos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-        });
-    });
+		}
+	);
 });
 
 
@@ -207,7 +209,6 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
 		'/Liquidacion/Obtener_Informacion_Empleado',
 		'POST',
 		(data) => {
-		    console.log(data);
 		    mostrarDatosColaborador(
 				data.consulta[0].nombreEmpleado,
 				data.consulta[0].apellidoEmpleado,
@@ -351,37 +352,45 @@ function SaveHiddenFor(SalarioOrdinarioMensual_Liq, SalarioPromedioMensual_Liq,
 }
 
 $("#btnConceptosAdicionales").click(function(){
-    var data = $("#frmConceptosAdicionales").serializeArray();
-    var VacacionesPendientes = $("#SalariosAdeudados").val();
-    var Form = [];
-    Form = {
-        SalariosAdeudados : $("#SalariosAdeudados").val(),
-        OtrosPagos : $("#OtrosPagos").val(),
-        PagoHEPendiente : $("#PagoHEPendiente").val(),
-        ValorBonoEducativo : $("#ValorBonoEducativo").val(),
-        PagoSeptimoDia : $("#PagoSeptimoDia").val(),
-        BonoPorVacaciones : $("#BonoPorVacaciones").val(),
-        ReajusteSalarial : $("#ReajusteSalarial").val(),
-        DecimoTercerMesAdeudado : $("#DecimoTercerMesAdeudado").val(),
-        DecimoCuartoMesAdeudado : $("#DecimoCuartoMesAdeudado").val(),
-        BonificacionVacaciones : $("#BonificacionVacaciones").val(),
-        PagoPorEmbarazo : $("#PagoPorEmbarazo").val(),
-        PagoPorLactancia : $("#PagoPorLactancia").val(),
-        PrePosNatal : $("#PrePosNatal").val(),
-        PagoPorDiasFeriado : $("#PagoPorDiasFeriado").val()
-    };
-    console.log(Form);
-    console.log(data);
-    $.ajax({
-        url: "Liquidacion/CalcularLiquidacion",
-        type: "POST",
-        dataType:"json",
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(Form)
-    }).done(function (data){
-        console.log(data);
-        $("#MontoTotalLiquidacion").val(data.MontoTotalLiquidacion);
-    });
+
+    if(!validarCampos())
+    {
+        //Mensaje de error si no hay data
+        iziToast.error({
+            title: 'Error',
+            message: 'Debe cargar los datos de un colaborador para registrar la liquidación.',
+        });
+    }
+    else{
+        var data = $("#frmConceptosAdicionales").serializeArray();
+        var VacacionesPendientes = $("#SalariosAdeudados").val();
+        var Form = [];
+        Form = {
+            SalariosAdeudados : $("#SalariosAdeudados").val(),
+            OtrosPagos : $("#OtrosPagos").val(),
+            PagoHEPendiente : $("#PagoHEPendiente").val(),
+            ValorBonoEducativo : $("#ValorBonoEducativo").val(),
+            PagoSeptimoDia : $("#PagoSeptimoDia").val(),
+            BonoPorVacaciones : $("#BonoPorVacaciones").val(),
+            ReajusteSalarial : $("#ReajusteSalarial").val(),
+            DecimoTercerMesAdeudado : $("#DecimoTercerMesAdeudado").val(),
+            DecimoCuartoMesAdeudado : $("#DecimoCuartoMesAdeudado").val(),
+            BonificacionVacaciones : $("#BonificacionVacaciones").val(),
+            PagoPorEmbarazo : $("#PagoPorEmbarazo").val(),
+            PagoPorLactancia : $("#PagoPorLactancia").val(),
+            PrePosNatal : $("#PrePosNatal").val(),
+            PagoPorDiasFeriado : $("#PagoPorDiasFeriado").val()
+        };
+        $.ajax({
+            url: "Liquidacion/CalcularLiquidacion",
+            type: "POST",
+            dataType:"json",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(Form)
+        }).done(function (data){
+            $("#MontoTotalLiquidacion").val(data.MontoTotalLiquidacion);
+        });
+    }
 })
 
 //VACIAR LOS CONCEPTOS AGREGADOS
@@ -409,7 +418,6 @@ function vaciarConceptosAdicionales()
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#RegistrarLiquidacion").click(function () {
     var Registrar_Verificar = (Registrar)? 1 : 0;
-    console.log(Registrar);
     Registrar = false;
     if(Registrar_Verificar == 1){
         //REALIZAR LA PETICIÓN PARA LA INSERCION
@@ -419,7 +427,6 @@ $("#RegistrarLiquidacion").click(function () {
             dataType:"json",
             contentType: 'application/json; charset=utf-8'
         }).done(function (data){
-            console.log(data);
             if(data == "error")
             {
                 iziToast.error({
@@ -428,10 +435,17 @@ $("#RegistrarLiquidacion").click(function () {
                 });
             }
             else{
+                
                 iziToast.success({
                     title: 'Éxito',
                     message: 'Se ha registrado la liquidación',
                 });
+                $("RegistrarLiquidacion").attr("disabled", true)
+                //SetTimeOut
+                setTimeout(function(){ 
+                    location.reload();
+                }, 4500);
+                
             }
         }).fail(function (data){
             iziToast.error({
@@ -454,9 +468,8 @@ $("#RegistrarLiquidacion").click(function () {
 
 //VALIDAR LAS ENTRADAS DE LOS CONCEPTOS AGREGADOS
 $('.ValidarCaracteres').bind('keypress', function (event) { 
-    console.log("hola");
     //var regex = new RegExp("^[a-zA-Z0-9]+$"); 
-    var regex = new RegExp("^[0-9]?[.]"); 
+    var regex = new RegExp("^[0-9]"); 
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode); 
     if (!regex.test(key)) 
     { 
