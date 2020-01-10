@@ -5,16 +5,19 @@
 }
 
 <div class="modal fade" id="AFPModalRPT" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Ingrese Parametros</h4>
-            </div>
-            @Html.Partial("_AFPModalRPT", new ERP_GMEDINA.Models.V_AFP_RPT())
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" id="IconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Ingrese Parametros</h4>
+			</div>
+	
+				@Html.Partial("_AFPModalRPT", new ERP_GMEDINA.Models.V_AFP_RPT())
+
+		</div>
+	</div>
 </div>
+	
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -24,7 +27,7 @@
                 <div class="ibox-title">
                     <h5>AFP</h5>
                     <div class="ibox-tools" id="boxTools">
-                        <button class="btn btn-primary btn-sm" id="ParametrosAFPRPT">Reporte Especifico</button>
+                        <button class="btn btn-primary btn-xs" id="ParametrosAFPRPT">Generar Reporte</button>
                     </div>
                 </div>
                 <div class="ibox-content">

@@ -31,8 +31,10 @@ namespace ERP_GMEDINA.Controllers
                                            cin_IdIngresos = c.cin_IdIngreso,
                                            cin_DescripcionIngreso = c.cin_DescripcionIngreso,
                                            cin_Activo = c.cin_Activo,
+
                                            cin_UsuarioCrea = c.cin_UsuarioCrea,
                                            cin_FechaCrea = c.cin_FechaCrea,
+
                                            cin_UsuarioModifica= c.cin_UsuarioModifica,
                                            cin_FechaModifica = c.cin_FechaModifica})
                                            //.OrderByDescending(x => x.cin_IdIngresos)
