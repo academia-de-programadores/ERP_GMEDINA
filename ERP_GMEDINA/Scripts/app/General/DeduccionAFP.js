@@ -57,7 +57,6 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].dafp_Activo + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
 
@@ -108,7 +107,7 @@ function mostrarCargandoCrear() {
 }
 
 //Activar
-$(document).on("click", "#tblAFP tbody tr td #btnActivarDeduccionAFP", function () {
+$(document).on("click", "#tblDeduccionAFP tbody tr td #btnActivarDeduccionAFP", function () {
 
     var ID = $(this).closest('tr').data('id');
 
@@ -446,7 +445,6 @@ $("#btnIconCerrare").click(function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", function () {
     var ID = $(this).data('id');
-    console.log(ID)
     $.ajax({
         url: "/DeduccionAFP/Details/" + ID,
         method: "GET",
@@ -484,10 +482,14 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #emp_Id").empty();
+                        //$("#Detalles #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
-                            $("#Detalles #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            //$("#Detalles #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            if (iter.Id == SelectedIdEmpleado)
+                            {
+                                $("#Detalles #emp_Id").html(iter.Descripcion);
+                            }
                         });
                     });
 
@@ -503,11 +505,14 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #afp_Id").empty();
+                        //$("#Detalles #afp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #afp_Id").append("<option value = 0>Selecione una opción...</option>");
+                        //$("#Detalles #afp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Detalles #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            //$("#Detalles #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            if (iter.Id == SelectedIdAFP) {
+                                $("#Detalles #afp_Id").html(iter.Descripcion);
+                            }
                         });
                     });
 
