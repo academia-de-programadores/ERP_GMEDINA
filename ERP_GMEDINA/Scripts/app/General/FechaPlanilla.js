@@ -87,52 +87,17 @@ function listar() {
         }, //Con esto se hace la traducción al español del datatables
         responsive: false,
         pageLength: 25,
-        dom: '<"html5buttons"B>lTfgitp', //Darle los elementos del DOM que deseo
+        dom: '<"html5buttons"B>lTfgtpi', //Darle los elementos del DOM que deseo
         buttons: [
 			//Poner los botones que quiero que aparezcan
 			{
 			    extend: 'copy',
-			    title: 'Catalogo de Planillas',
+			    title: 'Fecha de Planilla',
+			    titleAttr: 'Copiar',
 			    exportOptions: {
-			        columns: [1, 2]
-			    }
-			},
-			{
-			    extend: 'csv',
-			    title: 'Catalogo de Planillas',
-			    exportOptions: {
-			        columns: [1, 2]
-			    }
-			},
-			{
-			    extend: 'excelHtml5',
-			    title: 'Catalogo de Planillas',
-			    exportOptions: {
-			        columns: [1, 2]
-			    }
-			},
-			{
-			    extend: 'pdfHtml5',
-			    title: 'Catalogo de Planillas',
-			    exportOptions: {
-			        columns: [1, 2]
-			    }
-			},
-			{
-			    extend: 'print',
-			    title: 'Catalogo de Planillas',
-			    exportOptions: {
-			        columns: [1, 2]
+			        columns: [1]
 			    },
-			    customize: function (win) {
-			        $(win.document.body).addClass('white-bg');
-			        $(win.document.body).css('font-size', '10px');
-
-			        $(win.document.body)
-						.find('table')
-						.addClass('compact')
-						.css('font-size', 'inherit');
-			    }
+			    className: 'btn btn-primary'
 			}
         ]
     });
