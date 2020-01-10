@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Comisiones Por Empleado</h5>
+                    <h5>Listado de Comisiones</h5>
                     <div class="ibox-tools">
                         <input type="button" id="btnAgregarEmpleadoComisiones" value="Registar Comisión" class="btn btn-primary btn-xs" />
                     </div>
@@ -35,8 +35,7 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_Id)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Nombres)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbEmpleados.tbPersonas.per_Apellidos)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Nombre</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_PorcentajeComision)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.cc_TotalVenta)</th>
@@ -56,10 +55,9 @@
                                         @Html.DisplayFor(modelItem => item.cc_Id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
+                                        @{ string Nombre = item.tbEmpleados.tbPersonas.per_Nombres + " " + item.tbEmpleados.tbPersonas.per_Apellidos;}
+                                        @Html.HiddenFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres)
+                                        @Nombre
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.tbCatalogoDeIngresos.cin_DescripcionIngreso)
@@ -87,7 +85,7 @@
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                             if (item.cc_Activo == true)
                                             {
-                                                <button type="button" data-id="@item.cc_Id"  class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
+                                                <button type="button" data-id="@item.cc_Id"  class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalles</button>
                                                 <button type="button" data-id="@item.cc_Id"  class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
                                                
                                             }
@@ -135,7 +133,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" id="IconoCerraredit">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Editar Empleado Comisión</h4>
+                <h4 class="modal-title">Editar Comisión</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página*@
@@ -152,7 +150,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Detalle Empleado Comisión</h4>
+                <h4 class="modal-title">Detalle Comisión</h4>
             </div>
             <div class="modal-body" id="Detallar">
                 @Html.Partial("_DetalleEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
@@ -170,11 +168,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Inhabilitar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
 
-                ¿Esta seguro que desea Inhabilitar este Registro?
+                ¿Esta seguro que desea Inactivar este Registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="btnInactivarRegistroComisiones">Si</button>
