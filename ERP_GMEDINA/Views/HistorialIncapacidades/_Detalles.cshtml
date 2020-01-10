@@ -1,0 +1,66 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialIncapacidades
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle HistorialIncapacidades</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+					<dt>@Html.DisplayNameFor(model => model.hinc_Dias)</dt>
+                    <dd id="hinc_Dias"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbTipoIncapacidades.ticn_Descripcion )</dt>
+                    <dd id="tbTipoIncapacidades_ticn_Descripcion"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.hinc_CentroMedico)</dt>
+                    <dd id="hinc_CentroMedico"></dd>
+
+					
+
+					<dt>@Html.DisplayNameFor(model => model.hinc_Diagnostico)</dt>
+                    <dd id="hinc_Diagnostico"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.hinc_FechaInicio)</dt>
+                    <dd id="hinc_FechaInicio"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.hinc_FechaFin)</dt>
+                    <dd id="hinc_FechaFin"></dd>
+
+                    <dt>Usuario Crea</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.hinc_FechaCrea)</dt>
+                    <dd id="hinc_FechaCrea"></dd>
+
+					@*<dt>@Html.DisplayNameFor(model => model.hinc_FechaModifica)</dt>
+                    <dd id="hinc_FechaModifica"></dd>*@
+
+					
+
+					@*<dt>Usuario Modifica</dt>
+                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>*@
+
+
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General")
+    @Scripts.Render("~/Scripts/app/General/IndexHistorialIncapacidades")
+}
+
+
