@@ -15,14 +15,14 @@
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         
-                        <div @*hidden="hidden"*@ class="col-md-8">
+                        <div hidden="hidden"  class="col-md-8">
                             <input id="hvac_Id" name="hvac_Id" type="text" value="">
-                        </div>
+                        </div><br>
 
                         <div class="form-group">
-							@Html.LabelFor(model => model.hvac_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.hvac_RazonInactivo, "Razón Inactivo", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.hvac_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.EditorFor(model => model.hvac_RazonInactivo, new { htmlAttributes = new { @class = "form-control", @MaxLength = "100" } })
 								@Html.ValidationMessageFor(model => model.hvac_RazonInactivo, "", new { @class = "text-danger", @id = "errorhvac_RazonInactivo" })
                             </div>
                         </div>

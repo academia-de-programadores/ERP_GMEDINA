@@ -8,16 +8,13 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           if (validarDT(Lista)) {
-               return null;
-           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.hcar_Id,
-                   Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                   Encargado: value.Encargado,
                    Anterior: value.car_Anterior,
                    Nuevo: value.car_Nuevo,
-                   Fecha: value.hcar_Fecha
+                   Fecha: FechaFormato(value.hcar_Fecha).substring(0,10)
                });
            });
            tabla.draw();

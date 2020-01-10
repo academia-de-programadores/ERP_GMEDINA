@@ -996,6 +996,7 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\BTN\BTN-HOME.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\email.css" />
     <Content Include="Content\img\1.jpg" />
@@ -1242,6 +1243,8 @@
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
+    <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />

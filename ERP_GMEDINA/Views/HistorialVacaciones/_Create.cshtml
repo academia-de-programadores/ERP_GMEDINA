@@ -4,14 +4,14 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar HistorialVacaciones</h4>
+                <h4 class="modal-title">Crear vacación</h4>
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
                 {
-                    <div class="col-md-8">
+                    <div hidden="hidden" class="col-md-8">
                         <input id="emp_Id" name="emp_Id" type="text" value="">
-                    </div>
+                    </div><br>
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @*<div class="form-group">
@@ -22,16 +22,16 @@
                             </div>
                         </div>*@
                         <div class="form-group">
-							@Html.LabelFor(model => model.hvac_FechaInicio, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.hvac_FechaInicio,"Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.hvac_FechaInicio, new { htmlAttributes = new { @class = "form-contro required valid" } })
-								@Html.ValidationMessageFor(model => model.hvac_FechaInicio, "", new { @class = "text-danger", @id = "errorhvac_FechaInicio" })
+								@Html.TextBoxFor(model => model.hvac_FechaInicio, new { @class = "form-control datepicker", @type ="date" })
+								@Html.ValidationMessageFor(model => model.hvac_FechaInicio, "", new { @class = "text-danger", @id = "errorhvac_FechaInicio"})
                             </div>
                         </div>
                         <div class="form-group">
-							@Html.LabelFor(model => model.hvac_FechaFin, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.hvac_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.hvac_FechaFin, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.TextBoxFor(model => model.hvac_FechaFin, new { @class = "form-control datepicker", @type = "date" })
 								@Html.ValidationMessageFor(model => model.hvac_FechaFin, "", new { @class = "text-danger", @id = "errorhvac_FechaFin" })
                             </div>
                         </div>
