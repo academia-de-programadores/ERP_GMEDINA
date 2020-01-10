@@ -146,6 +146,7 @@ var MaxSueldoEdit = 0;
 $(cmbEmpleadoEdit).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = cmbEmpleadoEdit.val();
+
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
@@ -266,6 +267,44 @@ $('#btnCreateRegistroAdelantos').click(function () {
 
 });
 
+
+function ValidarCamposEditar(colaborador, razon, monto){
+    var pasoValidacion = true;
+
+    console.log(colaborador.val());
+    if(colaborador.val() == ''){
+        pasoValidacion = false;
+        //Codigo para mostrar el span de validacion
+        //Hacerle focus al input
+        console.log('No paso la validacion de campo colaborador');
+        
+        $(colaborador).focus();
+    } else{
+        
+    }
+
+    console.log(razon.val());
+
+    if(razon ==null || razon.val() == ''){
+        pasoValidacion = false;
+        $('#adsu_RazonAdelantoValidacion').show();
+        razon.focus();
+    } else{
+        $('#adsu_RazonAdelantoValidacion').hide();
+    }
+
+    if(monto == null || monto.val() == ''){
+        pasoValidacion = false;
+        $('#adsu_MontoValidacion').show();
+        monto.focus();
+    } else{
+        $('#adsu_MontoValidacion').hide();
+    }
+
+    return pasoValidacion;
+}
+
+
 //FUNCION: OCULTAR LOS MENSAJES DE VALIDACION
 $('#btnCerrarCrearAdelanto').click(function () {
     $("#Crear #Validation_descripcion1").css("display", "none");
@@ -277,6 +316,7 @@ $('#IconCerrar').click(function () {
     $("#Crear #Validation_descripcion2").css("display", "none");
     $("#Crear #Validation_descripcion3").css("display", "none");
 });
+
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
@@ -363,6 +403,7 @@ $("#btnUpdateAdelantos").click(function () {
         //ACCIONES EN CASO DE EXITO
 
         //EJECUTAR LA VALIDACION PARA LA EDICIÓN
+        if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
         if ($("#Editar #adsu_Monto").val() <= data) {
             var data = $('#frmAdelantosEdit').serializeArray();
             $.ajax({

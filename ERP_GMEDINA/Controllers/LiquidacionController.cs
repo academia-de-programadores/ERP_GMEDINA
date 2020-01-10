@@ -151,6 +151,7 @@ namespace ERP_GMEDINA.Controllers
                     LiquidacionVM.DecimoCuartoMesProporcional_Liq = Monto_DecimoCuartoProporcional;
                     LiquidacionVM.VacacionesPendientes_Liq = Monto_VacacionesProporcionales;
                     LiquidacionVM.MontoTotalLiquidacion = Math.Round(Total_Liquidacion, 2);
+                    LiquidacionVM.moli_Id = IdMotivo;
                     //ALMACENAMIENTO EN LA SESIÓN
                     LiquidacionViewModel sessionLiquidacion = new LiquidacionViewModel();
                     sessionLiquidacion = LiquidacionVM;
@@ -292,35 +293,36 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    //listLiquidacion = db.UDP_Plani_tbHistorialDeLiquidaciones_Insert(tbLiquidaciones.emp_Id,
-                    //                                                                 tbLiquidaciones.FechaLiquidacion,
-                    //                                                                 tbLiquidaciones.SalarioOrdinarioMensual_Liq,
-                    //                                                                 tbLiquidaciones.SalarioPromedioMensual_Liq,
-                    //                                                                 tbLiquidaciones.SalarioOrdinarioDiario_Liq,
-                    //                                                                 tbLiquidaciones.SalarioPromedioDiario_Liq,
-                    //                                                                 tbLiquidaciones.Preaviso_Liq,
-                    //                                                                 tbLiquidaciones.Cesantia_Liq,
-                    //                                                                 tbLiquidaciones.DecimoTercerMesProporcional_Liq,
-                    //                                                                 tbLiquidaciones.DecimoCuartoMesProporcional_Liq,
-                    //                                                                 tbLiquidaciones.VacacionesPendientes_Liq,
-                    //                                                                 tbLiquidaciones.SalariosAdeudados,
-                    //                                                                 tbLiquidaciones.OtrosPagos,      
-                    //                                                                 tbLiquidaciones.PagoHEPendiente,         
-                    //                                                                 tbLiquidaciones.ValorBonoEducativo,      
-                    //                                                                 tbLiquidaciones.PagoSeptimoDia,     
-                    //                                                                 tbLiquidaciones.BonoPorVacaciones,       
-                    //                                                                 tbLiquidaciones.ReajusteSalarial,        
-                    //                                                                 tbLiquidaciones.DecimoTercerMesAdeudado, 
-                    //                                                                 tbLiquidaciones.DecimoCuartoMesAdeudado, 
-                    //                                                                 tbLiquidaciones.BonificacionVacaciones,  
-                    //                                                                 tbLiquidaciones.PagoPorEmbarazo,         
-                    //                                                                 tbLiquidaciones.PagoPorLactancia,
-                    //                                                                 tbLiquidaciones.PrePosNatal,            
-                    //                                                                 tbLiquidaciones.PagoPorDiasFeriado,
-                    //                                                                 tbLiquidaciones.MontoTotalLiquidacion,
-                    //                                                                 tbLiquidaciones.UsuarioCrea,
-                    //                                                                 tbLiquidaciones.FechaCrea);
-                    
+                    listLiquidacion = db.UDP_Plani_tbHistorialDeLiquidaciones_Insert(tbLiquidaciones.emp_Id,
+                                                                                     tbLiquidaciones.FechaLiquidacion,
+                                                                                     tbLiquidaciones.SalarioOrdinarioMensual_Liq,
+                                                                                     tbLiquidaciones.SalarioPromedioMensual_Liq,
+                                                                                     tbLiquidaciones.SalarioOrdinarioDiario_Liq,
+                                                                                     tbLiquidaciones.SalarioPromedioDiario_Liq,
+                                                                                     tbLiquidaciones.Preaviso_Liq,
+                                                                                     tbLiquidaciones.Cesantia_Liq,
+                                                                                     tbLiquidaciones.DecimoTercerMesProporcional_Liq,
+                                                                                     tbLiquidaciones.DecimoCuartoMesProporcional_Liq,
+                                                                                     tbLiquidaciones.VacacionesPendientes_Liq,
+                                                                                     tbLiquidaciones.SalariosAdeudados,
+                                                                                     tbLiquidaciones.OtrosPagos,
+                                                                                     tbLiquidaciones.PagoHEPendiente,
+                                                                                     tbLiquidaciones.ValorBonoEducativo,
+                                                                                     tbLiquidaciones.PagoSeptimoDia,
+                                                                                     tbLiquidaciones.BonoPorVacaciones,
+                                                                                     tbLiquidaciones.ReajusteSalarial,
+                                                                                     tbLiquidaciones.DecimoTercerMesAdeudado,
+                                                                                     tbLiquidaciones.DecimoCuartoMesAdeudado,
+                                                                                     tbLiquidaciones.BonificacionVacaciones,
+                                                                                     tbLiquidaciones.PagoPorEmbarazo,
+                                                                                     tbLiquidaciones.PagoPorLactancia,
+                                                                                     tbLiquidaciones.PrePosNatal,
+                                                                                     tbLiquidaciones.PagoPorDiasFeriado,
+                                                                                     tbLiquidaciones.MontoTotalLiquidacion,
+                                                                                     tbLiquidaciones.UsuarioCrea,
+                                                                                     tbLiquidaciones.FechaCrea,
+                                                                                     tbLiquidaciones.moli_Id);
+
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result Resultado in listLiquidacion)
                         MensajeError = Resultado.MensajeError;

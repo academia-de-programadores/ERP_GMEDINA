@@ -263,6 +263,7 @@
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
     <Compile Include="Models\cV_tbAdelantoSueldo.cs" />
+    <Compile Include="Models\cV_HistorialEmpleadosLiquidados.cs" />
     <Compile Include="Models\EmpleadosVendedores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -853,6 +854,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_GeneralTotales_RPT.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialEmpleadosLiquidados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_IHSS_RPT.cs">
@@ -1891,6 +1895,7 @@
     <Content Include="Views\ReportesPlanilla\ReportIngresosPreview.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportVarios.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportVariosPreview.cshtml" />
+    <Content Include="Views\ReportesPlanilla\LiquidacionRPT_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,7 +3,7 @@ const btnGuardarEditar = $('#btnUpdateDeduccion')
 const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
 cargandoCrearcargandoCrear = $('#cargandoCrear')
 cargandoCrear = $('#cargandoCrear')
-cargandoActivar = $('#cargandoActivar')//Div que aparecera cuando se le de click en crear
+cargandoActivar = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -508,7 +508,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnActivarCatalogo
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnActivarRegistroDeduccion").click(function () {
-
+    mostrarCargandoActivar();
     var data = $("#frmCatalogoDeduccionesActivar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -533,7 +533,7 @@ $("#btnActivarRegistroDeduccion").click(function () {
                 title: 'Exito',
                 message: 'El registro fue Activado de forma exitosa!',
             });
-
+            ocultarCargandoActivar();
         }
     });
 });

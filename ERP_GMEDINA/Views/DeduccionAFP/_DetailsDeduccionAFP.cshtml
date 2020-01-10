@@ -11,7 +11,7 @@
                     @Html.LabelFor(model => model.emp_Id)
                 </div>
                 <div class="col-md-6">
-                    <select id="emp_Id" name="emp_Id" class="text-box single-line" disabled></select>
+                    <span id="emp_Id"> @Html.DisplayFor(model => model.emp_Id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
                     @Html.LabelFor(model => model.afp_Id)
                 </div>
                 <div class="col-md-6">
-                    <select id="afp_Id" name="afp_Id" class="text-box single-line" disabled></select>
+                    <span id="afp_Id">@Html.DisplayFor(model => model.afp_Id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
                 </div>
             </div>
 
