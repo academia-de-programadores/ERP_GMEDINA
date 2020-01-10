@@ -42,13 +42,13 @@ function llenarTabla() {
     _ajax(null,
         '/TipoIncapacidades/llenarTabla',
         'POST',
-        function (lista) {
+        function (Lista) {
             tabla.clear();
             tabla.draw();
             if (validarDT(Lista)) {
                 return null;
             }
-            $.each(lista, function (index, value) {
+            $.each(Lista, function (index, value) {
                 console.log(value.ticn_Descripcion);
                 tabla.row.add({
                     ID:value.ticn_Id,

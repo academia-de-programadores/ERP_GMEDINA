@@ -32,7 +32,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Razón Inactivo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "Excedió el numero máximo")]
-        public string habi_RazonInactivo { get; set; }
+        public string tiho_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]
         public int tiho_UsuarioCrea { get; set; }

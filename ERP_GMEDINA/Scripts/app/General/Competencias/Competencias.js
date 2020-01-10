@@ -48,7 +48,7 @@ function llenarTabla() {
                 console.log(value.comp_Descripcion);
                 tabla.row.add({
                     ID:value.comp_Id,
-                    Descripcion: value.comp_Descripcion
+                    Competencia: value.comp_Descripcion
                 }).draw();
             });
         });

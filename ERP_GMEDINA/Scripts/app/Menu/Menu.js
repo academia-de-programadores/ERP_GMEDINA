@@ -31,7 +31,7 @@
         ],
         Incapacidades: [
                 "TipoIncapacidades",
-                "HistorialPermisos"
+                "HistorialIncapacidades"
         ],
         Reclutamiento: [
                 "Competencias",

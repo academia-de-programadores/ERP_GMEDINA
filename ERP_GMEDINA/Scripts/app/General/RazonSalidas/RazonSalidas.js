@@ -43,7 +43,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 tabla.row.add({
                     ID:value.rsal_Id,
-                Descripcion:value.rsal_Descripcion
+                Razon:value.rsal_Descripcion
             }).draw();
             });
         });
