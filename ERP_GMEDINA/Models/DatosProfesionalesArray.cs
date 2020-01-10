@@ -12,9 +12,10 @@ namespace ERP_GMEDINA.Models
         public int[] Idiomas { get; set; }
         public int[] ReqEspeciales { get; set; }
         public int[] Titulos { get; set; }
+        public int[] req_Id { get; set; }
         public DatosProfesionalesArray()
         {
-
+            
         }
     }
 }

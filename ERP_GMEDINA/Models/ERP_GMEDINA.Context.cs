@@ -3243,7 +3243,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialPermisos_Insert_Result>("UDP_RRHH_tbHistorialPermisos_Insert", emp_IdParameter, tper_IdParameter, hper_fechaInicioParameter, hper_fechaFinParameter, hper_ObservacionParameter, hper_JustificadoParameter, hper_PorcentajeIndemnizadoParameter, hper_UsuarioCreaParameter, hper_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbCompetenciasRequisicion_Delete(Nullable<int> creq_Id, Nullable<int> creq_UsuarioModifica, Nullable<System.DateTime> creq_FechaModifica)
+        public virtual ObjectResult<rrhh_tbCompetenciasRequisicion_Delete_Result> rrhh_tbCompetenciasRequisicion_Delete(Nullable<int> creq_Id, Nullable<int> creq_UsuarioModifica, Nullable<System.DateTime> creq_FechaModifica)
         {
             var creq_IdParameter = creq_Id.HasValue ?
                 new ObjectParameter("creq_Id", creq_Id) :
@@ -3257,10 +3257,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("creq_FechaModifica", creq_FechaModifica) :
                 new ObjectParameter("creq_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbCompetenciasRequisicion_Delete", creq_IdParameter, creq_UsuarioModificaParameter, creq_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbCompetenciasRequisicion_Delete_Result>("rrhh_tbCompetenciasRequisicion_Delete", creq_IdParameter, creq_UsuarioModificaParameter, creq_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbCompetenciasRequisicion_Insert(Nullable<int> req_Id, Nullable<int> comp_Id, Nullable<int> creq_UsuarioCrea, Nullable<System.DateTime> creq_FechaCrea)
+        public virtual ObjectResult<rrhh_tbCompetenciasRequisicion_Insert_Result> rrhh_tbCompetenciasRequisicion_Insert(Nullable<int> req_Id, Nullable<int> comp_Id, Nullable<int> creq_UsuarioCrea, Nullable<System.DateTime> creq_FechaCrea)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -3278,10 +3278,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("creq_FechaCrea", creq_FechaCrea) :
                 new ObjectParameter("creq_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbCompetenciasRequisicion_Insert", req_IdParameter, comp_IdParameter, creq_UsuarioCreaParameter, creq_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbCompetenciasRequisicion_Insert_Result>("rrhh_tbCompetenciasRequisicion_Insert", req_IdParameter, comp_IdParameter, creq_UsuarioCreaParameter, creq_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbHabilidadesRequisicion_Delete(Nullable<int> hreq_Id, Nullable<int> hreq_UsuarioModifica, Nullable<System.DateTime> hreq_FechaModifica)
+        public virtual ObjectResult<rrhh_tbHabilidadesRequisicion_Delete_Result> rrhh_tbHabilidadesRequisicion_Delete(Nullable<int> hreq_Id, Nullable<int> hreq_UsuarioModifica, Nullable<System.DateTime> hreq_FechaModifica)
         {
             var hreq_IdParameter = hreq_Id.HasValue ?
                 new ObjectParameter("hreq_Id", hreq_Id) :
@@ -3295,10 +3295,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hreq_FechaModifica", hreq_FechaModifica) :
                 new ObjectParameter("hreq_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbHabilidadesRequisicion_Delete", hreq_IdParameter, hreq_UsuarioModificaParameter, hreq_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbHabilidadesRequisicion_Delete_Result>("rrhh_tbHabilidadesRequisicion_Delete", hreq_IdParameter, hreq_UsuarioModificaParameter, hreq_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbHabilidadesRequisicion_Insert(Nullable<int> req_Id, Nullable<int> habi_Id, Nullable<int> hreq_UsuarioCrea, Nullable<System.DateTime> hreq_FechaCrea)
+        public virtual ObjectResult<rrhh_tbHabilidadesRequisicion_Insert_Result> rrhh_tbHabilidadesRequisicion_Insert(Nullable<int> req_Id, Nullable<int> habi_Id, Nullable<int> hreq_UsuarioCrea, Nullable<System.DateTime> hreq_FechaCrea)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -3316,10 +3316,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hreq_FechaCrea", hreq_FechaCrea) :
                 new ObjectParameter("hreq_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbHabilidadesRequisicion_Insert", req_IdParameter, habi_IdParameter, hreq_UsuarioCreaParameter, hreq_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbHabilidadesRequisicion_Insert_Result>("rrhh_tbHabilidadesRequisicion_Insert", req_IdParameter, habi_IdParameter, hreq_UsuarioCreaParameter, hreq_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbIdiomasRequisicion_Delete(Nullable<int> ireq_Id, Nullable<int> ireq_UsuarioModifica, Nullable<System.DateTime> ireq_FechaModifica)
+        public virtual ObjectResult<rrhh_tbIdiomasRequisicion_Delete_Result> rrhh_tbIdiomasRequisicion_Delete(Nullable<int> ireq_Id, Nullable<int> ireq_UsuarioModifica, Nullable<System.DateTime> ireq_FechaModifica)
         {
             var ireq_IdParameter = ireq_Id.HasValue ?
                 new ObjectParameter("ireq_Id", ireq_Id) :
@@ -3333,10 +3333,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("ireq_FechaModifica", ireq_FechaModifica) :
                 new ObjectParameter("ireq_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbIdiomasRequisicion_Delete", ireq_IdParameter, ireq_UsuarioModificaParameter, ireq_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbIdiomasRequisicion_Delete_Result>("rrhh_tbIdiomasRequisicion_Delete", ireq_IdParameter, ireq_UsuarioModificaParameter, ireq_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbIdiomasRequisicion_Insert(Nullable<int> req_Id, Nullable<int> idi_Id, Nullable<int> ireq_UsuarioCrea, Nullable<System.DateTime> ireq_FechaCrea)
+        public virtual ObjectResult<rrhh_tbIdiomasRequisicion_Insert_Result> rrhh_tbIdiomasRequisicion_Insert(Nullable<int> req_Id, Nullable<int> idi_Id, Nullable<int> ireq_UsuarioCrea, Nullable<System.DateTime> ireq_FechaCrea)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -3354,10 +3354,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("ireq_FechaCrea", ireq_FechaCrea) :
                 new ObjectParameter("ireq_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbIdiomasRequisicion_Insert", req_IdParameter, idi_IdParameter, ireq_UsuarioCreaParameter, ireq_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbIdiomasRequisicion_Insert_Result>("rrhh_tbIdiomasRequisicion_Insert", req_IdParameter, idi_IdParameter, ireq_UsuarioCreaParameter, ireq_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbRequerimientosEspecialesRequisicion_Delete(Nullable<int> rer_Id, Nullable<int> rer_UsuarioModifica, Nullable<System.DateTime> rer_FechaModifica)
+        public virtual ObjectResult<rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result> rrhh_tbRequerimientosEspecialesRequisicion_Delete(Nullable<int> rer_Id, Nullable<int> rer_UsuarioModifica, Nullable<System.DateTime> rer_FechaModifica)
         {
             var rer_IdParameter = rer_Id.HasValue ?
                 new ObjectParameter("rer_Id", rer_Id) :
@@ -3371,10 +3371,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("rer_FechaModifica", rer_FechaModifica) :
                 new ObjectParameter("rer_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbRequerimientosEspecialesRequisicion_Delete", rer_IdParameter, rer_UsuarioModificaParameter, rer_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result>("rrhh_tbRequerimientosEspecialesRequisicion_Delete", rer_IdParameter, rer_UsuarioModificaParameter, rer_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbRequerimientosEspecialesRequisicion_Insert(Nullable<int> req_Id, Nullable<int> resp_Id, Nullable<int> rer_UsuarioCrea, Nullable<System.DateTime> rer_FechaCrea)
+        public virtual ObjectResult<rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result> rrhh_tbRequerimientosEspecialesRequisicion_Insert(Nullable<int> req_Id, Nullable<int> resp_Id, Nullable<int> rer_UsuarioCrea, Nullable<System.DateTime> rer_FechaCrea)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -3392,10 +3392,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("rer_FechaCrea", rer_FechaCrea) :
                 new ObjectParameter("rer_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbRequerimientosEspecialesRequisicion_Insert", req_IdParameter, resp_IdParameter, rer_UsuarioCreaParameter, rer_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result>("rrhh_tbRequerimientosEspecialesRequisicion_Insert", req_IdParameter, resp_IdParameter, rer_UsuarioCreaParameter, rer_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbTitulosRequisicion_Delete(Nullable<int> treq_Id, Nullable<int> tipe_UsuarioModifica, Nullable<System.DateTime> tipe_FechaModifica)
+        public virtual ObjectResult<rrhh_tbTitulosRequisicion_Delete_Result> rrhh_tbTitulosRequisicion_Delete(Nullable<int> treq_Id, Nullable<int> tipe_UsuarioModifica, Nullable<System.DateTime> tipe_FechaModifica)
         {
             var treq_IdParameter = treq_Id.HasValue ?
                 new ObjectParameter("treq_Id", treq_Id) :
@@ -3409,10 +3409,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tipe_FechaModifica", tipe_FechaModifica) :
                 new ObjectParameter("tipe_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbTitulosRequisicion_Delete", treq_IdParameter, tipe_UsuarioModificaParameter, tipe_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbTitulosRequisicion_Delete_Result>("rrhh_tbTitulosRequisicion_Delete", treq_IdParameter, tipe_UsuarioModificaParameter, tipe_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> rrhh_tbTitulosRequisicion_Insert(Nullable<int> req_Id, Nullable<int> titu_Id, Nullable<int> treq_UsuarioCrea, Nullable<System.DateTime> treq_FechaCrea)
+        public virtual ObjectResult<rrhh_tbTitulosRequisicion_Insert_Result> rrhh_tbTitulosRequisicion_Insert(Nullable<int> req_Id, Nullable<int> titu_Id, Nullable<int> treq_UsuarioCrea, Nullable<System.DateTime> treq_FechaCrea)
         {
             var req_IdParameter = req_Id.HasValue ?
                 new ObjectParameter("req_Id", req_Id) :
@@ -3430,7 +3430,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("treq_FechaCrea", treq_FechaCrea) :
                 new ObjectParameter("treq_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbTitulosRequisicion_Insert", req_IdParameter, titu_IdParameter, treq_UsuarioCreaParameter, treq_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbTitulosRequisicion_Insert_Result>("rrhh_tbTitulosRequisicion_Insert", req_IdParameter, titu_IdParameter, treq_UsuarioCreaParameter, treq_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbPersonas_Update_Result> UDP_RRHH_tbPersonas_Update(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
@@ -3492,6 +3492,170 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Update_Result>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Delete_Result1> UDP_RRHH_tbRequisiciones_Delete(Nullable<int> req_id, string req_razonInactivo, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        {
+            var req_idParameter = req_id.HasValue ?
+                new ObjectParameter("req_id", req_id) :
+                new ObjectParameter("req_id", typeof(int));
+    
+            var req_razonInactivoParameter = req_razonInactivo != null ?
+                new ObjectParameter("req_razonInactivo", req_razonInactivo) :
+                new ObjectParameter("req_razonInactivo", typeof(string));
+    
+            var req_UsuarioModificaParameter = req_UsuarioModifica.HasValue ?
+                new ObjectParameter("req_UsuarioModifica", req_UsuarioModifica) :
+                new ObjectParameter("req_UsuarioModifica", typeof(int));
+    
+            var req_FechaModificaParameter = req_FechaModifica.HasValue ?
+                new ObjectParameter("req_FechaModifica", req_FechaModifica) :
+                new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Delete_Result1>("UDP_RRHH_tbRequisiciones_Delete", req_idParameter, req_razonInactivoParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Insert_Result1> UDP_RRHH_tbRequisiciones_Insert(string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioCrea, Nullable<System.DateTime> req_FechaCrea)
+        {
+            var req_ExperienciaParameter = req_Experiencia != null ?
+                new ObjectParameter("req_Experiencia", req_Experiencia) :
+                new ObjectParameter("req_Experiencia", typeof(string));
+    
+            var req_SexoParameter = req_Sexo != null ?
+                new ObjectParameter("req_Sexo", req_Sexo) :
+                new ObjectParameter("req_Sexo", typeof(string));
+    
+            var req_DescripcionParameter = req_Descripcion != null ?
+                new ObjectParameter("req_Descripcion", req_Descripcion) :
+                new ObjectParameter("req_Descripcion", typeof(string));
+    
+            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
+                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
+                new ObjectParameter("req_EdadMinima", typeof(int));
+    
+            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
+                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
+                new ObjectParameter("req_EdadMaxima", typeof(int));
+    
+            var req_EstadoCivilParameter = req_EstadoCivil != null ?
+                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
+                new ObjectParameter("req_EstadoCivil", typeof(string));
+    
+            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
+                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
+                new ObjectParameter("req_EducacionSuperior", typeof(bool));
+    
+            var req_PermanenteParameter = req_Permanente.HasValue ?
+                new ObjectParameter("req_Permanente", req_Permanente) :
+                new ObjectParameter("req_Permanente", typeof(bool));
+    
+            var req_DuracionParameter = req_Duracion != null ?
+                new ObjectParameter("req_Duracion", req_Duracion) :
+                new ObjectParameter("req_Duracion", typeof(string));
+    
+            var req_VacantesParameter = req_Vacantes != null ?
+                new ObjectParameter("req_Vacantes", req_Vacantes) :
+                new ObjectParameter("req_Vacantes", typeof(string));
+    
+            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
+                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
+                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
+    
+            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
+                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
+                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
+    
+            var req_UsuarioCreaParameter = req_UsuarioCrea.HasValue ?
+                new ObjectParameter("req_UsuarioCrea", req_UsuarioCrea) :
+                new ObjectParameter("req_UsuarioCrea", typeof(int));
+    
+            var req_FechaCreaParameter = req_FechaCrea.HasValue ?
+                new ObjectParameter("req_FechaCrea", req_FechaCrea) :
+                new ObjectParameter("req_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Insert_Result1>("UDP_RRHH_tbRequisiciones_Insert", req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioCreaParameter, req_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Restore_Result1> UDP_RRHH_tbRequisiciones_Restore(Nullable<int> req_id, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        {
+            var req_idParameter = req_id.HasValue ?
+                new ObjectParameter("req_id", req_id) :
+                new ObjectParameter("req_id", typeof(int));
+    
+            var req_UsuarioModificaParameter = req_UsuarioModifica.HasValue ?
+                new ObjectParameter("req_UsuarioModifica", req_UsuarioModifica) :
+                new ObjectParameter("req_UsuarioModifica", typeof(int));
+    
+            var req_FechaModificaParameter = req_FechaModifica.HasValue ?
+                new ObjectParameter("req_FechaModifica", req_FechaModifica) :
+                new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Restore_Result1>("UDP_RRHH_tbRequisiciones_Restore", req_idParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Update_Result1> UDP_RRHH_tbRequisiciones_Update(Nullable<int> req_Id, string req_Experiencia, string req_Sexo, string req_Descripcion, Nullable<int> req_EdadMinima, Nullable<int> req_EdadMaxima, string req_EstadoCivil, Nullable<bool> req_EducacionSuperior, Nullable<bool> req_Permanente, string req_Duracion, string req_Vacantes, Nullable<System.DateTime> req_FechaRequisicion, Nullable<System.DateTime> req_FechaContratacion, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
+        {
+            var req_IdParameter = req_Id.HasValue ?
+                new ObjectParameter("req_Id", req_Id) :
+                new ObjectParameter("req_Id", typeof(int));
+    
+            var req_ExperienciaParameter = req_Experiencia != null ?
+                new ObjectParameter("req_Experiencia", req_Experiencia) :
+                new ObjectParameter("req_Experiencia", typeof(string));
+    
+            var req_SexoParameter = req_Sexo != null ?
+                new ObjectParameter("req_Sexo", req_Sexo) :
+                new ObjectParameter("req_Sexo", typeof(string));
+    
+            var req_DescripcionParameter = req_Descripcion != null ?
+                new ObjectParameter("req_Descripcion", req_Descripcion) :
+                new ObjectParameter("req_Descripcion", typeof(string));
+    
+            var req_EdadMinimaParameter = req_EdadMinima.HasValue ?
+                new ObjectParameter("req_EdadMinima", req_EdadMinima) :
+                new ObjectParameter("req_EdadMinima", typeof(int));
+    
+            var req_EdadMaximaParameter = req_EdadMaxima.HasValue ?
+                new ObjectParameter("req_EdadMaxima", req_EdadMaxima) :
+                new ObjectParameter("req_EdadMaxima", typeof(int));
+    
+            var req_EstadoCivilParameter = req_EstadoCivil != null ?
+                new ObjectParameter("req_EstadoCivil", req_EstadoCivil) :
+                new ObjectParameter("req_EstadoCivil", typeof(string));
+    
+            var req_EducacionSuperiorParameter = req_EducacionSuperior.HasValue ?
+                new ObjectParameter("req_EducacionSuperior", req_EducacionSuperior) :
+                new ObjectParameter("req_EducacionSuperior", typeof(bool));
+    
+            var req_PermanenteParameter = req_Permanente.HasValue ?
+                new ObjectParameter("req_Permanente", req_Permanente) :
+                new ObjectParameter("req_Permanente", typeof(bool));
+    
+            var req_DuracionParameter = req_Duracion != null ?
+                new ObjectParameter("req_Duracion", req_Duracion) :
+                new ObjectParameter("req_Duracion", typeof(string));
+    
+            var req_VacantesParameter = req_Vacantes != null ?
+                new ObjectParameter("req_Vacantes", req_Vacantes) :
+                new ObjectParameter("req_Vacantes", typeof(string));
+    
+            var req_FechaRequisicionParameter = req_FechaRequisicion.HasValue ?
+                new ObjectParameter("req_FechaRequisicion", req_FechaRequisicion) :
+                new ObjectParameter("req_FechaRequisicion", typeof(System.DateTime));
+    
+            var req_FechaContratacionParameter = req_FechaContratacion.HasValue ?
+                new ObjectParameter("req_FechaContratacion", req_FechaContratacion) :
+                new ObjectParameter("req_FechaContratacion", typeof(System.DateTime));
+    
+            var req_UsuarioModificaParameter = req_UsuarioModifica.HasValue ?
+                new ObjectParameter("req_UsuarioModifica", req_UsuarioModifica) :
+                new ObjectParameter("req_UsuarioModifica", typeof(int));
+    
+            var req_FechaModificaParameter = req_FechaModifica.HasValue ?
+                new ObjectParameter("req_FechaModifica", req_FechaModifica) :
+                new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Update_Result1>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
         }
     }
 }

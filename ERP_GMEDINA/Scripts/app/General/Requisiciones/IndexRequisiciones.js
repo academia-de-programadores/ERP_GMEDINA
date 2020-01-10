@@ -175,34 +175,32 @@ function tablaEditar(btn) {
             }
         });
 }
-function tablaDetalles(btn) {
-    var tr = $(btn).closest("tr");
-    var row = tabla.row(tr);
-    id = row.data().id;
+
+function tablaDetalles(ID) {
+    $('#ModalDetalles').modal('show');
+    id = ID;
     _ajax(null,
-        '/Requisiciones/Edit/' + id,
+        '/Requisiciones/Detalles/' + ID,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#req_Experiencia")["0"].innerText = obj.req_Experiencia;
-                $("#ModalDetalles").find("#req_Sexo")["0"].innerText = obj.req_Sexo;
-                $("#ModalDetalles").find("#req_Descripcion")["0"].innerText = obj.req_Descripcion;
-                $("#ModalDetalles").find("#req_EdadMinima")["0"].innerText = obj.req_EdadMinima;
-                $("#ModalDetalles").find("#req_EdadMaxima")["0"].innerText = obj.req_EdadMaxima;
-                $("#ModalDetalles").find("#req_EstadoCivil")["0"].innerText = obj.req_EstadoCivil;
-                $("#ModalDetalles").find("#req_EducacionSuperior")["0"].innerText = obj.req_EducacionSuperior;
-                $("#ModalDetalles").find("#req_Permanente")["0"].innerText = obj.req_Permanente;
-                $("#ModalDetalles").find("#req_Duracion")["0"].innerText = obj.req_Duracion;
-                $("#ModalDetalles").find("#req_Vacantes")["0"].innerText = obj.req_Vacantes;
-                $("#ModalDetalles").find("#req_FechaRequisicion")["0"].innerText = obj.req_FechaRequisicion;
-                $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = obj.req_FechaContratacion;
-                $("#ModalDetalles").find("#req_Estado")["0"].innerText = obj.req_Estado;
-                $("#ModalDetalles").find("#req_RazonInactivo")["0"].innerText = obj.req_RazonInactivo;
-                $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormato(obj.req_FechaCrea);
-                $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormato(obj.req_FechaModifica);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $("#ModalDetalles").find("#req_Experiencia")["0"].innerText = obj[0].req_Experiencia;
+                $("#ModalDetalles").find("#req_Sexo")["0"].innerText = obj[0].req_Sexo;
+                $("#ModalDetalles").find("#req_Descripcion")["0"].innerText = obj[0].req_Descripcion;
+                $("#ModalDetalles").find("#req_EdadMinima")["0"].innerText = obj[0].req_EdadMinima;
+                $("#ModalDetalles").find("#req_EdadMaxima")["0"].innerText = obj[0].req_EdadMaxima;
+                $("#ModalDetalles").find("#req_EstadoCivil")["0"].innerText = obj[0].req_EstadoCivil;
+                $("#ModalDetalles").find("#req_EducacionSuperior")["0"].innerText = obj[0].req_EducacionSuperior;
+                $("#ModalDetalles").find("#req_Permanente")["0"].innerText = obj[0].req_Permanente;
+                $("#ModalDetalles").find("#req_Duracion")["0"].innerText = obj[0].req_Duracion;
+                $("#ModalDetalles").find("#req_Vacantes")["0"].innerText = obj[0].req_Vacantes;
+                $("#ModalDetalles").find("#req_FechaRequisicion")["0"].innerText = FechaFormato(obj[0].req_FechaRequisicion);
+                $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = FechaFormato(obj[0].req_FechaContratacion);
+                $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormato(obj[0].req_FechaCrea);
+                $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormato(obj[0].req_FechaModifica);
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioCrea;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioModifica;
+
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -255,6 +253,7 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#req_FechaRequisicion").val("");
     $(modalnuevo).find("#req_FechaContratacion").val("");
 });
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/Requisiciones/Edit/' + id,
@@ -285,6 +284,7 @@ $("#btnInhabilitar").click(function () {
     $("#ModalInhabilitar").find("#req__RazonInactivo").val("");
     $("#ModalInhabilitar").find("#req__RazonInactivo").focus();
 });
+
 //botones POST
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
@@ -312,8 +312,8 @@ $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.req__Id = id;
-        data = JSON.stringify({ tbRequisiciones: data });
+        data.req_Id = id;
+        data = JSON.stringify({ Requisicion: data });
         _ajax(data,
             '/Requisiciones/Delete',
             'POST',
@@ -330,6 +330,7 @@ $("#InActivar").click(function () {
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
+    $("#req_RazonInactivo").val = "";
 });
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
@@ -353,3 +354,11 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+function tablaEditar(ID) {
+    id = ID;
+    sessionStorage.setItem("IdRequisicion", id);
+    window.location.href = "/Requisiciones/Edit";
+};
+
+
