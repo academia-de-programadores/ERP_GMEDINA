@@ -63,8 +63,8 @@
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                             if (item.dafp_Activo == true)
                                             {
-                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleAFP">Detalles</button>
-                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarAFP">Editar</button>
+                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalles</button>
+                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP">Editar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.dafp_Activo == false)
@@ -73,9 +73,6 @@
                                                 <button type="button" dafpid="@item.dafp_Id" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP">Activar</button>
                                             }
                                         }
-                                        <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalles</button>
-                                        <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP">Editar</button>
-                                        
                                     </td>
                                 </tr>
                             }
@@ -169,11 +166,6 @@
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
-                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmActivarDeduccionAFP" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="dafp_Id" id="dafp_Id" value="" />
-                }
                 ¿Esta seguro que desea Activar este registro?
             </div>
             <div class="modal-footer">

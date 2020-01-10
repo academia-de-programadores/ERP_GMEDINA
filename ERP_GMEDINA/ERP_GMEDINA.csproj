@@ -595,6 +595,9 @@
     <Compile Include="Models\UDP_Plani_tbAFP_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1872,6 +1875,7 @@
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
+    <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

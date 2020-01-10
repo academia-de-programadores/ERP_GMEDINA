@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: AcumuladosISR
         public ActionResult Index()
         {
-            var tbAcumuladosISR = db.tbAcumuladosISR.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x=> x.aisr_FechaCrea);
+            var tbAcumuladosISR = db.tbAcumuladosISR.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.aisr_FechaCrea);
             return View(tbAcumuladosISR.ToList());
         }
         [HttpGet]
@@ -39,21 +39,21 @@ namespace ERP_GMEDINA.Controllers
         {
             var tbAcumuladosISRJSON = from tbAcumuladosISR in db.tbAcumuladosISR
                                       where tbAcumuladosISR.aisr_Activo == true && tbAcumuladosISR.aisr_Id == id
-                                          select new
-                                          {
-                                              tbAcumuladosISR.aisr_Id,
-                                              tbAcumuladosISR.aisr_Descripcion,
-                                              tbAcumuladosISR.aisr_Monto,
-                                              tbAcumuladosISR.aisr_Activo,
+                                      select new
+                                      {
+                                          tbAcumuladosISR.aisr_Id,
+                                          tbAcumuladosISR.aisr_Descripcion,
+                                          tbAcumuladosISR.aisr_Monto,
+                                          tbAcumuladosISR.aisr_Activo,
 
-                                              tbAcumuladosISR.aisr_UsuarioCrea,
-                                              UsuCrea = tbAcumuladosISR.tbUsuario.usu_NombreUsuario,
-                                              tbAcumuladosISR.aisr_FechaCrea,
+                                          tbAcumuladosISR.aisr_UsuarioCrea,
+                                          UsuCrea = tbAcumuladosISR.tbUsuario.usu_NombreUsuario,
+                                          tbAcumuladosISR.aisr_FechaCrea,
 
-                                              tbAcumuladosISR.aisr_UsuarioModifica,
-                                              UsuModifica = tbAcumuladosISR.tbUsuario1.usu_NombreUsuario,
-                                              tbAcumuladosISR.aisr_FechaModifica
-                                          };
+                                          tbAcumuladosISR.aisr_UsuarioModifica,
+                                          UsuModifica = tbAcumuladosISR.tbUsuario1.usu_NombreUsuario,
+                                          tbAcumuladosISR.aisr_FechaModifica
+                                      };
 
             db.Configuration.ProxyCreationEnabled = false;
 
@@ -61,7 +61,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "aisr_Id,aisr_Descripcion,aisr_Monto,aisr_UsuarioCrea,aisr_FechaCrea,aisr_UsuarioModifica,aisr_FechaModifica,aisr_Activo")] tbAcumuladosISR tbAcumuladosISR)

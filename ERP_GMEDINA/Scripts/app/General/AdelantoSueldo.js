@@ -22,11 +22,10 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-//EVITAR POSTBACK DEL FORMULARIO CREATE
-$('#frmEmpleadoAdelantos').submit(function (e) {
-    return false;
-});
-
+//EVITAR POSTBACK DEL FORMULARIO
+//$('#frmAdelantoSueldoEdit').submit(function (e) {
+//    return false;
+//});
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridAdelantos() {
@@ -58,7 +57,7 @@ function cargarGridAdelantos() {
                     '<td>' + FechaAdelanto + '</td>' +
                     '<td>' + Deducido + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalles</button>' +
+                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalle</button>' +
                     '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs" disabled id="btnEditarAdelantoSueldo">Editar</button>' +
                     '</td>' +
                     '</tr>';
@@ -106,53 +105,59 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
 
 //OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
 var cmbEmpleado = $("#emp_IdEmpleado");
-
+//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA CREACION
+var MaxSueldoCreate = 0;
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA CREACION
 $(cmbEmpleado).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
-    var IdEmp = cmbEmpleado.val();
+    var IdEmp = parseInt(cmbEmpleado.val());
+    console.log(IdEmp);
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
-        method: "GET",
+        method: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ Emp_Id: IdEmp })
+        data: JSON.stringify({ id: IdEmp })
     }).done(function (data) {
         //ACCIONES EN CASO DE EXITO
-        $("#adsu_Monto").attr("max", data);
+        MaxSueldoCreate = data;
+        //$("#adsu_Monto").attr("max", data);
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
         $("#AgregarAdelantos").modal('hide');
         iziToast.error({
             title: 'Error',
-            message: 'No se recuperar el sueldo neto promedio',
+            message: 'No se pudo recuperar el sueldo neto promedio',
         });
     });
 });
 
 //OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
-var cmbEmpleadoEdit = $("#frmEmpleadoBonos #emp_Id");
-
+var cmbEmpleadoEdit = $("#frmAdelantosEdit #emp_Id");
+//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA EDICION
+var MaxSueldoEdit = 0;
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA EDICION
 $(cmbEmpleadoEdit).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = cmbEmpleadoEdit.val();
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
-        url: "/AdelantoSueldo/GetSueldoNetoProm/10",
-        method: "GET",
+        url: "/AdelantoSueldo/GetSueldoNetoProm",
+        method: "POST",
         dataType: "json",
-        contentType: "application/json; charset=utf-8"
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: IdEmp })
     }).done(function (data) {
         //ACCIONES EN CASO DE EXITO
-        $("#frmEmpleadoBonos #adsu_Monto").attr("max", data);
+        MaxSueldoEdit = data;
+        //$("#frmAdelantosEdit #adsu_Monto").attr("max", data);
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
         $("#EditarAdelantoSueldo").modal('hide');
         iziToast.error({
             title: 'Error',
-            message: 'No se recuperar el sueldo neto promedio',
+            message: 'No se pudo recuperar el sueldo neto promedio',
         });
     });
 });
@@ -160,39 +165,8 @@ $(cmbEmpleadoEdit).change(() => {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
-    var emp_IdEmpleado = $("#emp_IdEmpleado").val();
-    var adsu_RazonAdelanto = $("#adsu_RazonAdelanto").val();
-    var adsu_Monto = $("#adsu_Monto").val();
-    var adsu_FechaAdelanto = $("#adsu_FechaAdelanto").val();
-    //VALIDACIONES
-    if (emp_IdEmpleado == 0) {
-        $("#Validation_descripcion1").css("display", "");
-    } else {
-        $("#Validation_descripcion1").css("display", "none");
-    }
-
-    if (adsu_RazonAdelanto == null || adsu_RazonAdelanto == "") {
-        $("#Validation_descripcion2").css("display", "");
-    } else {
-        $("#Validation_descripcion2").css("display", "none");
-    }
-
-    if (adsu_Monto == null || adsu_Monto == "") {
-        $("#Validation_descripcion3").css("display", "");
-    } else {
-        $("#Validation_descripcion3").css("display", "none");
-    }
-
-    if (adsu_FechaAdelanto == null || adsu_FechaAdelanto == "") {
-        $("#Validation_descripcion4").css("display", "");
-    } else {
-        $("#Validation_descripcion4").css("display", "none");
-    }
-
-    if(emp_IdEmpleado != 0
-        && adsu_RazonAdelanto != null && adsu_RazonAdelanto != ""
-        && adsu_Monto != null && adsu_Monto != ""
-        && adsu_FechaAdelanto != null && adsu_FechaAdelanto != "") {
+    if ($("#Crear #adsu_Monto").val() <= MaxSueldoCreate)
+    {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoAdelantos").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -212,21 +186,26 @@ $('#btnCreateRegistroAdelantos').click(function () {
             }
             else {
                 cargarGridAdelantos();
-                $("#Validation_descripcion1").css("display", "none");
-                $("#Validation_descripcion2").css("display", "none");
-                $("#Validation_descripcion3").css("display", "none");
-                $("#Validation_descripcion4").css("display", "none");
-
-                //LIMPIAR EL FORMULARIO
-                document.getElementById("frmEmpleadoAdelantos").reset();
+                //Setear la variable de SueldoAdelantoMaximo a cero 
+                MaxSueldoCreate = 0;
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Éxito',
-                    message: '¡Se ha registrado exitosamente!',
+                    title: 'Exito',
+                    message: 'Se ha registrado con exitosamente!',
                 });
             }
         });
     }
+    else {
+        //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+        iziToast.error({
+            title: 'Error',
+            message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
+        });
+        //IGUALAR EL MONTO AL SUELDO PROMEDIO
+        $("#Crear #adsu_Monto").val(MaxSueldoCreate);
+    }
+
 });
 
 
@@ -302,51 +281,81 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
 $("#btnUpdateAdelantos").click(function () {
-    var data = $('#frmEmpleadoBonos').serializeArray();
+    //OBTENER EL ID DEL EMPLEADO 
+    var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
+    //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
     $.ajax({
-        url: "/AdelantoSueldo/Edit",
+        url: "/AdelantoSueldo/GetSueldoNetoProm",
         method: "POST",
-        data: data
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: IdEmp })
     }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
+        //ACCIONES EN CASO DE EXITO
+
+        //EJECUTAR LA VALIDACION PARA LA EDICIÓN
+        if ($("#Editar #adsu_Monto").val() <= data) {
+            var data = $('#frmAdelantosEdit').serializeArray();
+            $.ajax({
+                url: "/AdelantoSueldo/Edit",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+                if (data == "error") {
+                    //Cuando traiga un error del backend al guardar la edicion
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No se pudo editar el registro, contacte al administrador',
+                    });
+                }
+                else {
+                    // REFRESCAR UNICAMENTE LA TABLA
+                    cargarGridAdelantos();
+                    //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                    FullBody();
+                    $("#EditarAdelantoSueldo").modal('hide');
+                    //Setear la variable de SueldoAdelantoMaximo a cero 
+                    MaxSueldoEdit = 0;
+                    //Mensaje de exito de la edicion
+                    iziToast.success({
+                        title: 'Exito',
+                        message: 'El registro fue editado de forma exitosa!',
+                    });
+                }
             });
         }
         else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridAdelantos();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            FullBody();
-            $("#EditarAdelantoSueldo").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+            //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+            iziToast.error({
+                title: 'Error',
+                message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
             });
+            //IGUALAR EL MONTO AL SUELDO PROMEDIO
+            $("#Editar #adsu_Monto").val(data);
+            //MaxSueldoEdit = 0;
         }
+
+    }).fail(function (data) {
+        //ACCIONES EN CASO DE ERROR
+        $("#EditarAdelantoSueldo").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'No se pudo recuperar el sueldo neto promedio',
+        });
     });
+
 });
 
-//FUNCION: OCULTAR MODAL DE EDICION
+//FUNCION: OCULTAR MODAL DE EDICION EN LA INACTIVACION
 $("#btnCerrarEditar").click(function () {
     $("#EditarAdelantoSueldo").modal('hide');
     $("#Editar #Validation_descripcion").css("display", "none");
 });
 
-//FUNCION: DESPLEGAR MENSAJE ANTES DE EDITAR EL REGISTRO INHABILITADO
-$("#btnUpdateAdelantos2").click(function () {
-    iziToast.error({
-        title: 'Error',
-        message: 'Debe habilitar el registro antes de editarlo',
-    });
-});
-
-//FUNCION: CERRAR EL MODAL CON EL SEGUNDO BOTON DE CERRAR
+//FUNCION: OCULTAR MODAL DE EDICION EN LA ACTIVACION
 $("#btnCerrarEditar2").click(function () {
     $("#EditarAdelantoSueldo").modal('hide');
+    $("#Editar #Validation_descripcion").css("display", "none");
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -413,7 +422,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -424,7 +433,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue inhabilitado de forma exitosa!',
+                message: 'El registro fue Inactivado de forma exitosa!',
             });
         }
     });
@@ -449,7 +458,7 @@ $("#btnActivarRegistroAdelantos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo habilitar el registro, contacte al administrador',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -460,7 +469,7 @@ $("#btnActivarRegistroAdelantos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue habilitado de forma exitosa!',
+                message: 'El registro fue Inactivado de forma exitosa!',
             });
         }
     });
@@ -476,39 +485,9 @@ $("#btnInactivarAdelantos").click(function () {
     $("#InactivarAdelantos").modal();
 });
 
-//FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
-//$("#btnInactivarRegistroTipoDeducciones").click(function () {
-//    $.ajax({
-//        url: "/AdelantoSueldo/Inactivar/" + inactivar,
-//        method: "GET",
-//        dataType: "json",
-//        contentType: "application/json; charset=utf-8",
-//        data: JSON.stringify({ ID: inactivar })
-//    }).done(function (data) {
-//        $("#InactivarTipoDeducciones").modal('hide');
-//        //Refrescar la tabla de TipoDeducciones
-//        cargarGridAdelantos();
-//        //Mensaje de error si no hay data
-//        iziToast.success({
-//            title: 'Exito',
-//            message: 'Se ha inactivado el registro',
-//        });
-//    });
-//});
-
 //FUNCION: OCULTAR MODAL DE CREACION
 $("#btnCerrarCrear").click(function () {
     $("#Crear #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
-
-$("#btnCerrarCreate").click(function () {
-    $("#AgregarAdelantos").modal('hide');
-    $("#Validation_descripcion1").css("display", "none");
-    $("#Validation_descripcion2").css("display", "none");
-    $("#Validation_descripcion3").css("display", "none");
-    $("#Validation_descripcion4").css("display", "none");
     FullBody();
 });
 
@@ -550,10 +529,6 @@ $("#btnCerrar").click(function () {
     FullBody();
 });
 
-//$("#frmTipoDeduccionCreate").submit(function (event) {
-//    event.preventDefault();
-//});
 
-//$("#frmTipoDeduccionEdit").submit(function (event) {
-//    event.preventDefault();
-//});
+
+

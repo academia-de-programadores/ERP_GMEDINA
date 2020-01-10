@@ -264,13 +264,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Delete_Result> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia)
+        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Delete_Result> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
         {
             var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
                 new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
                 new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Delete_Result>("UDP_Plani_tbAuxilioDeCesantias_Delete", aces_IdAuxilioCesantiaParameter);
+            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
+                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
+                new ObjectParameter("aces_UsuarioModifica", typeof(int));
+    
+            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
+                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
+                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Delete_Result>("UDP_Plani_tbAuxilioDeCesantias_Delete", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Insert_Result> UDP_Plani_tbAuxilioDeCesantias_Insert(Nullable<int> aces_RangoInicioMeses, Nullable<int> aces_RangoFinMeses, Nullable<int> aces_DiasAuxilioCesantia, Nullable<int> aces_UsuarioCrea, Nullable<System.DateTime> aces_FechaCrea, Nullable<bool> aces_Activo)
@@ -1347,7 +1355,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbFormaPago_Update_Result>("UDP_Plani_tbFormaPago_Update", fpa_IdFormaPagoParameter, fpa_DescripcionParameter, fpa_UsuarioModificaParameter, fpa_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result> UDP_Plani_tbHistorialDeLiquidaciones_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> hdli_FechaLiquidacion, Nullable<decimal> hdli_SalarioOrdinarioMensual_Liq, Nullable<decimal> hdli_SalarioPromedioMensual_Liql, Nullable<decimal> hdli_SalarioOrdinarioDiario_Liq, Nullable<decimal> hdli_SalarioPromedioDiario_Liq, Nullable<decimal> hdli_Preaviso_Liq, Nullable<decimal> hdli_Cesantia_Liq, Nullable<decimal> hdli_DecimoTercerMesProporcional_Liq, Nullable<decimal> hdli_DecimoCuartoMesProporcional_Liq, Nullable<decimal> hdli_VacacionesPendientes_Liq, Nullable<decimal> hdli_SalariosAdeudados, Nullable<decimal> hdli_OtrosPagos, Nullable<decimal> hdli_PagoHEPendiente, Nullable<decimal> hdli_ValorBonoEducativo, Nullable<decimal> hdli_PagoSeptimoDia, Nullable<decimal> hdli_BonoPorVacaciones, Nullable<decimal> hdli_ReajusteSalarial, Nullable<decimal> hdli_DecimoTercerMesAdeudado, Nullable<decimal> hdli_DecimoCuartoMesAdeudado, Nullable<decimal> hdli_BonificacionVacaciones, Nullable<decimal> hdli_PagoPorEmbarazo, Nullable<decimal> hdli_PagoPorLactancia, Nullable<decimal> hdli_PrePosNatal, Nullable<decimal> hdli_PagoPorDiasFeriado, Nullable<decimal> hdli_MontoTotalLiquidacion, Nullable<int> hdli_liqu_UsuarioCrea, Nullable<System.DateTime> hdli_liqu_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result> UDP_Plani_tbHistorialDeLiquidaciones_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> hdli_FechaLiquidacion, Nullable<decimal> hdli_SalarioOrdinarioMensual_Liq, Nullable<decimal> hdli_SalarioPromedioMensual_Liql, Nullable<decimal> hdli_SalarioOrdinarioDiario_Liq, Nullable<decimal> hdli_SalarioPromedioDiario_Liq, Nullable<decimal> hdli_Preaviso_Liq, Nullable<decimal> hdli_Cesantia_Liq, Nullable<decimal> hdli_DecimoTercerMesProporcional_Liq, Nullable<decimal> hdli_DecimoCuartoMesProporcional_Liq, Nullable<decimal> hdli_VacacionesPendientes_Liq, Nullable<decimal> hdli_SalariosAdeudados, Nullable<decimal> hdli_OtrosPagos, Nullable<decimal> hdli_PagoHEPendiente, Nullable<decimal> hdli_ValorBonoEducativo, Nullable<decimal> hdli_PagoSeptimoDia, Nullable<decimal> hdli_BonoPorVacaciones, Nullable<decimal> hdli_ReajusteSalarial, Nullable<decimal> hdli_DecimoTercerMesAdeudado, Nullable<decimal> hdli_DecimoCuartoMesAdeudado, Nullable<decimal> hdli_BonificacionVacaciones, Nullable<decimal> hdli_PagoPorEmbarazo, Nullable<decimal> hdli_PagoPorLactancia, Nullable<decimal> hdli_PrePosNatal, Nullable<decimal> hdli_PagoPorDiasFeriado, Nullable<decimal> hdli_MontoTotalLiquidacion, Nullable<int> hdli_liqu_UsuarioCrea, Nullable<System.DateTime> hdli_liqu_FechaCrea, Nullable<int> moli_Id)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -1461,7 +1469,11 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hdli_liqu_FechaCrea", hdli_liqu_FechaCrea) :
                 new ObjectParameter("hdli_liqu_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result>("UDP_Plani_tbHistorialDeLiquidaciones_Insert", emp_IdParameter, hdli_FechaLiquidacionParameter, hdli_SalarioOrdinarioMensual_LiqParameter, hdli_SalarioPromedioMensual_LiqlParameter, hdli_SalarioOrdinarioDiario_LiqParameter, hdli_SalarioPromedioDiario_LiqParameter, hdli_Preaviso_LiqParameter, hdli_Cesantia_LiqParameter, hdli_DecimoTercerMesProporcional_LiqParameter, hdli_DecimoCuartoMesProporcional_LiqParameter, hdli_VacacionesPendientes_LiqParameter, hdli_SalariosAdeudadosParameter, hdli_OtrosPagosParameter, hdli_PagoHEPendienteParameter, hdli_ValorBonoEducativoParameter, hdli_PagoSeptimoDiaParameter, hdli_BonoPorVacacionesParameter, hdli_ReajusteSalarialParameter, hdli_DecimoTercerMesAdeudadoParameter, hdli_DecimoCuartoMesAdeudadoParameter, hdli_BonificacionVacacionesParameter, hdli_PagoPorEmbarazoParameter, hdli_PagoPorLactanciaParameter, hdli_PrePosNatalParameter, hdli_PagoPorDiasFeriadoParameter, hdli_MontoTotalLiquidacionParameter, hdli_liqu_UsuarioCreaParameter, hdli_liqu_FechaCreaParameter);
+            var moli_IdParameter = moli_Id.HasValue ?
+                new ObjectParameter("moli_Id", moli_Id) :
+                new ObjectParameter("moli_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result>("UDP_Plani_tbHistorialDeLiquidaciones_Insert", emp_IdParameter, hdli_FechaLiquidacionParameter, hdli_SalarioOrdinarioMensual_LiqParameter, hdli_SalarioPromedioMensual_LiqlParameter, hdli_SalarioOrdinarioDiario_LiqParameter, hdli_SalarioPromedioDiario_LiqParameter, hdli_Preaviso_LiqParameter, hdli_Cesantia_LiqParameter, hdli_DecimoTercerMesProporcional_LiqParameter, hdli_DecimoCuartoMesProporcional_LiqParameter, hdli_VacacionesPendientes_LiqParameter, hdli_SalariosAdeudadosParameter, hdli_OtrosPagosParameter, hdli_PagoHEPendienteParameter, hdli_ValorBonoEducativoParameter, hdli_PagoSeptimoDiaParameter, hdli_BonoPorVacacionesParameter, hdli_ReajusteSalarialParameter, hdli_DecimoTercerMesAdeudadoParameter, hdli_DecimoCuartoMesAdeudadoParameter, hdli_BonificacionVacacionesParameter, hdli_PagoPorEmbarazoParameter, hdli_PagoPorLactanciaParameter, hdli_PrePosNatalParameter, hdli_PagoPorDiasFeriadoParameter, hdli_MontoTotalLiquidacionParameter, hdli_liqu_UsuarioCreaParameter, hdli_liqu_FechaCreaParameter, moli_IdParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario)
@@ -2146,6 +2158,74 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dex_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Insert", eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioCreaParameter, dex_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbAuxilioDeCesantias_Activar(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
+        {
+            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
+                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
+                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
+    
+            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
+                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
+                new ObjectParameter("aces_UsuarioModifica", typeof(int));
+    
+            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
+                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
+                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAuxilioDeCesantias_Activar", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Activar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
+                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
+                new ObjectParameter("insf_UsuarioModifica", typeof(int));
+    
+            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
+                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
+                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Activar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Inactivar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
+                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
+                new ObjectParameter("insf_UsuarioModifica", typeof(int));
+    
+            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
+                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
+                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Inactivar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Activar_Result> UDP_Plani_tbAuxilioDeCesantias_Activar1(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
+        {
+            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
+                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
+                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
+    
+            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
+                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
+                new ObjectParameter("aces_UsuarioModifica", typeof(int));
+    
+            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
+                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
+                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Activar_Result>("UDP_Plani_tbAuxilioDeCesantias_Activar1", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
         }
     }
 }

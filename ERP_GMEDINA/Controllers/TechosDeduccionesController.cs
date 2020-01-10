@@ -26,13 +26,15 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbTechosDeducciones = db.tbTechosDeducciones
-                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                        .Select(c => new {
+                            cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
                             tddu_IdTechosDeducciones = c.tddu_IdTechosDeducciones,
                             tddu_PorcentajeEmpresa = c.tddu_PorcentajeEmpresa,
                             tddu_PorcentajeColaboradores = c.tddu_PorcentajeColaboradores,
                             tddu_Techo = c.tddu_Techo,
                             tddu_Activo = c.tddu_Activo,
-                            tede_FechaCrea = c.tddu_FechaCrea }).OrderByDescending(c => c.tede_FechaCrea)
+                            tede_FechaCrea = c.tddu_FechaCrea
+                        }).OrderByDescending(c => c.tede_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE
@@ -233,7 +235,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(JsonRequestBehavior.AllowGet);
         }
 
-        // GET: TechosDeducciones/Activar/5    
+        //GET: TechosDeducciones/Inactivar/5    
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listTechosDeducciones = null;
@@ -245,8 +247,8 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Activar(id,
-                                                                                    1,
-                                                                                    DateTime.Now);
+                                                                                        1,
+                                                                                        DateTime.Now);
 
                     foreach (UDP_Plani_tbTechosDeducciones_Activar_Result Resultado in listTechosDeducciones)
                         MensajeError = Resultado.MensajeError;
@@ -254,7 +256,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }

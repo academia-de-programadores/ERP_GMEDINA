@@ -13,26 +13,25 @@
                 @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                    @*@Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })*@
-                    <label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo colaborador es obligatorio.</label>
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @autocomplete = "off"} })
-                        <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo razón es obligatorio.</label>
-                        @*@Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger", @id = "Validation_descripcion1" })*@
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.adsu_RazonAdelanto)
+                        @Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger", @autocomplete = "off" })
+                    </div>
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off"} })
-                    @*@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion2" })*@
-                    <label class="text-danger" id="Validation_descripcion3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo monto es obligatorio.</label>
+                    @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -43,15 +42,14 @@
                         <i class="fa fa-calendar"></i>
                     </span>
                     @Html.EditorFor(model => model.adsu_FechaAdelanto, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "adsu_FechaAdelanto", @id = "adsu_FechaAdelanto" } })
-                    <label class="text-danger" id="Validation_descripcion4" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo fecha es obligatorio.</label>
                 </div>
-                    @*@Html.ValidationMessageFor(model => model.adsu_FechaAdelanto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })*@
+                @Html.ValidationMessageFor(model => model.adsu_FechaAdelanto, "", new { @class = "text-danger", @id = "Validation_descipcion" })
             </div>
 
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroAdelantos">Guardar</button>
-        <button type="button" class="btn btn-white" id="btnCerrarCreate">Cerrar</button>        
+        <button type="button" class="btn btn-primary pull-left" id="btnCreateRegistroAdelantos">Guardar</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>        
     </div>
 }

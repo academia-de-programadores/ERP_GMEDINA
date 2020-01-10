@@ -279,63 +279,48 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-        public JsonResult Activar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
-            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
-        }
+       
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Activar([Bind(Include = "cc_Id,cc_UsuarioModifica,cc_FechaModifica")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        [ValidateAntiForgeryToken]
+        public ActionResult Activar(int? id)
         {
+            IEnumerable<object> listEmpleadoComisiones = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (id == null)
+            {
+                return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            //LLENAR DATA DE AUDITORIA
+            tbEmpleadoComisiones tbEmpleadoComisiones = new tbEmpleadoComisiones();
+            tbEmpleadoComisiones.cc_Id = (int)id;
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
-
-            IEnumerable<object> listEmpleadoComisiones = null;
-
-            string MensajeError = "";
-
-            string response = String.Empty;
-
-
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(tbEmpleadoComisiones.cc_Id,
-                                                                                            tbEmpleadoComisiones.cc_UsuarioModifica,
-                                                                                            tbEmpleadoComisiones.cc_FechaModifica
-                                                                                           
-                                                                                            );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(tbEmpleadoComisiones.cc_Id,
+                                                                            tbEmpleadoComisiones.cc_UsuarioModifica,
+                                                                            tbEmpleadoComisiones.cc_FechaModifica);
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "Datos Incorrectos");
-                        response = "error";
-                    }
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
+                    MensajeError = Resultado.MensajeError;
 
-                }
-                catch (Exception)
+                if (MensajeError.StartsWith("-1"))
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                     response = "error";
                 }
-            }
-            else
-            {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
-                response = "error";
-            }
-            //ViewBag.Emp_IdEmpleado = new SelectList(db.tbEmpleados, "emp_Id", "emp_Nombres", tbEmpleadoComisiones.emp_Id);
 
+            }
+            catch (Exception Ex)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = Ex.Message.ToString();
+            }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }

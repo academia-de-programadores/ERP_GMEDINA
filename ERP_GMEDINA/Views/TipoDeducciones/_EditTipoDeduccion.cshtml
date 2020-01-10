@@ -3,18 +3,27 @@
 {
     @Html.AntiForgeryToken()
     <div class="modal-body" id="Editar">
-        <div class="form-horizontal">
-            @Html.HiddenFor(model => model.tde_IdTipoDedu)
-            @Html.HiddenFor(model => model.tde_UsuarioCrea)
-            @Html.HiddenFor(model => model.tde_FechaCrea)
-            <div class="form-group">
-                @Html.LabelFor(model => model.tde_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.tde_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+        @Html.HiddenFor(model => model.tde_IdTipoDedu)
+        @Html.HiddenFor(model => model.tde_UsuarioCrea)
+        @Html.HiddenFor(model => model.tde_FechaCrea)
+
+        <!-- CAJAS DE TEXTO -->
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.tde_Descripcion, htmlAttributes: new { /*@class = "control-label col-md-3 pull-left" */})
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.tde_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.tde_Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
