@@ -11,25 +11,34 @@
 					<dt>@Html.DisplayNameFor(model => model.car_Descripcion)</dt>
                     <dd id="car_Descripcion"></dd>
 
-					<dt>@Html.DisplayNameFor(model => model.car_Estado)</dt>
-                    <dd id="car_Estado"></dd>
-
-					<dt>@Html.DisplayNameFor(model => model.car_RazonInactivo)</dt>
-                    <dd id="car_RazonInactivo"></dd>
-
-					<dt>@Html.DisplayNameFor(model => model.car_FechaCrea)</dt>
-                    <dd id="car_FechaCrea"></dd>
-
-					<dt>@Html.DisplayNameFor(model => model.car_FechaModifica)</dt>
-                    <dd id="car_FechaModifica"></dd>
-
-					<dt>@Html.DisplayNameFor(model => model.car_UsuarioCrea)</dt>
-                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
-
-					<dt>@Html.DisplayNameFor(model => model.car_UsuarioModifica)</dt>
-                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>
+					
 
 				</dl>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <table class="table table-striped table-bordered dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Acción</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Creado</td>
+                                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="car_FechaCrea">@Html.DisplayFor(model => model.car_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Modificado</td>
+                                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="car_FechaModifica">@Html.DisplayFor(model => model.car_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>

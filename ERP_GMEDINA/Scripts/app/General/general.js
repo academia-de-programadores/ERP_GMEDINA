@@ -202,3 +202,54 @@ formularios.forEach(function (formulario) {
         e.preventDefault();
     });
 });
+
+function Mayor18() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear() - 18;
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    return today = yyyy + '-' + mm + '-' + dd;
+}
+
+function validarEmail(valor) {
+    if (/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(valor)) {
+        return valor;
+    } else {
+        return " ";
+    }
+}
+function alphanumeric(e) {
+    var regex = new RegExp("[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ ]");
+    var key = e.keyCode || e.which;
+    key = String.fromCharCode(key);
+    if (!regex.test(key)) {
+        e.returnValue = false;
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+    }
+};
+
+
+///Esta reemplazala
+function FechaFormatoSimple(pFecha) {
+    if (pFecha != null && pFecha != undefined) {
+        var fechaString = pFecha.substr(6);
+        var fechaActual = new Date(parseInt(fechaString));
+        var mes = pad2(fechaActual.getMonth() + 1);
+        var dia = pad2(fechaActual.getDate());
+        var anio = fechaActual.getFullYear();
+        var hora = pad2(fechaActual.getHours());
+        var minutos = pad2(fechaActual.getMinutes());
+        var segundos = pad2(fechaActual.getSeconds().toString());
+        var FechaFinal = anio + "-" + mes + "-" + dia;
+        return FechaFinal;
+    }
+    return '';
+}
