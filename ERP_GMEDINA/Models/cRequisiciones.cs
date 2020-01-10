@@ -35,7 +35,9 @@ namespace ERP_GMEDINA.Models
         public bool req_Permanente { get; set; }
         [Display(Name = "Duracion")]
         public string req_Duracion { get; set; }
+        [Display(Name = "Estado")]
         public bool req_Estado { get; set; }
+        [Display(Name = "Razon Inactivo")]
         public string req_RazonInactivo { get; set; }
         [Display(Name = "Vacantes")]
         public string req_Vacantes { get; set; }
@@ -43,9 +45,13 @@ namespace ERP_GMEDINA.Models
         public Nullable<System.DateTime> req_FechaRequisicion { get; set; }
         [Display(Name = "FechaContratacion")]
         public Nullable<System.DateTime> req_FechaContratacion { get; set; }
+        [Display(Name = "Usuario crea")]
         public int req_UsuarioCrea { get; set; }
+        [Display(Name = "Fecha creacion")]
         public System.DateTime req_FechaCrea { get; set; }
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> req_UsuarioModifica { get; set; }
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> req_FechaModifica { get; set; }
 
     }

@@ -32,6 +32,19 @@ function ListFill(obj) {
     SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160 });
 };
 
+function Req_check() {
+    var ischecked = $("#req_Permanente").is(':checked');
+    var req_Duracion = $("#req_Duracion");
+    if (ischecked) {
+        req_Duracion.prop("disabled", false);
+        req_Duracion.val("");
+    }
+    else {
+        req_Duracion.prop("disabled", true);
+        req_Duracion.val("N/A");
+    }
+};
+
 $(document).ready(function () {
     _ajax(null,
             '/Requisiciones/DualListBoxData',
@@ -40,8 +53,9 @@ $(document).ready(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     ListFill(obj);
                 }
-            })
+            });
 
+    
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
         onFinished: function () {
@@ -51,14 +65,29 @@ $(document).ready(function () {
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
             
-            var data = JSON.stringify({ Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() });
+            var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+            var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']").serializeArray();
+            tbRequisicion = serializar(Form);
+            Form = JSON.stringify({ tbRequisiciones: tbRequisicion, DatosProfesionales: data });
+            console.log(Form);
 
-            var Form = $("#FormRequisicion").serializeArray();
-            
-            Form = serializar(Form);
-           
-            console.log(JSON.stringify({ TbRequisicion : Form}));
-
+            if (tbRequisicion != null)
+            {
+                _ajax(Form,
+                '/Requisiciones/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    } else {
+                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    }
+                });
+            }
+            else
+            {
+                MsgError("Error", "por favor llene todos los campos de texto.");
+            }
         },
     });
 });

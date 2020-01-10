@@ -207,10 +207,10 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\JornadasController.cs" />
     <Compile Include="Controllers\NacionalidadesController.cs" />
-    <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
+    <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
@@ -261,7 +261,9 @@
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
+    <Compile Include="Models\DatosProfesionales.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
+    <Compile Include="Models\DatosProfessionalesEdit.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,7 +282,36 @@
     <Compile Include="Models\ExcelEmpleados.cs" />
     <Compile Include="Models\Personas.cs" />
     <Compile Include="Models\PersonasData.cs" />
-    <Compile Include="Models\RequisicionesData.cs" />
+    <Compile Include="Models\rrhh_tbCompetenciasRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbCompetenciasRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbHabilidadesRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbHabilidadesRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbIdiomasRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbIdiomasRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbTitulosRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbTitulosRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -749,13 +780,25 @@
     <Compile Include="Models\UDP_RRHH_tbRequisiciones_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Delete_Result1.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbRequisiciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Insert_Result1.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbRequisiciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Restore_Result1.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbRequisiciones_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbRequisiciones_Update_Result1.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbSeleccionCandidatos_Delete_Result.cs">
@@ -866,7 +909,13 @@
     <Compile Include="Models\UDP_RRHH_tbTitulos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DatosProfesionales.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_DatosProfesionalesP.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_DatosRequisicion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_Datos_Empleado.cs">
@@ -1882,6 +1931,13 @@
     <Content Include="Views\Jornadas\_DetallesHorarios.cshtml" />
     <Content Include="Views\Jornadas\_Edit.cshtml" />
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
+    <Content Include="Views\Requisiciones\Create.cshtml" />
+    <Content Include="Views\Requisiciones\Delete.cshtml" />
+    <Content Include="Views\Requisiciones\Details.cshtml" />
+    <Content Include="Views\Requisiciones\Edit.cshtml" />
+    <Content Include="Views\Requisiciones\Index.cshtml" />
+    <Content Include="Views\Requisiciones\_Delete.cshtml" />
+    <Content Include="Views\Requisiciones\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
