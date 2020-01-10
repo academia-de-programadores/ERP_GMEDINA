@@ -472,8 +472,9 @@ $(document).on("click", "#btnActivarEmpleadoComisiones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#ActivarEmpleadoComisiones").modal();
 });
-$("#btnActivarEmpleadoComisiones").click(function () {
 
+$("#btnActivarEmpleadoComisiones").click(function () {
+    var data = $("#frmEmpleadoComisionesActivar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Activar",

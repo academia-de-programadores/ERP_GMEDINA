@@ -172,6 +172,7 @@
                 <h4 class="modal-title">Inhabilitar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
+
                 ¿Esta seguro que desea Inhabilitar este Registro?
             </div>
             <div class="modal-footer">
@@ -190,8 +191,9 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
                 <h4 class="modal-title">Activar</h4>
             </div>
-            <div
+            
             <div class="modal-body" id="Activar">
+                @Html.Partial("_ActivarEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
                 ¿Esta seguro que desea Activar este Registro?
             </div>
             <div class="modal-footer">
@@ -200,8 +202,8 @@
 
             </div>
         </div>
+        </div>
     </div>
-</div>
 
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
 
