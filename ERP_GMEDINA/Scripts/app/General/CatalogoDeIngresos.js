@@ -23,6 +23,7 @@ function _ajax(params, uri, type, callback) {
 
 // REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/CatalogoDeIngresos/GetData',
         'GET',
@@ -40,19 +41,29 @@ function cargarGridIngresos() {
           
             for (var i = 0; i < ListaIngresos.length; i++) {
                 var estadoIng = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
+
+                var botonDetail = ListaIngresos[i].cin_Activo == true ?
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>' : '';
+
+                var botonEdit = ListaIngresos[i].cin_Activo == true ?
+                    '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' : '';
+
+                var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
+                    '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
+                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' :''; 
+
                 console.log(estadoIng);
+
                 template += '<tr  class="gradeA odd" role="row"  data-id = "' + ListaIngresos[i].cin_IdIngresos + '">' +
                     '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
                     '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' + estadoIng + '</td>' +
                     '<td>' +
-                    ((ListaIngresos[i].cin_Activo == true) ?
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
-                    + ListaIngresos[i].cin_IdIngresos +'">Detalles</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
-                    + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' :
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
-                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>')
+                    botonDetail +
+                    botonEdit +
+                    botonActivar
                     +'</td> </tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
