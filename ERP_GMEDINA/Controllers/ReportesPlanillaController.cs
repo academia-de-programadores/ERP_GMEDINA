@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-
+		//Listo
         #region Reporte Decimo Tercer Mes
         //-------------------------------------------------------------------------------------------------------------------------------
         //Reporte Decimo Tercer Mes - INICIO
@@ -66,17 +66,17 @@ namespace ERP_GMEDINA.Controllers
             string fileNameExtension;
             string deviceInfo =
 
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
 
-            Warning[] warnings;
+			Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
 
@@ -91,17 +91,17 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte Decimo Tercer Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte Decimo Tercer Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
 
+		//Listo
+		#region Reporte Decimo Cuarto Mes
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Decimo Cuarto Mes - INICIO
 
-        #region Reporte Decimo Cuarto Mes
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte Decimo Cuarto Mes - INICIO
-
-        //Index 
-        public ActionResult DecimoCuartoMesIndexRPT()
+		//Index 
+		public ActionResult DecimoCuartoMesIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -134,17 +134,17 @@ namespace ERP_GMEDINA.Controllers
             string fileNameExtension;
             string deviceInfo =
 
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
 
-            Warning[] warnings;
+			Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
 
@@ -159,19 +159,19 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte Decimo Cuarto Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte Decimo Cuarto Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
+
+		//Listo
+		#region INFOP
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte INFOP - INICIO
 
 
-        #region INFOP
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte INFOP - INICIO
 
-
-
-        //Index 
-        public ActionResult INFOPIndexRPT()
+		//Index 
+		public ActionResult INFOPIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -207,8 +207,8 @@ namespace ERP_GMEDINA.Controllers
             string deviceInfo =
             "<DeviceInfo>" +
             "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
             "  <MarginTop>0.1in</MarginTop>" +
             "  <MarginLeft>0.1in</MarginLeft>" +
             "  <MarginRight>0.1in</MarginRight>" +
@@ -230,17 +230,17 @@ namespace ERP_GMEDINA.Controllers
 
             return File(renderedBytes, mimeType);
         }
-        //Reporte INFOP - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
-        #endregion
+		//Reporte INFOP - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
 
+		//Listo
+		#region Instituciones Financieras
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Instituciones Financiras- INICIO
 
-        #region Instituciones Financieras
-        //-------------------------------------------------------------------------------------------------------------------------------
-        //Reporte Instituciones Financiras- INICIO
-
-        //Index 
-        public ActionResult InstitucionesFinancierasIndexRPT()
+		//Index 
+		public ActionResult InstitucionesFinancierasIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -275,17 +275,17 @@ namespace ERP_GMEDINA.Controllers
             string encoding;
             string fileNameExtension;
             string deviceInfo =
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
 
-            Warning[] warnings;
+			Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
 
@@ -304,7 +304,7 @@ namespace ERP_GMEDINA.Controllers
 		//-------------------------------------------------------------------------------------------------------------------------------
 		#endregion
 
-
+		//Listo
 		#region Reporte IHSS
 		//-------------------------------------------------------------------------------------------------------------------------------
 		//Reporte Decimo Tercer Mes - INICIO
@@ -345,8 +345,8 @@ namespace ERP_GMEDINA.Controllers
 
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
-			"  <PageWidth>11in</PageWidth>" +
-			"  <PageHeight>8.5in</PageHeight>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
 			"  <MarginTop>0.1in</MarginTop>" +
 			"  <MarginLeft>0.1in</MarginLeft>" +
 			"  <MarginRight>0.1in</MarginRight>" +
@@ -372,7 +372,7 @@ namespace ERP_GMEDINA.Controllers
 		//-------------------------------------------------------------------------------------------------------------------------------
 		#endregion
 
-		
+		//Listo
 		#region Reporte Impuesto Sobre la Renta(ISR)
 		//-------------------------------------------------------------------------------------------------------------------------------
 		//Reporte Decimo Cuarto Mes - INICIO
@@ -411,17 +411,17 @@ namespace ERP_GMEDINA.Controllers
             string fileNameExtension;
             string deviceInfo =
 
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
 
-            Warning[] warnings;
+			Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
 
@@ -440,75 +440,7 @@ namespace ERP_GMEDINA.Controllers
 		//-------------------------------------------------------------------------------------------------------------------------------
 		#endregion
 
-		
-		#region Reporte Liquidaciones
-		//-------------------------------------------------------------------------------------------------------------------------------
-		//Reporte Decimo Cuarto Mes - INICIO
-
-		//Index 
-		public ActionResult LiquidacionesIndexRPT()
-        {
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-
-            return View(db.V_Liquidaciones_RPT.ToList());
-        }
-
-        //Reporte con parametros
-        public ActionResult LiquidacionesParametrosRPT(DateTime hliq_fechaLiquidacion, int cpla_DescripcionPlanilla, string id)
-        {
-            LocalReport lr = new LocalReport();
-            string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "LiquidacionesRPT.rdlc");
-            if (System.IO.File.Exists(path))
-            {
-                lr.ReportPath = path;
-            }
-            else
-            {
-                return View("Index");
-            }
-            List<V_Liquidaciones_RPT> cm = new List<V_Liquidaciones_RPT>();
-
-            cm = db.V_Liquidaciones_RPT.Where(x => hliq_fechaLiquidacion == x.hliq_fechaLiquidacion && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
-
-            ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
-            lr.DataSources.Add(rd);
-            string reportType = id;
-            string mimeType;
-            string encoding;
-            string fileNameExtension;
-            string deviceInfo =
-
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>11in</PageWidth>" +
-            "  <PageHeight>8.5in</PageHeight>" +
-            "  <MarginTop>0.1in</MarginTop>" +
-            "  <MarginLeft>0.1in</MarginLeft>" +
-            "  <MarginRight>0.1in</MarginRight>" +
-            "  <MarginBottom>0.1in</MarginBottom>" +
-            "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = lr.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-            return File(renderedBytes, mimeType);
-        }
-		//Reporte Decimo Cuarto Mes - FIN
-		//-------------------------------------------------------------------------------------------------------------------------------
-		#endregion
-
-
+		//Listo
 		#region Reporte RAP
 
 		////-------------------------------------------------------------------------------------------------------------------------------
@@ -551,8 +483,8 @@ namespace ERP_GMEDINA.Controllers
 
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
-			"  <PageWidth>11in</PageWidth>" +
-			"  <PageHeight>8.5in</PageHeight>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
 			"  <MarginTop>0.1in</MarginTop>" +
 			"  <MarginLeft>0.1in</MarginLeft>" +
 			"  <MarginRight>0.1in</MarginRight>" +
@@ -580,7 +512,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
-
+		//Listo
 		#region Reporte AFP
 
 		////-------------------------------------------------------------------------------------------------------------------------------
@@ -623,8 +555,8 @@ namespace ERP_GMEDINA.Controllers
 
 			"<DeviceInfo>" +
 			"  <OutputFormat>" + id + "</OutputFormat>" +
-			"  <PageWidth>11in</PageWidth>" +
-			"  <PageHeight>8.5in</PageHeight>" +
+			"  <PageWidth>8.5in</PageWidth>" +
+			"  <PageHeight>11in</PageHeight>" +
 			"  <MarginTop>0.1in</MarginTop>" +
 			"  <MarginLeft>0.1in</MarginLeft>" +
 			"  <MarginRight>0.1in</MarginRight>" +
@@ -653,6 +585,8 @@ namespace ERP_GMEDINA.Controllers
 		#endregion
 
 
+		//Pendiente
+		
 		#region Reporte General Totales
 
 		//-------------------------------------------------------------------------------------------------------------------------------
@@ -717,20 +651,87 @@ namespace ERP_GMEDINA.Controllers
 
 			return File(renderedBytes, mimeType);
 		}
-        //Reporte General Totales Mes - FIN
-        //-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte General Totales Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
 
-        #endregion
+		#endregion
 
-        #region Rotativa
+		#region Reporte Liquidaciones
+		//-------------------------------------------------------------------------------------------------------------------------------
+		//Reporte Decimo Cuarto Mes - INICIO
 
-        //public Action printPrueba()
-        //{
-        //    return new ActionAsPdf("index");
-        //}
+		//Index 
+		public ActionResult LiquidacionesIndexRPT()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 
-        #endregion
+			return View(db.V_Liquidaciones_RPT.ToList());
+		}
+
+		//Reporte con parametros
+		public ActionResult LiquidacionesParametrosRPT(DateTime hliq_fechaLiquidacion, int cpla_DescripcionPlanilla, string id)
+		{
+			LocalReport lr = new LocalReport();
+			string path = Path.Combine(Server.MapPath("~/ReportesPlanilla"), "LiquidacionesRPT.rdlc");
+			if (System.IO.File.Exists(path))
+			{
+				lr.ReportPath = path;
+			}
+			else
+			{
+				return View("Index");
+			}
+			List<V_Liquidaciones_RPT> cm = new List<V_Liquidaciones_RPT>();
+
+			cm = db.V_Liquidaciones_RPT.Where(x => hliq_fechaLiquidacion == x.hliq_fechaLiquidacion && cpla_DescripcionPlanilla == x.cpla_IdPlanilla).ToList();
+
+			ReportDataSource rd = new ReportDataSource("ReportesPlanillaDS", cm);
+			lr.DataSources.Add(rd);
+			string reportType = id;
+			string mimeType;
+			string encoding;
+			string fileNameExtension;
+			string deviceInfo =
+
+			"<DeviceInfo>" +
+			"  <OutputFormat>" + id + "</OutputFormat>" +
+			"  <PageWidth>11in</PageWidth>" +
+			"  <PageHeight>8.5in</PageHeight>" +
+			"  <MarginTop>0.1in</MarginTop>" +
+			"  <MarginLeft>0.1in</MarginLeft>" +
+			"  <MarginRight>0.1in</MarginRight>" +
+			"  <MarginBottom>0.1in</MarginBottom>" +
+			"</DeviceInfo>";
+
+			Warning[] warnings;
+			string[] streams;
+			byte[] renderedBytes;
+
+			renderedBytes = lr.Render(
+				reportType,
+				deviceInfo,
+				out mimeType,
+				out encoding,
+				out fileNameExtension,
+				out streams,
+				out warnings);
+
+			return File(renderedBytes, mimeType);
+		}
+		//Reporte Decimo Cuarto Mes - FIN
+		//-------------------------------------------------------------------------------------------------------------------------------
+		#endregion
+
+		#region Rotativa
+
+		//public Action printPrueba()
+		//{
+		//    return new ActionAsPdf("index");
+		//}
+
+		#endregion
 
 
-    }
+	}
 }
