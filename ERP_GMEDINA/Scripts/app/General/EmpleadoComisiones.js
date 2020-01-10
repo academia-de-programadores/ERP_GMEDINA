@@ -38,18 +38,16 @@ function cargarGridComisiones() {
             var ListaComisiones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaComisiones.length; i++) {
-                var estadoRegistro = ListaAcumuladosISR[i].cc_Activo  == false ? 'Inactivo' : 'Activo'
-
+                var estadoRegistro = ListaComisiones[i].cc_Activo == false ? 'Inactivo' : 'Activo'
+                //var PagadoRegistro = ListaComisiones[i].cc_Pagado == false ? 'Inactivo' : 'Activo'
                 //variable boton detalles
-                var botonDetalles = ListaAcumuladosISR[i].cc_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';
+                var botonDetalles = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleEmpleadoComisiones">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaAcumuladosISR[i].cc_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' : '';
+                var botonEditar = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoComisiones">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAcumuladosISR[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAcumuladosISR">Activar</button>' : '' : '';
-
-
+                var botonActivar = ListaComisiones[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarEmpleadoComisiones">Activar</button>' : '' : '';
 
                 var FechaRegistro = FechaFormato(ListaComisiones[i].cc_FechaRegistro);
 
@@ -68,18 +66,21 @@ function cargarGridComisiones() {
                     '<td>' + ListaComisiones[i].cc_PorcentajeComision + '</td>' +
                       '<td>' + ListaComisiones[i].cc_TotalVenta + '</td>' +
                     '<td>' + FechaRegistro + '</td>' +
-                    '<td>' + ListaComisiones[i].cc_Activo + '</td>' +
+                    '<td>' + estadoRegistro + '</td>' +
                      '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
-                    '<td>' +
-                   '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
-                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
+                   
+                   '<td>' + botonDetalles +
+                   botonEditar +
+
+                    //boton activar 
+                    botonActivar
                     '</td>' +
                     '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyComisiones').html(template);
         });
-    FullBody();
+    
 }
 
 
@@ -252,45 +253,47 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroComisiones').click(function () {
     var Empleado = $("#Crear #emp_IdEmpleado").val();
-   
+    var Ingreso = $("#Crear #cin_IdIngreso").val();
 
-   if (Empleado == "0") {
+
+    if (Empleado == "0") {
         $("#Validation_descipcion").css("display", "");
     }
-    else {
-       $("#Validation_descipcion").css("display", "none");
-
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-        $.ajax({
-            url: "/EmpleadoComisiones/Create",
-            method: "POST",
-            data: data
-        })
-        .done(function (data) {
-            //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarEmpleadoComisiones");
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data == "error") {
-                $("#AgregarEmpleadoComisiones").modal('show');
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'Datos Incorrectos',
-                });
-            }
-            else {
-                cargarGridComisiones();
-                $("#AgregarEmpleadoComisiones").modal('hide');
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
-                });
-            }
-        });
+    else if (Ingreso == "0") {
+        $("#Validation_descipcion3").css("display", "");
     }
-    
-
+    else if (Empleado != "0" || Ingreso != "0") {
+       $("#Validation_descipcion").css("display", "none");
+       
+       //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+       var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+       $.ajax({
+           url: "/EmpleadoComisiones/Create",
+           method: "POST",
+           data: data
+       })
+       .done(function (data) {
+           //CERRAR EL MODAL DE AGREGAR
+           $("#AgregarEmpleadoComisiones");
+           //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+           if (data == "error") {
+               $("#AgregarEmpleadoComisiones").modal('show');
+               iziToast.error({
+                   title: 'Error',
+                   message: 'Datos Incorrectos',
+               });
+           }
+           else {
+               cargarGridComisiones();
+               $("#AgregarEmpleadoComisiones").modal('hide');
+               // Mensaje de exito cuando un registro se ha guardado bien
+               iziToast.success({
+                   title: 'Exito',
+                   message: 'El registro fue registrado de forma exitosa!',
+               });
+           }
+       });
+   }     
 });
 
 
@@ -444,7 +447,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitado el registro, contacte al administrador',
             });
         }
         else {
@@ -457,13 +460,48 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: 'El registro fue Inhabilitado de forma exitosa!',
             });
         }
     });
 });
 
 //VALIDAR CREAR//
+
+$(document).on("click", "#btnActivarEmpleadoComisiones", function () {
+    //MOSTRAR EL MODAL DE INACTIVAR
+    $("#ActivarEmpleadoComisiones").modal();
+});
+$("#btnActivarEmpleadoComisiones").click(function () {
+
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/EmpleadoComisiones/Activar",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            // REFRESCAR UNICAMENTE LA TABLA
+
+            cargarGridComisiones();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarEmpleadoComisiones").modal('hide');
+           
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue Activado de forma exitosa!',
+            });
+        }
+    });
+});
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModal").click(function () {
@@ -490,6 +528,7 @@ $("#btnCreateRegistroComisiones").click(function () {
     var PorcentajeComision = $("#PorcentajeComision").val();
     var TotalVenta = $("#TotalVenta").val();
     var Empleado = $("#emp_IdEmpleado").val();
+    var Ingresos = $("#cin_IdIngreso").val();
 
     if (PorcentajeComision == "") {
         $("#Validation_descipcion1").css("display", "");
@@ -510,7 +549,12 @@ $("#btnCreateRegistroComisiones").click(function () {
     else {
         $("#Validation_descipcion").css("display", "none");
     }
-
+    if (Ingresos == "0") {
+        $("#Validation_descipcion3").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3").css("display", "none");
+    }
 });
 
 //VALIDAR EDIT//

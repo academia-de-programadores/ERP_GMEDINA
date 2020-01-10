@@ -27,6 +27,16 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                     <table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                             <tr role="row">
@@ -40,39 +50,38 @@
                         <tbody id="tbodyIngresos">
 
 
-    @foreach (var item in Model)
-    {
-        string estadoIng = item.cin_Activo == false ? "Inactivo" : "Activo";
+                            @foreach (var item in Model)
+                            {
+                                string estadoIng = item.cin_Activo == false ? "Inactivo" : "Activo";
 
-        bool esAdministrador = true;
 
-        <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
-            <td>
-                @Html.DisplayFor(modelItem => item.cin_IdIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
-            </td>
-            <td>
-                @estadoIng
-            </td>
-            <td>
-                @{
-                    if (item.cin_Activo == true)
-                    {
-                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
-                        <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
-                    }
-                    if (esAdministrador == true && item.cin_Activo == false)
-                    {
-                                                 <!-- ACTIVAR -->
-                        <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
-                    }
-                }
-            </td>
-        </tr>
-                    }
-    </tbody>
+                                <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cin_IdIngreso)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
+                                    </td>
+                                    <td>
+                                        @estadoIng
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item.cin_Activo == true)
+                                            {
+                                                <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
+                                                <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
+                                            }
+                                            if (oUsuario?.usu_EsAdministrador == true == true && item.cin_Activo == false)
+                                            {
+                                                <!-- ACTIVAR -->
+                                                <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                         <tfoot>
                         </tfoot>
                     </table>
