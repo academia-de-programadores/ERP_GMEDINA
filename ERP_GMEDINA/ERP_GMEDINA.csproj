@@ -429,9 +429,6 @@
     <Compile Include="Models\tbPersonas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbPrestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbRazonSalidas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

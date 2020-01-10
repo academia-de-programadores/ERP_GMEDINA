@@ -40,7 +40,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbJornadas" Width="1.5" PointX="3" PointY="111.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbNacionalidades" Width="1.5" PointX="3" PointY="115.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPersonas" Width="1.5" PointX="11.25" PointY="105.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPrestaciones" Width="1.5" PointX="3" PointY="119.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRazonSalidas" Width="1.5" PointX="3" PointY="124" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRequerimientosEspeciales" Width="1.5" PointX="3" PointY="127.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRequerimientosEspecialesPersona" Width="1.5" PointX="13.5" PointY="107" IsExpanded="true" />
@@ -144,8 +143,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequerimientosEspeciales_resp_UsuarioCrea" ManuallyRouted="false" />

@@ -6031,8 +6031,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbNacionalidades3" Relationship="Self.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" FromRole="tbUsuario" ToRole="tbNacionalidades" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPersonas" />
           <NavigationProperty Name="tbPersonas1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPersonas" />
-          <NavigationProperty Name="tbPrestaciones" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea" FromRole="tbUsuario" ToRole="tbPrestaciones" />
-          <NavigationProperty Name="tbPrestaciones1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica" FromRole="tbUsuario" ToRole="tbPrestaciones" />
           <NavigationProperty Name="tbRazonSalidas" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
           <NavigationProperty Name="tbRazonSalidas1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
           <NavigationProperty Name="tbRequerimientosEspeciales" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRequerimientosEspeciales_resp_UsuarioCrea" FromRole="tbUsuario" ToRole="tbRequerimientosEspeciales" />
@@ -6681,24 +6679,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbRequerimientosEspecialesPersona" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbRequerimientosEspecialesPersona_per_Id" FromRole="tbPersonas" ToRole="tbRequerimientosEspecialesPersona" />
           <NavigationProperty Name="tbTitulosPersona" Relationship="Self.FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id" FromRole="tbPersonas" ToRole="tbTitulosPersona" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbPersonas" ToRole="tbSeleccionCandidatos" />
-        </EntityType>
-        <EntityType Name="tbPrestaciones">
-          <Key>
-            <PropertyRef Name="pres_Id" />
-          </Key>
-          <Property Name="pres_Id" Type="Int32" Nullable="false" />
-          <Property Name="pres_DerechoPreaviso" Type="Boolean" Nullable="false" />
-          <Property Name="pres_Preaviso" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_DecimoTercer" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_Catorceavo" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="pres_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="pres_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="pres_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="pres_UsuarioModifica" Type="Int32" />
-          <Property Name="pres_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea" FromRole="tbPrestaciones" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica" FromRole="tbPrestaciones" ToRole="tbUsuario" />
         </EntityType>
         <EntityType Name="tbRazonSalidas">
           <Key>
@@ -8209,30 +8189,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbPrestaciones" Type="Self.tbPrestaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPrestaciones">
-              <PropertyRef Name="pres_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbPrestaciones" Type="Self.tbPrestaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbPrestaciones">
-              <PropertyRef Name="pres_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbRazonSalidas" Type="Self.tbRazonSalidas" Multiplicity="*" />
@@ -9289,7 +9245,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="tbJornadas" EntityType="Self.tbJornadas" />
           <EntitySet Name="tbNacionalidades" EntityType="Self.tbNacionalidades" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" />
-          <EntitySet Name="tbPrestaciones" EntityType="Self.tbPrestaciones" />
           <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" />
           <EntitySet Name="tbRequerimientosEspeciales" EntityType="Self.tbRequerimientosEspeciales" />
           <EntitySet Name="tbRequerimientosEspecialesPersona" EntityType="Self.tbRequerimientosEspecialesPersona" />
@@ -9608,14 +9563,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPrestaciones" EntitySet="tbPrestaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPrestaciones_pres_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbPrestaciones" EntitySet="tbPrestaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbRazonSalidas_rsal_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
