@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Models
     }
     public class cCatalogoIngresos
     {
-        [Display(Name = "Código")]
+        [Display(Name = "Número")]
         public int cin_IdIngreso { get; set; }
 
         [Required]

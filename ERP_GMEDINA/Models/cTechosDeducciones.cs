@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
     }
     public class cTechosDeducciones
     {
-        [Display(Name = "ID Techos Deducciones")]
+        [Display(Name = "Número")]
         [Required]
         public int tddu_IdTechosDeducciones { get; set; }
 
