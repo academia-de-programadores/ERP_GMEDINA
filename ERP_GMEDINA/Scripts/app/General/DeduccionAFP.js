@@ -145,12 +145,6 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
             });
         }
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#ActivarDeduccionAFP").submit(function (e) {
-        return false;
-    });
-
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
