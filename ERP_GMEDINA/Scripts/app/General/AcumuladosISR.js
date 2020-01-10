@@ -54,13 +54,17 @@ function cargarGridAcumuladosISR() {
                 //variable boton editar
                 var botonEditar = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' : '';
 
-                //variable donde está el boton activar
+                //variable donde está el boton 
+
+
+
                 var botonActivar = ListaAcumuladosISR[i].aisr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAcumuladosISR">Activar</button>' : '' : '';
 
 
 
                 template += '<tr data-id = "' + ListaAcumuladosISR[i].aisr_Id + '">' +
-                    '<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
+					'<td>' + ListaAcumuladosISR[i].aisr_Id + '</td>' +
+					'<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
                     '<td>' + ListaAcumuladosISR[i].aisr_Monto + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
