@@ -31,6 +31,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/CatalogoDeDeducciones/GetData',
         'GET',
@@ -44,43 +45,48 @@ function cargarGridDeducciones() {
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaDeducciones = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+
+            //Recorrer la data y crear el template que se pondrá en el tbody
             for (var i = 0; i < ListaDeducciones.length; i++) {
-                var estadoCDD = ListaDeducciones[i].cde_Activo == false ? "Inactivo" : "Activo";
-                console.log(estadoCDD);
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaDeducciones[i].cde_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarCatalogoDeducciones">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaDeducciones[i].cde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarCatalogoDeducciones">Activar</button>' : '' : '';
+
                 template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
                   '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                   '<td>' + estadoCDD + '</td>' +
-                   '<td>' + ((ListaDeducciones[i].cde_Activo == true) ?
-                   '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Detalles</button>' +
-                   '<button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Editar</button>' :
-                   '<button type="button" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Activar</button>') + '</td> </tr>';
-            }
+                   //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
 
-            //for (var i = 0; i < ListaDeducciones.length; i++) {
-            //    template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-            //        '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-            //        '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_Activo + '</td>' +
-            //        '<td>' +
-            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-            //        '</td>' +
-            //        '</tr>';
-            //}
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                   '</td> ' +
+                   '</tr>';
+            }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            FullBody();
             $('#tbodyDeducciones').html(template);
             
-        });
-}
+            });
+      FullBody();
+ }        
 
 //VALIDAR CREATE//
 

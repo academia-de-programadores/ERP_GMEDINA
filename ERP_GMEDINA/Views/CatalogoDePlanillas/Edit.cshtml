@@ -11,7 +11,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-                    <h2>Editar</h2>
+                    <h2>Editar Planilla</h2>
                 </div>
                 <div class="ibox-content">
                     @using (Html.BeginForm())
@@ -124,23 +124,26 @@
             </div>
         </div>
         <br />
-        <div class="modal inmodal" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
             <div class="modal-dialog">
-                <div class="modal-content animated fadeIn">
+                <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                         <h4 class="modal-title">Inactivar</h4>
                     </div>
                     <div class="modal-body" id="Inactivar">
-                        ¿Seguro que desea inhabilitar el registro?
+                        ¿Está seguro que desea inactivar este registro?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary pull-left" id="btnInactivarPlanilla">Actualizar</button>
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" id="btnInactivarPlanilla">Si</button>
+                        <div class="btn" style="display:none;" id="cargandoEliminar">
+
+                        </div>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
