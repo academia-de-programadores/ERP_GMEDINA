@@ -113,7 +113,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_GeneralTotales_RPT" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_InformacionColaborador" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Ingresos_RPT" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ISR_RPT" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Liquidaciones_RPT" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_AnioPlanilla" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Plani_DecimoCuarto" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
@@ -402,6 +401,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_INFOP_RPT" Width="1.5" PointX="9.375" PointY="21.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_InstitucionesFinancieras_RPT" Width="1.5" PointX="13.375" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_IHSS_RPT" Width="1.5" PointX="11.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ISR_RPT" Width="1.5" PointX="7.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
