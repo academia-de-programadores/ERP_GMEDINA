@@ -164,7 +164,7 @@ function ocultarCargandoCrear() {
 }
 
 
-$("#btnAgregar").click(function () {
+/*$("#btnAgregar").click(function () {
     //Validación para Agregar
     var Vali1 = $("#val1").css("display", "");
     var Vali2 = $("#val2").css("display", "");
@@ -180,31 +180,17 @@ $("#btnAgregar").click(function () {
     var Valid5 = $("#val5").css("display", "none");
     var Valid6 = $("#val6").css("display", "none");
 
-    console.log(Vali1)
-    console.log(Valid6)
     debugger;
-    if (Vali1) {
-        ocultarCargandoCrear();
-    }
-    else if (Vali2) {
-        ocultarCargandoCrear();
-    }
-    else if (Vali3) {
-        ocultarCargandoCrear();
-    }
-    else if (Vali4) {
-        ocultarCargandoCrear();
-    }
-    else if (Vali5) {
-        ocultarCargandoCrear();
-    }
-    else if (Vali6) {
+
+    if (Vali1 != Valid1 || Vali2 != Valid2 || Vali3 != Valid3 || Vali4 != Valid4 || Vali5 != Valid5 || Vali6 != Valid6) {
+        mostrarCargandoCrear();
         ocultarCargandoCrear();
     }
     else {
         mostrarCargandoCrear();
     }
-});
+        
+});*/
 
 
 
