@@ -81,31 +81,7 @@
         </dd>
 
     </dl>
-    <div class="ibox-content">
-        <div class="form-horizontal">
-            <table class="table table-striped table-bordered dataTable">
-                <thead>
-                    <tr>
-                        <th>Acción</th>
-                        <th>Usuario</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Creado</td>
-                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                        <td><span id="hper_FechaCrea">@Html.DisplayFor(model => model.hper_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                    </tr>
-                    <tr>
-                        <td>Modificado</td>
-                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                        <td><span id="hper_FechaModifica">@Html.DisplayFor(model => model.hper_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+   
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.hper_Id }, new {@class="btn btn-primary" }) 
     @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
