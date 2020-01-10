@@ -1870,6 +1870,8 @@
     <Content Include="Views\Preaviso\_Edit.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
+    <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
+    <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

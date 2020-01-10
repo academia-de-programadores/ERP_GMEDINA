@@ -277,50 +277,68 @@ namespace ERP_GMEDINA.Controllers
             return Json(JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Activar(int id)
+
+
+        public JsonResult Activar(int? ID)
         {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
+            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Activar([Bind(Include = "cc_Id,cc_UsuarioModifica,cc_FechaModifica")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        {
+            tbEmpleadoComisiones.cc_UsuarioModifica = 1;
+            tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
+
             IEnumerable<object> listEmpleadoComisiones = null;
+
             string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+
             string response = String.Empty;
+
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(id,
-                                                                                         1,
-                                                                                         DateTime.Now
-                                                                                       );
-
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(tbEmpleadoComisiones.cc_Id,
+                                                                                            tbEmpleadoComisiones.cc_UsuarioModifica,
+                                                                                            tbEmpleadoComisiones.cc_FechaModifica
+                                                                                           
+                                                                                            );
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
                         MensajeError = Resultado.MensajeError;
-
 
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo Activar el registro. Contacte al administrador.");
+                        ModelState.AddModelError("", "Datos Incorrectos");
                         response = "error";
                     }
+
                 }
                 catch (Exception)
                 {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
                     response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
             }
             else
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
                 response = "error";
             }
-            return Json(JsonRequestBehavior.AllowGet);
-        }
+            //ViewBag.Emp_IdEmpleado = new SelectList(db.tbEmpleados, "emp_Id", "emp_Nombres", tbEmpleadoComisiones.emp_Id);
 
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

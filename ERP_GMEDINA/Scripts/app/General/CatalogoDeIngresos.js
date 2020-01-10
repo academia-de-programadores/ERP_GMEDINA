@@ -246,7 +246,41 @@ $("#btnInactivarIngresos").click(function () {
 
 );
 
+//MODAL ACTIVAR
 
+//$("#btnActivarIngresos").click(function () {
+//    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+//    var data = $("#frmActivarCatalogoIngresos").serializeArray();
+//    var ID = InactivarID;
+//    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+//    $.ajax({
+//        url: "/CatalogoDeIngresos/Activar/" + ID,
+//        method: "POST",
+//        data: data
+//    }).done(function (data) {
+//        if (data == "error") {
+//            //Cuando traiga un error del backend al guardar la edicion
+//            iziToast.error({
+//                title: 'Error',
+//                message: 'No se pudo activar el registro, contacte al administrador',
+//            });
+//        }
+//        else {
+//            $("#ActivarCatalogoIngresos").modal('hide');
+//            cargarGridIngresos();
+//            //Mensaje de exito de la edicion
+//            iziToast.success({
+//                title: 'Éxito',
+//                message: '¡El registro fue activado de forma exitosa!',
+//            });
+//        }
+//    });
+//    $("#frmCatalogoIngresos").submit(function (e) {
+//        return false;
+//    });
+//}
+
+//);
 
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -374,3 +408,70 @@ function spinner(){
 }
 
 
+//FUNCION: PRIMERA FASE DE ACTIVAR
+$(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
+    var ID = $(this).data('id');
+    ActivarID = ID;
+    $.ajax({
+        url: "/CatalogoDeIngresos/Activar/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                $("#Activar #cin_IdIngreso").val(data.cin_IdIngreso);
+                $("#Activar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
+                //$(".field-validation-error").css('display', 'none');
+                $("#ActivarCatalogoIngresos").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+        });
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnActivarIngresos").click(function () {
+
+    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    var data = $("#frmActivarCatalogoIngresos").serializeArray();
+    var descedit = $("#Activar #cin_DescripcionIngreso").val();
+
+    //VALIDAMOS LOS CAMPOS
+    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
+        mostrarcargandoEditar();
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/CatalogoDeIngresos/Activar",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                });
+            }
+            else {
+                $("#ActivarCatalogoIngresos").modal('hide');
+                cargarGridIngresos();
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro fue inhabilitado de forma exitosa!',
+                });
+            }
+        });
+        $("#frmCatalogoIngresos").submit(function (e) {
+            return false;
+        });
+    }
+});
