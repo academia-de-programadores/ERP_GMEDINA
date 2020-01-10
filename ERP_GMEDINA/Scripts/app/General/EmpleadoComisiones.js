@@ -471,37 +471,34 @@ $("#btnInactivarRegistroComisiones").click(function () {
 //VALIDAR CREAR//
 
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroComisiones", function () {
-                $("#ActivarEmpleadoComisiones").modal();   
+    IDActivar = $(this).data('id');
+    $("#ActivarEmpleadoComisiones").modal();
 });
 $("#btnActivarRegistroComisiones").click(function () {
-    var data = $("#frmEmpleadoComisionesActivar").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/EmpleadoComisiones/Activar/" + $(this).data('id'),
-        method: "POST",
-        data: data
+        url: "/EmpleadoComisiones/Activar/" + IDActivar,
+        method: "POST"
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitado el registro, contacte al administrador',
+                message: 'No se pudo Activar el registro, contacte al administrador',
             });
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
-
             cargarGridComisiones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#ActivarEmpleadoComisiones").modal('hide');
-           
             //Mensaje de exito de la edicion
-            //iziToast.success({
-            //    title: 'Exito',
-            //    message: 'El registro fue Inhabilitado de forma exitosa!',
-            //});
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
+            });
         }
     });
+    IDActivar = 0;
 });
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
     $("#btnCerrarModal").click(function () {
