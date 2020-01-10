@@ -12,7 +12,9 @@
             <div class="float-e-margins">
                 <div class="ibox-title">
                     <h5>Listado de Historial de Puesto</h5>
-
+                    <div class="ibox-tools">
+                        <input type="button" id="btnAgregar" onclick="btnAgregar()" class="btn btn-primary btn-xs" value="Promover Empleado" />
+                    </div>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-striped table-bordered table-hover" id="IndexTable">
@@ -31,6 +33,7 @@
         </div>
     </div>
 </div>
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbEmpleados())
 
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

@@ -3903,15 +3903,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Identidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Nombres" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="per_Edad" Type="int" Mode="In" />
+          <Parameter Name="per_Sexo" Type="char" Mode="In" />
+          <Parameter Name="nac_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_CorreoElectronico" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_EstadoCivil" Type="char" Mode="In" />
+          <Parameter Name="per_TipoSangre" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="per_FechaCrea" Type="datetime" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Id" Type="int" Mode="In" />
-          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
-          <Parameter Name="hcar_Fecha" Type="datetime" Mode="In" />
-          <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="emp_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
+          <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="emp_FechaIngreso" Type="date" Mode="In" />
+          <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Recontratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
@@ -10537,15 +10552,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Insert_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
-            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
-            <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tbHistorialPermisos" EntityType="ERP_GMEDINAModel.tbHistorialPermisos" />
           <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" />
