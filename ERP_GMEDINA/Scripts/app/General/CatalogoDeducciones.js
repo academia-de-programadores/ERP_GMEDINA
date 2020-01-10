@@ -1,7 +1,9 @@
 ﻿const btnGuardar = $('#btnCreateRegistroDeduccion')
 const btnGuardarEditar = $('#btnUpdateDeduccion')
+const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
 cargandoCrearcargandoCrear = $('#cargandoCrear')
-cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+cargandoActivar = $('#cargandoActivar')//Div que aparecera cuando se le de click en crear
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -16,6 +18,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 
 //VARIABLE PARA INACTIVAR
 var InactivarID = 0;
+var ActivarID = 0;
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -286,8 +289,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
+    }).done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
@@ -323,6 +325,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
             }
         });
 });
+
+
+
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
@@ -487,6 +492,53 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     });
 });
 
+
+//MOSTRAR MODAL ACTIVAR
+$(document).on("click", "#btnActivarCatalogoDeducciones", function () {
+    //MOSTRAR EL MODAL DE INACTIVAR
+    $("#ActivarCatalogoDeducciones").modal();
+});
+
+$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnActivarCatalogoDeducciones", function () {
+    var ID = $(this).data('id');
+    ActivarID = ID;
+    
+});
+
+
+//EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
+$("#btnActivarRegistroDeduccion").click(function () {
+
+    var data = $("#frmCatalogoDeduccionesActivar").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/CatalogoDeDeducciones/Activar/" + ActivarID,
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridDeducciones();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarCatalogoDeducciones").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue Activado de forma exitosa!',
+            });
+
+        }
+    });
+});
+ 
+
 function mostrarCargandoCrear() {
     btnGuardar.hide();
     cargandoCrear.html(spinner());
@@ -507,6 +559,18 @@ function mostrarCargandoEditar() {
 
 function ocultarCargandoEditar() {
     btnGuardarEditar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoActivar() {
+    btnGuardarActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoActivar() {
+    btnGuardarActivar.show();
     cargandoCrear.html('');
     cargandoCrear.hide();
 }
