@@ -60,7 +60,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha Modificacion")]
         public Nullable<System.DateTime> dex_FechaModifica { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "Estado")]
         public bool dex_Activo { get; set; }
 
     }

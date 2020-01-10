@@ -112,7 +112,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         public virtual DbSet<EmpleadosVendedores> EmpleadosVendedores { get; set; }
-        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
         public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
@@ -133,12 +132,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
         public virtual DbSet<V_GeneralTotales_RPT> V_GeneralTotales_RPT { get; set; }
-        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
-        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
         public virtual DbSet<V_Ingresos_RPT> V_Ingresos_RPT { get; set; }
-        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
-        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
         public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_AnioPlanilla> V_Plani_AnioPlanilla { get; set; }
         public virtual DbSet<V_Plani_DecimoCuarto> V_Plani_DecimoCuarto { get; set; }
@@ -152,7 +147,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
-        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
         public virtual DbSet<V_ReportesVarios> V_ReportesVarios { get; set; }
         public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
@@ -160,6 +154,12 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
+        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
+        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
+        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
+        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
+        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
+        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -420,15 +420,19 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Insert_Result>("UDP_Plani_EmpleadoComisiones_Insert", emp_IdParameter, cin_IdIngresoParameter, cc_FechaRegistroParameter, cc_PagadoParameter, cc_UsuarioCreaParameter, cc_FechaCreaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Update_Result> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> eMP_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
+        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Update_Result> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngresos, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
         {
             var cc_IdParameter = cc_Id.HasValue ?
                 new ObjectParameter("cc_Id", cc_Id) :
                 new ObjectParameter("cc_Id", typeof(int));
     
-            var eMP_IdParameter = eMP_Id.HasValue ?
-                new ObjectParameter("EMP_Id", eMP_Id) :
-                new ObjectParameter("EMP_Id", typeof(int));
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var cin_IdIngresosParameter = cin_IdIngresos.HasValue ?
+                new ObjectParameter("cin_IdIngresos", cin_IdIngresos) :
+                new ObjectParameter("cin_IdIngresos", typeof(int));
     
             var cc_UsuarioModificaParameter = cc_UsuarioModifica.HasValue ?
                 new ObjectParameter("cc_UsuarioModifica", cc_UsuarioModifica) :
@@ -446,7 +450,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
                 new ObjectParameter("cc_TotalVenta", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, eMP_IdParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, emp_IdParameter, cin_IdIngresosParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_EmpleadosPorAreas_Select_Result> UDP_Plani_EmpleadosPorAreas_Select()
@@ -1124,43 +1128,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dex_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Inactivar", dex_IdDeduccionesExtraParameter, dex_UsuarioModificaParameter, dex_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result> UDP_Plani_tbDeduccionesExtraordinarias_Insert(Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioCrea, Nullable<System.DateTime> dex_FechaCrea)
-        {
-            var eqem_IdParameter = eqem_Id.HasValue ?
-                new ObjectParameter("eqem_Id", eqem_Id) :
-                new ObjectParameter("eqem_Id", typeof(int));
-    
-            var dex_MontoInicialParameter = dex_MontoInicial.HasValue ?
-                new ObjectParameter("dex_MontoInicial", dex_MontoInicial) :
-                new ObjectParameter("dex_MontoInicial", typeof(decimal));
-    
-            var dex_MontoRestanteParameter = dex_MontoRestante.HasValue ?
-                new ObjectParameter("dex_MontoRestante", dex_MontoRestante) :
-                new ObjectParameter("dex_MontoRestante", typeof(decimal));
-    
-            var dex_ObservacionesComentariosParameter = dex_ObservacionesComentarios != null ?
-                new ObjectParameter("dex_ObservacionesComentarios", dex_ObservacionesComentarios) :
-                new ObjectParameter("dex_ObservacionesComentarios", typeof(string));
-    
-            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
-                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
-                new ObjectParameter("cde_IdDeducciones", typeof(int));
-    
-            var dex_CuotaParameter = dex_Cuota.HasValue ?
-                new ObjectParameter("dex_Cuota", dex_Cuota) :
-                new ObjectParameter("dex_Cuota", typeof(decimal));
-    
-            var dex_UsuarioCreaParameter = dex_UsuarioCrea.HasValue ?
-                new ObjectParameter("dex_UsuarioCrea", dex_UsuarioCrea) :
-                new ObjectParameter("dex_UsuarioCrea", typeof(int));
-    
-            var dex_FechaCreaParameter = dex_FechaCrea.HasValue ?
-                new ObjectParameter("dex_FechaCrea", dex_FechaCrea) :
-                new ObjectParameter("dex_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Insert", eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioCreaParameter, dex_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Update_Result> UDP_Plani_tbDeduccionesExtraordinarias_Update(Nullable<int> dex_IdDeduccionesExtra, Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioModifica, Nullable<System.DateTime> dex_FechaModifica)
@@ -2142,6 +2109,43 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cin_IdIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Update_Result>("UDP_tbTipoPlanillaDetalleIngreso_Update", cpla_IdPlanillaParameter, cin_IdIngresoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result> UDP_Plani_tbDeduccionesExtraordinarias_Insert(Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioCrea, Nullable<System.DateTime> dex_FechaCrea)
+        {
+            var eqem_IdParameter = eqem_Id.HasValue ?
+                new ObjectParameter("eqem_Id", eqem_Id) :
+                new ObjectParameter("eqem_Id", typeof(int));
+    
+            var dex_MontoInicialParameter = dex_MontoInicial.HasValue ?
+                new ObjectParameter("dex_MontoInicial", dex_MontoInicial) :
+                new ObjectParameter("dex_MontoInicial", typeof(decimal));
+    
+            var dex_MontoRestanteParameter = dex_MontoRestante.HasValue ?
+                new ObjectParameter("dex_MontoRestante", dex_MontoRestante) :
+                new ObjectParameter("dex_MontoRestante", typeof(decimal));
+    
+            var dex_ObservacionesComentariosParameter = dex_ObservacionesComentarios != null ?
+                new ObjectParameter("dex_ObservacionesComentarios", dex_ObservacionesComentarios) :
+                new ObjectParameter("dex_ObservacionesComentarios", typeof(string));
+    
+            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
+                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
+                new ObjectParameter("cde_IdDeducciones", typeof(int));
+    
+            var dex_CuotaParameter = dex_Cuota.HasValue ?
+                new ObjectParameter("dex_Cuota", dex_Cuota) :
+                new ObjectParameter("dex_Cuota", typeof(decimal));
+    
+            var dex_UsuarioCreaParameter = dex_UsuarioCrea.HasValue ?
+                new ObjectParameter("dex_UsuarioCrea", dex_UsuarioCrea) :
+                new ObjectParameter("dex_UsuarioCrea", typeof(int));
+    
+            var dex_FechaCreaParameter = dex_FechaCrea.HasValue ?
+                new ObjectParameter("dex_FechaCrea", dex_FechaCrea) :
+                new ObjectParameter("dex_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Insert", eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioCreaParameter, dex_FechaCreaParameter);
         }
     }
 }

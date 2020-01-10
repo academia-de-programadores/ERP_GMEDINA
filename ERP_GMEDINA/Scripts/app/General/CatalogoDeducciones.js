@@ -1,7 +1,9 @@
 ﻿const btnGuardar = $('#btnCreateRegistroDeduccion')
 const btnGuardarEditar = $('#btnUpdateDeduccion')
+const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
 cargandoCrearcargandoCrear = $('#cargandoCrear')
-cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+cargandoActivar = $('#cargandoActivar')//Div que aparecera cuando se le de click en crear
 
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -16,6 +18,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 
 //VARIABLE PARA INACTIVAR
 var InactivarID = 0;
+var ActivarID = 0;
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -31,6 +34,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/CatalogoDeDeducciones/GetData',
         'GET',
@@ -44,43 +48,48 @@ function cargarGridDeducciones() {
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaDeducciones = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+
+            //Recorrer la data y crear el template que se pondrá en el tbody
             for (var i = 0; i < ListaDeducciones.length; i++) {
-                var estadoCDD = ListaDeducciones[i].cde_Activo == false ? "Inactivo" : "Activo";
-                console.log(estadoCDD);
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaDeducciones[i].cde_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarCatalogoDeducciones">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaDeducciones[i].cde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarCatalogoDeducciones">Activar</button>' : '' : '';
+
                 template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
                   '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                   '<td>' + estadoCDD + '</td>' +
-                   '<td>' + ((ListaDeducciones[i].cde_Activo == true) ?
-                   '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Detalles</button>' +
-                   '<button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Editar</button>' :
-                   '<button type="button" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Activar</button>') + '</td> </tr>';
-            }
+                   //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
 
-            //for (var i = 0; i < ListaDeducciones.length; i++) {
-            //    template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-            //        '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-            //        '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-            //        '<td>' + ListaDeducciones[i].cde_Activo + '</td>' +
-            //        '<td>' +
-            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-            //        '</td>' +
-            //        '</tr>';
-            //}
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                   '</td> ' +
+                   '</tr>';
+            }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            FullBody();
             $('#tbodyDeducciones').html(template);
             
-        });
-}
+            });
+      FullBody();
+ }        
 
 //VALIDAR CREATE//
 
@@ -280,8 +289,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
+    }).done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
@@ -317,6 +325,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
             }
         });
 });
+
+
+
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
@@ -481,6 +492,53 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     });
 });
 
+
+//MOSTRAR MODAL ACTIVAR
+$(document).on("click", "#btnActivarCatalogoDeducciones", function () {
+    //MOSTRAR EL MODAL DE INACTIVAR
+    $("#ActivarCatalogoDeducciones").modal();
+});
+
+$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnActivarCatalogoDeducciones", function () {
+    var ID = $(this).data('id');
+    ActivarID = ID;
+    
+});
+
+
+//EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
+$("#btnActivarRegistroDeduccion").click(function () {
+
+    var data = $("#frmCatalogoDeduccionesActivar").serializeArray();
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/CatalogoDeDeducciones/Activar/" + ActivarID,
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridDeducciones();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarCatalogoDeducciones").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue Activado de forma exitosa!',
+            });
+
+        }
+    });
+});
+ 
+
 function mostrarCargandoCrear() {
     btnGuardar.hide();
     cargandoCrear.html(spinner());
@@ -501,6 +559,18 @@ function mostrarCargandoEditar() {
 
 function ocultarCargandoEditar() {
     btnGuardarEditar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoActivar() {
+    btnGuardarActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoActivar() {
+    btnGuardarActivar.show();
     cargandoCrear.html('');
     cargandoCrear.hide();
 }

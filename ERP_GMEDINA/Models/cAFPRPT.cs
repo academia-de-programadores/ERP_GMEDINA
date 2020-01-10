@@ -14,35 +14,33 @@ namespace ERP_GMEDINA.Models
     }
     public class cAFPRPT
     {
+		[Display(Name = "Codigo Empleado")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public int emp_Id { get; set; }
 
-        [Display(Name = "Codigo Empleado")]
-        public int emp_Id { get; set; }
+		[Display(Name = "Nombres")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string per_Nombres { get; set; }
 
-        [Display(Name = "Identidad")]
-        public string per_Identidad { get; set; }
+		[Display(Name = "Apellidos")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string per_Apellidos { get; set; }
 
-        [Display(Name = "Nombre Completo")]
-        public string per_Empleado { get; set; }
+		[Display(Name = "Total AFP")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public decimal hipa_AFP { get; set; }
 
-        [Display(Name = "Departamento")]
-        public string depto_descripcion { get; set; }
+		[Display(Name = "Codigo Planilla")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public int cpla_IdPlanilla { get; set; }
 
-        [Display(Name = "Área")]
-        public string area_Descripcion { get; set; }
+		[Display(Name = "Planilla")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string cpla_DescripcionPlanilla { get; set; }
 
-        [Display(Name = "Codigo Planilla")]
-        public int cpla_IdPlanilla { get; set; }
+		[Display(Name = "Fecha Pago")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public System.DateTime hipa_FechaPago { get; set; }
 
-        [Display(Name = "Tipo Planilla")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        public string cpla_DescripcionPlanilla { get; set; }
-
-       
-        [Display(Name = "Total")]
-        public Nullable<decimal> hipa_AFP{ get; set; }
-
-        [Display(Name = "Fecha Pago")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        public System.DateTime hipa_FechaPago { get; set; }
     }
 }

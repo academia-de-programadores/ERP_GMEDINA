@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: EmpleadoComisiones
         public ActionResult Index()
         {
-            var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Where(d => d.cc_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
+            var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
             return View(tbEmpleadoComisiones.ToList());
         }
 
@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones
-                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo}).Where(c => c.cc_Activo == true)
+                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from CatIngreso in  db.tbCatalogoDeIngresos.Where(x => x.cin_DescripcionIngreso == "Comisiones")
+            from CatIngreso in  db.tbCatalogoDeIngresos.Where(x => x.cin_Activo==true)
                 //join EmpBonos in db.tbEmpleadoBonos on CatIngreso.cin_IdIngreso equals EmpBonos.cin_IdIngreso
             select new
             {
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "Datos Incorrectos");
                         response = "error";
                     }
 
@@ -176,8 +176,8 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id, cc_UsuarioModifica, cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id,cin_IdIngreso,cc_UsuarioModifica,cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
@@ -196,6 +196,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Update(tbEmpleadoComisiones.cc_Id,
                                                                                             tbEmpleadoComisiones.emp_Id,
+                                                                                            tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_UsuarioModifica,
                                                                                             tbEmpleadoComisiones.cc_FechaModifica,
                                                                                             tbEmpleadoComisiones.cc_PorcentajeComision,
@@ -208,7 +209,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "Datos Incorrectos");
                         response = "error";
                     }
 
@@ -256,7 +257,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        ModelState.AddModelError("", "No se pudo Inhabilitar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
@@ -278,6 +279,66 @@ namespace ERP_GMEDINA.Controllers
 
 
 
+        public JsonResult Activar(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
+            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Activar([Bind(Include = "cc_Id,cc_UsuarioModifica,cc_FechaModifica")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        {
+            tbEmpleadoComisiones.cc_UsuarioModifica = 1;
+            tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
+
+            IEnumerable<object> listEmpleadoComisiones = null;
+
+            string MensajeError = "";
+
+            string response = String.Empty;
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(tbEmpleadoComisiones.cc_Id,
+                                                                                            tbEmpleadoComisiones.cc_UsuarioModifica,
+                                                                                            tbEmpleadoComisiones.cc_FechaModifica
+                                                                                           
+                                                                                            );
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "Datos Incorrectos");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
+                    response = "error";
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //ViewBag.Emp_IdEmpleado = new SelectList(db.tbEmpleados, "emp_Id", "emp_Nombres", tbEmpleadoComisiones.emp_Id);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
