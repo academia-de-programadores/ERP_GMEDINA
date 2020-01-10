@@ -146,6 +146,7 @@ var MaxSueldoEdit = 0;
 $(cmbEmpleadoEdit).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = cmbEmpleadoEdit.val();
+
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
@@ -212,6 +213,28 @@ $('#btnCreateRegistroAdelantos').click(function () {
     }
 
 });
+
+function ValidarCamposEditar(colaborador, razon, monto){
+    var pasoValidacion = true;
+
+    console.log(colaborador.val());
+    if(colaborador.val() == ''){
+        pasoValidacion = false;
+        //Codigo para mostrar el span de validacion
+        //Hacerle focus al input
+        console.log('No paso la validacion de campo colaborador')
+        $(colaborador).focus();
+    } else{
+
+    }
+
+    if(razon ==null || razon == ''){
+        pasoValidacion = false;
+        console.log('No paso la validacion de campo razon')
+    }
+
+    return pasoValidacion;
+}
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -289,6 +312,7 @@ $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
+    if(ValidarCamposEditar($('#emp_Id'), $('#adsu_RazonAdelanto'), $('#adsu_Monto')))
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
         method: "POST",
