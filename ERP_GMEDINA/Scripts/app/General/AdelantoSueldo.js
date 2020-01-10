@@ -46,16 +46,19 @@ function cargarGridAdelantos() {
             for (var i = 0; i < ListaAdelantos.length; i++) {
                 var FechaAdelanto = FechaFormato(ListaAdelantos[i].adsu_FechaAdelanto);
                 var Deducido = ListaAdelantos[i].adsu_Deducido == true ? 'Deducido en planilla' : 'Sin deducir';
+                var Activo = ListaAdelantos[i].adsu_Activo == true ? 'Activo' : 'Inactivo';
                 UsuarioModifica = ListaAdelantos[i].adsu_UsuarioModifica == null ? 'Sin modificaciones' : ListaAdelantos[i].adsu_UsuarioModifica;
 
                 //VALIDAR SI EL REGISTRO ESTA DEDUCIDO, SI LO ESTÁ, EL BOTON DE EDITAR ESTARÁ DESHABILITADO 
                 if (ListaAdelantos[i].adsu_Deducido) {
                     template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
+                    '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
                     '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_Monto + '</td>' +
                     '<td>' + FechaAdelanto + '</td>' +
                     '<td>' + Deducido + '</td>' +
+                    '<td>' + Activo + '</td>' +
                     '<td>' +
                     '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalle</button>' +
                     '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs" disabled id="btnEditarAdelantoSueldo">Editar</button>' +
@@ -63,11 +66,13 @@ function cargarGridAdelantos() {
                     '</tr>';
                 } else {
                     template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
+                    '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
                     '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_Monto + '</td>' +
                     '<td>' + FechaAdelanto + '</td>' +
                     '<td>' + Deducido + '</td>' +
+                    '<td>' + Activo + '</td>' +
                     '<td>' +
                     '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalles</button>' +
                     '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs" id="btnEditarAdelantoSueldo">Editar</button>' +

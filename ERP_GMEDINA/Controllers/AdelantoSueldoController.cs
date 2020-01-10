@@ -35,20 +35,24 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbAdelantoSueldo = db.tbAdelantoSueldo
-                        .Select(c => new { adsu_IdAdelantoSueldo = c.adsu_IdAdelantoSueldo,
-                                           adsu_RazonAdelanto = c.adsu_RazonAdelanto,
-                                           adsu_Monto = c.adsu_Monto,
-                                           adsu_FechaAdelanto = c.adsu_FechaAdelanto,
-                                           adsu_Deducido = c.adsu_Deducido,
-                                           adsu_UsuarioCrea = c.tbUsuario.usu_NombreUsuario,
-                                           adsu_FechaCrea = c.adsu_FechaCrea,
-                                           adsu_UsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
-                                           adsu_FechaModifica = c.adsu_FechaModifica,
-                                           adsu_Activo = c.adsu_Activo,
-                                           empleadoNombre = c.tbEmpleados.tbPersonas.per_Nombres + " " + c.tbEmpleados.tbPersonas.per_Apellidos })
+                        .Select(c => new
+                        {
+                            adsu_IdAdelantoSueldo = c.adsu_IdAdelantoSueldo,
+                            adsu_RazonAdelanto = c.adsu_RazonAdelanto,
+                            adsu_Monto = c.adsu_Monto,
+                            adsu_FechaAdelanto = c.adsu_FechaAdelanto,
+                            adsu_Deducido = c.adsu_Deducido,
+                            adsu_UsuarioCrea = c.tbUsuario.usu_NombreUsuario,
+                            adsu_FechaCrea = c.adsu_FechaCrea,
+                            adsu_UsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
+                            adsu_FechaModifica = c.adsu_FechaModifica,
+                            adsu_Activo = c.adsu_Activo,
+                            empleadoNombre = c.tbEmpleados.tbPersonas.per_Nombres + " " + c.tbEmpleados.tbPersonas.per_Apellidos
+                        })
                         .OrderBy(t => t.adsu_FechaCrea)
                         .OrderByDescending(x => x.adsu_FechaCrea)
-                        .ToList().Where(p => p.adsu_Activo == true);
+                        .ToList();
+                        //.Where(p => p.adsu_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbAdelantoSueldo, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
