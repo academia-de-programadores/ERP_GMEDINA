@@ -611,6 +611,14 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
                 "~/Scripts/app/General/Personas/CreatePersonas.js"));
+            //Inputmask
+            bundles.Add(new ScriptBundle("~/Content/InputMask").Include(
+            "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/jasny").Include(
+            "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditPersonas").Include(
+            "~/Scripts/app/General/Personas/EditPersonas.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));

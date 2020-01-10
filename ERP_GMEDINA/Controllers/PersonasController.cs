@@ -287,9 +287,9 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
-                        var List = db.UDP_RRHH_tbPersonas_Insert1(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
+                        var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
 
-                        foreach (UDP_RRHH_tbPersonas_Insert1_Result item in List)
+                        foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)
                         {
                             msj = item.MensajeError + "";
                             //Competencias
@@ -452,8 +452,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     string ResultI = "";
                     string ResultE = "";
-                    var _list = db.UDP_RRHH_tbPersonas_Update1(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre,1,DateTime.Now);
-                    foreach(UDP_RRHH_tbPersonas_Update1_Result Update in _list)
+                    var _list = db.UDP_RRHH_tbPersonas_Update(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre,1,DateTime.Now);
+                    foreach(UDP_RRHH_tbPersonas_Update_Result Update in _list)
                     {
                         msj = Update.MensajeError + "";
                         if(msj != "")

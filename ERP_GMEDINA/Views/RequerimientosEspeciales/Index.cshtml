@@ -34,16 +34,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) 
-                      {
-                        <tr class="gradeA odd" role="row" data-id="@item.resp_Id">
-                            <td>@Html.DisplayFor(modelItem => item.resp_Descripcion)</td>
-                            <td>
-							    <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.resp_Id)">Detalles</a>
-							    <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.resp_Id)">Editar</a>
-                            </td>
-                        </tr>
-                      }
                     </tbody>                       
                   </table>
                 </div>
@@ -63,6 +53,6 @@
 @section Scripts {
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/app/general/RequerimientosEspeciales")
+<script src="~/Scripts/app/General/RequerimientosEspeciales/RequerimientosEspeciales.js"></script>
 }
 

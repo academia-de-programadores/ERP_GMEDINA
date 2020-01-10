@@ -4740,427 +4740,427 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_Datos_Empleado" EntityType="Self.V_Datos_Empleado" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Datos_Empleado].[emp_Id] AS [emp_Id], 
-    [V_Datos_Empleado].[area_Id] AS [area_Id], 
-    [V_Datos_Empleado].[area_Descripcion] AS [area_Descripcion], 
-    [V_Datos_Empleado].[car_Id] AS [car_Id], 
-    [V_Datos_Empleado].[car_Descripcion] AS [car_Descripcion], 
-    [V_Datos_Empleado].[depto_Id] AS [depto_Id], 
-    [V_Datos_Empleado].[depto_Descripcion] AS [depto_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_Datos_Empleado].[emp_Id] AS [emp_Id],
+    [V_Datos_Empleado].[area_Id] AS [area_Id],
+    [V_Datos_Empleado].[area_Descripcion] AS [area_Descripcion],
+    [V_Datos_Empleado].[car_Id] AS [car_Id],
+    [V_Datos_Empleado].[car_Descripcion] AS [car_Descripcion],
+    [V_Datos_Empleado].[depto_Id] AS [depto_Id],
+    [V_Datos_Empleado].[depto_Descripcion] AS [depto_Descripcion],
     [V_Datos_Empleado].[jor_Descripcion] AS [jor_Descripcion]
     FROM [rrhh].[V_Datos_Empleado] AS [V_Datos_Empleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DatosProfesionales" EntityType="Self.V_DatosProfesionales" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_DatosProfesionales].[TipoDato] AS [TipoDato], 
-    [V_DatosProfesionales].[Descripcion] AS [Descripcion], 
+            <DefiningQuery>SELECT
+    [V_DatosProfesionales].[TipoDato] AS [TipoDato],
+    [V_DatosProfesionales].[Descripcion] AS [Descripcion],
     [V_DatosProfesionales].[Data_Id] AS [Data_Id]
     FROM [rrhh].[V_DatosProfesionales] AS [V_DatosProfesionales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DatosProfesionalesP" EntityType="Self.V_DatosProfesionalesP" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_DatosProfesionalesP].[TipoDato] AS [TipoDato], 
-    [V_DatosProfesionalesP].[Descripcion] AS [Descripcion], 
+            <DefiningQuery>SELECT
+    [V_DatosProfesionalesP].[TipoDato] AS [TipoDato],
+    [V_DatosProfesionalesP].[Descripcion] AS [Descripcion],
     [V_DatosProfesionalesP].[Data_Id] AS [Data_Id]
     FROM [rrhh].[V_DatosProfesionalesP] AS [V_DatosProfesionalesP]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DatosRequisicion" EntityType="Self.V_DatosRequisicion" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_DatosRequisicion].[Descripcion] AS [Descripcion], 
-    [V_DatosRequisicion].[TipoDato] AS [TipoDato], 
-    [V_DatosRequisicion].[Data_Id] AS [Data_Id], 
+            <DefiningQuery>SELECT
+    [V_DatosRequisicion].[Descripcion] AS [Descripcion],
+    [V_DatosRequisicion].[TipoDato] AS [TipoDato],
+    [V_DatosRequisicion].[Data_Id] AS [Data_Id],
     [V_DatosRequisicion].[req_Id] AS [req_Id]
     FROM [rrhh].[V_DatosRequisicion] AS [V_DatosRequisicion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Departamentos" EntityType="Self.V_Departamentos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Departamentos].[depto_Id] AS [depto_Id], 
-    [V_Departamentos].[area_Id] AS [area_Id], 
-    [V_Departamentos].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_Departamentos].[depto_UsuarioCrea] AS [depto_UsuarioCrea], 
-    [V_Departamentos].[depto_Fechacrea] AS [depto_Fechacrea], 
-    [V_Departamentos].[depto_Usuariomodifica] AS [depto_Usuariomodifica], 
-    [V_Departamentos].[depto_Fechamodifica] AS [depto_Fechamodifica], 
-    [V_Departamentos].[car_Id] AS [car_Id], 
-    [V_Departamentos].[car_Descripcion] AS [car_Descripcion], 
-    [V_Departamentos].[per_Id] AS [per_Id], 
-    [V_Departamentos].[per_NombreCompleto] AS [per_NombreCompleto], 
-    [V_Departamentos].[per_Telefono] AS [per_Telefono], 
+            <DefiningQuery>SELECT
+    [V_Departamentos].[depto_Id] AS [depto_Id],
+    [V_Departamentos].[area_Id] AS [area_Id],
+    [V_Departamentos].[depto_Descripcion] AS [depto_Descripcion],
+    [V_Departamentos].[depto_UsuarioCrea] AS [depto_UsuarioCrea],
+    [V_Departamentos].[depto_Fechacrea] AS [depto_Fechacrea],
+    [V_Departamentos].[depto_Usuariomodifica] AS [depto_Usuariomodifica],
+    [V_Departamentos].[depto_Fechamodifica] AS [depto_Fechamodifica],
+    [V_Departamentos].[car_Id] AS [car_Id],
+    [V_Departamentos].[car_Descripcion] AS [car_Descripcion],
+    [V_Departamentos].[per_Id] AS [per_Id],
+    [V_Departamentos].[per_NombreCompleto] AS [per_NombreCompleto],
+    [V_Departamentos].[per_Telefono] AS [per_Telefono],
     [V_Departamentos].[per_CorreoElectronico] AS [per_CorreoElectronico]
     FROM [rrhh].[V_Departamentos] AS [V_Departamentos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="Self.V_EmpleadoAmonestaciones" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_EmpleadoAmonestaciones].[emp_Id] AS [emp_Id], 
-    [V_EmpleadoAmonestaciones].[emp_NombreCompleto] AS [emp_NombreCompleto], 
-    [V_EmpleadoAmonestaciones].[car_Id] AS [car_Id], 
-    [V_EmpleadoAmonestaciones].[car_Descripcion] AS [car_Descripcion], 
-    [V_EmpleadoAmonestaciones].[depto_Id] AS [depto_Id], 
-    [V_EmpleadoAmonestaciones].[depto_Descripcion] AS [depto_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_EmpleadoAmonestaciones].[emp_Id] AS [emp_Id],
+    [V_EmpleadoAmonestaciones].[emp_NombreCompleto] AS [emp_NombreCompleto],
+    [V_EmpleadoAmonestaciones].[car_Id] AS [car_Id],
+    [V_EmpleadoAmonestaciones].[car_Descripcion] AS [car_Descripcion],
+    [V_EmpleadoAmonestaciones].[depto_Id] AS [depto_Id],
+    [V_EmpleadoAmonestaciones].[depto_Descripcion] AS [depto_Descripcion],
     [V_EmpleadoAmonestaciones].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_EmpleadoAmonestaciones] AS [V_EmpleadoAmonestaciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_EmpleadoIncapacidades" EntityType="Self.V_EmpleadoIncapacidades" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_EmpleadoIncapacidades].[emp_Id] AS [emp_Id], 
-    [V_EmpleadoIncapacidades].[emp_NombreCompleto] AS [emp_NombreCompleto], 
-    [V_EmpleadoIncapacidades].[car_Id] AS [car_Id], 
-    [V_EmpleadoIncapacidades].[car_Descripcion] AS [car_Descripcion], 
-    [V_EmpleadoIncapacidades].[depto_Id] AS [depto_Id], 
-    [V_EmpleadoIncapacidades].[depto_Descripcion] AS [depto_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_EmpleadoIncapacidades].[emp_Id] AS [emp_Id],
+    [V_EmpleadoIncapacidades].[emp_NombreCompleto] AS [emp_NombreCompleto],
+    [V_EmpleadoIncapacidades].[car_Id] AS [car_Id],
+    [V_EmpleadoIncapacidades].[car_Descripcion] AS [car_Descripcion],
+    [V_EmpleadoIncapacidades].[depto_Id] AS [depto_Id],
+    [V_EmpleadoIncapacidades].[depto_Descripcion] AS [depto_Descripcion],
     [V_EmpleadoIncapacidades].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_EmpleadoIncapacidades] AS [V_EmpleadoIncapacidades]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Empleados" EntityType="Self.V_Empleados" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Empleados].[emp_Id] AS [emp_Id], 
-    [V_Empleados].[per_Id] AS [per_Id], 
-    [V_Empleados].[per_Nombres] AS [per_Nombres], 
-    [V_Empleados].[per_Apellidos] AS [per_Apellidos], 
-    [V_Empleados].[per_NombreCompleto] AS [per_NombreCompleto], 
+            <DefiningQuery>SELECT
+    [V_Empleados].[emp_Id] AS [emp_Id],
+    [V_Empleados].[per_Id] AS [per_Id],
+    [V_Empleados].[per_Nombres] AS [per_Nombres],
+    [V_Empleados].[per_Apellidos] AS [per_Apellidos],
+    [V_Empleados].[per_NombreCompleto] AS [per_NombreCompleto],
     [V_Empleados].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_Empleados] AS [V_Empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialAmonestacion].[emp_Id] AS [emp_Id], 
-    [V_HistorialAmonestacion].[emp_Nombre] AS [emp_Nombre], 
-    [V_HistorialAmonestacion].[emp_Estado] AS [emp_Estado], 
-    [V_HistorialAmonestacion].[tamo_Id] AS [tamo_Id], 
-    [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion], 
-    [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id], 
-    [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha], 
-    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior], 
-    [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion], 
-    [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado], 
-    [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo], 
-    [V_HistorialAmonestacion].[hamo_UsuarioCrea] AS [hamo_UsuarioCrea], 
-    [V_HistorialAmonestacion].[hamo_FechaCrea] AS [hamo_FechaCrea], 
-    [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_HistorialAmonestacion].[emp_Id] AS [emp_Id],
+    [V_HistorialAmonestacion].[emp_Nombre] AS [emp_Nombre],
+    [V_HistorialAmonestacion].[emp_Estado] AS [emp_Estado],
+    [V_HistorialAmonestacion].[tamo_Id] AS [tamo_Id],
+    [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion],
+    [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id],
+    [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha],
+    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior],
+    [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion],
+    [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado],
+    [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo],
+    [V_HistorialAmonestacion].[hamo_UsuarioCrea] AS [hamo_UsuarioCrea],
+    [V_HistorialAmonestacion].[hamo_FechaCrea] AS [hamo_FechaCrea],
+    [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica],
     [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
     FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialAudienciaDescargo" EntityType="Self.V_HistorialAudienciaDescargo" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialAudienciaDescargo].[aude_Id] AS [aude_Id], 
-    [V_HistorialAudienciaDescargo].[emp_Id] AS [emp_Id], 
-    [V_HistorialAudienciaDescargo].[emp_Nombre] AS [emp_Nombre], 
-    [V_HistorialAudienciaDescargo].[emp_Estado] AS [emp_Estado], 
-    [V_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion], 
-    [V_HistorialAudienciaDescargo].[aude_FechaAudiencia] AS [aude_FechaAudiencia], 
-    [V_HistorialAudienciaDescargo].[aude_Testigo] AS [aude_Testigo], 
-    [V_HistorialAudienciaDescargo].[aude_DireccionArchivo] AS [aude_DireccionArchivo], 
-    [V_HistorialAudienciaDescargo].[aude_Estado] AS [aude_Estado], 
-    [V_HistorialAudienciaDescargo].[aude_RazonInactivo] AS [aude_RazonInactivo], 
-    [V_HistorialAudienciaDescargo].[aude_UsuarioCrea] AS [aude_UsuarioCrea], 
-    [V_HistorialAudienciaDescargo].[aude_FechaCrea] AS [aude_FechaCrea], 
-    [V_HistorialAudienciaDescargo].[aude_UsuarioModifica] AS [aude_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_HistorialAudienciaDescargo].[aude_Id] AS [aude_Id],
+    [V_HistorialAudienciaDescargo].[emp_Id] AS [emp_Id],
+    [V_HistorialAudienciaDescargo].[emp_Nombre] AS [emp_Nombre],
+    [V_HistorialAudienciaDescargo].[emp_Estado] AS [emp_Estado],
+    [V_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion],
+    [V_HistorialAudienciaDescargo].[aude_FechaAudiencia] AS [aude_FechaAudiencia],
+    [V_HistorialAudienciaDescargo].[aude_Testigo] AS [aude_Testigo],
+    [V_HistorialAudienciaDescargo].[aude_DireccionArchivo] AS [aude_DireccionArchivo],
+    [V_HistorialAudienciaDescargo].[aude_Estado] AS [aude_Estado],
+    [V_HistorialAudienciaDescargo].[aude_RazonInactivo] AS [aude_RazonInactivo],
+    [V_HistorialAudienciaDescargo].[aude_UsuarioCrea] AS [aude_UsuarioCrea],
+    [V_HistorialAudienciaDescargo].[aude_FechaCrea] AS [aude_FechaCrea],
+    [V_HistorialAudienciaDescargo].[aude_UsuarioModifica] AS [aude_UsuarioModifica],
     [V_HistorialAudienciaDescargo].[aude_FechaModifica] AS [aude_FechaModifica]
     FROM [rrhh].[V_HistorialAudienciaDescargo] AS [V_HistorialAudienciaDescargo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialCargos" EntityType="Self.V_HistorialCargos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialCargos].[hcar_Id] AS [hcar_Id], 
-    [V_HistorialCargos].[Nombre Completo] AS [Nombre Completo], 
-    [V_HistorialCargos].[CargoAnterior] AS [CargoAnterior], 
-    [V_HistorialCargos].[CargoNuevo] AS [CargoNuevo], 
-    [V_HistorialCargos].[Fecha de Historial] AS [Fecha de Historial], 
-    [V_HistorialCargos].[Usuario Crea] AS [Usuario Crea], 
-    [V_HistorialCargos].[Fecha Crea] AS [Fecha Crea], 
-    [V_HistorialCargos].[Usuario Modifica] AS [Usuario Modifica], 
+            <DefiningQuery>SELECT
+    [V_HistorialCargos].[hcar_Id] AS [hcar_Id],
+    [V_HistorialCargos].[Nombre Completo] AS [Nombre Completo],
+    [V_HistorialCargos].[CargoAnterior] AS [CargoAnterior],
+    [V_HistorialCargos].[CargoNuevo] AS [CargoNuevo],
+    [V_HistorialCargos].[Fecha de Historial] AS [Fecha de Historial],
+    [V_HistorialCargos].[Usuario Crea] AS [Usuario Crea],
+    [V_HistorialCargos].[Fecha Crea] AS [Fecha Crea],
+    [V_HistorialCargos].[Usuario Modifica] AS [Usuario Modifica],
     [V_HistorialCargos].[Fecha Modifica] AS [Fecha Modifica]
     FROM [rrhh].[V_HistorialCargos] AS [V_HistorialCargos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialContrataciones" EntityType="Self.V_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialContrataciones].[Id] AS [Id], 
-    [V_HistorialContrataciones].[IdEmpleado] AS [IdEmpleado], 
-    [V_HistorialContrataciones].[Nombre Completo] AS [Nombre Completo], 
-    [V_HistorialContrataciones].[Departamento] AS [Departamento], 
-    [V_HistorialContrataciones].[Area] AS [Area], 
-    [V_HistorialContrataciones].[Cargo] AS [Cargo], 
-    [V_HistorialContrataciones].[Fecha Seleccion Candidato] AS [Fecha Seleccion Candidato], 
-    [V_HistorialContrataciones].[Fecha Contrato] AS [Fecha Contrato], 
-    [V_HistorialContrataciones].[Usuario Crea] AS [Usuario Crea], 
-    [V_HistorialContrataciones].[Fecha Crea] AS [Fecha Crea], 
-    [V_HistorialContrataciones].[Usuario Modifica] AS [Usuario Modifica], 
+            <DefiningQuery>SELECT
+    [V_HistorialContrataciones].[Id] AS [Id],
+    [V_HistorialContrataciones].[IdEmpleado] AS [IdEmpleado],
+    [V_HistorialContrataciones].[Nombre Completo] AS [Nombre Completo],
+    [V_HistorialContrataciones].[Departamento] AS [Departamento],
+    [V_HistorialContrataciones].[Area] AS [Area],
+    [V_HistorialContrataciones].[Cargo] AS [Cargo],
+    [V_HistorialContrataciones].[Fecha Seleccion Candidato] AS [Fecha Seleccion Candidato],
+    [V_HistorialContrataciones].[Fecha Contrato] AS [Fecha Contrato],
+    [V_HistorialContrataciones].[Usuario Crea] AS [Usuario Crea],
+    [V_HistorialContrataciones].[Fecha Crea] AS [Fecha Crea],
+    [V_HistorialContrataciones].[Usuario Modifica] AS [Usuario Modifica],
     [V_HistorialContrataciones].[Fecha Modifica] AS [Fecha Modifica]
     FROM [rrhh].[V_HistorialContrataciones] AS [V_HistorialContrataciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialHorasTrabajadas" EntityType="Self.V_HistorialHorasTrabajadas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialHorasTrabajadas].[Id] AS [Id], 
-    [V_HistorialHorasTrabajadas].[Nombre Completo] AS [Nombre Completo], 
-    [V_HistorialHorasTrabajadas].[Departamento] AS [Departamento], 
-    [V_HistorialHorasTrabajadas].[Area] AS [Area], 
-    [V_HistorialHorasTrabajadas].[Cargo] AS [Cargo], 
-    [V_HistorialHorasTrabajadas].[Jornada] AS [Jornada], 
-    [V_HistorialHorasTrabajadas].[Tipo Horas] AS [Tipo Horas], 
-    [V_HistorialHorasTrabajadas].[Recargo] AS [Recargo], 
-    [V_HistorialHorasTrabajadas].[Fecha] AS [Fecha], 
-    [V_HistorialHorasTrabajadas].[Usuario Crea] AS [Usuario Crea], 
-    [V_HistorialHorasTrabajadas].[Fecha Crea] AS [Fecha Crea], 
-    [V_HistorialHorasTrabajadas].[Usuario Modifica] AS [Usuario Modifica], 
+            <DefiningQuery>SELECT
+    [V_HistorialHorasTrabajadas].[Id] AS [Id],
+    [V_HistorialHorasTrabajadas].[Nombre Completo] AS [Nombre Completo],
+    [V_HistorialHorasTrabajadas].[Departamento] AS [Departamento],
+    [V_HistorialHorasTrabajadas].[Area] AS [Area],
+    [V_HistorialHorasTrabajadas].[Cargo] AS [Cargo],
+    [V_HistorialHorasTrabajadas].[Jornada] AS [Jornada],
+    [V_HistorialHorasTrabajadas].[Tipo Horas] AS [Tipo Horas],
+    [V_HistorialHorasTrabajadas].[Recargo] AS [Recargo],
+    [V_HistorialHorasTrabajadas].[Fecha] AS [Fecha],
+    [V_HistorialHorasTrabajadas].[Usuario Crea] AS [Usuario Crea],
+    [V_HistorialHorasTrabajadas].[Fecha Crea] AS [Fecha Crea],
+    [V_HistorialHorasTrabajadas].[Usuario Modifica] AS [Usuario Modifica],
     [V_HistorialHorasTrabajadas].[Fecha Modifica] AS [Fecha Modifica]
     FROM [rrhh].[V_HistorialHorasTrabajadas] AS [V_HistorialHorasTrabajadas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialIncapacidades" EntityType="Self.V_HistorialIncapacidades" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialIncapacidades].[emp_Id] AS [emp_Id], 
-    [V_HistorialIncapacidades].[hinc_Id] AS [hinc_Id], 
-    [V_HistorialIncapacidades].[NombreCompleto] AS [NombreCompleto], 
-    [V_HistorialIncapacidades].[ticn_Id] AS [ticn_Id], 
-    [V_HistorialIncapacidades].[ticn_Descripcion] AS [ticn_Descripcion], 
-    [V_HistorialIncapacidades].[hinc_Dias] AS [hinc_Dias], 
-    [V_HistorialIncapacidades].[hinc_CentroMedico] AS [hinc_CentroMedico], 
-    [V_HistorialIncapacidades].[hinc_Doctor] AS [hinc_Doctor], 
-    [V_HistorialIncapacidades].[hinc_Diagnostico] AS [hinc_Diagnostico], 
-    [V_HistorialIncapacidades].[hinc_FechaInicio] AS [hinc_FechaInicio], 
-    [V_HistorialIncapacidades].[hinc_FechaFin] AS [hinc_FechaFin], 
-    [V_HistorialIncapacidades].[hinc_Estado] AS [hinc_Estado], 
+            <DefiningQuery>SELECT
+    [V_HistorialIncapacidades].[emp_Id] AS [emp_Id],
+    [V_HistorialIncapacidades].[hinc_Id] AS [hinc_Id],
+    [V_HistorialIncapacidades].[NombreCompleto] AS [NombreCompleto],
+    [V_HistorialIncapacidades].[ticn_Id] AS [ticn_Id],
+    [V_HistorialIncapacidades].[ticn_Descripcion] AS [ticn_Descripcion],
+    [V_HistorialIncapacidades].[hinc_Dias] AS [hinc_Dias],
+    [V_HistorialIncapacidades].[hinc_CentroMedico] AS [hinc_CentroMedico],
+    [V_HistorialIncapacidades].[hinc_Doctor] AS [hinc_Doctor],
+    [V_HistorialIncapacidades].[hinc_Diagnostico] AS [hinc_Diagnostico],
+    [V_HistorialIncapacidades].[hinc_FechaInicio] AS [hinc_FechaInicio],
+    [V_HistorialIncapacidades].[hinc_FechaFin] AS [hinc_FechaFin],
+    [V_HistorialIncapacidades].[hinc_Estado] AS [hinc_Estado],
     [V_HistorialIncapacidades].[hinc_RazonInactivo] AS [hinc_RazonInactivo]
     FROM [rrhh].[V_HistorialIncapacidades] AS [V_HistorialIncapacidades]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialPermisos_Empleados" EntityType="Self.V_HistorialPermisos_Empleados" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialPermisos_Empleados].[Id] AS [Id], 
-    [V_HistorialPermisos_Empleados].[Identidad] AS [Identidad], 
-    [V_HistorialPermisos_Empleados].[Nombre] AS [Nombre], 
-    [V_HistorialPermisos_Empleados].[Sexo] AS [Sexo], 
+            <DefiningQuery>SELECT
+    [V_HistorialPermisos_Empleados].[Id] AS [Id],
+    [V_HistorialPermisos_Empleados].[Identidad] AS [Identidad],
+    [V_HistorialPermisos_Empleados].[Nombre] AS [Nombre],
+    [V_HistorialPermisos_Empleados].[Sexo] AS [Sexo],
     [V_HistorialPermisos_Empleados].[Edad] AS [Edad]
     FROM [rrhh].[V_HistorialPermisos_Empleados] AS [V_HistorialPermisos_Empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialSalidas_Empleados" EntityType="Self.V_HistorialSalidas_Empleados" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HistorialSalidas_Empleados].[Id] AS [Id], 
-    [V_HistorialSalidas_Empleados].[Identidad] AS [Identidad], 
-    [V_HistorialSalidas_Empleados].[Nombre] AS [Nombre], 
-    [V_HistorialSalidas_Empleados].[Sexo] AS [Sexo], 
+            <DefiningQuery>SELECT
+    [V_HistorialSalidas_Empleados].[Id] AS [Id],
+    [V_HistorialSalidas_Empleados].[Identidad] AS [Identidad],
+    [V_HistorialSalidas_Empleados].[Nombre] AS [Nombre],
+    [V_HistorialSalidas_Empleados].[Sexo] AS [Sexo],
     [V_HistorialSalidas_Empleados].[Edad] AS [Edad]
     FROM [rrhh].[V_HistorialSalidas_Empleados] AS [V_HistorialSalidas_Empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Historialvacaciones" EntityType="Self.V_Historialvacaciones" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Historialvacaciones].[emp_Id] AS [emp_Id], 
-    [V_Historialvacaciones].[emp_nombre] AS [emp_nombre], 
-    [V_Historialvacaciones].[emp_Estado] AS [emp_Estado], 
-    [V_Historialvacaciones].[hvac_Id] AS [hvac_Id], 
-    [V_Historialvacaciones].[hvac_FechaInicio] AS [hvac_FechaInicio], 
-    [V_Historialvacaciones].[hvac_FechaFin] AS [hvac_FechaFin], 
-    [V_Historialvacaciones].[hvac_CantDias] AS [hvac_CantDias], 
-    [V_Historialvacaciones].[hvac_DiasPagados] AS [hvac_DiasPagados], 
-    [V_Historialvacaciones].[hvac_MesVacaciones] AS [hvac_MesVacaciones], 
-    [V_Historialvacaciones].[hvac_AnioVacaciones] AS [hvac_AnioVacaciones], 
-    [V_Historialvacaciones].[hvac_Estado] AS [hvac_Estado], 
-    [V_Historialvacaciones].[hvac_RazonInactivo] AS [hvac_RazonInactivo], 
-    [V_Historialvacaciones].[hvac_UsuarioCrea] AS [hvac_UsuarioCrea], 
-    [V_Historialvacaciones].[hvac_FechaCrea] AS [hvac_FechaCrea], 
-    [V_Historialvacaciones].[hvac_UsuarioModifica] AS [hvac_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_Historialvacaciones].[emp_Id] AS [emp_Id],
+    [V_Historialvacaciones].[emp_nombre] AS [emp_nombre],
+    [V_Historialvacaciones].[emp_Estado] AS [emp_Estado],
+    [V_Historialvacaciones].[hvac_Id] AS [hvac_Id],
+    [V_Historialvacaciones].[hvac_FechaInicio] AS [hvac_FechaInicio],
+    [V_Historialvacaciones].[hvac_FechaFin] AS [hvac_FechaFin],
+    [V_Historialvacaciones].[hvac_CantDias] AS [hvac_CantDias],
+    [V_Historialvacaciones].[hvac_DiasPagados] AS [hvac_DiasPagados],
+    [V_Historialvacaciones].[hvac_MesVacaciones] AS [hvac_MesVacaciones],
+    [V_Historialvacaciones].[hvac_AnioVacaciones] AS [hvac_AnioVacaciones],
+    [V_Historialvacaciones].[hvac_Estado] AS [hvac_Estado],
+    [V_Historialvacaciones].[hvac_RazonInactivo] AS [hvac_RazonInactivo],
+    [V_Historialvacaciones].[hvac_UsuarioCrea] AS [hvac_UsuarioCrea],
+    [V_Historialvacaciones].[hvac_FechaCrea] AS [hvac_FechaCrea],
+    [V_Historialvacaciones].[hvac_UsuarioModifica] AS [hvac_UsuarioModifica],
     [V_Historialvacaciones].[hvac_FechaModifica] AS [hvac_FechaModifica]
     FROM [rrhh].[V_Historialvacaciones] AS [V_Historialvacaciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HorariosDetalles" EntityType="Self.V_HorariosDetalles" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HorariosDetalles].[hor_Id] AS [hor_Id], 
-    [V_HorariosDetalles].[jor_Id] AS [jor_Id], 
-    [V_HorariosDetalles].[hor_Descripcion] AS [hor_Descripcion], 
-    [V_HorariosDetalles].[hor_HoraInicio] AS [hor_HoraInicio], 
-    [V_HorariosDetalles].[hor_HoraFin] AS [hor_HoraFin], 
-    [V_HorariosDetalles].[hor_CantidadHoras] AS [hor_CantidadHoras], 
-    [V_HorariosDetalles].[hor_Estado] AS [hor_Estado], 
-    [V_HorariosDetalles].[hor_RazonInactivo] AS [hor_RazonInactivo], 
-    [V_HorariosDetalles].[hor_UsuarioCrea] AS [hor_UsuarioCrea], 
-    [V_HorariosDetalles].[hor_FechaCrea] AS [hor_FechaCrea], 
-    [V_HorariosDetalles].[hor_UsuarioModifica] AS [hor_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_HorariosDetalles].[hor_Id] AS [hor_Id],
+    [V_HorariosDetalles].[jor_Id] AS [jor_Id],
+    [V_HorariosDetalles].[hor_Descripcion] AS [hor_Descripcion],
+    [V_HorariosDetalles].[hor_HoraInicio] AS [hor_HoraInicio],
+    [V_HorariosDetalles].[hor_HoraFin] AS [hor_HoraFin],
+    [V_HorariosDetalles].[hor_CantidadHoras] AS [hor_CantidadHoras],
+    [V_HorariosDetalles].[hor_Estado] AS [hor_Estado],
+    [V_HorariosDetalles].[hor_RazonInactivo] AS [hor_RazonInactivo],
+    [V_HorariosDetalles].[hor_UsuarioCrea] AS [hor_UsuarioCrea],
+    [V_HorariosDetalles].[hor_FechaCrea] AS [hor_FechaCrea],
+    [V_HorariosDetalles].[hor_UsuarioModifica] AS [hor_UsuarioModifica],
     [V_HorariosDetalles].[hor_FechaModifica] AS [hor_FechaModifica]
     FROM [rrhh].[V_HorariosDetalles] AS [V_HorariosDetalles]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HVacacionesEmpleados" EntityType="Self.V_HVacacionesEmpleados" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HVacacionesEmpleados].[emp_Id] AS [emp_Id], 
-    [V_HVacacionesEmpleados].[emp_NombreCompleto] AS [emp_NombreCompleto], 
-    [V_HVacacionesEmpleados].[car_Id] AS [car_Id], 
-    [V_HVacacionesEmpleados].[car_Descripcion] AS [car_Descripcion], 
-    [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id], 
-    [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_HVacacionesEmpleados].[emp_Id] AS [emp_Id],
+    [V_HVacacionesEmpleados].[emp_NombreCompleto] AS [emp_NombreCompleto],
+    [V_HVacacionesEmpleados].[car_Id] AS [car_Id],
+    [V_HVacacionesEmpleados].[car_Descripcion] AS [car_Descripcion],
+    [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id],
+    [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion],
     [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_SeleccionCandidatos].[Id] AS [Id], 
-    [V_SeleccionCandidatos].[IdPersona] AS [IdPersona], 
-    [V_SeleccionCandidatos].[Identidad] AS [Identidad], 
-    [V_SeleccionCandidatos].[Nombre] AS [Nombre], 
-    [V_SeleccionCandidatos].[FaseReclutamientoId] AS [FaseReclutamientoId], 
-    [V_SeleccionCandidatos].[Fase] AS [Fase], 
-    [V_SeleccionCandidatos].[RequisionId] AS [RequisionId], 
-    [V_SeleccionCandidatos].[Plaza_Solicitada] AS [Plaza_Solicitada], 
-    [V_SeleccionCandidatos].[Fecha] AS [Fecha], 
-    [V_SeleccionCandidatos].[Fecha_Crea] AS [Fecha_Crea], 
-    [V_SeleccionCandidatos].[Usuario_Crea] AS [Usuario_Crea], 
-    [V_SeleccionCandidatos].[Fecha_Modifica] AS [Fecha_Modifica], 
-    [V_SeleccionCandidatos].[Usuario_Modifica] AS [Usuario_Modifica], 
-    [V_SeleccionCandidatos].[Estado] AS [Estado], 
+            <DefiningQuery>SELECT
+    [V_SeleccionCandidatos].[Id] AS [Id],
+    [V_SeleccionCandidatos].[IdPersona] AS [IdPersona],
+    [V_SeleccionCandidatos].[Identidad] AS [Identidad],
+    [V_SeleccionCandidatos].[Nombre] AS [Nombre],
+    [V_SeleccionCandidatos].[FaseReclutamientoId] AS [FaseReclutamientoId],
+    [V_SeleccionCandidatos].[Fase] AS [Fase],
+    [V_SeleccionCandidatos].[RequisionId] AS [RequisionId],
+    [V_SeleccionCandidatos].[Plaza_Solicitada] AS [Plaza_Solicitada],
+    [V_SeleccionCandidatos].[Fecha] AS [Fecha],
+    [V_SeleccionCandidatos].[Fecha_Crea] AS [Fecha_Crea],
+    [V_SeleccionCandidatos].[Usuario_Crea] AS [Usuario_Crea],
+    [V_SeleccionCandidatos].[Fecha_Modifica] AS [Fecha_Modifica],
+    [V_SeleccionCandidatos].[Usuario_Modifica] AS [Usuario_Modifica],
+    [V_SeleccionCandidatos].[Estado] AS [Estado],
     [V_SeleccionCandidatos].[Razon_Inactivo] AS [Razon_Inactivo]
     FROM [rrhh].[V_SeleccionCandidatos] AS [V_SeleccionCandidatos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Sueldos" EntityType="Self.V_Sueldos" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_Sueldos].[Id] AS [Id], 
-    [V_Sueldos].[Id_Empleado] AS [Id_Empleado], 
-    [V_Sueldos].[Id_Amonestacion] AS [Id_Amonestacion], 
-    [V_Sueldos].[Identidad] AS [Identidad], 
-    [V_Sueldos].[Nombre] AS [Nombre], 
-    [V_Sueldos].[Sueldo] AS [Sueldo], 
-    [V_Sueldos].[Tipo_Moneda] AS [Tipo_Moneda], 
-    [V_Sueldos].[Cuenta] AS [Cuenta], 
-    [V_Sueldos].[Sueldo_Anterior] AS [Sueldo_Anterior], 
-    [V_Sueldos].[Area] AS [Area], 
-    [V_Sueldos].[Cargo] AS [Cargo], 
-    [V_Sueldos].[Usuario_Nombre] AS [Usuario_Nombre], 
-    [V_Sueldos].[Usuario_Crea] AS [Usuario_Crea], 
-    [V_Sueldos].[Fecha_Crea] AS [Fecha_Crea], 
-    [V_Sueldos].[Usuario_Modifica] AS [Usuario_Modifica], 
-    [V_Sueldos].[Fecha_Modifica] AS [Fecha_Modifica], 
-    [V_Sueldos].[Estado] AS [Estado], 
+            <DefiningQuery>SELECT
+    [V_Sueldos].[Id] AS [Id],
+    [V_Sueldos].[Id_Empleado] AS [Id_Empleado],
+    [V_Sueldos].[Id_Amonestacion] AS [Id_Amonestacion],
+    [V_Sueldos].[Identidad] AS [Identidad],
+    [V_Sueldos].[Nombre] AS [Nombre],
+    [V_Sueldos].[Sueldo] AS [Sueldo],
+    [V_Sueldos].[Tipo_Moneda] AS [Tipo_Moneda],
+    [V_Sueldos].[Cuenta] AS [Cuenta],
+    [V_Sueldos].[Sueldo_Anterior] AS [Sueldo_Anterior],
+    [V_Sueldos].[Area] AS [Area],
+    [V_Sueldos].[Cargo] AS [Cargo],
+    [V_Sueldos].[Usuario_Nombre] AS [Usuario_Nombre],
+    [V_Sueldos].[Usuario_Crea] AS [Usuario_Crea],
+    [V_Sueldos].[Fecha_Crea] AS [Fecha_Crea],
+    [V_Sueldos].[Usuario_Modifica] AS [Usuario_Modifica],
+    [V_Sueldos].[Fecha_Modifica] AS [Fecha_Modifica],
+    [V_Sueldos].[Estado] AS [Estado],
     [V_Sueldos].[RazonInactivo] AS [RazonInactivo]
     FROM [rrhh].[V_Sueldos] AS [V_Sueldos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbEmpleados].[NombreCompleto] AS [NombreCompleto], 
-    [V_tbEmpleados].[emp_Id] AS [emp_Id], 
-    [V_tbEmpleados].[per_Id] AS [per_Id], 
-    [V_tbEmpleados].[car_Id] AS [car_Id], 
-    [V_tbEmpleados].[area_Id] AS [area_Id], 
-    [V_tbEmpleados].[depto_Id] AS [depto_Id], 
-    [V_tbEmpleados].[jor_Id] AS [jor_Id], 
-    [V_tbEmpleados].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_tbEmpleados].[fpa_IdFormaPago] AS [fpa_IdFormaPago], 
-    [V_tbEmpleados].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_tbEmpleados].[emp_Reingreso] AS [emp_Reingreso], 
-    [V_tbEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso], 
-    [V_tbEmpleados].[emp_RazonSalida] AS [emp_RazonSalida], 
-    [V_tbEmpleados].[emp_CargoAnterior] AS [emp_CargoAnterior], 
-    [V_tbEmpleados].[emp_FechaDeSalida] AS [emp_FechaDeSalida], 
-    [V_tbEmpleados].[emp_Estado] AS [emp_Estado], 
-    [V_tbEmpleados].[emp_RazonInactivo] AS [emp_RazonInactivo], 
-    [V_tbEmpleados].[emp_UsuarioCrea] AS [emp_UsuarioCrea], 
-    [V_tbEmpleados].[emp_FechaCrea] AS [emp_FechaCrea], 
-    [V_tbEmpleados].[emp_UsuarioModifica] AS [emp_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_tbEmpleados].[NombreCompleto] AS [NombreCompleto],
+    [V_tbEmpleados].[emp_Id] AS [emp_Id],
+    [V_tbEmpleados].[per_Id] AS [per_Id],
+    [V_tbEmpleados].[car_Id] AS [car_Id],
+    [V_tbEmpleados].[area_Id] AS [area_Id],
+    [V_tbEmpleados].[depto_Id] AS [depto_Id],
+    [V_tbEmpleados].[jor_Id] AS [jor_Id],
+    [V_tbEmpleados].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_tbEmpleados].[fpa_IdFormaPago] AS [fpa_IdFormaPago],
+    [V_tbEmpleados].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_tbEmpleados].[emp_Reingreso] AS [emp_Reingreso],
+    [V_tbEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso],
+    [V_tbEmpleados].[emp_RazonSalida] AS [emp_RazonSalida],
+    [V_tbEmpleados].[emp_CargoAnterior] AS [emp_CargoAnterior],
+    [V_tbEmpleados].[emp_FechaDeSalida] AS [emp_FechaDeSalida],
+    [V_tbEmpleados].[emp_Estado] AS [emp_Estado],
+    [V_tbEmpleados].[emp_RazonInactivo] AS [emp_RazonInactivo],
+    [V_tbEmpleados].[emp_UsuarioCrea] AS [emp_UsuarioCrea],
+    [V_tbEmpleados].[emp_FechaCrea] AS [emp_FechaCrea],
+    [V_tbEmpleados].[emp_UsuarioModifica] AS [emp_UsuarioModifica],
     [V_tbEmpleados].[emp_FechaModifica] AS [emp_FechaModifica]
     FROM [rrhh].[V_tbEmpleados] AS [V_tbEmpleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbHistorialPermisos_completa" EntityType="Self.V_tbHistorialPermisos_completa" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialPermisos_completa].[per_Id] AS [per_Id], 
-    [V_tbHistorialPermisos_completa].[per_Identidad] AS [per_Identidad], 
-    [V_tbHistorialPermisos_completa].[per_Nombres] AS [per_Nombres], 
-    [V_tbHistorialPermisos_completa].[per_Apellidos] AS [per_Apellidos], 
-    [V_tbHistorialPermisos_completa].[per_FechaNacimiento] AS [per_FechaNacimiento], 
-    [V_tbHistorialPermisos_completa].[per_Sexo] AS [per_Sexo], 
-    [V_tbHistorialPermisos_completa].[per_Edad] AS [per_Edad], 
-    [V_tbHistorialPermisos_completa].[nac_Id] AS [nac_Id], 
-    [V_tbHistorialPermisos_completa].[per_Direccion] AS [per_Direccion], 
-    [V_tbHistorialPermisos_completa].[per_Telefono] AS [per_Telefono], 
-    [V_tbHistorialPermisos_completa].[per_CorreoElectronico] AS [per_CorreoElectronico], 
-    [V_tbHistorialPermisos_completa].[per_EstadoCivil] AS [per_EstadoCivil], 
-    [V_tbHistorialPermisos_completa].[per_TipoSangre] AS [per_TipoSangre], 
-    [V_tbHistorialPermisos_completa].[per_Estado] AS [per_Estado], 
-    [V_tbHistorialPermisos_completa].[per_RazonInactivo] AS [per_RazonInactivo], 
-    [V_tbHistorialPermisos_completa].[per_UsuarioCrea] AS [per_UsuarioCrea], 
-    [V_tbHistorialPermisos_completa].[per_FechaCrea] AS [per_FechaCrea], 
-    [V_tbHistorialPermisos_completa].[per_UsuarioModifica] AS [per_UsuarioModifica], 
-    [V_tbHistorialPermisos_completa].[per_FechaModifica] AS [per_FechaModifica], 
-    [V_tbHistorialPermisos_completa].[hper_Id] AS [hper_Id], 
-    [V_tbHistorialPermisos_completa].[tper_Descripcion] AS [tper_Descripcion], 
-    [V_tbHistorialPermisos_completa].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialPermisos_completa].[tper_Id] AS [tper_Id], 
-    [V_tbHistorialPermisos_completa].[hper_fechaInicio] AS [hper_fechaInicio], 
-    [V_tbHistorialPermisos_completa].[hper_fechaFin] AS [hper_fechaFin], 
-    [V_tbHistorialPermisos_completa].[hper_Duracion] AS [hper_Duracion], 
-    [V_tbHistorialPermisos_completa].[hper_Observacion] AS [hper_Observacion], 
-    [V_tbHistorialPermisos_completa].[hper_Justificado] AS [hper_Justificado], 
-    [V_tbHistorialPermisos_completa].[hper_PorcentajeIndemnizado] AS [hper_PorcentajeIndemnizado], 
-    [V_tbHistorialPermisos_completa].[hper_Estado] AS [hper_Estado], 
-    [V_tbHistorialPermisos_completa].[hper_RazonInactivo] AS [hper_RazonInactivo], 
-    [V_tbHistorialPermisos_completa].[hper_FechaCrea] AS [hper_FechaCrea], 
-    [V_tbHistorialPermisos_completa].[hper_UsuarioModifica] AS [hper_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_tbHistorialPermisos_completa].[per_Id] AS [per_Id],
+    [V_tbHistorialPermisos_completa].[per_Identidad] AS [per_Identidad],
+    [V_tbHistorialPermisos_completa].[per_Nombres] AS [per_Nombres],
+    [V_tbHistorialPermisos_completa].[per_Apellidos] AS [per_Apellidos],
+    [V_tbHistorialPermisos_completa].[per_FechaNacimiento] AS [per_FechaNacimiento],
+    [V_tbHistorialPermisos_completa].[per_Sexo] AS [per_Sexo],
+    [V_tbHistorialPermisos_completa].[per_Edad] AS [per_Edad],
+    [V_tbHistorialPermisos_completa].[nac_Id] AS [nac_Id],
+    [V_tbHistorialPermisos_completa].[per_Direccion] AS [per_Direccion],
+    [V_tbHistorialPermisos_completa].[per_Telefono] AS [per_Telefono],
+    [V_tbHistorialPermisos_completa].[per_CorreoElectronico] AS [per_CorreoElectronico],
+    [V_tbHistorialPermisos_completa].[per_EstadoCivil] AS [per_EstadoCivil],
+    [V_tbHistorialPermisos_completa].[per_TipoSangre] AS [per_TipoSangre],
+    [V_tbHistorialPermisos_completa].[per_Estado] AS [per_Estado],
+    [V_tbHistorialPermisos_completa].[per_RazonInactivo] AS [per_RazonInactivo],
+    [V_tbHistorialPermisos_completa].[per_UsuarioCrea] AS [per_UsuarioCrea],
+    [V_tbHistorialPermisos_completa].[per_FechaCrea] AS [per_FechaCrea],
+    [V_tbHistorialPermisos_completa].[per_UsuarioModifica] AS [per_UsuarioModifica],
+    [V_tbHistorialPermisos_completa].[per_FechaModifica] AS [per_FechaModifica],
+    [V_tbHistorialPermisos_completa].[hper_Id] AS [hper_Id],
+    [V_tbHistorialPermisos_completa].[tper_Descripcion] AS [tper_Descripcion],
+    [V_tbHistorialPermisos_completa].[emp_Id] AS [emp_Id],
+    [V_tbHistorialPermisos_completa].[tper_Id] AS [tper_Id],
+    [V_tbHistorialPermisos_completa].[hper_fechaInicio] AS [hper_fechaInicio],
+    [V_tbHistorialPermisos_completa].[hper_fechaFin] AS [hper_fechaFin],
+    [V_tbHistorialPermisos_completa].[hper_Duracion] AS [hper_Duracion],
+    [V_tbHistorialPermisos_completa].[hper_Observacion] AS [hper_Observacion],
+    [V_tbHistorialPermisos_completa].[hper_Justificado] AS [hper_Justificado],
+    [V_tbHistorialPermisos_completa].[hper_PorcentajeIndemnizado] AS [hper_PorcentajeIndemnizado],
+    [V_tbHistorialPermisos_completa].[hper_Estado] AS [hper_Estado],
+    [V_tbHistorialPermisos_completa].[hper_RazonInactivo] AS [hper_RazonInactivo],
+    [V_tbHistorialPermisos_completa].[hper_FechaCrea] AS [hper_FechaCrea],
+    [V_tbHistorialPermisos_completa].[hper_UsuarioModifica] AS [hper_UsuarioModifica],
     [V_tbHistorialPermisos_completa].[hper_FechaModifica] AS [hper_FechaModifica]
     FROM [rrhh].[V_tbHistorialPermisos_completa] AS [V_tbHistorialPermisos_completa]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbHistorialSalidas" EntityType="Self.V_tbHistorialSalidas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialSalidas].[hsal_Id] AS [hsal_Id], 
-    [V_tbHistorialSalidas].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialSalidas].[tsal_Id] AS [tsal_Id], 
-    [V_tbHistorialSalidas].[rsal_Id] AS [rsal_Id], 
-    [V_tbHistorialSalidas].[hsal_FechaSalida] AS [hsal_FechaSalida], 
-    [V_tbHistorialSalidas].[hsal_Observacion] AS [hsal_Observacion], 
-    [V_tbHistorialSalidas].[hsal_Estado] AS [hsal_Estado], 
-    [V_tbHistorialSalidas].[hsal_RazonInactivo] AS [hsal_RazonInactivo], 
-    [V_tbHistorialSalidas].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea], 
-    [V_tbHistorialSalidas].[hsal_FechaCrea] AS [hsal_FechaCrea], 
-    [V_tbHistorialSalidas].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_tbHistorialSalidas].[hsal_Id] AS [hsal_Id],
+    [V_tbHistorialSalidas].[emp_Id] AS [emp_Id],
+    [V_tbHistorialSalidas].[tsal_Id] AS [tsal_Id],
+    [V_tbHistorialSalidas].[rsal_Id] AS [rsal_Id],
+    [V_tbHistorialSalidas].[hsal_FechaSalida] AS [hsal_FechaSalida],
+    [V_tbHistorialSalidas].[hsal_Observacion] AS [hsal_Observacion],
+    [V_tbHistorialSalidas].[hsal_Estado] AS [hsal_Estado],
+    [V_tbHistorialSalidas].[hsal_RazonInactivo] AS [hsal_RazonInactivo],
+    [V_tbHistorialSalidas].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea],
+    [V_tbHistorialSalidas].[hsal_FechaCrea] AS [hsal_FechaCrea],
+    [V_tbHistorialSalidas].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica],
     [V_tbHistorialSalidas].[hsal_FechaModifica] AS [hsal_FechaModifica]
     FROM [rrhh].[V_tbHistorialSalidas] AS [V_tbHistorialSalidas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbHistorialSalidas_completa" EntityType="Self.V_tbHistorialSalidas_completa" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbHistorialSalidas_completa].[tsal_Descripcion] AS [tsal_Descripcion], 
-    [V_tbHistorialSalidas_completa].[rsal_Descripcion] AS [rsal_Descripcion], 
-    [V_tbHistorialSalidas_completa].[per_Id] AS [per_Id], 
-    [V_tbHistorialSalidas_completa].[per_Identidad] AS [per_Identidad], 
-    [V_tbHistorialSalidas_completa].[per_Nombres] AS [per_Nombres], 
-    [V_tbHistorialSalidas_completa].[per_Apellidos] AS [per_Apellidos], 
-    [V_tbHistorialSalidas_completa].[per_FechaNacimiento] AS [per_FechaNacimiento], 
-    [V_tbHistorialSalidas_completa].[per_Sexo] AS [per_Sexo], 
-    [V_tbHistorialSalidas_completa].[per_Edad] AS [per_Edad], 
-    [V_tbHistorialSalidas_completa].[nac_Id] AS [nac_Id], 
-    [V_tbHistorialSalidas_completa].[per_Direccion] AS [per_Direccion], 
-    [V_tbHistorialSalidas_completa].[per_Telefono] AS [per_Telefono], 
-    [V_tbHistorialSalidas_completa].[per_CorreoElectronico] AS [per_CorreoElectronico], 
-    [V_tbHistorialSalidas_completa].[per_EstadoCivil] AS [per_EstadoCivil], 
-    [V_tbHistorialSalidas_completa].[per_TipoSangre] AS [per_TipoSangre], 
-    [V_tbHistorialSalidas_completa].[per_Estado] AS [per_Estado], 
-    [V_tbHistorialSalidas_completa].[per_RazonInactivo] AS [per_RazonInactivo], 
-    [V_tbHistorialSalidas_completa].[per_UsuarioCrea] AS [per_UsuarioCrea], 
-    [V_tbHistorialSalidas_completa].[per_FechaCrea] AS [per_FechaCrea], 
-    [V_tbHistorialSalidas_completa].[per_UsuarioModifica] AS [per_UsuarioModifica], 
-    [V_tbHistorialSalidas_completa].[per_FechaModifica] AS [per_FechaModifica], 
-    [V_tbHistorialSalidas_completa].[hsal_Id] AS [hsal_Id], 
-    [V_tbHistorialSalidas_completa].[emp_Id] AS [emp_Id], 
-    [V_tbHistorialSalidas_completa].[tsal_Id] AS [tsal_Id], 
-    [V_tbHistorialSalidas_completa].[rsal_Id] AS [rsal_Id], 
-    [V_tbHistorialSalidas_completa].[hsal_FechaSalida] AS [hsal_FechaSalida], 
-    [V_tbHistorialSalidas_completa].[hsal_Observacion] AS [hsal_Observacion], 
-    [V_tbHistorialSalidas_completa].[hsal_Estado] AS [hsal_Estado], 
-    [V_tbHistorialSalidas_completa].[hsal_RazonInactivo] AS [hsal_RazonInactivo], 
-    [V_tbHistorialSalidas_completa].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea], 
-    [V_tbHistorialSalidas_completa].[hsal_FechaCrea] AS [hsal_FechaCrea], 
-    [V_tbHistorialSalidas_completa].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_tbHistorialSalidas_completa].[tsal_Descripcion] AS [tsal_Descripcion],
+    [V_tbHistorialSalidas_completa].[rsal_Descripcion] AS [rsal_Descripcion],
+    [V_tbHistorialSalidas_completa].[per_Id] AS [per_Id],
+    [V_tbHistorialSalidas_completa].[per_Identidad] AS [per_Identidad],
+    [V_tbHistorialSalidas_completa].[per_Nombres] AS [per_Nombres],
+    [V_tbHistorialSalidas_completa].[per_Apellidos] AS [per_Apellidos],
+    [V_tbHistorialSalidas_completa].[per_FechaNacimiento] AS [per_FechaNacimiento],
+    [V_tbHistorialSalidas_completa].[per_Sexo] AS [per_Sexo],
+    [V_tbHistorialSalidas_completa].[per_Edad] AS [per_Edad],
+    [V_tbHistorialSalidas_completa].[nac_Id] AS [nac_Id],
+    [V_tbHistorialSalidas_completa].[per_Direccion] AS [per_Direccion],
+    [V_tbHistorialSalidas_completa].[per_Telefono] AS [per_Telefono],
+    [V_tbHistorialSalidas_completa].[per_CorreoElectronico] AS [per_CorreoElectronico],
+    [V_tbHistorialSalidas_completa].[per_EstadoCivil] AS [per_EstadoCivil],
+    [V_tbHistorialSalidas_completa].[per_TipoSangre] AS [per_TipoSangre],
+    [V_tbHistorialSalidas_completa].[per_Estado] AS [per_Estado],
+    [V_tbHistorialSalidas_completa].[per_RazonInactivo] AS [per_RazonInactivo],
+    [V_tbHistorialSalidas_completa].[per_UsuarioCrea] AS [per_UsuarioCrea],
+    [V_tbHistorialSalidas_completa].[per_FechaCrea] AS [per_FechaCrea],
+    [V_tbHistorialSalidas_completa].[per_UsuarioModifica] AS [per_UsuarioModifica],
+    [V_tbHistorialSalidas_completa].[per_FechaModifica] AS [per_FechaModifica],
+    [V_tbHistorialSalidas_completa].[hsal_Id] AS [hsal_Id],
+    [V_tbHistorialSalidas_completa].[emp_Id] AS [emp_Id],
+    [V_tbHistorialSalidas_completa].[tsal_Id] AS [tsal_Id],
+    [V_tbHistorialSalidas_completa].[rsal_Id] AS [rsal_Id],
+    [V_tbHistorialSalidas_completa].[hsal_FechaSalida] AS [hsal_FechaSalida],
+    [V_tbHistorialSalidas_completa].[hsal_Observacion] AS [hsal_Observacion],
+    [V_tbHistorialSalidas_completa].[hsal_Estado] AS [hsal_Estado],
+    [V_tbHistorialSalidas_completa].[hsal_RazonInactivo] AS [hsal_RazonInactivo],
+    [V_tbHistorialSalidas_completa].[hsal_UsuarioCrea] AS [hsal_UsuarioCrea],
+    [V_tbHistorialSalidas_completa].[hsal_FechaCrea] AS [hsal_FechaCrea],
+    [V_tbHistorialSalidas_completa].[hsal_UsuarioModifica] AS [hsal_UsuarioModifica],
     [V_tbHistorialSalidas_completa].[hsal_FechaModifica] AS [hsal_FechaModifica]
     FROM [rrhh].[V_tbHistorialSalidas_completa] AS [V_tbHistorialSalidas_completa]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbPersonas].[per_Id] AS [per_Id], 
-    [V_tbPersonas].[Relacion_Id] AS [Relacion_Id], 
-    [V_tbPersonas].[Descripcion] AS [Descripcion], 
+            <DefiningQuery>SELECT
+    [V_tbPersonas].[per_Id] AS [per_Id],
+    [V_tbPersonas].[Relacion_Id] AS [Relacion_Id],
+    [V_tbPersonas].[Descripcion] AS [Descripcion],
     [V_tbPersonas].[Relacion] AS [Relacion]
     FROM [rrhh].[V_tbPersonas] AS [V_tbPersonas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbtiposalidas" EntityType="Self.V_tbtiposalidas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_tbtiposalidas].[tsal_Id] AS [tsal_Id], 
-    [V_tbtiposalidas].[tsal_Descripcion] AS [tsal_Descripcion], 
-    [V_tbtiposalidas].[tsal_Estado] AS [tsal_Estado], 
-    [V_tbtiposalidas].[tsal_RazonInactivo] AS [tsal_RazonInactivo], 
-    [V_tbtiposalidas].[tsal_UsuarioCrea] AS [tsal_UsuarioCrea], 
-    [V_tbtiposalidas].[tsal_FechaCrea] AS [tsal_FechaCrea], 
-    [V_tbtiposalidas].[tsal_UsuarioModifica] AS [tsal_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_tbtiposalidas].[tsal_Id] AS [tsal_Id],
+    [V_tbtiposalidas].[tsal_Descripcion] AS [tsal_Descripcion],
+    [V_tbtiposalidas].[tsal_Estado] AS [tsal_Estado],
+    [V_tbtiposalidas].[tsal_RazonInactivo] AS [tsal_RazonInactivo],
+    [V_tbtiposalidas].[tsal_UsuarioCrea] AS [tsal_UsuarioCrea],
+    [V_tbtiposalidas].[tsal_FechaCrea] AS [tsal_FechaCrea],
+    [V_tbtiposalidas].[tsal_UsuarioModifica] AS [tsal_UsuarioModifica],
     [V_tbtiposalidas].[tsal_FechaModifica] AS [tsal_FechaModifica]
     FROM [rrhh].[V_tbtiposalidas] AS [V_tbtiposalidas]</DefiningQuery>
           </EntitySet>
@@ -10953,7 +10953,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="treq_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="treq_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbPersonas_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbPersonas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update_Result)">
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_Identidad" Mode="In" Type="String" />
             <Parameter Name="per_Nombres" Mode="In" Type="String" />
@@ -12144,6 +12144,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbRequisiciones_Update_Result1">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbPersonas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>

@@ -744,6 +744,9 @@
     <Compile Include="Models\UDP_RRHH_tbPersonas_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbPersonas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbRazonSalidas_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

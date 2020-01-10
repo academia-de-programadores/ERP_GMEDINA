@@ -2,22 +2,12 @@
 
 
 @{
-    ViewBag.Title = "tipos de Monedas";
+    ViewBag.Title = "Monedas";
 
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 
 }
 
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Tipos de Monedas</h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -26,17 +16,14 @@
                 <div class="ibox-title">
                     <h5>Listado de Tipos de Monedas</h5>
                     <div class="ibox-tools">
-                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Tipo de Moneda" />
+                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Moneda" />
                     </div>
                 </div>
                 <div class="ibox-content">
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
-
-
                             <th>@Html.DisplayNameFor(model => model.tmon_Descripcion)</th>
-
                             <th>Acciones</th>
                         </tr>
                     </thead>

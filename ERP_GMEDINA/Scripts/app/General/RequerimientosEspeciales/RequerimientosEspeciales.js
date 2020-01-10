@@ -1,4 +1,5 @@
-﻿var id = 0;
+﻿
+var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -44,14 +45,16 @@ function llenarTabla() {
             }
             $.each(Lista, function (index, value) {
                 console.log(value.resp_Descripcion);
-                tabla.row.add([value.resp_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.resp_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.resp_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    ID: value.resp_Id,
+                    Descripción: value.resp_Descripcion,
+                }).draw();
             });
         });
 }
+$(document).ready(function () {
+    llenarTabla();
+});
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');

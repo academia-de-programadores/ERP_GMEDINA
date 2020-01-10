@@ -3433,7 +3433,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rrhh_tbTitulosRequisicion_Insert_Result>("rrhh_tbTitulosRequisicion_Insert", req_IdParameter, titu_IdParameter, treq_UsuarioCreaParameter, treq_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbPersonas_Update(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Update_Result> UDP_RRHH_tbPersonas_Update(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
         {
             var per_IdParameter = per_Id.HasValue ?
                 new ObjectParameter("per_Id", per_Id) :
@@ -3491,7 +3491,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("per_FechaModifica", per_FechaModifica) :
                 new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Update_Result>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbRequisiciones_Delete_Result1> UDP_RRHH_tbRequisiciones_Delete(Nullable<int> req_id, string req_razonInactivo, Nullable<int> req_UsuarioModifica, Nullable<System.DateTime> req_FechaModifica)
