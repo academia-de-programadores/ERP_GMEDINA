@@ -63,7 +63,8 @@ function cargarGridAcumuladosISR() {
 
 
                 template += '<tr data-id = "' + ListaAcumuladosISR[i].aisr_Id + '">' +
-                    '<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
+					'<td>' + ListaAcumuladosISR[i].aisr_Id + '</td>' +
+					'<td>' + ListaAcumuladosISR[i].aisr_Descripcion + '</td>' +
                     '<td>' + ListaAcumuladosISR[i].aisr_Monto + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +

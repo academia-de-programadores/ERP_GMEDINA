@@ -27,26 +27,26 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            //var tbTipoDeducciones = db.tbTipoDeduccion.ToList().Where(p => p.tde_Activo == true);
+			//var tbTipoDeducciones = db.tbTipoDeduccion.ToList().Where(p => p.tde_Activo == true);
 
-            //var tbPidoDedu = from d in db.tbTipoDeduccion
-            //                 where
+			//var tbPidoDedu = from d in db.tbTipoDeduccion
+			//                 where
 
-            var tbTipoDeducciones = db.tbTipoDeduccion
-                .Select(c => new
-                {
-                    tde_Descripcion = c.tde_Descripcion,
-                    tde_UsuarioCrea = c.tde_UsuarioCrea,
-                    NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
-                    tde_FechaCrea = c.tde_FechaCrea,
+			var tbTipoDeducciones = db.tbTipoDeduccion
+				.Select(c => new
+				{
+					tde_Descripcion = c.tde_Descripcion,
+					tde_UsuarioCrea = c.tde_UsuarioCrea,
+					NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
+					tde_FechaCrea = c.tde_FechaCrea,
 
-                    tde_UsuarioModifica = c.tde_UsuarioModifica,
-                    NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
-                    tde_FechaModifica = c.tde_FechaModifica,
-                    tde_IdTipoDedu = c.tde_IdTipoDedu,
-                    tde_Activo = c.tde_Activo
-                })
-                .OrderByDescending(c => c.tde_FechaCrea).ToList();
+					tde_UsuarioModifica = c.tde_UsuarioModifica,
+					NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
+					tde_FechaModifica = c.tde_FechaModifica,
+					tde_IdTipoDedu = c.tde_IdTipoDedu,
+					tde_Activo = c.tde_Activo
+				});
+                //.OrderByDescending(c => c.tde_FechaCrea).ToList();
 
             return new JsonResult { Data = tbTipoDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
