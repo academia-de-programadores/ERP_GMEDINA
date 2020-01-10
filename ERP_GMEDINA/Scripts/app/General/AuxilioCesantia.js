@@ -139,7 +139,7 @@ $('#btnCrearAuxCes').click(function ()
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    message: 'El registro se agregó de forma exitosa!',
                 });
             }
 
@@ -289,7 +289,7 @@ $("#btnUpdateAuxCes").click(function () {
 
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                    message: 'El registro se editó de forma exitosa!',
                 });
             }
         });
@@ -323,7 +323,7 @@ $("#btnEliminarAuxCes").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se logró eliminar el registro, contacte al administrador',
+                message: 'No se logró inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -333,7 +333,7 @@ $("#btnEliminarAuxCes").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue eliminado de forma exitosa!',
+                message: 'El registro se inactivó de forma exitosa!',
             });
         }
     });
