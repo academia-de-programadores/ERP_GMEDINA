@@ -47,7 +47,7 @@ function cargarGridComisiones() {
                 var botonEditar = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoComisiones">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaComisiones[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarEmpleadoComisiones">Activar</button>' : '' : '';
+                var botonActivar = ListaComisiones[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroComisiones">Activar</button>' : '' : '';
 
                 var FechaRegistro = FechaFormato(ListaComisiones[i].cc_FechaRegistro);
 
@@ -173,7 +173,7 @@ $("#btnUpdateComisiones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
+                message: 'Datos Incorrectos',
             });
         }
         else {            
@@ -254,7 +254,8 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 $('#btnCreateRegistroComisiones').click(function () {
     var Empleado = $("#Crear #emp_IdEmpleado").val();
     var Ingreso = $("#Crear #cin_IdIngreso").val();
-
+    var Porcentaje = $("#Crear #PorcentajeComision").val();
+    var Total = $("#Crear #TotalV").val();
 
     if (Empleado == "0") {
         $("#Validation_descipcion").css("display", "");
@@ -262,9 +263,6 @@ $('#btnCreateRegistroComisiones').click(function () {
     else if (Ingreso == "0") {
         $("#Validation_descipcion3").css("display", "");
     }
-    else if (Empleado != "0" || Ingreso != "0") {
-       $("#Validation_descipcion").css("display", "none");
-       
        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
        $.ajax({
@@ -274,7 +272,7 @@ $('#btnCreateRegistroComisiones').click(function () {
        })
        .done(function (data) {
            //CERRAR EL MODAL DE AGREGAR
-           $("#AgregarEmpleadoComisiones");
+           $("#AgregarEmpleadoComisiones").serializeArray();;
            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
            if (data == "error") {
                $("#AgregarEmpleadoComisiones").modal('show');
@@ -289,11 +287,10 @@ $('#btnCreateRegistroComisiones').click(function () {
                // Mensaje de exito cuando un registro se ha guardado bien
                iziToast.success({
                    title: 'Exito',
-                   message: 'El registro fue registrado de forma exitosa!',
+                   message: 'El registro fue Creado de forma exitosa!',
                });
            }
-       });
-   }     
+       }); 
 });
 
 
@@ -468,7 +465,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
 //VALIDAR CREAR//
 
-$(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarEmpleadoComisiones", function () {
+$(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroComisiones", function () {
     var ID = $(this).data('id');
     $.ajax({
         url: "/EmpleadoComisiones/Activar/" + ID,
@@ -481,8 +478,9 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarEmpleadoC
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Activar #cc_Id").val(data.cc_Id);
-                //$(".field-validation-error").css('display', 'none');
+                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $("#ActivarEmpleadoComisiones").modal();
+                //$("#DetalleEmpleadoComisiones").modal(hide);
             }
             else {
                 //Mensaje de error si no hay data
@@ -491,126 +489,105 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarEmpleadoC
                     message: 'No se pudo cargar la información, contacte al administrador',
                 });
             }
+           
         });
 });
-$("#btnActivarEmpleadoComisiones").click(function () {
-    var data = $("#frmEmpleadoComisionesActivar").serializeArray();
-    var Id = $("#Activar #cc_Id").val();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/EmpleadoComisiones/Activar",
-        method: "POST",
-        data: data
-    }).done(function (data) {
 
-        if (data != "error") {
-                
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#ActivarEmpeladoComisiones").modal('hide');
-            cargarGridComisiones();
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro fue editado de forma exitosa!',
-            }); 
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+    $("#btnCerrarModal").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion1").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+        $("#PorcentajeComision").val('');
+        $("#TotalVenta").val('');
+    });
+
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+    $("#IconoCerrar").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+        $("#Validation_descipcion1").css("display", "none");
+        $("#Validation_descipcion2").css("display", "none");
+        $("#PorcentajeComision").val('');
+        $("#TotalVenta").val('');
+    });
+
+
+    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+    $("#btnCreateRegistroComisiones").click(function () {
+        var PorcentajeComision = $("#PorcentajeComision").val();
+        var TotalVenta = $("#TotalVenta").val();
+        var Empleado = $("#emp_IdEmpleado").val();
+        var Ingresos = $("#cin_IdIngreso").val();
+
+        if (PorcentajeComision == "") {
+            $("#Validation_descipcion1").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion1").css("display", "none");
+        }
+        if (TotalVenta == "") {
+            $("#Validation_descipcion2").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion2").css("display", "none");
+        }
+
+        if (Empleado == "0") {
+            $("#Validation_descipcion").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion").css("display", "none");
+        }
+        if (Ingresos == "0") {
+            $("#Validation_descipcion3").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion3").css("display", "none");
+        }
+    });
+
+    //VALIDAR EDIT//
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+    $("#btnCerrarModaledit").click(function () {
+        $("#Validation_descipcion1e").css("display", "none");
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#cc_PorcentajeComision").val('');
+        $("#cc_TotalVenta").val('');
+    });
+
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+    $("#IconoCerraredit").click(function () {
+        $("#Validation_descipcion1e").css("display", "none");
+        $("#Validation_descipcion2e").css("display", "none");
+        $("#cc_PorcentajeComision").val('');
+        $("#cc_TotalVenta").val('');
+    });
+
+
+    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+    $("#btnUpdateComisiones").click(function () {
+        var PorcentajeComisionE = $("#cc_PorcentajeComision").val();
+        var TotalVentaE = $("#cc_TotalVenta").val();
+
+        if (PorcentajeComisionE == "" || PorcentajeComisionE == null || PorcentajeComisionE == undefined) {
+            $("#Validation_descipcion1e").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion1e").css("display", "none");
+        }
+
+        if (TotalVentaE == "" || TotalVentaE == null || TotalVentaE == undefined) {
+            $("#Validation_descipcion2e").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion2e").css("display", "none");
         }
 
     });
-});
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarModal").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion1").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#PorcentajeComision").val('');
-    $("#TotalVenta").val('');
-});
 
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconoCerrar").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion1").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#PorcentajeComision").val('');
-    $("#TotalVenta").val('');
-});
-
-
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-$("#btnCreateRegistroComisiones").click(function () {
-    var PorcentajeComision = $("#PorcentajeComision").val();
-    var TotalVenta = $("#TotalVenta").val();
-    var Empleado = $("#emp_IdEmpleado").val();
-    var Ingresos = $("#cin_IdIngreso").val();
-
-    if (PorcentajeComision == "") {
-        $("#Validation_descipcion1").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion1").css("display", "none");
-    }
-    if (TotalVenta == "") {
-        $("#Validation_descipcion2").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion2").css("display", "none");
-    }
-
-    if (Empleado == "0") {
-        $("#Validation_descipcion").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion").css("display", "none");
-    }
-    if (Ingresos == "0") {
-        $("#Validation_descipcion3").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion3").css("display", "none");
-    }
-});
-
-//VALIDAR EDIT//
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarModaledit").click(function () {
-    $("#Validation_descipcion1e").css("display", "none");
-    $("#Validation_descipcion2e").css("display", "none");
-    $("#cc_PorcentajeComision").val('');
-    $("#cc_TotalVenta").val('');
-});
-
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconoCerraredit").click(function () {
-    $("#Validation_descipcion1e").css("display", "none");
-    $("#Validation_descipcion2e").css("display", "none");
-    $("#cc_PorcentajeComision").val('');
-    $("#cc_TotalVenta").val('');
-});
-
-
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-$("#btnUpdateComisiones").click(function () {
-    var PorcentajeComisionE = $("#cc_PorcentajeComision").val();
-    var TotalVentaE = $("#cc_TotalVenta").val();
-
-    if (PorcentajeComisionE == "" || PorcentajeComisionE == null || PorcentajeComisionE == undefined) {
-        $("#Validation_descipcion1e").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion1e").css("display", "none");
-    }
-
-    if (TotalVentaE == "" || TotalVentaE == null || TotalVentaE == undefined) {
-        $("#Validation_descipcion2e").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion2e").css("display", "none");
-    }
-
-});
-
-$("#frmEmpleadoComisionesCreate").submit(function (e) {
-    e.preventDefault();
-});
+    $("#frmEmpleadoComisionesCreate").submit(function (e) {
+        e.preventDefault();
+    });
