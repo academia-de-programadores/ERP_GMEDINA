@@ -44,10 +44,6 @@
                             {
                                 string estado = item.aces_Activo == false ? "Inactivo" : "Activo";
 
-                                var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-
-                                bool esAdministrador = true;
-
                                 <tr class="gradeA odd" role="row" data-id="@item.aces_IdAuxilioCesantia">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.aces_IdAuxilioCesantia)

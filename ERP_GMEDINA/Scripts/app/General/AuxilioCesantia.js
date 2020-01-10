@@ -45,7 +45,7 @@ function cargarGridAuxilioCesantia() {
             {
 
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
@@ -57,6 +57,7 @@ function cargarGridAuxilioCesantia() {
                 var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAuxCes">Activar</button>' : '' : '';
 
 
+                console.log(estadoRegistro);
 
                 template += '<tr data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '">' +
                     '<td>' + ListaAuxCes[i].aces_IdAuxilioCesantia + '</td>' +
@@ -73,12 +74,12 @@ function cargarGridAuxilioCesantia() {
                     //boton activar 
                     botonActivar
                 '</td>' +
-                    '</tr>';
+                '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyAuxCes').html(template);
         });
-
+    FullBody();
 
 }
 
