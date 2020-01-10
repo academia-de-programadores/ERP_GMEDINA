@@ -347,10 +347,13 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
         if (data) {
             if (data.adsu_Deducido) {
                 console.log('true');
-                $("#btnUpdateAdelantos").attr("disabled");//desabilita boton
+                document.getElementById("btnUpdateAdelantos").disabled = true;
+                //$("#btnUpdateAdelantos").attr("disabled");//desabilita boton
                 //$("#btnUpdateAdelantos").disabled = true;
             } else {
-                $("#btnUpdateAdelantos").removeAttr("disabled");//habilita boton
+                console.log('false');
+                document.getElementById("btnUpdateAdelantos").disabled = false;
+                //$("#btnUpdateAdelantos").removeAttr("disabled");//habilita boton
                 //$("#btnUpdateAdelantos").disabled = false;
             }
             var SelectedIdEmp = data.emp_Id;
@@ -390,6 +393,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
 $("#btnUpdateAdelantos").click(function () {
+
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
