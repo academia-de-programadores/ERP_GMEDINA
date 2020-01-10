@@ -2,8 +2,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmAdelantosEdit" }))
 {
     @Html.AntiForgeryToken()
-    <div class="ibox-content">
-        <div class="form-horizontal">
+    
             <div class="form-horizontal">
                 @Html.HiddenFor(model => model.adsu_IdAdelantoSueldo)
 
@@ -63,6 +62,5 @@
                     </div>
                 </div>*@
             </div>
-        </div>
-    </div>
+        
 }
