@@ -345,14 +345,14 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
         data: JSON.stringify({ id: ID })
     }).done(function (data) {
         if (data) {
-            if (!data.adsu_Deducido) {
-                //if(data.adsu_Activo){
-                //    document.getElementById("inactivar").hidden = false;
-                //    document.getElementById("activar").hidden = true;
-                //} else {
-                //    document.getElementById("activar").hidden = false;
-                //    document.getElementById("inactivar").hidden = true;
-                //}
+            if (data.adsu_Deducido) {
+                console.log('true');
+                $("#btnUpdateAdelantos").attr("disabled");//desabilita boton
+                //$("#btnUpdateAdelantos").disabled = true;
+            } else {
+                $("#btnUpdateAdelantos").removeAttr("disabled");//habilita boton
+                //$("#btnUpdateAdelantos").disabled = false;
+            }
             var SelectedIdEmp = data.emp_Id;
 
             //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -378,7 +378,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
 
 
             $("#EditarAdelantoSueldo").modal();
-            }
+            
         } else if (data.adsu_Deducido) {
             iziToast.error({
                 title: 'Error',
@@ -401,7 +401,6 @@ $("#btnUpdateAdelantos").click(function () {
         data: JSON.stringify({ id: IdEmp })
     }).done(function (data) {
         //ACCIONES EN CASO DE EXITO
-
         //EJECUTAR LA VALIDACION PARA LA EDICIÓN
         if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
         if ($("#Editar #adsu_Monto").val() <= data) {
