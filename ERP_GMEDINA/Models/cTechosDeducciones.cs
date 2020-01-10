@@ -15,19 +15,22 @@ namespace ERP_GMEDINA.Models
     public class cTechosDeducciones
     {
         [Display(Name = "ID Techos Deducciones")]
-        [Required]
+        [Required]        
         public int tddu_IdTechosDeducciones { get; set; }
 
-        [Required]
+        [Required]                
         [Display(Name = "Porcentaje colaborador")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "El campo {0} debe ser numérico.")]
         public decimal tddu_PorcentajeColaboradores { get; set; }
 
         [Required]
         [Display(Name = "Porcentaje empresa")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "El campo {0} debe ser numérico.")]
         public decimal tddu_PorcentajeEmpresa { get; set; }
 
         [Required]
         [Display(Name = "Techo")]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "El campo {0} debe ser numérico.")]
         public decimal tddu_Techo { get; set; }
 
         [Required]

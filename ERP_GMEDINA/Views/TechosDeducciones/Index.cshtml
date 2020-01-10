@@ -62,9 +62,9 @@
                                         @estadoISR
                                     </td>
                                     <td>
-
+                                        
                                         @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
-
+                                        
                                         @{
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                             if (item.tddu_Activo == true)
@@ -112,7 +112,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h4 class="modal-title">Agregar techo de deducción</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
@@ -126,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalles del registro</h4>
+                <h4 class="modal-title">Detalles del techo de la deducción</h4>
             </div>
             <div class="modal-body" style="padding-bottom:0px;" id="Detalles">
                 @Html.Partial("_DetailsTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
@@ -143,13 +143,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <h4 class="modal-title">Inactivar techo de deducción</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger " id="btnInactivarTechosDeducciones">Si</button>
+                <button type="button" class="btn btn-danger " id="btnInactivarTechosDeducciones">Sí</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -162,13 +162,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Activar</h4>
+                <h4 class="modal-title">Activar techo de deducción</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Está seguro que desea activar este registro?
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success " id="btnActivarTechosDeduccionesEjecutar">Si</button>
+            <div class="modal-footer" style="border-top:0px;">
+                <button type="button" class="btn btn-primary " id="btnActivarTechosDeduccionesEjecutar">Sí</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
