@@ -230,40 +230,44 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        public ActionResult Activar(int ID)
+        public ActionResult Activar(int? ID)
         {
             string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
             string MensajeError = "";
-            if (ModelState.IsValid)
+
+            if (ID == null)
             {
-                try
-                {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(ID,
-                                                                                        0,
-                                                                                        DateTime.Now
-                                                                                        );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result Resultado in listCatalogoDeIngresos)
-                        MensajeError = Resultado.MensajeError;
+                return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            //LLENAR DATA DE AUDITORIA
+            tbCatalogoDeIngresos tbCatalogoDeIngresos = new tbCatalogoDeIngresos();
+            tbCatalogoDeIngresos.cin_IdIngreso = (int)ID;
+            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
+            tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Activar(tbCatalogoDeIngresos.cin_IdIngreso,
+                                                                              tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                              tbCatalogoDeIngresos.cin_FechaModifica);
 
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbCatalogoDeIngresos_Activar_Result Resultado in listCatalogoDeIngresos)
+                    MensajeError = Resultado.MensajeError;
 
-                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
-                    response = "bien";
-                }
-                catch (Exception)
+                if (MensajeError.StartsWith("-1"))
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                     response = "error";
                 }
+
             }
-            else
+            catch (Exception Ex)
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = Ex.Message.ToString();
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);

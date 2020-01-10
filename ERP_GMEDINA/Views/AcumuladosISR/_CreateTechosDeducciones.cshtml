@@ -6,7 +6,7 @@
         @Html.HiddenFor(model => model.aisr_Id)
         @Html.HiddenFor(model => model.aisr_FechaCrea)
         @Html.HiddenFor(model => model.aisr_UsuarioCrea)
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.aisr_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -20,10 +20,10 @@
                 @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.aisr_Monto, "", new { @class = "text-danger" })
             </div>
-        </div>        
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-        <input type="submit" class="btn btn-primary" id="btnCreateAcumuladosISR" value="Aceptar">
+        <input type="submit" class="btn btn-primary pull-left" id="btnCreateAcumuladosISR" value="Aceptar">
     </div>
 }
