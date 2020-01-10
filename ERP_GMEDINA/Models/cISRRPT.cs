@@ -14,38 +14,32 @@ namespace ERP_GMEDINA.Models
     }
     public class cISRRPT
     {
-        [Display(Name = "Codigo Empleado")]
-        public int emp_Id { get; set; }
+		[Display(Name = "Codigo Empleado")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public int emp_Id { get; set; }
 
-        public string per_Identidad { get; set; }
+		[Display(Name = "Nombres")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string per_Nombres { get; set; }
 
-        [Display(Name = "Nombre Completo")]
-        public string NombreCompleto { get; set; }
+		[Display(Name = "Apellidos")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string per_Apellidos { get; set; }
 
-        public int depto_Id { get; set; }
+		[Display(Name = "Codigo Planilla")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public int cpla_IdPlanilla { get; set; }
 
-        [Display(Name = "Departamento")]
-        public string depto_descripcion { get; set; }
+		[Display(Name = "Planilla")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public string cpla_DescripcionPlanilla { get; set; }
 
-        public int area_Id { get; set; }
+		[Display(Name = "Total ISR")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public decimal hipa_TotalISR { get; set; }
 
-        [Display(Name = "Area")]
-        public string area_Descripcion { get; set; }
-
-        public int cpla_IdPlanilla { get; set; }
-
-        [Display(Name = "Planilla")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        public string cpla_DescripcionPlanilla { get; set; }
-
-        [Display(Name = "Total ISR")]
-        public decimal hipa_TotalISR { get; set; }
-
-        [Display(Name = "Sueldo Neto")]
-        public Nullable<decimal> hipa_SueldoNeto { get; set; }
-
-        [Display(Name = "Fecha Pago")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        public System.DateTime hipa_FechaPago { get; set; }
+		[Display(Name = "Fecha Pago")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
+		public System.DateTime hipa_FechaPago { get; set; }
     }
 }
