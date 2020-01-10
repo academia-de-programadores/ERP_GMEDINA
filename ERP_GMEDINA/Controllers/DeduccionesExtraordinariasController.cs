@@ -42,7 +42,8 @@ namespace ERP_GMEDINA.Controllers
 					dex_FechaCrea = d.dex_FechaCrea,
 					dex_UsuarioModifica = d.dex_UsuarioModifica,
 					dex_FechaModifica = d.dex_FechaModifica
-				}).Where(d => d.dex_Activo == true).OrderBy(d => d.dex_FechaCrea)
+				})
+                .OrderBy(d => d.dex_FechaCrea)
 				.ToList();
 
 			//Retornamos un Json en el FrontEnd
@@ -241,14 +242,6 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Inhabilitar Deducciones Extraordinarias
-        //GET: DeduccionesExtraordinarias/Inactivar
-        public ActionResult Inactivar(int? ID)
-		{
-			db.Configuration.ProxyCreationEnabled = false;
-			tbDeduccionesExtraordinarias tbDeduccionesExtraordinariasJSON = db.tbDeduccionesExtraordinarias.Find(ID);
-			return Json(tbDeduccionesExtraordinariasJSON, JsonRequestBehavior.AllowGet);
-		}
-
 		//POST: DeduccionesExtraordinarias/Inactivar
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -308,6 +301,67 @@ namespace ERP_GMEDINA.Controllers
 			return Json(Response, JsonRequestBehavior.AllowGet);
 
 		}
+        #endregion
+
+        #region Activar Deducciones Extraordinarias
+        //POST: DeduccionesExtraordinarias/Inactivar
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult Activar(int dex_IdDeduccionesExtra)
+        {
+
+            //Para llenar los campos de auditoria
+            //tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
+            //tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+
+            //Variable para enviarla al lado del Cliente
+            string Response = String.Empty;
+            IEnumerable<object> listDeduccionesExtraordinarias = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    //Ejecutar Procedimiento Almacenado
+                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(dex_IdDeduccionesExtra,
+                                                                                                         1,
+                                                                                                         DateTime.Now);
+
+                    //El tipo complejo del Procedimiento Almacenado
+                    foreach (UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result Resultado in listDeduccionesExtraordinarias)
+                    {
+                        MensajeError = Resultado.MensajeError;
+                    }
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+
+                        //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
+                        ModelState.AddModelError("", "No se pudo Inactivar. Contacte al Administrador!");
+                        Response = "Error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Response = Ex.Message.ToString();
+                }
+
+                //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
+                Response = "Exito";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+
+                //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
+                Response = "Error";
+            }
+
+            return Json(Response, JsonRequestBehavior.AllowGet);
+
+        }
         #endregion
 
         #region Ejecutable Deducciones Extraordinarias

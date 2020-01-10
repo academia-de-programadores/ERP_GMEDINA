@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Models
 
         [StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
         [Required(ErrorMessage = "El campo AFP es Requerido")]
+        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Texto válido sin Números")]
         [Display(Name = "AFP")]
         public string afp_Descripcion { get; set; }
 
