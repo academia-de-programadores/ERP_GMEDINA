@@ -125,7 +125,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#scan_FechaCrea")["0"].innerText = FechaFormato(obj.scan_FechaCrea);
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#scan_FechaModifica")["0"].innerText = FechaFormato(obj.scan_FechaModifica);
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+              
                 $('#ModalDetalles').modal('show');
             }
         });
