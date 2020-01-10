@@ -281,15 +281,29 @@ function ValidarCamposEditar(colaborador, razon, monto){
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
         //Hacerle focus al input
-        console.log('No paso la validacion de campo colaborador')
+        console.log('No paso la validacion de campo colaborador');
+        
         $(colaborador).focus();
     } else{
-
+        
     }
 
-    if(razon ==null || razon == ''){
+    console.log(razon.val());
+
+    if(razon ==null || razon.val() == ''){
         pasoValidacion = false;
-        console.log('No paso la validacion de campo razon')
+        $('#adsu_RazonAdelantoValidacion').show();
+        razon.focus();
+    } else{
+        $('#adsu_RazonAdelantoValidacion').hide();
+    }
+
+    if(monto == null || monto.val() == ''){
+        pasoValidacion = false;
+        $('#adsu_MontoValidacion').show();
+        monto.focus();
+    } else{
+        $('#adsu_MontoValidacion').hide();
     }
 
     return pasoValidacion;
@@ -384,7 +398,6 @@ $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
-    if(ValidarCamposEditar($('#emp_Id'), $('#adsu_RazonAdelanto'), $('#adsu_Monto')))
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
         method: "POST",
@@ -395,6 +408,7 @@ $("#btnUpdateAdelantos").click(function () {
         //ACCIONES EN CASO DE EXITO
 
         //EJECUTAR LA VALIDACION PARA LA EDICIÓN
+        if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
         if ($("#Editar #adsu_Monto").val() <= data) {
             var data = $('#frmAdelantosEdit').serializeArray();
             $.ajax({
