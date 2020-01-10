@@ -58,9 +58,9 @@ function cargarGridAdelantos() {
 
                 //variable donde está el boton activar
                 var botonActivar = ListaAdelantos[i].adsu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroAdelantos">Activar</button>' : '' : '';
+                var dataId = ListaAdelantos[i].adsu_IdAdelantoSueldo;
 
-                //VALIDAR SI EL REGISTRO ESTA DEDUCIDO, SI LO ESTÁ, EL BOTON DE EDITAR ESTARÁ DESHABILITADO 
-                    template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
+                template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
                     '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
                     '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
@@ -74,7 +74,6 @@ function cargarGridAdelantos() {
                     botonActivar +
                     '</td>' +
                     '</tr>';
-                
             }
             
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
@@ -320,7 +319,8 @@ $('#IconCerrar').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
-    var ID = $(this).data('id');
+    var ID = $(this).closest('tr').data('id');
+    //var ID = $(this).data('id');
     IDInactivar = ID;
 
     var idEmpSelect = "";
@@ -346,13 +346,13 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     }).done(function (data) {
         if (data) {
             if (!data.adsu_Deducido) {
-                if(data.adsu_Activo){
-                    document.getElementById("inactivar").hidden = false;
-                    document.getElementById("activar").hidden = true;
-                } else {
-                    document.getElementById("activar").hidden = false;
-                    document.getElementById("inactivar").hidden = true;
-                }
+                //if(data.adsu_Activo){
+                //    document.getElementById("inactivar").hidden = false;
+                //    document.getElementById("activar").hidden = true;
+                //} else {
+                //    document.getElementById("activar").hidden = false;
+                //    document.getElementById("inactivar").hidden = true;
+                //}
             var SelectedIdEmp = data.emp_Id;
 
             //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -552,7 +552,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdelantos", function () {
-    IDActivar = $(this).data('id');
+    IDActivar = $(this).closest('tr').data('id');
     $("#ActivarAdelantoSueldo").modal();
 });
 
