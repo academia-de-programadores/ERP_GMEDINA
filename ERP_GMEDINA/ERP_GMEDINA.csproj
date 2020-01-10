@@ -196,6 +196,7 @@
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
+    <Compile Include="Controllers\HistorialAudienciaDescargosController.cs" />
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\cFormaPago.cs" />
     <Compile Include="Models\cHabilidades.cs" />
     <Compile Include="Models\cHistorialAmonestaciones.cs" />
+    <Compile Include="Models\cHistorialAudienciaDescargo.cs" />
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
@@ -628,6 +630,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialContrataciones_Delete_Result.cs">
@@ -1227,6 +1232,7 @@
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
@@ -1941,6 +1947,15 @@
     <Content Include="Views\Requisiciones\Index.cshtml" />
     <Content Include="Views\Requisiciones\_Delete.cshtml" />
     <Content Include="Views\Requisiciones\_Detalles.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Create.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Delete.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Details.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Edit.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Index.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Create.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Detalles.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

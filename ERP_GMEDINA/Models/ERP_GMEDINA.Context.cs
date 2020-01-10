@@ -1018,7 +1018,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Restore", aude_IdParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
-        public virtual int UDP_RRHH_tbHistorialAudienciaDescargo_Update(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Update(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -1036,7 +1036,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbHistorialContrataciones_Delete_Result> UDP_RRHH_tbHistorialContrataciones_Delete(Nullable<int> hcon_Id, string hcon_RazonInactivo, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
@@ -3656,6 +3656,94 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("req_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRequisiciones_Update_Result1>("UDP_RRHH_tbRequisiciones_Update", req_IdParameter, req_ExperienciaParameter, req_SexoParameter, req_DescripcionParameter, req_EdadMinimaParameter, req_EdadMaximaParameter, req_EstadoCivilParameter, req_EducacionSuperiorParameter, req_PermanenteParameter, req_DuracionParameter, req_VacantesParameter, req_FechaRequisicionParameter, req_FechaContratacionParameter, req_UsuarioModificaParameter, req_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbEquipoEmpleado_Inactivar(Nullable<int> eqem_Id, Nullable<int> eqem_UsuarioModifica, Nullable<System.DateTime> eqem_FechaModifica)
+        {
+            var eqem_IdParameter = eqem_Id.HasValue ?
+                new ObjectParameter("eqem_Id", eqem_Id) :
+                new ObjectParameter("eqem_Id", typeof(int));
+    
+            var eqem_UsuarioModificaParameter = eqem_UsuarioModifica.HasValue ?
+                new ObjectParameter("eqem_UsuarioModifica", eqem_UsuarioModifica) :
+                new ObjectParameter("eqem_UsuarioModifica", typeof(int));
+    
+            var eqem_FechaModificaParameter = eqem_FechaModifica.HasValue ?
+                new ObjectParameter("eqem_FechaModifica", eqem_FechaModifica) :
+                new ObjectParameter("eqem_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbEquipoEmpleado_Inactivar", eqem_IdParameter, eqem_UsuarioModificaParameter, eqem_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbEquipoTrabajo_Inactivar(Nullable<int> eqtra_Id, Nullable<int> eqtra_UsuarioModifica, Nullable<System.DateTime> eqtra_FechaModifica)
+        {
+            var eqtra_IdParameter = eqtra_Id.HasValue ?
+                new ObjectParameter("eqtra_Id", eqtra_Id) :
+                new ObjectParameter("eqtra_Id", typeof(int));
+    
+            var eqtra_UsuarioModificaParameter = eqtra_UsuarioModifica.HasValue ?
+                new ObjectParameter("eqtra_UsuarioModifica", eqtra_UsuarioModifica) :
+                new ObjectParameter("eqtra_UsuarioModifica", typeof(int));
+    
+            var eqtra_FechaModificaParameter = eqtra_FechaModifica.HasValue ?
+                new ObjectParameter("eqtra_FechaModifica", eqtra_FechaModifica) :
+                new ObjectParameter("eqtra_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbEquipoTrabajo_Inactivar", eqtra_IdParameter, eqtra_UsuarioModificaParameter, eqtra_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbEquipoTrabajo_Insert(string eqtra_Codigo, string eqtra_Descripcion, string eqtra_Observacion, Nullable<int> eqtra_UsuarioCrea, Nullable<System.DateTime> eqtra_FechaCrea)
+        {
+            var eqtra_CodigoParameter = eqtra_Codigo != null ?
+                new ObjectParameter("eqtra_Codigo", eqtra_Codigo) :
+                new ObjectParameter("eqtra_Codigo", typeof(string));
+    
+            var eqtra_DescripcionParameter = eqtra_Descripcion != null ?
+                new ObjectParameter("eqtra_Descripcion", eqtra_Descripcion) :
+                new ObjectParameter("eqtra_Descripcion", typeof(string));
+    
+            var eqtra_ObservacionParameter = eqtra_Observacion != null ?
+                new ObjectParameter("eqtra_Observacion", eqtra_Observacion) :
+                new ObjectParameter("eqtra_Observacion", typeof(string));
+    
+            var eqtra_UsuarioCreaParameter = eqtra_UsuarioCrea.HasValue ?
+                new ObjectParameter("eqtra_UsuarioCrea", eqtra_UsuarioCrea) :
+                new ObjectParameter("eqtra_UsuarioCrea", typeof(int));
+    
+            var eqtra_FechaCreaParameter = eqtra_FechaCrea.HasValue ?
+                new ObjectParameter("eqtra_FechaCrea", eqtra_FechaCrea) :
+                new ObjectParameter("eqtra_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbEquipoTrabajo_Insert", eqtra_CodigoParameter, eqtra_DescripcionParameter, eqtra_ObservacionParameter, eqtra_UsuarioCreaParameter, eqtra_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> rrhh_tbEquipoTrabajo_Update(Nullable<int> eqtra_Id, string eqtra_Codigo, string eqtra_Descripcion, string eqtra_Observacion, Nullable<int> eqtra_UsuarioModifica, Nullable<System.DateTime> eqtra_FechaModifica)
+        {
+            var eqtra_IdParameter = eqtra_Id.HasValue ?
+                new ObjectParameter("eqtra_Id", eqtra_Id) :
+                new ObjectParameter("eqtra_Id", typeof(int));
+    
+            var eqtra_CodigoParameter = eqtra_Codigo != null ?
+                new ObjectParameter("eqtra_Codigo", eqtra_Codigo) :
+                new ObjectParameter("eqtra_Codigo", typeof(string));
+    
+            var eqtra_DescripcionParameter = eqtra_Descripcion != null ?
+                new ObjectParameter("eqtra_Descripcion", eqtra_Descripcion) :
+                new ObjectParameter("eqtra_Descripcion", typeof(string));
+    
+            var eqtra_ObservacionParameter = eqtra_Observacion != null ?
+                new ObjectParameter("eqtra_Observacion", eqtra_Observacion) :
+                new ObjectParameter("eqtra_Observacion", typeof(string));
+    
+            var eqtra_UsuarioModificaParameter = eqtra_UsuarioModifica.HasValue ?
+                new ObjectParameter("eqtra_UsuarioModifica", eqtra_UsuarioModifica) :
+                new ObjectParameter("eqtra_UsuarioModifica", typeof(int));
+    
+            var eqtra_FechaModificaParameter = eqtra_FechaModifica.HasValue ?
+                new ObjectParameter("eqtra_FechaModifica", eqtra_FechaModifica) :
+                new ObjectParameter("eqtra_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbEquipoTrabajo_Update", eqtra_IdParameter, eqtra_CodigoParameter, eqtra_DescripcionParameter, eqtra_ObservacionParameter, eqtra_UsuarioModificaParameter, eqtra_FechaModificaParameter);
         }
     }
 }
