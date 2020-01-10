@@ -409,36 +409,15 @@ function spinner(){
 
 
 //FUNCION: PRIMERA FASE DE ACTIVAR
+
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
-    var ID = $(this).data('id');
-    ActivarID = ID;
-    $.ajax({
-        url: "/CatalogoDeIngresos/Activar/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $("#Activar #cin_IdIngreso").val(data.cin_IdIngreso);
-                $("#Activar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                //$(".field-validation-error").css('display', 'none');
-                $("#ActivarCatalogoIngresos").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
-});
+    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
+        IDActivar = $(this).data('id');
+    $("#ActivarCatalogoIngresos").modal();
+ });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnActivarIngresos").click(function () {
+$("#btnActivarIngreso").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmActivarCatalogoIngresos").serializeArray();
@@ -457,7 +436,7 @@ $("#btnActivarIngresos").click(function () {
                 //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                    message: 'No se pudo activar el registro, contacte al administrador',
                 });
             }
             else {
@@ -466,7 +445,7 @@ $("#btnActivarIngresos").click(function () {
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue inhabilitado de forma exitosa!',
+                    message: '¡El registro fue activado de forma exitosa!',
                 });
             }
         });
