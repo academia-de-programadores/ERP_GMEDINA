@@ -1,27 +1,34 @@
 ﻿@model ERP_GMEDINA.Models.tbPeriodos
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsPeriodo" }))
 {
-    <div class="modal-body" id="Detalles">
+    <div class="ibox-content">
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.peri_IdPeriodo)
 
-            
-
             <div class="form-group">
-                <label class="control-label col-md-2">Descripción</label>  @*@Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.peri_IdPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-6">
+                    <span id="peri_IdPeriodo">@Html.DisplayFor(model => model.peri_IdPeriodo, new { htmlAttributes = new { @class = "text-box single-line", disabled = "disabled" } })</span>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-6">
+                    <span id="peri_DescripPeriodo">@Html.DisplayFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line", disabled = "disabled" } })</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h2>Auditoría</h2>
+                <h4>Auditoría</h4>
             </div>
             <div class="ibox-content">
                 <div class="form-horizontal">
@@ -37,26 +44,19 @@
                             <tr>
                                 <td>Creado</td>
                                 @Html.HiddenFor(model => model.peri_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                <td>@Html.EditorFor(model => model.peri_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="peri_FechaCrea">@Html.DisplayFor(model => model.peri_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                             <tr>
                                 <td>Modificado</td>
                                 @Html.HiddenFor(model => model.peri_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                <td>@Html.EditorFor(model => model.peri_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="peri_FechaModifica">@Html.DisplayFor(model => model.peri_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="footer">
-                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                </div>
             </div>
         </div>
-
-    </div>
-
-    <div class="modal-footer">
     </div>
 }

@@ -1,0 +1,74 @@
+﻿@{
+	ViewBag.Title = "ReportIngresos";
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Planilla | @ViewBag.Title</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<!-- Add jQuery Style direct - used for jQGrid plugin -->
+	<link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+	<!-- Primary Inspinia style -->
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/font-awesome/css")
+	@Styles.Render("~/Content/plugins/izitoast/iziToast")
+</head>
+<body style="background-color:#fff;">
+	<div class="ibox float-e-margins">
+		<div class="ibox-title">
+			<h5>Reporte de @ViewBag.Encabezado</h5>
+		</div>
+		<div class="ibox-content">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Codigo Empleado</th>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Descripcion Ingreso</th>
+						<th>Total a Pagar</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Fin</th>
+						<th>Planilla</th>
+					</tr>
+					@foreach (var item in ViewBag.ReportIngresos)
+					{
+						<tr>
+							<td>
+								@item.emp_Id
+							</td>
+							<td>
+								@item.per_Nombres
+							</td>
+							<td>
+								@item.per_Apellidos
+							</td>
+							<td>
+								@item.cin_DescripcionIngreso
+							</td>
+							<td>
+								@item.hip_TotalPagar
+							</td>
+							<td>
+								@item.hipa_FechaInicio
+							</td>
+							<td>
+								@item.hipa_FechaFin
+							</td>
+							<td>
+								@item.cpla_DescripcionPlanilla
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

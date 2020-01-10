@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Periodos
         public ActionResult Index()
         {
-            var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(t => t.peri_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbPeriodos.ToList());
         }
         #endregion
@@ -40,8 +40,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     peri_FechaModifica = c.peri_FechaModifica,
                     peri_Activo = c.peri_Activo
-                }).Where(x => x.peri_Activo == true)
-                .OrderByDescending(x => x.peri_FechaCrea).ToList();
+                }).OrderByDescending(x => x.peri_FechaCrea).ToList();
 
             return new JsonResult { Data = tbPeriodos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

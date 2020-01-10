@@ -27,6 +27,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridPreaviso() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/Preaviso/GetData',
         'GET',
@@ -42,21 +43,48 @@ function cargarGridPreaviso() {
             var ListaPreaviso = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaPreaviso.length; i++) {
+
                 var FechaCrea = FechaFormato(ListaPreaviso[i].prea_FechaCrea);
 
                 var FechaModifica = FechaFormato(ListaPreaviso[i].prea_FechaModifica);
 
                 UsuarioModifica = ListaPreaviso[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListaPreaviso[i].NombreUsuarioModifica;
 
+
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaPreaviso[i].prea_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnDetallePreaviso">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs"  id="btnEditarPreaviso">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaPreaviso[i].prea_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPreaviso">Activar</button>' : '' : '';
+
+
+
                 template += '<tr data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '">' +
                     '<td>' + ListaPreaviso[i].prea_RangoInicioMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_RangoFinMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_DiasPreaviso + '</td>' +
-                    '<td>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePreaviso">Detalle</button>' +
-                    '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs" id="btnEditarPreaviso">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    '<td>' + ListaPreaviso[i].prea_Activo + '</td>' +
+                    //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
+
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';           
+                
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyPreaviso').html(template);
@@ -218,16 +246,16 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function
 
                     var FechaCrea = FechaFormato(data[0].prea_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].prea_FechaModifica);
-                    $("#Detalles #prea_IdPreaviso").val(iter.prea_IdPreaviso);
-                    $("#Detalles #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
-                    $("#Detalles #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
-                    $("#Detalles #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
-                    data[0].prea_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                    $("#Detalles #prea_UsuarioCrea").val(iter.prea_UsuarioCrea);
-                    $("#Detalles #prea_FechaCrea").val(FechaCrea);
-                    data[0].prea_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                    $("#Detalles #prea_UsuarioModifica").val(data[0].prea_UsuarioModifica);
-                    $("#Detalles #prea_FechaModifica").val(FechaModifica);
+                    $("#Detalles #prea_IdPreaviso").html(iter.prea_IdPreaviso);
+                    $("#Detalles #prea_RangoInicioMeses").html(iter.prea_RangoInicioMeses);
+                    $("#Detalles #prea_RangoFinMeses").html(iter.prea_RangoFinMeses);
+                    $("#Detalles #prea_DiasPreaviso").html(iter.prea_DiasPreaviso);
+                    data[0].prea_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #prea_UsuarioCrea").html(iter.prea_UsuarioCrea);
+                    $("#Detalles #prea_FechaCrea").html(FechaCrea);
+                    data[0].prea_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #prea_UsuarioModifica").html(data[0].prea_UsuarioModifica);
+                    $("#Detalles #prea_FechaModifica").html(FechaModifica);
                 });
                 $("#DetallarPreaviso").modal();
             }

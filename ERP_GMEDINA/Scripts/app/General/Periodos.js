@@ -27,6 +27,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridPeriodo() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/Periodos/GetData',
         'GET',
@@ -40,22 +41,67 @@ function cargarGridPeriodo() {
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListPeriodo = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //RECORRER DATA OBTENINDA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListPeriodo.length; i++) {
+
                 var FechaCrea = FechaFormato(ListPeriodo[i].peri_FechaCrea);
-                //var UsuarioModifica = !(item.peri_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+
                 var FechaModifica = FechaFormato(ListPeriodo[i].peri_FechaModifica);
 
                 UsuarioModifica = ListPeriodo[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListPeriodo[i].NombreUsuarioModifica;
 
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListPeriodo[i].peri_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListPeriodo[i].peri_Activo == true ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs"  id="btnDetallePeriodo">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListPeriodo[i].peri_Activo == true ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs"  id="btnEditarPeriodo">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListPeriodo[i].peri_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPeriodos">Activar</button>' : '' : '';
+
+
+
                 template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
                     '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
-                    '<td>' +
-                    '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalle</button>' +
-                    '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs" id="btnEditarPeriodo">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    '<td>' + ListPeriodo[i].peri_Activo + '</td>' +
+                    //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
+
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';
             }
+
+
+            //{
+            //    var FechaCrea = FechaFormato(ListPeriodo[i].peri_FechaCrea);
+            //    //var UsuarioModifica = !(item.peri_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+            //    var FechaModifica = FechaFormato(ListPeriodo[i].peri_FechaModifica);
+                
+
+            //    UsuarioModifica = ListPeriodo[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListPeriodo[i].NombreUsuarioModifica;
+
+            //    template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
+            //        '<td>' + ListPeriodo[i].peri_IdPeriodo + '</td>' +
+            //        '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
+            //        '<td>' + ListPeriodo[i].peri_Activo + '</td>' +
+            //        '<td>' +
+            //        '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs" id="btnDetallePeriodo">Detalle</button>' +
+            //        '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs" id="btnEditarPeriodo">Editar</button>' +
+            //        '</td>' +
+            //        '</tr>';
+            //}
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyPeriodo').html(template);
         });
@@ -66,45 +112,53 @@ function cargarGridPeriodo() {
 $(document).on("click", "#btnAgregarPeriodo", function () {
     console.log("btn Agregar Periodo");
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearPeriodo #peri_DescripPeriodo").val('');
+    $(".field-validation-error").css('display', 'none');
+    $('#Crear input[type=text], input[type=number]').val('');
+    //$("#CrearPeriodo #peri_IdPeriodo").val('');
+    //$("#CrearPeriodo #peri_DescripPeriodo").val('');
     $("#CrearPeriodo").modal();
     $("#CrearPeriodo #Validation_descripcion").css("display", "none");
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
+
 $('#btnCrearPeriodoConfirmar').click(function () {
-    console.log("btn Agregar Periodo dentro del modal");
+    var ModelState = true;
 
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    $("#CrearPeriodo #Validation_descripcion").css("display", "block");
-
+    $("#Crear #peri_DescripPeriodo").val() == "" ? ModelState = false : $("#Crear #peri_DescripPeriodo").val() == " " ? ModelState = false : $("#Crear #peri_DescripPeriodo").val() == null ? ModelState = false : isNaN($("#Crear #peri_DescripPeriodo").val()) == false ? ModelState = false : '';
+    
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreatePeriodo").serializeArray();
-
-    //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#CrearPeriodo #Crear #fpa_Descripcion").val() != "") {
-        mostrarCargandoCrear();
-
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+    if (ModelState) {
+        var data = $("#frmCreatePeriodo").serializeArray();
+        console.log(data);
+        debugger;
         $.ajax({
             url: "/Periodos/Create",
             method: "POST",
             data: data
         }).done(function (data) {
+            $("#CrearPeriodo").modal('hide');
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
-                $("#CrearPeriodo").modal('hide');
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo guardar el registro, contacte al administrador',
+                });
+            }
+            else if (data == "bien") {
                 cargarGridPeriodo();
+                console.log(data);
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se registró de forma exitosa!',
+                    message: 'El registro fue creado de forma exitosa!',
                 });
-                ocultarCargandoCrear();
             }
         });
     }
 });
+
+
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -137,6 +191,7 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
         });
 });
 
+
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnUpdatePeriodo", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -145,7 +200,7 @@ $(document).on("click", "#btnUpdatePeriodo", function () {
 
     var data = $("#frmEditPeriodo").serializeArray();
 
-    if ($("#CrearPeriodo #Crear #fpa_Descripcion").val() != "") {
+    if ($("#EditarPeriodo #Editar #peri_DescripPeriodo").val() != "") {
 
         $.ajax({
             url: "/Periodos/Editar",
@@ -190,13 +245,14 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 
                     var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
-        		    $("#Detalles #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
-        		    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-        		    $("#Detalles #peri_UsuarioCrea").val(iter.peri_UsuarioCrea);
-        		    $("#Detalles #peri_FechaCrea").val(FechaCrea);
-        		    data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-        		    $("#Detalles #peri_UsuarioModifica").val(data[0].peri_UsuarioModifica);
-        		    $("#Detalles #peri_FechaModifica").val(FechaModifica);
+                    $("#Detalles #peri_IdPeriodo").html(iter.peri_IdPeriodo);
+        		    $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
+        		    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+        		    $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
+        		    $("#Detalles #peri_FechaCrea").html(FechaCrea);
+        		    data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+        		    $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
+        		    $("#Detalles #peri_FechaModifica").html(FechaModifica);
         		});        		
         		$("#DetallarPeriodo").modal();
         	}
@@ -211,6 +267,7 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 });
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPeriodo", function () {
+    $("#EditarPeriodo").modal('hide');
     $("#InactivarPeriodo").modal();
 });
 
@@ -234,7 +291,6 @@ $("#btnInactivarPeriodoConfirmar").click(function () {
             cargarGridPeriodo();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPeriodo").modal('hide');
-            $("#EditarPeriodo").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
@@ -327,6 +383,12 @@ $("#btnCerrarInactivacion").click(function () {
 
 
 //*****************DETALLES******************//
+
+//FUNCION: OCULTAR MODAL DE EDICION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
+$("#IconCerrarDetalles").click(function () {
+    $("#DetallarPeriodo #Validation_descripcion").css("display", "none");
+    $("#DetallarPeriodo").modal('hide');
+});
 
 //Boton para cerrar el modal de Inactivar
 $("#btnCerrarDetails").click(function () {
