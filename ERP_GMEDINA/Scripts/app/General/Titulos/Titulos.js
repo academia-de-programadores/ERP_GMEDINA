@@ -38,13 +38,13 @@ function llenarTabla() {
     _ajax(null,
         '/Titulos/llenarTabla',
         'POST',
-        function (lista) {
+        function (Lista) {
             tabla.clear();
             tabla.draw();
             if (validarDT(Lista)) {
                 return null;
             }
-            $.each(lista, function (index, value) {
+            $.each(Lista, function (index, value) {
                 console.log(value.titu_Descripcion);
                 tabla.row.add({
                     ID: value.titu_Id,

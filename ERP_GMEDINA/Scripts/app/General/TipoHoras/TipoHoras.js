@@ -52,7 +52,7 @@ function llenarTabla() {
                   tabla.row.add({
                       ID: value.tiho_Id,
                       Hora: value.tiho_Descripcion,
-                      Recargo:value.tiho_Recargo
+                      Recargo: value.tiho_Recargo
                   });
         });
             tabla.draw();

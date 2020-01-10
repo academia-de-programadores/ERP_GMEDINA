@@ -118,3 +118,21 @@ function CallDetalles(btn) {
 //    debugger
 //    tablaEditar(id);
 //}
+
+function validarDT(obj) {
+    if (obj == "-2") {
+        //$("#ibox1").find(".ibox-content").hide();
+        //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
+        var ventana = $('#IndexTable tbody td.dataTables_empty');
+        ventana[0].innerHTML = "verifique su conexion a internet. (Sí el problema persiste llame al administrador)";
+        return true;
+    } else {
+        if (obj.Length == 0) {
+            $("#ibox1").find(".ibox-content").hide();
+            $("#ibox1").append('No hay registros para mostrar.');
+        } else {
+            return false;
+        }
+        return true;
+    }
+}
