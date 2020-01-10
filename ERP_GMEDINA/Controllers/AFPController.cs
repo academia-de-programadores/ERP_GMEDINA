@@ -298,10 +298,10 @@ namespace ERP_GMEDINA.Controllers
 
         #region Activar AFP
 
-        public ActionResult Activar(int? id)
+        public ActionResult Activar(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbAFP tbAFPJSON = db.tbAFP.Find(id);
+            tbAFP tbAFPJSON = db.tbAFP.Find(ID);
             return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
         }
 

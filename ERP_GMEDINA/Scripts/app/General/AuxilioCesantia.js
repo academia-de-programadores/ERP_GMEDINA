@@ -25,6 +25,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 
 //Funcion para refrescar la tabala (Index)
 function cargarGridAuxilioCesantia() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/AuxilioDeCesantias/GetData',
         'GET',
@@ -42,20 +43,43 @@ function cargarGridAuxilioCesantia() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAuxCes.length; i++)
             {
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
+
+                //variable boton detalles
+                var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAuxCes">Activar</button>' : '' : '';
+
+
+                console.log(estadoRegistro);
+
                 template += '<tr data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '">' +
                     '<td>' + ListaAuxCes[i].aces_IdAuxilioCesantia + '</td>' +
                     '<td>' + ListaAuxCes[i].aces_RangoInicioMeses + '</td>' +
                     '<td>' + ListaAuxCes[i].aces_RangoFinMeses + '</td>' +
                     '<td>' + ListaAuxCes[i].aces_DiasAuxilioCesantia + '</td>' +
-                    '<td>' +
-                    '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs" id="btnModalEdit" data-id="@item.aces_IdAuxilioCesantia">Editar</button>' +
-                    '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs" id="btnModalDetalles" data-id="@item.aces_IdAuxilioCesantia">Detalle</button>' +
-                    '</td>' +
-                    '</tr>';
+                    '<td>' + estadoRegistro + '</td>' +
+                     //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyAuxCes').html(template);
         });
+    FullBody();
 
 }
 
@@ -115,7 +139,7 @@ $('#btnCrearAuxCes').click(function ()
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    message: 'El registro se agregó de forma exitosa!',
                 });
             }
 
@@ -265,7 +289,7 @@ $("#btnUpdateAuxCes").click(function () {
 
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                    message: 'El registro se editó de forma exitosa!',
                 });
             }
         });
@@ -299,7 +323,7 @@ $("#btnEliminarAuxCes").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se logró eliminar el registro, contacte al administrador',
+                message: 'No se logró inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -309,7 +333,7 @@ $("#btnEliminarAuxCes").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue eliminado de forma exitosa!',
+                message: 'El registro se inactivó de forma exitosa!',
             });
         }
     });

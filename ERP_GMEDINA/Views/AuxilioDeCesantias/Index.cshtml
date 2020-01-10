@@ -18,6 +18,16 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="tblAuxCesantia">
                         <thead>
                             <tr role="row">
@@ -33,10 +43,6 @@
                             @foreach (var item in Model)
                             {
                                 string estado = item.aces_Activo == false ? "Inactivo" : "Activo";
-
-                                var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
-
-                                bool esAdministrador = true;
 
                                 <tr class="gradeA odd" role="row" data-id="@item.aces_IdAuxilioCesantia">
                                     <td>

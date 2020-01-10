@@ -1,0 +1,18 @@
+﻿@model ERP_GMEDINA.Models.tbCatalogoDeIngresos
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmActivarCatalogoIngresos" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cin_IdIngreso)
+    @Html.HiddenFor(model => model.cin_FechaCrea)
+    @Html.HiddenFor(model => model.cin_UsuarioCrea)
+    <div class="modal-body" id="Activar">
+        ¿Esta seguro que desea Activar este registro?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary pull-left " id="btnActivarIngresos">Activar</button>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

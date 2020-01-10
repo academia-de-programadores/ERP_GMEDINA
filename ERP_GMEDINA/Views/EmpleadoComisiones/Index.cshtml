@@ -95,7 +95,8 @@
                                             if (oUsuario.usu_EsAdministrador == true && item.cc_Activo == false)
                                             {
                                                  <!-- ACTIVAR -->
-                                                <button type="button" data-id="@item.cc_Id" class="btn btn-primary btn-xs" id="btnActivarEmpleadoComisiones">Activar</button>
+                                                <button type="button" data-id="@item.cc_Id" class="btn btn-primary btn-xs" id="btnActivarRegistroComisiones">Activar</button>
+                                               
                                             }
                                         }
                                     </td>
@@ -194,13 +195,13 @@
             
             <div class="modal-body" id="Activar">
                 @Html.Partial("_ActivarEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
-                ¿Esta seguro que desea Activar este Registro?
+                @*¿Esta seguro que desea Activar este Registro?*@
             </div>
-            <div class="modal-footer">
+            @*<div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="btnActivarRegistroComisiones">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
 
-            </div>
+            </div>*@
         </div>
         </div>
     </div>

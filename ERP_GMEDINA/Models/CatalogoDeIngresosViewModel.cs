@@ -18,6 +18,13 @@ namespace ERP_GMEDINA.Models
         public string descripcionPlanilla { get; set; }
         public int frecuenciaDias { get; set; }
         public string recibeComision { get; set; }
-		public bool activo { get; set; }
-	}
+		public ActivoAdmin activoAdmin { get; set; }
+        public bool esAdmin { get; set; }
+    }
+
+    public class ActivoAdmin
+    {
+        public bool esAdmin { get; set; }
+        public bool activo { get; set; }
+    }
 }
