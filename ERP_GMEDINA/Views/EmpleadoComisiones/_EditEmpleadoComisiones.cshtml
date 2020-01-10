@@ -3,51 +3,45 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesEditar" }))
 {
     <div class="ibox-content">
+        @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.cc_Id)
+
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                       
-                        @Html.LabelFor(model => model.cc_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.cc_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                    </div>
+                @Html.LabelFor(model => model.cc_Id, htmlAttributes: new { @class = "control-label col-md-2", })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cc_Id, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision" } })
+                    <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
-                </div>
-                <div class="col-md-6">
+                @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
+                <div class="col-md-10">
                     <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                     <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.cin_IdIngreso, htmlAttributes: new { @class = "control-label col-md-2", })
-                </div>
-                <div class="col-md-6">
+                @Html.LabelFor(model => model.cin_IdIngreso, htmlAttributes: new { @class = "control-label col-md-2", })
+                <div class="col-md-10">
                     <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                     <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
-                </div>
-                <div class="col-md-6">
+                @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
                     @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision" } })
                     @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
-                </div>
-                <div class="col-md-6">
+                @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
                     @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" } })
                     @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
                 </div>
@@ -63,3 +57,8 @@
     </div>
 }
 
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoComisionesInactivar" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.cc_Id)
+}

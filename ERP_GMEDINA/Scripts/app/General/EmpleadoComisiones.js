@@ -22,6 +22,7 @@ var Idinactivar = 0;
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridComisiones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/EmpleadoComisiones/GetData',
         'GET',
@@ -37,6 +38,19 @@ function cargarGridComisiones() {
             var ListaComisiones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaComisiones.length; i++) {
+                var estadoRegistro = ListaAcumuladosISR[i].cc_Activo  == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaAcumuladosISR[i].cc_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAcumuladosISR[i].cc_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAcumuladosISR">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAcumuladosISR[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAcumuladosISR[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAcumuladosISR">Activar</button>' : '' : '';
+
+
+
                 var FechaRegistro = FechaFormato(ListaComisiones[i].cc_FechaRegistro);
 
                 var Check = "";
@@ -100,15 +114,29 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_IdEmpleado").empty();
-                        $("#Editar #cin_IdIngreso").empty();
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
-                        $.each(data, function (i, iter) {
-                            $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
+                       
                     });
+
+                $.ajax({
+                    url: "/EmpleadoComisiones/EditGetDDLIngreso",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID })
+                })
+                   .done(function (data) {
+                       //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                       $("#Editar #cin_IdIngreso").empty();
+                       //LLENAR EL DROPDOWNLIST
+                       $.each(data, function (i, iter) {
+                           $("#Editar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdIng ? " selected" : "") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                       });
+
+                   });
                 $("#EditarEmpleadoComisiones").modal();
                 //$("#DetalleEmpleadoComisiones").modal(hide);
             }
@@ -141,6 +169,11 @@ $("#btnUpdateComisiones").click(function () {
         data: data
     }).done(function (data) {
         if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo editar el registro, contacte al administrador',
+            });
         }
         else {            
             // REFRESCAR UNICAMENTE LA TABLA
@@ -227,8 +260,6 @@ $('#btnCreateRegistroComisiones').click(function () {
     else {
        $("#Validation_descipcion").css("display", "none");
 
-
-
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoComisionesCreate").serializeArray();
         $.ajax({
@@ -242,6 +273,10 @@ $('#btnCreateRegistroComisiones').click(function () {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 $("#AgregarEmpleadoComisiones").modal('show');
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'Datos Incorrectos',
+                });
             }
             else {
                 cargarGridComisiones();
