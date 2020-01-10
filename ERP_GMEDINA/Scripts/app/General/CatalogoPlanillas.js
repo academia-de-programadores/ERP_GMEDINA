@@ -345,6 +345,9 @@ function listar() {
 				data: null,
 				defaultContent: ''
 			},
+			{
+				data : 'idPlanilla'
+			},
 			{ data: 'descripcionPlanilla' }, //Columna 2: descripción de la planilla, esto viene de la petición que se hizo al servidor
 			{ data: 'frecuenciaDias' }, //Columna 3: frecuencia en días de la planilla, esto viene de la petición que se hizo al servidor
 			{
