@@ -91,6 +91,11 @@ function cargarGridAdelantos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+    $("#Crear #adsu_RazonAdelanto").val("");
+    $("#Crear #adsu_Monto").val("");
+    $("#Crear #emp_IdEmpleado").val(0);
+    $("#Crear #adsu_FechaAdelanto").val("");
+
     $("#AgregarAdelantos").modal();
     $.ajax({
         url: "/AdelantoSueldo/EmpleadoGetDDL",
@@ -171,7 +176,17 @@ $(cmbEmpleadoEdit).change(() => {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
-    if ($("#Crear #adsu_Monto").val() <= MaxSueldoCreate)
+    var Razon =  $("#Crear #adsu_RazonAdelanto").val();
+    var Monto = $("#Crear #adsu_Monto").val();
+    var IdEmp = $("#Crear #emp_IdEmpleado").val();
+    var Fecha = $("#Crear #adsu_FechaAdelanto").val();
+    
+    
+    if ($("#Crear #adsu_Monto").val() <= MaxSueldoCreate
+        && IdEmp != 0
+        && Razon != "" && Razon != null && Razon != undefined
+        && Monto != "" && Monto != null && Monto != undefined && Monto > 0
+        && Fecha != "" && Fecha != null && Fecha != undefined)
     {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoAdelantos").serializeArray();
@@ -191,6 +206,9 @@ $('#btnCreateRegistroAdelantos').click(function () {
                 });
             }
             else {
+                $("#Crear #Validation_descripcion1").css("display", "none");
+                $("#Crear #Validation_descripcion2").css("display", "none");
+                $("#Crear #Validation_descripcion3").css("display", "none");
                 cargarGridAdelantos();
                 //Setear la variable de SueldoAdelantoMaximo a cero 
                 MaxSueldoCreate = 0;
@@ -203,16 +221,57 @@ $('#btnCreateRegistroAdelantos').click(function () {
         });
     }
     else {
-        //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-        iziToast.error({
-            title: 'Error',
-            message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
-        });
-        //IGUALAR EL MONTO AL SUELDO PROMEDIO
-        $("#Crear #adsu_Monto").val(MaxSueldoCreate);
+        if (IdEmp == 0)
+        {
+            iziToast.error({
+                title: 'Error',
+                message: 'Ingrese un colaborador válido.',
+            });
+        } else if (Razon == "" || Razon == null || Razon == undefined) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Campo Razón requerido.',
+            });
+        }else if(Monto == "" || Monto == null || Monto == undefined || Monto == 0){
+            iziToast.error({
+                title: 'Error',
+                message: 'Campo Monto requerido.',
+            });
+        } else if (Fecha == "" || Fecha == null || Fecha == undefined) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Campo Fecha requerido.',
+            });
+        }
+        else if ($("#Crear #adsu_Monto").val() > MaxSueldoCreate) {
+            //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+            iziToast.error({
+                title: 'Error',
+                message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
+            });
+            //IGUALAR EL MONTO AL SUELDO PROMEDIO
+            $("#Crear #adsu_Monto").val(MaxSueldoCreate);
+        }
+
+        if (Razon == "" || Razon == null || Razon == undefined) {
+            $("#Crear #Validation_descripcion1").css("display", "");
+        } else {
+            $("#Crear #Validation_descripcion1").css("display", "none");
+        }
+        if (Monto == "" || Monto == null || Monto == undefined) {
+            $("#Crear #Validation_descripcion2").css("display", "");
+        } else {
+            $("#Crear #Validation_descripcion2").css("display", "none");
+        }
+        if (Fecha == "" || Fecha == null || Fecha == undefined) {
+            $("#Crear #Validation_descripcion3").css("display", "");
+        } else {
+            $("#Crear #Validation_descripcion3").css("display", "none");
+        }
     }
 
 });
+
 
 function ValidarCamposEditar(colaborador, razon, monto){
     var pasoValidacion = true;
@@ -235,6 +294,19 @@ function ValidarCamposEditar(colaborador, razon, monto){
 
     return pasoValidacion;
 }
+
+
+//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION
+$('#btnCerrarCrearAdelanto').click(function () {
+    $("#Crear #Validation_descripcion1").css("display", "none");
+    $("#Crear #Validation_descripcion2").css("display", "none");
+    $("#Crear #Validation_descripcion3").css("display", "none");
+});
+$('#IconCerrar').click(function () {
+    $("#Crear #Validation_descripcion1").css("display", "none");
+    $("#Crear #Validation_descripcion2").css("display", "none");
+    $("#Crear #Validation_descripcion3").css("display", "none");
+});
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
