@@ -1237,6 +1237,7 @@
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\CreateHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
@@ -1246,7 +1247,6 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
-    <Content Include="Scripts\app\General\Personas\FinalPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
@@ -1958,6 +1958,14 @@
     <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Detalles.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Edit.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Create.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Details.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Edit.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Index.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Create.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

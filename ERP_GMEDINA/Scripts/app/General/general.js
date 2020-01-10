@@ -93,7 +93,6 @@ function FechaFormatoSimple(pFecha) {
     return '';
 }
 
-
 function pad2(number) {
     return (number < 10 ? '0' : '') + number
 }
@@ -134,7 +133,11 @@ function MsgSuccess(Titulo, Mensajes) {
     });
 }
 function MsgWarning(Titulo, Mensajes) {
-    iziToast.warning({
+    //iziToast.warning({
+    //    title: Titulo,
+    //    message: Mensajes,
+    //});
+    iziToast.success({
         title: Titulo,
         message: Mensajes,
     });

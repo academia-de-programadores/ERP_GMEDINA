@@ -574,6 +574,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
             //dataTables.buttons.min.js
 
             bundles.Add(new StyleBundle("~/Content/app/General").Include(
