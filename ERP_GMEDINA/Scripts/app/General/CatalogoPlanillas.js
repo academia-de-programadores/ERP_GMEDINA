@@ -316,6 +316,13 @@ function verificarCampos(
 	return todoBien;
 }
 
+const Activar = `
+							<button type="button" class="btn btn-primary btn-xs" id="btnActivar">Activar</button>
+							`;
+const DetallesEditar = `
+							<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+							<button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
+							`;
 //Datatables
 function listar() {
 	//Almacenar la tabla creada
@@ -344,25 +351,28 @@ function listar() {
 				data: 'recibeComision'
 			},
 			{
-				data: 'activo',
+				data: 'activoAdmin',
 				render: function (data) {
-					return (data) ? "Activo" : "Inactivo";
+					return (data.activo) ? "Activo" : "Inactivo";
 				}
 			},
 			{
 				//Columna 4: los botones que tendrá cada fila, editar y detalles de la planilla
 				orderable: false,
-				data: 'activo',
+				data: 'activoAdmin',
 				render: function (data) {
-					if (data)
-						return `
-						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
-                        <button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
-					`
-					else
-						return `
-						<button type="button" class="btn btn-primary btn-xs" id="btnActivar">Activar</button>
-						`;
+					if (!data.activo && data.esAdmin) {
+						return Activar;
+					}
+					else if (data.activo && data.esAdmin) {
+						return DetallesEditar;
+					}
+					else if (!data.activo && !data.esAdmin) {
+						return '';
+					}
+					else {
+						return DetallesEditar;
+					}
 				}
 			}
 		],

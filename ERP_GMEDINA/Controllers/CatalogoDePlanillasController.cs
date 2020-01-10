@@ -23,17 +23,26 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult getPlanilla()
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla();
+            tbUsuario sesion =  Session["sesionUsuario"] as tbUsuario;
+            
+            IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla(sesion?.usu_EsAdministrador);
             object json = new { data = tbCatalogoDePlanillas };
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
-        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla()
-        {
+        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false)
+        {   
             return db.tbCatalogoDePlanillas
                             .OrderByDescending(x => x.cpla_FechaCrea)
                             .OrderByDescending(x => x.cpla_Activo)
-                            .Select(x => new CatalogoDePlanillasViewModel { idPlanilla = x.cpla_IdPlanilla, descripcionPlanilla = x.cpla_DescripcionPlanilla, frecuenciaDias = x.cpla_FrecuenciaEnDias, recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"), activo = x.cpla_Activo });
+                            .Select(x => new CatalogoDePlanillasViewModel
+                            {
+                                idPlanilla = x.cpla_IdPlanilla,
+                                descripcionPlanilla = x.cpla_DescripcionPlanilla,
+                                frecuenciaDias = x.cpla_FrecuenciaEnDias,
+                                recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"),
+                                activoAdmin = new ActivoAdmin { activo = x.cpla_Activo, esAdmin = usuario ?? false }
+                            });
         }
 
         [HttpGet]
@@ -624,7 +633,7 @@ namespace ERP_GMEDINA.Controllers
                     if (mensajeError.StartsWith("-1"))
                         response = "error";
 
-                    tbCatalogoDePlanillas = GetPlanilla();
+                    tbCatalogoDePlanillas = GetPlanilla((Session["sesionUsuario"] as tbUsuario)?.usu_EsAdministrador);
 
                     dbContextTransaccion.Commit();
                 }
