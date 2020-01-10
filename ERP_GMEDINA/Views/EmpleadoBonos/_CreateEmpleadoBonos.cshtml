@@ -28,7 +28,8 @@
                         <div class="col-md-6">
                             Monto
                             @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "col-md-9", @type = "number", @name = "cb_Monto", @id = "cb_Monto" } })
-                            @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })
+                            <div>@Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })</div>
+                            @*<label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto requerido.</label>*@
                         </div>
                     </div>
                 </div>
@@ -86,7 +87,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarCrearBono">Cerrar</button>
                 <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroBonos">Guardar</button>
             </div>
         }

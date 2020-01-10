@@ -85,8 +85,7 @@ namespace ERP_GMEDINA.Controllers
             tbEmpleadoBonos.cb_FechaRegistro = DateTime.Now;
             tbEmpleadoBonos.cb_Pagado = false;
             tbEmpleadoBonos.cb_UsuarioCrea = 1;
-            tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;            
-
+            tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listEmpleadoBonos = null;
@@ -147,7 +146,6 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult edit([Bind(Include = "cb_Id, emp_Id, cin_IdIngreso, cb_Monto, cb_FechaRegistro, cb_Pagado, cb_UsuarioModifica, cb_FechaModifica")] tbEmpleadoBonos tbEmpleadoBonos)
         {
             tbEmpleadoBonos.cb_UsuarioModifica = 1;
