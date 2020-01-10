@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
     public class cPreaviso
     {
 
-
+        [Display(Name = "Numero")]
         public int prea_IdPreaviso { get; set; }
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
@@ -42,6 +42,8 @@ namespace ERP_GMEDINA.Models
 
         public Nullable<int> prea_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> prea_FechaModifica { get; set; }
+
+        [Display(Name = "Estado")]
         public bool prea_Activo { get; set; }
 
     }
