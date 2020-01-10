@@ -120,7 +120,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Vacantes, htmlAttributes: new { @class = "control-label col-md-2"})
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "form-control required", @type = "number" } })
+                                                @Html.EditorFor(model => model.req_Vacantes, new { htmlAttributes = new { @class = "form-control required", @type = "number", @min ="1" } })
                                                 @Html.ValidationMessageFor(model => model.req_Vacantes, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -186,7 +186,6 @@
     }
 
     @section Scripts {
-        @Scripts.Render("~/plugins/validate")
         @Scripts.Render("~/Scripts/app/general")
         @Scripts.Render("~/plugins/duallist")
         @Scripts.Render("~/plugins/wizardSteps")
