@@ -6,31 +6,34 @@
     <dd id="hper_Observacion">
         @Html.DisplayFor(model => model.hper_Observacion)
     </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.hper_FechaCrea)
-    </dt>
-    <dd id="hper_FechaCrea">
-        @Html.DisplayFor(model => model.hper_FechaCrea)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.hper_FechaModifica)
-    </dt>
-    <dd id="hper_FechaModifica">
-        @Html.DisplayFor(model => model.hper_FechaModifica)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-    </dt>
-    <dd id="tbUsuario_usu_NombreUsuario">
-        @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-    </dd>
-    <dt>
-        @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-    </dt>
-    <dd id="tbUsuario1_usu_NombreUsuario">
-        @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-    </dd>
+
+    
 </dl>
+<div class="ibox-content">
+    <div class="form-horizontal">
+        <table class="table table-striped table-bordered dataTable">
+            <thead>
+                <tr>
+                    <th>Acción</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Creado</td>
+                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    <td><span id="hper_FechaCrea">@Html.DisplayFor(model => model.hper_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                </tr>
+                <tr>
+                    <td>Modificado</td>
+                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                    <td><span id="hper_FechaModifica">@Html.DisplayFor(model => model.hper_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @*MODAL EDITAR*@
 <div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">

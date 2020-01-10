@@ -1,19 +1,11 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialPermisos>
 
 @{
-    ViewBag.Title = "Permisos";
+    ViewBag.Title = "Historial de Permisos";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Historial de Permisos</h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -47,7 +39,7 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar Observaciónes de salida</h4>
+                <h4 class="modal-title">Editar Observaciónes de Permiso</h4>
             </div>
             <div class="modal-body" id="ModalEdit">
                 @Html.Partial("_EditHistorialPermisos", new ERP_GMEDINA.Models.tbHistorialPermisos())
@@ -90,7 +82,7 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalles de la salida</h4>
+                <h4 class="modal-title">Detalles del Permiso</h4>
             </div>
             <div class="modal-body" id="ModalDetallesAX">
                 <p>
