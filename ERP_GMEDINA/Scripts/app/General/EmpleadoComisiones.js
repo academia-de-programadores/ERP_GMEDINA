@@ -164,6 +164,7 @@ $("#btnUpdateComisiones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    mostrarCargandoEditar()
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
         method: "POST",
@@ -186,7 +187,7 @@ $("#btnUpdateComisiones").click(function () {
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
-
+            ocultarCargandoEditar();
         }
     });
 });
@@ -231,6 +232,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+  
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
         method: "GET",
@@ -247,6 +249,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
                 $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
+    
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarEmpleadoComisiones").modal();
 });
@@ -264,7 +267,8 @@ $('#btnCreateRegistroComisiones').click(function () {
         $("#Validation_descipcion3").css("display", "");
     }
        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-       var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+    mostrarCargandoCrear()
        $.ajax({
            url: "/EmpleadoComisiones/Create",
            method: "POST",
@@ -290,6 +294,7 @@ $('#btnCreateRegistroComisiones').click(function () {
                    message: 'El registro fue Creado de forma exitosa!',
                });
            }
+           ocultarCargandoCrear();
        }); 
 });
 
@@ -498,6 +503,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroC
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion1").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Validation_descipcion3").css("display", "none");
         $("#PorcentajeComision").val('');
         $("#TotalVenta").val('');
     });
@@ -508,6 +514,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroC
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion1").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
+        $("#Validation_descipcion3").css("display", "none");
         $("#PorcentajeComision").val('');
         $("#TotalVenta").val('');
     });
@@ -591,3 +598,67 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroC
     $("#frmEmpleadoComisionesCreate").submit(function (e) {
         e.preventDefault();
     });
+
+    function mostrarCargandoCrear(){
+        btnGuardar.hide();
+        cargandoCrear.html(spinner());
+        cargandoCrear.show();
+    }
+ 
+    function ocultarCargandoCrear(){
+        btnGuardar.show();
+        cargandoCrear.html('');
+        cargandoCrear.hide();
+    }
+
+    //Mostrar el spinner
+    function spinner(){
+        return`<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+    }
+
+
+const btnGuardar = $('#btnCreateRegistroComisiones'),
+
+    cargandoCrearcargandoCrear=$('#cargandoCrear')
+
+    cargandoCrear=$('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+
+
+    function mostrarCargandoEditar(){
+        btnEditar.hide();
+        cargandoEditar.html(spinner());
+        cargandoEditar.show();
+    }
+ 
+    function ocultarCargandoEditar(){
+        btnEditar.show();
+        cargandoEditar.html('');
+        cargandoEditar.hide();
+    }
+
+    //Mostrar el spinner
+    function spinner(){
+        return`<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+    }
+
+
+const btnEditar = $('#btnUpdateComisiones'),
+
+        cargandoCrearcargandoEditar = $('#cargandoEditar')
+
+    cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
+
+
