@@ -4,28 +4,58 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Detalle Historial Amonestaciones</h4>
+                <h4 class="modal-title">Detalles Amonestación</h4>
             </div>
             <div class="modal-body">
                 <dl class="dl-horizontal">
-                    <dt>@Html.DisplayNameFor(model => model.emp_Id)</dt>
-                    <dd id="emp_Id"></dd>
 
-					<dt>@Html.DisplayNameFor(model => model.hamo_Observacion)</dt>
+					<dt>Observación</dt>
                     <dd id="hamo_Observacion"></dd>
 
-                    <dt>@Html.DisplayNameFor(model => model.tbTipoAmonestaciones.tamo_Descripcion)</dt>
+                    <dt>Descripción</dt>
                       <dd id="tbTipoAmonestaciones_tamo_Descripcion"></dd>
 
-					<dt>@Html.DisplayNameFor(model => model.hamo_Fecha)</dt>
+					<dt>Fecha</dt>
                     <dd id="hamo_Fecha"></dd>
 
-					<dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+					@*<dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
                     <dd id="tbUsuario_usu_NombreUsuario"></dd>
 
                     <dt>@Html.DisplayNameFor(model => model.hamo_FechaCrea)</dt>
-                    <dd id="hamo_FechaCrea"></dd>
+                    <dd id="hamo_FechaCrea"></dd>*@
 				</dl>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>Auditoría</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <table class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Acción</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        @Html.HiddenFor(model => model.hamo_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="hamo_FechaCrea">@Html.DisplayFor(model => model.hamo_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                    @*<tr>
+                                        <td>Modificado</td>
+                                        @Html.HiddenFor(model => model.hamo_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="hamo_FechaModifica">@Html.DisplayFor(model => model.hamo_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>*@
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
