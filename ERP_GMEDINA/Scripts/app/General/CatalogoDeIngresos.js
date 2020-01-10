@@ -416,41 +416,32 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function
     $("#ActivarCatalogoIngresos").modal();
  });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+
+//EJECUTAR LA ACTIVACION DEL REGISTRO
 $("#btnActivarIngreso").click(function () {
-
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmActivarCatalogoIngresos").serializeArray();
-    var descedit = $("#Activar #cin_DescripcionIngreso").val();
-
-    //VALIDAMOS LOS CAMPOS
-    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
-        mostrarcargandoEditar();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/CatalogoDeIngresos/Activar",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo activar el registro, contacte al administrador',
-                });
-            }
-            else {
-                $("#ActivarCatalogoIngresos").modal('hide');
-                cargarGridIngresos();
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro fue activado de forma exitosa!',
-                });
-            }
-        });
-        $("#frmCatalogoIngresos").submit(function (e) {
-            return false;
-        });
-    }
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/CatalogoDeIngresos/Activar/" + IDActivar,
+        method: "POST"
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarCatalogoIngresos").modal('hide');
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridIngresos();
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
+            });
+        }
+    });
+    IDActivar = 0;
 });

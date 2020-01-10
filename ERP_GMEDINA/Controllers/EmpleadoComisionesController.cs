@@ -282,7 +282,7 @@ namespace ERP_GMEDINA.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Activar(int id)
+        public ActionResult Activar(int? id)
         {
             IEnumerable<object> listEmpleadoComisiones = null;
             string MensajeError = "";

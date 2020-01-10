@@ -24,7 +24,7 @@
                         string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
-                        <input type="hidden" name="rol_Usuario" id="rol_Usuario"  value="@rol_Usuario"/>
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
                     }
                     <table class="table table-striped table-bordered table-hover dataTables-AcumuladosISR animated fadeInRight" id="tblAcumuladosISR">
                         <thead>
@@ -69,7 +69,7 @@
                                         }
                                     </td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                         <tfoot>
                         </tfoot>
@@ -141,6 +141,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger " id="btnInactivarAcumuladosISREjecutar">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal de confirmación activar *@
+<div class="modal fade" id="ActivarAcumuladosISR" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Está seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success " id="btnActivarAcumuladosISREjecutar">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>

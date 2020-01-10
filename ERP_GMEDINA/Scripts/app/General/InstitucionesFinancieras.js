@@ -2,18 +2,6 @@
 //FUNCION: Opciones de validacion
 $('#btnCargarPlanilla').click(function ()
 {
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    //var data = $("#dropzoneForm").serializeArray();
-
-    //var ddlINFS = $("#Crear #aces_RangoInicioMeses").val();
-    //var rangoFin = $("#Crear #aces_RangoFinMeses").val();
-    //var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
-
- //   console.log(data);
-
-    //VALIDAMOS LOS CAMPOS
- //   if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0) {
-   
 //------------------------------------------------------------------------------------------------------
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -35,27 +23,8 @@ $('#btnCargarPlanilla').click(function ()
             else 
             {
                 $("#frmOpcionesINFS").modal();
-               // cargarGridAuxilioCesantia();
-                //$("#dropzoneForm #cboINFS").val('');
-                //$("#dropzoneForm #cboIdDeduccion").val('');
-                //$("#archivoexcel").val('');
-
-                // Mensaje de exito cuando un registro se ha guardado bien
-                //iziToast.success({
-                //    title: 'Exito',
-                //    message: 'El registro fue registrado de forma exitosa!',
-                //});
             }
         });
-    
-//else 
-//{
-//        $("#rangoinicio").focus();
-//        iziToast.error({
-//            title: 'Error',
-//            message: 'Ingrese datos válidos.',
-//        });
-//    }
 });
 
 

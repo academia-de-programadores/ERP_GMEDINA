@@ -1,5 +1,4 @@
 ﻿@model ERP_GMEDINA.Models.tbAcumuladosISR
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditAcumuladosISR" }))
 {
     @Html.AntiForgeryToken()
@@ -43,7 +42,6 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.aisr_Id)
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

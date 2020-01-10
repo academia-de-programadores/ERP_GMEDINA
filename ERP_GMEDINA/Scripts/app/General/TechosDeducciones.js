@@ -30,6 +30,7 @@ $("#frmTechosDeduccionesCreate").submit(function (e) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridTechosDeducciones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/TechosDeducciones/GetData',
         'GET',
@@ -44,24 +45,35 @@ function cargarGridTechosDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTechosDeducciones.length; i++) {
                 var Activo;
-                if(ListaTechosDeducciones[i].tddu_Activo)
-                    Activo = "Activo"
-                else
-                    Activo = "Inactivo";
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaTechosDeducciones[i].tddu_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
                 template += '<tr data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '">' +
                     '<td>' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeColaboradores + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].tddu_Techo + '</td>' +
                     '<td>' + ListaTechosDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + Activo + '</td>' +
-                    '<td>' +
+                    '<td>' + estadoRegistro + '</td>' +
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
 
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalle</button>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' +
-                    '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyTechosDeducciones').html(template);
@@ -300,17 +312,17 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 var FechaCrea = FechaFormato(data[0].tddu_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].tddu_FechaModifica);
                 $("#Detalles #tddu_UsuarioCrea").val(data[0].tddu_UsuarioCrea);
-                $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
+                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
 
-                $("#Detalles #tddu_PorcentajeColaboradores").val(data[0].tddu_PorcentajeColaboradores);
-                $("#Detalles #tddu_PorcentajeEmpresa").val(data[0].tddu_PorcentajeEmpresa);
-                $("#Detalles #tddu_Techo").val(data[0].tddu_Techo);
-                $("#Detalles #tede_UsuarioCrea").val(data[0].tede_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #tddu_FechaCrea").val(FechaCrea);
-                $("#Detalles #tddu_UsuarioModifica").val(data.tddu_UsuarioModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #tddu_FechaModifica").val(FechaModifica);
+                $("#Detalles #tddu_PorcentajeColaboradores").html(data[0].tddu_PorcentajeColaboradores);
+                $("#Detalles #tddu_PorcentajeEmpresa").html(data[0].tddu_PorcentajeEmpresa);
+                $("#Detalles #tddu_Techo").html(data[0].tddu_Techo);
+                $("#Detalles #tede_UsuarioCrea").html(data[0].tede_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #tddu_FechaCrea").html(FechaCrea);
+                $("#Detalles #tddu_UsuarioModifica").html(data.tddu_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #tddu_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].cde_IdDeducciones;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -341,4 +353,38 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 });
             }
         });
+});
+
+// activar
+var activarID = 0;
+$(document).on("click", "#btnActivarTechosDeducciones", function () {
+    activarID = $(this).data('id');
+    $("#ActivarTechosDeducciones").modal();
+});
+
+//activar ejecutar
+$("#btnActivarTechosDeduccionesEjecutar").click(function () {
+
+    $.ajax({
+        url: "/TechosDeducciones/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo activar el registro.',
+            });
+        }
+        else {
+            cargarGridTechosDeducciones();
+            $("#ActivarTechosDeducciones").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue activado de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
 });

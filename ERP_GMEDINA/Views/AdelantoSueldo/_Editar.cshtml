@@ -1,5 +1,5 @@
 ﻿@model ERP_GMEDINA.Models.tbAdelantoSueldo
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonos" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmAdelantosEdit" }))
 {
     <div class="modal-body" id="Editar">
         @Html.AntiForgeryToken()
@@ -18,22 +18,20 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="text" autocomplete="off" class="form-control" id="adsu_RazonAdelanto" name="adsu_RazonAdelanto"/>
-                    @*@Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new {@autocomplete = "off" } })*@
-                    <label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo razón es obligatorio.</label>
-                    @*@Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" , @autocomplete = "off" } })
-                    <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo monto es obligatorio.</label>
-                    @*@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+            @* VArIABLE PARA INABILITAR EL BOTON DE ACUALIZAR *@
             <div id = "inactivar" class="modal-footer" hidden>
                 <button type="button" class="btn btn-primary pull-left" id="btnUpdateAdelantos">Actualizar</button>
                 <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarAdelantoSueldo">Inhabilitar</button>
@@ -41,10 +39,13 @@
             </div>
 
             <div id="activar" class="modal-footer" hidden>
-                <button type="button" class="btn btn-primary pull-left" id="btnUpdateAdelantos2">Actualizar</button>
+                <button type="button" class="btn btn-primary pull-left" disabled title="Debe habilitar el registro para editar" id="btnUpdateAdelantos">Actualizar</button>
                 <button type="button" class="btn btn-primary pull-left" id="btnActivarAdelantoSueldo">Habilitar</button>
                 <button type="button" class="btn btn-white" id="btnCerrarEditar2">Cerrar</button>
             </div>
+
+            
+            <div id="padre"></div>
         </div>
     </div>
 }
