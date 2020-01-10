@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha de Modificación")]
         public Nullable<System.DateTime> afp_FechaModifica { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "Estado")]
         public bool afp_Activo { get; set; }
 
     }
