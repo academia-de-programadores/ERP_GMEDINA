@@ -13,8 +13,11 @@ namespace ERP_GMEDINA.Models
     public class cPeriodos
     {
 
-
+        [Display(Name = "Numero")]
         public int peri_IdPeriodo { get; set; }
+
+        [Display(Name = "Estado")]
+        public bool peri_Activo { get; set; }
 
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "No puede dejar el campo {0} vacio.")]
@@ -29,7 +32,6 @@ namespace ERP_GMEDINA.Models
 
         public Nullable<int> peri_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> peri_FechaModifica { get; set; }
-        public bool peri_Activo { get; set; }
 
     }
 }

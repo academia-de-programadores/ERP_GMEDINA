@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Preaviso
         public ActionResult Index()
         {
-            var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(t => t.prea_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbPreaviso.ToList());
         }
         #endregion
@@ -43,8 +43,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     prea_FechaModifica = c.prea_FechaModifica,
                     prea_Activo = c.prea_Activo
-                }).Where(x => x.prea_Activo == true)
-                .OrderByDescending(x => x.prea_FechaCrea).ToList();
+                }).OrderByDescending(x => x.prea_FechaCrea).ToList();
 
             return new JsonResult { Data = tbPreaviso, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

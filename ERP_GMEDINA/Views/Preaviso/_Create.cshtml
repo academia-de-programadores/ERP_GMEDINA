@@ -2,40 +2,39 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreatePreaviso" }))
 {
-    <div class="modal-body" id="Crear">
+    <div class="ibox-content">
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.prea_UsuarioCrea)
             @Html.HiddenFor(model => model.prea_FechaCrea)
+            
             <div class="form-group">
-                @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-6">
+                    <div class="input-group date">
+                        Rango de Inicio del Mes
+                        @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                     @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Rango de Fin de Mes</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-6">
+                    <div class="input-group date">
+                        Rango del Fin de Mes
+                        @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                     @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2">Dias Preaviso</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-6">
+                    <div class="input-group date">
+                        Dias Preaviso
+                        @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>   
                     @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
             </div>
         </div>
     </div>
-            <div class="modal-footer">
-                <input type="button" value="Cancelar" id="btnCerrarCrear" class="btn btn-default" />
-                <input type="submit" id="btnCrearPreavisoConfirmar" value="Guardar" class="btn btn-primary" />
-                <div style="display:none" class="btn" id="cargandoCrear">
-                </div>
-            </div>}
+}
