@@ -45,6 +45,9 @@ function Add(depto_Descripcion, car_Descripcion) {
                 Accion:'i'
             }
             ).draw();
+        $("#FormDepartamentos").find("#depto_Descripcion").val("");
+        $("#FormDepartamentos").find("#car_Descripcion").val("");
+        $("#FormDepartamentos").find("#depto_Descripcion").focus();
     } else {
         if (car_Descripcion.trim().length == 0) {
             var txt_required = $("#FormDepartamentos").find("#car_Descripcion").data("val-required");
