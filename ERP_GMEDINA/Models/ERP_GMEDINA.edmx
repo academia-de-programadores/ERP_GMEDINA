@@ -1760,6 +1760,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_GeneralTotales_RPT' does not h
           <Property Name="cde_OtrasDeducciones" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_HistorialEmpleadosLiquidados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialEmpleadosLiquidados">
+          <Key>
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="hdli_Id" Type="int" />
+          <Property Name="emp_Id" Type="int" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="moli_IdMotivo" Type="int" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="hdli_MontoTotalLiquidacion" Type="decimal" Precision="16" Scale="4" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_IHSS_RPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_IHSS_RPT">
           <Key>
@@ -6495,6 +6515,20 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_GeneralTotales_RPT].[cde_TotalINFOP] AS [cde_TotalINFOP], 
     [V_GeneralTotales_RPT].[cde_OtrasDeducciones] AS [cde_OtrasDeducciones]
     FROM [Plani].[V_GeneralTotales_RPT] AS [V_GeneralTotales_RPT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="Self.V_HistorialEmpleadosLiquidados" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_HistorialEmpleadosLiquidados].[hdli_Id] AS [hdli_Id], 
+    [V_HistorialEmpleadosLiquidados].[emp_Id] AS [emp_Id], 
+    [V_HistorialEmpleadosLiquidados].[per_Identidad] AS [per_Identidad], 
+    [V_HistorialEmpleadosLiquidados].[per_Nombres] AS [per_Nombres], 
+    [V_HistorialEmpleadosLiquidados].[per_Apellidos] AS [per_Apellidos], 
+    [V_HistorialEmpleadosLiquidados].[hdli_SalarioOrdinarioMensual_Liq] AS [hdli_SalarioOrdinarioMensual_Liq], 
+    [V_HistorialEmpleadosLiquidados].[hdli_SalarioPromedioMensual_Liql] AS [hdli_SalarioPromedioMensual_Liql], 
+    [V_HistorialEmpleadosLiquidados].[moli_IdMotivo] AS [moli_IdMotivo], 
+    [V_HistorialEmpleadosLiquidados].[moli_Descripcion] AS [moli_Descripcion], 
+    [V_HistorialEmpleadosLiquidados].[hdli_MontoTotalLiquidacion] AS [hdli_MontoTotalLiquidacion]
+    FROM [Plani].[V_HistorialEmpleadosLiquidados] AS [V_HistorialEmpleadosLiquidados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_IHSS_RPT" EntityType="Self.V_IHSS_RPT" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -14915,7 +14949,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result)">
-          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -15455,25 +15489,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Activar" ReturnType="Collection(String)">
-          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar" ReturnType="Collection(String)">
-          <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
             <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar" ReturnType="Collection(String)">
-          <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
             <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Activar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Activar_Result)">
-          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -15902,6 +15937,24 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="V_HistorialEmpleadosLiquidados">
+          <Key>
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="hdli_Id" Type="Int32" />
+          <Property Name="emp_Id" Type="Int32" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="moli_IdMotivo" Type="Int32" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hdli_MontoTotalLiquidacion" Type="Decimal" Precision="16" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18619,6 +18672,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_HistorialEmpleadosLiquidados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados">
+              <MappingFragment StoreEntitySet="V_HistorialEmpleadosLiquidados">
+                <ScalarProperty Name="hdli_MontoTotalLiquidacion" ColumnName="hdli_MontoTotalLiquidacion" />
+                <ScalarProperty Name="moli_Descripcion" ColumnName="moli_Descripcion" />
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+                <ScalarProperty Name="hdli_SalarioPromedioMensual_Liql" ColumnName="hdli_SalarioPromedioMensual_Liql" />
+                <ScalarProperty Name="hdli_SalarioOrdinarioMensual_Liq" ColumnName="hdli_SalarioOrdinarioMensual_Liq" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hdli_Id" ColumnName="hdli_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
