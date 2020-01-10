@@ -419,21 +419,18 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $("#Activar #cin_IdIngreso").val(data.cin_IdIngreso);
-                $("#Activar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                //$(".field-validation-error").css('display', 'none');
-                $("#ActivarCatalogoIngresos").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
+    .done(function (data) {
+        if (data == "error")
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo inhabilitar el registro, contacte al administrador',
+            });
+
+        else {
+            //Mensaje de error si no hay data
+            $("#ActivarCatalogoIngresos").modal();
+        }
         });
 });
 
