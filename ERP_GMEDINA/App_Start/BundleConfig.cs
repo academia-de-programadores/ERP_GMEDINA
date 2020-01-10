@@ -510,6 +510,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
                   "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/EditRequisiciones.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/RazonSalidas").Include(
               "~/Scripts/app/general/RazonSalidas/RazonSalidas.js"));
 

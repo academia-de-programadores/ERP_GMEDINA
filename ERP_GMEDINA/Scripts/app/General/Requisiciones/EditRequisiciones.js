@@ -91,11 +91,11 @@ $(document).ready(function () {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#tbRequisiciones").find("#req_Experiencia").val(obj[0].req_Experiencia);
-                $("#tbRequisiciones").find("#req_Sexo").val(obj[0].req_Sexo);
+                $("#tbRequisiciones").find("#req_Sexo").val($.trim(obj[0].req_Sexo));
                 $("#tbRequisiciones").find("#req_Descripcion").val(obj[0].req_Descripcion);
                 $("#tbRequisiciones").find("#req_EdadMinima").val(obj[0].req_EdadMinima);
                 $("#tbRequisiciones").find("#req_EdadMaxima").val(obj[0].req_EdadMaxima);
-                $("#tbRequisiciones").find("#req_EstadoCivil").val(obj[0].req_EstadoCivil);
+                $("#tbRequisiciones").find("#req_EstadoCivil").val($.trim(obj[0].req_EstadoCivil));
                 $("#tbRequisiciones").find("#req_EducacionSuperior").prop("checked", obj[0].req_EducacionSuperior);
                 $("#tbRequisiciones").find("#req_Permanente").prop("checked", obj[0].req_Permanente);
                 $("#tbRequisiciones").find("#req_Duracion").val(obj[0].req_Duracion);
