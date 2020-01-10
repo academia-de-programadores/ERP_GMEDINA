@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Controllers
                             tddu_Techo = c.tddu_Techo,
                             tddu_Activo = c.tddu_Activo,
                             tede_FechaCrea = c.tddu_FechaCrea
-                        }).OrderByDescending(c => c.tede_FechaCrea)
+                        })//.OrderByDescending(c => c.tede_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.V_HistorialEmpleadosLiquidados>
+
+@{
+    ViewBag.Title = "Empleados Liquidados";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Reporte de Liquidación de Empleados</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoDeducciones">Registrar Deduccion</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 160px;">@Html.DisplayNameFor(model => model.per_Nombres)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 160px;">@Html.DisplayNameFor(model => model.moli_Descripcion)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 140px;">@Html.DisplayNameFor(model => model.hdli_SalarioOrdinarioMensual_Liq)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hdli_SalarioPromedioMensual_Liql)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.hdli_MontoTotalLiquidacion)</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyDeducciones">
+                            @foreach (var item in Model)
+                            {
+                                var NombreCompleto = item.per_Nombres + " " + item.per_Apellidos;
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => NombreCompleto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.moli_Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hdli_SalarioOrdinarioMensual_Liq)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hdli_SalarioPromedioMensual_Liql)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hdli_MontoTotalLiquidacion)
+                                    </td>
+                                    <td>
+                                        <button data-id="@item.hdli_Id" type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
+                                        <button data-id="@item.hdli_Id" type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrarEdit"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="col-md-offset-4"><strong>Editar Deducción</strong></h2>
+            </div>
+            <div class="modal-body" id="Editar">
+                @*Mandamos un nuevo modelo solo para poder cargar la página *@
+                @*@Html.Partial("_EditCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AgregarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrarCreate"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h2 class="col-md-offset-4"><strong>Agregar Deducción</strong></h2>
+            </div>
+            <div class="modal-body" id="Crear">
+                @*@Html.Partial("_CreateCatalogoDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DetallesCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalles</h4>
+            </div>
+            <div class="modal-body" id="Detalles">
+                @*@Html.Partial("_DetalleCatalogoDeDeducciones", new ERP_GMEDINA.Models.tbCatalogoDeDeducciones())*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Seguro que desea inhabilitar el registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="btnInactivarRegistroDeduccion">Actualizar</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarInhabilitar">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/CatalogoDeducciones.js")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}

@@ -78,10 +78,6 @@ namespace ERP_GMEDINA.Controllers
 			string Response = String.Empty;
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
 			string MensajeError = "";
-            if (ModelState.IsValid)
-            {
-                Response = "Error";
-            }
 			if (ModelState.IsValid)
 			{
 				try

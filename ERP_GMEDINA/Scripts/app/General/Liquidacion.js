@@ -160,7 +160,7 @@ $(document).ready(function() {
     //Llengar DDL Areas con Empleados
     _ajax(
 		null,
-		'Liquidacion/GetEmpleadosAreas',
+		'/Liquidacion/GetEmpleadosAreas',
 		'GET',
 		(data) => {
 		    $('#cmbxEmpleados').select2({
@@ -202,7 +202,7 @@ function obtenerDatosEmpleados(idEmpleado, fechaFin, IdMotivo) {
 		{
 		    idEmpleado: idEmpleado,
 		    fechaFin: fechaFin,
-            IdMotivo : IdMotivo
+		    IdMotivo : IdMotivo
 		},
 		'/Liquidacion/Obtener_Informacion_Empleado',
 		'POST',
@@ -456,7 +456,7 @@ $("#RegistrarLiquidacion").click(function () {
 $('.ValidarCaracteres').bind('keypress', function (event) { 
     console.log("hola");
     //var regex = new RegExp("^[a-zA-Z0-9]+$"); 
-    var regex = new RegExp("^[0-9]"); 
+    var regex = new RegExp("^[0-9]?[.]"); 
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode); 
     if (!regex.test(key)) 
     { 
@@ -464,3 +464,4 @@ $('.ValidarCaracteres').bind('keypress', function (event) {
         return false; 
     } 
 });
+

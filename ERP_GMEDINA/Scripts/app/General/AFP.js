@@ -495,11 +495,14 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #tde_IdTipoDedu").empty();
+                        //$("#Detalles #tde_IdTipoDedu").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
+                        //$("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            //$("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            if (iter.Id == SelectedId) {
+                                $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
+                            }
                         });
                     });
                 $("#DetallesAFP").modal();
