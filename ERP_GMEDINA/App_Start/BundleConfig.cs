@@ -540,6 +540,11 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/Preaviso.js"));
             #endregion
 
+            #region Equipo Todos
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
+                "~/Scripts/app/General/FechaPlanilla.js"));
+            #endregion
+
             //DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
                 "~/Scripts/Scripts_Base/jquery.validate.js",

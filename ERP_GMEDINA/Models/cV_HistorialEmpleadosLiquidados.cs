@@ -17,8 +17,11 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public Nullable<int> hdli_Id { get; set; }
 
-        [Display(Name = "ID de Empleado")]
+        [Display(Name = "ID Empleado")]
         public Nullable<int> emp_Id { get; set; }
+
+        [Display(Name = "No. Identidad")]
+        public string per_Identidad { get; set; }
 
         [Display(Name = "Nombre")]
         public string per_Nombres { get; set; }
@@ -26,16 +29,16 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Apellido")]
         public string per_Apellidos { get; set; }
 
-        [Display(Name = "Salario Ordinario Mensual")]
+        [Display(Name = "Salario Mensual")]
         public Nullable<decimal> hdli_SalarioOrdinarioMensual_Liq { get; set; }
 
-        [Display(Name = "Salario Promedio Mensual")]
+        [Display(Name = "Salario Mensual")]
         public Nullable<decimal> hdli_SalarioPromedioMensual_Liql { get; set; }
 
         [Display(Name = "ID Motivo De Liquidación")]
         public int moli_IdMotivo { get; set; }
 
-        [Display(Name = "Razón De Liquidación")]
+        [Display(Name = "Motivo")]
         public string moli_Descripcion { get; set; }
 
         [Display(Name = "Total")]

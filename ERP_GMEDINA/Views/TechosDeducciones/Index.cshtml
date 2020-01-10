@@ -62,9 +62,9 @@
                                         @estadoISR
                                     </td>
                                     <td>
-                                        
+
                                         @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
-                                        
+
                                         @{
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                             if (item.tddu_Activo == true)
@@ -167,8 +167,11 @@
             <div class="modal-body" id="Inactivar">
                 ¿Está seguro que desea activar este registro?
             </div>
+
             <div class="modal-footer" style="border-top:0px;">
                 <button type="button" class="btn btn-primary " id="btnActivarTechosDeduccionesEjecutar">Sí</button>
+
+
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>

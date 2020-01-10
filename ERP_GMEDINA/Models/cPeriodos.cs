@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
     public class cPeriodos
     {
 
-        [Display(Name = "Numero")]
+        [Display(Name = "Número")]
         public int peri_IdPeriodo { get; set; }
 
         [Display(Name = "Estado")]
