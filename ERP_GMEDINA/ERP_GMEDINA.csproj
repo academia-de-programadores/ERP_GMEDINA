@@ -200,6 +200,7 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
+    <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
     <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
@@ -242,10 +243,12 @@
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\cHistorialIncapacidades.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
     <Compile Include="Models\cHistorialSalidas_Empleados.cs" />
+    <Compile Include="Models\CHistorialVacaciones.cs" />
     <Compile Include="Models\cHorarios.cs" />
     <Compile Include="Models\cIdiomas.cs" />
     <Compile Include="Models\cJornadas.cs" />
@@ -1237,6 +1240,7 @@
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\CreateHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
@@ -1250,6 +1254,7 @@
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
+    <Content Include="Scripts\app\General\Requisiciones\EditRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -1956,6 +1961,14 @@
     <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Detalles.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Edit.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Create.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Details.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Edit.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Index.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Create.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
