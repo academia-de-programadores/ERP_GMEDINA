@@ -262,6 +262,7 @@
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
+    <Compile Include="Models\cV_tbAdelantoSueldo.cs" />
     <Compile Include="Models\EmpleadosVendedores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
