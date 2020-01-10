@@ -156,8 +156,12 @@ var lista = getJson();
              'POST',
              function (obj) {
               if (obj != "-1" && obj != "-2" && obj != "-3") {
-               //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-               MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                  //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                  MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                  ChildTable.clear().draw();
+                  $("#FormAreas").find("#suc_Id option[value='0']").attr("selected", true);
+                  $("#FormAreas").find("#area_Descripcion").val("");
+                  $("#FormAreas").find("#car_Descripcion").val("");
               } else {
                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
               }
