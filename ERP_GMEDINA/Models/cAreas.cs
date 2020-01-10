@@ -36,6 +36,7 @@ namespace ERP_GMEDINA.Models
         //[Display(Name = "Cargo")]
         //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         //[MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
+        //[Display(Name = "Cargo")]
         public string car_Descripcion { get; set; }
     }
 }

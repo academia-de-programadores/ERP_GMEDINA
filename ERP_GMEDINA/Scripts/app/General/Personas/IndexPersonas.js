@@ -84,6 +84,9 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
+           if (validarDT(Lista)) {
+               return null;
+           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    ID: value.Id,
@@ -140,8 +143,9 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#per_CorreoElectronico")["0"].innerText = obj[0].per_CorreoElectronico;
                 $("#ModalDetalles").find("#per_FechaCrea")["0"].innerText = FechaFormato(obj[0].per_FechaCrea);
                 $("#ModalDetalles").find("#per_FechaModifica")["0"].innerText = FechaFormato(obj[0].per_FechaModifica);
-                $("#ModalDetalles").find("#per_UsuarioCrea")["0"].innerText = obj[0].per_UsuarioCrea;
-                $("#ModalDetalles").find("#per_UsuarioModifica")["0"].innerText = obj[0].per_UsuarioModifica;
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioCrea;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].per_UsuarioModifica;
+
 
                 $('#ModalDetalles').modal('show');
             }
