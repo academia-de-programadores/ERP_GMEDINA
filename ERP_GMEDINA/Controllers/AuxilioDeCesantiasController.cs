@@ -186,7 +186,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID);
+                    listAuxilioCesantia = db.UDP_Plani_tbAuxilioDeCesantias_Delete(ID, 1, DateTime.Now);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbAuxilioDeCesantias_Delete_Result Resultado in listAuxilioCesantia)
@@ -211,6 +211,43 @@ namespace ERP_GMEDINA.Controllers
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Activar(int id)
+        {
+            IEnumerable<object> listAuxCes = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listAuxCes = db.UDP_Plani_tbAuxilioDeCesantias_Activar(id,1,DateTime.Now);
+
+                    foreach (UDP_Plani_tbAuxilioDeCesantias_Activar_Result Resultado in listAuxCes)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
+                }
+                catch (Exception)
+                {
+                    response = "error";
+                }
+                response = "bien";
+            }
+            else
+            {
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                response = "error";
+            }
+
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

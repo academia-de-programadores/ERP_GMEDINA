@@ -54,7 +54,7 @@ function cargarGridAuxilioCesantia() {
                 var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAuxCes">Activar</button>' : '' : '';
+                var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarAuxCes">Activar</button>' : '' : '';
 
 
                 console.log(estadoRegistro);
@@ -340,5 +340,38 @@ $("#btnEliminarAuxCes").click(function () {
 });
 
 
+// activar
+var activarID = 0;
+$(document).on("click", "#btnModalActivarAuxCes", function () {
+    activarID = $(this).data('id');
+    $("#frmActivarAuxCes").modal();
+});
+
+//activar ejecutar
+$("#btnActivarAuxCes").click(function () {
+
+    $.ajax({
+        url: "/AuxilioDeCesantias/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se logró inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridAuxilioCesantia();
+            $("#frmActivarAuxCes").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se inactivó de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
+});
 
 
