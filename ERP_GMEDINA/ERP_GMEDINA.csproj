@@ -201,6 +201,7 @@
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
+    <Compile Include="Controllers\FechaPlanillaController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
@@ -282,6 +283,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\FechaPlanilla.cs" />
+    <Compile Include="Models\FechaPlanillaViewModel.cs" />
     <Compile Include="Models\LiquidacionViewModel.cs" />
     <Compile Include="Models\ReportePlanillaViewModel.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -1192,6 +1195,7 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\excelexportjs.js" />
+    <Content Include="Scripts\app\General\FechaPlanilla.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\GeneralTotalesRPT.js" />
     <Content Include="Scripts\app\General\IHSSRPT.js" />
@@ -1896,6 +1900,13 @@
     <Content Include="Views\ReportesPlanilla\ReportVarios.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportVariosPreview.cshtml" />
     <Content Include="Views\ReportesPlanilla\LiquidacionRPT_Index.cshtml" />
+    <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
+    <Content Include="Views\FechaPlanilla\Create.cshtml" />
+    <Content Include="Views\FechaPlanilla\Delete.cshtml" />
+    <Content Include="Views\FechaPlanilla\Details.cshtml" />
+    <Content Include="Views\FechaPlanilla\Edit.cshtml" />
+    <Content Include="Views\FechaPlanilla\Index.cshtml" />
+    <Content Include="Views\FechaPlanilla\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
