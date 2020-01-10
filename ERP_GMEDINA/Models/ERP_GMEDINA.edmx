@@ -5556,8 +5556,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UDP_Plani_tbAuxilioDeCesantias_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Activar">
+          <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
+          <Parameter Name="aces_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aces_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbAuxilioDeCesantias_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Delete">
           <Parameter Name="aces_IdAuxilioCesantia" Type="int" Mode="In" />
+          <Parameter Name="aces_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aces_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbAuxilioDeCesantias_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani" StoreFunctionName="UDP_Plani.tbAuxilioDeCesantias_Insert">
           <Parameter Name="aces_RangoInicioMeses" Type="int" Mode="In" />
@@ -5903,6 +5910,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="hdli_MontoTotalLiquidacion" Type="decimal" Mode="In" />
           <Parameter Name="hdli_liqu_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hdli_liqu_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="moli_Id" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbHistorialDePago_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -5925,6 +5933,16 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="hipa_TotalSeptimoDia" Type="decimal" Mode="In" />
           <Parameter Name="hipa_AdelantoSueldo" Type="decimal" Mode="In" />
           <Parameter Name="hipa_TotalSalario" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbInstitucionesFinancieras_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+          <Parameter Name="insf_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="insf_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+          <Parameter Name="insf_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="insf_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbInstitucionesFinancieras_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_DescInstitucionFinanc" Type="nvarchar" Mode="In" />
@@ -14898,6 +14916,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Delete_Result)">
           <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Insert_Result)">
             <Parameter Name="aces_RangoInicioMeses" Mode="In" Type="Int32" />
@@ -15233,6 +15253,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="hdli_MontoTotalLiquidacion" Mode="In" Type="Decimal" />
             <Parameter Name="hdli_liqu_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hdli_liqu_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="moli_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbHistorialDePago_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbHistorialDePago_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -15432,6 +15453,26 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
             <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Activar" ReturnType="Collection(String)">
+          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar" ReturnType="Collection(String)">
+          <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar" ReturnType="Collection(String)">
+          <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Activar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Activar_Result)">
+          <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
+            <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -15856,6 +15897,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -18561,6 +18605,16 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Activar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Activar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Inactivar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Activar1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Activar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
