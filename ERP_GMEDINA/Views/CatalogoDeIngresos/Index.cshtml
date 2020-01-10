@@ -43,7 +43,7 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_Activo)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 240px;">Acción</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 240px;">Acciones</th>
 
                             </tr>
                         </thead>
@@ -96,7 +96,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEditar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar Catalogo de Ingreso</h4>
+                <h4 class="modal-title">Editar Catálogo de Ingreso</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -151,14 +151,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inactivar </h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inhabilitar este registro?
+                ¿Esta seguro que desea Inactivar  este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white " data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger pull-right" id="btnInactivarIngresos">Eliminar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger " id="btnInactivarIngresos">Si</button>
             </div>
         </div>
     </div>

@@ -105,10 +105,10 @@
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear AFP</h4>
             </div>
-            <div class="modal-body" id="Crear">
+           
                 @Html.Partial("_CreateAFP", new ERP_GMEDINA.Models.tbAFP())
-            </div>
 
+            
         </div>
     </div>
 </div>
@@ -181,7 +181,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger pull-right" id="btnActivarRegistroAFP">Si</button>
+                <button type="button" class="btn btn-primary pull-right" id="btnActivarRegistroAFP">Si</button>
                 <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
             </div>
         </div>

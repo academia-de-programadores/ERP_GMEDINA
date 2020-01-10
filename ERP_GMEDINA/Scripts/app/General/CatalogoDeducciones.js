@@ -205,8 +205,22 @@ $('#btnCreateRegistroDeduccion').click(function () {
     }
     else {
 
+        $("#Validation_descipcion2A").css("display", "none");    
+    }
+
+    if (cde_PorcentajeColaboradorA == "0.00" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA <= 0) {
+        $("#Validation_descipcion3A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion3A").css("display", "none");
+    }
+
+    if (cde_PorcentajeEmpresaA == "0.00" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA <= 0) {
+        $("#Validation_descipcion4A").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion4A").css("display", "none");
         mostrarCargandoCrear();
-        $("#Validation_descipcion2A").css("display", "none");
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
 
@@ -235,21 +249,8 @@ $('#btnCreateRegistroDeduccion').click(function () {
                 $("#cde_PorcentajeEmpresaA").val("");
                 $("#tde_IdTipoDedu").val("0");
             }
-        }); 
-    }
+        });
 
-    if (cde_PorcentajeColaboradorA == "0.00" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA <= 0) {
-        $("#Validation_descipcion3A").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion3A").css("display", "none");
-    }
-
-    if (cde_PorcentajeEmpresaA == "0.00" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA <= 0) {
-        $("#Validation_descipcion4A").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion4A").css("display", "none");
     }
 });
 
@@ -335,7 +336,7 @@ $("#btnUpdateDeduccion").click(function () {
     var cde_PorcentajeColaboradorE = $("#Editar #cde_PorcentajeColaborador").val();
     var cde_PorcentajeEmpresaE = $("#Editar #cde_PorcentajeEmpresa").val();
 
-    if (cde_DescripcionDeduccionE == "" || cde_PorcentajeColaboradorE <= 0.00 || cde_PorcentajeColaboradorE == 0 || cde_PorcentajeEmpresaE <= 0.00 || cde_PorcentajeEmpresaE == 0)
+    if (cde_DescripcionDeduccionE == ""  || cde_PorcentajeColaboradorE <= 0.00 || cde_PorcentajeColaboradorE == 0 || cde_PorcentajeEmpresaE <= 0.00 || cde_PorcentajeEmpresaE == 0)
     {
         $("#Validation_descipcion").css("display", "");
         $("#Validation_descipcion2").css("display", "");
@@ -349,7 +350,6 @@ $("#btnUpdateDeduccion").click(function () {
         $("#Validation_descipcion").css("display", "none");
         $("#Validation_descipcion2").css("display", "none");
         $("#Validation_descipcion3").css("display", "none");
-        mostrarCargandoEditar();
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmCatalogoDeducciones").serializeArray();
 
@@ -373,7 +373,6 @@ $("#btnUpdateDeduccion").click(function () {
                     title: 'Exito',
                     message: 'El registro fue editado de forma exitosa!',
                 });
-                ocultarCargandoEditar();
             }
         });
     } 

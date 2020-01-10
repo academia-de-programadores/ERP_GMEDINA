@@ -8,6 +8,7 @@ namespace ERP_GMEDINA.Models
     public class LiquidacionViewModel
     {
         public Nullable<int>      emp_Id { get; set; }
+        public Nullable<int> moli_Id { get; set; }
         public Nullable<DateTime> FechaLiquidacion { get; set; }
         public Nullable<decimal>  SalarioOrdinarioMensual_Liq { get; set; }
         public Nullable<decimal>  SalarioPromedioMensual_Liq { get; set; }
@@ -35,6 +36,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal>  MontoTotalLiquidacion { get; set; }
         public Nullable<int>      UsuarioCrea { get; set; }
         public Nullable<DateTime> FechaCrea { get; set; }
+        public Nullable<int> UsuarioModifica { get; set; }
+        public Nullable<DateTime> FechaModifica { get; set; }
     }
 
     public class SelectAreasEmpleadosViewModel

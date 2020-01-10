@@ -66,8 +66,8 @@ function cargarGridPeriodo() {
 
 
                 template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
+                    '<td>' + ListPeriodo[i].peri_IdPeriodo + '</td>' +
                     '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
-                    '<td>' + ListPeriodo[i].peri_Activo + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
 
@@ -123,38 +123,45 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
 //FUNCION: CREAR UN NUEVO REGISTRO
 
 $('#btnCrearPeriodoConfirmar').click(function () {
-    var ModelState = true;
+    var DescripPerio = $("#Crear #peri_DescripPeriodo").val();
 
-    $("#Crear #peri_DescripPeriodo").val() == "" ? ModelState = false : $("#Crear #peri_DescripPeriodo").val() == " " ? ModelState = false : $("#Crear #peri_DescripPeriodo").val() == null ? ModelState = false : isNaN($("#Crear #peri_DescripPeriodo").val()) == false ? ModelState = false : '';
-    
+   
+    if (DescripPerio != ""){
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    if (ModelState) {
-        var data = $("#frmCreatePeriodo").serializeArray();
-        console.log(data);
-        debugger;
-        $.ajax({
-            url: "/Periodos/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            $("#CrearPeriodo").modal('hide');
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
-            }
-            else if (data == "bien") {
-                cargarGridPeriodo();
-                console.log(data);
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue creado de forma exitosa!',
-                });
-            }
-        });
+         var data = $("#frmCreatePeriodo").serializeArray();
+         console.log(data);
+            debugger;
+         $.ajax({
+             url: "/Periodos/Create",
+             method: "POST",
+             data: data
+          }).done(function (data) {
+             $("#CrearPeriodo").modal('hide');
+             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+             if (data == "error") {
+                 iziToast.error({
+                     title: 'Error',
+                     message: 'No se pudo guardar el registro, contacte al administrador',
+                 });
+             }
+             else if (data == "bien") {
+                    cargarGridPeriodo();
+                    console.log(data);
+                    // Mensaje de exito cuando un registro se ha guardado bien
+                  iziToast.success({
+                        title: 'Exito',
+                        message: 'El registro fue creado de forma exitosa!',
+                    });
+              }
+            });
+    } else {
+        if (DescripPerio == "") {
+            $("#Crear #peri_DescripPeriodo").focus;
+            mostrarError('No puede dejar el campo descripcion vacio.');
+        } else {
+            $("#Crear #peri_DescripPeriodo").focus;
+            mostrarError('No puede se permiten datos numericos.');
+        }
     }
 });
 
@@ -196,11 +203,14 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 $(document).on("click", "#btnUpdatePeriodo", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
 
-    $("#EditarPeriodo #Validation_descripcion").css("display", "block");
+ //   $("#EditarPeriodo #Validation_descripcion").css("display", "block");
 
     var data = $("#frmEditPeriodo").serializeArray();
+    var descedit = $("#Editar #peri_DescripPeriodo").val();
 
-    if ($("#EditarPeriodo #Editar #peri_DescripPeriodo").val() != "") {
+    if ($("#Editar #peri_DescripPeriodo").val() != "") {
+        debugger;
+        console.log("entro");
 
         $.ajax({
             url: "/Periodos/Editar",
@@ -399,3 +409,10 @@ $("#btnCerrarDetails").click(function () {
 $("#frmDetailsPeriodo").submit(function (event) {
     event.preventDefault();
 });
+
+function mostrarError(Mensaje) {
+    iziToast.error({
+        title: 'Error',
+        message: Mensaje,
+    });
+}

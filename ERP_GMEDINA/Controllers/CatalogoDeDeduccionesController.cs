@@ -17,11 +17,11 @@ namespace PruebaPlanilla.Controllers
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
-            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario).OrderByDescending(x => x.cde_FechaCrea);
+            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario).OrderBy(x => x.cde_IdDeducciones);
             return View(tbCatalogoDeDeducciones.ToList());
         }
 
-        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON 
         public ActionResult GetData()
         {
             //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
@@ -29,7 +29,7 @@ namespace PruebaPlanilla.Controllers
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbCatalogoDeDeducciones1 = db.tbCatalogoDeDeducciones
                         .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica })
-                        .OrderByDescending(x => x.cde_FechaCrea)
+                        .OrderBy(x => x.cde_IdDeducciones)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeDeducciones1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -91,7 +91,9 @@ namespace PruebaPlanilla.Controllers
             ViewBag.cde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioCrea);
             ViewBag.cde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioModifica);
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
-            return Json(response, JsonRequestBehavior.AllowGet);
+
+            object json = new { response = response, data = GetData() };
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
 
