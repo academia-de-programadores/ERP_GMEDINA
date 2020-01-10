@@ -24,13 +24,13 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#fare_Descripcion")["0"].innerText = obj.fare_Descripcion;
-                $("#ModalDetalles").find("#fare_Estado")["0"].innerText = obj.fare_Estado;
-                $("#ModalDetalles").find("#fare_RazonInactivo")["0"].innerText = obj.fare_RazonInactivo;
+                //$("#ModalDetalles").find("#fare_Estado")["0"].innerText = obj.fare_Estado;
+                //$("#ModalDetalles").find("#fare_RazonInactivo")["0"].innerText = obj.fare_RazonInactivo;
                 $("#ModalDetalles").find("#fare_FechaCrea")["0"].innerText = FechaFormato(obj.fare_FechaCrea);
                 $("#ModalDetalles").find("#fare_FechaModifica")["0"].innerText = FechaFormato(obj.fare_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
             }
         });
