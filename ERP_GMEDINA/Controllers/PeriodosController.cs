@@ -96,7 +96,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         #endregion
-        
+
         #region GET: EDIT
         // GET: Periodos/Edit/5
         public JsonResult Edit(int? id)
@@ -106,9 +106,9 @@ namespace ERP_GMEDINA.Controllers
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
             var tbPeriodo = db.tbPeriodos.Where(d => d.peri_IdPeriodo == id)
-                        .Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo , peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
+                        .Select(c => new { peri_DescripPeriodo = c.peri_DescripPeriodo, peri_IdPeriodo = c.peri_IdPeriodo, peri_UsuarioCrea = c.peri_UsuarioCrea, peri_FechaCrea = c.peri_FechaCrea, peri_UsuarioModifica = c.peri_UsuarioModifica, peri_FechaModifica = c.peri_FechaModifica, peri_Activo = c.peri_Activo })
                         .ToList();
-            
+
             //RETORNAR JSON AL LADO DEL CLIENTE              
             if (tbPeriodo == null)
             {
