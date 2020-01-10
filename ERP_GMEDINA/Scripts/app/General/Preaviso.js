@@ -67,10 +67,10 @@ function cargarGridPreaviso() {
 
 
                 template += '<tr data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '">' +
+                    '<td>' + ListaPreaviso[i].prea_IdPreaviso + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_RangoInicioMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_RangoFinMeses + '</td>' +
                     '<td>' + ListaPreaviso[i].prea_DiasPreaviso + '</td>' +
-                    '<td>' + ListaPreaviso[i].prea_Activo + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
 
@@ -192,6 +192,7 @@ $(document).on("click", "#btnUpdatePreaviso", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
+    $("#EditarPreaviso").modal('hide');
     $("#InactivarPreaviso").modal();
 });
 
@@ -215,7 +216,6 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             cargarGridPreaviso();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPreaviso").modal('hide');
-            $("#EditarPreaviso").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
