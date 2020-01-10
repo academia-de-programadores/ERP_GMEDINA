@@ -468,42 +468,54 @@ $("#btnInactivarRegistroComisiones").click(function () {
 
 //VALIDAR CREAR//
 
-$(document).on("click", "#btnActivarEmpleadoComisiones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#ActivarEmpleadoComisiones").modal();
+$(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarEmpleadoComisiones", function () {
+    var ID = $(this).data('id');
+    $.ajax({
+        url: "/EmpleadoComisiones/Activar/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                $("#Activar #cc_Id").val(data.cc_Id);
+                //$(".field-validation-error").css('display', 'none');
+                $("#ActivarEmpleadoComisiones").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo cargar la información, contacte al administrador',
+                });
+            }
+        });
 });
-
 $("#btnActivarEmpleadoComisiones").click(function () {
     var data = $("#frmEmpleadoComisionesActivar").serializeArray();
+    var Id = $("#Activar #cc_Id").val();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Activar",
         method: "POST",
         data: data
     }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
-            });
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
 
-            cargarGridComisiones();
+        if (data != "error") {
+                
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#ActivarEmpleadoComisiones").modal('hide');
-           
-            //Mensaje de exito de la edicion
+            $("#ActivarEmpeladoComisiones").modal('hide');
+            cargarGridComisiones();
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Activado de forma exitosa!',
-            });
+                title: 'Éxito',
+                message: '¡El registro fue editado de forma exitosa!',
+            }); 
         }
+
     });
 });
-
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModal").click(function () {
     $("#Validation_descipcion").css("display", "none");
