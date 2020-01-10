@@ -1,0 +1,45 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialAudienciaDescargo
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle Audiencias de Descargo</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+					<dt>@Html.DisplayNameFor(model => model.aude_Descripcion)</dt>
+                    <dd id="aude_Descripcion"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.aude_FechaAudiencia)</dt>
+                    <dd id="aude_FechaAudiencia"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.aude_Testigo)</dt>
+                    <dd id="aude_Testigo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.aude_DireccionArchivo)</dt>
+                    <dd id="aude_DireccionArchivo"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.aude_FechaCrea)</dt>
+                    <dd id="aude_FechaCrea"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
+                    <dd id="tbUsuario_usu_NombreUsuario1"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.aude_FechaModifica)</dt>
+                    <dd id="aude_FechaModifica"></dd>
+
+
+				</dl>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary pull-left" data-id=""  id="btnEditar">Editar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
