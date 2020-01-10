@@ -1,4 +1,18 @@
 ﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+        success: function (data) {
+            callback(data);
+        }
+    });
+}
+
+// REGION DE VARIABLES
+var EliminarID = 0;
+
 //FUNCION: Opciones de validacion
 $('#btnCargarPlanilla').click(function ()
 {
@@ -29,42 +43,73 @@ $('#btnCargarPlanilla').click(function ()
 
 
 
+// INACTIVAR 
+$("#frmInactivarINFS").click(function () {
+    //$("#frmEditarAuxCes").modal('hide');
+    $("#frmEliminarAuxCes").modal();
+});
 
-        //$(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", function () {
-        //    var ID = $(this).data('id');
-        //    $.ajax({
-        //        url: "/AuxilioDeCesantias/Details/" + ID,
-        //        method: "GET",
-        //        dataType: "json",
-        //        contentType: "application/json; charset=utf-8",
-        //        data: JSON.stringify({ ID: ID })
-        //    })
-        //        .done(function (data)
-        //        {
-        //            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-        //            if (data)
-        //            {
-        //                console.log(data);
-        //                var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
-        //                var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
-        //                $("#aces_IdAuxilioCesantia").val(data[0].aces_IdAuxilioCesantia);
-        //                $("#frmDetallesAuxCess #aces_RangoInicioMeses").val(data[0].aces_RangoInicioMeses);
-        //                $("#frmDetallesAuxCess #aces_RangoFinMeses").val(data[0].aces_RangoFinMeses);
-        //                $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").val(data[0].aces_DiasAuxilioCesantia);
-        //                $("#tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-        //                $("#aces_FechaCrea").val(FechaCrea);
-        //                data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-        //                $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
-        //                $("#aces_FechaModifica").val(FechaModifica);
-        //                $("#frmDetailAuxCes").modal();
+$("#btnInactivarINFS").click(function () {
+    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    var data = $("#frmInactivarINFS").serializeArray();
+    var ID = EliminarID;
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $.ajax({
+        url: "/AuxilioDeCesantias/Inactivar/" + ID,
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se logró inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            $("#frmEliminarAuxCes").modal('hide');
+            $("#frmEditarAuxCes").modal('hide');
+            cargarGridAuxilioCesantia();
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro se inactivó de forma exitosa!',
+            });
+        }
+    });
+});
 
-        //            }
-        //            else {
-        //                //Mensaje de error si no hay data
-        //                iziToast.error({
-        //                    title: 'Error',
-        //                    message: 'No se pudo cargar la información, contacte al administrador',
-        //                });
-        //            }
-        //        });
-        //});
+
+// Activar
+var activarID = 0;
+$(document).on("click", "#btnModalActivarAuxCes", function () {
+    activarID = $(this).data('id');
+    $("#frmActivarAuxCes").modal();
+});
+
+//activar ejecutar
+$("#btnActivarAuxCes").click(function () {
+
+    $.ajax({
+        url: "/AuxilioDeCesantias/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se logró inactivar el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridAuxilioCesantia();
+            $("#frmActivarAuxCes").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se inactivó de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
+});

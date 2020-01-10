@@ -24,6 +24,27 @@ namespace ERP_GMEDINA.Controllers
             return View(tbInstitucionesFinancieras.ToList());
         }
 
+        public ActionResult GetData()
+        {
+            var tbInstitucionesFinancieras1 = db.tbInstitucionesFinancieras
+                        .Select(c => new {
+                            insf_IdInstitucionFinanciera = c.insf_IdInstitucionFinanciera,
+                            insf_DescInstitucionFinanc = c.insf_DescInstitucionFinanc,
+                            insf_Contacto = c.insf_Contacto,
+                            insf_Telefono = c.insf_Telefono,
+                            insf_Correo = c.insf_Correo,
+                            insf_UsuarioCrea = c.insf_UsuarioCrea,
+                            insf_FechaCrea = c.insf_FechaCrea,
+                            insf_UsuarioModifica = c.insf_UsuarioModifica,
+                            insf_FechaModifica = c.insf_FechaModifica,
+                            insf_Activo = c.insf_Activo
+                        })
+                                           .OrderByDescending(x => x.insf_FechaCrea)
+                                           /*.Where(x => x.aces_Activo == true)*/.ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         // GET: InstitucionesFinancieras/Details/5
         public ActionResult Details(int? id)
         {
@@ -191,6 +212,83 @@ namespace ERP_GMEDINA.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Inactivar(int ID)
+        {
+            string response = String.Empty;
+            IEnumerable<object> listINFS = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Inactivar(ID, 1, DateTime.Now);
+
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result Resultado in listINFS)
+                        MensajeError = Resultado.MensajeError;
+
+                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                    response = "bien";
+                }
+                catch (Exception)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
+                    response = "error";
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se logró eliminar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Activar(int id)
+        {
+            IEnumerable<object> listINFS = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Activar(id, 1, DateTime.Now);
+
+                    foreach (UDP_Plani_tbInstitucionesFinancieras_Activar1_Result Resultado in listINFS)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo activar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
+                }
+                catch (Exception)
+                {
+                    response = "error";
+                }
+                response = "bien";
+            }
+            else
+            {
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                response = "error";
+            }
+
+            return Json(JsonRequestBehavior.AllowGet);
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
