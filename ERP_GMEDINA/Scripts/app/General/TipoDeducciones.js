@@ -26,6 +26,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridTipoDeducciones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/TipoDeducciones/GetData',
         'GET',
@@ -41,28 +42,43 @@ function cargarGridTipoDeducciones() {
             var ListaTipoDeducciones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTipoDeducciones.length; i++) {
-                var FechaCrea = FechaFormato(ListaTipoDeducciones[i].tde_FechaCrea);
 
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaTipoDeducciones[i].tde_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTipoDeducciones">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs"  id="btnDetalleTipoDeducciones">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaTipoDeducciones[i].tde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTipoDeducciones">Activar</button>' : '' : '';
+
+
+                var FechaCrea = FechaFormato(ListaTipoDeducciones[i].tde_FechaCrea);
                 var FechaModifica = FechaFormato(ListaTipoDeducciones[i].tde_FechaModifica);
 
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
-                var activo;
-                if (ListaTipoDeducciones[i].tde_Activo)
-                     activo = "Activo";
-                else activo = "Inactivo";
-                
+
+
 
 
                 template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
                     '<td>' + ListaTipoDeducciones[i].tde_IdTipoDedu + '</td>' +
                     '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' + activo + '</td>' +
+                    '<td>' + estadoRegistro + '</td>' +
+                    //variable donde está el boton de detalles
                     '<td>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleTipoDeducciones">Detalles</button>' +
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs" id="btnEditarTipoDeducciones">Editar</button>' +                    
-                    '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" id="btnActivarTipoDeducciones">Activar</button>' +
-                    '</td>' +
-                    '</tr>';
+                    botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+                '</td>' +
+                '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyTipoDeducciones').html(template);
@@ -177,7 +193,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
 
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeducciones", function () {
     var ID = $(this).data('id');
-    console.log(ID);
+    //console.log(ID);
     $.ajax({
         url: "/TipoDeducciones/Details/" + ID,
         method: "GET",
@@ -188,6 +204,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                console.log(data);
                 var FechaCrea = FechaFormato(data[0].tde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].tde_FechaModifica);
                 $("#Detalles #tde_UsuarioCrea").val(data[0].tde_UsuarioCrea);
@@ -199,7 +216,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
                 $("#Detalles #tde_FechaModifica").html(FechaModifica);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                
+
                 $("#DetailsTipoDeducciones").modal();
             }
             else {
@@ -271,4 +288,32 @@ $("#frmTipoDeduccionCreate").submit(function (event) {
 
 $("#frmTipoDeduccionEdit").submit(function (event) {
     event.preventDefault();
+});
+
+// activar
+$(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
+    activarID = $(this).data('id');
+    console.log(activarID);
+    $("#ActivarTipoDeducciones").modal();
+});
+
+//FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
+$("#btnActivarRegistroTipoDeducciones").click(function () {
+    $.ajax({
+        url: "/TipoDeducciones/Activar/" + activarID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: { id: activarID }
+    }).done(function (data) {
+        $("#ActivarTipoDeducciones").modal('hide');
+        //Refrescar la tabla de TipoDeducciones
+        cargarGridTipoDeducciones();
+        console.log(data);
+        //Mensaje de error si no hay data
+        iziToast.success({
+            title: 'Exito',
+            message: 'Se ha activado el registro',
+        });
+    });
 });

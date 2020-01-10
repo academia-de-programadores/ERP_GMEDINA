@@ -24,6 +24,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/DeduccionAFP/GetData',
         'GET',
@@ -40,23 +41,23 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionAFP.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaAFP[i].dafp_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaDeduccionAFP[i].dafp_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' : '';
+                var botonDetalles = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' : '';
+                var botonEditar = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAFP[i].dafp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP" dafpid="' + ListaDeduccionAFP[i].dafp_Id + '" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Activar</button>' : '' : '';
+                var botonActivar = ListaDeduccionAFP[i].dafp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP" dafpid="' + ListaDeduccionAFP[i].dafp_Id + '" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Activar</button>' : '' : '';
 
                 template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
+                    '<td>' + ListaDeduccionAFP[i].dafp_Id + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                     +
-                     +
+                    '<td>' + ListaDeduccionAFP[i].dafp_Activo + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
 
@@ -113,27 +114,19 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarDeduccionAFP", function 
 
     var ID = $(this).attr('dafpid');
 
-    $.ajax({
-        url: "/DeduccionAFP/Activar/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    }).done(function (data) {
-        $('#dafp_Id').val(data.dafp_Id);
+    localStorage.setItem('id', ID);
 
-        $("#ActivarDeduccionAFP").modal();
-    })
+    $("#ActivarDeduccionAFP").modal();
 })
 
 $("#btnActivarRegistroDeduccionAFP").click(function () {
 
-    var data = $("#frmActivarDeduccionAFP").serializeArray();
+    let ID = localStorage.getItem('id')
 
     $.ajax({
         url: "/DeduccionAFP/Activar",
         method: "POST",
-        data: data
+        data: { id: ID }
     }).done(function (data) {
         $("#ActivarDeduccionAFP").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
@@ -145,7 +138,6 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
         }
         else{
             cargarGridDeducciones();
-            console.log(data);
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
@@ -153,12 +145,6 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
             });
         }
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#ActivarDeduccionAFP").submit(function (e) {
-        return false;
-    });
-
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -322,6 +308,7 @@ $("#Editar #validatione1").css("display", "none");
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     var ID = $(this).data('id');
+    console.log(ID)
     $.ajax({
         url: "/DeduccionAFP/Edit/" + ID,
         method: "GET",
@@ -414,12 +401,10 @@ $("#btnEditDeduccionAFP").click(function () {
     }).done(function (data) {
         if (data != "error") {
 
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionAFP").modal('hide');
-
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridDeducciones();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
@@ -461,6 +446,7 @@ $("#btnIconCerrare").click(function () {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", function () {
     var ID = $(this).data('id');
+    console.log(ID)
     $.ajax({
         url: "/DeduccionAFP/Details/" + ID,
         method: "GET",

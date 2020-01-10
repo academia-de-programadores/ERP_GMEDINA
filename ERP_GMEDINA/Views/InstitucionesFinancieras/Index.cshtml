@@ -18,6 +18,16 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
@@ -26,11 +36,15 @@
                             <th>@Html.DisplayNameFor(model => model.insf_Contacto)</th>
                             <th>@Html.DisplayNameFor(model => model.insf_Telefono)</th>
                             <th>@Html.DisplayNameFor(model => model.insf_Correo)</th>
+                            <th>@Html.DisplayNameFor(model => model.insf_Activo)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach (var item in Model) {
+                      @foreach (var item in Model)
+                      {
+                         string estado = item.insf_Activo == false ? "Inactivo" : "Activo";
+
                         <tr class="gradeA odd" role="row" data-id="@item.insf_IdInstitucionFinanciera">
                             <td>
                                 @Html.DisplayFor(modelItem => item.insf_IdInstitucionFinanciera)
@@ -47,12 +61,28 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.insf_Correo)
                             </td>
+                            <td>
+                                @estado
+                            </td>
 							<td>
-								@*<button type="button" class="btn btn-primary btn-xs" id="btnDetalle">Detalle</button>
-		<button type="button" class="btn btn-default btn-xs" id="btnEditar">Editar</button>*@
-								@Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
-								@Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
-								@Html.ActionLink("Eliminar", "Delete", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-danger btn-xs" })
+                                @{
+                                    if (item.insf_Activo == true)
+                                    {
+                                        @*<button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-primary btn-xs" id="btnModalDetalles">Detalles</button>
+                                                <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-default btn-xs" id="btnModalEdit">Editar</button>*@
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
+                                        <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-danger btn-xs" id="btnModalActivarAuxCes">Inctivar</button>
+                                    }
+                                    if (oUsuario.usu_EsAdministrador == true && item.insf_Activo == false)
+                                    {
+                                                 <!-- ACTIVAR -->
+                                        <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-primary btn-xs" id="btnModalActivarINFS">Activar</button>
+                                    }
+                                }
+								
+								
+								
 							</td>
                         </tr>
                       }

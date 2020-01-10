@@ -42,7 +42,7 @@ namespace ERP_GMEDINA.Controllers
                             afp_FechaModifica = a.afp_FechaModifica,
                             afp_Activo = a.afp_Activo
                         })
-                        .Where(a => a.afp_Activo == true)
+                        .OrderBy(a => a.afp_FechaCrea)
                         .ToList();
             return new JsonResult { Data = tbAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -297,24 +297,9 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar AFP
-
-        public ActionResult Activar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbAFP tbAFPJSON = db.tbAFP.Find(ID);
-            return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Activar(int afp_Id)
+        public ActionResult Activar(int id)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             int afp_UsuarioModifica = 1;
             DateTime afp_FechaModifica = DateTime.Now;
@@ -328,7 +313,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listAFP = db.UDP_Plani_tbAFP_Activar(afp_Id,
+                    listAFP = db.UDP_Plani_tbAFP_Activar(id,
                                                          afp_UsuarioModifica,
                                                          afp_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP

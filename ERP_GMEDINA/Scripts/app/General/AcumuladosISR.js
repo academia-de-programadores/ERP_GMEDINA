@@ -314,3 +314,37 @@ $(document).ready(function () {
         });
     });
 });
+
+// activar
+var activarID = 0;
+$(document).on("click", "#btnActivarAcumuladosISR", function () {
+    activarID = $(this).data('id');
+    $("#ActivarAcumuladosISR").modal();
+});
+
+//activar ejecutar
+$("#btnActivarAcumuladosISREjecutar").click(function () {
+
+    $.ajax({
+        url: "/AcumuladosISR/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo activar el registro.',
+            });
+        }
+        else {
+            cargarGridAcumuladosISR();
+            $("#ActivarAcumuladosISR").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue activado de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
+});

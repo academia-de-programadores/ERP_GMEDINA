@@ -242,6 +242,7 @@
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\cDeduccionesRPT.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cFormaPago.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
+    <Compile Include="Models\cIngresosRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
     <Compile Include="Models\cISR.cs" />
@@ -595,6 +597,9 @@
     <Compile Include="Models\UDP_Plani_tbAFP_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbAuxilioDeCesantias_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -780,6 +785,9 @@
     </Compile>
     <Compile Include="Models\ViewModelDecimoCuartoMes.cs" />
     <Compile Include="Models\ViewModelDecimoTercerMes.cs" />
+    <Compile Include="Models\ViewModelDeduccionesReport.cs" />
+    <Compile Include="Models\ViewModelingresosReport.cs" />
+    <Compile Include="Models\ViewModelReportesVarios.cs" />
     <Compile Include="Models\V_AFP_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1872,6 +1880,16 @@
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
+    <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
+    <Content Include="Views\ReportesPlanilla\Deducciones.cshtml" />
+    <Content Include="Views\ReportesPlanilla\Ingresos.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportDeducciones.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportDeduccionesPreview.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportesVarios.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportIngresos.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportIngresosPreview.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportVarios.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportVariosPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

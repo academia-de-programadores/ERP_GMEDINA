@@ -471,33 +471,35 @@ $("#btnInactivarRegistroComisiones").click(function () {
 //VALIDAR CREAR//
 
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnActivarRegistroComisiones", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/EmpleadoComisiones/Activar/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $("#Activar #cc_Id").val(data.cc_Id);
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-                $("#ActivarEmpleadoComisiones").modal();
-                //$("#DetalleEmpleadoComisiones").modal(hide);
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-           
-        });
+    IDActivar = $(this).data('id');
+    $("#ActivarEmpleadoComisiones").modal();
 });
-
+$("#btnActivarRegistroComisiones").click(function () {
+    $.ajax({
+        url: "/EmpleadoComisiones/Activar/" + IDActivar,
+        method: "POST"
+    }).done(function (data) {
+        if (data == "error") {
+            //Cuando traiga un error del backend al guardar la edicion
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridComisiones();
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarEmpleadoComisiones").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
+            });
+        }
+    });
+    IDActivar = 0;
+});
     //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
     $("#btnCerrarModal").click(function () {
         $("#Validation_descipcion").css("display", "none");

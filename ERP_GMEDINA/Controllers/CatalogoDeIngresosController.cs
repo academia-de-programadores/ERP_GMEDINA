@@ -227,7 +227,51 @@ namespace ERP_GMEDINA.Controllers
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
-        }        
+        }
+
+
+        public ActionResult Activar(int? ID)
+        {
+            string response = String.Empty;
+            IEnumerable<object> listCatalogoDeIngresos = null;
+            string MensajeError = "";
+
+            if (ID == null)
+            {
+                return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            //LLENAR DATA DE AUDITORIA
+            tbCatalogoDeIngresos tbCatalogoDeIngresos = new tbCatalogoDeIngresos();
+            tbCatalogoDeIngresos.cin_IdIngreso = (int)ID;
+            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
+            tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Activar(tbCatalogoDeIngresos.cin_IdIngreso,
+                                                                              tbCatalogoDeIngresos.cin_UsuarioModifica,
+                                                                              tbCatalogoDeIngresos.cin_FechaModifica);
+
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_tbCatalogoDeIngresos_Activar_Result Resultado in listCatalogoDeIngresos)
+                    MensajeError = Resultado.MensajeError;
+
+                if (MensajeError.StartsWith("-1"))
+                {
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                    response = "error";
+                }
+
+            }
+            catch (Exception Ex)
+            {
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = Ex.Message.ToString();
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: CatalogoDeDeducciones/Delete/5
         public ActionResult Delete(int? id)

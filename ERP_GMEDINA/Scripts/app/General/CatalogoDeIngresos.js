@@ -409,66 +409,39 @@ function spinner(){
 
 
 //FUNCION: PRIMERA FASE DE ACTIVAR
+
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
-    var ID = $(this).data('id');
-    ActivarID = ID;
+    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
+        IDActivar = $(this).data('id');
+    $("#ActivarCatalogoIngresos").modal();
+ });
+
+
+//EJECUTAR LA ACTIVACION DEL REGISTRO
+$("#btnActivarIngreso").click(function () {
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/CatalogoDeIngresos/Activar/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-    .done(function (data) {
-        if (data == "error")
+        url: "/CatalogoDeIngresos/Activar/" + IDActivar,
+        method: "POST"
+    }).done(function (data) {
+        if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                message: 'No se pudo Activar el registro, contacte al administrador',
             });
-
-        else {
-            //Mensaje de error si no hay data
-            $("#ActivarCatalogoIngresos").modal();
         }
-        });
-});
-
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnActivarIngresos").click(function () {
-
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmActivarCatalogoIngresos").serializeArray();
-    var descedit = $("#Activar #cin_DescripcionIngreso").val();
-
-    //VALIDAMOS LOS CAMPOS
-    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
-        mostrarcargandoEditar();
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/CatalogoDeIngresos/Activar",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo inhabilitar el registro, contacte al administrador',
-                });
-            }
-            else {
-                $("#ActivarCatalogoIngresos").modal('hide');
-                cargarGridIngresos();
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Éxito',
-                    message: '¡El registro fue inhabilitado de forma exitosa!',
-                });
-            }
-        });
-        $("#frmCatalogoIngresos").submit(function (e) {
-            return false;
-        });
-    }
+        else {
+            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#ActivarCatalogoIngresos").modal('hide');
+            // REFRESCAR UNICAMENTE LA TABLA
+            cargarGridIngresos();
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
+            });
+        }
+    });
+    IDActivar = 0;
 });
