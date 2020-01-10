@@ -60,6 +60,9 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
+           if (validarDT(Lista)) {
+               return null;
+           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
 
@@ -103,7 +106,7 @@ function tablaDetalles(ID) {
                 //$("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+      
                 $('#ModalDetalles').modal('show');
             }
         });
