@@ -15,12 +15,12 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Deducciones")]
         public int cde_IdDeducciones { get; set; }
 
-        [Display(Name = "Descripcion Deduccion")]
+        [Display(Name = "Descripción Deducción")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud minima de 2")]
         public string cde_DescripcionDeduccion { get; set; }
 
-        [Display(Name = "Tipo Deduccion")]
+        [Display(Name = "Tipo Deducción")]
         [Required]
         public int tde_IdTipoDedu { get; set; }
 

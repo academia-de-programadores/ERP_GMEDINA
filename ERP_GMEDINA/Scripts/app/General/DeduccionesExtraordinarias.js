@@ -96,10 +96,6 @@ function spinner() {
 }
 
 
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
 
@@ -152,6 +148,9 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 //Validaciones de Botones de las Pantallas
 const btnAgregar = $('#btnAgregar')
 
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
 function mostrarCargandoCrear() {
     btnAgregar.hide();
     cargandoCrear.html(spinner());
@@ -164,27 +163,49 @@ function ocultarCargandoCrear() {
     cargandoCrear.hide();
 }
 
-//Agregar
-$(document).on("click", "#btnAgregar", function () {
-    $.ajax({
-        url: "/DeduccionesExtraordinarias/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "Error")
-        {
-            ocultarCargandoCrear();
-        }
-        else if (data == "Exito")
-        {
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro se agregó de forma exitosa!',
-            });
-            mostrarCargandoCrear();
-        }
-    })
+
+$("#btnAgregar").click(function () {
+    //Validación para Agregar
+    var Vali1 = $("#val1").css("display", "");
+    var Vali2 = $("#val2").css("display", "");
+    var Vali3 = $("#val3").css("display", "");
+    var Vali4 = $("#val4").css("display", "");
+    var Vali5 = $("#val5").css("display", "");
+    var Vali6 = $("#val6").css("display", "");
+
+    var Valid1 = $("#val1").css("display", "none");
+    var Valid2 = $("#val2").css("display", "none");
+    var Valid3 = $("#val3").css("display", "none");
+    var Valid4 = $("#val4").css("display", "none");
+    var Valid5 = $("#val5").css("display", "none");
+    var Valid6 = $("#val6").css("display", "none");
+
+    console.log(Vali1)
+    console.log(Valid6)
+    debugger;
+    if (Vali1) {
+        ocultarCargandoCrear();
+    }
+    else if (Vali2) {
+        ocultarCargandoCrear();
+    }
+    else if (Vali3) {
+        ocultarCargandoCrear();
+    }
+    else if (Vali4) {
+        ocultarCargandoCrear();
+    }
+    else if (Vali5) {
+        ocultarCargandoCrear();
+    }
+    else if (Vali6) {
+        ocultarCargandoCrear();
+    }
+    else {
+        mostrarCargandoCrear();
+    }
 });
+
 
 
 //Modal de Inactivar

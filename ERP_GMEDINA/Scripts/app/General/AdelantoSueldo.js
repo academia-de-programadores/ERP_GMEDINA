@@ -1,5 +1,6 @@
 ﻿//VARIABLE GLOBAL PARA INACTIVAR
 var IDInactivar = 0;
+var IDActivar = 0;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 
@@ -29,6 +30,7 @@ function _ajax(params, uri, type, callback) {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridAdelantos() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/AdelantoSueldo/GetData',
         'GET',
@@ -49,9 +51,16 @@ function cargarGridAdelantos() {
                 var Activo = ListaAdelantos[i].adsu_Activo == true ? 'Activo' : 'Inactivo';
                 UsuarioModifica = ListaAdelantos[i].adsu_UsuarioModifica == null ? 'Sin modificaciones' : ListaAdelantos[i].adsu_UsuarioModifica;
 
-                //VALIDAR SI EL REGISTRO ESTA DEDUCIDO, SI LO ESTÁ, EL BOTON DE EDITAR ESTARÁ DESHABILITADO 
-                if (ListaAdelantos[i].adsu_Deducido) {
-                    template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
+                var botonDetalles = ListaAdelantos[i].adsu_Activo == true ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAdelantoSueldo">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAdelantos[i].adsu_Activo == true ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAdelantoSueldo">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAdelantos[i].adsu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroAdelantos">Activar</button>' : '' : '';
+                var dataId = ListaAdelantos[i].adsu_IdAdelantoSueldo;
+
+                template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
                     '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
                     '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
                     '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
@@ -60,26 +69,11 @@ function cargarGridAdelantos() {
                     '<td>' + Deducido + '</td>' +
                     '<td>' + Activo + '</td>' +
                     '<td>' +
-                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalle</button>' +
-                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs" disabled id="btnEditarAdelantoSueldo">Editar</button>' +
+                    botonDetalles +
+                    botonEditar +
+                    botonActivar +
                     '</td>' +
                     '</tr>';
-                } else {
-                    template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
-                    '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
-                    '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
-                    '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
-                    '<td>' + ListaAdelantos[i].adsu_Monto + '</td>' +
-                    '<td>' + FechaAdelanto + '</td>' +
-                    '<td>' + Deducido + '</td>' +
-                    '<td>' + Activo + '</td>' +
-                    '<td>' +
-                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleAdelantoSueldo">Detalles</button>' +
-                    '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs" id="btnEditarAdelantoSueldo">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
-                }
-                
             }
             
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
@@ -281,15 +275,29 @@ function ValidarCamposEditar(colaborador, razon, monto){
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
         //Hacerle focus al input
-        console.log('No paso la validacion de campo colaborador')
+        console.log('No paso la validacion de campo colaborador');
+        
         $(colaborador).focus();
     } else{
-
+        
     }
 
-    if(razon ==null || razon == ''){
+    console.log(razon.val());
+
+    if(razon ==null || razon.val() == ''){
         pasoValidacion = false;
-        console.log('No paso la validacion de campo razon')
+        $('#adsu_RazonAdelantoValidacion').show();
+        razon.focus();
+    } else{
+        $('#adsu_RazonAdelantoValidacion').hide();
+    }
+
+    if(monto == null || monto.val() == ''){
+        pasoValidacion = false;
+        $('#adsu_MontoValidacion').show();
+        monto.focus();
+    } else{
+        $('#adsu_MontoValidacion').hide();
     }
 
     return pasoValidacion;
@@ -311,7 +319,8 @@ $('#IconCerrar').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
-    var ID = $(this).data('id');
+    var ID = $(this).closest('tr').data('id');
+    //var ID = $(this).data('id');
     IDInactivar = ID;
 
     var idEmpSelect = "";
@@ -337,13 +346,13 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     }).done(function (data) {
         if (data) {
             if (!data.adsu_Deducido) {
-                if(data.adsu_Activo){
-                    document.getElementById("inactivar").hidden = false;
-                    document.getElementById("activar").hidden = true;
-                } else {
-                    document.getElementById("activar").hidden = false;
-                    document.getElementById("inactivar").hidden = true;
-                }
+                //if(data.adsu_Activo){
+                //    document.getElementById("inactivar").hidden = false;
+                //    document.getElementById("activar").hidden = true;
+                //} else {
+                //    document.getElementById("activar").hidden = false;
+                //    document.getElementById("inactivar").hidden = true;
+                //}
             var SelectedIdEmp = data.emp_Id;
 
             //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -384,7 +393,6 @@ $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
-    if(ValidarCamposEditar($('#emp_Id'), $('#adsu_RazonAdelanto'), $('#adsu_Monto')))
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
         method: "POST",
@@ -395,6 +403,7 @@ $("#btnUpdateAdelantos").click(function () {
         //ACCIONES EN CASO DE EXITO
 
         //EJECUTAR LA VALIDACION PARA LA EDICIÓN
+        if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
         if ($("#Editar #adsu_Monto").val() <= data) {
             var data = $('#frmAdelantosEdit').serializeArray();
             $.ajax({
@@ -478,20 +487,20 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueld
                 var FechaModifica = FechaFormato(data.adsu_FechaModifica);
 
                 if (data.adsu_Deducido) {
-                    $('#Detalles #adsu_Deducido').prop('checked', true);
+                    $("#Detalles #adsu_Deducido").html("Si");
                 } else {
-                    $('#Detalles #adsu_Deducido').prop('checked', false);
+                    $("#Detalles #adsu_Deducido").html("No");
                 }
 
-                $("#Detalles #per_Nombres").val(data.per_Nombres);
-                $("#Detalles #adsu_FechaAdelanto").val(FechaRegistro);
-                $("#Detalles #adsu_RazonAdelanto").val(data.adsu_RazonAdelanto);
-                $("#Detalles #adsu_Monto").val(data.adsu_Monto);
+                $("#Detalles #per_Nombres").html(data.per_Nombres);
+                $("#Detalles #adsu_FechaAdelanto").html(FechaRegistro);
+                $("#Detalles #adsu_RazonAdelanto").html(data.adsu_RazonAdelanto);
+                $("#Detalles #adsu_Monto").html(data.adsu_Monto);
 
-                $("#Detalles #UsuarioCrea").val(data.UsuarioCrea);                
-                $("#Detalles #adsu_FechaCrea").val(FechaCrea);
-                $("#Detalles #UsuarioModifica").val(data.UsuarioModifica);
-                $("#Detalles #adsu_FechaModifica").val(FechaModifica);
+                $("#Detalles #UsuarioCrea").html(data.UsuarioCrea);
+                $("#Detalles #adsu_FechaCrea").html(FechaCrea);
+                $("#Detalles #UsuarioModifica").html(data.UsuarioModifica);
+                $("#Detalles #adsu_FechaModifica").html(FechaModifica);
 
                 $("#DetallesAdelantoSueldo").modal();
             }
@@ -533,8 +542,8 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             $("#InactivarAdelantoSueldo").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro fue Inactivado de forma exitosa!',
             });
         }
     });
@@ -542,17 +551,16 @@ $("#btnInactivarRegistroAdelantos").click(function () {
 });
 
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
-$(document).on("click", "#btnActivarAdelantoSueldo", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#EditarAdelantoSueldo").modal('hide');
+$(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdelantos", function () {
+    IDActivar = $(this).closest('tr').data('id');
     $("#ActivarAdelantoSueldo").modal();
 });
 
-//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnActivarRegistroAdelantos").click(function () {
+//EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
+$("#btnActivarRegistroAdelantosModal").click(function () {
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/AdelantoSueldo/Activar/" + IDInactivar,
+        url: "/AdelantoSueldo/Activar/" + IDActivar,
         method: "POST"
     }).done(function (data) {
         if (data == "error") {
@@ -569,12 +577,12 @@ $("#btnActivarRegistroAdelantos").click(function () {
             $("#ActivarAdelantoSueldo").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro fue Activado de forma exitosa!',
             });
         }
     });
-    IDInactivar = 0;
+    IDActivar = 0;
 });
 
 

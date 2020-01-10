@@ -14,10 +14,10 @@ namespace ERP_GMEDINA.Models
 
     public class cTipoDeduccion
     {
-        [Display(Name = "ID Tipo Deduccion")]
+        [Display(Name = "Número")]
         public int tde_IdTipoDedu { get; set; }
 
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         [Required(ErrorMessage = "El campo descripción no puede quedar vacío")]
         [StringLength(100, MinimumLength = 3)]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]

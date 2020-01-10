@@ -26,7 +26,7 @@
 				</div>
 			</li>
 
-			<li class="@Html.IsSelected(controller:"Menu",action: "Index")">
+			<li class="">
 				<a href="@Url.Action("Index", "Menu")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.dashboard">Inicio</span></a>
 			</li>
 
@@ -84,10 +84,12 @@
 					@*<li class="@Html.IsSelected(action: "GeneralTotalesIndexRPT")"><a href="@Url.Action("GeneralTotalesIndexRPT", "ReportesPlanilla")">Gastos Mensuales</a></li>*@
 					<li class="@Html.IsSelected(action: "IHSSIndexRPT")"><a href="@Url.Action("IHSSIndexRPT", "ReportesPlanilla")">IHSS</a></li>
 					<li class="@Html.IsSelected(action: "ISRIndexRPT")"><a href="@Url.Action("ISRIndexRPT", "ReportesPlanilla")">ISR</a></li>
-					@*<li class="@Html.IsSelected(action: "LiquidacionesIndexRPT")"><a href="@Url.Action("LiquidacionesIndexRPT", "ReportesPlanilla")">Liquidaciones</a></li>*@
+					<li class="@Html.IsSelected(action: "LiquidacionRPT_Index")"><a href="@Url.Action("LiquidacionRPT_Index", "ReportesPlanilla")">Liquidaciones</a></li>
 
 					<li class="@Html.IsSelected(action: "Deducciones")"><a href="@Url.Action("Deducciones", "ReportesPlanilla")">Deducciones</a></li>
 					<li class="@Html.IsSelected(action: "Ingresos")"><a href="@Url.Action("Ingresos", "ReportesPlanilla")">Ingresos</a></li>
+					<li class="@Html.IsSelected(action: "ReportesVarios")"><a href="@Url.Action("ReportesVarios", "ReportesPlanilla")">Reportes Varios</a></li>
+
 				</ul>
 			</li>
 

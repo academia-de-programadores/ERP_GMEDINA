@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
     public class cPreaviso
     {
 
-        [Display(Name = "Numero")]
+        [Display(Name = "Número")]
         public int prea_IdPreaviso { get; set; }
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
@@ -30,7 +30,7 @@ namespace ERP_GMEDINA.Models
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
         [Range(0.00, 999999.99, ErrorMessage = "La cantidad no puede ser menor de 0 dígitos, ni mayor que 6 dígitos")]
-        [Display(Name = "Dias de Preaviso")]
+        [Display(Name = "Días de Preaviso")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
         public string prea_DiasPreaviso { get; set; }
 
