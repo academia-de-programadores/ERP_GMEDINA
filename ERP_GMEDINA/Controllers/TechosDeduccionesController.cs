@@ -26,15 +26,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbTechosDeducciones = db.tbTechosDeducciones
-                        .Select(c => new {
-                            cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
                             tddu_IdTechosDeducciones = c.tddu_IdTechosDeducciones,
                             tddu_PorcentajeEmpresa = c.tddu_PorcentajeEmpresa,
                             tddu_PorcentajeColaboradores = c.tddu_PorcentajeColaboradores,
                             tddu_Techo = c.tddu_Techo,
                             tddu_Activo = c.tddu_Activo,
-                            tede_FechaCrea = c.tddu_FechaCrea
-                        })//.OrderByDescending(c => c.tede_FechaCrea)
+                            tede_FechaCrea = c.tddu_FechaCrea }) 
+                            //.OrderByDescending(c => c.tede_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE

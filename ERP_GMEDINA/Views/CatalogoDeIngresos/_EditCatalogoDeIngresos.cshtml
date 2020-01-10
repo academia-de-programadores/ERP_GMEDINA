@@ -2,8 +2,8 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresos" }))
 {
     @Html.AntiForgeryToken()
-    <div class="ibox-content">
-        <div class="form-horizontal">
+    @*<div class="ibox-content">
+        <div class="form-horizontal">*@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
@@ -18,8 +18,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @*</div>
+    </div>*@
                         }
 
                         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
