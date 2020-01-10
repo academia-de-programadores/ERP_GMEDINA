@@ -7,9 +7,6 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           //if (validarDT(Lista)) {
-           //    return null;
-           //}
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    ID: value.Id,
@@ -100,7 +97,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Éxito!", "Se ha actualizado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -125,9 +122,9 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#tbRequisiciones")["0"].innerText = obj.tbRequisiciones.req_Descripcion;
                 $("#ModalDetalles").find("#scan_Fecha")["0"].innerText = FechaFormato(obj.scan_Fecha).substring(0, FechaFormato(obj.scan_Fecha).length - 8);;;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#scan_FechaCrea")["0"].innerText = FechaFormato(obj.scan_FechaCrea).substring(0, FechaFormato(obj.scan_FechaCrea).length - 8);
+                $("#ModalDetalles").find("#scan_FechaCrea")["0"].innerText = FechaFormato(obj.scan_FechaCrea);
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#scan_FechaModifica")["0"].innerText = FechaFormato(obj.scan_FechaModifica).substring(0, FechaFormato(obj.scan_FechaModifica).length - 8);
+                $("#ModalDetalles").find("#scan_FechaModifica")["0"].innerText = FechaFormato(obj.scan_FechaModifica);
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
             }
@@ -155,7 +152,7 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                     LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
 
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -204,7 +201,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -281,7 +278,7 @@ $("#btnContratar").click(function () {
                     $('.modal-backdrop').remove();//eliminamos el backdrop del modal 
                     llenarTabla();
                     LimpiarControles(["emp_FechaInreso", "emp_CuentaBancaria"]);
-                    MsgSuccess("¡Exito!", "Se ah Guardado el cambio");
+                    MsgSuccess("¡Éxito!", "Se ha guardado el cambio");
                 } else {
 
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");

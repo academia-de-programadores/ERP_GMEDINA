@@ -20,8 +20,8 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#tper_Descripcion")["0"].innerText = obj.tper_Descripcion;
-                $("#ModalDetalles").find("#tper_Estado")["0"].innerText = obj.tper_Estado;
-                $("#ModalDetalles").find("#tper_RazonInactivo")["0"].innerText = obj.tper_RazonInactivo;
+                //$("#ModalDetalles").find("#tper_Estado")["0"].innerText = obj.tper_Estado;
+                //$("#ModalDetalles").find("#tper_RazonInactivo")["0"].innerText = obj.tper_RazonInactivo;
                 $("#ModalDetalles").find("#tper_FechaCrea")["0"].innerText = FechaFormato(obj.tper_FechaCrea);
                 $("#ModalDetalles").find("#tper_FechaModifica")["0"].innerText = FechaFormato(obj.tper_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -37,9 +37,6 @@ function llenarTabla() {
         'POST',
         function (Lista) {
             tabla.clear().draw();
-            if (validarDT(Lista)) {
-                return null;
-            }
             $.each(Lista, function (index, value) {
                 console.log(value.tper_Descripcion);
                 tabla.row.add([value.tper_Descripcion,

@@ -7,7 +7,6 @@ var id = 0;
 
 
 function tablaEditar(ID) {
-    console.log("woman :3333");
 
     id = ID;
     _ajax(null,
@@ -31,7 +30,7 @@ function tablaEditar(ID) {
 
 
 function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Sueldos</h5><div align=right><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Historial de Sueldos del Empleado</h5><div align=right><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
                 '<th>' + 'Sueldo Anterior' + '</th>' +
@@ -61,9 +60,6 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           if (validarDT(Lista)) {
-               return null;
-           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
 
@@ -99,12 +95,14 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj.sue_Cantidad;
-                $("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
+                //$("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
                 //$("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
                 $("#ModalDetalles").find("#sue_UsuarioCrea")["0"].innerText = obj.sue_UsuarioCrea;
                 $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj.sue_FechaCrea);
+                //$("#ModalDetalles").find("#sue_UsuarioModifica")["0"].innerText = obj.sue_UsuarioModifica;
+                //$("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
             }
@@ -126,11 +124,9 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     if (row.child.isShown()) {
         row.child.hide();
         tr.removeClass('shown');
-        debugger
     }
     else {
         id = row.data().Id_Empleado;
-        console.log(id);
         hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/Sueldos/ChildRowData',
@@ -138,6 +134,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
+                    tr.removeClass('loading,gif');
                     tr.addClass('shown');
                 }
             });
@@ -150,7 +147,6 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 
 $("#btnActualizar").click(function () {
-    console.log("sf");
     var data = $('#FormEditar').serializeArray();
     data = serializar(data);
     if (data != null) {
@@ -164,7 +160,7 @@ $("#btnActualizar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["sue_Id", "sue_Cantidad"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -180,7 +176,6 @@ $("#btnActualizar").click(function () {
 
 
 $("#btnEditar").click(function tablaEditar() {
-    console.log("woman :3");
     _ajax(null,
         '/Sueldos/Edit/' + id,
         'GET',

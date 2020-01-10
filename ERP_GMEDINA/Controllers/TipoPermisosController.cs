@@ -12,119 +12,176 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoPermisosController : Controller
     {
-
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: tbTipoPermisos
+        // GET: Competencias
         public ActionResult Index()
         {
-            var tbTipoPermisos = db.tbTipoPermisos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-            return View(tbTipoPermisos.ToList());
-        }
-
-        // GET: tbTipoPermisos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            List<tbTipoPermisos> tbTipoPermisos = new List<Models.tbTipoPermisos> { };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                tbTipoPermisos = db.tbTipoPermisos.Where(x => x.tper_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbTipoPermisos);
             }
-            tbTipoPermisos tbTipoPermisos = db.tbTipoPermisos.Find(id);
-            if (tbTipoPermisos == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ex.Message.ToString();
+                tbTipoPermisos.Add(new tbTipoPermisos { tper_Id = 0, tper_Descripcion = "fallo la conexion" });
             }
             return View(tbTipoPermisos);
         }
-
-        // GET: tbTipoPermisos/Create
-        public ActionResult Create()
-        {
-            ViewBag.tper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.tper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
-
-        // POST: tbTipoPermisos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tper_Id,tper_Descripcion,tper_Estado,tper_RazonInactivo,tper_UsuarioCrea,tper_FechaCrea,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
+        public JsonResult llenarTabla()
         {
-            if (ModelState.IsValid)
+            List<tbTipoPermisos> tbTipoPermisos = new List<Models.tbTipoPermisos> { };
+            foreach (tbTipoPermisos x in db.tbTipoPermisos.ToList().Where(x => x.tper_Estado == true))
             {
-                db.tbTipoPermisos.Add(tbTipoPermisos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                tbTipoPermisos.Add(new tbTipoPermisos
+                {
+                    tper_Id = x.tper_Id,
+                    tper_Descripcion = x.tper_Descripcion
+                });
             }
-
-            ViewBag.tper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioCrea);
-            ViewBag.tper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioModifica);
-            return View(tbTipoPermisos);
+            return Json(tbTipoPermisos, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult Create(tbTipoPermisos tbTipoPermisos)
+        {
+            string msj = "";
+            if (tbTipoPermisos.tper_Descripcion != "")
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoPermisos_Insert(
+                        tbTipoPermisos.tper_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoPermisos_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: tbTipoPermisos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoPermisos tbTipoPermisos = db.tbTipoPermisos.Find(id);
-            if (tbTipoPermisos == null)
+
+            tbTipoPermisos tbTipoPermisos = null;
+            try
             {
+                tbTipoPermisos = db.tbTipoPermisos.Find(id);
+                if (tbTipoPermisos == null || !tbTipoPermisos.tper_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            ViewBag.tper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioCrea);
-            ViewBag.tper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioModifica);
-            return View(tbTipoPermisos);
+            Session["id"] = id;
+            var competencias = new tbTipoPermisos
+            {
+                tper_Id = tbTipoPermisos.tper_Id,
+                tper_Descripcion = tbTipoPermisos.tper_Descripcion,
+                tper_Estado = tbTipoPermisos.tper_Estado,
+                tper_RazonInactivo = tbTipoPermisos.tper_RazonInactivo,
+                tper_UsuarioCrea = tbTipoPermisos.tper_UsuarioCrea,
+                tper_FechaCrea = tbTipoPermisos.tper_FechaCrea,
+                tper_UsuarioModifica = tbTipoPermisos.tper_UsuarioModifica,
+                tper_FechaModifica = tbTipoPermisos.tper_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoPermisos.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbTipoPermisos.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(competencias, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: tbTipoPermisos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tper_Id,tper_Descripcion,tper_Estado,tper_RazonInactivo,tper_UsuarioCrea,tper_FechaCrea,tper_UsuarioModifica,tper_FechaModifica")] tbTipoPermisos tbTipoPermisos)
+        public JsonResult Edit(tbTipoPermisos tbTipoPermisos)
         {
-            if (ModelState.IsValid)
+            string msj = "";
+            if (tbTipoPermisos.tper_Id != 0 && tbTipoPermisos.tper_Descripcion != "")
             {
-                db.Entry(tbTipoPermisos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var id = (int)Session["id"];
+                var usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoPermisos_Update(id,
+                        tbTipoPermisos.tper_Descripcion, usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoPermisos_Update_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            ViewBag.tper_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioCrea);
-            ViewBag.tper_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTipoPermisos.tper_UsuarioModifica);
-            return View(tbTipoPermisos);
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult Delete(tbTipoPermisos tbTipoPermisos)
+        {
+            string msj = "...";
+            if (tbTipoPermisos.tper_Id != 0 && tbTipoPermisos.tper_RazonInactivo != "")
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, tbTipoPermisos.tper_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoPermisos_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError = " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: tbTipoPermisos/Delete/5
-        public ActionResult Delete(int? id)
+        protected tbUsuario IsNull(tbUsuario valor)
         {
-            if (id == null)
+            if (valor != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return valor;
             }
-            tbTipoPermisos tbTipoPermisos = db.tbTipoPermisos.Find(id);
-            if (tbTipoPermisos == null)
+            else
             {
-                return HttpNotFound();
+                return new tbUsuario { usu_NombreUsuario = "" };
             }
-            return View(tbTipoPermisos);
         }
-
-        // POST: tbTipoPermisos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbTipoPermisos tbTipoPermisos = db.tbTipoPermisos.Find(id);
-            db.tbTipoPermisos.Remove(tbTipoPermisos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

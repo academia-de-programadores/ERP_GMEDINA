@@ -29,9 +29,7 @@ function tablaDetalles(btn) {
                 $("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.emp_Id;
                 $("#ModalDetalles").find("#tmon_Id")["0"].innerText = obj.tmon_Id;
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj.sue_Cantidad;
-                $("#ModalDetalles").find("#sue_SueldoAnterior")["0"].innerText = obj.sue_SueldoAnterior;
-                $("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
-                $("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
+                $("#ModalDetalles").find("#sue_SueldoAnterior")["0"].innerText = obj.sue_SueldoAnterior;               
                 $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj.sue_FechaCrea);
                 $("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
