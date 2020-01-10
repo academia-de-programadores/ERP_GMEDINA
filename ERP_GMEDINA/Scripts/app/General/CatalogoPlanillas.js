@@ -29,6 +29,7 @@ const btnGuardar = $('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), //Bot
 	inputIdPlanilla = $('form #cpla_IdPlanilla'), //Seleccionar el id de la planilla (esta oculto)
 	cargandoCrear = $('#cargandoCrear'), //Div que aparecera cuando se le de click en crear
 	cargandoEditar = $('#cargandoEditar'), //Div que aparecera cuando se de click en editar
+	cargandoEliminar = $('#cargandoEliminar'), //Div que aparecera cuando se de click en eliminar
 	elementsSwitch = Array.prototype.slice.call(
 		document.querySelectorAll('.js-switch')
 	),
@@ -285,6 +286,18 @@ function ocultarCargandoCrear() {
 	cargandoCrear.hide();
 }
 
+function mostrarCargandoEliminar() {
+	$('#btnInactivarPlanilla').hide();
+	cargandoEliminar.html(spinner());
+	cargandoEliminar.show();
+}
+
+function ocultarCargandoEliminar() {
+	$('#btnInactivarPlanilla').show();
+	cargandoEliminar.html('');
+	cargandoEliminar.hide();
+}
+
 //Para editar o insertar utilizare esta función, para validar los campos
 function verificarCampos(
 	descripcionPlanilla,
@@ -353,6 +366,12 @@ function listar() {
 			{ data: 'frecuenciaDias' }, //Columna 3: frecuencia en días de la planilla, esto viene de la petición que se hizo al servidor
 			{
 				data: 'recibeComision'
+			},
+			{
+				data: 'activo',
+				render: function (data) {
+					return (data) ? "Activo" : "Inactivo";
+				}
 			},
 			{
 				//Columna 4: los botones que tendrá cada fila, editar y detalles de la planilla
@@ -755,6 +774,7 @@ $('#inactivar').click(() => {
 
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	var id = inputIdPlanilla.val();
+	mostrarCargandoEliminar();
 	_ajax(
 		{ id: id },
 		'/CatalogoDePlanillas/Delete',
@@ -772,6 +792,7 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 					message: 'Ocurrió un error'
 				});
 			}
+			ocultarCargandoEliminar();
 		},
 		(enviar) => { }
 	);
