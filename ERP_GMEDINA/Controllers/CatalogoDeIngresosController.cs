@@ -227,7 +227,47 @@ namespace ERP_GMEDINA.Controllers
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
-        }        
+        }
+
+
+        public ActionResult Activar(int ID)
+        {
+            string response = String.Empty;
+            IEnumerable<object> listCatalogoDeIngresos = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(ID,
+                                                                                        0,
+                                                                                        DateTime.Now
+                                                                                        );
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result Resultado in listCatalogoDeIngresos)
+                        MensajeError = Resultado.MensajeError;
+
+
+                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
+                    response = "bien";
+                }
+                catch (Exception)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                    response = "error";
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: CatalogoDeDeducciones/Delete/5
         public ActionResult Delete(int? id)
