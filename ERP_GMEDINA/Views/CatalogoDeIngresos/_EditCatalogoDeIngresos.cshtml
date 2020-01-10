@@ -2,42 +2,33 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresos" }))
 {
     @Html.AntiForgeryToken()
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                            @Html.HiddenFor(model => model.cin_IdIngreso)
+                            @Html.HiddenFor(model => model.cin_FechaCrea)
+                            @Html.HiddenFor(model => model.cin_UsuarioCrea)
+                            @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" })
+                    </div>
+                    <div class="col-md-6">
+                            @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        }
 
-    @Html.HiddenFor(model => model.cin_IdIngreso)
-    @Html.HiddenFor(model => model.cin_FechaCrea)
-    @Html.HiddenFor(model => model.cin_UsuarioCrea)
-   
-                    @*<div class="ibox-content">
-                        <div class="form-horizontal">*@
-                            <div class="form-group">
-                                <div class="row">
-                                       <div class="col-md-6">
-                                        @Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" })
-                                        </div>
-                                        <div class="col-md-6">
-                                            @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @id = "cin_DescripcionIngreso" } })
-                                            @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "validareditar" })
-                                        </div>
-                                 </div>
-                             </div>
-                         
-                    @*</div>
-
-                    </div>*@
-            
-}
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
- {
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.cin_IdIngreso)
-    @Html.HiddenFor(model => model.cin_FechaCrea)
-    @Html.HiddenFor(model => model.cin_UsuarioCrea)
-
-}
-                  
-@section Scripts {
-                       
-    @Scripts.Render("~/bundles/jqueryval")                 
-  
- }
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.cin_IdIngreso)
+                            @Html.HiddenFor(model => model.cin_FechaCrea)
+                            @Html.HiddenFor(model => model.cin_UsuarioCrea)
+                        }
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }

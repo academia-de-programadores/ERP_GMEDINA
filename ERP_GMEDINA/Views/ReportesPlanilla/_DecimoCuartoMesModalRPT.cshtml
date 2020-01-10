@@ -2,32 +2,32 @@
 
 @using (Html.BeginForm("DecimoCuartoMesParametrosRPT", "ReportesPlanilla"))
 {
-	<div class="modal-body">
+<div class="modal-body">
 
-		<div class="form-group">
-			@Html.LabelFor(model => model.dcm_FechaPago, htmlAttributes: new { @class = "font-noraml" }) <br />
-			<div class="input-group date">
-				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.dcm_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dcm_FechaPago", @id = "dcm_FechaPago" } })
-			</div>
-			@Html.ValidationMessageFor(model => model.dcm_FechaPago, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+	<div class="form-group">
+		@Html.LabelFor(model => model.dcm_FechaPago, htmlAttributes: new { @class = "font-noraml" }) <br />
+		<div class="input-group date">
+			<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.dcm_FechaPago, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "dcm_FechaPago", @id = "dcm_FechaPago" } })
 		</div>
+		@Html.ValidationMessageFor(model => model.dcm_FechaPago, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+	</div>
 
-		<div class="form-group">
-			@Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "font-noraml" }) <br />
+	<div class="form-group">
+		@Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "font-noraml" }) <br />
 
-			@Html.DropDownList("cpla_DescripcionPlanilla", (IEnumerable<SelectListItem>)ViewBag.TipoPlanillaDDL, "Seleccione", new { @class = "form-control" })
+		@Html.DropDownList("cpla_DescripcionPlanilla", (IEnumerable<SelectListItem>)ViewBag.TipoPlanillaDDL, "Seleccione", new { @class = "form-control" })
 
-			@Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
-		</div>
+		@Html.ValidationMessageFor(model => model.cpla_DescripcionPlanilla, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+	</div>
 
-		<input type="hidden" value="pdf" name="id" />
-
+	<input type="hidden" value="pdf" name="id" />
+</div>
 
 
 		<div class="modal-footer">
 			<button type="button" class="btn btn-white" id="btnCerrarModalRPT">Cerrar</button>
-			<button type="submit" class="btn btn-primary" id="btnEnviarParametros">Aceptar</button>
+			<button type="submit" class="btn btn-primary pull-left" id="btnEnviarParametros">Imprimir</button>
 		</div>
 
-	</div>
+	
 }

@@ -50,6 +50,7 @@
                             @foreach (var item in Model)
                             {
                                 string Estado = item.cc_Activo == false ? "Inactivo" : "Activo";
+                                //string Pagado = item.cc_Pagado == false ? "Sin Pagar" : "Pagado";
                                 <tr class="gradeA odd" role="row" data-id="@item.cc_Id">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.cc_Id)
@@ -73,37 +74,31 @@
                                         @Html.DisplayFor(modelItem => item.cc_FechaRegistro)
                                     </td>
                                     <td>
-                                     @{var Pagado = item.cc_Pagado == true ? "checked" : string.Empty;}
-                                    <input type="checkbox" class="i-checks" id="check-@item.cc_Pagado" @Pagado disabled />
-
+                                        @Estado
                                     </td>
                                     <td>
-                                       @Estado
+                                     @*@Pagado*@
+                                        @{var Pagado = item.cc_Pagado == true ? "checked" : string.Empty;}
+                                        <input type="checkbox" class="i-checks" id="check-@item.cc_Pagado" @Pagado disabled />
                                     </td>
+                                    
                                     <td>
                                         @{
                                             <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                             if (item.cc_Activo == true)
                                             {
-                                                <button type="button" data-id="@item.cc_Id" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
-                                                <button type="button" data-id="@item.cc_Id" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
+                                                <button type="button" data-id="@item.cc_Id"  class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
+                                                <button type="button" data-id="@item.cc_Id"  class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
                                                
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario.usu_EsAdministrador == true && item.cc_Activo == false)
                                             {
                                                  <!-- ACTIVAR -->
-                                                <button type="button" data-id="@item.cc_Id" type="button" class="btn btn-default btn-xs" id="btnActivarEmpleadoComisiones">Editar</button>
+                                                <button type="button" data-id="@item.cc_Id" class="btn btn-primary btn-xs" id="btnActivarEmpleadoComisiones">Activar</button>
+                                               
                                             }
                                         }
-
-
-
-
-
-                                        <button data-id="@item.cc_Id" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>
-                                        <button data-id="@item.cc_Id" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>
-                                        
                                     </td>
                                 </tr>
                             }
@@ -175,10 +170,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inhabilitar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Eliminar este Registro?
+
+                ¿Esta seguro que desea Inhabilitar este Registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="btnInactivarRegistroComisiones">Si</button>
@@ -188,6 +184,27 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ActivarEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            
+            <div class="modal-body" id="Activar">
+                @Html.Partial("_ActivarEmpleadoComisiones", new ERP_GMEDINA.Models.tbEmpleadoComisiones())
+                ¿Esta seguro que desea Activar este Registro?
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnActivarRegistroComisiones">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+
+            </div>*@
+        </div>
+        </div>
+    </div>
 
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
 

@@ -39,16 +39,36 @@ function cargarGridDeducciones() {
             var ListaAFP = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAFP.length; i++) {
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaAFP[i].afp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAFP[i].afp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
+
                 template += '<tr data-id = "' + ListaAFP[i].afp_Id + '">' +
                     '<td>' + ListaAFP[i].afp_Descripcion + '</td>' +
                     '<td>' + ListaAFP[i].afp_AporteMinimoLps + '</td>' +
                     '<td>' + ListaAFP[i].afp_InteresAporte + '</td>' +
                     '<td>' + ListaAFP[i].afp_InteresAnual + '</td>' +
                     '<td>' + ListaAFP[i].tde_Descripcion + '</td>' +
-                    '<td>' +
+                    //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
 
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' +
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+
                     '</td>' +
                     '</tr>';
             }
@@ -56,6 +76,94 @@ function cargarGridDeducciones() {
             $('#tbodyAFP').html(template);
         });
 }
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+        </div>`;
+}
+
+
+const btnActivar = $('#btnActivarRegistroAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnActivar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+//Activar
+$(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
+
+    var ID = $(this).closest('tr').data('id');
+
+    var ID = $(this).attr('afpid');
+
+    console.log(ID)
+
+    $.ajax({
+        url: "/AFP/Activar/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    });
+
+    $('#afp_Id').val(data.afp_Id);
+
+    $("#ActivarAFP").modal();
+});
+
+$("#btnActivarRegistroAFP").click(function () {
+
+    var data = $("#frmActivarAFP").serializeArray();
+
+    $.ajax({
+        url: "/AFP/Activar",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        $("#ActivarAFP").modal('hide');
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo activar el registro, contacte al administrador',
+            });
+        }
+        else if (data == "bien") {
+            cargarGridDeducciones();
+            console.log(data);
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue activado de forma exitosa!',
+            });
+        }
+    });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmActivarAFP").submit(function (e) {
+        return false;
+    });
+
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
     $("#validation1").css("display", "none");
@@ -77,18 +185,6 @@ $("#btnIconCerrar").click(function () {
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-        </div>`;
-}
-
 const btnGuardar = $('#btnCreateRegistroAFP')
 
 //Div que aparecera cuando se le de click en crear

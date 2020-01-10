@@ -9,22 +9,19 @@
               <Width>3.33911cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33911cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33911cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33911cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33911cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.33911cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>3.33911cm</Width>
+              <Width>2.5cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -33,14 +30,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox2">
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Identidad</Value>
+                              <Value>Codigo Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -52,7 +49,43 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#949ca4</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#7c8692</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Nombres</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#949ca4</Color>
@@ -76,7 +109,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Empleado</Value>
+                              <Value>Apellidos</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -112,7 +145,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Departamento</Value>
+                              <Value>AFP</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -141,42 +174,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Área</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#949ca4</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#7c8692</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -184,7 +181,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Planilla</Value>
+                              <Value>Fecha Pago</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -220,7 +217,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Total</Value>
+                              <Value>Planilla</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -247,42 +244,6 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox13">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value> Fecha Pago</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <FontSize>11pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>White</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox13</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#949ca4</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>#7c8692</BackgroundColor>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -290,14 +251,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="per_Identidad">
+                    <Textbox Name="emp_Id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!per_Identidad.Value</Value>
+                              <Value>=Fields!emp_Id.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -307,7 +268,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>per_Identidad</rd:DefaultName>
+                      <rd:DefaultName>emp_Id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -323,14 +284,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="per_Empleado">
+                    <Textbox Name="per_Nombres">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!per_Empleado.Value</Value>
+                              <Value>=Fields!per_Nombres.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -340,7 +301,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>per_Empleado</rd:DefaultName>
+                      <rd:DefaultName>per_Nombres</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -356,14 +317,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="depto_descripcion">
+                    <Textbox Name="per_Apellidos">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!depto_descripcion.Value</Value>
+                              <Value>=Fields!per_Apellidos.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -373,7 +334,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>depto_descripcion</rd:DefaultName>
+                      <rd:DefaultName>per_Apellidos</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -389,14 +350,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="area_Descripcion">
+                    <Textbox Name="hipa_AFP">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!area_Descripcion.Value</Value>
+                              <Value>=Fields!hipa_AFP.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -406,7 +367,40 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>area_Descripcion</rd:DefaultName>
+                      <rd:DefaultName>hipa_AFP</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="hipa_FechaPago1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!hipa_FechaPago.Value</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>hipa_FechaPago1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -453,79 +447,12 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="hipa_AFP">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!hipa_AFP.Value)</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>hipa_AFP</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="hipa_FechaPago">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!hipa_FechaPago.Value</Value>
-                              <Style>
-                                <FontFamily>Tahoma</FontFamily>
-                                <Color>#4d4d4d</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>hipa_FechaPago</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>#e5e5e5</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
-            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -546,7 +473,7 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Height>1.27938cm</Height>
-        <Width>23.37375cm</Width>
+        <Width>15.83911cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -554,10 +481,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>0.50369in</Height>
     <Style />
   </Body>
-  <Width>9.20226in</Width>
+  <Width>6.23587in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -589,28 +516,12 @@
           <DataField>emp_Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="per_Identidad">
-          <DataField>per_Identidad</DataField>
+        <Field Name="per_Nombres">
+          <DataField>per_Nombres</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="per_Empleado">
-          <DataField>per_Empleado</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="depto_Id">
-          <DataField>depto_Id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="depto_descripcion">
-          <DataField>depto_descripcion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="area_Id">
-          <DataField>area_Id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="area_Descripcion">
-          <DataField>area_Descripcion</DataField>
+        <Field Name="per_Apellidos">
+          <DataField>per_Apellidos</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="hipa_AFP">
@@ -632,7 +543,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReportesPlanillaDS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\User\Desktop\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesPlanillaDS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\cflam\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesPlanillaDS.xsd</rd:SchemaPath>
         <rd:TableName>V_AFP_RPT</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
