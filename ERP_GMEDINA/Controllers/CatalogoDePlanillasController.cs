@@ -23,12 +23,17 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult getPlanilla()
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            var tbCatalogoDePlanillas = db.tbCatalogoDePlanillas
-                .OrderByDescending(x => x.cpla_FechaCrea)
-				.OrderByDescending(x=> x.cpla_Activo)
-                .Select(x => new CatalogoDePlanillasViewModel { idPlanilla = x.cpla_IdPlanilla, descripcionPlanilla = x.cpla_DescripcionPlanilla, frecuenciaDias = x.cpla_FrecuenciaEnDias, recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"), activo = x.cpla_Activo });
+            IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla();
             object json = new { data = tbCatalogoDePlanillas };
             return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla()
+        {
+            return db.tbCatalogoDePlanillas
+                            .OrderByDescending(x => x.cpla_FechaCrea)
+                            .OrderByDescending(x => x.cpla_Activo)
+                            .Select(x => new CatalogoDePlanillasViewModel { idPlanilla = x.cpla_IdPlanilla, descripcionPlanilla = x.cpla_DescripcionPlanilla, frecuenciaDias = x.cpla_FrecuenciaEnDias, recibeComision = (x.cpla_RecibeComision == true ? "Si" : "No"), activo = x.cpla_Activo });
         }
 
         [HttpGet]
@@ -605,6 +610,8 @@ namespace ERP_GMEDINA.Controllers
             int usuarioModifica = 1; //TOOD: Agregar usuario modifica
             DateTime fechaModifica = DateTime.Now;
             IEnumerable<object> planillaActivada = null;
+            IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = null;
+
             using (var dbContextTransaccion = db.Database.BeginTransaction())
             {
                 try
@@ -617,6 +624,8 @@ namespace ERP_GMEDINA.Controllers
                     if (mensajeError.StartsWith("-1"))
                         response = "error";
 
+                    tbCatalogoDePlanillas = GetPlanilla();
+
                     dbContextTransaccion.Commit();
                 }
                 catch (Exception)
@@ -626,7 +635,9 @@ namespace ERP_GMEDINA.Controllers
                 }
             }
 
-            return Json(response, JsonRequestBehavior.AllowGet);
+            object json = new { data = tbCatalogoDePlanillas,response = response };
+
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

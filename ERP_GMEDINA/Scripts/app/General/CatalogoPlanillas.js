@@ -79,7 +79,7 @@ var crearEditar = function (edit) {
 		)
 	) {
 		if (!edit) {
-			mostrarCargandoCrear();
+			mostrarSpinner(btnGuardar, cargandoCrear);
 
 			_ajax(
 				{
@@ -103,14 +103,14 @@ var crearEditar = function (edit) {
 							message: 'Hubo un error al insertar el registro'
 						});
 
-						ocultarCargandoCrear();
+						ocultarSpinner(btnGuardar, cargandoCrear);
 					}
 				},
 				(enviar) => { }
 			);
 		} else {
 			let idPlanilla = inputIdPlanilla.val();
-			mostrarCargandoEditar();
+			mostrarSpinner(btnEditar, cargandoEditar);
 			_ajax(
 				{
 					id: idPlanilla,
@@ -133,7 +133,7 @@ var crearEditar = function (edit) {
 							title: 'Error',
 							message: 'Hubo un error al editar el registro'
 						});
-						ocultarCargandoEditar();
+						ocultarSpinnerSpinner(btnEditar, cargandoEditar);
 					}
 				},
 				(enviar) => { }
@@ -262,40 +262,16 @@ function scrollArriba() {
 	htmlBody.animate({ scrollTop: 60 }, 300);
 }
 
-function ocultarCargandoEditar() {
-	btnEditar.show();
-	cargandoEditar.html('');
-	cargandoEditar.hide();
+function mostrarSpinner(btn, div) {
+	btn.hide();
+	div.html(spinner());
+	div.show();
 }
 
-function mostrarCargandoEditar() {
-	btnEditar.hide();
-	cargandoEditar.html(spinner());
-	cargandoEditar.show();
-}
-
-function mostrarCargandoCrear() {
-	btnGuardar.hide();
-	cargandoCrear.html(spinner());
-	cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-	btnGuardar.show();
-	cargandoCrear.html('');
-	cargandoCrear.hide();
-}
-
-function mostrarCargandoEliminar() {
-	$('#btnInactivarPlanilla').hide();
-	cargandoEliminar.html(spinner());
-	cargandoEliminar.show();
-}
-
-function ocultarCargandoEliminar() {
-	$('#btnInactivarPlanilla').show();
-	cargandoEliminar.html('');
-	cargandoEliminar.hide();
+function ocultarSpinner(btn, div) {
+	btn.show();
+	div.html('');
+	div.hide();
 }
 
 //Para editar o insertar utilizare esta función, para validar los campos
@@ -445,7 +421,7 @@ function obtenerIdDetallesEditar(tbody, table) {
 		pathname += 'CatalogoDePlanillas/';
 
 	//Cuando de click en editar, que obtenga el id del tr, y que redireccione a la pantalla de Edit
-	$(tbody).on('click', 'button#btnEditarCatalogoDeducciones', function () {
+	$(document).on('click', 'button#btnEditarCatalogoDeducciones', function () {
 		var data = table.row($(this).parents('tr')).data();
 		location.href = pathname + 'Edit/' + data.idPlanilla;
 	});
@@ -458,6 +434,9 @@ function obtenerIdDetallesEditar(tbody, table) {
 
 	$(tbody).on('click', 'button#btnActivar', function () {
 		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
+		console.log(table.row($(this).parents('tr')));
+
+		localStorage.setItem('element', JSON.stringify($(this).parents('tr')));
 		$('#frmActivarCatalogoPlanilla').modal();
 	});
 }
@@ -739,7 +718,7 @@ $('#inactivar').click(() => {
 
 $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	var id = inputIdPlanilla.val();
-	mostrarCargandoEliminar();
+	mostrarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
 	_ajax(
 		{ id: id },
 		'/CatalogoDePlanillas/Delete',
@@ -757,32 +736,34 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 					message: 'Ocurrió un error'
 				});
 			}
-			ocultarCargandoEliminar();
+			ocultarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
 		},
 		(enviar) => { }
 	);
 });
 
-$('#btnActivarCatatalogoPlanilla').click(() => {
+$(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 	let id = localStorage.getItem('id');
-
+	mostrarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
 	_ajax({ id: id },
 		'/CatalogoDePlanillas/ActivarPlanilla',
 		'POST',
 		(data) => {
 			console.log(data);
-			if (data == 'bien') {
+			if (data.response == 'bien') {
 				iziToast.success({
 					title: 'Éxito',
 					message: 'El registro se activo correctamente.'
 				});
 				$('#frmActivarCatalogoPlanilla').modal('hide');
-			}
 
+				table.clear();
+				table.rows.add(data.data).draw();
+			}
+			ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
 		},
 		() => {
 			console.log('Enviando');
-
 		})
 });
 //#endregion
