@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsPeriodo" }))
 {
-    <div class="modal-body" id="Detalles">
+    <div class="ibox-content">
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
@@ -10,33 +10,45 @@
             @Html.HiddenFor(model => model.prea_IdPreaviso)
 
             <div class="form-group">
-                <label class="control-label col-md-2">Rango de Inicio de Mes</label> 
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.prea_IdPreaviso, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <span id="prea_IdPreaviso">@Html.DisplayFor(model => model.prea_IdPreaviso, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })</span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2">Rango de Fin de Mes</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <span id="prea_RangoInicioMeses">@Html.DisplayFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })</span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2">Dias Preaviso</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                    @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.prea_RangoFinMeses, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <span id="prea_RangoFinMeses">@Html.DisplayFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.prea_DiasPreaviso, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <span id="prea_DiasPreaviso">@Html.DisplayFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })</span>
                 </div>
             </div>
         </div>
 
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h2>Auditoría</h2>
+                <h4>Auditoría</h4>
             </div>
             <div class="ibox-content">
                 <div class="form-horizontal">
@@ -52,125 +64,21 @@
                             <tr>
                                 <td>Creado</td>
                                 @Html.HiddenFor(model => model.prea_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                <td>@Html.EditorFor(model => model.prea_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td><span id="tbUsuario_usu_NombreUsuario">@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="prea_FechaCrea">@Html.EditorFor(model => model.prea_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                             <tr>
                                 <td>Modificado</td>
                                 @Html.HiddenFor(model => model.prea_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                                <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                                <td>@Html.EditorFor(model => model.prea_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                <td><span id="tbUsuario1_usu_NombreUsuario">@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="prea_FechaModifica">@Html.EditorFor(model => model.prea_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="footer">
-                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <div class="modal-footer">
-    </div>
 }
 
-
-@*@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutBase.cshtml";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>tbPreaviso</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_RangoInicioMeses)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_RangoInicioMeses)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_RangoFinMeses)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_RangoFinMeses)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_DiasPreaviso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_DiasPreaviso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_FechaCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prea_Activo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prea_Activo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario2.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario2.usu_NombreUsuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario3.usu_NombreUsuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUsuario3.usu_NombreUsuario)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.prea_IdPreaviso }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@

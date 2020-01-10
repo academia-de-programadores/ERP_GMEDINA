@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
 
     public partial class cInstitucionesFinancieras
     {
-        [Display(Name = "Codigo")]
+        [Display(Name = "Número")]
         public int insf_IdInstitucionFinanciera { get; set; }
         [Display(Name = "Nombre o Descripcion")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
