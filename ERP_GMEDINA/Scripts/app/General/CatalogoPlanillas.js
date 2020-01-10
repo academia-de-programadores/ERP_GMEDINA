@@ -385,9 +385,7 @@ function listar() {
 					`
 					else
 						return `
-						<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalles</button>
-						<button type="button" class="btn btn-default btn-xs" disabled id="btnEditarCatalogoDeducciones">Editar</button>
-						<button type="button" class="btn btn-success btn-xs" id="btnInactivar">Activar</button>
+						<button type="button" class="btn btn-primary btn-xs" id="btnActivar">Activar</button>
 						`;
 				}
 			}
@@ -421,49 +419,16 @@ function listar() {
 		}, //Con esto se hace la traducción al español del datatables
 		responsive: false,
 		pageLength: 10,
-		dom: '<"html5buttons"B>lTfgitp', //Darle los elementos del DOM que deseo
+		dom: '<"html5buttons"B>lTfgtpi',
 		buttons: [
-			//Poner los botones que quiero que aparezcan
 			{
 				extend: 'copy',
-				title: 'Catalogo de Planillas',
+				text: '<i class="fa fa-copy btn-xs"></i>',
+				titleAttr: 'Copiar',
 				exportOptions: {
-					columns: [1, 2]
+					columns: [1, 2, 3, 4],
 				},
-				text: '<i class="fa fa-copy"></i>'
-			},
-			{
-				extend: 'excelHtml5',
-				title: 'Catalogo de Planillas',
-				exportOptions: {
-					columns: [1, 2]
-				},
-				text: '<i class="fa fa-file-excel-o"></i>'
-			},
-			{
-				extend: 'pdfHtml5',
-				title: 'Catalogo de Planillas',
-				exportOptions: {
-					columns: [1, 2]
-				},
-				text: '<i class="fa fa-file-pdf-o"></i>'
-			},
-			{
-				extend: 'print',
-				title: 'Catalogo de Planillas',
-				exportOptions: {
-					columns: [1, 2]
-				},
-				text: '<i class="fa fa-print"></i>',
-				customize: function (win) {
-					$(win.document.body).addClass('white-bg');
-					$(win.document.body).css('font-size', '10px');
-
-					$(win.document.body)
-						.find('table')
-						.addClass('compact')
-						.css('font-size', 'inherit');
-				}
+				className: 'btn btn-primary'
 			}
 		]
 	});
@@ -491,9 +456,9 @@ function obtenerIdDetallesEditar(tbody, table) {
 		location.href = pathname + 'Details/' + data.idPlanilla;
 	});
 
-	$(tbody).on('click', 'button#btnInactivar', function () {
+	$(tbody).on('click', 'button#btnActivar', function () {
 		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
-		$('#frmInactivarCatalogoPlanilla').modal();
+		$('#frmActivarCatalogoPlanilla').modal();
 	});
 }
 
@@ -798,7 +763,7 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 	);
 });
 
-$('#btnEliminarCatatalogoPlanilla').click(() => {
+$('#btnActivarCatatalogoPlanilla').click(() => {
 	let id = localStorage.getItem('id');
 
 	_ajax({ id: id },
@@ -811,7 +776,7 @@ $('#btnEliminarCatatalogoPlanilla').click(() => {
 					title: 'Éxito',
 					message: 'El registro se activo correctamente.'
 				});
-				$('#frmInactivarCatalogoPlanilla').modal('hide');
+				$('#frmActivarCatalogoPlanilla').modal('hide');
 			}
 
 		},
