@@ -51,6 +51,7 @@ $('#Editar #cb_Pagado').click(function () {
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridBonos() {
+    var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
         '/EmpleadoBonos/GetData',
         'GET',
@@ -68,12 +69,21 @@ function cargarGridBonos() {
             for (var i = 0; i < ListaBonos.length; i++) {
                 var FechaRegistro = FechaFormato(ListaBonos[i].cb_FechaRegistro);
                 var Estado = ListaBonos[i].cb_Activo == true ? 'Activo' : 'Inactivo';
-                if (ListaBonos[i].cb_Activo) {
-                    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>' +
-                    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>';
-                } else {
-                    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>';
-                }
+
+                var botonDetalles = ListaBonos[i].cb_Activo == true ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleEmpleadoBonos">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaBonos[i].cb_Activo == true ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoBonos">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
+
+                //if (ListaBonos[i].cb_Activo) {
+                //    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>' +
+                //    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>';
+                //} else {
+                //    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>';
+                //}
 
                 //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
@@ -95,7 +105,9 @@ function cargarGridBonos() {
                     '<td>' + Check + '</td>' + //AQUI ENVIA LA VARIABLE
                     '<td>' + Estado + '</td>' +
                     '<td>' +
-                    botones +
+                    botonDetalles +
+                    botonEditar +
+                    botonActivar +
                     '</td>' +
                     '</tr>';
             }
@@ -108,6 +120,7 @@ function cargarGridBonos() {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE EMPLEADOS DEL MODAL
+    //
     $.ajax({
         url: "/EmpleadoBonos/EditGetDDLEmpleado",
         method: "GET",
@@ -150,11 +163,12 @@ $('#btnCreateRegistroBonos').click(function () {
     var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
     var IdIngreso = $("#Crear #cin_IdIngreso").val();
     var Monto = $("#Crear #cb_Monto").val();
+    var decimales = Monto.split(".");
 
     if (IdEmpleado != 0 &&
         IdIngreso != 0 &&
-        Monto != "" && Monto != null && Monto != undefined && Monto > 0) {
-
+        Monto != "" && Monto != null && Monto != undefined && Monto > 0
+        && decimales[1] != null && decimales[1] != undefined) {
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoBonosCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -166,6 +180,7 @@ $('#btnCreateRegistroBonos').click(function () {
             //CERRAR EL MODAL DE AGREGAR
             $("#AgregarEmpleadoBonos").modal('hide');
             $("#Crear #cb_Monto").val("");
+            //$("#Validation_descripcion1").css("display", "none");
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 iziToast.error({
@@ -177,8 +192,8 @@ $('#btnCreateRegistroBonos').click(function () {
                 cargarGridBonos();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    title: 'Éxito',
+                    message: '¡El registro se agergó de forma exitosa!',
                 });
             }
         });
@@ -187,17 +202,27 @@ $('#btnCreateRegistroBonos').click(function () {
     else {
         if (IdEmpleado == 0) {
             $("#Crear #emp_IdEmpleado").focus;
-            mostrarError('Ingrese un colaborador válido');
-        }else if (IdIngreso == 0) {
+            mostrarError('Ingrese un colaborador válido.');
+        } else if (IdIngreso == 0) {
             $("#Crear #cin_IdIngreso").focus;
-            mostrarError('Ingrese un bono válido');
+            mostrarError('Ingrese un bono válido.');
+        } else if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+            $("#Crear #cin_IdIngreso").focus;
+            mostrarError('Campo Monto requerido.');
+        } else if (decimales[1] == null && decimales[1] == undefined) {
+            mostrarError('Monto válido con dos valores decimales.');
         }
+    }    
+});
 
-        //if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-        //    $("#Crear #cb_Monto").focus;
-        //    mostrarError('Ingrese un Monto válido');
-        //}
-    }
+$("#btnCerrarCrearBono").click(function () {
+    $("#Validation_descripcion3").hidden = true;
+    $("#Validation_descripcion3").css("display", "none");
+});
+
+$("#IconCerrar").click(function () {
+    $("#Validation_descripcion3").hidden = true;
+    $("#Validation_descripcion3").css("display", "none");
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -278,15 +303,17 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+//FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     
     var Monto = $("#Editar #cb_Monto").val();
+    var decimales = Monto.split(".");
 
-    if (Monto != "" && Monto != null && Monto != undefined && Monto > 0) {
+    if (Monto != "" && Monto != null && Monto != undefined && Monto > 0
+        && decimales[1] != null && decimales[1] != undefined) {
     
-    var data = $("#frmEmpleadoBonos").serializeArray();
+        var data = $("#frmEmpleadoBonos").serializeArray();
 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -294,7 +321,6 @@ $("#btnUpdateBonos").click(function () {
         method: "POST",
         data: data
     }).done(function (data) {
-        console.log("fue al controlador");
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
@@ -305,18 +331,25 @@ $("#btnUpdateBonos").click(function () {
         else {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridBonos();
+            FullBody();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarEmpleadoBonos").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro fue editado de forma exitosa!',
             });
         }
     });
     } else {
-            $("#Editar #cb_Monto").focus;
-            mostrarError('Ingrese un Monto válido');
+        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+            $("#Crear #cin_IdIngreso").focus;
+            mostrarError('Campo Monto requerido.');
+        } else if (decimales[1] == null && decimales[1] == undefined) {
+            mostrarError('Monto válido con dos valores decimales.');
+        }
+        //    $("#Editar #cb_Monto").focus;
+        //    mostrarError('Ingrese un Monto válido');
      }
 });
 
@@ -430,7 +463,7 @@ $("#btnInactivarRegistroBono").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: 'No se pudo Inactivar el registro, contacte al administrador',
             });
         }
         else {
@@ -440,8 +473,8 @@ $("#btnInactivarRegistroBono").click(function () {
             $("#InactivarEmpleadoBonos").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inhabilitado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro fue Inactivado de forma exitosa!',
             });
         }
     });

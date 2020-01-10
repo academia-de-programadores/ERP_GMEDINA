@@ -15,6 +15,16 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{ 
+                    <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                    var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                    <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                    string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                    <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                    <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                   <table id="tblEmpleadoBonos" class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
                         <tr role="row">
@@ -60,23 +70,19 @@
                             </td>
                             <td>
                                 @{
-                                    string ocultar = "", mostrar = "";
-
+                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
                                     if (item.cb_Activo)
                                     {
-                                        ocultar = "";
-                                        mostrar = "hidden";
+                                        <button type="button" data-id="@item.cb_Id" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>
+                                        <button type="button" data-id="@item.cb_Id" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>
                                     }
-                                    else
+                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                    if (oUsuario?.usu_EsAdministrador == true && item.cb_Activo == false)
                                     {
-                                        ocultar = "hidden";
-                                        mostrar = "";
-
+                                                 <!-- ACTIVAR -->
+                                        <button type="button" data-id="@item.cb_Id" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>
                                     }
                                 }
-                              <button data-id="@item.cb_Id" type="button" class="btn btn-primary btn-xs @ocultar" id="btnDetalleEmpleadoBonos">Detalles</button>
-                              <button data-id="@item.cb_Id" type="button" class="btn btn-default btn-xs @ocultar" id="btnEditarEmpleadoBonos">Editar</button>
-                              <button data-id="@item.cb_Id" type="button" class="btn btn-primary btn-xs @mostrar" id="btnActivarEmpleadoBonos">Activar</button>
                             </td>
                         </tr>
                       }
@@ -159,7 +165,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btnXCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Bono</h4>
             </div>
             <div class="modal-body" id="Editar">
@@ -180,14 +186,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Eliminar este registro?
+                ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="btnInactivarRegistroBono">Eliminar</button>
+                <button type="button" class="btn btn-danger" id="btnInactivarRegistroBono">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
