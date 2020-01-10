@@ -41,14 +41,11 @@ function llenarTabla() {
             var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
-            if (validarDT(Lista)) {
-                return null;
-            }
             $.each(Lista, function (index, value) {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add({
                     ID:value.tmon_Id,
-                    Monedas:value.tmon_Descripcion
+                    Descripcion:value.tmon_Descripcion
                 }).draw();
             });
         });
@@ -95,11 +92,11 @@ $("#btnGuardar").click(function () {
                     LimpiarControles(["tmon_Descripcion"]);
                     MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "Codigo:" + obj + "contacte al administrador(Verifique si el registro ya existe)");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 $("#InActivar").click(function () {
@@ -116,13 +113,13 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["tmon_Descripcion", "tmon_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
+                    MsgSuccess("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador.");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 $("#btnActualizar").click(function () {
@@ -138,12 +135,12 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ha actualizado el registro");
+                    MsgSuccess("¡Exito!", "Se ha editado el registro");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador(Verifique si el registro ya existe).");
+                    MsgError("Error", "Codigo:" + obj + "contacte al administrador(Verifique si el registro ya existe)");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
