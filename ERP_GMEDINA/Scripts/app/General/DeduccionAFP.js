@@ -39,13 +39,36 @@ function cargarGridDeducciones() {
             var ListaDeduccionAFP = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionAFP.length; i++) {
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaAFP[i].dafp_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' : '';
+
+                //variable donde está el boton activar
+                var botonActivar = ListaAFP[i].dafp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP" dafpid="' + ListaDeduccionAFP[i].dafp_Id + '" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Activar</button>' : '' : '';
+
                 template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
                     '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                    '<td>'+
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' +
+                     +
+                     +
+                    //variable del estado del registro creada en el operador ternario de arriba
+                    '<td>' + estadoRegistro + '</td>' +
+
+                    //variable donde está el boton de detalles
+                    '<td>' + botonDetalles +
+
+                    //variable donde está el boton de detalles
+                     botonEditar +
+
+                    //boton activar 
+                    botonActivar
+
                     '</td>' +
                     '</tr>';
             }
@@ -54,7 +77,6 @@ function cargarGridDeducciones() {
         });
 }
 
-//Agregar//
 
 //Mostrar el spinner
 function spinner() {
@@ -66,6 +88,82 @@ function spinner() {
         <div class="sk-rect5"></div>
         </div>`;
 }
+
+const btnActivar = $('#btnActivarRegistroDeduccionAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnActivar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+//Activar
+$(document).on("click", "#tblAFP tbody tr td #btnActivarDeduccionAFP", function () {
+
+    var ID = $(this).closest('tr').data('id');
+
+    var ID = $(this).attr('dafpid');
+
+    $.ajax({
+        url: "/DeduccionAFP/Activar/" + ID,
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+
+    $('#dafp_Id').val(data.dafp_Id);
+
+    $("#ActivarDeduccionAFP").modal();
+})
+
+$("#btnActivarRegistroDeduccionAFP").click(function () {
+
+    var data = $("#frmActivarDeduccionAFP").serializeArray();
+
+    $.ajax({
+        url: "/DeduccionAFP/Activar",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        $("#ActivarDeduccionAFP").modal('hide');
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo activar el registro, contacte al administrador',
+            });
+        }
+        else if (data == "bien") {
+            cargarGridDeducciones();
+            console.log(data);
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue activado de forma exitosa!',
+            });
+        }
+    });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#ActivarDeduccionAFP").submit(function (e) {
+        return false;
+    });
+
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Agregar//
 
 const btnGuardar = $('#btnCreateRegistroDeduccionAFP')
 
