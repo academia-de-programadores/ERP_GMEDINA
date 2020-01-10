@@ -40,14 +40,11 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;
-                $("#ModalDetalles").find("#jor_Estado")["0"].innerText = obj.jor_Estado;
-                $("#ModalDetalles").find("#jor_RazonInactivo")["0"].innerText = obj.jor_RazonInactivo;
+                $("#ModalDetalles").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;                
                 $("#ModalDetalles").find("#jor_FechaCrea")["0"].innerText = FechaFormato(obj.jor_FechaCrea);
                 $("#ModalDetalles").find("#jor_FechaModifica")["0"].innerText = FechaFormato(obj.jor_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;                
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -154,18 +151,14 @@ function showmodalDetalle(btn) {
                 var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
                 var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
                 $('#ModalDetallesHorario').modal('show');
-                $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;
-                //$("#ModalDetallesHorario").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;
+                $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;                
                 $("#ModalDetallesHorario").find("#hor_HoraInicio")["0"].innerText = hor_HoraInicio;
                 $("#ModalDetallesHorario").find("#hor_HoraFin")["0"].innerText = hor_HoraFin;
-                $("#ModalDetallesHorario").find("#hor_CantidadHoras")["0"].innerText = obj.hor_CantidadHoras;
-                $("#ModalDetallesHorario").find("#hor_Estado")["0"].innerText = obj.hor_Estado;
-                $("#ModalDetallesHorario").find("#hor_RazonInactivo")["0"].innerText = obj.hor_RazonInactivo;
+                $("#ModalDetallesHorario").find("#hor_CantidadHoras")["0"].innerText = obj.hor_CantidadHoras;                
                 $("#ModalDetallesHorario").find("#hor_FechaCrea")["0"].innerText = FechaFormato(obj.hor_FechaCrea);
                 $("#ModalDetallesHorario").find("#hor_FechaModifica")["0"].innerText = FechaFormato(obj.hor_FechaModifica);
                 $("#ModalDetallesHorario").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesHorario").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetallesHorario").find("#btnEditar")["0"].dataset.id = ID;
+                $("#ModalDetallesHorario").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;                
                 $('#ModalDetallesHorario').modal('show');
             }
         });

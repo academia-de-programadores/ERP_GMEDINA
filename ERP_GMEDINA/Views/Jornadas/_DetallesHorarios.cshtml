@@ -9,10 +9,7 @@
             <div class="modal-body">
                 <dl class="dl-horizontal">
                     <dt>@Html.DisplayNameFor(model => model.hor_Descripcion)</dt>
-                    <dd id="hor_Descripcion"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)</dt>
-                    <dd id="tbJornadas"></dd>
+                    <dd id="hor_Descripcion"></dd>                    
 
                     <dt>@Html.DisplayNameFor(model => model.hor_HoraInicio)</dt>
                     <dd id="hor_HoraInicio"></dd>
@@ -21,27 +18,41 @@
                     <dd id="hor_HoraFin"></dd>
 
                     <dt>@Html.DisplayNameFor(model => model.hor_CantidadHoras)</dt>
-                    <dd id="hor_CantidadHoras"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.hor_Estado)</dt>
-                    <dd id="hor_Estado"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.hor_RazonInactivo)</dt>
-                    <dd id="hor_RazonInactivo"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.hor_FechaCrea)</dt>
-                    <dd id="hor_FechaCrea"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.hor_FechaModifica)</dt>
-                    <dd id="hor_FechaModifica"></dd>                    
-
-                    <dt>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</dt>
-                    <dd id="tbUsuario_usu_NombreUsuario"></dd>
-
-                    <dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
-                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>                    
-
+                    <dd id="hor_CantidadHoras"></dd>                   
                 </dl>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>Auditoría</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <table class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Acción</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        @Html.HiddenFor(model => model.hor_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="hor_FechaCrea">@Html.DisplayFor(model => model.hor_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modificado</td>
+                                        @Html.HiddenFor(model => model.hor_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                        <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="hor_FechaModifica">@Html.DisplayFor(model => model.hor_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>               
