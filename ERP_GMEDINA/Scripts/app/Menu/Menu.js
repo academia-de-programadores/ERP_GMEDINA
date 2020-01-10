@@ -39,6 +39,7 @@
                 "Titulos",
                 "FasesReclutamiento",
                 "Personas",
+                "Requisiciones",
                 "SeleccionCandidatos",
                 "RequerimientosEspeciales"
         ]

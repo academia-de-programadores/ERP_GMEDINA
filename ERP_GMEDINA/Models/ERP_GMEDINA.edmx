@@ -11043,7 +11043,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbHistorialCargos_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbHistorialCargos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialCargos_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
@@ -12190,6 +12190,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialCargos_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -14608,7 +14611,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialCargos_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialCargos_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialCargos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

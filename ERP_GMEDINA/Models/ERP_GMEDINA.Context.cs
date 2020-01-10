@@ -3746,7 +3746,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("rrhh_tbEquipoTrabajo_Update", eqtra_IdParameter, eqtra_CodigoParameter, eqtra_DescripcionParameter, eqtra_ObservacionParameter, eqtra_UsuarioModificaParameter, eqtra_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHistorialCargos_Insert(Nullable<int> emp_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> hcar_Fecha, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialCargos_Insert_Result> UDP_RRHH_tbHistorialCargos_Insert(Nullable<int> emp_Id, Nullable<int> car_Id, Nullable<int> area_Id, Nullable<int> depto_Id, Nullable<int> jor_Id, Nullable<decimal> sue_Cantidad, Nullable<System.DateTime> hcar_Fecha, Nullable<int> emp_UsuarioModifica, Nullable<System.DateTime> emp_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -3784,7 +3784,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("emp_FechaModifica", emp_FechaModifica) :
                 new ObjectParameter("emp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialCargos_Insert", emp_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, sue_CantidadParameter, hcar_FechaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialCargos_Insert_Result>("UDP_RRHH_tbHistorialCargos_Insert", emp_IdParameter, car_IdParameter, area_IdParameter, depto_IdParameter, jor_IdParameter, sue_CantidadParameter, hcar_FechaParameter, emp_UsuarioModificaParameter, emp_FechaModificaParameter);
         }
     }
 }
