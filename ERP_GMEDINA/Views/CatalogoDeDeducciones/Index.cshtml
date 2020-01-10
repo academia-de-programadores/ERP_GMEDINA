@@ -21,7 +21,7 @@
                         var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
 
                         <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
-                        string rol_Usuario = oUsuario.usu_EsAdministrador == true ? "1" : "0";
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
 
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
@@ -73,7 +73,8 @@
                                                     <button type="button" data-id="@item.cde_IdDeducciones" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>
                                                 }
 
-                                                if (oUsuario.usu_EsAdministrador == true && item.cde_Activo == false)
+                                                <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                                if (oUsuario?.usu_EsAdministrador == true && item.cde_Activo == false)
                                                 {
                                                  <!-- ACTIVAR -->
                                                     <button type="button" data-id="@item.cde_IdDeducciones" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones">Activar</button>
