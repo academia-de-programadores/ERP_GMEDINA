@@ -49,7 +49,7 @@ function cargarGridDeducciones() {
                 var botonEditar = ListaAFP[i].afp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
+                var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
 
                 template += '<tr data-id = "' + ListaAFP[i].afp_Id + '">' +
                     '<td>' + ListaAFP[i].afp_Descripcion + '</td>' +
@@ -77,11 +77,43 @@ function cargarGridDeducciones() {
         });
 }
 
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+        </div>`;
+}
+
+
+const btnActivar = $('#btnActivarRegistroAFP')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function ocultarCargandoCrear() {
+    btnActivar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+function mostrarCargandoCrear() {
+    btnActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+//Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('afpid');
+
+    console.log(ID)
 
     $.ajax({
         url: "/AFP/Activar/" + ID,
@@ -89,12 +121,12 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    })
+    });
 
     $('#afp_Id').val(data.afp_Id);
 
     $("#ActivarAFP").modal();
-})
+});
 
 $("#btnActivarRegistroAFP").click(function () {
 
@@ -129,7 +161,9 @@ $("#btnActivarRegistroAFP").click(function () {
         return false;
     });
 
-})
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
     $("#validation1").css("display", "none");
@@ -151,18 +185,6 @@ $("#btnIconCerrar").click(function () {
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-        </div>`;
-}
-
 const btnGuardar = $('#btnCreateRegistroAFP')
 
 //Div que aparecera cuando se le de click en crear

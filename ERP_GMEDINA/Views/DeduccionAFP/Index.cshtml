@@ -16,19 +16,36 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="tblDeduccionAFP">
                         <thead>
                             <tr role="row">
+                                <th>Número</th>
                                 <th>Empleado</th>
                                 <th>@Html.DisplayNameFor(model => model.dafp_AporteLps)</th>
                                 <th>@Html.DisplayNameFor(model => model.tbAFP.afp_Descripcion)</th>
+                                <th>@Html.DisplayNameFor(model => model.dafp_Activo)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tbodyDeduccionAFP">
                             @foreach (var item in Model)
                             {
+                                 <!-- validar el estado del registro (activo/inactivo)-->
+                                string estadoDeduccionAFP = item.dafp_Activo == false ? "Inactivo" : "Activo";
                                 <tr class="gradeA odd" role="row" data-id="@item.dafp_Id">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dafp_Id)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
                                     </td>
@@ -39,9 +56,26 @@
                                         @Html.DisplayFor(modelItem => item.tbAFP.afp_Descripcion)
                                     </td>
                                     <td>
+                                        @estadoDeduccionAFP
+                                    </td>
+                                    <td>
+                                        @{
+                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
+                                            if (item.dafp_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleAFP">Detalles</button>
+                                                <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarAFP">Editar</button>
+                                            }
+                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                            if (oUsuario?.usu_EsAdministrador == true && item.dafp_Activo == false)
+                                            {
+                                                 <!-- ACTIVAR -->
+                                                <button type="button" dafpid="@item.dafp_Id" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP">Activar</button>
+                                            }
+                                        }
                                         <button type="button" data-id="@item.dafp_Id" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP">Detalles</button>
                                         <button type="button" data-id="@item.dafp_Id" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP">Editar</button>
-                                        <button type="button" data-id="@item.afp_Id" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP">Activar</button>
+                                        
                                     </td>
                                 </tr>
                             }
@@ -135,12 +169,17 @@
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmActivarDeduccionAFP" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="dafp_Id" id="dafp_Id" value="" />
+                }
                 ¿Esta seguro que desea Activar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnActivarRegistroDeduccionAFP">Activar</button>
-                <div style="display:none" class="btn pull-left" id="cargandoActivar"></div>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger pull-right" id="btnActivarRegistroDeduccionAFP">Si</button>
+                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
             </div>
         </div>
     </div>

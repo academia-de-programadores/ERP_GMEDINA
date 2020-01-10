@@ -323,6 +323,75 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+        #region Activar Deducción AFP
+
+        public ActionResult Activar(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Activar(int dafp_Id)
+        {
+            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
+            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
+
+
+            //LLENAR DATA DE AUDITORIA
+            int dafp_UsuarioModifica = 1;
+            DateTime dafp_FechaModifica = DateTime.Now;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionAFP = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Activar(dafp_Id,
+                                                                           dafp_UsuarioModifica,
+                                                                           dafp_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionAFP_Activar_Result Resultado in listDeduccionAFP)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
         #region Ejecutable Deducción AFP
         protected override void Dispose(bool disposing)
         {
