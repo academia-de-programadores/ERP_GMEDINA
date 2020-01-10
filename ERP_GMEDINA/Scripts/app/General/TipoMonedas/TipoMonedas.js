@@ -45,7 +45,7 @@ function llenarTabla() {
                 console.log(value.tmon_Descripcion);
                 tabla.row.add({
                     ID:value.tmon_Id,
-                    Descripcion:value.tmon_Descripcion
+                    Moneda:value.tmon_Descripcion
                 }).draw();
             });
         });
