@@ -44,7 +44,6 @@ namespace ERP_GMEDINA.Controllers
                             dafp_FechaModifica = t.dafp_FechaModifica,
                             dafp_Activo = t.dafp_Activo
                         })
-                        .Where(t => t.dafp_Activo == true)
                         .OrderBy(t => t.dafp_FechaCrea)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
@@ -324,17 +323,8 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Activar Deducción AFP
-
-        public ActionResult Activar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
-            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Activar(int dafp_Id)
+        public ActionResult Activar(int id)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -355,7 +345,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Activar(dafp_Id,
+                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Activar(id,
                                                                            dafp_UsuarioModifica,
                                                                            dafp_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
