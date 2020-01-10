@@ -262,6 +262,7 @@
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
+    <Compile Include="Models\DatosProfessionalesEdit.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -866,9 +867,11 @@
     <Compile Include="Models\UDP_RRHH_tbTitulos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DatosProfesionales.cs" />
     <Compile Include="Models\V_DatosProfesionalesP.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DatosRequisicion.cs" />
     <Compile Include="Models\V_Datos_Empleado.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1194,6 +1197,8 @@
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
+    <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
