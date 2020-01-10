@@ -300,12 +300,6 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Activar(int id)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             int afp_UsuarioModifica = 1;
             DateTime afp_FechaModifica = DateTime.Now;

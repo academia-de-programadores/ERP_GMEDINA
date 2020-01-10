@@ -90,24 +90,6 @@ function spinner() {
         </div>`;
 }
 
-
-const btnActivar = $('#btnActivarRegistroAFP')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-function ocultarCargandoCrear() {
-    btnActivar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-function mostrarCargandoCrear() {
-    btnActivar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
 //Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 
@@ -144,11 +126,6 @@ $("#btnActivarRegistroAFP").click(function () {
                 message: 'El registro fue activado de forma exitosa!',
             });
         }
-    });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmActivarAFP").submit(function (e) {
-        return false;
     });
 
 });
