@@ -34,7 +34,7 @@ namespace ERP_GMEDINA.Controllers
                         .Select(
                         t => new
                         {
-
+                           
                             hcon_Id = t.Id,
                             Colaborador = t.Nombre_Completo,
                             dep_Descripcion = t.Departamento,
@@ -42,7 +42,7 @@ namespace ERP_GMEDINA.Controllers
                             car_Descripcion = t.Cargo,
                             scan_Fecha = t.Fecha_Seleccion_Candidato,
                             hcon_FechaContratado = t.Fecha_Contrato
-
+                            
 
                         }
                         )
@@ -64,7 +64,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialContrataciones.Where(x => x.Id == id).ToList();
+                    lista = db.V_HistorialContrataciones.Where(x => x.Id== id).ToList();
                 }
                 catch
                 {
