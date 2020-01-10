@@ -1,6 +1,5 @@
 ﻿@model ERP_GMEDINA.Models.tbTipoDeduccion
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTipoDeduccionEdit"}))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmTipoDeduccionEdit" }))
 {
     @Html.AntiForgeryToken()
     <div class="modal-body" id="Editar">
@@ -19,7 +18,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
-        <button type="submit" class="btn btn-primary" id="btnUpdateTipoDeducciones">Aceptar</button>
-        <button type="button" class="btn btn-danger" id="btnInactivarTipoDeducciones">Inhabilitar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnUpdateTipoDeducciones">Actualizar</button>
+        <button type="button" class="btn btn-danger pull-left" id="btnInactivarTipoDeducciones">Inhabilitar</button>
     </div>
 }

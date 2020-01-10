@@ -54,7 +54,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
+        public virtual DbSet<tbMotivoLiquidacion> tbMotivoLiquidacion { get; set; }
         public virtual DbSet<tbPeriodos> tbPeriodos { get; set; }
+        public virtual DbSet<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
         public virtual DbSet<tbPreaviso> tbPreaviso { get; set; }
         public virtual DbSet<tbTechosDeducciones> tbTechosDeducciones { get; set; }
         public virtual DbSet<tbTipoDeduccion> tbTipoDeduccion { get; set; }
@@ -70,6 +72,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
         public virtual DbSet<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
         public virtual DbSet<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
+        public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
@@ -96,6 +99,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
         public virtual DbSet<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
         public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
+        public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
         public virtual DbSet<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
@@ -107,6 +111,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulos> tbTitulos { get; set; }
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
+        public virtual DbSet<EmpleadosVendedores> EmpleadosVendedores { get; set; }
         public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
         public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
@@ -119,6 +124,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
         public virtual DbSet<V_DecimoTercerMes_Pagados> V_DecimoTercerMes_Pagados { get; set; }
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
+        public virtual DbSet<V_Deducciones_RPT> V_Deducciones_RPT { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
@@ -130,6 +136,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
         public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
+        public virtual DbSet<V_Ingresos_RPT> V_Ingresos_RPT { get; set; }
         public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
         public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
         public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
@@ -146,14 +153,116 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
         public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
+        public virtual DbSet<V_ReportesVarios> V_ReportesVarios { get; set; }
         public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
-        public virtual DbSet<tbMotivoLiquidacion> tbMotivoLiquidacion { get; set; }
-        public virtual DbSet<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
     
         public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Delete_Result> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia)
         {
@@ -311,15 +420,19 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Insert_Result>("UDP_Plani_EmpleadoComisiones_Insert", emp_IdParameter, cin_IdIngresoParameter, cc_FechaRegistroParameter, cc_PagadoParameter, cc_UsuarioCreaParameter, cc_FechaCreaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Update_Result> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> eMP_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
+        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Update_Result> UDP_Plani_EmpleadoComisiones_Update(Nullable<int> cc_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngresos, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifica, Nullable<decimal> cc_PorcentajeComision, Nullable<decimal> cc_TotalVenta)
         {
             var cc_IdParameter = cc_Id.HasValue ?
                 new ObjectParameter("cc_Id", cc_Id) :
                 new ObjectParameter("cc_Id", typeof(int));
     
-            var eMP_IdParameter = eMP_Id.HasValue ?
-                new ObjectParameter("EMP_Id", eMP_Id) :
-                new ObjectParameter("EMP_Id", typeof(int));
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var cin_IdIngresosParameter = cin_IdIngresos.HasValue ?
+                new ObjectParameter("cin_IdIngresos", cin_IdIngresos) :
+                new ObjectParameter("cin_IdIngresos", typeof(int));
     
             var cc_UsuarioModificaParameter = cc_UsuarioModifica.HasValue ?
                 new ObjectParameter("cc_UsuarioModifica", cc_UsuarioModifica) :
@@ -337,7 +450,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cc_TotalVenta", cc_TotalVenta) :
                 new ObjectParameter("cc_TotalVenta", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, eMP_IdParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Update_Result>("UDP_Plani_EmpleadoComisiones_Update", cc_IdParameter, emp_IdParameter, cin_IdIngresosParameter, cc_UsuarioModificaParameter, cc_FechaModificaParameter, cc_PorcentajeComisionParameter, cc_TotalVentaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_EmpleadosPorAreas_Select_Result> UDP_Plani_EmpleadosPorAreas_Select()
@@ -787,6 +900,23 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cin_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeIngresos_Update_Result>("UDP_Plani_tbCatalogoDeIngresos_Update", cin_IdIngresoParameter, cin_DescripcionIngresoParameter, cin_UsuarioModificaParameter, cin_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Activar_Result> UDP_Plani_tbCatalogoDePlanillas_Activar(Nullable<int> cpla_IdPlanilla, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica)
+        {
+            var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
+                new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
+                new ObjectParameter("cpla_IdPlanilla", typeof(int));
+    
+            var cpla_UsuarioModificaParameter = cpla_UsuarioModifica.HasValue ?
+                new ObjectParameter("cpla_UsuarioModifica", cpla_UsuarioModifica) :
+                new ObjectParameter("cpla_UsuarioModifica", typeof(int));
+    
+            var cpla_FechaModificaParameter = cpla_FechaModifica.HasValue ?
+                new ObjectParameter("cpla_FechaModifica", cpla_FechaModifica) :
+                new ObjectParameter("cpla_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Activar_Result>("UDP_Plani_tbCatalogoDePlanillas_Activar", cpla_IdPlanillaParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result> UDP_Plani_tbCatalogoDePlanillas_Inactivar(Nullable<int> cpla_IdPlanilla)
@@ -1371,6 +1501,91 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDeLiquidaciones_Insert_Result>("UDP_Plani_tbHistorialDeLiquidaciones_Insert", emp_IdParameter, hdli_FechaLiquidacionParameter, hdli_SalarioOrdinarioMensual_LiqParameter, hdli_SalarioPromedioMensual_LiqlParameter, hdli_SalarioOrdinarioDiario_LiqParameter, hdli_SalarioPromedioDiario_LiqParameter, hdli_Preaviso_LiqParameter, hdli_Cesantia_LiqParameter, hdli_DecimoTercerMesProporcional_LiqParameter, hdli_DecimoCuartoMesProporcional_LiqParameter, hdli_VacacionesPendientes_LiqParameter, hdli_SalariosAdeudadosParameter, hdli_OtrosPagosParameter, hdli_PagoHEPendienteParameter, hdli_ValorBonoEducativoParameter, hdli_PagoSeptimoDiaParameter, hdli_BonoPorVacacionesParameter, hdli_ReajusteSalarialParameter, hdli_DecimoTercerMesAdeudadoParameter, hdli_DecimoCuartoMesAdeudadoParameter, hdli_BonificacionVacacionesParameter, hdli_PagoPorEmbarazoParameter, hdli_PagoPorLactanciaParameter, hdli_PrePosNatalParameter, hdli_PagoPorDiasFeriadoParameter, hdli_MontoTotalLiquidacionParameter, hdli_liqu_UsuarioCreaParameter, hdli_liqu_FechaCreaParameter);
         }
     
+        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var hipa_SueldoNetoParameter = hipa_SueldoNeto.HasValue ?
+                new ObjectParameter("hipa_SueldoNeto", hipa_SueldoNeto) :
+                new ObjectParameter("hipa_SueldoNeto", typeof(decimal));
+    
+            var hipa_FechaInicioParameter = hipa_FechaInicio.HasValue ?
+                new ObjectParameter("hipa_FechaInicio", hipa_FechaInicio) :
+                new ObjectParameter("hipa_FechaInicio", typeof(System.DateTime));
+    
+            var hipa_FechaFinParameter = hipa_FechaFin.HasValue ?
+                new ObjectParameter("hipa_FechaFin", hipa_FechaFin) :
+                new ObjectParameter("hipa_FechaFin", typeof(System.DateTime));
+    
+            var hipa_FechaPagoParameter = hipa_FechaPago.HasValue ?
+                new ObjectParameter("hipa_FechaPago", hipa_FechaPago) :
+                new ObjectParameter("hipa_FechaPago", typeof(System.DateTime));
+    
+            var hipa_AnioParameter = hipa_Anio.HasValue ?
+                new ObjectParameter("hipa_Anio", hipa_Anio) :
+                new ObjectParameter("hipa_Anio", typeof(int));
+    
+            var hipa_MesParameter = hipa_Mes.HasValue ?
+                new ObjectParameter("hipa_Mes", hipa_Mes) :
+                new ObjectParameter("hipa_Mes", typeof(int));
+    
+            var peri_IdPeriodoParameter = peri_IdPeriodo.HasValue ?
+                new ObjectParameter("peri_IdPeriodo", peri_IdPeriodo) :
+                new ObjectParameter("peri_IdPeriodo", typeof(int));
+    
+            var hipa_UsuarioCreaParameter = hipa_UsuarioCrea.HasValue ?
+                new ObjectParameter("hipa_UsuarioCrea", hipa_UsuarioCrea) :
+                new ObjectParameter("hipa_UsuarioCrea", typeof(int));
+    
+            var hipa_FechaCreaParameter = hipa_FechaCrea.HasValue ?
+                new ObjectParameter("hipa_FechaCrea", hipa_FechaCrea) :
+                new ObjectParameter("hipa_FechaCrea", typeof(System.DateTime));
+    
+            var hipa_TotalISRParameter = hipa_TotalISR.HasValue ?
+                new ObjectParameter("hipa_TotalISR", hipa_TotalISR) :
+                new ObjectParameter("hipa_TotalISR", typeof(decimal));
+    
+            var hipa_ISRPendienteParameter = hipa_ISRPendiente.HasValue ?
+                new ObjectParameter("hipa_ISRPendiente", hipa_ISRPendiente) :
+                new ObjectParameter("hipa_ISRPendiente", typeof(bool));
+    
+            var hipa_AFPParameter = hipa_AFP.HasValue ?
+                new ObjectParameter("hipa_AFP", hipa_AFP) :
+                new ObjectParameter("hipa_AFP", typeof(decimal));
+    
+            var hipa_TotalHorasConPermisoJustificadoParameter = hipa_TotalHorasConPermisoJustificado.HasValue ?
+                new ObjectParameter("hipa_TotalHorasConPermisoJustificado", hipa_TotalHorasConPermisoJustificado) :
+                new ObjectParameter("hipa_TotalHorasConPermisoJustificado", typeof(decimal));
+    
+            var hipa_TotalComisionesParameter = hipa_TotalComisiones.HasValue ?
+                new ObjectParameter("hipa_TotalComisiones", hipa_TotalComisiones) :
+                new ObjectParameter("hipa_TotalComisiones", typeof(decimal));
+    
+            var hipa_TotalHorasExtrasParameter = hipa_TotalHorasExtras.HasValue ?
+                new ObjectParameter("hipa_TotalHorasExtras", hipa_TotalHorasExtras) :
+                new ObjectParameter("hipa_TotalHorasExtras", typeof(decimal));
+    
+            var hipa_TotalVacacionesParameter = hipa_TotalVacaciones.HasValue ?
+                new ObjectParameter("hipa_TotalVacaciones", hipa_TotalVacaciones) :
+                new ObjectParameter("hipa_TotalVacaciones", typeof(decimal));
+    
+            var hipa_TotalSeptimoDiaParameter = hipa_TotalSeptimoDia.HasValue ?
+                new ObjectParameter("hipa_TotalSeptimoDia", hipa_TotalSeptimoDia) :
+                new ObjectParameter("hipa_TotalSeptimoDia", typeof(decimal));
+    
+            var hipa_AdelantoSueldoParameter = hipa_AdelantoSueldo.HasValue ?
+                new ObjectParameter("hipa_AdelantoSueldo", hipa_AdelantoSueldo) :
+                new ObjectParameter("hipa_AdelantoSueldo", typeof(decimal));
+    
+            var hipa_TotalSalarioParameter = hipa_TotalSalario.HasValue ?
+                new ObjectParameter("hipa_TotalSalario", hipa_TotalSalario) :
+                new ObjectParameter("hipa_TotalSalario", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter);
+        }
+    
         public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Insert_Result> UDP_Plani_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<System.DateTime> insf_FechaCrea, Nullable<bool> insf_Activo)
         {
             var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
@@ -1931,91 +2146,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cin_IdIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Update_Result>("UDP_tbTipoPlanillaDetalleIngreso_Update", cpla_IdPlanillaParameter, cin_IdIngresoParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbHistorialDePago_Insert_Result> UDP_Plani_tbHistorialDePago_Insert(Nullable<int> emp_Id, Nullable<decimal> hipa_SueldoNeto, Nullable<System.DateTime> hipa_FechaInicio, Nullable<System.DateTime> hipa_FechaFin, Nullable<System.DateTime> hipa_FechaPago, Nullable<int> hipa_Anio, Nullable<int> hipa_Mes, Nullable<int> peri_IdPeriodo, Nullable<int> hipa_UsuarioCrea, Nullable<System.DateTime> hipa_FechaCrea, Nullable<decimal> hipa_TotalISR, Nullable<bool> hipa_ISRPendiente, Nullable<decimal> hipa_AFP, Nullable<decimal> hipa_TotalHorasConPermisoJustificado, Nullable<decimal> hipa_TotalComisiones, Nullable<decimal> hipa_TotalHorasExtras, Nullable<decimal> hipa_TotalVacaciones, Nullable<decimal> hipa_TotalSeptimoDia, Nullable<decimal> hipa_AdelantoSueldo, Nullable<decimal> hipa_TotalSalario)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var hipa_SueldoNetoParameter = hipa_SueldoNeto.HasValue ?
-                new ObjectParameter("hipa_SueldoNeto", hipa_SueldoNeto) :
-                new ObjectParameter("hipa_SueldoNeto", typeof(decimal));
-    
-            var hipa_FechaInicioParameter = hipa_FechaInicio.HasValue ?
-                new ObjectParameter("hipa_FechaInicio", hipa_FechaInicio) :
-                new ObjectParameter("hipa_FechaInicio", typeof(System.DateTime));
-    
-            var hipa_FechaFinParameter = hipa_FechaFin.HasValue ?
-                new ObjectParameter("hipa_FechaFin", hipa_FechaFin) :
-                new ObjectParameter("hipa_FechaFin", typeof(System.DateTime));
-    
-            var hipa_FechaPagoParameter = hipa_FechaPago.HasValue ?
-                new ObjectParameter("hipa_FechaPago", hipa_FechaPago) :
-                new ObjectParameter("hipa_FechaPago", typeof(System.DateTime));
-    
-            var hipa_AnioParameter = hipa_Anio.HasValue ?
-                new ObjectParameter("hipa_Anio", hipa_Anio) :
-                new ObjectParameter("hipa_Anio", typeof(int));
-    
-            var hipa_MesParameter = hipa_Mes.HasValue ?
-                new ObjectParameter("hipa_Mes", hipa_Mes) :
-                new ObjectParameter("hipa_Mes", typeof(int));
-    
-            var peri_IdPeriodoParameter = peri_IdPeriodo.HasValue ?
-                new ObjectParameter("peri_IdPeriodo", peri_IdPeriodo) :
-                new ObjectParameter("peri_IdPeriodo", typeof(int));
-    
-            var hipa_UsuarioCreaParameter = hipa_UsuarioCrea.HasValue ?
-                new ObjectParameter("hipa_UsuarioCrea", hipa_UsuarioCrea) :
-                new ObjectParameter("hipa_UsuarioCrea", typeof(int));
-    
-            var hipa_FechaCreaParameter = hipa_FechaCrea.HasValue ?
-                new ObjectParameter("hipa_FechaCrea", hipa_FechaCrea) :
-                new ObjectParameter("hipa_FechaCrea", typeof(System.DateTime));
-    
-            var hipa_TotalISRParameter = hipa_TotalISR.HasValue ?
-                new ObjectParameter("hipa_TotalISR", hipa_TotalISR) :
-                new ObjectParameter("hipa_TotalISR", typeof(decimal));
-    
-            var hipa_ISRPendienteParameter = hipa_ISRPendiente.HasValue ?
-                new ObjectParameter("hipa_ISRPendiente", hipa_ISRPendiente) :
-                new ObjectParameter("hipa_ISRPendiente", typeof(bool));
-    
-            var hipa_AFPParameter = hipa_AFP.HasValue ?
-                new ObjectParameter("hipa_AFP", hipa_AFP) :
-                new ObjectParameter("hipa_AFP", typeof(decimal));
-    
-            var hipa_TotalHorasConPermisoJustificadoParameter = hipa_TotalHorasConPermisoJustificado.HasValue ?
-                new ObjectParameter("hipa_TotalHorasConPermisoJustificado", hipa_TotalHorasConPermisoJustificado) :
-                new ObjectParameter("hipa_TotalHorasConPermisoJustificado", typeof(decimal));
-    
-            var hipa_TotalComisionesParameter = hipa_TotalComisiones.HasValue ?
-                new ObjectParameter("hipa_TotalComisiones", hipa_TotalComisiones) :
-                new ObjectParameter("hipa_TotalComisiones", typeof(decimal));
-    
-            var hipa_TotalHorasExtrasParameter = hipa_TotalHorasExtras.HasValue ?
-                new ObjectParameter("hipa_TotalHorasExtras", hipa_TotalHorasExtras) :
-                new ObjectParameter("hipa_TotalHorasExtras", typeof(decimal));
-    
-            var hipa_TotalVacacionesParameter = hipa_TotalVacaciones.HasValue ?
-                new ObjectParameter("hipa_TotalVacaciones", hipa_TotalVacaciones) :
-                new ObjectParameter("hipa_TotalVacaciones", typeof(decimal));
-    
-            var hipa_TotalSeptimoDiaParameter = hipa_TotalSeptimoDia.HasValue ?
-                new ObjectParameter("hipa_TotalSeptimoDia", hipa_TotalSeptimoDia) :
-                new ObjectParameter("hipa_TotalSeptimoDia", typeof(decimal));
-    
-            var hipa_AdelantoSueldoParameter = hipa_AdelantoSueldo.HasValue ?
-                new ObjectParameter("hipa_AdelantoSueldo", hipa_AdelantoSueldo) :
-                new ObjectParameter("hipa_AdelantoSueldo", typeof(decimal));
-    
-            var hipa_TotalSalarioParameter = hipa_TotalSalario.HasValue ?
-                new ObjectParameter("hipa_TotalSalario", hipa_TotalSalario) :
-                new ObjectParameter("hipa_TotalSalario", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter);
         }
     }
 }

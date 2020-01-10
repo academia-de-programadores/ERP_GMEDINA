@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: AcumuladosISR
         public ActionResult Index()
         {
-            var tbAcumuladosISR = db.tbAcumuladosISR.Where(x=>x.aisr_Activo==true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x=> x.aisr_FechaCrea);
+            var tbAcumuladosISR = db.tbAcumuladosISR.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x=> x.aisr_FechaCrea);
             return View(tbAcumuladosISR.ToList());
         }
         [HttpGet]
@@ -25,7 +25,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult GetData()
         {
             var otbAcumuladosISR = db.tbAcumuladosISR
-                        .Select(c => new { aisr_Descripcion = c.aisr_Descripcion, aisr_Id = c.aisr_Id, aisr_Monto = c.aisr_Monto, aisr_Activo = c.aisr_Activo, aisr_FechaCrea = c.aisr_FechaCrea, aisr_UsuarioCrea = c.aisr_UsuarioCrea, aisr_UsuarioModifica = c.aisr_UsuarioModifica, aisr_FechaModifica = c.aisr_FechaModifica }).Where(c => c.aisr_Activo == true).OrderByDescending(c => c.aisr_FechaCrea)
+                        .Select(c => new { aisr_Descripcion = c.aisr_Descripcion, aisr_Id = c.aisr_Id, aisr_Monto = c.aisr_Monto, aisr_Activo = c.aisr_Activo, aisr_FechaCrea = c.aisr_FechaCrea, aisr_UsuarioCrea = c.aisr_UsuarioCrea, aisr_UsuarioModifica = c.aisr_UsuarioModifica, aisr_FechaModifica = c.aisr_FechaModifica })
+                        .OrderByDescending(c => c.aisr_FechaCrea)
                         .ToList();
 
             //RETORNAR JSON AL LADO DEL CLIENTE

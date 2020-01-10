@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones
-                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo}).Where(c => c.cc_Activo == true)
+                        .Select(c => new { cc_Id = c.cc_Id, emp_Id = c.emp_Id, per_Nombres = c.tbEmpleados.tbPersonas.per_Nombres, per_Apellidos = c.tbEmpleados.tbPersonas.per_Apellidos, cin_IdIngreso = c.cin_IdIngreso, cin_DescripcionIngreso = c.tbCatalogoDeIngresos.cin_DescripcionIngreso, cc_PorcentajeComision = c.cc_PorcentajeComision,cc_TotalVenta = c.cc_TotalVenta, cc_FechaRegistro = c.cc_FechaRegistro, cc_Pagado = c.cc_Pagado, cc_UsuarioCrea = c.cc_UsuarioCrea, cc_FechaCrea = c.cc_FechaCrea, cc_UsuarioModifica = c.cc_UsuarioModifica, cc_FechaModifica = c.cc_FechaModifica,cc_Activo = c.cc_Activo})
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -54,7 +54,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from CatIngreso in  db.tbCatalogoDeIngresos.Where(x => x.cin_DescripcionIngreso == "Comisiones")
+            from CatIngreso in  db.tbCatalogoDeIngresos.Where(x => x.cin_Activo==true)
                 //join EmpBonos in db.tbEmpleadoBonos on CatIngreso.cin_IdIngreso equals EmpBonos.cin_IdIngreso
             select new
             {
@@ -176,8 +176,8 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id, cc_UsuarioModifica, cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "cc_Id,emp_Id,cin_IdIngreso,cc_UsuarioModifica,cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
             tbEmpleadoComisiones.cc_UsuarioModifica = 1;
             tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
@@ -196,6 +196,7 @@ namespace ERP_GMEDINA.Controllers
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Update(tbEmpleadoComisiones.cc_Id,
                                                                                             tbEmpleadoComisiones.emp_Id,
+                                                                                            tbEmpleadoComisiones.cin_IdIngreso,
                                                                                             tbEmpleadoComisiones.cc_UsuarioModifica,
                                                                                             tbEmpleadoComisiones.cc_FechaModifica,
                                                                                             tbEmpleadoComisiones.cc_PorcentajeComision,
@@ -230,16 +231,6 @@ namespace ERP_GMEDINA.Controllers
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
-        }
-
-
-        // GET: EmpleadoComisiones/Inactivar
-      
-        public JsonResult Inactivar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
-            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

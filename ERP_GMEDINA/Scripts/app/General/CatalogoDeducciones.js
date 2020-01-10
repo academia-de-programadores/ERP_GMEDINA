@@ -46,17 +46,35 @@ function cargarGridDeducciones() {
             var ListaDeducciones = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeducciones.length; i++) {
+                var estadoCDD = ListaDeducciones[i].cde_Activo == false ? "Inactivo" : "Activo";
+                console.log(estadoCDD);
                 template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
+                  '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
                     '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
                     '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+                   '<td>' + estadoCDD + '</td>' +
+                   '<td>' + ((ListaDeducciones[i].cde_Activo == true) ?
+                   '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Detalles</button>' +
+                   '<button type="button" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Editar</button>' :
+                   '<button type="button" class="btn btn-primary btn-xs" id="btnActivarCatalogoDeducciones" data-id="' + ListaDeducciones[i].cde_IdDeducciones + '">Activar</button>') + '</td> </tr>';
             }
+
+            //for (var i = 0; i < ListaDeducciones.length; i++) {
+            //    template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
+            //        '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
+            //        '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
+            //        '<td>' + ListaDeducciones[i].cde_Activo + '</td>' +
+            //        '<td>' +
+            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
+            //        '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
+            //        '</td>' +
+            //        '</tr>';
+            //}
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             FullBody();
             $('#tbodyDeducciones').html(template);
@@ -252,37 +270,6 @@ $("#IconCerrarEdit").click(function () {
 });
 
 
-//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
-//$("#btnUpdateDeduccion").click(function () {
-//    var cde_DescripcionDeduccionE = $("#cde_DescripcionDeduccion").val();
-//    var cde_PorcentajeColaboradorE = $("#cde_PorcentajeColaborador").val();
-//    var cde_PorcentajeEmpresaE = $("#cde_PorcentajeEmpresa").val();
-
-
-//    if (cde_DescripcionDeduccionE == "") {
-//        $("#Validation_descipcion").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion").css("display", "none");
-//    }
-
-//    if (cde_PorcentajeColaboradorE == "" || cde_PorcentajeColaboradorE == null || cde_PorcentajeColaboradorE == undefined) {
-//        $("#Validation_descipcion2").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion2").css("display", "none");
-//    }
-
-//    if (cde_PorcentajeEmpresaE == "" || cde_PorcentajeEmpresaE == null || cde_PorcentajeEmpresaE == undefined) {
-//        $("#Validation_descipcion3").css("display", "");
-//    }
-//    else {
-//        $("#Validation_descipcion3").css("display", "none");
-//    }
-
-//});
-
-
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
@@ -342,6 +329,10 @@ $("#btnUpdateDeduccion").click(function () {
         $("#Validation_descipcion").css("display", "");
         $("#Validation_descipcion2").css("display", "");
         $("#Validation_descipcion3").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos validos',
+        });
     }
     else {
         $("#Validation_descipcion").css("display", "none");
@@ -401,16 +392,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 console.log(data);
                 var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data[0].cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data[0].cde_DescripcionDeduccion);
-                $("#Detalles #cde_PorcentajeColaborador").val(data[0].cde_PorcentajeColaborador);
-                $("#Detalles #cde_PorcentajeEmpresa").val(data[0].cde_PorcentajeEmpresa);
-                $("#Detalles #cde_UsuarioCrea").val(data[0].cde_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #cde_FechaCrea").val(FechaCrea);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
+                $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
+                $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
+                $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#Detalles #cde_FechaCrea").html(FechaCrea);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
-                $("#Detalles #cde_FechaModifica").val(FechaModifica);
+                $("#Detalles #cde_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].TipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL

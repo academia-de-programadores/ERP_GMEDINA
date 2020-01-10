@@ -16,36 +16,50 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.cpla_IdPlanilla)
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Descripción</label>
-                                <div class="col-md-5">
-                                    @Html.EditorFor(model => model.cpla_DescripcionPlanilla, new { htmlAttributes = new { @class = "form-control" } })
-                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+                        <div class="form-horizontal">                        
+                            @Html.HiddenFor(model => model.cpla_IdPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label col-md-2">Descripción</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.EditorFor(model => model.cpla_DescripcionPlanilla, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Frecuencia en días</label>
-                                <div class="col-md-5">
-                                    <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" class="form-control valid">
-                                        <option value="30" selected>Mensual</option>
-                                        <option value="7">Semanal</option>
-                                        <option value="15">Quincenal</option>
-                                    </select>
-                                    <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio.</span>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Frecuencia de pago</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" class="form-control valid">
+                                            <option value="30" selected>Mensual</option>
+                                            <option value="7">Semanal</option>
+                                            <option value="15">Quincenal</option>
+                                        </select>
+                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2">Recibe Comisiones</label>
-                                <div class="col-md-5">
-                                    <input type="checkbox" checked="@false" class="i-checks" id="check-recibe-comision" />
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">Recibe Comisiones</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" checked="@false" class="i-checks" id="check-recibe-comision" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="ibox-content">
                             <div class="col-lg-5" id="catalogoDeIngresos">
                                 <div class="ibox float-e-margins">

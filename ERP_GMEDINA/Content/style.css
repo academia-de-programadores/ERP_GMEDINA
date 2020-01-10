@@ -41,8 +41,8 @@ h5 {
 
 .custom-scrollbar {
     max-height: calc(100vh);
-    overflow-y: auto;     
-    position: fixed;           
+    overflow-y: auto;
+    position: fixed;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -54,7 +54,7 @@ background : #0F1923;
 border-radius: 10px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb { 
+.custom-scrollbar::-webkit-scrollbar-thumb {
 background : rgba(45, 77, 107,0.5);
 border-radius: 10px;
 box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
@@ -4486,7 +4486,7 @@ body.fullscreen-ibox-mode {
   min-height: calc(100% - 48px);
 }
 body.modal-open {
-  /*padding-right: inherit !important;*/  
+  /*padding-right: inherit !important;*/
   overflow:auto;
   padding-right:0 !important;
 }
@@ -4494,8 +4494,15 @@ body.modal-open {
     overflow:auto;
   padding-right:0 !important;
 }
+body:not(.modal-open){
+  padding-right: 0px !important;
+}
+.modal.fade.hide{
+    overflow:auto;
+  padding-right:0 !important;
+}
 
- 
+
 
 body:not(.modal-open){
   padding-right: 0px !important;

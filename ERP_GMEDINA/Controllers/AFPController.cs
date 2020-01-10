@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: AFP
         public ActionResult Index()
         {
-            var tbAFP = db.tbAFP.Where(a => a.afp_Activo == true).Include(a => a.tbTipoDeduccion);
+            var tbAFP = db.tbAFP.OrderBy(t => t.afp_FechaCrea).Include(a => a.tbTipoDeduccion);
             return View(tbAFP.ToList());
         }
 
@@ -236,7 +236,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inactivar AFP
+        #region Inhabilitar AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int afp_Id)

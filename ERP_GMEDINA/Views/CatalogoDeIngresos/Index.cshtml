@@ -31,31 +31,48 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">@Html.DisplayNameFor(model => model.cin_IdIngreso)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 456px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 180px;">Acción</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_DescripcionIngreso)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 380px;">@Html.DisplayNameFor(model => model.cin_Activo)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 240px;">Acción</th>
 
                             </tr>
                         </thead>
                         <tbody id="tbodyIngresos">
-                            @foreach (var item in Model)
-                            {
-                                <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.cin_IdIngreso)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
-                                    </td>
-                                  
 
-                                    <td>
-                                        
-                                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
-                                        <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
+
+    @foreach (var item in Model)
+    {
+        string estadoIng = item.cin_Activo == false ? "Inactivo" : "Activo";
+
+        bool esAdministrador = true;
+
+        <tr class="gradeA odd" role="row" data-id="@item.cin_IdIngreso">
+            <td>
+                @Html.DisplayFor(modelItem => item.cin_IdIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cin_DescripcionIngreso)
+            </td>
+            <td>
+                @estadoIng
+            </td>
+            <td>
+                @{
+                    if (item.cin_Activo == true)
+                    {
+                        <button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalles</button>
+                        <button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button>
+                    }
+                    if (esAdministrador == true && item.cin_Activo == false)
+                    {
+                                                 <!-- ACTIVAR -->
+                        <button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="@item.cin_IdIngreso">Activar</button>
+                    }
+                }
+            </td>
+        </tr>
+                    }
+    </tbody>
                         <tfoot>
                         </tfoot>
                     </table>
@@ -69,7 +86,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="IconCerrarEditar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Catalogo de Ingreso</h4>
             </div>
             <div class="modal-body" id="Editar">
@@ -88,7 +105,6 @@
     </div>
 
 
-
 <div class="modal fade" id="AgregarCatalogoIngresos" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -96,9 +112,9 @@
                 <button type="button" class="close" id="IconCerrarCreate" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear Catálogo de Ingreso</h4>
             </div>
-           
+
                 @Html.Partial("_CreateCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
-          
+
         </div>
     </div>
 </div>
