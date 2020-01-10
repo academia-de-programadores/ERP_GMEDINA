@@ -23,8 +23,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#idi_Descripcion")["0"].innerText = obj.idi_Descripcion;
-                $("#ModalDetalles").find("#idi_Estado")["0"].innerText = obj.idi_Estado;
-                $("#ModalDetalles").find("#idi_RazonInactivo")["0"].innerText = obj.idi_RazonInactivo;
                 $("#ModalDetalles").find("#idi_FechaCrea")["0"].innerText = FechaFormato(obj.idi_FechaCrea);
                 $("#ModalDetalles").find("#idi_FechaModifica")["0"].innerText = FechaFormato(obj.idi_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;

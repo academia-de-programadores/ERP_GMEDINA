@@ -1,5 +1,8 @@
-﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Vacaciones</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
+﻿
+
+
+function format(obj) {
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Registrar vacación</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
                 
@@ -21,7 +24,7 @@
                 '<td>' + index.hvac_CantDias + '</td>' +
                 '<td>' + index.hvac_MesVacaciones + '</td>' +
                 '<td>' + index.hvac_AnioVacaciones + '</td>' +
-                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>' + '</td>' +
+                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalles</button>' + '</td>' +
                 '</tr>' +
                 '</tbody>'
         '</table>'
@@ -36,9 +39,6 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           if (validarDT(Lista)) {
-               return null;
-           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.emp_Id,
@@ -95,7 +95,7 @@ function llamarmodaldelete(ID) {
 //    id = ID;
 
 function llamarmodaldetalles(ID) {
-    debugger
+   
     //var modaldetalle = $("#ModalDetalles");
     //$('#Prueba tbody tr').on('click', function () {
     //    var tr = $(this).closest('tr');
@@ -103,7 +103,7 @@ function llamarmodaldetalles(ID) {
     //    var id = row.data().id;
     //});
     id = ID;
-    debugger
+    
     _ajax({ id: parseInt(id) },
         '/HistorialVacaciones/Detalles',
         'GET',
@@ -116,13 +116,13 @@ function llamarmodaldetalles(ID) {
                 $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados;
                 $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj[0].hvac_MesVacaciones;
                 $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj[0].hvac_AnioVacaciones;
-                $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;
-                $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj[0].hvac_RazonInactivo;
+                //$("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;
+                //$("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj[0].hvac_RazonInactivo;
                 $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj[0].hvac_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#hvac_UsuarioCrea")["0"].innerText = obj[0].hvac_UsuarioCrea;
-                $("#ModalDetalles").find("#hvac_UsuarioModifica")["0"].innerText = obj[0].hvac_UsuarioModifica;
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioCrea;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].hvac_UsuarioModifica;
                 $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj[0].hvac_FechaModifica).substring(0, 10);
-                debugger
+                
 
             }
         });
@@ -131,7 +131,7 @@ function llamarmodaldetalles(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    debugger
+    
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
@@ -142,7 +142,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
@@ -156,7 +156,7 @@ $("#InActivar").click(function () {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    debugger
+    
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
         _ajax(data,
