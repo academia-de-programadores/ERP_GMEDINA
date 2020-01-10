@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: EmpleadoComisiones
         public ActionResult Index()
         {
-            var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Where(d => d.cc_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
+            var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
             return View(tbEmpleadoComisiones.ToList());
         }
 
@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "Datos Incorrectos");
                         response = "error";
                     }
 
@@ -209,7 +209,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "Datos Incorrectos");
                         response = "error";
                     }
 
@@ -257,7 +257,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        ModelState.AddModelError("", "No se pudo Inhabilitar el registro. Contacte al administrador.");
                         response = "error";
                     }
                 }
@@ -277,7 +277,49 @@ namespace ERP_GMEDINA.Controllers
             return Json(JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Activar(int id)
+        {
+            IEnumerable<object> listEmpleadoComisiones = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(id,
+                                                                                         1,
+                                                                                         DateTime.Now
+                                                                                       );
 
+                    foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
+                        MensajeError = Resultado.MensajeError;
+
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo Activar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
+                }
+                catch (Exception)
+                {
+                    response = "error";
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                response = "error";
+            }
+            return Json(JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

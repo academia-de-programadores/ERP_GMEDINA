@@ -112,7 +112,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         public virtual DbSet<EmpleadosVendedores> EmpleadosVendedores { get; set; }
-        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
         public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
@@ -133,12 +132,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
         public virtual DbSet<V_GeneralTotales_RPT> V_GeneralTotales_RPT { get; set; }
-        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
-        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
         public virtual DbSet<V_Ingresos_RPT> V_Ingresos_RPT { get; set; }
-        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
-        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
         public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_AnioPlanilla> V_Plani_AnioPlanilla { get; set; }
         public virtual DbSet<V_Plani_DecimoCuarto> V_Plani_DecimoCuarto { get; set; }
@@ -152,7 +147,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
-        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
         public virtual DbSet<V_ReportesVarios> V_ReportesVarios { get; set; }
         public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
@@ -160,6 +154,12 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
+        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
+        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
+        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
+        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
+        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
+        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
