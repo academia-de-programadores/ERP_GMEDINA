@@ -585,7 +585,7 @@ namespace ERP_GMEDINA.Controllers
 		#endregion
 
 
-		//Pendiente
+		//Pendientes
 		
 		#region Reporte General Totales
 
