@@ -1872,6 +1872,7 @@
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
+    <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

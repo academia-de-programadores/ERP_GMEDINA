@@ -33,7 +33,8 @@ namespace ERP_GMEDINA.Controllers
             //                 where
 
             var tbTipoDeducciones = db.tbTipoDeduccion
-                .Select(c => new {
+                .Select(c => new
+                {
                     tde_Descripcion = c.tde_Descripcion,
                     tde_UsuarioCrea = c.tde_UsuarioCrea,
                     NombreUsuarioCrea = c.tbUsuario.usu_NombreUsuario,
@@ -44,7 +45,7 @@ namespace ERP_GMEDINA.Controllers
                     tde_FechaModifica = c.tde_FechaModifica,
                     tde_IdTipoDedu = c.tde_IdTipoDedu,
                     tde_Activo = c.tde_Activo
-                })                
+                })
                 .OrderByDescending(c => c.tde_FechaCrea).ToList();
 
             return new JsonResult { Data = tbTipoDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -136,19 +137,19 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbTechosDeduccionesJSON = from tbTipoDeducciones in db.tbTipoDeduccion
-                                          where tbTipoDeducciones.tde_Activo == true && tbTipoDeducciones.tde_IdTipoDedu == ID
+                                          where tbTipoDeducciones.tde_IdTipoDedu == ID
                                           select new
                                           {
-                                              tbTipoDeducciones.tde_IdTipoDedu,
-                                              tbTipoDeducciones.tde_Descripcion,
+                                              tde_IdTipoDedu = tbTipoDeducciones.tde_IdTipoDedu,
+                                              tde_Descripcion = tbTipoDeducciones.tde_Descripcion,
 
-                                              tbTipoDeducciones.tde_UsuarioCrea,
+                                              tde_UsuarioCrea = tbTipoDeducciones.tde_UsuarioCrea,
                                               UsuCrea = tbTipoDeducciones.tbUsuario.usu_NombreUsuario,
-                                              tbTipoDeducciones.tde_FechaCrea,
+                                              tde_FechaCrea = tbTipoDeducciones.tde_FechaCrea,
 
-                                              tbTipoDeducciones.tde_UsuarioModifica,
+                                              tde_UsuarioModifica = tbTipoDeducciones.tde_UsuarioModifica,
                                               UsuModifica = tbTipoDeducciones.tbUsuario1.usu_NombreUsuario,
-                                              tbTipoDeducciones.tde_FechaModifica
+                                              tde_FechaModifica = tbTipoDeducciones.tde_FechaModifica
                                           };
 
             db.Configuration.ProxyCreationEnabled = false;
@@ -251,6 +252,38 @@ namespace ERP_GMEDINA.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             tbTipoDeduccion tbTipoDeduccionesJSON = db.tbTipoDeduccion.Find(ID);
             return Json(tbTipoDeduccionesJSON, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Activar
+        public JsonResult Activar(int? ID)
+        {
+            string response = String.Empty;
+            IEnumerable<object> listTipoDeduccion = null;
+            string MensajeError = "";
+            try
+            {
+                listTipoDeduccion = db.UDP_Plani_tbTipoDeduccion_Activar(ID, 1, DateTime.Now);
+
+                foreach (UDP_Plani_tbTipoDeduccion_Activar_Result resultado in listTipoDeduccion.ToList())
+                    MensajeError = resultado.MensajeError;
+
+                if (MensajeError.StartsWith("-1"))
+                {
+                    ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador");
+                    response = "error";
+                }
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador.");
+                response = "error";
+            }
+            db.Configuration.ProxyCreationEnabled = false;
+            //tbTipoDeduccion tbTipoDeduccionesJSON = db.tbTipoDeduccion.Find(ID);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
