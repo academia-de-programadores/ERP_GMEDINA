@@ -279,12 +279,7 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-        public JsonResult Activar(int? ID)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbEmpleadoComisiones tbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
-            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
-        }
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Activar(int id)
@@ -293,40 +288,41 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                try
+                return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            //LLENAR DATA DE AUDITORIA
+            tbEmpleadoComisiones tbEmpleadoComisiones = new tbEmpleadoComisiones();
+            tbEmpleadoComisiones.cc_Id = (int)id;
+            tbEmpleadoComisiones.cc_UsuarioModifica = 1;
+            tbEmpleadoComisiones.cc_FechaModifica = DateTime.Now;
+            try
+            {
+                //EJECUTAR PROCEDIMIENTO ALMACENADO
+                listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(tbEmpleadoComisiones.cc_Id,
+                                                                            tbEmpleadoComisiones.cc_UsuarioModifica,
+                                                                            tbEmpleadoComisiones.cc_FechaModifica);
+
+                //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
+                    MensajeError = Resultado.MensajeError;
+
+                if (MensajeError.StartsWith("-1"))
                 {
-                    listEmpleadoComisiones = db.UDP_Plani_EmpleadoComisiones_Activar(id,
-                                                                                         1,
-                                                                                         DateTime.Now
-                                                                                            );
-
-                    foreach (UDP_Plani_EmpleadoComisiones_Activar_Result Resultado in listEmpleadoComisiones)
-                        MensajeError = Resultado.MensajeError;
-
-
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo Activar el registro. Contacte al administrador.");
-                        response = "error";
-                    }
-                }
-                catch (Exception)
-                {
+                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
                     response = "error";
                 }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
+
             }
-            else
+            catch (Exception Ex)
             {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
-                response = "error";
+                //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = Ex.Message.ToString();
             }
-            return Json(JsonRequestBehavior.AllowGet);
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {
