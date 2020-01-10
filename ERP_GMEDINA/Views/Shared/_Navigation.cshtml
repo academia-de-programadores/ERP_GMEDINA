@@ -3,13 +3,11 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
                 <div class="dropdown profile-element">
-                    <span>
-                        <img alt="image" class="img-circle" src="~/Content/img/profile_small.jpg" />
-                    </span>
+                  
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">Perfil </strong>
+                                <strong class="font-bold">Recursos Humanos </strong>
                             </span> <span class="text-muted text-xs block">Otras Acciones<b class="caret"></b></span>
                         </span>
                     </a>
@@ -176,9 +174,9 @@
                             <li class="@Html.IsSelected(controller:"Personas",action: "Index")">
                                 <a href="@Url.Action("Index", "Personas")">Personas</a>
                             </li>
-                            @*<li class="@Html.IsSelected(action: "Dashboard_5")">
-                                <a href="@Url.Action("Dashboard_1", "Dashboards")">Requisicion</a>
-                            </li>*@
+                            <li class="@Html.IsSelected(controller:"Requisiciones",action: "Index")">
+                                <a href="@Url.Action("Index", "Requisiciones")">Requisicion</a>
+                            </li>
                             <li class="@Html.IsSelected(controller:"SeleccionCandidatos",action: "Index")">
                                 <a href="@Url.Action("Index", "SeleccionCandidatos")">Seleccion de Candidatos</a>
                             </li>
