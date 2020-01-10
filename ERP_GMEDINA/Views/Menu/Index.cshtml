@@ -1,275 +1,253 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<marquee scrollamount="15" class="animated"><h1 class="text-navy">Bienvenido</h1></marquee>
+<div class="ibox-content m-b-sm border-bottom">
+	<div class="text-center p-lg">
 
+		<h1><i class="fa fa-home"></i> BIENVENIDOS</h1>
 
-@*<div class="row">
-    <div class="col-lg-12 text-center">
-        <div class="navy-line"></div>
-        <h1>Over 40+ unique view<br> <span class="navy"> with many custom components</span> </h1>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
-    </div>
-</div>*@
-
-@*<div class="col-lg-6">
-    <div class="widget navy-bg no-padding">
-        <div class="p-m">
-            <h1 class="m-xs">$ 1,540</h1>
-
-            <h3 class="font-bold no-margins">
-                Annual income
-            </h3>
-            <small>Income form project Alpha.</small>
-        </div>
-        <div class="flot-chart">
-            <div class="flot-chart-content" id="flot-chart1" style="padding: 0px; position: relative;"><canvas class="flot-base" width="525" height="100" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 525px; height: 100px;"></canvas><canvas class="flot-overlay" width="525" height="100" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 525px; height: 100px;"></canvas></div>
-        </div>
-    </div>
-</div>*@
-
-
-
-
-<div class="row">
-   <div class="col-md-3 text-center wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">
-        <div>
-            <i class="fa fa-mobile features-icon"></i>
-            <h2>Full responsive</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
-        </div>
-        <div class="m-t-lg">
-            <i class="fa fa-bar-chart features-icon"></i>
-            <h2>6 Charts Library</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
-        </div>
-    </div>
-    <div class="col-md-6 text-center  wow zoomIn animated" style="visibility: visible;">
-        <img src="~/Content/img/pago.jpg" alt="dashboard" class="img-responsive">
-    </div>
-   <div class="col-md-3 text-center wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;">
-    <div>
-         <i class="fa fa-envelope features-icon"></i>
-         <h2>Mail pages</h2>
-         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
-     </div>
-     <div class="m-t-lg">
-         <i class="fa fa-google features-icon"></i>
-         <h2>AngularJS version</h2>
-         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus.</p>
-     </div>
-    </div>
+	</div>
 </div>
 
 
+@*<div class="row">
+		<div class="col-lg-12 text-center">
+			<div class="navy-line"></div>
+			<h1>Over 40+ unique view<br> <span class="navy"> with many custom components</span> </h1>
+			<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+		</div>
+	</div>*@
+
+@*<div class="col-lg-6">
+		<div class="widget navy-bg no-padding">
+			<div class="p-m">
+				<h1 class="m-xs">$ 1,540</h1>
+
+				<h3 class="font-bold no-margins">
+					Annual income
+				</h3>
+				<small>Income form project Alpha.</small>
+			</div>
+			<div class="flot-chart">
+				<div class="flot-chart-content" id="flot-chart1" style="padding: 0px; position: relative;"><canvas class="flot-base" width="525" height="100" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 525px; height: 100px;"></canvas><canvas class="flot-overlay" width="525" height="100" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 525px; height: 100px;"></canvas></div>
+			</div>
+		</div>
+	</div>*@
+
+
+
+
+
+
+
 <script>
 
-    $(document).ready(function () {
+	$(document).ready(function () {
 
-        $('body').scrollspy({
-            target: '.navbar-fixed-top',
-            offset: 80
-        });
+		$('body').scrollspy({
+			target: '.navbar-fixed-top',
+			offset: 80
+		});
 
-        // Page scrolling feature
-        $('a.page-scroll').bind('click', function(event) {
-            var link = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $(link.attr('href')).offset().top - 50
-            }, 500);
-            event.preventDefault();
-            $("#navbar").collapse('hide');
-        });
-    });
+		// Page scrolling feature
+		$('a.page-scroll').bind('click', function (event) {
+			var link = $(this);
+			$('html, body').stop().animate({
+				scrollTop: $(link.attr('href')).offset().top - 50
+			}, 500);
+			event.preventDefault();
+			$("#navbar").collapse('hide');
+		});
+	});
 
-    var cbpAnimatedHeader = (function() {
-        var docElem = document.documentElement,
-                header = document.querySelector( '.navbar-default' ),
-                didScroll = false,
-                changeHeaderOn = 200;
-        function init() {
-            window.addEventListener( 'scroll', function( event ) {
-                if( !didScroll ) {
-                    didScroll = true;
-                    setTimeout( scrollPage, 250 );
-                }
-            }, false );
-        }
-        function scrollPage() {
-            var sy = scrollY();
-            if ( sy >= changeHeaderOn ) {
-                $(header).addClass('navbar-scroll')
-            }
-            else {
-                $(header).removeClass('navbar-scroll')
-            }
-            didScroll = false;
-        }
-        function scrollY() {
-            return window.pageYOffset || docElem.scrollTop;
-        }
-        init();
+	var cbpAnimatedHeader = (function () {
+		var docElem = document.documentElement,
+			header = document.querySelector('.navbar-default'),
+			didScroll = false,
+			changeHeaderOn = 200;
+		function init() {
+			window.addEventListener('scroll', function (event) {
+				if (!didScroll) {
+					didScroll = true;
+					setTimeout(scrollPage, 250);
+				}
+			}, false);
+		}
+		function scrollPage() {
+			var sy = scrollY();
+			if (sy >= changeHeaderOn) {
+				$(header).addClass('navbar-scroll')
+			}
+			else {
+				$(header).removeClass('navbar-scroll')
+			}
+			didScroll = false;
+		}
+		function scrollY() {
+			return window.pageYOffset || docElem.scrollTop;
+		}
+		init();
 
-    })();
+	})();
 
-    // Activate WOW.js plugin for animation on scrol
-    new WOW().init();
+	// Activate WOW.js plugin for animation on scrol
+	new WOW().init();
 
 </script>
 <script>
-        $(document).ready(function(){
-            var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-            var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+	$(document).ready(function () {
+		var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
+		var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
 
-            var data1 = [
-                { label: "Data 1", data: d1, color: '#17a084'},
-                { label: "Data 2", data: d2, color: '#127e68' }
-            ];
-            $.plot($("#flot-chart1"), data1, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
+		var data1 = [
+			{ label: "Data 1", data: d1, color: '#17a084' },
+			{ label: "Data 2", data: d2, color: '#127e68' }
+		];
+		$.plot($("#flot-chart1"), data1, {
+			xaxis: {
+				tickDecimals: 0
+			},
+			series: {
+				lines: {
+					show: true,
+					fill: true,
+					fillColor: {
+						colors: [{
+							opacity: 1
+						}, {
+							opacity: 1
+						}]
+					}
+				},
+				points: {
+					width: 0.1,
+					show: false
+				}
+			},
+			grid: {
+				show: false,
+				borderWidth: 0
+			},
+			legend: {
+				show: false
+			}
+		});
 
-            var data2 = [
-                { label: "Data 1", data: d1, color: '#19a0a1'}
-            ];
-            $.plot($("#flot-chart2"), data2, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
+		var data2 = [
+			{ label: "Data 1", data: d1, color: '#19a0a1' }
+		];
+		$.plot($("#flot-chart2"), data2, {
+			xaxis: {
+				tickDecimals: 0
+			},
+			series: {
+				lines: {
+					show: true,
+					fill: true,
+					fillColor: {
+						colors: [{
+							opacity: 1
+						}, {
+							opacity: 1
+						}]
+					}
+				},
+				points: {
+					width: 0.1,
+					show: false
+				}
+			},
+			grid: {
+				show: false,
+				borderWidth: 0
+			},
+			legend: {
+				show: false
+			}
+		});
 
-            var data3 = [
-                { label: "Data 1", data: d1, color: '#fbbe7b'},
-                { label: "Data 2", data: d2, color: '#f8ac59' }
-            ];
-            $.plot($("#flot-chart3"), data3, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
+		var data3 = [
+			{ label: "Data 1", data: d1, color: '#fbbe7b' },
+			{ label: "Data 2", data: d2, color: '#f8ac59' }
+		];
+		$.plot($("#flot-chart3"), data3, {
+			xaxis: {
+				tickDecimals: 0
+			},
+			series: {
+				lines: {
+					show: true,
+					fill: true,
+					fillColor: {
+						colors: [{
+							opacity: 1
+						}, {
+							opacity: 1
+						}]
+					}
+				},
+				points: {
+					width: 0.1,
+					show: false
+				}
+			},
+			grid: {
+				show: false,
+				borderWidth: 0
+			},
+			legend: {
+				show: false
+			}
+		});
 
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green'
-            });
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green'
+		});
 
-            $(".todo-list").sortable({
-                placeholder: "sort-highlight",
-                handle: ".handle",
-                forcePlaceholderSize: true,
-                zIndex: 999999
-            }).disableSelection();
+		$(".todo-list").sortable({
+			placeholder: "sort-highlight",
+			handle: ".handle",
+			forcePlaceholderSize: true,
+			zIndex: 999999
+		}).disableSelection();
 
-            var mapData = {
-                "US": 498,
-                "SA": 200,
-                "CA": 1300,
-                "DE": 220,
-                "FR": 540,
-                "CN": 120,
-                "AU": 760,
-                "BR": 550,
-                "IN": 200,
-                "GB": 120,
-                "RU": 2000
-            };
+		var mapData = {
+			"US": 498,
+			"SA": 200,
+			"CA": 1300,
+			"DE": 220,
+			"FR": 540,
+			"CN": 120,
+			"AU": 760,
+			"BR": 550,
+			"IN": 200,
+			"GB": 120,
+			"RU": 2000
+		};
 
-            $('#world-map').vectorMap({
-                map: 'world_mill_en',
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: '#e4e4e4',
-                        "fill-opacity": 1,
-                        stroke: 'none',
-                        "stroke-width": 0,
-                        "stroke-opacity": 0
-                    }
-                },
-                series: {
-                    regions: [{
-                        values: mapData,
-                        scale: ["#1ab394", "#22d6b1"],
-                        normalizeFunction: 'polynomial'
-                    }]
-                }
-            });
-        });
+		$('#world-map').vectorMap({
+			map: 'world_mill_en',
+			backgroundColor: "transparent",
+			regionStyle: {
+				initial: {
+					fill: '#e4e4e4',
+					"fill-opacity": 1,
+					stroke: 'none',
+					"stroke-width": 0,
+					"stroke-opacity": 0
+				}
+			},
+			series: {
+				regions: [{
+					values: mapData,
+					scale: ["#1ab394", "#22d6b1"],
+					normalizeFunction: 'polynomial'
+				}]
+			}
+		});
+	});
 </script>
