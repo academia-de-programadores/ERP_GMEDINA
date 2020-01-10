@@ -222,7 +222,7 @@ function llenarTabla() {
                     EdadMaxima: value.req_EdadMaxima,
                     EstadoCivil: value.req_EstadoCivil,
                     EducacionSuperior: BinToCheckBox(value.req_EducacionSuperior),
-                    Permanente: BinToCheckBox(value.req_Permanente),
+                    Temporal: BinToCheckBox(value.req_Permanente),
                     Duracion: value.req_Duracion,
                     Vacantes: value.req_Vacantes,
                     FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),

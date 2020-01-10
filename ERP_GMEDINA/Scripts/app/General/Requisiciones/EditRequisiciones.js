@@ -46,6 +46,20 @@ function ListFill(obj) {
     SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
 };
 
+function Req_check() {
+    var ischecked = $("#req_Permanente").is(':checked');
+    var req_Duracion = $("#req_Duracion");
+    if (ischecked) {
+        req_Duracion.prop("disabled", false);
+        req_Duracion.val("");
+    }
+    else {
+        req_Duracion.prop("disabled", true);
+        req_Duracion.val("N/A");
+    }
+};
+
+
 $(document).ready(function () {
 
     
@@ -89,6 +103,7 @@ $(document).ready(function () {
         '/Requisiciones/Edit/' + id,
         'GET',
         function (obj) {
+            var req_Duracion = $("#req_Duracion");
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#tbRequisiciones").find("#req_Experiencia").val(obj[0].req_Experiencia);
                 $("#tbRequisiciones").find("#req_Sexo").val($.trim(obj[0].req_Sexo));
@@ -105,11 +120,11 @@ $(document).ready(function () {
 
                 if(obj[0].req_Permanente == true)
                 {
-                    $("#tbRequisiciones").find("#req_Permanente").prop("disabled", false);
+                    req_Duracion.prop("disabled", false);
                 }
             }
         });
-    
+
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
         onFinished: function () {

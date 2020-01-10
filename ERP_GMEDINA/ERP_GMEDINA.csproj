@@ -1251,6 +1251,7 @@
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
+    <Content Include="Scripts\app\General\Requisiciones\EditRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
