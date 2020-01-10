@@ -15,9 +15,9 @@ namespace ERP_GMEDINA.Models
     {
        
        
-        [Display(Name = "Observacion")]
+        [Display(Name = "Observación")]
         public string hamo_Observacion { get; set; }
-        [Display(Name = "Razon Inactivo")]
+        [Display(Name = "Razón Inactivo")]
         public string hamo_RazonInactivo { get; set; }
     }
 }
