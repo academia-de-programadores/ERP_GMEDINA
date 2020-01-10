@@ -58,13 +58,14 @@ function format(obj, jor_Id) {
             '<div class="col-md-3">' +
                 '<div class="panel panel-default">' +
                   '<div class="panel-heading">' +
-                     '<h5>' + index.hor_descripcion + '</h5>' +
-                     '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
-                     '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                     '<h5>' + index.hor_descripcion + '</h5>' +                     
                 '</div>' +
                 '<div class="panel-body">' +
                 'Hora Inicio: ' + index.hor_HoraInicio.toString() +
-                '<br> Hora Fin: ' + index.hor_HoraFin + '</div>' +                
+                '<br> Hora Fin: ' + index.hor_HoraFin +
+                    '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
+                    '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                '</div>' +
                 '</div>' +
             '</div>'
     });
