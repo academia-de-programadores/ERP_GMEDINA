@@ -121,16 +121,19 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
+    }).done(function (data) {
+        console.log(data)
+        $('#afp_Id').val(data.afp_Id);
+        //Mostrar el Modal
+        $("#ActivarAFP").modal();
     });
-
-    $('#afp_Id').val(data.afp_Id);
-
-    $("#ActivarAFP").modal();
 });
 
 $("#btnActivarRegistroAFP").click(function () {
 
     var data = $("#frmActivarAFP").serializeArray();
+
+    console.log(data)
 
     $.ajax({
         url: "/AFP/Activar",
@@ -145,7 +148,7 @@ $("#btnActivarRegistroAFP").click(function () {
                 message: 'No se pudo activar el registro, contacte al administrador',
             });
         }
-        else if (data == "bien") {
+        else{
             cargarGridDeducciones();
             console.log(data);
             // Mensaje de exito cuando un registro se ha guardado bien

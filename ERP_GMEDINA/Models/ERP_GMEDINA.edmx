@@ -15143,16 +15143,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result)">
-            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
-            <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
-            <Parameter Name="dex_MontoRestante" Mode="In" Type="Decimal" />
-            <Parameter Name="dex_ObservacionesComentarios" Mode="In" Type="String" />
-            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
-            <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
-            <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
             <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
@@ -15433,6 +15423,16 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_ISR_RPT" EntityType="ERP_GMEDINAModel.V_ISR_RPT" />
           <EntitySet Name="V_AFP_RPT" EntityType="ERP_GMEDINAModel.V_AFP_RPT" />
           <EntitySet Name="V_RAP_RPT" EntityType="ERP_GMEDINAModel.V_RAP_RPT" />
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_MontoRestante" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_ObservacionesComentarios" Mode="In" Type="String" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
+            <Parameter Name="dex_Cuota" Mode="In" Type="Decimal" />
+            <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -15573,9 +15573,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
@@ -15858,6 +15855,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18177,13 +18177,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
@@ -18565,6 +18558,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

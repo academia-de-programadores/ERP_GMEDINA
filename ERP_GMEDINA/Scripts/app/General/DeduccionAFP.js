@@ -119,11 +119,11 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarDeduccionAFP", function 
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
+    }).done(function (data) {
+        $('#dafp_Id').val(data.dafp_Id);
+
+        $("#ActivarDeduccionAFP").modal();
     })
-
-    $('#dafp_Id').val(data.dafp_Id);
-
-    $("#ActivarDeduccionAFP").modal();
 })
 
 $("#btnActivarRegistroDeduccionAFP").click(function () {
@@ -143,7 +143,7 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
                 message: 'No se pudo activar el registro, contacte al administrador',
             });
         }
-        else if (data == "bien") {
+        else{
             cargarGridDeducciones();
             console.log(data);
             // Mensaje de exito cuando un registro se ha guardado bien
