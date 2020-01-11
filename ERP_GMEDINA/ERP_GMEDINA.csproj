@@ -871,6 +871,9 @@
     <Compile Include="Models\V_GeneralTotales_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_HistorialEmpleadosLiquidados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_IHSS_RPT.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

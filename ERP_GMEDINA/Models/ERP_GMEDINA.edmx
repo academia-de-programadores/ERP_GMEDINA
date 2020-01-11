@@ -15796,6 +15796,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -16340,6 +16341,24 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_HistorialEmpleadosLiquidados">
+          <Key>
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="per_Nombres" />
+            <PropertyRef Name="per_Apellidos" />
+            <PropertyRef Name="moli_IdMotivo" />
+          </Key>
+          <Property Name="hdli_Id" Type="Int32" />
+          <Property Name="emp_Id" Type="Int32" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="moli_IdMotivo" Type="Int32" Nullable="false" />
+          <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hdli_MontoTotalLiquidacion" Type="Decimal" Precision="16" Scale="4" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19113,6 +19132,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Update" />
+          <EntitySetMapping Name="V_HistorialEmpleadosLiquidados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados">
+              <MappingFragment StoreEntitySet="V_HistorialEmpleadosLiquidados">
+                <ScalarProperty Name="hdli_MontoTotalLiquidacion" ColumnName="hdli_MontoTotalLiquidacion" />
+                <ScalarProperty Name="moli_Descripcion" ColumnName="moli_Descripcion" />
+                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
+                <ScalarProperty Name="hdli_SalarioPromedioMensual_Liql" ColumnName="hdli_SalarioPromedioMensual_Liql" />
+                <ScalarProperty Name="hdli_SalarioOrdinarioMensual_Liq" ColumnName="hdli_SalarioOrdinarioMensual_Liq" />
+                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
+                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hdli_Id" ColumnName="hdli_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -162,6 +162,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
         public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         public virtual DbSet<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
+        public virtual DbSet<V_HistorialEmpleadosLiquidados> V_HistorialEmpleadosLiquidados { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
