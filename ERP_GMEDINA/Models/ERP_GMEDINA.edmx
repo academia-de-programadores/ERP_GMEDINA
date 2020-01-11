@@ -15738,17 +15738,17 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbIngresosIndividuales" EntitySet="tbIngresosIndividuales" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Activar_Result)">
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="dei_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result)">
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="dei_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Insert_Result)">
             <Parameter Name="dei_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dei_MontoInicial" Mode="In" Type="Decimal" />
@@ -15757,7 +15757,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dei_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesIndividuales_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Update_Result)">
             <Parameter Name="dei_IdDeduccionesIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="dei_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -15767,17 +15767,17 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dei_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dei_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Activar_Result)">
             <Parameter Name="ini_IdIngresosIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Inactivar_Result)">
             <Parameter Name="ini_IdIngresosIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Insert_Result)">
             <Parameter Name="ini_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="ini_MontoInicial" Mode="In" Type="Decimal" />
@@ -15786,7 +15786,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="ini_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbIngresosIndividuales_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Update_Result)">
             <Parameter Name="ini_IdIngresosIndividuales" Mode="In" Type="Int32" />
             <Parameter Name="ini_Motivo" Mode="In" Type="String" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -16359,6 +16359,30 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="hdli_MontoTotalLiquidacion" Type="Decimal" Precision="16" Scale="4" />
         </EntityType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesIndividuales_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesIndividuales_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesIndividuales_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbIngresosIndividuales_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbIngresosIndividuales_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbIngresosIndividuales_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbIngresosIndividuales_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19124,14 +19148,62 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesIndividuales_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesIndividuales_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="V_HistorialEmpleadosLiquidados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados">
               <MappingFragment StoreEntitySet="V_HistorialEmpleadosLiquidados">

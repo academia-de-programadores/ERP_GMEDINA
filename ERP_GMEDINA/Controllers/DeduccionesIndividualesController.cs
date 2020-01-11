@@ -10,71 +10,67 @@ using ERP_GMEDINA.Models;
 
 namespace ERP_GMEDINA.Controllers
 {
-    public class DeduccionAFPController : Controller
+    public class DeduccionesIndividualesController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        #region Index Deducción AFP
-        // GET: DeduccionAFP
+        #region Index Deducciones Individuales
+        // GET: DeduccionesIndividuales
         public ActionResult Index()
         {
-            var tbDeduccionAFP = db.tbDeduccionAFP.OrderBy(t => t.dafp_FechaCrea).Include(t => t.tbAFP).Include(t => t.tbEmpleados);
-            return View(tbDeduccionAFP.ToList());
+            var tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
+            return View(tbDeduccionesIndividuales.ToList());
         }
 
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         public ActionResult GetData()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            var tbDeduccionAFP1 = db.tbDeduccionAFP
-                        .Select(t => new {
-                            dafp_Id = t.dafp_Id,
-                            per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres,
-                            per_Apellidos = t.tbEmpleados.tbPersonas.per_Apellidos,
-                            emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
-                            dafp_AporteLps = t.dafp_AporteLps,
-                            afp_Id = t.afp_Id,
-                            afp_Descripcion = t.tbAFP.afp_Descripcion,
-                            emp_Id = t.emp_Id,
-                            dafp_UsuarioCrea = t.dafp_UsuarioCrea,
-                            dafp_UsuarioModifica = t.dafp_UsuarioModifica,
-                            dafp_FechaCrea = t.dafp_FechaCrea,
-                            dafp_FechaModifica = t.dafp_FechaModifica,
-                            dafp_Activo = t.dafp_Activo
-                        })
-                        .OrderBy(t => t.dafp_FechaCrea)
-                        .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            //Variable para Guardar el Select List que llamará el js en el FrontEnd
+            var tbDeduccionesIndividualesD = db.tbDeduccionesIndividuales
+                .Select(d => new
+                {
+                    dei_IdDeduccionesIndividuales = d.dei_IdDeduccionesIndividuales,
+                    dei_Motivo = d.dei_Motivo,
+                    emp_Id = d.emp_Id,
+                    per_Nombres = d.tbEmpleados.tbPersonas.per_Nombres,
+                    per_Apellidos = d.tbEmpleados.tbPersonas.per_Apellidos,
+                    dei_MontoInicial = d.dei_MontoInicial,
+                    dei_MontoRestante = d.dei_MontoRestante,
+                    dei_Cuota = d.dei_Cuota,
+                    dei_Activo = d.dei_Activo,
+                    dei_UsuarioCrea = d.dei_UsuarioCrea,
+                    dei_FechaCrea = d.dei_FechaCrea,
+                    dei_UsuarioModifica = d.dei_UsuarioModifica,
+                    dei_FechaModifica = d.dei_FechaModifica
+                })
+                .OrderBy(d => d.dei_FechaCrea)
+                .ToList();
+
+            //Retornamos un Json en el FrontEnd
+            return new JsonResult { Data = tbDeduccionesIndividualesD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
 
-        #region Crear Deducción AFP
-        // GET: DeduccionAFP/Create
+        #region Crear Deducciones Individuales
+        // GET: DeduccionesIndividuales/Create
         public ActionResult Create()
         {
-            /*
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
-            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
-            */
             return View();
         }
 
-        // POST: DeduccionAFP/Create
+        // POST: DeduccionesIndividuales/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Create([Bind(Include = "dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_UsuarioCrea,dei_FechaCrea")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            tbDeduccionAFP.dafp_UsuarioCrea = 1;
-            tbDeduccionAFP.dafp_FechaCrea = DateTime.Now;
+            tbDeduccionesIndividuales.dei_UsuarioCrea = 1;
+            tbDeduccionesIndividuales.dei_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
-            IEnumerable<object> listDeduccionAFP = null;
+            IEnumerable<object> listDeduccionIndividuales = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -82,13 +78,15 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Insert(tbDeduccionAFP.dafp_AporteLps,
-                                                                          tbDeduccionAFP.afp_Id,
-                                                                          tbDeduccionAFP.emp_Id,
-                                                                          tbDeduccionAFP.dafp_UsuarioCrea,
-                                                                          tbDeduccionAFP.dafp_FechaCrea);
+                    listDeduccionIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Insert(tbDeduccionesIndividuales.dei_Motivo,
+                                                                                              tbDeduccionesIndividuales.emp_Id,
+                                                                                              tbDeduccionesIndividuales.dei_MontoInicial,
+                                                                                              tbDeduccionesIndividuales.dei_MontoRestante,
+                                                                                              tbDeduccionesIndividuales.dei_Cuota,
+                                                                                              tbDeduccionesIndividuales.dei_UsuarioCrea,
+                                                                                              tbDeduccionesIndividuales.dei_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbDeduccionAFP_Insert_Result Resultado in listDeduccionAFP)
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Insert_Result Resultado in listDeduccionIndividuales)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -113,19 +111,13 @@ namespace ERP_GMEDINA.Controllers
                 //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                 response = "error";
             }
-
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-
-            /*
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
-            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
-            */
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
-        #region Dropdownlists
+        #region Dropdownlist
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
         public JsonResult EditGetEmpleadoDDL()
         {
@@ -138,42 +130,30 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
-
-        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetAFPDDL()
-        {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from AFP in db.tbAFP
-            where AFP.afp_Activo == true
-            select new { Id = AFP.afp_Id, Descripcion = AFP.afp_Descripcion };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
-        }
         #endregion
 
-        #region Editar Deducción AFP
-        // GET: DeduccionAFP/Edit/5
-        public JsonResult Edit(int? id)
+        #region Editar Deducciones Individuales
+        // GET: DeduccionesIndividuales/Edit/5
+        public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(id);
-            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
+            tbDeduccionesIndividuales tbDeduccionesIndividualesJSON = db.tbDeduccionesIndividuales.Find(id);
+            return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: DeduccionAFP/Edit/5
+        // POST: DeduccionesIndividuales/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Edit([Bind(Include = "dei_IdDeduccionesIndividuales,dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_UsuarioModifica,dei_FechaModifica")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
         {
-            //LLENAR DATA DE AUDITORIA
-            tbDeduccionAFP.dafp_UsuarioModifica = 1;
-            tbDeduccionAFP.dafp_FechaModifica = DateTime.Now;
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            tbDeduccionesIndividuales.dei_UsuarioModifica = 1;
+            tbDeduccionesIndividuales.dei_FechaModifica = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
-            IEnumerable<object> listDeduccionAFP = null;
+            IEnumerable<object> listDeduccionIndividuales = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -181,20 +161,22 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Update(tbDeduccionAFP.dafp_Id,
-                                                                          tbDeduccionAFP.dafp_AporteLps,
-                                                                          tbDeduccionAFP.afp_Id,
-                                                                          tbDeduccionAFP.emp_Id,
-                                                                          tbDeduccionAFP.dafp_UsuarioModifica,
-                                                                          tbDeduccionAFP.dafp_FechaModifica);
+                    listDeduccionIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Update(tbDeduccionesIndividuales.dei_IdDeduccionesIndividuales,
+                                                                                              tbDeduccionesIndividuales.dei_Motivo,
+                                                                                              tbDeduccionesIndividuales.emp_Id,
+                                                                                              tbDeduccionesIndividuales.dei_MontoInicial,
+                                                                                              tbDeduccionesIndividuales.dei_MontoRestante,
+                                                                                              tbDeduccionesIndividuales.dei_Cuota,
+                                                                                              tbDeduccionesIndividuales.dei_UsuarioModifica,
+                                                                                              tbDeduccionesIndividuales.dei_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbDeduccionAFP_Update_Result Resultado in listDeduccionAFP)
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Update_Result Resultado in listDeduccionIndividuales)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "No se pudo editar el registro, contacte al administrador");
                         response = "error";
                     }
 
@@ -210,62 +192,54 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                 response = "error";
             }
-
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-
-            /*
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
-            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
-            */
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-        #endregion
+#endregion
 
-        #region Detalles Deducción AFP
-        // GET: DeduccionAFP/Details/5
-        public JsonResult Details(int? ID)
+        #region Detalles Deducciones Individuales
+        // GET: DeduccionesIndividuales/Details/5
+        public ActionResult Details(int? id)
         {
-            var tbDeduccionAFPJSON = from tbDeduAFP in db.tbDeduccionAFP
-                                     where tbDeduAFP.dafp_Activo == true && tbDeduAFP.dafp_Id == ID
+            var tbDeduccionesIndividualesJSON = from tbDeduIndi in db.tbDeduccionesIndividuales
+                                                where tbDeduIndi.dei_Activo == true && tbDeduIndi.dei_IdDeduccionesIndividuales == id
                                      select new
                                      {
-                                         tbDeduAFP.dafp_Id,
-                                         tbDeduAFP.dafp_AporteLps,
-                                         tbDeduAFP.tbEmpleados.tbPersonas.per_Nombres,
-                                         tbDeduAFP.tbEmpleados.tbPersonas.per_Apellidos,
-                                         tbDeduAFP.tbEmpleados.emp_CuentaBancaria,
-                                         tbDeduAFP.tbAFP.afp_Descripcion,
-                                         tbDeduAFP.afp_Id,
-                                         tbDeduAFP.emp_Id,
-                                         tbDeduAFP.dafp_Activo,
-                                         tbDeduAFP.dafp_UsuarioCrea,
-                                         UsuCrea = tbDeduAFP.tbUsuario.usu_NombreUsuario,
-                                         tbDeduAFP.dafp_FechaCrea,
-                                         tbDeduAFP.dafp_UsuarioModifica,
-                                         UsuModifica = tbDeduAFP.tbUsuario1.usu_NombreUsuario,
-                                         tbDeduAFP.dafp_FechaModifica
+                                         tbDeduIndi.dei_IdDeduccionesIndividuales,
+                                         tbDeduIndi.dei_Motivo,
+                                         tbDeduIndi.emp_Id,
+                                         tbDeduIndi.tbEmpleados.tbPersonas.per_Nombres,
+                                         tbDeduIndi.tbEmpleados.tbPersonas.per_Apellidos,
+                                         tbDeduIndi.dei_MontoInicial,
+                                         tbDeduIndi.dei_MontoRestante,
+                                         tbDeduIndi.dei_Cuota,
+                                         tbDeduIndi.dei_UsuarioCrea,
+                                         UsuCrea = tbDeduIndi.tbUsuario.usu_NombreUsuario,
+                                         tbDeduIndi.dei_FechaCrea,
+                                         tbDeduIndi.dei_UsuarioModifica,
+                                         UsuModifica = tbDeduIndi.tbUsuario1.usu_NombreUsuario,
+                                         tbDeduIndi.dei_FechaModifica
                                      };
-
             db.Configuration.ProxyCreationEnabled = false;
-            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
+            return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
-        #region Inhabilitar Deducción AFP
+        #region Inhabilitar Deducciones Individuales
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int dafp_Id)
+        public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
             //LLENAR DATA DE AUDITORIA
-            int dafp_UsuarioModifica = 1;
-            DateTime dafp_FechaModifica = DateTime.Now;
+            int dei_UsuarioModifica = 1;
+            DateTime dei_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            IEnumerable<object> listDeduccionAFP = null;
+            IEnumerable<object> listDeduccionesIndividuales = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -273,11 +247,11 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Inactivar(dafp_Id,
-                                                                             dafp_UsuarioModifica,
-                                                                             dafp_FechaModifica);
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(dei_IdDeduccionesIndividuales,
+                                                                             dei_UsuarioModifica,
+                                                                             dei_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbDeduccionAFP_Inactivar_Result Resultado in listDeduccionAFP)
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result Resultado in listDeduccionesIndividuales)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -310,16 +284,16 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Activar Deducción AFP
+        #region Activar Deducciones Individuales
         [HttpPost]
         public ActionResult Activar(int id)
         {
             //LLENAR DATA DE AUDITORIA
-            int dafp_UsuarioModifica = 1;
-            DateTime dafp_FechaModifica = DateTime.Now;
+            int dei_UsuarioModifica = 1;
+            DateTime dei_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
-            IEnumerable<object> listDeduccionAFP = null;
+            IEnumerable<object> listDeduccionesIndividuales = null;
             string MensajeError = "";
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
@@ -327,11 +301,11 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Activar(id,
-                                                                           dafp_UsuarioModifica,
-                                                                           dafp_FechaModifica);
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Activar(id,
+                                                                                                   dei_UsuarioModifica,
+                                                                                                   dei_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbDeduccionAFP_Activar_Result Resultado in listDeduccionAFP)
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Activar_Result Resultado in listDeduccionesIndividuales)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
@@ -357,14 +331,14 @@ namespace ERP_GMEDINA.Controllers
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-
         #endregion
 
-        #region Ejecutable Deducción AFP
+        #region Ejecutable Deducciones Individuales
         protected override void Dispose(bool disposing)
         {
             if (disposing)
