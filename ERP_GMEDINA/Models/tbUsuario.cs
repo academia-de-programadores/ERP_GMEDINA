@@ -184,6 +184,10 @@ namespace ERP_GMEDINA.Models
             this.tbMotivoLiquidacion1 = new HashSet<tbMotivoLiquidacion>();
             this.tbPorcentajeMotivoLiquidacion = new HashSet<tbPorcentajeMotivoLiquidacion>();
             this.tbPorcentajeMotivoLiquidacion1 = new HashSet<tbPorcentajeMotivoLiquidacion>();
+            this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
+            this.tbDeduccionesIndividuales1 = new HashSet<tbDeduccionesIndividuales>();
+            this.tbIngresosIndividuales = new HashSet<tbIngresosIndividuales>();
+            this.tbIngresosIndividuales1 = new HashSet<tbIngresosIndividuales>();
         }
     
         public int usu_Id { get; set; }
@@ -531,5 +535,13 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPorcentajeMotivoLiquidacion> tbPorcentajeMotivoLiquidacion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbIngresosIndividuales> tbIngresosIndividuales1 { get; set; }
     }
 }

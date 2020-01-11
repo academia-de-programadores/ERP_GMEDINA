@@ -36,6 +36,8 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
             this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
             this.tbSueldos = new HashSet<tbSueldos>();
+            this.tbDeduccionesIndividuales = new HashSet<tbDeduccionesIndividuales>();
+            this.tbIngresosIndividuales = new HashSet<tbIngresosIndividuales>();
         }
     
         public int emp_Id { get; set; }
@@ -106,5 +108,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         public virtual tbJornadas tbJornadas { get; set; }
         public virtual tbPersonas tbPersonas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
     }
 }
