@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+        #region Index Deducciones Individuales
         // GET: DeduccionesIndividuales
         public ActionResult Index()
         {
@@ -21,27 +22,39 @@ namespace ERP_GMEDINA.Controllers
             return View(tbDeduccionesIndividuales.ToList());
         }
 
-        // GET: DeduccionesIndividuales/Details/5
-        public ActionResult Details(int? id)
+        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        public ActionResult GetData()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionesIndividuales tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Find(id);
-            if (tbDeduccionesIndividuales == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionesIndividuales);
-        }
+            //Variable para Guardar el Select List que llamará el js en el FrontEnd
+            var tbDeduccionesIndividualesD = db.tbDeduccionesIndividuales
+                .Select(d => new
+                {
+                    dei_IdDeduccionesIndividuales = d.dei_IdDeduccionesIndividuales,
+                    dei_Motivo = d.dei_Motivo,
+                    emp_Id = d.emp_Id,
+                    per_Nombres = d.tbEmpleados.tbPersonas.per_Nombres,
+                    per_Apellidos = d.tbEmpleados.tbPersonas.per_Apellidos,
+                    dei_MontoInicial = d.dei_MontoInicial,
+                    dei_MontoRestante = d.dei_MontoRestante,
+                    dei_Cuota = d.dei_Cuota,
+                    dei_Activo = d.dei_Activo,
+                    dei_UsuarioCrea = d.dei_UsuarioCrea,
+                    dei_FechaCrea = d.dei_FechaCrea,
+                    dei_UsuarioModifica = d.dei_UsuarioModifica,
+                    dei_FechaModifica = d.dei_FechaModifica
+                })
+                .OrderBy(d => d.dei_FechaCrea)
+                .ToList();
 
+            //Retornamos un Json en el FrontEnd
+            return new JsonResult { Data = tbDeduccionesIndividualesD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        #endregion
+
+        #region Crear Deducciones Individuales
         // GET: DeduccionesIndividuales/Create
         public ActionResult Create()
         {
-            ViewBag.dei_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.dei_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
             return View();
         }
 
@@ -50,37 +63,83 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dei_IdDeduccionesIndividuales,dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_Pagado,dei_UsuarioCrea,dei_FechaCrea,dei_UsuarioModifica,dei_FechaModifica,dei_Activo")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
+        public ActionResult Create([Bind(Include = "dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_UsuarioCrea,dei_FechaCrea")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
         {
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            tbDeduccionesIndividuales.dei_UsuarioCrea = 1;
+            tbDeduccionesIndividuales.dei_FechaCrea = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionIndividuales = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                db.tbDeduccionesIndividuales.Add(tbDeduccionesIndividuales);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Insert(tbDeduccionesIndividuales.dei_Motivo,
+                                                                                              tbDeduccionesIndividuales.emp_Id,
+                                                                                              tbDeduccionesIndividuales.dei_MontoInicial,
+                                                                                              tbDeduccionesIndividuales.dei_MontoRestante,
+                                                                                              tbDeduccionesIndividuales.dei_Cuota,
+                                                                                              tbDeduccionesIndividuales.dei_PagaSiempre,
+                                                                                              tbDeduccionesIndividuales.dei_UsuarioCrea,
+                                                                                              tbDeduccionesIndividuales.dei_FechaCrea);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Insert_Result Resultado in listDeduccionIndividuales)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
             }
+            else
+            {
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = "error";
+            }
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
 
-            ViewBag.dei_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioCrea);
-            ViewBag.dei_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionesIndividuales.emp_Id);
-            return View(tbDeduccionesIndividuales);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Dropdownlist
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetEmpleadoDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from Emp in db.tbEmpleados
+            where Emp.emp_Estado == true
+            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
+            select new { Id = Emp.emp_Id, Descripcion = Per.per_Nombres + " " + Per.per_Apellidos };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Editar Deducciones Individuales
         // GET: DeduccionesIndividuales/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionesIndividuales tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Find(id);
-            if (tbDeduccionesIndividuales == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.dei_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioCrea);
-            ViewBag.dei_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionesIndividuales.emp_Id);
-            return View(tbDeduccionesIndividuales);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionesIndividuales tbDeduccionesIndividualesJSON = db.tbDeduccionesIndividuales.Find(id);
+            return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: DeduccionesIndividuales/Edit/5
@@ -88,46 +147,201 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dei_IdDeduccionesIndividuales,dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_Pagado,dei_UsuarioCrea,dei_FechaCrea,dei_UsuarioModifica,dei_FechaModifica,dei_Activo")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
+        public ActionResult Edit([Bind(Include = "dei_IdDeduccionesIndividuales,dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_UsuarioModifica,dei_FechaModifica")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
         {
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            tbDeduccionesIndividuales.dei_UsuarioModifica = 1;
+            tbDeduccionesIndividuales.dei_FechaModifica = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionIndividuales = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                db.Entry(tbDeduccionesIndividuales).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.dei_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioCrea);
-            ViewBag.dei_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesIndividuales.dei_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionesIndividuales.emp_Id);
-            return View(tbDeduccionesIndividuales);
-        }
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Update(tbDeduccionesIndividuales.dei_IdDeduccionesIndividuales,
+                                                                                              tbDeduccionesIndividuales.dei_Motivo,
+                                                                                              tbDeduccionesIndividuales.emp_Id,
+                                                                                              tbDeduccionesIndividuales.dei_MontoInicial,
+                                                                                              tbDeduccionesIndividuales.dei_MontoRestante,
+                                                                                              tbDeduccionesIndividuales.dei_Cuota,
+                                                                                              tbDeduccionesIndividuales.dei_PagaSiempre,
+                                                                                              tbDeduccionesIndividuales.dei_UsuarioModifica,
+                                                                                              tbDeduccionesIndividuales.dei_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Update_Result Resultado in listDeduccionIndividuales)
+                        MensajeError = Resultado.MensajeError;
 
-        // GET: DeduccionesIndividuales/Delete/5
-        public ActionResult Delete(int? id)
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo editar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = "error";
+            }
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Detalles Deducciones Individuales
+        // GET: DeduccionesIndividuales/Details/5
+        public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionesIndividuales tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Find(id);
-            if (tbDeduccionesIndividuales == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionesIndividuales);
+            var tbDeduccionesIndividualesJSON = from tbDeduIndi in db.tbDeduccionesIndividuales
+                                                where tbDeduIndi.dei_Activo == true && tbDeduIndi.dei_IdDeduccionesIndividuales == id
+                                                select new
+                                                {
+                                                    tbDeduIndi.dei_IdDeduccionesIndividuales,
+                                                    tbDeduIndi.dei_Motivo,
+                                                    tbDeduIndi.emp_Id,
+                                                    tbDeduIndi.tbEmpleados.tbPersonas.per_Nombres,
+                                                    tbDeduIndi.tbEmpleados.tbPersonas.per_Apellidos,
+                                                    tbDeduIndi.dei_MontoInicial,
+                                                    tbDeduIndi.dei_MontoRestante,
+                                                    tbDeduIndi.dei_Cuota,
+                                                    tbDeduIndi.dei_PagaSiempre,
+                                                    tbDeduIndi.dei_UsuarioCrea,
+                                                    UsuCrea = tbDeduIndi.tbUsuario.usu_NombreUsuario,
+                                                    tbDeduIndi.dei_FechaCrea,
+                                                    tbDeduIndi.dei_UsuarioModifica,
+                                                    UsuModifica = tbDeduIndi.tbUsuario1.usu_NombreUsuario,
+                                                    tbDeduIndi.dei_FechaModifica
+                                                };
+            db.Configuration.ProxyCreationEnabled = false;
+            return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // POST: DeduccionesIndividuales/Delete/5
-        [HttpPost, ActionName("Delete")]
+        #region Inhabilitar Deducciones Individuales
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
-            tbDeduccionesIndividuales tbDeduccionesIndividuales = db.tbDeduccionesIndividuales.Find(id);
-            db.tbDeduccionesIndividuales.Remove(tbDeduccionesIndividuales);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            //LLENAR DATA DE AUDITORIA
+            int dei_UsuarioModifica = 1;
+            DateTime dei_FechaModifica = DateTime.Now;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionesIndividuales = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(dei_IdDeduccionesIndividuales,
+                                                                                                   dei_UsuarioModifica,
+                                                                                                   dei_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result Resultado in listDeduccionesIndividuales)
+                        MensajeError = Resultado.MensajeError;
 
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Activar Deducciones Individuales
+        [HttpPost]
+        public ActionResult Activar(int id)
+        {
+            //LLENAR DATA DE AUDITORIA
+            int dei_UsuarioModifica = 1;
+            DateTime dei_FechaModifica = DateTime.Now;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionesIndividuales = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Activar(id,
+                                                                                                 dei_UsuarioModifica,
+                                                                                                 dei_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionesIndividuales_Activar_Result Resultado in listDeduccionesIndividuales)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Ejecutable Deducciones Individuales
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -136,5 +350,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }

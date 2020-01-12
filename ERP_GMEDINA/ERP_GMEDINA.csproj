@@ -245,6 +245,7 @@
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\cDeduccionesIndividuales.cs" />
     <Compile Include="Models\cDeduccionesRPT.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
+    <Compile Include="Models\cIngresosIndividuales.cs" />
     <Compile Include="Models\cIngresosRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
@@ -694,6 +696,12 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -728,6 +736,12 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Activar1_Result.cs">
