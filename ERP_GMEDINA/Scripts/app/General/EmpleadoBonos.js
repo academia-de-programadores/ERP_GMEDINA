@@ -302,9 +302,11 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
             Check = "";
         });
 });
-
-//FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos").click(function () {
+    $("#EditarEmpleadoBonosConfirmacion").modal();
+});
+//FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnUpdateBonos2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     
     var Monto = $("#Editar #cb_Monto").val();
@@ -324,9 +326,11 @@ $("#btnUpdateBonos").click(function () {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
+
                 title: 'Error',
                 message: 'No se pudo editar el registro, contacte al administrador',
             });
+            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
@@ -334,6 +338,7 @@ $("#btnUpdateBonos").click(function () {
             FullBody();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarEmpleadoBonos").modal('hide');
+            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -344,8 +349,10 @@ $("#btnUpdateBonos").click(function () {
     } else {
         if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
             $("#Crear #cin_IdIngreso").focus;
+            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
             mostrarError('Campo Monto requerido.');
         } else if (decimales[1] == null && decimales[1] == undefined) {
+            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
             mostrarError('Monto válido con dos valores decimales.');
         }
         //    $("#Editar #cb_Monto").focus;

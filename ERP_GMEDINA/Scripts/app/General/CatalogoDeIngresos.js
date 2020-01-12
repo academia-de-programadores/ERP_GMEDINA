@@ -190,6 +190,7 @@ $("#btnEditarIngresos").click(function () {
             title: 'Error',
             message: 'Ingrese datos válidos',
         });
+        $("#EditarCatalogoIngresosConfirmacion").modal('hide');
     }
 });
 

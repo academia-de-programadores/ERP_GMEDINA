@@ -326,7 +326,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
             }
         });
 });
-debugger;
+
 $("#btnUpdateDeduccion").click(function () {
     $("#EditarCatalogoDeduccionesConfirmacion").modal();
 });
@@ -348,6 +348,7 @@ $("#btnUpdateDeduccion2").click(function () {
             title: 'Error',
             message: 'Ingrese datos validos',
         });
+        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
     }
     else {
         $("#Validation_descipcion").css("display", "none");

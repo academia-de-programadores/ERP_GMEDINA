@@ -85,7 +85,6 @@ function cargarGridComisiones() {
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
-debugger;
 
 
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
@@ -175,6 +174,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
                 title: 'Error',
                 message: 'Datos Incorrectos',
             });
+            $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
@@ -187,8 +187,9 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
-            ocultarCargandoEditar();
+            
         }
+        ocultarCargandoEditar();
     });
 });
 
