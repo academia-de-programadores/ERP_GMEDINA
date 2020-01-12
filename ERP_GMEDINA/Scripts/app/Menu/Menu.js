@@ -8,6 +8,8 @@
             "Jornadas",
             "Areas",
             "TipoHoras",
+            "Jornadas"
+            
         ];
     var Empleado =[
                 "Empleados",
@@ -16,8 +18,12 @@
                 "HistorialCargos"
             ]
     var ACCIONES = {
+        Vacaciones:[
+                "HistorialVacaciones"
+        ],
         Amonestaciones: [
                 "TipoAmonestaciones",
+                "HistorialAudienciaDescargos",
                 "HistorialAmonestaciones"
         ],
         Salidas: [
