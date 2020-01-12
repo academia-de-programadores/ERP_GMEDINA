@@ -5,17 +5,6 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-@*<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Catalogo de ingresos</h2>
-        <ol class="breadcrumb">
-            <li class="active">
-            </li>
-        </ol>
-    </div>
-</div>*@
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -104,15 +93,35 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-                <input type="button" id="btnUpdateIngresos" value="Actualizar" class="btn btn-primary pull-left" />
-                <div style="display:none" class="btn pull-left" id="cargandoEditar">
-                </div>
+                <button type="button"  class="btn btn-primary pull-left" id="btnUpdateIngresos">Editar</button>
+                
                 <button type="button" class="btn btn-danger pull-left" id="btnModalInactivar">Inhabilitar</button>
             </div>
         </div>
 </div>
     </div>
 
+<div class="modal fade" id="EditarCatalogoIngresosConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Editar este registro?
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnEditarIngresos" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+                
+                @*<button type="button" class="btn btn-primary" id="btnEditarIngresos">Si</button>*@
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="AgregarCatalogoIngresos" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">

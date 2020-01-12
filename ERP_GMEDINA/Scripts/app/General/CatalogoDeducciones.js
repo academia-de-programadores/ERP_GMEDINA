@@ -1,5 +1,5 @@
 ﻿const btnGuardar = $('#btnCreateRegistroDeduccion')
-const btnGuardarEditar = $('#btnUpdateDeduccion')
+const btnGuardarEditar = $('#btnUpdateDeduccion2')
 const btnGuardarActivar = $('#btnActivarRegistroDeduccion')
 cargandoCrearcargandoCrear = $('#cargandoCrear')
 cargandoCrear = $('#cargandoCrear')
@@ -327,11 +327,14 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         });
 });
 
+$("#btnUpdateDeduccion").click(function () {
+    $("#EditarCatalogoDeduccionesConfirmacion").modal();
+});
 
 
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnUpdateDeduccion").click(function () {
+$("#btnUpdateDeduccion2").click(function () {
     var cde_DescripcionDeduccionE = $("#Editar #cde_DescripcionDeduccion").val();
     var cde_PorcentajeColaboradorE = $("#Editar #cde_PorcentajeColaborador").val();
     var cde_PorcentajeEmpresaE = $("#Editar #cde_PorcentajeEmpresa").val();
@@ -345,6 +348,7 @@ $("#btnUpdateDeduccion").click(function () {
             title: 'Error',
             message: 'Ingrese datos validos',
         });
+        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
     }
     else {
         $("#Validation_descipcion").css("display", "none");
@@ -367,7 +371,7 @@ $("#btnUpdateDeduccion").click(function () {
 
                 //Ocultar el modal 
                 $("#EditarCatalogoDeducciones").modal('hide');
-
+                $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
