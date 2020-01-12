@@ -20,6 +20,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> dei_MontoInicial { get; set; }
         public Nullable<decimal> dei_MontoRestante { get; set; }
         public Nullable<decimal> dei_Cuota { get; set; }
+        public Nullable<bool> dei_Pagado { get; set; }
         public int dei_UsuarioCrea { get; set; }
         public System.DateTime dei_FechaCrea { get; set; }
         public Nullable<int> dei_UsuarioModifica { get; set; }

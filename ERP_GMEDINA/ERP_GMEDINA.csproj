@@ -198,7 +198,6 @@
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
-    <Compile Include="Controllers\DeduccionesIndividualesController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
@@ -244,6 +243,7 @@
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\cDeduccionesIndividuales.cs" />
     <Compile Include="Models\cDeduccionesRPT.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />
@@ -693,12 +693,6 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Update_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -733,12 +727,6 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Inactivar_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Insert_Result.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Activar1_Result.cs">
@@ -1229,6 +1217,7 @@
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
+    <Content Include="Scripts\app\General\DeduccionesIndividuales.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\excelexportjs.js" />
@@ -1945,11 +1934,6 @@
     <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
     <Content Include="Views\FechaPlanilla\Report.cshtml" />
-    <Content Include="Views\DeduccionesIndividuales\Create.cshtml" />
-    <Content Include="Views\DeduccionesIndividuales\Delete.cshtml" />
-    <Content Include="Views\DeduccionesIndividuales\Details.cshtml" />
-    <Content Include="Views\DeduccionesIndividuales\Edit.cshtml" />
-    <Content Include="Views\DeduccionesIndividuales\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,9 +17,8 @@ namespace ERP_GMEDINA.Models
         public int ini_IdIngresosIndividuales { get; set; }
         public string ini_Motivo { get; set; }
         public int emp_Id { get; set; }
-        public Nullable<decimal> ini_MontoInicial { get; set; }
-        public Nullable<decimal> ini_MontoRestante { get; set; }
-        public Nullable<decimal> ini_Cuota { get; set; }
+        public Nullable<decimal> ini_Monto { get; set; }
+        public Nullable<bool> ini_Pagado { get; set; }
         public int ini_UsuarioCrea { get; set; }
         public System.DateTime ini_FechaCrea { get; set; }
         public Nullable<int> ini_UsuarioModifica { get; set; }
