@@ -4,7 +4,7 @@
 {
     <div class="ibox-content">
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.dei_Id)
+        @Html.HiddenFor(model => model.dei_IdDeduccionesIndividuales)
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

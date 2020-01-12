@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Motivo" } })
-                    @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                    @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validatione1" })
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-8">
                     <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation2" })
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validatione2" })
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial" } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validation3" })
+                    @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validatione3" })
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
-                    @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation3" })
+                    @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota" } })
-                    @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validation4" })
+                    @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validatione5" })
                 </div>
             </div>
 
@@ -73,13 +73,14 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>
-        <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroDeduccionIndividual">Guardar</button>
-        <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
+        <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnEditDeduccionIndividual">Guardar</button>
+        <div style="display:none" class="btn pull-left" id="cargandoEditar"></div>  
+        <button type="button" class="btn btn-danger pull-left" id="btnInactivarDeduccionesIndividuales">Inhabilitar</button>
     </div>
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarDeduccionIndividual" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.afp_Id)
+    @Html.HiddenFor(model => model.dei_IdDeduccionesIndividuales)
 }

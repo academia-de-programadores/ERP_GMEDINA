@@ -31,6 +31,7 @@
                             <tr role="row">
                                 <th>@Html.DisplayNameFor(model => model.dei_IdDeduccionesIndividuales)</th>
                                 <th>@Html.DisplayNameFor(model => model.dei_Motivo)</th>
+                                <th>@Html.DisplayNameFor(model => model.emp_Id)</th>
                                 <th>@Html.DisplayNameFor(model => model.dei_MontoInicial)</th>
                                 <th>@Html.DisplayNameFor(model => model.dei_MontoRestante)</th>
                                 <th>@Html.DisplayNameFor(model => model.dei_Cuota)</th>
@@ -49,6 +50,9 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.dei_Motivo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.dei_MontoInicial)

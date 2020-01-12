@@ -37,11 +37,11 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tbodyDeduccionesIndividuales">
+                        <tbody id="tbodyIngresosIndividuales">
                             @foreach (var item in Model)
                             {
                            <!-- validar el estado del registro (activo/inactivo)-->
-                                string estadoDeduccionesIndividuales = item.dei_Activo == false ? "Inactivo" : "Activo";
+                                string estadoIngresosIndividuales = item.ini_Activo == false ? "Inactivo" : "Activo";
                                 <tr class="gradeA odd" role="row" data-id="@item.ini_IdIngresosIndividuales">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ini_IdIngresosIndividuales)
@@ -56,7 +56,7 @@
                                         @Html.DisplayFor(modelItem => item.ini_Monto)
                                     </td>
                                     <td>
-                                        @estadoDeduccionesIndividuales
+                                        @estadoIngresosIndividuales
                                     </td>
                                     <td>
                                         @{
@@ -70,7 +70,7 @@
                                             if (oUsuario?.usu_EsAdministrador == true && item.ini_Activo == false)
                                             {
                                                  <!-- ACTIVAR -->
-                                                <button type="button" deiid="@item.ini_IdIngresosIndividuales" data-id="@item.ini_IdIngresosIndividuales" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales">Activar</button>
+                                                <button type="button" iniid="@item.ini_IdIngresosIndividuales" data-id="@item.ini_IdIngresosIndividuales" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales">Activar</button>
                                             }
                                         }
                                     </td>

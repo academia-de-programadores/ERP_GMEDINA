@@ -26,7 +26,7 @@ function _ajax(params, uri, type, callback) {
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
     _ajax(null,
-        '/DeduccionesIndividuales/GetData',
+        '/IngresosIndividuales/GetData',
         'GET',
         (data) => {
             if (data.length == 0) {
@@ -39,26 +39,24 @@ function cargarGridDeducciones() {
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaAFP = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaDeduccionIndividual.length; i++) {
+            for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaDeduccionIndividual[i].dei_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Detalles</button>' : '';
+                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Editar</button>' : '';
+                var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaDeduccionIndividual[i].dei_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionesIndividuales" deiid="' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Activar</button>' : '' : '';
+                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_Motivo + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].Apellidos + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_MontoInicial + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_MontoRestante + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_Cuota + '</td>' +
+                template += '<tr data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">' +
+                    '<td>' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '</td>' +
+                    '<td>' + ListaIngresoIndividual[i].ini_Motivo + '</td>' +
+                    '<td>' + ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].Apellidos + '</td>' +
+                    '<td>' + ListaIngresoIndividual[i].ini_Monto + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
 
@@ -75,7 +73,7 @@ function cargarGridDeducciones() {
                 '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeduccionesIndividuales').html(template);
+            $('#tbodyIngresosIndividuales').html(template);
         });
 }
 
@@ -91,26 +89,26 @@ function spinner() {
 }
 
 //Activar
-$(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTable tbody tr td #btnActivarIngresosIndividuales", function () {
 
     var id = $(this).closest('tr').data('id');
 
-    var id = $(this).attr('deiid');
+    var id = $(this).attr('iniid');
     localStorage.setItem('id', id);
     //Mostrar el Modal
-    $("#ActivarDeduccionesIndividuales").modal();
+    $("#ActivarIngresosIndividuales").modal();
 });
 
-$("#btnActivarRegistroDeduccionIndividual").click(function () {
+$("#btnActivarRegistroIngresoIndividual").click(function () {
 
     let id = localStorage.getItem('id')
 
     $.ajax({
-        url: "/DeduccionesIndividuales/Activar",
+        url: "/IngresosIndividuales/Activar",
         method: "POST",
         data: { id: id }
     }).done(function (data) {
-        $("#ActivarDeduccionesIndividuales").modal('hide');
+        $("#btnActivarRegistroIngresoIndividual").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
             iziToast.error({
@@ -130,29 +128,28 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
 
 });
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 $("#btnCerrarCrear").click(function () {
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#AgregarDeduccionesIndividuales").modal('hide');
+    $("#AgregarIngresosIndividuales").modal('hide');
 });
 
 $("#btnIconCerrar").click(function () {
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
-    $("#AgregarDeduccionesIndividuales").modal('hide');
+    $("#AgregarIngresosIndividuales").modal('hide');
 });
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-const btnGuardar = $('#btnCreateRegistroDeduccionIndividual')
+const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
 
 //Div que aparecera cuando se le de click en crear
 cargandoCrear = $('#cargandoCrear')
@@ -169,10 +166,10 @@ function mostrarCargandoCrear() {
     cargandoCrear.show();
 }
 
-$(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+$(document).on("click", "#btnAgregarIngresoIndividual", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
-        url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+        url: "/IngresosIndividuales/EditGetEmpleadoDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
@@ -185,29 +182,23 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionesIndividuales").modal();
-    $("#Crear #dei_Motivo").val('');
-    $("#Crear #dei_MontoInicial").val('');
-    $("#Crear #dei_MontoRestante").val('');
-    $("#Crear #dei_Cuota").val('');
-    $("#Crear #dei_PagaSiempre").val('');
+    $("#AgregarIngresosIndividuales").modal();
+    $("#Crear #ini_Motivo").val('');
+    $("#Crear #ini_Monto").val('');
+    $("#Crear #ini_PagaSiempre").val('');
 
 });
 
 $("#validation1").css("display", "none");
 $("#validation2").css("display", "none");
 $("#validation3").css("display", "none");
-$("#validation4").css("display", "none");
-$("#validation5").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #emp_Id").val();
-    var val2 = $("#Crear #dei_Motivo").val();
-    var val3 = $("#Crear #dei_MontoInicial").val();
-    var val4 = $("#Crear #dei_MontoRestante").val();
-    var val5 = $("#Crear #dei_Cuota").val();
+    var val2 = $("#Crear #ini_Motivo").val();
+    var val3 = $("#Crear #ini_Monto").val();
 
 
     if (val2 == "") {
@@ -224,28 +215,15 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
         $("#Crear #validation3").css("display", "none");
     }
 
-    if (val4 == "" || val4 == null || val4 == undefined) {
-        $("#Crear #validation4").css("display", "");
-    }
-    else {
-        $("#Crear #validation4").css("display", "none");
-    }
-    if (val5 == "" || val5 == null || val5 == undefined) {
-        $("#Crear #validation5").css("display", "");
-    }
-    else {
-        $("#Crear #validation5").css("display", "none");
-    }
-
     mostrarCargandoCrear();
 
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateDeduccionIndividual").serializeArray();
+    var data = $("#frmCreateIngresoIndividual").serializeArray();
 
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
     $.ajax({
-        url: "/DeduccionesIndividuales/Create",
+        url: "/IngresosIndividuales/Create",
         method: "POST",
         data: data
     }).done(function (data) {
@@ -255,14 +233,12 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
 
             cargarGridDeducciones();
 
-            $("#Crear #dei_Motivo").val('');
-            $("#Crear #dei_MontoInicial").val('');
-            $("#Crear #dei_MontoRestante").val('');
-            $("#Crear #dei_Cuota").val('');
-            $("#Crear #dei_PagaSiempre").val('');
+            $("#Crear #ini_Motivo").val('');
+            $("#Crear #ini_Monto").val('');
+            $("#Crear #ini_PagaSiempre").val('');
 
             //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarDeduccionesIndividuales").modal('hide');
+            $("#AgregarIngresosIndividuales").modal('hide');
 
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
@@ -281,7 +257,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateDeduccionIndividual").submit(function (e) {
+    $("#frmCreateIngresoIndividual").submit(function (e) {
         return false;
     });
 
@@ -294,8 +270,6 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#validatione4").css("display", "none");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
@@ -303,16 +277,12 @@ $("#btnIconCerrare").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#validatione4").css("display", "none");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
 $("#validatione1").css("display", "none");
 $("#validatione2").css("display", "none");
 $("#validatione3").css("display", "none");
-$("#validatione4").css("display", "none");
-$("#validatione5").css("display", "none");
 
 
 
@@ -336,10 +306,10 @@ function mostrarCargandoEditar() {
     cargandoEditar.show();
 }
 
-$(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales", function () {
     var id = $(this).data('id');
     $.ajax({
-        url: "/DeduccionesIndividuales/Edit/" + id,
+        url: "/IngresosIndividuales/Edit/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -348,17 +318,16 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                $("#Editar #dei_Motivo").val(data.dei_Motivo);
-                $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
-                $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
-                $("#Editar #dei_Cuota").val(data.dei_Cuota);
+                $("#Editar #ini_Motivo").val(data.ini_Motivo);
+                $("#Editar #ini_Monto").val(data.ini_Monto);
+                $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
+                var SelectedId = data.emp_Id;
 
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
-                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+                    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -372,8 +341,8 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                             $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesDeduccionesIndividuales").modal('hide');
-                $("#EditarDeduccionesIndividuales").modal();
+                $("#DetallesIngresosIndividuales").modal('hide');
+                $("#EditarIngresosIndividuales").modal();
             }
             else {
                 //Mensaje de error si no hay data
@@ -386,13 +355,11 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
 });
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditDeduccionIndividual").click(function () {
+$("#btnEditIngresoIndividual").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var vale1 = $("#Editar #emp_Id").val();
-    var vale2 = $("#Editar #dei_Motivo").val();
-    var vale3 = $("#Editar #dei_MontoInicial").val();
-    var vale4 = $("#Editar #dei_MontoRestante").val();
-    var vale5 = $("#Editar #dei_Cuota").val();
+    var vale2 = $("#Editar #ini_Motivo").val();
+    var vale3 = $("#Editar #ini_Monto").val();
 
 
     if (vale2 == "") {
@@ -409,32 +376,20 @@ $("#btnEditDeduccionIndividual").click(function () {
         $("#Editar #validatione3").css("display", "none");
     }
 
-    if (vale4 == "" || vale4 == null || vale4 == undefined) {
-        $("#Editar #validatione4").css("display", "");
-    }
-    else {
-        $("#Editar #validatione4").css("display", "none");
-    }
-    if (vale5 == "" || vale5 == null || vale5 == undefined) {
-        $("#Editar #validatione5").css("display", "");
-    }
-    else {
-        $("#Editar #validatione5").css("display", "none");
-    }
     mostrarCargandoEditar();
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEditarDeduccionIndividual").serializeArray();
+    var data = $("#frmEditIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/DeduccionesIndividuales/Edit",
+        url: "/IngresosIndividuales/Edit",
         method: "POST",
         data: data
     }).done(function (data) {
         if (data != "error") {
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarDeduccionesIndividuales").modal('hide');
+            $("#EditarIngresosIndividuales").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //Mensaje de exito de la edicion
@@ -455,7 +410,7 @@ $("#btnEditDeduccionIndividual").click(function () {
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmEditarDeduccionIndividual").submit(function (e) {
+    $("#frmEditIngresoIndividual").submit(function (e) {
         return false;
     });
 
@@ -468,10 +423,10 @@ $("#btnEditDeduccionIndividual").click(function () {
 
 //Detalles//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividuales", function () {
+$(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales", function () {
     var id = $(this).data('id');
     $.ajax({
-        url: "/DeduccionesIndividuales/Details/" + id,
+        url: "/IngresosIndividuales/Details/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -480,28 +435,26 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data[0].dei_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].dei_FechaModifica);
+                var FechaCrea = FechaFormato(data[0].ini_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].ini_FechaModifica);
                 $(".field-validation-error").css('display', 'none');
-                $("#Detalles #dei_IdDeduccionesIndividuales").html(data[0].dei_IdDeduccionesIndividuales);
-                $("#Detalles #dei_Motivo").html(data[0].dei_Motivo);
-                $("#Detalles #dei_MontoInicial").html(data[0].dei_MontoInicial);
-                $("#Detalles #dei_MontoRestante").html(data[0].dei_MontoRestante);
-                $("#Detalles #dei_Cuota").html(data[0].dei_Cuota);
-                $("#Detalles #dei_PagaSiempre").html(data[0].dei_PagaSiempre);
+                $("#Detalles #ini_IdIngresosIndividuales").html(data[0].ini_IdIngresosIndividuales);
+                $("#Detalles #ini_Motivo").html(data[0].ini_Motivo);
+                $("#Detalles #ini_Monto").html(data[0].ini_Monto);
+                $("#Detalles #ini_PagaSiempre").html(data[0].ini_PagaSiempre);
                 $("#Detalles #emp_Id").html(data[0].emp_Id);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#Detalles #dei_UsuarioCrea").html(data[0].dei_UsuarioCrea);
-                $("#Detalles #dei_FechaCrea").html(FechaCrea);
+                $("#Detalles #ini_UsuarioCrea").html(data[0].ini_UsuarioCrea);
+                $("#Detalles #ini_FechaCrea").html(FechaCrea);
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#Detalles #dei_UsuarioModifica").html(data[0].dei_UsuarioModifica);
-                $("#Detalles #dei_FechaModifica").html(FechaModifica);
+                $("#Detalles #ini_UsuarioModifica").html(data[0].dei_UsuarioModifica);
+                $("#Detalles #ini_FechaModifica").html(FechaModifica);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].emp_Id;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
-                    url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
+                    url: "/IngresosIndividuales/EditGetEmpleadoDDL",
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -519,7 +472,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
                             }
                         });
                     });
-                $("#DetallesDeduccionesIndividuales").modal();
+                $("#DetallesIngresosIndividuales").modal();
             }
             else {
                 //Mensaje de error si no hay data
@@ -535,13 +488,13 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
 
 
 //Inactivar//
-$(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
-    $("#EditarDeduccionesIndividuales").modal('hide');
+$(document).on("click", "#btnInactivarIngresoIndividual", function () {
+    $("#EditarIngresosIndividuales").modal('hide');
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarDeduccionesIndividuales").modal();
+    $("#InactivarIngresosIndividuales").modal();
 });
 
-const btnInhabilitar = $('#btnInactivarRegistroDeduccionIndividual')
+const btnInhabilitar = $('#btnInactivarRegistroIngresoIndividual')
 
 //Div que aparecera cuando se le de click en crear
 cargandoInhabilitar = $('#cargandoInhabilitar')
@@ -558,13 +511,14 @@ function mostrarCargandoInhabilitar() {
     cargandoInhabilitar.show();
 }
 
-//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroDeduccionIndividual").click(function () {
 
-    var data = $("#frmInactivarDeduccionIndividual").serializeArray();
+//EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
+$("#btnInactivarRegistroIngresoIndividual").click(function () {
+
+    var data = $("#frmInactivarIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/DeduccionesIndividuales/Inactivar",
+        url: "/IngresosIndividuales/Inactivar",
         method: "POST",
         data: data
     }).done(function (data) {
@@ -581,8 +535,8 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function () {
             cargarGridDeducciones();
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#InactivarDeduccionesIndividuales").modal('hide');
-            $("#EditarDeduccionesIndividuales").modal('hide');
+            $("#InactivarIngresosIndividuales").modal('hide');
+            $("#EditarIngresosIndividuales").modal('hide');
 
             //Mensaje de exito de la edicion
             iziToast.success({
@@ -594,7 +548,7 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function () {
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmInactivarDeduccionIndividual").submit(function (e) {
+    $("#frmInactivarIngresoIndividual").submit(function (e) {
         return false;
     });
 
