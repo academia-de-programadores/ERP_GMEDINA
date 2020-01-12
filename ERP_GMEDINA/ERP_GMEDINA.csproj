@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
+    <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
@@ -198,11 +199,13 @@
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
+    <Compile Include="Controllers\DeduccionesIndividualesController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\FechaPlanillaController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
+    <Compile Include="Controllers\IngresosIndividualesController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
@@ -211,7 +214,6 @@
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
-    <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
@@ -1933,6 +1935,18 @@
     <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
     <Content Include="Views\FechaPlanilla\Report.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Index.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_DetailsIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_EditIngresosIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\Index.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_EditDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Create.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Delete.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Details.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
