@@ -1197,8 +1197,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1259,7 +1257,38 @@
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSets\ReportesPlanillaDS.xsc">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
+    <None Include="DataSets\ReportesPlanillaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReportesPlanillaDS.xss">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+    </Content>
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
@@ -1291,39 +1320,10 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
-    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
-    <Content Include="Scripts\api\spanish.json" />
-    <Content Include="DataSets\ReportesPlanillaDS.xsc">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
-    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
-    <Content Include="App_Browsers\qt.browser" />
-    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
-    <None Include="DataSets\ReportesPlanillaDS.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesPlanillaDS.xss">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1957,10 +1957,6 @@
     <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_EditDeduccionesIndividuales.cshtml" />
-    <Content Include="Views\IngresosIndividuales\Create.cshtml" />
-    <Content Include="Views\IngresosIndividuales\Delete.cshtml" />
-    <Content Include="Views\IngresosIndividuales\Details.cshtml" />
-    <Content Include="Views\IngresosIndividuales\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
