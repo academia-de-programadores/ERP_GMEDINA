@@ -14,7 +14,8 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: EmpleadoComisiones
+       
+        #region Index
         public ActionResult Index()
         {
             var tbEmpleadoComisiones = db.tbEmpleadoComisiones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeIngresos).Include(t => t.tbEmpleados).Include(t => t.tbEmpleados.tbPersonas);
@@ -32,7 +33,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbEmpleadoComisiones, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
+        #region DDLEmpleado
         public JsonResult EditGetDDLEmpleado()
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
@@ -49,7 +52,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region DDLIngresos
         public JsonResult EditGetDDLIngreso()
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
@@ -65,7 +70,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: EmpleadoBonos/Details/5
+        #endregion
+
+        #region Detalles
         public JsonResult Details(int? ID)
         {
             var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones
@@ -101,9 +108,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
-
-        // GET: EmpleadoBonos/Create
+        #region Create
         [HttpPost]
         public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cc_FechaRegistro, cc_Pagado, cc_UsuarioCrea, cc_FechaCrea,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
         {
@@ -162,8 +169,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
-        // GET: EmpleadoBonos/Edit/5
+        #region GET EDITAR
         public JsonResult Edit(int? ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -171,10 +179,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
 
-        // POST: EmpleadoBonos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST Editar
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cc_Id,emp_Id,cin_IdIngreso,cc_UsuarioModifica,cc_FechaModifica,cc_PorcentajeComision, cc_TotalVenta")] tbEmpleadoComisiones tbEmpleadoComisiones)
@@ -232,7 +239,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region POST Inactivar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int id)
@@ -276,6 +285,9 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Activar
         public ActionResult Activar(int id)
         {
             IEnumerable<object> listEmpleadoComisiones = null;
@@ -315,17 +327,8 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
 
