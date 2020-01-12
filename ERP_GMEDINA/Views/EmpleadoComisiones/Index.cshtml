@@ -144,6 +144,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="EditarEmpleadoComisionesConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -155,7 +156,10 @@
                 ¿Esta seguro que desea Editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnUpdateComisionesConfirmar2">Si</button>
+                <input type="button" id="btnUpdateComisionesConfirmar2" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+               
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>

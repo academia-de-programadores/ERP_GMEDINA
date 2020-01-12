@@ -140,8 +140,14 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateIngresos").click(function () {
+    $("#EditarCatalogoIngresosConfirmacion").modal();
+});
+
+
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditarIngresos").click(function () {
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoIngresos").serializeArray();
@@ -161,6 +167,7 @@ $("#btnUpdateIngresos").click(function () {
                 
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarCatalogoIngresos").modal('hide');
+                $("#EditarCatalogoIngresosConfirmacion").modal('hide');
                 cargarGridIngresos();
                 iziToast.success({
                     title: 'Éxito',
@@ -186,7 +193,7 @@ $("#btnUpdateIngresos").click(function () {
     }
 });
 
-const btneditar = $('#btnUpdateIngresos'),
+const btneditar = $('#btnEditarIngresos'),
 
 cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
@@ -445,3 +452,4 @@ $("#btnActivarIngreso").click(function () {
     });
     IDActivar = 0;
 });
+

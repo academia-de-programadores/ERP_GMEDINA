@@ -154,6 +154,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
             Check = "";
         });
 });
+
 $("#btnUpdateComisionesConfirmar").click(function () {
     $("#EditarEmpleadoComisionesConfirmacion").modal();
 });
@@ -657,9 +658,9 @@ function spinner() {
 }
 
 
-const btnEditar = $('#btnUpdateComisiones'),
+const btnEditar = $('#btnUpdateComisionesConfirmar2'),
 
-        cargandoCrearcargandoEditar = $('#cargandoEditar')
+cargandoCrearcargandoEditar = $('#cargandoEditar')
 
 cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
