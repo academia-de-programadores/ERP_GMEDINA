@@ -2333,7 +2333,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Inactivar_Result>("UDP_Plani_tbIngresosIndividuales_Inactivar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbDeduccionesIndividuales_Insert(string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioCrea, Nullable<System.DateTime> dei_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Insert_Result> UDP_Plani_tbDeduccionesIndividuales_Insert(string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioCrea, Nullable<System.DateTime> dei_FechaCrea)
         {
             var dei_MotivoParameter = dei_Motivo != null ?
                 new ObjectParameter("dei_Motivo", dei_Motivo) :
@@ -2367,10 +2367,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dei_FechaCrea", dei_FechaCrea) :
                 new ObjectParameter("dei_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDeduccionesIndividuales_Insert", dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioCreaParameter, dei_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Insert_Result>("UDP_Plani_tbDeduccionesIndividuales_Insert", dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioCreaParameter, dei_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbDeduccionesIndividuales_Update(Nullable<int> dei_IdDeduccionesIndividuales, string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Update_Result> UDP_Plani_tbDeduccionesIndividuales_Update(Nullable<int> dei_IdDeduccionesIndividuales, string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
         {
             var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
                 new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
@@ -2408,10 +2408,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
                 new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDeduccionesIndividuales_Update", dei_IdDeduccionesIndividualesParameter, dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Update_Result>("UDP_Plani_tbDeduccionesIndividuales_Update", dei_IdDeduccionesIndividualesParameter, dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Insert_Result> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
         {
             var ini_MotivoParameter = ini_Motivo != null ?
                 new ObjectParameter("ini_Motivo", ini_Motivo) :
@@ -2437,10 +2437,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("ini_FechaCrea", ini_FechaCrea) :
                 new ObjectParameter("ini_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Insert_Result>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Update_Result> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
         {
             var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
                 new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
@@ -2470,7 +2470,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
                 new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Update_Result>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
         }
     }
 }
