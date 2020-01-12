@@ -243,7 +243,6 @@
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
-    <Compile Include="Models\cDeduccionesIndividuales.cs" />
     <Compile Include="Models\cDeduccionesRPT.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />

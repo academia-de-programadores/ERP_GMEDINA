@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
         public string ini_Motivo { get; set; }
         public int emp_Id { get; set; }
         public Nullable<decimal> ini_Monto { get; set; }
+        public Nullable<bool> ini_PagaSiempre { get; set; }
         public Nullable<bool> ini_Pagado { get; set; }
         public int ini_UsuarioCrea { get; set; }
         public System.DateTime ini_FechaCrea { get; set; }
