@@ -83,7 +83,7 @@ if (ReferenceScriptLibraries) {
 <#
 
 #>
-<#
+<# 
 foreach (PropertyMetadata property in ModelMetadata.Properties) {
 string hola = Convert.ToString(property.PropertyName.ToString());
 	        int count = 0;
@@ -92,7 +92,7 @@ string hola = Convert.ToString(property.PropertyName.ToString());
         {
             count++;
         }
-
+			
 			if (count >=13)
 {
 if (property.PropertyName.Substring(count - 13) == "RazonInactivo")

@@ -19,8 +19,8 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id")]
         public int emp_Id { get; set; }
 
-        [Display(Name = "Id")]
-        public int per_Id { get; set; }
+        //[Display(Name = "Id")]
+        //public int per_Id { get; set; }
 
         [Display(Name = "Id")]
         public int tiho_Id { get; set; }
