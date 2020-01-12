@@ -473,6 +473,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesIndividuales").Include(
                 "~/Scripts/app/General/DeduccionesIndividuales.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IngresosIndividuales").Include(
+                "~/Scripts/app/General/IngresosIndividuales.js"));
+
             #endregion
 
             #region Equipo Willian

@@ -37,6 +37,7 @@ namespace ERP_GMEDINA.Controllers
                     dei_MontoInicial = d.dei_MontoInicial,
                     dei_MontoRestante = d.dei_MontoRestante,
                     dei_Cuota = d.dei_Cuota,
+                    dei_PagaSiempre = d.dei_PagaSiempre,
                     dei_Activo = d.dei_Activo,
                     dei_UsuarioCrea = d.dei_UsuarioCrea,
                     dei_FechaCrea = d.dei_FechaCrea,

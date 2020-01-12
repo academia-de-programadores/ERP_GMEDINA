@@ -1,1 +1,89 @@
-﻿
+﻿@model ERP_GMEDINA.Models.tbIngresosIndividuales
+
+@using (Html.BeginForm())
+{
+    <div class="ibox-content">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.ini_Motivo)
+                </div>
+                <div class="col-md-6">
+                    <span id="ini_Motivo">@Html.DisplayFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.ini_Motivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.emp_Id)
+                </div>
+                <div class="col-md-6">
+                    <span id="emp_Id"> @Html.DisplayFor(model => model.emp_Id, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.ini_Monto)
+                </div>
+                <div class="col-md-6">
+                    <span id="ini_Monto">@Html.DisplayFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_PagaSiempre)
+                </div>
+                <div class="col-md-8">
+                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" disabled="disabled" />
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h4>Auditoría</h4>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <table class="table table-striped table-bordered dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Acción</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Creado</td>
+                                    @Html.HiddenFor(model => model.ini_UsuarioCrea)
+                                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="ini_FechaCrea">@Html.DisplayFor(model => model.ini_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Modificado</td>
+                                    @Html.HiddenFor(model => model.ini_UsuarioModifica)
+                                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    <td><span id="ini_FechaModifica">@Html.DisplayFor(model => model.ini_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
