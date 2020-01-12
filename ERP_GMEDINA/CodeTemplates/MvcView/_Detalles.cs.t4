@@ -8,62 +8,6 @@ string boolType = "System.Boolean";
 Version requiredMvcVersion = new Version("5.1.0.0");
 bool isControlHtmlAttributesSupported = MvcVersion >= requiredMvcVersion;
 // The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
-if(IsPartialView) {#>
-<#
-}
-else if(IsLayoutPageSelected) {
-#>
-@{
-    ViewBag.Title = "<#= ViewName#>";
-<#
-if (!String.IsNullOrEmpty(LayoutPageFile)) {
-#>
-    Layout = "<#= LayoutPageFile#>";
-<#
-}
-#>
-}
-    @Html.AntiForgeryToken()
-<#
-}
-else {
-#>
-@{
-    Layout = null;
-}
-<!DOCTYPE html>
-
-<html>
-  <head>
-      <meta name="viewport" content="width=device-width" />
-      <title><#= ViewName #></title>
-  </head>
-  <body>
-<#
-    PushIndent("    ");
-}
-#>
-<#
-if (ReferenceScriptLibraries) {
-#>
-<#
-    if (!IsLayoutPageSelected && IsBundleConfigPresent) {
-#>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
-<#
-    }
-#>
-<#
-    else if (!IsLayoutPageSelected) {
-#>
-<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-<#
-    }
 #>
 <div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
@@ -74,9 +18,6 @@ if (ReferenceScriptLibraries) {
             </div>
             <div class="modal-body">
                 <dl class="dl-horizontal">
-<#
-}
-#>
 <#
 
 #>
@@ -95,7 +36,9 @@ if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
         continue;
     }
 
+
 	string ddid = property.PropertyName;
+try{
 if (property.PropertyName.Substring(0,9) == "tbUsuario")
 {
 ddid = "";
@@ -112,6 +55,9 @@ string Valor = GetValueExpression(property);
             }
         }
 }
+}
+catch()
+{}
 #>
 					<dt>@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)</dt>
                     <dd id="<#= ddid #>"></dd>

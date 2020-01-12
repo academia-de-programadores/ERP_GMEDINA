@@ -8,62 +8,6 @@ string boolType = "System.Boolean";
 Version requiredMvcVersion = new Version("5.1.0.0");
 bool isControlHtmlAttributesSupported = MvcVersion >= requiredMvcVersion;
 // The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
-if(IsPartialView) {#>
-<#
-}
-else if(IsLayoutPageSelected) {
-#>
-@{
-    ViewBag.Title = "<#= ViewName#>";
-<#
-if (!String.IsNullOrEmpty(LayoutPageFile)) {
-#>
-    Layout = "<#= LayoutPageFile#>";
-<#
-}
-#>
-}
-    @Html.AntiForgeryToken()
-<#
-}
-else {
-#>
-@{
-    Layout = null;
-}
-<!DOCTYPE html>
-
-<html>
-  <head>
-      <meta name="viewport" content="width=device-width" />
-      <title><#= ViewName #></title>
-  </head>
-  <body>
-<#
-    PushIndent("    ");
-}
-#>
-<#
-if (ReferenceScriptLibraries) {
-#>
-<#
-    if (!IsLayoutPageSelected && IsBundleConfigPresent) {
-#>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
-<#
-    }
-#>
-<#
-    else if (!IsLayoutPageSelected) {
-#>
-<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-<#
-    }
 #>
 <div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
@@ -73,9 +17,6 @@ if (ReferenceScriptLibraries) {
                 <h4 class="modal-title">Editar <#= ViewDataTypeShortName.Substring(2) #></h4>
             </div>
             <div class="modal-body">
-<#
-}
-#>
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormEditar" }))
                 {
                         <div class="form-horizontal">
