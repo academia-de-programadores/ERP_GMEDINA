@@ -474,7 +474,7 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/DeduccionesIndividuales.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/IngresosIndividuales").Include(
-                "~/Scripts/app/General/IngresosIndividuales.js"))
+                "~/Scripts/app/General/IngresosIndividuales.js"));
 
             #endregion
 
