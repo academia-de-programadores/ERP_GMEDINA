@@ -1,7 +1,6 @@
 ﻿var IDInactivar = 0;
 
 const btnGuardar = $('#btnCrearPreavisoConfirmar'),
-cargandoCrearcargandoCrear = $('#cargandoCrear'),
 cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
@@ -83,8 +82,8 @@ function cargarGridPreaviso() {
                     //boton activar 
                     botonActivar
                 '</td>' +
-                '</tr>';           
-                
+                '</tr>';
+
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyPreaviso').html(template);
@@ -135,27 +134,27 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
-	var ID = $(this).data('id');
-	IDInactivar = ID;
-	$.ajax({
-		url: "/Preaviso/Edit/" + ID,
-		method: "POST",
-		dataType: "json",
-		contentType: "application/json; charset=utf-8",
-		data: JSON.stringify({ ID: ID })
-	})
+    var ID = $(this).data('id');
+    IDInactivar = ID;
+    $.ajax({
+        url: "/Preaviso/Edit/" + ID,
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
         .done(function (data) {
-        	//SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-        	if (data) {
-        		debugger;
-        		$.each(data, function (i, iter) {
-        		    $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
-        		    $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
-        		    $("#Editar #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
-        		    $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
-        		});
-        		$("#EditarPreaviso").modal();
-        	}
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                debugger;
+                $.each(data, function (i, iter) {
+                    $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
+                    $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
+                    $("#Editar #prea_RangoFinMeses").val(iter.prea_RangoFinMeses);
+                    $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
+                });
+                $("#EditarPreaviso").modal();
+            }
         });
 });
 
@@ -167,7 +166,7 @@ $(document).on("click", "#btnUpdatePreaviso", function () {
 
     var data = $("#frmEditPreaviso").serializeArray();
     console.log(data);
-    
+
     if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "") {
         $.ajax({
             url: "/Preaviso/Editar",
