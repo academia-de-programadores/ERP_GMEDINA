@@ -143,7 +143,7 @@ var crearEditar = function (edit) {
 };
 
 function listaCatalogoDeducciones(arrayDeducciones) {
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -155,7 +155,7 @@ function listaCatalogoDeducciones(arrayDeducciones) {
 		let currentCheckboxIdDedu = arrDedu[1];
 		//Ver si esta chequeado o no para guardar solo los que esten chequeados
 		let isCheckedDedu = $(
-			'#catalogoDeDeducciones #check-' + currentCheckboxIdDedu
+			'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td #check-' + currentCheckboxIdDedu
 		).is(':checked', true);
 		//Agregar a la lista de
 		if (isCheckedDedu === true) {
@@ -189,7 +189,7 @@ function listaCatalogoIngresos(arrayIngresos) {
 
 function listaCatalogoDeduccionesFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeDeducciones table tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -214,7 +214,7 @@ function listaCatalogoDeduccionesFalse() {
 
 function listaCatalogoIngresosFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeIngresos tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -427,70 +427,39 @@ function listar() {
 	obtenerIdDetallesEditar('#tblCatalogoPlanillas tbody', table);
 }
 
+const idiomaEspaniolCatalogos = {
+	"paging": false,
+	"sProcessing": spinner(),
+	"sLengthMenu": "_MENU_",
+	"sZeroRecords": "No se encontraron resultados",
+	"sEmptyTable": "Ningún dato disponible en esta tabla",
+	"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+	"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+	"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+	"sInfoPostFix": "",
+	"sSearch": "Buscar:",
+	"sUrl": "",
+	"sInfoThousands": ",",
+	"sLoadingRecords": spinner(),
+	"oPaginate": {
+		"sFirst": "Primero",
+		"sLast": "Último",
+		"sNext": "Siguiente",
+		"sPrevious": "Anterior"
+	},
+	"oAria": {
+		"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	}
+};
 //Create o Edit
 function listarCatalogos() {
-	console.log(baseUrl);
-
-
-	table = $('.tbl-catalogos').DataTable({
-		"language": {
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "_MENU_",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningún dato disponible en esta tabla",
-			"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar:",
-			"sUrl": "",
-			"sInfoThousands": ",",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate": {
-				"sFirst": "Primero",
-				"sLast": "Último",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria": {
-				"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-			}
-		},
-		ajax: {
-			//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
-			method: 'GET',
-			url: baseUrl + '/GetIngresosDeducciones',
-			contentType: 'application/json; charset=utf-8',
-			dataType: 'json'
-		},
-		responsive: false,
-		dom: 'lftp',
-		"columns": [
-			{
-				"searchable": false,
-				"orderable": true,
-				data: 'id',
-				render: function (data) {
-					console.log(data);
-
-					return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
-				},
-				className: '',
-				defaultContent: ''
-			},
-			{
-				data: 'descripcion'
-			}
-		],
-		"order": [[1, "asc"]],
+	$('.i-checks').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green'
 	});
 
-	console.log();
-
 	elementsSwitch.forEach(function (html) {
-		console.log(html);
-
 		var switchery = new Switchery(html, {
 			color: '#18a689',
 			jackColor: '#fff',
@@ -499,12 +468,318 @@ function listarCatalogos() {
 		});
 	});
 
-	$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
-		checkboxClass: 'icheckbox_square-green',
-		radioClass: 'iradio_square-green'
-	});
+	var urlFetchData = baseUrl + '/GetIngresosDeducciones?esCrear=';
+	if (estaEnEditar() > 1) {
+		console.log('Esta en editar');
+		urlFetchData += 'false&id=' + URLactual.substr((URLactual.search(/Edit/i) + 'Edit'.length + 1))
+
+		table = $('.tbl-catalogos').DataTable({
+			"language": {
+				"paging": false,
+				"sProcessing": spinner(),
+				"sLengthMenu": "_MENU_",
+				"sZeroRecords": "No se encontraron resultados",
+				"sEmptyTable": "Ningún dato disponible en esta tabla",
+				"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sSearch": "Buscar:",
+				"sUrl": "",
+				"sInfoThousands": ",",
+				"sLoadingRecords": spinner(),
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			},
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData,
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'checkId',
+					render: function (data) {
+						let check = (data.check) ? 'checked' : '';
+						return `<input type="checkbox" class="i-checks" id="check-` + data.id + `" ` + check + ` />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				$('#tblCatalogoIngresos tbody tr td .i-checks, #tblCatalogoIngresos tbody tr td .i-checks input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+				console.log('ok');
+
+				elementsSwitch.forEach(function (html) {
+					var switchery = new Switchery(html, {
+						color: '#18a689',
+						jackColor: '#fff',
+						size: 'small',
+						disabled: true
+					});
+				});
+
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones  input.i-checks'
+				);
+
+				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				$('.i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				var catalogoDeduccionesChangeCheckbox = document.querySelector(
+					'#catalogoDeDeducciones .js-check-change'
+				);
+
+				seleccionarCheckbox_CatalogoIngresos();
 
 
+				$('#noAplica').on('ifChecked', () => {
+					catalogoDeduccionesInputs.iCheck('uncheck');
+
+					const seleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones');
+					if (seleccionarTodasLasDeducciones.is(':checked'))
+						seleccionarTodasLasDeducciones.click();
+				});
+
+				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					$('#noAplica').iCheck('uncheck');
+					if (listaCatalogoDeduccionesFalse()) {
+						if (!$('#checkSeleccionarTodasDeducciones').is(':checked'))
+							$('#checkSeleccionarTodasDeducciones').click();
+					}
+				});
+
+				catalogoDeduccionesChangeCheckbox.onchange = function () {
+					const seleccionarTodasLasDeducciones = $(
+						'#seleccionarTodasLasDeducciones'
+					);
+					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
+					if (catalogoDeduccionesChangeCheckbox.checked) {
+						catalogoDeduccionesInputs.iCheck('check');
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+						catalogoDeduccionesInputs.iCheck('uncheck');
+					}
+				};
+			}
+		});
+	} //crear
+	else {
+		table = $('.tbl-catalogos').DataTable({
+			"language": idiomaEspaniolCatalogos,
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData,
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'id',
+					render: function (data) {
+						return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				$('#tblCatalogoIngresos tbody tr td .i-checks, #tblCatalogoIngresos tbody tr td .i-checks input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				seleccionarCheckbox_CatalogoIngresos();
+			}
+		});
+
+		$('.tbl-catalogos-d').DataTable({
+			"language": idiomaEspaniolCatalogos,
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData += 'true&esIngreso=false',
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'id',
+					render: function (data) {
+						return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
+				);
+
+				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				$('.i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				var catalogoDeduccionesChangeCheckbox = document.querySelector(
+					'#catalogoDeDeducciones .js-check-change'
+				);
+
+				seleccionarCheckbox_CatalogoIngresos();
+
+
+				$('#noAplica').on('ifChecked', () => {
+					catalogoDeduccionesInputs.iCheck('uncheck');
+
+					const seleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones');
+					if (seleccionarTodasLasDeducciones.is(':checked'))
+						seleccionarTodasLasDeducciones.click();
+				});
+
+				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					$('#noAplica').iCheck('uncheck');
+					if (listaCatalogoDeduccionesFalse()) {
+						if (!$('#checkSeleccionarTodasDeducciones').is(':checked'))
+							$('#checkSeleccionarTodasDeducciones').click();
+					}
+				});
+
+				catalogoDeduccionesChangeCheckbox.onchange = function () {
+					const seleccionarTodasLasDeducciones = $(
+						'#seleccionarTodasLasDeducciones'
+					);
+					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
+					if (catalogoDeduccionesChangeCheckbox.checked) {
+						catalogoDeduccionesInputs.iCheck('check');
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+						catalogoDeduccionesInputs.iCheck('uncheck');
+					}
+				};
+			}
+		});
+
+
+	}
+
+	function seleccionarCheckbox_CatalogoIngresos() {
+
+		var catalogoIngresosChangeCheckbox = document.querySelector(
+			'#catalogoDeIngresos .js-check-change'
+		);
+		const catalogoIngresosInputs = $('#tblCatalogoIngresos tbody tr td input.i-checks');
+
+		//Seleccionar o deseleccionar los ingresos
+		catalogoIngresosChangeCheckbox.onchange = function () {
+			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
+			let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
+			if (catalogoIngresosChangeCheckbox.checked) {
+				catalogoIngresosInputs.iCheck('check');
+				seleccionarTodosLosIngresos.html(
+					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+				);
+			} else {
+				catalogoIngresosInputs.iCheck('uncheck');
+				seleccionarTodosLosIngresos.html(
+					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+				);
+			}
+		};
+
+		//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
+		//Se activara el switch, si esta desactivado
+		$(catalogoIngresosInputs).on('ifChecked', () => {
+			console.log('check ');
+
+			if (listaCatalogoIngresosFalse()) {
+				console.log('check all');
+				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
+					$('#checkSeleccionarTodosIngresos').click();
+			}
+		});
+
+		//Activar switch seleccionar todos en ingresos
+		if (listaCatalogoIngresosFalse()) {
+			$('#checkSeleccionarTodosIngresos').prop('checked', true);
+		}
+	}
+
+	function activarSwitchDeduccionesEnEditar() {
+		//Activar switch seleccionar todos en deducciones
+		if (listaCatalogoDeduccionesFalse()) {
+			$('#checkSeleccionarTodasDeducciones').prop('checked', true);
+		}
+	}
 }
 
 //Redireccionar a Edit o Details
@@ -529,8 +804,6 @@ function obtenerIdDetallesEditar(tbody, table) {
 
 	$(tbody).on('click', 'button#btnActivar', function () {
 		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
-		console.log(table.row($(this).parents('tr')));
-
 		localStorage.setItem('element', JSON.stringify($(this).parents('tr')));
 		$('#frmActivarCatalogoPlanilla').modal();
 	});
@@ -630,90 +903,6 @@ $(document).ready(() => {
 		listar();
 	} else {
 		listarCatalogos();
-		const catalogoIngresosInputs = $('#catalogoDeIngresos input.i-checks');
-		const catalogoDeduccionesInputs = $(
-			'#catalogoDeDeducciones input.i-checks'
-		);
-
-		$('.i-checks, input.i-checks-no-aplica').iCheck({
-			checkboxClass: 'icheckbox_square-green',
-			radioClass: 'iradio_square-green'
-		});
-
-		//Activar switch seleccionar todos en ingresos
-		if (listaCatalogoIngresosFalse()) {
-			$('#checkSeleccionarTodosIngresos').prop('checked', true);
-		}
-
-		//Activar switch seleccionar todos en deducciones
-		if (listaCatalogoDeduccionesFalse()) {
-			$('#checkSeleccionarTodasDeducciones').prop('checked', true);
-		}
-
-		var catalogoIngresosChangeCheckbox = document.querySelector(
-			'#catalogoDeIngresos .js-check-change'
-		);
-		var catalogoDeduccionesChangeCheckbox = document.querySelector(
-			'#catalogoDeDeducciones .js-check-change'
-		);
-
-		$('#noAplica').on('ifChecked', () => {
-			catalogoDeduccionesInputs.iCheck('uncheck');
-
-			const seleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones');
-			if (seleccionarTodasLasDeducciones.is(':checked'))
-				seleccionarTodasLasDeducciones.click();
-			console.log($('#checkSeleccionarTodasDeducciones').checked);
-		});
-
-		$(catalogoDeduccionesInputs).on('ifChecked', () => {
-			$('#noAplica').iCheck('uncheck');
-			if (listaCatalogoDeduccionesFalse()) {
-				if (!$('#checkSeleccionarTodasDeducciones').is(':checked'))
-					$('#checkSeleccionarTodasDeducciones').click();
-			}
-		});
-
-		$(catalogoIngresosInputs).on('ifChecked', () => {
-			if (listaCatalogoIngresosFalse()) {
-				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
-					$('#checkSeleccionarTodosIngresos').click();
-			}
-		});
-
-		catalogoIngresosChangeCheckbox.onchange = function () {
-			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
-			let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
-			if (catalogoIngresosChangeCheckbox.checked) {
-				catalogoIngresosInputs.iCheck('check');
-				seleccionarTodosLosIngresos.html(
-					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-				);
-			} else {
-				catalogoIngresosInputs.iCheck('uncheck');
-				seleccionarTodosLosIngresos.html(
-					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-				);
-			}
-		};
-
-		catalogoDeduccionesChangeCheckbox.onchange = function () {
-			const seleccionarTodasLasDeducciones = $(
-				'#seleccionarTodasLasDeducciones'
-			);
-			let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
-			if (catalogoDeduccionesChangeCheckbox.checked) {
-				catalogoDeduccionesInputs.iCheck('check');
-				seleccionarTodasLasDeducciones.html(
-					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-				);
-			} else {
-				seleccionarTodasLasDeducciones.html(
-					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-				);
-				catalogoDeduccionesInputs.iCheck('uncheck');
-			}
-		};
 	}
 
 	// Si esta en la pantalla de Create entonces vaciar todo
@@ -836,7 +1025,6 @@ $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 		'/CatalogoDePlanillas/ActivarPlanilla',
 		'POST',
 		(data) => {
-			console.log(data);
 			if (data.response == 'bien') {
 				iziToast.success({
 					title: 'Éxito',
@@ -850,7 +1038,6 @@ $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 			ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
 		},
 		() => {
-			console.log('Enviando');
 		})
 });
 //#endregion

@@ -23,15 +23,15 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult getPlanilla()
         {
             //Obtener el catalogo de planillas, y los usuarios que la crearon y/o modificaron
-            tbUsuario sesion =  Session["sesionUsuario"] as tbUsuario;
-            
+            tbUsuario sesion = Session["sesionUsuario"] as tbUsuario;
+
             IQueryable<CatalogoDePlanillasViewModel> tbCatalogoDePlanillas = GetPlanilla(sesion?.usu_EsAdministrador);
             object json = new { data = tbCatalogoDePlanillas };
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
         private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false)
-        {   
+        {
             return db.tbCatalogoDePlanillas
                             .OrderByDescending(x => x.cpla_FechaCrea)
                             .OrderByDescending(x => x.cpla_Activo)
@@ -75,14 +75,9 @@ namespace ERP_GMEDINA.Controllers
             }
 
             tbCatalogoDePlanillas tbCatalogoDePlanillas; //Planilla 
-            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, listaCatalogoDeducciones; //Detalles de la planilla
 
             //Obtener la planilla y sus detalles
-            response = ObtenerCatalogoDePlanillaIngresosDeducciones(id, response, out tbCatalogoDePlanillas, out listaCatalogoIngresos, out listaCatalogoDeducciones);
-
-            //Guardar en los ViewBags los detalles
-            ViewBag.CatalogoIngresos = listaCatalogoIngresos;
-            ViewBag.CatalogoDeducciones = listaCatalogoDeducciones;
+            response = ObtenerCatalogoDePlanilla(id, response, out tbCatalogoDePlanillas);
 
             return View(tbCatalogoDePlanillas);
         }
@@ -94,33 +89,47 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetIngresosDeducciones()
+        public JsonResult GetIngresosDeducciones(bool esCrear = true, int id = 0, bool esIngreso = true)
         {
-            //Obtener la lista de ingresos de la base de datos
-            var ingresos =  (from catalogoIngresos in db.tbCatalogoDeIngresos
-                                                        where catalogoIngresos.cin_Activo == true
-                                                        select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-                                                        {
-                                                            id = catalogoIngresos.cin_IdIngreso,
-                                                            descripcion = catalogoIngresos.cin_DescripcionIngreso
-                                                        }).ToList();
-            //var ingresos = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
-            //                where catalogoDeducciones.cde_Activo == true
-            //                select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-            //                {
-            //                    id = catalogoDeducciones.cde_IdDeducciones,
-            //                    descripcion = catalogoDeducciones.cde_DescripcionDeduccion
-            //                }).ToList();
+            object json = null;
 
-            object json = new { data = ingresos };
-            //, deducciones = (from catalogoIngresos in db.tbCatalogoDeIngresos
-            //                 where catalogoIngresos.cin_Activo == true
-            //                 select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-            //                 {
-            //                     id = catalogoIngresos.cin_IdIngreso,
-            //                     descripcion = catalogoIngresos.cin_DescripcionIngreso
-            //                 }).ToList() }
 
+            if (esCrear)
+            {
+                if (esIngreso)
+                {
+                    //Obtener la lista de ingresos de la base de datos
+                    var ingresos = (from catalogoIngresos in db.tbCatalogoDeIngresos
+                                    where catalogoIngresos.cin_Activo == true
+                                    select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+                                    {
+                                        id = catalogoIngresos.cin_IdIngreso,
+                                        descripcion = catalogoIngresos.cin_DescripcionIngreso
+                                    }).ToList();
+
+                    json = new { data = ingresos };
+                }
+                else
+                {
+                    var deducciones = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
+                                       where catalogoDeducciones.cde_Activo == true
+                                       select new CatalogoDeIngresosDeduccionesViewModel
+                                       {
+                                           id = catalogoDeducciones.cde_IdDeducciones,
+                                           descripcion = catalogoDeducciones.cde_DescripcionDeduccion
+                                       }).ToList();
+                    json = new { data = deducciones };
+                }
+            }
+            else
+            {
+                IEnumerable<object> objListaCatalogoIngresos = null;
+                IEnumerable<object> objListaCatalogoDeducciones = null;
+                List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>(), listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>(); //Detalles de la planilla
+                GetIngresosDeduccionesEdit(id, ref listaCatalogoIngresos, ref listaCatalogoDeducciones, out objListaCatalogoIngresos, out objListaCatalogoDeducciones);
+
+                json = new { data = listaCatalogoIngresos };
+            }
 
             return Json(json, JsonRequestBehavior.AllowGet);
         }
@@ -216,14 +225,14 @@ namespace ERP_GMEDINA.Controllers
 
                                 #region Insertar en el catalogo de Deducciones
 
-                                if(catalogoDeducciones.Length != 0)
-                                // Recorrer el array catalogoDeducciones
-                                InsertarCatalogoDeducciones(catalogoDeducciones,
-                                    ref response,
-                                    MensajeError,
-                                    MensajeErrorCatalogoDeIngresos,
-                                    ref MensajeErrorCatalogoDeDeducciones,
-                                    ref listCatalogoDeDeducciones);
+                                if (catalogoDeducciones.Length != 0)
+                                    // Recorrer el array catalogoDeducciones
+                                    InsertarCatalogoDeducciones(catalogoDeducciones,
+                                        ref response,
+                                        MensajeError,
+                                        MensajeErrorCatalogoDeIngresos,
+                                        ref MensajeErrorCatalogoDeDeducciones,
+                                        ref listCatalogoDeDeducciones);
 
                                 #endregion
                             }
@@ -331,82 +340,72 @@ namespace ERP_GMEDINA.Controllers
 
             // Obtener los datos del catalogo de planillas filtrando por el id
             tbCatalogoDePlanillas tbCatalogoDePlanillas; //Planilla
-            List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, listaCatalogoDeducciones; //Detalles de la planilla
 
             //Obtener la planilla y sus detalles
-            response = ObtenerCatalogoDePlanillaIngresosDeducciones(id, response, out tbCatalogoDePlanillas, out listaCatalogoIngresos, out listaCatalogoDeducciones);
-
-            //Guardar los detalles en los ViewBags para pronto recorrerlos
-            ViewBag.CatalogoIngresos = listaCatalogoIngresos;
-            ViewBag.CatalogoDeducciones = listaCatalogoDeducciones;
+            response = ObtenerCatalogoDePlanilla(id, response, out tbCatalogoDePlanillas);
 
             return View(tbCatalogoDePlanillas);
         }
 
         /*Obtener el catalogo de planillas, el catalogo de ingresos de la planilla 
         *y el catalogo de deducciones de la planilla, filtrando por el id de la planilla*/
-        private string ObtenerCatalogoDePlanillaIngresosDeducciones(int? id, string response, out tbCatalogoDePlanillas tbCatalogoDePlanillas, out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, out List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones)
+        private string ObtenerCatalogoDePlanilla(int? id, string response, out tbCatalogoDePlanillas tbCatalogoDePlanillas)
         {
-            #region Declaración de variables
-            IEnumerable<object> listCatalogoDeDeducciones = null; //Aqui se almacena la lista del catalogo de deducciones 
-            IEnumerable<object> listCatalogoDeIngresos = null; //Aqui se almacena la lista del catalogo de ingresos
+            response = "ok";
+            tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id); //Buscar por el id en el catalogo de planillas
+            return response;
+        }
 
-            listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>(); //Generar la salida del catalogo de ingresos
-            listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>();//Generar salida del catalogo de deducciones
+        private void GetIngresosDeduccionesEdit(int? id, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones, out IEnumerable<object> listCatalogoDeDeducciones, out IEnumerable<object> listCatalogoDeIngresos)
+        {
+            #region Obtener el catalogo de ingresos
+            listCatalogoDeIngresos = db.UDP_Plani_CatalogoDeIngresosEdit_Select(id); //Obtener la lista del catalogo de ingresos filtrando por el id de la planilla
+
+            //Recorrer el resultado de la variable listCatalogoDeIngresos
+            foreach (UDP_Plani_CatalogoDeIngresosEdit_Select_Result result in listCatalogoDeIngresos)
+            {
+                CatalogoDeIngresosDeduccionesViewModel catalogoIngresos = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar los ingresos de la planilla
+                catalogoIngresos.id = result.cin_IdIngreso; //Se utilizara para identificar que checkbox ha sido clickeado
+                catalogoIngresos.descripcion = result.cin_DescripcionIngreso; //Descripcion del ingreso
+
+                //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
+                if (result.@checked == 1)
+                {
+                    catalogoIngresos.check = true;
+                    catalogoIngresos.checkId = new CheckId { check = true, id = result.cin_IdIngreso };
+                }
+                else
+                {
+                    catalogoIngresos.check = false;
+                    catalogoIngresos.checkId = new CheckId { check = false, id = result.cin_IdIngreso };
+                }
+
+                //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
+                listaCatalogoIngresos.Add(catalogoIngresos);
+            }
             #endregion
 
-            tbCatalogoDePlanillas = db.tbCatalogoDePlanillas.Find(id); //Buscar por el id en el catalogo de planillas
-            try
+            #region Obtener el catalogo de deducciones
+            //Obtener la lista del catalogo de deducciones filtrando por el id de la planilla
+            listCatalogoDeDeducciones = db.UDP_Plani_CatalogoDeduccionesEdit_Select(id);
+
+            //Recorrer el resultado de la variable listCatalogoDeDeducciones
+            foreach (UDP_Plani_CatalogoDeduccionesEdit_Select_Result result in listCatalogoDeDeducciones.ToList())
             {
-                #region Obtener el catalogo de ingresos
-                listCatalogoDeIngresos = db.UDP_Plani_CatalogoDeIngresosEdit_Select(id); //Obtener la lista del catalogo de ingresos filtrando por el id de la planilla
+                CatalogoDeIngresosDeduccionesViewModel catalogoDeduccion = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar las deducciones de la planilla
+                catalogoDeduccion.id = result.cde_IdDeducciones; //Se utilizara para identificar que checkbox ha sido clickeado
+                catalogoDeduccion.descripcion = result.cde_DescripcionDeduccion; //Descripcion de la deducción
 
-                //Recorrer el resultado de la variable listCatalogoDeIngresos
-                foreach (UDP_Plani_CatalogoDeIngresosEdit_Select_Result result in listCatalogoDeIngresos)
-                {
-                    CatalogoDeIngresosDeduccionesViewModel catalogoIngresos = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar los ingresos de la planilla
-                    catalogoIngresos.id = result.cin_IdIngreso; //Se utilizara para identificar que checkbox ha sido clickeado
-                    catalogoIngresos.descripcion = result.cin_DescripcionIngreso; //Descripcion del ingreso
+                //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
+                if (result.@checked == 1)
+                    catalogoDeduccion.check = true;
+                else
+                    catalogoDeduccion.check = false;
 
-                    //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
-                    if (result.@checked == 1)
-                        catalogoIngresos.check = true;
-                    else
-                        catalogoIngresos.check = false;
-
-                    //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
-                    listaCatalogoIngresos.Add(catalogoIngresos);
-                }
-                #endregion
-
-                #region Obtener el catalogo de deducciones
-                //Obtener la lista del catalogo de deducciones filtrando por el id de la planilla
-                listCatalogoDeDeducciones = db.UDP_Plani_CatalogoDeduccionesEdit_Select(id);
-
-                //Recorrer el resultado de la variable listCatalogoDeDeducciones
-                foreach (UDP_Plani_CatalogoDeduccionesEdit_Select_Result result in listCatalogoDeDeducciones.ToList())
-                {
-                    CatalogoDeIngresosDeduccionesViewModel catalogoDeduccion = new CatalogoDeIngresosDeduccionesViewModel(); //Almacenar las deducciones de la planilla
-                    catalogoDeduccion.id = result.cde_IdDeducciones; //Se utilizara para identificar que checkbox ha sido clickeado
-                    catalogoDeduccion.descripcion = result.cde_DescripcionDeduccion; //Descripcion de la deducción
-
-                    //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
-                    if (result.@checked == 1)
-                        catalogoDeduccion.check = true;
-                    else
-                        catalogoDeduccion.check = false;
-
-                    //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
-                    listaCatalogoDeducciones.Add(catalogoDeduccion);
-                }
-                #endregion
+                //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
+                listaCatalogoDeducciones.Add(catalogoDeduccion);
             }
-            catch (Exception)
-            {
-                response = "error"; //Retornar con un error en el lado del cliente
-            }
-
-            return response;
+            #endregion
         }
 
 
@@ -650,7 +649,7 @@ namespace ERP_GMEDINA.Controllers
                 }
             }
 
-            object json = new { data = tbCatalogoDePlanillas,response = response };
+            object json = new { data = tbCatalogoDePlanillas, response = response };
 
             return Json(json, JsonRequestBehavior.AllowGet);
         }

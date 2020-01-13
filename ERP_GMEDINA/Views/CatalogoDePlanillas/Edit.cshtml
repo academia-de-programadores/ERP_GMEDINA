@@ -68,16 +68,16 @@
                                         <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
                                             <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
                                         </div>
-                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" id="checkSeleccionarTodosIngresos" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
-                                        <br /><br />
-                                        @foreach (var item in ViewBag.CatalogoIngresos)
-                                        {
-                                            <div class="form-horizontal col-xs-offset-1">
-                                                <div class="form-group">
-                                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
-                                                </div>
-                                            </div>
-                                        }
+                                        <input type="checkbox" id="checkSeleccionarTodosIngresos" class="js-switch js-check-change" /> &nbsp; &nbsp; &nbsp; <label id="seleccionarTodosLosIngresos">Seleccionar todos los Ingresos</label><br /><br />
+                                        <table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
+                                            <thead>
+                                                <tr>
+                                                    <th style="background: white"></th>
+                                                    <th>Descripcion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -91,15 +91,15 @@
                                             <span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
                                         </div>
                                         &nbsp; &nbsp; &nbsp;<input type="checkbox" id="checkSeleccionarTodasDeducciones" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
-                                        <br /><br />
-                                        @foreach (var item in ViewBag.CatalogoDeducciones)
-                                        {
-                                            <div class="form-horizontal col-xs-offset-1">
-                                                <div class="form-group">
-                                                    <input type="checkbox" class="i-checks" id="check-@item.id" checked="@item.check" /> @item.descripcion
-                                                </div>
-                                            </div>
-                                        }
+                                        <table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover tbl-catalogos-d">
+                                            <thead>
+                                                <tr>
+                                                    <th style="background: white"></th>
+                                                    <th>Descripcion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                         <div class="form-horizontal col-xs-offset-1">
                                             <div class="form-group">
                                                 <input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
@@ -151,9 +151,15 @@
 <script src="~/Scripts/plugins/switchery/switchery.js"></script>
 @section Scripts {
     @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/dataTablesSelvin")
+    @Scripts.Render("~/plugins/dataTables")
+
+
+
 }
 @section Styles {
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 
 

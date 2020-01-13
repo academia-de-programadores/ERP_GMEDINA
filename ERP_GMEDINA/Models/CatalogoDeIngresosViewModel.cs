@@ -10,6 +10,7 @@ namespace ERP_GMEDINA.Models
         public int id { get; set; }
         public string descripcion { get; set; }
         public bool check { get; set; }
+        public CheckId checkId { get; set; }
     }
 
     public class CatalogoDePlanillasViewModel
@@ -26,5 +27,11 @@ namespace ERP_GMEDINA.Models
     {
         public bool esAdmin { get; set; }
         public bool activo { get; set; }
+    }
+
+    public class CheckId
+    {
+        public int id { get; set; }
+        public bool check { get; set; }
     }
 }
