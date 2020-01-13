@@ -389,3 +389,38 @@ function spinner() {
  <div class="sk-rect5"></div>
  </div>`;
 }
+
+
+// Activar
+var activarID = 0;
+$(document).on("click", "#btnActivarFormaPago", function () {
+    activarID = $(this).data('id');
+    $("#frmActivarForP").modal();
+});
+
+//activar ejecutar
+$("#btnActivarForP").click(function () {
+
+    $.ajax({
+        url: "/FormaPago/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se logró Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridFormaPago();
+            $("#frmActivarForP").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se Activó de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
+});

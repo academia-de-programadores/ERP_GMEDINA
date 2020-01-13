@@ -423,40 +423,37 @@ function mostrarError(Mensaje) {
 
 
 
-//FUNCION: PRIMERA FASE DE ACTIVAR
 
-$(document).on("click", "#tblPeriodo tbody tr td #btnActivarPeriodos", function () {
-    //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
-    IDActivar = $(this).data('id');
-    $("#ActivarCatalogoIngresos").modal();
+// Activar
+var activarID = 0;
+$(document).on("click", "#btnActivarPeriodos", function () {
+    activarID = $(this).data('id');
+    $("#frmActivarPeriod").modal();
 });
 
+//activar ejecutar
+$("#btnActivarPeriod").click(function () {
 
-//EJECUTAR LA ACTIVACION DEL REGISTRO
-$("#btnActivarIngreso").click(function () {
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/CatalogoDeIngresos/Activar/" + IDActivar,
-        method: "POST"
+        url: "/Periodos/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
     }).done(function (data) {
         if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: 'No se logró Activar el registro, contacte al administrador',
             });
         }
         else {
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#ActivarCatalogoIngresos").modal('hide');
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridIngresos();
+            cargarGridPeriodo();
+            $("#frmActivarPeriod").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se Activó de forma exitosa!',
             });
         }
     });
-    IDActivar = 0;
+    activarID = 0;
 });
