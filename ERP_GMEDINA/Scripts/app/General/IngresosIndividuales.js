@@ -291,21 +291,21 @@ $("#validatione3").css("display", "none");
 
 const btnEditar = $('#btnEditIngresoIndividual')
 
-const btnInhabilitar = $('#btnInactivarIngresoIndividual')
+const btnInactivar = $('#btnInactivarIngresoIndividual')
 
 //Div que aparecera cuando se le de click en crear
 cargandoEditar = $('#cargandoEditar')
 
 function ocultarCargandoEditar() {
     btnEditar.show();
-    btnInhabilitar.show();
+    btnInactivar.show();
     cargandoEditar.html('');
     cargandoEditar.hide();
 }
 
 function mostrarCargandoEditar() {
     btnEditar.hide();
-    btnInhabilitar.hide();
+    btnInactivar.hide();
     cargandoEditar.html(spinner());
     cargandoEditar.show();
 }
@@ -382,7 +382,6 @@ $("#btnEditIngresoIndividual").click(function () {
     }
 
     mostrarCargandoEditar();
-    debugger;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
