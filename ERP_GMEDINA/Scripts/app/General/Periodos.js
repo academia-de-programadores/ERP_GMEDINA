@@ -145,14 +145,14 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function () {
     //OCULTAR EL DATAANNOTATIONS
-    $("#frmEditPeriodo #Edit_Validation_descripcion").css("visibility", "hidden");
+    $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "none");
     //CAPTURAR EL ID DEL REGISTRO
     var ID = $(this).data('id');
     //SETEAR LA VARIABLE INACTIVAR CON EL ID DEL REGISTRO
     IDInactivar = ID;
 
     //OCULTAR EL SCROLLVIEW
-    $('body').css("overflow", "hidden");
+    //$('body').css("overflow", "hidden");
 
         //EJECUCION DE LA PETICION AL SERVIDOR
 	    $.ajax({
@@ -214,7 +214,7 @@ $(document).on("click", "#btnUpdatePeriodo", function () {
     }
     else {
         //MOSTRAR DATAANNOTATION
-        $("#frmEditPeriodo #Edit_Validation_descripcion").css("visibility", "visible");
+        $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
         //OCULTAR EL SCROLLVIEW
         $('body').css("overflow", "hidden");
     }
