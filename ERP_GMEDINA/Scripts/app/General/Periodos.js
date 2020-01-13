@@ -202,8 +202,18 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 });
 
 
+
+$("#btnUpdatePeriodo").click(function () {
+    //console.log('console');
+    $("#ConfirmarEdicion").modal();
+});
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+});
+
 //GUARADAR LA EDICION DEL REGISTRO
-$(document).on("click", "#btnUpdatePeriodo", function () {
+$(document).on("click", "#btnConfirmarEditar", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
 
     //   $("#EditarPeriodo #Validation_descripcion").css("display", "block");
@@ -225,10 +235,17 @@ $(document).on("click", "#btnUpdatePeriodo", function () {
             if (data != "error") {
                 cargarGridPeriodo();
                 $("#EditarPeriodo").modal('hide');
+                $("#ConfirmarEdicion").modal('hide');
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
                     message: '¡Se editó de forma exitosa!',
+                });
+            } else {
+                $("#ConfirmarEdicion").modal('hide');
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se aceptan datos numericos!',
                 });
             }
         });
