@@ -41,9 +41,7 @@ namespace ERP_GMEDINA.Controllers
                     ini_FechaCrea = d.ini_FechaCrea,
                     ini_UsuarioModifica = d.ini_UsuarioModifica,
                     ini_FechaModifica = d.ini_FechaModifica
-                })
-                .OrderBy(d => d.ini_FechaCrea)
-                .ToList();
+                }).ToList();
 
             //Retornamos un Json en el FrontEnd
             return new JsonResult { Data = tbIngresosIndividualesD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -51,15 +49,8 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region Crear Ingresos Individuales
-        // GET: IngresosIndividuales/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: IngresosIndividuales/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ini_Motivo,emp_Id,ini_Monto,ini_PagaSiempre,ini_UsuarioCrea,ini_FechaCrea")] tbIngresosIndividuales tbIngresosIndividuales)

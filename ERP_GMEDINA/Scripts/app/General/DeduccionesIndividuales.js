@@ -349,6 +349,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
                 $("#Editar #dei_Motivo").val(data.dei_Motivo);
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
                 $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
@@ -386,8 +387,11 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionIndividual").click(function () {
+    $("#EditarDeduccionesIndividualesConfirmacion").modal();
+});
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditDeduccionIndividual2").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var vale1 = $("#Editar #emp_Id").val();
     var vale2 = $("#Editar #dei_Motivo").val();
@@ -435,6 +439,7 @@ $("#btnEditDeduccionIndividual").click(function () {
         if (data != "error") {
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             $("#EditarDeduccionesIndividuales").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
@@ -562,11 +567,10 @@ function mostrarCargandoInhabilitar() {
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionIndividual2").click(function ()
 {
-
     var data = $("#frmInactivarDeduccionIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/frmInactivarDeduccionIndividual/Inactivar/" + Idinactivar,
+        url: "/DeduccionesIndividuales/Inactivar/" + Idinactivar,
         method: "POST",
         data: data
     }).done(function (data) {

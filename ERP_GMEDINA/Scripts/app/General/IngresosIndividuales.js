@@ -37,7 +37,7 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaAFP = data, template = '';
+            var ListaIngresoIndividual = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
@@ -307,13 +307,13 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales", function () {
-    var id = $(this).data('id');
+    var ID = $(this).data('id');
     $.ajax({
-        url: "/IngresosIndividuales/Edit/" + id,
+        url: "/IngresosIndividuales/Edit/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
+        data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -335,10 +335,10 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
+                        $("#Editar #emp_IdEmpleados").empty();
                         //LLENAR EL DROPDOWNLIST                    
                         $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #emp_IdEmpleados").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
                 $("#DetallesIngresosIndividuales").modal('hide');
