@@ -87,16 +87,9 @@
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEditar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Catálogo de Ingreso</h4>
             </div>
-            <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-                <button type="button"  class="btn btn-primary pull-left" id="btnUpdateIngresos">Editar</button>
-                
-                <button type="button" class="btn btn-danger pull-left" id="btnModalInactivar">Inhabilitar</button>
-            </div>
+           
         </div>
 </div>
     </div>
