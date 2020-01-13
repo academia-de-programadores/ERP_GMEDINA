@@ -91,7 +91,10 @@ $(document).on("click", "#btnAgregarTipoDeducciones", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #Validation_descipcion").css("display", "none");
     $("#Crear input[type=text]").val('');
-    $("#AgregarTipoDeducciones").modal();
+    //$("#AgregarTipoDeducciones").modal();
+    $("#AgregarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -145,7 +148,10 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeduccion
                     $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
                     $("#Editar #tde_Descripcion").val(iter.tde_Descripcion);
                 });
-                $("#EditarTipoDeducciones").modal();
+                //$("#EditarTipoDeducciones").modal();
+                $("#EditarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -158,11 +164,18 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeduccion
 });
 
 $("#btnUpdateTipoDeducciones").click(function () {
-    $("#EditarTipoDeducciones").modal('hide');
-        $("#EditarTipoDeduccionConfirmacion").modal();
+
+    if ($("#Editar #tde_Descripcion").val() != '') {
+        $("#EditarTipoDeducciones").modal('hide');
+        //$("#EditarTipoDeduccionConfirmacion").modal();
+        $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
+    }
+    
 });
 
-////////MODAAAAAAAAL DE CONFIRMACION DE EDITAR----------------
+////////MODAAAAAAAAL DE CONFIRMACION DE EDITAR------
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarTipoDedu").click(function () {
 
@@ -207,7 +220,10 @@ $("#btnEditarTipoDedu").click(function () {
             title: 'Error',
             message: 'Ingrese datos válidos',
         });
-        $("#EditarTipoDeduccionConfirmacion").modal('hide');
+        //$("#EditarTipoDeduccionConfirmacion").modal('hide');
+        $("#EditarTipoDeduccionConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 });
 
@@ -302,7 +318,10 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
                 data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
 
-                $("#DetailsTipoDeducciones").modal();
+                //$("#DetailsTipoDeducciones").modal();
+                $("#DetailsTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -317,7 +336,11 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
 $("#btnInactivarTipoDeducciones").click(function () {
     $("#EditarTipoDeducciones").modal('hide');
-    $("#InactivarTipoDeducciones").modal();
+    //$("#InactivarTipoDeducciones").modal();
+    $("#InactivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+
 });
 
 //FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
@@ -379,7 +402,10 @@ $("#frmTipoDeduccionEdit").submit(function (event) {
 $(document).on("click", "#tblTipoDeducciones tbody tr td #btnActivarTipoDeducciones", function () {
     activarID = $(this).data('id');
     console.log(activarID);
-    $("#ActivarTipoDeducciones").modal();
+    //$("#ActivarTipoDeducciones").modal();
+    $("#ActivarTipoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //FUNCION: SEGUNDA FASE DE EDICION DE REGISTROS, REALIZAR LA EJECUCION PARA INACTIVAR EL REGISTRO
