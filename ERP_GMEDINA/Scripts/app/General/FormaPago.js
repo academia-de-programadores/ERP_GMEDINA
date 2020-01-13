@@ -168,8 +168,17 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
         });
 });
 
+$("#btnUpdateFormaPago").click(function () {
+    //console.log('console');
+    $("#ConfirmarEdicion").modal();
+});
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+});
+
 //GUARADR LA EDICION DEL REGISTRO
-$(document).on("click", "#btnUpdateFormaPago", function () {
+$(document).on("click", "#btnConfirmarEditar", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditFormaPago").serializeArray();
     console.log(data);
@@ -180,20 +189,22 @@ $(document).on("click", "#btnUpdateFormaPago", function () {
     })
 	.done(function (data) {
 	    //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-	    if (data) {
+	    if (data == "bien") {
 
 	        cargarGridFormaPago();
 	        $("#EditarFormaPago").modal('hide');
+	        $("#ConfirmarEdicion").modal('hide');
 	        iziToast.success({
 	            title: 'Exito',
 	            message: '¡Se editó de forma exitosa!',
 	        });
 	    }
-	    else {
+	    else if (data == "error") {
+	        $("#ConfirmarEdicion").modal('hide');
 	        //Mensaje de error si no hay data
 	        iziToast.error({
 	            title: 'Error',
-	            message: 'No se pudo cargar la información, contacte al administrador',
+	            message: '¡No se aceptan datos numericos!',
 	        });
 	    }
 	});
