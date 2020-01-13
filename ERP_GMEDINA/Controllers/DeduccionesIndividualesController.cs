@@ -126,9 +126,12 @@ namespace ERP_GMEDINA.Controllers
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
             from Emp in db.tbEmpleados
-            where Emp.emp_Estado == true
             join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
-            select new { Id = Emp.emp_Id, Descripcion = Per.per_Nombres + " " + Per.per_Apellidos };
+            where Emp.emp_Estado == true
+            select new {
+                Id = Emp.emp_Id,
+                Descripcion = Per.per_Nombres + " " + Per.per_Apellidos
+            };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -236,7 +239,7 @@ namespace ERP_GMEDINA.Controllers
         #region Inhabilitar Deducciones Individuales
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
+        public ActionResult Inactivar(int id)
         {
             //LLENAR DATA DE AUDITORIA
             int dei_UsuarioModifica = 1;
@@ -251,7 +254,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(dei_IdDeduccionesIndividuales,
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(id,
                                                                                                    dei_UsuarioModifica,
                                                                                                    dei_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
