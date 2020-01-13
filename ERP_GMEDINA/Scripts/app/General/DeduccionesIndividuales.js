@@ -191,14 +191,12 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
     $("#Crear #dei_MontoRestante").val('');
     $("#Crear #dei_Cuota").val('');
     $("#Crear #dei_PagaSiempre").val('');
-
+    $("#validation1").css("display", "none");
+    $("#validation2").css("display", "none");
+    $("#validation3").css("display", "none");
+    $("#validation4").css("display", "none");
+    $("#validation5").css("display", "none");
 });
-
-$("#validation1").css("display", "none");
-$("#validation2").css("display", "none");
-$("#validation3").css("display", "none");
-$("#validation4").css("display", "none");
-$("#validation5").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
@@ -308,11 +306,7 @@ $("#btnIconCerrare").click(function () {
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
 
-$("#validatione1").css("display", "none");
-$("#validatione2").css("display", "none");
-$("#validatione3").css("display", "none");
-$("#validatione4").css("display", "none");
-$("#validatione5").css("display", "none");
+
 
 
 
@@ -375,6 +369,11 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     });
                
                 $("#EditarDeduccionesIndividuales").modal();
+                $("#validatione1").css("display", "none");
+                $("#validatione2").css("display", "none");
+                $("#validatione3").css("display", "none");
+                $("#validatione4").css("display", "none");
+                $("#validatione5").css("display", "none");
             }
             else {
                 //Mensaje de error si no hay data

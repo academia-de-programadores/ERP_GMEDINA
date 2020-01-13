@@ -1,66 +1,76 @@
 ﻿@model ERP_GMEDINA.Models.tbAdelantoSueldo
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmAdelantosEdit" }))
 {
-    @Html.AntiForgeryToken()
-    
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+        <div class="ibox-content">
             <div class="form-horizontal">
-                @Html.HiddenFor(model => model.adsu_IdAdelantoSueldo)
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.adsu_IdAdelantoSueldo)
 
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    </div>
-                </div>*@
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label>
-                        </div>
-                        <div class="col-md-6">
-                            <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @*@Html.HiddenFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
-                            @Html.LabelFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })
-                            <span class="field-validation-valid text-danger" style="display: none" id="adsu_RazonAdelantoValidacion">El campo Razón es obligatorio.</span>
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select id="emp_Id" name="emp_Id" class="form-control"></select>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="emp_Id" name="emp_Id" class="form-control"></select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "form-control" } })
-                        <span class="field-validation-valid text-danger" style="display: none" id="adsu_RazonAdelantoValidacion">El campo adelanto de sueldo es obligatorio</span>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @*@Html.HiddenFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
+                                @Html.LabelFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })
+                                <span class="field-validation-valid text-danger" style="display: none" id="adsu_RazonAdelantoValidacion">El campo Razón es obligatorio.</span>
+                            </div>
+                        </div>
                     </div>
-                </div>*@
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "form-control" } })
+                                <span class="field-validation-valid text-danger" style="display: none" id="adsu_RazonAdelantoValidacion">El campo adelanto de sueldo es obligatorio</span>
+                            </div>
+                        </div>*@
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @*@Html.HiddenFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
-                            @Html.LabelFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
-                        </div>
-                        <div class="col-md-6">
-                           @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off" } })
-                            <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion">El campo Monto es obligatorio.</span>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @*@Html.HiddenFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
+                                @Html.LabelFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number", @autocomplete = "off" } })
+                                <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion">El campo Monto es obligatorio.</span>
+                            </div>
                         </div>
                     </div>
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion">El campo monto es obligatorio</span>
+                            </div>
+                        </div>*@
                 </div>
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                        <span class="field-validation-valid text-danger" style="display: none" id="adsu_MontoValidacion">El campo monto es obligatorio</span>
-                    </div>
-                </div>*@
             </div>
-        
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary pull-left" id="btnUpdateAdelantos">Actualizar</button>
+        <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarAdelantoSueldo">Inhabilitar</button>
+        <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
+    </div>
 }
