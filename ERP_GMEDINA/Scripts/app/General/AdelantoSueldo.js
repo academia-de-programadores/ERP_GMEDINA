@@ -8,7 +8,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      //console.log("No se pudo recuperar Script SerializeDate");
   });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -115,7 +115,7 @@ var MaxSueldoCreate = 0;
 $(cmbEmpleado).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = parseInt(cmbEmpleado.val());
-    console.log(IdEmp);
+    //console.log(IdEmp);
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
@@ -208,8 +208,8 @@ $('#btnCreateRegistroAdelantos').click(function () {
                 MaxSueldoCreate = 0;
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'Se ha registrado con exitosamente!',
+                    title: 'Éxito',
+                    message: '¡Se ha registrado exitosamente!',
                 });
             }
         });
@@ -270,19 +270,24 @@ $('#btnCreateRegistroAdelantos').click(function () {
 function ValidarCamposEditar(colaborador, razon, monto){
     var pasoValidacion = true;
 
-    console.log(colaborador.val());
+    //console.log(colaborador.val());
     if(colaborador.val() == ''){
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
         //Hacerle focus al input
-        console.log('No paso la validacion de campo colaborador');
+        //console.log('No paso la validacion de campo colaborador');
+        $("#ConfirmarEdicion").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'Ha ocurrido un problema con el campo colaborador',
+        });
         
         $(colaborador).focus();
     } else{
         
     }
 
-    console.log(razon.val());
+    //console.log(razon.val());
 
     if(razon ==null || razon.val() == ''){
         pasoValidacion = false;
@@ -346,12 +351,12 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     }).done(function (data) {
         if (data) {
             if (data.adsu_Deducido) {
-                console.log('true');
+                //console.log('true');
                 document.getElementById("btnUpdateAdelantos").disabled = true;
                 //$("#btnUpdateAdelantos").attr("disabled");//desabilita boton
                 //$("#btnUpdateAdelantos").disabled = true;
             } else {
-                console.log('false');
+                //console.log('false');
                 document.getElementById("btnUpdateAdelantos").disabled = false;
                 //$("#btnUpdateAdelantos").removeAttr("disabled");//habilita boton
                 //$("#btnUpdateAdelantos").disabled = false;
@@ -391,8 +396,18 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     })
 });
 
-//FUNCION: EJECUTAR EDICION DE REGISTROS
 $("#btnUpdateAdelantos").click(function () {
+    //console.log('console');
+    $("#EditarAdelantoSueldo").modal('hide');
+    $("#ConfirmarEdicion").modal();
+});
+
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+});
+//FUNCION: EJECUTAR EDICION DE REGISTROS
+$("#btnConfirmarEditar").click(function () {
 
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
@@ -426,13 +441,13 @@ $("#btnUpdateAdelantos").click(function () {
                     cargarGridAdelantos();
                     //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                     FullBody();
-                    $("#EditarAdelantoSueldo").modal('hide');
+                    $("#ConfirmarEdicion").modal('hide');
                     //Setear la variable de SueldoAdelantoMaximo a cero 
                     MaxSueldoEdit = 0;
                     //Mensaje de exito de la edicion
                     iziToast.success({
-                        title: 'Exito',
-                        message: 'El registro fue editado de forma exitosa!',
+                        title: 'Éxito',
+                        message: '¡El registro fue editado de forma exitosa!',
                     });
                 }
             });
