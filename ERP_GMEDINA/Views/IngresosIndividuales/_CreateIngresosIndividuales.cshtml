@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "form-control", @id = "ini_Motivo" } })
-                    @Html.ValidationMessageFor(model => model.ini_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                    @Html.ValidationMessageFor(model => model.ini_Motivo, "", new { @class = "text-danger", @id = "validatione1" })
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-8">
                     <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation2" })
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validatione2" })
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "form-control", @id = "ini_Monto" } })
-                    @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validation3" })
+                    @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validatione3" })
                 </div>
             </div>
 
@@ -45,7 +45,15 @@
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
                 <div class="col-md-8">
-                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" value="@true" />
+                        <input type="checkbox" class="i-checks" id="ini_PagaSiempre" name="ini_PagaSiempre" />
+                    <script>
+                        if (ini_PagaSiempre.Checked == true) {
+                            $("#iniPagaSiempre").val(1);
+                        }
+                        else {
+                            $("#iniPagaSiempre").val(0);
+                        }
+                    </script>
                 </div>
             </div>
 

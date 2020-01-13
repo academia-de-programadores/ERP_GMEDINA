@@ -186,12 +186,12 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     $("#Crear #ini_Motivo").val('');
     $("#Crear #ini_Monto").val('');
     $("#Crear #ini_PagaSiempre").val('');
+    $("#validation1").css("display", "none");
+    $("#validation2").css("display", "none");
+    $("#validation3").css("display", "none");
 
 });
 
-$("#validation1").css("display", "none");
-$("#validation2").css("display", "none");
-$("#validation3").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
@@ -199,6 +199,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var val1 = $("#Crear #emp_Id").val();
     var val2 = $("#Crear #ini_Motivo").val();
     var val3 = $("#Crear #ini_Monto").val();
+    var val4 = $("#Crear #ini_PagaSiempre").val();
 
 
     if (val2 == "") {
@@ -280,12 +281,6 @@ $("#btnIconCerrare").click(function () {
     $("#EditarIngresosIndividuales").modal('hide');
 });
 
-$("#validatione1").css("display", "none");
-$("#validatione2").css("display", "none");
-$("#validatione3").css("display", "none");
-
-
-
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
@@ -348,6 +343,9 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                     });
                 $("#DetallesIngresosIndividuales").modal('hide');
                 $("#EditarIngresosIndividuales").modal();
+                $("#validatione1").css("display", "none");
+                $("#validatione2").css("display", "none");
+                $("#validatione3").css("display", "none");
             }
             else {
                 //Mensaje de error si no hay data
@@ -369,6 +367,7 @@ $("#btnEditIngresoIndividual2").click(function () {
     var vale1 = $("#Editar #emp_Id").val();
     var vale2 = $("#Editar #ini_Motivo").val();
     var vale3 = $("#Editar #ini_Monto").val();
+    var exp = /^[0-9]+(\.[0-9]{1,2})$/;
 
 
     if (vale2 == "") {
@@ -378,11 +377,11 @@ $("#btnEditIngresoIndividual2").click(function () {
         $("#Editar #validatione1").css("display", "none");
     }
 
-    if (vale3 == "" || vale3 == null || vale3 == undefined) {
-        $("#Editar #validatione3").css("display", "");
+    if (vale3 != "" || vale3 != null || vale3 != undefined) {
+        $("#Editar #validatione3").css("display", "none");
     }
     else {
-        $("#Editar #validatione3").css("display", "none");
+        $("#Editar #validatione3").css("display", "");
     }
 
     mostrarCargandoEditar();
