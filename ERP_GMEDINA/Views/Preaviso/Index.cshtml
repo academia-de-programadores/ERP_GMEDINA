@@ -99,15 +99,7 @@
                 <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear Preaviso</h4>
             </div>
-            <div class="modal-body" id="Crear">
-                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
-            <div class="modal-footer">
-                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default" />
-                <div style="display:none" class="btn" id="cargandoCrear">
-                </div>
-                <input type="submit" id="btnCrearPreavisoConfirmar" value="Guardar" class="btn btn-primary pull-left" />
-            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
         </div>                
     </div>
 </div>
@@ -119,16 +111,8 @@
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Preaviso</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
-            <div class="modal-footer">
-                <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default" />
-                <input type="submit" value="Actualizar" id="btnUpdatePreaviso" class="btn btn-primary pull-left" />
-                <input type="button" value="Inactivar" id="btnInactivarPreaviso" class="btn btn-danger pull-left" />
-            </div>
-               
-            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())      
+        </div>
     </div>
 </div>
 
@@ -146,6 +130,23 @@
                 <button type="button" class="btn btn-primary" id="btnConfirmarEditar">Si</button>
                 <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DetallarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Detalle Preaviso</h4>
+            </div>
+            <div class="modal-body" id="Detalles">
+                @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPreaviso())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -182,23 +183,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnActivarPreavis">Si</button>
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="DetallarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle Preaviso</h4>
-            </div>
-            <div class="modal-body" id="Detalles">
-                @Html.Partial("_Details", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

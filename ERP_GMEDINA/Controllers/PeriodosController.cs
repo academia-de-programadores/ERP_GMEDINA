@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Periodos
         public ActionResult Index()
         {
-            var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbPeriodos = db.tbPeriodos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.peri_IdPeriodo);
             return View(tbPeriodos.ToList());
         }
         #endregion
@@ -40,7 +40,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     peri_FechaModifica = c.peri_FechaModifica,
                     peri_Activo = c.peri_Activo
-                }).OrderByDescending(x => x.peri_FechaCrea).ToList();
+                }).OrderBy(x => x.peri_IdPeriodo).ToList();
 
             return new JsonResult { Data = tbPeriodos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -277,15 +277,16 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: ACTIVAR
+        // POST: Periodos/Delete/5
         [HttpPost]
-        public ActionResult Activar(int? Id)
+        public ActionResult Activar(int? id)
         {
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";
             IEnumerable<object> listPeriodo = null;
             string MensajeError = "";
             //VALIDAR QUE EL ID NO LLEGUE NULL
-            if (Id == null)
+            if (id == null)
             {
                 response = "error";
                 return Json(response, JsonRequestBehavior.AllowGet);
@@ -293,7 +294,7 @@ namespace ERP_GMEDINA.Controllers
             //INSTANCIA DEL MODELO
             tbPeriodos tbPeriodos = new tbPeriodos();
             //LLENAR DATA DE AUDITORIA
-            tbPeriodos.peri_IdPeriodo = (int)Id;
+            tbPeriodos.peri_IdPeriodo = (int)id;
             tbPeriodos.peri_UsuarioModifica = 1;
             tbPeriodos.peri_FechaModifica = DateTime.Now;
             //VALIDAR SI EL ID ES VÁLIDO
@@ -303,10 +304,10 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listPeriodo = db.UDP_Plani_tbPeriodos_Activar(tbPeriodos.peri_IdPeriodo,
-                                                                     tbPeriodos.peri_UsuarioModifica,
-                                                                     tbPeriodos.peri_FechaModifica);
+                                                                               tbPeriodos.peri_UsuarioModifica,
+                                                                               tbPeriodos.peri_FechaModifica);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO
                     foreach (UDP_Plani_tbPeriodos_Activar_Result Resultado in listPeriodo)
                         MensajeError = Resultado.MensajeError;
 
@@ -327,7 +328,7 @@ namespace ERP_GMEDINA.Controllers
             else
             {
                 // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
 
