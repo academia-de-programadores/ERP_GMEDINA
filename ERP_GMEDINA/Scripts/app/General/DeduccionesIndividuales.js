@@ -337,14 +337,14 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
-    var ID = $(this).data('id');
-    Idinactivar = ID;
+    var id = $(this).data('id');
+    Idinactivar = id;
     $.ajax({
-        url: "/DeduccionesIndividuales/Edit/" + ID,
+        url: "/DeduccionesIndividuales/Edit/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        data: JSON.stringify({ id: id })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -364,7 +364,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
+                    data: JSON.stringify({ id })
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
@@ -390,6 +390,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
 $("#btnEditDeduccionIndividual").click(function () {
     $("#EditarDeduccionesIndividualesConfirmacion").modal();
 });
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionIndividual2").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -451,6 +452,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
 
         }
         else {
+            $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             iziToast.error({
                 title: 'Error',
                 message: 'Datos Invalidos!',

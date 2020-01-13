@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Monto")]
         public decimal ini_Monto { get; set; }
 
-        [Display(Name = "Siempre se Deduce")]
+        [Display(Name = "Siempre Recibe")]
         public Nullable<bool> ini_PagaSiempre { get; set; }
 
         [Display(Name = "Creado por")]

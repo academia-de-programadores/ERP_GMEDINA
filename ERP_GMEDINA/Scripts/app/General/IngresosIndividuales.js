@@ -359,8 +359,12 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditIngresoIndividual").click(function () {
+    $("#EditarIngresosIndividualesConfirmacion").modal();
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditIngresoIndividual2").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var vale1 = $("#Editar #emp_Id").val();
     var vale2 = $("#Editar #ini_Motivo").val();
@@ -394,6 +398,7 @@ $("#btnEditIngresoIndividual").click(function () {
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarIngresosIndividuales").modal('hide');
+            $("#EditarIngresosIndividualesConfirmacion").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //Mensaje de exito de la edicion
@@ -404,6 +409,7 @@ $("#btnEditIngresoIndividual").click(function () {
 
         }
         else {
+            $("#EditarIngresosIndividualesConfirmacion").modal('hide');
             iziToast.error({
                 title: 'Error',
                 message: 'Datos Invalidos!',
