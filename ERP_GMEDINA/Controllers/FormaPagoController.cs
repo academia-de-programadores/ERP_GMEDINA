@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: FormaPago
         public ActionResult Index()
         {
-            var tbFormaPago = db.tbFormaPago.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.fpa_FechaCrea);
+            var tbFormaPago = db.tbFormaPago.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.fpa_IdFormaPago);
             return View(tbFormaPago.ToList());
         }
         #endregion
@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     fpa_FechaModifica = c.fpa_FechaModifica,
                     fpa_Activo = c.fpa_Activo
-                }).OrderByDescending(x => x.fpa_FechaCrea).ToList();
+                }).OrderBy(x => x.fpa_IdFormaPago).ToList();
 
             return new JsonResult { Data = tbFormaPago, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
