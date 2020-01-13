@@ -368,7 +368,7 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
     $.ajax({
         url: "/TechosDeducciones/Activar/" + activarID,
         method: "POST",
-        data: { id: activarID }
+        data: {id : activarID}
     }).done(function (data) {
         if (data == "error") {
             iziToast.error({

@@ -6210,686 +6210,686 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="EmpleadosVendedores" EntityType="Self.EmpleadosVendedores" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [EmpleadosVendedores].[Id] AS [Id], 
+            <DefiningQuery>SELECT
+    [EmpleadosVendedores].[Id] AS [Id],
     [EmpleadosVendedores].[Descripcion] AS [Descripcion]
     FROM [Plani].[EmpleadosVendedores] AS [EmpleadosVendedores]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_AFP_RPT" EntityType="Self.V_AFP_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_AFP_RPT].[emp_Id] AS [emp_Id], 
-    [V_AFP_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_AFP_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_AFP_RPT].[hipa_AFP] AS [hipa_AFP], 
-    [V_AFP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_AFP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
+            <DefiningQuery>SELECT
+    [V_AFP_RPT].[emp_Id] AS [emp_Id],
+    [V_AFP_RPT].[per_Nombres] AS [per_Nombres],
+    [V_AFP_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_AFP_RPT].[hipa_AFP] AS [hipa_AFP],
+    [V_AFP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_AFP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
     [V_AFP_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
     FROM [Plani].[V_AFP_RPT] AS [V_AFP_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_BonosColaborador" EntityType="Self.V_BonosColaborador" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_BonosColaborador].[cb_Id] AS [cb_Id], 
-    [V_BonosColaborador].[emp_Id] AS [emp_Id], 
-    [V_BonosColaborador].[cb_Monto] AS [cb_Monto], 
-    [V_BonosColaborador].[cb_FechaRegistro] AS [cb_FechaRegistro], 
-    [V_BonosColaborador].[cb_Pagado] AS [cb_Pagado], 
-    [V_BonosColaborador].[cb_UsuarioCrea] AS [cb_UsuarioCrea], 
-    [V_BonosColaborador].[cb_FechaCrea] AS [cb_FechaCrea], 
-    [V_BonosColaborador].[cb_UsuarioModifica] AS [cb_UsuarioModifica], 
-    [V_BonosColaborador].[cb_FechaModifica] AS [cb_FechaModifica], 
-    [V_BonosColaborador].[cb_Activo] AS [cb_Activo], 
-    [V_BonosColaborador].[cin_IdIngreso] AS [cin_IdIngreso], 
+            <DefiningQuery>SELECT
+    [V_BonosColaborador].[cb_Id] AS [cb_Id],
+    [V_BonosColaborador].[emp_Id] AS [emp_Id],
+    [V_BonosColaborador].[cb_Monto] AS [cb_Monto],
+    [V_BonosColaborador].[cb_FechaRegistro] AS [cb_FechaRegistro],
+    [V_BonosColaborador].[cb_Pagado] AS [cb_Pagado],
+    [V_BonosColaborador].[cb_UsuarioCrea] AS [cb_UsuarioCrea],
+    [V_BonosColaborador].[cb_FechaCrea] AS [cb_FechaCrea],
+    [V_BonosColaborador].[cb_UsuarioModifica] AS [cb_UsuarioModifica],
+    [V_BonosColaborador].[cb_FechaModifica] AS [cb_FechaModifica],
+    [V_BonosColaborador].[cb_Activo] AS [cb_Activo],
+    [V_BonosColaborador].[cin_IdIngreso] AS [cin_IdIngreso],
     [V_BonosColaborador].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso]
     FROM [Plani].[V_BonosColaborador] AS [V_BonosColaborador]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_CatalogoDeIngresos" EntityType="Self.V_CatalogoDeIngresos" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_CatalogoDeIngresos].[cin_IdIngreso] AS [cin_IdIngreso], 
-    [V_CatalogoDeIngresos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_CatalogoDeIngresos].[cin_UsuarioCrea] AS [cin_UsuarioCrea], 
-    [V_CatalogoDeIngresos].[cin_FechaCrea] AS [cin_FechaCrea], 
-    [V_CatalogoDeIngresos].[cin_UsuarioModifica] AS [cin_UsuarioModifica], 
-    [V_CatalogoDeIngresos].[cin_FechaModifica] AS [cin_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_CatalogoDeIngresos].[cin_IdIngreso] AS [cin_IdIngreso],
+    [V_CatalogoDeIngresos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso],
+    [V_CatalogoDeIngresos].[cin_UsuarioCrea] AS [cin_UsuarioCrea],
+    [V_CatalogoDeIngresos].[cin_FechaCrea] AS [cin_FechaCrea],
+    [V_CatalogoDeIngresos].[cin_UsuarioModifica] AS [cin_UsuarioModifica],
+    [V_CatalogoDeIngresos].[cin_FechaModifica] AS [cin_FechaModifica],
     [V_CatalogoDeIngresos].[cin_Activo] AS [cin_Activo]
     FROM [Plani].[V_CatalogoDeIngresos] AS [V_CatalogoDeIngresos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_CatalogoDePlanillasConIngresosYDeducciones" EntityType="Self.V_CatalogoDePlanillasConIngresosYDeducciones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[idPlanilla] AS [idPlanilla], 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[descripcionPlanilla] AS [descripcionPlanilla], 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[frecuenciaEnDias] AS [frecuenciaEnDias], 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[idIngreso] AS [idIngreso], 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[descripcionIngreso] AS [descripcionIngreso], 
-    [V_CatalogoDePlanillasConIngresosYDeducciones].[idDeducciones] AS [idDeducciones], 
+            <DefiningQuery>SELECT
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[idPlanilla] AS [idPlanilla],
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[descripcionPlanilla] AS [descripcionPlanilla],
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[frecuenciaEnDias] AS [frecuenciaEnDias],
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[idIngreso] AS [idIngreso],
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[descripcionIngreso] AS [descripcionIngreso],
+    [V_CatalogoDePlanillasConIngresosYDeducciones].[idDeducciones] AS [idDeducciones],
     [V_CatalogoDePlanillasConIngresosYDeducciones].[descripcionDeduccion] AS [descripcionDeduccion]
     FROM [Plani].[V_CatalogoDePlanillasConIngresosYDeducciones] AS [V_CatalogoDePlanillasConIngresosYDeducciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ColaboradoresPorPlanilla" EntityType="Self.V_ColaboradoresPorPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_ColaboradoresPorPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_ColaboradoresPorPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
+            <DefiningQuery>SELECT
+    [V_ColaboradoresPorPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_ColaboradoresPorPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
     [V_ColaboradoresPorPlanilla].[CantidadColaboradores] AS [CantidadColaboradores]
     FROM [Plani].[V_ColaboradoresPorPlanilla] AS [V_ColaboradoresPorPlanilla]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ComisionesColaborador" EntityType="Self.V_ComisionesColaborador" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_ComisionesColaborador].[cc_Id] AS [cc_Id], 
-    [V_ComisionesColaborador].[emp_Id] AS [emp_Id], 
-    [V_ComisionesColaborador].[cc_Monto] AS [cc_Monto], 
-    [V_ComisionesColaborador].[cc_FechaRegistro] AS [cc_FechaRegistro], 
-    [V_ComisionesColaborador].[cc_Pagado] AS [cc_Pagado], 
-    [V_ComisionesColaborador].[cc_UsuarioCrea] AS [cc_UsuarioCrea], 
-    [V_ComisionesColaborador].[cc_FechaCrea] AS [cc_FechaCrea], 
-    [V_ComisionesColaborador].[cc_UsuarioModifica] AS [cc_UsuarioModifica], 
-    [V_ComisionesColaborador].[cc_FechaModifica] AS [cc_FechaModifica], 
-    [V_ComisionesColaborador].[cc_Activo] AS [cc_Activo], 
-    [V_ComisionesColaborador].[cin_IdIngreso] AS [cin_IdIngreso], 
+            <DefiningQuery>SELECT
+    [V_ComisionesColaborador].[cc_Id] AS [cc_Id],
+    [V_ComisionesColaborador].[emp_Id] AS [emp_Id],
+    [V_ComisionesColaborador].[cc_Monto] AS [cc_Monto],
+    [V_ComisionesColaborador].[cc_FechaRegistro] AS [cc_FechaRegistro],
+    [V_ComisionesColaborador].[cc_Pagado] AS [cc_Pagado],
+    [V_ComisionesColaborador].[cc_UsuarioCrea] AS [cc_UsuarioCrea],
+    [V_ComisionesColaborador].[cc_FechaCrea] AS [cc_FechaCrea],
+    [V_ComisionesColaborador].[cc_UsuarioModifica] AS [cc_UsuarioModifica],
+    [V_ComisionesColaborador].[cc_FechaModifica] AS [cc_FechaModifica],
+    [V_ComisionesColaborador].[cc_Activo] AS [cc_Activo],
+    [V_ComisionesColaborador].[cin_IdIngreso] AS [cin_IdIngreso],
     [V_ComisionesColaborador].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso]
     FROM [Plani].[V_ComisionesColaborador] AS [V_ComisionesColaborador]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoCuartoMes" EntityType="Self.V_DecimoCuartoMes" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoCuartoMes].[emp_Id] AS [emp_Id], 
-    [V_DecimoCuartoMes].[Nombre] AS [Nombre], 
-    [V_DecimoCuartoMes].[Apellido] AS [Apellido], 
-    [V_DecimoCuartoMes].[Cargo] AS [Cargo], 
-    [V_DecimoCuartoMes].[Planilla] AS [Planilla], 
-    [V_DecimoCuartoMes].[CuentaBancaria] AS [CuentaBancaria], 
+            <DefiningQuery>SELECT
+    [V_DecimoCuartoMes].[emp_Id] AS [emp_Id],
+    [V_DecimoCuartoMes].[Nombre] AS [Nombre],
+    [V_DecimoCuartoMes].[Apellido] AS [Apellido],
+    [V_DecimoCuartoMes].[Cargo] AS [Cargo],
+    [V_DecimoCuartoMes].[Planilla] AS [Planilla],
+    [V_DecimoCuartoMes].[CuentaBancaria] AS [CuentaBancaria],
     [V_DecimoCuartoMes].[Monto] AS [Monto]
     FROM [Plani].[V_DecimoCuartoMes] AS [V_DecimoCuartoMes]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoCuartoMes_Pagados" EntityType="Self.V_DecimoCuartoMes_Pagados" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoCuartoMes_Pagados].[emp_Id] AS [emp_Id], 
-    [V_DecimoCuartoMes_Pagados].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoCuartoMes_Pagados].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoCuartoMes_Pagados].[car_Descripcion] AS [car_Descripcion], 
-    [V_DecimoCuartoMes_Pagados].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_DecimoCuartoMes_Pagados].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoCuartoMes_Pagados].[dcm_Monto] AS [dcm_Monto], 
+            <DefiningQuery>SELECT
+    [V_DecimoCuartoMes_Pagados].[emp_Id] AS [emp_Id],
+    [V_DecimoCuartoMes_Pagados].[per_Nombres] AS [per_Nombres],
+    [V_DecimoCuartoMes_Pagados].[per_Apellidos] AS [per_Apellidos],
+    [V_DecimoCuartoMes_Pagados].[car_Descripcion] AS [car_Descripcion],
+    [V_DecimoCuartoMes_Pagados].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_DecimoCuartoMes_Pagados].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_DecimoCuartoMes_Pagados].[dcm_Monto] AS [dcm_Monto],
     [V_DecimoCuartoMes_Pagados].[dcm_FechaPago] AS [dcm_FechaPago]
     FROM [Plani].[V_DecimoCuartoMes_Pagados] AS [V_DecimoCuartoMes_Pagados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoCuartoMes_RPT" EntityType="Self.V_DecimoCuartoMes_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoCuartoMes_RPT].[dcm_IdDecimoCuartoMes] AS [dcm_IdDecimoCuartoMes], 
-    [V_DecimoCuartoMes_RPT].[emp_Id] AS [emp_Id], 
-    [V_DecimoCuartoMes_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoCuartoMes_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoCuartoMes_RPT].[dcm_FechaPago] AS [dcm_FechaPago], 
-    [V_DecimoCuartoMes_RPT].[dcm_Monto] AS [dcm_Monto], 
-    [V_DecimoCuartoMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoCuartoMes_RPT].[dcm_CodigoPago] AS [dcm_CodigoPago], 
-    [V_DecimoCuartoMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_DecimoCuartoMes_RPT].[dcm_IdDecimoCuartoMes] AS [dcm_IdDecimoCuartoMes],
+    [V_DecimoCuartoMes_RPT].[emp_Id] AS [emp_Id],
+    [V_DecimoCuartoMes_RPT].[per_Nombres] AS [per_Nombres],
+    [V_DecimoCuartoMes_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_DecimoCuartoMes_RPT].[dcm_FechaPago] AS [dcm_FechaPago],
+    [V_DecimoCuartoMes_RPT].[dcm_Monto] AS [dcm_Monto],
+    [V_DecimoCuartoMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_DecimoCuartoMes_RPT].[dcm_CodigoPago] AS [dcm_CodigoPago],
+    [V_DecimoCuartoMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_DecimoCuartoMes_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_DecimoCuartoMes_RPT] AS [V_DecimoCuartoMes_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoTercerMes].[emp_Id] AS [emp_Id], 
-    [V_DecimoTercerMes].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoTercerMes].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoTercerMes].[car_Descripcion] AS [car_Descripcion], 
-    [V_DecimoTercerMes].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_DecimoTercerMes].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
+            <DefiningQuery>SELECT
+    [V_DecimoTercerMes].[emp_Id] AS [emp_Id],
+    [V_DecimoTercerMes].[per_Nombres] AS [per_Nombres],
+    [V_DecimoTercerMes].[per_Apellidos] AS [per_Apellidos],
+    [V_DecimoTercerMes].[car_Descripcion] AS [car_Descripcion],
+    [V_DecimoTercerMes].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_DecimoTercerMes].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
     [V_DecimoTercerMes].[dtm_Monto] AS [dtm_Monto]
     FROM [Plani].[V_DecimoTercerMes] AS [V_DecimoTercerMes]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoTercerMes_Pagados" EntityType="Self.V_DecimoTercerMes_Pagados" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoTercerMes_Pagados].[emp_Id] AS [emp_Id], 
-    [V_DecimoTercerMes_Pagados].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoTercerMes_Pagados].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoTercerMes_Pagados].[car_Descripcion] AS [car_Descripcion], 
-    [V_DecimoTercerMes_Pagados].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_DecimoTercerMes_Pagados].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoTercerMes_Pagados].[dtm_Monto] AS [dtm_Monto], 
+            <DefiningQuery>SELECT
+    [V_DecimoTercerMes_Pagados].[emp_Id] AS [emp_Id],
+    [V_DecimoTercerMes_Pagados].[per_Nombres] AS [per_Nombres],
+    [V_DecimoTercerMes_Pagados].[per_Apellidos] AS [per_Apellidos],
+    [V_DecimoTercerMes_Pagados].[car_Descripcion] AS [car_Descripcion],
+    [V_DecimoTercerMes_Pagados].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_DecimoTercerMes_Pagados].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_DecimoTercerMes_Pagados].[dtm_Monto] AS [dtm_Monto],
     [V_DecimoTercerMes_Pagados].[dtm_FechaPago] AS [dtm_FechaPago]
     FROM [Plani].[V_DecimoTercerMes_Pagados] AS [V_DecimoTercerMes_Pagados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="Self.V_DecimoTercerMes_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoTercerMes_RPT].[dtm_IdDecimoTercerMes] AS [dtm_IdDecimoTercerMes], 
-    [V_DecimoTercerMes_RPT].[emp_Id] AS [emp_Id], 
-    [V_DecimoTercerMes_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoTercerMes_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoTercerMes_RPT].[dtm_FechaPago] AS [dtm_FechaPago], 
-    [V_DecimoTercerMes_RPT].[dtm_Monto] AS [dtm_Monto], 
-    [V_DecimoTercerMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoTercerMes_RPT].[dtm_CodigoPago] AS [dtm_CodigoPago], 
-    [V_DecimoTercerMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_DecimoTercerMes_RPT].[dtm_IdDecimoTercerMes] AS [dtm_IdDecimoTercerMes],
+    [V_DecimoTercerMes_RPT].[emp_Id] AS [emp_Id],
+    [V_DecimoTercerMes_RPT].[per_Nombres] AS [per_Nombres],
+    [V_DecimoTercerMes_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_DecimoTercerMes_RPT].[dtm_FechaPago] AS [dtm_FechaPago],
+    [V_DecimoTercerMes_RPT].[dtm_Monto] AS [dtm_Monto],
+    [V_DecimoTercerMes_RPT].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_DecimoTercerMes_RPT].[dtm_CodigoPago] AS [dtm_CodigoPago],
+    [V_DecimoTercerMes_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_DecimoTercerMes_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_DecimoTercerMes_RPT] AS [V_DecimoTercerMes_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Deducciones_RPT" EntityType="Self.V_Deducciones_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Deducciones_RPT].[emp_Id] AS [emp_Id], 
-    [V_Deducciones_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_Deducciones_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_Deducciones_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_Deducciones_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_Deducciones_RPT].[hidp_Total] AS [hidp_Total], 
-    [V_Deducciones_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_Deducciones_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_Deducciones_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_Deducciones_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_Deducciones_RPT].[emp_Id] AS [emp_Id],
+    [V_Deducciones_RPT].[per_Nombres] AS [per_Nombres],
+    [V_Deducciones_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_Deducciones_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_Deducciones_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_Deducciones_RPT].[hidp_Total] AS [hidp_Total],
+    [V_Deducciones_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_Deducciones_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_Deducciones_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_Deducciones_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_Deducciones_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_Deducciones_RPT] AS [V_Deducciones_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias].[per_DeduccionEmpleado] AS [per_DeduccionEmpleado], 
-    [V_DeduccionesExtraordinarias].[car_Descripcion] AS [car_Descripcion], 
-    [V_DeduccionesExtraordinarias].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtraordinarias].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtraordinarias].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtraordinarias].[dex_Cuota] AS [dex_Cuota], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesExtraordinarias].[per_DeduccionEmpleado] AS [per_DeduccionEmpleado],
+    [V_DeduccionesExtraordinarias].[car_Descripcion] AS [car_Descripcion],
+    [V_DeduccionesExtraordinarias].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios],
+    [V_DeduccionesExtraordinarias].[dex_MontoInicial] AS [dex_MontoInicial],
+    [V_DeduccionesExtraordinarias].[dex_MontoRestante] AS [dex_MontoRestante],
+    [V_DeduccionesExtraordinarias].[dex_Cuota] AS [dex_Cuota],
     [V_DeduccionesExtraordinarias].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion]
     FROM [Plani].[V_DeduccionesExtraordinarias] AS [V_DeduccionesExtraordinarias]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="Self.V_DeduccionesExtraordinarias_Detalles" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra], 
-    [V_DeduccionesExtraordinarias_Detalles].[eqem_Id] AS [eqem_Id], 
-    [V_DeduccionesExtraordinarias_Detalles].[per_Empleado] AS [per_Empleado], 
-    [V_DeduccionesExtraordinarias_Detalles].[car_Cargo] AS [car_Cargo], 
-    [V_DeduccionesExtraordinarias_Detalles].[depto_Departamento] AS [depto_Departamento], 
-    [V_DeduccionesExtraordinarias_Detalles].[area_Area] AS [area_Area], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Id] AS [eqtra_Id], 
-    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Codigo] AS [eqtra_Codigo], 
-    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Descripcion] AS [eqtra_Descripcion], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_Cuota] AS [dex_Cuota], 
-    [V_DeduccionesExtraordinarias_Detalles].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_DeduccionesExtraordinarias_Detalles].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioCrea] AS [dex_UsuarioCrea], 
-    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioCrea] AS [usu_UsuarioCrea], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_FechaCrea] AS [dex_FechaCrea], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioModifica] AS [dex_UsuarioModifica], 
-    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioModifica] AS [usu_UsuarioModifica], 
-    [V_DeduccionesExtraordinarias_Detalles].[dex_FechaModifica] AS [dex_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesExtraordinarias_Detalles].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra],
+    [V_DeduccionesExtraordinarias_Detalles].[eqem_Id] AS [eqem_Id],
+    [V_DeduccionesExtraordinarias_Detalles].[per_Empleado] AS [per_Empleado],
+    [V_DeduccionesExtraordinarias_Detalles].[car_Cargo] AS [car_Cargo],
+    [V_DeduccionesExtraordinarias_Detalles].[depto_Departamento] AS [depto_Departamento],
+    [V_DeduccionesExtraordinarias_Detalles].[area_Area] AS [area_Area],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios],
+    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Id] AS [eqtra_Id],
+    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Codigo] AS [eqtra_Codigo],
+    [V_DeduccionesExtraordinarias_Detalles].[eqtra_Descripcion] AS [eqtra_Descripcion],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_MontoInicial] AS [dex_MontoInicial],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_MontoRestante] AS [dex_MontoRestante],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_Cuota] AS [dex_Cuota],
+    [V_DeduccionesExtraordinarias_Detalles].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_DeduccionesExtraordinarias_Detalles].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioCrea] AS [dex_UsuarioCrea],
+    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioCrea] AS [usu_UsuarioCrea],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_FechaCrea] AS [dex_FechaCrea],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_UsuarioModifica] AS [dex_UsuarioModifica],
+    [V_DeduccionesExtraordinarias_Detalles].[usu_UsuarioModifica] AS [usu_UsuarioModifica],
+    [V_DeduccionesExtraordinarias_Detalles].[dex_FechaModifica] AS [dex_FechaModifica],
     [V_DeduccionesExtraordinarias_Detalles].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtraordinarias_Detalles] AS [V_DeduccionesExtraordinarias_Detalles]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias_Empleados" EntityType="Self.V_DeduccionesExtraordinarias_Empleados" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra], 
-    [V_DeduccionesExtraordinarias_Empleados].[eqem_Id] AS [eqem_Id], 
-    [V_DeduccionesExtraordinarias_Empleados].[per_Empleado] AS [per_Empleado], 
-    [V_DeduccionesExtraordinarias_Empleados].[car_Cargo] AS [car_Cargo], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtraordinarias_Empleados].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_Cuota] AS [dex_Cuota], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioCrea] AS [dex_UsuarioCrea], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaCrea] AS [dex_FechaCrea], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioModifica] AS [dex_UsuarioModifica], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaModifica] AS [dex_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesExtraordinarias_Empleados].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra],
+    [V_DeduccionesExtraordinarias_Empleados].[eqem_Id] AS [eqem_Id],
+    [V_DeduccionesExtraordinarias_Empleados].[per_Empleado] AS [per_Empleado],
+    [V_DeduccionesExtraordinarias_Empleados].[car_Cargo] AS [car_Cargo],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoInicial] AS [dex_MontoInicial],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoRestante] AS [dex_MontoRestante],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios],
+    [V_DeduccionesExtraordinarias_Empleados].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_Cuota] AS [dex_Cuota],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioCrea] AS [dex_UsuarioCrea],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaCrea] AS [dex_FechaCrea],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioModifica] AS [dex_UsuarioModifica],
+    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaModifica] AS [dex_FechaModifica],
     [V_DeduccionesExtraordinarias_Empleados].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtraordinarias_Empleados] AS [V_DeduccionesExtraordinarias_Empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="Self.V_DeduccionesExtraordinarias_EquipoEmpleado" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqem_Id] AS [eqem_Id], 
-    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Id] AS [eqtra_Id], 
-    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Codigo] AS [eqtra_Codigo], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqem_Id] AS [eqem_Id],
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Id] AS [eqtra_Id],
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Codigo] AS [eqtra_Codigo],
     [V_DeduccionesExtraordinarias_EquipoEmpleado].[per_EquipoEmpleado] AS [per_EquipoEmpleado]
     FROM [Plani].[V_DeduccionesExtraordinarias_EquipoEmpleado] AS [V_DeduccionesExtraordinarias_EquipoEmpleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtrasColaboradores].[eqtra_Id] AS [eqtra_Id], 
-    [V_DeduccionesExtrasColaboradores].[eqtra_codigo] AS [eqtra_codigo], 
-    [V_DeduccionesExtrasColaboradores].[eqtra_Descripcion] AS [eqtra_Descripcion], 
-    [V_DeduccionesExtrasColaboradores].[eqtra_observacion] AS [eqtra_observacion], 
-    [V_DeduccionesExtrasColaboradores].[emp_Id] AS [emp_Id], 
-    [V_DeduccionesExtrasColaboradores].[eqem_Fecha] AS [eqem_Fecha], 
-    [V_DeduccionesExtrasColaboradores].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtrasColaboradores].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtrasColaboradores].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtrasColaboradores].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_DeduccionesExtrasColaboradores].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_DeduccionesExtrasColaboradores].[dex_Cuota] AS [dex_Cuota], 
-    [V_DeduccionesExtrasColaboradores].[dex_UsuarioCrea] AS [dex_UsuarioCrea], 
-    [V_DeduccionesExtrasColaboradores].[dex_FechaCrea] AS [dex_FechaCrea], 
-    [V_DeduccionesExtrasColaboradores].[dex_UsuarioModifica] AS [dex_UsuarioModifica], 
-    [V_DeduccionesExtrasColaboradores].[dex_FechaModifica] AS [dex_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesExtrasColaboradores].[eqtra_Id] AS [eqtra_Id],
+    [V_DeduccionesExtrasColaboradores].[eqtra_codigo] AS [eqtra_codigo],
+    [V_DeduccionesExtrasColaboradores].[eqtra_Descripcion] AS [eqtra_Descripcion],
+    [V_DeduccionesExtrasColaboradores].[eqtra_observacion] AS [eqtra_observacion],
+    [V_DeduccionesExtrasColaboradores].[emp_Id] AS [emp_Id],
+    [V_DeduccionesExtrasColaboradores].[eqem_Fecha] AS [eqem_Fecha],
+    [V_DeduccionesExtrasColaboradores].[dex_MontoInicial] AS [dex_MontoInicial],
+    [V_DeduccionesExtrasColaboradores].[dex_MontoRestante] AS [dex_MontoRestante],
+    [V_DeduccionesExtrasColaboradores].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios],
+    [V_DeduccionesExtrasColaboradores].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_DeduccionesExtrasColaboradores].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_DeduccionesExtrasColaboradores].[dex_Cuota] AS [dex_Cuota],
+    [V_DeduccionesExtrasColaboradores].[dex_UsuarioCrea] AS [dex_UsuarioCrea],
+    [V_DeduccionesExtrasColaboradores].[dex_FechaCrea] AS [dex_FechaCrea],
+    [V_DeduccionesExtrasColaboradores].[dex_UsuarioModifica] AS [dex_UsuarioModifica],
+    [V_DeduccionesExtrasColaboradores].[dex_FechaModifica] AS [dex_FechaModifica],
     [V_DeduccionesExtrasColaboradores].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtrasColaboradores] AS [V_DeduccionesExtrasColaboradores]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesInstitucionesFinancierasColaboradres" EntityType="Self.V_DeduccionesInstitucionesFinancierasColaboradres" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_IdDeduccionInstFinanciera] AS [deif_IdDeduccionInstFinanciera], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[emp_Id] AS [emp_Id], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Monto] AS [deif_Monto], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Comentarios] AS [deif_Comentarios], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_UsuarioCrea] AS [deif_UsuarioCrea], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_FechaCrea] AS [deif_FechaCrea], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_UsuarioModifica] AS [deif_UsuarioModifica], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_FechaModifica] AS [deif_FechaModifica], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Activo] AS [deif_Activo], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[insf_IdInstitucionFinanciera] AS [insf_IdInstitucionFinanciera], 
-    [V_DeduccionesInstitucionesFinancierasColaboradres].[insf_DescInstitucionFinanc] AS [insf_DescInstitucionFinanc], 
+            <DefiningQuery>SELECT
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_IdDeduccionInstFinanciera] AS [deif_IdDeduccionInstFinanciera],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[emp_Id] AS [emp_Id],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Monto] AS [deif_Monto],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Comentarios] AS [deif_Comentarios],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_UsuarioCrea] AS [deif_UsuarioCrea],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_FechaCrea] AS [deif_FechaCrea],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_UsuarioModifica] AS [deif_UsuarioModifica],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_FechaModifica] AS [deif_FechaModifica],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[deif_Activo] AS [deif_Activo],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[insf_IdInstitucionFinanciera] AS [insf_IdInstitucionFinanciera],
+    [V_DeduccionesInstitucionesFinancierasColaboradres].[insf_DescInstitucionFinanc] AS [insf_DescInstitucionFinanc],
     [V_DeduccionesInstitucionesFinancierasColaboradres].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion]
     FROM [Plani].[V_DeduccionesInstitucionesFinancierasColaboradres] AS [V_DeduccionesInstitucionesFinancierasColaboradres]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_EmpleadoBonos" EntityType="Self.V_EmpleadoBonos" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_EmpleadoBonos].[cb_Id] AS [cb_Id], 
-    [V_EmpleadoBonos].[emp_Id] AS [emp_Id], 
-    [V_EmpleadoBonos].[per_Nombres] AS [per_Nombres], 
-    [V_EmpleadoBonos].[cin_IdIngreso] AS [cin_IdIngreso], 
-    [V_EmpleadoBonos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_EmpleadoBonos].[cb_Monto] AS [cb_Monto], 
-    [V_EmpleadoBonos].[cb_FechaRegistro] AS [cb_FechaRegistro], 
-    [V_EmpleadoBonos].[cb_Pagado] AS [cb_Pagado], 
-    [V_EmpleadoBonos].[cb_UsuarioCrea] AS [cb_UsuarioCrea], 
-    [V_EmpleadoBonos].[cb_FechaCrea] AS [cb_FechaCrea], 
-    [V_EmpleadoBonos].[cb_UsuarioModifica] AS [cb_UsuarioModifica], 
+            <DefiningQuery>SELECT
+    [V_EmpleadoBonos].[cb_Id] AS [cb_Id],
+    [V_EmpleadoBonos].[emp_Id] AS [emp_Id],
+    [V_EmpleadoBonos].[per_Nombres] AS [per_Nombres],
+    [V_EmpleadoBonos].[cin_IdIngreso] AS [cin_IdIngreso],
+    [V_EmpleadoBonos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso],
+    [V_EmpleadoBonos].[cb_Monto] AS [cb_Monto],
+    [V_EmpleadoBonos].[cb_FechaRegistro] AS [cb_FechaRegistro],
+    [V_EmpleadoBonos].[cb_Pagado] AS [cb_Pagado],
+    [V_EmpleadoBonos].[cb_UsuarioCrea] AS [cb_UsuarioCrea],
+    [V_EmpleadoBonos].[cb_FechaCrea] AS [cb_FechaCrea],
+    [V_EmpleadoBonos].[cb_UsuarioModifica] AS [cb_UsuarioModifica],
     [V_EmpleadoBonos].[cb_FechaModifica] AS [cb_FechaModifica]
     FROM [Plani].[V_EmpleadoBonos] AS [V_EmpleadoBonos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_FormaDePago" EntityType="Self.V_FormaDePago" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_FormaDePago].[fpa_IdFormaPago] AS [fpa_IdFormaPago], 
-    [V_FormaDePago].[fpa_Descripcion] AS [fpa_Descripcion], 
-    [V_FormaDePago].[fpa_UsuarioCrea] AS [fpa_UsuarioCrea], 
-    [V_FormaDePago].[fpa_FechaCrea] AS [fpa_FechaCrea], 
-    [V_FormaDePago].[fpa_UsuarioModifica] AS [fpa_UsuarioModifica], 
-    [V_FormaDePago].[fpa_FechaModifica] AS [fpa_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_FormaDePago].[fpa_IdFormaPago] AS [fpa_IdFormaPago],
+    [V_FormaDePago].[fpa_Descripcion] AS [fpa_Descripcion],
+    [V_FormaDePago].[fpa_UsuarioCrea] AS [fpa_UsuarioCrea],
+    [V_FormaDePago].[fpa_FechaCrea] AS [fpa_FechaCrea],
+    [V_FormaDePago].[fpa_UsuarioModifica] AS [fpa_UsuarioModifica],
+    [V_FormaDePago].[fpa_FechaModifica] AS [fpa_FechaModifica],
     [V_FormaDePago].[fpa_Activo] AS [fpa_Activo]
     FROM [Plani].[V_FormaDePago] AS [V_FormaDePago]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_GeneralTotales_RPT" EntityType="Self.V_GeneralTotales_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_GeneralTotales_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_GeneralTotales_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_GeneralTotales_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_GeneralTotales_RPT].[cde_TotalISR] AS [cde_TotalISR], 
-    [V_GeneralTotales_RPT].[cde_TotalAFP] AS [cde_TotalAFP], 
-    [V_GeneralTotales_RPT].[cde_TotalIHSS] AS [cde_TotalIHSS], 
-    [V_GeneralTotales_RPT].[cde_TotalRAP] AS [cde_TotalRAP], 
-    [V_GeneralTotales_RPT].[cde_TotalINFOP] AS [cde_TotalINFOP], 
+            <DefiningQuery>SELECT
+    [V_GeneralTotales_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_GeneralTotales_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_GeneralTotales_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_GeneralTotales_RPT].[cde_TotalISR] AS [cde_TotalISR],
+    [V_GeneralTotales_RPT].[cde_TotalAFP] AS [cde_TotalAFP],
+    [V_GeneralTotales_RPT].[cde_TotalIHSS] AS [cde_TotalIHSS],
+    [V_GeneralTotales_RPT].[cde_TotalRAP] AS [cde_TotalRAP],
+    [V_GeneralTotales_RPT].[cde_TotalINFOP] AS [cde_TotalINFOP],
     [V_GeneralTotales_RPT].[cde_OtrasDeducciones] AS [cde_OtrasDeducciones]
     FROM [Plani].[V_GeneralTotales_RPT] AS [V_GeneralTotales_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="Self.V_HistorialEmpleadosLiquidados" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_HistorialEmpleadosLiquidados].[hdli_Id] AS [hdli_Id], 
-    [V_HistorialEmpleadosLiquidados].[emp_Id] AS [emp_Id], 
-    [V_HistorialEmpleadosLiquidados].[per_Identidad] AS [per_Identidad], 
-    [V_HistorialEmpleadosLiquidados].[per_Nombres] AS [per_Nombres], 
-    [V_HistorialEmpleadosLiquidados].[per_Apellidos] AS [per_Apellidos], 
-    [V_HistorialEmpleadosLiquidados].[hdli_SalarioOrdinarioMensual_Liq] AS [hdli_SalarioOrdinarioMensual_Liq], 
-    [V_HistorialEmpleadosLiquidados].[hdli_SalarioPromedioMensual_Liql] AS [hdli_SalarioPromedioMensual_Liql], 
-    [V_HistorialEmpleadosLiquidados].[moli_IdMotivo] AS [moli_IdMotivo], 
-    [V_HistorialEmpleadosLiquidados].[moli_Descripcion] AS [moli_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_HistorialEmpleadosLiquidados].[hdli_Id] AS [hdli_Id],
+    [V_HistorialEmpleadosLiquidados].[emp_Id] AS [emp_Id],
+    [V_HistorialEmpleadosLiquidados].[per_Identidad] AS [per_Identidad],
+    [V_HistorialEmpleadosLiquidados].[per_Nombres] AS [per_Nombres],
+    [V_HistorialEmpleadosLiquidados].[per_Apellidos] AS [per_Apellidos],
+    [V_HistorialEmpleadosLiquidados].[hdli_SalarioOrdinarioMensual_Liq] AS [hdli_SalarioOrdinarioMensual_Liq],
+    [V_HistorialEmpleadosLiquidados].[hdli_SalarioPromedioMensual_Liql] AS [hdli_SalarioPromedioMensual_Liql],
+    [V_HistorialEmpleadosLiquidados].[moli_IdMotivo] AS [moli_IdMotivo],
+    [V_HistorialEmpleadosLiquidados].[moli_Descripcion] AS [moli_Descripcion],
     [V_HistorialEmpleadosLiquidados].[hdli_MontoTotalLiquidacion] AS [hdli_MontoTotalLiquidacion]
     FROM [Plani].[V_HistorialEmpleadosLiquidados] AS [V_HistorialEmpleadosLiquidados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_IHSS_RPT" EntityType="Self.V_IHSS_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_IHSS_RPT].[emp_Id] AS [emp_Id], 
-    [V_IHSS_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_IHSS_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_IHSS_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_IHSS_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_IHSS_RPT].[hidp_Total] AS [hidp_Total], 
-    [V_IHSS_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_IHSS_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_IHSS_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_IHSS_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_IHSS_RPT].[emp_Id] AS [emp_Id],
+    [V_IHSS_RPT].[per_Nombres] AS [per_Nombres],
+    [V_IHSS_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_IHSS_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_IHSS_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_IHSS_RPT].[hidp_Total] AS [hidp_Total],
+    [V_IHSS_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_IHSS_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_IHSS_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_IHSS_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_IHSS_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_IHSS_RPT] AS [V_IHSS_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_INFOP_RPT" EntityType="Self.V_INFOP_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_INFOP_RPT].[emp_Id] AS [emp_Id], 
-    [V_INFOP_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_INFOP_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_INFOP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_INFOP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_INFOP_RPT].[hidp_Total] AS [hidp_Total], 
-    [V_INFOP_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_INFOP_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_INFOP_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_INFOP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_INFOP_RPT].[emp_Id] AS [emp_Id],
+    [V_INFOP_RPT].[per_Nombres] AS [per_Nombres],
+    [V_INFOP_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_INFOP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_INFOP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_INFOP_RPT].[hidp_Total] AS [hidp_Total],
+    [V_INFOP_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_INFOP_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_INFOP_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_INFOP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_INFOP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_INFOP_RPT] AS [V_INFOP_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_InformacionColaborador" EntityType="Self.V_InformacionColaborador" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_InformacionColaborador].[emp_Id] AS [emp_Id], 
-    [V_InformacionColaborador].[emp_Estado] AS [emp_Estado], 
-    [V_InformacionColaborador].[area_Id] AS [area_Id], 
-    [V_InformacionColaborador].[area_Descripcion] AS [area_Descripcion], 
-    [V_InformacionColaborador].[depto_Id] AS [depto_Id], 
-    [V_InformacionColaborador].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_InformacionColaborador].[jor_Id] AS [jor_Id], 
-    [V_InformacionColaborador].[jor_Descripcion] AS [jor_Descripcion], 
-    [V_InformacionColaborador].[per_Id] AS [per_Id], 
-    [V_InformacionColaborador].[per_Nombres] AS [per_Nombres], 
-    [V_InformacionColaborador].[per_Apellidos] AS [per_Apellidos], 
-    [V_InformacionColaborador].[per_Identidad] AS [per_Identidad], 
-    [V_InformacionColaborador].[per_Sexo] AS [per_Sexo], 
-    [V_InformacionColaborador].[per_Edad] AS [per_Edad], 
-    [V_InformacionColaborador].[per_Direccion] AS [per_Direccion], 
-    [V_InformacionColaborador].[per_Telefono] AS [per_Telefono], 
-    [V_InformacionColaborador].[per_CorreoElectronico] AS [per_CorreoElectronico], 
-    [V_InformacionColaborador].[per_EstadoCivil] AS [per_EstadoCivil], 
-    [V_InformacionColaborador].[SalarioBase] AS [SalarioBase], 
-    [V_InformacionColaborador].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_InformacionColaborador].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_InformacionColaborador].[fpa_IdFormaPago] AS [fpa_IdFormaPago], 
-    [V_InformacionColaborador].[fpa_Descripcion] AS [fpa_Descripcion], 
-    [V_InformacionColaborador].[car_Id] AS [car_Id], 
+            <DefiningQuery>SELECT
+    [V_InformacionColaborador].[emp_Id] AS [emp_Id],
+    [V_InformacionColaborador].[emp_Estado] AS [emp_Estado],
+    [V_InformacionColaborador].[area_Id] AS [area_Id],
+    [V_InformacionColaborador].[area_Descripcion] AS [area_Descripcion],
+    [V_InformacionColaborador].[depto_Id] AS [depto_Id],
+    [V_InformacionColaborador].[depto_Descripcion] AS [depto_Descripcion],
+    [V_InformacionColaborador].[jor_Id] AS [jor_Id],
+    [V_InformacionColaborador].[jor_Descripcion] AS [jor_Descripcion],
+    [V_InformacionColaborador].[per_Id] AS [per_Id],
+    [V_InformacionColaborador].[per_Nombres] AS [per_Nombres],
+    [V_InformacionColaborador].[per_Apellidos] AS [per_Apellidos],
+    [V_InformacionColaborador].[per_Identidad] AS [per_Identidad],
+    [V_InformacionColaborador].[per_Sexo] AS [per_Sexo],
+    [V_InformacionColaborador].[per_Edad] AS [per_Edad],
+    [V_InformacionColaborador].[per_Direccion] AS [per_Direccion],
+    [V_InformacionColaborador].[per_Telefono] AS [per_Telefono],
+    [V_InformacionColaborador].[per_CorreoElectronico] AS [per_CorreoElectronico],
+    [V_InformacionColaborador].[per_EstadoCivil] AS [per_EstadoCivil],
+    [V_InformacionColaborador].[SalarioBase] AS [SalarioBase],
+    [V_InformacionColaborador].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_InformacionColaborador].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_InformacionColaborador].[fpa_IdFormaPago] AS [fpa_IdFormaPago],
+    [V_InformacionColaborador].[fpa_Descripcion] AS [fpa_Descripcion],
+    [V_InformacionColaborador].[car_Id] AS [car_Id],
     [V_InformacionColaborador].[car_Descripcion] AS [car_Descripcion]
     FROM [Plani].[V_InformacionColaborador] AS [V_InformacionColaborador]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Ingresos_RPT" EntityType="Self.V_Ingresos_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Ingresos_RPT].[emp_Id] AS [emp_Id], 
-    [V_Ingresos_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_Ingresos_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_Ingresos_RPT].[cin_IdIngreso] AS [cin_IdIngreso], 
-    [V_Ingresos_RPT].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_Ingresos_RPT].[hip_TotalPagar] AS [hip_TotalPagar], 
-    [V_Ingresos_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_Ingresos_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_Ingresos_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_Ingresos_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_Ingresos_RPT].[emp_Id] AS [emp_Id],
+    [V_Ingresos_RPT].[per_Nombres] AS [per_Nombres],
+    [V_Ingresos_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_Ingresos_RPT].[cin_IdIngreso] AS [cin_IdIngreso],
+    [V_Ingresos_RPT].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso],
+    [V_Ingresos_RPT].[hip_TotalPagar] AS [hip_TotalPagar],
+    [V_Ingresos_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_Ingresos_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_Ingresos_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_Ingresos_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_Ingresos_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_Ingresos_RPT] AS [V_Ingresos_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_InstitucionesFinancieras_RPT" EntityType="Self.V_InstitucionesFinancieras_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_InstitucionesFinancieras_RPT].[emp_Id] AS [emp_Id], 
-    [V_InstitucionesFinancieras_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_InstitucionesFinancieras_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_InstitucionesFinancieras_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_InstitucionesFinancieras_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_InstitucionesFinancieras_RPT].[hidp_Total] AS [hidp_Total], 
-    [V_InstitucionesFinancieras_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_InstitucionesFinancieras_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_InstitucionesFinancieras_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_InstitucionesFinancieras_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_InstitucionesFinancieras_RPT].[emp_Id] AS [emp_Id],
+    [V_InstitucionesFinancieras_RPT].[per_Nombres] AS [per_Nombres],
+    [V_InstitucionesFinancieras_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_InstitucionesFinancieras_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_InstitucionesFinancieras_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_InstitucionesFinancieras_RPT].[hidp_Total] AS [hidp_Total],
+    [V_InstitucionesFinancieras_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_InstitucionesFinancieras_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_InstitucionesFinancieras_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_InstitucionesFinancieras_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_InstitucionesFinancieras_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_InstitucionesFinancieras_RPT] AS [V_InstitucionesFinancieras_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ISR_RPT" EntityType="Self.V_ISR_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_ISR_RPT].[emp_Id] AS [emp_Id], 
-    [V_ISR_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_ISR_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_ISR_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_ISR_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_ISR_RPT].[hipa_TotalISR] AS [hipa_TotalISR], 
+            <DefiningQuery>SELECT
+    [V_ISR_RPT].[emp_Id] AS [emp_Id],
+    [V_ISR_RPT].[per_Nombres] AS [per_Nombres],
+    [V_ISR_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_ISR_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_ISR_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_ISR_RPT].[hipa_TotalISR] AS [hipa_TotalISR],
     [V_ISR_RPT].[hipa_FechaPago] AS [hipa_FechaPago]
     FROM [Plani].[V_ISR_RPT] AS [V_ISR_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Liquidaciones_RPT" EntityType="Self.V_Liquidaciones_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Liquidaciones_RPT].[emp_Id] AS [emp_Id], 
-    [V_Liquidaciones_RPT].[per_Identidad] AS [per_Identidad], 
-    [V_Liquidaciones_RPT].[NombreCompleto] AS [NombreCompleto], 
-    [V_Liquidaciones_RPT].[depto_descripcion] AS [depto_descripcion], 
-    [V_Liquidaciones_RPT].[area_Descripcion] AS [area_Descripcion], 
-    [V_Liquidaciones_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Liquidaciones_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_Liquidaciones_RPT].[hliq_fechaIngreso] AS [hliq_fechaIngreso], 
-    [V_Liquidaciones_RPT].[hliq_fechaLiquidacion] AS [hliq_fechaLiquidacion], 
-    [V_Liquidaciones_RPT].[hliq_PorcentajeLiquidacion] AS [hliq_PorcentajeLiquidacion], 
+            <DefiningQuery>SELECT
+    [V_Liquidaciones_RPT].[emp_Id] AS [emp_Id],
+    [V_Liquidaciones_RPT].[per_Identidad] AS [per_Identidad],
+    [V_Liquidaciones_RPT].[NombreCompleto] AS [NombreCompleto],
+    [V_Liquidaciones_RPT].[depto_descripcion] AS [depto_descripcion],
+    [V_Liquidaciones_RPT].[area_Descripcion] AS [area_Descripcion],
+    [V_Liquidaciones_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_Liquidaciones_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_Liquidaciones_RPT].[hliq_fechaIngreso] AS [hliq_fechaIngreso],
+    [V_Liquidaciones_RPT].[hliq_fechaLiquidacion] AS [hliq_fechaLiquidacion],
+    [V_Liquidaciones_RPT].[hliq_PorcentajeLiquidacion] AS [hliq_PorcentajeLiquidacion],
     [V_Liquidaciones_RPT].[hliq_Observaciones] AS [hliq_Observaciones]
     FROM [Plani].[V_Liquidaciones_RPT] AS [V_Liquidaciones_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_AnioPlanilla" EntityType="Self.V_Plani_AnioPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
+            <DefiningQuery>SELECT
     [V_Plani_AnioPlanilla].[hipa_Anio] AS [hipa_Anio]
     FROM [Plani].[V_Plani_AnioPlanilla] AS [V_Plani_AnioPlanilla]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_DecimoCuarto" EntityType="Self.V_Plani_DecimoCuarto" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_DecimoCuarto].[dcm_IdDecimoCuartoMes] AS [dcm_IdDecimoCuartoMes], 
-    [V_Plani_DecimoCuarto].[emp_Id] AS [emp_Id], 
-    [V_Plani_DecimoCuarto].[NombreCompleto] AS [NombreCompleto], 
-    [V_Plani_DecimoCuarto].[area_Descripcion] AS [area_Descripcion], 
-    [V_Plani_DecimoCuarto].[dcm_FechaPago] AS [dcm_FechaPago], 
+            <DefiningQuery>SELECT
+    [V_Plani_DecimoCuarto].[dcm_IdDecimoCuartoMes] AS [dcm_IdDecimoCuartoMes],
+    [V_Plani_DecimoCuarto].[emp_Id] AS [emp_Id],
+    [V_Plani_DecimoCuarto].[NombreCompleto] AS [NombreCompleto],
+    [V_Plani_DecimoCuarto].[area_Descripcion] AS [area_Descripcion],
+    [V_Plani_DecimoCuarto].[dcm_FechaPago] AS [dcm_FechaPago],
     [V_Plani_DecimoCuarto].[dcm_Monto] AS [dcm_Monto]
     FROM [Plani].[V_Plani_DecimoCuarto] AS [V_Plani_DecimoCuarto]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_DecimoTercer" EntityType="Self.V_Plani_DecimoTercer" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_DecimoTercer].[dtm_IdDecimoTercerMes] AS [dtm_IdDecimoTercerMes], 
-    [V_Plani_DecimoTercer].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Plani_DecimoTercer].[emp_Id] AS [emp_Id], 
-    [V_Plani_DecimoTercer].[NombreCompleto] AS [NombreCompleto], 
-    [V_Plani_DecimoTercer].[area_Descripcion] AS [area_Descripcion], 
-    [V_Plani_DecimoTercer].[dtm_FechaPago] AS [dtm_FechaPago], 
+            <DefiningQuery>SELECT
+    [V_Plani_DecimoTercer].[dtm_IdDecimoTercerMes] AS [dtm_IdDecimoTercerMes],
+    [V_Plani_DecimoTercer].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_Plani_DecimoTercer].[emp_Id] AS [emp_Id],
+    [V_Plani_DecimoTercer].[NombreCompleto] AS [NombreCompleto],
+    [V_Plani_DecimoTercer].[area_Descripcion] AS [area_Descripcion],
+    [V_Plani_DecimoTercer].[dtm_FechaPago] AS [dtm_FechaPago],
     [V_Plani_DecimoTercer].[dtm_Monto] AS [dtm_Monto]
     FROM [Plani].[V_Plani_DecimoTercer] AS [V_Plani_DecimoTercer]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_DesplegableHistorialPlanilla" EntityType="Self.V_Plani_DesplegableHistorialPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_DesplegableHistorialPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Plani_DesplegableHistorialPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
+            <DefiningQuery>SELECT
+    [V_Plani_DesplegableHistorialPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_Plani_DesplegableHistorialPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
     [V_Plani_DesplegableHistorialPlanilla].[fecha] AS [fecha]
     FROM [Plani].[V_Plani_DesplegableHistorialPlanilla] AS [V_Plani_DesplegableHistorialPlanilla]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_EncabezadoHistorialPlanilla" EntityType="Self.V_Plani_EncabezadoHistorialPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_EncabezadoHistorialPlanilla].[emp_Id] AS [emp_Id], 
-    [V_Plani_EncabezadoHistorialPlanilla].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_Plani_EncabezadoHistorialPlanilla].[NombreColaborador] AS [NombreColaborador], 
-    [V_Plani_EncabezadoHistorialPlanilla].[car_Descripcion] AS [car_Descripcion], 
-    [V_Plani_EncabezadoHistorialPlanilla].[area_Descripcion] AS [area_Descripcion], 
-    [V_Plani_EncabezadoHistorialPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Plani_EncabezadoHistorialPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_Plani_EncabezadoHistorialPlanilla].[fpa_Descripcion] AS [fpa_Descripcion], 
-    [V_Plani_EncabezadoHistorialPlanilla].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_Plani_EncabezadoHistorialPlanilla].[hipa_SueldoNeto] AS [hipa_SueldoNeto], 
+            <DefiningQuery>SELECT
+    [V_Plani_EncabezadoHistorialPlanilla].[emp_Id] AS [emp_Id],
+    [V_Plani_EncabezadoHistorialPlanilla].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago],
+    [V_Plani_EncabezadoHistorialPlanilla].[NombreColaborador] AS [NombreColaborador],
+    [V_Plani_EncabezadoHistorialPlanilla].[car_Descripcion] AS [car_Descripcion],
+    [V_Plani_EncabezadoHistorialPlanilla].[area_Descripcion] AS [area_Descripcion],
+    [V_Plani_EncabezadoHistorialPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_Plani_EncabezadoHistorialPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_Plani_EncabezadoHistorialPlanilla].[fpa_Descripcion] AS [fpa_Descripcion],
+    [V_Plani_EncabezadoHistorialPlanilla].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_Plani_EncabezadoHistorialPlanilla].[hipa_SueldoNeto] AS [hipa_SueldoNeto],
     [V_Plani_EncabezadoHistorialPlanilla].[peri_DescripPeriodo] AS [peri_DescripPeriodo]
     FROM [Plani].[V_Plani_EncabezadoHistorialPlanilla] AS [V_Plani_EncabezadoHistorialPlanilla]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="Self.V_Plani_HistorialDeducciones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_HistorialDeducciones].[emp_Id] AS [emp_Id], 
-    [V_Plani_HistorialDeducciones].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_Plani_HistorialDeducciones].[hidp_IdHistorialdeDeduPago] AS [hidp_IdHistorialdeDeduPago], 
-    [V_Plani_HistorialDeducciones].[hipa_TotalISR] AS [hipa_TotalISR], 
-    [V_Plani_HistorialDeducciones].[hipa_AFP] AS [hipa_AFP], 
-    [V_Plani_HistorialDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total], 
+            <DefiningQuery>SELECT
+    [V_Plani_HistorialDeducciones].[emp_Id] AS [emp_Id],
+    [V_Plani_HistorialDeducciones].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago],
+    [V_Plani_HistorialDeducciones].[hidp_IdHistorialdeDeduPago] AS [hidp_IdHistorialdeDeduPago],
+    [V_Plani_HistorialDeducciones].[hipa_TotalISR] AS [hipa_TotalISR],
+    [V_Plani_HistorialDeducciones].[hipa_AFP] AS [hipa_AFP],
+    [V_Plani_HistorialDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total],
     [V_Plani_HistorialDeducciones].[TotalDeducciones] AS [TotalDeducciones]
     FROM [Plani].[V_Plani_HistorialDeducciones] AS [V_Plani_HistorialDeducciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_HistorialIngreso" EntityType="Self.V_Plani_HistorialIngreso" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_HistorialIngreso].[emp_Id] AS [emp_Id], 
-    [V_Plani_HistorialIngreso].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
+            <DefiningQuery>SELECT
+    [V_Plani_HistorialIngreso].[emp_Id] AS [emp_Id],
+    [V_Plani_HistorialIngreso].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago],
+    [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso],
     [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar]
     FROM [Plani].[V_Plani_HistorialIngreso] AS [V_Plani_HistorialIngreso]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_Prueba].[usu_Id] AS [usu_Id], 
-    [V_Plani_Prueba].[usu_NombreUsuario] AS [usu_NombreUsuario], 
-    [V_Plani_Prueba].[usu_Password] AS [usu_Password], 
-    [V_Plani_Prueba].[usu_Nombres] AS [usu_Nombres], 
-    [V_Plani_Prueba].[usu_Apellidos] AS [usu_Apellidos], 
-    [V_Plani_Prueba].[usu_Correos] AS [usu_Correos], 
-    [V_Plani_Prueba].[usu_EsActivo] AS [usu_EsActivo], 
-    [V_Plani_Prueba].[usu_RazonInactivo] AS [usu_RazonInactivo], 
-    [V_Plani_Prueba].[usu_EsAdministrador] AS [usu_EsAdministrador], 
+            <DefiningQuery>SELECT
+    [V_Plani_Prueba].[usu_Id] AS [usu_Id],
+    [V_Plani_Prueba].[usu_NombreUsuario] AS [usu_NombreUsuario],
+    [V_Plani_Prueba].[usu_Password] AS [usu_Password],
+    [V_Plani_Prueba].[usu_Nombres] AS [usu_Nombres],
+    [V_Plani_Prueba].[usu_Apellidos] AS [usu_Apellidos],
+    [V_Plani_Prueba].[usu_Correos] AS [usu_Correos],
+    [V_Plani_Prueba].[usu_EsActivo] AS [usu_EsActivo],
+    [V_Plani_Prueba].[usu_RazonInactivo] AS [usu_RazonInactivo],
+    [V_Plani_Prueba].[usu_EsAdministrador] AS [usu_EsAdministrador],
     [V_Plani_Prueba].[usu_SesionesValidas] AS [usu_SesionesValidas]
     FROM [Plani].[V_Plani_Prueba] AS [V_Plani_Prueba]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_TipoPlani" EntityType="Self.V_Plani_TipoPlani" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_TipoPlani].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_Plani_TipoPlani].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_Plani_TipoPlani].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_Plani_TipoPlani] AS [V_Plani_TipoPlani]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_PlanillaDeducciones" EntityType="Self.V_PlanillaDeducciones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_PlanillaDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_PlanillaDeducciones].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_PlanillaDeducciones].[cpla_FrecuenciaEnDias] AS [cpla_FrecuenciaEnDias], 
-    [V_PlanillaDeducciones].[tpdd_IdPlanillaDetDeduccion] AS [tpdd_IdPlanillaDetDeduccion], 
-    [V_PlanillaDeducciones].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_PlanillaDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_PlanillaDeducciones].[tde_IdTipoDedu] AS [tde_IdTipoDedu], 
-    [V_PlanillaDeducciones].[tde_Descripcion] AS [tde_Descripcion], 
-    [V_PlanillaDeducciones].[cde_PorcentajeColaborador] AS [cde_PorcentajeColaborador], 
+            <DefiningQuery>SELECT
+    [V_PlanillaDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_PlanillaDeducciones].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_PlanillaDeducciones].[cpla_FrecuenciaEnDias] AS [cpla_FrecuenciaEnDias],
+    [V_PlanillaDeducciones].[tpdd_IdPlanillaDetDeduccion] AS [tpdd_IdPlanillaDetDeduccion],
+    [V_PlanillaDeducciones].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_PlanillaDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_PlanillaDeducciones].[tde_IdTipoDedu] AS [tde_IdTipoDedu],
+    [V_PlanillaDeducciones].[tde_Descripcion] AS [tde_Descripcion],
+    [V_PlanillaDeducciones].[cde_PorcentajeColaborador] AS [cde_PorcentajeColaborador],
     [V_PlanillaDeducciones].[cde_PorcentajeEmpresa] AS [cde_PorcentajeEmpresa]
     FROM [Plani].[V_PlanillaDeducciones] AS [V_PlanillaDeducciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_PlanillaIngresos" EntityType="Self.V_PlanillaIngresos" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_PlanillaIngresos].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_PlanillaIngresos].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_PlanillaIngresos].[cpla_FrecuenciaEnDias] AS [cpla_FrecuenciaEnDias], 
-    [V_PlanillaIngresos].[tpdi_IdDetallePlanillaIngreso] AS [tpdi_IdDetallePlanillaIngreso], 
-    [V_PlanillaIngresos].[cin_IdIngreso] AS [cin_IdIngreso], 
+            <DefiningQuery>SELECT
+    [V_PlanillaIngresos].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_PlanillaIngresos].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_PlanillaIngresos].[cpla_FrecuenciaEnDias] AS [cpla_FrecuenciaEnDias],
+    [V_PlanillaIngresos].[tpdi_IdDetallePlanillaIngreso] AS [tpdi_IdDetallePlanillaIngreso],
+    [V_PlanillaIngresos].[cin_IdIngreso] AS [cin_IdIngreso],
     [V_PlanillaIngresos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso]
     FROM [Plani].[V_PlanillaIngresos] AS [V_PlanillaIngresos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_PreviewPlanilla" EntityType="Self.V_PreviewPlanilla" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_PreviewPlanilla].[emp_Id] AS [emp_Id], 
-    [V_PreviewPlanilla].[Nombres] AS [Nombres], 
-    [V_PreviewPlanilla].[per_Identidad] AS [per_Identidad], 
-    [V_PreviewPlanilla].[per_Sexo] AS [per_Sexo], 
-    [V_PreviewPlanilla].[per_Edad] AS [per_Edad], 
-    [V_PreviewPlanilla].[per_Direccion] AS [per_Direccion], 
-    [V_PreviewPlanilla].[per_Telefono] AS [per_Telefono], 
-    [V_PreviewPlanilla].[per_CorreoElectronico] AS [per_CorreoElectronico], 
-    [V_PreviewPlanilla].[per_EstadoCivil] AS [per_EstadoCivil], 
-    [V_PreviewPlanilla].[salarioBase] AS [salarioBase], 
-    [V_PreviewPlanilla].[tmon_Id] AS [tmon_Id], 
-    [V_PreviewPlanilla].[tmon_Descripcion] AS [tmon_Descripcion], 
-    [V_PreviewPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_PreviewPlanilla].[emp_Id] AS [emp_Id],
+    [V_PreviewPlanilla].[Nombres] AS [Nombres],
+    [V_PreviewPlanilla].[per_Identidad] AS [per_Identidad],
+    [V_PreviewPlanilla].[per_Sexo] AS [per_Sexo],
+    [V_PreviewPlanilla].[per_Edad] AS [per_Edad],
+    [V_PreviewPlanilla].[per_Direccion] AS [per_Direccion],
+    [V_PreviewPlanilla].[per_Telefono] AS [per_Telefono],
+    [V_PreviewPlanilla].[per_CorreoElectronico] AS [per_CorreoElectronico],
+    [V_PreviewPlanilla].[per_EstadoCivil] AS [per_EstadoCivil],
+    [V_PreviewPlanilla].[salarioBase] AS [salarioBase],
+    [V_PreviewPlanilla].[tmon_Id] AS [tmon_Id],
+    [V_PreviewPlanilla].[tmon_Descripcion] AS [tmon_Descripcion],
+    [V_PreviewPlanilla].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_PreviewPlanilla].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_PreviewPlanilla] AS [V_PreviewPlanilla]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RAP_RPT" EntityType="Self.V_RAP_RPT" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_RAP_RPT].[emp_Id] AS [emp_Id], 
-    [V_RAP_RPT].[per_Nombres] AS [per_Nombres], 
-    [V_RAP_RPT].[per_Apellidos] AS [per_Apellidos], 
-    [V_RAP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_RAP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_RAP_RPT].[hidp_Total] AS [hidp_Total], 
-    [V_RAP_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_RAP_RPT].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_RAP_RPT].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_RAP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
+            <DefiningQuery>SELECT
+    [V_RAP_RPT].[emp_Id] AS [emp_Id],
+    [V_RAP_RPT].[per_Nombres] AS [per_Nombres],
+    [V_RAP_RPT].[per_Apellidos] AS [per_Apellidos],
+    [V_RAP_RPT].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_RAP_RPT].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_RAP_RPT].[hidp_Total] AS [hidp_Total],
+    [V_RAP_RPT].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_RAP_RPT].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_RAP_RPT].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_RAP_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
     [V_RAP_RPT].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_RAP_RPT] AS [V_RAP_RPT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ReportesVarios" EntityType="Self.V_ReportesVarios" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_ReportesVarios].[per_Id] AS [per_Id], 
-    [V_ReportesVarios].[per_Nombres] AS [per_Nombres], 
-    [V_ReportesVarios].[per_Apellidos] AS [per_Apellidos], 
-    [V_ReportesVarios].[emp_Id] AS [emp_Id], 
-    [V_ReportesVarios].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_ReportesVarios].[emp_Fechaingreso] AS [emp_Fechaingreso], 
-    [V_ReportesVarios].[emp_Estado] AS [emp_Estado], 
-    [V_ReportesVarios].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_ReportesVarios].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_ReportesVarios].[cpla_RecibeComision] AS [cpla_RecibeComision], 
-    [V_ReportesVarios].[cpla_Activo] AS [cpla_Activo], 
-    [V_ReportesVarios].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_ReportesVarios].[hipa_SueldoNeto] AS [hipa_SueldoNeto], 
-    [V_ReportesVarios].[hipa_FechaInicio] AS [hipa_FechaInicio], 
-    [V_ReportesVarios].[hipa_FechaFin] AS [hipa_FechaFin], 
-    [V_ReportesVarios].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_ReportesVarios].[hipa_Anio] AS [hipa_Anio], 
-    [V_ReportesVarios].[hipa_Mes] AS [hipa_Mes], 
-    [V_ReportesVarios].[peri_IdPeriodo] AS [peri_IdPeriodo], 
-    [V_ReportesVarios].[hipa_FechaCrea] AS [hipa_FechaCrea], 
-    [V_ReportesVarios].[hipa_TotalISR] AS [hipa_TotalISR], 
-    [V_ReportesVarios].[hipa_ISRPendiente] AS [hipa_ISRPendiente], 
-    [V_ReportesVarios].[hipa_AFP] AS [hipa_AFP], 
-    [V_ReportesVarios].[hipa_TotalHorasConPermisoJustificado] AS [hipa_TotalHorasConPermisoJustificado], 
-    [V_ReportesVarios].[hipa_TotalComisiones] AS [hipa_TotalComisiones], 
-    [V_ReportesVarios].[hipa_TotalHorasExtras] AS [hipa_TotalHorasExtras], 
-    [V_ReportesVarios].[hipa_TotalVacaciones] AS [hipa_TotalVacaciones], 
-    [V_ReportesVarios].[hipa_TotalSeptimoDia] AS [hipa_TotalSeptimoDia], 
-    [V_ReportesVarios].[hipa_AdelantoSueldo] AS [hipa_AdelantoSueldo], 
+            <DefiningQuery>SELECT
+    [V_ReportesVarios].[per_Id] AS [per_Id],
+    [V_ReportesVarios].[per_Nombres] AS [per_Nombres],
+    [V_ReportesVarios].[per_Apellidos] AS [per_Apellidos],
+    [V_ReportesVarios].[emp_Id] AS [emp_Id],
+    [V_ReportesVarios].[emp_CuentaBancaria] AS [emp_CuentaBancaria],
+    [V_ReportesVarios].[emp_Fechaingreso] AS [emp_Fechaingreso],
+    [V_ReportesVarios].[emp_Estado] AS [emp_Estado],
+    [V_ReportesVarios].[cpla_IdPlanilla] AS [cpla_IdPlanilla],
+    [V_ReportesVarios].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla],
+    [V_ReportesVarios].[cpla_RecibeComision] AS [cpla_RecibeComision],
+    [V_ReportesVarios].[cpla_Activo] AS [cpla_Activo],
+    [V_ReportesVarios].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago],
+    [V_ReportesVarios].[hipa_SueldoNeto] AS [hipa_SueldoNeto],
+    [V_ReportesVarios].[hipa_FechaInicio] AS [hipa_FechaInicio],
+    [V_ReportesVarios].[hipa_FechaFin] AS [hipa_FechaFin],
+    [V_ReportesVarios].[hipa_FechaPago] AS [hipa_FechaPago],
+    [V_ReportesVarios].[hipa_Anio] AS [hipa_Anio],
+    [V_ReportesVarios].[hipa_Mes] AS [hipa_Mes],
+    [V_ReportesVarios].[peri_IdPeriodo] AS [peri_IdPeriodo],
+    [V_ReportesVarios].[hipa_FechaCrea] AS [hipa_FechaCrea],
+    [V_ReportesVarios].[hipa_TotalISR] AS [hipa_TotalISR],
+    [V_ReportesVarios].[hipa_ISRPendiente] AS [hipa_ISRPendiente],
+    [V_ReportesVarios].[hipa_AFP] AS [hipa_AFP],
+    [V_ReportesVarios].[hipa_TotalHorasConPermisoJustificado] AS [hipa_TotalHorasConPermisoJustificado],
+    [V_ReportesVarios].[hipa_TotalComisiones] AS [hipa_TotalComisiones],
+    [V_ReportesVarios].[hipa_TotalHorasExtras] AS [hipa_TotalHorasExtras],
+    [V_ReportesVarios].[hipa_TotalVacaciones] AS [hipa_TotalVacaciones],
+    [V_ReportesVarios].[hipa_TotalSeptimoDia] AS [hipa_TotalSeptimoDia],
+    [V_ReportesVarios].[hipa_AdelantoSueldo] AS [hipa_AdelantoSueldo],
     [V_ReportesVarios].[hipa_TotalSalario] AS [hipa_TotalSalario]
     FROM [Plani].[V_ReportesVarios] AS [V_ReportesVarios]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbAdelantoSueldo" EntityType="Self.V_tbAdelantoSueldo" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_tbAdelantoSueldo].[adsu_IdAdelantoSueldo] AS [adsu_IdAdelantoSueldo], 
-    [V_tbAdelantoSueldo].[emp_Id] AS [emp_Id], 
-    [V_tbAdelantoSueldo].[per_Nombres] AS [per_Nombres], 
-    [V_tbAdelantoSueldo].[per_Identidad] AS [per_Identidad], 
-    [V_tbAdelantoSueldo].[adsu_FechaAdelanto] AS [adsu_FechaAdelanto], 
-    [V_tbAdelantoSueldo].[adsu_RazonAdelanto] AS [adsu_RazonAdelanto], 
-    [V_tbAdelantoSueldo].[adsu_Monto] AS [adsu_Monto], 
-    [V_tbAdelantoSueldo].[adsu_Deducido] AS [adsu_Deducido], 
-    [V_tbAdelantoSueldo].[adsu_UsuarioCrea] AS [adsu_UsuarioCrea], 
-    [V_tbAdelantoSueldo].[NombreUsuarioCrea] AS [NombreUsuarioCrea], 
-    [V_tbAdelantoSueldo].[UsuarioCrea] AS [UsuarioCrea], 
-    [V_tbAdelantoSueldo].[adsu_FechaCrea] AS [adsu_FechaCrea], 
-    [V_tbAdelantoSueldo].[adsu_UsuarioModifica] AS [adsu_UsuarioModifica], 
-    [V_tbAdelantoSueldo].[NombreUsuarioModifica] AS [NombreUsuarioModifica], 
-    [V_tbAdelantoSueldo].[UsuarioModifica] AS [UsuarioModifica], 
-    [V_tbAdelantoSueldo].[adsu_FechaModifica] AS [adsu_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_tbAdelantoSueldo].[adsu_IdAdelantoSueldo] AS [adsu_IdAdelantoSueldo],
+    [V_tbAdelantoSueldo].[emp_Id] AS [emp_Id],
+    [V_tbAdelantoSueldo].[per_Nombres] AS [per_Nombres],
+    [V_tbAdelantoSueldo].[per_Identidad] AS [per_Identidad],
+    [V_tbAdelantoSueldo].[adsu_FechaAdelanto] AS [adsu_FechaAdelanto],
+    [V_tbAdelantoSueldo].[adsu_RazonAdelanto] AS [adsu_RazonAdelanto],
+    [V_tbAdelantoSueldo].[adsu_Monto] AS [adsu_Monto],
+    [V_tbAdelantoSueldo].[adsu_Deducido] AS [adsu_Deducido],
+    [V_tbAdelantoSueldo].[adsu_UsuarioCrea] AS [adsu_UsuarioCrea],
+    [V_tbAdelantoSueldo].[NombreUsuarioCrea] AS [NombreUsuarioCrea],
+    [V_tbAdelantoSueldo].[UsuarioCrea] AS [UsuarioCrea],
+    [V_tbAdelantoSueldo].[adsu_FechaCrea] AS [adsu_FechaCrea],
+    [V_tbAdelantoSueldo].[adsu_UsuarioModifica] AS [adsu_UsuarioModifica],
+    [V_tbAdelantoSueldo].[NombreUsuarioModifica] AS [NombreUsuarioModifica],
+    [V_tbAdelantoSueldo].[UsuarioModifica] AS [UsuarioModifica],
+    [V_tbAdelantoSueldo].[adsu_FechaModifica] AS [adsu_FechaModifica],
     [V_tbAdelantoSueldo].[adsu_Activo] AS [adsu_Activo]
     FROM [Plani].[V_tbAdelantoSueldo] AS [V_tbAdelantoSueldo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbCatalogoDeDeducciones" EntityType="Self.V_tbCatalogoDeDeducciones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_tbCatalogoDeDeducciones].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_tbCatalogoDeDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_tbCatalogoDeDeducciones].[tde_IdTipoDedu] AS [tde_IdTipoDedu], 
-    [V_tbCatalogoDeDeducciones].[cde_PorcentajeColaborador] AS [cde_PorcentajeColaborador], 
-    [V_tbCatalogoDeDeducciones].[cde_PorcentajeEmpresa] AS [cde_PorcentajeEmpresa], 
-    [V_tbCatalogoDeDeducciones].[cde_UsuarioCrea] AS [cde_UsuarioCrea], 
-    [V_tbCatalogoDeDeducciones].[cde_FechaCrea] AS [cde_FechaCrea], 
-    [V_tbCatalogoDeDeducciones].[cde_UsuarioModifica] AS [cde_UsuarioModifica], 
-    [V_tbCatalogoDeDeducciones].[cde_FechaModifica] AS [cde_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_tbCatalogoDeDeducciones].[cde_IdDeducciones] AS [cde_IdDeducciones],
+    [V_tbCatalogoDeDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion],
+    [V_tbCatalogoDeDeducciones].[tde_IdTipoDedu] AS [tde_IdTipoDedu],
+    [V_tbCatalogoDeDeducciones].[cde_PorcentajeColaborador] AS [cde_PorcentajeColaborador],
+    [V_tbCatalogoDeDeducciones].[cde_PorcentajeEmpresa] AS [cde_PorcentajeEmpresa],
+    [V_tbCatalogoDeDeducciones].[cde_UsuarioCrea] AS [cde_UsuarioCrea],
+    [V_tbCatalogoDeDeducciones].[cde_FechaCrea] AS [cde_FechaCrea],
+    [V_tbCatalogoDeDeducciones].[cde_UsuarioModifica] AS [cde_UsuarioModifica],
+    [V_tbCatalogoDeDeducciones].[cde_FechaModifica] AS [cde_FechaModifica],
     [V_tbCatalogoDeDeducciones].[cde_Activo] AS [cde_Activo]
     FROM [Plani].[V_tbCatalogoDeDeducciones] AS [V_tbCatalogoDeDeducciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbCatalogoDeIngresos" EntityType="Self.V_tbCatalogoDeIngresos" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_tbCatalogoDeIngresos].[cin_IdIngreso] AS [cin_IdIngreso], 
-    [V_tbCatalogoDeIngresos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_tbCatalogoDeIngresos].[cin_UsuarioCrea] AS [cin_UsuarioCrea], 
-    [V_tbCatalogoDeIngresos].[cin_FechaCrea] AS [cin_FechaCrea], 
-    [V_tbCatalogoDeIngresos].[cin_UsuarioModifica] AS [cin_UsuarioModifica], 
-    [V_tbCatalogoDeIngresos].[cin_FechaModifica] AS [cin_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_tbCatalogoDeIngresos].[cin_IdIngreso] AS [cin_IdIngreso],
+    [V_tbCatalogoDeIngresos].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso],
+    [V_tbCatalogoDeIngresos].[cin_UsuarioCrea] AS [cin_UsuarioCrea],
+    [V_tbCatalogoDeIngresos].[cin_FechaCrea] AS [cin_FechaCrea],
+    [V_tbCatalogoDeIngresos].[cin_UsuarioModifica] AS [cin_UsuarioModifica],
+    [V_tbCatalogoDeIngresos].[cin_FechaModifica] AS [cin_FechaModifica],
     [V_tbCatalogoDeIngresos].[cin_Activo] AS [cin_Activo]
     FROM [Plani].[V_tbCatalogoDeIngresos] AS [V_tbCatalogoDeIngresos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbEmpleadoComisiones" EntityType="Self.V_tbEmpleadoComisiones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_tbEmpleadoComisiones].[emp_Id] AS [emp_Id], 
-    [V_tbEmpleadoComisiones].[per_Identidad] AS [per_Identidad], 
-    [V_tbEmpleadoComisiones].[Nombre Completo] AS [Nombre Completo], 
-    [V_tbEmpleadoComisiones].[car_Descripcion] AS [car_Descripcion], 
-    [V_tbEmpleadoComisiones].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_tbEmpleadoComisiones].[area_Descripcion] AS [area_Descripcion], 
-    [V_tbEmpleadoComisiones].[jor_Descripcion] AS [jor_Descripcion], 
+            <DefiningQuery>SELECT
+    [V_tbEmpleadoComisiones].[emp_Id] AS [emp_Id],
+    [V_tbEmpleadoComisiones].[per_Identidad] AS [per_Identidad],
+    [V_tbEmpleadoComisiones].[Nombre Completo] AS [Nombre Completo],
+    [V_tbEmpleadoComisiones].[car_Descripcion] AS [car_Descripcion],
+    [V_tbEmpleadoComisiones].[depto_Descripcion] AS [depto_Descripcion],
+    [V_tbEmpleadoComisiones].[area_Descripcion] AS [area_Descripcion],
+    [V_tbEmpleadoComisiones].[jor_Descripcion] AS [jor_Descripcion],
     [V_tbEmpleadoComisiones].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla]
     FROM [Plani].[V_tbEmpleadoComisiones] AS [V_tbEmpleadoComisiones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_TipoDeduccion" EntityType="Self.V_TipoDeduccion" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_TipoDeduccion].[tde_IdTipoDedu] AS [tde_IdTipoDedu], 
-    [V_TipoDeduccion].[tde_Descripcion] AS [tde_Descripcion], 
-    [V_TipoDeduccion].[tde_UsuarioCrea] AS [tde_UsuarioCrea], 
-    [V_TipoDeduccion].[tde_FechaCrea] AS [tde_FechaCrea], 
-    [V_TipoDeduccion].[tde_UsuarioModifica] AS [tde_UsuarioModifica], 
-    [V_TipoDeduccion].[tde_FechaModifica] AS [tde_FechaModifica], 
+            <DefiningQuery>SELECT
+    [V_TipoDeduccion].[tde_IdTipoDedu] AS [tde_IdTipoDedu],
+    [V_TipoDeduccion].[tde_Descripcion] AS [tde_Descripcion],
+    [V_TipoDeduccion].[tde_UsuarioCrea] AS [tde_UsuarioCrea],
+    [V_TipoDeduccion].[tde_FechaCrea] AS [tde_FechaCrea],
+    [V_TipoDeduccion].[tde_UsuarioModifica] AS [tde_UsuarioModifica],
+    [V_TipoDeduccion].[tde_FechaModifica] AS [tde_FechaModifica],
     [V_TipoDeduccion].[tde_Activo] AS [tde_Activo]
     FROM [Plani].[V_TipoDeduccion] AS [V_TipoDeduccion]</DefiningQuery>
           </EntitySet>
@@ -15508,7 +15508,16 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="V_HistorialEmpleadosLiquidados" EntityType="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados" />
+          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Activar1_Result)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -15937,24 +15946,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <EntityType Name="V_HistorialEmpleadosLiquidados">
-          <Key>
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="moli_IdMotivo" />
-          </Key>
-          <Property Name="hdli_Id" Type="Int32" />
-          <Property Name="emp_Id" Type="Int32" />
-          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="per_Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="per_Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="moli_IdMotivo" Type="Int32" Nullable="false" />
-          <Property Name="moli_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="hdli_MontoTotalLiquidacion" Type="Decimal" Precision="16" Scale="4" />
-        </EntityType>
+        <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Activar1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18672,22 +18669,20 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="V_HistorialEmpleadosLiquidados">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialEmpleadosLiquidados">
-              <MappingFragment StoreEntitySet="V_HistorialEmpleadosLiquidados">
-                <ScalarProperty Name="hdli_MontoTotalLiquidacion" ColumnName="hdli_MontoTotalLiquidacion" />
-                <ScalarProperty Name="moli_Descripcion" ColumnName="moli_Descripcion" />
-                <ScalarProperty Name="moli_IdMotivo" ColumnName="moli_IdMotivo" />
-                <ScalarProperty Name="hdli_SalarioPromedioMensual_Liql" ColumnName="hdli_SalarioPromedioMensual_Liql" />
-                <ScalarProperty Name="hdli_SalarioOrdinarioMensual_Liq" ColumnName="hdli_SalarioOrdinarioMensual_Liq" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="hdli_Id" ColumnName="hdli_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Inactivar1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Inactivar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Activar1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Activar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Activar1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

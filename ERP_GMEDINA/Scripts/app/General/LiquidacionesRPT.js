@@ -58,3 +58,12 @@ $("#btnEnviarParametros").click(function () {
     }
 
 });
+
+
+$(document).on("click", "#tblLiquidaciones tbody tr td #btnImprimirLiquidacion", function () {
+    $("#ModalImprimirLiquidacion").modal();
+});
+
+$(document).on("click", "#ModalImprimirLiquidacion #ImprimirCerrar", function () {
+    $("#ModalImprimirLiquidacion").modal('hide');
+});

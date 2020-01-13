@@ -340,7 +340,7 @@ $("#btnEliminarAuxCes").click(function () {
 });
 
 
-// activar
+// Activar
 var activarID = 0;
 $(document).on("click", "#btnModalActivarAuxCes", function () {
     activarID = $(this).data('id');

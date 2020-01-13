@@ -40,7 +40,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbodyINFS">
                       @foreach (var item in Model)
                       {
                          string estado = item.insf_Activo == false ? "Inactivo" : "Activo";
@@ -72,7 +72,7 @@
                                                 <button type="button" data-id="@item.aces_IdAuxilioCesantia" class="btn btn-default btn-xs" id="btnModalEdit">Editar</button>*@
                                                 @Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
-                                        <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-danger btn-xs" id="btnModalActivarAuxCes">Inctivar</button>
+                                        <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-danger btn-xs" id="btnModalInactivarINFS">Inactivar</button>
                                     }
                                     if (oUsuario.usu_EsAdministrador == true && item.insf_Activo == false)
                                     {
@@ -80,8 +80,6 @@
                                         <button type="button" data-id="@item.insf_IdInstitucionFinanciera" class="btn btn-primary btn-xs" id="btnModalActivarINFS">Activar</button>
                                     }
                                 }
-								
-								
 								
 							</td>
                         </tr>
@@ -93,13 +91,53 @@
         </div>
     </div>
  </div>
+
+
+<div class="modal fade" id="frmInactivarINFS" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar</h4>
+            </div>
+            <div class="modal-body" id="Eliminar">
+                ¿Esta seguro que desea Inactivar este registro?
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger " id="btnInactivarINFS">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frmActivarINFS" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Está seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnActivarINFS">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Scripts.Render("~/plugins/izitoast")
+    
 }
 
 @section Scripts {
   @Scripts.Render("~/plugins/dataTables")
   @Styles.Render("~/Content/plugins/izitoast/iziToast")
+<script src="~/Scripts/app/General/InstitucionesFinancierasIndex.js"></script>
 }
