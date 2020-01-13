@@ -123,6 +123,7 @@
     </div>
 </div>
 
+@*INACTIVAR*@
 <div class="modal fade" id="InactivarPeriodo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -131,11 +132,30 @@
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                <p><b>¿Esta Seguro Que Desea Inactivar este registro?</b></p>
+                <p><b>¿Esta seguro que desea Inactivar este registro?</b></p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" id="btnInactivarPeriodoConfirmar">Si</button>
                 <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ACTIVAR*@
+<div class="modal fade" id="ActivarPeriodo" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar Periodo</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este Registro?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger " id="btnActivarPeriodoConfirm">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarActivar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
