@@ -151,8 +151,6 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
     //SETEAR LA VARIABLE INACTIVAR CON EL ID DEL REGISTRO
     IDInactivar = ID;
 
-    //OCULTAR EL SCROLLVIEW
-    //$('body').css("overflow", "hidden");
 
         //EJECUCION DE LA PETICION AL SERVIDOR
 	    $.ajax({
@@ -282,13 +280,13 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 });
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPeriodo", function () {
-    $("#EditarPeriodo").modal('hide');
     $("#InactivarPeriodo").modal();
 });
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPeriodoConfirmar").click(function () {
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    $("#EditarPeriodo").modal('hide');
     $.ajax({
         url: "/Periodos/Inactivar/" + IDInactivar,
         method: "POST", dataType: "json",
