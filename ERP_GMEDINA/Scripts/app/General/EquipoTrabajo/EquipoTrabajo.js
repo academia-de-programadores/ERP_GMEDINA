@@ -1,11 +1,11 @@
 ﻿var ID = 0;
 //Funciones GET
-function tablaEditar(ID) {
+function tablaEditar(id) {
     //var tr = $(btn).closest("tr");
     //var row = tabla.row(tr);
     //id = ID;
     _ajax(null,
-        '/EquipoTrabajo/Edit/' + ID,
+        '/EquipoTrabajo/Edit/' + id,
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
@@ -44,6 +44,9 @@ function llenarTabla() {
         '/EquipoTrabajo/llenarTabla',
         'POST',
         function (Lista) {
+            if (validarDT(Lista)) {
+                return null;
+            }
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
@@ -69,21 +72,22 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#eqtra_Descripcion").val("");
     $(modalnuevo).find("#eqtra_Observacion").val("");
 });
-//$("#btnEditar").click(function () {
-//    _ajax(null,
-//        '/EquipoTrabajo/Edit/' + ID,
-//        'GET',
-//        function (obj) {
-//            if (obj != "-1" && obj != "-2" && obj != "-3") {
-//                CierraPopups();
-//                $('#ModalEditar').modal('show');
-//                $("#ModalEditar").find("#eqtra_Codigo").val(obj.eqtra_Codigo);
-//                $("#ModalEditar").find("#eqtra_Codigo").focus();
-//                $("#ModalEditar").find("#eqtra_Descripcion").val(obj.eqtra_Descripcion);
-//                $("#ModalEditar").find("#eqtra_Observacion").val(obj.eqtra_Observacion);
-//            }
-//        });
-//});
+$("#btnEditar").click(function () {
+    _ajax(null,
+        '/EquipoTrabajo/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                ID = obj.eqtra_Id;
+                CierraPopups();
+                $('#ModalEditar').modal('show');
+                $("#ModalEditar").find("#eqtra_Codigo").val(obj.eqtra_Codigo);
+                $("#ModalEditar").find("#eqtra_Codigo").focus();
+                $("#ModalEditar").find("#eqtra_Descripcion").val(obj.eqtra_Descripcion);
+                $("#ModalEditar").find("#eqtra_Observacion").val(obj.eqtra_Observacion);
+            }
+        });
+});
 $("#btnInhabilitar").click(function () {
     CierraPopups();
     $('#ModalInhabilitar').modal('show');
@@ -140,7 +144,7 @@ $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.eqtr_Id = ID;
+        data.eqtra_Id = ID;
         data = JSON.stringify({ tbEquipoTrabajo: data });
         _ajax(data,
             '/EquipoTrabajo/Edit',
