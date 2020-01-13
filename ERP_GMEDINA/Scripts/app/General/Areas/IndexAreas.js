@@ -50,13 +50,25 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
+                if (value.area_Estado==1) {
+                    tabla.row.add({
+                        ID: value.area_Id,
+                        Area: value.area_Descripcion,
+                        Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                        Sucursales: value.Sucursales//,
+                        //Acciones:"lol"
+                    });
+                } else {
                     tabla.row.add({
                         ID: value.area_Id,
                         Area: value.area_Descripcion,
                         Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
                         Sucursales: value.Sucursales,
-                        Acciones:"lol"
+                        Acciones: "<div>" +
+                                    "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                                "</div>"
                     });
+                }
             });
             tabla.draw();
        });

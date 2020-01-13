@@ -1,12 +1,14 @@
 ﻿var tabla = null;
+var textoBoton = 'Mostrar todo';
 var botones = [];
 var htmlSpiner =
-'<div id="ibox1" class="ibox-content sk-loading">' +
-    '<div class="sk-spinner sk-spinner-double-bounce">' +
-    '<div class="sk-double-bounce1"></div>' +
-    '<div class="sk-double-bounce2"></div>' +
-    '</div>' +
-'</div>';
+    `<div class="sk-spinner sk-spinner-wave">
+                <div class="sk-rect1"></div>
+                <div class="sk-rect2"></div>
+                <div class="sk-rect3"></div>
+                <div class="sk-rect4"></div>
+                <div class="sk-rect5"></div>
+             </div>`;
 $(document).ready(function () {
     var columnas = [];
     var col = 0;
@@ -40,8 +42,7 @@ $(document).ready(function () {
             //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
-                data: null,
-                orderable: false,
+                data: campo,
                 defaultContent: "<div>" +
                                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +
@@ -54,7 +55,6 @@ $(document).ready(function () {
                 orderable: false,
                 defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-
                                 "</div>"
             });
         }
@@ -64,7 +64,6 @@ $(document).ready(function () {
         }
     });
     tabla = $('#IndexTable').DataTable({
-        //"language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -90,52 +89,27 @@ $(document).ready(function () {
             }
         },
         responsive: true,
-        pageLength: 25,
         "scrollX": true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "autoWidth": false,
-        dom: 'Bfrtip',
+        dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             {
                 extend: 'copy',
                 exportOptions: {
                     columns: botones
-                }
+                }                
             },
             {
-                extend: 'csv',
-                exportOptions: {
-                    columns: botones
-                }
-            },
-            {
-                extend: 'excel',
-                exportOptions: {
-                    columns: botones
-                },
-                title: 'ExampleFile'
-            },
-            {
-                extend: 'pdf',
-                exportOptions: {
-                    columns: botones
-                },
-                title: 'nadaaa'
-            },
-
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: botones
-                },
-                customize: function (win) {
-                    $(win.document.body).addClass('white-bg');
-                    $(win.document.body).css('font-size', '10px');
-
-
-
-                    $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
+                text: textoBoton,
+                action: function (btn) {
+                    if (textoBoton == 'Mostrar todo') {
+                        textoBoton = 'Mostrar activos';
+                        btn.currentTarget.innerText = textoBoton;
+                    } else {
+                        textoBoton = 'Mostrar todo';
+                        btn.currentTarget.innerText = textoBoton;
+                    }
                 }
             }
         ],
