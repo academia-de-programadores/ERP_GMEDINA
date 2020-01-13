@@ -155,9 +155,23 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         });
 });
 
-$("#btnUpdateComisionesConfirmar").click(function () { 
-    $("#EditarEmpleadoComisionesConfirmacion").modal();
+$('#btnUpdateComisionesConfirmar').click(function () {
+    var PorcentajeComision = $("#Editar #PorcentajeComision").val();
+    var TotalVenta = $("#Editar #TotalVenta").val();
+
+    if (PorcentajeComision != "" && TotalVenta != "" && PorcentajeComision != "0" && TotalVenta != "0" && PorcentajeComision != null && TotalVenta != null && PorcentajeComision != undefined && TotalVenta != undefined) {
+        $("#Editar #Validation_descipcion1").css("display", "none");
+        $("#Editar #Validation_descipcion2").css("display", "none");
+        $("#EditarEmpleadoComisionesConfirmacion").modal();
+    }
+    else {
+            $("#Editar #Validation_descipcion1").css("display", "");
+            $("#Editar #Validation_descipcion2").css("display", "");
+            $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+        }   
 });
+
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisionesConfirmar2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -578,19 +592,19 @@ $("#btnCreateRegistroComisiones").click(function () {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarModaledit").click(function () {
-    $("#Validation_descipcion1e").css("display", "none");
-    $("#Validation_descipcion2e").css("display", "none");
-    $("#cc_PorcentajeComision").val('');
-    $("#cc_TotalVenta").val('');
+    $("#Editar #Validation_descipcion1e").css("display", "none");
+    $("#Editar #Validation_descipcion2e").css("display", "none");
+    $("#Editar #cc_PorcentajeComision").val('');
+    $("#Editar #cc_TotalVenta").val('');
 });
 
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconoCerraredit").click(function () {
-    $("#Validation_descipcion1e").css("display", "none");
-    $("#Validation_descipcion2e").css("display", "none");
-    $("#cc_PorcentajeComision").val('');
-    $("#cc_TotalVenta").val('');
+    $("#Editar #Validation_descipcion1e").css("display", "none");
+    $("#Editar #Validation_descipcion2e").css("display", "none");
+    $("#Editar #cc_PorcentajeComision").val('');
+    $("#Editar #cc_TotalVenta").val('');
 });
 
 
