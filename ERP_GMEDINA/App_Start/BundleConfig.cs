@@ -675,6 +675,9 @@ namespace ERP_GMEDINA
                                       bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialPermisos").Include(
                                       "~/Scripts/app/general/HistorialPermisos/CreateHistorialPermisos.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
+            "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

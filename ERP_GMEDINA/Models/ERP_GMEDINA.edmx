@@ -3978,6 +3978,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="eqem_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="eqem_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEquipoTrabajo_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqtra_Id" Type="int" Mode="In" />
+          <Parameter Name="eqtra_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="eqtra_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbEquipoTrabajo_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="eqtra_Codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="eqtra_Descripcion" Type="nvarchar" Mode="In" />
@@ -10066,7 +10071,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Insert" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Insert_Result)">
             <Parameter Name="eqtra_Codigo" Mode="In" Type="String" />
             <Parameter Name="eqtra_Descripcion" Mode="In" Type="String" />
             <Parameter Name="eqtra_Observacion" Mode="In" Type="String" />
@@ -10078,7 +10083,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Update" ReturnType="Collection(Int32)">
+          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Update_Result)">
             <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_Codigo" Mode="In" Type="String" />
             <Parameter Name="eqtra_Descripcion" Mode="In" Type="String" />
@@ -11053,6 +11058,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
             <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Inactivar_Result)">
+            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -12194,6 +12204,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbHistorialCargos_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEquipoTrabajo_Insert_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEquipoTrabajo_Update_Result">
+          <Property Type="Int32" Name="MensajeError" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEquipoTrabajo_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13443,8 +13462,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result">
@@ -14614,6 +14645,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialCargos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialCargos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialCargos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

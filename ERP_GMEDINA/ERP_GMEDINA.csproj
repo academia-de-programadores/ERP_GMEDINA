@@ -192,6 +192,7 @@
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HabilidadesController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\cDropDownList.cs" />
     <Compile Include="Models\cEmpleados.cs" />
     <Compile Include="Models\cEmpresas.cs" />
+    <Compile Include="Models\cEquipoTrabajo.cs" />
     <Compile Include="Models\cFasesReclutamiento.cs" />
     <Compile Include="Models\cFormaPago.cs" />
     <Compile Include="Models\cHabilidades.cs" />
@@ -586,6 +588,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbfasesReclutamiento_Delete_Result.cs">
@@ -1234,6 +1245,7 @@
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
+    <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
@@ -1972,6 +1984,11 @@
     <Content Include="Views\HistorialIncapacidades\_Create.cshtml" />
     <Content Include="Views\HistorialIncapacidades\_Delete.cshtml" />
     <Content Include="Views\HistorialIncapacidades\_Detalles.cshtml" />
+    <Content Include="Views\EquipoTrabajo\Index.cshtml" />
+    <Content Include="Views\EquipoTrabajo\_Create.cshtml" />
+    <Content Include="Views\EquipoTrabajo\_Delete.cshtml" />
+    <Content Include="Views\EquipoTrabajo\_Detalles.cshtml" />
+    <Content Include="Views\EquipoTrabajo\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
