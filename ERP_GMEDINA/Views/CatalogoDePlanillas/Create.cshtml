@@ -16,7 +16,7 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        <div class="form-horizontal">                        
+                        <div class="form-horizontal">
                             @Html.HiddenFor(model => model.cpla_IdPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="row">
                                 <div class="form-group">
@@ -70,16 +70,24 @@
                                             <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
                                             <br />
                                         </div>
-                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodosLosIngresos">Seleccionar todos los ingresos</label>
-                                        <br /><br />
-                                        @foreach (var item in ViewBag.CatalogoIngresos)
-                                        {
-                                            <div class="form-horizontal col-xs-offset-1">
-                                                <div class="form-group">
-                                                    <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
-                                                </div>
-                                            </div>
-                                        }
+                                        <input type="checkbox" class="js-switch js-check-change"/> &nbsp; &nbsp; &nbsp; Seleccionar todos los Ingresos <br /><br />
+                                        <table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
+                                            <thead>
+                                                <tr>
+                                                    <th style="background: white"></th>
+                                                    <th>Descripcion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @*@foreach (var item in ViewBag.CatalogoIngresos)
+                                                {
+                                                    <tr>
+                                                        <td><input type="checkbox" class="i-checks" id="check-@item.id" /></td>
+                                                        <td>@item.descripcion</td>
+                                                    </tr>
+                                                }*@
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -94,14 +102,14 @@
                                         </div>
                                         &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
                                         <br /><br />
-                                        @foreach (var item in ViewBag.CatalogoDeducciones)
+                                        @*@foreach (var item in ViewBag.CatalogoDeducciones)
                                         {
                                             <div class="form-horizontal col-xs-offset-1">
                                                 <div class="form-group">
                                                     <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
                                                 </div>
                                             </div>
-                                        }
+                                        }*@
                                         <div class="form-horizontal col-xs-offset-1">
                                             <div class="form-group">
                                                 <input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
@@ -132,9 +140,12 @@
 <script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
 @section Scripts {
     @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/dataTablesSelvin")
+    @Scripts.Render("~/plugins/dataTables") 
 }
 @section Styles {
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 <script src="~/Scripts/plugins/switchery/switchery.js"></script>
 <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
