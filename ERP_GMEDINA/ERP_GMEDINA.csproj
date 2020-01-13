@@ -90,22 +90,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
       <Private>True</Private>
@@ -216,11 +200,6 @@
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
-    <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1231,7 +1210,6 @@
     <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\DeduccionesIndividuales.js" />
-    <Content Include="Scripts\app\General\DeduccionesRPT.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\excelexportjs.js" />
@@ -1269,20 +1247,9 @@
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Scripts\api\spanish.json" />
-    <Content Include="DataSets\ReportesPlanillaDS.xsc">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
     <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
-    <None Include="DataSets\ReportesPlanillaDS.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesPlanillaDS.xss">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
@@ -1794,15 +1761,6 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\ReportesPlanilla\DecimoTercerMesIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\Index.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_DecimoTercerMesModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\INFOPIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_INFOPModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_InstitucionesFinancierasModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\DecimoCuartoMesIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_DecimoCuartoMesModalRPT.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
@@ -1824,12 +1782,6 @@
     <Content Include="Views\EmpleadoComisiones\_CreateEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_DetalleEmpleadoComisiones.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_EditEmpleadoComisiones.cshtml" />
-    <Content Include="Views\ReportesPlanilla\IHSSIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_IHSSModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_AFPModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_RAPModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\AFPIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\RAPIndexRPT.cshtml" />
     <Content Include="Views\AcumuladosISR\Create.cshtml" />
     <Content Include="Views\AcumuladosISR\Delete.cshtml" />
     <Content Include="Views\AcumuladosISR\Details.cshtml" />
@@ -1899,12 +1851,6 @@
     <Content Include="Views\ISR\_CreateISR.cshtml" />
     <Content Include="Views\ISR\_DetailsISR.cshtml" />
     <Content Include="Views\ISR\_EditISR.cshtml" />
-    <Content Include="Views\ReportesPlanilla\GeneralTotalesIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ISRIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\LiquidacionesIndexRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_GeneralTotalesModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_ISRModalRPT.cshtml" />
-    <Content Include="Views\ReportesPlanilla\_LiquidacionesModalRPT.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\Index.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_Create.cshtml" />
     <Content Include="Views\AuxilioDeCesantias\_DetailsAuxCes.cshtml" />
@@ -1938,13 +1884,9 @@
     <Content Include="Views\ReportesPlanilla\Deducciones.cshtml" />
     <Content Include="Views\ReportesPlanilla\Ingresos.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportDeducciones.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportDeduccionesPreview.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportesVarios.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportIngresos.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportIngresosPreview.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportVarios.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportVariosPreview.cshtml" />
-    <Content Include="Views\ReportesPlanilla\LiquidacionRPT_Index.cshtml" />
     <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
     <Content Include="Views\FechaPlanilla\Create.cshtml" />
     <Content Include="Views\FechaPlanilla\Delete.cshtml" />
@@ -1964,6 +1906,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ReportesPlanilla\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1993,18 +1936,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ReportesPlanilla\AFPRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoMesRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\DecimoTercerMesRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\GeneralTotalesRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\IHSSRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\INFOPRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\ISRRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\LiquidacionesRPT.rdlc" />
-    <EmbeddedResource Include="ReportesPlanilla\RAPRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
