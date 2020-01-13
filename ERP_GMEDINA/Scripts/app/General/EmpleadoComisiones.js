@@ -264,42 +264,47 @@ $('#btnCreateRegistroComisiones').click(function () {
     var Porcentaje = $("#Crear #PorcentajeComision").val();
     var Total = $("#Crear #TotalV").val();
 
-    if (Empleado == "0") {
+    if (Empleado == "0" ) {
         $("#Validation_descipcion").css("display", "");
     }
     else if (Ingreso == "0") {
         $("#Validation_descipcion3").css("display", "");
     }
+    else {
+        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+        mostrarCargandoCrear()
+        $.ajax({
+            url: "/EmpleadoComisiones/Create",
+            method: "POST",
+            data: data
+        })
+        .done(function (data) {
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarEmpleadoComisiones").serializeArray();;
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                $("#AgregarEmpleadoComisiones").modal('show');
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Datos Incorrectos',
+                });
+            }
+            else {
+                cargarGridComisiones();
+                $("#AgregarEmpleadoComisiones").modal('hide');
+                $("#Crear #emp_IdEmpleado").val();
+                $("#Crear #cin_IdIngreso").val();
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue Creado de forma exitosa!',
+                });
+            }
+            ocultarCargandoCrear();
+        });
+    }
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-    mostrarCargandoCrear()
-    $.ajax({
-        url: "/EmpleadoComisiones/Create",
-        method: "POST",
-        data: data
-    })
-    .done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarEmpleadoComisiones").serializeArray();;
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            $("#AgregarEmpleadoComisiones").modal('show');
-            iziToast.error({
-                title: 'Error',
-                message: 'Datos Incorrectos',
-            });
-        }
-        else {
-            cargarGridComisiones();
-            $("#AgregarEmpleadoComisiones").modal('hide');
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Creado de forma exitosa!',
-            });
-        }
-        ocultarCargandoCrear();
-    });
+    
 });
 
 
