@@ -225,6 +225,44 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
     IDInactivar = 0;
 });
 
+
+
+// Activar
+var activarID = 0;
+$(document).on("click", "#btnActivarPreaviso", function () {
+    activarID = $(this).data('id');
+    $("#frmActivarPreavis").modal();
+});
+
+//activar ejecutar
+$("#btnActivarPreavis").click(function () {
+
+    $.ajax({
+        url: "/Preaviso/Activar/" + activarID,
+        method: "POST",
+        data: { id: activarID }
+    }).done(function (data) {
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se logró Activar el registro, contacte al administrador',
+            });
+        }
+        else {
+            debugger;
+            cargarGridPreaviso();
+            $("#frmActivarPreavis").modal('hide');
+            //Mensaje de exito de la edicion
+            iziToast.success({
+                title: 'Éxito',
+                message: '¡El registro se Activó de forma exitosa!',
+            });
+        }
+    });
+    activarID = 0;
+
+
+});
 //FUNCION: DETALLES DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
 $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function () {
