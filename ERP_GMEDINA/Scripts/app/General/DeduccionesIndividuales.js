@@ -37,7 +37,7 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaAFP = data, template = '';
+            var ListaDeduccionIndividual = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionIndividual.length; i++) {
                 //variable para verificar el estado del registro
@@ -55,7 +55,7 @@ function cargarGridDeducciones() {
                 template += '<tr data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">' +
                     '<td>' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '</td>' +
                     '<td>' + ListaDeduccionIndividual[i].dei_Motivo + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].Apellidos + '</td>' +
+                    '<td>' + ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionIndividual[i].dei_MontoInicial + '</td>' +
                     '<td>' + ListaDeduccionIndividual[i].dei_MontoRestante + '</td>' +
                     '<td>' + ListaDeduccionIndividual[i].dei_Cuota + '</td>' +
@@ -337,13 +337,14 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
-    var id = $(this).data('id');
+    var ID = $(this).data('id');
+    Idinactivar = ID;
     $.ajax({
-        url: "/DeduccionesIndividuales/Edit/" + id,
+        url: "/DeduccionesIndividuales/Edit/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: id })
+        data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -354,7 +355,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                 $("#Editar #dei_Cuota").val(data.dei_Cuota);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
+                var SelectedId = data.emp_Id;
 
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
@@ -366,13 +367,13 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_Id").empty();
+                        $("#Editar #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST                    
                         $.each(data, function (i, iter) {
-                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesDeduccionesIndividuales").modal('hide');
+               
                 $("#EditarDeduccionesIndividuales").modal();
             }
             else {
@@ -559,12 +560,13 @@ function mostrarCargandoInhabilitar() {
 }
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroDeduccionIndividual").click(function () {
+$("#btnInactivarRegistroDeduccionIndividual2").click(function ()
+{
 
     var data = $("#frmInactivarDeduccionIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/DeduccionesIndividuales/Inactivar",
+        url: "/frmInactivarDeduccionIndividual/Inactivar/" + Idinactivar,
         method: "POST",
         data: data
     }).done(function (data) {
@@ -572,30 +574,20 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se pudo Inhabilitado el registro, contacte al administrador',
             });
         }
         else {
-            mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
-
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarDeduccionesIndividuales").modal('hide');
-            $("#EditarDeduccionesIndividuales").modal('hide');
-
+            $("#EditarDeduccionesIndividuales").modal('hide')
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se inhabilitó de forma exitosa!',
+                message: 'El registro fue Inhabilitado de forma exitosa!',
             });
         }
-        ocultarCargandoInhabilitar();
     });
-
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmInactivarDeduccionIndividual").submit(function (e) {
-        return false;
-    });
-
 });
