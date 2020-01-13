@@ -6,18 +6,16 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           if (validarDT(Lista)) {
-               return null;
-           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.htra_Id,
-                   Colaborador: value.Colaborador,
-
-                   Recargo: value.tiho_Recargo,
+                   Empleado: value.Empleado,
+                   Jornadas: value.Jornadas,
                    Hora: value.tiho_Descripcion,
-                   Fecha: value.htra_Fecha
-
+                   Cantidad:value.Cantidad,
+                   Recargo: value.tiho_Recargo,
+                   Fecha: FechaFormato(value.Fecha)
+                   
                });
            });
            tabla.draw();
