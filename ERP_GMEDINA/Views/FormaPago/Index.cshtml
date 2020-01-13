@@ -17,6 +17,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+
                     @{
                         <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
                         var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
@@ -27,82 +28,59 @@
                         <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
                         <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
                     }
-                    <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
-                        <thead>
 
-                            <tr role="row">
-                                <th>@Html.DisplayNameFor(model => model.fpa_IdFormaPago)</th>
-                                <th>@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
-                                <th>@Html.DisplayNameFor(model => model.fpa_Activo)</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyFormaPago">
-
-                            @foreach (var item in Model)
-                            {
-
-                                var UsuarioModifica = !(item.fpa_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
-                                var UsuarioCrea = !(item.fpa_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
-                                var FechaCrea = Convert.ToString(item.fpa_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaCrea);
-                                var FechaModifica = Convert.ToString(item.fpa_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaModifica);
-
-                        <!-- validar el estado del registro (activo/inactivo)-->
-                                string estadoISR = item.fpa_Activo == false ? "Inactivo" : "Activo";
-
-                                <tr class="gradeA odd" role="row">
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.fpa_IdFormaPago)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.fpa_Descripcion)
-                                    </td>
-                                    <td>
-                                        <!-- variable del estado del registro creada arriba-->
-                                        @estadoISR
-                                    </td>
-                                    <td>
-                                        @{
-                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
-                                            if (item.fpa_Activo == true)
-                                            {
-                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-primary btn-xs" id="btnDetalleFormaPago">Detalles</button>
-                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
-                                            }
-                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
-                                            if (oUsuario?.usu_EsAdministrador == true && item.fpa_Activo == false)
-                                            {
-                                                 <!-- ACTIVAR -->
-                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-primary btn-xs" id="btnActivarFormaPago">Activar</button>
-                                            }
-                                        }
-                                    </td>
-                                </tr>
-                                            }
-
-
-                        </tbody>
-                    </table>
+                  <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Número</th>
+                            <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
+                            <th class="sorting_asc  col-md-4" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Activo)</th>
+                            <th class="sorting_asc  col-md-4">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFormaPago">
+                      @foreach (var item in Model) {
+                          var EsActivo = (item.fpa_Activo) ? "Activo" : "Inactivo";
+                        <tr class="gradeA odd" role="row" data-id="@item.fpa_IdFormaPago">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fpa_IdFormaPago)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fpa_Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => EsActivo)
+                            </td>
+                            <td>
+                                @if (item.fpa_Activo == true)
+                                {
+                                    <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>
+                                    <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
+                                }
+                                @if (oUsuario.usu_EsAdministrador == true && item.fpa_Activo == false)
+                                {
+                                    <!-- ACTIVAR -->
+                                    <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-primary btn-xs" id="btnActivarFormaPago">Activar</button>
+                                }
+                            </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+ </div>
 
 <div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Crear FormaPago</h4>
+                <h4 class="modal-title">Crear Forma de Pago</h4>
             </div>
             @Html.Partial("_Create", new ERP_GMEDINA.Models.tbFormaPago())
-            <div class="modal-footer">
-                <input type="submit" id="btnCrearFormaPago" value="Guardar" class="btn btn-primary pull-left" />
-                <div style="display:none" class="btn" id="cargandoCrear">
-                </div>
-                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default" />
-            </div>
         </div>
     </div>
 </div>
@@ -112,59 +90,38 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar</h4>
+                <h4 class="modal-title">Editar Forma de Pago</h4>
             </div>
             @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbFormaPago())
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="InactivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar el registro</h4>
-            </div>
-            <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inactivar este Registro?
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger" id="btnInactivarFormaPagoConfirm">Si</button>
-                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<div class="modal fade" id="frmActivarForP" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Activar</h4>
+                <h4 class="modal-title">Editar</h4>
             </div>
-            <div class="modal-body" id="Activar">
-                ¿Está seguro que desea activar este registro?
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="btnActivarForP">Si</button>
-                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="DetallarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="frmDetailFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="IconCerrarDetalles" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle Periodo</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle de Forma de Pago</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())
@@ -176,13 +133,51 @@
     </div>
 </div>
 
+@*INACTIVAR*@
+<div class="modal fade" id="InactivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inhabilitar Forma de Pago</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                ¿Esta seguro que desea Inhabilitar este Registro?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" id="btnInactivarFormaPagoConfirm">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarInactivar" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ACTIVAR*@
+<div class="modal fade" id="ActivarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar Forma de Pago</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este Registro?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger " id="btnActivarFormaPagoConfirm">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarActivar" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")@Scripts.Render("~/plugins/izitoast")
 }
 
 @section Scripts {
 
-    @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/Scripts/app/General/FormaPago")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+  @Scripts.Render("~/plugins/dataTables")
+  @Scripts.Render("~/Scripts/app/General/FormaPago")
+  @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

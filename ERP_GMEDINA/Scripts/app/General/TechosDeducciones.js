@@ -193,6 +193,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                         });
                     });
                 $("#EditarTechosDeducciones").modal();
+                $('body').css("overflow", "hidden");
             }
             else {
                 //Mensaje de error si no hay data
@@ -388,3 +389,40 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
     });
     activarID = 0;
 });
+
+//VALIDAR LAS ENTRADAS DE LOS CONCEPTOS AGREGADOS
+function isNumberKey(txt, evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode == 46) {
+        //Check if the text already contains the . character
+        //var len = $('.ValidarCaracteres').val().length;
+        //var index = $('.ValidarCaracteres').val().indexOf('.')
+        if (txt.value.indexOf('.') === -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    else {
+        if (charCode > 31 &&
+          (charCode < 48 || charCode > 57))
+            return false;
+    }
+    //if (index > 0) {
+    //    var CharAfterdot = (len + 1) - index;
+    //    if (CharAfterdot > 3) {
+    //        return false;
+    //    }
+    //}
+    return true;
+}
+
+//$('.ValidarCaracteres').bind('keypress', function (event) {
+//    //var regex = new RegExp("^[a-zA-Z0-9]+$");
+//    var regex = new RegExp("^[0-9.]");
+//    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+//    if (!regex.test(key)) {
+//        event.preventDefault();
+//        return false;
+//    }
+//});

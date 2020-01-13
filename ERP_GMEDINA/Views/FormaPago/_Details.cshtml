@@ -1,35 +1,33 @@
 ﻿@model ERP_GMEDINA.Models.tbFormaPago
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsFormaPago" }))
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesFormaPago" }))
 {
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            @Html.HiddenFor(model => model.fpa_IdFormaPago)
-
-            <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.fpa_IdFormaPago, htmlAttributes: new { @class = "control-label" })
-                </div>
-                <div class="col-md-6">
-                    <span id="peri_IdPeriodo">@Html.DisplayFor(model => model.fpa_IdFormaPago, new { htmlAttributes = new { @class = "text-box single-line", disabled = "disabled" } })</span>
-                </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <label class="control-label">Descripción</label>
             </div>
-            <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label" })
-                </div>
-                <div class="col-md-6">
-                    <span id="peri_DescripPeriodo">@Html.DisplayFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", disabled = "disabled" } })</span>
-                </div>
-            </div>
-
+            @*<div class="col-md-6">
+                    <label class="control-label">Valor</label>
+                </div>*@
         </div>
+    </div>
+    <hr class="col-md-11" style="margin:0px 15px 0px 0px;" />
+        <div class="ibox-content" style="border-color:#fff;">
 
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h4>Auditoría</h4>
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="fpa_Descripcion">@Html.DisplayFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="ibox float-e-margins">
+            <h4 class="modal-title">Detalles</h4>
             <div class="ibox-content">
                 <div class="form-horizontal">
                     <table class="table table-striped table-bordered dataTable">
@@ -57,6 +55,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
 }
+

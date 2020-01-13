@@ -60,8 +60,7 @@ function cargarGridComisiones() {
 
                 template += '<tr data-id = "' + ListaComisiones[i].cc_Id + '">' +
                     '<td>' + ListaComisiones[i].cc_Id + '</td>' +
-                    '<td>' + ListaComisiones[i].per_Nombres + '</td>' +
-                    '<td>' + ListaComisiones[i].per_Apellidos + '</td>' +
+                    '<td>' + ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos + '</td>' +
                     '<td>' + ListaComisiones[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' + ListaComisiones[i].cc_PorcentajeComision + '</td>' +
                       '<td>' + ListaComisiones[i].cc_TotalVenta + '</td>' +
@@ -140,7 +139,9 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
                        });
 
                    });
-                $("#EditarEmpleadoComisiones").modal();
+                $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
                 //$("#DetalleEmpleadoComisiones").modal(hide);
             }
             else {
@@ -154,7 +155,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         });
 });
 
-$("#btnUpdateComisionesConfirmar").click(function () {
+$("#btnUpdateComisionesConfirmar").click(function () { 
     $("#EditarEmpleadoComisionesConfirmacion").modal();
 });
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
@@ -227,7 +228,9 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoComisiones").modal();
+    $("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow","hidden"); 
+    $("html, body").css("overflow","scroll"); 
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -261,42 +264,47 @@ $('#btnCreateRegistroComisiones').click(function () {
     var Porcentaje = $("#Crear #PorcentajeComision").val();
     var Total = $("#Crear #TotalV").val();
 
-    if (Empleado == "0") {
+    if (Empleado == "0" ) {
         $("#Validation_descipcion").css("display", "");
     }
     else if (Ingreso == "0") {
         $("#Validation_descipcion3").css("display", "");
     }
+    else {
+        var data = $("#frmEmpleadoComisionesCreate").serializeArray();
+        mostrarCargandoCrear()
+        $.ajax({
+            url: "/EmpleadoComisiones/Create",
+            method: "POST",
+            data: data
+        })
+        .done(function (data) {
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarEmpleadoComisiones").serializeArray();;
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                $("#AgregarEmpleadoComisiones").modal('show');
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Datos Incorrectos',
+                });
+            }
+            else {
+                cargarGridComisiones();
+                $("#AgregarEmpleadoComisiones").modal('hide');
+                $("#Crear #emp_IdEmpleado").val();
+                $("#Crear #cin_IdIngreso").val();
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue Creado de forma exitosa!',
+                });
+            }
+            ocultarCargandoCrear();
+        });
+    }
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-    mostrarCargandoCrear()
-    $.ajax({
-        url: "/EmpleadoComisiones/Create",
-        method: "POST",
-        data: data
-    })
-    .done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarEmpleadoComisiones").serializeArray();;
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            $("#AgregarEmpleadoComisiones").modal('show');
-            iziToast.error({
-                title: 'Error',
-                message: 'Datos Incorrectos',
-            });
-        }
-        else {
-            cargarGridComisiones();
-            $("#AgregarEmpleadoComisiones").modal('hide');
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Creado de forma exitosa!',
-            });
-        }
-        ocultarCargandoCrear();
-    });
+    
 });
 
 
@@ -415,6 +423,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                     });
 
                 $("#DetalleEmpleadoComisiones").modal();
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -438,7 +448,6 @@ $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroComisiones").click(function () {
-
     var data = $("#frmEmpleadoComisionesInactivar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -468,7 +477,14 @@ $("#btnInactivarRegistroComisiones").click(function () {
         }
     });
 });
-
+$("#btnInactivarRegistroComisionesNo").click(function () {
+  
+                $("#InactivarEmpleadoComisiones").modal('hide');
+                $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
+    
+});
 //VALIDAR CREAR//
 var IDActivar = 0;
 $(document).on("click", "#btnActivarRegistroComisiones", function () {
@@ -629,7 +645,7 @@ function spinner() {
 
 const btnGuardar = $('#btnCreateRegistroComisiones'),
 
-    cargandoCrearcargandoCrear = $('#cargandoCrear')
+cargandoCrearcargandoCrear = $('#cargandoCrear')
 
 cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
 

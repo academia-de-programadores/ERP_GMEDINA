@@ -4,7 +4,7 @@
 {
     @Html.HiddenFor(model => model.adsu_IdAdelantoSueldo)
         @Html.AntiForgeryToken()
-    <div class="ibox-content">
+    @*<div class="ibox-content">*@
         <div class="form-horizontal">
             <div class="row">
                 <div class="col-md-6">
@@ -14,49 +14,7 @@
                     <span id="per_Nombres">@Html.DisplayFor(model => model.per_Nombres, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
-            @*<div class="form-group">
-                    @Html.LabelFor(model => model.per_Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.per_Nombres, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.per_Nombres, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                    <div class="form-group">
-                    @Html.LabelFor(model => model.adsu_FechaAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_FechaAdelanto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.adsu_FechaAdelanto, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.adsu_RazonAdelanto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.adsu_RazonAdelanto, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.adsu_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.adsu_Deducido, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.adsu_Deducido, new { htmlAttributes = new { @disabled = "disabled" } })
-                            @Html.ValidationMessageFor(model => model.adsu_Deducido, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>*@
-
-
-
+          
             <div class="row">
                 <div class="col-md-6">
                     @Html.LabelFor(model => model.adsu_FechaAdelanto, new { htmlAttributes = new { @class = "text-box single-line" } })
@@ -91,7 +49,7 @@
             </div>
 
         </div>
-    </div>
+    @*</div>*@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h4>Auditoría</h4>

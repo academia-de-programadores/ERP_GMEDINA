@@ -1,29 +1,24 @@
 ﻿@model ERP_GMEDINA.Models.tbFormaPago
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateFormaPago" }))
-{
-    <div class="modal-body" id="Crear">
-
-        <div class="ibox-content">
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.fpa_UsuarioCrea)
-                @Html.HiddenFor(model => model.fpa_FechaCrea)
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group date">
-                                Descripción@*@Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateFormaPago" }))
+        {
+            <div class="modal-body" id="Crear">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.fpa_UsuarioCrea)
+                    @Html.HiddenFor(model => model.fpa_FechaCrea)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </div>
-}
+            <div class="modal-footer">
+                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
+                <input type="submit" value="Guardar" id="btnCrearFormaPago" class="btn btn-primary pull-left" />
+            </div>
+        }
