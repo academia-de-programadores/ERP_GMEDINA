@@ -70,76 +70,67 @@ var crearEditar = function (edit) {
 	//Obtener las lista del catalogo de deducciones
 	listaCatalogoDeducciones(arrayDeducciones);
 
-	//Insertar o editar
-	if (
-		verificarCampos(
-			descripcionPlanilla,
-			frecuenciaDias,
-			arrayIngresos,
-			arrayDeducciones
-		)
-	) {
-		if (!edit) {
-			mostrarSpinner(btnGuardar, cargandoCrear);
 
-			_ajax(
-				{
-					catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
-					catalogoIngresos: arrayIngresos,
-					catalogoDeducciones: arrayDeducciones,
-					checkRecibeComision: checkRecibeComision.checked
-				},
-				'/CatalogoDePlanillas/Create',
-				'POST',
-				(data) => {
-					if (data == 'bien') {
-						iziToast.success({
-							title: 'Exito',
-							message: 'El registro fue insertado de forma exitosa.'
-						});
-						location.href = baseUrl;
-					} else {
-						iziToast.error({
-							title: 'Error',
-							message: 'Hubo un error al insertar el registro'
-						});
+	if (!edit) {
+		mostrarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
 
-						ocultarSpinner(btnGuardar, cargandoCrear);
-					}
-				},
-				(enviar) => { }
-			);
-		} else {
-			let idPlanilla = inputIdPlanilla.val();
-			mostrarSpinner(btnEditar, cargandoEditar);
-			_ajax(
-				{
-					id: idPlanilla,
-					catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
-					catalogoIngresos: arrayIngresos,
-					catalogoDeducciones: arrayDeducciones,
-					checkRecibeComision: checkRecibeComision.checked
-				},
-				'/CatalogoDePlanillas/Edit',
-				'POST',
-				(data) => {
-					if (data == 'bien') {
-						iziToast.success({
-							title: 'Exito',
-							message: 'El registro fue editado de forma exitosa.'
-						});
-						location.href = baseUrl;
-					} else {
-						iziToast.error({
-							title: 'Error',
-							message: 'Hubo un error al editar el registro'
-						});
-						ocultarSpinnerSpinner(btnEditar, cargandoEditar);
-					}
-				},
-				(enviar) => { }
-			);
-		}
+		_ajax(
+			{
+				catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
+				catalogoIngresos: arrayIngresos,
+				catalogoDeducciones: arrayDeducciones,
+				checkRecibeComision: checkRecibeComision.checked
+			},
+			'/CatalogoDePlanillas/Create',
+			'POST',
+			(data) => {
+				if (data == 'bien') {
+					iziToast.success({
+						title: 'Exito',
+						message: 'El registro fue insertado de forma exitosa.'
+					});
+					location.href = baseUrl;
+				} else {
+					iziToast.error({
+						title: 'Error',
+						message: 'Hubo un error al insertar el registro'
+					});
+
+					ocultarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+				}
+			},
+			(enviar) => { }
+		);
+	} else {
+		let idPlanilla = inputIdPlanilla.val();
+		mostrarSpinner($('#btnConfirmacionEdit'), cargandoEditar);
+		_ajax(
+			{
+				id: idPlanilla,
+				catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
+				catalogoIngresos: arrayIngresos,
+				catalogoDeducciones: arrayDeducciones,
+				checkRecibeComision: checkRecibeComision.checked
+			},
+			'/CatalogoDePlanillas/Edit',
+			'POST',
+			(data) => {
+				if (data == 'bien') {
+					iziToast.success({
+						title: 'Exito',
+						message: 'El registro fue editado de forma exitosa.'
+					});
+					location.href = baseUrl;
+				} else {
+					iziToast.error({
+						title: 'Error',
+						message: 'Hubo un error al editar el registro'
+					});
+					ocultarSpinnerSpinner($('#btnConfirmacionEdit'), cargandoEditar);
+				}
+			},
+			(enviar) => { }
+		);
 	}
 };
 
@@ -257,6 +248,16 @@ function estaEnCrear() {
 
 function estaEnEditar() {
 	return getUrl.toString().indexOf('Edit');
+}
+
+function estaEnDetalles() {
+	return getUrl.toString().indexOf('Details');
+}
+
+
+function estaEnIndex() {
+	console.log('esta en index');
+	return getUrl.toString().indexOf('Index');
 }
 
 //Posicionaarse en la parte superior de la pagina cuando falle una validación
@@ -869,28 +870,30 @@ function getIngresos(data) {
        <div class="ibox-title">
             <h5>Ingresos de la Planilla</h5>
         </div>
-        <div class="ibox-content">
-            <table class="table table-bordered">
+		<div class="ibox-content">
+		<div class="data">
+            <table class="table table-bordered tbl-catalogos">
                 <thead>
                     <tr>
                         <th>Ingreso</th>
                     </tr>
                 </thead>
                 <tbody>`;
-	$.each(data.ingresos, function (index, val) {
-		ingresosPlanillas +=
-			`
-                        <tr>
-                            <td>
-                                ` +
-			val.cin_DescripcionIngreso +
-			`
-                            </td>
-                        </tr>
-                    `;
-	});
-	ingresosPlanillas += `</tbody>
-            </table>
+		$.each(data.ingresos, function (index, val) {
+			ingresosPlanillas +=
+				`
+							<tr>
+								<td>
+									` +
+				val.cin_DescripcionIngreso +
+				`
+								</td>
+							</tr>
+						`;
+		});
+ingresosPlanillas += `</tbody>
+				</table>
+			</div>
         </div>
     </div>`;
 
@@ -958,6 +961,44 @@ $(document).ready(() => {
 		listarCatalogos();
 	}
 
+	console.log('Leyendo');
+
+	if (estaEnDetalles() > 1) {
+
+		$('.tbl-catalogos').DataTable({
+			"language": {
+				"paging": false,
+				"sProcessing": spinner(),
+				"sLengthMenu": "_MENU_",
+				"sZeroRecords": "No se encontraron resultados",
+				"sEmptyTable": "Ningún dato disponible en esta tabla",
+				"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+				"sUrl": "",
+				"sInfoThousands": ",",
+				"sLoadingRecords": spinner(),
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			},
+			"paging": false,
+			responsive: false,
+			dom: 'lft',
+			"order": [[1, "asc"]]
+		});
+	}
+
+
 	// Si esta en la pantalla de Create entonces vaciar todo
 	if (estaEnCrear() > 1) {
 		$('input[type="checkbox"]').prop('checked', false);
@@ -1014,6 +1055,37 @@ $(document).on('click', 'td.details-control', function () {
 			(data) => {
 				//Mostrar el detalle con sus datos
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
+				$('#tblCatalogoPlanillas tbody tr .tbl-catalogos').DataTable({
+					"language": {
+						"paging": false,
+						"sProcessing": spinner(),
+						"sLengthMenu": "_MENU_",
+						"sZeroRecords": "No se encontraron resultados",
+						"sEmptyTable": "Ningún dato disponible en esta tabla",
+						"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+						"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+						"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+						"sInfoPostFix": "",
+						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+						"sUrl": "",
+						"sInfoThousands": ",",
+						"sLoadingRecords": spinner(),
+						"oPaginate": {
+							"sFirst": "Primero",
+							"sLast": "Último",
+							"sNext": "Siguiente",
+							"sPrevious": "Anterior"
+						},
+						"oAria": {
+							"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+							"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+						}
+					},
+					"paging": false,
+					responsive: false,
+					dom: 'lft',
+					"order": [[1, "asc"]]
+				});
 				tr.addClass('shown');
 			},
 			() => { }
@@ -1024,16 +1096,76 @@ $(document).on('click', 'td.details-control', function () {
 //Insetar
 $(document).on(
 	'click',
-	'#btnGuardarCatalogoDePlanillasIngresosDeducciones',
+	'#btnConfirmacionCreate',
 	function () {
 		crearEditar(false);
 	}
 );
 
+//Desplegar modal de que si desea guardar
+$('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	//Array de Ingresos y deducciones
+	let arrayIngresos = [];
+	let arrayDeducciones = [];
+	//Obtener los valores del catalogo de planillas
+	let descripcionPlanilla = inputDescripcionPlanilla.val();
+	let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+	//Obtener las lista del catalogo de ingresos
+	listaCatalogoIngresos(arrayIngresos);
+
+	//Obtener las lista del catalogo de deducciones
+	listaCatalogoDeducciones(arrayDeducciones);
+
+	//Insertar o editar
+	if (
+		verificarCampos(
+			descripcionPlanilla,
+			frecuenciaDias,
+			arrayIngresos,
+			arrayDeducciones
+		)
+	) {
+		console.log(descripcionPlanilla);
+		$('#modalConfirmacionCreate').modal();
+	}
+
+});
+
+//Desplegar modal de que si desea editar
+$('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	//Array de Ingresos y deducciones
+	let arrayIngresos = [];
+	let arrayDeducciones = [];
+	//Obtener los valores del catalogo de planillas
+	let descripcionPlanilla = inputDescripcionPlanilla.val();
+	let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+	//Obtener las lista del catalogo de ingresos
+	listaCatalogoIngresos(arrayIngresos);
+
+	//Obtener las lista del catalogo de deducciones
+	listaCatalogoDeducciones(arrayDeducciones);
+
+	//Insertar o editar
+	if (
+		verificarCampos(
+			descripcionPlanilla,
+			frecuenciaDias,
+			arrayIngresos,
+			arrayDeducciones
+		)
+	) {
+		console.log(descripcionPlanilla);
+		$('#modalConfirmacionEdit').modal();
+	}
+
+});
+
 //Editar
 $(document).on(
 	'click',
-	'#btnEditarCatalogoDePlanillasIngresosDeducciones',
+	'#btnConfirmacionEdit',
 	function () {
 		crearEditar(true);
 	}

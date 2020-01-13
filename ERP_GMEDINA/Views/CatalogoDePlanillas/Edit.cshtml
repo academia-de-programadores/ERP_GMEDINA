@@ -1,165 +1,185 @@
 ﻿@model ERP_GMEDINA.Models.tbCatalogoDePlanillas
 @{
-    ViewBag.Title = "Editar";
-    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+	ViewBag.Title = "Editar";
+	Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
 <link href="~/Content/plugins/switchery/switchery.css" rel="stylesheet" />
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
-                    <h2>Editar Planilla</h2>
-                </div>
-                <div class="ibox-content">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            @Html.HiddenFor(model => model.cpla_IdPlanilla)
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        @Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
-                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        <label class="control-label">Frecuencia de pago</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
-                                            <option value="7" @(Model.cpla_FrecuenciaEnDias == 7 ? "selected='selected'" : "")>Semanal</option>
-                                            <option value="15" @(Model.cpla_FrecuenciaEnDias == 15 ? "selected='selected'" : "")>Quincenal</option>
-                                            <option value="30" @(Model.cpla_FrecuenciaEnDias == 30 ? "selected='selected'" : "")>Mensual</option>
-                                        </select>
-                                        <span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                        <label class="control-label">Recibe Comisiones</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="checkbox" checked="@Model.cpla_RecibeComision" class="i-checks" id="check-recibe-comision" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="col-lg-5" id="catalogoDeIngresos">
-                                <div class="ibox float-e-margins">
-                                    <h3 style="margin-left:85px;">Lista del catalogo de Ingresos</h3>
-                                    <div class="col-lg-offset-2">
-                                        <hr />
-                                        <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-                                            <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
-                                        </div>
-                                        <input type="checkbox" checked="@false" id="checkSeleccionarTodosIngresos" class="js-switch js-check-change" /> &nbsp; &nbsp; &nbsp; <label id="seleccionarTodosLosIngresos">Seleccionar todos los Ingresos</label><br /><br />
-                                        <table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
-                                            <thead>
-                                                <tr>
-                                                    <th style="background: white"></th>
-                                                    <th>Descripcion</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
+					<h2>Editar Planilla</h2>
+				</div>
+				<div class="ibox-content">
+					@using (Html.BeginForm())
+					{
+						@Html.AntiForgeryToken()
+						<div class="form-horizontal">
+							@Html.HiddenFor(model => model.cpla_IdPlanilla)
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-1"></div>
+									<div class="col-md-2">
+										@Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+									</div>
+									<div class="col-md-4">
+										<input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
+										<span class="field-validation-valid text-danger" style="display:none" id="validacionDescripcionPlanilla" data-valmsg-for="cpla_DescripcionPlanilla" data-valmsg-replace="true">El campo descripción planilla es obligatorio.</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-1"></div>
+									<div class="col-md-2">
+										<label class="control-label">Frecuencia de pago</label>
+									</div>
+									<div class="col-md-4">
+										<select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
+											<option value="7" @(Model.cpla_FrecuenciaEnDias == 7 ? "selected='selected'" : "")>Semanal</option>
+											<option value="15" @(Model.cpla_FrecuenciaEnDias == 15 ? "selected='selected'" : "")>Quincenal</option>
+											<option value="30" @(Model.cpla_FrecuenciaEnDias == 30 ? "selected='selected'" : "")>Mensual</option>
+										</select>
+										<span class="field-validation-valid text-danger" style="display:none" id="validacionFrecuenciaDias" data-valmsg-for="cpla_FrecuenciaEnDias" data-valmsg-replace="true">El campo Frecuencia en días es obligatorio, y tiene que ser un número mayor que cero.</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<div class="col-md-1"></div>
+									<div class="col-md-2">
+										<label class="control-label">Recibe Comisiones</label>
+									</div>
+									<div class="col-md-4">
+										<input type="checkbox" checked="@Model.cpla_RecibeComision" class="i-checks" id="check-recibe-comision" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ibox-content">
+							<div class="col-lg-5" id="catalogoDeIngresos">
+								<div class="ibox float-e-margins">
+									<h3 style="margin-left:85px;">Lista del catalogo de Ingresos</h3>
+									<div class="col-lg-offset-2">
+										<hr />
+										<div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+											<span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
+										</div>
+										<input type="checkbox" checked="@false" id="checkSeleccionarTodosIngresos" class="js-switch js-check-change" /> &nbsp; &nbsp; &nbsp; <label id="seleccionarTodosLosIngresos">Seleccionar todos los Ingresos</label><br /><br />
+										<div class="data">
+											<table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
+												<thead>
+													<tr>
+														<th style="background: white"></th>
+														<th>Descripcion</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+											</div>
+										</div>
+								</div>
+							</div>
 
-                            <div class="col-lg-5" id="catalogoDeDeducciones">
-                                <div class="ibox float-e-margins">
-                                    <h3 style="margin-left:85px;">Lista del catalogo de Deducciones</h3>
-                                    <div class="col-lg-offset-2">
-                                        <hr />
-                                        <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-                                            <span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
-                                        </div>
-                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" checked="@false" id="checkSeleccionarTodasDeducciones" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
-                                        <table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover tbl-catalogos-d">
-                                            <thead>
-                                                <tr>
-                                                    <th style="background: white"></th>
-                                                    <th>Descripcion</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                        <div class="form-horizontal col-xs-offset-1">
-                                            <div class="form-group">
-                                                <input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="button" id="btnEditarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
-                                    <div style="display:none" class="btn" id="cargandoEditar">
-                                    </div>
-                                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                                    <button type="button" class="btn btn-danger" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="inactivar">Inactivar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    }
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                        <h4 class="modal-title">Inactivar</h4>
-                    </div>
-                    <div class="modal-body" id="Inactivar">
-                        ¿Está seguro que desea inactivar este registro?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" id="btnInactivarPlanilla">Si</button>
-                        <div class="btn" style="display:none;" id="cargandoEliminar">
-                        </div>
-                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="col-lg-5" id="catalogoDeDeducciones">
+								<div class="ibox float-e-margins">
+									<h3 style="margin-left:85px;">Lista del catalogo de Deducciones</h3>
+									<div class="col-lg-offset-2">
+										<hr />
+										<div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+											<span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
+										</div>
+										&nbsp; &nbsp; &nbsp;<input type="checkbox" checked="@false" id="checkSeleccionarTodasDeducciones" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
+										<div class="data">
+											<table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover tbl-catalogos-d">
+												<thead>
+													<tr>
+														<th style="background: white"></th>
+														<th>Descripcion</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+										</div>
+										<br />
+										<div class="form-horizontal col-xs-offset-1">
+											<div class="form-group">
+												<input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-offset-2 col-md-10">
+									<input type="button" id="btnEditarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
+									@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+									<button type="button" class="btn btn-danger" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="inactivar">Inactivar</button>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					}
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="modal fade" id="InactivarCatalogoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+						<h4 class="modal-title">Inactivar</h4>
+					</div>
+					<div class="modal-body" id="Inactivar">
+						¿Está seguro que desea inactivar este registro?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" id="btnInactivarPlanilla">Si</button>
+						<div class="btn" style="display:none;" id="cargandoEliminar">
+						</div>
+						<button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modalConfirmacionEdit" tabindex="-1" role="dialog" aria-hidden="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+						<h4 class="modal-title">Editar</h4>
+					</div>
+					<div class="modal-body" id="Activar">
+						¿Esta seguro que desea Editar este registro?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+						<input type="button" id="btnConfirmacionEdit" value="Si" class="btn btn-primary " />
+						<div style="display:none" class="btn" id="cargandoEditar">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/app/General/CatalogoPlanillas.js"></script>
 <script src="~/Scripts/plugins/iziToast/iziToast.js"></script>
 <script src="~/Scripts/plugins/switchery/switchery.js"></script>
 @section Scripts {
-    @Scripts.Render("~/plugins/iCheck")
-    @Scripts.Render("~/plugins/dataTablesSelvin")
-    @Scripts.Render("~/plugins/dataTables")
-
-
-
+	@Scripts.Render("~/plugins/iCheck")
+	@Scripts.Render("~/plugins/dataTablesSelvin")
+	@Scripts.Render("~/plugins/dataTables")
 }
 @section Styles {
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
-    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+	@Styles.Render("~/Content/app/General")
+	@Styles.Render("~/Content/plugins/izitoast/iziToast")
+	@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 
 
