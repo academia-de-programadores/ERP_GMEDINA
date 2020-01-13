@@ -14,8 +14,9 @@
                     </div>
                     <div class="col-md-6">
                             @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger" })
-                    </div>
+                 
+                        <span class="field-validation-valid text-danger" style="display: none" id="validareditar">El campo Descripción Ingresos es obligatorio.</span>
+                     </div>
                 </div>
             </div>
         @*</div>
