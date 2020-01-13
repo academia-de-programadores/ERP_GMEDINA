@@ -133,6 +133,11 @@ $("#btnActivarRegistroAFP").click(function () {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#btnCerrarCrear").click(function () {
+    $("#afp_Descripcion").val('');
+    $("#afp_AporteMinimoLps").val('');
+    $("#afp_InteresAporte").val('');
+    $("#afp_InteresAnual").val('');
+    $("#tde_IdTipoDedu").val("0");
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
@@ -142,6 +147,11 @@ $("#btnCerrarCrear").click(function () {
 });
 
 $("#btnIconCerrar").click(function () {
+    $("#afp_Descripcion").val('');
+    $("#afp_AporteMinimoLps").val('');
+    $("#afp_InteresAporte").val('');
+    $("#afp_InteresAnual").val('');
+    $("#tde_IdTipoDedu").val("0");
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
@@ -180,23 +190,36 @@ $(document).on("click", "#btnAgregarAFP", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #tde_IdTipoDedu").empty();
+            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarAFP").modal();
-    $("#Crear #afp_Descripcion").val('');
-    $("#Crear #afp_AporteMinimoLps").val('');
-    $("#Crear #afp_InteresAporte").val('');
-    $("#Crear #afp_InteresAnual").val('');
+    $("#AgregarAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+
+    $("#validation1").css("display", "none");
+    $("#validation2").css("display", "none");
+    $("#validation3").css("display", "none");
+    $("#validation4").css("display", "none");
+    $("#validation5").css("display", "none");
+
+    $("#afp_Descripcion").val('');
+    $("#afp_AporteMinimoLps").val('');
+    $("#afp_InteresAporte").val('');
+    $("#afp_InteresAnual").val('');
+    $("#tde_IdTipoDedu").val("0");
 
 });
 
-$("#validatione1").css("display", "none");
-$("#validatione2").css("display", "none");
-$("#validatione3").css("display", "none");
-$("#validatione4").css("display", "none");
+$("#AgregarAFP").on('hidden.bs.modal', function () {
+
+});
+
+
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
@@ -207,6 +230,12 @@ $('#btnCreateRegistroAFP').click(function () {
     var val4 = $("#Crear #afp_InteresAporte").val();
     var val5 = $("#Crear #afp_InteresAnual").val();
 
+    if (val1 == "" || val1 == 0 || val1 == "0") {
+        $("#Crear #validation5").css("display", "");
+    }
+    else {
+        $("#Crear #validation5").css("display", "none");
+    }
 
         if (val2 == "") {
             $("#Crear #validation1").css("display", "");
@@ -235,6 +264,7 @@ $('#btnCreateRegistroAFP').click(function () {
             $("#Crear #validation4").css("display", "none");
         }
         
+
         mostrarCargandoCrear();
 
 
@@ -361,7 +391,9 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                         });
                     });
                 $("#DetallesAFP").modal('hide');
-                $("#EditarAFP").modal();
+                $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -373,8 +405,26 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#EditarAFP").on('hidden.bs.modal', function () {
+
+});
+
 $("#btnEditAFP").click(function () {
+    $("#EditarAFP").modal('hide');
+    $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+});
+
+$(document).on("click", "#btnRegresar", function () {
+    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#EditarAFPConfirmacion").modal('hide');
+});
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnEditAFPConfirmar").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var vale2 = $("#Editar #afp_Descripcion").val();
     var vale3 = $("#Editar #afp_AporteMinimoLps").val();
@@ -421,6 +471,7 @@ $("#btnEditAFP").click(function () {
         if (data != "error") {
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#EditarAFPConfirmacion").modal('hide');
             $("#EditarAFP").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
@@ -448,6 +499,10 @@ $("#btnEditAFP").click(function () {
 
 });
 
+
+$("#EditarAFP").on('hidden.bs.modal', function () {
+
+});
 
 
 
@@ -521,6 +576,11 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 
 
 //Inactivar//
+$(document).on("click", "#btnBack", function () {
+    $("#EditarAFP").modal();
+    $("#InactivarAFP").modal('hide');
+});
+
 $(document).on("click", "#btnInactivarAFP", function () {
     $("#EditarAFP").modal('hide');
     //MOSTRAR EL MODAL DE INACTIVAR

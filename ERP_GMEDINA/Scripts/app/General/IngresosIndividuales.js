@@ -22,6 +22,13 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+$(document).ready(function () {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
+})
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -134,16 +141,24 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
 
 
 $("#btnCerrarCrear").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
+    $("#Crear #emp_Id").val("0");
+    $("#ini_Motivo").val('');
+    $("#ini_Monto").val('');
+    $("#ini_PagaSiempre").val('');
+    $("#validatione1").css("display", "none");
+    $("#validatione2").css("display", "none");
+    $("#validatione3").css("display", "none");
     $("#AgregarIngresosIndividuales").modal('hide');
 });
 
 $("#btnIconCerrar").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
+    $("#Crear #emp_Id").val("0");
+    $("#ini_Motivo").val('');
+    $("#ini_Monto").val('');
+    $("#ini_PagaSiempre").val('');
+    $("#validatione1").css("display", "none");
+    $("#validatione2").css("display", "none");
+    $("#validatione3").css("display", "none");
     $("#AgregarIngresosIndividuales").modal('hide');
 });
 
@@ -177,20 +192,23 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #emp_Id").empty();
+            $("#Crear #emp_Id").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarIngresosIndividuales").modal();
-    $("#Crear #ini_Motivo").val('');
-    $("#Crear #ini_Monto").val('');
-    $("#Crear #ini_PagaSiempre").val('');
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
+    $("#AgregarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#Crear #emp_Id").val("0");
+    $("#ini_Motivo").val('');
+    $("#ini_Monto").val('');
+    $("#ini_PagaSiempre").val('');
 
 });
+
+
 
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -201,19 +219,18 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var val3 = $("#Crear #ini_Monto").val();
     var val4 = $("#Crear #ini_PagaSiempre").val();
 
-
     if (val2 == "") {
-        $("#Crear #validation1").css("display", "");
+        $("#Crear #validatione2").css("display", "");
     }
     else {
-        $("#Crear #validation1").css("display", "none");
+        $("#Crear #validatione2").css("display", "none");
     }
 
     if (val3 == "" || val3 == null || val3 == undefined) {
-        $("#Crear #validation3").css("display", "");
+        $("#Crear #validatione3").css("display", "");
     }
     else {
-        $("#Crear #validation3").css("display", "none");
+        $("#Crear #validatione3").css("display", "none");
     }
 
     mostrarCargandoCrear();
@@ -237,7 +254,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
             $("#Crear #ini_Motivo").val('');
             $("#Crear #ini_Monto").val('');
             $("#Crear #ini_PagaSiempre").val('');
-
+            $("#Crear #validatione1").css("display", "none");
             //CERRAR EL MODAL DE AGREGAR
             $("#AgregarIngresosIndividuales").modal('hide');
 
@@ -268,16 +285,16 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
+    $("#validation1").css("display", "none");
+    $("#validation2").css("display", "none");
+    $("#validation3").css("display", "none");
     $("#EditarIngresosIndividuales").modal('hide');
 });
 
 $("#btnIconCerrare").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
+    $("#validation1").css("display", "none");
+    $("#validation2").css("display", "none");
+    $("#validation3").css("display", "none");
     $("#EditarIngresosIndividuales").modal('hide');
 });
 
@@ -342,10 +359,10 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                         });
                     });
                 $("#DetallesIngresosIndividuales").modal('hide');
-                $("#EditarIngresosIndividuales").modal();
-                $("#validatione1").css("display", "none");
-                $("#validatione2").css("display", "none");
-                $("#validatione3").css("display", "none");
+
+                $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -358,8 +375,22 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
 });
 
 $("#btnEditIngresoIndividual").click(function () {
-    $("#EditarIngresosIndividualesConfirmacion").modal();
+    $("#EditarIngresosIndividuales").modal('hide');
+    $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
+
+$(document).on("click", "#btnRegresar", function () {
+    $("#EditarIngresosIndividualesConfirmacion").modal('hide');
+    $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+});
+
+
+
+
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditIngresoIndividual2").click(function () {
@@ -367,10 +398,8 @@ $("#btnEditIngresoIndividual2").click(function () {
     var vale1 = $("#Editar #emp_Id").val();
     var vale2 = $("#Editar #ini_Motivo").val();
     var vale3 = $("#Editar #ini_Monto").val();
-    var exp = /^[0-9]+(\.[0-9]{1,2})$/;
 
-
-    if (vale2 == "") {
+    if (vale2 == "" || vale2 == null) {
         $("#Editar #validatione1").css("display", "");
     }
     else {
@@ -394,7 +423,9 @@ $("#btnEditIngresoIndividual2").click(function () {
         data: data
     }).done(function (data) {
         if (data != "error") {
-
+            $("#validation1").css("display", "none");
+            $("#validation2").css("display", "none");
+            $("#validation3").css("display", "none");
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarIngresosIndividuales").modal('hide');
             $("#EditarIngresosIndividualesConfirmacion").modal('hide');
@@ -413,6 +444,9 @@ $("#btnEditIngresoIndividual2").click(function () {
                 title: 'Error',
                 message: 'Datos Invalidos!',
             });
+            $("#validation1").css("display", "");
+            $("#validation2").css("display", "");
+            $("#validation3").css("display", "");
         }
 
         ocultarCargandoEditar();
@@ -497,10 +531,18 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
 
 
 //Inactivar//
+$(document).on("click", "#btnBack", function () {
+    $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#InactivarIngresosIndividuales").modal('hide');
+});
+
 $(document).on("click", "#btnInactivarIngresoIndividual", function () {
     $("#EditarIngresosIndividuales").modal('hide');
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarIngresosIndividuales").modal();
+    $("#InactivarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroIngresoIndividual')
