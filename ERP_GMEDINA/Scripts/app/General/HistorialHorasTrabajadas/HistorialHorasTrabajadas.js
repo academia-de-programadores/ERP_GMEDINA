@@ -9,8 +9,8 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.htra_Id,
-                   Empleado: value.Empleado,
-                   Jornadas: value.Jornadas,
+                   Nombres: value.Empleado,
+                   Jornada: value.Jornadas,
                    Hora: value.tiho_Descripcion,
                    Cantidad:value.Cantidad,
                    Recargo: value.tiho_Recargo,

@@ -27,5 +27,6 @@ namespace ERP_GMEDINA.Models
         public string Area { get; set; }
         public string Cargo { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public int Cantidad { get; set; }
     }
 }

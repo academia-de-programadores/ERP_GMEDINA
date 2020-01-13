@@ -436,7 +436,7 @@
           <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
           <Property Name="hper_Duracion" Type="int" Nullable="false" />
           <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hper_Justificado" Type="bit" />
+          <Property Name="hper_Justificado" Type="bit" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
           <Property Name="hper_Estado" Type="bit" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -1114,6 +1114,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
             <PropertyRef Name="Cargo" />
             <PropertyRef Name="Jornada" />
             <PropertyRef Name="Tipo Horas" />
+            <PropertyRef Name="Cantidad" />
             <PropertyRef Name="Recargo" />
             <PropertyRef Name="Fecha Crea" />
           </Key>
@@ -1124,6 +1125,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
           <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Jornada" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Tipo Horas" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Recargo" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" />
           <Property Name="Usuario Crea" Type="varchar" MaxLength="100" />
@@ -4907,6 +4909,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HistorialHorasTrabajadas].[Cargo] AS [Cargo], 
     [V_HistorialHorasTrabajadas].[Jornada] AS [Jornada], 
     [V_HistorialHorasTrabajadas].[Tipo Horas] AS [Tipo Horas], 
+    [V_HistorialHorasTrabajadas].[Cantidad] AS [Cantidad], 
     [V_HistorialHorasTrabajadas].[Recargo] AS [Recargo], 
     [V_HistorialHorasTrabajadas].[Fecha] AS [Fecha], 
     [V_HistorialHorasTrabajadas].[Usuario Crea] AS [Usuario Crea], 
@@ -7194,6 +7197,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="Departamento" />
             <PropertyRef Name="Area" />
             <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Cantidad" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
@@ -7208,6 +7212,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="V_HistorialIncapacidades">
           <Key>
@@ -11506,7 +11511,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
           <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_Justificado" Type="Boolean" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
           <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -13177,6 +13182,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HistorialHorasTrabajadas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialHorasTrabajadas">
               <MappingFragment StoreEntitySet="V_HistorialHorasTrabajadas">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
