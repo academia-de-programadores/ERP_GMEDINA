@@ -149,10 +149,11 @@ $("#btnUpdateIngresos").click(function () {
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
         $("#EditarCatalogoIngresosConfirmacion").modal();
+        $("#Editar #validareditar").css("display", "none");
     }
     else {
         //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
-        $("#validareditar").css("display", "");
+        $("#Editar #validareditar").css("display", "");
         $("#Editar #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
