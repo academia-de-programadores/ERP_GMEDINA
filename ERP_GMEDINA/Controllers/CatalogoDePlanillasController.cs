@@ -123,12 +123,21 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-                IEnumerable<object> objListaCatalogoIngresos = null;
-                IEnumerable<object> objListaCatalogoDeducciones = null;
-                List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>(), listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>(); //Detalles de la planilla
-                GetIngresosDeduccionesEdit(id, ref listaCatalogoIngresos, ref listaCatalogoDeducciones, out objListaCatalogoIngresos, out objListaCatalogoDeducciones);
+                if (esIngreso)
+                {
+                    IEnumerable<object> objListaCatalogoIngresos = null;
+                    List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos = new List<CatalogoDeIngresosDeduccionesViewModel>(); //Detalles de la planilla
+                    GetIngresosEdit(id, ref listaCatalogoIngresos, out objListaCatalogoIngresos);
+                    json = new { data = listaCatalogoIngresos };
+                }
+                else
+                {
+                    IEnumerable<object> objListaCatalogoDeducciones = null;
+                    List<CatalogoDeIngresosDeduccionesViewModel>  listaCatalogoDeducciones = new List<CatalogoDeIngresosDeduccionesViewModel>();
+                    GetDeduccionesEdit(id, ref listaCatalogoDeducciones, out objListaCatalogoDeducciones);
+                    json = new { data = listaCatalogoDeducciones };
+                }
 
-                json = new { data = listaCatalogoIngresos };
             }
 
             return Json(json, JsonRequestBehavior.AllowGet);
@@ -356,7 +365,7 @@ namespace ERP_GMEDINA.Controllers
             return response;
         }
 
-        private void GetIngresosDeduccionesEdit(int? id, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones, out IEnumerable<object> listCatalogoDeDeducciones, out IEnumerable<object> listCatalogoDeIngresos)
+        private void GetIngresosEdit(int? id, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoIngresos, out IEnumerable<object> listCatalogoDeIngresos)
         {
             #region Obtener el catalogo de ingresos
             listCatalogoDeIngresos = db.UDP_Plani_CatalogoDeIngresosEdit_Select(id); //Obtener la lista del catalogo de ingresos filtrando por el id de la planilla
@@ -384,7 +393,10 @@ namespace ERP_GMEDINA.Controllers
                 listaCatalogoIngresos.Add(catalogoIngresos);
             }
             #endregion
+        }
 
+        private void GetDeduccionesEdit(int? id, ref List<CatalogoDeIngresosDeduccionesViewModel> listaCatalogoDeducciones, out IEnumerable<object> listCatalogoDeDeducciones)
+        {
             #region Obtener el catalogo de deducciones
             //Obtener la lista del catalogo de deducciones filtrando por el id de la planilla
             listCatalogoDeDeducciones = db.UDP_Plani_CatalogoDeduccionesEdit_Select(id);
@@ -398,9 +410,15 @@ namespace ERP_GMEDINA.Controllers
 
                 //Si la propiedad checked del resultado es verdadera entonces sera true, caso contrario false, esto para saber cuando marcar el checkbox
                 if (result.@checked == 1)
+                {
                     catalogoDeduccion.check = true;
+                    catalogoDeduccion.checkId = new CheckId { check = true, id = result.cde_IdDeducciones };
+                }
                 else
+                {
                     catalogoDeduccion.check = false;
+                    catalogoDeduccion.checkId = new CheckId { check = false, id = result.cde_IdDeducciones };
+                }
 
                 //Agregar a la lista del catalogo de ingresos el objeto que se acaba de crear
                 listaCatalogoDeducciones.Add(catalogoDeduccion);
