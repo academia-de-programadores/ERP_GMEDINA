@@ -1327,7 +1327,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
           <Property Name="Usuario_Nombre" Type="varchar" MaxLength="150" />
           <Property Name="Usuario_Crea" Type="int" Nullable="false" />
           <Property Name="Fecha_Crea" Type="datetime" />
-          <Property Name="Usuario_Modifica" Type="datetime" />
+          <Property Name="Usuario_Modifica" Type="int" />
           <Property Name="Fecha_Modifica" Type="datetime" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -4516,7 +4516,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="tmon_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="sue_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="sue_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tamo_Id" Type="int" Mode="In" />
@@ -10742,7 +10743,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="scan_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="scan_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="V_Sueldos" EntityType="ERP_GMEDINAModel.V_Sueldos" />
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratacion" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratacion_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
@@ -10769,7 +10769,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="sue_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="sue_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbFaseSeleccion" EntityType="ERP_GMEDINAModel.tbFaseSeleccion" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
@@ -11069,6 +11070,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_Sueldos" EntityType="ERP_GMEDINAModel.V_Sueldos" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11814,38 +11816,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbIdiomasPersona_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <EntityType Name="V_Sueldos">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Id_Empleado" />
-            <PropertyRef Name="Id_Amonestacion" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Sueldo" />
-            <PropertyRef Name="Area" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Usuario_Crea" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
-          <Property Name="Id_Amonestacion" Type="Int32" Nullable="false" />
-          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="Sueldo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="Tipo_Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Sueldo_Anterior" Type="Int32" />
-          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Usuario_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Crea" Type="DateTime" Precision="3" />
-          <Property Name="Usuario_Modifica" Type="DateTime" Precision="3" />
-          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tbFaseSeleccion">
           <Key>
             <PropertyRef Name="fsel_Id" />
@@ -12219,6 +12189,38 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbEquipoTrabajo_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="V_Sueldos">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_Empleado" />
+            <PropertyRef Name="Id_Amonestacion" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Sueldo" />
+            <PropertyRef Name="Area" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Usuario_Crea" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
+          <Property Name="Id_Amonestacion" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Sueldo" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="Tipo_Moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sueldo_Anterior" Type="Int32" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usuario_Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario_Crea" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Crea" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Modifica" Type="Int32" />
+          <Property Name="Fecha_Modifica" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14318,30 +14320,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="V_Sueldos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Sueldos">
-              <MappingFragment StoreEntitySet="V_Sueldos">
-                <ScalarProperty Name="RazonInactivo" ColumnName="RazonInactivo" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
-                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
-                <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha_Crea" />
-                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
-                <ScalarProperty Name="Usuario_Nombre" ColumnName="Usuario_Nombre" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Sueldo_Anterior" ColumnName="Sueldo_Anterior" />
-                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
-                <ScalarProperty Name="Tipo_Moneda" ColumnName="Tipo_Moneda" />
-                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="Id_Amonestacion" ColumnName="Id_Amonestacion" />
-                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Restore" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Restore_Result">
@@ -14662,6 +14640,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_Sueldos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Sueldos">
+              <MappingFragment StoreEntitySet="V_Sueldos">
+                <ScalarProperty Name="RazonInactivo" ColumnName="RazonInactivo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Modifica" ColumnName="Fecha_Modifica" />
+                <ScalarProperty Name="Usuario_Modifica" ColumnName="Usuario_Modifica" />
+                <ScalarProperty Name="Fecha_Crea" ColumnName="Fecha_Crea" />
+                <ScalarProperty Name="Usuario_Crea" ColumnName="Usuario_Crea" />
+                <ScalarProperty Name="Usuario_Nombre" ColumnName="Usuario_Nombre" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Sueldo_Anterior" ColumnName="Sueldo_Anterior" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="Tipo_Moneda" ColumnName="Tipo_Moneda" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Id_Amonestacion" ColumnName="Id_Amonestacion" />
+                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

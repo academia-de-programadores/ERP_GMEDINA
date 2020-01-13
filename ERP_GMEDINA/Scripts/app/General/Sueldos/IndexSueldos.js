@@ -37,6 +37,10 @@ function format(obj) {
                 '<th>' + 'Id del empleado' + '</th>' +
                 '<th>' + 'Cuenta Bancaria' + '</th>' +
                 '<th>' + 'Cargo' + '</th>' +
+                '<th>' + 'Fecha Modifica' + '</th>' +
+
+                
+
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
@@ -47,6 +51,9 @@ function format(obj) {
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +
+                '<td>' + FechaFormato(index.Fecha_Crea).substring(0, 10) + '</td>' +
+
+              
                 '</tr>' +
                 '</tbody>'
         '</table>'
@@ -82,6 +89,7 @@ function llenarTabla() {
                    Fecha_Crea: value.Fecha_Crea,
                    Usuario_Modifica: value.Usuario_Modifica,
                    Fecha_Modifica: value.Fecha_Modifica
+
                })
                .draw();
 

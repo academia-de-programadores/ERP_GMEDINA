@@ -102,7 +102,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<tbHorarios> tbHorarios { get; set; }
-        public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
         public virtual DbSet<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<V_DatosProfesionalesP> V_DatosProfesionalesP { get; set; }
@@ -111,6 +110,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_tbHistorialPermisos_completa> V_tbHistorialPermisos_completa { get; set; }
         public virtual DbSet<V_DatosProfesionales> V_DatosProfesionales { get; set; }
         public virtual DbSet<V_DatosRequisicion> V_DatosRequisicion { get; set; }
+        public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -2857,7 +2857,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpleados_Restore_Result>("UDP_RRHH_tbEmpleados_Restore", emp_IdParameter, emp_UsuariomodificaParameter, emp_FechamodificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbSueldos_Insert_Result> UDP_RRHH_tbSueldos_Insert(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_UsuarioCrea, Nullable<System.DateTime> sue_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbSueldos_Insert_Result> UDP_RRHH_tbSueldos_Insert(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<int> tmon_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_UsuarioCrea, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
                 new ObjectParameter("sue_Id", sue_Id) :
@@ -2879,11 +2879,15 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("sue_UsuarioCrea", sue_UsuarioCrea) :
                 new ObjectParameter("sue_UsuarioCrea", typeof(int));
     
-            var sue_FechaCreaParameter = sue_FechaCrea.HasValue ?
-                new ObjectParameter("sue_FechaCrea", sue_FechaCrea) :
-                new ObjectParameter("sue_FechaCrea", typeof(System.DateTime));
+            var sue_UsuarioModificaParameter = sue_UsuarioModifica.HasValue ?
+                new ObjectParameter("sue_UsuarioModifica", sue_UsuarioModifica) :
+                new ObjectParameter("sue_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Insert_Result>("UDP_RRHH_tbSueldos_Insert", sue_IdParameter, emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_UsuarioCreaParameter, sue_FechaCreaParameter);
+            var sue_FechaModificaParameter = sue_FechaModifica.HasValue ?
+                new ObjectParameter("sue_FechaModifica", sue_FechaModifica) :
+                new ObjectParameter("sue_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbSueldos_Insert_Result>("UDP_RRHH_tbSueldos_Insert", sue_IdParameter, emp_IdParameter, tmon_IdParameter, sue_CantidadParameter, sue_UsuarioCreaParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbCargos_tbEmpleados_Select()
