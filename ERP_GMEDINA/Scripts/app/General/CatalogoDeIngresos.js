@@ -20,15 +20,6 @@ function _ajax(params, uri, type, callback) {
         }
     });
 }
-
-
-$("#EditarCatalogoIngresos").on('hidden.bs.modal', function () {
-
-});
-
-$("#AgregarCatalogoIngresos").on('hidden.bs.modal', function () {
-
-});
 // REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -135,8 +126,10 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
             if (data) {
                 $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
-                //$(".field-validation-error").css('display', 'none');
-                $("#EditarCatalogoIngresos").modal();
+                $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -149,7 +142,24 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
 });
 
 $("#btnUpdateIngresos").click(function () {
-    $("#EditarCatalogoIngresosConfirmacion").modal();
+
+    //descedit es la variable que uso para validar si esta vacio o no
+    var descedit = $("#Editar #cin_DescripcionIngreso").val();
+
+    if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
+        //al validar que no este vacio muestro mi modal de confirmación
+        $("#EditarCatalogoIngresosConfirmacion").modal();
+        $("#Editar #validareditar").css("display", "none");
+    }
+    else {
+        //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
+        $("#Editar #validareditar").css("display", "");
+        $("#Editar #cin_DescripcionIngreso").focus();
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos válidos',
+        });
+    }
 });
 
 
@@ -191,15 +201,6 @@ $("#btnEditarIngresos").click(function () {
             return false;
         });
     }
-    else {
-        $("#validareditar").css("display", "");
-        $("#Editar #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
-        $("#EditarCatalogoIngresosConfirmacion").modal('hide');
-    }
 });
 
 const btneditar = $('#btnEditarIngresos'),
@@ -226,6 +227,14 @@ $("#btnModalInactivar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
     $("#InactivarCatalogoIngresos").modal();
 });
+
+//Modal editar despues de No Inactivar
+$("#btnNoInactivar").click(function () {
+    $("#validareditar").css("display", "none");
+    $("#EditarCatalogoIngresos").modal();
+    $("#InactivarCatalogoIngresos").modal('hide');
+});
+
 
 $("#btnInactivarIngresos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -303,7 +312,9 @@ $("#btnInactivarIngresos").click(function () {
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cin_DescripcionIngreso").val('');
-    $("#AgregarCatalogoIngresos").modal();
+    $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 $("#frmCatalogoIngresosCreate").submit(function (e) {
@@ -349,6 +360,11 @@ $('#btnCreateRegistroIngresos').click(function () {
     else {
         $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos válidos',
+        });
+
     }
 });
 
@@ -356,19 +372,6 @@ $('#btnCreateRegistroIngresos').click(function () {
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
     $("#frmCatalogoIngresosCreate").modal('hide');
-});
-
-
-////////////////////////EDITAR
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
-$("#btnCerrarEditar").click(function () {
-    $("#validareditar").css("display", "none");
-});
-
-//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
-$("#IconCerrarEditar").click(function () {
-    $("#validareditar").css("display", "none");
 });
 
 
@@ -389,8 +392,17 @@ $("#IconCerrarCreate").click(function () {
     $("#descripcioncrear").css("display", "none");
 });
 
+////////////////////////EDITAR
 
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
 
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEditar").click(function () {
+    $("#validareditar").css("display", "none");
+});
 
 
 
