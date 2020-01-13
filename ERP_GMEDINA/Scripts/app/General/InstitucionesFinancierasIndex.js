@@ -11,18 +11,20 @@ function _ajax(params, uri, type, callback) {
 }
 
 // REGION DE VARIABLES
-var registroID = 0;
-
-
-//Funcion para refrescar la tabala (Index)
+//var registroID = 0;
+var esAdministrador = $("#rol_Usuario").val();
+console.log("Hola: " + esAdministrador);
+//Funcion para refrescar la tabla (Index)
 function cargarGridINFS()
 {
-    var esAdministrador = $("#rol_Usuario").val();
+//    var esAdministrador = $("#rol_Usuario").val();
+//    cons.log("Hola: " +esAdministrador);
     _ajax(null,
         '/InstitucionesFinancieras/GetData',
         'GET',
         (data) => {
-            if (data.length == 0) {
+            if (data.length == 0)
+            {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
@@ -31,30 +33,36 @@ function cargarGridINFS()
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaINFS = data, template = '';
+            console.log(ListaINFS);
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaINFS.length; i++) {
-
+            for (var i = 0; i < ListaINFS.length; i++)
+            {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaINFS[i].insf_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
-                var botonDetalles = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Details?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + 'class="btn btn-primary btn-xs">Detalles</a>' : '';
+                var botonDetalles = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Details?id="' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-primary btn-xs">Detalles</a>' : '';
                                                                      
                                                                      //'<button data-id = "' + ListListaINFSaAuxCes[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>'
                 //variable boton editar
-                var botonEditar = ListaINFS[i].insf_Activo == true ? '<a href="InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + 'class="btn btn-primary btn-xs">Detalles</a>' : '';
+                var botonEditar = ListaINFS[i].insf_Activo == true ? '@Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })' : '';
+                    //'<input type="button" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs" value="Editar" onclick="location.href=InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" />' : '';
+                    //'<a href="@Url.Action("Edit", "InstitucionesFinancieras", new { id = ' + ListaINFS[i].insf_IdInstitucionFinanciera + ' })" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
+                    //'<a href="InstitucionesFinancieras/Edit?id="' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
                     //'<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
+                //"@Url.Action("Information", "Admin", new { id = UrlParameter.Optional })"
 
                 //variable donde está el boton activar
-                var botonInactivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inctivar</button>' : '' : '';
+                var botonInactivar = ListaINFS[i].insf_Activo == true ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-danger btn-xs"  id="btnModalInactivarINFS">Inctivar</button>' : '' : '';
                                                                                                 
                 //variable donde está el boton activar
                 var botonActivar = ListaINFS[i].insf_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarINFS">Activar</button>' : '' : '';
 
 
-                console.log(estadoRegistro);
+                console.log(botonEditar);
 
                 template += '<tr data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '">' +
+                    '<td>' + ListaINFS[i].insf_IdInstitucionFinanciera + '</td>' +
                     '<td>' + ListaINFS[i].insf_DescInstitucionFinanc + '</td>' +
                     '<td>' + ListaINFS[i].insf_Contacto + '</td>' +
                     '<td>' + ListaINFS[i].insf_Telefono + '</td>' +
@@ -77,26 +85,22 @@ function cargarGridINFS()
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyINFS').html(template);
         });
-    FullBody();
+    //FullBody();
 
 }
 
 
 var ID_in = 0;
 // INACTIVAR 
-$("#btnModalInactivarINFS").click(function () {
-    //$("#frmEditarAuxCes").modal('hide');
+$(document).on("click", "#btnModalInactivarINFS", function ()
+{
     ID_in = $(this).data('id');
     $("#frmInactivarINFS").modal();
 });
 
 $("#btnInactivarINFS").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-
-
-
-
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA INACTIVACIóN
     $.ajax({
         url: "/InstitucionesFinancieras/Inactivar/" + ID_in,
         method: "POST"
@@ -109,10 +113,9 @@ $("#btnInactivarINFS").click(function () {
             });
         }
         else {
-            $("#btnModalInactivarINFS").modal('hide');
-            //$("#frmEditarAuxCes").modal('hide');
+            $("#frmInactivarINFS").modal('hide');
             cargarGridINFS();
-            //Mensaje de exito de la edicion
+            //Mensaje de exito de la inactivación
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro se inactivó de forma exitosa!',
@@ -120,7 +123,7 @@ $("#btnInactivarINFS").click(function () {
         }
     });
     ID_in = 0;
-    $("#frmInactivarINFS").modal('hide');
+   // $("#frmInactivarINFS").modal('hide');
 });
 
 
@@ -132,13 +135,16 @@ $(document).on("click", "#btnModalActivarINFS", function () {
 });
 
 //activar ejecutar
-$("#btnActivarINFS").click(function () {
+$("#btnActivarINFS").click(function ()
+{
     $.ajax({
         url: "/InstitucionesFinancieras/Activar/" + activarID,
         method: "POST",
         data: { id: activarID }
-    }).done(function (data) {
-        if (data == "error") {
+    }).done(function (data)
+    {
+        if (data == "error")
+        {
             iziToast.error({
                 title: 'Error',
                 message: 'No se logró activar el registro, contacte al administrador',
@@ -147,7 +153,7 @@ $("#btnActivarINFS").click(function () {
         else {
             cargarGridINFS();
             $("#frmActivarINFS").modal('hide');
-            //Mensaje de exito de la edicion
+            //Mensaje de exito de la activación
             iziToast.success({
                 title: 'Éxito',
                 message: '¡El registro se Activó de forma exitosa!',
@@ -155,5 +161,5 @@ $("#btnActivarINFS").click(function () {
         }
     });
     activarID = 0;
-    $("#frmActivarINFS").modal('hide');
+    //$("#frmActivarINFS").modal('hide');
 });

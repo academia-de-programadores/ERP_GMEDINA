@@ -17,59 +17,92 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                  <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_FechaCrea)</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.fpa_FechaModifica)</th>       
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyFormaPago">
-                      @foreach (var item in Model) {
-                          var UsuarioModifica = !(item.fpa_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
-                          var FechaModifica = Convert.ToString(item.fpa_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaModifica);
-                        <tr class="gradeA odd" role="row" data-id="@item.fpa_IdFormaPago">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fpa_Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fpa_FechaCrea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => UsuarioModifica)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => FechaModifica)
-                            </td>
-                            <td>
-                              @*<button type="button" class="btn btn-primary btn-xs" id="btnEditarFormaPago">Editar</button>*@
-                              <button data-id="@item.fpa_IdFormaPago" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
-                            </td>
-                        </tr>
-                      }
-                    </tbody>
-                  </table>
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
+                    <table id="tblFormaPago" class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+
+                            <tr role="row">
+                                <th>@Html.DisplayNameFor(model => model.fpa_IdFormaPago)</th>
+                                <th>@Html.DisplayNameFor(model => model.fpa_Descripcion)</th>
+                                <th>@Html.DisplayNameFor(model => model.fpa_Activo)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyFormaPago">
+
+                            @foreach (var item in Model)
+                            {
+
+                                var UsuarioModifica = !(item.fpa_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
+                                var UsuarioCrea = !(item.fpa_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
+                                var FechaCrea = Convert.ToString(item.fpa_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaCrea);
+                                var FechaModifica = Convert.ToString(item.fpa_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.fpa_FechaModifica);
+
+                        <!-- validar el estado del registro (activo/inactivo)-->
+                                string estadoISR = item.fpa_Activo == false ? "Inactivo" : "Activo";
+
+                                <tr class="gradeA odd" role="row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fpa_IdFormaPago)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fpa_Descripcion)
+                                    </td>
+                                    <td>
+                                        <!-- variable del estado del registro creada arriba-->
+                                        @estadoISR
+                                    </td>
+                                    <td>
+                                        @{
+                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
+                                            if (item.fpa_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-primary btn-xs" id="btnDetalleFormaPago">Detalles</button>
+                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>
+                                            }
+                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                            if (oUsuario?.usu_EsAdministrador == true && item.fpa_Activo == false)
+                                            {
+                                                 <!-- ACTIVAR -->
+                                                <button type="button" data-id="@item.fpa_IdFormaPago" class="btn btn-primary btn-xs" id="btnActivarFormaPago">Activar</button>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                            }
+
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
- </div>
-    
+</div>
+
 <div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h4 class="modal-title">Crear FormaPago</h4>
             </div>
             @Html.Partial("_Create", new ERP_GMEDINA.Models.tbFormaPago())
+            <div class="modal-footer">
+                <input type="submit" id="btnCrearFormaPago" value="Guardar" class="btn btn-primary pull-left" />
+                <div style="display:none" class="btn" id="cargandoCrear">
+                </div>
+                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default" />
+            </div>
         </div>
     </div>
 </div>
@@ -91,14 +124,53 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inhabilitar el registro</h4>
+                <h4 class="modal-title">Inactivar el registro</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Inhabilitar este Registro?
+                ¿Esta seguro que desea Inactivar este Registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" id="btnCerrar" data-dismiss="modal">No</button>
-                <button type="submit" class="btn btn-danger " id="btnInactivarFormaPagoConfirm">Si</button>
+                <button type="submit" class="btn btn-danger" id="btnInactivarFormaPagoConfirm">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="frmActivarForP" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Está seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnActivarForP">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="DetallarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarDetalles" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Detalle Periodo</h4>
+            </div>
+            <div class="modal-body" id="Detalles">
+                @Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -109,8 +181,8 @@
 }
 
 @section Scripts {
- 
-  @Scripts.Render("~/plugins/dataTables")
-  @Scripts.Render("~/Scripts/app/General/FormaPago")
-  @Styles.Render("~/Content/plugins/izitoast/iziToast")
+
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General/FormaPago")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }

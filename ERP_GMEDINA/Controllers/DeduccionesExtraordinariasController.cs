@@ -55,7 +55,6 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
 		{
-
 			//Viewbag para llenar sus respectivos Dropdownlist
 			ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
 			ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado");

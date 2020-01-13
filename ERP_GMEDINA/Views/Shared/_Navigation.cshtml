@@ -42,16 +42,20 @@
 				</ul>
 			</li>
 
-			<li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AcumuladosISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "CatalogoDeIngresos")  @Html.IsSelected(controller: "InstitucionesFinancieras")  @Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "EmpleadoBonos") @Html.IsSelected(controller: "EmpleadoComisiones") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "AdelantoSueldo") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") ">
+			<li class="@Html.IsSelected(controller: "ISR") @Html.IsSelected(controller: "AcumuladosISR") @Html.IsSelected(controller: "AuxilioDeCesantias") @Html.IsSelected(controller: "CatalogoDeIngresos")  @Html.IsSelected(controller: "InstitucionesFinancieras")  @Html.IsSelected(controller: "CatalogoDeDeducciones") @Html.IsSelected(controller: "FormaPago") @Html.IsSelected(controller: "TechosDeducciones") @Html.IsSelected(controller: "TipoDeducciones") @Html.IsSelected(controller: "DeduccionesExtraordinarias") @Html.IsSelected(controller: "DeduccionAFP") @Html.IsSelected(controller: "DeduccionesIndividuales") @Html.IsSelected(controller: "EmpleadoBonos") @Html.IsSelected(controller: "EmpleadoComisiones") @Html.IsSelected(controller: "IngresosIndividuales") @Html.IsSelected(controller: "AFP") @Html.IsSelected(controller: "AdelantoSueldo") @Html.IsSelected(controller: "Preaviso") @Html.IsSelected(controller: "Periodos") ">
 				<a href="@Url.Action("Dashboard_1", "Dashboards")"><i class="fa fa-cog"></i> <span class="nav-label" data-i18n="nav.dashboard">Configuraciones</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in")">
 					<li class="@Html.IsSelected(controller: "CatalogoDeIngresos")"><a href="@Url.Action("Index", "CatalogoDeIngresos")">Ingresos</a></li>
 					<li class="@Html.IsSelected(controller: "EmpleadoBonos")"><a href="@Url.Action("Index", "EmpleadoBonos")">Bonos</a></li>
 					<li class="@Html.IsSelected(controller: "EmpleadoComisiones")"><a href="@Url.Action("Index", "EmpleadoComisiones")">Comisiones</a></li>
+                    <li class="@Html.IsSelected(controller: "IngresosIndividuales")"><a href="@Url.Action("Index", "IngresosIndividuales")">Ingresos Extras</a></li>
 					<li class="@Html.IsSelected(controller: "CatalogoDeDeducciones")"><a href="@Url.Action("Index", "CatalogoDeDeducciones")">Deducciones</a></li>
-					<li class="@Html.IsSelected(controller: "DeduccionesExtraordinarias")"><a href="@Url.Action("Index", "DeduccionesExtraordinarias")">Deducciones Extras</a></li>
+					<li class="@Html.IsSelected(controller: "DeduccionesExtraordinarias")"><a href="@Url.Action("Index", "DeduccionesExtraordinarias")">Deducciones Equipo de Trabajo</a></li>
 					<li class="@Html.IsSelected(controller: "DeduccionAFP")"><a href="@Url.Action("Index", "DeduccionAFP")">Deducciones AFP</a></li>
+                    <li class="@Html.IsSelected(controller: "DeduccionesIndividuales")"><a href="@Url.Action("Index", "DeduccionesIndividuales")">Deducciones Extras</a></li>
 					
+                    <li class="@Html.IsSelected(controller: "Periodos")"><a href="@Url.Action("Index", "Periodos")">Periodos de Pago</a></li>
+                    <li class="@Html.IsSelected(controller: "FormaPago")"><a href="@Url.Action("Index", "FormaPago")">Formas de Pago</a></li>
 					<li class="@Html.IsSelected(controller: "TechosDeducciones")"><a href="@Url.Action("Index", "TechosDeducciones")">Techos de Deducciones</a></li>
 					<li class="@Html.IsSelected(controller: "TipoDeducciones")"><a href="@Url.Action("Index", "TipoDeducciones")">Tipo de Deducciones</a></li>
 					<li class="@Html.IsSelected(controller: "InstitucionesFinancieras")"><a href="@Url.Action("Index", "InstitucionesFinancieras")">Instituciones Financieras</a></li>

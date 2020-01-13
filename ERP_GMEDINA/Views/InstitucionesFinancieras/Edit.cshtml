@@ -54,7 +54,9 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @*data-id="@item.insf_IdInstitucionFinanciera"*@
+                            <button type="button" class="btn btn-primary btn-xs" id="btnModalActualizarINFS">Actualizar</button>
+                            @*<input type="submit" value="Guardar" class="btn btn-primary" />*@
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                         </div>
                     </div>
@@ -66,16 +68,29 @@
     </div>
 </div>
 
+<div class="modal fade" id="frmActualizarINFS" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Actualizar</h4>
+            </div>
+            <div class="modal-body" id="Actualizar">
+                ¿Está seguro que desea actualizar este registro?
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary" id="btnActualizarINFS">Si</button>*@
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<script type="text/javascript">
-        $(function () {
-            $("#phone").mask("(999) 999-9999");
-        });
-</script>
-
-
-
+@section Scripts 
+{
+ @Scripts.Render("~/Scripts/app/General/InstitucionesFinancierasEdit")
+}
 
 
 

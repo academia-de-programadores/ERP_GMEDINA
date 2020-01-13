@@ -417,6 +417,7 @@ function vaciarConceptosAdicionales()
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#RegistrarLiquidacion").click(function () {
+    $("#RegistrarLiquidacion").attr("disabled", true);
     var Registrar_Verificar = (Registrar)? 1 : 0;
     Registrar = false;
     if(Registrar_Verificar == 1){
@@ -440,7 +441,6 @@ $("#RegistrarLiquidacion").click(function () {
                     title: 'Éxito',
                     message: 'Se ha registrado la liquidación',
                 });
-                $("RegistrarLiquidacion").attr("disabled", true)
                 //SetTimeOut
                 setTimeout(function(){ 
                     location.reload();
@@ -452,6 +452,7 @@ $("#RegistrarLiquidacion").click(function () {
                 title: 'Error',
                 message: 'Ocurrio un error al registrar la liquidación',
             });
+            $("#RegistrarLiquidacion").attr("disabled", false);
         });;
     }
     else{

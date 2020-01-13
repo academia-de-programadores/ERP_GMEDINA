@@ -168,12 +168,6 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            /*
-            tbDeduccionAFP.cde_UsuarioCrea = 1;
-            tbDeduccionAFP.cde_FechaCrea = DateTime.Now;
-            */
             //LLENAR DATA DE AUDITORIA
             tbDeduccionAFP.dafp_UsuarioModifica = 1;
             tbDeduccionAFP.dafp_FechaModifica = DateTime.Now;
@@ -266,12 +260,6 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int dafp_Id)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             int dafp_UsuarioModifica = 1;
             DateTime dafp_FechaModifica = DateTime.Now;
@@ -326,12 +314,6 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Activar(int id)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
-            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             int dafp_UsuarioModifica = 1;
             DateTime dafp_FechaModifica = DateTime.Now;
@@ -355,7 +337,7 @@ namespace ERP_GMEDINA.Controllers
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        ModelState.AddModelError("", "No se pudo activar el registro, contacte al administrador");
                         response = "error";
                     }
 

@@ -14,11 +14,11 @@
                         @Html.LabelFor(model => model.peri_IdPeriodo, htmlAttributes: new { @class = "control-label col-md-2", @disabled = "disabled" })
                     </div>
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.peri_IdPeriodo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled"} })
+                        @Html.EditorFor(model => model.peri_IdPeriodo, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
                         @Html.ValidationMessageFor(model => model.peri_IdPeriodo, "", new { @class = "text-danger" })
-                    </div>    
+                    </div>
                 </div>
-            </div> 
+            </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
@@ -29,7 +29,7 @@
                         @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
     <div class="modal-footer">

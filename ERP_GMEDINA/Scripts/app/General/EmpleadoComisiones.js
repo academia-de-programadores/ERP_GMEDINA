@@ -85,6 +85,8 @@ function cargarGridComisiones() {
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+
+
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
     var ID = $(this).data('id');
     Idinactivar = ID;
@@ -152,15 +154,11 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         });
 });
 
-$(document).on("click", "#btnEditarEmpleadoComisiones", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#DetalleEmpleadoComisiones").modal('hide');
-
+$("#btnUpdateComisionesConfirmar").click(function () {
+    $("#EditarEmpleadoComisionesConfirmacion").modal();
 });
-
-
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnUpdateComisiones").click(function () {
+$("#btnUpdateComisionesConfirmar2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -176,19 +174,22 @@ $("#btnUpdateComisiones").click(function () {
                 title: 'Error',
                 message: 'Datos Incorrectos',
             });
+            $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridComisiones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarEmpleadoComisiones").modal('hide');
+            $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue editado de forma exitosa!',
             });
-            ocultarCargandoEditar();
+            
         }
+        ocultarCargandoEditar();
     });
 });
 
@@ -658,9 +659,9 @@ function spinner() {
 }
 
 
-const btnEditar = $('#btnUpdateComisiones'),
+const btnEditar = $('#btnUpdateComisionesConfirmar2'),
 
-        cargandoCrearcargandoEditar = $('#cargandoEditar')
+cargandoCrearcargandoEditar = $('#cargandoEditar')
 
 cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 

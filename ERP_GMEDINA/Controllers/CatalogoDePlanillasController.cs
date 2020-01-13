@@ -90,33 +90,39 @@ namespace ERP_GMEDINA.Controllers
         // GET: CatalogoDePlanillas/Create
         public ActionResult Create()
         {
-            #region Obtener ingresos
-            //Obtener la lista de ingresos de la base de datos
-            var CatalogoIngresos = (from catalogoIngresos in db.tbCatalogoDeIngresos
-                                    where catalogoIngresos.cin_Activo == true
-                                    select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-                                    {
-                                        id = catalogoIngresos.cin_IdIngreso,
-                                        descripcion = catalogoIngresos.cin_DescripcionIngreso
-                                    }).ToList();
-            #endregion
-
-            #region Obtener Deducciones
-            //Obtener la lista de deducciones de la base de datos
-            var CatalogoDeducciones = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
-                                       where catalogoDeducciones.cde_Activo == true
-                                       select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
-                                       {
-                                           id = catalogoDeducciones.cde_IdDeducciones,
-                                           descripcion = catalogoDeducciones.cde_DescripcionDeduccion
-                                       }).ToList();
-            #endregion
-
-            //A estos ViewBags se les asigna la lista de objetos de ingresos y deducciones, para luego recorrerla en la vista
-            ViewBag.CatalogoIngresos = CatalogoIngresos;
-            ViewBag.CatalogoDeducciones = CatalogoDeducciones;
-
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetIngresosDeducciones()
+        {
+            //Obtener la lista de ingresos de la base de datos
+            var ingresos =  (from catalogoIngresos in db.tbCatalogoDeIngresos
+                                                        where catalogoIngresos.cin_Activo == true
+                                                        select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+                                                        {
+                                                            id = catalogoIngresos.cin_IdIngreso,
+                                                            descripcion = catalogoIngresos.cin_DescripcionIngreso
+                                                        }).ToList();
+            //var ingresos = (from catalogoDeducciones in db.tbCatalogoDeDeducciones
+            //                where catalogoDeducciones.cde_Activo == true
+            //                select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+            //                {
+            //                    id = catalogoDeducciones.cde_IdDeducciones,
+            //                    descripcion = catalogoDeducciones.cde_DescripcionDeduccion
+            //                }).ToList();
+
+            object json = new { data = ingresos };
+            //, deducciones = (from catalogoIngresos in db.tbCatalogoDeIngresos
+            //                 where catalogoIngresos.cin_Activo == true
+            //                 select new CatalogoDeIngresosDeduccionesViewModel //Se crea un nuevo objeto para luego recorrer la lista de estos objetos
+            //                 {
+            //                     id = catalogoIngresos.cin_IdIngreso,
+            //                     descripcion = catalogoIngresos.cin_DescripcionIngreso
+            //                 }).ToList() }
+
+
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
         // POST: CatalogoDePlanillas/Create

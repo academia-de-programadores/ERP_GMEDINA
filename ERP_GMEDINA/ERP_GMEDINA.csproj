@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AcumuladosISRController.cs" />
     <Compile Include="Controllers\AdelantoSueldoController.cs" />
     <Compile Include="Controllers\AFPController.cs" />
+    <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\CatalogoDeIngresosController.cs" />
     <Compile Include="Controllers\CatalogoDePlanillasController.cs" />
@@ -198,11 +199,13 @@
     <Compile Include="Controllers\DecimoTercerMesController.cs" />
     <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
+    <Compile Include="Controllers\DeduccionesIndividualesController.cs" />
     <Compile Include="Controllers\EmpleadoBonosController.cs" />
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\FechaPlanillaController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
+    <Compile Include="Controllers\IngresosIndividualesController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
     <Compile Include="Controllers\LiquidacionController.cs" />
@@ -211,7 +214,6 @@
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\PreavisoController.cs" />
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
-    <Compile Include="Controllers\AuxilioDeCesantiasController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
@@ -243,6 +245,7 @@
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\cDeduccionesExtraordinariasDetalles.cs" />
+    <Compile Include="Models\cDeduccionesIndividuales.cs" />
     <Compile Include="Models\cDeduccionesRPT.cs" />
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />
@@ -251,6 +254,7 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
+    <Compile Include="Models\cIngresosIndividuales.cs" />
     <Compile Include="Models\cIngresosRPT.cs" />
     <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\cInstitucionesFinancierasRPT.cs" />
@@ -347,6 +351,9 @@
     <Compile Include="Models\tbDeduccionesExtraordinarias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbDeduccionesIndividuales.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -438,6 +445,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbIdiomasRequisicion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbIngresosIndividuales.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbInstitucionesFinancieras.cs">
@@ -680,6 +690,18 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesIndividuales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbEmpleadoBonos_Activar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -710,10 +732,22 @@
     <Compile Include="Models\UDP_Plani_tbHistorialDePago_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbIngresosIndividuales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Activar1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result.cs">
+    <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionesFinancieras_Insert_Result.cs">
@@ -1163,8 +1197,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
-    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1198,6 +1230,8 @@
     <Content Include="Scripts\app\General\DecimoTercerMesRPT.js" />
     <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
+    <Content Include="Scripts\app\General\DeduccionesIndividuales.js" />
+    <Content Include="Scripts\app\General\DeduccionesRPT.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\excelexportjs.js" />
@@ -1206,6 +1240,8 @@
     <Content Include="Scripts\app\General\GeneralTotalesRPT.js" />
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
+    <Content Include="Scripts\app\General\IngresosIndividuales.js" />
+    <Content Include="Scripts\app\General\InstitucionesFinancierasEdit.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasIndex.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancieras.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
@@ -1224,7 +1260,38 @@
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSets\ReportesPlanillaDS.xsc">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
+    <None Include="DataSets\ReportesPlanillaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReportesPlanillaDS.xss">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
+      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
+    </Content>
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
@@ -1256,39 +1323,10 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
-    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
-    <Content Include="Scripts\api\spanish.json" />
-    <Content Include="DataSets\ReportesPlanillaDS.xsc">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
-    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
-    <Content Include="App_Browsers\qt.browser" />
-    <Content Include="Content\FormatoPlanillaInstitucionesFinancieras\FormatoPredeterminadoDeduccionPlanilla.xlsx" />
-    <None Include="DataSets\ReportesPlanillaDS.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesPlanillaDS.xss">
-      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\ERP_GMEDINA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ERP_GMEDINA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ERP_GMEDINA.edmx.diagram">
-      <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1914,6 +1952,15 @@
     <Content Include="Views\FechaPlanilla\Edit.cshtml" />
     <Content Include="Views\FechaPlanilla\Index.cshtml" />
     <Content Include="Views\FechaPlanilla\Report.cshtml" />
+    <Content Include="Views\IngresosIndividuales\Index.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_CreateIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_DetailsIngresosIndividuales.cshtml" />
+    <Content Include="Views\IngresosIndividuales\_EditIngresosIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\Index.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\DeduccionesIndividuales\_EditDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\FormaPago\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

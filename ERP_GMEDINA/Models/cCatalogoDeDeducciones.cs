@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Models
         
         [Display(Name = "Porcentaje Colaborador")]
         [Required(ErrorMessage = "No puede dejar campos vacios.")]
-        [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [Range(0.01, 9999999999, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]     
         public decimal cde_PorcentajeColaborador { get; set; }
 

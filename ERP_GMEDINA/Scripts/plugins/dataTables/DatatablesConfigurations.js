@@ -5,16 +5,16 @@
 		pageLength: 10,
 		dom: '<"html5buttons"B>lTfgtpi',
 		buttons: [
-            {
-            	extend: 'copy',
-            	text: '<i class="fa fa-copy btn-xs"></i>',
-            	titleAttr: 'Copiar',
-            	exportOptions: {
-            		columns: [0, 1, 2, 3, 4],
-            	},
-            	className: 'btn btn-primary'
+			{
+				extend: 'copy',
+				text: '<i class="fa fa-copy btn-xs"></i>',
+				titleAttr: 'Copiar',
+				exportOptions: {
+					columns: [0, 1, 2, 3, 4],
+				},
+				className: 'btn btn-primary'
 
-            }
+			}
 
 		]
 	});

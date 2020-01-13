@@ -1,0 +1,67 @@
+﻿@model ERP_GMEDINA.Models.tbIngresosIndividuales
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditIngresoIndividual" }))
+{
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_Motivo)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Motivo" } })
+                    @Html.ValidationMessageFor(model => model.ini_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.emp_Id)
+                </div>
+                <div class="col-md-8">
+                    <select id="emp_Id" name="emp_Id" class="form-control"></select>
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation2" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_Monto)
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Monto" } })
+                    @Html.ValidationMessageFor(model => model.ini_Monto, "", new { @class = "text-danger", @id = "validation3" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ini_PagaSiempre)
+                </div>
+                <div class="col-md-8">
+                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" value="ini_PagaSiempre" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnEditIngresoIndividual">Guardar</button>
+        <div style="display:none" class="btn pull-left" id="cargandoEditar"></div>
+        <button type="button" class="btn btn-danger pull-left" id="btnInactivarIngresoIndividual">Inhabilitar</button>
+    </div>
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarIngresoIndividual" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
+}
+

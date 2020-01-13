@@ -465,13 +465,16 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(
-                "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
-
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(
                 "~/Scripts/app/General/DeduccionAFP.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/AFP").Include(
                 "~/Scripts/app/General/AFP.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesIndividuales").Include(
+                "~/Scripts/app/General/DeduccionesIndividuales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IngresosIndividuales").Include(
+                "~/Scripts/app/General/IngresosIndividuales.js"));
 
             #endregion
 
@@ -538,6 +541,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Preaviso").Include(
                 "~/Scripts/app/General/Preaviso.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/InstitucionesFinancierasEdit").Include(
+                "~/Scripts/app/General/InstitucionesFinancierasEdit.js"));
             #endregion
 
             #region Equipo Todos
