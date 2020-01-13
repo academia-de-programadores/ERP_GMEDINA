@@ -21,7 +21,6 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "No puede dejar el campo {0} vacio.")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
         public string peri_DescripPeriodo { get; set; }
 
         [Display(Name = "Usuario Crea")]

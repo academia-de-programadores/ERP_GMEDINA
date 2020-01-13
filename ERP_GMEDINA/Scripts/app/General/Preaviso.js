@@ -91,6 +91,41 @@ function cargarGridPreaviso() {
     FullBody();
 }
 
+function DataAnnotations(ToF) {
+    if (ToF)
+    {
+        //TRUE PARA OCULTAR DATAANNOTATIONS
+        $("#Editar #RangoInicio_Validation_descripcion").css("display", "none");
+        $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
+        $("#Editar #Dias_descripcion").css("display", "none");
+    }
+    else
+    {
+        //FALSE PARA MOSTRAR DATAANNOTATIONS
+        $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
+        $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
+        $("#Editar #Dias_descripcion").css("display", "block");
+    }
+}
+
+function ValidarForm() {
+    //VARIABLE DE RETORNO
+    var Retorno = true;
+    //DECLARACION DE OBJETOS 
+    var RangoInicio = $("#Editar #prea_RangoInicioMeses").val('');
+    var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
+    var Dias = $("#Editar #prea_DiasPreaviso").val('');
+    //VALIDAR QUE LOS CAMPOS SEAN MAYORES QUE CERO
+    if(RangoInicio < 0)
+        Retorno = false;
+    if (RangoFin < 0)
+        Retorno = false;
+    if (Dias < 0)
+        Retorno = false;
+    //RETORNO DE FUNCION
+    return Retorno;
+}
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarPreaviso", function () {
     //MOSTRAR EL MODAL DE AGREGAR
@@ -98,7 +133,7 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
     $("#CrearPreaviso #prea_RangoFinMeses").val('');
     $("#CrearPreaviso #prea_DiasPreaviso").val('');
     $("#CrearPreaviso").modal();
-    $("#CrearPreaviso #Validation_descripcion").css("display", "none");
+    DataAnnotations(true);
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
@@ -108,8 +143,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreatePreaviso").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if ($("#CrearPreaviso #Crear #prea_RangoInicioMeses").val() != "") {
-        mostrarCargandoCrear();
+    if (ValidarForm()) {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/Preaviso/Create",
@@ -125,9 +159,18 @@ $('#btnCrearPreavisoConfirmar').click(function () {
                     title: 'Exito',
                     message: '¡Se registró de forma exitosa!',
                 });
-                ocultarCargandoCrear();
+            }
+            else {
+                iziToast.success({
+                    title: 'Error',
+                    message: '¡No se pudo ingresar el registro!',
+                });
             }
         });
+    }
+    else {
+        //MOSTRAR DATAANNOTATIONS
+        DataAnnotations(false);
     }
 });
 
@@ -136,6 +179,9 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
     var ID = $(this).data('id');
     IDInactivar = ID;
+
+
+
     $.ajax({
         url: "/Preaviso/Edit/" + ID,
         method: "POST",
@@ -146,7 +192,6 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                debugger;
                 $.each(data, function (i, iter) {
                     $("#Editar #prea_IdPreaviso").val(iter.prea_IdPreaviso);
                     $("#Editar #prea_RangoInicioMeses").val(iter.prea_RangoInicioMeses);
@@ -160,8 +205,15 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
 
 
 $("#btnUpdatePreaviso").click(function () {
-    //console.log('console');
-    $("#ConfirmarEdicion").modal();
+    if (ValidarForm()) {
+        console.log("Hola");
+        //MOSTRAR MODAL DE CONFIRMACIÓN
+        $("#ConfirmarEdicion").modal();
+    }
+    else {
+        //MOSTRAR DATAANNOTATIONS
+        DataAnnotations(false);
+    }
 });
 
 $("#btnCerrarConfirmarEditar").click(function () {
@@ -324,17 +376,6 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function
         });
 });
 
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
 
 //Mostrar el spinner
 function spinner() {

@@ -2,57 +2,70 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditPreaviso" }))
 {
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+    <div class="modal-body" id="Editar">
+        <div class="ibox-content">
+            @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.HiddenFor(model => model.prea_IdPreaviso)
-                        @Html.HiddenFor(model => model.prea_UsuarioModifica)
-                        @Html.LabelFor(model => model.prea_IdPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.prea_IdPreaviso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled"  } })
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.HiddenFor(model => model.prea_IdPreaviso)
+                            @Html.HiddenFor(model => model.prea_UsuarioModifica)
+                            @Html.LabelFor(model => model.prea_IdPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.prea_IdPreaviso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                            @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "RangoInicio_Validation_descripcion" })
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.prea_RangoFinMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.prea_RangoFinMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "RangoFin_Validation_descripcion" })
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.LabelFor(model => model.prea_DiasPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.prea_DiasPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Dias_Validation_descripcion" })
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
+    <div class="modal-footer">
+        <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default" />
+        <input type="submit" value="Actualizar" id="btnUpdatePreaviso" class="btn btn-primary pull-left" />
+        <input type="button" value="Inactivar" id="btnInactivarPreaviso" class="btn btn-danger pull-left" />
+    </div>
+
+    
 }

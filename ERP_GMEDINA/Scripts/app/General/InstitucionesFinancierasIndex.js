@@ -33,10 +33,11 @@ function cargarGridINFS()
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaINFS = data, template = '';
-            console.log(ListaINFS);
+            //console.log(ListaINFS);
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaINFS.length; i++)
             {
+                console.log(ListaINFS[i].insf_IdInstitucionFinanciera);
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaINFS[i].insf_Activo == false ? 'Inactivo' : 'Activo';
 

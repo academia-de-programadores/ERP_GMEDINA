@@ -1,26 +1,36 @@
 ﻿@model ERP_GMEDINA.Models.tbPeriodos
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreatePeriodo" }))
-{
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.peri_UsuarioCrea)
-            @Html.HiddenFor(model => model.peri_FechaCrea)
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreatePeriodo" }))
+        {
+            <div class="modal-body" id="Crear">
+                <div class="ibox-content">
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="input-group date">
-                            Descripción@*@Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.peri_UsuarioCrea)
+                        @Html.HiddenFor(model => model.peri_FechaCrea)
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.peri_DescripPeriodo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.peri_DescripPeriodo, new { htmlAttributes = new { @class = "text-box single-line" } })
+                                    @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Crear_Validation_descripcion" })
+                                </div>
+                            </div>
                         </div>
-                        @Html.ValidationMessageFor(model => model.peri_DescripPeriodo, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-}
+            <div class="modal-footer">
+                <input type="submit" id="btnCrearPeriodoConfirmar" value="Guardar" class="btn btn-primary pull-left" />
+                <div style="display:none" class="btn" id="cargandoCrear"></div>
+                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default" />
+            </div>
+        }
