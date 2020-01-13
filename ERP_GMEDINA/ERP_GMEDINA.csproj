@@ -1958,6 +1958,7 @@
     <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_EditDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\FormaPago\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

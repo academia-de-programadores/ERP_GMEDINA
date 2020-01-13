@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: FormaPago
         public ActionResult Index()
         {
-            var tbFormaPago = db.tbFormaPago.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(p => p.fpa_Activo == true).OrderByDescending(x => x.fpa_FechaCrea);
+            var tbFormaPago = db.tbFormaPago.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderByDescending(x => x.fpa_FechaCrea);
             return View(tbFormaPago.ToList());
         }
         #endregion
@@ -44,8 +44,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     fpa_FechaModifica = c.fpa_FechaModifica,
                     fpa_Activo = c.fpa_Activo
-                }).Where(x => x.fpa_Activo == true)
-                .OrderByDescending(x => x.fpa_FechaCrea).ToList();
+                }).OrderByDescending(x => x.fpa_FechaCrea).ToList();
 
             return new JsonResult { Data = tbFormaPago, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -173,11 +172,25 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region GET: DETAILS
-        public JsonResult Details(int? ID)
+        public JsonResult Details(int ID)
         {
             db.Configuration.ProxyCreationEnabled = false;
 
-            tbFormaPago tbFormaPagoJSON = db.tbFormaPago.Find(ID);
+            var tbFormaPagoJSON = from tbFormaPago in db.tbFormaPago
+                                 where tbFormaPago.fpa_IdFormaPago == ID
+                                 orderby tbFormaPago.fpa_FechaCrea descending
+                                 select new
+                                 {
+                                     fpa_IdFormaPago = tbFormaPago.fpa_IdFormaPago,
+                                     fpa_Descripcion = tbFormaPago.fpa_Descripcion,
+                                     fpa_UsuarioCrea = tbFormaPago.fpa_UsuarioCrea,
+                                     UsuCrea = tbFormaPago.tbUsuario.usu_NombreUsuario,
+                                     fpa_FechaCrea = tbFormaPago.fpa_FechaCrea,
+                                     fpa_UsuarioModifica = tbFormaPago.fpa_UsuarioModifica,
+                                     UsuModifica = tbFormaPago.tbUsuario1.usu_NombreUsuario,
+                                     fpa_FechaModifica = tbFormaPago.fpa_FechaModifica,
+                                     fpa_Activo = tbFormaPago.fpa_Activo
+                                 };
             return Json(tbFormaPagoJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -214,6 +227,66 @@ namespace ERP_GMEDINA.Controllers
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbFormaPago_Inactivar_Result Resultado in listFormaPago)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region POST: INACTIVAR
+        [HttpPost]
+        public ActionResult Activar(int? Id)
+        {
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = "bien";
+            IEnumerable<object> listFormaPago = null;
+            string MensajeError = "";
+            //VALIDAR QUE EL ID NO LLEGUE NULL
+            if (Id == null)
+            {
+                response = "error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            //INSTANCIA DEL MODELO
+            tbFormaPago tbFormaPago = new tbFormaPago();
+            //LLENAR DATA DE AUDITORIA
+            tbFormaPago.fpa_IdFormaPago = (int)Id;
+            tbFormaPago.fpa_UsuarioModifica = 1;
+            tbFormaPago.fpa_FechaModifica = DateTime.Now;
+            //VALIDAR SI EL ID ES VÁLIDO
+            if (tbFormaPago.fpa_IdFormaPago > 0)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listFormaPago = db.UDP_Plani_tbFormaPago_Activar(tbFormaPago.fpa_IdFormaPago,
+                                                                     tbFormaPago.fpa_UsuarioModifica,
+                                                                     tbFormaPago.fpa_FechaModifica);
+
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbFormaPago_Activar_Result Resultado in listFormaPago)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
