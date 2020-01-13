@@ -63,13 +63,13 @@
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.tde_Activo == false)
                                             {
-                                                 <!-- ACTIVAR -->
+                                                <!-- ACTIVAR -->
                                                 <button type="button" data-id="@item.tde_IdTipoDedu" class="btn btn-primary btn-xs" id="btnActivarTipoDeducciones">Activar</button>
                                             }
                                         }
                                     </td>
                                 </tr>
-                                            }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -99,6 +99,29 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="EditarTipoDeduccionConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Editar este registro?
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnEditarTipoDedu" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+
+                @*<button type="button" class="btn btn-primary" id="btnEditarIngresos">Si</button>*@
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="InactivarTipoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -112,7 +135,6 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" id="btnInactivarRegistroTipoDeducciones">Si</button>
                 <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
-
             </div>
         </div>
     </div>
@@ -133,7 +155,6 @@
         </div>
     </div>
 </div>
-
 <!-- modal activar -->
 <div class="modal fade" id="ActivarTipoDeducciones" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -148,7 +169,6 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="btnActivarRegistroTipoDeducciones">Si</button>
                 <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
-
             </div>
         </div>
     </div>

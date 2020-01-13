@@ -72,7 +72,7 @@
         </div>
     </div>
  </div>
-    
+
 <div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -97,12 +97,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="frmDetailFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Detalle Auxilio de Cesantia</h4>
+                <h4 class="modal-title">Detalle de Forma de Pago</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_Details", new ERP_GMEDINA.Models.tbFormaPago())
@@ -157,7 +176,7 @@
 }
 
 @section Scripts {
- 
+
   @Scripts.Render("~/plugins/dataTables")
   @Scripts.Render("~/Scripts/app/General/FormaPago")
   @Styles.Render("~/Content/plugins/izitoast/iziToast")

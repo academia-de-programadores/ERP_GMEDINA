@@ -21,6 +21,14 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+
+$("#EditarCatalogoIngresos").on('hidden.bs.modal', function () {
+
+});
+
+$("#AgregarCatalogoIngresos").on('hidden.bs.modal', function () {
+
+});
 // REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
     var esAdministrador = $("#rol_Usuario").val();

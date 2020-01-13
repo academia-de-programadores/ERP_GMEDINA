@@ -31,20 +31,20 @@
                     <thead>
                         <tr role="row">
                             <th>@Html.DisplayNameFor(model => model.peri_IdPeriodo)</th>
-                            <th>@Html.DisplayNameFor(model => model.peri_DescripPeriodo)</th>                            
+                            <th>@Html.DisplayNameFor(model => model.peri_DescripPeriodo)</th>
                             <th>@Html.DisplayNameFor(model => model.peri_Activo)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyPeriodo">
-                        
+
                       @foreach (var item in Model){
 
                          var UsuarioModifica = !(item.peri_UsuarioModifica > 0) ? "Sin modificaciones" : item.tbUsuario1.usu_Nombres + " " + item.tbUsuario1.usu_Apellidos;
                           var UsuarioCrea = !(item.peri_UsuarioCrea > 0) ? "Sin modificaciones" : item.tbUsuario.usu_NombreUsuario;
                           var FechaCrea = Convert.ToString(item.peri_FechaCrea) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaCrea);
                           var FechaModifica = Convert.ToString(item.peri_FechaModifica) == string.Empty ? "Sin modificaciones" : Convert.ToString(item.peri_FechaModifica);
-                        
+
                         <!-- validar el estado del registro (activo/inactivo)-->
                         string estadoISR = item.peri_Activo == false ? "Inactivo" : "Activo";
 
@@ -85,7 +85,7 @@
         </div>
     </div>
  </div>
-    
+
 <div class="modal fade" id="CrearPeriodo" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -105,7 +105,26 @@
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Periodo</h4>
             </div>
-            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPeriodos()) 
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPeriodos())
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
+            </div>
         </div>
     </div>
 </div>

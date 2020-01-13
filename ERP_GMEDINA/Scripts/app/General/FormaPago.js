@@ -151,6 +151,15 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
         });
 });
 
+$("#btnUpdateFormaPago").click(function () {
+    //console.log('console');
+    $("#ConfirmarEdicion").modal();
+});
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+});
+
 //GUARADR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnUpdateFormaPago", function () {
     //VALIDAR QUE EL CAMPO NO ESTE VACIO
