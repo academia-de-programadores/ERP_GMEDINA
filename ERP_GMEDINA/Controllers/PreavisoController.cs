@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Preaviso
         public ActionResult Index()
         {
-            var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
+            var tbPreaviso = db.tbPreaviso.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).OrderBy(x => x.prea_IdPreaviso);
             return View(tbPreaviso.ToList());
         }
         #endregion
@@ -43,7 +43,7 @@ namespace ERP_GMEDINA.Controllers
                     NombreUsuarioModifica = c.tbUsuario1.usu_NombreUsuario,
                     prea_FechaModifica = c.prea_FechaModifica,
                     prea_Activo = c.prea_Activo
-                }).OrderByDescending(x => x.prea_FechaCrea).ToList();
+                }).OrderBy(x => x.prea_IdPreaviso).ToList();
 
             return new JsonResult { Data = tbPreaviso, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -256,6 +256,66 @@ namespace ERP_GMEDINA.Controllers
             {
                 // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region POST: ACTIVAR
+        [HttpPost]
+        public ActionResult Activar(int? Id)
+        {
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = "bien";
+            IEnumerable<object> listPreaviso = null;
+            string MensajeError = "";
+            //VALIDAR QUE EL ID NO LLEGUE NULL
+            if (Id == null)
+            {
+                response = "error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            //INSTANCIA DEL MODELO
+            tbPreaviso tbPreaviso = new tbPreaviso();
+            //LLENAR DATA DE AUDITORIA
+            tbPreaviso.prea_IdPreaviso = (int)Id;
+            tbPreaviso.prea_UsuarioModifica = 1;
+            tbPreaviso.prea_FechaModifica = DateTime.Now;
+            //VALIDAR SI EL ID ES VÁLIDO
+            if (tbPreaviso.prea_IdPreaviso > 0)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listPreaviso = db.UDP_Plani_tbPreaviso_Activar(tbPreaviso.prea_IdPreaviso,
+                                                                     tbPreaviso.prea_UsuarioModifica,
+                                                                     tbPreaviso.prea_FechaModifica);
+
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbPreaviso_Activar_Result Resultado in listPreaviso)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
                 response = "error";
             }
 

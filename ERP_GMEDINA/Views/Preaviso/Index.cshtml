@@ -99,15 +99,7 @@
                 <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear Preaviso</h4>
             </div>
-            <div class="modal-body" id="Crear">
-                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
-            <div class="modal-footer">
-                <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default" />
-                <div style="display:none" class="btn" id="cargandoCrear">
-                </div>
-                <input type="submit" id="btnCrearPreavisoConfirmar" value="Guardar" class="btn btn-primary pull-left" />
-            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPreaviso())
         </div>                
     </div>
 </div>
@@ -119,32 +111,25 @@
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Preaviso</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
-            <div class="modal-footer">
-                <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default" />
-                <input type="submit" value="Actualizar" id="btnUpdatePreaviso" class="btn btn-primary pull-left" />
-                <input type="button" value="Inactivar" id="btnInactivarPreaviso" class="btn btn-danger pull-left" />
-            </div>
-               
-            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())      
+        </div>
     </div>
 </div>
 
-<div class="modal fade" id="InactivarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Inactivar</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Editar</h4>
             </div>
-            <div class="modal-body" id="Inactivar">
-                <p><b>¿Esta Seguro Que Desea Inactivar este registro?</b></p>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger" id="btnInactivarPreavisoConfirmar">Si</button>
-                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
             </div>
         </div>
     </div>
@@ -167,6 +152,42 @@
     </div>
 </div>
 
+<div class="modal fade" id="InactivarPreaviso" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrar" class="close" data-dismiss="modal"><span aria-hidden="false">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <p><b>¿Esta Seguro Que Desea Inactivar este registro?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" id="btnInactivarPreavisoConfirmar">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="frmActivarPreavis" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Está seguro que desea activar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnActivarPreavis">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Scripts.Render("~/plugins/izitoast")
@@ -178,67 +199,3 @@
     @Scripts.Render("~/Scripts/app/General/Preaviso")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
-
-@*<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.prea_RangoInicioMeses)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prea_RangoFinMeses)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prea_DiasPreaviso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prea_FechaCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prea_FechaModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbUsuario2.usu_NombreUsuario)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.prea_RangoInicioMeses)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prea_RangoFinMeses)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prea_DiasPreaviso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prea_FechaCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prea_FechaModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbUsuario2.usu_NombreUsuario)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.prea_IdPreaviso }) |
-            @Html.ActionLink("Details", "Details", new { id=item.prea_IdPreaviso }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.prea_IdPreaviso })
-        </td>
-    </tr>
-}
-
-</table>*@

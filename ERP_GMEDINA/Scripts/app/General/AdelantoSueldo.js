@@ -8,7 +8,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      //console.log("No se pudo recuperar Script SerializeDate");
   });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -22,11 +22,6 @@ function _ajax(params, uri, type, callback) {
         }
     });
 }
-
-//EVITAR POSTBACK DEL FORMULARIO
-//$('#frmAdelantoSueldoEdit').submit(function (e) {
-//    return false;
-//});
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridAdelantos() {
@@ -83,6 +78,10 @@ function cargarGridAdelantos() {
    
 }
 
+//$("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+//$("html, body").css("overflow", "hidden");
+//$("html, body").css("overflow", "scroll");
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
     $("#Crear #adsu_RazonAdelanto").val("");
@@ -90,7 +89,6 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
     $("#Crear #emp_IdEmpleado").val(0);
     $("#Crear #adsu_FechaAdelanto").val("");
 
-    $("#AgregarAdelantos").modal();
     $.ajax({
         url: "/AdelantoSueldo/EmpleadoGetDDL",
         method: "GET",
@@ -105,6 +103,9 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
             $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
         });
     });
+    $("#AgregarAdelantos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
@@ -115,7 +116,7 @@ var MaxSueldoCreate = 0;
 $(cmbEmpleado).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = parseInt(cmbEmpleado.val());
-    console.log(IdEmp);
+    //console.log(IdEmp);
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
@@ -167,7 +168,6 @@ $(cmbEmpleadoEdit).change(() => {
     });
 });
 
-
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAdelantos').click(function () {
     var Razon =  $("#Crear #adsu_RazonAdelanto").val();
@@ -182,6 +182,8 @@ $('#btnCreateRegistroAdelantos').click(function () {
         && Monto != "" && Monto != null && Monto != undefined && Monto > 0
         && Fecha != "" && Fecha != null && Fecha != undefined)
     {
+        //MOSTRAR EL SPINNER DE CARGA
+        mostrarCargandoCrear();
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoAdelantos").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -192,6 +194,7 @@ $('#btnCreateRegistroAdelantos').click(function () {
         }).done(function (data) {
             //CERRAR EL MODAL DE AGREGAR
             $("#AgregarAdelantos").modal('hide');
+            ocultarCargandoCrear();
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 iziToast.error({
@@ -200,16 +203,14 @@ $('#btnCreateRegistroAdelantos').click(function () {
                 });
             }
             else {
-                $("#Crear #Validation_descripcion1").css("display", "none");
-                $("#Crear #Validation_descripcion2").css("display", "none");
-                $("#Crear #Validation_descripcion3").css("display", "none");
+                OcultarValidaciones();
                 cargarGridAdelantos();
                 //Setear la variable de SueldoAdelantoMaximo a cero 
                 MaxSueldoCreate = 0;
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'Se ha registrado con exitosamente!',
+                    title: 'Éxito',
+                    message: '¡Se ha registrado exitosamente!',
                 });
             }
         });
@@ -252,7 +253,7 @@ $('#btnCreateRegistroAdelantos').click(function () {
         } else {
             $("#Crear #Validation_descripcion1").css("display", "none");
         }
-        if (Monto == "" || Monto == null || Monto == undefined) {
+        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
             $("#Crear #Validation_descripcion2").css("display", "");
         } else {
             $("#Crear #Validation_descripcion2").css("display", "none");
@@ -270,19 +271,24 @@ $('#btnCreateRegistroAdelantos').click(function () {
 function ValidarCamposEditar(colaborador, razon, monto){
     var pasoValidacion = true;
 
-    console.log(colaborador.val());
+    //console.log(colaborador.val());
     if(colaborador.val() == ''){
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
         //Hacerle focus al input
-        console.log('No paso la validacion de campo colaborador');
+        //console.log('No paso la validacion de campo colaborador');
+        $("#ConfirmarEdicion").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'Ha ocurrido un problema con el campo colaborador',
+        });
         
         $(colaborador).focus();
     } else{
         
     }
 
-    console.log(razon.val());
+    //console.log(razon.val());
 
     if(razon ==null || razon.val() == ''){
         pasoValidacion = false;
@@ -304,23 +310,31 @@ function ValidarCamposEditar(colaborador, razon, monto){
 }
 
 
+//FUNCION: OCULTAR LOS LABEL DE MENSAJE DE ERROR
+function OcultarValidaciones(){
+    $("#Crear #Validation_descripcion1").css("display", "none");
+    $("#Crear #Validation_descripcion2").css("display", "none");
+    $("#Crear #Validation_descripcion3").css("display", "none");
+}
+
 //FUNCION: OCULTAR LOS MENSAJES DE VALIDACION
 $('#btnCerrarCrearAdelanto').click(function () {
-    $("#Crear #Validation_descripcion1").css("display", "none");
-    $("#Crear #Validation_descripcion2").css("display", "none");
-    $("#Crear #Validation_descripcion3").css("display", "none");
+    OcultarValidaciones()
 });
 $('#IconCerrar').click(function () {
-    $("#Crear #Validation_descripcion1").css("display", "none");
-    $("#Crear #Validation_descripcion2").css("display", "none");
-    $("#Crear #Validation_descripcion3").css("display", "none");
+    OcultarValidaciones()
+});
+
+//FUNCION: OCULTAR LAS VALIDACIONES AL CERRAR EL MODAL DANDO CLIKC FUERA
+$("#AgregarAdelantos").on('hidden.bs.modal', function () {
+    OcultarValidaciones()
 });
 
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
+    $("#Editar #emp_Id").empty();
     var ID = $(this).closest('tr').data('id');
-    //var ID = $(this).data('id');
     IDInactivar = ID;
 
     var idEmpSelect = "";
@@ -335,64 +349,76 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
     }).done(function (data) {
         idEmpSelect = data.emp_Id;
         NombreSelect = data.per_Nombres;
-    })
+        //LLENAR EL DROPDOWNLIST
+        $("#Editar #emp_Id").append("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>");
 
-    $.ajax({
-        url: "/AdelantoSueldo/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: ID })
-    }).done(function (data) {
-        if (data) {
-            if (data.adsu_Deducido) {
-                console.log('true');
-                document.getElementById("btnUpdateAdelantos").disabled = true;
-                //$("#btnUpdateAdelantos").attr("disabled");//desabilita boton
-                //$("#btnUpdateAdelantos").disabled = true;
-            } else {
-                console.log('false');
-                document.getElementById("btnUpdateAdelantos").disabled = false;
-                //$("#btnUpdateAdelantos").removeAttr("disabled");//habilita boton
-                //$("#btnUpdateAdelantos").disabled = false;
-            }
-            var SelectedIdEmp = data.emp_Id;
+        $.ajax({
+            url: "/AdelantoSueldo/Edit/" + ID,
+            method: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: ID })
+        }).done(function (data) {
+            if (data) {
+                if (data.adsu_Deducido) {
+                    document.getElementById("btnUpdateAdelantos").disabled = true;
+                } else {
+                    document.getElementById("btnUpdateAdelantos").disabled = false;
+                }
+                var SelectedIdEmp = data.emp_Id;
 
-            //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
-            $.ajax({
-                url: "/AdelantoSueldo/EmpleadoGetDDL",
-                method: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ ID })
-            }).done(function (data) {
-                //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                $("#Editar #emp_Id").empty();
-                //LLENAR EL DROPDOWNLIST
-
-                $("#Editar #emp_Id").append("<option value='" + idEmpSelect + "' selected>" + NombreSelect + "</option>");
-                $.each(data, function (i, iter) {
-                    $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
+                $.ajax({
+                    url: "/AdelantoSueldo/EmpleadoGetDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID })
+                }).done(function (data) {
+                    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                    $.each(data, function (i, iter) {
+                        //$("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        $("#Editar #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                    });
                 });
-            });
-            $("#Editar #adsu_IdAdelantoSueldo").val(data.adsu_IdAdelantoSueldo);
-            $("#Editar #adsu_RazonAdelanto").val(data.adsu_RazonAdelanto);
-            $("#Editar #adsu_Monto").val(data.adsu_Monto);
+                $("#Editar #adsu_IdAdelantoSueldo").val(data.adsu_IdAdelantoSueldo);
+                $("#Editar #adsu_RazonAdelanto").val(data.adsu_RazonAdelanto);
+                $("#Editar #adsu_Monto").val(data.adsu_Monto);
 
 
-            $("#EditarAdelantoSueldo").modal();
-            
-        } else if (data.adsu_Deducido) {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se puede editar un registro ded',
-            });
-        }
-    })
+                $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
+
+            } else if (data.adsu_Deducido) {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se puede editar un registro deducido',
+                });
+            }
+        })
+
+    }).fail(function (jqXHR, textStatus, error) {
+        console.log('no pudimos traer tu selected');
+        console.log(jqXHR + ' -- ' + textStatus + ' -- ' + error);
+    });
+});
+
+//FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
+$("#btnUpdateAdelantos").click(function () {
+    ocultarCargandoEditar();
+    $("#EditarAdelantoSueldo").modal('hide');
+    $("#ConfirmarEdicion").modal();
+});
+
+//FUNCION: CERRAR EL MODAL DE CONFIRMACION AL EDITAR, (CON EL BOTON DE CERRAR)
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
 });
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
-$("#btnUpdateAdelantos").click(function () {
+$("#btnConfirmarEditar").click(function () {
+    mostrarCargandoEditar();
 
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
@@ -426,13 +452,14 @@ $("#btnUpdateAdelantos").click(function () {
                     cargarGridAdelantos();
                     //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                     FullBody();
-                    $("#EditarAdelantoSueldo").modal('hide');
+                    $("#ConfirmarEdicion").modal('hide');
+                    ocultarCargandoEditar();
                     //Setear la variable de SueldoAdelantoMaximo a cero 
                     MaxSueldoEdit = 0;
                     //Mensaje de exito de la edicion
                     iziToast.success({
-                        title: 'Exito',
-                        message: 'El registro fue editado de forma exitosa!',
+                        title: 'Éxito',
+                        message: '¡El registro fue editado de forma exitosa!',
                     });
                 }
             });
@@ -443,6 +470,8 @@ $("#btnUpdateAdelantos").click(function () {
                 title: 'Error',
                 message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
             });
+            $("#ConfirmarEdicion").modal('hide');
+            ocultarCargandoEditar();
             //IGUALAR EL MONTO AL SUELDO PROMEDIO
             $("#Editar #adsu_Monto").val(data);
             //MaxSueldoEdit = 0;
@@ -526,6 +555,7 @@ $(document).on("click", "#btnmodalInactivarAdelantoSueldo", function () {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroAdelantos").click(function () {
+    mostrarCargandoInactivar();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AdelantoSueldo/Inactivar/" + IDInactivar,
@@ -543,6 +573,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             cargarGridAdelantos();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarAdelantoSueldo").modal('hide');
+            ocultarCargandoInactivar();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -561,6 +592,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdela
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnActivarRegistroAdelantosModal").click(function () {
+    mostrarCargandoActivar();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AdelantoSueldo/Activar/" + IDActivar,
@@ -578,6 +610,7 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
             cargarGridAdelantos();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#ActivarAdelantoSueldo").modal('hide');
+            ocultarCargandoActivar();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -641,6 +674,99 @@ $("#btnCerrar").click(function () {
     FullBody();
 });
 
+//---------------------------------------FUNCIONES SPINNER---------------------------------------
+//MODAL AGREGAR
+function mostrarCargandoCrear() {
+    btnGuardar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
+const btnGuardar = $('#btnCreateRegistroAdelantos'),
 
 
+cargandoCrearcargandoCrear = $('#cargandoCrear')
 
+
+cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+
+
+//FUNCIONES SPINNER MODAL EDITAR
+function mostrarCargandoEditar() {
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
+function ocultarCargandoEditar() {
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
+
+const btnEditar = $('#btnConfirmarEditar'),
+
+
+cargandoEditarcargandoEditar = $('#cargandoEditar')
+
+
+cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
+
+//FUNCIONES SPINNER MODAL INACTIVAR
+function mostrarCargandoInactivar() {
+    btnInactivar.hide();
+    cargandoInactivar.html(spinner());
+    cargandoInactivar.show();
+}
+
+function ocultarCargandoInactivar() {
+    btnInactivar.show();
+    cargandoInactivar.html('');
+    cargandoInactivar.hide();
+}
+const btnInactivar = $('#btnInactivarRegistroAdelantos'),
+
+
+cargandoInactivarcargandoInactivar = $('#cargandoInactivar')
+
+
+cargandoInactivar = $('#cargandoInactivar')//Div que aparecera cuando se le de click en crear
+
+
+//FUNCIONES SPINNER MODAL ACTIVAR
+function mostrarCargandoActivar() {
+    btnActivar.hide();
+    cargandoActivar.html(spinner());
+    cargandoActivar.show();
+}
+
+function ocultarCargandoActivar() {
+    btnActivar.show();
+    cargandoActivar.html('');
+    cargandoActivar.hide();
+}
+
+const btnActivar = $('#btnActivarRegistroAdelantosModal'),
+
+
+cargandoActivarcargandoActivar = $('#cargandoActivar')
+
+
+cargandoActivar = $('#cargandoActivar')//Div que aparecera cuando se le de click en crear
