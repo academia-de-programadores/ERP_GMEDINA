@@ -13,15 +13,14 @@
                     @Html.LabelFor(model => model.dei_Motivo, htmlAttributes: new { @class = "control-label col-md-2", })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Motivo" } })
-                        @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validatione1" })
+                        @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validation1" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
                     <div class="col-md-10">
-                        <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                        <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                        <select id="emp_Id" name="emp_Id" class="form-control"></select>
                     </div>
                 </div>
 
@@ -29,7 +28,7 @@
                     @Html.LabelFor(model => model.dei_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2", })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial" } })
-                        @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validatione3" })
+                        @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validation3" })
                     </div>
                 </div>
 
@@ -37,7 +36,7 @@
                     @Html.LabelFor(model => model.dei_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2", })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
-                        @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
+                        @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation4" })
                     </div>
                 </div>
 
@@ -45,7 +44,7 @@
                     @Html.LabelFor(model => model.dei_Cuota, htmlAttributes: new { @class = "control-label col-md-2", })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota" } })
-                        @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validatione5" })
+                        @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validation5" })
                     </div>
                 </div>
 
@@ -61,7 +60,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-        <button type="button" class="btn btn-primary pull-left" id="btnEditDeduccionIndividual">Actualizar</button>
+        <button type="submit" class="btn btn-primary pull-left" id="btnEditDeduccionIndividual">Actualizar</button>
         <button type="button" class="btn btn-danger pull-left" id="btnInactivarDeduccionesIndividuales">Inhabilitar</button>
     </div>
 }
