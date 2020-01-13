@@ -28,10 +28,10 @@ namespace ERP_GMEDINA.Models
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "El campo Monto es Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
-        [Display(Name = "Cuota")]
+        [Display(Name = "Monto")]
         public decimal ini_Monto { get; set; }
 
-        [Display(Name = "Siempre se Deduce")]
+        [Display(Name = "Siempre Recibe")]
         public Nullable<bool> ini_PagaSiempre { get; set; }
 
         [Display(Name = "Creado por")]

@@ -228,7 +228,7 @@ namespace ERP_GMEDINA.Controllers
                     listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Inactivar(ID, 1, DateTime.Now);
 
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result Resultado in listINFS)
+                    foreach (UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result Resultado in listINFS)
                         MensajeError = Resultado.MensajeError;
 
                     //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH

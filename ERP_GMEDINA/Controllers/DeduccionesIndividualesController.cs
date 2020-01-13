@@ -239,7 +239,7 @@ namespace ERP_GMEDINA.Controllers
         #region Inhabilitar Deducciones Individuales
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int id)
+        public ActionResult Inactivar(int dei_IdDeduccionesIndividuales)
         {
             //LLENAR DATA DE AUDITORIA
             int dei_UsuarioModifica = 1;
@@ -254,7 +254,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(id,
+                    listDeduccionesIndividuales = db.UDP_Plani_tbDeduccionesIndividuales_Inactivar(dei_IdDeduccionesIndividuales,
                                                                                                    dei_UsuarioModifica,
                                                                                                    dei_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP

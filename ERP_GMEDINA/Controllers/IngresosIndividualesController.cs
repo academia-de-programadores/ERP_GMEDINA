@@ -106,13 +106,32 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+        #region Dropdownlist
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetEmpleadoDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from Emp in db.tbEmpleados
+            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
+            where Emp.emp_Estado == true
+            select new
+            {
+                Id = Emp.emp_Id,
+                Descripcion = Per.per_Nombres + " " + Per.per_Apellidos
+            };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Editar Ingresos Individuales
         // GET: IngresosIndividuales/Edit/5
         public ActionResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionesIndividuales tbDeduccionesIndividualesJSON = db.tbDeduccionesIndividuales.Find(id);
-            return Json(tbDeduccionesIndividualesJSON, JsonRequestBehavior.AllowGet);
+            tbIngresosIndividuales tbIngresosIndividualesJSON = db.tbIngresosIndividuales.Find(id);
+            return Json(tbIngresosIndividualesJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: IngresosIndividuales/Edit/5

@@ -25,7 +25,7 @@
                     @Html.LabelFor(model => model.emp_Id)
                 </div>
                 <div class="col-md-8">
-                    <select id="emp_IdEmpleados" name="emp_Id" class="form-control"></select>
+                    <select id="emp_Id" name="emp_Id" class="form-control"></select>
                     @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation2" })
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
                 <div class="col-md-8">
-                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" />
+                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" value="@true" />
                 </div>
             </div>
 

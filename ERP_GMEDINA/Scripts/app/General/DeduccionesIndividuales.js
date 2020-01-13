@@ -319,7 +319,7 @@ $("#validatione5").css("display", "none");
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
-const btnEditar = $('#btnEditDeduccionIndividual')
+const btnEditar = $('#btnEditDeduccionIndividual2')
 
 //Div que aparecera cuando se le de click en crear
 cargandoEditar = $('#cargandoEditar')
@@ -337,20 +337,19 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
-    var ID = $(this).data('id');
-    Idinactivar = ID;
+    var id = $(this).data('id');
     $.ajax({
-        url: "/DeduccionesIndividuales/Edit/" + ID,
+        url: "/DeduccionesIndividuales/Edit/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        data: JSON.stringify({ id: id })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
-                $("#Editar #dei_Motivo").val(data.dei_Motivo);
+                $("#Editar #dei_Motivo").val(data.dei_Motivo).$00;
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
                 $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
                 $("#Editar #dei_Cuota").val(data.dei_Cuota);
@@ -364,14 +363,14 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
+                    data: JSON.stringify({ id })
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_IdEmpleado").empty();
+                        $("#Editar #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST                    
                         $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
                
@@ -390,6 +389,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
 $("#btnEditDeduccionIndividual").click(function () {
     $("#EditarDeduccionesIndividualesConfirmacion").modal();
 });
+
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionIndividual2").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
@@ -400,7 +400,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
     var vale5 = $("#Editar #dei_Cuota").val();
 
 
-    if (vale2 == "") {
+    if (vale2 == "" || vale2 == null) {
         $("#Editar #validatione1").css("display", "");
     }
     else {
@@ -451,6 +451,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
 
         }
         else {
+            $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             iziToast.error({
                 title: 'Error',
                 message: 'Datos Invalidos!',
@@ -565,12 +566,12 @@ function mostrarCargandoInhabilitar() {
 }
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroDeduccionIndividual2").click(function ()
+$("#btnInactivarRegistroDeduccionIndividual").click(function ()
 {
     var data = $("#frmInactivarDeduccionIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/DeduccionesIndividuales/Inactivar/" + Idinactivar,
+        url: "/DeduccionesIndividuales/Inactivar",
         method: "POST",
         data: data
     }).done(function (data) {

@@ -15694,20 +15694,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar" ReturnType="Collection(String)">
-            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
-            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbAuxilioDeCesantias_Activar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Activar_Result)">
             <Parameter Name="aces_IdAuxilioCesantia" Mode="In" Type="Int32" />
             <Parameter Name="aces_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result)">
-            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
-            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Activar1" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Activar1_Result)">
             <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
@@ -15798,6 +15788,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="ini_PagaSiempre" Mode="In" Type="Boolean" />
             <Parameter Name="ini_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="ini_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -16227,9 +16222,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Activar1_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
@@ -16386,6 +16378,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbIngresosIndividuales_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -19096,17 +19091,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Activar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAuxilioDeCesantias_Activar1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAuxilioDeCesantias_Activar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbAuxilioDeCesantias_Activar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Inactivar1" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Inactivar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar1_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -19222,6 +19209,13 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbIngresosIndividuales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbIngresosIndividuales_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbIngresosIndividuales_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Inactivar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
