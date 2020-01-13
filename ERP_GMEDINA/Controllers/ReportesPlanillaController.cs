@@ -686,6 +686,12 @@ namespace ERP_GMEDINA.Controllers
 			return View();
 		}
 
+		public static object getDeducciones()
+		{
+			object json = new { data = 1 };
+			return json;
+		}
+
 		//vista de previsualización del reporte
 		public ActionResult ReportDeduccionesPreview(int cde_IdDeducciones, DateTime hipa_FechaInicio, DateTime hipa_FechaFin, int cpla_IdPlanilla)
 		{

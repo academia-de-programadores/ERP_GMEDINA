@@ -1231,6 +1231,7 @@
     <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\DeduccionesIndividuales.js" />
+    <Content Include="Scripts\app\General\DeduccionesRPT.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\excelexportjs.js" />
