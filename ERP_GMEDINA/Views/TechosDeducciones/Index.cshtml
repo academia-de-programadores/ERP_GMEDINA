@@ -98,12 +98,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Edición de datos</h4>
-            </div>
-            <div class="modal-body" id="Editar">
+            </div>            
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
-            </div>
-        </div>
+            </div>        
     </div>
 </div>
 @* MODAL DE CREACIÓN *@
@@ -113,10 +111,8 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar techo de deducción</h4>
-            </div>
-            <div class="modal-body" id="Crear">
-                @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())
-            </div>
+            </div>            
+                @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbTechosDeducciones())           
         </div>
     </div>
 </div>
