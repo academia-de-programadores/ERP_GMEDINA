@@ -11,6 +11,7 @@
             </div>
             <div class="col-md-9">
                 <select id="emp_Id" name="emp_Id" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation1d" })
             </div>
         </div>
 
@@ -20,7 +21,7 @@
             </div>           
             <div class="col-md-9">
                 @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @id = "dafp_AporteLps" } })
-                @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation1d" })
+                @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation2d" })
             </div>
         </div>
 
@@ -30,6 +31,7 @@
             </div>
             <div class="col-md-9">
                 <select id="afp_Id" name="afp_Id" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.afp_Id, "", new { @class = "text-danger", @id = "validation3d" })
             </div>
         </div>
 
