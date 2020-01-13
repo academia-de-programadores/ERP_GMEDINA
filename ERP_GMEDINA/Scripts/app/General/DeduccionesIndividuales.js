@@ -319,7 +319,7 @@ $("#validatione5").css("display", "none");
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
-const btnEditar = $('#btnEditDeduccionIndividual')
+const btnEditar = $('#btnEditDeduccionIndividual2')
 
 //Div que aparecera cuando se le de click en crear
 cargandoEditar = $('#cargandoEditar')
@@ -350,7 +350,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 $("#Editar #dei_IdDeduccionesIndividuales").val(data.dei_IdDeduccionesIndividuales);
-                $("#Editar #dei_Motivo").val(data.dei_Motivo);
+                $("#Editar #dei_Motivo").val(data.dei_Motivo).$00;
                 $("#Editar #dei_MontoInicial").val(data.dei_MontoInicial);
                 $("#Editar #dei_MontoRestante").val(data.dei_MontoRestante);
                 $("#Editar #dei_Cuota").val(data.dei_Cuota);
