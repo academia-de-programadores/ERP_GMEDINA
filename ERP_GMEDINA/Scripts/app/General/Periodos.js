@@ -242,6 +242,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                     message: '¡Se editó de forma exitosa!',
                 });
             } else {
+                $("#ConfirmarEdicion").modal('hide');
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se aceptan datos numericos!',

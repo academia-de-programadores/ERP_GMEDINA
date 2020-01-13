@@ -158,8 +158,19 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
         });
 });
 
+
+$("#btnUpdatePreaviso").click(function () {
+    //console.log('console');
+    $("#ConfirmarEdicion").modal();
+});
+
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+});
+
+
 //GUARADAR LA EDICION DEL REGISTRO
-$(document).on("click", "#btnUpdatePreaviso", function () {
+$(document).on("click", "#btnConfirmarEditar", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
 
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
@@ -178,10 +189,17 @@ $(document).on("click", "#btnUpdatePreaviso", function () {
             if (data != "error") {
                 cargarGridPreaviso();
                 $("#EditarPreaviso").modal('hide');
+                $("#ConfirmarEdicion").modal('hide');
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
                     message: '¡Se editó de forma exitosa!',
+                });
+            } else {
+                $("#ConfirmarEdicion").modal('hide');
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡Solo se aceptan datos numericos!',
                 });
             }
 
