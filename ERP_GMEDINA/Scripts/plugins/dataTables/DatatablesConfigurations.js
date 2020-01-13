@@ -1,12 +1,12 @@
 ﻿var tabla = null;
 var botones = [];
-var htmlSpiner = '<div id="ibox1" class="ibox-content sk-loading">' +
-'<div class="sk-spinner sk-spinner-double-bounce">' +
-'<div class="sk-double-bounce1"></div>' +
-'<div class="sk-double-bounce2"></div>' +
-'</div>' +
-'<h1 class="title">Cargando...</h1>'
-'</div>'
+var htmlSpiner =
+'<div id="ibox1" class="ibox-content sk-loading">' +
+    '<div class="sk-spinner sk-spinner-double-bounce">' +
+    '<div class="sk-double-bounce1"></div>' +
+    '<div class="sk-double-bounce2"></div>' +
+    '</div>' +
+'</div>';
 $(document).ready(function () {
     var columnas = [];
     var col = 0;

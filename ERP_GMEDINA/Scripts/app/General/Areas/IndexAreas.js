@@ -87,12 +87,26 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     else {
         id = row.data().ID;
         hola = row.data().hola;
+        //linea que hace aparecer el spiner
+        //"htmlSpiner" es el nombre de la variable que contiene el spiner en html
+        row.child(htmlSpiner).show();
+        tr.addClass('shown');
         _ajax({ id: parseInt(id) },
             '/Areas/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    //desaparecemos el spiner
+                    row.child.hide();
+                    tr.removeClass('shown');
+                    //dibuja el childRow
                     row.child(format(obj)).show();
+                    tr.addClass('shown');
+                } else {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                    //dibuja el childRow
+                    row.child("Error de conexion").show();
                     tr.addClass('shown');
                 }
             });
