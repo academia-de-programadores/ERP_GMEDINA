@@ -3,35 +3,37 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditTechosDeducciones" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.tddu_IdTechosDeducciones)
-        @Html.HiddenFor(model => model.tddu_FechaCrea)
-        @Html.HiddenFor(model => model.tddu_UsuarioCrea)
-        <div class="form-group">
-            <label class="control-label col-md-2">Descripción Deducción</label>  @* @Html.LabelFor(model => model.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <select id="cde_IdDeducciones" name="cde_IdDeducciones" class="form-control"></select>
+    <div class="modal-body" id="Editar">
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.tddu_IdTechosDeducciones)
+            @Html.HiddenFor(model => model.tddu_FechaCrea)
+            @Html.HiddenFor(model => model.tddu_UsuarioCrea)
+            <div class="form-group">
+                <label class="control-label col-md-2">Descripción Deducción</label>  @* @Html.LabelFor(model => model.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <select id="cde_IdDeducciones" name="cde_IdDeducciones" class="form-control"></select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.tddu_Techo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tddu_Techo, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.tddu_Techo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control ValidarCaracteres", @onkeypress = "return isNumberKey(this, 'keypress');", @ondrop = "return false;", @onpaste = "return false;", @oncontextmenu = "return false;" } })
+                    @Html.ValidationMessageFor(model => model.tddu_Techo, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.tddu_PorcentajeColaboradores, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tddu_PorcentajeColaboradores, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.tddu_PorcentajeColaboradores, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
+                    @Html.ValidationMessageFor(model => model.tddu_PorcentajeColaboradores, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.tddu_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tddu_PorcentajeEmpresa, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.tddu_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
+                    @Html.ValidationMessageFor(model => model.tddu_PorcentajeEmpresa, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
@@ -43,13 +45,13 @@
             <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="btnInactivarTechoDeducciones">Inhabilitar</button>
             <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
         </div>
-}
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarTechosDeducciones" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.tddu_IdTechosDeducciones)
-}
+        }
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarTechosDeducciones" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.tddu_IdTechosDeducciones)
+        }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
