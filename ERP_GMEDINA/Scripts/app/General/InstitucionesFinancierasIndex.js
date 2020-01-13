@@ -45,7 +45,8 @@ function cargarGridINFS()
                                                                      
                                                                      //'<button data-id = "' + ListListaINFSaAuxCes[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>'
                 //variable boton editar
-                var botonEditar = ListaINFS[i].insf_Activo == true ? '<input type="button" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs" value="Editar" onclick="location.href="<%: Url.Action("Edit", "InstitucionesFinancieras") %>" />' : '';
+                var botonEditar = ListaINFS[i].insf_Activo == true ? '@Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })' : '';
+                    //'<input type="button" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs" value="Editar" onclick="location.href=InstitucionesFinancieras/Edit?id=' + ListaINFS[i].insf_IdInstitucionFinanciera + '" />' : '';
                     //'<a href="@Url.Action("Edit", "InstitucionesFinancieras", new { id = ' + ListaINFS[i].insf_IdInstitucionFinanciera + ' })" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
                     //'<a href="InstitucionesFinancieras/Edit?id="' + ListaINFS[i].insf_IdInstitucionFinanciera + '" data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" class="btn btn-default btn-xs">Editar</a>' : '';
                     //'<button data-id = "' + ListaINFS[i].insf_IdInstitucionFinanciera + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
