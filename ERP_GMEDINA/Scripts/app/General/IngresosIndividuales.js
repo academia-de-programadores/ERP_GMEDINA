@@ -55,7 +55,7 @@ function cargarGridDeducciones() {
                 template += '<tr data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">' +
                     '<td>' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '</td>' +
                     '<td>' + ListaIngresoIndividual[i].ini_Motivo + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].Apellidos + '</td>' +
+                    '<td>' + ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos + '</td>' +
                     '<td>' + ListaIngresoIndividual[i].ini_Monto + '</td>' +
                     //variable del estado del registro creada en el operador ternario de arriba
                     '<td>' + estadoRegistro + '</td>' +
@@ -108,7 +108,7 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
         method: "POST",
         data: { id: id }
     }).done(function (data) {
-        $("#btnActivarRegistroIngresoIndividual").modal('hide');
+        $("#ActivarIngresosIndividuales").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
             iziToast.error({
@@ -194,7 +194,7 @@ $("#validation2").css("display", "none");
 $("#validation3").css("display", "none");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccionIndividual').click(function () {
+$('#btnCreateRegistroIngresoIndividual').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #emp_Id").val();
     var val2 = $("#Crear #ini_Motivo").val();
@@ -270,14 +270,14 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
-    $("#EditarDeduccionesIndividuales").modal('hide');
+    $("#EditarIngresosIndividuales").modal('hide');
 });
 
 $("#btnIconCerrare").click(function () {
     $("#validatione1").css("display", "none");
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
-    $("#EditarDeduccionesIndividuales").modal('hide');
+    $("#EditarIngresosIndividuales").modal('hide');
 });
 
 $("#validatione1").css("display", "none");
@@ -289,35 +289,40 @@ $("#validatione3").css("display", "none");
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
-const btnEditar = $('#btnEditDeduccionIndividual')
+const btnEditar = $('#btnEditIngresoIndividual')
+
+const btnInhabilitar = $('#btnInactivarIngresoIndividual')
 
 //Div que aparecera cuando se le de click en crear
 cargandoEditar = $('#cargandoEditar')
 
 function ocultarCargandoEditar() {
     btnEditar.show();
+    btnInhabilitar.show();
     cargandoEditar.html('');
     cargandoEditar.hide();
 }
 
 function mostrarCargandoEditar() {
     btnEditar.hide();
+    btnInhabilitar.hide();
     cargandoEditar.html(spinner());
     cargandoEditar.show();
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales", function () {
-    var ID = $(this).data('id');
+    var id = $(this).data('id');
     $.ajax({
-        url: "/IngresosIndividuales/Edit/" + ID,
+        url: "/IngresosIndividuales/Edit/" + id,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
+        data: JSON.stringify({ id: id })
     })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
                 $("#Editar #ini_Motivo").val(data.ini_Motivo);
                 $("#Editar #ini_Monto").val(data.ini_Monto);
                 $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
@@ -331,14 +336,14 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                     method: "GET",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
+                    data: JSON.stringify({ id })
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #emp_IdEmpleados").empty();
+                        $("#Editar #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST                    
                         $.each(data, function (i, iter) {
-                            $("#Editar #emp_IdEmpleados").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
                 $("#DetallesIngresosIndividuales").modal('hide');
@@ -377,7 +382,7 @@ $("#btnEditIngresoIndividual").click(function () {
     }
 
     mostrarCargandoEditar();
-
+    debugger;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditIngresoIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
