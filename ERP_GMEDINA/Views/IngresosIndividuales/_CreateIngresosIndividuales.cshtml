@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-8">
                     <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validatione2" })
+                    <label class="text-danger" id="validatione2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Empleado es Requerido.</label>
                 </div>
             </div>
 
@@ -46,14 +46,6 @@
                 </div>
                 <div class="col-md-8">
                         <input type="checkbox" class="i-checks" id="ini_PagaSiempre" name="ini_PagaSiempre" />
-                    <script>
-                        if (ini_PagaSiempre.Checked == true) {
-                            $("#iniPagaSiempre").val(1);
-                        }
-                        else {
-                            $("#iniPagaSiempre").val(0);
-                        }
-                    </script>
                 </div>
             </div>
 
@@ -65,6 +57,7 @@
             <button type="submit" class="btn btn-primary pull-left" id="btnCreateRegistroIngresoIndividual">Guardar</button>
             <div style="display:none" class="btn pull-left" id="cargandoCrear"></div>
         </div>
+
 }
 
 
