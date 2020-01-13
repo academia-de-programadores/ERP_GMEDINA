@@ -276,6 +276,66 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
+        #region POST: ACTIVAR
+        [HttpPost]
+        public ActionResult Activar(int? Id)
+        {
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = "bien";
+            IEnumerable<object> listPeriodo = null;
+            string MensajeError = "";
+            //VALIDAR QUE EL ID NO LLEGUE NULL
+            if (Id == null)
+            {
+                response = "error";
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            //INSTANCIA DEL MODELO
+            tbPeriodos tbPeriodos = new tbPeriodos();
+            //LLENAR DATA DE AUDITORIA
+            tbPeriodos.peri_IdPeriodo = (int)Id;
+            tbPeriodos.peri_UsuarioModifica = 1;
+            tbPeriodos.peri_FechaModifica = DateTime.Now;
+            //VALIDAR SI EL ID ES VÁLIDO
+            if (tbPeriodos.peri_IdPeriodo > 0)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listPeriodo = db.UDP_Plani_tbPeriodos_Activar(tbPeriodos.peri_IdPeriodo,
+                                                                     tbPeriodos.peri_UsuarioModifica,
+                                                                     tbPeriodos.peri_FechaModifica);
+
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbPeriodos_Activar_Result Resultado in listPeriodo)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo Activar el registro, contacte al administrador.");
+                response = "error";
+            }
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region DISPOSE
         protected override void Dispose(bool disposing)
         {

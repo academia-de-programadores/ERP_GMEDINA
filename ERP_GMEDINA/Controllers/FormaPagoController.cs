@@ -255,7 +255,7 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region POST: INACTIVAR
+        #region POST: ACTIVAR
         [HttpPost]
         public ActionResult Activar(int? Id)
         {
