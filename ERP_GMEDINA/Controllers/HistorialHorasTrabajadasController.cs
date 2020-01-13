@@ -34,14 +34,12 @@ namespace ERP_GMEDINA.Controllers
                         t => new
                         {
                             htra_Id = t.Id,
-                            Colaborador = t.Nombre_Completo,
-                            dep_Descripcion = t.Departamento,
-                            area_Descripcion = t.Area,
-                            car_Descripcion = t.Cargo,
-                            jor_Descripcion = t.Jornada,
-                            tiho_Recargo = t.Recargo,
+                            Empleado = t.Nombre_Completo,
+                            Jornadas = t.Jornada,
                             tiho_Descripcion = t.Tipo_Horas,
-                            htra_Fecha= t.Fecha
+                            Cantidad = t.Cantidad,            
+                            tiho_Recargo = t.Recargo,
+                            Fecha = t.Fecha
                         }
                         )
                         .ToList();
@@ -74,7 +72,7 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && db !=null)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

@@ -196,7 +196,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id,tbsueldos.sue_Cantidad, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbSueldos_Insert(tbsueldos.sue_Id, tbsueldos.emp_Id, tbsueldos.tmon_Id,tbsueldos.sue_Cantidad, Usuario.usu_Id,Usuario.usu_Id,DateTime.Now);
                     foreach (UDP_RRHH_tbSueldos_Insert_Result item in list)
                     {
                         msj = item.MensajeError + " ";
