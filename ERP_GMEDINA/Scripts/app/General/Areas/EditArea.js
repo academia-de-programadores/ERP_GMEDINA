@@ -186,7 +186,7 @@ $("#btnCrear").click(function () {
                     //MsgSuccess("¡Exito!", "Se ah agregado el registro");
                     window.location.href = "/Areas";
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se logro editar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -261,7 +261,7 @@ $("#ModalInhabilitar").find("#InActivar").on("click", function () {
                     //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
                     $(location).attr('href', '/Areas');
                 } else {
-                    MsgError("Error", "Codigo: " + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     }
