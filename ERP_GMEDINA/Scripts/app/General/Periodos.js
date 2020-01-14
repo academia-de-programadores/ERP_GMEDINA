@@ -36,7 +36,7 @@ function cargarGridPeriodo() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -117,7 +117,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
              if (data == "error") {
                  iziToast.error({
                      title: 'Error',
-                     message: 'No se pudo guardar el registro, contacte al administrador',
+                     message: '¡No se guardó el registro, contacte al administrador!',
                  });
              }
              else if (data == "bien") {
@@ -126,7 +126,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
                     // Mensaje de exito cuando un registro se ha guardado bien
                   iziToast.success({
                         title: 'Exito',
-                        message: 'El registro fue creado de forma exitosa!',
+                        message: '¡El registro se agregó de forma exitosa!',
                     });
               }
             });
@@ -217,13 +217,13 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se editó de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             } else {
                 $("#ConfirmarEdicion").modal('hide');
                 iziToast.error({
                     title: 'Error',
-                    message: '¡No se aceptan datos numericos!',
+                    message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
         });
@@ -274,7 +274,7 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
         		//Mensaje de error si no hay data
         		iziToast.error({
         			title: 'Error',
-        			message: 'No se pudo cargar la información, contacte al administrador',
+        			message: '¡No se cargó la información, contacte al administrador!',
         		});
         	}
         });
@@ -297,7 +297,7 @@ $("#btnInactivarPeriodoConfirmar").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -308,7 +308,7 @@ $("#btnInactivarPeriodoConfirmar").click(function () {
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -338,7 +338,7 @@ $("#btnActivarPeriodoConfirm").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
             $("#ActivarPeriodo").modal('hide');
         }
@@ -350,7 +350,7 @@ $("#btnActivarPeriodoConfirm").click(function () {
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });

@@ -16,6 +16,8 @@
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion" } })
                         @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id = "Validation_descipcion" })
+
+                        <span class="field-validation-valid text-danger" style="display: none" id="validareditar1">El campo Descripción Deducción es obligatorio.</span>
                     </div>
                 </div>
             </div>
@@ -40,6 +42,8 @@
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeColaborador", @value = "" } })
                         @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
+
+                        <span class="field-validation-valid text-danger" style="display: none" id="validareditar2">El campo Porcentaje Colaborador es obligatorio.</span>
                     </div>
                 </div>
             </div>
@@ -52,13 +56,15 @@
                     <div class="col-md-6">
                         @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeEmpresa", @value = "" } })
                         @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
+
+                        <span class="field-validation-valid text-danger" style="display: none" id="validareditar3">El campo Porcentaje Empresa es obligatorio.</span>
                     </div>
                 </div>
             </div>
         </div>
 </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
+            <button type="submit" class="btn btn-primary pull-left" id="btnUpdateDeduccion">Actualizar</button>
             <button type="button" class="btn btn-danger col-md-2" id="btnmodalInactivarCatalogoDeducciones">Inhabilitar</button>
             <button type="button" class="btn btn-white" data-dismiss="modal" id="btnCerrarEditar">Cerrar</button>
         </div>

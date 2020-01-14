@@ -10,9 +10,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Deducciones Individuales</h5>
+                    <h5>Listado de Deducciones Extras</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarDeduccionIndividual">Registrar Deducción Individual</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarDeduccionIndividual">Registrar Deducción Extra</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -31,8 +31,8 @@
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dei_IdDeduccionesIndividuales)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Nombre</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dei_Motivo)</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.emp_Id)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dei_MontoInicial)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dei_MontoRestante)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.dei_Cuota)</th>
@@ -102,7 +102,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Crear Deducción Individual</h4>
+                <h4 class="modal-title">Crear Deducción Extra</h4>
             </div>
 
             @Html.Partial("_CreateDeduccionesIndividuales", new ERP_GMEDINA.Models.tbDeduccionesIndividuales())
@@ -119,7 +119,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar Deducción Individual</h4>
+                <h4 class="modal-title">Editar Deducción Extra</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -134,14 +134,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btnReg"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body">
                 ¿Esta seguro que desea Editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
                 <input type="button" id="btnEditDeduccionIndividual2" value="Si" class="btn btn-primary " />
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div> 
@@ -157,7 +157,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle de Deducción Individual</h4>
+                <h4 class="modal-title">Detalle de Deducción Extra</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsDeduccionesIndividuales", new ERP_GMEDINA.Models.tbDeduccionesIndividuales())
@@ -172,14 +172,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btnBa"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Esta seguro que desea Eliminar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white pull-right" id="btnBack">No</button>
                 <button type="button" class="btn btn-danger pull-right" id="btnInactivarRegistroDeduccionIndividual">Si</button>
                 <div style="display:none" class="btn pull-right" id="cargandoInhabilitar"></div>
             </div>

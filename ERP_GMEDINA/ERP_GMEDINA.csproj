@@ -1913,12 +1913,15 @@
     <Content Include="Views\DeduccionesIndividuales\_CreateDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_DetailsDeduccionesIndividuales.cshtml" />
     <Content Include="Views\DeduccionesIndividuales\_EditDeduccionesIndividuales.cshtml" />
+    <Content Include="Views\FormaPago\_Create.cshtml" />
+    <Content Include="Views\FormaPago\_Details.cshtml" />
+    <Content Include="Views\FormaPago\_Edit.cshtml" />
+    <Content Include="Views\FormaPago\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FormaPago\" />
-    <Folder Include="Views\Periodos\" />
     <Folder Include="ReportesPlanilla\" />
+    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
