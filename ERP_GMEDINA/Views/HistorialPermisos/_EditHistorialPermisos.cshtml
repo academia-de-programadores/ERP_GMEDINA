@@ -8,9 +8,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*@Html.HiddenFor(model => model.tiho_Id)*@
         <div class="form-group">
-            @Html.LabelFor(model => model.hper_Observacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Observación", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.hper_Observacion, new { htmlAttributes = new { @class = "form-control required valid" } })
+                @Html.EditorFor(model => model.hper_Observacion, new { htmlAttributes = new { @class = "form-control required valid" , @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.hper_Observacion, "", new { @class = "text-danger", @id = "errorhsal_Observacion" })
             </div>
         </div>

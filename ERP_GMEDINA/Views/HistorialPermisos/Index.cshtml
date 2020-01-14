@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialPermisos>
 
 @{
-    ViewBag.Title = "Historial de Permisos";
+    ViewBag.Title = "Permisos";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -39,14 +37,13 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar Observaciónes de Permiso</h4>
+                <h4 class="modal-title">Editar Observaciónes del permiso</h4>
             </div>
             <div class="modal-body" id="ModalEdit">
                 @Html.Partial("_EditHistorialPermisos", new ERP_GMEDINA.Models.tbHistorialPermisos())
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary pull-left" id="btnActualizar">Editar</button>
                 <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
             </div>
         </div>
@@ -91,23 +88,23 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                @*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
+
             </div>
         </div>
     </div>
 </div>
 
 @*@Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialPermisos())
-@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialPermisos())
-@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbHistorialPermisos())
-@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbHistorialPermisos())*@
-    
+    @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialPermisos())
+    @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbHistorialPermisos())
+    @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbHistorialPermisos())*@
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 @section Scripts {
-@Scripts.Render("~/plugins/dataTables")
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
 }
