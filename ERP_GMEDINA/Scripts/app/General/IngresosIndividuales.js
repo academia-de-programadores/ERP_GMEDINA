@@ -40,7 +40,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -120,7 +120,7 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
@@ -128,7 +128,7 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -216,7 +216,9 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var val2 = $("#Crear #ini_Motivo").val();
     var val3 = $("#Crear #ini_Monto").val();
     var val4 = $("#Crear #ini_PagaSiempre").val();
+    var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
+    debugger;
     if (val2 == "") {
         $("#Crear #validatione1").css("display", "");
     }
@@ -224,60 +226,60 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
         $("#Crear #validatione1").css("display", "none");
     }
 
-    if (val3 == "" || val3 == null || val3 == undefined) {
-        $("#Crear #validatione3").css("display", "");
-    }
-    else {
-        $("#Crear #validatione3").css("display", "none");
-    }
-
     if (val1 == "" || val1 == 0 || val1 == "0") {
         $("#Crear #validatione2").css("display", "");
     }
-    else {
+    else if (val1 != "" || val1 != 0 || val1 != "0") {
         $("#Crear #validatione2").css("display", "none");
-
-        mostrarCargandoCrear();
-
-
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-        var data = $("#frmCreateIngresoIndividual").serializeArray();
-
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/IngresosIndividuales/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
-
-                cargarGridDeducciones();
-
-                $("#Crear #ini_Motivo").val('');
-                $("#Crear #ini_Monto").val('');
-                $("#Crear #ini_PagaSiempre").val('');
-                //CERRAR EL MODAL DE AGREGAR
-                $("#AgregarIngresosIndividuales").modal('hide');
-
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro se agregó de forma exitosa!',
-                });
-            }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'Datos Invalidos!',
-                });
-            }
-
-            ocultarCargandoCrear();
-        });
     }
+    else if (val3 != "" || val3 != null || val3 != undefined) {
+        if (expr.test(val3))
+        {
+            $("#Crear #validatione3").css("display", "none");
+            mostrarCargandoCrear();
 
+
+            //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+            var data = $("#frmCreateIngresoIndividual").serializeArray();
+
+            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+            $.ajax({
+                url: "/IngresosIndividuales/Create",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+
+                //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+                if (data != "error") {
+
+                    cargarGridDeducciones();
+
+                    $("#Crear #ini_Motivo").val('');
+                    $("#Crear #ini_Monto").val('');
+                    $("#Crear #ini_PagaSiempre").val('');
+                    //CERRAR EL MODAL DE AGREGAR
+                    $("#AgregarIngresosIndividuales").modal('hide');
+
+                    // Mensaje de exito cuando un registro se ha guardado bien
+                    iziToast.success({
+                        title: 'Exito',
+                        message: '¡El registro se agregó de forma exitosa!',
+                    });
+                }
+                else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se guardó el registro, contacte al administrador!',
+                    });
+                }
+
+                ocultarCargandoCrear();
+            });
+        }
+    }
+    else {
+        $("#Crear #validatione3").css("display", "");
+    }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateIngresoIndividual").submit(function (e) {
@@ -373,17 +375,42 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
 });
 
 $("#btnEditIngresoIndividual").click(function () {
-    $("#EditarIngresosIndividuales").modal('hide');
-    $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    var vale2 = $("#Editar #ini_Motivo").val();
+    var vale3 = $("#Editar #ini_Monto").val();
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    if (vale2 == "" || vale2 == null) {
+        $("#Editar #validatione1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: '¡Ingrese datos válidos!',
+        });
+    }
+    else if (vale3 != null || vale3 != "") {
+        if (expreg.test(vale3)) {
+            $("#EditarIngresosIndividuales").modal('hide');
+            $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+            $("html, body").css("overflow", "hidden");
+            $("html, body").css("overflow", "scroll");
+        }
+        else {
+            $("#Editar #validatione3").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
+    }
+    $("#EditarIngresosIndividuales").submit(function (e) {
+        return false;
+    });
 });
 
 $(document).on("click", "#btnRegresar", function () {
@@ -425,38 +452,38 @@ $("#btnEditIngresoIndividual2").click(function () {
         $("#Editar #validatione3").css("display", "");
     }
 
-    mostrarCargandoEditar();
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEditIngresoIndividual").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/IngresosIndividuales/Edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data != "error") {
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarIngresosIndividuales").modal('hide');
-            $("#EditarIngresosIndividualesConfirmacion").modal('hide');
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro se editó de forma exitosa!',
-            });
+        mostrarCargandoEditar();
+        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+        var data = $("#frmEditIngresoIndividual").serializeArray();
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/IngresosIndividuales/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data != "error") {
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#EditarIngresosIndividuales").modal('hide');
+                $("#EditarIngresosIndividualesConfirmacion").modal('hide');
+                // REFRESCAR UNICAMENTE LA TABLA
+                cargarGridDeducciones();
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
 
-        }
-        else {
-            $("#EditarIngresosIndividualesConfirmacion").modal('hide');
-            iziToast.error({
-                title: 'Error',
-                message: 'Datos Invalidos!',
-            });
-        }
+            }
+            else {
+                $("#EditarIngresosIndividualesConfirmacion").modal('hide');
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+            }
 
-        ocultarCargandoEditar();
-    });
+            ocultarCargandoEditar();
+        });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmEditIngresoIndividual").submit(function (e) {
@@ -527,7 +554,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -590,7 +617,7 @@ $("#btnInactivarRegistroIngresoIndividual").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -605,7 +632,7 @@ $("#btnInactivarRegistroIngresoIndividual").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se inhabilitó de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
         ocultarCargandoInhabilitar();

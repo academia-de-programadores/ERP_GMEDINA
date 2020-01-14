@@ -10,9 +10,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de Ingresos Individuales</h5>
+                    <h5>Listado de Ingresos Extras</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarIngresoIndividual">Registrar Ingreso Individual</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarIngresoIndividual">Registrar Ingreso Extra</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -92,7 +92,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Crear Ingreso Individual</h4>
+                <h4 class="modal-title">Crear Ingreso Extra</h4>
             </div>
 
             @Html.Partial("_CreateIngresosIndividuales", new ERP_GMEDINA.Models.tbIngresosIndividuales())
@@ -109,7 +109,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Editar Ingreso Individual</h4>
+                <h4 class="modal-title">Editar Ingreso Extra</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
@@ -147,7 +147,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalle de Ingreso Individual</h4>
+                <h4 class="modal-title">Detalle de Ingreso Extra</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsIngresosIndividuales", new ERP_GMEDINA.Models.tbIngresosIndividuales())

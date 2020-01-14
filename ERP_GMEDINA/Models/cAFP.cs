@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
 
     public class cAFP
     {
-        [Display(Name = "AFP")]
+        [Display(Name = "Número")]
         public int afp_Id { get; set; }
 
         [StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]

@@ -33,7 +33,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -115,7 +115,7 @@ $("#btnActivarRegistroAFP").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else{
@@ -123,7 +123,7 @@ $("#btnActivarRegistroAFP").click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -213,43 +213,58 @@ $(document).on("click", "#btnAgregarAFP", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var val1 = $("#Crear #tde_IdTipoDedu").val();
-    var val2 = $("#Crear #afp_Descripcion").val();
-    var val3 = $("#Crear #afp_AporteMinimoLps").val();
-    var val4 = $("#Crear #afp_InteresAporte").val();
-    var val5 = $("#Crear #afp_InteresAnual").val();
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+    var val1 = $("#Crear #afp_Descripcion").val();
+    var val2 = $("#Crear #afp_AporteMinimoLps").val();
+    var val3 = $("#Crear #afp_InteresAporte").val();
+    var val4 = $("#Crear #afp_InteresAnual").val();
+    var val5 = $("#Crear #tde_IdTipoDedu").val();
 
-        if (val2 == "") {
-            $("#Crear #validation1").css("display", "");
+    if (vale1 == "" || vale1 == null) {
+        $("#Editar #validatione1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: '¡Ingrese datos válidos!',
+        });
+    }
+    else if (vale2 != "" || vale2 != null || vale2 != undefined) {
+        if (expreg.test(vale2)) {
+            if (vale3 != "" || vale3 != null || vale3 != undefined) {
+                if (expreg.test(vale3)) {
+                    if (vale4 != "" || vale4 != null || vale4 != undefined) {
+                        if (expreg.test(vale4)) {
+                            $("#EditarAFP").modal('hide');
+                            $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+                            $("html, body").css("overflow", "hidden");
+                            $("html, body").css("overflow", "scroll");
+                        }
+                        else {
+                            $("#Editar #validatione4").css("display", "");
+                            iziToast.error({
+                                title: 'Error',
+                                message: '¡Ingrese datos válidos!',
+                            });
+                        }
+                    }
+                }
+                else {
+                    $("#Editar #validatione3").css("display", "");
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡Ingrese datos válidos!',
+                    });
+                }
+            }
         }
         else {
-            $("#Crear #validation1").css("display", "none");
+            $("#Editar #validatione2").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
         }
+    }
 
-        if (val3 == "" || val3 == null || val3 == undefined) {
-            $("#Crear #validation2").css("display", "");
-        }
-        else {
-            $("#Crear #validation2").css("display", "none");
-        }
-
-        if (val4 == "" || val4 == null || val4 == undefined) {
-            $("#Crear #validation3").css("display", "");
-        }
-        else {
-            $("#Crear #validation3").css("display", "none");
-        }
-        if (val5 == "" || val5 == null || val5 == undefined) {
-            $("#Crear #validation4").css("display", "");
-        }
-        else {
-            $("#Crear #validation4").css("display", "none");
-        }
-        if (val1 == "" || val1 == 0 || val1 == "0") {
-            $("#Crear #validation5").css("display", "");
-        }
-        else {
-            $("#Crear #validation5").css("display", "none");
 
             mostrarCargandoCrear();
 
@@ -281,19 +296,19 @@ $('#btnCreateRegistroAFP').click(function () {
                     // Mensaje de exito cuando un registro se ha guardado bien
                     iziToast.success({
                         title: 'Exito',
-                        message: 'El registro se agregó de forma exitosa!',
+                        message: '¡El registro se agregó de forma exitosa!',
                     });
                 }
                 else {
                     iziToast.error({
                         title: 'Error',
-                        message: 'Datos Invalidos!',
+                        message: '¡No se guardó el registro, contacte al administrador!',
                     });
                 }
 
                 ocultarCargandoCrear();
             });
-        }
+        
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateAFP").submit(function (e) {
@@ -387,21 +402,68 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
 });
 
-$("#EditarAFP").on('hidden.bs.modal', function () {
-
-});
-
 $("#btnEditAFP").click(function () {
-    $("#EditarAFP").modal('hide');
-    $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    var vale1 = $("#Editar #afp_Descripcion").val();
+    var vale2 = $("#Editar #afp_AporteMinimoLps").val();
+    var vale3 = $("#Editar #afp_InteresAporte").val();
+    var vale4 = $("#Editar #afp_InteresAnual").val();
+
+    if (vale1 == "" || vale1 == null) {
+        $("#Editar #validatione1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: '¡Ingrese datos válidos!',
+        });
+    }
+    else if (vale2 != "" || vale2 != null || vale2 != undefined) {
+        if (expreg.test(vale2)) {
+            if (vale3 != "" || vale3 != null || vale3 != undefined) {
+                if (expreg.test(vale3)) {
+                    if (vale4 != "" || vale4 != null || vale4 != undefined) {
+                        if (expreg.test(vale4)) {
+                            $("#EditarAFP").modal('hide');
+                            $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+                            $("html, body").css("overflow", "hidden");
+                            $("html, body").css("overflow", "scroll");
+                        }
+                        else {
+                            $("#Editar #validatione4").css("display", "");
+                            iziToast.error({
+                                title: 'Error',
+                                message: '¡Ingrese datos válidos!',
+                            });
+                        }
+                    }
+                }
+                else {
+                    $("#Editar #validatione3").css("display", "");
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡Ingrese datos válidos!',
+                    });
+                }
+            }
+        }
+        else {
+            $("#Editar #validatione2").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
+    }
+
+    $("#EditarAFP").submit(function (e) {
+        return false;
+    });
 });
 
 $(document).on("click", "#btnRegresar", function () {
@@ -474,14 +536,14 @@ $("#btnEditAFPConfirmar").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se editó de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
 
         }
         else {
             iziToast.error({
                 title: 'Error',
-                message: 'Datos Invalidos!',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
         }
         
@@ -555,7 +617,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -568,7 +630,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
 $(document).on("click", "#btnBack", function () {
     $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");();
+    $("html, body").css("overflow", "scroll");
     $("#InactivarAFP").modal('hide');
 });
 
@@ -618,7 +680,7 @@ $("#btnInactivarRegistroAFP").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -633,7 +695,7 @@ $("#btnInactivarRegistroAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se inhabilitó de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
         ocultarCargandoInhabilitar();

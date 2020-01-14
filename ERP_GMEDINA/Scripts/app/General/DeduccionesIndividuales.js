@@ -40,7 +40,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -122,7 +122,7 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
@@ -130,7 +130,7 @@ $("#btnActivarRegistroDeduccionIndividual").click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -223,82 +223,94 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     var val3 = $("#Crear #dei_MontoInicial").val();
     var val4 = $("#Crear #dei_MontoRestante").val();
     var val5 = $("#Crear #dei_Cuota").val();
+    var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-    if (val2 == "") {
+    if (val2 == "" || val2 == null) {
         $("#Crear #validation1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: '¡Ingrese datos válidos!',
+        });
     }
-    else {
-        $("#Crear #validation1").css("display", "none");
-    }
-
-    if (val3 == "" || val3 == null || val3 == undefined) {
-        $("#Crear #validation3").css("display", "");
-    }
-    else {
-        $("#Crear #validation3").css("display", "none");
-    }
-
-    if (val4 == "" || val4 == null || val4 == undefined) {
-        $("#Crear #validation4").css("display", "");
-    }
-    else {
-        $("#Crear #validation4").css("display", "none");
-    }
-    if (val5 == "" || val5 == null || val5 == undefined) {
-        $("#Crear #validation5").css("display", "");
-    }
-    else {
-        $("#Crear #validation5").css("display", "none");
-    }
-
-    if (val1 == "" || val1 == 0 || val1 == "0") {
+    else if (val1 == "" || val1 == 0 || val1 == "0") {
         $("#Crear #validation2").css("display", "");
     }
-    else {
+    else if (val1 != "" || val1 != 0 || val1 != "0") {
         $("#Crear #validation2").css("display", "none");
+        if (val3 != "" || val3 != null || val3 != undefined) {
+            if (expr.test(val3)) {
+                if (val4 != "" || val4 != null || val4 != undefined) {
+                    if (expr.test(val4)) {
+                        if (val5 != "" || val5 != null || val5 != undefined) {
+                            if (expr.test(val5)) {
 
-        mostrarCargandoCrear();
+                                mostrarCargandoCrear();
+                                //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+                                var data = $("#frmCreateDeduccionIndividual").serializeArray();
 
+                                //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+                                $.ajax({
+                                    url: "/DeduccionesIndividuales/Create",
+                                    method: "POST",
+                                    data: data
+                                }).done(function (data) {
 
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-        var data = $("#frmCreateDeduccionIndividual").serializeArray();
+                                    //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+                                    if (data != "error") {
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/DeduccionesIndividuales/Create",
-            method: "POST",
-            data: data
-        }).done(function (data) {
+                                        cargarGridDeducciones();
 
-            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data != "error") {
+                                        $("#Crear #dei_Motivo").val('');
+                                        $("#Crear #dei_MontoInicial").val('');
+                                        $("#Crear #dei_MontoRestante").val('');
+                                        $("#Crear #dei_Cuota").val('');
+                                        $("#Crear #dei_PagaSiempre").val('');
 
-                cargarGridDeducciones();
+                                        //CERRAR EL MODAL DE AGREGAR
+                                        $("#AgregarDeduccionesIndividuales").modal('hide');
 
-                $("#Crear #dei_Motivo").val('');
-                $("#Crear #dei_MontoInicial").val('');
-                $("#Crear #dei_MontoRestante").val('');
-                $("#Crear #dei_Cuota").val('');
-                $("#Crear #dei_PagaSiempre").val('');
+                                        // Mensaje de exito cuando un registro se ha guardado bien
+                                        iziToast.success({
+                                            title: 'Exito',
+                                            message: '¡El registro se agregó de forma exitosa!',
+                                        });
+                                    }
+                                    else {
+                                        iziToast.error({
+                                            title: 'Error',
+                                            message: '¡No se guardó el registro, contacte al administrador!',
+                                        });
+                                    }
 
-                //CERRAR EL MODAL DE AGREGAR
-                $("#AgregarDeduccionesIndividuales").modal('hide');
-
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro se agregó de forma exitosa!',
-                });
+                                    ocultarCargandoCrear();
+                                });
+                            }
+                        }
+                        else {
+                            $("#Editar #validation5").css("display", "");
+                            iziToast.error({
+                                title: 'Error',
+                                message: '¡Ingrese datos válidos!',
+                            });
+                        }
+                    }
+                }
+                else {
+                    $("#Crear #validation4").css("display", "");
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡Ingrese datos válidos!',
+                    });
+                }
             }
-            else {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'Datos Invalidos!',
-                });
-            }
-
-            ocultarCargandoCrear();
-        });
+        }
+        else {
+            $("#Crear #validation3").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
     }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -394,27 +406,75 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
                 $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
-                $("#validatione1").css("display", "none");
-                $("#validatione2").css("display", "none");
-                $("#validatione3").css("display", "none");
-                $("#validatione4").css("display", "none");
-                $("#validatione5").css("display", "none");
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
 });
 
 $("#btnEditDeduccionIndividual").click(function () {
-    $("#EditarDeduccionesIndividuales").modal('hide');
-    $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    var vale2 = $("#Editar #dei_Motivo").val();
+    var vale3 = $("#Editar #dei_MontoInicial").val();
+    var vale4 = $("#Editar #dei_MontoRestante").val();
+    var vale5 = $("#Editar #dei_Cuota").val();
+
+
+    if (vale2 == "" || vale2 == null) {
+        $("#Editar #validatione1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: '¡Ingrese datos válidos!',
+        });
+    }
+    else if (vale3 != "" || vale3 != null || vale3 != undefined) {
+        debugger;
+        if (expreg.test(vale3)) {
+            if (vale4 != "" || vale4 != null || vale4 != undefined) {
+                if (expreg.test(vale4)) {
+                    if (vale5 != "" || vale5 != null || vale5 != undefined) {
+                        if (expreg.test(vale5)) {
+                            $("#EditarDeduccionesIndividuales").modal('hide');
+                            $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+                            $("html, body").css("overflow", "hidden");
+                            $("html, body").css("overflow", "scroll");
+                        }
+                        else {
+                            $("#Editar #validatione5").css("display", "");
+                            iziToast.error({
+                                title: 'Error',
+                                message: '¡Ingrese datos válidos!',
+                            });
+                        }
+                    }
+                }
+                else{
+                    $("#Editar #validatione4").css("display", "");
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡Ingrese datos válidos!',
+                    });
+                }
+            }
+        }
+        else {
+            $("#Editar #validatione3").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
+    }
+
+    $("#EditarDeduccionesIndividuales").submit(function (e) {
+        return false;
+    });
 });
 
 
@@ -491,7 +551,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se editó de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
 
         }
@@ -499,7 +559,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
             $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             iziToast.error({
                 title: 'Error',
-                message: 'Datos Invalidos!',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
         }
 
@@ -577,7 +637,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -639,7 +699,7 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function ()
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitado el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -651,7 +711,7 @@ $("#btnInactivarRegistroDeduccionIndividual").click(function ()
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
