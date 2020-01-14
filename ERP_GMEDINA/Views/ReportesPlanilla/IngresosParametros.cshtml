@@ -8,78 +8,90 @@
 
 @using (Html.BeginForm("IngresosParametros", "ReportesPlanilla", FormMethod.Post, new { id = "frmReportIngresosPreview" }))
 {
-	<div class="col-lg-12">
-		<div class="ibox">
-			<div class="ibox-title">
-				<h5>Reportes de ingresos</h5>
-			</div>
-			<div class="ibox-content">
-				<div class="form-horizontal">
-					<div class="form-group">
-						<div class="col-md-6">
-							<label class="font-normal">Ingreso</label>
 
-							@Html.DropDownList("cin_IdIngreso", (IEnumerable<SelectListItem>)ViewBag.Ingresos, "Seleccione una opción", new { @class = "form-control" })
-
-							@Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
-						</div>
-
-						<div class="col-md-6">
-							<label class="font-normal">Planilla</label>
-
-							@Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
-
-							@Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
-						</div>
-						<br />
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="float-e-margins">
+				<div class="ibox-title">
+					<h5>Reportes de ingresos</h5>
+					<div class="ibox-tools">
 					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<div class="col-md-6">
+								<label class="font-normal">Ingreso</label>
 
-					<div class="form-group">
-						<div class="col-md-6">
-							<label class="font-normal">Fecha Inicio</label>
-							<div class="input-group date">
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
+								@Html.DropDownList("cin_IdIngreso", (IEnumerable<SelectListItem>)ViewBag.Ingresos, "Seleccione una opción", new { @class = "form-control" })
+
+								@Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
 							</div>
-							@Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
+
+							<div class="col-md-6">
+								<label class="font-normal">Planilla</label>
+
+								@Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
+
+								@Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
+							</div>
+							<br />
 						</div>
 
-						<div class="col-md-6">
-							<label class="font-normal">Fecha Fin</label>
-							<div class="input-group date">
-								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin" } })
+						<div class="form-group">
+							<div class="col-md-6">
+								<label class="font-normal">Fecha Inicio</label>
+								<div class="input-group date">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
+								</div>
+								@Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
 							</div>
-							@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
-						</div>
 
+							<div class="col-md-6">
+								<label class="font-normal">Fecha Fin</label>
+								<div class="input-group date">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin" } })
+								</div>
+								@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
+							</div>
+
+						</div>
+						<button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarIngresos">Previsualizar</button>
 					</div>
-					<button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarIngresos">Previsualizar</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 }
+
+<br />
 
 @{
 	string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
 }
-<div id="divPreview" class="wrapper wrapper-content  animated" style="display:@visibilidadPreview;">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h4>Reporte de @ViewBag.Titulo</h4>
+<div class="row" style="display:@visibilidadPreview;">
+	<div class="col-lg-12">
+		<div class="float-e-margins">
+			<div class="ibox-title">
+				<h5>Previsualización de reporte</h5>
+				<div class="ibox-tools">
 				</div>
-				<div class="ibox-content">
-					@{
-						if (ViewBag.ReportViewer != null)
-						{
-							@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
-						}
+			</div>
+			<div class="ibox-content">
+				@{
+					if (ViewBag.ReportViewer != null)
+					{
+						@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
 					}
-				</div>
+				}
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<br />
+<br />
 
 

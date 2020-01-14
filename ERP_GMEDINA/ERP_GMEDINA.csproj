@@ -1926,7 +1926,9 @@
     <Content Include="Views\FormaPago\_Details.cshtml" />
     <Content Include="Views\FormaPago\_Edit.cshtml" />
     <Content Include="Views\FormaPago\Index.cshtml" />
-    <Folder Include="Views\Periodos\" />
+    <Content Include="Views\ReportesPlanilla\DeduccionesParametros.cshtml" />
+    <Content Include="Views\ReportesPlanilla\IngresosParametros.cshtml" />
+    <Content Include="Views\ReportesPlanilla\ReportesVariosParametros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1960,6 +1962,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
