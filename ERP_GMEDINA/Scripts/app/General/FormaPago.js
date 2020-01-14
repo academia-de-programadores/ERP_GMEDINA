@@ -83,8 +83,6 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
 
 //FUNCION: CREAR UN NUEVO REGISTRO
 $('#btnCrearFormaPago').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    $("#CrearFormaPago #Validation_descripcion").css("display", "block");
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
@@ -113,6 +111,10 @@ $('#btnCrearFormaPago').click(function () {
                 });
             }
         });
+    }
+    else {
+        // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+        $("#CrearFormaPago #Validation_descripcion").css("display", "block");
     }
 });
 
@@ -153,9 +155,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 });
 
 $("#btnUpdateFormaPago").click(function () {
-    debugger;
     var Descripcion = $("#Editar #fpa_Descripcion").val();
-    debugger;
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
         $("#ConfirmarEdicion").modal();
     }
