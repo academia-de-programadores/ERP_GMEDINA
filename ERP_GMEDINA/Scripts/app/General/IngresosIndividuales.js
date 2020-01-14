@@ -256,12 +256,15 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
             console.table(data);
 
             //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-            $.ajax({
-                url: "/IngresosIndividuales/Create",
-                method: "POST",
-                data: data
-            }).done(function (data) {
-
+            _ajax({
+                ini_Motivo: ini_Motivo,
+                emp_Id: emp_Id,
+                ini_Monto: ini_Monto,
+                ini_PagaSiempre: ini_PagaSiempre
+            },
+            '/IngresosIndividuales/Create',
+            'POST',
+            (data) => {
                 //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
                 if (data != "error") {
 
@@ -287,7 +290,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 }
 
                 ocultarCargandoCrear();
-            });
+            })
         }
     }
     else {
