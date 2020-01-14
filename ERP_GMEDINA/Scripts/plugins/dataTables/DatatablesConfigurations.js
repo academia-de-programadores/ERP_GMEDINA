@@ -1,5 +1,5 @@
 ﻿var tabla = null;
-var textoBoton = 'Mostrar todo';
+var textoBoton = 'Mostrar activos';
 var botones = [];
 var htmlSpiner =
     `<div class="sk-spinner sk-spinner-wave">
@@ -104,9 +104,11 @@ $(document).ready(function () {
                 text: textoBoton,
                 action: function (btn) {
                     if (textoBoton == 'Mostrar todo') {
+                        llenarTabla(-1);
                         textoBoton = 'Mostrar activos';
                         btn.currentTarget.innerText = textoBoton;
                     } else {
+                        llenarTabla(0);
                         textoBoton = 'Mostrar todo';
                         btn.currentTarget.innerText = textoBoton;
                     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbAreas>
+﻿@model ERP_GMEDINA.Models.tbAreas
 
 @{
     ViewBag.Title = "Area";
@@ -42,4 +42,7 @@
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/IndexArea")
+    @if (Model.area_Estado){
+        @Scripts.Render("~/Scripts/app/general/Admin")
+    }
 }

@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbAreas = new List<tbAreas> { };
+            tbAreas tbAreas = new tbAreas {area_Estado=true };
             return View(tbAreas);
         }
         public ActionResult llenarTabla()
@@ -29,7 +29,6 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var tbAreas = db.tbAreas
-                        .Where(x => x.area_Estado == true)
                         .Select(
                         t => new
                         {
@@ -381,6 +380,31 @@ namespace ERP_GMEDINA.Controllers
                 {
                     var list = db.UDP_RRHH_tbAreas_Delete(cAreas.area_Id, cAreas.area_Razoninactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbAreas_Delete_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: Areas/Delete/5
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbAreas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbAreas_Restore_Result item in list)
                     {
                         result = item.MensajeError;
                     }
