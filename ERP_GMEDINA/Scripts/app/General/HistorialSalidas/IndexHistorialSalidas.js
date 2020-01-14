@@ -30,7 +30,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText =          FechaFormato(obj.hsal_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText= obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -96,7 +96,7 @@ $("#InActivar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 llenarTabla();
-                LimpiarControles(["hsal_Observacion"]);
+                LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
             } else {
                 MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");

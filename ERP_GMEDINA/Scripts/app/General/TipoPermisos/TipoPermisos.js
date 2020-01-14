@@ -1,4 +1,8 @@
 ﻿var id = 0;
+$(document).ready(function () {
+    llenarTabla();
+    $('.clockpicker').clockpicker();
+});
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -26,7 +30,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#tper_FechaModifica")["0"].innerText = FechaFormato(obj.tper_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
+                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -36,12 +40,12 @@ function llenarTabla() {
         '/TipoPermisos/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear().draw();
+            tabla.clear();
+            tabla.draw();
             if (validarDT(Lista)) {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.tper_Descripcion);
                 tabla.row.add({
                     ID: value.tper_Id,
                     Permiso: value.tper_Descripcion
@@ -87,7 +91,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["tper_Descripcion", "tper_RazonInactivo"]);
+                    LimpiarControles(["tper_Descripcion"]);
                     MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");

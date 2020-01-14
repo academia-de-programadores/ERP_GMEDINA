@@ -161,6 +161,8 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(string tiho_RazonInactivo)
         {
             string msj = "";
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
             tbTipoHoras tbTipoHoras = new tbTipoHoras();
             //tbTipoHoras.tiho_Id = id;
             tbTipoHoras.tiho_RazonInactivo = tiho_RazonInactivo;
@@ -171,7 +173,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoHoras_Delete(id, tbTipoHoras.tiho_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoHoras_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoHoras_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
