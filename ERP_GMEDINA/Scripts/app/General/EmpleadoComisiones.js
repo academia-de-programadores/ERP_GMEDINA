@@ -175,6 +175,15 @@ $('#btnUpdateComisionesConfirmar').click(function () {
          });
          $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
      }
+     else if (PorcentajeComision == "" && TotalVenta == "" && PorcentajeComision == "0.00" && TotalVenta == "0.00" && PorcentajeComision == null && TotalVenta == null && PorcentajeComision == undefined && TotalVenta == undefined) {
+         $("#Editar #Validation_descipcion1").css("display", "");
+         $("#Editar #Validation_descipcion2").css("display", "");
+         iziToast.error({
+             title: 'Error',
+             message: 'Ingrese datos validos',
+         });
+         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+     }
     else {
         $("#Editar #Validation_descipcion1").css("display", "");
         $("#Editar #Validation_descipcion2").css("display", "");
