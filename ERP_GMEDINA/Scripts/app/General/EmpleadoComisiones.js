@@ -31,7 +31,7 @@ function cargarGridComisiones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -156,19 +156,31 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 });
 
 $('#btnUpdateComisionesConfirmar').click(function () {
-    var PorcentajeComision = $("#Editar #PorcentajeComision").val();
-    var TotalVenta = $("#Editar #TotalVenta").val();
-
-    if (PorcentajeComision != "" && TotalVenta != "" && PorcentajeComision != "0" && TotalVenta != "0" && PorcentajeComision != null && TotalVenta != null && PorcentajeComision != undefined && TotalVenta != undefined) {
-        $("#Editar #Validation_descipcion1").css("display", "none");
-        $("#Editar #Validation_descipcion2").css("display", "none");
+    var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
+    var TotalVenta = $("#Editar #cc_TotalVenta").val();
+    debugger;
+     if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
+        $("#Editar #Validation_descipcion1").css("display", "");
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos validos',
+        });
+        $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+     }
+     else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
+         $("#Editar #Validation_descipcion2").css("display", "");
+         iziToast.error({
+             title: 'Error',
+             message: 'Ingrese datos validos',
+         });
+         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+     }
+    else {
+        $("#Editar #Validation_descipcion1").css("display", "");
+        $("#Editar #Validation_descipcion2").css("display", "");
         $("#EditarEmpleadoComisionesConfirmacion").modal();
     }
-    else {
-            $("#Editar #Validation_descipcion1").css("display", "");
-            $("#Editar #Validation_descipcion2").css("display", "");
-            $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
-        }   
+   
 });
 
 
@@ -187,7 +199,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'Datos Incorrectos',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
             $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
         }
@@ -200,7 +212,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
             
         }
@@ -300,7 +312,7 @@ $('#btnCreateRegistroComisiones').click(function () {
                 $("#AgregarEmpleadoComisiones").modal('show');
                 iziToast.error({
                     title: 'Error',
-                    message: 'Datos Incorrectos',
+                    message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
             else {
@@ -444,7 +456,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -473,7 +485,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitado el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -486,7 +498,7 @@ $("#btnInactivarRegistroComisiones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -515,7 +527,7 @@ $("#btnActivarRegistroComisionesEjecutar").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -526,7 +538,7 @@ $("#btnActivarRegistroComisionesEjecutar").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
