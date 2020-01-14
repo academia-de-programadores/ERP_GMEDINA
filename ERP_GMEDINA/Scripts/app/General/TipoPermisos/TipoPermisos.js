@@ -42,11 +42,10 @@ function llenarTabla() {
             }
             $.each(Lista, function (index, value) {
                 console.log(value.tper_Descripcion);
-                tabla.row.add([value.tper_Descripcion,
-                    "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tper_Id + ")' >Detalles</a>" +
-                        "<a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tper_Id + ")'>Editar</a>" +
-                    "</div>"]).draw();
+                tabla.row.add({
+                    ID: value.tper_Id,
+                    Permiso: value.tper_Descripcion
+                }).draw();
             });
         });
 }
@@ -111,7 +110,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["tper_Descripcion", "tper_RazonInactivo"]);
+                    LimpiarControles(["tper_Descripcion"]);
                     MsgWarning("¡Exito!", "Se ha inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");

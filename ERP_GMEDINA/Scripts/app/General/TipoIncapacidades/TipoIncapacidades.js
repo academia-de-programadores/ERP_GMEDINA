@@ -124,7 +124,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["ticn_Descripcion", "ticn_RazonInactivo"]);
+                    LimpiarControles(["ticn_Descripcion"]);
                     MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");

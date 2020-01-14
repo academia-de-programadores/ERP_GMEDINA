@@ -48,6 +48,17 @@
                             <li class="@Html.IsSelected(controller:"Sueldos")">
                                 <a href="@Url.Action("Index", "Sueldos")">Listado de Sueldos</a>
                             </li>
+                            @*VACACIONES*@
+
+
+                            <li class="@Html.IsSelected(controller:"HistorialVacaciones")">
+                                <a href="@Url.Action("Index", "HistorialVacaciones")">Historial de Vacaciones</a>
+                            </li>
+
+
+                            @*VACACIONES*@
+
+
                             <li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas")">
                                 <a href="@Url.Action("Index", "HistorialHorasTrabajadas")">Historial de Horas Trabajadas</a>
                             </li>
@@ -70,20 +81,7 @@
             <li id="ACCIONES" class="@Html.IsSelected(controller: "Acciones de Personal")">
                 <a href="@Url.Action("General_1", "Acciones de Personal")"><i class="fa fa-th-fa fa-users"></i> <span class="nav-label" data-i18n="nav.dashboard">Acciones de Personal</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in") ACCIONES">
-                    @*VACACIONES*@
-                    <li id="Vacaciones" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Vacaciones <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Vacaciones">
-
-                            <li class="@Html.IsSelected(controller:"HistorialVacaciones")">
-                                <a href="@Url.Action("Index", "HistorialVacaciones")">Historial de Vacaciones</a>
-                            </li>
-
-
-                        </ul>
-                    </li>
-                    @*VACACIONES*@
-
+            
 
                     @*AMONESTACIONES*@
                     <li id="Amonestaciones" class="@Html.IsSelected(action: "Dashboard_5")">
