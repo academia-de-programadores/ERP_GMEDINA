@@ -34,7 +34,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetallesR").find("#tiho_FechaModifica")["0"].innerText = FechaFormato(obj.tiho_FechaModifica);
                 $("#ModalDetallesR").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesR").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });

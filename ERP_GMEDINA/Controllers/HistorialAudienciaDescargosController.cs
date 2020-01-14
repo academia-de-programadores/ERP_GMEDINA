@@ -223,12 +223,15 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
             string msj = "";
-            if (tbHistorialAudienciaDescargo.aude_Id != 0 && tbHistorialAudienciaDescargo.aude_RazonInactivo != "")
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbHistorialAudienciaDescargo.aude_Id != 0 )
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, tbHistorialAudienciaDescargo.aude_RazonInactivo, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

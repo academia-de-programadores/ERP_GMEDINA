@@ -150,12 +150,13 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbHistorialAmonestaciones tbHistorialAmonestaciones)
         {
             string msj = "";
-            if (tbHistorialAmonestaciones.hamo_Id != 0 && tbHistorialAmonestaciones.hamo_RazonInactivo != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+            if (tbHistorialAmonestaciones.hamo_Id != 0 )
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, tbHistorialAmonestaciones.hamo_RazonInactivo, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialAmonestaciones_Delete(tbHistorialAmonestaciones.hamo_Id, RazonInactivo, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAmonestaciones_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

@@ -145,13 +145,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbCompetencias tbCompetencias)
         {
             string msj = "...";
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
             if (tbCompetencias.comp_Id != 0 && tbCompetencias.comp_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbCompetencias_Delete(id, tbCompetencias.comp_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbCompetencias_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbCompetencias_Delete_Result item in list)
                     {
                         msj = item.MensajeError = " ";

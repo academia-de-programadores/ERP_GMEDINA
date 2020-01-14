@@ -31,7 +31,7 @@ function tablaDetalles(id) {
                 $("#ModalDetalles").find("#habi_FechaModifica")["0"].innerText = FechaFormato(obj.habi_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -98,7 +98,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    LimpiarControles(["habi_Descripcion"]);
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");

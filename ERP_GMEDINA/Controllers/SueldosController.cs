@@ -219,7 +219,10 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbSueldos tbSueldos)
         {
             string msj = "";
-            if (tbSueldos.sue_Id != 0 && tbSueldos.sue_RazonInactivo != "")
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbSueldos.sue_Id != 0 )
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];

@@ -153,13 +153,16 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbRazonSalidas tbRazonSalidas)
         {
             string msj = "";
+
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
             if (tbRazonSalidas.rsal_Id != 0 && tbRazonSalidas.rsal_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRazonSalidas_Delete(id, tbRazonSalidas.rsal_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbRazonSalidas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbRazonSalidas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

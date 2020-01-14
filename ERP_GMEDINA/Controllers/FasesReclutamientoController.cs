@@ -151,13 +151,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbFasesReclutamiento tbFasesReclutamiento)
         {
             string msj = "";
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
             if (tbFasesReclutamiento.fare_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, tbFasesReclutamiento.fare_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbfasesReclutamiento_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

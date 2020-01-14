@@ -277,6 +277,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(string hper_RazonInactivo)
         {
             string msj = "";
+
             db = new ERP_GMEDINAEntities();
             tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos();
             //tbTipoHoras.tiho_Id = id;

@@ -363,13 +363,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbJornadas tbJornadas)
         {
             string msj = "...";
-            if (tbJornadas.jor_Id != 0 && tbJornadas.jor_RazonInactivo != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+            if (tbJornadas.jor_Id != 0 )
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbJornadas_Delete(id, tbJornadas.jor_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbJornadas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbJornadas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -392,13 +393,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult DeleteHorario(tbHorarios tbHorarios)
         {
             string msj = "...";
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
             if (tbHorarios.hor_Id != 0 && tbHorarios.hor_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHorarios_Delete(id, tbHorarios.hor_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHorarios_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHorarios_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

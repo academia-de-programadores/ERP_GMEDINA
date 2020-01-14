@@ -120,7 +120,7 @@ function Llamarmodaldetalle(ID) {
                 //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
                 //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
-                $('#ModalDetalles').modal('show');
+                //$('#ModalDetalles').modal('show');
 
             }
         });

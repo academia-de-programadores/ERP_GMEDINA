@@ -7,23 +7,19 @@
                 <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
-                {
-                    <div class="form-horizontal">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-							@Html.LabelFor(model => model.resp_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.resp_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.resp_RazonInactivo, "", new { @class = "text-danger", @id = "errorresp_RazonInactivo" })
-                            </div>
-                        </div>
-					</div>
-					}
+                <div class="blockquote">
+
+                    <p>
+
+                        Esta accion puede tener repercuciones en otras secciones del sistema
+                        (Si sucede un error,consulte al administrador)
+
+                    </p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary pull-left" id="InActivar">Guardar</button>
+                <button type="button" class="btn btn-primary pull-left" id="InActivar">Inhabilitar</button>
             </div>
         </div>
     </div>

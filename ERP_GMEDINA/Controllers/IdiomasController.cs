@@ -163,14 +163,16 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbIdiomas tbIdiomas)
         {
             string msj = "...";
-            if(tbIdiomas.idi_Id != 0 && tbIdiomas.idi_RazonInactivo != "")
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+            if (tbIdiomas.idi_Id != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
                     var list = db.UDP_RRHH_tbIdiomas_Delete(id,
-                                                            tbIdiomas.idi_RazonInactivo,
+                                                            RazonInactivo,
                                                             Usuario.usu_Id,
                                                             DateTime.Now);
                     foreach(UDP_RRHH_tbIdiomas_Delete_Result item in list)

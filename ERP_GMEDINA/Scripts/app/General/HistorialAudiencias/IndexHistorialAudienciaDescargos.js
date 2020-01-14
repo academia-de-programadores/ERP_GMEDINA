@@ -19,7 +19,7 @@
                 + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
                 + '<td>' + testigo + '</td>'
                
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
         '</table>'
 
@@ -165,7 +165,7 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();                 
                     llenarTabla();
-                    LimpiarControles(["aude_Id", "aude_RazonInactivo"]);
+                    LimpiarControles(["aude_Id"]);
                     MsgWarning("¡Exito!", "Se inactivo el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");

@@ -122,13 +122,15 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
-            if (tbNacionalidades.nac_Id != 0 && tbNacionalidades.nac_Descripcion != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbNacionalidades.nac_Id != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbNacionalidades_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";

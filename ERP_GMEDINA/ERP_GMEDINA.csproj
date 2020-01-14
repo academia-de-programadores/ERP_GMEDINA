@@ -1882,7 +1882,6 @@
     <Content Include="Views\TipoSalidas\_Edit.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Create.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Delete.cshtml" />
-    <Content Include="Views\HistorialAmonestaciones\Details.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Edit.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Index.cshtml" />
     <Content Include="Views\HistorialCargos\Index.cshtml" />
@@ -1892,21 +1891,15 @@
     <Content Include="Views\RequerimientosEspeciales\_Delete.cshtml" />
     <Content Include="Views\RequerimientosEspeciales\_Detalles.cshtml" />
     <Content Include="Views\RequerimientosEspeciales\_Edit.cshtml" />
-    <Content Include="Views\Jornadas\Create.cshtml" />
-    <Content Include="Views\Jornadas\Delete.cshtml" />
-    <Content Include="Views\Jornadas\Details.cshtml" />
-    <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
     <Content Include="Views\Areas\_DeleteDepartamento.cshtml" />
     <Content Include="Views\Areas\_EditDepartamento.cshtml" />
     <Content Include="Views\Personas\Create.cshtml" />
     <Content Include="Views\Personas\Delete.cshtml" />
-    <Content Include="Views\Personas\Details.cshtml" />
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\_Delete.cshtml" />
     <Content Include="Views\Personas\_Detalles.cshtml" />
-    <Content Include="Views\HistorialSalidas\Create.cshtml" />
     <Content Include="Views\HistorialSalidas\Delete.cshtml" />
     <Content Include="Views\HistorialSalidas\Details.cshtml" />
     <Content Include="Views\HistorialSalidas\Edit.cshtml" />
@@ -1926,10 +1919,6 @@
     <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Delete.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Detalles.cshtml" />
-    <Content Include="Views\Sueldos\Create.cshtml" />
-    <Content Include="Views\Sueldos\Delete.cshtml" />
-    <Content Include="Views\Sueldos\Details.cshtml" />
-    <Content Include="Views\Sueldos\Edit.cshtml" />
     <Content Include="Views\Sueldos\Index.cshtml" />
     <Content Include="Views\Sueldos\_Delete.cshtml" />
     <Content Include="Views\Sueldos\_Detalles.cshtml" />
@@ -1940,10 +1929,6 @@
     <Content Include="Views\TipoPermisos\_Delete.cshtml" />
     <Content Include="Views\TipoPermisos\_Detalles.cshtml" />
     <Content Include="Views\TipoPermisos\_Edit.cshtml" />
-    <Content Include="Views\HistorialPermisos\Create.cshtml" />
-    <Content Include="Views\HistorialPermisos\Delete.cshtml" />
-    <Content Include="Views\HistorialPermisos\Details.cshtml" />
-    <Content Include="Views\HistorialPermisos\Edit.cshtml" />
     <Content Include="Views\HistorialPermisos\Index.cshtml" />
     <Content Include="Views\HistorialPermisos\_AddEmpleado.cshtml" />
     <Content Include="Views\HistorialPermisos\_DetallesHistorialPermisos.cshtml" />
@@ -1970,10 +1955,6 @@
     <Content Include="Views\Requisiciones\Index.cshtml" />
     <Content Include="Views\Requisiciones\_Delete.cshtml" />
     <Content Include="Views\Requisiciones\_Detalles.cshtml" />
-    <Content Include="Views\HistorialAudienciaDescargos\Create.cshtml" />
-    <Content Include="Views\HistorialAudienciaDescargos\Delete.cshtml" />
-    <Content Include="Views\HistorialAudienciaDescargos\Details.cshtml" />
-    <Content Include="Views\HistorialAudienciaDescargos\Edit.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\Index.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Create.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
@@ -1992,6 +1973,9 @@
     <Content Include="Views\EquipoTrabajo\_Delete.cshtml" />
     <Content Include="Views\EquipoTrabajo\_Detalles.cshtml" />
     <Content Include="Views\EquipoTrabajo\_Edit.cshtml" />
+    <Content Include="Views\HistorialSalidas\Create.cshtml" />
+    <Content Include="Views\Sueldos\Create.cshtml" />
+    <Content Include="Views\HistorialCargos\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

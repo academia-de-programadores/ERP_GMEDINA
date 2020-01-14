@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hper_fechaFin { get; set; }
         [Display(Name = "Duración")]
         public int hper_Duracion { get; set; }
-        [Display(Name = "Observaciónes")]
+        [Display(Name = "Observacion")]
         public string hper_Observacion { get; set; }
         [Display(Name = "Justificado")]
         public Nullable<bool> hper_Justificado { get; set; }

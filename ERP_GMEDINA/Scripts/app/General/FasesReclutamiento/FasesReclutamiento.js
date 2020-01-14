@@ -94,7 +94,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["fare_Descripcion", "fare_RazonInactivo"]);
+                    LimpiarControles(["fare_Descripcion"]);
                     MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
