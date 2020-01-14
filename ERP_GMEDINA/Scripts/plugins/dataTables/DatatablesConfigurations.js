@@ -141,7 +141,8 @@ function validarDT(obj) {
         //$("#ibox1").find(".ibox-content").hide();
         //$("#ibox1").append('verifique su conexion a internet. (Sí el problema persiste llame al administrador)');
         var ventana = $('#IndexTable tbody td.dataTables_empty');
-        ventana[0].innerHTML = "verifique su conexion a internet. (Sí el problema persiste llame al administrador)";
+        ventana[0].innerHTML = "verifique su conexion a internet.(Sí el problema persiste contacte al administrador)";
+        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
         return true;
     } else {
         if (obj.Length==0) {
