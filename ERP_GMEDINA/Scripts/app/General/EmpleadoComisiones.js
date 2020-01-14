@@ -87,6 +87,11 @@ function cargarGridComisiones() {
 
 
 $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoComisiones", function () {
+    //OCULTAR DATAANNOTATIONS
+    $("#Editar #Validation_descipcion1e").css("display", "hidden");
+    $("#Editar #Validation_descipcion2e").css("display", "hidden");
+
+
     var ID = $(this).data('id');
     Idinactivar = ID;
     $.ajax({
@@ -159,20 +164,21 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();   
      if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
-        $("#Editar #Validation_descipcion1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos validos',
-        });
+         $("#Editar #Validation_descipcion1").css("display", "block");
+      
+         //MOSTRAR DATAANNOTATIONS
+         $("#Editar #Validation_descipcion1e").css("display", "block");
+         $("#Editar #Validation_descipcion2e").css("display", "block");
+         //MOSTRAR MODAL
         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
      }
      else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
-         $("#Editar #Validation_descipcion2").css("display", "");
-   
+         $("#Editar #Validation_descipcion1e").css("display", "block");
+         $("#Editar #Validation_descipcion2e").css("display", "block");
      }
      else if (PorcentajeComision == "" && TotalVenta == "" && PorcentajeComision == "0.00" && TotalVenta == "0.00" && PorcentajeComision == null && TotalVenta == null && PorcentajeComision == undefined && TotalVenta == undefined) {
-         $("#Editar #Validation_descipcion1").css("display", "");
-         $("#Editar #Validation_descipcion2").css("display", "");   
+         $("#Editar #Validation_descipcion1e").css("display", "block");
+         $("#Editar #Validation_descipcion2e").css("display", "block");
      }
     else {
        

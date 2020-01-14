@@ -17,7 +17,8 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
-                var tbAdelantoSueldo = db.tbAdelantoSueldo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).OrderBy(t => t.adsu_FechaCrea).OrderByDescending(t => t.adsu_FechaCrea);
+                var tbAdelantoSueldo = db.tbAdelantoSueldo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
+                    //.OrderBy(t => t.adsu_IdAdelantoSueldo).OrderByDescending(t => t.adsu_IdAdelantoSueldo);
                 //.Where(t => t.adsu_Activo == true);
                 return View(tbAdelantoSueldo.ToList());
             }
@@ -49,8 +50,8 @@ namespace ERP_GMEDINA.Controllers
                             adsu_Activo = c.adsu_Activo,
                             empleadoNombre = c.tbEmpleados.tbPersonas.per_Nombres + " " + c.tbEmpleados.tbPersonas.per_Apellidos
                         })
-                        .OrderBy(t => t.adsu_FechaCrea)
-                        .OrderByDescending(x => x.adsu_FechaCrea)
+                        //.OrderBy(t => t.adsu_IdAdelantoSueldo)
+                        //.OrderByDescending(x => x.adsu_IdAdelantoSueldo)
                         .ToList();
                         //.Where(p => p.adsu_Activo == true);
             //RETORNAR JSON AL LADO DEL CLIENTE
