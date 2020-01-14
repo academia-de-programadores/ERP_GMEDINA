@@ -159,7 +159,7 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroBonos').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-
+  
     var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
     var IdIngreso = $("#Crear #cin_IdIngreso").val();
     var Monto = $("#Crear #cb_Monto").val();
@@ -169,6 +169,7 @@ $('#btnCreateRegistroBonos').click(function () {
         IdIngreso != 0 &&
         Monto != "" && Monto != null && Monto != undefined && Monto > 0
         && decimales[1] != null && decimales[1] != undefined) {
+        
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoBonosCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -216,6 +217,9 @@ $('#btnCreateRegistroBonos').click(function () {
 });
 
 $("#btnCerrarCrearBono").click(function () {
+    $("#Validation_descipcion").hidden=true,
+    $("#Validation_descipcion").css("display", "none");
+   
     $("#Validation_descripcion3").hidden = true;
     $("#Validation_descripcion3").css("display", "none");
 });
@@ -303,7 +307,16 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         });
 });
 $("#btnUpdateBonos").click(function () {
-    $("#EditarEmpleadoBonosConfirmacion").modal();
+    var Monto = $("#Editar #cb_Monto").val();
+    if (Monto == "" || Monto == "0.00" || Monto == null || Monto == undefined)
+    {
+        $("#Editar #Validation_descipcion1e").css("display", "block");
+        $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+    }
+    else {
+        $("#EditarEmpleadoBonosConfirmacion").modal();
+    }
+
 });
 //FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos2").click(function () {
@@ -521,4 +534,20 @@ $("#btnActivarRegistroBono").click(function () {
         }
     });
     IDActivar = 0;
+});
+
+
+$('#btnCreateRegistroBonos').click(function () {
+    var Monto = $("#Crear #cb_Monto").val();
+    var decimales = Monto.split(".");
+
+
+    if (Monto == "" || decimales[1] != null || decimales[1] != undefined) {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else {
+        $("#Validation_descipcion").css("display", "none");
+    }
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+
 });

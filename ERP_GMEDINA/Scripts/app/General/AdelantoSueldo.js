@@ -368,9 +368,46 @@ $(cmbEmpleadoEdit).change(() => {
 
 //FUNCION: OCULTAR EL MODAL DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
 $("#btnUpdateAdelantos").click(function () {
-    ocultarCargandoEditar();
-    $("#EditarAdelantoSueldo").modal('hide');
-    $("#ConfirmarEdicion").modal();
+    //OBTENER EL ID DEL EMPLEADO 
+    var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
+
+    if (ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto'))) {
+        //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
+        $.ajax({
+            url: "/AdelantoSueldo/GetSueldoNetoProm",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: IdEmp })
+        }).done(function (data) {
+            if ($("#Editar #adsu_Monto").val() <= data) {
+                ocultarCargandoEditar();
+                $("#EditarAdelantoSueldo").modal('hide');
+                $("#ConfirmarEdicion").modal();
+            } else {
+                //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+                iziToast.error({
+                    title: 'Error',
+                    message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
+                });
+                $("#ConfirmarEdicion").modal('hide');
+                ocultarCargandoEditar();
+                //IGUALAR EL MONTO AL SUELDO PROMEDIO
+                $("#EditarAdelantoSueldo #adsu_Monto").val('');
+                //$("#Editar #adsu_Monto").val(data);
+                //document.getElementById("#adsu_Monto").placeholder = 'El sueldo promedio es ' + data;
+                $("#EditarAdelantoSueldo #adsu_Monto").placeholder = 'El sueldo promedio es ' + data;
+                document.getElementsByName("#adsu_MontoPlaceholder").placeholder = 'El sueldo promedio es ' + data;
+            }
+        }).fail(function (data) {
+            //ACCIONES EN CASO DE ERROR
+            $("#EditarAdelantoSueldo").modal('hide');
+            iziToast.error({
+                title: 'Error',
+                message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
+            });
+        });
+    }
 });
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
@@ -378,19 +415,19 @@ $("#btnConfirmarEditar").click(function () {
     mostrarCargandoEditar();
 
     //OBTENER EL ID DEL EMPLEADO 
-    var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
+    //var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
     //RECUPERAR EL MONTO MAXIMO PARA ADELANTO DE SUELDO
-    $.ajax({
-        url: "/AdelantoSueldo/GetSueldoNetoProm",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: IdEmp })
-    }).done(function (data) {
-        //ACCIONES EN CASO DE EXITO
-        //EJECUTAR LA VALIDACION PARA LA EDICIÓN
-        if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
-        if ($("#Editar #adsu_Monto").val() <= data) {
+    //$.ajax({
+    //    url: "/AdelantoSueldo/GetSueldoNetoProm",
+    //    method: "POST",
+    //    dataType: "json",
+    //    contentType: "application/json; charset=utf-8",
+    //    data: JSON.stringify({ id: IdEmp })
+    //}).done(function (data) {
+    //    //ACCIONES EN CASO DE EXITO
+    //    //EJECUTAR LA VALIDACION PARA LA EDICIÓN
+    //    if(ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto')))
+    //    if ($("#Editar #adsu_Monto").val() <= data) {
             var data = $('#frmAdelantosEdit').serializeArray();
             $.ajax({
                 url: "/AdelantoSueldo/Edit",
@@ -420,30 +457,21 @@ $("#btnConfirmarEditar").click(function () {
                     });
                 }
             });
-        }
-        else {
-            //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-            iziToast.error({
-                title: 'Error',
-                message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
-            });
-            $("#ConfirmarEdicion").modal('hide');
-            ocultarCargandoEditar();
-            //IGUALAR EL MONTO AL SUELDO PROMEDIO
-            $("#Editar #adsu_Monto").val('');
-            //$("#Editar #adsu_Monto").val(data);
-            document.getElementById("adsu_Monto").placeholder = 'El sueldo promedio es ' + data;
-        }
-
-    }).fail(function (data) {
-        //ACCIONES EN CASO DE ERROR
-        $("#EditarAdelantoSueldo").modal('hide');
-        iziToast.error({
-            title: 'Error',
-            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
-        });
-    });
-
+        //}
+        //else {
+        //    //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+        //    iziToast.error({
+        //        title: 'Error',
+        //        message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
+        //    });
+        //    $("#ConfirmarEdicion").modal('hide');
+        //    ocultarCargandoEditar();
+        //    //IGUALAR EL MONTO AL SUELDO PROMEDIO
+        //    $("#Editar #adsu_Monto").val('');
+        //    //$("#Editar #adsu_Monto").val(data);
+        //    document.getElementById("adsu_Monto").placeholder = 'El sueldo promedio es ' + data;
+        //}
+    //})
 });
 
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
@@ -477,6 +505,14 @@ function ValidarCamposEditar(colaborador, razon, monto) {
         monto.focus();
     } else {
         $('#adsu_MontoValidacion').hide();
+    }
+
+    if (monto != null && monto.val() != '' && monto.val() <= 0) {
+        pasoValidacion = false;
+        $('#adsu_MontoValidacion2').show();
+        monto.focus();
+    } else {
+        $('#adsu_MontoValidacion2').hide();
     }
 
     return pasoValidacion;

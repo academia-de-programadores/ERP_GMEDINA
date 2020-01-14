@@ -165,7 +165,7 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     var TotalVenta = $("#Editar #cc_TotalVenta").val();   
      if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
          $("#Editar #Validation_descipcion1").css("display", "block");
-      
+
          //MOSTRAR DATAANNOTATIONS
          $("#Editar #Validation_descipcion1e").css("display", "block");
          $("#Editar #Validation_descipcion2e").css("display", "block");
