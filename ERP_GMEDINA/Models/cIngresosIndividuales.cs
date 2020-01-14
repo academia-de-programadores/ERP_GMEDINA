@@ -17,17 +17,18 @@ namespace ERP_GMEDINA.Models
         public int ini_IdIngresosIndividuales { get; set; }
 
         [StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
-        [Required(ErrorMessage = "El campo Motivo es Requerido")]
+        [Required(ErrorMessage = "Campo Motivo Requerido")]
         [Display(Name = "Motivo")]
         public string ini_Motivo { get; set; }
 
-        [Required(ErrorMessage = "El campo Empleado es requerido")]
+        [Required(ErrorMessage = "Campo Empleado requerido")]
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
-        [Required(ErrorMessage = "El campo Monto es Requerido")]
+        [Required(ErrorMessage = "Campo Monto Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
+        [DataType(DataType.Currency)]
         [Display(Name = "Monto")]
         public decimal ini_Monto { get; set; }
 

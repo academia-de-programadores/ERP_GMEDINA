@@ -1931,10 +1931,6 @@
     <Content Include="Views\ReportesPlanilla\ReportesVariosParametros.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Periodos\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Content\plugins\bootstrap-rtl\bootstrap-rtl.css.map" />
     <Content Include="Content\plugins\footable\fonts\footable.eot" />
@@ -1966,6 +1962,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
