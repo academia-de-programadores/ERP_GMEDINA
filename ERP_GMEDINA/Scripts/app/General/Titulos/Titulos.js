@@ -99,7 +99,7 @@ $("#btnGuardar").click(function() {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["titu_Descripcion"]);
+                    LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 }
                 else {

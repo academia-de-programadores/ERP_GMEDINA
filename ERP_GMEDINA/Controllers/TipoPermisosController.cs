@@ -15,7 +15,6 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: Competencias
-
         public ActionResult Index()
         {
             List<tbTipoPermisos> tbTipoPermisos = new List<Models.tbTipoPermisos> { };
@@ -32,44 +31,20 @@ namespace ERP_GMEDINA.Controllers
             }
             return View(tbTipoPermisos);
         }
-
-
-
-
-
-        //[HttpPost]
-        //public JsonResult llenarTabla()
-        //{
-        //    var lista = db.tbTipoSalidas
-        //        .Where(x => x.tsal_Estado == true)
-        //        .Select(
-        //        t =>
-        //        new
-        //        {
-        //            tsal_Id = t.tsal_Id,
-        //            tsal_Descripcion = t.tsal_Descripcion
-        //        })
-        //        .ToList();
-        //    return Json(lista, JsonRequestBehavior.AllowGet);
-        //}
-
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            var lista = db.tbTipoPermisos.Where(X => X.tper_Estado == true).Select(
-                t=>
-                new
+            List<tbTipoPermisos> tbTipoPermisos = new List<Models.tbTipoPermisos> { };
+            foreach (tbTipoPermisos x in db.tbTipoPermisos.ToList().Where(x => x.tper_Estado == true))
+            {
+                tbTipoPermisos.Add(new tbTipoPermisos
                 {
-                    tper_Id = t.tper_Id,
-                    tper_Descripcion = t.tper_Descripcion
-                })
-                .ToList();
-                return Json(lista, JsonRequestBehavior.AllowGet);
+                    tper_Id = x.tper_Id,
+                    tper_Descripcion = x.tper_Descripcion
+                });
             }
-
-
-
-
+            return Json(tbTipoPermisos, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public JsonResult Create(tbTipoPermisos tbTipoPermisos)
         {
@@ -170,15 +145,13 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "...";
-            string RazonInactivo = "Se ha Inhabilitado este Registro";
-
             if (tbTipoPermisos.tper_Id != 0 && tbTipoPermisos.tper_RazonInactivo != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, tbTipoPermisos.tper_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoPermisos_Delete_Result item in list)
                     {
                         msj = item.MensajeError = " ";

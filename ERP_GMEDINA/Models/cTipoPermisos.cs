@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Tipo permiso")]
         public int tper_Id { get; set; }
 
-        [Display(Name = "Permiso")]
+        [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string tper_Descripcion { get; set; }

@@ -96,7 +96,7 @@ $("#btnGuardar").click(function () {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 llenarTabla();
-                LimpiarControles(["tiho_Descripcion"]);
+                LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
                 MsgSuccess("¡Exito!", "Se ha agregado el registro");
             } else {
                 MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
