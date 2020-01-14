@@ -1929,6 +1929,10 @@
     <Content Include="Views\ReportesPlanilla\DeduccionesParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\IngresosParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\ReportesVariosParametros.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Periodos\_Create.cshtml" />
+    <Content Include="Views\Periodos\_Details.cshtml" />
+    <Content Include="Views\Periodos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1963,9 +1967,7 @@
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Periodos\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
