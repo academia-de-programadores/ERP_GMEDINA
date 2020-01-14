@@ -43,7 +43,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -204,12 +204,12 @@ $('#btnCreateRegistroDeduccion').click(function () {
                                 message: '¡El registro se agregó de forma exitosa!',
                             });
                         }
-                        else {
-                            iziToast.error({
-                                title: 'Error',
-                                message: 'Datos Invalidos!',
-                            });
-                        }
+                        //else {
+                        //    iziToast.error({
+                        //        title: 'Error',
+                        //        message: 'Datos Invalidos!',
+                        //    });
+                        //}
 
                         ocultarCargandoCrear();
                     });
@@ -297,7 +297,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -432,7 +432,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -470,7 +470,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -481,7 +481,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             $("#EditarCatalogoDeducciones").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
+                title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
 
@@ -594,8 +594,3 @@ function spinner() {
  <div class="sk-rect5"></div>
  </div>`;
 }
-
-
-
-
-
