@@ -183,8 +183,9 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 
 
 $("#btnUpdatePeriodo").click(function () {
-    //console.log('console');
-    $("#ConfirmarEdicion").modal();
+    if ($("#Crear #peri_DescripPeriodo").val() != '') {
+        $("#ConfirmarEdicion").modal();
+    }
 });
 
 $("#btnCerrarConfirmarEditar").click(function () {

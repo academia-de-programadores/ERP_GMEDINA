@@ -1,14 +1,20 @@
 ﻿//VARIABLE GLOBAL PARA INACTIVAR
 var IDInactivar = 0;
 var IDActivar = 0;
+//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
+var cmbEmpleado = $("#emp_IdEmpleado");
+//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA CREACION
+var MaxSueldoCreate = 0;
+//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
+var cmbEmpleadoEdit = $("#frmAdelantosEdit #emp_Id");
+//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA EDICION
+var MaxSueldoEdit = 0;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA
-
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
   })
   .fail(function (jqxhr, settings, exception) {
-      //console.log("No se pudo recuperar Script SerializeDate");
   });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -34,7 +40,7 @@ function cargarGridAdelantos() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -78,10 +84,6 @@ function cargarGridAdelantos() {
    
 }
 
-//$("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-//$("html, body").css("overflow", "hidden");
-//$("html, body").css("overflow", "scroll");
-
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
     $("#Crear #adsu_RazonAdelanto").val("");
@@ -108,15 +110,10 @@ $(document).on("click", "#btnAgregarAdelanto", function () {
     $("html, body").css("overflow", "scroll");
 });
 
-//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
-var cmbEmpleado = $("#emp_IdEmpleado");
-//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA CREACION
-var MaxSueldoCreate = 0;
 //DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA CREACION
 $(cmbEmpleado).change(() => {
     //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
     var IdEmp = parseInt(cmbEmpleado.val());
-    //console.log(IdEmp);
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
@@ -127,43 +124,12 @@ $(cmbEmpleado).change(() => {
     }).done(function (data) {
         //ACCIONES EN CASO DE EXITO
         MaxSueldoCreate = data;
-        //$("#adsu_Monto").attr("max", data);
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
         $("#AgregarAdelantos").modal('hide');
         iziToast.error({
             title: 'Error',
-            message: 'No se pudo recuperar el sueldo neto promedio',
-        });
-    });
-});
-
-//OBJETO CONSTANTE DEL DDL DE EMPLEADOS 
-var cmbEmpleadoEdit = $("#frmAdelantosEdit #emp_Id");
-//VARIABLE GLOBAL CON EL VALOR MAXIMO DEL SUELDO EN LA EDICION
-var MaxSueldoEdit = 0;
-//DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA EDICION
-$(cmbEmpleadoEdit).change(() => {
-    //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
-    var IdEmp = cmbEmpleadoEdit.val();
-
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
-    $.ajax({
-        url: "/AdelantoSueldo/GetSueldoNetoProm",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: IdEmp })
-    }).done(function (data) {
-        //ACCIONES EN CASO DE EXITO
-        MaxSueldoEdit = data;
-        //$("#frmAdelantosEdit #adsu_Monto").attr("max", data);
-    }).fail(function (data) {
-        //ACCIONES EN CASO DE ERROR
-        $("#EditarAdelantoSueldo").modal('hide');
-        iziToast.error({
-            title: 'Error',
-            message: 'No se pudo recuperar el sueldo neto promedio',
+            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
         });
     });
 });
@@ -199,7 +165,7 @@ $('#btnCreateRegistroAdelantos').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro',
+                    message: 'No se guardó el registro, contacte al administrador',
                 });
             }
             else {
@@ -210,122 +176,91 @@ $('#btnCreateRegistroAdelantos').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡Se ha registrado exitosamente!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
     }
     else {
-        if (IdEmp == 0)
-        {
-            iziToast.error({
-                title: 'Error',
-                message: 'Ingrese un colaborador válido.',
-            });
-        } else if (Razon == "" || Razon == null || Razon == undefined) {
-            iziToast.error({
-                title: 'Error',
-                message: 'Campo Razón requerido.',
-            });
-        }else if(Monto == "" || Monto == null || Monto == undefined || Monto == 0){
-            iziToast.error({
-                title: 'Error',
-                message: 'Campo Monto requerido.',
-            });
-        } else if (Fecha == "" || Fecha == null || Fecha == undefined) {
-            iziToast.error({
-                title: 'Error',
-                message: 'Campo Fecha requerido.',
-            });
-        }
-        else if ($("#Crear #adsu_Monto").val() > MaxSueldoCreate) {
-            //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-            iziToast.error({
-                title: 'Error',
-                message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
-            });
-            //IGUALAR EL MONTO AL SUELDO PROMEDIO
-            $("#Crear #adsu_Monto").val(MaxSueldoCreate);
-        }
-
-        if (Razon == "" || Razon == null || Razon == undefined) {
-            $("#Crear #Validation_descripcion1").css("display", "");
-        } else {
-            $("#Crear #Validation_descripcion1").css("display", "none");
-        }
-        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Crear #Validation_descripcion2").css("display", "");
-        } else {
-            $("#Crear #Validation_descripcion2").css("display", "none");
-        }
-        if (Fecha == "" || Fecha == null || Fecha == undefined) {
-            $("#Crear #Validation_descripcion3").css("display", "");
-        } else {
-            $("#Crear #Validation_descripcion3").css("display", "none");
-        }
+        //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
+        ValidarCamposCrear(Razon, Monto, IdEmp, Fecha);
     }
-
 });
 
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE CREAR
+function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
 
-function ValidarCamposEditar(colaborador, razon, monto){
-    var pasoValidacion = true;
-
-    //console.log(colaborador.val());
-    if(colaborador.val() == ''){
-        pasoValidacion = false;
-        //Codigo para mostrar el span de validacion
-        //Hacerle focus al input
-        //console.log('No paso la validacion de campo colaborador');
-        $("#ConfirmarEdicion").modal('hide');
+    if (IdEmp == 0) {
         iziToast.error({
             title: 'Error',
-            message: 'Ha ocurrido un problema con el campo colaborador',
+            message: 'Ingrese un colaborador válido',
         });
-        
-        $(colaborador).focus();
-    } else{
-        
+    } else if (Razon == "" || Razon == null || Razon == undefined) {
+        iziToast.error({
+            title: 'Error',
+            message: 'Campo Razón requerido',
+        });
+    } else if (Monto == "" || Monto == null || Monto == undefined) {
+        iziToast.error({
+            title: 'Error',
+            message: 'Campo Monto requerido',
+        });
+    } else if (Monto <= 0) {
+        iziToast.error({
+            title: 'Error',
+            message: 'El campo Monto debe ser mayor que cero',
+        });
+    } else if (Fecha == "" || Fecha == null || Fecha == undefined) {
+        iziToast.error({
+            title: 'Error',
+            message: 'Campo Fecha requerido',
+        });
+    }
+    else if ($("#Crear #adsu_Monto").val() > MaxSueldoCreate) {
+        //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+        iziToast.error({
+            title: 'Error',
+            message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
+        });
+        //IGUALAR EL MONTO AL SUELDO PROMEDIO
+        $("#Crear #adsu_Monto").val('');
+        //$("#Crear #adsu_Monto").placeholder = 'El monto debe ser menor o igual que ' + MaxSueldoCreate;
+        document.getElementById("adsu_Monto").placeholder = 'El sueldo promedio es ' + MaxSueldoCreate;
+        //$("#Crear #adsu_Monto").val(MaxSueldoCreate);
     }
 
-    //console.log(razon.val());
-
-    if(razon ==null || razon.val() == ''){
-        pasoValidacion = false;
-        $('#adsu_RazonAdelantoValidacion').show();
-        razon.focus();
-    } else{
-        $('#adsu_RazonAdelantoValidacion').hide();
+    if (Razon == "" || Razon == null || Razon == undefined) {
+        $("#Crear #Validation_descripcion1").css("display", "");
+    } else {
+        $("#Crear #Validation_descripcion1").css("display", "none");
     }
-
-    if(monto == null || monto.val() == ''){
-        pasoValidacion = false;
-        $('#adsu_MontoValidacion').show();
-        monto.focus();
-    } else{
-        $('#adsu_MontoValidacion').hide();
+    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+        $("#Crear #Validation_descripcion2").css("display", "");
+    } else {
+        $("#Crear #Validation_descripcion2").css("display", "none");
     }
-
-    return pasoValidacion;
+    if (Fecha == "" || Fecha == null || Fecha == undefined) {
+        $("#Crear #Validation_descripcion3").css("display", "");
+    } else {
+        $("#Crear #Validation_descripcion3").css("display", "none");
+    }
 }
 
-
-//FUNCION: OCULTAR LOS LABEL DE MENSAJE DE ERROR
+//FUNCION: OCULTAR LOS LABEL DE MENSAJE DE ERROR EN MODAL DE CREAR
 function OcultarValidaciones(){
     $("#Crear #Validation_descripcion1").css("display", "none");
     $("#Crear #Validation_descripcion2").css("display", "none");
     $("#Crear #Validation_descripcion3").css("display", "none");
+    document.getElementById("adsu_Monto").placeholder = '';
 }
 
-//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION
+//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION DEL MODAL DE CREAR
 $('#btnCerrarCrearAdelanto').click(function () {
     OcultarValidaciones()
 });
 $('#IconCerrar').click(function () {
     OcultarValidaciones()
 });
-
-//FUNCION: OCULTAR LAS VALIDACIONES AL CERRAR EL MODAL DANDO CLIKC FUERA
 $("#AgregarAdelantos").on('hidden.bs.modal', function () {
     OcultarValidaciones()
 });
@@ -360,6 +295,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             data: JSON.stringify({ id: ID })
         }).done(function (data) {
             if (data) {
+                //HABILITAR O INHABILITAR EL BOTON DE EDITAR SI ESTA DEDUCIDO O NO 
                 if (data.adsu_Deducido) {
                     document.getElementById("btnUpdateAdelantos").disabled = true;
                 } else {
@@ -377,7 +313,6 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
                 }).done(function (data) {
                     //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                     $.each(data, function (i, iter) {
-                        //$("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         $("#Editar #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                     });
                 });
@@ -385,7 +320,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
                 $("#Editar #adsu_RazonAdelanto").val(data.adsu_RazonAdelanto);
                 $("#Editar #adsu_Monto").val(data.adsu_Monto);
 
-
+                //MOSTRAR EL MODAL Y BLOQUEAR EL FONDO
                 $("#EditarAdelantoSueldo").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
@@ -393,14 +328,41 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo
             } else if (data.adsu_Deducido) {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se puede editar un registro deducido',
+                    message: 'No puede editar un registro deducido',
                 });
             }
         })
 
     }).fail(function (jqXHR, textStatus, error) {
-        console.log('no pudimos traer tu selected');
-        console.log(jqXHR + ' -- ' + textStatus + ' -- ' + error);
+        iziToast.error({
+            title: 'Error',
+            message: 'No se cargó la información del colaborador, contacte al administrador',
+        });
+    });
+});
+
+//DETECTAR LOS CAMBIOS EN EL DDL DE EMPLEADOS EN LA EDICION
+$(cmbEmpleadoEdit).change(() => {
+    //CAPTURAR EL ID DEL EMPLEADO SELECCIONADO
+    var IdEmp = cmbEmpleadoEdit.val();
+
+    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA CONSULTA DE SALARIO PROMEDIO
+    $.ajax({
+        url: "/AdelantoSueldo/GetSueldoNetoProm",
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: IdEmp })
+    }).done(function (data) {
+        //ACCIONES EN CASO DE EXITO
+        MaxSueldoEdit = data;
+    }).fail(function (data) {
+        //ACCIONES EN CASO DE ERROR
+        $("#EditarAdelantoSueldo").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
+        });
     });
 });
 
@@ -409,11 +371,6 @@ $("#btnUpdateAdelantos").click(function () {
     ocultarCargandoEditar();
     $("#EditarAdelantoSueldo").modal('hide');
     $("#ConfirmarEdicion").modal();
-});
-
-//FUNCION: CERRAR EL MODAL DE CONFIRMACION AL EDITAR, (CON EL BOTON DE CERRAR)
-$("#btnCerrarConfirmarEditar").click(function () {
-    $("#ConfirmarEdicion").modal('hide');
 });
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
@@ -444,7 +401,7 @@ $("#btnConfirmarEditar").click(function () {
                     //Cuando traiga un error del backend al guardar la edicion
                     iziToast.error({
                         title: 'Error',
-                        message: 'No se pudo editar el registro, contacte al administrador',
+                        message: 'No se editó el registro, contacte al administrador',
                     });
                 }
                 else {
@@ -459,7 +416,7 @@ $("#btnConfirmarEditar").click(function () {
                     //Mensaje de exito de la edicion
                     iziToast.success({
                         title: 'Éxito',
-                        message: '¡El registro fue editado de forma exitosa!',
+                        message: '¡El registro se editó de forma exitosa!',
                     });
                 }
             });
@@ -468,13 +425,14 @@ $("#btnConfirmarEditar").click(function () {
             //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
             iziToast.error({
                 title: 'Error',
-                message: 'El monto Ingresado es mayor que el sueldo promedio del colaborador',
+                message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
             });
             $("#ConfirmarEdicion").modal('hide');
             ocultarCargandoEditar();
             //IGUALAR EL MONTO AL SUELDO PROMEDIO
-            $("#Editar #adsu_Monto").val(data);
-            //MaxSueldoEdit = 0;
+            $("#Editar #adsu_Monto").val('');
+            //$("#Editar #adsu_Monto").val(data);
+            document.getElementById("adsu_Monto").placeholder = 'El sueldo promedio es ' + data;
         }
 
     }).fail(function (data) {
@@ -482,22 +440,65 @@ $("#btnConfirmarEditar").click(function () {
         $("#EditarAdelantoSueldo").modal('hide');
         iziToast.error({
             title: 'Error',
-            message: 'No se pudo recuperar el sueldo neto promedio',
+            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
         });
     });
 
 });
 
-//FUNCION: OCULTAR MODAL DE EDICION EN LA INACTIVACION
-$("#btnCerrarEditar").click(function () {
-    $("#EditarAdelantoSueldo").modal('hide');
-    $("#Editar #Validation_descripcion").css("display", "none");
+//FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
+function ValidarCamposEditar(colaborador, razon, monto) {
+    var pasoValidacion = true;
+
+    if (colaborador.val() == '') {
+        pasoValidacion = false;
+        //Codigo para mostrar el span de validacion
+        //Hacerle focus al input
+        $("#ConfirmarEdicion").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: 'Ha ocurrido un problema con el campo colaborador',
+        });
+
+        $(colaborador).focus();
+    }
+
+    if (razon == null || razon.val() == '') {
+        pasoValidacion = false;
+        $('#adsu_RazonAdelantoValidacion').show();
+        razon.focus();
+    } else {
+        $('#adsu_RazonAdelantoValidacion').hide();
+    }
+
+    if (monto == null || monto.val() == '') {
+        pasoValidacion = false;
+        $('#adsu_MontoValidacion').show();
+        monto.focus();
+    } else {
+        $('#adsu_MontoValidacion').hide();
+    }
+
+    return pasoValidacion;
+}
+
+//FUNCION: CERRAR EL MODAL DE CONFIRMACION AL EDITAR, (CON EL BOTON DE CERRAR)
+$("#btnCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+    //document.getElementById("adsu_Monto").placeholder = '';
 });
 
-//FUNCION: OCULTAR MODAL DE EDICION EN LA ACTIVACION
-$("#btnCerrarEditar2").click(function () {
+//FUNCION: OCULTAR MODAL DE EDICION CON EL BOTON CERRAR DEL MODAL DE EDITAR
+$("#btnCerrarEditar").click(function () {
     $("#EditarAdelantoSueldo").modal('hide');
-    $("#Editar #Validation_descripcion").css("display", "none");
+    document.getElementById("adsu_Monto").placeholder = '';
+    FullBody();
+});
+
+//FUNCION: CERRAR EL MODAL DE EDITAR CON EL BOTON DE X
+$("#IconCerrarEditar").click(function () {
+    document.getElementById("adsu_Monto").placeholder = '';
+    FullBody();
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -540,7 +541,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueld
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -551,6 +552,12 @@ $(document).on("click", "#btnmodalInactivarAdelantoSueldo", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#EditarAdelantoSueldo").modal('hide');
     $("#InactivarAdelantoSueldo").modal();
+});
+
+//FUNCION: PRIMERA FASE DE INACTIVACION DE REGISTROS, MOSTRAR MODAL CON MENSAJE DE CONFIRMACION
+$("#btnInactivarAdelantos").click(function () {
+    $("#EditarAdelantos").modal('hide');
+    $("#InactivarAdelantos").modal();
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
@@ -565,7 +572,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -577,11 +584,17 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
     IDInactivar = 0;
+});
+
+//FUNCION: OCULTAR MODAL DE INACTIVACION
+$("#btnCerrarInactivar").click(function () {
+    $("#InactivarAdelantoSueldo").modal('hide');
+    FullBody();
 });
 
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
@@ -602,7 +615,7 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -614,39 +627,11 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
     IDActivar = 0;
-});
-
-
-
-//---------------------------------------------------------------------------------------
-//FUNCION: PRIMERA FASE DE INACTIVACION DE REGISTROS, MOSTRAR MODAL CON LA MENSAJE DE CONFIRMACION
-$("#btnInactivarAdelantos").click(function () {
-    $("#EditarAdelantos").modal('hide');
-    $("#InactivarAdelantos").modal();
-});
-
-//FUNCION: OCULTAR MODAL DE CREACION
-$("#btnCerrarCrear").click(function () {
-    $("#Crear #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
-//FUNCION: OCULTAR MODAL DE EDICION
-$("#btnCerrarEditar").click(function () {
-    $("#EditarAdelantoSueldo").modal('hide');
-    $("#Editar #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
-//FUNCION: OCULTAR MODAL DE INACTIVACION
-$("#btnCerrarInactivar").click(function () {
-    $("#InactivarAdelantoSueldo").modal('hide');
-    FullBody();
 });
 
 //FUNCION: OCULTAR MODAL DE ACTIVACION
@@ -655,26 +640,18 @@ $("#btnCerrarActivar").click(function () {
     FullBody();
 });
 
-//FUNCION: OCULTAR MODAL DE CREACION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
-$("#IconCerrarCrear").click(function () {
-    $("#Crear #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
-//FUNCION: OCULTAR MODAL DE EDICION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
-$("#IconCerrarEditar").click(function () {
-    $("#Editar #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
-//FUNCION: HABILITAR EL DATAANNOTATION AL DESPLEGAR EL MODAL
-$("#btnCerrar").click(function () {
-    $("#EditarTipoDeducciones").modal('hide');
-    $("#Editar #Validation_descripcion").css("display", "none");
-    FullBody();
-});
-
 //---------------------------------------FUNCIONES SPINNER---------------------------------------
+//Mostrar el spinner
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
+ <div class="sk-rect1"></div>
+ <div class="sk-rect2"></div>
+ <div class="sk-rect3"></div>
+ <div class="sk-rect4"></div>
+ <div class="sk-rect5"></div>
+ </div>`;
+}
+
 //MODAL AGREGAR
 function mostrarCargandoCrear() {
     btnGuardar.hide();
@@ -686,17 +663,6 @@ function ocultarCargandoCrear() {
     btnGuardar.show();
     cargandoCrear.html('');
     cargandoCrear.hide();
-}
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
 }
 
 const btnGuardar = $('#btnCreateRegistroAdelantos'),
