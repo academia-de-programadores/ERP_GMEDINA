@@ -68,9 +68,9 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                     LimpiarControles(["sue_Cantidad"]);
 
-                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

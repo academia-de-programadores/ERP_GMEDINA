@@ -97,13 +97,13 @@ $("#InActivar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
+                MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
             }
         });
     } else {
-        MsgWarning(" ", "la eliminación de información debe ser justificada");
+        MsgWarning(" ", "La eliminación de información debe ser justificada");
     }
 });
 
@@ -118,9 +118,9 @@ $("#btnActualizar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hsal_Observacion"]);
-                MsgSuccess("¡Exito!", "Se ha editado el registro");
+                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
             } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
             }
         });
     }

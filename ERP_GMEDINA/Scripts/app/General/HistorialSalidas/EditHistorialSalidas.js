@@ -48,7 +48,7 @@ $("#ModalInhabilitar").find("#InActivar").on("click", function () {
                     //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
                     $(location).attr('href', '/Areas');
                 } else {
-                    MsgError("Error", "Codigo: " + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     }

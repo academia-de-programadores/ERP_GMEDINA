@@ -113,9 +113,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id"]);
-                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
+                    MsgWarning("¡Éxito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -137,9 +137,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
-                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

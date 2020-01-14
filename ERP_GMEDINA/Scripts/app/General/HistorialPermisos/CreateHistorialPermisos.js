@@ -196,7 +196,7 @@ $("#btnCrear").click(function () {
     if ($("#TipoPermisos").val() == 0) {
         MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida"); 
     } else if ($("#hper_PorcentajeIndemnizado").val() == "") {
-        MsgWarning("Error", "Es nesesario es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso"); 
+        MsgWarning("Error", "Es nesesario especificar el porcentaje del sueldo del cual el colaborador gozara durante la duración del permiso"); 
     } else {
         //declaramos el objeto principal de nuestra tabla y asignamos sus valores
         var tbHistorialPermisos =
@@ -233,11 +233,11 @@ $("#btnCrear").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                            MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                            MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                             setTimeout(function () { location.href = "/HistorialPermisos/Index"; }, 5000);
                             $("#btnCrear").attr("disabled", "disabled");
                         } else {
-                            MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                            MsgError("Error", "No se guardó el registro, contacte al administrador");
                         }
                     });
             } else {
