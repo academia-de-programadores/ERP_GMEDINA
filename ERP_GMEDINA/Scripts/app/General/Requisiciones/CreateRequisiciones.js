@@ -58,6 +58,16 @@ $(document).ready(function () {
     
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
+        onStepChanging: function (event, currentIndex, newIndex) {
+            var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']");
+            Form.validate().settings.ignore = ":disabled,:hidden";
+            return Form.valid();
+        },
+        onFinishing: function (event, currentIndex) {
+            var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']");
+            Form.validate().settings.ignore = ":disabled";
+            return Form.valid();
+        },
         onFinished: function () {
             var SlctCompetencias = $(".SlctCompetencias");
             var SlctHabilidades = $(".SlctHabilidades");

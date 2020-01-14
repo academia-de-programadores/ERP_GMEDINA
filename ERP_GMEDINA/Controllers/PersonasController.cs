@@ -91,6 +91,7 @@ namespace ERP_GMEDINA.Controllers
             Sexo.Add(new { Id = "", Descripcion = "**Seleccione una opción**" });
             Sexo.Add(new { Id = "F", Descripcion = "Femenino" });
             Sexo.Add(new { Id = "M", Descripcion = "Masculino" });
+            Sexo.Add(new { Id = "I", Descripcion = "Indiferente" });
             //Ddl EstadoCivil
             var EstadoCivil = new List<object> { };
             EstadoCivil.Add(new { Id = "", Descripcion = "**Seleccione una opción**" });
@@ -365,7 +366,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }        
         // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
@@ -378,6 +379,7 @@ namespace ERP_GMEDINA.Controllers
                     Sexo.Add(new { Id = "", Descripcion = "**Seleccione una opción**"});
                     Sexo.Add(new { Id = "F", Descripcion = "Femenino"});
                     Sexo.Add(new { Id = "M", Descripcion = "Masculino"});
+                    Sexo.Add(new { Id = "I", Descripcion = "Indiferente" });
                     //Ddl EstadoCivil
                     var EstadoCivil = new List<object> { };
                     EstadoCivil.Add(new { Id = "", Descripcion = "**Seleccione una opción**"});
@@ -636,7 +638,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                 }
             }
-            return Json(msj, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
         [HttpPost]
@@ -722,7 +724,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                 }
             }
-            return Json(msj, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
         }
 
         protected tbUsuario IsNull(tbUsuario valor)

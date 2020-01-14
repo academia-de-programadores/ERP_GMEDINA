@@ -10,15 +10,15 @@
         debugger
         Id = index.per_Id.toString();
         if(index.Relacion == "Competencias") 
-            Comp += '<label>'+index.Descripcion.toString() + '</label><br>';
+            Comp += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Habilidades")
-            Hab += '<label>' + index.Descripcion.toString() + '</label><br>';
+            Hab += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Idiomas")
-            Idi += '<label>' + index.Descripcion.toString() + '</label><br>';
+            Idi += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
         else if (index.Relacion == "Requerimientos_Especiales")
-            ReEs += '<label>' + index.Descripcion.toString() + '</label><br>';
+            ReEs += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
         else if (index.Relacion == "Titulos")
-            Tit += '<label>' + index.Descripcion.toString() + '</label><br>';
+            Tit += '<label style="color:#585858">' + index.Descripcion.toString() + '</label><br>';
     });
     if (Comp.length == 0)
         Comp += '<label>Sin datos que mostrar.*</label>';

@@ -95,6 +95,16 @@ $(document).ready(function () {
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
+        onStepChanging: function (event, currentIndex, newIndex) {
+            var Form = $("#tbPersonas").find("select, textarea, input");
+            Form.validate().settings.ignore = ":disabled,:hidden";
+            return Form.valid();
+        },
+        onFinishing: function (event, currentIndex) {
+            var Form = $("#tbPersonas").find("select, textarea, input");
+            Form.validate().settings.ignore = ":disabled";
+            return Form.valid();
+        },
         onFinished: function () {
             var SlctCompetencias = $(".SlctCompetencias");
             var SlctHabilidades = $(".SlctHabilidades");
@@ -105,7 +115,7 @@ $(document).ready(function () {
 
             var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
-            tbPersonas = serializar(Form);
+            tbPersonas = serializarPro(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
 
             if (tbPersonas != null)

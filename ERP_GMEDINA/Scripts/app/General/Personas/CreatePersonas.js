@@ -54,23 +54,29 @@ $(document).ready(function () {
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
+        //validaciones
+        onStepChanging: function (event, currentIndex, newIndex) {
+            var Form = $("#tbPersonas").find("select, textarea, input");
+            Form.validate().settings.ignore = ":disabled,:hidden";
+            return Form.valid();
+        },
+        onFinishing: function (event, currentIndex) {
+            var Form = $("#tbPersonas").find("select, textarea, input");
+            Form.validate().settings.ignore = ":disabled";
+            return Form.valid();
+        },
         onFinished: function () {
             var SlctCompetencias = $(".SlctCompetencias");
             var SlctHabilidades = $(".SlctHabilidades");
             var SlctIdiomas = $(".SlctIdiomas");
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
-            var Correo = validarEmail($('#per_CorreoElectronico').val());
 
             var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
-            tbPersonas = serializar(Form);
+            tbPersonas = serializarPro(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-
             //
-            if (tbPersonas != null)
-            {
-                    if (Correo != " ") {
                         _ajax(data,
                         '/Personas/Create',
                         'POST',
@@ -83,14 +89,6 @@ $(document).ready(function () {
                                 MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                             }
                         });
-                    }
-                    else {
-                        MsgError("Error", "Correo Electronico invalido");
-                    }
-            }
-            else {
-                MsgError("Error", "por favor llene todos los datos");
-            }
         },
     });
 });
