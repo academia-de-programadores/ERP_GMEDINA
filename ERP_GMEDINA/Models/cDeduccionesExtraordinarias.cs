@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
 
     public class cDeduccionesExtraordinarias
     {
-        [Display(Name = "Id Deducciones Extraordinarias")]
+        [Display(Name = "Número")]
         public int dex_IdDeduccionesExtra { get; set; }
 
         [Required(ErrorMessage = "El campo Equipo Empleado es requerido")]

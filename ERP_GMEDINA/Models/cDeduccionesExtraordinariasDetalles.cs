@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
 
     public class cDeduccionesExtraordinariasDetalles
     {
-        [Display(Name = "Id Deducciones Extraordinarias")]
+        [Display(Name = "Número")]
         public int dex_IdDeduccionesExtra { get; set; }
 
         [Display(Name = "Id Equipo Empleado")]

@@ -35,7 +35,7 @@ function cargarGridPreaviso() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -116,11 +116,11 @@ function ValidarForm() {
     var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
     var Dias = $("#Editar #prea_DiasPreaviso").val('');
     //VALIDAR QUE LOS CAMPOS SEAN MAYORES QUE CERO
-    if(RangoInicio < 0)
+    if(!RangoInicio >= 0 || RangoInicio != '')
         Retorno = false;
-    if (RangoFin < 0)
+    if (!RangoFin >= 0 || RangoFin != '')
         Retorno = false;
-    if (Dias < 0)
+    if (!Dias >= 0 || Dias != '')
         Retorno = false;
     //RETORNO DE FUNCION
     return Retorno;
@@ -157,13 +157,13 @@ $('#btnCrearPreavisoConfirmar').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se registró de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
             else {
-                iziToast.success({
+                iziToast.error({
                     title: 'Error',
-                    message: '¡No se pudo ingresar el registro!',
+                    message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
         });
@@ -179,9 +179,6 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
     var ID = $(this).data('id');
     IDInactivar = ID;
-
-
-
     $.ajax({
         url: "/Preaviso/Edit/" + ID,
         method: "POST",
@@ -203,21 +200,25 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
         });
 });
 
-
 $("#btnUpdatePreaviso").click(function () {
-    if (ValidarForm()) {
-        console.log("Hola");
-        //MOSTRAR MODAL DE CONFIRMACIÓN
-        $("#ConfirmarEdicion").modal();
+    
+    var prea_RangoInicioMeses = $("#Editar #prea_RangoInicioMeses").val();
+    var prea_RangoFinMeses = $("#Editar #prea_RangoFinMeses").val();
+    var prea_DiasPreaviso = $("#Editar #prea_DiasPreaviso").val();
+
+    if (prea_RangoInicioMeses == "0" || prea_RangoInicioMeses == "") {
+        $("#Validation_descipcion").css("display", "");
+    }
+    else if (prea_RangoFinMeses == "0" ||prea_RangoFinMeses == "") {
+        $("#Validation_descipcion1").css("display", "");
+    }
+    else if (prea_DiasPreaviso == "0" || prea_DiasPreaviso == "") {
+        $("#Validation_descipcion2").css("display", "");
     }
     else {
-        //MOSTRAR DATAANNOTATIONS
-        DataAnnotations(false);
+        $("#ConfirmarEdicion").modal();
     }
-});
-
-$("#btnCerrarConfirmarEditar").click(function () {
-    $("#ConfirmarEdicion").modal('hide');
+   
 });
 
 
@@ -227,10 +228,9 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
 
-    var data = $("#frmEditPreaviso").serializeArray();
-    console.log(data);
-
-    if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "") {
+    if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "")
+    {
+        var data = $("#frmEditPreaviso").serializeArray();
         $.ajax({
             url: "/Preaviso/Editar",
             method: "POST",
@@ -245,13 +245,13 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se editó de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             } else {
                 $("#ConfirmarEdicion").modal('hide');
                 iziToast.error({
                     title: 'Error',
-                    message: '¡Solo se aceptan datos numericos!',
+                    message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
 
@@ -261,7 +261,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
-    $("#EditarPreaviso").modal('hide');
     $("#InactivarPreaviso").modal();
 });
 
@@ -277,7 +276,7 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -285,10 +284,12 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             cargarGridPreaviso();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPreaviso").modal('hide');
+            //OCULTAR EL MODAL DE EDICION
+            $("#EditarPreaviso").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -315,17 +316,16 @@ $("#btnActivarPreavis").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se logró Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
-            debugger;
             cargarGridPreaviso();
             $("#frmActivarPreavis").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro se Activó de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });

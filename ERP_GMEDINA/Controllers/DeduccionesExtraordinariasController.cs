@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias
         public ActionResult Index()
 		{
-			var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.OrderBy(t => t.dex_FechaCrea).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
+			var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
 			return View(tbDeduccionesExtraordinarias.ToList());
 		}
 
@@ -31,7 +31,9 @@ namespace ERP_GMEDINA.Controllers
 				{
 					dex_IdDeduccionesExtra = d.dex_IdDeduccionesExtra,
 					eqem_Id = d.eqem_Id,
-					cde_IdDeducciones = d.cde_IdDeducciones,
+                    per_Nombres = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres,
+                    per_Apellidos = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Apellidos,
+                    cde_IdDeducciones = d.cde_IdDeducciones,
 					dex_MontoInicial = d.dex_MontoInicial,
 					dex_MontoRestante = d.dex_MontoRestante,
 					dex_ObservacionesComentarios = d.dex_ObservacionesComentarios,

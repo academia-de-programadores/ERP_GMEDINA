@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
 
     public class cDeduccionAFP
     {
-        [Display(Name = "Id Deducción AFP")]
+        [Display(Name = "Número")]
         public int dafp_Id { get; set; }
 
         [Range(0.01, 9999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]

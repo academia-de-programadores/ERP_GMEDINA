@@ -10,7 +10,9 @@ var pathname = window.location.pathname + '/',
 		'//' +
 		location.hostname +
 		(location.port ? ':' + location.port : ''),
-	table; //Almacenar la tabla
+	table,
+	table2,
+	checkSeleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones'); //Almacenar la tabla
 
 //Constantes
 const btnGuardar = $('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), //Boton para guardar el catalogo de planilla con sus detalles
@@ -69,81 +71,72 @@ var crearEditar = function (edit) {
 	//Obtener las lista del catalogo de deducciones
 	listaCatalogoDeducciones(arrayDeducciones);
 
-	//Insertar o editar
-	if (
-		verificarCampos(
-			descripcionPlanilla,
-			frecuenciaDias,
-			arrayIngresos,
-			arrayDeducciones
-		)
-	) {
-		if (!edit) {
-			mostrarSpinner(btnGuardar, cargandoCrear);
 
-			_ajax(
-				{
-					catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
-					catalogoIngresos: arrayIngresos,
-					catalogoDeducciones: arrayDeducciones,
-					checkRecibeComision: checkRecibeComision.checked
-				},
-				'/CatalogoDePlanillas/Create',
-				'POST',
-				(data) => {
-					if (data == 'bien') {
-						iziToast.success({
-							title: 'Exito',
-							message: 'El registro fue insertado de forma exitosa.'
-						});
-						location.href = baseUrl;
-					} else {
-						iziToast.error({
-							title: 'Error',
-							message: 'Hubo un error al insertar el registro'
-						});
+	if (!edit) {
+		mostrarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
 
-						ocultarSpinner(btnGuardar, cargandoCrear);
-					}
-				},
-				(enviar) => { }
-			);
-		} else {
-			let idPlanilla = inputIdPlanilla.val();
-			mostrarSpinner(btnEditar, cargandoEditar);
-			_ajax(
-				{
-					id: idPlanilla,
-					catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
-					catalogoIngresos: arrayIngresos,
-					catalogoDeducciones: arrayDeducciones,
-					checkRecibeComision: checkRecibeComision.checked
-				},
-				'/CatalogoDePlanillas/Edit',
-				'POST',
-				(data) => {
-					if (data == 'bien') {
-						iziToast.success({
-							title: 'Exito',
-							message: 'El registro fue editado de forma exitosa.'
-						});
-						location.href = baseUrl;
-					} else {
-						iziToast.error({
-							title: 'Error',
-							message: 'Hubo un error al editar el registro'
-						});
-						ocultarSpinnerSpinner(btnEditar, cargandoEditar);
-					}
-				},
-				(enviar) => { }
-			);
-		}
+		_ajax(
+			{
+				catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
+				catalogoIngresos: arrayIngresos,
+				catalogoDeducciones: arrayDeducciones,
+				checkRecibeComision: checkRecibeComision.checked
+			},
+			'/CatalogoDePlanillas/Create',
+			'POST',
+			(data) => {
+				if (data == 'bien') {
+					iziToast.success({
+						title: 'Exito',
+						message: '¡El registro se agregó de forma exitosa!'
+					});
+					location.href = baseUrl;
+				} else {
+					iziToast.error({
+						title: 'Error',
+						message: 'No se guardó el registro, contacte al administrador'
+					});
+
+					ocultarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+				}
+			},
+			(enviar) => { }
+		);
+	} else {
+		let idPlanilla = inputIdPlanilla.val();
+		mostrarSpinner($('#btnConfirmacionEdit'), cargandoEditar);
+		_ajax(
+			{
+				id: idPlanilla,
+				catalogoDePlanillas: [descripcionPlanilla, frecuenciaDias],
+				catalogoIngresos: arrayIngresos,
+				catalogoDeducciones: arrayDeducciones,
+				checkRecibeComision: checkRecibeComision.checked
+			},
+			'/CatalogoDePlanillas/Edit',
+			'POST',
+			(data) => {
+				if (data == 'bien') {
+					iziToast.success({
+						title: 'Exito',
+						message: '¡El registro se editó de forma exitosa!'
+					});
+					location.href = baseUrl;
+				} else {
+					iziToast.error({
+						title: 'Error',
+						message: 'No se editó el registro, contacte al administrador'
+					});
+					ocultarSpinnerSpinner($('#btnConfirmacionEdit'), cargandoEditar);
+				}
+			},
+			(enviar) => { }
+		);
 	}
 };
 
 function listaCatalogoDeducciones(arrayDeducciones) {
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -155,7 +148,7 @@ function listaCatalogoDeducciones(arrayDeducciones) {
 		let currentCheckboxIdDedu = arrDedu[1];
 		//Ver si esta chequeado o no para guardar solo los que esten chequeados
 		let isCheckedDedu = $(
-			'#catalogoDeDeducciones #check-' + currentCheckboxIdDedu
+			'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td #check-' + currentCheckboxIdDedu
 		).is(':checked', true);
 		//Agregar a la lista de
 		if (isCheckedDedu === true) {
@@ -189,7 +182,7 @@ function listaCatalogoIngresos(arrayIngresos) {
 
 function listaCatalogoDeduccionesFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeDeducciones input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeDeducciones table tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -201,7 +194,7 @@ function listaCatalogoDeduccionesFalse() {
 		let currentCheckboxIdDedu = arrDedu[1];
 		//Ver si esta chequeado o no para guardar solo los que esten chequeados
 		let isCheckedDedu = $(
-			'#catalogoDeDeducciones #check-' + currentCheckboxIdDedu
+			'#catalogoDeDeducciones tbody tr td input#check-' + currentCheckboxIdDedu
 		).prop('checked');
 		//Agregar a la lista de
 		if (!isCheckedDedu) {
@@ -214,7 +207,7 @@ function listaCatalogoDeduccionesFalse() {
 
 function listaCatalogoIngresosFalse() {
 	var hayUnoFalso = true;
-	$('#catalogoDeIngresos input[type="checkbox"].i-checks').each(function (
+	$('#catalogoDeIngresos table tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
 		val
 	) {
@@ -226,7 +219,7 @@ function listaCatalogoIngresosFalse() {
 		let currentCheckboxIdIngreso = arr[1];
 		//Ver si esta chequeado o no para guardar solo los que esten chequeados
 		let isChecked = $(
-			'#catalogoDeIngresos #check-' + currentCheckboxIdIngreso
+			'#catalogoDeIngresos tbody tr td input#check-' + currentCheckboxIdIngreso
 		).prop('checked');
 
 		//Agregar a la lista de ingresos
@@ -235,6 +228,7 @@ function listaCatalogoIngresosFalse() {
 			return;
 		}
 	});
+
 	return hayUnoFalso;
 }
 
@@ -255,6 +249,16 @@ function estaEnCrear() {
 
 function estaEnEditar() {
 	return getUrl.toString().indexOf('Edit');
+}
+
+function estaEnDetalles() {
+	return getUrl.toString().indexOf('Details');
+}
+
+
+function estaEnIndex() {
+	console.log('esta en index');
+	return getUrl.toString().indexOf('Index');
 }
 
 //Posicionaarse en la parte superior de la pagina cuando falle una validación
@@ -338,6 +342,10 @@ function listar() {
 			contentType: 'application/json; charset=utf-8',
 			dataType: 'json'
 		},
+		// stateSave: true,
+		// "scrollY": "400px",
+		// "scrollCollapse": true,
+		//"pagingType": "full_numbers",
 		columns: [
 			{
 				//Columna 1: el boton de desplegar
@@ -385,7 +393,7 @@ function listar() {
 			sProcessing: spinner(),
 			sLengthMenu: 'Mostrar _MENU_ registros',
 			sZeroRecords: 'No se encontraron resultados',
-			sEmptyTable: 'Ningún dato disponible en esta tabla',
+			sEmptyTable: 'No se cargó la información, contacte al administrador',
 			sInfo:
 				'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
 			sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
@@ -427,70 +435,40 @@ function listar() {
 	obtenerIdDetallesEditar('#tblCatalogoPlanillas tbody', table);
 }
 
+const idiomaEspaniolCatalogos = {
+	"paging": false,
+	"sProcessing": spinner(),
+	"sLengthMenu": "_MENU_",
+	"sZeroRecords": "No se encontraron resultados",
+	"sEmptyTable": "Ningún dato disponible en esta tabla",
+	"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+	"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+	"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+	"sInfoPostFix": "",
+	"sSearch": "Buscar:",
+	"sUrl": "",
+	"sInfoThousands": ",",
+	"sLoadingRecords": spinner(),
+	"oPaginate": {
+		"sFirst": "Primero",
+		"sLast": "Último",
+		"sNext": "Siguiente",
+		"sPrevious": "Anterior"
+	},
+	"oAria": {
+		"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	}
+};
+
 //Create o Edit
 function listarCatalogos() {
-	console.log(baseUrl);
-
-
-	table = $('.tbl-catalogos').DataTable({
-		"language": {
-			"sProcessing": "Procesando...",
-			"sLengthMenu": "_MENU_",
-			"sZeroRecords": "No se encontraron resultados",
-			"sEmptyTable": "Ningún dato disponible en esta tabla",
-			"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-			"sInfoPostFix": "",
-			"sSearch": "Buscar:",
-			"sUrl": "",
-			"sInfoThousands": ",",
-			"sLoadingRecords": "Cargando...",
-			"oPaginate": {
-				"sFirst": "Primero",
-				"sLast": "Último",
-				"sNext": "Siguiente",
-				"sPrevious": "Anterior"
-			},
-			"oAria": {
-				"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-			}
-		},
-		ajax: {
-			//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
-			method: 'GET',
-			url: baseUrl + '/GetIngresosDeducciones',
-			contentType: 'application/json; charset=utf-8',
-			dataType: 'json'
-		},
-		responsive: false,
-		dom: 'lftp',
-		"columns": [
-			{
-				"searchable": false,
-				"orderable": true,
-				data: 'id',
-				render: function (data) {
-					console.log(data);
-
-					return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
-				},
-				className: '',
-				defaultContent: ''
-			},
-			{
-				data: 'descripcion'
-			}
-		],
-		"order": [[1, "asc"]],
+	$('.i-checks, .i-checks-no-aplica').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green'
 	});
 
-	console.log();
-
 	elementsSwitch.forEach(function (html) {
-		console.log(html);
-
 		var switchery = new Switchery(html, {
 			color: '#18a689',
 			jackColor: '#fff',
@@ -499,12 +477,369 @@ function listarCatalogos() {
 		});
 	});
 
-	$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
-		checkboxClass: 'icheckbox_square-green',
-		radioClass: 'iradio_square-green'
-	});
+	var urlFetchData = baseUrl + '/GetIngresosDeducciones?esCrear=';
+	if (estaEnEditar() > 1) {
+		console.log('Esta en editar');
+		urlFetchData += 'false&id=' + URLactual.substr((URLactual.search(/Edit/i) + 'Edit'.length + 1))
 
+		//Ingresos
+		table = $('.tbl-catalogos').DataTable({
+			"language": {
+				"paging": false,
+				"sProcessing": spinner(),
+				"sLengthMenu": "_MENU_",
+				"sZeroRecords": "No se encontraron resultados",
+				"sEmptyTable": "Ningún dato disponible en esta tabla",
+				"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sSearch": "Buscar:",
+				"sUrl": "",
+				"sInfoThousands": ",",
+				"sLoadingRecords": spinner(),
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			},
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData,
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'checkId',
+					render: function (data) {
+						let check = (data.check) ? 'checked' : '';
+						return `<input type="checkbox" class="i-checks" id="check-` + data.id + `" ` + check + ` />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
 
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				var catalogoIngresosChangeCheckbox = document.querySelector(
+					'#catalogoDeIngresos .js-check-change'
+				);
+				const catalogoIngresosInputs = $('#tblCatalogoIngresos tbody tr td input.i-checks');
+
+				//Seleccionar o deseleccionar los ingresos
+				catalogoIngresosChangeCheckbox.onchange = function () {
+					const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
+					let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
+					if (catalogoIngresosChangeCheckbox.checked) {
+						catalogoIngresosInputs.iCheck('check');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						catalogoIngresosInputs.iCheck('uncheck');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+					}
+				};
+
+				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
+				//Se activara el switch, si esta desactivado
+				$(catalogoIngresosInputs).on('ifChecked', () => {
+					if (listaCatalogoIngresosFalse()) {
+						console.log('ok1')
+						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
+							$('#checkSeleccionarTodosIngresos').click();
+							console.log('ok2')
+
+						}
+					}
+				});
+
+				//Activar switch seleccionar todos en ingresos
+				if (listaCatalogoIngresosFalse()) {
+					console.log('ok3')
+					$('#checkSeleccionarTodosIngresos').click();
+				}
+
+			}
+		});
+
+		//Deducciones
+		table2 = $('.tbl-catalogos-d').DataTable({
+			"language": idiomaEspaniolCatalogos,
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData += '&esIngreso=false',
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'checkId',
+					render: function (data) {
+						let check = (data.check) ? 'checked' : '';
+						return `<input type="checkbox" class="i-checks" id="check-` + data.id + `" ` + check + ` />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+
+				$('#tblCatalogoDeducciones tbody tr td .i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
+				);
+
+				var catalogoDeduccionesChangeCheckbox = document.querySelector(
+					'#catalogoDeDeducciones .js-check-change'
+				);
+
+				$('#noAplica').on('ifChecked', () => {
+					catalogoDeduccionesInputs.iCheck('uncheck');
+					const seleccionarTodasLasDeducciones = checkSeleccionarTodasLasDeducciones;
+					if (seleccionarTodasLasDeducciones.is(':checked'))
+						seleccionarTodasLasDeducciones.click();
+				});
+
+				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					$('#noAplica').iCheck('uncheck');
+					if (listaCatalogoDeduccionesFalse()) {
+						if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
+							checkSeleccionarTodasLasDeducciones.click();
+					}
+				});
+
+				catalogoDeduccionesChangeCheckbox.onchange = function () {
+					const seleccionarTodasLasDeducciones = $('#seleccionarTodasLasDeducciones');
+					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
+					if (catalogoDeduccionesChangeCheckbox.checked) {
+						catalogoDeduccionesInputs.iCheck('check');
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar'));
+					}
+					else {
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar'));
+						catalogoDeduccionesInputs.iCheck('uncheck');
+					}
+				};
+
+				//Activar switch seleccionar todos en deducciones
+				if (listaCatalogoDeduccionesFalse()) {
+					checkSeleccionarTodasLasDeducciones.click();
+				}
+			}
+		});
+	} //crear
+	else {
+		//Ingresos
+		table = $('.tbl-catalogos').DataTable({
+			"language": idiomaEspaniolCatalogos,
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData,
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'id',
+					render: function (data) {
+						return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				$('#tblCatalogoIngresos tbody tr td .i-checks, #tblCatalogoIngresos tbody tr td .i-checks input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				seleccionarCheckbox_CatalogoIngresos();
+			}
+		});
+
+		//Deducciones
+		table2 = $('.tbl-catalogos-d').DataTable({
+			"language": idiomaEspaniolCatalogos,
+			"paging": false,
+			ajax: {
+				//Hacer la peticion asíncrona y obtener los datos que se mostraran en el datatable
+				method: 'GET',
+				url: urlFetchData += 'true&esIngreso=false',
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json'
+			},
+			responsive: false,
+			dom: 'lft',
+			"columns": [
+				{
+					"searchable": false,
+					"orderable": true,
+					data: 'id',
+					render: function (data) {
+						return `<input type="checkbox" class="i-checks" id="check-` + data + `" />`;
+					},
+					className: '',
+					defaultContent: ''
+				},
+				{
+					data: 'descripcion'
+				}
+			],
+			"order": [[1, "asc"]],
+			initComplete: function (settings, json) {
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
+				);
+
+				$('#tblCatalogoDeducciones tbody tr td .i-checks').iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green'
+				});
+
+				var catalogoDeduccionesChangeCheckbox = document.querySelector(
+					'#catalogoDeDeducciones .js-check-change'
+				);
+
+				$('#noAplica').on('ifChecked', () => {
+					catalogoDeduccionesInputs.iCheck('uncheck');
+
+					const seleccionarTodasLasDeducciones = checkSeleccionarTodasLasDeducciones;
+					if (seleccionarTodasLasDeducciones.is(':checked'))
+						seleccionarTodasLasDeducciones.click();
+				});
+
+				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					$('#noAplica').iCheck('uncheck');
+					if (listaCatalogoDeduccionesFalse()) {
+						if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
+							checkSeleccionarTodasLasDeducciones.prop("checked", true);
+						else {
+							checkSeleccionarTodasLasDeducciones.prop("checked", false);
+						}
+					}
+				});
+
+				catalogoDeduccionesChangeCheckbox.onchange = function () {
+					const seleccionarTodasLasDeducciones = $(
+						'#seleccionarTodasLasDeducciones'
+					);
+					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
+					if (catalogoDeduccionesChangeCheckbox.checked) {
+						catalogoDeduccionesInputs.iCheck('check');
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						seleccionarTodasLasDeducciones.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+						catalogoDeduccionesInputs.iCheck('uncheck');
+					}
+				};
+			}
+		});
+	}
+
+	function seleccionarCheckbox_CatalogoIngresos() {
+
+		var catalogoIngresosChangeCheckbox = document.querySelector(
+			'#catalogoDeIngresos .js-check-change'
+		);
+		const catalogoIngresosInputs = $('#tblCatalogoIngresos tbody tr td input.i-checks');
+
+		//Seleccionar o deseleccionar los ingresos
+		catalogoIngresosChangeCheckbox.onchange = function () {
+			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
+			let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
+			if (catalogoIngresosChangeCheckbox.checked) {
+				catalogoIngresosInputs.iCheck('check');
+				seleccionarTodosLosIngresos.html(
+					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+				);
+			} else {
+				catalogoIngresosInputs.iCheck('uncheck');
+				seleccionarTodosLosIngresos.html(
+					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+				);
+			}
+		};
+
+		//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
+		//Se activara el switch, si esta desactivado
+		$(catalogoIngresosInputs).on('ifChecked', () => {
+			console.log('check ');
+
+			if (listaCatalogoIngresosFalse()) {
+				console.log('check all');
+				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
+					$('#checkSeleccionarTodosIngresos').prop("checked", true);
+			}
+		});
+
+		//Activar switch seleccionar todos en ingresos
+		if (listaCatalogoIngresosFalse()) {
+			$('#checkSeleccionarTodosIngresos').click();
+		}
+	}
 }
 
 //Redireccionar a Edit o Details
@@ -529,8 +864,6 @@ function obtenerIdDetallesEditar(tbody, table) {
 
 	$(tbody).on('click', 'button#btnActivar', function () {
 		localStorage.setItem('id', table.row($(this).parents('tr')).data().idPlanilla);
-		console.log(table.row($(this).parents('tr')));
-
 		localStorage.setItem('element', JSON.stringify($(this).parents('tr')));
 		$('#frmActivarCatalogoPlanilla').modal();
 	});
@@ -543,8 +876,9 @@ function getIngresos(data) {
        <div class="ibox-title">
             <h5>Ingresos de la Planilla</h5>
         </div>
-        <div class="ibox-content">
-            <table class="table table-bordered">
+		<div class="ibox-content">
+		<div class="data-details">
+            <table class="table table-bordered tbl-catalogos" id="childIngresos">
                 <thead>
                     <tr>
                         <th>Ingreso</th>
@@ -554,17 +888,18 @@ function getIngresos(data) {
 	$.each(data.ingresos, function (index, val) {
 		ingresosPlanillas +=
 			`
-                        <tr>
-                            <td>
-                                ` +
+							<tr>
+								<td>
+									` +
 			val.cin_DescripcionIngreso +
 			`
-                            </td>
-                        </tr>
-                    `;
+								</td>
+							</tr>
+						`;
 	});
 	ingresosPlanillas += `</tbody>
-            </table>
+				</table>
+			</div>
         </div>
     </div>`;
 
@@ -578,8 +913,9 @@ function getDeducciones(data) {
        <div class="ibox-title">
             <h5>Deducciones de la Planilla</h5>
         </div>
-        <div class="ibox-content">
-            <table class="table table-bordered">
+		<div class="ibox-content">
+		<div class="data-details">
+            <table class="table table-bordered tbl-catalogos">
                 <thead>
                     <tr>
                         <th>Deducción</th>
@@ -599,7 +935,8 @@ function getDeducciones(data) {
                     `;
 	});
 	deduccionesPlanilla += `</tbody>
-            </table>
+			</table>
+			</div>
         </div>
     </div>`;
 
@@ -630,91 +967,45 @@ $(document).ready(() => {
 		listar();
 	} else {
 		listarCatalogos();
-		const catalogoIngresosInputs = $('#catalogoDeIngresos input.i-checks');
-		const catalogoDeduccionesInputs = $(
-			'#catalogoDeDeducciones input.i-checks'
-		);
-
-		$('.i-checks, input.i-checks-no-aplica').iCheck({
-			checkboxClass: 'icheckbox_square-green',
-			radioClass: 'iradio_square-green'
-		});
-
-		//Activar switch seleccionar todos en ingresos
-		if (listaCatalogoIngresosFalse()) {
-			$('#checkSeleccionarTodosIngresos').prop('checked', true);
-		}
-
-		//Activar switch seleccionar todos en deducciones
-		if (listaCatalogoDeduccionesFalse()) {
-			$('#checkSeleccionarTodasDeducciones').prop('checked', true);
-		}
-
-		var catalogoIngresosChangeCheckbox = document.querySelector(
-			'#catalogoDeIngresos .js-check-change'
-		);
-		var catalogoDeduccionesChangeCheckbox = document.querySelector(
-			'#catalogoDeDeducciones .js-check-change'
-		);
-
-		$('#noAplica').on('ifChecked', () => {
-			catalogoDeduccionesInputs.iCheck('uncheck');
-
-			const seleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones');
-			if (seleccionarTodasLasDeducciones.is(':checked'))
-				seleccionarTodasLasDeducciones.click();
-			console.log($('#checkSeleccionarTodasDeducciones').checked);
-		});
-
-		$(catalogoDeduccionesInputs).on('ifChecked', () => {
-			$('#noAplica').iCheck('uncheck');
-			if (listaCatalogoDeduccionesFalse()) {
-				if (!$('#checkSeleccionarTodasDeducciones').is(':checked'))
-					$('#checkSeleccionarTodasDeducciones').click();
-			}
-		});
-
-		$(catalogoIngresosInputs).on('ifChecked', () => {
-			if (listaCatalogoIngresosFalse()) {
-				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
-					$('#checkSeleccionarTodosIngresos').click();
-			}
-		});
-
-		catalogoIngresosChangeCheckbox.onchange = function () {
-			const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
-			let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
-			if (catalogoIngresosChangeCheckbox.checked) {
-				catalogoIngresosInputs.iCheck('check');
-				seleccionarTodosLosIngresos.html(
-					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-				);
-			} else {
-				catalogoIngresosInputs.iCheck('uncheck');
-				seleccionarTodosLosIngresos.html(
-					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-				);
-			}
-		};
-
-		catalogoDeduccionesChangeCheckbox.onchange = function () {
-			const seleccionarTodasLasDeducciones = $(
-				'#seleccionarTodasLasDeducciones'
-			);
-			let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
-			if (catalogoDeduccionesChangeCheckbox.checked) {
-				catalogoDeduccionesInputs.iCheck('check');
-				seleccionarTodasLasDeducciones.html(
-					seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-				);
-			} else {
-				seleccionarTodasLasDeducciones.html(
-					seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-				);
-				catalogoDeduccionesInputs.iCheck('uncheck');
-			}
-		};
 	}
+
+	console.log('Leyendo');
+
+	if (estaEnDetalles() > 1) {
+
+		$('.tbl-catalogos').DataTable({
+			"language": {
+				"paging": false,
+				"sProcessing": spinner(),
+				"sLengthMenu": "_MENU_",
+				"sZeroRecords": "No se encontraron resultados",
+				"sEmptyTable": "Ningún dato disponible en esta tabla",
+				"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+				"sUrl": "",
+				"sInfoThousands": ",",
+				"sLoadingRecords": spinner(),
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			},
+			"paging": false,
+			responsive: false,
+			dom: 'lft',
+			"order": [[1, "asc"]]
+		});
+	}
+
 
 	// Si esta en la pantalla de Create entonces vaciar todo
 	if (estaEnCrear() > 1) {
@@ -773,6 +1064,42 @@ $(document).on('click', 'td.details-control', function () {
 				//Mostrar el detalle con sus datos
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
+
+				let detail = $('.tbl-catalogos').DataTable({
+					"language": {
+						"paging": false,
+						"sProcessing": spinner(),
+						"sLengthMenu": "_MENU_",
+						"sZeroRecords": "No se encontraron resultados",
+						"sEmptyTable": "Ningún dato disponible en esta tabla",
+						"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+						"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+						"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+						"sInfoPostFix": "",
+						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+						"sUrl": "",
+						"sInfoThousands": ",",
+						"sLoadingRecords": spinner(),
+						"oPaginate": {
+							"sFirst": "Primero",
+							"sLast": "Último",
+							"sNext": "Siguiente",
+							"sPrevious": "Anterior"
+						},
+						"oAria": {
+							"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+							"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+						}
+					},
+					"paging": true,
+					responsive: false,
+					dom: 'lft',
+					"order": [[0, "asc"]],
+					initComplete: function () {
+						console.log('Hola');
+					}
+				});
+
 			},
 			() => { }
 		);
@@ -782,16 +1109,80 @@ $(document).on('click', 'td.details-control', function () {
 //Insetar
 $(document).on(
 	'click',
-	'#btnGuardarCatalogoDePlanillasIngresosDeducciones',
+	'#btnConfirmacionCreate',
 	function () {
 		crearEditar(false);
 	}
 );
 
+//Desplegar modal de que si desea guardar
+$('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	table.search('').draw();
+	table2.search('').draw();
+	//Array de Ingresos y deducciones
+	let arrayIngresos = [];
+	let arrayDeducciones = [];
+	//Obtener los valores del catalogo de planillas
+	let descripcionPlanilla = inputDescripcionPlanilla.val();
+	let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+	//Obtener las lista del catalogo de ingresos
+	listaCatalogoIngresos(arrayIngresos);
+
+	//Obtener las lista del catalogo de deducciones
+	listaCatalogoDeducciones(arrayDeducciones);
+
+	//Insertar o editar
+	if (
+		verificarCampos(
+			descripcionPlanilla,
+			frecuenciaDias,
+			arrayIngresos,
+			arrayDeducciones
+		)
+	) {
+		console.log(descripcionPlanilla);
+		$('#modalConfirmacionCreate').modal();
+	}
+
+});
+
+//Desplegar modal de que si desea editar
+$('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	table.search('').draw();
+	table2.search('').draw();
+	//Array de Ingresos y deducciones
+	let arrayIngresos = [];
+	let arrayDeducciones = [];
+	//Obtener los valores del catalogo de planillas
+	let descripcionPlanilla = inputDescripcionPlanilla.val();
+	let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+	//Obtener las lista del catalogo de ingresos
+	listaCatalogoIngresos(arrayIngresos);
+
+	//Obtener las lista del catalogo de deducciones
+	listaCatalogoDeducciones(arrayDeducciones);
+
+	//Insertar o editar
+	if (
+		verificarCampos(
+			descripcionPlanilla,
+			frecuenciaDias,
+			arrayIngresos,
+			arrayDeducciones
+		)
+	) {
+		console.log(descripcionPlanilla);
+		$('#modalConfirmacionEdit').modal();
+	}
+
+});
+
 //Editar
 $(document).on(
 	'click',
-	'#btnEditarCatalogoDePlanillasIngresosDeducciones',
+	'#btnConfirmacionEdit',
 	function () {
 		crearEditar(true);
 	}
@@ -814,13 +1205,13 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 			if (data == 'bien') {
 				iziToast.success({
 					title: 'Exito',
-					message: 'El registro fue inactivado de forma exitosa.'
+					message: '¡El registro se inactivó de forma exitosa!'
 				});
 				location.href = baseUrl;
 			} else {
 				iziToast.error({
 					title: 'Error',
-					message: 'Ocurrió un error'
+					message: 'No se inactivó el registro, contacte al administrador'
 				});
 			}
 			ocultarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
@@ -836,21 +1227,24 @@ $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 		'/CatalogoDePlanillas/ActivarPlanilla',
 		'POST',
 		(data) => {
-			console.log(data);
 			if (data.response == 'bien') {
 				iziToast.success({
 					title: 'Éxito',
-					message: 'El registro se activo correctamente.'
+					message: '¡El registro se activó de forma exitosa!'
 				});
 				$('#frmActivarCatalogoPlanilla').modal('hide');
 
 				table.clear();
 				table.rows.add(data.data).draw();
+			} else {
+				iziToast.error({
+					title: 'Éxito',
+					message: 'No se activó el registro, contacte al administrador'
+				});
 			}
 			ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
 		},
 		() => {
-			console.log('Enviando');
 		})
 });
 //#endregion

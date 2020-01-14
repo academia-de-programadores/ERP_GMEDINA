@@ -358,7 +358,7 @@ $("#btnActivarAuxCes").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se logró inactivar el registro, contacte al administrador',
+                message: 'No se logró activar el registro, contacte al administrador',
             });
         }
         else {
@@ -367,7 +367,7 @@ $("#btnActivarAuxCes").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro se inactivó de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });

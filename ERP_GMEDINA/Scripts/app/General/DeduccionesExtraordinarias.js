@@ -33,7 +33,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el Index
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
 
@@ -56,7 +56,7 @@ function cargarGridDeducciones() {
 
                 template += '<tr data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].eqem_Id + '</td>' +
+                    '<td>' + ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoInicial + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoRestante + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios + '</td>' +
@@ -124,7 +124,7 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
@@ -132,7 +132,7 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -201,10 +201,21 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
 });
 
+function mostrarCargandoInhabilitar() {
+    btnInhabilitar.hide();
+    cargandoInhabilitar.show();
+    cargandoInhabilitar.html(spinner());
+}
+
+function ocultarCargandoInhabilitar() {
+    btnInhabilitar.show();
+    cargandoInhabilitar.html('');
+    cargandoInhabilitar.hide();
+}
 
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-
+    mostrarCargandoInhabilitar();
     //Serializar el Formulario del Modal que esta en su respectiva Vista Parcial, para Parsear al Formato Json 
     var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
 
@@ -215,42 +226,28 @@ $("#btnInactivar").click(function () {
         data: data
     }).done(function (data) {
         if (data == "Error") {
-
+            ocultarCargandoInhabilitar();
             //Cuando trae un error en el BackEnd al realizar la Inactivación
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
-                
-            function mostrarCargandoInhabilitar() {
-                btnInhabilitar.hide();
-                cargandoInhabilitar.show();
-                cargandoInhabilitar.html(spinner());
-                btnEditar.hide();
-                cargandoEditar.html(spinner());
-                cargandoEditar.show();
-            }
-
-            function ocultarCargandoInhabilitar() {
-                btnInhabilitar.show();
-                cargandoInhabilitar.html('');
-                cargandoInhabilitar.hide();
-            }
 
                 // Actualizar el Index para ver los cambios
                 location.href = "/DeduccionesExtraordinarias/Index";
 
                 cargarGridDeducciones();
 
+                mostrarCargandoInhabilitar();
                 //Ya actualizado, se oculta el Modal
                 $("#InactivarDeduccionesExtraordinarias").modal('hide');
 
                 //Mensaje de Éxito de la Inactivación
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro se inhabilitó de forma exitosa!',
+                    message: '¡El registro se inactivó de forma exitosa!',
                 });
 
             }

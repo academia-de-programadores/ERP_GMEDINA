@@ -70,7 +70,7 @@
                                             <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
                                             <br />
                                         </div>
-                                        <input type="checkbox" class="js-switch js-check-change"/> &nbsp; &nbsp; &nbsp; Seleccionar todos los Ingresos <br /><br />
+                                        <input type="checkbox"  id="checkSeleccionarTodosIngresos" class="js-switch js-check-change"/> &nbsp; &nbsp; &nbsp; <label id="seleccionarTodosLosIngresos">Seleccionar todos los Ingresos</label><br /><br />
                                         <table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
                                             <thead>
                                                 <tr>
@@ -79,13 +79,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @*@foreach (var item in ViewBag.CatalogoIngresos)
-                                                {
-                                                    <tr>
-                                                        <td><input type="checkbox" class="i-checks" id="check-@item.id" /></td>
-                                                        <td>@item.descripcion</td>
-                                                    </tr>
-                                                }*@
                                             </tbody>
                                         </table>
                                     </div>
@@ -100,16 +93,16 @@
                                         <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
                                             <span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
                                         </div>
-                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
-                                        <br /><br />
-                                        @*@foreach (var item in ViewBag.CatalogoDeducciones)
-                                        {
-                                            <div class="form-horizontal col-xs-offset-1">
-                                                <div class="form-group">
-                                                    <input type="checkbox" class="i-checks" id="check-@item.id" /> @item.descripcion
-                                                </div>
-                                            </div>
-                                        }*@
+                                        &nbsp; &nbsp; &nbsp;<input type="checkbox" id="checkSeleccionarTodasDeducciones" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
+                                        <table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover tbl-catalogos-d">
+                                            <thead>
+                                                <tr>
+                                                    <th style="background: white"></th>
+                                                    <th>Descripcion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                         <div class="form-horizontal col-xs-offset-1">
                                             <div class="form-group">
                                                 <input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
@@ -121,8 +114,6 @@
                             <div class="form-group">
                                 <div class="col-md-offset-3 col-md-10">
                                     <input type="button" id="btnGuardarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
-                                    <div style="display:none" class="btn" id="cargandoCrear">
-                                    </div>
                                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                                 </div>
                             </div>
@@ -133,6 +124,25 @@
                 </div>
             </div>
         </div>
+		<div class="modal fade" id="modalConfirmacionCreate" tabindex="-1" role="dialog" aria-hidden="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+						<h4 class="modal-title">Crear</h4>
+					</div>
+					<div class="modal-body" id="Activar">
+						¿Esta seguro que desea Crear este registro?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+						<input type="button" id="btnConfirmacionCreate" value="Si" class="btn btn-primary " />
+						<div style="display:none" class="btn" id="cargandoCrear">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
 <script src="~/Scripts/Scripts_Base/jquery-3.3.1.min.js"></script>
@@ -145,7 +155,7 @@
 }
 @section Styles {
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
-@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+	@Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 <script src="~/Scripts/plugins/switchery/switchery.js"></script>
 <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />

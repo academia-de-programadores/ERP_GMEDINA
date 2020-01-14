@@ -33,7 +33,7 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -132,7 +132,7 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else{
@@ -140,7 +140,7 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -167,8 +167,6 @@ function mostrarCargandoCrear() {
     cargandoCrear.show();
 }
 
-$("#validation1d").css("display", "none");
-
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
@@ -182,6 +180,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         .done(function (data) {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#Crear #emp_Id").empty();
+            $("#Crear #emp_Id").append("<option value='0'>Selecione una opción...</option>");
             //LLENAR EL DROPDOWNLIST
             $.each(data, function (i, iter) {
                 $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
@@ -198,6 +197,7 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         .done(function (data) {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#Crear #afp_Id").empty();
+            $("#Crear #afp_Id").append("<option value='0'>Selecione una opción...</option>");
             //LLENAR EL DROPDOWNLIST
             $.each(data, function (i, iter) {
                 $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
@@ -206,64 +206,94 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
 
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionAFP").modal();
-    $("#Crear #dafp_AporteLps").val('');
-    
+    $("#AgregarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#Crear #emp_Id").val("0");
+    $("#dafp_AporteLps").val('');
+    $("#Crear #afp_Id").val("0");
 });
-
 
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var val1 = $("#Crear #dafp_AporteLps").val();
 
-    if (val1 == "") {
-        $("#Crear #validation1d").css("display", "");
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    var val1 = $("#Crear #emp_Id").val();
+    var val2 = $("#Crear #dafp_AporteLps").val();
+    var val3 = $("#Crear #afp_Id").val();
+
+    debugger;
+    if (val1 == "" || val1 == 0 || val1 == "0") {
+        $("#Crear #validatione1d").css("display", "");
+    }
+    else if (val1 != "" || val1 != 0 || val1 != "0") {
+        $("#Crear #validatione1d").css("display", "none");
+        if (val2 != "" || val2 != null || val2 != undefined) {
+            if (expreg.test(val2)) {
+                if (val3 == "" || val3 == 0 || val3 == "0") {
+                    $("#Crear #validatione3d").css("display", "");
+                }
+                else if (val3 != "" || val3 != 0 || val3 != "0") {
+                    $("#Crear #validatione3d").css("display", "none");
+
+                    mostrarCargandoCrear();
+
+                    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+                    var data = $("#frmCreateDeduccionAFP").serializeArray();
+                    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+                    $.ajax({
+                        url: "/DeduccionAFP/Create",
+                        method: "POST",
+                        data: data
+                    }).done(function (data) {
+
+                        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+                        if (data != "error") {
+
+                            cargarGridDeducciones();
+
+                            $("#Crear #dafp_AporteLps").val('');
+
+                            //CERRAR EL MODAL DE AGREGAR
+                            $("#AgregarDeduccionAFP").modal('hide');
+
+                            // Mensaje de exito cuando un registro se ha guardado bien
+                            iziToast.success({
+                                title: 'Exito',
+                                message: '¡El registro se agregó de forma exitosa!',
+                            });
+
+                            $("#Crear #emp_Id").val("0");
+                            $("#Crear #dafp_AporteLps").val('');
+                            $("#Crear #afp_Id").val("0");
+                        }
+                        else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: '¡No se guardó el registro, contacte al administrador!',
+                            });
+                        }
+
+                        ocultarCargandoCrear();
+
+                    });
+                }
+            }
+            else {
+                $("#Crear #validatione2d").css("display", "");
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡Ingrese datos válidos!',
+                });
+            }
+        }
     }
     else {
-        $("#Crear #validation1d").css("display", "none");
+        $("#Crear #validatione1d").css("display", "");
     }
-    mostrarCargandoCrear();
-
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateDeduccionAFP").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/DeduccionAFP/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data != "error") {
-
-            cargarGridDeducciones();
-
-            $("#Crear #dafp_AporteLps").val('');
-
-            //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarDeduccionAFP").modal('hide');
-
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro se agregó de forma exitosa!',
-            });
-
-            $("#Crear #dafp_AporteLps").val('');
-        }
-        else
-        {
-            iziToast.error({
-                title: 'Error',
-                message: 'Datos Invalidos!',
-            });
-        }
-        
-        ocultarCargandoCrear();
-        
-    });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateDeduccionAFP").submit(function (e) {
@@ -273,12 +303,22 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
 });
 
 $("#btnCerrarAgregar").click(function () {
+    $("#emp_Id").val("0");
+    $("#dafp_AporteLps").val('');
+    $("#afp_Id").val("0");
     $("#validation1d").css("display", "none");
+    $("#validation2d").css("display", "none");
+    $("#validation3d").css("display", "none");
     $("#AgregarDeduccionAFP").modal('hide');
 });
 
 $("#btnIconCerrar").click(function () {
+    $("#emp_Id").val("0");
+    $("#dafp_AporteLps").val('');
+    $("#afp_Id").val("0");
     $("#validation1d").css("display", "none");
+    $("#validation2d").css("display", "none");
+    $("#validation3d").css("display", "none");
     $("#AgregarDeduccionAFP").modal('hide');
 });
 
@@ -361,26 +401,68 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                         });
                     });
                 $("#DetallesDeduccionAFP").modal('hide');
-                $("#EditarDeduccionAFP").modal();
+                $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
                 
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
 });
 
+$("#btnEditDeduccionAFP").click(function () {
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    var vale3 = $("#Editar #dafp_AporteLps").val();
+
+    if (vale3 != "" || vale3 != null || vale3 != undefined) {
+        if (expreg.test(vale3)) {
+            $("#EditarDeduccionAFP").modal('hide');
+            $("#EditarDeduccionAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+            $("html, body").css("overflow", "hidden");
+            $("html, body").css("overflow", "scroll");
+        }
+        else {
+            $("#Editar #validatione3").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
+    }
+
+    $("#EditarDeduccionAFP").submit(function (e) {
+        return false;
+    });
+
+});
+
+$(document).on("click", "#btnRegresar", function () {
+    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#EditarDeduccionAFPConfirmacion").modal('hide');
+});
+
+$(document).on("click", "#btnReg", function () {
+    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#EditarDeduccionAFPConfirmacion").modal('hide');
+});
+
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnEditDeduccionAFP").click(function () {
+$("#btnEditDeduccionAFPConfirmar").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var vale1 = $("#Editar #dafp_AporteLps").val();
-    debugger
-    console.log(vale1)
+
     if (vale1 == "" || vale1 == null || vale1 == undefined) {
         $("#Editar #validatione1").css("display", "");
     }
@@ -401,20 +483,21 @@ $("#btnEditDeduccionAFP").click(function () {
         if (data != "error") {
 
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+            $("#EditarDeduccionAFPConfirmacion").modal('hide');
             $("#EditarDeduccionAFP").modal('hide');
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se editó de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
         }
         else
         {
             iziToast.error({
                 title: 'Error',
-                message: 'Datos Invalidos!',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
         }
         ocultarCargandoEditar();
@@ -425,6 +508,7 @@ $("#btnEditDeduccionAFP").click(function () {
         return false;
     });
 });
+
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 
@@ -523,27 +607,38 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
 });
 
-$(document).on("click", "#btnEdicionDeduccionAFP", function () {
-    //MOSTRAR EL MODAL DE Editar
-    $("#EditarDeduccionAFP").modal();
-    $("#DetallesDeduccionAFP").modal('hide');
-});
+
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Inactivar//
+$(document).on("click", "#btnBack", function () {
+    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#InactivarDeduccionAFP").modal('hide');
+});
+
+$(document).on("click", "#btnBa", function () {
+    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    $("#InactivarDeduccionAFP").modal('hide');
+});
+
 $(document).on("click", "#btnInactivarDeduccionAFP", function () {
     $("#EditarDeduccionAFP").modal('hide');
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarDeduccionAFP").modal();
+    $("#InactivarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 const btnInhabilitar = $('#btnInactivarRegistroDeduccionAFP');
@@ -577,7 +672,7 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         
@@ -591,7 +686,7 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro se inhabilitó de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
         ocultarCargandoInhabilitar();
@@ -602,15 +697,3 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
         return false;
     });
 });
-
-
-// PROBANDO LOS IZITOAST
-//$(document).ready(function () {
-//    console.log('cargado JS');
-//    iziToast.show({
-//        title: 'Hola',
-//        message: 'Estoy probando los iziToast'
-//    });
-//});
-
-

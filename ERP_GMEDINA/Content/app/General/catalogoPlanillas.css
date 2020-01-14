@@ -18,5 +18,17 @@ tr.shown td.details-control {
 .no-sort {
     pointer-events: none !important;
     cursor: default !important;
-    padding:13px !important;
+    padding: 13px !important;
+}
+
+.data {
+    width: 300px;
+    max-height: 400px;
+    overflow: scroll;
+}
+
+.data-details {
+    width: 460px;
+    max-height: 400px;
+    overflow: scroll;
 }
