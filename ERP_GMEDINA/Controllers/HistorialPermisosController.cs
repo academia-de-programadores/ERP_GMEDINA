@@ -35,7 +35,7 @@ namespace ERP_GMEDINA.Controllers
                           .Select(
                           t => new
                           {
-                            // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
+                              // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
                               hper_Id = t.hper_Id,
                               hper_Justificado = t.hper_Justificado,
                               per_Nombres = t.per_Nombres + " " + t.per_Apellidos,
@@ -46,9 +46,9 @@ namespace ERP_GMEDINA.Controllers
                               per_EstadoCivil = t.per_EstadoCivil,
                               hper_Observacion = t.hper_Observacion,
                               hper_fechaInicio = t.hper_fechaInicio,
-                              hper_fechaFin=t.hper_fechaFin,
-                              hper_Duracion=t.hper_Duracion,
-                              hper_PorcentajeIndemnizado=t.hper_PorcentajeIndemnizado,
+                              hper_fechaFin = t.hper_fechaFin,
+                              hper_Duracion = t.hper_Duracion,
+                              hper_PorcentajeIndemnizado = t.hper_PorcentajeIndemnizado,
                               tper_Id = t.tper_Id,
                               tper_Descripcion = t.tper_Descripcion
                           }
@@ -229,6 +229,10 @@ namespace ERP_GMEDINA.Controllers
                 hper_Observacion = tbHistorialPermisos.hper_Observacion,
                 hper_Estado = tbHistorialPermisos.hper_Estado,
                 hper_RazonInactivo = tbHistorialPermisos.hper_RazonInactivo,
+                hper_fechaInicio = tbHistorialPermisos.hper_fechaInicio,
+                hper_fechaFin = tbHistorialPermisos.hper_fechaFin,
+                hper_Duracion=tbHistorialPermisos.hper_Duracion,
+
                 hper_UsuarioCrea = tbHistorialPermisos.hper_UsuarioCrea,
                 hper_FechaCrea = tbHistorialPermisos.hper_FechaCrea,
                 hper_UsuarioModifica = tbHistorialPermisos.hper_UsuarioModifica,
@@ -238,7 +242,7 @@ namespace ERP_GMEDINA.Controllers
             };
             return Json(HistorialPermisos, JsonRequestBehavior.AllowGet);
         }
-         // POST: Habilidades/Edit/5
+        // POST: Habilidades/Edit/5
         [HttpPost]
         public JsonResult Edit(string hsal_Observacion)
         {
@@ -253,7 +257,7 @@ namespace ERP_GMEDINA.Controllers
                 var id = (int)Session["id"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialPermisos_Update(id, tbHistorialPermisos.hper_Observacion,Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialPermisos_Update(id, tbHistorialPermisos.hper_Observacion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialPermisos_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -277,7 +281,6 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(string hper_RazonInactivo)
         {
             string msj = "";
-
             db = new ERP_GMEDINAEntities();
             tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos();
             //tbTipoHoras.tiho_Id = id;

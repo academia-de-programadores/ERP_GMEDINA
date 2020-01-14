@@ -233,8 +233,9 @@ $("#btnCrear").click(function () {
                     function (obj) {
                         if (obj != "-1" && obj != "-2" && obj != "-3") {
                             //LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-                            MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                            location.href = "/HistorialPermisos/Index";
+                            MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                            setTimeout(function () { location.href = "/HistorialPermisos/Index"; }, 5000);
+                            $("#btnCrear").attr("disabled", "disabled");
                         } else {
                             MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                         }
