@@ -1,4 +1,5 @@
-﻿function tablaDetalles(id) {
+﻿var fill = 0;
+function tablaDetalles(id) {
     $(location).attr('href', "/Areas/details/" + id);
 }
 function tablaEditar(id) {
@@ -39,7 +40,7 @@ function format(obj) {
     });
     return div + '</div></div></div>';
 }
-function llenarTabla(fill) {
+function llenarTabla() {
     _ajax(null,
        '/Areas/llenarTabla',
        'POST',
@@ -81,7 +82,8 @@ function flecha(obj) {
     }, 50);
 }
 $(document).ready(function () {
-    llenarTabla(-1);
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
 });
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

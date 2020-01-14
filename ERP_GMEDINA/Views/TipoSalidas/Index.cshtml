@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbTipoSalidas>
+﻿@model ERP_GMEDINA.Models.tbTipoSalidas
 
 @{
     ViewBag.Title = "Tipos de Salidas";
@@ -40,7 +40,11 @@
 }
 
 @section Scripts {
-  @Scripts.Render("~/plugins/dataTables")
-@Scripts.Render("~/Scripts/app/general")
-@Scripts.Render("~/Scripts/app/general/TipoSalidas")
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general/TipoSalidas")
+    @if (Model.tsal_Estado)
+    {
+        @Scripts.Render("~/Scripts/app/general/TipoSalidas/Admin")
+    }
 }

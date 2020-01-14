@@ -1,4 +1,5 @@
 ﻿var ID = 0;
+var fill = 0;
 //Funciones GET
 function tablaEditar(id) {
     //var tr=$(btn).closest("tr");
@@ -36,6 +37,8 @@ function tablaDetalles(id) {
             }
         });
 }
+//fill = -1 para cargar toda la data
+//fill = 0 para cargar solo los activos
 function llenarTabla() {
     _ajax(null,
         '/Habilidades/llenarTabla',
@@ -47,15 +50,24 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    ID: value.habi_Id,
-                    Descripcion: value.habi_Descripcion
-                });
+                var Acciones = value.habi_Estado == 1
+                    ? null :
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "</div>";
+                if (value.habi_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.habi_Id,
+                        Descripcion: value.habi_Descripcion,
+                        Acciones: Acciones
+                    });
+                }                
             });
             tabla.draw();
         });
 }
 $(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 //Botones GET

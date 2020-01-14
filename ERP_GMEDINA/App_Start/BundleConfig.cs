@@ -460,9 +460,16 @@ namespace ERP_GMEDINA
              "~/Scripts/plugins/iziToast/iziToast.min.js",
              "~/Scripts/app/general/general.js"));
 
+            // script Habilidades
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
+            "~/Scripts/app/general/Habilidades/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
             "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            // script TipoSalidas
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas/Admin").Include(
+            "~/Scripts/app/general/TipoSalidas/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
             "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbHabilidades>
+﻿@model ERP_GMEDINA.Models.tbHabilidades
 
 @{
     ViewBag.Title = "Habilidades";
@@ -42,4 +42,8 @@
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/Habilidades")
+    @if (Model.habi_Estado)
+    {
+        @Scripts.Render("~/Scripts/app/general/Habilidades/Admin")
+    }
 }
