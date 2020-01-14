@@ -132,17 +132,12 @@
                 <button type="button" class="close" data-dismiss="modal" id="btnXCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Bono</h4>
             </div>
-            <div class="modal-body" id="Editar">
+           
                 @Html.Partial("_EditEmpleadoBonos", new ERP_GMEDINA.Models.tbEmpleadoBonos())
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary pull-left" id="btnUpdateBonos">Actualizar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarEmpleadoBonos">Inhabilitar</button>
-            </div>
+           
         </div>
     </div>
-</div>
 
 
 <div class="modal fade" id="EditarEmpleadoBonosConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
