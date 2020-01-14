@@ -164,13 +164,15 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbTipoMonedas tbTipoMonedas)
         {
             string msj = "...";
-            if (tbTipoMonedas.tmon_Id != 0 && tbTipoMonedas.tmon_RazonInactivo != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbTipoMonedas.tmon_Id != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoMonedas_Delete(id, tbTipoMonedas.tmon_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoMonedas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoMonedas_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

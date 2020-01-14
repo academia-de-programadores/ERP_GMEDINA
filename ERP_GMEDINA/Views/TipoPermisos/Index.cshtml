@@ -24,16 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="gradeA odd" role="row" data-id="@item.tper_Id">
-                                    <td>@Html.DisplayFor(modelItem => item.tper_Descripcion)</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-xs " onclick="tablaDetalles(@item.tper_Id)">Detalles</a>
-                                        <a class="btn btn-default btn-xs " onclick="tablaEditar(@item.tper_Id)">Editar</a>
-                                    </td>
-                                </tr>
-                            }
+
                         </tbody>
                     </table>
                 </div>
@@ -50,9 +41,11 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/plugins/clockpickerStyles")
 }
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/TipoPermisos")
+    @Scripts.Render("~/plugins/clockpicker")
 }

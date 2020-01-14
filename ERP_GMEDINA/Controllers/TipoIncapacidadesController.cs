@@ -160,13 +160,16 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbTipoIncapacidades tbTipoIncapacidades)
         {
             string msj = "";
-            if (tbTipoIncapacidades.ticn_RazonInactivo != "")
+
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbTipoIncapacidades.ticn_Id != 0)
             {
                 var id = (int)Session["id"];
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoIncapacidades_Delete(id, tbTipoIncapacidades.ticn_RazonInactivo, usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Delete(id, RazonInactivo, usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -209,21 +212,3 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
