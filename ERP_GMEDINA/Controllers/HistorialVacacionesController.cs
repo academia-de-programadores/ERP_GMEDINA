@@ -35,8 +35,18 @@ namespace ERP_GMEDINA.Controllers
                             emp_Id = t.emp_Id,
                             Empleado = t.emp_NombreCompleto,
                             Cargo = t.car_Descripcion,
-                            Departamento = t.depto_Descripcion
+                            Departamento = t.depto_Descripcion,
+                            FechaContratacion = t.emp_Fechaingreso
                         }).ToList();
+
+                    foreach(var e in Empleados)
+                    {
+                        if(DateTime.Now.AddYears(-1) < e.FechaContratacion )
+                        {
+
+                        }
+                    }
+
                     return Json(Empleados, JsonRequestBehavior.AllowGet);
                 }
             }

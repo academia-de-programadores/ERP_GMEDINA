@@ -21,5 +21,6 @@ namespace ERP_GMEDINA.Models
         public int depto_Id { get; set; }
         public string depto_Descripcion { get; set; }
         public bool emp_Estado { get; set; }
+        public System.DateTime emp_Fechaingreso { get; set; }
     }
 }
