@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialSalidas>
 
 @{
-    ViewBag.Title = "Salidas";
+    ViewBag.Title = "Finalizaciones Laborales";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -10,9 +10,9 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Listado de salidas de personal</h5>
+                    <h5>Listado de Finalizaciones Laborales</h5>
                     <div class="ibox-tools">
-                        @Html.ActionLink("Registrar Salidas de Personal", "Create", null, new { @class = "btn btn-primary btn-xs" })
+                        @Html.ActionLink("Registrar Finalizacion Laboral", "Create", null, new { @class = "btn btn-primary btn-xs" })
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -40,7 +40,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
 
-                <h4 class="modal-title">Editar Observación de salida</h4>
+                <h4 class="modal-title">Editar Finalizacion Laboral</h4>
 
             </div>
             <div class="modal-body" id="ModalEdit">
@@ -91,7 +91,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
 
-                <h4 class="modal-title">Detalles de la salida</h4>
+                <h4 class="modal-title">Detalles de la Finalizacion</h4>
 
             </div>
             <div class="modal-body" id="ModalDetallesAX">
