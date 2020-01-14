@@ -56,7 +56,7 @@ function cargarGridDeducciones() {
 
                 template += '<tr data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].eqem_Id + '</td>' +
+                    '<td>' + ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoInicial + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoRestante + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios + '</td>' +
