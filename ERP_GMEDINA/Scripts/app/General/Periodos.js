@@ -279,9 +279,21 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
         	}
         });
 });
+
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPeriodo", function () {
+    //OCULTAR MODAL DE EDICION
+    $("#EditarPeriodo").modal('hide');
+    //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarPeriodo").modal();
+});
+
+//OCULTAR EL MODAL DE INACTIVAR
+$(document).on("click", "#btnCerrarInactivar", function () {
+    //OCULTAR MODAL DE EDICION
+    $("#EditarPeriodo").modal();
+    //MOSTRAR MODAL DE INACTIVACION
+    $("#InactivarPeriodo").modal('hide');
 });
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
