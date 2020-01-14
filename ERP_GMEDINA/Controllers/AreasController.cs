@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            bool Admin = (bool)Session["Admin"];
             tbAreas tbAreas = new tbAreas {area_Estado=true };
             return View(tbAreas);
         }

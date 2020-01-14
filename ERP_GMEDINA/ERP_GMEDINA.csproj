@@ -1251,6 +1251,7 @@
     <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
+    <Content Include="Scripts\app\General\Habilidades\Admin.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
@@ -1286,6 +1287,7 @@
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
     <Content Include="Scripts\app\General\TipoPermisos\TipoPermisos.js" />
+    <Content Include="Scripts\app\General\TipoSalidas\Admin.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />

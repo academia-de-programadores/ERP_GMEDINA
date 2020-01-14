@@ -17,31 +17,21 @@ namespace ERP_GMEDINA.Controllers
         // GET: Habilidades
         public ActionResult Index()
         {
-            List<tbTipoSalidas> tbTipoSalidas = new List<Models.tbTipoSalidas> { };
+            tbTipoSalidas tbTipoSalidas = new tbTipoSalidas {tsal_Estado=true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbTipoSalidas = db.tbTipoSalidas.Where(x => x.tsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbTipoSalidas);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbTipoSalidas.Add(new tbTipoSalidas { tsal_Id = 0, tsal_Descripcion = "fallo la conexion" });
-            }
             return View(tbTipoSalidas);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
             var lista = db.tbTipoSalidas
-                .Where(x => x.tsal_Estado == true)
                 .Select(
                 t =>
                 new
                 {
                     tsal_Id = t.tsal_Id,
-                    tsal_Descripcion = t.tsal_Descripcion
+                    tsal_Descripcion = t.tsal_Descripcion,
+                    tsal_Estado = t.tsal_Estado
                 })
                 .ToList();
             return Json(lista, JsonRequestBehavior.AllowGet);
@@ -178,7 +168,29 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoSalidas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoSalidas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)

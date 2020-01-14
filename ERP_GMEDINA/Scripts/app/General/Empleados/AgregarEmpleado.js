@@ -41,7 +41,7 @@ $( "#FormEmpleados" ).on( "submit", function( event ) {
             MsgError("Error", "El archivo ya existe");
         }
         else if (res == "1") {
-            MsgSuccess("Exito", "Se han agregado los registros con exito");
+            MsgSuccess("Exito", "Los registros se agregaron de forma exitosa");
             llenarTabla();
             $('#ModalNuevo').modal('hide');
         }

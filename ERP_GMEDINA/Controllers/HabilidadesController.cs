@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Habilidades
         public ActionResult Index()
         {
-            List<tbHabilidades> tbHabilidades = new List<tbHabilidades> { };
+            tbHabilidades tbHabilidades = new tbHabilidades {habi_Estado=true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             return View(tbHabilidades);
         }
@@ -25,13 +25,13 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult llenarTabla()
         {
             var lista = db.tbHabilidades
-                .Where(x => x.habi_Estado == true)
                 .Select(
                     t =>
                     new
                     {
                         habi_Id = t.habi_Id,
-                        habi_Descripcion = t.habi_Descripcion
+                        habi_Descripcion = t.habi_Descripcion,
+                        habi_Estado = t.habi_Estado
                     }
                 )
                 .ToList();
@@ -169,7 +169,28 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbHabilidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHabilidades_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)

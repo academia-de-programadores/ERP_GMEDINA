@@ -1,4 +1,5 @@
 ﻿var id = 0;
+var fill = 0;
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -40,17 +41,27 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-             tabla.row.add(
-              {
-                  ID: value.tsal_Id,
-                  Salidas: value.tsal_Descripcion
-              }
-              ).draw();
+                var Acciones = value.tsal_Estado == 1
+                    ? null :
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "</div>";
+                if (value.tsal_Estado > fill) {
+                    tabla.row.add(
+                        {
+                            ID: value.tsal_Id,
+                            Salidas: value.tsal_Descripcion,
+                            Acciones: Acciones
+                        });
+                }
+             
             });
+            tabla.draw();
         });
 }
 $(document).ready(function () {
- llenarTabla();
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
 });
 //Botones GET
 $("#btnAgregar").click(function () {
