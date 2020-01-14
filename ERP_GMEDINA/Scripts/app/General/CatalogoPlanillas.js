@@ -11,6 +11,7 @@ var pathname = window.location.pathname + '/',
 		location.hostname +
 		(location.port ? ':' + location.port : ''),
 	table,
+	table2,
 	checkSeleccionarTodasLasDeducciones = $('#checkSeleccionarTodasDeducciones'); //Almacenar la tabla
 
 //Constantes
@@ -87,13 +88,13 @@ var crearEditar = function (edit) {
 				if (data == 'bien') {
 					iziToast.success({
 						title: 'Exito',
-						message: 'El registro fue insertado de forma exitosa.'
+						message: '¡El registro se agregó de forma exitosa!'
 					});
 					location.href = baseUrl;
 				} else {
 					iziToast.error({
 						title: 'Error',
-						message: 'Hubo un error al insertar el registro'
+						message: 'No se guardó el registro, contacte al administrador'
 					});
 
 					ocultarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
@@ -118,13 +119,13 @@ var crearEditar = function (edit) {
 				if (data == 'bien') {
 					iziToast.success({
 						title: 'Exito',
-						message: 'El registro fue editado de forma exitosa.'
+						message: '¡El registro se editó de forma exitosa!'
 					});
 					location.href = baseUrl;
 				} else {
 					iziToast.error({
 						title: 'Error',
-						message: 'Hubo un error al editar el registro'
+						message: 'No se editó el registro, contacte al administrador'
 					});
 					ocultarSpinnerSpinner($('#btnConfirmacionEdit'), cargandoEditar);
 				}
@@ -341,6 +342,10 @@ function listar() {
 			contentType: 'application/json; charset=utf-8',
 			dataType: 'json'
 		},
+		// stateSave: true,
+		// "scrollY": "400px",
+		// "scrollCollapse": true,
+		//"pagingType": "full_numbers",
 		columns: [
 			{
 				//Columna 1: el boton de desplegar
@@ -388,7 +393,7 @@ function listar() {
 			sProcessing: spinner(),
 			sLengthMenu: 'Mostrar _MENU_ registros',
 			sZeroRecords: 'No se encontraron resultados',
-			sEmptyTable: 'Ningún dato disponible en esta tabla',
+			sEmptyTable: 'No se cargó la información, contacte al administrador',
 			sInfo:
 				'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
 			sInfoEmpty: 'Mostrando registros del 0 al 0 de un total de 0 registros',
@@ -455,6 +460,7 @@ const idiomaEspaniolCatalogos = {
 		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 	}
 };
+
 //Create o Edit
 function listarCatalogos() {
 	$('.i-checks, .i-checks-no-aplica').iCheck({
@@ -586,7 +592,7 @@ function listarCatalogos() {
 		});
 
 		//Deducciones
-		$('.tbl-catalogos-d').DataTable({
+		table2 = $('.tbl-catalogos-d').DataTable({
 			"language": idiomaEspaniolCatalogos,
 			"paging": false,
 			ajax: {
@@ -711,7 +717,7 @@ function listarCatalogos() {
 		});
 
 		//Deducciones
-		$('.tbl-catalogos-d').DataTable({
+		table2 = $('.tbl-catalogos-d').DataTable({
 			"language": idiomaEspaniolCatalogos,
 			"paging": false,
 			ajax: {
@@ -871,27 +877,27 @@ function getIngresos(data) {
             <h5>Ingresos de la Planilla</h5>
         </div>
 		<div class="ibox-content">
-		<div class="data">
-            <table class="table table-bordered tbl-catalogos">
+		<div class="data-details">
+            <table class="table table-bordered tbl-catalogos" id="childIngresos">
                 <thead>
                     <tr>
                         <th>Ingreso</th>
                     </tr>
                 </thead>
                 <tbody>`;
-		$.each(data.ingresos, function (index, val) {
-			ingresosPlanillas +=
-				`
+	$.each(data.ingresos, function (index, val) {
+		ingresosPlanillas +=
+			`
 							<tr>
 								<td>
 									` +
-				val.cin_DescripcionIngreso +
-				`
+			val.cin_DescripcionIngreso +
+			`
 								</td>
 							</tr>
 						`;
-		});
-ingresosPlanillas += `</tbody>
+	});
+	ingresosPlanillas += `</tbody>
 				</table>
 			</div>
         </div>
@@ -907,8 +913,9 @@ function getDeducciones(data) {
        <div class="ibox-title">
             <h5>Deducciones de la Planilla</h5>
         </div>
-        <div class="ibox-content">
-            <table class="table table-bordered">
+		<div class="ibox-content">
+		<div class="data-details">
+            <table class="table table-bordered tbl-catalogos">
                 <thead>
                     <tr>
                         <th>Deducción</th>
@@ -928,7 +935,8 @@ function getDeducciones(data) {
                     `;
 	});
 	deduccionesPlanilla += `</tbody>
-            </table>
+			</table>
+			</div>
         </div>
     </div>`;
 
@@ -1055,7 +1063,9 @@ $(document).on('click', 'td.details-control', function () {
 			(data) => {
 				//Mostrar el detalle con sus datos
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
-				$('#tblCatalogoPlanillas tbody tr .tbl-catalogos').DataTable({
+				tr.addClass('shown');
+
+				let detail = $('.tbl-catalogos').DataTable({
 					"language": {
 						"paging": false,
 						"sProcessing": spinner(),
@@ -1081,12 +1091,15 @@ $(document).on('click', 'td.details-control', function () {
 							"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 						}
 					},
-					"paging": false,
+					"paging": true,
 					responsive: false,
 					dom: 'lft',
-					"order": [[1, "asc"]]
+					"order": [[0, "asc"]],
+					initComplete: function () {
+						console.log('Hola');
+					}
 				});
-				tr.addClass('shown');
+
 			},
 			() => { }
 		);
@@ -1104,6 +1117,8 @@ $(document).on(
 
 //Desplegar modal de que si desea guardar
 $('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	table.search('').draw();
+	table2.search('').draw();
 	//Array de Ingresos y deducciones
 	let arrayIngresos = [];
 	let arrayDeducciones = [];
@@ -1134,6 +1149,8 @@ $('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
 
 //Desplegar modal de que si desea editar
 $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
+	table.search('').draw();
+	table2.search('').draw();
 	//Array de Ingresos y deducciones
 	let arrayIngresos = [];
 	let arrayDeducciones = [];
@@ -1188,13 +1205,13 @@ $('#InactivarCatalogoDeducciones #btnInactivarPlanilla').click(() => {
 			if (data == 'bien') {
 				iziToast.success({
 					title: 'Exito',
-					message: 'El registro fue inactivado de forma exitosa.'
+					message: '¡El registro se inactivó de forma exitosa!'
 				});
 				location.href = baseUrl;
 			} else {
 				iziToast.error({
 					title: 'Error',
-					message: 'Ocurrió un error'
+					message: 'No se inactivó el registro, contacte al administrador'
 				});
 			}
 			ocultarSpinner($('#btnInactivarPlanilla'), cargandoEliminar);
@@ -1213,12 +1230,17 @@ $(document).on('click', '#btnActivarCatatalogoPlanilla', () => {
 			if (data.response == 'bien') {
 				iziToast.success({
 					title: 'Éxito',
-					message: 'El registro se activo correctamente.'
+					message: '¡El registro se activó de forma exitosa!'
 				});
 				$('#frmActivarCatalogoPlanilla').modal('hide');
 
 				table.clear();
 				table.rows.add(data.data).draw();
+			} else {
+				iziToast.error({
+					title: 'Éxito',
+					message: 'No se activó el registro, contacte al administrador'
+				});
 			}
 			ocultarSpinner($('#btnActivarCatatalogoPlanilla'), $('#cargandoActivar'));
 		},

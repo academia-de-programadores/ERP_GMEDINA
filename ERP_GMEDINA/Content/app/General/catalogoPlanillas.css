@@ -23,6 +23,12 @@ tr.shown td.details-control {
 
 .data {
     width: 300px;
-    height: 400px;
+    max-height: 400px;
+    overflow: scroll;
+}
+
+.data-details {
+    width: 460px;
+    max-height: 400px;
     overflow: scroll;
 }
