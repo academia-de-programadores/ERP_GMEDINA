@@ -1926,12 +1926,6 @@
     <Content Include="Views\FormaPago\_Details.cshtml" />
     <Content Include="Views\FormaPago\_Edit.cshtml" />
     <Content Include="Views\FormaPago\Index.cshtml" />
-    <Content Include="Views\ReportesPlanilla\DeduccionesParametros.cshtml" />
-    <Content Include="Views\ReportesPlanilla\IngresosParametros.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportesVariosParametros.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <ItemGroup>
