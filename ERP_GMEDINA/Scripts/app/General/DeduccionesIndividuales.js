@@ -22,6 +22,13 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+$(document).ready(function () {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
+})
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -199,26 +206,14 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionesIndividuales").modal();
-    $("#emp_Id").val("0");
+    $("#Crear #emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
     $("#dei_MontoRestante").val('');
     $("#dei_Cuota").val('');
     $("#dei_PagaSiempre").val('');
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
 });
 
-$("#AgregarDeduccionesIndividuales").on('hidden.bs.modal', function () {
-
-});
-
-$("#AgregarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
-$("html, body").css("overflow", "hidden");
-$("html, body").css("overflow", "scroll");
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
@@ -228,13 +223,6 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     var val3 = $("#Crear #dei_MontoInicial").val();
     var val4 = $("#Crear #dei_MontoRestante").val();
     var val5 = $("#Crear #dei_Cuota").val();
-
-    if (val1 == "" || val1 == 0 || val1 == "0") {
-        $("#Crear #validation2").css("display", "");
-    }
-    else {
-        $("#Crear #validation2").css("display", "none");
-    }
 
     if (val2 == "") {
         $("#Crear #validation1").css("display", "");
@@ -263,48 +251,55 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
         $("#Crear #validation5").css("display", "none");
     }
 
-    mostrarCargandoCrear();
+    if (val1 == "" || val1 == 0 || val1 == "0") {
+        $("#Crear #validation2").css("display", "");
+    }
+    else {
+        $("#Crear #validation2").css("display", "none");
+
+        mostrarCargandoCrear();
 
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateDeduccionIndividual").serializeArray();
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmCreateDeduccionIndividual").serializeArray();
 
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/DeduccionesIndividuales/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesIndividuales/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
 
-        //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data != "error") {
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
 
-            cargarGridDeducciones();
+                cargarGridDeducciones();
 
-            $("#Crear #dei_Motivo").val('');
-            $("#Crear #dei_MontoInicial").val('');
-            $("#Crear #dei_MontoRestante").val('');
-            $("#Crear #dei_Cuota").val('');
-            $("#Crear #dei_PagaSiempre").val('');
+                $("#Crear #dei_Motivo").val('');
+                $("#Crear #dei_MontoInicial").val('');
+                $("#Crear #dei_MontoRestante").val('');
+                $("#Crear #dei_Cuota").val('');
+                $("#Crear #dei_PagaSiempre").val('');
 
-            //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarDeduccionesIndividuales").modal('hide');
+                //CERRAR EL MODAL DE AGREGAR
+                $("#AgregarDeduccionesIndividuales").modal('hide');
 
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro se agregó de forma exitosa!',
-            });
-        }
-        else {
-            iziToast.error({
-                title: 'Error',
-                message: 'Datos Invalidos!',
-            });
-        }
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Datos Invalidos!',
+                });
+            }
 
-        ocultarCargandoCrear();
-    });
+            ocultarCargandoCrear();
+        });
+    }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateDeduccionIndividual").submit(function (e) {
@@ -424,15 +419,20 @@ $("#btnEditDeduccionIndividual").click(function () {
 
 
 $(document).on("click", "#btnRegresar", function () {
+    $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
+});
+
+
+$(document).on("click", "#btnReg", function () {
     $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
+    $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
-$("#EditarDeduccionesIndividuales").on('hidden.bs.modal', function () {
-
-});
 
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
@@ -588,10 +588,17 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
+    $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
+});
+
+$(document).on("click", "#btnBa", function () {
     $("#InactivarDeduccionesIndividuales").modal('hide');
+    $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {

@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-9">
                 <select id="emp_Id" name="emp_Id" class="form-control"></select>
-                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", @id = "validation1d" })
+                <label class="text-danger" id="validatione1d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo Empleado es Requerido.</label>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-9">
                 <select id="afp_Id" name="afp_Id" class="form-control"></select>
-                @Html.ValidationMessageFor(model => model.afp_Id, "", new { @class = "text-danger", @id = "validation3d" })
+                <label class="text-danger" id="validatione3d" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo AFP es Requerido.</label>
             </div>
         </div>
 
