@@ -14,13 +14,13 @@
     var Empleado =[
                 "Empleados",
                 "Sueldos",
+                "HistorialVacaciones",
                 "HistorialHorasTrabajadas",
                 "HistorialCargos"
+                
             ]
     var ACCIONES = {
-        Vacaciones:[
-                "HistorialVacaciones"
-        ],
+   
         Amonestaciones: [
                 "TipoAmonestaciones",
                 "HistorialAudienciaDescargos",
