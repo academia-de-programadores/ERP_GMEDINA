@@ -95,28 +95,28 @@ function cargarGridDeducciones() {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-    $("#tde_IdTipoDedu").val("0");
+    $("#Crear #Validation_descipcionA").css("display", "none");
+    $("#Crear #Validation_descipcion2A").css("display", "none");
+    $("#Crear #Validation_descipcion3A").css("display", "none");
+    $("#Crear #Validation_descipcion4A").css("display", "none");
+    $("#Crear #cde_DescripcionDeduccionA").val("");
+    $("#Crear #cde_PorcentajeColaboradorA").val("");
+    $("#Crear #cde_PorcentajeEmpresaA").val("");
+    $("#Crear #tde_IdTipoDedu").val("0");
     ocultarCargandoCrear(); 
 });
 
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrarCreate").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-    $("#tde_IdTipoDedu").val("0");
+    $("#Crear #Validation_descipcionA").css("display", "none");
+    $("#Crear #Validation_descipcion2A").css("display", "none");
+    $("#Crear #Validation_descipcion3A").css("display", "none");
+    $("#Crear #Validation_descipcion4A").css("display", "none");
+    $("#Crear #cde_DescripcionDeduccionA").val("");
+    $("#Crear #cde_PorcentajeColaboradorA").val("");
+    $("#Crear #cde_PorcentajeEmpresaA").val("");
+    $("#Crear #tde_IdTipoDedu").val("0");
     ocultarCargandoCrear();
 });
 
@@ -201,7 +201,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
                             // Mensaje de exito cuando un registro se ha guardado bien
                             iziToast.success({
                                 title: 'Exito',
-                                message: 'El registro fue agregado de forma exitosa!',
+                                message: '¡El registro se agregó de forma exitosa!',
                             });
                         }
                         else {
@@ -289,7 +289,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#EditarCatalogoDeducciones").modal();
+                $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -308,6 +310,8 @@ $('#btnUpdateDeduccion').click(function () {
 
     if (cde_DescripcionDeduccionE2 == "" ||  cde_PorcentajeColaboradorE2 == "" || cde_PorcentajeColaboradorE2 == "0" || cde_PorcentajeColaboradorE2 < 0 || cde_PorcentajeEmpresaE2 == "" || cde_PorcentajeEmpresaE2 == "0" || cde_PorcentajeEmpresaE2 < 0)
     {
+
+        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
         $("#Editar #Validation_descipcion").css("display", "");
         $("#Editar #Validation_descipcion2").css("display", "");
         $("#Editar #Validation_descipcion3").css("display", "");
@@ -316,14 +320,15 @@ $('#btnUpdateDeduccion').click(function () {
             title: 'Error',
             message: 'Ingrese datos validos',
         });
-        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
     }
     else {
         $("#Editar #Validation_descipcion").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "none");
         $("#Editar #Validation_descipcion3").css("display", "none");
            
-        $("#EditarCatalogoDeduccionesConfirmacion").modal();
+        $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 });
 
@@ -353,7 +358,7 @@ $("#btnUpdateDeduccion2").click(function () {
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             }
             else
@@ -362,6 +367,9 @@ $("#btnUpdateDeduccion2").click(function () {
                     title: 'Error',
                     message: 'Ingrese datos validos',
                 });
+                $("#Editar #Validation_descipcion2").css("display", "");
+                $("#Editar #Validation_descipcion3").css("display", "");
+                $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
             }
         });
 });  
@@ -435,7 +443,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 //MOSTRAR MODAL INACTIVAR
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal();
+    $("#InactivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 
     //Ocultar el modal editar
     $("#EditarCatalogoDeducciones").modal('hide');
@@ -472,7 +482,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
 
         }
@@ -483,19 +493,19 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 //MOSTRAR MODAL ACTIVAR
 $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#ActivarCatalogoDeducciones").modal();
+    $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnCerrarInhabilitar").click(function () {
-
     //Mostrar modal editar nuevamente
-    $("#EditarCatalogoDeducciones").modal();
-
+    $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#InactivarCatalogoDeducciones").modal('hide');
-
-
 });
 
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnActivarCatalogoDeducciones", function () {
@@ -519,7 +529,7 @@ $("#btnActivarRegistroDeduccion").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -530,7 +540,7 @@ $("#btnActivarRegistroDeduccion").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
             ocultarCargandoActivar();
         }
