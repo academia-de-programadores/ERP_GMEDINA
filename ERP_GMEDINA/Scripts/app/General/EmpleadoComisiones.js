@@ -157,8 +157,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
 $('#btnUpdateComisionesConfirmar').click(function () {
     var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
-    var TotalVenta = $("#Editar #cc_TotalVenta").val();
-    debugger;
+    var TotalVenta = $("#Editar #cc_TotalVenta").val();   
      if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
         $("#Editar #Validation_descipcion1").css("display", "");
         iziToast.error({
@@ -169,24 +168,14 @@ $('#btnUpdateComisionesConfirmar').click(function () {
      }
      else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
          $("#Editar #Validation_descipcion2").css("display", "");
-         iziToast.error({
-             title: 'Error',
-             message: 'Ingrese datos validos',
-         });
-         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+   
      }
      else if (PorcentajeComision == "" && TotalVenta == "" && PorcentajeComision == "0.00" && TotalVenta == "0.00" && PorcentajeComision == null && TotalVenta == null && PorcentajeComision == undefined && TotalVenta == undefined) {
          $("#Editar #Validation_descipcion1").css("display", "");
-         $("#Editar #Validation_descipcion2").css("display", "");
-         iziToast.error({
-             title: 'Error',
-             message: 'Ingrese datos validos',
-         });
-         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+         $("#Editar #Validation_descipcion2").css("display", "");   
      }
     else {
-        $("#Editar #Validation_descipcion1").css("display", "");
-        $("#Editar #Validation_descipcion2").css("display", "");
+       
         $("#EditarEmpleadoComisionesConfirmacion").modal();
     }
    
@@ -297,7 +286,7 @@ $('#btnCreateRegistroComisiones').click(function () {
     var Empleado = $("#Crear #emp_IdEmpleado").val();
     var Ingreso = $("#Crear #cin_IdIngreso").val();
     var Porcentaje = $("#Crear #PorcentajeComision").val();
-    var Total = $("#Crear #TotalV").val();
+    var Total = $("#Crear #TotalVenta").val();
 
     if (Empleado == "0" ) {
         $("#Validation_descipcion").css("display", "");

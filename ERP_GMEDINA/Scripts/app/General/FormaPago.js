@@ -33,7 +33,7 @@ function cargarGridFormaPago() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -76,7 +76,7 @@ function cargarGridFormaPago() {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarFormaPago", function () {
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#CrearFormaPago #fpa_Descripcion").val('');
+    $("#Crear #fpa_Descripcion").val('');
     $("#CrearFormaPago").modal();
     $("#CrearFormaPago #Validation_descripcion").css("display", "none");
 });
@@ -99,16 +99,17 @@ $('#btnCrearFormaPago').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
             else {
+                $("#Crear #fpa_Descripcion").val();
                 $("#CrearFormaPago").modal('hide');
                 cargarGridFormaPago();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se registró de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
@@ -152,18 +153,24 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 });
 
 $("#btnUpdateFormaPago").click(function () {
-    //console.log('console');
-    $("#ConfirmarEdicion").modal();
-});
-
-$("#btnCerrarConfirmarEditar").click(function () {
-    $("#ConfirmarEdicion").modal('hide');
+    debugger;
+    var Descripcion = $("#Editar #fpa_Descripcion").val();
+    debugger;
+    if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
+        $("#ConfirmarEdicion").modal();
+    }
+    else {
+       
+        $("#Editar #Edit_Validation_descripcion").css("display", "");
+        $("#ConfirmarEdicion").modal('hide');
+    }
+   
 });
 
 //GUARADR LA EDICION DEL REGISTRO
-$(document).on("click", "#btnUpdateFormaPago", function () {
+$("#btnConfirmarEditar2").click(function () {
     //VALIDAR QUE EL CAMPO NO ESTE VACIO
-    if ($("#frmEditFormaPago #Editar #fpa_Descripcion").val() != "") {
+    if ($("#Editar #fpa_Descripcion").val() != "") {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditFormaPago").serializeArray();
         console.log(data);
@@ -179,14 +186,14 @@ $(document).on("click", "#btnUpdateFormaPago", function () {
                 $("#EditarFormaPago").modal('hide');
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡Se editó de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
         });
@@ -226,7 +233,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -254,7 +261,7 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -265,7 +272,7 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Inhabiltado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -294,7 +301,7 @@ $("#btnActivarFormaPagoConfirm").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
             $("#ActivarFormaPago").modal('hide');
         }
@@ -306,7 +313,7 @@ $("#btnActivarFormaPagoConfirm").click(function () {
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
