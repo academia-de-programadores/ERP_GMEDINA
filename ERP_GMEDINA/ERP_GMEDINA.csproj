@@ -216,6 +216,11 @@
     <Compile Include="Controllers\ReportesPlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
+    <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1311,6 +1316,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="DataSets\ReportesPlanillaDS.xsc">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReportesPlanillaDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReportesPlanillaDS.xss">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1778,7 +1794,6 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\ReportesPlanilla\Index.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
@@ -1892,12 +1907,6 @@
     <Content Include="Views\CatalogoDeIngresos\_ActivarCatalogoDeIngreso.cshtml" />
     <Content Include="Views\EmpleadoComisiones\_ActivarEmpleadoComisiones.cshtml" />
     <Content Include="Views\TipoDeducciones\_DetailsTipoDeducciones.cshtml" />
-    <Content Include="Views\ReportesPlanilla\Deducciones.cshtml" />
-    <Content Include="Views\ReportesPlanilla\Ingresos.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportDeducciones.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportesVarios.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportIngresos.cshtml" />
-    <Content Include="Views\ReportesPlanilla\ReportVarios.cshtml" />
     <Content Include="Views\FechaPlanilla\ComprobanteEmpleadoEncabezado.cshtml" />
     <Content Include="Views\FechaPlanilla\Create.cshtml" />
     <Content Include="Views\FechaPlanilla\Delete.cshtml" />
@@ -1917,14 +1926,7 @@
     <Content Include="Views\FormaPago\_Details.cshtml" />
     <Content Include="Views\FormaPago\_Edit.cshtml" />
     <Content Include="Views\FormaPago\Index.cshtml" />
-    <Content Include="Views\Periodos\Index.cshtml" />
-    <Content Include="Views\Periodos\_Create.cshtml" />
-    <Content Include="Views\Periodos\_Details.cshtml" />
-    <Content Include="Views\Periodos\_Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="ReportesPlanilla\" />
+    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1954,6 +1956,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

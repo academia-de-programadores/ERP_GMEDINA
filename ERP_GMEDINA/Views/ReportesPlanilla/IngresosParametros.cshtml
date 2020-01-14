@@ -1,37 +1,27 @@
-﻿@model ERP_GMEDINA.Models.V_Deducciones_RPT
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_Ingresos_RPT
 
 @{
-	ViewBag.Title = "Deducciones";
+	ViewBag.Title = "Reportes ingresos";
 	Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-@using (Html.BeginForm("ReportDeduccionesPreview", "ReportesPlanilla"))
+@using (Html.BeginForm("IngresosParametros", "ReportesPlanilla", FormMethod.Post, new { id = "frmReportIngresosPreview" }))
 {
 	<div class="col-lg-12">
-		<div class="float-e-margins">
+		<div class="ibox">
 			<div class="ibox-title">
-				<h5>Reportes de Deducciones</h5>
-				<div class="ibox-tools">
-					<div style="display:none" class="btn" id="div_loading">
-						<div class="sk-spinner sk-spinner-wave">
-							<div class="sk-rect1"></div>
-							<div class="sk-rect2"></div>
-							<div class="sk-rect3"></div>
-							<div class="sk-rect4"></div>
-							<div class="sk-rect5"></div>
-						</div>
-					</div>
-				</div>
+				<h5>Reportes de ingresos</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
 						<div class="col-md-6">
-							<label class="font-normal">Deducción</label>
+							<label class="font-normal">Ingreso</label>
 
-							@Html.DropDownList("cde_IdDeducciones", (IEnumerable<SelectListItem>)ViewBag.Deducciones, "Seleccione una opción", new { @class = "form-control" })
+							@Html.DropDownList("cin_IdIngreso", (IEnumerable<SelectListItem>)ViewBag.Ingresos, "Seleccione una opción", new { @class = "form-control" })
 
-							@Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
+							@Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
 						</div>
 
 						<div class="col-md-6">
@@ -60,14 +50,36 @@
 							</div>
 							@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
 						</div>
-					</div>
-					<br />
-					<button type="submit" class="btn btn-primary btn-sm" id="btnImprimir">Previsualizar</button>
-				</div>
 
+					</div>
+					<button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarIngresos">Previsualizar</button>
+				</div>
 			</div>
 		</div>
 	</div>
 }
+
+@{
+	string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
+}
+<div id="divPreview" class="wrapper wrapper-content  animated" style="display:@visibilidadPreview;">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox ">
+				<div class="ibox-title">
+					<h4>Reporte de @ViewBag.Titulo</h4>
+				</div>
+				<div class="ibox-content">
+					@{
+						if (ViewBag.ReportViewer != null)
+						{
+							@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
