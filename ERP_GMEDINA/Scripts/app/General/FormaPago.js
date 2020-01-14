@@ -244,7 +244,18 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarFormaPago", function () {
+    //OCULTAR MODAL DE EDICION
+    $("#EditarFormaPago").modal('hide');
+    //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarFormaPago").modal();
+});
+
+//OCULTAR EL MODAL DE INACTIVAR
+$(document).on("click", "#btnCerrarInactivar", function () {
+    //OCULTAR MODAL DE INACTIVACION
+    $("#InactivarFormaPago").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarFormaPago").modal();
 });
 
 //CONFORMAR INACTIVACION DEL REGISTRO
@@ -267,8 +278,6 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
         else {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridFormaPago();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#InactivarFormaPago").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',

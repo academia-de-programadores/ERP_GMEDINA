@@ -111,9 +111,7 @@
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Preaviso</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
-            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPreaviso())
         </div>
     </div>
 </div>
@@ -166,7 +164,7 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" id="btnInactivarPreavisoConfirmar">Si</button>
-                <button type="button" class="btn btn-white" id="btnCerrar" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-white" id="btnCerrarInactivar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

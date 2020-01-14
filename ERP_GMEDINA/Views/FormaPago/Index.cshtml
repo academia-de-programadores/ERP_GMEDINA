@@ -73,19 +73,18 @@
     </div>
  </div>
 
-                      <div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
-                          <div class="modal-dialog">
-                              <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                      <h4 class="modal-title">Crear Forma de Pago</h4>
-                                  </div>
-                                  <div class="modal-body" id="Crear">
-                                      @Html.Partial("_Create", new ERP_GMEDINA.Models.tbFormaPago())
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+
+<div class="modal fade" id="CrearFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="IconCerrarCrear" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Crear Forma de Pago</h4>
+            </div>
+            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbFormaPago())
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="EditarFormaPago" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -94,9 +93,7 @@
                 <button type="button" id="IconCerrarEditar" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Forma de Pago</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbFormaPago())
-            </div>
+            @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbFormaPago())
         </div>
     </div>
 </div>

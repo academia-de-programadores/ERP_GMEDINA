@@ -1917,11 +1917,14 @@
     <Content Include="Views\FormaPago\_Details.cshtml" />
     <Content Include="Views\FormaPago\_Edit.cshtml" />
     <Content Include="Views\FormaPago\Index.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Periodos\_Create.cshtml" />
+    <Content Include="Views\Periodos\_Details.cshtml" />
+    <Content Include="Views\Periodos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ReportesPlanilla\" />
-    <Folder Include="Views\Periodos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
