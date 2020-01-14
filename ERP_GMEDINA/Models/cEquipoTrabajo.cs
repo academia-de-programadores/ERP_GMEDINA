@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
         [Display(Name = "Codigo")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
+        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string eqtra_Codigo { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
@@ -29,19 +29,8 @@ namespace ERP_GMEDINA.Models
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string eqtra_Observacion { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
-        [Display(Name = "Estado")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
-        public bool eqtra_Estado { get; set; }
+  
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
-        [Display(Name = "Razon Inactivo")]
-        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
-        public string eqtra_RazonInactivo { get; set; }
-
-        public int eqtra_UsuarioCrea { get; set; }
-        public System.DateTime eqtra_FechaCrea { get; set; }
-        public Nullable<int> eqtra_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> eqtra_FechaModifica { get; set; }
+       
     }
 }

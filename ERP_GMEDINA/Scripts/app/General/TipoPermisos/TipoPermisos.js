@@ -48,7 +48,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 tabla.row.add({
                     ID: value.tper_Id,
-                    Descripción: value.tper_Descripcion
+                    Permiso: value.tper_Descripcion
                 }).draw();
             });
         });
@@ -91,7 +91,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["tper_Descripcion", "tper_RazonInactivo"]);
+                    LimpiarControles(["tper_Descripcion"]);
                     MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
