@@ -1257,6 +1257,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
             <PropertyRef Name="depto_Id" />
             <PropertyRef Name="depto_Descripcion" />
             <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="emp_Fechaingreso" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -1265,6 +1266,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Property Name="depto_Id" Type="int" Nullable="false" />
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4998,7 +5000,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HVacacionesEmpleados].[car_Descripcion] AS [car_Descripcion], 
     [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id], 
     [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado]
+    [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado], 
+    [V_HVacacionesEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso]
     FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
@@ -11579,6 +11582,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="depto_Id" />
             <PropertyRef Name="depto_Descripcion" />
             <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="emp_Fechaingreso" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
@@ -11587,6 +11591,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="depto_Id" Type="Int32" Nullable="false" />
           <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="V_SeleccionCandidatos">
           <Key>
@@ -14092,6 +14097,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HVacacionesEmpleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HVacacionesEmpleados">
               <MappingFragment StoreEntitySet="V_HVacacionesEmpleados">
+                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
                 <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
                 <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
                 <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />

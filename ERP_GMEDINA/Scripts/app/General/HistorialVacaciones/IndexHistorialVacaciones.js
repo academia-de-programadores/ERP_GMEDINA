@@ -44,7 +44,8 @@ function llenarTabla() {
                    Id: value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
-                   Departamento: value.Departamento
+                   Departamento: value.Departamento,
+                   FechaContratacion: FechaFormatoSimple(value.FechaContratacion)
                });
            });
            tabla.draw();
