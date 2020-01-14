@@ -1,0 +1,95 @@
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_Deducciones_RPT
+
+@{
+	ViewBag.Title = "Reportes deducciones";
+	Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+@using (Html.BeginForm("DeduccionesParametros", "ReportesPlanilla", FormMethod.Post, new { id = "frmReportDeduccionesPreview" }))
+{
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="float-e-margins">
+				<div class="ibox-title">
+					<h5>Reportes de deduciones</h5>
+					<div class="ibox-tools">
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<div class="col-md-6">
+								<label class="font-normal">Deducción</label>
+
+								@Html.DropDownList("cde_IdDeducciones", (IEnumerable<SelectListItem>)ViewBag.Deducciones, "Seleccione una opción", new { @class = "form-control" })
+
+								@Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
+							</div>
+
+							<div class="col-md-6">
+								<label class="font-normal">Planilla</label>
+
+								@Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
+
+								@Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
+							</div>
+							<br />
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6">
+								<label class="font-normal">Fecha Inicio</label>
+								<div class="input-group date">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaInicio", @id = "hipa_FechaInicio" } })
+								</div>
+								@Html.ValidationMessageFor(model => model.hipa_FechaInicio, "", new { @class = "text-danger" })
+							</div>
+
+							<div class="col-md-6">
+								<label class="font-normal">Fecha Fin</label>
+								<div class="input-group date">
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hipa_FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hipa_FechaFin", @id = "hipa_FechaFin" } })
+								</div>
+								@Html.ValidationMessageFor(model => model.hipa_FechaFin, "", new { @class = "text-danger" })
+							</div>
+
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+<br />
+
+		@{
+			string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
+		}
+
+<div class="row" style="display:@visibilidadPreview;">
+	<div class="col-lg-12">
+		<div class="float-e-margins">
+			<div class="ibox-title">
+				<h5>Previsualización de reporte</h5>
+				<div class="ibox-tools">
+				</div>
+			</div>
+			<div class="ibox-content">
+				@{
+					if (ViewBag.ReportViewer != null)
+					{
+						@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+					}
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<br />
+<br />

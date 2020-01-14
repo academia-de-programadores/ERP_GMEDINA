@@ -261,7 +261,19 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
+    //OCULTAR EL MODAL DE EDICION
+    $("#EditarPreaviso").modal('hide');
+    //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal();
+});
+
+//DESPLEGAR EL MODAL DE INACTIVAR
+$(document).on("click", "#btnCerrarInactivar", function () {
+    console.log("Hola");
+    //OCULTAR EL MODAL DE INACTIVACION
+    $("#InactivarPreaviso").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarPreaviso").modal();
 });
 
 //CONFORMAR INACTIVACION DEL REGISTRO
@@ -284,8 +296,6 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             cargarGridPreaviso();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPreaviso").modal('hide');
-            //OCULTAR EL MODAL DE EDICION
-            $("#EditarPreaviso").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',

@@ -25,10 +25,11 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Ingreso")]
         public int cin_IdIngreso { get; set; }
 
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo Monto Requerido")]
         [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto no puede ser menor de 0 dígitos, ni mayor que 16 dígitos")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Monto")]
+
         public decimal cb_Monto { get; set; }
 
         [Required]
