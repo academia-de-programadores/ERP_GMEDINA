@@ -116,11 +116,11 @@ $(document).ready(function () {
                         'POST',
                         function (obj) {
                             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                                MsgSuccess("¡Exito!", "Se ah editado el registro");
+                                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
                                 $("#finish").attr("href", " ");
                                 setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
                             } else {
-                                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                             }
                         });
                     }

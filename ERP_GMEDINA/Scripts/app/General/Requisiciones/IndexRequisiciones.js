@@ -299,9 +299,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -322,9 +322,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -345,9 +345,9 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     } else {

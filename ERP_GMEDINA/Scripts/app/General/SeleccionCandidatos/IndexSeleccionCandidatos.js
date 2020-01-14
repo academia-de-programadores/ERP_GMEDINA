@@ -97,9 +97,9 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Éxito!", "Se ha actualizado el registro");
+                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -151,10 +151,9 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["per_Id", "fare_Id", "scan_Fecha", "req_Id"]);
-
-                    MsgSuccess("¡Éxito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -201,9 +200,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["scan_RazonInactivo"]);
-                    MsgWarning("¡Éxito!", "Se ha Inactivado el registro");
+                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -281,7 +280,7 @@ $("#btnContratar").click(function () {
                     MsgSuccess("¡Éxito!", "Se ha guardado el cambio");
                 } else {
 
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {

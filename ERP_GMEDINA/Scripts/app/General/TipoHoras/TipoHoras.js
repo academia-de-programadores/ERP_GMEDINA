@@ -97,9 +97,9 @@ $("#btnGuardar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["tiho_Descripcion"]);
-                MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
             } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                MsgError("Error", "No se guardó el registro, contacte al administrador");
             }
         });
     }
@@ -115,9 +115,9 @@ $("#InActivar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["tiho_Descripcion", "tiho_Recargo", "tiho_RazonInactivo"]);
-                MsgSuccess("¡Exito!", "Se ha inhabilitado el registro");
+                MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
             }
         });
     }
@@ -133,9 +133,9 @@ $("#btnActualizar").click(function () {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["tiho_Descripcion", "tiho_Recargo"]);
-                MsgSuccess("¡Exito!", "Se ha editado el registro");
+                MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
             } else {
-                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                MsgError("Error", "No se pudo editar el registro, contacte al administrador");
             }
         });
     }
