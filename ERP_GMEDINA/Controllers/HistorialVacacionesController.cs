@@ -49,15 +49,15 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_Historialvacaciones > lista = new List<V_Historialvacaciones> { };
+            List<V_Historialvacaciones> lista = new List<V_Historialvacaciones> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
                     lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id && x.hvac_Estado == true).ToList();
-                    if(lista == null)
+                    if (lista == null)
                     {
-                        lista.Add(new V_Historialvacaciones {  });
+                        lista.Add(new V_Historialvacaciones { });
                     }
                 }
                 catch
@@ -71,6 +71,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialAmonestaciones/Create
+        [HttpPost]
         public JsonResult Create(tbHistorialVacaciones tbHistorialVacaciones)
         {
             string msj = "";
@@ -123,7 +124,7 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-         public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
