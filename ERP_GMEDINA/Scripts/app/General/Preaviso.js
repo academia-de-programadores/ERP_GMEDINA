@@ -116,11 +116,11 @@ function ValidarForm() {
     var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
     var Dias = $("#Editar #prea_DiasPreaviso").val('');
     //VALIDAR QUE LOS CAMPOS SEAN MAYORES QUE CERO
-    if(RangoInicio < 0)
+    if(!RangoInicio >= 0 || RangoInicio != '')
         Retorno = false;
-    if (RangoFin < 0)
+    if (!RangoFin >= 0 || RangoFin != '')
         Retorno = false;
-    if (Dias < 0)
+    if (!Dias >= 0 || Dias != '')
         Retorno = false;
     //RETORNO DE FUNCION
     return Retorno;
@@ -261,7 +261,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
-    $("#EditarPreaviso").modal('hide');
     $("#InactivarPreaviso").modal();
 });
 
@@ -285,6 +284,8 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             cargarGridPreaviso();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPreaviso").modal('hide');
+            //OCULTAR EL MODAL DE EDICION
+            $("#EditarPreaviso").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
@@ -319,7 +320,6 @@ $("#btnActivarPreavis").click(function () {
             });
         }
         else {
-            debugger;
             cargarGridPreaviso();
             $("#frmActivarPreavis").modal('hide');
             //Mensaje de exito de la edicion
