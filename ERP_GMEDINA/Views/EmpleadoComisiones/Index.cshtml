@@ -73,12 +73,11 @@
                                     </td>
                                     <td>
                                         @Estado
-                                    </td>
+                                    </td> 
                                     <td>
-                                     @*@Pagado*@
-                                        @{var Pagado = item.cc_Pagado == true ? "checked" : string.Empty;}
-                                        <input type="checkbox" class="i-checks" id="check-@item.cc_Pagado" @Pagado disabled />
+                                              @Html.DisplayFor(modelItem => item.cc_Pagado)
                                     </td>
+                                   
                                     
                                     <td>
                                         @{
@@ -126,7 +125,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div class="modal fade" id="EditarEmpleadoComisiones" tabindex="-1" role="dialog" aria-hidden="false">

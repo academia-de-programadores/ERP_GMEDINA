@@ -75,9 +75,7 @@ namespace ERP_GMEDINA.Controllers
         #region Detalles
         public JsonResult Details(int? ID)
         {
-            var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones
-                                               //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
-                                               //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
+            var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones 
                                            where tbEmplComisiones.cc_Activo == true && tbEmplComisiones.cc_Id == ID
                                            select new
                                            {

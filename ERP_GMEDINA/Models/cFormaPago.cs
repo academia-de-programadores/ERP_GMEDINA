@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Models
         public int fpa_IdFormaPago { get; set; }
 
         [Display(Name = "Forma de Pago")]
-        [Required(ErrorMessage = "El campo Forma de Pago es requerido")]
-        //[RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
+        [Required(ErrorMessage = "Campo forma de pago requerido")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numéricos")]
         public string fpa_Descripcion { get; set; }
 
         [Display(Name = "Creado por")]
@@ -33,7 +33,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha de Modificación")]
         public Nullable<System.DateTime> fpa_FechaModifica { get; set; }
 
-        [Display(Name = "Es Activo")]
+        [Display(Name = "Estado")]
         public bool fpa_Activo { get; set; }
     }
 }
