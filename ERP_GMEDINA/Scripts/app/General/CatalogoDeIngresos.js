@@ -38,7 +38,8 @@ function cargarGridIngresos() {
             var ListaIngresos = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
           
-            for (var i = 0; i < ListaIngresos.length; i++) {
+            for (var i = 0; i < ListaIngresos.length; i++)
+            {
                 var estadoIng = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
                 var botonDetail = ListaIngresos[i].cin_Activo == true ?

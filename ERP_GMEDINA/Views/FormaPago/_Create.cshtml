@@ -9,9 +9,12 @@
                     @Html.HiddenFor(model => model.fpa_UsuarioCrea)
                     @Html.HiddenFor(model => model.fpa_FechaCrea)
                     <div class="form-group">
-                        @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                Descripción
+                                @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
                             @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                         </div>
                     </div>

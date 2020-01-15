@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public int cin_IdIngreso { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo {0} requerido.")]
         [Display(Name = "Descripción Ingresos")]
         public string cin_DescripcionIngreso { get; set; }
 

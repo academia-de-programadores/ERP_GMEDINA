@@ -90,6 +90,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
     //OCULTAR DATAANNOTATIONS
     $("#Editar #Validation_descipcion1e").css("display", "hidden");
     $("#Editar #Validation_descipcion2e").css("display", "hidden");
+    $("#Editar #Validation_descipcion1").css("display", "hidden");
+    $("#Editar #Validation_descipcion2").css("display", "hidden");
 
 
     var ID = $(this).data('id');
@@ -162,29 +164,36 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 
 $('#btnUpdateComisionesConfirmar').click(function () {
     var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
-    var TotalVenta = $("#Editar #cc_TotalVenta").val();   
-     if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
-         $("#Editar #Validation_descipcion1").css("display", "block");
-
-         //MOSTRAR DATAANNOTATIONS
-         $("#Editar #Validation_descipcion1e").css("display", "block");
-         $("#Editar #Validation_descipcion2e").css("display", "block");
-         //MOSTRAR MODAL
-        $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
-     }
-     else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
-         $("#Editar #Validation_descipcion1e").css("display", "block");
-         $("#Editar #Validation_descipcion2e").css("display", "block");
-     }
-     else if (PorcentajeComision == "" && TotalVenta == "" && PorcentajeComision == "0.00" && TotalVenta == "0.00" && PorcentajeComision == null && TotalVenta == null && PorcentajeComision == undefined && TotalVenta == undefined) {
-         $("#Editar #Validation_descipcion1e").css("display", "block");
-         $("#Editar #Validation_descipcion2e").css("display", "block");
-     }
-    else {
-       
-        $("#EditarEmpleadoComisionesConfirmacion").modal();
+    var TotalVenta = $("#Editar #cc_TotalVenta").val();
+    if (PorcentajeComision == "" && TotalVenta == "" || PorcentajeComision == "0.00" && TotalVenta == "0.00" || PorcentajeComision == null && TotalVenta == null || PorcentajeComision == undefined && TotalVenta == undefined) {
+        $("#Editar #Validation_descipcion1e").css("display", "block");
+        $("#Editar #Validation_descipcion1").css("display", "");
+        $("#Editar #Validation_descipcion2e").css("display", "block");
+        $("#Editar #Validation_descipcion2").css("display", "");
     }
-   
+    else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
+        $("#Editar #Validation_descipcion2e").css("display", "block");
+        $("#Editar #Validation_descipcion1").css("display", "none");
+        $("#Editar #Validation_descipcion2").css("display", "");
+
+    }
+    else if (PorcentajeComision == "" || PorcentajeComision == "0.00" || PorcentajeComision == null || PorcentajeComision == undefined) {
+
+        //MOSTRAR DATAANNOTATIONS
+        $("#Editar #Validation_descipcion1e").css("display", "block");
+        $("#Editar #Validation_descipcion1").css("display", "");
+        $("#Editar #Validation_descipcion2").css("display", "none");
+        //MOSTRAR MODAL
+        $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+    }
+    
+        else {
+        $("#Editar #Validation_descipcion1").css("display", "none");
+        $("#Editar #Validation_descipcion2").css("display", "none");
+        
+            $("#EditarEmpleadoComisionesConfirmacion").modal();
+        }
+    
 });
 
 
@@ -266,7 +275,10 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-
+    $("#Validation_descipcion4").css("display", "none");
+    $("#Validation_descipcion5").css("display", "none");
+    $("#Validation_descipcion6").css("display", "none");
+    $("#Validation_descipcion7").css("display", "none");
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
         method: "GET",
@@ -293,14 +305,12 @@ $('#btnCreateRegistroComisiones').click(function () {
     var Ingreso = $("#Crear #cin_IdIngreso").val();
     var Porcentaje = $("#Crear #PorcentajeComision").val();
     var Total = $("#Crear #TotalVenta").val();
-
-    if (Empleado == "0" ) {
-        $("#Validation_descipcion").css("display", "");
-    }
-    else if (Ingreso == "0") {
-        $("#Validation_descipcion3").css("display", "");
-    }
-    else {
+    if (Empleado != "0" && Ingreso != "0" && Porcentaje != "" && Porcentaje != "0" && Total != "" && Total != "0")
+    {
+        $("#Validation_descipcion4").css("display", "none");
+        $("#Validation_descipcion5").css("display", "none");
+        $("#Validation_descipcion6").css("display", "none");
+        $("#Validation_descipcion7").css("display", "none");
         var data = $("#frmEmpleadoComisionesCreate").serializeArray();
         mostrarCargandoCrear()
         $.ajax({
@@ -333,6 +343,37 @@ $('#btnCreateRegistroComisiones').click(function () {
             ocultarCargandoCrear();
         });
     }
+    else
+    {
+        if (Empleado == "0") {
+            $("#Validation_descipcion").css("display", "");
+            $("#Validation_descipcion4").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion4").css("display", "none");
+        }
+        if (Ingreso == "0") {
+            $("#Validation_descipcion3").css("display", "");
+            $("#Validation_descipcion5").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion5").css("display", "none");
+        }
+        if (Porcentaje == "" || Porcentaje == "0") {
+            $("#Validation_descipcion6").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion6").css("display", "none");
+        }
+        if (Total == "" || Total == "0") {
+            $("#Validation_descipcion7").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion7").css("display", "none");
+        }
+    }
+   
+    
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     
 });
@@ -610,6 +651,8 @@ $("#btnCreateRegistroComisiones").click(function () {
 $("#btnCerrarModaledit").click(function () {
     $("#Editar #Validation_descipcion1e").css("display", "none");
     $("#Editar #Validation_descipcion2e").css("display", "none");
+    $("#Editar #Validation_descipcion1").css("display", "none");
+    $("#Editar #Validation_descipcion2").css("display", "none");
     $("#Editar #cc_PorcentajeComision").val('');
     $("#Editar #cc_TotalVenta").val('');
 });
@@ -619,6 +662,8 @@ $("#btnCerrarModaledit").click(function () {
 $("#IconoCerraredit").click(function () {
     $("#Editar #Validation_descipcion1e").css("display", "none");
     $("#Editar #Validation_descipcion2e").css("display", "none");
+    $("#Editar #Validation_descipcion1").css("display", "none");
+    $("#Editar #Validation_descipcion2").css("display", "none");
     $("#Editar #cc_PorcentajeComision").val('');
     $("#Editar #cc_TotalVenta").val('');
 });
