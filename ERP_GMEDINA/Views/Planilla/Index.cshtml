@@ -11,22 +11,7 @@
         <div class="row">
             <!-- INICIAN LOS WIDGETS-->
             <div class="col-lg-3">
-                <div class="widget style1 navy-bg">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <i class="fa fa-user fa-3x"></i>
-                        </div>
-                        <div class="col-xs-8 text-right">
-                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color:white;"><b><a style="vertical-align: inherit;color:white;" href="#" class="cargarPlanilla" data-id="">Todos</a></b></font></font></span>
-                            <h2 class="font-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.colaboradoresGeneral</font></font></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- WIDGETS CON FOREACH-->
-            @foreach (var item in ViewBag.PlanillasColaboradores)
-            {
-                <div class="col-lg-3">
+                <a style="vertical-align: inherit;color:white;" href="#" class="cargarPlanilla" data-id="">
                     <div class="widget style1 navy-bg">
                         <div class="row">
                             <div class="col-xs-4">
@@ -35,23 +20,50 @@
                             <div class="col-xs-8 text-right">
                                 <span>
                                     <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;color:white;">
+                                        <font style="vertical-align: inherit; color:white;">
                                             <b>
-                                                <a href="#" style="vertical-align: inherit;color:white;" class="cargarPlanilla" data-id="@item.cpla_IdPlanilla">
-                                                    @item.cpla_DescripcionPlanilla
-                                                </a>
+                                                Todos
                                             </b>
                                         </font>
                                     </font>
                                 </span>
-                                <h2 class="font-bold">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">@item.CantidadColaboradores</font>
-                                    </font>
-                                </h2>
+                                <h2 class="font-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.colaboradoresGeneral</font></font></h2>
                             </div>
                         </div>
                     </div>
+                </a>
+            </div>
+            <!-- WIDGETS CON FOREACH-->
+            @foreach (var item in ViewBag.PlanillasColaboradores)
+            {
+                <div class="col-lg-3">
+                    <a href="#" style="vertical-align: inherit;color:white;" class="cargarPlanilla" data-id="@item.cpla_IdPlanilla">
+                        <div class="widget style1 navy-bg">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-user fa-3x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span>
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;color:white;">
+                                                <b>
+
+                                                    @item.cpla_DescripcionPlanilla
+
+                                                </b>
+                                            </font>
+                                        </font>
+                                    </span>
+                                    <h2 class="font-bold">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">@item.CantidadColaboradores</font>
+                                        </font>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             }
             <!-- TERMINAN WIDGETS CON FOREACH-->

@@ -6,14 +6,18 @@
         @Html.HiddenFor(model => model.cin_IdIngreso)
         @Html.HiddenFor(model => model.cin_FechaCrea)
         @Html.HiddenFor(model => model.cin_UsuarioCrea)
+       
+           
         <div class="form-group">
-
-            <div class="input-group date">
-                Descripción Ingreso
-                @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off" } })
+            <div class="row">
+                <div class="col-md-10">
+                    <div>
+                        Descripción Ingreso
+                        @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
+                </div>
             </div>
-                @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
-            
         </div>
     </div>
     <div class="modal-footer">

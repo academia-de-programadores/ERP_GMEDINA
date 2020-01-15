@@ -89,7 +89,9 @@ namespace ERP_GMEDINA.Controllers
                                         descripcionMoneda = ttm.tmon_Descripcion
                                     }).ToList();
                     //OBTENER: ANTIGUEDAD
-                    int TotalDiasLaborados = Liquidacion.Calculo_AntiguedadEnDias(IdEmpleado, fechaFin);
+                    int TotalDiasLaborados = (int)Liquidacion.Dias360Mes(fechaFin, IdEmpleado);
+                    //int TotalDiasLaborados = Liquidacion.Calculo_AntiguedadEnDias(IdEmpleado, fechaFin);
+
                     int residuo = 0;
                     //OBTENER AÑOS
                     anios = (TotalDiasLaborados > 360) ? TotalDiasLaborados / 360 : 0;

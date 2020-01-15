@@ -29,6 +29,8 @@ $(document).ready(function () {
     });
 })
 
+var ini_PagaSiempre = false;
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -212,32 +214,43 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var val1 = $("#Crear #emp_Id").val();
-    var val2 = $("#Crear #ini_Motivo").val();
-    var val3 = $("#Crear #ini_Monto").val();
-    var val4 = $("#Crear #ini_PagaSiempre").val();
+    var ini_IdIngresosIndividuales = $("#Crear #ini_IdIngresosIndividuales").val();
+    var emp_Id = $("#Crear #emp_Id").val();
+    var ini_Motivo = $("#Crear #ini_Motivo").val();
+    var ini_Monto = $("#Crear #ini_Monto").val();
     var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-    debugger;
-    if (val2 == "") {
+    if ($('#ini_PagaSiempre').is(':checked')) {
+        ini_PagaSiempre = true;
+    }
+    else{
+        ini_PagaSiempre = false;
+    }
+
+    if (ini_Motivo == "" || ini_Motivo == null) {
         $("#Crear #validatione1").css("display", "");
     }
     else {
         $("#Crear #validatione1").css("display", "none");
     }
 
-    if (val1 == "" || val1 == 0 || val1 == "0") {
+    if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
         $("#Crear #validatione2").css("display", "");
     }
-    else if (val1 != "" || val1 != 0 || val1 != "0") {
+    else if (emp_Id != "" || emp_Id != 0 || emp_Id != "0") {
         $("#Crear #validatione2").css("display", "none");
     }
-    else if (val3 != "" || val3 != null || val3 != undefined) {
-        if (expr.test(val3))
+    else if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+        if (expr.test(ini_Monto))
         {
             $("#Crear #validatione3").css("display", "none");
             mostrarCargandoCrear();
 
+            
+            //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+            //var data = $("#frmCreateIngresoIndividual").serializeArray();
+
+            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
 
             //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
             var data = $("#frmCreateIngresoIndividual").serializeArray();
@@ -248,7 +261,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 method: "POST",
                 data: data
             }).done(function (data) {
-
                 //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
                 if (data != "error") {
 
@@ -274,7 +286,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 }
 
                 ocultarCargandoCrear();
-            });
+            })
         }
     }
     else {
@@ -388,10 +400,6 @@ $("#btnEditIngresoIndividual").click(function () {
 
     if (vale2 == "" || vale2 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale3 != null || vale3 != "") {
         if (expreg.test(vale3)) {
@@ -402,10 +410,6 @@ $("#btnEditIngresoIndividual").click(function () {
         }
         else {
             $("#Editar #validatione3").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
     $("#EditarIngresosIndividuales").submit(function (e) {
@@ -548,7 +552,9 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
                             }
                         });
                     });
-                $("#DetallesIngresosIndividuales").modal();
+                $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data

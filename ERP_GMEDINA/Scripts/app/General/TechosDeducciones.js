@@ -38,7 +38,7 @@ function cargarGridTechosDeducciones() {
             if (data.length == 0) {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             var ListaTechosDeducciones = data, template = '';
@@ -129,7 +129,7 @@ $('#btnCreateTechoDeducciones').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: 'No se guardó el registro, contacte al administrador',
                 });
             }
             else if (data == "bien") {
@@ -138,7 +138,7 @@ $('#btnCreateTechoDeducciones').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: 'El registro fue registrado de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
@@ -199,7 +199,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -228,7 +228,7 @@ $("#btnEditarTecho").click(function () {
                 //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
+                    message: 'No se editó el registro, contacte al administrador',
                 });
             }
             else {
@@ -243,12 +243,12 @@ $("#btnEditarTecho").click(function () {
             }
         });
     }
-    else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
+    //else {
+    //    iziToast.error({
+    //        title: 'Error',
+    //        message: 'Ingrese datos válidos.',
+    //    });
+    //}
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -279,7 +279,7 @@ $("#btnInactivarTechosDeducciones").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -289,7 +289,7 @@ $("#btnInactivarTechosDeducciones").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -350,7 +350,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -374,7 +374,7 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro.',
+                message: 'No se activó el registro.',
             });
         }
         else {

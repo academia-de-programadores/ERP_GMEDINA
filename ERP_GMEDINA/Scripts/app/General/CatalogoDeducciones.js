@@ -43,11 +43,13 @@ function cargarGridDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaDeducciones = data, template = '';
+
+            $('#tblCatalogoDeducciones').DataTable().clear();
 
             //Recorrer la data y crear el template que se pondrá en el tbody
             for (var i = 0; i < ListaDeducciones.length; i++) {
@@ -56,7 +58,7 @@ function cargarGridDeducciones() {
                 var estadoRegistro = ListaDeducciones[i].cde_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
+                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" style= "margin-right:3px;" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarCatalogoDeducciones">Editar</button>' : '';
@@ -64,29 +66,16 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaDeducciones[i].cde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarCatalogoDeducciones">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-                  '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-                    '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                   //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                   '</td> ' +
-                   '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeducciones').html(template);
-            
+                $('#tblCatalogoDeducciones').dataTable().fnAddData([
+					ListaDeducciones[i].cde_IdDeducciones,
+					ListaDeducciones[i].cde_DescripcionDeduccion,
+					ListaDeducciones[i].cde_PorcentajeColaborador,
+					ListaDeducciones[i].cde_PorcentajeColaborador,
+					ListaDeducciones[i].cde_PorcentajeEmpresa,
+					ListaDeducciones[i].tde_Descripcion,
+					botonDetalles + botonEditar + botonActivar
+                ]);
+            }            
             });
       FullBody();
  }        
@@ -95,28 +84,28 @@ function cargarGridDeducciones() {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-    $("#tde_IdTipoDedu").val("0");
+    $("#Crear #Validation_descipcionA").css("display", "none");
+    $("#Crear #Validation_descipcion2A").css("display", "none");
+    $("#Crear #Validation_descipcion3A").css("display", "none");
+    $("#Crear #Validation_descipcion4A").css("display", "none");
+    $("#Crear #cde_DescripcionDeduccionA").val("");
+    $("#Crear #cde_PorcentajeColaboradorA").val("");
+    $("#Crear #cde_PorcentajeEmpresaA").val("");
+    $("#Crear #tde_IdTipoDedu").val("0");
     ocultarCargandoCrear(); 
 });
 
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrarCreate").click(function () {
-    $("#Validation_descipcionA").css("display", "none");
-    $("#Validation_descipcion2A").css("display", "none");
-    $("#Validation_descipcion3A").css("display", "none");
-    $("#Validation_descipcion4A").css("display", "none");
-    $("#cde_DescripcionDeduccionA").val("");
-    $("#cde_PorcentajeColaboradorA").val("");
-    $("#cde_PorcentajeEmpresaA").val("");
-    $("#tde_IdTipoDedu").val("0");
+    $("#Crear #Validation_descipcionA").css("display", "none");
+    $("#Crear #Validation_descipcion2A").css("display", "none");
+    $("#Crear #Validation_descipcion3A").css("display", "none");
+    $("#Crear #Validation_descipcion4A").css("display", "none");
+    $("#Crear #cde_DescripcionDeduccionA").val("");
+    $("#Crear #cde_PorcentajeColaboradorA").val("");
+    $("#Crear #cde_PorcentajeEmpresaA").val("");
+    $("#Crear #tde_IdTipoDedu").val("0");
     ocultarCargandoCrear();
 });
 
@@ -201,15 +190,15 @@ $('#btnCreateRegistroDeduccion').click(function () {
                             // Mensaje de exito cuando un registro se ha guardado bien
                             iziToast.success({
                                 title: 'Exito',
-                                message: 'El registro fue agregado de forma exitosa!',
+                                message: '¡El registro se agregó de forma exitosa!',
                             });
                         }
-                        else {
-                            iziToast.error({
-                                title: 'Error',
-                                message: 'Datos Invalidos!',
-                            });
-                        }
+                        //else {
+                        //    iziToast.error({
+                        //        title: 'Error',
+                        //        message: 'Datos Invalidos!',
+                        //    });
+                        //}
 
                         ocultarCargandoCrear();
                     });
@@ -289,13 +278,15 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#EditarCatalogoDeducciones").modal();
+                $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -308,6 +299,8 @@ $('#btnUpdateDeduccion').click(function () {
 
     if (cde_DescripcionDeduccionE2 == "" ||  cde_PorcentajeColaboradorE2 == "" || cde_PorcentajeColaboradorE2 == "0" || cde_PorcentajeColaboradorE2 < 0 || cde_PorcentajeEmpresaE2 == "" || cde_PorcentajeEmpresaE2 == "0" || cde_PorcentajeEmpresaE2 < 0)
     {
+
+        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
         $("#Editar #Validation_descipcion").css("display", "");
         $("#Editar #Validation_descipcion2").css("display", "");
         $("#Editar #Validation_descipcion3").css("display", "");
@@ -316,14 +309,15 @@ $('#btnUpdateDeduccion').click(function () {
             title: 'Error',
             message: 'Ingrese datos validos',
         });
-        $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
     }
     else {
         $("#Editar #Validation_descipcion").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "none");
         $("#Editar #Validation_descipcion3").css("display", "none");
            
-        $("#EditarCatalogoDeduccionesConfirmacion").modal();
+        $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 });
 
@@ -353,7 +347,7 @@ $("#btnUpdateDeduccion2").click(function () {
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             }
             else
@@ -362,6 +356,9 @@ $("#btnUpdateDeduccion2").click(function () {
                     title: 'Error',
                     message: 'Ingrese datos validos',
                 });
+                $("#Editar #Validation_descipcion2").css("display", "");
+                $("#Editar #Validation_descipcion3").css("display", "");
+                $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
             }
         });
 });  
@@ -424,7 +421,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -435,7 +432,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 //MOSTRAR MODAL INACTIVAR
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarCatalogoDeducciones").modal();
+    $("#InactivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 
     //Ocultar el modal editar
     $("#EditarCatalogoDeducciones").modal('hide');
@@ -460,7 +459,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -471,8 +470,8 @@ $("#btnInactivarRegistroDeduccion").click(function () {
             $("#EditarCatalogoDeducciones").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue Inactivado de forma exitosa!',
+                title: 'Éxito',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
 
         }
@@ -483,19 +482,19 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 //MOSTRAR MODAL ACTIVAR
 $(document).on("click", "#btnActivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
-    $("#ActivarCatalogoDeducciones").modal();
+    $("#ActivarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnCerrarInhabilitar").click(function () {
-
     //Mostrar modal editar nuevamente
-    $("#EditarCatalogoDeducciones").modal();
-
+    $("#EditarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#InactivarCatalogoDeducciones").modal('hide');
-
-
 });
 
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnActivarCatalogoDeducciones", function () {
@@ -519,7 +518,7 @@ $("#btnActivarRegistroDeduccion").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -530,7 +529,7 @@ $("#btnActivarRegistroDeduccion").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
-                message: 'El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
             ocultarCargandoActivar();
         }
@@ -584,8 +583,3 @@ function spinner() {
  <div class="sk-rect5"></div>
  </div>`;
 }
-
-
-
-
-

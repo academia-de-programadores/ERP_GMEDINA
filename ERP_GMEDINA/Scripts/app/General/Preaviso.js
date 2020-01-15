@@ -39,68 +39,44 @@ function cargarGridPreaviso() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaPreaviso = data, template = '';
+            var ListaPreaviso = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblPreaviso').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaPreaviso.length; i++) {
-
                 var FechaCrea = FechaFormato(ListaPreaviso[i].prea_FechaCrea);
-
                 var FechaModifica = FechaFormato(ListaPreaviso[i].prea_FechaModifica);
-
                 UsuarioModifica = ListaPreaviso[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListaPreaviso[i].NombreUsuarioModifica;
-
-
-
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaPreaviso[i].prea_Activo == false ? 'Inactivo' : 'Activo'
-
                 //variable boton detalles
-                var botonDetalles = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnDetallePreaviso">Detalles</button>' : '';
-
+                var botonDetalles = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetallePreaviso">Detalles</button>' : '';
                 //variable boton editar
                 var botonEditar = ListaPreaviso[i].prea_Activo == true ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-default btn-xs"  id="btnEditarPreaviso">Editar</button>' : '';
-
                 //variable donde está el boton activar
                 var botonActivar = ListaPreaviso[i].prea_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPreaviso">Activar</button>' : '' : '';
-
-
-
-                template += '<tr data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '">' +
-                    '<td>' + ListaPreaviso[i].prea_IdPreaviso + '</td>' +
-                    '<td>' + ListaPreaviso[i].prea_RangoInicioMeses + '</td>' +
-                    '<td>' + ListaPreaviso[i].prea_RangoFinMeses + '</td>' +
-                    '<td>' + ListaPreaviso[i].prea_DiasPreaviso + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
-
+                //AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
+                $('#tblPreaviso').dataTable().fnAddData([
+                     ListaPreaviso[i].prea_IdPreaviso,
+                     ListaPreaviso[i].prea_RangoInicioMeses,
+                     ListaPreaviso[i].prea_RangoFinMeses,
+                     ListaPreaviso[i].prea_DiasPreaviso,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyPreaviso').html(template);
         });
     FullBody();
 }
 
 function DataAnnotations(ToF) {
-    if (ToF)
-    {
+    if (ToF) {
         //TRUE PARA OCULTAR DATAANNOTATIONS
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "none");
         $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
         $("#Editar #Dias_descripcion").css("display", "none");
     }
-    else
-    {
+    else {
         //FALSE PARA MOSTRAR DATAANNOTATIONS
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
         $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
@@ -116,7 +92,7 @@ function ValidarForm() {
     var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
     var Dias = $("#Editar #prea_DiasPreaviso").val('');
     //VALIDAR QUE LOS CAMPOS SEAN MAYORES QUE CERO
-    if(!RangoInicio >= 0 || RangoInicio != '')
+    if (!RangoInicio >= 0 || RangoInicio != '')
         Retorno = false;
     if (!RangoFin >= 0 || RangoFin != '')
         Retorno = false;
@@ -177,6 +153,12 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
+
+    //OCULTAR DATAANNOTATIONS 
+    $("#Validation_descipcion").css("display", "block");
+    $("#Validation_descipcion1").css("display", "block");
+    $("#Validation_descipcion2").css("display", "block");
+    //REALIZAR LA PETICION AL SERVIDOR
     var ID = $(this).data('id');
     IDInactivar = ID;
     $.ajax({
@@ -201,26 +183,34 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
 });
 
 $("#btnUpdatePreaviso").click(function () {
-    
+
     var prea_RangoInicioMeses = $("#Editar #prea_RangoInicioMeses").val();
     var prea_RangoFinMeses = $("#Editar #prea_RangoFinMeses").val();
     var prea_DiasPreaviso = $("#Editar #prea_DiasPreaviso").val();
 
     if (prea_RangoInicioMeses == "0" || prea_RangoInicioMeses == "") {
-        $("#Validation_descipcion").css("display", "");
+        $("#Validation_descipcion").css("display", "block");
     }
-    else if (prea_RangoFinMeses == "0" ||prea_RangoFinMeses == "") {
-        $("#Validation_descipcion1").css("display", "");
+    else if (prea_RangoFinMeses == "0" || prea_RangoFinMeses == "") {
+        $("#Validation_descipcion1").css("display", "block");
     }
     else if (prea_DiasPreaviso == "0" || prea_DiasPreaviso == "") {
-        $("#Validation_descipcion2").css("display", "");
+        $("#Validation_descipcion2").css("display", "block");
     }
     else {
+        $("#EditarPreaviso").modal('hide');
         $("#ConfirmarEdicion").modal();
     }
-   
+
 });
 
+//DESPLEGAR EL MODAL DE INACTIVAR
+$(document).on("click", "#btnCerrarConfirmarEditar", function () {
+    //OCULTAR EL MODAL DE EDICION
+    $("#ConfirmarEdicion").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarPreaviso").modal();
+});
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
@@ -228,8 +218,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
 
-    if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "")
-    {
+    if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "") {
         var data = $("#frmEditPreaviso").serializeArray();
         $.ajax({
             url: "/Preaviso/Editar",
@@ -240,7 +229,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data != "error") {
                 cargarGridPreaviso();
-                $("#EditarPreaviso").modal('hide');
+                
                 $("#ConfirmarEdicion").modal('hide');
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
@@ -261,10 +250,21 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
+    //OCULTAR EL MODAL DE EDICION
+    $("#EditarPreaviso").modal('hide');
+    //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal();
 });
 
-//CONFORMAR INACTIVACION DEL REGISTRO
+//CERRAR EL MODAL DE INACTIVAR
+$(document).on("click", "#btnCerrarInactivar", function () {
+    //OCULTAR EL MODAL DE INACTIVACION
+    $("#InactivarPreaviso").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarPreaviso").modal();
+});
+
+//CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPreavisoConfirmar").click(function () {
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -284,8 +284,6 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
             cargarGridPreaviso();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarPreaviso").modal('hide');
-            //OCULTAR EL MODAL DE EDICION
-            $("#EditarPreaviso").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
                 title: 'Exito',
