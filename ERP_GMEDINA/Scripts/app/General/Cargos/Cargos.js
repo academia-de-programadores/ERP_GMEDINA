@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
+var fill = 0;
 var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
@@ -43,11 +45,19 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.car_Descripcion);
-                tabla.row.add({
-                    ID: value.car_Id,
-                    Cargo: value.car_Descripcion
-                }).draw();
+               // console.log(value.car_Descripcion);
+                var Acciones = value.car_Estado == 1
+                   ?null:
+                   "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                   "</div>";
+                if (value.car_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.car_Id,
+                        Cargo: value.car_Descripcion,
+                        Acciones:Acciones
+                    }).draw();
+                }
             });
         });
 }

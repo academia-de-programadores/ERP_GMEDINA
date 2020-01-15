@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbCargos>
+﻿@model ERP_GMEDINA.Models.tbCargos
 
 @{
     ViewBag.Title = "Cargos";
@@ -46,4 +46,9 @@
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/Cargos")
+
+@if (Model.car_Estado)
+{
+    @Scripts.Render("~/Scripts/app/general/Cargos/Admin")
+}
 }

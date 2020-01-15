@@ -20,9 +20,9 @@ function llenarTabla() {
            tabla.draw();
        });
 }
-$(document).ready(function () {
-    llenarTabla();
-});
+//$(document).ready(function () {
+//    llenarTabla();
+//});
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

@@ -1240,6 +1240,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\Areas\Admin.js" />
+    <Content Include="Scripts\app\General\Cargos\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Cargos.js" />
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
