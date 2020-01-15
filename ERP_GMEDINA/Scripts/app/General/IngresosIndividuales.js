@@ -207,6 +207,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
+
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var ini_IdIngresosIndividuales = $("#Crear #ini_IdIngresosIndividuales").val();
     var emp_Id = $("#Crear #emp_Id").val();
@@ -234,26 +235,28 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     else if (emp_Id != "" || emp_Id != 0 || emp_Id != "0") {
         $("#Crear #validatione2").css("display", "none");
     }
-    else if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+    if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+        console.log('click');
+        console.log(ini_Motivo);
+        console.log(emp_Id);
+        console.log(ini_Monto);
+        console.log(ini_PagaSiempre);
         if (expr.test(ini_Monto))
         {
             $("#Crear #validatione3").css("display", "none");
             mostrarCargandoCrear();
 
-            
             //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
             //var data = $("#frmCreateIngresoIndividual").serializeArray();
 
-            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+            debugger;
 
-            //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-            var data = $("#frmCreateIngresoIndividual").serializeArray();
 
             //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
             $.ajax({
                 url: "/IngresosIndividuales/Create",
                 method: "POST",
-                data: data
+                data: { ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: ini_Monto, ini_PagaSiempre: ini_PagaSiempre }
             }).done(function (data) {
                 //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
                 if (data != "error") {
@@ -288,7 +291,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateIngresoIndividual").submit(function (e) {
+    $("#frmCreateIngresosIndividuales").submit(function (e) {
         return false;
     });
 
