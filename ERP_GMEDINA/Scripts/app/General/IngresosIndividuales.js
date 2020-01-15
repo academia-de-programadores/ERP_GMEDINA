@@ -46,43 +46,37 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaIngresoIndividual = data, template = '';
+            var ListaIngresoIndividual = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#IndexTable').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
+                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
+                var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
+                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">' +
-                    '<td>' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].ini_Motivo + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].ini_Monto + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-
-                '</td>' +
-                '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyIngresosIndividuales').html(template);
+                //AGREGAR EL ROW AL DATATABLE
+                $('#IndexTable').dataTable().fnAddData([
+                    ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
+                    ListaIngresoIndividual[i].ini_Motivo,
+                    ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
+                    ListaIngresoIndividual[i].ini_Monto,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+                }
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 

@@ -37,43 +37,37 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaDeduccionAFP = data, template = '';
+            var ListaDeduccionAFP = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblDeduccionAFP').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionAFP.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaDeduccionAFP[i].dafp_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' : '';
+                var botonDetalles = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' : '';
+                var botonEditar = ListaDeduccionAFP[i].dafp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarDeduccionAFP" data-id="' + ListaDeduccionAFP[i].dafp_Id + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaDeduccionAFP[i].dafp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP" dafpid="' + ListaDeduccionAFP[i].dafp_Id + '" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Activar</button>' : '' : '';
+                var botonActivar = ListaDeduccionAFP[i].dafp_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionAFP" dafpid="' + ListaDeduccionAFP[i].dafp_Id + '" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
-                    '<td>' + ListaDeduccionAFP[i].dafp_Id + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-
-                    '</td>' +
-                    '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeduccionAFP').html(template);
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblDeduccionAFP').dataTable().fnAddData([
+                    ListaDeduccionAFP[i].dafp_Id,
+                    ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos,
+                    ListaDeduccionAFP[i].dafp_AporteLps,
+                    ListaDeduccionAFP[i].afp_Descripcion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+                }
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 
