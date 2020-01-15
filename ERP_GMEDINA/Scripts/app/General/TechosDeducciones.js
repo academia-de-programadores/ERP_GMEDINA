@@ -41,7 +41,8 @@ function cargarGridTechosDeducciones() {
                     message: 'No se cargó la información, contacte al administrador',
                 });
             }
-            var ListaTechosDeducciones = data, template = '';
+            var ListaTechosDeducciones = data;
+            $('#tblTechosDeducciones').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTechosDeducciones.length; i++) {
                 var Activo;
@@ -50,36 +51,78 @@ function cargarGridTechosDeducciones() {
                 var estadoRegistro = ListaTechosDeducciones[i].tddu_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTechosDeducciones">Detalles</button>' : '';
+                var botonDetalles = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs" style="margin-right: 3px;"  id="btnDetalleTechosDeducciones">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaTechosDeducciones[i].tddu_Activo == true ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTechosDeducciones">Editar</button>' : '';
 
                 //variable donde está el boton activar
                 var botonActivar = ListaTechosDeducciones[i].tddu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarTechosDeducciones">Activar</button>' : '' : '';
-                template += '<tr data-id = "' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '">' +
-                    '<td>' + ListaTechosDeducciones[i].tddu_IdTechosDeducciones + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeColaboradores + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].tddu_PorcentajeEmpresa + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].tddu_Techo + '</td>' +
-                    '<td>' + ListaTechosDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
 
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
+                $('#tblTechosDeducciones').dataTable().fnAddData([
+                ListaTechosDeducciones[i].tddu_IdTechosDeducciones,
+                ListaTechosDeducciones[i].tddu_Techo,
+                ListaTechosDeducciones[i].tddu_PorcentajeColaboradores,
+                ListaTechosDeducciones[i].tddu_PorcentajeEmpresa,
+                ListaTechosDeducciones[i].cde_DescripcionDeduccion,
+                estadoRegistro,
+                  botonDetalles + botonEditar + botonActivar]
+                );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyTechosDeducciones').html(template);
         });
     FullBody();
 }
+
+function DataAnnotations(ToF, esCreate) {
+
+    if (!esCreate)
+        if (ToF) {
+            $("#frmEditTechosDeducciones #Validation_deduccion").css("display", "none");
+            $("#frmEditTechosDeducciones #Validation_Techo").css("display", "none");
+            $("#frmEditTechosDeducciones #Validation_PorcentajeColaboradores").css("display", "none");
+            $("#frmEditTechosDeducciones #Validation_PorcentajeEmpresa").css("display", "none");
+
+            $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "none");
+            $("#frmTechosDeduccionesCreate #Validation_Techo").css("display", "none");
+            $("#frmTechosDeduccionesCreate #Validation_PorcentajeColaboradores").css("display", "none");
+            $("#frmTechosDeduccionesCreate #Validation_PorcentajeEmpresa").css("display", "none");
+        }
+        else {
+            $("#frmEditTechosDeducciones #Validation_deduccion").css("display", "block");
+            $("#frmEditTechosDeducciones #Validation_Techo").css("display", "block");
+            $("#frmEditTechosDeducciones #Validation_PorcentajeColaboradores").css("display", "block");
+            $("#frmEditTechosDeducciones #Validation_PorcentajeEmpresa").css("display", "block");
+
+            $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "block");
+            $("#frmTechosDeduccionesCreate #Validation_Techo").css("display", "block");
+            $("#frmTechosDeduccionesCreate #Validation_PorcentajeColaboradores").css("display", "block");
+            $("#frmTechosDeduccionesCreate #Validation_PorcentajeEmpresa").css("display", "block");
+        }
+
+};
+
+$("#btnCerrarCreateTechosDeducciones").click(function () {
+    $("#frmTechosDeduccionesCreate #Validation_deduccion").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_Techo").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_PorcentajeColaboradores").css("display", "none");
+    $("#frmTechosDeduccionesCreate #Validation_PorcentajeEmpresa").css("display", "none");
+});
+
+$("#btnCerrarEditar").click(function () {
+    $("#frmEditTechosDeducciones #Validation_deduccion").css("display", "none");
+    $("#frmEditTechosDeducciones #Validation_Techo").css("display", "none");
+    $("#frmEditTechosDeducciones#Validation_PorcentajeColaboradores").css("display", "none");
+    $("#frmEditTechosDeducciones #Validation_PorcentajeEmpresa").css("display", "none");
+});
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$(".close").click(function () {
+    $("#Validation_deduccion").css("display", "none");
+    $("#Validation_Techo").css("display", "none");
+    $("#Validation_PorcentajeColaboradores").css("display", "none");
+    $("#Validation_PorcentajeEmpresa").css("display", "none");
+});
 
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarTechosDeducciones", function () {
@@ -103,22 +146,12 @@ $(document).on("click", "#btnAgregarTechosDeducciones", function () {
     $('#Crear input[type=text], input[type=number]').val('');
     $("#AgregarTechosDeducciones").modal();
 });
-
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateTechoDeducciones').click(function () {
-    var ModelState = true;
-
-    //$("#Editar #tede_Id").val() == "" ? ModelState = false : '';
-    $("#Crear #tddu_Techo").val() == "" ? ModelState = false : $("#Crear #tddu_Techo").val() == "0.00" ? ModelState = false : $("#Crear #tddu_Techo").val() == null ? ModelState = false : isNaN($("#Crear #tddu_Techo").val()) == true ? ModelState = false : '';
-    $("#Crear #tddu_PorcentajeColaboradores").val() == "" ? ModelState = false : $("#Crear #tddu_PorcentajeColaboradores").val() == "0.00" ? ModelState = false : $("#Crear #tddu_PorcentajeColaboradores").val() == null ? ModelState = false : isNaN($("#Crear #tddu_PorcentajeColaboradores").val()) == true ? ModelState = false : '';
-    $("#Crear #tddu_PorcentajeEmpresa").val() == "" ? ModelState = false : $("#Crear #tddu_PorcentajeEmpresa").val() == "0" ? ModelState = false : $("#Crear #tddu_PorcentajeEmpresa").val() == null ? ModelState = false : isNaN($("#Crear #tddu_PorcentajeEmpresa").val()) == true ? ModelState = false : '';
-    $("#Crear #cde_IdDeducciones").val() == "" ? ModelState = false : $("#Crear #cde_IdDeducciones").val() == "0" ? ModelState = false : $("#Crear #cde_IdDeducciones").val() == null ? ModelState = false : isNaN($("#Crear #cde_IdDeducciones").val()) == true ? ModelState = false : '';
-
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    if (ModelState) {
+    if ($("#Crear #cde_Descripcion").val() != "0" && $("#Crear #tddu_Techo").val() != "" && $("#Crear #tddu_PorcentajeColaboradores").val() != "" && $("#Crear #tddu_PorcentajeEmpresa").val() != "") {
         var data = $("#frmTechosDeduccionesCreate").serializeArray();
         console.log(data);
-        debugger;
         $.ajax({
             url: "/TechosDeducciones/Create",
             method: "POST",
@@ -144,12 +177,8 @@ $('#btnCreateTechoDeducciones').click(function () {
         });
     }
     else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
+        DataAnnotations(false);
     }
-
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -193,7 +222,6 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
                         });
                     });
                 $("#EditarTechosDeducciones").modal();
-                $('body').css("overflow", "hidden");
             }
             else {
                 //Mensaje de error si no hay data
@@ -207,15 +235,7 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnEditarTechosDeduc
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarTecho").click(function () {
-
-    var ModelState = true;
-    $("#Editar #tddu_IdTechosDeducciones").val() == "" ? ModelState = false : $("#Editar #tddu_IdTechosDeducciones").val() == "0" ? ModelState = false : $("#Editar #tddu_IdTechosDeducciones").val() == null ? ModelState = false : '';
-    $("#Editar #tddu_Techo").val() == "" ? ModelState = false : $("#Editar #tddu_Techo").val() == "0.00" ? ModelState = false : $("#Editar #tddu_Techo").val() == null ? ModelState = false : '';
-    $("#Editar #tddu_PorcentajeColaboradores").val() == "" ? ModelState = false : $("#Editar #tddu_PorcentajeColaboradores").val() == "0.00" ? ModelState = false : $("#Editar #tddu_PorcentajeColaboradores").val() == null ? ModelState = false : '';
-    $("#Editar #tddu_PorcentajeEmpresa").val() == "" ? ModelState = false : $("#Editar #tddu_PorcentajeEmpresa").val() == "0" ? ModelState = false : $("#Editar #tddu_PorcentajeEmpresa").val() == null ? ModelState = false : '';
-    $("#Editar #cde_IdDeducciones").val() == "" ? ModelState = false : $("#Editar #cde_IdDeducciones").val() == "0" ? ModelState = false : $("#Editar #cde_IdDeducciones").val() == null ? ModelState = false : '';
-
-    if (ModelState) {
+    if ($("#Crear #cde_Descripcion").val() != "0" && $("#Crear #tddu_Techo").val() != "" && $("#Crear #tddu_PorcentajeColaboradores").val() != "" && $("#Crear #tddu_PorcentajeEmpresa").val() != "") {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditTechosDeducciones").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -243,12 +263,9 @@ $("#btnEditarTecho").click(function () {
             }
         });
     }
-    //else {
-    //    iziToast.error({
-    //        title: 'Error',
-    //        message: 'Ingrese datos válidos.',
-    //    });
-    //}
+    else {
+        DataAnnotations(false);
+    }
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -256,15 +273,10 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarTechosDeducciones").modal('hide');
 });
 
-
-
-
 $(document).on("click", "#btnInactivarTechoDeducciones", function () {
     $("#EditarTechosDeducciones").modal('hide');
     $("#InactivarTechosDeducciones").modal();
 });
-
-
 
 //Inactivar registro Techos Deducciones
 $("#btnInactivarTechosDeducciones").click(function () {
@@ -343,7 +355,6 @@ $(document).on("click", "#tblTechosDeducciones tbody tr td #btnDetalleTechosDedu
                 //            $("#Detalles #cde_IdDeducciones").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                 //        });
                 //    });
-                $('body').css("overflow", "hidden");
                 $("#DetailsTechosDeducciones").modal();
             }
             else {
@@ -369,12 +380,12 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
     $.ajax({
         url: "/TechosDeducciones/Activar/" + activarID,
         method: "POST",
-        data: {id : activarID}
+        data: { id: activarID }
     }).done(function (data) {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se activó el registro.',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -383,7 +394,7 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -391,38 +402,12 @@ $("#btnActivarTechosDeduccionesEjecutar").click(function () {
 });
 
 //VALIDAR LAS ENTRADAS DE LOS CONCEPTOS AGREGADOS
-function isNumberKey(txt, evt) {
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode == 46) {
-        //Check if the text already contains the . character
-        //var len = $('.ValidarCaracteres').val().length;
-        //var index = $('.ValidarCaracteres').val().indexOf('.')
-        if (txt.value.indexOf('.') === -1) {
-            return true;
-        } else {
-            return false;
-        }
+$('.ValidarCaracteres').bind('keypress', function (event) {
+    //var regex = new RegExp("^[a-zA-Z0-9]+$");
+    var regex = new RegExp("^[0-9.]");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
     }
-    else {
-        if (charCode > 31 &&
-          (charCode < 48 || charCode > 57))
-            return false;
-    }
-    //if (index > 0) {
-    //    var CharAfterdot = (len + 1) - index;
-    //    if (CharAfterdot > 3) {
-    //        return false;
-    //    }
-    //}
-    return true;
-}
-
-//$('.ValidarCaracteres').bind('keypress', function (event) {
-//    //var regex = new RegExp("^[a-zA-Z0-9]+$");
-//    var regex = new RegExp("^[0-9.]");
-//    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-//    if (!regex.test(key)) {
-//        event.preventDefault();
-//        return false;
-//    }
-//});
+});
