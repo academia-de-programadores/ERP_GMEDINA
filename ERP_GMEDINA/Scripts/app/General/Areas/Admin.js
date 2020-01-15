@@ -1,4 +1,4 @@
-﻿var Admin = true;
+﻿Admin = true;
 function hablilitar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
