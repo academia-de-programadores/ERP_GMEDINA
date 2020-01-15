@@ -88,9 +88,9 @@ $(document).ready(function () {
                 'POST',
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                     } else {
-                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                        MsgError("Error", "No se guardó el registro, contacte al administrador");
                     }
                 });
             }

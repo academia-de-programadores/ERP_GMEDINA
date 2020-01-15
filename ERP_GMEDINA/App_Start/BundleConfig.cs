@@ -652,6 +652,7 @@ namespace ERP_GMEDINA
                 bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
                 "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
+
                 bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones").Include(
                     "~/Scripts/app/General/CreateHistorialVacaciones.js"));
 
@@ -675,8 +676,8 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
 
-                                  bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
-                                      "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
+                 "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
 
             //App/HistorialPermisos
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(

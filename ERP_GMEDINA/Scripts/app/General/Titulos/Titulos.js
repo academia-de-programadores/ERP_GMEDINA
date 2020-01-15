@@ -100,10 +100,9 @@ $("#btnGuardar").click(function() {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["titu_Descripcion"]);
-                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
-                }
-                else {
-                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador(Verifique si el registro ya existe).");
+                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                } else {
+                    MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
@@ -126,9 +125,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ha Inhabilitado el registro");
+                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + " Contacte al administrador.");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -149,9 +148,9 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("¡Exito!", "Se ah actualizado el registro");
+                    MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + " contacte al administrador(Verifique si el registro ya existe).");
+                    MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     } else {

@@ -68,9 +68,9 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["per_Descripcion", "per_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
             });
     } else {
