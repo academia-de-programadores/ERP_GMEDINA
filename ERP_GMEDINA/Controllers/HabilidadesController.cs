@@ -12,7 +12,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HabilidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Habilidades
         public ActionResult Index()
@@ -24,18 +24,29 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            var lista = db.tbHabilidades
-                .Select(
-                    t =>
-                    new
-                    {
-                        habi_Id = t.habi_Id,
-                        habi_Descripcion = t.habi_Descripcion,
-                        habi_Estado = t.habi_Estado
-                    }
-                )
-                .ToList();
-            return Json(lista, JsonRequestBehavior.AllowGet);
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                //Aqui codigo llenarTabla
+                    var lista = db.tbHabilidades
+                        .Select(
+                            t =>
+                            new
+                            {
+                                habi_Id = t.habi_Id,
+                                habi_Descripcion = t.habi_Descripcion,
+                                habi_Estado = t.habi_Estado
+                            }
+                        )
+                        .ToList();
+                    return Json(lista, JsonRequestBehavior.AllowGet);
+
+                //aqui termina llenarTabla
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
         }
 
         // POST: Habilidades/Create
@@ -48,6 +59,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHabilidades_Insert(tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHabilidades_Insert_Result item in list)
                     {
@@ -78,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
             tbHabilidades tbHabilidades = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbHabilidades = db.tbHabilidades.Find(id);
                 if (tbHabilidades == null || !tbHabilidades.habi_Estado)
                 {
@@ -117,6 +130,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHabilidades_Update(id, tbHabilidades.habi_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHabilidades_Update_Result item in list)
                     {
@@ -150,6 +164,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHabilidades_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHabilidades_Delete_Result item in list)
                     {
@@ -177,6 +192,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHabilidades_Restore(id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHabilidades_Restore_Result item in list)
                     {
