@@ -187,7 +187,7 @@ $('#btnCreateRegistroBonos').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
             else {
@@ -195,7 +195,7 @@ $('#btnCreateRegistroBonos').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro se agergó de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
@@ -380,13 +380,6 @@ $("#btnUpdateBonos").click(function () {
 //FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    
-    var Monto = $("#Editar #cb_Monto").val();
-    var decimales = Monto.split(".");
-
-    if (Monto != "" && Monto != null && Monto != undefined && Monto > 0
-        && decimales[1] != null && decimales[1] != undefined) {
-    
         var data = $("#frmEmpleadoBonos").serializeArray();
 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -400,7 +393,7 @@ $("#btnUpdateBonos2").click(function () {
             iziToast.error({
 
                 title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
             $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         }
@@ -414,22 +407,10 @@ $("#btnUpdateBonos2").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue editado de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
         }
-    });
-    } else {
-        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Crear #cin_IdIngreso").focus;
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-            mostrarError('Campo Monto requerido.');
-        } else if (decimales[1] == null && decimales[1] == undefined) {
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-            mostrarError('Monto válido con dos valores decimales.');
-        }
-        //    $("#Editar #cb_Monto").focus;
-        //    mostrarError('Ingrese un Monto válido');
-     }
+    });  
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -516,7 +497,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -542,7 +523,7 @@ $("#btnInactivarRegistroBono").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -553,7 +534,7 @@ $("#btnInactivarRegistroBono").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!!',
             });
         }
     });
@@ -577,7 +558,7 @@ $("#btnActivarRegistroBono").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
@@ -588,7 +569,7 @@ $("#btnActivarRegistroBono").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
