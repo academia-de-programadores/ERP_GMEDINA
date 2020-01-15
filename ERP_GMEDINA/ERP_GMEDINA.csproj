@@ -1981,6 +1981,7 @@
     <Content Include="Views\HistorialSalidas\Create.cshtml" />
     <Content Include="Views\Sueldos\Create.cshtml" />
     <Content Include="Views\HistorialCargos\_Create.cshtml" />
+    <Content Include="Views\Shared\_Activar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

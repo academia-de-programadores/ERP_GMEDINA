@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            Session["Admin"] = false;
+            Session["Admin"] = true;
             return View();
         }
     }

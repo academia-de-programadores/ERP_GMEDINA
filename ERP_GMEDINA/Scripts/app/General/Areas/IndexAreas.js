@@ -58,6 +58,7 @@ function llenarTabla() {
                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
                     "</div>":'';
                 tabla.row.add({
+                    Estado:value.area_Estado?'Activo':'Inactivo',
                     "Número":value.area_Id,
                     ID: value.area_Id,
                     Area: value.area_Descripcion,

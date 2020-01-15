@@ -28,26 +28,24 @@ namespace ERP_GMEDINA.Controllers
 
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida. 
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var tbAreas = db.tbAreas
-                        .Select(
-                        t => new
-                        {
-                            area_Id = t.area_Id,
-                            area_Descripcion = t.area_Descripcion,
-                            Sucursales = t.tbSucursales.suc_Descripcion,
-                            Encargado = t.tbCargos.tbEmpleados
-                                .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                            area_Estado=t.area_Estado
-                        }
-                        )
-                        .ToList();
-                    return Json(tbAreas, JsonRequestBehavior.AllowGet);
-                }
+                var tbAreas = db.tbAreas
+                    .Select(
+                    t => new
+                    {
+                        area_Id = t.area_Id,
+                        area_Descripcion = t.area_Descripcion,
+                        Sucursales = t.tbSucursales.suc_Descripcion,
+                        Encargado = t.tbCargos.tbEmpleados
+                            .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
+                        area_Estado=t.area_Estado
+                    }
+                    )
+                    .ToList();
+                return Json(tbAreas, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception ex)
             {
+                ex.ToString();
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
