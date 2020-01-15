@@ -49,6 +49,8 @@ function cargarGridDeducciones() {
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var ListaDeducciones = data, template = '';
 
+            $('#tblCatalogoDeducciones').DataTable().clear();
+
             //Recorrer la data y crear el template que se pondrá en el tbody
             for (var i = 0; i < ListaDeducciones.length; i++) {
 
@@ -56,7 +58,7 @@ function cargarGridDeducciones() {
                 var estadoRegistro = ListaDeducciones[i].cde_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
+                var botonDetalles = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" style= "margin-right:3px;" type="button" class="btn btn-primary btn-xs"  id="btnDetalleCatalogoDeducciones">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaDeducciones[i].cde_Activo == true ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-default btn-xs"  id="btnEditarCatalogoDeducciones">Editar</button>' : '';
@@ -64,29 +66,16 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaDeducciones[i].cde_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarCatalogoDeducciones">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-                  '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-                    '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                   //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                   '</td> ' +
-                   '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeducciones').html(template);
-            
+                $('#tblCatalogoDeducciones').dataTable().fnAddData([
+					ListaDeducciones[i].cde_IdDeducciones,
+					ListaDeducciones[i].cde_DescripcionDeduccion,
+					ListaDeducciones[i].cde_PorcentajeColaborador,
+					ListaDeducciones[i].cde_PorcentajeColaborador,
+					ListaDeducciones[i].cde_PorcentajeEmpresa,
+					ListaDeducciones[i].tde_Descripcion,
+					botonDetalles + botonEditar + botonActivar
+                ]);
+            }            
             });
       FullBody();
  }        

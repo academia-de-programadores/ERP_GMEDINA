@@ -46,19 +46,24 @@ $('.cargarPlanilla').click(function () {
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
             var PlanillaSeleccionada = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+
+
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblPreviewPlanilla').DataTable().clear();
             for (var i = 0; i < PlanillaSeleccionada.length; i++) {
-                template += '<tr data-id = "' + PlanillaSeleccionada[i].emp_Id + '">' +
-                    '<td>' + PlanillaSeleccionada[i].Nombres + '</td>' +
-                    '<td>' + PlanillaSeleccionada[i].per_Identidad + '</td>' +
-                    '<td>' + PlanillaSeleccionada[i].salarioBase + '</td>' +
-                    '<td>' + PlanillaSeleccionada[i].tmon_Descripcion + '</td>' +
-                    '</tr>';
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblPreviewPlanilla').dataTable().fnAddData([
+                    PlanillaSeleccionada[i].Nombres,
+                    PlanillaSeleccionada[i].per_Identidad,
+                    PlanillaSeleccionada[i].salarioBase,
+                    PlanillaSeleccionada[i].tmon_Descripcion
+                ]);
             }
+
+
             ID == '' ? planillaId = null : planillaId = data[0].cpla_IdPlanilla;
             nombrePlanilla = data[0].cpla_DescripcionPlanilla;
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyPreviewPlanilla').html(template);
             ID == '' ? $('#nombrePlanilla').html('') : $('#nombrePlanilla').html(data[0].cpla_DescripcionPlanilla);
             $('#btnPlanilla').css('display', '');
             $('#Cargando').css('display', 'none');
@@ -165,9 +170,7 @@ $(document).ready(function () {
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
     });
-    //$('.dual_select').bootstrapDualListbox({
-    //    selectorMinimalHeight: 160
-    //});
+
     $('#datepicker .input-group.date')
 		.datepicker({
 		    todayBtn: 'linked',
