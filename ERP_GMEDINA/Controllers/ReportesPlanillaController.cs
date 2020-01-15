@@ -117,10 +117,9 @@ namespace ERP_GMEDINA.Controllers
 			conx.Close();
 
 			return View();
-		}		
+		}
 		#endregion
 
-		//Pendiente
 		#region reportes varios dinamico 
 
 		//parametros del reporte
@@ -131,8 +130,172 @@ namespace ERP_GMEDINA.Controllers
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 			return View();
 		}
-		
+
+		//Report viewer
+		[HttpPost]
+		public ActionResult ReportesVariosParametros(string reporte, int cpla_IdPlanilla, DateTime hipa_FechaInicio, DateTime hipa_FechaFin)
+		{
+
+			ReportViewer reportViewer = new ReportViewer();
+			reportViewer.ProcessingMode = ProcessingMode.Local;
+			reportViewer.SizeToReportContent = false;
+			reportViewer.Width = Unit.Pixel(1050);
+			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.BackColor = System.Drawing.Color.White;
+			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+			SqlConnection conx = new SqlConnection(connectionString);
+			//comando para el dataAdapter
+			SqlCommand command = new SqlCommand();
+			command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
+			command.Parameters.AddWithValue("@hipa_FechaInicio", SqlDbType.Date).Value = hipa_FechaInicio;
+			command.Parameters.AddWithValue("@hipa_FechaFin", SqlDbType.Date).Value = hipa_FechaFin;
+			command.Connection = conx;
+
+
+
+
+			// seleccionar reporte
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteISRRPT.rdlc";
+			command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_TotalISR,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_TotalISR >0 and  cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+			string encabezadoReporte = "ISR";
+
+			switch (reporte)
+			{
+				case "AFP":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_AFP,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_AFP > 0 and cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteAFPRPT.rdlc";
+					encabezadoReporte = "AFP";
+					break;
+
+				case "Comisiones":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_TotalComisiones,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_TotalComisiones > 0 and cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteComisionesRPT.rdlc";
+					encabezadoReporte = "Comisiones";
+					break;
+
+				case "HorasExtras":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_TotalHorasExtras,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_TotalHorasExtras > 0 and cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteHorasExtrasRPT.rdlc";
+					encabezadoReporte = "Horas extras";
+					break;
+
+				case "Vacaciones":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_TotalVacaciones,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_TotalVacaciones > 0 and  cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteVacacionesRPT.rdlc";
+					encabezadoReporte = "Vacaciones";
+					break;
+				case "SeptimoDia":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_TotalSeptimoDia,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_TotalSeptimoDia > 0 and cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteSeptimoDiaRPT.rdlc";
+					encabezadoReporte = "Séptimo día";
+					break;
+				case "AdelantosSueldo":
+					command.CommandText = "SELECT emp_Id,per_Nombres,per_Apellidos,hipa_FechaInicio,hipa_FechaFin, hipa_FechaPago,hipa_AdelantoSueldo,cpla_DescripcionPlanilla FROM Plani.V_ReportesVarios where hipa_AdelantoSueldo > 0 and cpla_IdPlanilla = @cpla_IdPlanilla and hipa_FechaPago between @hipa_FechaInicio and @hipa_FechaFin";
+					reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc";
+					encabezadoReporte = "Adelantos de sueldo";
+					break;
+			}
+
+			SqlDataAdapter adp = new SqlDataAdapter(command);
+			adp.Fill(ds, "tbHistorialDePago");
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["tbHistorialDePago"]));
+			ViewBag.ReportViewer = reportViewer;
+			ViewBag.Encabezado = encabezadoReporte;
+			//DDLS
+			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+
+			conx.Close();
+
+			return View();
+		}
+
 		#endregion
 
+		#region decimo tercer mes 
+
+		//parametros del reporte
+		public ActionResult DecimoTercerParametros()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+
+		//parametros del reporte
+		[HttpPost]
+		public ActionResult DecimoTercerParametros(int cpla_IdPlanilla, DateTime dtm_FechaPago)
+		{
+			ReportViewer reportViewer = new ReportViewer();
+			reportViewer.ProcessingMode = ProcessingMode.Local;
+			reportViewer.SizeToReportContent = false;
+			reportViewer.Width = Unit.Pixel(1050);
+			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.BackColor = System.Drawing.Color.White;
+			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+			SqlConnection conx = new SqlConnection(connectionString);
+
+			//comando para el dataAdapter
+			SqlCommand command = new SqlCommand();
+			command.CommandText = "SELECT * FROM [Plani].[V_DecimoTercerMes_RPT] where cpla_IdPlanilla = @cpla_IdPlanilla and dtm_FechaPago = @dtm_FechaPago";
+			command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
+			command.Parameters.AddWithValue("@dtm_FechaPago", SqlDbType.Date).Value = dtm_FechaPago;
+			command.Connection = conx;
+			SqlDataAdapter adp = new SqlDataAdapter(command);
+			adp.Fill(ds, ds.V_DecimoTercerMes_RPT.TableName);
+
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoTercerRPT.rdlc";
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoTercerMes_RPT"]));
+			conx.Close();
+
+			ViewBag.ReportViewer = reportViewer;
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+		#endregion
+
+		#region decimo cuarto mes 
+
+		//parametros del reporte
+		public ActionResult DecimoCuartoParametros()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+
+		//parametros del reporte
+		[HttpPost]
+		public ActionResult DecimoCuartoParametros(int cpla_IdPlanilla, DateTime dcm_FechaPago)
+		{
+			ReportViewer reportViewer = new ReportViewer();
+			reportViewer.ProcessingMode = ProcessingMode.Local;
+			reportViewer.SizeToReportContent = false;
+			reportViewer.Width = Unit.Pixel(1050);
+			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.BackColor = System.Drawing.Color.White;
+			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+			SqlConnection conx = new SqlConnection(connectionString);
+
+			//comando para el dataAdapter
+			SqlCommand command = new SqlCommand();
+			command.CommandText = "SELECT * FROM [Plani].[V_DecimoCuartoMes_RPT] where cpla_IdPlanilla = @cpla_IdPlanilla and dcm_FechaPago = @dcm_FechaPago";
+			command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
+			command.Parameters.AddWithValue("@dcm_FechaPago", SqlDbType.Date).Value = dcm_FechaPago;
+			command.Connection = conx;
+			SqlDataAdapter adp = new SqlDataAdapter(command);
+			adp.Fill(ds, ds.V_DecimoCuartoMes_RPT.TableName);
+
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoCuartoRPT.rdlc";
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoCuartoMes_RPT"]));
+			conx.Close();
+
+			ViewBag.ReportViewer = reportViewer;
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+		#endregion
 	}
 }

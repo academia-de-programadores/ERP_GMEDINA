@@ -37,45 +37,39 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaAFP = data, template = '';
+            var ListaAFP = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblAFP').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAFP.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaAFP[i].afp_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaAFP[i].afp_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' : '';
+                var botonDetalles = ListaAFP[i].afp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleAFP" data-id = "' + ListaAFP[i].afp_Id + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaAFP[i].afp_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' : '';
+                var botonEditar = ListaAFP[i].afp_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarAFP" data-id = "' + ListaAFP[i].afp_Id + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
+                var botonActivar = ListaAFP[i].afp_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarAFP" afpid="' + ListaAFP[i].afp_Id + '" data-id = "' + ListaAFP[i].afp_Id + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaAFP[i].afp_Id + '">' +
-                    '<td>' + ListaAFP[i].afp_Id + '</td>' +
-                    '<td>' + ListaAFP[i].afp_Descripcion + '</td>' +
-                    '<td>' + ListaAFP[i].afp_AporteMinimoLps + '</td>' +
-                    '<td>' + ListaAFP[i].afp_InteresAporte + '</td>' +
-                    '<td>' + ListaAFP[i].afp_InteresAnual + '</td>' +
-                    '<td>' + ListaAFP[i].tde_Descripcion + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-
-                    '</td>' +
-                    '</tr>';
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblAFP').dataTable().fnAddData([
+                    ListaAFP[i].afp_Id,
+                    ListaAFP[i].afp_Descripcion,
+                    ListaAFP[i].afp_AporteMinimoLps,
+                    ListaAFP[i].afp_InteresAporte,
+                    ListaAFP[i].afp_InteresAnual,
+                    ListaAFP[i].tde_Descripcion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyAFP').html(template);
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 
@@ -222,10 +216,6 @@ $('#btnCreateRegistroAFP').click(function () {
 
     if (vale1 == "" || vale1 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale2 != "" || vale2 != null || vale2 != undefined) {
         if (expreg.test(vale2)) {
@@ -240,28 +230,16 @@ $('#btnCreateRegistroAFP').click(function () {
                         }
                         else {
                             $("#Editar #validatione4").css("display", "");
-                            iziToast.error({
-                                title: 'Error',
-                                message: '¡Ingrese datos válidos!',
-                            });
                         }
                     }
                 }
                 else {
                     $("#Editar #validatione3").css("display", "");
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡Ingrese datos válidos!',
-                    });
                 }
             }
         }
         else {
             $("#Editar #validatione2").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
 
@@ -418,10 +396,6 @@ $("#btnEditAFP").click(function () {
 
     if (vale1 == "" || vale1 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale2 != "" || vale2 != null || vale2 != undefined) {
         if (expreg.test(vale2)) {
@@ -436,28 +410,16 @@ $("#btnEditAFP").click(function () {
                         }
                         else {
                             $("#Editar #validatione4").css("display", "");
-                            iziToast.error({
-                                title: 'Error',
-                                message: '¡Ingrese datos válidos!',
-                            });
                         }
                     }
                 }
                 else {
                     $("#Editar #validatione3").css("display", "");
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡Ingrese datos válidos!',
-                    });
                 }
             }
         }
         else {
             $("#Editar #validatione2").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
 
@@ -611,7 +573,9 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                             }
                         });
                     });
-                $("#DetallesAFP").modal();
+                $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data

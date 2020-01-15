@@ -44,45 +44,39 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaDeduccionIndividual = data, template = '';
+            var ListaDeduccionIndividual = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#IndexTable').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionIndividual.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaDeduccionIndividual[i].dei_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Detalles</button>' : '';
+                var botonDetalles = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Editar</button>' : '';
+                var botonEditar = ListaDeduccionIndividual[i].dei_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarDeduccionesIndividuales" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaDeduccionIndividual[i].dei_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionesIndividuales" deiid="' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Activar</button>' : '' : '';
+                var botonActivar = ListaDeduccionIndividual[i].dei_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionesIndividuales" deiid="' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '" data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '">' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_Motivo + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_MontoInicial + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_MontoRestante + '</td>' +
-                    '<td>' + ListaDeduccionIndividual[i].dei_Cuota + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-
-                '</td>' +
-                '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeduccionesIndividuales').html(template);
+                //AGREGAR EL ROW AL DATATABLE
+                $('#IndexTable').dataTable().fnAddData([
+                    ListaDeduccionIndividual[i].dei_IdDeduccionesIndividuales,
+                    ListaDeduccionIndividual[i].dei_Motivo,
+                    ListaDeduccionIndividual[i].per_Nombres + ' ' + ListaDeduccionIndividual[i].per_Apellidos,
+                    ListaDeduccionIndividual[i].dei_MontoInicial,
+                    ListaDeduccionIndividual[i].dei_MontoRestante,
+                    ListaDeduccionIndividual[i].dei_Cuota,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+                }
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 

@@ -9,16 +9,6 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     .fail(function (jqxhr, settings, exception) {
         console.log("No se pudo recuperar Script SerializeDate");
     });
-
-//EVITAR POSTBACK DE FORMULARIOS
-
-$('#frmEmpleadoBonosCreate').submit(function (e) {
-    return false;
-});
-$('#frmEmpleadoBonos').submit(function (e) {
-    return false;
-});
-
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
@@ -30,6 +20,18 @@ function _ajax(params, uri, type, callback) {
         }
     });
 }
+
+//EVITAR POSTBACK DE FORMULARIOS
+
+$('#frmEmpleadoBonosCreate').submit(function (e) {
+    return false;
+});
+$('#frmEmpleadoBonos').submit(function (e) {
+    return false;
+});
+
+//FUNCION GENERICA PARA REUTILIZAR AJAX
+
 
 //FUNCION: MOSTRAR ERRORES IZITOAST
 function mostrarError(Mensaje) {
@@ -64,7 +66,8 @@ function cargarGridBonos() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaBonos = data, template = '', botones = '';
+            var ListaBonos = data;
+            $('#tblEmpleadoBonos').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaBonos.length; i++) {
                 var FechaRegistro = FechaFormato(ListaBonos[i].cb_FechaRegistro);
@@ -78,13 +81,6 @@ function cargarGridBonos() {
                 //variable donde está el boton activar
                 var botonActivar = ListaBonos[i].cb_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarEmpleadoBonos">Activar</button>' : '' : '';
 
-                //if (ListaBonos[i].cb_Activo) {
-                //    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnDetalleEmpleadoBonos">Detalles</button>' +
-                //    '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-default btn-xs" id="btnEditarEmpleadoBonos">Editar</button>';
-                //} else {
-                //    botones = '<button data-id = "' + ListaBonos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs" id="btnActivarEmpleadoBonos">Activar</button>';
-                //}
-
                 //VALIDACION PARA RECARGAR LA TABLA SIN AFECTAR LOS CHECKBOX
                 var Check = "";
                 //ESTA VARIABLE GUARDA CODIGO HTML DE UN CHECKBOX, PARA ENVIARLO A LA TABLA
@@ -94,27 +90,19 @@ function cargarGridBonos() {
                     Check = '<input type="checkbox" id="cb_Pagado" name="cb_Pagado" disabled>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
                 }
 
-                
-
-                template += '<tr data-id = "' + ListaBonos[i].cb_Id + '">' +
-                    '<td>' + ListaBonos[i].cb_Id  + '</td>' +
-                    '<td>' + ListaBonos[i].per_Nombres + ' ' + ListaBonos[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaBonos[i].cin_DescripcionIngreso + '</td>' +
-                    '<td>' + ListaBonos[i].cb_Monto + '</td>' +
-                    '<td>' + FechaRegistro + '</td>' +
-                    '<td>' + Check + '</td>' + //AQUI ENVIA LA VARIABLE
-                    '<td>' + Estado + '</td>' +
-                    '<td>' +
-                    botonDetalles +
-                    botonEditar +
-                    botonActivar +
-                    '</td>' +
-                    '</tr>';
+                $('#tblEmpleadoBonos').dataTable().fnAddData([
+                   ListaBonos[i].cb_Id,
+                   ListaBonos[i].per_Nombres + ' ' + ListaBonos[i].per_Apellidos,
+                   ListaBonos[i].cin_DescripcionIngreso,
+                   ListaBonos[i].cb_Monto,
+                   FechaRegistro,
+                   Check,
+                   Estado,
+                   botonDetalles + botonEditar + botonActivar]
+                   ); 
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyBonos').html(template);
         });
-    FullBody();
+    (FullBody);
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -152,8 +140,10 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoBonos").modal();
     $("#Crear #cb_Monto").val("");
+    $("#AgregarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
@@ -371,6 +361,7 @@ $("#btnUpdateBonos").click(function () {
        
     }
     else {
+        $("#EditarEmpleadoBonos").modal('hide');
         $("#EditarEmpleadoBonosConfirmacion").modal();
         $("#Editar #Validation_descipcion5").css("display", "none");
         $("#Editar #Validation_descipcion6").css("display", "none");
@@ -412,7 +403,17 @@ $("#btnUpdateBonos2").click(function () {
         }
     });  
 });
+$("#btCerrarEditar").click(function () {
+    $("#EditarEmpleadoBonos").modal();
+    $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+})
 
+
+
+$("#btCerrarNo").click(function () {
+    $("#EditarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal();
+})
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos", function () {
     var ID = $(this).data('id');
@@ -426,15 +427,13 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
                 var FechaCrea = FechaFormato(data.cb_FechaCrea);
                 var FechaModifica = FechaFormato(data.cb_FechaModifica);
                 var usuarioModifica = data.usuarioModifica == null ? 'Sin modificaciones' : data.usuarioModifica;
                 var usuarioCrea = data.NombreUsarioCrea == null ? 'N/A' : data.NombreUsarioCrea;
 
-                if (data.cb_Pagado) {
-                    //$('#Detalles #cb_Pagado').prop('checked', true);
+                if (data.cb_Pagado) { 
                     $("#Detalles #cb_Pagado").html("Si");
                 } else {
                     $("#Detalles #cb_Pagado").html("No");
@@ -577,5 +576,4 @@ $("#btnActivarRegistroBono").click(function () {
 });
 
 
-
-
+ 

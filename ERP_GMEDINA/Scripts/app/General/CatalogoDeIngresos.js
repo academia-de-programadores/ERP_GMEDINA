@@ -35,39 +35,33 @@ function cargarGridIngresos() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaIngresos = data, template = '';
+            var ListaIngresos = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblCatalogoIngresos').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-          
             for (var i = 0; i < ListaIngresos.length; i++)
             {
-                var estadoIng = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
+                var estadoRegistro = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
-                var botonDetail = ListaIngresos[i].cin_Activo == true ?
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
+                var botonDetalles = ListaIngresos[i].cin_Activo == true ?
+                    '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>' : '';
 
-                var botonEdit = ListaIngresos[i].cin_Activo == true ?
+                var botonEditar = ListaIngresos[i].cin_Activo == true ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' : '';
 
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
                     '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' :''; 
-
-                console.log(estadoIng);
-
-                template += '<tr  class="gradeA odd" role="row"  data-id = "' + ListaIngresos[i].cin_IdIngresos + '">' +
-                    '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
-                    '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
-                    '<td>' + estadoIng + '</td>' +
-                    '<td>' +
-                    botonDetail +
-                    botonEdit +
-                    botonActivar
-                    +'</td> </tr>';
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblCatalogoIngresos').dataTable().fnAddData([
+                     ListaIngresos[i].cin_IdIngresos,
+                     ListaIngresos[i].cin_DescripcionIngreso,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyIngresos').html(template);
         });
     FullBody();
 }
@@ -205,7 +199,6 @@ $("#btnEditarIngresos").click(function () {
 });
 
 const btneditar = $('#btnEditarIngresos'),
-
 cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
 function mostrarcargandoEditar() {
@@ -219,9 +212,6 @@ function ocultarcargandoEditar() {
     cargandoEditar.html('');
     cargandoEditar.hide();
 }
-
-
-
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
@@ -268,46 +258,7 @@ $("#btnInactivarIngresos").click(function () {
     $("#frmCatalogoIngresos").submit(function (e) {
         return false;
     });
-}
-
-);
-
-//MODAL ACTIVAR
-
-//$("#btnActivarIngresos").click(function () {
-//    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-//    var data = $("#frmActivarCatalogoIngresos").serializeArray();
-//    var ID = InactivarID;
-//    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-//    $.ajax({
-//        url: "/CatalogoDeIngresos/Activar/" + ID,
-//        method: "POST",
-//        data: data
-//    }).done(function (data) {
-//        if (data == "error") {
-//            //Cuando traiga un error del backend al guardar la edicion
-//            iziToast.error({
-//                title: 'Error',
-//                message: 'No se pudo activar el registro, contacte al administrador',
-//            });
-//        }
-//        else {
-//            $("#ActivarCatalogoIngresos").modal('hide');
-//            cargarGridIngresos();
-//            //Mensaje de exito de la edicion
-//            iziToast.success({
-//                title: 'Éxito',
-//                message: '¡El registro fue activado de forma exitosa!',
-//            });
-//        }
-//    });
-//    $("#frmCatalogoIngresos").submit(function (e) {
-//        return false;
-//    });
-//}
-
-//);
-
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
@@ -381,7 +332,7 @@ $("#btnCerrarEditar").click(function () {
 
 
 
-////////////////////////CREAR
+//#region CREAR
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
@@ -392,9 +343,9 @@ $("#btnCerrarCrear").click(function () {
 $("#IconCerrarCreate").click(function () {
     $("#descripcioncrear").css("display", "none");
 });
+//#endregion
 
-////////////////////////EDITAR
-
+//#region EDITAR
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
@@ -404,7 +355,7 @@ $("#btnCerrarEditar").click(function () {
 $("#IconCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
 });
-
+//#endregion
 
 
 const btnGuardar = $('#btnCreateRegistroIngresos'),

@@ -12,14 +12,16 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.cc_Id, htmlAttributes: new { @class = "control-label col-md-2", })
-                   
+                    <label id="Validation_descipcion13" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.cc_Id, new { htmlAttributes = new { @class = "form-control", @id = "cc_Id", @disabled = "disabled" } })
+                       
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2", })
+                    <label id="Validation_descipcion14" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>      
                     <div class="col-md-10">
                         <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -27,6 +29,7 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.cin_IdIngreso, htmlAttributes: new { @class = "control-label col-md-2", })
+                    <label id="Validation_descipcion15" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                     <div class="col-md-10">
                         <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -34,34 +37,37 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <label class="text-danger" id="Validation_descipcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision" } })
-                        @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" })
+    
+                        @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label id="Validation_descipcion11" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                        <label class="text-danger" id="Validation_descipcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision" } })
+                            @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" } })
-                        @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cc_TotalVenta, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label id="Validation_descipcion12" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                        <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" } })
+                            @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-   </div>
-        
+
     <div class="modal-footer">
         @*data-dismiss="modal"*@
         <button type="submit" class="btn btn-white pull-right" data-dismiss="modal" id="btnCerrarModaledit">Cerrar</button>
         <button type="submit" class="btn btn-primary pull-left" id="btnUpdateComisionesConfirmar">Actualizar</button>
 
         @*<button type="submit" class="btn btn-primary pull-left" id="btnUpdateComisiones">Actualizar</button>*@
-        <button type="button" class="btn btn-danger pull-left" id="btnInactivarEmpleadoComisiones">Inhabilitar</button>
+        <button type="button" class="btn btn-danger pull-left" id="btnInactivarEmpleadoComisiones">Inactivar</button>
     </div>
     }
 

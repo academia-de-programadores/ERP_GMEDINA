@@ -1823,10 +1823,6 @@
     <Content Include="Views\AcumuladosISR\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Create.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Details.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Edit.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />
@@ -1933,6 +1929,8 @@
     <Content Include="Views\Periodos\_Create.cshtml" />
     <Content Include="Views\Periodos\_Details.cshtml" />
     <Content Include="Views\Periodos\_Edit.cshtml" />
+    <Content Include="Views\ReportesPlanilla\DecimoTercerParametros.cshtml" />
+    <Content Include="Views\ReportesPlanilla\DecimoCuartoParametros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1964,8 +1962,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ReportesPlanilla\DecimoCuartoRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\DecimoTercerRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteAFPRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteComisionesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteHorasExtrasRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteISRRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteSeptimoDiaRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteVacacionesRPT.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

@@ -1,9 +1,8 @@
 ﻿@model ERP_GMEDINA.Models.tbIngresosIndividuales
 
-@using (Html.BeginForm(null, null, FormMethod.Post))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "frmCreateIngresosIndividuales" }))
 {
     <div class="modal-body" id="Crear">
-        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.ini_IdIngresosIndividuales, new { htmlAttributes = new { @class = "form-control", @id = "ini_IdIngresosIndividuales" } })
 
         <div class="form-horizontal">

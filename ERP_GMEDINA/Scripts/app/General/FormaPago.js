@@ -160,7 +160,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -197,7 +197,8 @@ $("#btnConfirmarEditar2").click(function () {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data != 'error') {
                 cargarGridFormaPago();
-                $("#EditarFormaPago").modal('hide');
+                $("#ConfirmarEdicion").modal('hide');
+                //$("#EditarFormaPago").modal('hide');
                 iziToast.success({
                     title: 'Éxito',
                     message: '¡El registro se editó de forma exitosa!',
