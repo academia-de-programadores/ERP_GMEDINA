@@ -3,7 +3,7 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header" style="background-image: url(../../Content/img/header-profile.png);">
                 <div class="dropdown profile-element">
-                  
+
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
@@ -39,35 +39,8 @@
                     <li class="@Html.IsSelected(controller:"TipoMonedas",action: "Index")"><a href="@Url.Action("Index", "TipoMonedas")">Monedas</a></li>
                     <li class="@Html.IsSelected(controller:"Nacionalidades",action: "Index")"><a href="@Url.Action("Index", "Nacionalidades")">Nacionalidades</a></li>
 
-                    <li id="Empleado" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Empleado <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Empleado">
-                            <li class="@Html.IsSelected(controller:"Empleados")">
-                                <a href="@Url.Action("Index", "Empleados")">Listado de Empleados</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"Sueldos")">
-                                <a href="@Url.Action("Index", "Sueldos")">Listado de Sueldos</a>
-                            </li>
-                            @*VACACIONES*@
 
 
-                            <li class="@Html.IsSelected(controller:"HistorialVacaciones")">
-                                <a href="@Url.Action("Index", "HistorialVacaciones")">Historial de Vacaciones</a>
-                            </li>
-
-
-                            @*VACACIONES*@
-
-
-                            <li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas")">
-                                <a href="@Url.Action("Index", "HistorialHorasTrabajadas")">Historial de Horas Trabajadas</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"HistorialCargos")">
-                                <a href="@Url.Action("Index", "HistorialCargos")">Historial de Puestos</a>
-                            </li>
-                        </ul>
-
-                    </li>
                     <li class="@Html.IsSelected(controller:"Jornadas")"><a href="@Url.Action("Index", "Jornadas")">Jornadas y Horarios</a></li>
                     <li class="@Html.IsSelected(controller:"Areas")"><a href="@Url.Action("Index", "Areas")">Departamentos y Areas</a></li>
                     <li class="@Html.IsSelected(controller:"TipoHoras")"><a href="@Url.Action("Index", "TipoHoras")">Listado de Horarios</a></li>
@@ -78,119 +51,145 @@
 
 
             @*ACCIONES DE PERSONAL*@
-            <li id="ACCIONES" class="@Html.IsSelected(controller: "Acciones de Personal")">
-                <a href="@Url.Action("General_1", "Acciones de Personal")"><i class="fa fa-th-fa fa-users"></i> <span class="nav-label" data-i18n="nav.dashboard">Acciones de Personal</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Dashboards", cssClass: "in") ACCIONES">
-            
 
-                    @*AMONESTACIONES*@
-                    <li id="Amonestaciones" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Amonestaciones <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Amonestaciones">
-                            <li class="@Html.IsSelected(controller:"TipoAmonestaciones")">
-                                <a href="@Url.Action("Index", "TipoAmonestaciones")">Tipo de Amonestaciones</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"HistorialAudienciaDescargos")">
-                                <a href="@Url.Action("Index", "HistorialAudienciaDescargos")">Audiencia de Descargo</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"HistorialAmonestaciones")">
-                                <a href="@Url.Action("Index", "HistorialAmonestaciones")">Historial de Amonestaciones</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @*AMONESTACIONES*@
-
-
-                    @*Salidas*@
-                    <li id="Salidas" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Finalizacion Laboral<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Salidas">
-                            <li class="@Html.IsSelected(controller:"RazonSalidas")">
-                                <a href="@Url.Action("Index", "RazonSalidas")">Razones de Salidas</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"TipoSalidas")">
-                                <a href="@Url.Action("Index", "TipoSalidas")">Tipos de Salidas</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"HistorialSalidas")">
-                                <a href="@Url.Action("Index", "HistorialSalidas")">Finalizaciones Laborales</a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    @*Salidas*@
-
-
-
-                    @*PERMISOS*@
-                    <li id="Permisos" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Permisos <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Permisos">
-                            <li class="@Html.IsSelected(controller:"TipoPermisos")">
-                                <a href="@Url.Action("Index", "TipoPermisos")">Tipo de Permisos</a>
-                            </li>
-
-                            <li class="@Html.IsSelected(controller:"HistorialPermisos")">
-                                <a href="@Url.Action("Index", "HistorialPermisos")">Historial de Permisos</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @*PERMISOS*@
-
-
-                    @*INCAPACIDADES*@
-                    <li id="Incapacidades" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Incapacidades <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Incapacidades">
-                            <li class="@Html.IsSelected(controller:"TipoIncapacidades")">
-                                <a href="@Url.Action("Index", "TipoIncapacidades")">Tipos de Incapacidades</a>
-                            </li>
-
-                            <li class="@Html.IsSelected(controller:"HistorialIncapacidades")">
-                                <a href="@Url.Action("Index", "HistorialIncapacidades")">Historial de Incapacidades</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @*INCAPACIDADES*@
-
-
-                    @*RECLUTAMIENTO*@
-                    <li id="Reclutamiento" class="@Html.IsSelected(action: "Dashboard_5")">
-                        <a href="#">Reclutamiento <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level Reclutamiento">
-                            <li class="@Html.IsSelected(controller:"Competencias")">
-                                <a href="@Url.Action("Index", "Competencias")">Listado de Competencias</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"Habilidades")">
-                                <a href="@Url.Action("Index", "Habilidades")">Listado de Habilidades</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"Titulos")">
-                                <a href="@Url.Action("Index", "Titulos")">Listado de Titulos</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"FasesReclutamiento")">
-                                <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"Personas")">
-                                <a href="@Url.Action("Index", "Personas")">Personas</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"Requisiciones")">
-                                <a href="@Url.Action("Index", "Requisiciones")">Requisicion</a>
-                            </li>
-                            <li class="@Html.IsSelected(controller:"SeleccionCandidatos")">
-                                <a href="@Url.Action("Index", "SeleccionCandidatos")">Seleccion de Candidatos</a>
-                            </li>
-
-                            <li class="@Html.IsSelected(controller:"RequerimientosEspeciales")">
-                                <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>
-                            </li>
-                        </ul>
-                    </li>
-                    @*RECLUTAMIENTO*@
-
-
+            <li id="Empleados" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Empleados</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Empleados", cssClass: "in") Empleados">
+                    @*EMPLEADOS*@
+                    <li class="@Html.IsSelected(controller:"Empleados")"><a href="@Url.Action("Index", "Empleados")">Listado de Empleados</a></li>
+                    <li class="@Html.IsSelected(controller:"Sueldos")"><a href="@Url.Action("Index", "Sueldos")">Listado de Sueldos</a></li>
+                    <li class="@Html.IsSelected(controller:"HistorialVacaciones")"> <a href="@Url.Action("Index", "HistorialVacaciones")">Historial de Vacaciones</a></li>
+                    <li class="@Html.IsSelected(controller:"HistorialHorasTrabajadas")"><a href="@Url.Action("Index", "HistorialHorasTrabajadas")">Historial de Horas Trabajadas</a></li>
+                    <li class="@Html.IsSelected(controller:"HistorialCargos")"><a href="@Url.Action("Index", "HistorialCargos")">Historial de Puestos</a></li>
+                    @*EMPLEADOS*@
                 </ul>
             </li>
 
+            @*AMONESTACIONES*@
+            <li id="Amonestaciones" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-warning"></i> <span class="nav-label" data-i18n="nav.dashboard">Amonestaciones</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Amonestaciones">
+                    <li class="@Html.IsSelected(controller:"TipoAmonestaciones")"><a href="@Url.Action("Index", "TipoAmonestaciones")">Tipo de Amonestaciones</a></li>
+                    <li class="@Html.IsSelected(controller:"HistorialAudienciaDescargos")"><a href="@Url.Action("Index", "HistorialAudienciaDescargos")">Audiencia de Descargo</a></li>
+                    <li class="@Html.IsSelected(controller:"HistorialAmonestaciones")"><a href="@Url.Action("Index", "HistorialAmonestaciones")">Historial de Amonestaciones</a></li>
+                </ul>
+            </li>
+            @*AMONESTACIONES*@
+
+
+            @*Salidas*@
+            <li id="Salidas" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Finalizacion Laboral</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Salidas">
+                    <li class="@Html.IsSelected(controller:"RazonSalidas")">
+                        <a href="@Url.Action("Index", "RazonSalidas")">Razones de Salidas</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"TipoSalidas")">
+                        <a href="@Url.Action("Index", "TipoSalidas")">Tipos de Salidas</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"HistorialSalidas")">
+                        <a href="@Url.Action("Index", "HistorialSalidas")">Finalizaciones Laborales</a>
+                    </li>
+
+                </ul>
+            </li>
+            @*Salidas*@
+
+
+
+            @*PERMISOS*@
+            <li id="Permisos" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-check-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Permisos</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Permisos">
+                    <li class="@Html.IsSelected(controller:"TipoPermisos")">
+                        <a href="@Url.Action("Index", "TipoPermisos")">Tipo de Permisos</a>
+                    </li>
+
+                    <li class="@Html.IsSelected(controller:"HistorialPermisos")">
+                        <a href="@Url.Action("Index", "HistorialPermisos")">Historial de Permisos</a>
+                    </li>
+                </ul>
+            </li>
+            @*PERMISOS*@
+
+
+            @*INCAPACIDADES*@
+            <li id="Incapacidades" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-plus-square-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Incapacidades</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Incapacidades">
+                    <li class="@Html.IsSelected(controller:"TipoIncapacidades")">
+                        <a href="@Url.Action("Index", "TipoIncapacidades")">Tipos de Incapacidades</a>
+                    </li>
+
+                    <li class="@Html.IsSelected(controller:"HistorialIncapacidades")">
+                        <a href="@Url.Action("Index", "HistorialIncapacidades")">Historial de Incapacidades</a>
+                    </li>
+                </ul>
+            </li>
+            @*INCAPACIDADES*@
+
+
+            @*RECLUTAMIENTO*@
+            <li id="Reclutamiento" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-user-plus"></i> <span class="nav-label" data-i18n="nav.dashboard">Reclutamiento</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Reclutamiento">
+                    <li class="@Html.IsSelected(controller:"Competencias")">
+                        <a href="@Url.Action("Index", "Competencias")">Listado de Competencias</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Habilidades")">
+                        <a href="@Url.Action("Index", "Habilidades")">Listado de Habilidades</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Titulos")">
+                        <a href="@Url.Action("Index", "Titulos")">Listado de Titulos</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"FasesReclutamiento")">
+                        <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Personas")">
+                        <a href="@Url.Action("Index", "Personas")">Personas</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Requisiciones")">
+                        <a href="@Url.Action("Index", "Requisiciones")">Requisicion</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"SeleccionCandidatos")">
+                        <a href="@Url.Action("Index", "SeleccionCandidatos")">Seleccion de Candidatos</a>
+                    </li>
+
+                    <li class="@Html.IsSelected(controller:"RequerimientosEspeciales")">
+                        <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>
+                    </li>
+                </ul>
+            </li>
+            @*RECLUTAMIENTO*@
+
+            @*DATOS PROFESIONALES*@
+            <li id="Datos_Profesionales" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-file-text-o"></i> <span class="nav-label" data-i18n="nav.dashboard">Datos Profesionales</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level Reclutamiento">
+                    <li class="@Html.IsSelected(controller:"Competencias")">
+                        <a href="@Url.Action("Index", "Competencias")">Listado de Competencias</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Habilidades")">
+                        <a href="@Url.Action("Index", "Habilidades")">Listado de Habilidades</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"Titulos")">
+                        <a href="@Url.Action("Index", "Titulos")">Listado de Titulos</a>
+                    </li>
+                    <li class="@Html.IsSelected(controller:"FasesReclutamiento")">
+                        <a href="@Url.Action("Index", "FasesReclutamiento")">Fases de Reclutamiento</a>
+                    </li>
+     
+                    <li class="@Html.IsSelected(controller:"RequerimientosEspeciales")">
+                        <a href="@Url.Action("Index", "RequerimientosEspeciales")">Requisiciones Especiales</a>
+                    </li>
+                </ul>
+            </li>
+            @*DATOS PROFESIONALES*@
+
+
+
+
             @*MENUS DE RRHH*@
-        </ul>
-    </div>
+            </ul>
+</div>
 </nav>
