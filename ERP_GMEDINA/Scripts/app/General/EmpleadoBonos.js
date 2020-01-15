@@ -209,8 +209,10 @@ $('#btnCreateRegistroBonos').click(function () {
             mostrarError('Ingrese un bono válido.');
         } else if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
             $("#Crear #cin_IdIngreso").focus;
+            $("#Editar #Validation_descipcion1e").css("display", "block");
             mostrarError('Campo Monto requerido.');
         } else if (decimales[1] == null && decimales[1] == undefined) {
+            $("#Editar #Validation_descipcion1e").css("display", "block");
             mostrarError('Monto válido con dos valores decimales.');
         }
     }    
@@ -307,16 +309,22 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         });
 });
 $("#btnUpdateBonos").click(function () {
-    var Monto = $("#Editar #cb_Monto").val();
-    if (Monto == "" || Monto == "0.00" || Monto == null || Monto == undefined)
-    {
-        $("#Editar #Validation_descipcion1e").css("display", "block");
-        $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+    var Monto = $("#Crear #cb_Monto").val();
+    var decimales = Monto.split(".");
+    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+        $("#Crear #cin_IdIngreso").focus;
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+        $("#Crear #Validation_descipcion").css("display", "");
+        mostrarError('Campo Monto requerido.');
+    } else if (decimales[1] == null && decimales[1] == undefined) {
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+        $("#Crear #Validation_descipcion").css("display", "");
+        mostrarError('Monto válido con dos valores decimales.');
     }
     else {
-        $("#EditarEmpleadoBonosConfirmacion").modal();
-    }
 
+        $("#EditarEmpleadoBonosConfirmacion").modal();
+}
 });
 //FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos2").click(function () {
@@ -540,14 +548,17 @@ $("#btnActivarRegistroBono").click(function () {
 $('#btnCreateRegistroBonos').click(function () {
     var Monto = $("#Crear #cb_Monto").val();
     var decimales = Monto.split(".");
-
-
-    if (Monto == "" || decimales[1] != null || decimales[1] != undefined) {
+    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+        $("#Crear #cin_IdIngreso").focus;
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         $("#Validation_descipcion").css("display", "");
-    }
-    else {
-        $("#Validation_descipcion").css("display", "none");
+        mostrarError('Campo Monto requerido.');
+    } else if (decimales[1] == null && decimales[1] == undefined) {
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+        $("#Validation_descipcion").css("display", "");
+        mostrarError('Monto válido con dos valores decimales.');
     }
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
 
 });
+
