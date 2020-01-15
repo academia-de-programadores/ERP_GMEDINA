@@ -37,39 +37,29 @@ function cargarGridFormaPago() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaFormaPago = data, template = '';
+            var ListaFormaPago = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblFormaPago').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaFormaPago.length; i++) {
-
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaFormaPago[i].fpa_Activo == false ? 'Inactivo' : 'Activo';
-
                 //variable boton detalles
                 var botonDetalles = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>' : '';
-
                 //variable boton editar
                 var botonEditar = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>' : '';
-
                 //variable donde está el boton activar
                 var botonActivar = ListaFormaPago[i].fpa_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarFormaPago">Activar</button>' : '' : '';
-
-
-                console.log(estadoRegistro);
-
-                template += '<tr data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '">' +
-                    '<td>' + ListaFormaPago[i].fpa_IdFormaPago + '</td>' +
-                    '<td>' + ListaFormaPago[i].fpa_Descripcion + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                    '<td>' +
-                    botonDetalles +
-                    botonEditar +
-                    botonActivar
-                    '</td>' +
-                    '</tr>';
+                //AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
+                $('#tblFormaPago').dataTable().fnAddData([
+                     ListaFormaPago[i].fpa_IdFormaPago,
+                     ListaFormaPago[i].fpa_Descripcion,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //APLICAR EL MAX-WIDTH DEL BODY
             FullBody();
-            $('#tbodyFormaPago').html(template);
         });
 }
 
