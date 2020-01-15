@@ -159,17 +159,18 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroBonos').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-  
     var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
     var IdIngreso = $("#Crear #cin_IdIngreso").val();
     var Monto = $("#Crear #cb_Monto").val();
     var decimales = Monto.split(".");
 
-    if (IdEmpleado != 0 &&
-        IdIngreso != 0 &&
+    if (IdEmpleado != 0 && IdIngreso != 0 &&
         Monto != "" && Monto != null && Monto != undefined && Monto > 0
         && decimales[1] != null && decimales[1] != undefined) {
-        
+        $("#Validation_descipcion1").css("display", "none");
+        $("#Validation_descipcion3").css("display", "none");
+        $("#Validation_descipcion5").css("display", "none");
+
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoBonosCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -186,7 +187,7 @@ $('#btnCreateRegistroBonos').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
             else {
@@ -194,45 +195,91 @@ $('#btnCreateRegistroBonos').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro se agergó de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
 
     }
     else {
-        if (IdEmpleado == 0) {
-            $("#Crear #emp_IdEmpleado").focus;
-            mostrarError('Ingrese un colaborador válido.');
-        } else if (IdIngreso == 0) {
-            $("#Crear #cin_IdIngreso").focus;
-            mostrarError('Ingrese un bono válido.');
-        } else if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Crear #cin_IdIngreso").focus;
-            $("#Editar #Validation_descipcion1e").css("display", "block");
-            mostrarError('Campo Monto requerido.');
-        } else if (decimales[1] == null && decimales[1] == undefined) {
-            $("#Editar #Validation_descipcion1e").css("display", "block");
-            mostrarError('Monto válido con dos valores decimales.');
+        if (IdEmpleado == "0") {
+            $("#Validation_descipcion1").css("display", "");
+            $("#Validation_descipcion2").css("display", "");
         }
-    }    
+        else {
+            $("#Validation_descipcion1").css("display", "none");
+            $("#Validation_descipcion2").css("display", "none");
+        }
+        if (IdIngreso == "0") {
+            $("#Validation_descipcion3").css("display", "");
+            $("#Validation_descipcion4").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion3").css("display", "none");
+            $("#Validation_descipcion4").css("display", "none");
+        }
+        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+            $("#Validation_descipcion5").css("display", "");
+            $("#Validation_descipcion6").css("display", "");
+        }
+        else if (decimales[1] == null && decimales[1] == undefined) {
+
+            $("#Validation_descipcion5").css("display", "");
+            $("#Validation_descipcion6").css("display", "");
+        }
+        else {
+            $("#Validation_descipcion5").css("display", "none");
+            $("#Validation_descipcion6").css("display", "none");
+        }
+    } 
 });
 
 $("#btnCerrarCrearBono").click(function () {
-    $("#Validation_descipcion").hidden=true,
-    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion1").hidden = true;
+    $("#Validation_descipcion1").css("display", "none");
+
+    $("#Validation_descipcion2").hidden = true;
+    $("#Validation_descipcion2").css("display", "none");
+
+    $("#Validation_descipcion3").hidden = true;
+    $("#Validation_descipcion3").css("display", "none");
+
+    $("#Validation_descipcion4").hidden = true;
+    $("#Validation_descipcion4").css("display", "none");
+
+    $("#Validation_descipcion5").hidden = true;
+    $("#Validation_descipcion5").css("display", "none");
+
+    $("#Validation_descipcion6").hidden = true;
+    $("#Validation_descipcion6").css("display", "none");
    
-    $("#Validation_descripcion3").hidden = true;
-    $("#Validation_descripcion3").css("display", "none");
+   
 });
 
 $("#IconCerrar").click(function () {
-    $("#Validation_descripcion3").hidden = true;
-    $("#Validation_descripcion3").css("display", "none");
+    $("#Validation_descipcion1").hidden = true;
+    $("#Validation_descipcion1").css("display", "none");
+
+    $("#Validation_descipcion2").hidden = true;
+    $("#Validation_descipcion2").css("display", "none");
+
+    $("#Validation_descipcion3").hidden = true;
+    $("#Validation_descipcion3").css("display", "none");
+
+    $("#Validation_descipcion4").hidden = true;
+    $("#Validation_descipcion4").css("display", "none");
+
+    $("#Validation_descipcion5").hidden = true;
+    $("#Validation_descipcion5").css("display", "none");
+
+    $("#Validation_descipcion6").hidden = true;
+    $("#Validation_descipcion6").css("display", "none");
 });
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
+    $("#Editar #Validation_descipcion6").css("display", "none");
+    $("#Editar #Validation_descipcion5").css("display", "none");
     var ID = $(this).data('id');
     IDInactivar = ID;
     $.ajax({
@@ -309,33 +356,30 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         });
 });
 $("#btnUpdateBonos").click(function () {
-    var Monto = $("#Crear #cb_Monto").val();
+    var Monto = $("#Editar #cb_Monto").val();
     var decimales = Monto.split(".");
     if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
         $("#Crear #cin_IdIngreso").focus;
-        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-        $("#Crear #Validation_descipcion").css("display", "");
-        mostrarError('Campo Monto requerido.');
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide'); 
+        $("#Editar #Validation_descipcion5").css("display", "");
+        $("#Editar #Validation_descipcion6").css("display", "");
+
     } else if (decimales[1] == null && decimales[1] == undefined) {
         $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-        $("#Crear #Validation_descipcion").css("display", "");
-        mostrarError('Monto válido con dos valores decimales.');
+        $("#Editar #Validation_descipcion5").css("display", "");
+        $("#Editar #Validation_descipcion6").css("display", "");
+       
     }
     else {
-
         $("#EditarEmpleadoBonosConfirmacion").modal();
+        $("#Editar #Validation_descipcion5").css("display", "none");
+        $("#Editar #Validation_descipcion6").css("display", "none");
+       
 }
 });
 //FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    
-    var Monto = $("#Editar #cb_Monto").val();
-    var decimales = Monto.split(".");
-
-    if (Monto != "" && Monto != null && Monto != undefined && Monto > 0
-        && decimales[1] != null && decimales[1] != undefined) {
-    
         var data = $("#frmEmpleadoBonos").serializeArray();
 
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -349,7 +393,7 @@ $("#btnUpdateBonos2").click(function () {
             iziToast.error({
 
                 title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
+                message: '¡No se editó el registro, contacte al administrador!',
             });
             $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         }
@@ -363,22 +407,10 @@ $("#btnUpdateBonos2").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue editado de forma exitosa!',
+                message: '¡El registro se editó de forma exitosa!',
             });
         }
-    });
-    } else {
-        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Crear #cin_IdIngreso").focus;
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-            mostrarError('Campo Monto requerido.');
-        } else if (decimales[1] == null && decimales[1] == undefined) {
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-            mostrarError('Monto válido con dos valores decimales.');
-        }
-        //    $("#Editar #cb_Monto").focus;
-        //    mostrarError('Ingrese un Monto válido');
-     }
+    });  
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -465,7 +497,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -491,7 +523,7 @@ $("#btnInactivarRegistroBono").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inactivar el registro, contacte al administrador',
+                message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
         else {
@@ -502,7 +534,7 @@ $("#btnInactivarRegistroBono").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!!',
             });
         }
     });
@@ -526,7 +558,7 @@ $("#btnActivarRegistroBono").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: '¡No se activó el registro, contacte al administrador!',
             });
         }
         else {
@@ -537,7 +569,7 @@ $("#btnActivarRegistroBono").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
@@ -545,20 +577,5 @@ $("#btnActivarRegistroBono").click(function () {
 });
 
 
-$('#btnCreateRegistroBonos').click(function () {
-    var Monto = $("#Crear #cb_Monto").val();
-    var decimales = Monto.split(".");
-    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-        $("#Crear #cin_IdIngreso").focus;
-        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-        $("#Validation_descipcion").css("display", "");
-        mostrarError('Campo Monto requerido.');
-    } else if (decimales[1] == null && decimales[1] == undefined) {
-        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-        $("#Validation_descipcion").css("display", "");
-        mostrarError('Monto válido con dos valores decimales.');
-    }
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
 
-});
 
