@@ -212,7 +212,6 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
-		//Decimo Tercer
 		#region decimo tercer mes 
 
 		//parametros del reporte
@@ -256,7 +255,6 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		//Decimo Cuarto
 		#region decimo cuarto mes 
 
 		//parametros del reporte
