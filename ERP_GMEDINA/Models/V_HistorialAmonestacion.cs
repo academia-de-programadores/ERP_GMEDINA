@@ -21,7 +21,6 @@ namespace ERP_GMEDINA.Models
         public string tamo_Descripcion { get; set; }
         public int hamo_Id { get; set; }
         public Nullable<System.DateTime> hamo_Fecha { get; set; }
-        public int hamo_AmonestacionAnterior { get; set; }
         public string hamo_Observacion { get; set; }
         public bool hamo_Estado { get; set; }
         public string hamo_RazonInactivo { get; set; }
