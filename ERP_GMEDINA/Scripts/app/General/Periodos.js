@@ -57,7 +57,7 @@ function cargarGridPeriodo() {
                 //variable donde está el boton activar
                 var botonActivar = ListPeriodo[i].peri_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPeriodos">Activar</button>' : '' : '';
 
-                $('#tblPreaviso').dataTable().fnAddData([
+                $('#tblPeriodo').dataTable().fnAddData([
                      ListPeriodo[i].peri_IdPeriodo,
                      ListPeriodo[i].peri_DescripPeriodo,
                      estadoRegistro,
