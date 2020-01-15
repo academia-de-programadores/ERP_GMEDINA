@@ -190,19 +190,22 @@ $('#btnUpdateComisionesConfirmar').click(function () {
         else {
         $("#Editar #Validation_descipcion1").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "none");
-        
-            $("#EditarEmpleadoComisionesConfirmacion").modal();
+        $("#EditarEmpleadoComisionesConfirmacion").modal();
+        $("#EditarEmpleadoComisiones").modal('hide');
         }
     
 });
 
+$("#btCerrarEditar").click(function () {
+    $("#EditarEmpleadoComisiones").modal();
+    $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
+})
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisionesConfirmar2").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    mostrarCargandoEditar()
+    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN   
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
         method: "POST",
@@ -228,8 +231,7 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
                 message: '¡El registro se editó de forma exitosa!',
             });
             
-        }
-        ocultarCargandoEditar();
+        }     
     });
 });
 
@@ -312,7 +314,7 @@ $('#btnCreateRegistroComisiones').click(function () {
         $("#Validation_descipcion6").css("display", "none");
         $("#Validation_descipcion7").css("display", "none");
         var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-        mostrarCargandoCrear()
+      
         $.ajax({
             url: "/EmpleadoComisiones/Create",
             method: "POST",
@@ -340,7 +342,7 @@ $('#btnCreateRegistroComisiones').click(function () {
                     message: 'El registro fue Creado de forma exitosa!',
                 });
             }
-            ocultarCargandoCrear();
+          
         });
     }
     else
@@ -693,67 +695,4 @@ $("#btnUpdateComisiones").click(function () {
 $("#frmEmpleadoComisionesCreate").submit(function (e) {
     e.preventDefault();
 });
-
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-
-const btnGuardar = $('#btnCreateRegistroComisiones'),
-
-cargandoCrearcargandoCrear = $('#cargandoCrear')
-
-cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
-
-
-function mostrarCargandoEditar() {
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarCargandoEditar() {
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
-
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-
-const btnEditar = $('#btnUpdateComisionesConfirmar2'),
-
-cargandoCrearcargandoEditar = $('#cargandoEditar')
-
-cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
-
 
