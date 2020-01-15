@@ -249,11 +249,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
 
             
             //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-            var data = [ini_IdIngresosIndividuales, ini_Motivo, emp_Id, ini_Monto, ini_PagaSiempre];
-
             //var data = $("#frmCreateIngresoIndividual").serializeArray();
-
-            console.table(data);
 
             //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
             _ajax({
@@ -404,10 +400,6 @@ $("#btnEditIngresoIndividual").click(function () {
 
     if (vale2 == "" || vale2 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale3 != null || vale3 != "") {
         if (expreg.test(vale3)) {
@@ -418,10 +410,6 @@ $("#btnEditIngresoIndividual").click(function () {
         }
         else {
             $("#Editar #validatione3").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
     $("#EditarIngresosIndividuales").submit(function (e) {
@@ -564,7 +552,9 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
                             }
                         });
                     });
-                $("#DetallesIngresosIndividuales").modal();
+                $("#DetallesIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
