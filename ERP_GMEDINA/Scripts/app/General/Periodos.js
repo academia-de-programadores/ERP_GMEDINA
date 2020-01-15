@@ -196,13 +196,14 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 
 
 $("#btnUpdatePeriodo").click(function () {
-    if ($("#Editar #peri_DescripPeriodo").val() != '') {
+    var desc = $("#Editar #peri_DescripPeriodo").val();
+    if (desc != '' && desc != null && desc != undefined && isNaN(desc) == true) {
         $("#EditarPeriodo").modal('hide');
         $("#ConfirmarEdicion").modal();
     }
     else {
         //MOSTRAR DATAANNOTATION
-        $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
+        DataAnnotations(false);
         //OCULTAR EL SCROLLVIEW
         $('body').css("overflow", "hidden");
     }
@@ -232,7 +233,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
         })
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data != "error") {
+            if (data != 'error') {
                 cargarGridPeriodo();
                 $("#ConfirmarEdicion").modal('hide');
                 // Mensaje de exito cuando un registro se ha guardado bien
@@ -242,6 +243,7 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                 });
             } else {
                 $("#ConfirmarEdicion").modal('hide');
+                $("#EditarPeriodo").modal();
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se editó el registro, contacte al administrador!',
