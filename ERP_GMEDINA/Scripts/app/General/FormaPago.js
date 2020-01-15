@@ -147,6 +147,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 $("#btnUpdateFormaPago").click(function () {
     var Descripcion = $("#Editar #fpa_Descripcion").val();
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
+        $("#EditarFormaPago").modal('hide');
         $("#ConfirmarEdicion").modal();
     }
     else {
@@ -229,6 +230,14 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
         });
 });
 
+//CERRAR MODAL DE CONFIRMACIÓN DE EDICION
+$(document).on("click", "#btnCerrarConfirmarEditar", function () {
+    //OCULTAR MODAL DE CONFIRMACIÓN DE EDICION
+    $("#ConfirmarEdicion").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarFormaPago").modal();
+});
+
 //
 //INACTIVAR
 
@@ -251,7 +260,7 @@ $(document).on("click", "#btnCerrarInactivar", function () {
 //CONFORMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarFormaPagoConfirm").click(function () {
     //SE OCULTA EL MODAL DE EDICION
-    $("#EditarFormaPago").modal('hide');
+    $("#InactivarFormaPago").modal('hide');
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/FormaPago/Inactivar/" + IDInactivar,

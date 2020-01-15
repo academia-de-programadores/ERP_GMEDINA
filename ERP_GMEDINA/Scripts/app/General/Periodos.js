@@ -40,50 +40,30 @@ function cargarGridPeriodo() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListPeriodo = data, template = '';
+            var ListPeriodo = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblPeriodo').DataTable().clear();
             //RECORRER DATA OBTENINDA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListPeriodo.length; i++) {
-
                 var FechaCrea = FechaFormato(ListPeriodo[i].peri_FechaCrea);
-
                 var FechaModifica = FechaFormato(ListPeriodo[i].peri_FechaModifica);
-
                 UsuarioModifica = ListPeriodo[i].NombreUsuarioModifica == null ? 'Sin modificaciones' : ListPeriodo[i].NombreUsuarioModifica;
-
-
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListPeriodo[i].peri_Activo == false ? 'Inactivo' : 'Activo'
-
                 //variable boton detalles
                 var botonDetalles = ListPeriodo[i].peri_Activo == true ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnDetallePeriodo">Detalles</button>' : '';
-
                 //variable boton editar
                 var botonEditar = ListPeriodo[i].peri_Activo == true ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-default btn-xs"  id="btnEditarPeriodo">Editar</button>' : '';
-
                 //variable donde está el boton activar
                 var botonActivar = ListPeriodo[i].peri_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListPeriodo[i].peri_IdPeriodo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPeriodos">Activar</button>' : '' : '';
 
-
-
-                template += '<tr data-id = "' + ListPeriodo[i].peri_IdPeriodo + '">' +
-                    '<td>' + ListPeriodo[i].peri_IdPeriodo + '</td>' +
-                    '<td>' + ListPeriodo[i].peri_DescripPeriodo + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
+                $('#tblPreaviso').dataTable().fnAddData([
+                     ListPeriodo[i].peri_IdPeriodo,
+                     ListPeriodo[i].peri_DescripPeriodo,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-
-            $('#tbodyPeriodo').html(template);
         });
     FullBody();
 }
@@ -103,33 +83,33 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
 $('#btnCrearPeriodoConfirmar').click(function () {
     var DescripPerio = $("#Crear #peri_DescripPeriodo").val();
     console.log(DescripPerio);
-    if (!DescripPerio == ''){
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-         var data = $("#frmCreatePeriodo").serializeArray();
-         console.log(data);
-         $.ajax({
-             url: "/Periodos/Create",
-             method: "POST",
-             data: data
-          }).done(function (data) {
-             $("#CrearPeriodo").modal('hide');
-             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-             if (data == "error") {
-                 iziToast.error({
-                     title: 'Error',
-                     message: '¡No se guardó el registro, contacte al administrador!',
-                 });
-             }
-             else if (data == "bien") {
-                    cargarGridPeriodo();
-                    console.log(data);
-                    // Mensaje de exito cuando un registro se ha guardado bien
-                  iziToast.success({
-                        title: 'Exito',
-                        message: '¡El registro se agregó de forma exitosa!',
-                    });
-              }
-            });
+    if (!DescripPerio == '') {
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmCreatePeriodo").serializeArray();
+        console.log(data);
+        $.ajax({
+            url: "/Periodos/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            $("#CrearPeriodo").modal('hide');
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+            else if (data == "bien") {
+                cargarGridPeriodo();
+                console.log(data);
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+        });
     } else {
         console.log("validar")
         //MOSTRAR EL DATAANNOTATION
@@ -152,56 +132,67 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
     IDInactivar = ID;
 
 
-        //EJECUCION DE LA PETICION AL SERVIDOR
-	    $.ajax({
-	        url: "/Periodos/Edit/" + ID,
-	        method: "POST",
-	        dataType: "json",
-	        contentType: "application/json; charset=utf-8",
-	        data: JSON.stringify({ ID: ID })
-	    })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data) {
-                $.each(data, function (i, iter) {
-                    $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
-                    $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
-                });
-                $("#EditarPeriodo").modal();
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-        });
+    //EJECUCION DE LA PETICION AL SERVIDOR
+    $.ajax({
+        url: "/Periodos/Edit/" + ID,
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
+    .done(function (data) {
+        //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        if (data) {
+            $.each(data, function (i, iter) {
+                $("#Editar #peri_IdPeriodo").val(iter.peri_IdPeriodo);
+                $("#Editar #peri_DescripPeriodo").val(iter.peri_DescripPeriodo);
+            });
+            $("#EditarPeriodo").modal();
+        }
+        else {
+            //Mensaje de error si no hay data
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo cargar la información, contacte al administrador',
+            });
+        }
+    });
 
 });
 
 
 
 $("#btnUpdatePeriodo").click(function () {
-    if ($("#Crear #peri_DescripPeriodo").val() != '') {
+    if ($("#Editar #peri_DescripPeriodo").val() != '') {
+        $("#EditarPeriodo").modal('hide');
         $("#ConfirmarEdicion").modal();
     }
+    else {
+        //MOSTRAR DATAANNOTATION
+        $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
+        //OCULTAR EL SCROLLVIEW
+        $('body').css("overflow", "hidden");
+    }
+    
 });
 
 $("#btnCerrarConfirmarEditar").click(function () {
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarPeriodo").modal();
+    //OCULTAR MODAL DE CONFIRMACION
     $("#ConfirmarEdicion").modal('hide');
 });
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-
- //   $("#EditarPeriodo #Validation_descripcion").css("display", "block");
+    console.log("Hola");
+    //   $("#EditarPeriodo #Validation_descripcion").css("display", "block");
 
     var data = $("#frmEditPeriodo").serializeArray();
-    var descedit = $("#Editar #peri_DescripPeriodo").val();
+    //var descedit = $("#Editar #peri_DescripPeriodo").val();
 
-    if ($("#Editar #peri_DescripPeriodo").val() != "") {
+    //if ($("#Editar #peri_DescripPeriodo").val() != "") {
 
         $.ajax({
             url: "/Periodos/Editar",
@@ -227,13 +218,13 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                 });
             }
         });
-    }
-    else {
-        //MOSTRAR DATAANNOTATION
-        $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
-        //OCULTAR EL SCROLLVIEW
-        $('body').css("overflow", "hidden");
-    }
+    //}
+    //else {
+    //    //MOSTRAR DATAANNOTATION
+    //    $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
+    //    //OCULTAR EL SCROLLVIEW
+    //    $('body').css("overflow", "hidden");
+    //}
 });
 
 
@@ -243,14 +234,14 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function () {
     var ID = $(this).data('id');
-	IDInactivar = ID;
-	$.ajax({
-		url: "/Periodos/Details/" + ID,
-		method: "POST",
-		dataType: "json",
-		contentType: "application/json; charset=utf-8",
-		data: JSON.stringify({ ID: ID })
-	})
+    IDInactivar = ID;
+    $.ajax({
+        url: "/Periodos/Details/" + ID,
+        method: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID: ID })
+    })
 
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
@@ -260,23 +251,23 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
                     var FechaCrea = FechaFormato(data[0].peri_FechaCrea);
                     var FechaModifica = FechaFormato(data[0].peri_FechaModifica);
                     $("#Detalles #peri_IdPeriodo").html(iter.peri_IdPeriodo);
-        		    $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
-        		    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-        		    $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
-        		    $("#Detalles #peri_FechaCrea").html(FechaCrea);
-        		    data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-        		    $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
-        		    $("#Detalles #peri_FechaModifica").html(FechaModifica);
-        		});        		
-        		$("#DetallarPeriodo").modal();
-        	}
-        	else {
-        		//Mensaje de error si no hay data
-        		iziToast.error({
-        			title: 'Error',
-        			message: '¡No se cargó la información, contacte al administrador!',
-        		});
-        	}
+                    $("#Detalles #peri_DescripPeriodo").html(iter.peri_DescripPeriodo);
+                    data[0].peri_UsuarioCrea == null ? $("#Detalles #tbUsuario_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                    $("#Detalles #peri_UsuarioCrea").html(iter.peri_UsuarioCrea);
+                    $("#Detalles #peri_FechaCrea").html(FechaCrea);
+                    data[0].peri_UsuarioModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                    $("#Detalles #peri_UsuarioModifica").html(data[0].peri_UsuarioModifica);
+                    $("#Detalles #peri_FechaModifica").html(FechaModifica);
+                });
+                $("#DetallarPeriodo").modal();
+            }
+            else {
+                //Mensaje de error si no hay data
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se cargó la información, contacte al administrador!',
+                });
+            }
         });
 });
 
