@@ -41,14 +41,15 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                var Acciones = value.tsal_Estado == 1
-                    ? null :
+                var Acciones = value.area_Estado == 1
+                    ? null : Admin ?
                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
-                    "</div>";
+                    "</div>" : '';
                 if (value.tsal_Estado > fill) {
                     tabla.row.add(
                         {
+                            "Número": value.tsal_Id,
                             ID: value.tsal_Id,
                             Salidas: value.tsal_Descripcion,
                             Acciones: Acciones

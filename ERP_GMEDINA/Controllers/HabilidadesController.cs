@@ -17,7 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: Habilidades
         public ActionResult Index()
         {
-            tbHabilidades tbHabilidades = new tbHabilidades {habi_Estado=true };
+            bool Admin = (bool)Session["Admin"];
+            tbHabilidades tbHabilidades = new tbHabilidades {habi_Estado= Admin };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             return View(tbHabilidades);
         }

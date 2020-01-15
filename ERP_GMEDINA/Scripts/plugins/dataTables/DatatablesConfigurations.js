@@ -10,34 +10,7 @@ var htmlSpiner =
                 <div class="sk-rect4"></div>
                 <div class="sk-rect5"></div>
              </div>`;
-var buttons = [
-            {
-             extend: 'copy',
-             exportOptions: {
-              columns: botones
-             }
-            }
-];
 $(document).ready(function () {
- if (Admin) {
-  buttons.push(
-      {
-       text: textoBoton,
-       action: function (btn) {
-        if (textoBoton == 'Mostrar todo') {
-         fill = -1;
-         llenarTabla();
-         textoBoton = 'Mostrar activos';
-         btn.currentTarget.innerText = textoBoton;
-        } else {
-         fill = 0;
-         llenarTabla();
-         textoBoton = 'Mostrar todo';
-         btn.currentTarget.innerText = textoBoton;
-        }
-       }
-      });
- }
  var columnas = [];
  var col = 0;
  var contador = -1;
@@ -123,13 +96,17 @@ $(document).ready(function () {
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
   "autoWidth": false,
   dom: '<"html5buttons"B>lTfgitp',
-  buttons: buttons,
+  buttons : [
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: botones
+                }
+            }
+  ],
   //Aqui se le pasa al DataTables la estructura de la tabla con sus parametros correspondientes
   columns: columnas,
-  order: [[col, 'asc']],
-
-
-
+  order: [[col, 'asc']]
  });
 });
 function CallDetalles(btn) {

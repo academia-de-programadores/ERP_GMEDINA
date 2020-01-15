@@ -51,17 +51,16 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 var Acciones = value.habi_Estado == 1
-                    ? null :
+                    ? null : Admin ?
                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
-                    "</div>";
-                if (value.habi_Estado > fill) {
-                    tabla.row.add({
-                        ID: value.habi_Id,
-                        Descripcion: value.habi_Descripcion,
-                        Acciones: Acciones
-                    });
-                }                
+                    "</div>" : '';
+                tabla.row.add({
+                    "Número": value.habi_Id,
+                    ID: value.habi_Id,
+                    Descripcion: value.habi_Descripcion,
+                    Acciones: Acciones
+                });      
             });
             tabla.draw();
         });

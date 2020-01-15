@@ -1,4 +1,5 @@
 ﻿var fill = 0;
+var Admin = false;
 function tablaDetalles(id) {
     $(location).attr('href', "/Areas/details/" + id);
 }
@@ -52,19 +53,18 @@ function llenarTabla() {
             }
             $.each(Lista, function (index, value) {
                 var Acciones = value.area_Estado==1
-                    ?null:
+                    ?null:Admin?
                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
-                    "</div>";
-                if (value.area_Estado>fill) {
-                    tabla.row.add({
-                        ID: value.area_Id,
-                        Area: value.area_Descripcion,
-                        Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
-                        Sucursales: value.Sucursales,
-                        Acciones: Acciones
-                    });
-                } 
+                    "</div>":'';
+                tabla.row.add({
+                    "Número":value.area_Id,
+                    ID: value.area_Id,
+                    Area: value.area_Descripcion,
+                    Encargado: value.Encargado.length == 0 ? 'Sin Asignar' : value.Encargado[0],
+                    Sucursales: value.Sucursales,
+                    Acciones: Acciones
+                });
             });
             tabla.draw();
        });
