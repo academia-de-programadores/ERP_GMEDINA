@@ -1823,10 +1823,6 @@
     <Content Include="Views\AcumuladosISR\_CreateTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_DetailsTechosDeducciones.cshtml" />
     <Content Include="Views\AcumuladosISR\_EditTechosDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Create.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Details.cshtml" />
-    <Content Include="Views\CatalogoDeIngresos\Edit.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\Index.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CatalogoDeIngresos.cshtml" />
     <Content Include="Views\CatalogoDeIngresos\_CreateCatalogoDeIngresos.cshtml" />

@@ -199,7 +199,6 @@ $("#btnEditarIngresos").click(function () {
 });
 
 const btneditar = $('#btnEditarIngresos'),
-
 cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
 function mostrarcargandoEditar() {
@@ -213,9 +212,6 @@ function ocultarcargandoEditar() {
     cargandoEditar.html('');
     cargandoEditar.hide();
 }
-
-
-
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
@@ -262,46 +258,7 @@ $("#btnInactivarIngresos").click(function () {
     $("#frmCatalogoIngresos").submit(function (e) {
         return false;
     });
-}
-
-);
-
-//MODAL ACTIVAR
-
-//$("#btnActivarIngresos").click(function () {
-//    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-//    var data = $("#frmActivarCatalogoIngresos").serializeArray();
-//    var ID = InactivarID;
-//    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-//    $.ajax({
-//        url: "/CatalogoDeIngresos/Activar/" + ID,
-//        method: "POST",
-//        data: data
-//    }).done(function (data) {
-//        if (data == "error") {
-//            //Cuando traiga un error del backend al guardar la edicion
-//            iziToast.error({
-//                title: 'Error',
-//                message: 'No se pudo activar el registro, contacte al administrador',
-//            });
-//        }
-//        else {
-//            $("#ActivarCatalogoIngresos").modal('hide');
-//            cargarGridIngresos();
-//            //Mensaje de exito de la edicion
-//            iziToast.success({
-//                title: 'Éxito',
-//                message: '¡El registro fue activado de forma exitosa!',
-//            });
-//        }
-//    });
-//    $("#frmCatalogoIngresos").submit(function (e) {
-//        return false;
-//    });
-//}
-
-//);
-
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
@@ -375,7 +332,7 @@ $("#btnCerrarEditar").click(function () {
 
 
 
-////////////////////////CREAR
+//#region CREAR
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
@@ -386,9 +343,9 @@ $("#btnCerrarCrear").click(function () {
 $("#IconCerrarCreate").click(function () {
     $("#descripcioncrear").css("display", "none");
 });
+//#endregion
 
-////////////////////////EDITAR
-
+//#region EDITAR
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
@@ -398,7 +355,7 @@ $("#btnCerrarEditar").click(function () {
 $("#IconCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
 });
-
+//#endregion
 
 
 const btnGuardar = $('#btnCreateRegistroIngresos'),
