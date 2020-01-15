@@ -35,39 +35,33 @@ function cargarGridIngresos() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaIngresos = data, template = '';
+            var ListaIngresos = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblCatalogoIngresos').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-          
             for (var i = 0; i < ListaIngresos.length; i++)
             {
-                var estadoIng = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
+                var estadoRegistro = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
-                var botonDetail = ListaIngresos[i].cin_Activo == true ?
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
+                var botonDetalles = ListaIngresos[i].cin_Activo == true ?
+                    '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalle" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Detalles</button>' : '';
 
-                var botonEdit = ListaIngresos[i].cin_Activo == true ?
+                var botonEditar = ListaIngresos[i].cin_Activo == true ?
                     '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngreso" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Editar</button>' : '';
 
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
                     '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
                     + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' :''; 
-
-                console.log(estadoIng);
-
-                template += '<tr  class="gradeA odd" role="row"  data-id = "' + ListaIngresos[i].cin_IdIngresos + '">' +
-                    '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
-                    '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
-                    '<td>' + estadoIng + '</td>' +
-                    '<td>' +
-                    botonDetail +
-                    botonEdit +
-                    botonActivar
-                    +'</td> </tr>';
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblCatalogoIngresos').dataTable().fnAddData([
+                     ListaIngresos[i].cin_IdIngresos,
+                     ListaIngresos[i].cin_DescripcionIngreso,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyIngresos').html(template);
         });
     FullBody();
 }
