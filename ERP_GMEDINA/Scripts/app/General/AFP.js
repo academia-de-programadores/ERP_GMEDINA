@@ -222,10 +222,6 @@ $('#btnCreateRegistroAFP').click(function () {
 
     if (vale1 == "" || vale1 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale2 != "" || vale2 != null || vale2 != undefined) {
         if (expreg.test(vale2)) {
@@ -240,28 +236,16 @@ $('#btnCreateRegistroAFP').click(function () {
                         }
                         else {
                             $("#Editar #validatione4").css("display", "");
-                            iziToast.error({
-                                title: 'Error',
-                                message: '¡Ingrese datos válidos!',
-                            });
                         }
                     }
                 }
                 else {
                     $("#Editar #validatione3").css("display", "");
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡Ingrese datos válidos!',
-                    });
                 }
             }
         }
         else {
             $("#Editar #validatione2").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
 
@@ -418,10 +402,6 @@ $("#btnEditAFP").click(function () {
 
     if (vale1 == "" || vale1 == null) {
         $("#Editar #validatione1").css("display", "");
-        iziToast.error({
-            title: 'Error',
-            message: '¡Ingrese datos válidos!',
-        });
     }
     else if (vale2 != "" || vale2 != null || vale2 != undefined) {
         if (expreg.test(vale2)) {
@@ -436,28 +416,16 @@ $("#btnEditAFP").click(function () {
                         }
                         else {
                             $("#Editar #validatione4").css("display", "");
-                            iziToast.error({
-                                title: 'Error',
-                                message: '¡Ingrese datos válidos!',
-                            });
                         }
                     }
                 }
                 else {
                     $("#Editar #validatione3").css("display", "");
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡Ingrese datos válidos!',
-                    });
                 }
             }
         }
         else {
             $("#Editar #validatione2").css("display", "");
-            iziToast.error({
-                title: 'Error',
-                message: '¡Ingrese datos válidos!',
-            });
         }
     }
 
@@ -611,7 +579,9 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                             }
                         });
                     });
-                $("#DetallesAFP").modal();
+                $("#DetallesAFP").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
