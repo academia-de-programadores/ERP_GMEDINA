@@ -227,7 +227,7 @@ $("#InActivar").click(function () {
                     //debugger
                     llenarTabla();
                     LimpiarControles(["hinc_Id", "hinc_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgSuccess("¡Exito!", "Se ah Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }

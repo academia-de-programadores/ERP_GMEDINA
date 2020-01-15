@@ -133,7 +133,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "tmon_Id", "sue_Cantidad", "sue_SueldoAnterior"]);
-                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }

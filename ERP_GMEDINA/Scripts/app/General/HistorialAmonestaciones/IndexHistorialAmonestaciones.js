@@ -113,7 +113,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id"]);
-                    MsgWarning("¡Éxito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Éxito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }

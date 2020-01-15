@@ -131,7 +131,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["eqtra_Codigo", "eqtra_Descripcion", "eqtra_Observacion"]);
-                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }

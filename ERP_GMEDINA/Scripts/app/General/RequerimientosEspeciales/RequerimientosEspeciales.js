@@ -117,7 +117,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["resp_Descripcion", "resp_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }

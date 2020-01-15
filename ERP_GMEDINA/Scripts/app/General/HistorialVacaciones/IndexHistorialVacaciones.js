@@ -143,7 +143,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
                 }
