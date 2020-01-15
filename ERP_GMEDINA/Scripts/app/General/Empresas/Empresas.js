@@ -73,11 +73,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#empr_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#empr_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#empr_RazonInactivo").val("");
+    $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 
 //Botones POST
@@ -143,7 +143,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["empr_Nombre", "empr_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

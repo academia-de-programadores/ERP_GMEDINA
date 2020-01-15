@@ -74,11 +74,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#resp_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#resp_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#resp_RazonInactivo").val("");
+    $("#ModalInactivar").find("#resp_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -119,7 +119,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["resp_Descripcion", "resp_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

@@ -80,11 +80,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#ticn_Descripcion").val("");
-    $("#ModalInhabilitar").find("ticn_Descripcion").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#ticn_Descripcion").val("");
+    $("#ModalInactivar").find("ticn_Descripcion").focus();
 });
 
 $("#btnGuardar").click(function () {
@@ -126,7 +126,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["ticn_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

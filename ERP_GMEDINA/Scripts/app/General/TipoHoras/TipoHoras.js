@@ -80,11 +80,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#habi_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#habi_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#habi_RazonInactivo").val("");
+    $("#ModalInactivar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -117,7 +117,7 @@ $("#InActivar").click(function () {
                 LimpiarControles(["tiho_Descripcion", "tiho_Recargo", "tiho_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
             }
         });
     }

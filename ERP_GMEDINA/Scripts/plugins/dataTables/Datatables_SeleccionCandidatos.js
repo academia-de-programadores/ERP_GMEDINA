@@ -39,7 +39,7 @@ $(document).ready(function () {
                                     "<a class='btn btn-primary btn-xs' style= 'min-width: 70px;' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs' style= 'min-width: 70px;' onclick='CallEditar(this)'>Editar</a>" +
                                     "<a class='btn btn-success btn-xs ' style= 'min-width: 70px;' onclick='CallContratar(this)'>Contratar</a>" +
-                                    "<a class='btn btn-danger btn-xs ' style= 'min-width: 70px;'  onclick='CallEliminar(this)'>Inhabilitar</a>" +
+                                    "<a class='btn btn-danger btn-xs ' style= 'min-width: 70px;'  onclick='CallEliminar(this)'>Inactivar</a>" +
                                 "</div>"
             });
         }

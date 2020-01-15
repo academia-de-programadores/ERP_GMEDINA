@@ -91,11 +91,11 @@ $("#btnEditar").click(function () {
       }
      });
 });
-$("#btnInhabilitar").click(function () {
- CierraPopups();
- $('#ModalInhabilitar').modal('show');
- $("#ModalInhabilitar").find("#habi_RazonInactivo").val("");
- $("#ModalInhabilitar").find("#habi_RazonInactivo").focus();
+$("#btnInactivar").click(function () {
+    CierraPopups();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#habi_RazonInactivo").val("");
+    $("#ModalInactivar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -121,27 +121,27 @@ $("#btnGuardar").click(function () {
  }
 });
 $("#InActivar").click(function () {
- var data = $("#FormInactivar").serializeArray();
- data = serializar(data);
- if (data != null) {
-  data.habi_Id = ID;
-  data = JSON.stringify({ tbHabilidades: data });
-  _ajax(data,
-      '/Habilidades/Delete',
-      'POST',
-      function (obj) {
-       if (obj != "-1" && obj != "-2" && obj != "-3") {
-        CierraPopups();
-        llenarTabla();
-        LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
-        MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
-       } else {
-        MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
-       }
-      });
- } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
- }
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data.habi_Id = ID;
+        data = JSON.stringify({ tbHabilidades: data });
+        _ajax(data,
+            '/Habilidades/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                } else {
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
 });
 $("#btnActualizar").click(function () {
  var data = $("#FormEditar").serializeArray();
