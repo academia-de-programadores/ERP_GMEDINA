@@ -46,43 +46,37 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaIngresoIndividual = data, template = '';
+            var ListaIngresoIndividual = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#IndexTable').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
+                var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
+                var botonEditar = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-default btn-xs" id="btnEditarIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
+                var botonActivar = ListaIngresoIndividual[i].ini_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarIngresosIndividuales" iniid="' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">' +
-                    '<td>' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].ini_Motivo + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaIngresoIndividual[i].ini_Monto + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-
-                '</td>' +
-                '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyIngresosIndividuales').html(template);
+                //AGREGAR EL ROW AL DATATABLE
+                $('#IndexTable').dataTable().fnAddData([
+                    ListaIngresoIndividual[i].ini_IdIngresosIndividuales,
+                    ListaIngresoIndividual[i].ini_Motivo,
+                    ListaIngresoIndividual[i].per_Nombres + ' ' + ListaIngresoIndividual[i].per_Apellidos,
+                    ListaIngresoIndividual[i].ini_Monto,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+                }
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 
@@ -213,6 +207,7 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
+
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var ini_IdIngresosIndividuales = $("#Crear #ini_IdIngresosIndividuales").val();
     var emp_Id = $("#Crear #emp_Id").val();
@@ -220,7 +215,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var ini_Monto = $("#Crear #ini_Monto").val();
     var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-    debugger;
     if ($('#ini_PagaSiempre').is(':checked')) {
         ini_PagaSiempre = true;
     }
@@ -241,26 +235,29 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     else if (emp_Id != "" || emp_Id != 0 || emp_Id != "0") {
         $("#Crear #validatione2").css("display", "none");
     }
-    else if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+    if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+        console.log('click');
+        console.log(ini_Motivo);
+        console.log(emp_Id);
+        console.log(ini_Monto);
+        console.log(ini_PagaSiempre);
         if (expr.test(ini_Monto))
         {
             $("#Crear #validatione3").css("display", "none");
             mostrarCargandoCrear();
 
-            
             //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
             //var data = $("#frmCreateIngresoIndividual").serializeArray();
 
+            debugger;
+
+
             //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-            _ajax({
-                ini_Motivo: ini_Motivo,
-                emp_Id: emp_Id,
-                ini_Monto: ini_Monto,
-                ini_PagaSiempre: ini_PagaSiempre
-            },
-            '/IngresosIndividuales/Create',
-            'POST',
-            (data) => {
+            $.ajax({
+                url: "/IngresosIndividuales/Create",
+                method: "POST",
+                data: { ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: ini_Monto, ini_PagaSiempre: ini_PagaSiempre }
+            }).done(function (data) {
                 //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
                 if (data != "error") {
 
@@ -294,7 +291,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateIngresoIndividual").submit(function (e) {
+    $("#frmCreateIngresosIndividuales").submit(function (e) {
         return false;
     });
 

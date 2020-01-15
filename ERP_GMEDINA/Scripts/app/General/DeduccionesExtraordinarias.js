@@ -38,7 +38,10 @@ function cargarGridDeducciones() {
             }
 
             //Variable para guardar la data obtenida
-            var ListaDeduccionesExtraordinarias = data, template = '';
+            var ListaDeduccionesExtraordinarias = data;
+
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblDeduccionesExtraordinarias').DataTable().clear();
 
             //Recorrer la data obtenida a traves de la función anterior y se crea un Template de la Tabla para Actualizarse
             for (var i = 0; i < ListaDeduccionesExtraordinarias.length; i++) {
@@ -46,39 +49,29 @@ function cargarGridDeducciones() {
                 var estadoRegistro = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>' : '';
+                var botonDetalles = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Detalles</a>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
+                var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias" iddeduccionesextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
+                var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias" iddeduccionesextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
 
-                template += '<tr data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoInicial + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoRestante + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
-                    //variable del estado del registro creada en el operador ternario de arriba
-                    '<td>' + estadoRegistro + '</td>' +
-
-                    //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                    '</td>' +
-                    '</tr>';
-            }
-
-            //Refrescar el tbody de la Tabla del Index
-            $("#tbodyDeduccionesExtraordinarias").html(template);
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblDeduccionesExtraordinarias').dataTable().fnAddData([
+                    ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra,
+                    ListaDeduccionesExtraordinarias[i].per_Nombres + ' ' + ListaDeduccionesExtraordinarias[i].per_Apellidos,
+                    ListaDeduccionesExtraordinarias[i].dex_MontoInicial,
+                    ListaDeduccionesExtraordinarias[i].dex_MontoRestante,
+                    ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios,
+                    ListaDeduccionesExtraordinarias[i].dex_Cuota,
+                    ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
+                }
+            //APLICAR EL MAX WIDTH
+            FullBody();
         });
 }
 
@@ -197,25 +190,14 @@ function ocultarCargandoCrear() {
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
     //Mostrar el Modal de Inactivar
-    $("#InactivarDeduccionesExtraordinarias").modal();
+    $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 
 });
 
-function mostrarCargandoInhabilitar() {
-    btnInhabilitar.hide();
-    cargandoInhabilitar.show();
-    cargandoInhabilitar.html(spinner());
-}
-
-function ocultarCargandoInhabilitar() {
-    btnInhabilitar.show();
-    cargandoInhabilitar.html('');
-    cargandoInhabilitar.hide();
-}
-
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-    mostrarCargandoInhabilitar();
     //Serializar el Formulario del Modal que esta en su respectiva Vista Parcial, para Parsear al Formato Json 
     var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
 
@@ -226,7 +208,6 @@ $("#btnInactivar").click(function () {
         data: data
     }).done(function (data) {
         if (data == "Error") {
-            ocultarCargandoInhabilitar();
             //Cuando trae un error en el BackEnd al realizar la Inactivación
             iziToast.error({
                 title: 'Error',
@@ -234,22 +215,17 @@ $("#btnInactivar").click(function () {
             });
         }
         else {
-
-                // Actualizar el Index para ver los cambios
+            // Actualizar el Index para ver los cambios
+            $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+            $("html, body").css("overflow", "hidden");
+            $("html, body").css("overflow", "scroll");
                 location.href = "/DeduccionesExtraordinarias/Index";
-
                 cargarGridDeducciones();
-
-                mostrarCargandoInhabilitar();
-                //Ya actualizado, se oculta el Modal
-                $("#InactivarDeduccionesExtraordinarias").modal('hide');
-
                 //Mensaje de Éxito de la Inactivación
                 iziToast.success({
                     title: 'Exito',
                     message: '¡El registro se inactivó de forma exitosa!',
                 });
-
             }
     });
 
