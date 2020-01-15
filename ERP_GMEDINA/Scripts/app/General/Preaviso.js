@@ -267,16 +267,15 @@ $(document).on("click", "#btnInactivarPreaviso", function () {
     $("#InactivarPreaviso").modal();
 });
 
-//DESPLEGAR EL MODAL DE INACTIVAR
+//CERRAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnCerrarInactivar", function () {
-    console.log("Hola");
     //OCULTAR EL MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal('hide');
     //MOSTRAR MODAL DE EDICION
     $("#EditarPreaviso").modal();
 });
 
-//CONFORMAR INACTIVACION DEL REGISTRO
+//CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPreavisoConfirmar").click(function () {
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
