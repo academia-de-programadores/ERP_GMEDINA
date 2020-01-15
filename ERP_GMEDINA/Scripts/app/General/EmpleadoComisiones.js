@@ -35,51 +35,46 @@ function cargarGridComisiones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaComisiones = data, template = '';
+            var ListaComisiones = data;
+            //Limpiar Data del DataTable
+            $('#tblEmpleadoComisiones').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaComisiones.length; i++) {
                 var estadoRegistro = ListaComisiones[i].cc_Activo == false ? 'Inactivo' : 'Activo'
                 //var PagadoRegistro = ListaComisiones[i].cc_Pagado == false ? 'Inactivo' : 'Activo'
                 //variable boton detalles
-                var botonDetalles = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleEmpleadoComisiones">Detalles</button>' : '';
+                var botonDetalles = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" style="margin rigth:3px;" class="btn btn-primary btn-xs"  id="btnDetalleEmpleadoComisiones">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarEmpleadoComisiones">Editar</button>' : '';
+                var botonEditar = ListaComisiones[i].cc_Activo == true ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" style="margin rigth:3px;" class="btn btn-default btn-xs"  id="btnEditarEmpleadoComisiones">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaComisiones[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroComisiones">Activar</button>' : '' : '';
+                var botonActivar = ListaComisiones[i].cc_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" style="margin rigth:3px;" class="btn btn-primary btn-xs"  id="btnActivarRegistroComisiones">Activar</button>' : '' : '';
 
                 var FechaRegistro = FechaFormato(ListaComisiones[i].cc_FechaRegistro);
 
                 var Check = "";
+                //ESTA VARIABLE GUARDA CODIGO HTML DE UN CHECKBOX, PARA ENVIARLO A LA TABLA
                 if (ListaComisiones[i].cc_Pagado == true) {
-                    Check = '<div class="icheckbox_square-green checked disabled" style="position: relative;"><input type="checkbox" class="i-checks" id="check-id" checked="" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>'; //SE LLENA LA VARIABLE CON UN INPUT CHEQUEADO
+                    Check = '<input type="checkbox" id="cc_Pagado" name="cc_Pagado" checked disabled>'; //SE LLENA LA VARIABLE CON UN INPUT CHEQUEADO
                 } else {
-                    Check = '<div class="icheckbox_square-green disabled" style="position: relative;"><input type="checkbox" class="i-checks" id="check-" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
+                    Check = '<input type="checkbox" id="cc_Pagado" name="cc_Pagado" disabled>'; //SE LLENA LA VARIABLE CON UN INPUT QUE NO ESTA CHEQUEADO
                 }
 
-                template += '<tr data-id = "' + ListaComisiones[i].cc_Id + '">' +
-                    '<td>' + ListaComisiones[i].cc_Id + '</td>' +
-                    '<td>' + ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos + '</td>' +
-                    '<td>' + ListaComisiones[i].cin_DescripcionIngreso + '</td>' +
-                    '<td>' + ListaComisiones[i].cc_PorcentajeComision + '</td>' +
-                      '<td>' + ListaComisiones[i].cc_TotalVenta + '</td>' +
-                    '<td>' + FechaRegistro + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                     '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
-
-                   '<td>' + botonDetalles +
-                   botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
+                $('#tblEmpleadoComisiones').dataTable().fnAddData([
+                    ListaComisiones[i].cc_Id,
+                    ListaComisiones[i].per_Nombres + ' ' + ListaComisiones[i].per_Apellidos,
+                    ListaComisiones[i].cin_DescripcionIngreso,
+                    ListaComisiones[i].cc_PorcentajeComision,
+                    ListaComisiones[i].cc_TotalVenta,
+                    FechaRegistro,
+                    estadoRegistro,
+                    Check,
+                    botonDetalles + botonEditar + botonActivar]
+                    );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyComisiones').html(template);
         });
-
+    (FullBody);
 }
 
 
@@ -92,8 +87,11 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
     $("#Editar #Validation_descipcion2e").css("display", "hidden");
     $("#Editar #Validation_descipcion1").css("display", "hidden");
     $("#Editar #Validation_descipcion2").css("display", "hidden");
-
-
+    $("#Editar #Validation_descipcion11").css("display", "");
+    $("#Editar #Validation_descipcion12").css("display", "");
+    $("#Editar #Validation_descipcion13").css("display", "");
+    $("#Editar #Validation_descipcion14").css("display", "");
+    $("#Editar #Validation_descipcion15").css("display", "");
     var ID = $(this).data('id');
     Idinactivar = ID;
     $.ajax({
@@ -106,6 +104,11 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                if (data.cc_Pagado) {
+                    document.getElementById("btnUpdateComisionesConfirmar").disabled = true;
+                } else {
+                    document.getElementById("btnUpdateComisionesConfirmar").disabled = false;
+                }
                 $("#Editar #cc_Id").val(data.cc_Id);
                 $("#Editar #cc_PorcentajeComision").val(data.cc_PorcentajeComision);
                 $("#Editar #cc_TotalVenta").val(data.cc_TotalVenta);
@@ -168,12 +171,15 @@ $('#btnUpdateComisionesConfirmar').click(function () {
     if (PorcentajeComision == "" && TotalVenta == "" || PorcentajeComision == "0.00" && TotalVenta == "0.00" || PorcentajeComision == null && TotalVenta == null || PorcentajeComision == undefined && TotalVenta == undefined) {
         $("#Editar #Validation_descipcion1e").css("display", "block");
         $("#Editar #Validation_descipcion1").css("display", "");
+        $("#Editar #Validation_descipcion11").css("display", "none");
+        $("#Editar #Validation_descipcion12").css("display", "none");
         $("#Editar #Validation_descipcion2e").css("display", "block");
         $("#Editar #Validation_descipcion2").css("display", "");
     }
     else if (TotalVenta == "" || TotalVenta == "0.00" || TotalVenta == null || TotalVenta == undefined) {
         $("#Editar #Validation_descipcion2e").css("display", "block");
         $("#Editar #Validation_descipcion1").css("display", "none");
+        $("#Editar #Validation_descipcion12").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "");
 
     }
@@ -182,18 +188,21 @@ $('#btnUpdateComisionesConfirmar').click(function () {
         //MOSTRAR DATAANNOTATIONS
         $("#Editar #Validation_descipcion1e").css("display", "block");
         $("#Editar #Validation_descipcion1").css("display", "");
+        $("#Editar #Validation_descipcion11").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "none");
         //MOSTRAR MODAL
         $("#EditarEmpleadoComisionesConfirmacion").modal('hide');
     }
-    
-        else {
+
+    else {
         $("#Editar #Validation_descipcion1").css("display", "none");
         $("#Editar #Validation_descipcion2").css("display", "none");
-        $("#EditarEmpleadoComisionesConfirmacion").modal();
+        $("#EditarEmpleadoComisionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
         $("#EditarEmpleadoComisiones").modal('hide');
-        }
-    
+    }
+
 });
 
 $("#btCerrarEditar").click(function () {
@@ -203,6 +212,7 @@ $("#btCerrarEditar").click(function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateComisionesConfirmar2").click(function () {
+    document.getElementById("btnUpdateComisionesConfirmar2").disabled = true;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisionesEditar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN   
@@ -230,17 +240,15 @@ $("#btnUpdateComisionesConfirmar2").click(function () {
                 title: 'Exito',
                 message: '¡El registro se editó de forma exitosa!',
             });
-            
-        }     
+
+        }
     });
 });
-
 
 // EVITAR POSTBACK DE FORMULARIOS
 $("#frmEmpleadoComisiones").submit(function (e) {
     return false;
 });
-
 // EVITAR POSTBACK DE FORMULARIOS
 $("#frmEmpleadoComisionesEditar").submit(function (e) {
     return false;
@@ -249,6 +257,7 @@ $("#frmEmpleadoComisionesEditar").submit(function (e) {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     var cc_Pagado = $('#AgregarEmpleadoComisiones #cc_Pagado').prop('checked', false);
+    document.getElementById("btnCreateRegistroComisiones").disabled = false;
     $("#PorcentajeComision").val('');
     $("#TotalVenta").val('');
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
@@ -270,8 +279,8 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow","hidden"); 
-    $("html, body").css("overflow","scroll"); 
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -281,6 +290,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     $("#Validation_descipcion5").css("display", "none");
     $("#Validation_descipcion6").css("display", "none");
     $("#Validation_descipcion7").css("display", "none");
+ 
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
         method: "GET",
@@ -307,14 +317,15 @@ $('#btnCreateRegistroComisiones').click(function () {
     var Ingreso = $("#Crear #cin_IdIngreso").val();
     var Porcentaje = $("#Crear #PorcentajeComision").val();
     var Total = $("#Crear #TotalVenta").val();
-    if (Empleado != "0" && Ingreso != "0" && Porcentaje != "" && Porcentaje != "0" && Total != "" && Total != "0")
-    {
+    document.getElementById("btnCreateRegistroComisiones").disabled = true;
+    if (Empleado != "0" && Ingreso != "0" && Porcentaje != "" && Porcentaje != "0" && Total != "" && Total != "0") {
         $("#Validation_descipcion4").css("display", "none");
         $("#Validation_descipcion5").css("display", "none");
         $("#Validation_descipcion6").css("display", "none");
         $("#Validation_descipcion7").css("display", "none");
+        
         var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-      
+
         $.ajax({
             url: "/EmpleadoComisiones/Create",
             method: "POST",
@@ -342,14 +353,14 @@ $('#btnCreateRegistroComisiones').click(function () {
                     message: 'El registro fue Creado de forma exitosa!',
                 });
             }
-          
+
         });
     }
-    else
-    {
+    else {
         if (Empleado == "0") {
             $("#Validation_descipcion").css("display", "");
             $("#Validation_descipcion4").css("display", "");
+            document.getElementById("btnCreateRegistroComisiones").disabled = false;
         }
         else {
             $("#Validation_descipcion4").css("display", "none");
@@ -357,29 +368,31 @@ $('#btnCreateRegistroComisiones').click(function () {
         if (Ingreso == "0") {
             $("#Validation_descipcion3").css("display", "");
             $("#Validation_descipcion5").css("display", "");
+            document.getElementById("btnCreateRegistroComisiones").disabled = false;
         }
         else {
             $("#Validation_descipcion5").css("display", "none");
         }
         if (Porcentaje == "" || Porcentaje == "0") {
             $("#Validation_descipcion6").css("display", "");
+            document.getElementById("btnCreateRegistroComisiones").disabled = false;
         }
         else {
             $("#Validation_descipcion6").css("display", "none");
         }
         if (Total == "" || Total == "0") {
             $("#Validation_descipcion7").css("display", "");
+            document.getElementById("btnCreateRegistroComisiones").disabled = false;
         }
         else {
             $("#Validation_descipcion7").css("display", "none");
         }
     }
-   
-    
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    
-});
 
+
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+
+});
 
 //FUNCION: Detail 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -401,47 +414,12 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                 var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
                 var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
-
-                //-------------------------CHECKBOX-------------------------
-                var padre = document.getElementById("padre");
-                //OBTIENE EL DIV PADRE QUE CONTENDRA EL CHECKBOX
+                console.log(data);
                 if (data[0].cc_Pagado) {
-                    //VACIA EN CONTENIDO DEL DIV PADRE ANTES DE LLENARLO
-                    padre.innerHTML = '';
-                    //CREA EL DIV HIJO
-                    var input = document.createElement("INPUT");
-                    //ASIGNA LOS ATRIBUTOS Y CLASES AL DIV HIJO
-                    input.type = 'checkbox';
-                    input.classList.add('i-checks');
-                    input.disabled = true;
-                    input.checked = true;
-
-                    //AGREGA EL DIV HIJO AL DIV PADRE
-                    padre.appendChild(input);
-
-                    //LLAMA LA FUNCION DE I-CHECKS PARA DARLE ESTILO AL CHECKBOX
-                    $('.i-checks').iCheck({
-                        checkboxClass: 'icheckbox_square-green',
-                        radioClass: 'iradio_square-green',
-                    });
+                    //$('#Detalles #cb_Pagado').prop('checked', true);
+                    $("#Detallar #cc_Pagado").html("Si");
                 } else {
-                    //VACIA EN CONTENIDO DEL DIV PADRE ANTES DE LLENARLO
-                    padre.innerHTML = '';
-                    //CREA EL DIV HIJO
-                    var input = document.createElement("INPUT");
-                    //ASIGNA LOS ATRIBUTOS Y CLASES AL DIV HIJO
-                    input.type = 'checkbox';
-                    input.classList.add('i-checks');
-                    input.disabled = true;
-
-                    //AGREGA EL DIV HIJO AL DIV PADRE
-                    padre.appendChild(input);
-
-                    //LLAMA LA FUNCION DE I-CHECKS PARA DARLE ESTILO AL CHECKBOX
-                    $('.i-checks').iCheck({
-                        checkboxClass: 'icheckbox_square-green',
-                        radioClass: 'iradio_square-green',
-                    });
+                    $("#Detallar #cc_Pagado").html("No");
                 }
                 $("#Detallar #cc_Id").html(data[0].cc_Id);
                 $("#Detallar #cc_FechaRegistro").html(FechaRegistro);
@@ -484,7 +462,7 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
-                })
+                    })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Detallar #cin_IdIngreso").empty();
@@ -494,10 +472,9 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
                             $("#Detallar #cin_IdIngreso").append("<option" + (iter.Id == SelectedIdCatIngreso ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-
-                $("#DetalleEmpleadoComisiones").modal();
+                $("#DetalleEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
+                $("html, body").css("overflow", "scroll");    
             }
             else {
                 //Mensaje de error si no hay data
@@ -511,16 +488,20 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
 $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#EditarEmpleadoComisiones").modal('hide');
-    $("#InactivarEmpleadoComisiones").modal();
+    $("#InactivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+
+    document.getElementById("btnInactivarRegistroComisiones").disabled = false;
+    document.getElementById("btnInactivarRegistroComisionesNo").disabled = false;
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroComisiones").click(function () {
+    document.getElementById("btnInactivarRegistroComisiones").disabled = true;
     var data = $("#frmEmpleadoComisionesInactivar").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -551,20 +532,24 @@ $("#btnInactivarRegistroComisiones").click(function () {
     });
 });
 $("#btnInactivarRegistroComisionesNo").click(function () {
-  
-                $("#InactivarEmpleadoComisiones").modal('hide');
-                $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
-                $("html, body").css("overflow", "hidden");
-                $("html, body").css("overflow", "scroll");
-    
+    document.getElementById("btnInactivarRegistroComisionesNo").disabled = true;
+    $("#InactivarEmpleadoComisiones").modal('hide');
+    $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+
 });
 //VALIDAR CREAR//
 var IDActivar = 0;
 $(document).on("click", "#btnActivarRegistroComisiones", function () {
     IDActivar = $(this).data('id');
-    $("#ActivarEmpleadoComisiones").modal();
+    $("#ActivarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
+    document.getElementById("btnActivarRegistroComisionesEjecutar").disabled = false;
 });
 $("#btnActivarRegistroComisionesEjecutar").click(function () {
+    document.getElementById("btnActivarRegistroComisionesEjecutar").disabled = true;
     $.ajax({
         url: "/EmpleadoComisiones/Activar/" + IDActivar,
         method: "POST",
