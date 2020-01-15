@@ -75,27 +75,6 @@ function cargarGridDeducciones() {
 					ListaDeducciones[i].tde_Descripcion,
 					botonDetalles + botonEditar + botonActivar
                 ]);
-
-                //template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-                //  '<td>' + ListaDeducciones[i].cde_IdDeducciones + '</td>' +
-                //    '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                //    '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-                //    '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-                //    '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
-                //   //variable del estado del registro creada en el operador ternario de arriba
-                //    '<td>' + estadoRegistro + '</td>' +
-
-                //    //variable donde está el boton de detalles
-                //    '<td>' + botonDetalles +
-
-                //    //variable donde está el boton de detalles
-                //     botonEditar +
-
-                //    //boton activar 
-                //    botonActivar
-                //   '</td> ' +
-                //   '</tr>';
-
             }            
             });
       FullBody();
