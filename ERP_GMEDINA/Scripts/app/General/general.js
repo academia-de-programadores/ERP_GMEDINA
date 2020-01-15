@@ -8,6 +8,7 @@ function CierraPopups() {
         $('.modal-backdrop').remove();//eliminamos el backdrop del modal
     });
 }
+
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -256,4 +257,4 @@ function FechaFormatoSimple(pFecha) {
         return FechaFinal;
     }
     return '';
-}
+};
