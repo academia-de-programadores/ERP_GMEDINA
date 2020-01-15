@@ -212,5 +212,92 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
+		//Decimo Tercer
+		#region decimo tercer mes 
+
+		//parametros del reporte
+		public ActionResult DecimoTercerParametros()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+
+		//parametros del reporte
+		[HttpPost]
+		public ActionResult DecimoTercerParametros(int cpla_IdPlanilla, DateTime dtm_FechaPago)
+		{
+			ReportViewer reportViewer = new ReportViewer();
+			reportViewer.ProcessingMode = ProcessingMode.Local;
+			reportViewer.SizeToReportContent = false;
+			reportViewer.Width = Unit.Pixel(1050);
+			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.BackColor = System.Drawing.Color.White;
+			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+			SqlConnection conx = new SqlConnection(connectionString);
+
+			//comando para el dataAdapter
+			SqlCommand command = new SqlCommand();
+			command.CommandText = "SELECT * FROM [Plani].[V_DecimoTercerMes_RPT] where cpla_IdPlanilla = @cpla_IdPlanilla and dtm_FechaPago = @dtm_FechaPago";
+			command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
+			command.Parameters.AddWithValue("@dtm_FechaPago", SqlDbType.Date).Value = dtm_FechaPago;
+			command.Connection = conx;
+			SqlDataAdapter adp = new SqlDataAdapter(command);
+			adp.Fill(ds, ds.V_DecimoTercerMes_RPT.TableName);
+
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoTercerRPT.rdlc";
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoTercerMes_RPT"]));
+			conx.Close();
+
+			ViewBag.ReportViewer = reportViewer;
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+		#endregion
+
+		//Decimo Cuarto
+		#region decimo cuarto mes 
+
+		//parametros del reporte
+		public ActionResult DecimoCuartoParametros()
+		{
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+
+		//parametros del reporte
+		[HttpPost]
+		public ActionResult DecimoCuartoParametros(int cpla_IdPlanilla, DateTime dcm_FechaPago)
+		{
+			ReportViewer reportViewer = new ReportViewer();
+			reportViewer.ProcessingMode = ProcessingMode.Local;
+			reportViewer.SizeToReportContent = false;
+			reportViewer.Width = Unit.Pixel(1050);
+			reportViewer.Height = Unit.Pixel(500);
+			reportViewer.BackColor = System.Drawing.Color.White;
+			var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+			SqlConnection conx = new SqlConnection(connectionString);
+
+			//comando para el dataAdapter
+			SqlCommand command = new SqlCommand();
+			command.CommandText = "SELECT * FROM [Plani].[V_DecimoCuartoMes_RPT] where cpla_IdPlanilla = @cpla_IdPlanilla and dcm_FechaPago = @dcm_FechaPago";
+			command.Parameters.AddWithValue("@cpla_IdPlanilla", SqlDbType.Int).Value = cpla_IdPlanilla;
+			command.Parameters.AddWithValue("@dcm_FechaPago", SqlDbType.Date).Value = dcm_FechaPago;
+			command.Connection = conx;
+			SqlDataAdapter adp = new SqlDataAdapter(command);
+			adp.Fill(ds, ds.V_DecimoCuartoMes_RPT.TableName);
+
+			reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\DecimoCuartoRPT.rdlc";
+			reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_DecimoCuartoMes_RPT"]));
+			conx.Close();
+
+			ViewBag.ReportViewer = reportViewer;
+			//Cargar DDL del modal (Tipo de planilla a seleccionar)
+			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+			return View();
+		}
+		#endregion
 	}
 }

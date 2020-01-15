@@ -44,7 +44,7 @@ namespace ERP_GMEDINA.Models
 
 
 		[Display(Name = "Fecha Inicio")]
-		[Required(ErrorMessage = "Este campo es requerido")]
+		[Required(ErrorMessage = "campo Fecha Inicio es requerido")]
 		public System.DateTime hipa_FechaInicio { get; set; }
 
 
