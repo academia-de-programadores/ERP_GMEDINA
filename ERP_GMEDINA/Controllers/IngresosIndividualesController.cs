@@ -52,11 +52,11 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: IngresosIndividuales/Create
         [HttpPost]
-        public ActionResult Create(string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
+        public ActionResult Create([Bind(Include = "ini_Motivo,emp_Id,ini_Monto,ini_PagaSiempre,ini_UsuarioCrea,ini_FechaCrea")] tbIngresosIndividuales tbIngresosIndividuales)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
-            int ini_UsuarioCrea = 1;
-            DateTime ini_FechaCrea = DateTime.Now;
+            tbIngresosIndividuales.ini_UsuarioCrea = 1;
+            tbIngresosIndividuales.ini_FechaCrea = DateTime.Now;
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
             IEnumerable<object> listIngresosIndividuales = null;
@@ -67,12 +67,12 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Insert(ini_Motivo,
-                                                                                          emp_Id,
-                                                                                          ini_Monto,
-                                                                                          ini_PagaSiempre,
-                                                                                          ini_UsuarioCrea,
-                                                                                          ini_FechaCrea);
+                    listIngresosIndividuales = db.UDP_Plani_tbIngresosIndividuales_Insert(tbIngresosIndividuales.ini_Motivo,
+                                                                                          tbIngresosIndividuales.emp_Id,
+                                                                                          tbIngresosIndividuales.ini_Monto,
+                                                                                          tbIngresosIndividuales.ini_PagaSiempre,
+                                                                                          tbIngresosIndividuales.ini_UsuarioCrea,
+                                                                                          tbIngresosIndividuales.ini_FechaCrea);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbIngresosIndividuales_Insert_Result Resultado in listIngresosIndividuales)
                         MensajeError = Resultado.MensajeError;

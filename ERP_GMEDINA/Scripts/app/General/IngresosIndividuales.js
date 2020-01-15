@@ -220,7 +220,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     var ini_Monto = $("#Crear #ini_Monto").val();
     var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
-    debugger;
     if ($('#ini_PagaSiempre').is(':checked')) {
         ini_PagaSiempre = true;
     }
@@ -252,15 +251,16 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
             //var data = $("#frmCreateIngresoIndividual").serializeArray();
 
             //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-            _ajax({
-                ini_Motivo: ini_Motivo,
-                emp_Id: emp_Id,
-                ini_Monto: ini_Monto,
-                ini_PagaSiempre: ini_PagaSiempre
-            },
-            '/IngresosIndividuales/Create',
-            'POST',
-            (data) => {
+
+            //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+            var data = $("#frmCreateIngresoIndividual").serializeArray();
+
+            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+            $.ajax({
+                url: "/IngresosIndividuales/Create",
+                method: "POST",
+                data: data
+            }).done(function (data) {
                 //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
                 if (data != "error") {
 

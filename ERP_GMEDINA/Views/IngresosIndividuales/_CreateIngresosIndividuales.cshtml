@@ -1,6 +1,6 @@
 ﻿@model ERP_GMEDINA.Models.tbIngresosIndividuales
 
-@using (Html.BeginForm(null, null, FormMethod.Post))
+@using (Html.BeginForm(null, null, FormMethod.Post, "frmCreateIngresoIndividual"))
 {
     <div class="modal-body" id="Crear">
         @Html.AntiForgeryToken()
