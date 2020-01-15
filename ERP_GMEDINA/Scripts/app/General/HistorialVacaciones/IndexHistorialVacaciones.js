@@ -85,8 +85,8 @@ function llamarmodal() {
     modalnuevo.modal('show');
 }
 function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hvac_Id").val(ID);
+    var modaldelete = $("#ModalInactivar");
+    $("#ModalInactivar").find("#hvac_Id").val(ID);
     modaldelete.modal('show');
 }
 
@@ -145,7 +145,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["hvac_Id", "hvac_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

@@ -231,13 +231,13 @@ $("#ModalEditar").find("#btnActualizar").on("click", function () {
     }
     dRow = null;
 });
-$("#ModalInhabilitar").find("#InActivar").on("click", function () {
+$("#ModalInactivar").find("#InActivar").on("click", function () {
     if (Entidad == 'Depto')
     {
         var depto =
        {
            depto_Id: dRow.data().Id,
-           depto_RazonInactivo: $("#ModalInhabilitar").find("#depto_RazonInactivo").val(),
+           depto_RazonInactivo: $("#ModalInactivar").find("#depto_RazonInactivo").val(),
        };
         if (depto.depto_RazonInactivo.trim()=='') {
             return null;
@@ -248,10 +248,10 @@ $("#ModalInhabilitar").find("#InActivar").on("click", function () {
             .remove()
             .draw();
         dRow = null;
-        $('#ModalInhabilitar').modal('hide');
+        $('#ModalInactivar').modal('hide');
     } else
     {
-        var area_Razoninactivo=$("#ModalInhabilitar").find("#depto_RazonInactivo").val()
+        var area_Razoninactivo=$("#ModalInactivar").find("#depto_RazonInactivo").val()
         _ajax(JSON.stringify({ area_Razoninactivo: area_Razoninactivo }),
             '/Areas/Delete',
             'POST',
@@ -261,23 +261,23 @@ $("#ModalInhabilitar").find("#InActivar").on("click", function () {
                     //MsgSuccess("¡Exito!", "Se ah Eliminado el Area");
                     $(location).attr('href', '/Areas');
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     }
 });
-$("#btnInhabilitar").on("click", function () {
+$("#btnInactivar").on("click", function () {
     $("#depto_RazonInactivo").val("");
     $('#ModalEditar').modal('hide');
-    $('#ModalInhabilitar').modal('toggle');
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    $('#ModalInactivar').modal('toggle');
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#depto_RazonInactivo").focus();
     Entidad = "Depto";
 });
 $("#btnInactivarArea").on("click", function () {
-    $('#ModalInhabilitar').modal('toggle');
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#depto_RazonInactivo").focus();
+    $('#ModalInactivar').modal('toggle');
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#depto_RazonInactivo").focus();
     Entidad = "Area";
 });
 function limpiarSpan(id, form) {

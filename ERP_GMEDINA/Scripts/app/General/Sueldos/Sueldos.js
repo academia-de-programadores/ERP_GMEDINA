@@ -90,11 +90,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#sue__RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#sue__RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#sue__RazonInactivo").val("");
+    $("#ModalInactivar").find("#sue__RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -135,7 +135,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["emp_Id", "tmon_Id", "sue_Cantidad", "sue_SueldoAnterior"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

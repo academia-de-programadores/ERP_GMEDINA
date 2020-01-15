@@ -15,7 +15,7 @@
                     '<td>' + index.tamo_Descripcion + '</td>' +
                     '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
                     '<td>' + index.hamo_Observacion + '</td>' +
-                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalles</button>' + '</td>' +
+                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalles</button>' + '</td>' +
                     '</tr>' +
                     '</tbody>'
             '</table>'
@@ -78,8 +78,8 @@ function llamarmodal() {
     modalnuevo.modal('show');
 }
 function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hamo_Id").val(ID);
+    var modaldelete = $("#ModalInactivar");
+    $("#ModalInactivar").find("#hamo_Id").val(ID);
     modaldelete.modal('show');
 }
 
@@ -115,7 +115,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["hamo_Id"]);
                     MsgSuccess("¡Éxito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

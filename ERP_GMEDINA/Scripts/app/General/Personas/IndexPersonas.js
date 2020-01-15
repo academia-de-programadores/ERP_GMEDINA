@@ -48,11 +48,11 @@
     div += '</div>';
     return div ;
 }
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#per_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#per_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#per_RazonInactivo").val("");
+    $("#ModalInactivar").find("#per_RazonInactivo").focus();
 });
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
@@ -70,7 +70,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["per_Descripcion", "per_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

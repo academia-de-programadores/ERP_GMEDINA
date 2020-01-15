@@ -23,7 +23,7 @@ function format(obj) {
                 + '<td>' + index.hinc_Diagnostico + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
         '</table>'
 
@@ -95,8 +95,8 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 function Llamarmodaldelete(ID) {
 
-    var modalnuevo = $("#ModalInhabilitar");
-    $("#ModalInhabilitar").find("#hinc_Id").val(ID);
+    var modalnuevo = $("#ModalInactivar");
+    $("#ModalInactivar").find("#hinc_Id").val(ID);
     modalnuevo.modal('show');
 
 

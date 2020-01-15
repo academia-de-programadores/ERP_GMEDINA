@@ -11,9 +11,9 @@ function tablaEditar(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
                 //$("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
-                $('#ModalInhabilitar').modal('show');
-                $("#ModalInhabilitar").find("#hper_RazonInactivo").val("");
-                $("#ModalInhabilitar").find("#hper_RazonInactivo").focus();
+                $('#ModalInactivar').modal('show');
+                $("#ModalInactivar").find("#hper_RazonInactivo").val("");
+                $("#ModalInactivar").find("#hper_RazonInactivo").focus();
             }
         });
 }
@@ -112,7 +112,7 @@ function llenarTabla() {
                     per_EstadoCivil: value.per_EstadoCivil,
                     hper_Observacion: value.hper_Observacion,
                     FechaInicio: value.FechaInicio,
-                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inhabilitar</a>"
+                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                 });
             });
             tabla.draw();
@@ -144,11 +144,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#hper_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#hper_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#hper_RazonInactivo").val("");
+    $("#ModalInactivar").find("#hper_RazonInactivo").focus();
 });
 //llamado
 $("#InActivar").click(function () {
@@ -165,7 +165,7 @@ $("#InActivar").click(function () {
                 LimpiarControles(["hper_Observacion", "hper_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
             }
         });
     } else {
