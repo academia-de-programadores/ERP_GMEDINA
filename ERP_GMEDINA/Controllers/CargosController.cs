@@ -17,42 +17,45 @@ namespace ERP_GMEDINA.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            List<tbCargos> tbCargos = new List<Models.tbCargos> { };
+            tbCargos tbCargos =new tbCargos {car_Estado=true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+               // tbCargos = db.tbCargos.Where(x => x.car_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList()[0];
 
                 return View(tbCargos);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbCargos.Add(new tbCargos { car_Id = 0, car_Descripcion = "fallo la conexion" });
+                //tbCargos.Add(new tbCargos { car_Id = 0, car_Descripcion = "fallo la conexion" });
             }
             return View(tbCargos);
         }
 
-
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbCargos> tbCargos =
-                new List<Models.tbCargos> { };
-            foreach (tbCargos x in db.tbCargos.ToList().Where(x => x.car_Estado == true))
+            try
             {
-                tbCargos.Add(new tbCargos
-                {
-                    car_Id = x.car_Id,
-                    car_Descripcion = x.car_Descripcion
-                });
-            }
+            var tbCargos = db.tbCargos
+                .Select(
+                   t => new {
+                        car_Id = t.car_Id,
+                        car_Descripcion = t.car_Descripcion,
+                        car_Estado = t.car_Estado
+                    }
+                )
+                .ToList();
             return Json(tbCargos, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
-
-
-
-
 
         [HttpPost]
         public JsonResult Create(tbCargos tbCargos)
@@ -82,8 +85,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,7 +96,7 @@ namespace ERP_GMEDINA.Controllers
             try
             {
                 tbCargos = db.tbCargos.Find(id);
-                if (tbCargos == null || !tbCargos.car_Estado)
+                if (tbCargos == null )
                 {
                     return HttpNotFound();
                 }
@@ -122,10 +123,6 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(Cargos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
 
         [HttpPost]
@@ -158,8 +155,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
-
         [HttpPost]
         public ActionResult Delete(tbCargos tbCargos)
         {
@@ -190,8 +185,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
-
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
@@ -205,6 +198,29 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbCargos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCargos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

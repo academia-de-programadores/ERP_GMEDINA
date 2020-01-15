@@ -47,7 +47,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHabilidades> tbHabilidades { get; set; }
         public virtual DbSet<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
         public virtual DbSet<tbHabilidadesRequisicion> tbHabilidadesRequisicion { get; set; }
-        public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
         public virtual DbSet<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
         public virtual DbSet<tbHistorialCargos> tbHistorialCargos { get; set; }
         public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
@@ -83,7 +82,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
         public virtual DbSet<V_EmpleadoIncapacidades> V_EmpleadoIncapacidades { get; set; }
         public virtual DbSet<V_Empleados> V_Empleados { get; set; }
-        public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<V_HistorialAudienciaDescargo> V_HistorialAudienciaDescargo { get; set; }
         public virtual DbSet<V_HistorialCargos> V_HistorialCargos { get; set; }
         public virtual DbSet<V_HistorialContrataciones> V_HistorialContrataciones { get; set; }
@@ -111,6 +109,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DatosProfesionales> V_DatosProfesionales { get; set; }
         public virtual DbSet<V_DatosRequisicion> V_DatosRequisicion { get; set; }
         public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
+        public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
+        public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

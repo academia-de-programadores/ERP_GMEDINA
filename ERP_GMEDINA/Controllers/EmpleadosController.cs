@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
 {
     public class EmpleadosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Empleados
         public ActionResult Index()
@@ -72,9 +72,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
-
-
-
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
@@ -339,25 +336,29 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(1, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
         // GET: Empleados/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db = new ERP_GMEDINAEntities();
+                //Aqui codigo llenarTabla
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
+                    if (tbEmpleados == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tbEmpleados);
+                //aqui termina llenarTabla
             }
-            tbEmpleados tbEmpleados = db.tbEmpleados.Find(id);
-            //tbEmpleados.tbPersonas = db.tbPersonas.Find(tbEmpleados.per_Id);
-            if (tbEmpleados == null)
+            catch
             {
                 return HttpNotFound();
             }
-            return View(tbEmpleados);
         }
 
         // GET: Empleados/Create
@@ -462,7 +463,7 @@ namespace ERP_GMEDINA.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db!=null)
             {
                 db.Dispose();
             }

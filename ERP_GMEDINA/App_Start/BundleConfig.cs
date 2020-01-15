@@ -464,6 +464,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
             "~/Scripts/app/general/Habilidades/Admin.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos/Admin").Include(
+          "~/Scripts/app/general/Cargos/Admin.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
             "~/Scripts/app/general/Habilidades/Habilidades.js"));
 
