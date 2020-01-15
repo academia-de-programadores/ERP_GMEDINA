@@ -4,7 +4,7 @@
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      //console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
       console.log("No se pudo recuperar Script SerializeDate");
@@ -78,12 +78,13 @@ function DataAnnotations(ToF) {
     }
 }
 
-
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarFormaPago", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #fpa_Descripcion").val('');
-    $("#CrearFormaPago").modal();
+    $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     DataAnnotations(true);
 });
 
@@ -93,6 +94,7 @@ $('#btnCrearFormaPago').click(function () {
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
+        $("#Crear #AsteriscoFormaPago").css("display", "none");
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
@@ -112,13 +114,14 @@ $('#btnCrearFormaPago').click(function () {
                 cargarGridFormaPago();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Exito',
+                    title: 'Éxito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
     }
     else {
+        $("#Crear #AsteriscoFormaPago").css("display", "");
         // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
         DataAnnotations(false);
     }
@@ -148,7 +151,10 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                     $("#Editar #fpa_IdFormaPago").val(iter.fpa_IdFormaPago);
                     $("#Editar #fpa_Descripcion").val(iter.fpa_Descripcion);
                 });
-                $("#EditarFormaPago").modal();
+                $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -193,7 +199,7 @@ $("#btnConfirmarEditar2").click(function () {
                 cargarGridFormaPago();
                 $("#EditarFormaPago").modal('hide');
                 iziToast.success({
-                    title: 'Exito',
+                    title: 'Éxito',
                     message: '¡El registro se editó de forma exitosa!',
                 });
             }
@@ -272,6 +278,8 @@ $(document).on("click", "#btnInactivarFormaPago", function () {
 
 //OCULTAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnCerrarInactivar", function () {
+    //OCULTAR DATAANOTATIONS
+    DataAnnotations(true);
     //OCULTAR MODAL DE INACTIVACION
     $("#InactivarFormaPago").modal('hide');
     //MOSTRAR MODAL DE EDICION
@@ -300,7 +308,7 @@ $("#btnInactivarFormaPagoConfirm").click(function () {
             cargarGridFormaPago();
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
-                title: 'Exito',
+                title: 'Éxito',
                 message: '¡El registro se inactivó de forma exitosa!',
             });
         }
@@ -341,7 +349,7 @@ $("#btnActivarFormaPagoConfirm").click(function () {
             $("#ActivarFormaPago").modal('hide');
             //MENSAJE DE EXITO DE LA EDICIÓN
             iziToast.success({
-                title: 'Exito',
+                title: 'Éxito',
                 message: '¡El registro se activó de forma exitosa!',
             });
         }
@@ -355,12 +363,14 @@ $("#btnActivarFormaPagoConfirm").click(function () {
 //*****************CREAR******************//
 
 $("#IconCerrarCrear").click(function () {
+    $("#Crear #AsteriscoFormaPago").css("display", "none");
     $("#EditarFormaPago #Validation_descripcion").css("display", "none");
     $("#CrearFormaPago").modal("hide");
 });
 
 //OCULTAR MODAL DE CREACION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
 $("#btnCerrarCrear").click(function () {
+    $("#Crear #AsteriscoFormaPago").css("display", "none");
     $("#CrearFormaPago #Validation_descripcion").css("display", "none");
     $("#CrearFormaPago").modal("hide");
 });
@@ -374,6 +384,7 @@ $("#frmCreateFormaPago").submit(function (event) {
 
 //FUNCION: OCULTAR MODAL DE EDICION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
 $("#IconCerrarEditar").click(function () {
+    $("#Crear #AsteriscoFormaPagoEditar").css("display", "none");
     $("#EditarFormaPago #Validation_descripcion").css("display", "none");
     $("#EditarFormaPago").modal('hide');
 });
@@ -398,6 +409,7 @@ $(document).on("click", "#btnmodalInactivarFormaPago", function () {
 
 //BOTON PARA CERRAR EL MODAL DE INACTIVAR
 $("#btnCerrarInactivar").click(function () {
+    //DataAnnotations(true);
     $("#InactivarFormaPago").modal('hide');
 });
 
