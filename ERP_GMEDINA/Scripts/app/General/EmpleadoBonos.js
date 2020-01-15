@@ -371,6 +371,7 @@ $("#btnUpdateBonos").click(function () {
        
     }
     else {
+        $("#EditarEmpleadoBonos").modal('hide');
         $("#EditarEmpleadoBonosConfirmacion").modal();
         $("#Editar #Validation_descipcion5").css("display", "none");
         $("#Editar #Validation_descipcion6").css("display", "none");
@@ -412,7 +413,17 @@ $("#btnUpdateBonos2").click(function () {
         }
     });  
 });
+$("#btCerrarEditar").click(function () {
+    $("#EditarEmpleadoBonos").modal();
+    $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+})
 
+
+
+$("#btCerrarNo").click(function () {
+    $("#EditarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal();
+})
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos", function () {
     var ID = $(this).data('id');
@@ -577,5 +588,4 @@ $("#btnActivarRegistroBono").click(function () {
 });
 
 
-
-
+ 
