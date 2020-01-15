@@ -9,13 +9,14 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    Colaborador
+                    Colaborador<label class="text-danger" id="AsteriscoColaborador" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
+                    <label class="text-danger" id="Validation_descripcion0" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo colaborador requerido</label>
                 </div>
                 <div class="col-md-6">
-                    Razón
+                    Razón<label class="text-danger" id="AsteriscoRazon" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.adsu_RazonAdelanto, new { htmlAttributes = new { @class = "col-md-9", @name = "adsu_RazonAdelanto", @id = "adsu_RazonAdelanto", @autocomplete = "off" } })
-                    <div><label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Razón requerido.</label></div>
+                    <div><label class="text-danger" id="Validation_descripcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo razón requerido</label></div>
                 </div>
             </div>
         </div>
@@ -23,13 +24,15 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    Monto
+                    Monto<label class="text-danger" id="AsteriscoMonto" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.adsu_Monto, new { htmlAttributes = new { @class = "col-md-9", @type = "number", @name = "adsu_Monto", @id = "adsu_Monto", @autocomplete = "off" } })
                     <div>@Html.ValidationMessageFor(model => model.adsu_Monto, "", new { @class = "text-danger", @id = "Validation_descripcion3" })</div>
-                   <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Monto requerido.</label>
+                   <label class="text-danger" id="Validation_descripcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo monto requerido</label>
+                    <label class="text-danger" id="Validation_descripcion4" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">El campo monto debe ser mayor que cero</label>
+                    <span class="field-validation-valid text-danger" style="display: none" id="SueldoPromedioCrear"></span>
                 </div>
                 <div class="col-md-6">
-                    Fecha Adelanto
+                    Fecha Adelanto<label class="text-danger" id="AsteriscoFecha" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     <div class="input-group date">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
@@ -37,7 +40,7 @@
                         @Html.EditorFor(model => model.adsu_FechaAdelanto, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "adsu_FechaAdelanto", @id = "adsu_FechaAdelanto" } })
                     </div>
                     <div>
-                    <label class="text-danger" id="Validation_descripcion3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Fecha requerido.</label>
+                    <label class="text-danger" id="Validation_descripcion3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo fecha requerido</label>
                     </div>
                 </div>
             </div>
