@@ -170,7 +170,7 @@ function tablaEditar(ID) {
     id = ID;
     //debugger
     sessionStorage.setItem("IdPersona", ID);
-    window.location.href = "Create";
+    window.location.href = "/HistorialIncapacidades/Create";
 
     //_ajax(null,
     //    '/Personas/Edit/',
