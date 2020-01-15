@@ -1966,6 +1966,13 @@
   <ItemGroup>
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteAFPRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteComisionesRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteHorasExtrasRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteISRRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteSeptimoDiaRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\ReporteVacacionesRPT.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
