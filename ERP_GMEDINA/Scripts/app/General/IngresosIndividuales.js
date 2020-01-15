@@ -338,10 +338,14 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                debugger;
                 $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
                 $("#Editar #ini_Motivo").val(data.ini_Motivo);
                 $("#Editar #ini_Monto").val(data.ini_Monto);
-                $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
+
+                var CheckBox = data.ini_PagaSiempre;
+
+                $("#Editar #ini_PagaSiempre").val(CheckBox);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.emp_Id;
