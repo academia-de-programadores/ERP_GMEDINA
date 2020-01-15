@@ -54,8 +54,6 @@ namespace ERP_GMEDINA.Models
             this.tbHabilidadesPersona1 = new HashSet<tbHabilidadesPersona>();
             this.tbHabilidadesRequisicion = new HashSet<tbHabilidadesRequisicion>();
             this.tbHabilidadesRequisicion1 = new HashSet<tbHabilidadesRequisicion>();
-            this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
-            this.tbHistorialAmonestaciones1 = new HashSet<tbHistorialAmonestaciones>();
             this.tbHistorialAudienciaDescargo = new HashSet<tbHistorialAudienciaDescargo>();
             this.tbHistorialAudienciaDescargo1 = new HashSet<tbHistorialAudienciaDescargo>();
             this.tbHistorialCargos = new HashSet<tbHistorialCargos>();
@@ -130,6 +128,8 @@ namespace ERP_GMEDINA.Models
             this.tbFaseSeleccion1 = new HashSet<tbFaseSeleccion>();
             this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbSeleccionCandidatos1 = new HashSet<tbSeleccionCandidatos>();
+            this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
+            this.tbHistorialAmonestaciones1 = new HashSet<tbHistorialAmonestaciones>();
         }
     
         public int usu_Id { get; set; }
@@ -217,10 +217,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicion1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -369,5 +365,9 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones1 { get; set; }
     }
 }
