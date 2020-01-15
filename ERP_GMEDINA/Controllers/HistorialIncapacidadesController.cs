@@ -22,9 +22,51 @@ namespace ERP_GMEDINA.Controllers
 
         var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
             return View(tbHistorialIncapacidades.ToList());
+          
         }
 
 
+       
+        public ActionResult Create()
+        {
+            ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
+            ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+
+            return View();
+        }
+
+        // POST: tbHistorialIncapacidades/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
+        {
+            string msj = "";
+            if (tbHistorialIncapacidades.hinc_Diagnostico != "")
+            {
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_Dias, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        }
 
 
         public ActionResult llenarTabla()
@@ -126,6 +168,44 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+
+        // GET: HistorialIncapacidades/Details/5
+        public ActionResult Detallesempleados(int? id)
+        {
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                tbEmpleados tbEmpleados1 = null;
+
+                try
+                {
+                    tbEmpleados1 = db.tbEmpleados.Find(id);
+                    if (tbEmpleados1 == null || !tbEmpleados1.emp_Estado)
+                    {
+                        return HttpNotFound();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    return HttpNotFound();
+                }
+                Session["id"] = id;
+                var empleados = new tbEmpleados
+
+                {
+                    tbPersonas = new tbPersonas { per_Identidad = IsNull(tbEmpleados1.tbPersonas).per_Identidad, per_Nombres = IsNull(tbEmpleados1.tbPersonas).per_Nombres + " " + IsNull(tbEmpleados1.tbPersonas).per_Apellidos }
+                 
+                
+                };
+                return Json(empleados, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         // GET: HistorialIncapacidades/Create
         //public ActionResult Create()
         //{
@@ -139,47 +219,47 @@ namespace ERP_GMEDINA.Controllers
         // POST: HistorialIncapacidades/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
-        {
-            string msj = "";
-            if (tbHistorialIncapacidades.hinc_Diagnostico != "")
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id,
-                                                                            tbHistorialIncapacidades.ticn_Id,
-                                                                            tbHistorialIncapacidades.hinc_Dias,
-                                                                            tbHistorialIncapacidades.hinc_CentroMedico,
-                                                                            tbHistorialIncapacidades.hinc_Doctor,
-                                                                            tbHistorialIncapacidades.hinc_Diagnostico,
-                                                                            tbHistorialIncapacidades.hinc_FechaInicio,
-                                                                            tbHistorialIncapacidades.hinc_FechaFin,
-                                                                            1,
-                                                                            DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-            }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
+        //{
+        //    string msj = "";
+        //    if (tbHistorialIncapacidades.hinc_Diagnostico != "")
+        //    {
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id,
+        //                                                                    tbHistorialIncapacidades.ticn_Id,
+        //                                                                    tbHistorialIncapacidades.hinc_Dias,
+        //                                                                    tbHistorialIncapacidades.hinc_CentroMedico,
+        //                                                                    tbHistorialIncapacidades.hinc_Doctor,
+        //                                                                    tbHistorialIncapacidades.hinc_Diagnostico,
+        //                                                                    tbHistorialIncapacidades.hinc_FechaInicio,
+        //                                                                    tbHistorialIncapacidades.hinc_FechaFin,
+        //                                                                    1,
+        //                                                                    DateTime.Now);
+        //            foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
+        //            {
+        //                msj = item.MensajeError + " ";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
 
 
         // GET: HistorialIncapacidades/Edit/5
-      
-         public ActionResult Edit(int? ID)
+
+        public ActionResult Edit(int? ID)
         {
             if (ID == null)
             {
@@ -216,6 +296,31 @@ namespace ERP_GMEDINA.Controllers
             return Json(Incapacidades, JsonRequestBehavior.AllowGet);
         }
 
+
+        private tbPersonas IsNull(tbPersonas valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbPersonas { per_Identidad = "" };
+            }
+        }
+
+        private tbPersonas IsNullnombre(tbPersonas valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbPersonas { per_Nombres = "" };
+            }
+        }
+
         private tbTipoIncapacidades IsNull(tbTipoIncapacidades valor)
         {
            if(valor != null)
@@ -248,12 +353,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
             string msj = "";
-            if (tbHistorialIncapacidades.hinc_Id != 0 && tbHistorialIncapacidades.hinc_RazonInactivo != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+            if (tbHistorialIncapacidades.hinc_Id != 0 )
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, tbHistorialIncapacidades.hinc_RazonInactivo, 1, DateTime.Now);
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, RazonInactivo, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

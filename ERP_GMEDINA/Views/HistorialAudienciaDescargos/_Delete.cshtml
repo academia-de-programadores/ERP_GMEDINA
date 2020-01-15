@@ -9,13 +9,18 @@
             <div class="modal-body">
 
                 <div class="blockquote">
-
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
+{
+    <div hidden="hidden" class="col-md-8">
+        <input id="aude_Id" name="aude_Id" type="text" value="">
+    </div>
                     <p>
-
+                      
                         Esta accion puede tener repercuciones en otras secciones del sistema
                         (Si sucede un error,consulte al administrador)
 
                     </p>
+}
                 </div>
             </div>
             <div class="modal-footer">

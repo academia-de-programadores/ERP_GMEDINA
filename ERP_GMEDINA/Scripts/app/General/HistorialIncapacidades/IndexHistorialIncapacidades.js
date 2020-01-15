@@ -3,7 +3,7 @@
 function format(obj) {
 
 
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="tablaEditar('+idEmpleado+')" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Incapacidad  </th>'
@@ -23,7 +23,7 @@ function format(obj) {
                 + '<td>' + index.hinc_Diagnostico + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
         '</table>'
 
@@ -31,6 +31,7 @@ function format(obj) {
     });
     return div + '</div></div>';
 }
+
 
 
 
@@ -47,7 +48,9 @@ function llenarTabla() {
            tabla.clear();
            tabla.draw();
            $.each(Lista, function (index, value) {
+               empleado = value.Empleado
                tabla.row.add({
+                   
                    Id: value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
@@ -99,14 +102,16 @@ function Llamarmodaldelete(ID) {
 
 }
 
+
+
 function Llamarmodaldetalle(ID) {
-    debugger
+    //debugger
     var modalnuevo = $("#ModalDetalles");
     _ajax({ ID: parseInt(ID) },
         '/HistorialIncapacidades/Edit/',
         'GET',
         function (obj) {
-
+            
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
@@ -120,7 +125,7 @@ function Llamarmodaldetalle(ID) {
                 //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
                 //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
-                //$('#ModalDetalles').modal('show');
+                $('#ModalDetalles').modal('show');
 
             }
         });
@@ -153,47 +158,63 @@ function Llamarmodaldetalle(ID) {
 
 
 
-function Llamarmodalcreate() {
+//function Llamarmodalcreate() {
 
-    var modalnuevo = $("#ModalNuevo");
-    $("#ModalNuevo").find("#emp_Id").val(idEmpleado);
-    modalnuevo.modal('show');
+//    var modalnuevo = $("#ModalNuevo");
+//    $("#ModalNuevo").find("#emp_Id").val(idEmpleado);
+//    modalnuevo.modal('show');
+//}
+
+
+function tablaEditar(ID) {
+    id = ID;
+    //debugger
+    sessionStorage.setItem("IdPersona", ID);
+    window.location.href = "Create";
+
+    //_ajax(null,
+    //    '/Personas/Edit/',
+    //    'GET',
+    //    function (obj) {
+    //        if (obj != "-1" && obj != "-2" && obj != "-3") {
+    //        }
+    //    });
 }
 
 
 
+//$("#btnGuardar").click(function () {
+//    var data = $("#FormNuevo").serializeArray();
+//    data = serializar(data);
+//    if (data != null) {
+//        data = JSON.stringify({ tbHistorialIncapacidades: data });
+//        _ajax(data,
+//            '/HistorialIncapacidades/Create',
+//            'POST',
+//            function (obj) {
+//                if (obj != "-1" && obj != "-2" && obj != "-3") {
+//                    CierraPopups();
+//                    llenarTabla();
+//                    LimpiarControles(["emp_Id", "ticn_Id", "hinc_Dias", "hinc_CentroMedico", "hinc_Doctor", "hinc_Diagnostico", "hinc_FechaInicio", "hinc_FechaFin"]);
+//                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+//                } else {
+//                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+//                }
+//            });
+//    } else {
+//        MsgError("Error", "por favor llene todas las cajas de texto");
+//    }
+//});
 
 
 
 
 
-
-$("#btnGuardar").click(function () {
-    var data = $("#FormNuevo").serializeArray();
-    data = serializar(data);
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialIncapacidades: data });
-        _ajax(data,
-            '/HistorialIncapacidades/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["emp_Id", "ticn_Id", "hinc_Dias", "hinc_CentroMedico", "hinc_Doctor", "hinc_Diagnostico", "hinc_FechaInicio", "hinc_FechaFin"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
-                } else {
-                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
-    }
-});
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
+    data.hinc_Id = id;
     debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialIncapacidades: data });
@@ -203,7 +224,7 @@ $("#InActivar").click(function () {
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
-                    debugger
+                    //debugger
                     llenarTabla();
                     LimpiarControles(["hinc_Id", "hinc_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se ah Inactivado el registro");
@@ -215,5 +236,7 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+
 
 

@@ -149,6 +149,7 @@ function Llamarmodaldelete(ID) {
 
     var modalnuevo = $("#ModalInhabilitar");
     $("#ModalInhabilitar").find("#aude_Id").val(ID);
+    idEditar = ID;
     modalnuevo.modal('show');
 }
 
@@ -156,6 +157,7 @@ function Llamarmodaldelete(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
+    //data = data.aude_Id.idEditar;
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
         _ajax(data,
