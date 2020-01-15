@@ -137,14 +137,14 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
 });
 
 $("#btnUpdateIngresos").click(function () {
-
+    debugger;
     //descedit es la variable que uso para validar si esta vacio o no
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
-        $("#EditarCatalogoIngresosConfirmacion").modal();
         $("#Editar #validareditar").css("display", "none");
+        $("#EditarCatalogoIngresosConfirmacion").modal();
     }
     else {
         //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
@@ -161,7 +161,7 @@ $("#btnUpdateIngresos").click(function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarIngresos").click(function () {
-
+    debugger;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoIngresos").serializeArray();
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
@@ -325,11 +325,6 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
     $("#frmCatalogoIngresosCreate").modal('hide');
 });
-
-
-
-
-
 
 
 //#region CREAR
