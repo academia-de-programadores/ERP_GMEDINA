@@ -15,7 +15,8 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Número")]
         public int cin_IdIngreso { get; set; }
 
-        [Required(ErrorMessage = "Campo {0} requerido.")]
+		[StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
+		[Required(ErrorMessage = "Campo {0} requerido.")]
         [Display(Name = "Descripción Ingresos")]
         public string cin_DescripcionIngreso { get; set; }
 

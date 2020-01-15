@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Forma de Pago")]
         [Required(ErrorMessage = "El campo Forma de Pago es requerido")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
+        //[RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "No se permiten datos numericos")]
         public string fpa_Descripcion { get; set; }
 
         [Display(Name = "Creado por")]
