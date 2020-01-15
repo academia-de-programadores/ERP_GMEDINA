@@ -37,39 +37,29 @@ function cargarGridFormaPago() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaFormaPago = data, template = '';
+            var ListaFormaPago = data;
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblFormaPago').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaFormaPago.length; i++) {
-
                 //variable para verificar el estado del registro
                 var estadoRegistro = ListaFormaPago[i].fpa_Activo == false ? 'Inactivo' : 'Activo';
-
                 //variable boton detalles
                 var botonDetalles = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetallesFormaPago">Detalles</button>' : '';
-
                 //variable boton editar
                 var botonEditar = ListaFormaPago[i].fpa_Activo == true ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-default btn-xs" id="btnEditarFormaPago">Editar</button>' : '';
-
                 //variable donde está el boton activar
                 var botonActivar = ListaFormaPago[i].fpa_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarFormaPago">Activar</button>' : '' : '';
-
-
-                console.log(estadoRegistro);
-
-                template += '<tr data-id = "' + ListaFormaPago[i].fpa_IdFormaPago + '">' +
-                    '<td>' + ListaFormaPago[i].fpa_IdFormaPago + '</td>' +
-                    '<td>' + ListaFormaPago[i].fpa_Descripcion + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                    '<td>' +
-                    botonDetalles +
-                    botonEditar +
-                    botonActivar
-                    '</td>' +
-                    '</tr>';
+                //AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
+                $('#tblFormaPago').dataTable().fnAddData([
+                     ListaFormaPago[i].fpa_IdFormaPago,
+                     ListaFormaPago[i].fpa_Descripcion,
+                     estadoRegistro,
+                     botonDetalles + botonEditar + botonActivar]
+                 );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //APLICAR EL MAX-WIDTH DEL BODY
             FullBody();
-            $('#tbodyFormaPago').html(template);
         });
 }
 
@@ -157,6 +147,7 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 $("#btnUpdateFormaPago").click(function () {
     var Descripcion = $("#Editar #fpa_Descripcion").val();
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
+        $("#EditarFormaPago").modal('hide');
         $("#ConfirmarEdicion").modal();
     }
     else {
@@ -239,6 +230,14 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnDetallesFormaPago", funct
         });
 });
 
+//CERRAR MODAL DE CONFIRMACIÓN DE EDICION
+$(document).on("click", "#btnCerrarConfirmarEditar", function () {
+    //OCULTAR MODAL DE CONFIRMACIÓN DE EDICION
+    $("#ConfirmarEdicion").modal('hide');
+    //MOSTRAR MODAL DE EDICION
+    $("#EditarFormaPago").modal();
+});
+
 //
 //INACTIVAR
 
@@ -261,7 +260,7 @@ $(document).on("click", "#btnCerrarInactivar", function () {
 //CONFORMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarFormaPagoConfirm").click(function () {
     //SE OCULTA EL MODAL DE EDICION
-    $("#EditarFormaPago").modal('hide');
+    $("#InactivarFormaPago").modal('hide');
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/FormaPago/Inactivar/" + IDInactivar,

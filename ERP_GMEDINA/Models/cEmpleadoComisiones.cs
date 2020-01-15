@@ -52,13 +52,13 @@ namespace ERP_GMEDINA.Models
 
 
         [Display(Name = "Porcentaje Comision")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo Porcentaje Comision Requerido")]
         [Range(0, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
         public decimal cc_PorcentajeComision { get; set; }
 
 
         [Display(Name = "Total Venta")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo Total Venta Requerido")]
         [Range(0, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]   
         public decimal cc_TotalVenta { get; set; }
 
