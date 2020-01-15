@@ -196,15 +196,9 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 
 
 $("#btnUpdatePeriodo").click(function () {
-<<<<<<< HEAD
-    if ($("#Crear #peri_DescripPeriodo").val() != '') {
-=======
     if ($("#Editar #peri_DescripPeriodo").val() != '') {
->>>>>>> 42de8eaba6b8a63fe5fba02ee6ecc9c1cf477b5f
         $("#EditarPeriodo").modal('hide');
         $("#ConfirmarEdicion").modal();
-    } else {
-        DataAnnotations(false);
     }
     else {
         //MOSTRAR DATAANNOTATION
@@ -225,20 +219,9 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
-<<<<<<< HEAD
 
     DataAnnotations(false);
     if ($("#Editar #peri_DescripPeriodo").val() != "") {
-=======
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    console.log("Hola");
-    //   $("#EditarPeriodo #Validation_descripcion").css("display", "block");
-
-    var data = $("#frmEditPeriodo").serializeArray();
-    //var descedit = $("#Editar #peri_DescripPeriodo").val();
-
-    //if ($("#Editar #peri_DescripPeriodo").val() != "") {
->>>>>>> 42de8eaba6b8a63fe5fba02ee6ecc9c1cf477b5f
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditPeriodo").serializeArray();
@@ -265,7 +248,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                 });
             }
         });
-<<<<<<< HEAD
     }
     else {
         //MOSTRAR DATAANNOTATION
@@ -273,22 +255,11 @@ $(document).on("click", "#btnConfirmarEditar", function () {
         //OCULTAR EL SCROLLVIEW
         $('body').css("overflow", "hidden");
     }
-=======
-    //}
-    //else {
-    //    //MOSTRAR DATAANNOTATION
-    //    $("#frmEditPeriodo #Edit_Validation_descripcion").css("display", "block");
-    //    //OCULTAR EL SCROLLVIEW
-    //    $('body').css("overflow", "hidden");
-    //}
->>>>>>> 42de8eaba6b8a63fe5fba02ee6ecc9c1cf477b5f
 });
 
 
 
 
-<<<<<<< HEAD
-=======
 //FUNCION: DETALLES DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 
 $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function () {
@@ -329,7 +300,6 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
             }
         });
 });
->>>>>>> 42de8eaba6b8a63fe5fba02ee6ecc9c1cf477b5f
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPeriodo", function () {
