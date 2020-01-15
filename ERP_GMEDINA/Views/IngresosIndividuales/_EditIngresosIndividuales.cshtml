@@ -3,7 +3,6 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditIngresoIndividual" }))
 {
     <div class="modal-body" id="Editar">
-        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
 
         <div class="form-horizontal">
@@ -45,7 +44,7 @@
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
                 <div class="col-md-8">
-                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" value="ini_PagaSiempre" />
+                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" checked="@Model.ini_PagaSiempre" />
                 </div>
             </div>
 
@@ -61,7 +60,6 @@
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarIngresoIndividual" }))
 {
-    @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
 }
 
