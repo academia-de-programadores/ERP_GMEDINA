@@ -41,22 +41,33 @@ function cargarGridISR() {
                 });
             }
             var ListaISR = data, template = '';
+            //LIMPIAR LA DATA DEL DATATABLE
+            $('#tblISR').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaISR.length; i++) {
-                template += '<tr data-id = "' + ListaISR[i].isr_Id + '">' +
-                    '<td>' + ListaISR[i].isr_RangoInicial + '</td>' +
-                    '<td>' + ListaISR[i].isr_RangoFinal + '</td>' +
-                    '<td>' + ListaISR[i].isr_Porcentaje + '</td>' +
-                    '<td>' + ListaISR[i].tde_Descripcion + '</td>' +
-                    '<td>' +
-                   
-                    '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalle</button>' +
-                     '<button data-id = "' + ListaISR[i].isr_Id + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' +
-                    '</td>' +
-                    '</tr>';
+            for (var i = 0; i < ListaISR.length; i++) {                
+
+                //variable para verificar el estado del registro
+                var estadoRegistro = ListaISR[i].isr_Activo == false ? 'Inactivo' : 'Activo'
+
+                //variable boton detalles
+                var botonDetalles = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleISR">Detalles</button>' : '';
+
+                //variable boton editar
+                var botonEditar = ListaISR[i].isr_Activo == true ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-default btn-xs"  id="btnModalEditarISR">Editar</button>' : '';
+
+                //variable boton activar
+                var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISR">Activar</button>' : '' : '';
+
+                //AGREGAR EL ROW AL DATATABLE
+                $('#tblAcumuladosISR').dataTable().fnAddData([
+                    ListaISR[i].isr_RangoInicial,
+                    ListaISR[i].isr_RangoFinal,
+                    ListaISR[i].isr_Porcentaje,
+                    ListaISR[i].tde_Descripcion,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar
+                ]);
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyISR').html(template);
         });
     FullBody();
 }

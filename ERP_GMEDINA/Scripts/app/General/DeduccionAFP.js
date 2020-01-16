@@ -385,7 +385,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                 $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
-                
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -627,14 +627,14 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
                 message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
-        
+
         else {
             mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarDeduccionAFP").modal('hide');
-            
+
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',

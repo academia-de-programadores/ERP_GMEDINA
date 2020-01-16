@@ -137,20 +137,11 @@ $("#btnCerrarCrear").click(function () {
     $("#validation3").css("display", "none");
     $("#validation4").css("display", "none");
     $("#validation5").css("display", "none");
-    $("#AgregarAFP").modal('hide');
-});
-
-$("#btnIconCerrar").click(function () {
-    $("#afp_Descripcion").val('');
-    $("#afp_AporteMinimoLps").val('');
-    $("#afp_InteresAporte").val('');
-    $("#afp_InteresAnual").val('');
-    $("#Crear #tde_IdTipoDedu").val("0");
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#validation4").css("display", "none");
-    $("#validation5").css("display", "none");
+    $("#Crear #ast1").css("color", "black");
+    $("#Crear #ast2").css("color", "black");
+    $("#Crear #ast3").css("color", "black");
+    $("#Crear #ast4").css("color", "black");
+    $("#Crear #ast5").css("color", "black");
     $("#AgregarAFP").modal('hide');
 });
 
@@ -206,6 +197,9 @@ $(document).on("click", "#btnAgregarAFP", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
+    debugger;
+    //Para que no entre directamente a hacer la peticion o la acción al servidor
+    var TOF = true;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
     var val1 = $("#Crear #afp_Descripcion").val();
@@ -214,80 +208,128 @@ $('#btnCreateRegistroAFP').click(function () {
     var val4 = $("#Crear #afp_InteresAnual").val();
     var val5 = $("#Crear #tde_IdTipoDedu").val();
 
-    if (vale1 == "" || vale1 == null) {
-        $("#Editar #validatione1").css("display", "");
+    if (val1 == "" || val1 == null) {
+        $("#Crear #validation1").css("display", "");
+        $("#Crear #ast1").css("color", "red");
+        TOF = false;
     }
-    else if (vale2 != "" || vale2 != null || vale2 != undefined) {
-        if (expreg.test(vale2)) {
-            if (vale3 != "" || vale3 != null || vale3 != undefined) {
-                if (expreg.test(vale3)) {
-                    if (vale4 != "" || vale4 != null || vale4 != undefined) {
-                        if (expreg.test(vale4)) {
-                            $("#EditarAFP").modal('hide');
-                            $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-                            $("html, body").css("overflow", "hidden");
-                            $("html, body").css("overflow", "scroll");
-                        }
-                        else {
-                            $("#Editar #validatione4").css("display", "");
-                        }
-                    }
-                }
-                else {
-                    $("#Editar #validatione3").css("display", "");
-                }
+    else{
+        $("#Crear #validation1").css("display", "none");
+        $("#Crear #ast1").css("color", "black");
+    }
+    //--
+    if (val2 != "" || val2 != null || val2 != undefined) {
+        $("#Crear #validation2").css("display", "none");
+        $("#Crear #ast2").css("color", "black");
+    }
+    else {
+        $("#Crear #validation2").css("display", "");
+        $("#Crear #ast2").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(val2)) {
+        $("#Crear #validation2").css("display", "none");
+        $("#Crear #ast2").css("color", "black");
+    }
+    else {
+        $("#Crear #validation2").css("display", "");
+        $("#Crear #ast2").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (val3 != "" || val3 != null || val3 != undefined) {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(val3)) {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (val4 != "" || val4 != null || val4 != undefined) {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(val4)) {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (val5 == "" || val5 == 0 || val5 == "0" || val5 == null) {
+        $("#Crear #validation5").css("display", "");
+        $("#Crear #ast5").css("color", "red");
+        TOF = false;
+    }
+    else {
+        $("#Crear #validation5").css("display", "none");
+        $("#Crear #ast5").css("color", "black");
+    }
+
+    if (TOF) {
+        mostrarCargandoCrear();
+
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmCreateAFP").serializeArray();
+
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/AFP/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+
+                cargarGridDeducciones();
+
+                $("#Crear #afp_Descripcion").val('');
+                $("#Crear #afp_AporteMinimoLps").val('');
+                $("#Crear #afp_InteresAporte").val('');
+                $("#Crear #afp_InteresAnual").val('');
+                $("#Crear #tde_IdTipoDedu").val("0");
+
+                //CERRAR EL MODAL DE AGREGAR
+                $("#AgregarAFP").modal('hide');
+
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
             }
-        }
-        else {
-            $("#Editar #validatione2").css("display", "");
-        }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+
+            ocultarCargandoCrear();
+        });
     }
 
-
-            mostrarCargandoCrear();
-
-
-            //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-            var data = $("#frmCreateAFP").serializeArray();
-
-            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-            $.ajax({
-                url: "/AFP/Create",
-                method: "POST",
-                data: data
-            }).done(function (data) {
-
-                //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-                if (data != "error") {
-
-                    cargarGridDeducciones();
-
-                    $("#Crear #afp_Descripcion").val('');
-                    $("#Crear #afp_AporteMinimoLps").val('');
-                    $("#Crear #afp_InteresAporte").val('');
-                    $("#Crear #afp_InteresAnual").val('');
-                    $("#Crear #tde_IdTipoDedu").val("0");
-
-                    //CERRAR EL MODAL DE AGREGAR
-                    $("#AgregarAFP").modal('hide');
-
-                    // Mensaje de exito cuando un registro se ha guardado bien
-                    iziToast.success({
-                        title: 'Exito',
-                        message: '¡El registro se agregó de forma exitosa!',
-                    });
-                }
-                else {
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡No se guardó el registro, contacte al administrador!',
-                    });
-                }
-
-                ocultarCargandoCrear();
-            });
-        
-
+    
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateAFP").submit(function (e) {
         return false;
@@ -295,27 +337,23 @@ $('#btnCreateRegistroAFP').click(function () {
 
 });
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#EditarAFP").modal('hide');
-});
-
-$("#btnIconCerrare").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#EditarAFP").modal('hide');
-});
-
 
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
+
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    $("#validationes1").css("display", "none");
+    $("#validationes2").css("display", "none");
+    $("#validationes3").css("display", "none");
+    $("#validationes4").css("display", "none");
+    $("#Editar #aste1").css("color", "black");
+    $("#Editar #aste2").css("color", "black");
+    $("#Editar #aste3").css("color", "black");
+    $("#Editar #aste4").css("color", "black");
+    $("#EditarAFP").modal('hide');
+});
 
 const btnEditar = $('#btnEditAFP')
 
@@ -371,7 +409,6 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
                             $("#Editar #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesAFP").modal('hide');
                 $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
@@ -387,40 +424,83 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
 });
 
 $("#btnEditAFP").click(function () {
+    var TOF = true;
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
     var vale1 = $("#Editar #afp_Descripcion").val();
     var vale2 = $("#Editar #afp_AporteMinimoLps").val();
     var vale3 = $("#Editar #afp_InteresAporte").val();
     var vale4 = $("#Editar #afp_InteresAnual").val();
-
+    debugger;
     if (vale1 == "" || vale1 == null) {
-        $("#Editar #validatione1").css("display", "");
+        $("#validationes1").css("display", "");
+        $("#Editar #aste1").css("color", "red");
+        TOF = false;
     }
-    else if (vale2 != "" || vale2 != null || vale2 != undefined) {
-        if (expreg.test(vale2)) {
-            if (vale3 != "" || vale3 != null || vale3 != undefined) {
-                if (expreg.test(vale3)) {
-                    if (vale4 != "" || vale4 != null || vale4 != undefined) {
-                        if (expreg.test(vale4)) {
-                            $("#EditarAFP").modal('hide');
-                            $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
-                            $("html, body").css("overflow", "hidden");
-                            $("html, body").css("overflow", "scroll");
-                        }
-                        else {
-                            $("#Editar #validatione4").css("display", "");
-                        }
-                    }
-                }
-                else {
-                    $("#Editar #validatione3").css("display", "");
-                }
-            }
-        }
-        else {
-            $("#Editar #validatione2").css("display", "");
-        }
+    else{
+        $("#validationes1").css("display", "none");
+        $("#Editar #aste1").css("color", "black");
+    }
+    //--
+    if (vale2 != "" || vale2 != null || vale2 != undefined) {
+        $("#Editar #aste2").css("color", "black");
+    }
+    else {
+        $("#validationes2").css("display", "");
+        $("#Editar #aste2").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(vale2)) {
+        $("#validationes2").css("display", "none");
+        $("#Editar #aste2").css("color", "black");
+    }
+    else {
+        $("#validationes2").css("display", "");
+        $("#Editar #aste2").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (vale3 != "" || vale3 != null || vale3 != undefined) {
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(vale3)) {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#validationes3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (vale4 != "" || vale4 != null || vale4 != undefined) {
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#validationes4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+        TOF = false;
+    }
+    if (expreg.test(vale4)) {
+        $("#validationes4").css("display", "none");
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#validationes4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (TOF) {
+        $("#EditarAFP").modal('hide');
+        $("#EditarAFPConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
 
     $("#EditarAFP").submit(function (e) {
@@ -435,49 +515,9 @@ $(document).on("click", "#btnRegresar", function () {
     $("#EditarAFPConfirmacion").modal('hide');
 });
 
-$(document).on("click", "#btnReg", function () {
-    $("#EditarAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
-    $("#EditarAFPConfirmacion").modal('hide');
-});
-
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditAFPConfirmar").click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var vale2 = $("#Editar #afp_Descripcion").val();
-    var vale3 = $("#Editar #afp_AporteMinimoLps").val();
-    var vale4 = $("#Editar #afp_InteresAporte").val();
-    var vale5 = $("#Editar #afp_InteresAnual").val();
-
-
-    if (vale2 == "") {
-        $("#Editar #validatione1").css("display", "");
-    }
-    else {
-        $("#Editar #validatione1").css("display", "none");
-    }
-
-    if (vale3 == "" || vale3 == null || vale3 == undefined) {
-        $("#Editar #validatione2").css("display", "");
-    }
-    else {
-        $("#Editar #validatione2").css("display", "none");
-    }
-
-    if (vale4 == "" || vale4 == null || vale4 == undefined) {
-        $("#Editar #validatione3").css("display", "");
-    }
-    else {
-        $("#Editar #validatione3").css("display", "none");
-    }
-    if (vale5 == "" || vale5 == null || vale5 == undefined) {
-        $("#Editar #validatione4").css("display", "");
-    }
-    else {
-        $("#Editar #validatione4").css("display", "none");
-    }
     mostrarCargandoEditar();
 
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -521,6 +561,7 @@ $("#btnEditAFPConfirmar").click(function () {
 
 
 
+
 //Detalles//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
@@ -561,7 +602,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
                 })
-                    .done(function (data) {
+                .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();
                         //LLENAR EL DROPDOWNLIST

@@ -52,6 +52,7 @@ namespace ERP_GMEDINA.Controllers
                                               tbTechosDeducciones.tddu_PorcentajeEmpresa,
                                               tbTechosDeducciones.tddu_Techo,
                                               tbTechosDeducciones.cde_IdDeducciones,
+                                              tbTechosDeducciones.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
 
                                               tbTechosDeducciones.tddu_UsuarioCrea,
                                               UsuCrea = tbTechosDeducciones.tbUsuario.usu_NombreUsuario,

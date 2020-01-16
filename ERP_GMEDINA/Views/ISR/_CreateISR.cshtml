@@ -2,43 +2,61 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmISRCreate" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.isr_Id)
-        @Html.HiddenFor(model => model.isr_FechaCrea)
-        @Html.HiddenFor(model => model.isr_UsuarioCrea)
-        <div class="form-group">
-            @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger" })
+    <div class="modal-body" id="Crear">
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.isr_Id)
+            @Html.HiddenFor(model => model.isr_FechaCrea)
+            @Html.HiddenFor(model => model.isr_UsuarioCrea)
+
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-        @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-10">
-                <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-        <input type="submit" class="btn btn-primary pull-left" id="btnCreateISR" value="Guardar">
+        <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
+        <input type="submit" value="Guardar" id="btnCreateISR" class="btn btn-primary pull-left" />
     </div>
 }

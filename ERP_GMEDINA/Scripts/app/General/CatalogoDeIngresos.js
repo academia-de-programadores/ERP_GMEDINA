@@ -31,7 +31,7 @@ function cargarGridIngresos() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -89,14 +89,16 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                 $("#Detallar #cin_FechaModifica").val(FechaModifica);
-                $("#DetailCatalogoIngresos").modal();
+                $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
 
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -120,6 +122,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
             if (data) {
                 $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
+                $('#asteriscoEdit').removeClass('text-danger');
                 $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
@@ -129,30 +132,47 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
 });
 
+$('#frmCatalogoIngresosCreate #cin_DescripcionIngreso').keyup(function(){
+    if($(this)
+    .val()
+    .trim() != ''){
+        $('#asteriscoCreate').removeClass('text-danger');
+    }
+});
+
+$('#Editar #cin_DescripcionIngreso').keyup(function(){
+    if($(this)
+    .val()
+    .trim() != ''){
+        $('#validareditar').hide();
+        $('#asteriscoEdit').removeClass('text-danger');
+    }
+});
+
 $("#btnUpdateIngresos").click(function () {
-    debugger;
     //descedit es la variable que uso para validar si esta vacio o no
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
         $("#Editar #validareditar").css("display", "none");
-        $("#EditarCatalogoIngresosConfirmacion").modal();
+        $("#EditarCatalogoIngresosConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
     else {
-        //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
-        $("#Editar #validareditar").css("display", "");
-        $("#Editar #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
+        $("#descripcioncrear").css("display", "");
+        $("#Crear #cin_DescripcionIngreso").focus();
+
+        $('#validareditar').html('Campo Descripción Ingresos requerido');
+        $('#validareditar').show();
+        $('#asteriscoEdit').addClass('text-danger');
     }
 });
 
@@ -186,9 +206,14 @@ $("#btnEditarIngresos").click(function () {
                 cargarGridIngresos();
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
                 ocultarcargandoEditar();
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se editó el registro, contacte al administrador',
+                });
             }
 
         });
@@ -218,13 +243,17 @@ function ocultarcargandoEditar() {
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
-    $("#InactivarCatalogoIngresos").modal();
+    $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //Modal editar despues de No Inactivar
 $("#btnNoInactivar").click(function () {
     $("#validareditar").css("display", "none");
-    $("#EditarCatalogoIngresos").modal();
+    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#InactivarCatalogoIngresos").modal('hide');
 });
 
@@ -243,7 +272,7 @@ $("#btnInactivarIngresos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -253,7 +282,7 @@ $("#btnInactivarIngresos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -266,6 +295,7 @@ $("#btnInactivarIngresos").click(function () {
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cin_DescripcionIngreso").val('');
+    $('#asteriscoCreate').removeClass('text-danger');
     $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
@@ -301,24 +331,22 @@ $('#btnCreateRegistroIngresos').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue guardado de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
                 ocultarCargandoCrear()
                 $("#Crear #cin_DescripcionIngreso").val('');
-
-
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se guardó el registro, contacte al administrador',
+                });
             }
-
         });
     }
     else {
         $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
-
+        $('#asteriscoCreate').addClass('text-danger');
     }
 });
 
@@ -390,7 +418,9 @@ function spinner() {
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
     IDActivar = $(this).data('id');
-    $("#ActivarCatalogoIngresos").modal();
+    $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 
@@ -405,7 +435,7 @@ $("#btnActivarIngreso").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -416,7 +446,7 @@ $("#btnActivarIngreso").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });

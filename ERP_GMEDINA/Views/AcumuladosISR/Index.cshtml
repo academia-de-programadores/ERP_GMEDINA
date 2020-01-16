@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>Listado de acumulados ISR</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarAcumuladosISR">Registrar acumulado ISR</button></li>
+                        <button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarAcumuladosISR">Registrar acumulado ISR</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -89,13 +89,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar acumulado ISR</h4>
-            </div>
-            
+            </div>            
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())
-            
+                @Html.Partial("_EditTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())            
         </div>
     </div>
 </div>
@@ -104,12 +101,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Crear acumulado ISR</h4>
-            </div>
-           
-                @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())
-           
+            </div>           
+                @Html.Partial("_CreateTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())           
         </div>
     </div>
 </div>
@@ -119,7 +113,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Detalle acumulado ISR</h4>
             </div>
             <div class="modal-body" id="Detalles">
@@ -137,7 +130,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -156,7 +148,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
