@@ -40,7 +40,7 @@
                             <label class="text-danger" id="Validation_descipcion5" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line" } })
+                            @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger", @id = "Validation_descipcion6" })
                         </div>
                     </div>

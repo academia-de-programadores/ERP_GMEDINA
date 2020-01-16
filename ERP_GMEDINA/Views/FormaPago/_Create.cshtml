@@ -9,15 +9,23 @@
                     @Html.HiddenFor(model => model.fpa_UsuarioCrea)
                     @Html.HiddenFor(model => model.fpa_FechaCrea)
                     <div class="form-group">
-
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                Descripción<label class="text-danger" id="AsteriscoFormaPago" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                                @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label" })
+                            <label class="" id="AsteriscoFormaPago">*</label>                            
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                         </div>
-                    </div>
+                    </div> 
+                    @*<div class="form-group">
+                            <div class="input-group">
+                            @Html.LabelFor(model => model.fpa_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            
+                            @Html.EditorFor(model => model.fpa_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fpa_Descripcion, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    </div>*@
                 </div>
             </div>
             <div class="modal-footer">

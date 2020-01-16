@@ -41,7 +41,7 @@ $('.cargarPlanilla').click(function () {
                 $('#Cargando').css('display', 'none');
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
