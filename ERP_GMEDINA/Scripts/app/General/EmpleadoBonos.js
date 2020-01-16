@@ -582,8 +582,6 @@ $("#btnInactivarRegistroBono").click(function () {
 
 //VOLVER AL MODAL DE EDITAR CERRANDO EL MODAL DE INACTIVAR CON EL BOTON 'CERRAR'
 $("#btCerrarNo").click(function () {
-    $("#Editar #AsteriscoMonto").removeClass("text-danger");
-    $("#Editar #Validation_descipcion6").css("display", "none");
     //document.getElementById("btCerrarNo").disabled = true;
     $("#EditarEmpleadoBonos").modal();
     $("#InactivarEmpleadoBonos").modal('hide');
