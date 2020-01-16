@@ -1,0 +1,84 @@
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_ReporteInstitucionesFinancieras_RPT
+
+@{
+    ViewBag.Title = "Reportes ingresos";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+@using (Html.BeginForm("InstitucionesFinancierasParametros", "ReportesPlanilla", FormMethod.Post, new { id = "frmReportIngresosPreview" }))
+{
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Reportes de instituciones financieras</h5>
+                    <div class="ibox-tools">
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Institución financiera</label>
+
+                                @Html.DropDownList("insf_IdInstitucionFinanciera", (IEnumerable<SelectListItem>)ViewBag.Instituciones, "Seleccione una opción", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Empleado</label>
+
+                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="font-normal">Planilla</label>
+
+                                @Html.DropDownList("cpla_IdPlanilla", (IEnumerable<SelectListItem>)ViewBag.Planillas, "Seleccione una opción", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarIngresos">Previsualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<br />
+
+@{
+    string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
+}
+<div class="row" style="display:@visibilidadPreview;">
+    <div class="col-lg-12">
+        <div class="float-e-margins">
+            <div class="ibox-title">
+                <h5>Previsualización de reporte</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (ViewBag.ReportViewer != null)
+                    {
+                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
