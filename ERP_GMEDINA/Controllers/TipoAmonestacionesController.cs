@@ -12,41 +12,40 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoAmonestacionesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: TipoAmonestaciones
         public ActionResult Index()
         {
-            List<tbTipoAmonestaciones> tbTipoAmonestaciones = new List<Models.tbTipoAmonestaciones> { };
+            bool Admin = (bool)Session["Admin"];
+            tbTipoAmonestaciones tbTipoAmonestaciones = new tbTipoAmonestaciones { tamo_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbTipoAmonestaciones = db.tbTipoAmonestaciones.Where(x => x.tamo_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
-                return View(tbTipoAmonestaciones);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbTipoAmonestaciones.Add(new tbTipoAmonestaciones { tamo_Id = 0, tamo_Descripcion = "fallo la conexion" });
-            }
             return View(tbTipoAmonestaciones);
         }
 
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTipoAmonestaciones> tbTipoAmonestaciones =
-                new List<Models.tbTipoAmonestaciones> { };
-            foreach (tbTipoAmonestaciones x in db.tbTipoAmonestaciones.ToList().Where(x => x.tamo_Estado == true))
+            try
             {
-                tbTipoAmonestaciones.Add(new tbTipoAmonestaciones
-                {
-                    tamo_Id = x.tamo_Id,
-                    tamo_Descripcion = x.tamo_Descripcion
-                });
+                db = new ERP_GMEDINAEntities();
+                var tbTipoAmonestacion = db.tbTipoAmonestaciones
+                       .Select(
+                       t => new
+                       {
+                           tamo_Id = t.tamo_Id,
+                           tamo_Descripcion = t.tamo_Descripcion,
+                           tamo_Estado = t.tamo_Estado
+                       }
+                       )
+                       .ToList();
+                return Json(tbTipoAmonestacion, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbTipoAmonestaciones, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
         // POST: TipoAmonestaciones/Create
         [HttpPost]
@@ -58,6 +57,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoAmonestaciones_Insert(tbTipoAmonestaciones.tamo_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoAmonestaciones_Insert_Result item in list)
                     {
@@ -88,8 +88,9 @@ namespace ERP_GMEDINA.Controllers
             tbTipoAmonestaciones tbTipoAmonestaciones = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbTipoAmonestaciones = db.tbTipoAmonestaciones.Find(id);
-                if (tbTipoAmonestaciones == null || !tbTipoAmonestaciones.tamo_Estado)
+                if (tbTipoAmonestaciones == null)
                 {
                     return HttpNotFound();
                 }
@@ -127,6 +128,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoAmonestaciones_Update(id, tbTipoAmonestaciones.tamo_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoAmonestaciones_Update_Result item in list)
                     {
@@ -147,7 +149,30 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbTipoAmonestaciones_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoAmonestaciones_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         // POST: TipoAmonestaciones/Delete/5
         [HttpPost]
@@ -164,6 +189,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoAmonestaciones_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoAmonestaciones_Delete_Result item in list)
                     {
@@ -197,7 +223,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

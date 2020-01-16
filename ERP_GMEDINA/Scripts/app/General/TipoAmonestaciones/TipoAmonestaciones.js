@@ -1,8 +1,13 @@
-﻿$(document).ready(function () {
+﻿
+var fill = 0;
+var id = 0;
+var Admin = false;
+//Funciones GET
+$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
-var id = 0;
-//Funciones GET
+
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
@@ -44,11 +49,22 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    ID:value.tamo_Id,
-                    Descripcion:value.tamo_Descripcion
-                   }).draw();
+                 var Acciones = value.tamo_Estado == 1
+                   ?null:
+                   "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                   "</div>";
+                if (value.tamo_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.tamo_Id,
+                        "Número": value.tamo_Id,
+                        Estado: value.tamo_Estado,
+                        Descripcion: value.tamo_Descripcion,
+                        Acciones:Acciones
+                    })
+                }
             });
+            tabla.draw();
         });
 }
 //Botones GET
