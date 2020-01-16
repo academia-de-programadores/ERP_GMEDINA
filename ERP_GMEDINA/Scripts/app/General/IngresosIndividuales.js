@@ -345,7 +345,12 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
 
                 var CheckBox = data.ini_PagaSiempre;
 
-                $("#Editar #ini_PagaSiempre").val(CheckBox);
+                if (CheckBox) {
+                    $("#Editar #ini_PagaSiempre").prop("checked", true);
+                }
+                else {
+                    $("#Editar #ini_PagaSiempre").prop("checked", false);
+                }
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.emp_Id;
