@@ -29,6 +29,13 @@ $(document).ready(function () {
     });
 })
 
+$(document).ready(function () {
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
+})
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -293,6 +300,10 @@ $("#btnCerrarEditar").click(function () {
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
     $("#EditarIngresosIndividuales").modal('hide');
+    $("#Editar #ini_IdIngresosIndividuales").val('');
+    $("#Editar #ini_Motivo").val('');
+    $("#Editar #ini_Monto").val('');
+    $("#Editar #ini_PagaSiempre").val('');
 });
 
 $("#btnIconCerrare").click(function () {
@@ -300,6 +311,10 @@ $("#btnIconCerrare").click(function () {
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
     $("#EditarIngresosIndividuales").modal('hide');
+    $("#Editar #ini_IdIngresosIndividuales").val('');
+    $("#Editar #ini_Motivo").val('');
+    $("#Editar #ini_Monto").val('');
+    $("#Editar #ini_PagaSiempre").val('');
 });
 
 //Editar//
