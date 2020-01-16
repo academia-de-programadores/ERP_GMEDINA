@@ -87,11 +87,8 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
     $("#Editar #Validation_descipcion2e").css("display", "hidden");
     $("#Editar #Validation_descipcion1").css("display", "none");
     $("#Editar #Validation_descipcion2").css("display", "hidden");
-    $("#Editar #Validation_descipcion11").css("display", "");
-    $("#Editar #Validation_descipcion12").css("display", "");
-    $("#Editar #Validation_descipcion13").css("display", "");
-    $("#Editar #Validation_descipcion14").css("display", "");
-    $("#Editar #Validation_descipcion15").css("display", "");
+    $("#Editar #AsteriscoPorcentaje").removeClass("text-danger");
+    $("#Editar #AsteriscoTotal").removeClass("text-danger");
     var ID = $(this).data('id');
     Idinactivar = ID;
     $.ajax({
@@ -542,8 +539,6 @@ $("#btnInactivarRegistroComisiones").click(function () {
 });
 $("#btnInactivarRegistroComisionesNo").click(function () {
     document.getElementById("btnInactivarRegistroComisionesNo").disabled = true;
-    $("#Editar #Validation_descipcion11").css("display", "none");
-    $("#Editar #Validation_descipcion12").css("display", "none");
     $("#InactivarEmpleadoComisiones").modal('hide');
     $("#EditarEmpleadoComisiones").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
