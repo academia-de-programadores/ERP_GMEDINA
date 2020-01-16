@@ -85,6 +85,7 @@ function cargarGridAdelantos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+
     document.getElementById("btnCreateRegistroAdelantos").disabled = false;
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
@@ -203,49 +204,57 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
         $("#Crear #adsu_Monto").val('');
         $("#Crear #SueldoPromedioCrear").html('El sueldo promedio es ' + MaxSueldoCreate);
         $("#Crear #SueldoPromedioCrear").show();
-        $("#Crear #AsteriscoMonto").css("display", "");
+        //$("#Crear #AsteriscoMonto").css("display", "");
+        $("#Crear #AsteriscoMonto").addClass("text-danger");
+
     } else {
-        $("#Crear #AsteriscoMonto").css("display", "none");
+        //.removeClass("checked");
+        //$("#Crear #AsteriscoMonto").css("display", "none");
+        $("#Crear #AsteriscoMonto").removeClass("text-danger");
         $("#Crear #SueldoPromedioCrear").hide();
     }
 
     if (IdEmp == 0) {
-        $("#Crear #AsteriscoColaborador").css("display", "");
+
+        $("#Crear #AsteriscoColaborador").addClass("text-danger");
         $("#Crear #Validation_descripcion0").css("display", "");
     } else {
-        $("#Crear #AsteriscoColaborador").css("display", "none");
+        $("#Crear #AsteriscoColaborador").removeClass("text-danger");
         $("#Crear #Validation_descripcion0").css("display", "none");
     }
 
     if (Razon == "" || Razon == null || Razon == undefined) {
-        $("#Crear #AsteriscoRazon").css("display", "");
+        $("#Crear #AsteriscoRazon").addClass("text-danger");
         $("#Crear #Validation_descripcion1").css("display", "");
     } else {
-        $("#Crear #AsteriscoRazon").css("display", "none");
+        $("#Crear #AsteriscoRazon").removeClass("text-danger");
         $("#Crear #Validation_descripcion1").css("display", "none");
     }
     if (Monto == "" || Monto == null || Monto == undefined) {
-        $("#Crear #AsteriscoMonto").css("display", "");
-        $('#AsteriscoMonto').show();
+        $("#Crear #AsteriscoMonto").removeClass("text-danger");
+        $("#Crear #Validation_descripcion4").css("display", "none");
+
+        $("#Crear #AsteriscoMonto").addClass("text-danger");
+        //$('#AsteriscoMonto').show();
         $("#Crear #Validation_descripcion2").css("display", "");
     } else {
-        $("#Crear #AsteriscoMonto").css("display", "none");
-        $('#AsteriscoMonto').hide();
+        $("#Crear #AsteriscoMonto").removeClass("text-danger");
         $("#Crear #Validation_descripcion2").css("display", "none");
+        if (Monto <= 0) {
+
+            $("#Crear #AsteriscoMonto").addClass("text-danger");
+            $("#Crear #Validation_descripcion4").css("display", "");
+        } else {
+            $("#Crear #AsteriscoMonto").removeClass("text-danger");
+            $("#Crear #Validation_descripcion4").css("display", "none");
+        }
     }
 
-    if (Monto <= 0 && Monto != "" && Monto != null && Monto != undefined) {
-        $("#Crear #AsteriscoMonto").css("display", "");
-        $("#Crear #Validation_descripcion4").css("display", "");
-    } else {
-        $("#Crear #AsteriscoMonto").css("display", "none");
-        $("#Crear #Validation_descripcion4").css("display", "none");
-    }
     if (Fecha == "" || Fecha == null || Fecha == undefined) {
-        $("#Crear #AsteriscoFecha").css("display", "");
+        $("#Crear #AsteriscoFecha").addClass("text-danger");
         $("#Crear #Validation_descripcion3").css("display", "");
     } else {
-        $("#Crear #AsteriscoFecha").css("display", "none");
+        $("#Crear #AsteriscoFecha").removeClass("text-danger");
         $("#Crear #Validation_descripcion3").css("display", "none");
     }
 }
@@ -257,10 +266,10 @@ function OcultarValidaciones() {
     $("#Crear #Validation_descripcion2").css("display", "none");
     $("#Crear #Validation_descripcion3").css("display", "none");
     $("#Crear #Validation_descripcion4").css("display", "none");
-    $("#Crear #AsteriscoColaborador").css("display", "none");
-    $("#Crear #AsteriscoRazon").css("display", "none");
-    $("#Crear #AsteriscoMonto").css("display", "none");
-    $("#Crear #AsteriscoFecha").css("display", "none");
+    $("#Crear #AsteriscoColaborador").removeClass("text-danger");
+    $("#Crear #AsteriscoRazon").removeClass("text-danger");
+    $("#Crear #AsteriscoMonto").removeClass("text-danger");
+    $("#Crear #AsteriscoFecha").removeClass("text-danger");
     $("#Crear #SueldoPromedioCrear").hide();
 }
 
@@ -403,9 +412,9 @@ $("#btnUpdateAdelantos").click(function () {
                 //MENSAJES DEL SUELDO PROMEDIO
                 $("#EditarAdelantoSueldo #adsu_Monto").val('');
                 $('#SueldoPromedio').show();
-                $("#Editar #MontoAsterisco").css("display", "");
+                $("#Editar #MontoAsterisco").addClass("text-danger");
             } else {
-                $("#Editar #MontoAsterisco").css("display", "none");
+                $("#Editar #MontoAsterisco").removeClass("text-danger");
                 $('#SueldoPromedio').hide();
 
                 $("#EditarAdelantoSueldo").modal('hide');
@@ -485,7 +494,6 @@ function ValidarCamposEditar(colaborador, razon, monto) {
     var pasoValidacion = true;
     var SuelPromedio;
 
-    console.log('suelprom fuera de ajax' + SuelPromedio);
     if (colaborador.val() == '') {
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
@@ -502,31 +510,34 @@ function ValidarCamposEditar(colaborador, razon, monto) {
     if (razon == null || razon.val() == '') {
         pasoValidacion = false;
         $('#adsu_RazonAdelantoValidacion').show();
-        $("#Editar #RazonAsterisco").css("display", "");
+        $("#Editar #RazonAsterisco").addClass("text-danger");
         razon.focus();
     } else {
         $('#adsu_RazonAdelantoValidacion').hide();
-        $("#Editar #RazonAsterisco").css("display", "none");
+        $("#Editar #RazonAsterisco").removeClass("text-danger");
     }
 
-    if (monto == null || monto.val() == '') {
+    if (monto == null || monto.val() == '' || monto.val() == undefined) {
         pasoValidacion = false;
+        $('#SueldoPromedio').hide();
+        $('#adsu_MontoValidacion2').hide();
         $('#adsu_MontoValidacion').show();
-        $("#Editar #MontoAsterisco").css("display", "");
+        $("#Editar #MontoAsterisco").addClass("text-danger");
         monto.focus();
     } else {
         $('#adsu_MontoValidacion').hide();
-        $("#Editar #MontoAsterisco").css("display", "none");
-    }
-
-    if (monto != null && monto.val() != '' && monto.val() <= 0) {
-        pasoValidacion = false;
-        $("#Editar #MontoAsterisco").css("display", "");
-        $('#adsu_MontoValidacion2').show();
-        monto.focus();
-    } else {
-        $("#Editar #MontoAsterisco").css("display", "none");
-        $('#adsu_MontoValidacion2').hide();
+        $("#Editar #MontoAsterisco").removeClass("text-danger");
+        if (monto.val() <= 0) {
+            pasoValidacion = false;
+            $('#SueldoPromedio').hide();
+            $('#adsu_MontoValidacion').hide();
+            $("#Editar #MontoAsterisco").addClass("text-danger");
+            $('#adsu_MontoValidacion2').show();
+            monto.focus();
+        } else {
+            $("#Editar #MontoAsterisco").removeClass("text-danger");
+            $('#adsu_MontoValidacion2').hide();
+        }
     }
     return pasoValidacion;
 }
@@ -536,14 +547,13 @@ function OcultarValidacionesEditar() {
     $('#adsu_RazonAdelantoValidacion').hide();
     $('#adsu_MontoValidacion').hide();
     $('#adsu_MontoValidacion2').hide();
-    $("#Editar #RazonAsterisco").css("display", "none");
-    $("#Editar #MontoAsterisco").css("display", "none");
+    $("#Editar #RazonAsterisco").removeClass("text-danger");
+    $("#Editar #MontoAsterisco").removeClass("text-danger");
     $('#SueldoPromedio').hide();
 }
 
 //FUNCION: CERRAR EL MODAL DE CONFIRMACION AL EDITAR, (CON EL BOTON DE CERRAR)
 $("#btnCerrarConfirmarEditar").click(function () {
-    OcultarValidacionesEditar()
     $("#ConfirmarEdicion").modal('hide');
     $("#EditarAdelantoSueldo").modal();
 });
@@ -554,26 +564,6 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarAdelantoSueldo").modal('hide');
     document.getElementById("adsu_Monto").placeholder = '';
     FullBody();
-});
-
-//FUNCION: CERRAR EL MODAL DE EDITAR CON EL BOTON DE X
-$("#IconCerrarEditar").click(function () {
-    OcultarValidacionesEditar()
-    $("#EditarAdelantoSueldo").modal('hide');
-    document.getElementById("adsu_Monto").placeholder = '';
-    FullBody();
-});
-
-$("#IconCerrarConfirmarEditar").click(function () {
-    $("#ConfirmarEdicion").modal('hide');
-    $("#EditarAdelantoSueldo").modal();
-});
-
-//REGRESAR AL MODAL DE EDITAR CON EL BOTON X DEL MODAL DE INACTIVAR, OCULTANDO LAS VALIDACIONES
-$("#IconCerrarInactivar").click(function () {
-    OcultarValidacionesEditar();
-    $("#InactivarAdelantoSueldo").modal('hide');
-    $("#EditarAdelantoSueldo").modal();
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
@@ -670,7 +660,6 @@ $("#btnInactivarRegistroAdelantos").click(function () {
 
 //FUNCION: OCULTAR MODAL DE INACTIVACION
 $("#btnCerrarInactivar").click(function () {
-    OcultarValidacionesEditar();
     $("#InactivarAdelantoSueldo").modal('hide');
     $("#EditarAdelantoSueldo").modal();
 });
