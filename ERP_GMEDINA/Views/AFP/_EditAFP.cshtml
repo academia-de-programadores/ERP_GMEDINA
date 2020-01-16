@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_Descripcion)
+                    @Html.LabelFor(model => model.afp_Descripcion)<span id="aste1">*</span>
                 </div>                
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_Descripcion" } })
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_AporteMinimoLps)
+                    @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="aste2">*</span>
                 </div>                
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_AporteMinimoLps" } })
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAporte)
+                    @Html.LabelFor(model => model.afp_InteresAporte)<span id="aste3">*</span>
                 </div>                
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAporte" } })
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAnual)
+                    @Html.LabelFor(model => model.afp_InteresAnual)<span id="aste4">*</span>
                 </div>               
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAnual" } })

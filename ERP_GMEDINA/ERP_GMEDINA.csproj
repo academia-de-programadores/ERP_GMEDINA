@@ -1959,6 +1959,7 @@
     <Content Include="Views\Periodos\_Edit.cshtml" />
     <Content Include="Views\ReportesPlanilla\DecimoTercerParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\DecimoCuartoParametros.cshtml" />
+    <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasParametros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1994,6 +1995,7 @@
     <EmbeddedResource Include="ReportesPlanilla\DecimoTercerRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\DeduccionesRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\IngresosRPT.rdlc" />
+    <EmbeddedResource Include="ReportesPlanilla\InstitucionesFinancierasRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteAdelantoSueldoRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteAFPRPT.rdlc" />
     <EmbeddedResource Include="ReportesPlanilla\ReporteComisionesRPT.rdlc" />
