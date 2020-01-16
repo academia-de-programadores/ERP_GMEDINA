@@ -381,14 +381,13 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
         data: JSON.stringify({ ID: ID })
     })
         .done(function (data) {
-            $("#DetallesCatalogoDeducciones").modal();
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
                 var FechaCrea = FechaFormato(data[0].cde_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cde_FechaModifica);
                 $("#Detalles #cde_IdDeducciones").html(data[0].cde_IdDeducciones);
                 $("#Detalles #cde_DescripcionDeduccion").html(data[0].cde_DescripcionDeduccion);
+                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                 $("#Detalles #cde_PorcentajeColaborador").html(data[0].cde_PorcentajeColaborador);
                 $("#Detalles #cde_PorcentajeEmpresa").html(data[0].cde_PorcentajeEmpresa);
                 $("#Detalles #cde_UsuarioCrea").html(data[0].cde_UsuarioCrea);
@@ -398,7 +397,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                 $("#Detalles #cde_UsuarioModifica").val(data[0].cde_UsuarioModifica);
                 $("#Detalles #cde_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data[0].TipoDedu;
+                var SelectedId = data[0].tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/CatalogoDeDeducciones/EditGetDDL",
@@ -408,14 +407,18 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                     data: JSON.stringify({ ID })
                 })
                 .done(function (data) {
-                    //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                    $("#Detalles #tde_IdTipoDedu").empty();
+
                     //LLENAR EL DROPDOWNLIST
                     $.each(data, function (i, iter) {
-                        $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        if (iter.Id == SelectedId) {
+                            $("#Detalles #tde_IdTipoDedu").html(iter.Descripcion);
+                        }
                     });
                 });
 
+                $("#DetallesCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
