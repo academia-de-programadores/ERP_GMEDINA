@@ -86,14 +86,15 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var lista = db.tbDepartamentos
-                        .Where(x => x.area_Id == id && x.depto_Estado == true)
+                        .Where(x => x.area_Id == id)
                         .Select(depto =>
                         new
                         {
                             depto_Id = depto.depto_Id,
                             car_Id = depto.tbCargos.car_Id,
                             car_Descripcion = depto.tbCargos.car_Descripcion,
-                            depto_Descripcion = depto.depto_Descripcion
+                            depto_Descripcion = depto.depto_Descripcion,
+                            depto_Estado=depto.depto_Estado
                         }).ToList();
                     return Json(lista, JsonRequestBehavior.AllowGet);
                 }
@@ -351,6 +352,19 @@ namespace ERP_GMEDINA.Controllers
                                 return Json("-2", JsonRequestBehavior.AllowGet);
                             }
                         }
+                        else if (item.Accion == "a")
+                        {
+                            var depto = db.UDP_RRHH_tbDepartamentos_Restore(item.depto_Id, Usuario.usu_Id, DateTime.Now);
+                            string mensajeDB = "";
+                            foreach (UDP_RRHH_tbDepartamentos_Restore_Result items in depto)
+                            {
+                                mensajeDB = items.MensajeError.ToString();
+                            }
+                            if (mensajeDB == "-1")
+                            {
+                                return Json("-2", JsonRequestBehavior.AllowGet);
+                            }
+                        }
                     }
                     transaction.Commit();
                 }
@@ -420,7 +434,6 @@ namespace ERP_GMEDINA.Controllers
                 }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing && db != null)
