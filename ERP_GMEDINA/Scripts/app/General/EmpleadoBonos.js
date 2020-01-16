@@ -299,6 +299,7 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                debugger;
                 if (data.cb_Pagado) {
                     document.getElementById("btnUpdateBonos").disabled = true;
                 } else {

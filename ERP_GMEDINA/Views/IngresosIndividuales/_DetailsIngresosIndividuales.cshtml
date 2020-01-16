@@ -38,11 +38,11 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
-                <div class="col-md-8">
-                    <input type="checkbox" class="i-checks" id="ini_PagaSiempre" disabled="disabled" />
+                <div class="col-md-6">
+                    <span id="ini_PagaSiempre">@Html.DisplayFor(model => model.ini_PagaSiempre, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
                 </div>
             </div>
 

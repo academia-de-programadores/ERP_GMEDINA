@@ -339,18 +339,18 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 debugger;
+
+                if (data.ini_PagaSiempre) {
+                    $('#Editar #ini_PagaSiempre').prop('checked', true);
+                }
+                else {
+                    $('#Editar #ini_PagaSiempre').prop('checked', false);
+                }
+
                 $("#Editar #ini_IdIngresosIndividuales").val(data.ini_IdIngresosIndividuales);
                 $("#Editar #ini_Motivo").val(data.ini_Motivo);
                 $("#Editar #ini_Monto").val(data.ini_Monto);
-
-                var CheckBox = data.ini_PagaSiempre;
-
-                if (CheckBox) {
-                    $("#Editar #ini_PagaSiempre").prop("checked", true);
-                }
-                else {
-                    $("#Editar #ini_PagaSiempre").prop("checked", false);
-                }
+                $("#Editar #ini_PagaSiempre").val(data.ini_PagaSiempre);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data.emp_Id;
@@ -504,13 +504,18 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleIngresosIndividuales
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                if (data[0].ini_PagaSiempre) {
+                    $("#Detalles #ini_PagaSiempre").html("Si");
+                }
+                else {
+                    $("#Detalles #ini_PagaSiempre").html("No");
+                }
                 var FechaCrea = FechaFormato(data[0].ini_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].ini_FechaModifica);
                 $(".field-validation-error").css('display', 'none');
                 $("#Detalles #ini_IdIngresosIndividuales").html(data[0].ini_IdIngresosIndividuales);
                 $("#Detalles #ini_Motivo").html(data[0].ini_Motivo);
                 $("#Detalles #ini_Monto").html(data[0].ini_Monto);
-                $("#Detalles #ini_PagaSiempre").html(data[0].ini_PagaSiempre);
                 $("#Detalles #emp_Id").html(data[0].emp_Id);
                 $("#Detalles #tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
                 $("#Detalles #ini_UsuarioCrea").html(data[0].ini_UsuarioCrea);
