@@ -59,12 +59,13 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Upload(HttpPostedFileBase file)
         {
-            if (file!=null)
+            string extencion = file.FileName.Split('.')[1].ToLower();
+            if (file!=null && (extencion=="png" || extencion == "jpg" || extencion == "jpeg"))
             {
                 string path = Server.MapPath("~/Logos/" + file.FileName);
                 if (!System.IO.File.Exists(path))
                 {//OPEN IF
-                    file.SaveAs(path);
+                    Session["file"]=file;
                     Session["Path"] = path;
                 return Json(true, JsonRequestBehavior.AllowGet);
                 }
@@ -77,9 +78,10 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Create(tbEmpresas tbEmpresas)
         {
+            HttpPostedFileBase file = (HttpPostedFileBase)Session["file"];
             string path = (string)Session["Path"];
             string msj = "...";
-            if (tbEmpresas.empr_Nombre != "")
+            if (tbEmpresas.empr_Nombre != "" && file!=null && path!=null)
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -88,8 +90,13 @@ namespace ERP_GMEDINA.Controllers
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
                         msj = item.MensajeError;
-                        return Json(msj, JsonRequestBehavior.AllowGet);
                     }
+                    file.SaveAs(path);
+                    Session["file"] = null;
+                    Session["Path"] = null;
+                    Session.Remove("file");
+                    Session.Remove("Path");
+                    return Json(msj, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
