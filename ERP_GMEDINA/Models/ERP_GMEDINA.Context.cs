@@ -1783,7 +1783,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoHoras_Insert_Result>("UDP_RRHH_tbTipoHoras_Insert", tiho_DescripcionParameter, tiho_RecargoParameter, tiho_UsuarioCreaParameter, tiho_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbTipoHoras_Restore(Nullable<int> tiho_Id, Nullable<int> tiho_UsuarioModifica, Nullable<System.DateTime> tiho_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbTipoHoras_Restore_Result> UDP_RRHH_tbTipoHoras_Restore(Nullable<int> tiho_Id, Nullable<int> tiho_UsuarioModifica, Nullable<System.DateTime> tiho_FechaModifica)
         {
             var tiho_IdParameter = tiho_Id.HasValue ?
                 new ObjectParameter("tiho_Id", tiho_Id) :
@@ -1797,7 +1797,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tiho_FechaModifica", tiho_FechaModifica) :
                 new ObjectParameter("tiho_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbTipoHoras_Restore", tiho_IdParameter, tiho_UsuarioModificaParameter, tiho_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbTipoHoras_Restore_Result>("UDP_RRHH_tbTipoHoras_Restore", tiho_IdParameter, tiho_UsuarioModificaParameter, tiho_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbTipoHoras_Select_Result> UDP_RRHH_tbTipoHoras_Select(Nullable<int> tiho_Id)

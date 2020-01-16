@@ -464,6 +464,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
             "~/Scripts/app/general/Habilidades/Admin.js"));
 
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoHOras/Admin").Include(
+            "~/Scripts/app/general/TipoHOras/Admin.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos/Admin").Include(
           "~/Scripts/app/general/Cargos/Admin.js"));
 
@@ -507,8 +512,11 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
                 "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas/Admin").Include(
+                "~/Scripts/app/general/TipoMonedas/Admin.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
-                           "~/Scripts/app/general/Idiomas/Idiomas.js"));
+                               "~/Scripts/app/general/Idiomas/Idiomas.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js",
