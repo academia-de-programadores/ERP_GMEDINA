@@ -35,7 +35,7 @@ function cargarGridTipoDeducciones() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se pudo cargar la información, contacte al administrador!',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -201,7 +201,7 @@ $("#btnEditarTipoDedu").click(function () {
                 cargarGridTipoDeducciones();
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
+                    message: 'El registro se editó de forma exitosa!',
                 });
                 ocultarcargandoEditar();
             }
@@ -327,7 +327,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnDetalleTipoDeduccio
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: '¡No se cargó la información, contacte al administrador!',
                 });
             }
         });
@@ -358,7 +358,7 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
-            message: 'Se ha inactivado el registro',
+            message: '¡El registro se inactivó de forma exitosa!',
         });
     });
 });
@@ -424,7 +424,7 @@ $("#btnActivarRegistroTipoDeducciones").click(function () {
         //Mensaje de error si no hay data
         iziToast.success({
             title: 'Exito',
-            message: 'Se ha activado el registro',
+            message: '¡El registro se activó de forma exitosa!',
         });
     });
 });
