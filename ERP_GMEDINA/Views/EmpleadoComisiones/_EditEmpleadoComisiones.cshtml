@@ -41,8 +41,8 @@
                         @Html.LabelFor(model => model.cc_PorcentajeComision, htmlAttributes: new { @class = "control-label col-md-2" })
                         <label id="Validation_descipcion11" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                         <label class="text-danger" id="Validation_descipcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision" } })
+                        <div class="col-md-10">    
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision", @type = "number" } })
                             @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" })
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <label id="Validation_descipcion12" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                         <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" } })
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" , @type = "number" } })
                             @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
                         </div>
                     </div>

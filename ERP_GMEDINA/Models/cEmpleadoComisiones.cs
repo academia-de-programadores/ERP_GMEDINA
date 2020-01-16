@@ -53,13 +53,13 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Porcentaje Comision")]
         [Required(ErrorMessage = "Campo Porcentaje Comision Requerido")]
-        [Range(0, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
+        [Range(1, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}")]
         public decimal cc_PorcentajeComision { get; set; }
 
 
         [Display(Name = "Total Venta")]
         [Required(ErrorMessage = "Campo Total Venta Requerido")]
-        [Range(0, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]   
+        [Range(1, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}")]   
         public decimal cc_TotalVenta { get; set; }
 
         public virtual tbUsuario tbUsuario { get; set; }
