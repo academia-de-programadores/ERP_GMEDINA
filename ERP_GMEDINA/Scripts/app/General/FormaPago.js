@@ -85,6 +85,9 @@ $(document).on("click", "#btnAgregarFormaPago", function () {
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
+    //CAMBIAR EL ASTERISCO A COLOR NEGRO
+    $("#AsteriscoFormaPago").removeClass("text-danger");
+    //OCULTAR DATAANNOTATIONS
     DataAnnotations(true);
 });
 
@@ -94,7 +97,7 @@ $('#btnCrearFormaPago').click(function () {
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
-        $("#Crear #AsteriscoFormaPago").css("display", "none");
+        //$("#Crear #AsteriscoFormaPago").css("display", "none");
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
@@ -119,11 +122,14 @@ $('#btnCrearFormaPago').click(function () {
                 });
             }
         });
+        $("#AsteriscoFormaPago").removeClass("text-danger");
     }
     else {
         $("#Crear #AsteriscoFormaPago").css("display", "");
         // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
         DataAnnotations(false);
+        //CAMBIAR A COLOR ROJO EL ASTERISCO
+        $("#AsteriscoFormaPago").addClass("text-danger");
     }
 });
 
@@ -136,6 +142,8 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
     IDInactivar = ID;
     //OCULTAR EL DATAANNOTATIONS
     DataAnnotations(true);
+    //PONER EL ASTERISCO DE VALIDACION EN NEGRO
+    $("#AsteriscoFormaPagoEditar").removeClass("text-danger");
     $.ajax({
         url: "/FormaPago/Edit/" + ID,
         method: "POST",
@@ -154,7 +162,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
                 $("#EditarFormaPago").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
-
             }
             else {
                 //Mensaje de error si no hay data
@@ -166,6 +173,10 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
         });
 });
 
+
+
+
+
 $("#btnUpdateFormaPago").click(function () {
     var Descripcion = $("#Editar #fpa_Descripcion").val();
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
@@ -173,11 +184,22 @@ $("#btnUpdateFormaPago").click(function () {
         $("#ConfirmarEdicion").modal();
     }
     else {
-       
+        //MOSTRAR EL DATAANNOTATIONS
         DataAnnotations(false);
-        $("#ConfirmarEdicion").modal('hide');
+        //CAMBIAR EL COLOR DEL ASTERISCO DE VALIDACION
+        $("#AsteriscoFormaPagoEditar").addClass("text-danger");
     }
    
+});
+
+//CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
+$(".Asterisco").click(function () {
+    $("#AsteriscoFormaPagoEditar").removeClass("text-danger");
+});
+
+//MOSTRAR EL MODAL DE EDICION AL MOMENTO DE CERRAR EL MODAL CON EL BOTON CERRAR
+$("#InactivarFormaPago #IconCerrar").click(function () {
+    $("#EditarFormaPago").modal();
 });
 
 //GUARADR LA EDICION DEL REGISTRO
@@ -427,3 +449,9 @@ $(document).on("click", "#btnmodalActivarFormaPago", function () {
 $("#btnCerrarActivar").click(function () {
     $("#ActivarFormaPago").modal('hide');
 });
+
+
+//FUNCIONES PARA EL ASTERISCO DE VALIDACION
+
+$("#AsteriscoFormaPago").addClass("text-danger");
+$("#AsteriscoFormaPago").removeClass("text-danger");

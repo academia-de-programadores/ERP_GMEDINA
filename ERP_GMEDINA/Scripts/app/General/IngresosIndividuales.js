@@ -29,13 +29,6 @@ $(document).ready(function () {
     });
 })
 
-$(document).ready(function () {
-    $('.i-checks').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green'
-    });
-})
-
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     var esAdministrador = $("#rol_Usuario").val();
@@ -303,7 +296,7 @@ $("#btnCerrarEditar").click(function () {
     $("#Editar #ini_IdIngresosIndividuales").val('');
     $("#Editar #ini_Motivo").val('');
     $("#Editar #ini_Monto").val('');
-    $("#Editar #ini_PagaSiempre").val('');
+    $("#Editar #ini_PagaSiempre").val();
 });
 
 $("#btnIconCerrare").click(function () {
@@ -314,7 +307,7 @@ $("#btnIconCerrare").click(function () {
     $("#Editar #ini_IdIngresosIndividuales").val('');
     $("#Editar #ini_Motivo").val('');
     $("#Editar #ini_Monto").val('');
-    $("#Editar #ini_PagaSiempre").val('');
+    $("#Editar #ini_PagaSiempre").val();
 });
 
 //Editar//
@@ -353,7 +346,6 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                debugger;
 
                 if (data.ini_PagaSiempre) {
                     $('#Editar #ini_PagaSiempre').prop('checked', true);
@@ -386,8 +378,6 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
                             $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesIngresosIndividuales").modal('hide');
-
                 $("#EditarIngresosIndividuales").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
@@ -408,7 +398,7 @@ $("#btnEditIngresoIndividual").click(function () {
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
     if (vale2 == "" || vale2 == null) {
-        $("#Editar #validatione1").css("display", "");
+        $("#Editar #validation1").css("display", "");
     }
     else if (vale3 != null || vale3 != "") {
         if (expreg.test(vale3)) {
@@ -418,7 +408,7 @@ $("#btnEditIngresoIndividual").click(function () {
             $("html, body").css("overflow", "scroll");
         }
         else {
-            $("#Editar #validatione3").css("display", "");
+            $("#Editar #validation3").css("display", "");
         }
     }
     $("#EditarIngresosIndividuales").submit(function (e) {

@@ -1,5 +1,7 @@
 ﻿//VARIABLES PARA INACTIVACION Y ACTIVACION DE REGISTROS
 var IDInactivar = 0, IDActivar = 0;
+//VARIABLE PARA VALIDAR SI ESTA PAGADO
+var varPagado;
 
 //OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
@@ -198,7 +200,6 @@ $('#btnCreateRegistroBonos').click(function () {
 
     }
     else {
-        debugger;
         if (IdEmpleado == "0") {
             $("#Crear #Validation_descipcion1").css("display", "");
             $("#Crear #Validation_descipcion2").css("display", "");
@@ -299,10 +300,11 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                debugger;
                 if (data.cb_Pagado) {
+                    varPagado = 1;
                     document.getElementById("btnUpdateBonos").disabled = true;
                 } else {
+                    varPagado = 0;
                     document.getElementById("btnUpdateBonos").disabled = false;
                 }
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
@@ -369,6 +371,8 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
             Check = "";
         });
 });
+
+//VALIDAR LOS CAMPOS DE EDITAR Y MOSTRAR EL MODAL DE CONFIRMACION
 $("#btnUpdateBonos").click(function () {
     var Monto = $("#Editar #cb_Monto").val();
     var decimales = Monto.split(".");
@@ -388,6 +392,7 @@ $("#btnUpdateBonos").click(function () {
     }
     else {
         $("#EditarEmpleadoBonos").modal('hide');
+        document.getElementById("btnUpdateBonos2").disabled = false;
         $("#EditarEmpleadoBonosConfirmacion").modal({ backdrop: 'static', keyboard: false });
         $("html, body").css("overflow", "hidden");
         $("html, body").css("overflow", "scroll");
@@ -397,50 +402,51 @@ $("#btnUpdateBonos").click(function () {
        
 }
 });
-//FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+//FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL DE CONFIRMACION
 $("#btnUpdateBonos2").click(function () {
-    document.getElementById("btnUpdateBonos2").disabled = true;
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    if (varPagado == 0) {
+        document.getElementById("btnUpdateBonos2").disabled = true;
+        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEmpleadoBonos").serializeArray();
-       
+        console.log(data);
+
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/EmpleadoBonos/edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
+        $.ajax({
+            url: "/EmpleadoBonos/edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
 
-                title: 'Error',
-                message: '¡No se editó el registro, contacte al administrador!',
-            });
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridBonos();
-            FullBody();
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarEmpleadoBonos").modal('hide');
-            $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro se editó de forma exitosa!',
-            });
-        }
-    });  
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+                $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+            }
+            else {
+                // REFRESCAR UNICAMENTE LA TABLA
+                cargarGridBonos();
+                FullBody();
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#EditarEmpleadoBonos").modal('hide');
+                $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Éxito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+        });
+    } else {
+        $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+        iziToast.error({
+            title: 'Error',
+            message: '¡No puede editar un registro pagado!',
+        });
+    }  
 });
-$("#btCerrarEditar").click(function () {
-    document.getElementById("btCerrarEditar").disabled = true;
-    $("#EditarEmpleadoBonos").modal();
-    $("#EditarEmpleadoBonosConfirmacion").modal('hide');
-})
-
-
-
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos", function () {
@@ -573,11 +579,44 @@ $("#btnInactivarRegistroBono").click(function () {
     IDInactivar = 0;
 });
 
+//VOLVER AL MODAL DE EDITAR CERRANDO EL MODAL DE INACTIVAR CON EL BOTON 'CERRAR'
 $("#btCerrarNo").click(function () {
-    document.getElementById("btCerrarNo").disabled = true;
+    $("#Editar #Validation_descipcion3").css("display", "");
+    $("#Editar #Validation_descipcion6").css("display", "none");
+    $("#Editar #Validation_descipcion5").css("display", "none");
+    //document.getElementById("btCerrarNo").disabled = true;
     $("#EditarEmpleadoBonos").modal();
     $("#InactivarEmpleadoBonos").modal('hide');
 })
+
+//VOLVER AL MODAL DE EDITAR CERRANDO EL MODAL DE INACTIVAR CON EL BOTON X
+$("#IconCerrarInactivar").click(function () {
+    $("#Editar #Validation_descipcion3").css("display", "");
+    $("#Editar #Validation_descipcion6").css("display", "none");
+    $("#Editar #Validation_descipcion5").css("display", "none");
+    //document.getElementById("btCerrarNo").disabled = true;
+    $("#EditarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal('hide');
+})
+
+//VOLVER AL MODAL DE EDITAR CERRANDO EL MODAL DE CONFIRMACION CON LA X
+$("#IconCerrarEditarConfirmacion").click(function () {
+    $("#Editar #Validation_descipcion3").css("display", "");
+    $("#Editar #Validation_descipcion6").css("display", "none");
+    $("#Editar #Validation_descipcion5").css("display", "none");
+    //document.getElementById("btCerrarNo").disabled = true;
+    $("#EditarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal('hide');
+})
+
+//VOLVER AL MODAL DE EDITAR CERRANDO EL MODAL DE CONFIRMACION CON EL BOTON 'NO'
+$("#btCerrarEditar").click(function () {
+    //document.getElementById("btCerrarEditar").disabled = true;
+    $("#EditarEmpleadoBonos").modal();
+    $("#EditarEmpleadoBonosConfirmacion").modal('hide');
+})
+
+
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnActivarEmpleadoBonos", function () {
     IDActivar = $(this).data('id');
