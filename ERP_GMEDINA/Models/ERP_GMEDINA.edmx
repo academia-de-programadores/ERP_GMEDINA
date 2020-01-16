@@ -10346,7 +10346,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tiho_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tiho_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Restore" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_RRHH_tbTipoHoras_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Restore_Result)">
             <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
             <Parameter Name="tiho_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
@@ -12384,6 +12384,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Type="DateTime" Name="FechaInicio" Nullable="true" />
           <Property Type="DateTime" Name="FechaFin" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbTipoHoras_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13966,7 +13969,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTipoHoras_Select" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTipoHoras_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result">

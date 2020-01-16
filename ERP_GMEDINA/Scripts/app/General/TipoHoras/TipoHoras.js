@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
-    $(".drop li a")
-       .on('click', function (e) {
-           e.stopPropagation();
-       });
 });
+
+var fill = 0;
+var Admin = false;
 var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
@@ -48,14 +48,24 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 //console.log(item.tiho_Descripcion);
-           
-                  tabla.row.add({
+                var Acciones = value.tiho_Estado == 1
+                       ?null:Admin?
+                       "<div>" +
+                           "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "</div>":"";
+          
+                tabla.row.add({
+                   
+                    "Número": value.tiho_Id,
                       ID: value.tiho_Id,
                       Hora: value.tiho_Descripcion,
-                      Recargo: value.tiho_Recargo
+                      Recargo: value.tiho_Recargo,
+                      Estado: value.tiho_Estado ? 'Activo' : 'Inactivo',
+                      Acciones: Acciones
                   });
         });
-            tabla.draw();
+        tabla.draw();
+
         });
 }
 //Botones GET

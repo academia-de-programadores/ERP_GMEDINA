@@ -201,7 +201,6 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
-    <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
     <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
@@ -707,6 +706,9 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistrialVacaciones_Periodos_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHorarios_Delete_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -855,6 +857,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbTipoHoras_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
@@ -1284,6 +1289,7 @@
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
     <Content Include="Scripts\app\General\Sueldos\Sueldos.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
+    <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
