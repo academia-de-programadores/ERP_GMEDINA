@@ -3,39 +3,48 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditTechosDeducciones" }))
 {
     @Html.AntiForgeryToken()
+    <style>.asterisco{margin:0px;padding:0px;}</style>
     <div class="modal-body" id="Editar">
         <div class="form-horizontal">
             @Html.HiddenFor(model => model.tddu_IdTechosDeducciones)
             @Html.HiddenFor(model => model.tddu_FechaCrea)
             @Html.HiddenFor(model => model.tddu_UsuarioCrea)
             <div class="form-group">
-                <label class="control-label col-md-2">Descripción Deducción</label>  @* @Html.LabelFor(model => model.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-10">
+                <div class="col-md-5">
+                    <label style="padding:0px;" class="control-label">Descripción Deducción</label><label class="asterisco" id="AsteriskDeduccionE">*</label>
+                </div>
+                <div class="col-md-7">
                     <select id="cde_IdDeducciones" name="cde_IdDeducciones" class="form-control"></select>
-                    <label class="text-danger" id="Validation_deduccion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo deducción requerido.</label>
+                    <label class="text-danger" id="Validation_deduccionE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo deducción requerido.</label>
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.tddu_Techo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control ValidarCaracteres"} })
-                    <label class="text-danger" id="Validation_Techo" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Techo requerido.</label>
+                <div class="col-md-5">
+                    @Html.LabelFor(model => model.tddu_Techo, htmlAttributes: new { @class = "control-label" })<label class="asterisco" id="AsteriskTechoE">*</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.tddu_Techo, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
+                        <label class="text-danger" id="Validation_TechoE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Techo requerido.</label>
+                    </div>
                 </div>
-            </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.tddu_PorcentajeColaboradores, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
-                    <label class="text-danger" id="Validation_PorcentajeColaboradores" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Colaborador requerido.</label>
+                <div class="col-md-5">
+                    @Html.LabelFor(model => model.tddu_PorcentajeColaboradores, htmlAttributes: new { @class = "control-label" })<label class="asterisco" id="AsteriskPorcentajeColaboradorE">*</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.tddu_PorcentajeColaboradores, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
+                        <label class="text-danger" id="Validation_PorcentajeColaboradoresE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Colaborador requerido.</label>
+                    </div>
                 </div>
-            </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.tddu_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
-                    <label class="text-danger" id="Validation_PorcentajeEmpresa" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Empresa requerido.</label>
+                <div class="col-md-5">
+                    @Html.LabelFor(model => model.tddu_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label" })<label class="asterisco" id="AsteriskPorcentajeEmpresaE">*</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.tddu_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control ValidarCaracteres" } })
+                        <label class="text-danger" id="Validation_PorcentajeEmpresaE" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Porcentaje Empresa requerido.</label>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
         <div class="modal-footer">
