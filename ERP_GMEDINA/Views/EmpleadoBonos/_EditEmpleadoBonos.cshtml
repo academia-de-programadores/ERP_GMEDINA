@@ -5,15 +5,28 @@
         <div class="ibox-content">
             <div class="form-horizontal">
                 @Html.HiddenFor(model => model.cb_Id)
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="pull-left">Número</label>
+                        </div>
+                        <div class="col-md-6 pull-right">
+                            @Html.EditorFor(model => model.cb_Id, new { htmlAttributes = new { @class = "form-control", @id = "cb_Id", @disabled = "disabled" } })
+
+                            <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
                             @*@Html.HiddenFor(model => model.emp_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label>
-                            <label id="Validation_descipcion1" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                            <label class="" id="AsteriscoEmpleado">*</label>
                         </div>
                         <div class="col-md-6">
+                         
                             <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                         </div>
                     </div>
@@ -24,7 +37,7 @@
                         <div class="col-md-6">
                             @*@Html.HiddenFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="cin_IdIngreso" htmlattributes="{ class = text-box single-line, disabled = disabled }">Bono</label>
-                            <label id="Validation_descipcion2" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                            <label class="" id="AsteriscoBono">*</label>  
                         </div>
                         <div class="col-md-6">
                             <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
@@ -36,8 +49,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="cb_Monto" htmlattributes="{ class = text-box single-line, disabled = disabled }">Monto</label>           
-                            <label id="Validation_descipcion3" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
-                            <label class="text-danger" id="Validation_descipcion5" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                            <label class="" id="AsteriscoMonto">*</label> 
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @autocomplete = "off" } })

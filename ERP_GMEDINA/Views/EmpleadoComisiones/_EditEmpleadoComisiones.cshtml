@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <label class="pull-left">Número</label> 
-                    <label class="pull-left"  id="Validation_descipcion13" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                    
                     <div class="col-md-8 pull-right">
                         @Html.EditorFor(model => model.cc_Id, new { htmlAttributes = new { @class = "form-control", @id = "cc_Id", @disabled = "disabled" } })
                        
@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label class="pull-left">Empleado</label> 
-                    <label class="pull-left" id="Validation_descipcion14" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>      
+                    <label class="" id="AsteriscoEmpleado">*</label> 
                     <div class="col-md-8 pull-right">
                         <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label class="pull-left">Comisión</label> 
-                    <label class="pull-left" id="Validation_descipcion15" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
+                    <label class="" id="AsteriscoComision">*</label>  
                     <div class="col-md-8 pull-right">
                         <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                         <label class="text-danger" id="Validation_descipcion" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
@@ -38,20 +38,18 @@
 
                 <div class="form-group">
                     <label class="pull-left">Porcentaje Comisión</label> 
-                        <label  class="pull-left"id="Validation_descipcion11" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
-                        <label class="text-danger pull-left" id="Validation_descipcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                    <label class="" id="AsteriscoPorcentaje">*</label>  
                         <div class="col-md-8 pull-right">    
-                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision", @type = "number" } })
-                            @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" })
+                            @Html.EditorFor(model => model.cc_PorcentajeComision, new { htmlAttributes = new { @class = "form-control", @id = "cc_PorcentajeComision", @type = "number", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.cc_PorcentajeComision, "", new { @class = "text-danger", @id = "Validation_descipcion1e" , @autocomplete  = "off"})
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="pull-left">Total Venta</label> 
-                        <label class="pull-left" id="Validation_descipcion12" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
-                        <label class="text-danger pull-left" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                        <label class="" id="AsteriscoTotal">*</label>  
                         <div class="col-md-8 pull-right">
-                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" , @type = "number" } })
+                            @Html.EditorFor(model => model.cc_TotalVenta, new { htmlAttributes = new { @class = "form-control", @id = "cc_TotalVenta" , @type = "number", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.cc_TotalVenta, "", new { @class = "text-danger", @id = "Validation_descipcion2e" })
                         </div>
                     </div>
