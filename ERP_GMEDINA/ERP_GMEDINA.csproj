@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
@@ -960,6 +961,9 @@
     <Compile Include="Models\V_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_EquipoTrabajoDetalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1253,6 +1257,7 @@
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
+    <Content Include="Scripts\app\General\EquipoEmpleados\EquipoEmpleados.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\Admin.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
@@ -1993,6 +1998,7 @@
     <Content Include="Views\Sueldos\Create.cshtml" />
     <Content Include="Views\HistorialCargos\_Create.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
+    <Content Include="Views\EquipoEmpleados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

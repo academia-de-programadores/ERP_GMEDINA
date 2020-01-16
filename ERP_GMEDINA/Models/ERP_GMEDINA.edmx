@@ -999,6 +999,34 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Empleados' does not have a prim
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EquipoTrabajoDetalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_EquipoTrabajoDetalles">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="eqtra_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="eqtra_Descripcion" />
+            <PropertyRef Name="eqem_Estado" />
+            <PropertyRef Name="eqem_Fecha" />
+            <PropertyRef Name="eqem_UsuarioCrea" />
+            <PropertyRef Name="eqem_FechaCrea" />
+          </Key>
+          <Property Name="eqem_Id" Type="int" Nullable="false" />
+          <Property Name="eqtra_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="eqtra_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eqtra_Observacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="eqem_Estado" Type="bit" Nullable="false" />
+          <Property Name="eqem_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="eqem_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="eqem_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="eqem_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="eqem_UsuarioModifica" Type="int" />
+          <Property Name="eqem_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialAmonestacion">
           <Key>
@@ -1394,6 +1422,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <PropertyRef Name="hper_fechaInicio" />
             <PropertyRef Name="hper_fechaFin" />
             <PropertyRef Name="hper_Duracion" />
+            
             <PropertyRef Name="hper_PorcentajeIndemnizado" />
             <PropertyRef Name="hper_Estado" />
             <PropertyRef Name="hper_FechaCrea" />
@@ -1425,7 +1454,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
           <Property Name="hper_Duracion" Type="int" Nullable="false" />
           <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hper_Justificado" Type="bit" />
+          <Property Name="hper_Justificado" Type="bit" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
           <Property Name="hper_Estado" Type="bit" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -4919,6 +4948,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_Empleados].[per_NombreCompleto] AS [per_NombreCompleto], 
     [V_Empleados].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_Empleados] AS [V_Empleados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_EquipoTrabajoDetalles" EntityType="Self.V_EquipoTrabajoDetalles" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_EquipoTrabajoDetalles].[eqem_Id] AS [eqem_Id], 
+    [V_EquipoTrabajoDetalles].[eqtra_Id] AS [eqtra_Id], 
+    [V_EquipoTrabajoDetalles].[emp_Id] AS [emp_Id], 
+    [V_EquipoTrabajoDetalles].[eqtra_Codigo] AS [eqtra_Codigo], 
+    [V_EquipoTrabajoDetalles].[eqtra_Descripcion] AS [eqtra_Descripcion], 
+    [V_EquipoTrabajoDetalles].[eqtra_Observacion] AS [eqtra_Observacion], 
+    [V_EquipoTrabajoDetalles].[eqem_Estado] AS [eqem_Estado], 
+    [V_EquipoTrabajoDetalles].[eqem_RazonInactivo] AS [eqem_RazonInactivo], 
+    [V_EquipoTrabajoDetalles].[eqem_Fecha] AS [eqem_Fecha], 
+    [V_EquipoTrabajoDetalles].[eqem_UsuarioCrea] AS [eqem_UsuarioCrea], 
+    [V_EquipoTrabajoDetalles].[eqem_FechaCrea] AS [eqem_FechaCrea], 
+    [V_EquipoTrabajoDetalles].[eqem_UsuarioModifica] AS [eqem_UsuarioModifica], 
+    [V_EquipoTrabajoDetalles].[eqem_FechaModifica] AS [eqem_FechaModifica]
+    FROM [rrhh].[V_EquipoTrabajoDetalles] AS [V_EquipoTrabajoDetalles]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -11133,6 +11179,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tipe_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_EquipoTrabajoDetalles" EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12159,7 +12206,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
           <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_Justificado" Type="Boolean" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
           <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -12389,6 +12436,32 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbTipoHoras_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="V_EquipoTrabajoDetalles">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="eqtra_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="eqtra_Descripcion" />
+            <PropertyRef Name="eqem_Estado" />
+            <PropertyRef Name="eqem_Fecha" />
+            <PropertyRef Name="eqem_UsuarioCrea" />
+            <PropertyRef Name="eqem_FechaCrea" />
+          </Key>
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eqem_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="eqem_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="eqem_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqem_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="eqem_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqem_UsuarioModifica" Type="Int32" />
+          <Property Name="eqem_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14863,6 +14936,25 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Restore" />
+          <EntitySetMapping Name="V_EquipoTrabajoDetalles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EquipoTrabajoDetalles">
+              <MappingFragment StoreEntitySet="V_EquipoTrabajoDetalles">
+                <ScalarProperty Name="eqem_FechaModifica" ColumnName="eqem_FechaModifica" />
+                <ScalarProperty Name="eqem_UsuarioModifica" ColumnName="eqem_UsuarioModifica" />
+                <ScalarProperty Name="eqem_FechaCrea" ColumnName="eqem_FechaCrea" />
+                <ScalarProperty Name="eqem_UsuarioCrea" ColumnName="eqem_UsuarioCrea" />
+                <ScalarProperty Name="eqem_Fecha" ColumnName="eqem_Fecha" />
+                <ScalarProperty Name="eqem_RazonInactivo" ColumnName="eqem_RazonInactivo" />
+                <ScalarProperty Name="eqem_Estado" ColumnName="eqem_Estado" />
+                <ScalarProperty Name="eqtra_Observacion" ColumnName="eqtra_Observacion" />
+                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
+                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -105,22 +105,27 @@ $("#btnInactivar").click(function () {
  $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 $("#FormNuevo").on("submit", function (event) {
- if ($("#ModalNuevo").data("res")) {
-  event.preventDefault();
-  var data = $("#FormNuevo").serializeArray();
-  data = serializar(data);
-  _ajax(JSON.stringify({ tbEmpresas: data }),
-      '/Empresas/Create/',
-      'POST',
-      function (obj) {
-       if (obj != "-1" && obj != "-2" && obj != "-3") {
-        llenarTabla();
-       }
-      });
- } else {
-  MsgError("Error", "Aun no se carga el archivo ó el archibo no es valido");
- }
-
+    if ($("#ModalNuevo").data("res")) {
+        event.preventDefault();
+        var data = $("#FormNuevo").serializeArray();
+        data = serializar(data);
+        _ajax(JSON.stringify({ tbEmpresas: data }),
+            '/Empresas/Create/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    llenarTabla();
+                    MsgSuccess("Exito","Archivo subido exitosamente");
+                    $("#ModalNuevo").modal('hide');//ocultamos el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el
+                }else {
+                    MsgError("Error","valores incorrectos");
+                }
+            });
+    } else {
+        MsgError("Error", "El archivo no es valido o el campo ya existe");
+    }
 });
 
 $("#btnActualizar").click(function () {
