@@ -306,15 +306,6 @@ $("#btnCerrarAgregar").click(function () {
     $("#AgregarDeduccionAFP").modal('hide');
 });
 
-$("#btnIconCerrar").click(function () {
-    $("#emp_Id").val("0");
-    $("#dafp_AporteLps").val('');
-    $("#afp_Id").val("0");
-    $("#validation1d").css("display", "none");
-    $("#validation2d").css("display", "none");
-    $("#validation3d").css("display", "none");
-    $("#AgregarDeduccionAFP").modal('hide');
-});
 
 
 //Editar//
@@ -444,13 +435,6 @@ $(document).on("click", "#btnRegresar", function () {
     $("#EditarDeduccionAFPConfirmacion").modal('hide');
 });
 
-$(document).on("click", "#btnReg", function () {
-    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
-    $("#EditarDeduccionAFPConfirmacion").modal('hide');
-});
-
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionAFPConfirmar").click(function () {
@@ -507,11 +491,6 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 
 $("#btnCerrarEditar").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#EditarDeduccionAFP").modal('hide');
-});
-
-$("#btnIconCerrare").click(function () {
     $("#validatione1").css("display", "none");
     $("#EditarDeduccionAFP").modal('hide');
 });
@@ -615,13 +594,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
-    $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
-    $("html, body").css("overflow", "hidden");
-    $("html, body").css("overflow", "scroll");
-    $("#InactivarDeduccionAFP").modal('hide');
-});
-
-$(document).on("click", "#btnBa", function () {
     $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
