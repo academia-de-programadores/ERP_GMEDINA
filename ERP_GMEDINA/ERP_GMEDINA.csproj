@@ -224,6 +224,11 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
+    <Compile Include="DataSets\ReportesRRHH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1367,6 +1372,17 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSets\ReportesRRHH.xsc">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReportesRRHH.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesRRHH.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReportesRRHH.xss">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2079,6 +2095,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
+    <EmbeddedResource Include="Reports\EquipoEmpleadosRPT.rdlc" />
+    <EmbeddedResource Include="Reports\FaseSeleccionRPT.rdlc" />
+    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
