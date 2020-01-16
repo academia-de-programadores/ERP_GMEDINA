@@ -135,7 +135,7 @@ function showmodaledit(btn) {
 }
 function showmodalDelete(btn) {
     jor_Id = $(btn).data('id');
-    var modalnuevo = $('#ModalInhabilitarHorario');
+    var modalnuevo = $('#ModalInactivarHorario');
     modalnuevo.modal('show');
     $("#ModalEditarHorarios").modal('hide');//ocultamos el modal
     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
@@ -181,11 +181,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#jor_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#jor_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#jor_RazonInactivo").val("");
+    $("#ModalInactivar").find("#jor_RazonInactivo").focus();
 });
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
@@ -294,7 +294,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["jor_Descripcion", "jor_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
@@ -312,14 +312,14 @@ $("#InActivarHorario").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    $("#ModalInhabilitarHorario").modal('hide');//ocultamos el modal
+                    $("#ModalInactivarHorario").modal('hide');//ocultamos el modal
                     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                     $('.modal-backdrop').remove();//eliminamos el backdrop del modal
                     llenarTabla();
                     LimpiarControles(["hor_Descripcion", "hor_RazonInactivo"]);
                     MsgWarning("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

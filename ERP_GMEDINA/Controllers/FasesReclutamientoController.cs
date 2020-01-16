@@ -16,35 +16,36 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            List<tbFasesReclutamiento> tbFasesReclutamiento = new List<Models.tbFasesReclutamiento> { };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbFasesReclutamiento = db.tbFasesReclutamiento.Where(x => x.fare_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbFasesReclutamiento.Add(new tbFasesReclutamiento { fare_Id = 0, habi_Descripcion = "fallo la conexion" });
-                return View(tbFasesReclutamiento);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbFasesReclutamiento.Add(new tbFasesReclutamiento { fare_Id = 0, fare_Descripcion = "fallo la conexion" });
-            }
+
+            tbFasesReclutamiento tbFasesReclutamiento = new tbFasesReclutamiento { fare_Estado = true };
             return View(tbFasesReclutamiento);
         }
+
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbFasesReclutamiento> tbFasesReclutamiento =
-                new List<Models.tbFasesReclutamiento> { };
-            foreach (tbFasesReclutamiento x in db.tbFasesReclutamiento.ToList().Where(x => x.fare_Estado == true))
+            try
             {
-                tbFasesReclutamiento.Add(new tbFasesReclutamiento
+                db = new ERP_GMEDINAEntities();
+                List<tbFasesReclutamiento> tbFasesReclutamiento =
+                new List<Models.tbFasesReclutamiento> { };
+                foreach (tbFasesReclutamiento x in db.tbFasesReclutamiento.ToList())
                 {
-                    fare_Id = x.fare_Id,
-                    fare_Descripcion = x.fare_Descripcion
-                });
+                    tbFasesReclutamiento.Add(new tbFasesReclutamiento
+                    {
+                        fare_Id = x.fare_Id,
+                        fare_Descripcion = x.fare_Descripcion,
+                        fare_Estado = x.fare_Estado
+                    });
+                }
+                return Json(tbFasesReclutamiento, JsonRequestBehavior.AllowGet);
+
             }
-            return Json(tbFasesReclutamiento, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
         }
 
         // POST: FasesReclutamiento/Create
@@ -57,6 +58,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbFasesReclutamiento_Insert(tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbFasesReclutamiento_Insert_Result item in list)
                     {
@@ -87,6 +89,7 @@ namespace ERP_GMEDINA.Controllers
             tbFasesReclutamiento tbFasesReclutamiento = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbFasesReclutamiento = db.tbFasesReclutamiento.Find(id);
                 if (tbFasesReclutamiento == null || !tbFasesReclutamiento.fare_Estado)
                 {
@@ -126,6 +129,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbFasesReclutamiento_Update(id, tbFasesReclutamiento.fare_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbFasesReclutamiento_Update_Result item in list)
                     {
@@ -158,6 +162,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbfasesReclutamiento_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbfasesReclutamiento_Delete_Result item in list)
                     {
@@ -177,6 +182,31 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbfasesReclutamiento_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbfasesReclutamiento_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
         protected tbUsuario IsNull(tbUsuario valor)
         {

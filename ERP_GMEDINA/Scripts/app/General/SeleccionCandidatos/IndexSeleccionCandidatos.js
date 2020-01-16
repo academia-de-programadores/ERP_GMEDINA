@@ -170,15 +170,15 @@ function CallEliminar(btn) {
     var id = row.data().ID;
 
     CierraPopups();
-    $("#ModalInhabilitar").find("#scan_Id").val(id);
+    $("#ModalInactivar").find("#scan_Id").val(id);
     _ajax(null,
         '/SeleccionCandidatos/Edit/' + id,
        'GET',
        function (obj) {
            if (obj != "-1" && obj != "-2" && obj != "-3") {
-               $("#ModalInhabilitar").find("#per_Id").val(obj.per_Id);
-               $("#ModalInhabilitar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-               $('#ModalInhabilitar').modal('show');
+               $("#ModalInactivar").find("#per_Id").val(obj.per_Id);
+               $("#ModalInactivar").find("#per_Descripcion").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+               $('#ModalInactivar').modal('show');
            }
        });
 
@@ -202,7 +202,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["scan_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

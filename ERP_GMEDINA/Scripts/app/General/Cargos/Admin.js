@@ -1,9 +1,18 @@
 ﻿Admin = true;
+
+//Esta funcion llama al modal de Habilitar
 function hablilitar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().ID;
-    _ajax(JSON.stringify({id:id}),
+    $("#txtIdRestore").val(id);
+    $('#ModalHabilitar').modal('show');
+}
+
+//Cambiar el controlador para ejecutar el UDP de restaurar
+$("#btnActivar").click(function () {
+    var Id = $("#txtIdRestore").val();
+    _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
         '/Cargos/hablilitar/',
         'POST',
         function (obj) {
@@ -11,4 +20,5 @@ function hablilitar(btn) {
                 llenarTabla(-1);
             }
         });
-}
+    CierraPopups();
+});

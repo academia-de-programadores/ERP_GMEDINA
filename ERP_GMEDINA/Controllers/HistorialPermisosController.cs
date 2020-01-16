@@ -12,14 +12,13 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialPermisosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
-        // GET: HistorialPermisos
+        // GET: Areas
         public ActionResult Index()
         {
-            //ViewBag.tsal_Id = new SelectList(db.tbTipoSalidas, "tsal_Id", "tsal_Descripcion");
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialPermisos = new List<tbHistorialPermisos> { };
+            bool Admin = (bool)Session["Admin"];
+            tbHistorialPermisos tbHistorialPermisos = new tbHistorialPermisos { hper_Estado = Admin };
             return View(tbHistorialPermisos);
         }
         public ActionResult llenarTabla()
@@ -66,12 +65,14 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<V_tbHistorialPermisos_completa> lista = new List<V_tbHistorialPermisos_completa> { };
-            using (db = new ERP_GMEDINAEntities())
+            //List<V_tbHistorialPermisos_completa> lista = new List<V_tbHistorialPermisos_completa> { };
+            //using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
+                    using (db = new ERP_GMEDINAEntities())
+
+                        lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
                 }
                 catch
                 {
@@ -88,7 +89,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    TipoPermisos.Add(new
+                    using (db = new ERP_GMEDINAEntities())
+
+                        TipoPermisos.Add(new
                     {
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
@@ -118,7 +121,9 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    Empleados.Add(new
+                    using (db = new ERP_GMEDINAEntities())
+
+                        Empleados.Add(new
                     {
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
@@ -203,7 +208,6 @@ namespace ERP_GMEDINA.Controllers
         ///
         public ActionResult Edit(int? id)
         {
-            db = new ERP_GMEDINAEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -211,6 +215,8 @@ namespace ERP_GMEDINA.Controllers
             tbHistorialPermisos tbHistorialPermisos = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
+
                 tbHistorialPermisos = db.tbHistorialPermisos.Find(id);
                 if (tbHistorialPermisos == null || !tbHistorialPermisos.hper_Estado)
                 {
@@ -257,6 +263,8 @@ namespace ERP_GMEDINA.Controllers
                 var id = (int)Session["id"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
+
                     var list = db.UDP_RRHH_tbHistorialPermisos_Update(id, tbHistorialPermisos.hper_Observacion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialPermisos_Update_Result item in list)
                     {
@@ -292,6 +300,7 @@ namespace ERP_GMEDINA.Controllers
                 var id = (int)Session["id"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHistorialPermisos_Delete(id, tbHistorialPermisos.hper_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialPermisos_Delete_Result item in list)
                     {
@@ -331,6 +340,29 @@ namespace ERP_GMEDINA.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialPermisos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

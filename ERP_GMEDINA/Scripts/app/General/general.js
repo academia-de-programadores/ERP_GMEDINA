@@ -1,5 +1,5 @@
 //
-var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
+var modal = ["ModalNuevo", "ModalEditar", "ModalInactivar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
 function CierraPopups() {
     $.each(modal, function (index, valor) {
@@ -160,7 +160,7 @@ $("#ModalNuevo").on('hidden.bs.modal', function () {
 $("#ModalEditar").on('hidden.bs.modal', function () {
     limpiarClases(this);
 });
-$("#ModalInhabilitar").on('hidden.bs.modal', function () {
+$("#ModalInactivar").on('hidden.bs.modal', function () {
     limpiarClases(this);
 });
 $(".required").each(function (indice, input) {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialPermisos>
+﻿@model ERP_GMEDINA.Models.tbHistorialPermisos
 
 @{
     ViewBag.Title = "Permisos";
@@ -18,10 +18,12 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                         <thead>
                             <tr role="row">
-                                <th></th>
+                  
+                                <th>Número</th>
                                 <th>Nombre Completo</th>
                                 <th>Tipo Permiso</th>
-                                <th>Accion</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -31,7 +33,7 @@
         </div>
     </div>
 </div>
-@*MODAL EDITAR*@
+@*MODAL EDITAR
 <div class="modal inmodal" id="ModalEditar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
@@ -44,34 +46,34 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivar">Inactivar</button>
             </div>
         </div>
     </div>
 </div>
 @*MODAL EDITAR*@
 
-@*MODAL INHABILITAR*@
-<div class="modal inmodal" id="ModalInhabilitar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+@*MODAL Inactivar*@
+<div class="modal inmodal" id="ModalInactivar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
+                <h4 class="modal-title">¿Seguro que desea Inactivar el registro?</h4>
             </div>
-            <div class="modal-body" id="ModalInhabilitar">
+            <div class="modal-body" id="ModalInactivar">
                 <p>
                     @Html.Partial("_InhabilitarHistorialPermisos", new ERP_GMEDINA.Models.tbHistorialPermisos())
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left" id="InActivar">Inhabilitar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger pull-right" id="InActivar">Si</button>
             </div>
         </div>
     </div>
 </div>
-@*MODAL INHABILITAR*@
+@*MODAL Inactivar*@
 
 @*MODAL DETALLES*@
 <div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
@@ -93,6 +95,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ModalHabilitar" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este registro?
+            </div>
+            <input type="hidden" value="" id="txtIdRestore">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary pull-right" id="btnActivar" data-dismiss="modal">Si</button>
+                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @*@Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialPermisos())
     @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialPermisos())
@@ -107,4 +129,8 @@
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
+    @if (Model.hper_Estado)
+    {
+        @Scripts.Render("~/Scripts/app/general/HistorialPermisos/Admin")
+    }
 }

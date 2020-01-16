@@ -18,7 +18,9 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                         <thead>
                             <tr role="row">
+                                <th>Número</th>
                                 <th>@Html.DisplayNameFor(model => model.habi_Descripcion)</th>
+                                <th>@Html.DisplayNameFor(model=>model.habi_Estado)</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -29,6 +31,7 @@
         </div>
     </div>
 </div>
+@Html.Partial("_Activar")
 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbHabilidades())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHabilidades())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbHabilidades())

@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
     public class cRequisiciones
     {
 
-        [Display(Name = "ID")]
+        [Display(Name = "Numero")]
         public int req_Id { get; set; }
         [Display(Name = "Experiencia")]
         public string req_Experiencia { get; set; }
@@ -41,9 +41,9 @@ namespace ERP_GMEDINA.Models
         public string req_RazonInactivo { get; set; }
         [Display(Name = "Vacantes")]
         public string req_Vacantes { get; set; }
-        [Display(Name = "FechaRequisicion")]
+        [Display(Name = "Fecha Requisicion")]
         public Nullable<System.DateTime> req_FechaRequisicion { get; set; }
-        [Display(Name = "FechaContratacion")]
+        [Display(Name = "Fecha Contratacion")]
         public Nullable<System.DateTime> req_FechaContratacion { get; set; }
         [Display(Name = "Usuario crea")]
         public int req_UsuarioCrea { get; set; }

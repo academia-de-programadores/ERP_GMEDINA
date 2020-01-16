@@ -79,11 +79,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#hsal_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#hsal_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#hsal_RazonInactivo").val("");
+    $("#ModalInactivar").find("#hsal_RazonInactivo").focus();
 });
 //aqui
 $("#InActivar").click(function () {
@@ -99,7 +99,7 @@ $("#InActivar").click(function () {
                 LimpiarControles(["hsal_Observacion", "hsal_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
             }
         });
     } else {

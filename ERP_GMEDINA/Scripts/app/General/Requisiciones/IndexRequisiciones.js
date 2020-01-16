@@ -1,4 +1,7 @@
-﻿var id = 0;
+﻿var fill = 0;
+var id = 0;
+var Admin = false;
+
 //Funciones GET
 function tablaDetalles(btn) {
     var tr = $(btn).closest("tr");
@@ -213,26 +216,40 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    ID: value.req_Id,
-                    Experiencia: value.req_Experiencia,
-                    Sexo: value.req_Sexo,
-                    Descripcion: value.req_Descripcion,
-                    EdadMinima: value.req_EdadMinima,
-                    EdadMaxima: value.req_EdadMaxima,
-                    EstadoCivil: value.req_EstadoCivil,
-                    EducacionSuperior: BinToCheckBox(value.req_EducacionSuperior),
-                    Temporal: BinToCheckBox(value.req_Permanente),
-                    Duracion: value.req_Duracion,
-                    Vacantes: value.req_Vacantes,
-                    FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),
-                    FechaContratacion: FechaFormatoSimple(value.req_FechaContratacion)
-                });
+
+                var Acciones = value.req_Estado==1
+                    ?null:
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "</div>";
+                if (value.req_Estado>fill) {
+                    
+                    tabla.row.add({
+                        ID: value.req_Id,
+                        "Número": value.req_Id,
+                        Experiencia: value.req_Experiencia,
+                        Sexo: value.req_Sexo,
+                        Descripcion: value.req_Descripcion,
+                        EdadMinima: value.req_EdadMinima,
+                        EdadMaxima: value.req_EdadMaxima,
+                        EstadoCivil: value.req_EstadoCivil,
+                        EducacionSuperior: value.req_EducacionSuperior ? "Si" : "No",
+                        Temporal: value.req_Permanente ? "Si" : "No",
+                        Duracion: value.req_Duracion == null ? "N/A" : value.req_Duracion,
+                        Vacantes: value.req_Vacantes,
+                        FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),
+                        FechaContratacion: FechaFormatoSimple(value.req_FechaContratacion),
+                        Acciones: Acciones,
+                        Estado : value.req_Estado ? "Activo" : "Inactivo"
+                    });
+                } 
+                tabla.draw();
             });
-            tabla.draw();
-        });
-}
+        })
+    };
+
 $(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 //Botones GET
@@ -278,11 +295,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#req__RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#req__RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#req__RazonInactivo").val("");
+    $("#ModalInactivar").find("#req__RazonInactivo").focus();
 });
 
 //botones POST
@@ -324,7 +341,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["req_Experiencia", "req_Sexo", "req_Descripcion", "req_EdadMinima", "req_EdadMaxima", "req_EstadoCivil", "req_EducacionSuperior", "req_Permanente", "req_Duracion", "req_Vacantes", "req_FechaRequisicion", "req_FechaContratacion", "req__RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

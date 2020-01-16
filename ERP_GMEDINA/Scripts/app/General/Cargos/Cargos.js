@@ -2,6 +2,7 @@
     fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
+
 var fill = 0;
 var id = 0;
 //Funciones GET
@@ -25,7 +26,6 @@ function tablaDetalles(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#car_Descripcion")["0"].innerText = obj.car_Descripcion;
-          
                 $("#ModalDetalles").find("#car_FechaCrea")["0"].innerText = FechaFormato(obj.car_FechaCrea);
                 $("#ModalDetalles").find("#car_FechaModifica")["0"].innerText = FechaFormato(obj.car_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -35,6 +35,7 @@ function tablaDetalles(ID) {
             }
         });
 }
+
 function llenarTabla() {
     _ajax(null,
         '/Cargos/llenarTabla',
@@ -53,8 +54,9 @@ function llenarTabla() {
                    "</div>";
                 if (value.car_Estado > fill) {
                     tabla.row.add({
-                        ID: value.car_Id,
+                        Numero: value.car_Id,
                         Cargo: value.car_Descripcion,
+                        Estado:value.car_Estado ?"Activo":"Inactivo",
                         Acciones:Acciones
                     }).draw();
                 }
@@ -68,6 +70,7 @@ $("#btnAgregar").click(function () {
     $(modalnuevo).find("#car_Descripcion").val("");
     $(modalnuevo).find("#car_Descripcion").focus();
 });
+
 $("#btnEditar").click(function () {
     _ajax(null,
         '/Cargos/Edit/' + id,
@@ -81,12 +84,14 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#car_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#car_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#car_RazonInactivo").val("");
+    $("#ModalInactivar").find("#car_RazonInactivo").focus();
 });
+
 //botones POST
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
@@ -110,6 +115,7 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -126,13 +132,16 @@ $("#InActivar").click(function () {
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+
+
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);

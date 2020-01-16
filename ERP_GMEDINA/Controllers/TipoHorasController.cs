@@ -12,41 +12,41 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoHorasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Habilidades
         public ActionResult Index()
         {
-            List<tbTipoHoras> tbTipoHoras = new List<Models.tbTipoHoras> { };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbTipoHoras = db.tbTipoHoras.Where(x => x.tiho_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbHabilidades.Add(new tbHabilidades { habi_Id = 0, habi_Descripcion = "fallo la conexion" });
-                return View(tbTipoHoras);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbTipoHoras.Add(new tbTipoHoras { tiho_Id = 0, tiho_Descripcion = "fallo la conexion", tiho_Recargo = 0 });
-            }
+            tbTipoHoras tbTipoHoras = new tbTipoHoras {tiho_Estado=true };
+            bool Admin = (bool)Session["Admin"];
+       
             return View(tbTipoHoras);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTipoHoras> tbTipoHoras =
-                new List<Models.tbTipoHoras> { };
-            foreach (tbTipoHoras x in db.tbTipoHoras.ToList().Where(x => x.tiho_Estado == true))
+            try
             {
-                tbTipoHoras.Add(new tbTipoHoras
-                {
-                    tiho_Id = x.tiho_Id,
+                db = new ERP_GMEDINAEntities();
+                var tbTipoHoras = db.tbTipoHoras
+                    .Select(
+                       x => new {
+                           
+                           tiho_Id = x.tiho_Id,
                     tiho_Descripcion = x.tiho_Descripcion,
-                    tiho_Recargo = x.tiho_Recargo
-                });
+                    tiho_Recargo = x.tiho_Recargo,
+                           tiho_Estado = x.tiho_Estado
+                       }
+                )
+                .ToList();
+                return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
+
             }
-            return Json(tbTipoHoras, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
 
         // POST: Habilidades/Create
@@ -62,6 +62,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoHoras_Insert(tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoHoras_Insert_Result item in list)
                     {
@@ -92,6 +93,7 @@ namespace ERP_GMEDINA.Controllers
             tbTipoHoras tbTipoHoras = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbTipoHoras = db.tbTipoHoras.Find(id);
                 if (tbTipoHoras == null || !tbTipoHoras.tiho_Estado)
                 {
@@ -136,6 +138,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoHora_Update(id, tbTipoHoras.tiho_Descripcion, tbTipoHoras.tiho_Recargo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoHora_Update_Result item in list)
                     {
@@ -173,6 +176,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoHoras_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoHoras_Delete_Result item in list)
                     {
@@ -204,9 +208,36 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+
+                    var list = db.UDP_RRHH_tbTipoHoras_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoHoras_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

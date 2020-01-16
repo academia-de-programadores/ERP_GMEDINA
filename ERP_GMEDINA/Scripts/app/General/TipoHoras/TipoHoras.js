@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
-    $(".drop li a")
-       .on('click', function (e) {
-           e.stopPropagation();
-       });
 });
+
+var fill = 0;
+var Admin = false;
 var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
@@ -48,14 +48,24 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 //console.log(item.tiho_Descripcion);
-           
-                  tabla.row.add({
+                var Acciones = value.tiho_Estado == 1
+                       ?null:Admin?
+                       "<div>" +
+                           "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "</div>":"";
+          
+                tabla.row.add({
+                   
+                    "Número": value.tiho_Id,
                       ID: value.tiho_Id,
                       Hora: value.tiho_Descripcion,
-                      Recargo: value.tiho_Recargo
+                      Recargo: value.tiho_Recargo,
+                      Estado: value.tiho_Estado ? 'Activo' : 'Inactivo',
+                      Acciones: Acciones
                   });
         });
-            tabla.draw();
+        tabla.draw();
+
         });
 }
 //Botones GET
@@ -80,11 +90,11 @@ $("#btnEditar").click(function () {
             }
         });
 });
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#habi_RazonInactivo").val("");
-    $("#ModalInhabilitar").find("#habi_RazonInactivo").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#habi_RazonInactivo").val("");
+    $("#ModalInactivar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
 $("#btnGuardar").click(function () {
@@ -117,7 +127,7 @@ $("#InActivar").click(function () {
                 LimpiarControles(["tiho_Descripcion", "tiho_Recargo", "tiho_RazonInactivo"]);
                 MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
             } else {
-                MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
             }
         });
     }
