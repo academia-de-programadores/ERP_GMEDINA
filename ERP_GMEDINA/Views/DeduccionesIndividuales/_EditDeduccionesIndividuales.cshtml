@@ -9,17 +9,17 @@
 
                 <div class="form-group" >
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.dei_Motivo)
+                        @Html.LabelFor(model => model.dei_Motivo)<span id="aste1">*</span>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.dei_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Motivo" } })
-                        @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validation1" })
+                        @Html.ValidationMessageFor(model => model.dei_Motivo, "", new { @class = "text-danger", @id = "validatione1" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.emp_Id)
+                        @Html.LabelFor(model => model.emp_Id)<span id="aste2">*</span>
                     </div>
                     <div class="col-md-8">
                         <select id="emp_Id" name="emp_Id" class="form-control"></select>
@@ -28,31 +28,31 @@
 
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.dei_MontoInicial)
+                        @Html.LabelFor(model => model.dei_MontoInicial)<span id="aste3">*</span>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.dei_MontoInicial, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoInicial" } })
-                        @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validation3" })
+                        @Html.ValidationMessageFor(model => model.dei_MontoInicial, "", new { @class = "text-danger", @id = "validatione3" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.dei_MontoRestante)
+                        @Html.LabelFor(model => model.dei_MontoRestante)<span id="aste4">*</span>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
-                        @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validation4" })
+                        @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.dei_Cuota)
+                        @Html.LabelFor(model => model.dei_Cuota)<span id="aste5">*</span>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.dei_Cuota, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_Cuota" } })
-                        @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validation5" })
+                        @Html.ValidationMessageFor(model => model.dei_Cuota, "", new { @class = "text-danger", @id = "validatione5" })
                     </div>
                 </div>
 
