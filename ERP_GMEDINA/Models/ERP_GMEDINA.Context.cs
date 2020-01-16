@@ -3911,31 +3911,6 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbCompetenciasPersona_Restore", cope_IdParameter, cope_UsuarioModificaParameter, cope_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbEquipoEmpleado_Insert(Nullable<int> emp_Id, Nullable<int> eqtra_Id, Nullable<System.DateTime> eqem_Fecha, Nullable<int> eqem_UsuarioCrea, Nullable<System.DateTime> eqem_FechaCrea)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var eqtra_IdParameter = eqtra_Id.HasValue ?
-                new ObjectParameter("eqtra_Id", eqtra_Id) :
-                new ObjectParameter("eqtra_Id", typeof(int));
-    
-            var eqem_FechaParameter = eqem_Fecha.HasValue ?
-                new ObjectParameter("eqem_Fecha", eqem_Fecha) :
-                new ObjectParameter("eqem_Fecha", typeof(System.DateTime));
-    
-            var eqem_UsuarioCreaParameter = eqem_UsuarioCrea.HasValue ?
-                new ObjectParameter("eqem_UsuarioCrea", eqem_UsuarioCrea) :
-                new ObjectParameter("eqem_UsuarioCrea", typeof(int));
-    
-            var eqem_FechaCreaParameter = eqem_FechaCrea.HasValue ?
-                new ObjectParameter("eqem_FechaCrea", eqem_FechaCrea) :
-                new ObjectParameter("eqem_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbEquipoEmpleado_Insert", emp_IdParameter, eqtra_IdParameter, eqem_FechaParameter, eqem_UsuarioCreaParameter, eqem_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<string> UDP_RRHH_tbHabilidadesPersona_Restore(Nullable<int> hape_Id, Nullable<int> hape_UsuarioModifica, Nullable<System.DateTime> hape_FechaModifica)
         {
             var hape_IdParameter = hape_Id.HasValue ?
@@ -4143,6 +4118,31 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tipe_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbTitulosPersona_Restore", tipe_IdParameter, tipe_UsuarioModificaParameter, tipe_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbEquipoEmpleados_Insert_Result> UDP_RRHH_tbEquipoEmpleados_Insert(Nullable<int> emp_Id, Nullable<int> eqtra_Id, Nullable<System.DateTime> eqem_Fecha, Nullable<int> eqem_UsuarioCrea, Nullable<System.DateTime> eqem_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var eqtra_IdParameter = eqtra_Id.HasValue ?
+                new ObjectParameter("eqtra_Id", eqtra_Id) :
+                new ObjectParameter("eqtra_Id", typeof(int));
+    
+            var eqem_FechaParameter = eqem_Fecha.HasValue ?
+                new ObjectParameter("eqem_Fecha", eqem_Fecha) :
+                new ObjectParameter("eqem_Fecha", typeof(System.DateTime));
+    
+            var eqem_UsuarioCreaParameter = eqem_UsuarioCrea.HasValue ?
+                new ObjectParameter("eqem_UsuarioCrea", eqem_UsuarioCrea) :
+                new ObjectParameter("eqem_UsuarioCrea", typeof(int));
+    
+            var eqem_FechaCreaParameter = eqem_FechaCrea.HasValue ?
+                new ObjectParameter("eqem_FechaCrea", eqem_FechaCrea) :
+                new ObjectParameter("eqem_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEquipoEmpleados_Insert_Result>("UDP_RRHH_tbEquipoEmpleados_Insert", emp_IdParameter, eqtra_IdParameter, eqem_FechaParameter, eqem_UsuarioCreaParameter, eqem_FechaCreaParameter);
         }
     }
 }

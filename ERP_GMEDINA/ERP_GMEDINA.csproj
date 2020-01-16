@@ -589,6 +589,9 @@
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoEmpleados_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1998,6 +2001,7 @@
     <Content Include="Views\HistorialCargos\_Create.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\Index.cshtml" />
+    <Content Include="Views\EquipoEmpleados\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

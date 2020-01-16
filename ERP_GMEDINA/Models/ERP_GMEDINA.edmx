@@ -2500,31 +2500,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -4024,15 +4000,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_RRHH_tbEquipoEmpleado_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="eqem_Id" Type="int" Mode="In" />
-          <Parameter Name="eqem_UsuarioModifica" Type="int" Mode="In" />
-          <Parameter Name="eqem_FechaModifica" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="UDP_RRHH_tbEquipoEmpleado_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+        <Function Name="UDP_RRHH_tbEquipoEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="eqtra_Id" Type="int" Mode="In" />
-          <Parameter Name="eqem_Fecha" Type="date" Mode="In" />
+          <Parameter Name="eqem_Fecha" Type="datetime" Mode="In" />
           <Parameter Name="eqem_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="eqem_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -5617,15 +5588,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
@@ -11113,13 +11076,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="cope_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cope_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleado_Insert" ReturnType="Collection(String)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
-            <Parameter Name="eqem_Fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="eqem_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="eqem_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHabilidadesPersona_Restore" ReturnType="Collection(String)">
             <Parameter Name="hape_Id" Mode="In" Type="Int32" />
             <Parameter Name="hape_UsuarioModifica" Mode="In" Type="Int32" />
@@ -11180,6 +11136,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_EquipoTrabajoDetalles" EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" />
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleados_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="eqem_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12462,6 +12425,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="eqem_UsuarioModifica" Type="Int32" />
           <Property Name="eqem_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbEquipoEmpleados_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14918,7 +14884,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImportMapping FunctionImportName="rrhh_tbRequerimientosEspecialesRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbRequerimientosEspecialesRequisicion_Restore" />
           <FunctionImportMapping FunctionImportName="rrhh_tbTitulosRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbTitulosRequisicion_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetenciasPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetenciasPersona_Restore" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleado_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleado_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidadesPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidadesPersona_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistrialVacaciones_Periodos" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistrialVacaciones_Periodos">
             <ResultMapping>
@@ -14955,6 +14920,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleados_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleados_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

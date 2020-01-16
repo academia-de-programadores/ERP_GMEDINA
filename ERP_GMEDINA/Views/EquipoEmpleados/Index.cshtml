@@ -19,9 +19,10 @@
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">                            
-                            <th>Empleados</th>
+                            <th></th>
+                            <th>Empleado</th>
                             <th>Correo</th>
-                            <th>Teléfono</th>
+                            <th>Telefono</th>
                         </tr>
                     </thead>
                     <tbody> </tbody>
@@ -31,6 +32,8 @@
         </div>
     </div>
  </div>
+
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbEquipoEmpleados())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
