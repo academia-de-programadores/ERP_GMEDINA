@@ -566,6 +566,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades").Include(
             "~/Scripts/app/General/Nacionalidades/Nacionalidades.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades/Admin").Include(
+"~/Scripts/app/General/Nacionalidades/Admin.js"));
+
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
             "~/Scripts/app/general/Habilidades/Habilidades.js"));
 
@@ -580,6 +584,18 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                         "~/Scripts/app/general/Areas/EditArea.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
+         "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos/Admin").Include(
+           "~/Scripts/app/General/Titulos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/AdminHistorialAmonestaciones").Include(
+                       "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Admin").Include(
+           "~/Scripts/app/general/Idiomas/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Admin").Include(
                 "~/Scripts/app/general/Areas/Admin.js"));

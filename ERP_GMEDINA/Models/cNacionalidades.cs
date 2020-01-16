@@ -19,13 +19,12 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID")]
         public int nac_Id { get; set; }
 
-        [Display(Name = "Nacionalidades")]
+        [Display(Name = "Nacionalidad")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         public string nac_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
-
         public bool nac_Estado { get; set; }
 
         [Display(Name = "Razón Inactivo")]
