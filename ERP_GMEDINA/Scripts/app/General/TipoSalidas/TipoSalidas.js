@@ -48,7 +48,7 @@ function llenarTabla() {
                     "</div>" : '';
                    tabla.row.add(
                        {
-                        Estado:value.tsal_Estado,
+                        Estado:value.tsal_Estado?'Activo':'Inactivo',
                            "Número": value.tsal_Id,
                            ID: value.tsal_Id,
                            Salidas: value.tsal_Descripcion,

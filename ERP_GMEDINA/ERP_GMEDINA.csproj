@@ -245,7 +245,6 @@
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
-    <Compile Include="Models\cHistorialIncapacidades.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -705,6 +704,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistrialVacaciones_Periodos_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHorarios_Delete_Result.cs">
