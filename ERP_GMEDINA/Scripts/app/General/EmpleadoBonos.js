@@ -108,7 +108,11 @@ function cargarGridBonos() {
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE EMPLEADOS DEL MODAL
-    //
+    $("#Validation_descipcion7").css("display", "");
+    $("#Validation_descipcion8").css("display", "");
+    $("#Validation_descipcion9").css("display", "");
+    $("#Validation_descipcion4").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
     $.ajax({
         url: "/EmpleadoBonos/EditGetDDLEmpleado",
         method: "GET",
@@ -153,14 +157,14 @@ $('#btnCreateRegistroBonos').click(function () {
     var IdIngreso = $("#Crear #cin_IdIngreso").val();
     var Monto = $("#Crear #cb_Monto").val();
     var decimales = Monto.split(".");
-
+    document.getElementById("btnCreateRegistroBonos").disabled = true;
     if (IdEmpleado != 0 && IdIngreso != 0 &&
         Monto != "" && Monto != null && Monto != undefined && Monto > 0
         && decimales[1] != null && decimales[1] != undefined) {
         $("#Validation_descipcion1").css("display", "none");
         $("#Validation_descipcion3").css("display", "none");
         $("#Validation_descipcion5").css("display", "none");
-
+        document.getElementById("btnCreateRegistroBonos").disabled = true;
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoBonosCreate").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -192,56 +196,67 @@ $('#btnCreateRegistroBonos').click(function () {
 
     }
     else {
+        debugger;
         if (IdEmpleado == "0") {
-            $("#Validation_descipcion1").css("display", "");
-            $("#Validation_descipcion2").css("display", "");
+            $("#Crear #Validation_descipcion1").css("display", "");
+            $("#Crear #Validation_descipcion2").css("display", "");
+            $("#Crear #Validation_descipcion9").css("display", "none");
+            document.getElementById("btnCreateRegistroBonos").disabled = false;
         }
         else {
-            $("#Validation_descipcion1").css("display", "none");
-            $("#Validation_descipcion2").css("display", "none");
+            $("#Crear #Validation_descipcion1").css("display", "none");
+            $("#Crear #Validation_descipcion2").css("display", "none");
+            $("#Crear #Validation_descipcion9").css("display", "");
         }
         if (IdIngreso == "0") {
-            $("#Validation_descipcion3").css("display", "");
-            $("#Validation_descipcion4").css("display", "");
+            $("#Crear #Validation_descipcion3").css("display", "");
+            $("#Crear #Validation_descipcion4").css("display", "");
+            $("#Crear #Validation_descipcion7").css("display", "none");
+            document.getElementById("btnCreateRegistroBonos").disabled = false;
         }
         else {
-            $("#Validation_descipcion3").css("display", "none");
-            $("#Validation_descipcion4").css("display", "none");
+            $("#Crear #Validation_descipcion3").css("display", "none");
+            $("#Crear #Validation_descipcion4").css("display", "none");
+            $("#Crear #Validation_descipcion7").css("display", "");
         }
-        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
-            $("#Validation_descipcion5").css("display", "");
-            $("#Validation_descipcion6").css("display", "");
+        if (Monto == "" || Monto == null || Monto == undefined || Monto <= "0" || Monto == "0") {
+            $("#Crear #Validation_descipcion5").css("display", "");
+            $("#Crear #Validation_descipcion6").css("display", "");
+            $("#Crear #Validation_descipcion8").css("display", "none");
+            document.getElementById("btnCreateRegistroBonos").disabled = false;
         }
         else if (decimales[1] == null && decimales[1] == undefined) {
-
-            $("#Validation_descipcion5").css("display", "");
-            $("#Validation_descipcion6").css("display", "");
+            $("#Crear #Validation_descipcion8").css("display", "none");
+            $("#Crear #Validation_descipcion5").css("display", "");
+            $("#Crear #Validation_descipcion6").css("display", "");
+            document.getElementById("btnCreateRegistroBonos").disabled = false;
         }
         else {
-            $("#Validation_descipcion5").css("display", "none");
-            $("#Validation_descipcion6").css("display", "none");
+            $("#Crear #Validation_descipcion8").css("display", "");
+            $("#Crear #Validation_descipcion5").css("display", "none");
+            $("#Crear #Validation_descipcion6").css("display", "none");
         }
     } 
 });
 
 $("#btnCerrarCrearBono").click(function () {
-    $("#Validation_descipcion1").hidden = true;
-    $("#Validation_descipcion1").css("display", "none");
+    $("#Crear #Validation_descipcion1").hidden = true;
+    $("#Crear #Validation_descipcion1").css("display", "none");
 
-    $("#Validation_descipcion2").hidden = true;
-    $("#Validation_descipcion2").css("display", "none");
+    $("#Crear #Validation_descipcion2").hidden = true;
+    $("#Crear #Validation_descipcion2").css("display", "none");
 
-    $("#Validation_descipcion3").hidden = true;
-    $("#Validation_descipcion3").css("display", "none");
+    $("#Crear #Validation_descipcion3").hidden = true;
+    $("#Crear #Validation_descipcion3").css("display", "none");
 
-    $("#Validation_descipcion4").hidden = true;
-    $("#Validation_descipcion4").css("display", "none");
+    $("#Crear #Validation_descipcion4").hidden = true;
+    $("#Crear #Validation_descipcion4").css("display", "none");
 
-    $("#Validation_descipcion5").hidden = true;
-    $("#Validation_descipcion5").css("display", "none");
+    $("#Crear #Validation_descipcion5").hidden = true;
+    $("#Crear #Validation_descipcion5").css("display", "none");
 
-    $("#Validation_descipcion6").hidden = true;
-    $("#Validation_descipcion6").css("display", "none");
+    $("#Crear #Validation_descipcion6").hidden = true;
+    $("#Crear #Validation_descipcion6").css("display", "none");
    
    
 });
@@ -282,7 +297,11 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-
+                if (data.cb_Pagado) {
+                    document.getElementById("btnUpdateBonos").disabled = true;
+                } else {
+                    document.getElementById("btnUpdateBonos").disabled = false;
+                }
                 var FechaRegistro = FechaFormato(data.cb_FechaRegistro);
 
                 //AQUI VALIDA EL CHECKBOX PARA PODER CARGARLO EN EL MODAL
@@ -333,7 +352,9 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                     });
 
 
-                $("#EditarEmpleadoBonos").modal();
+                $("#EditarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data
@@ -348,31 +369,37 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
 $("#btnUpdateBonos").click(function () {
     var Monto = $("#Editar #cb_Monto").val();
     var decimales = Monto.split(".");
-    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+    if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0 || Monto == 0) {
         $("#Crear #cin_IdIngreso").focus;
         $("#EditarEmpleadoBonosConfirmacion").modal('hide'); 
         $("#Editar #Validation_descipcion5").css("display", "");
         $("#Editar #Validation_descipcion6").css("display", "");
-
+        $("#Editar #Validation_descipcion3").css("display", "none");
+        document.getElementById("btnUpdateBonos").disabled = false;
     } else if (decimales[1] == null && decimales[1] == undefined) {
         $("#EditarEmpleadoBonosConfirmacion").modal('hide');
         $("#Editar #Validation_descipcion5").css("display", "");
         $("#Editar #Validation_descipcion6").css("display", "");
-       
+        $("#Editar #Validation_descipcion3").css("display", "none");
+        document.getElementById("btnUpdateBonos").disabled = false;
     }
     else {
         $("#EditarEmpleadoBonos").modal('hide');
-        $("#EditarEmpleadoBonosConfirmacion").modal();
+        $("#EditarEmpleadoBonosConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
         $("#Editar #Validation_descipcion5").css("display", "none");
         $("#Editar #Validation_descipcion6").css("display", "none");
+        $("#Editar #Validation_descipcion3").css("display", "");
        
 }
 });
 //FUNCION: EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos2").click(function () {
+    document.getElementById("btnUpdateBonos2").disabled = true;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEmpleadoBonos").serializeArray();
-
+       
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoBonos/edit",
@@ -404,16 +431,14 @@ $("#btnUpdateBonos2").click(function () {
     });  
 });
 $("#btCerrarEditar").click(function () {
+    document.getElementById("btCerrarEditar").disabled = true;
     $("#EditarEmpleadoBonos").modal();
     $("#EditarEmpleadoBonosConfirmacion").modal('hide');
 })
 
 
 
-$("#btCerrarNo").click(function () {
-    $("#EditarEmpleadoBonos").modal();
-    $("#InactivarEmpleadoBonos").modal();
-})
+
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos", function () {
     var ID = $(this).data('id');
@@ -506,12 +531,17 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnDetalleEmpleadoBonos"
 //FUNCION: MOSTRAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnmodalInactivarEmpleadoBonos", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
+    document.getElementById("btnInactivarRegistroBono").disabled = false;
+    document.getElementById("btCerrarNo").disabled = false;
     $("#EditarEmpleadoBonos").modal('hide');
-    $("#InactivarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroBono").click(function () {
+    document.getElementById("btnInactivarRegistroBono").disabled = true;
     console.log(IDInactivar);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -540,14 +570,24 @@ $("#btnInactivarRegistroBono").click(function () {
     IDInactivar = 0;
 });
 
+$("#btCerrarNo").click(function () {
+    document.getElementById("btCerrarNo").disabled = true;
+    $("#EditarEmpleadoBonos").modal();
+    $("#InactivarEmpleadoBonos").modal('hide');
+})
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnActivarEmpleadoBonos", function () {
     IDActivar = $(this).data('id');
-    $("#ActivarEmpleadoBonos").modal();
+    document.getElementById("btnActivarRegistroBono").disabled = false;
+    document.getElementById("btactivarNO").disabled = false;
+    $("#ActivarEmpleadoBonos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO
 $("#btnActivarRegistroBono").click(function () {
+    document.getElementById("btnActivarRegistroBono").disabled = true;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoBonos/Activar/" + IDActivar,
@@ -574,6 +614,9 @@ $("#btnActivarRegistroBono").click(function () {
     });
     IDActivar = 0;
 });
-
-
+btactivarNO
+$("#btactivarNO").click(function () {
+    document.getElementById("btactivarNO").disabled = true;
+    $("#ActivarEmpleadoBonos").modal('hide');
+})
  

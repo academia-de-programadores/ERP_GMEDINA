@@ -168,7 +168,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnEditarEmpleadoCo
 $('#btnUpdateComisionesConfirmar').click(function () {
     var PorcentajeComision = $("#Editar #cc_PorcentajeComision").val();
     var TotalVenta = $("#Editar #cc_TotalVenta").val();
-    debugger;
     if (PorcentajeComision == "" && TotalVenta == "" || PorcentajeComision == "0.00" && TotalVenta == "0.00" || PorcentajeComision == null && TotalVenta == null || PorcentajeComision == undefined && TotalVenta == undefined || PorcentajeComision == "0" && TotalVenta == "0" || PorcentajeComision <= "0" && TotalVenta <= "0") {
         $("#Editar #Validation_descipcion1e").css("display", "block");
         $("#Editar #Validation_descipcion1").css("display", "");
