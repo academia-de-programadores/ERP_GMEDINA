@@ -20,6 +20,8 @@ window.addEventListener('load', init, false);
 $("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+     var img = document.getElementById('img1');
+     img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
  } else {
   var formData = new FormData();
