@@ -46,6 +46,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/bundles/skinConfig").Include(
                       "~/Scripts/app/skin.config.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/Admin").Include(
+           "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
+
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));

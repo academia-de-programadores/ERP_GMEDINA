@@ -111,6 +111,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
         public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
+        public virtual DbSet<V_EquipoTrabajoDetalles> V_EquipoTrabajoDetalles { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
