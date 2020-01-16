@@ -22,13 +22,51 @@ tr.shown td.details-control {
 }
 
 .data {
-    width: 300px;
+    width: 370px;
     height: 400px;
-    overflow: scroll;
+    overflow: auto;
+}
+
+/*.data {
+    max-height: calc(100vh);
+    overflow-y: auto;
+    position: fixed;
+}*/
+
+.data::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.data::-webkit-scrollbar-track {
+background : rgb(131, 131, 131);
+border-radius: 10px;
+}
+
+.data::-webkit-scrollbar-thumb {
+background : rgba(168, 168, 168, 0.5);
+border-radius: 10px;
+box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .data-details {
     width: 460px;
     height: 300px;
-    overflow: scroll;
+    overflow: auto;
+}
+
+.data-details::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.data-details::-webkit-scrollbar-track {
+background : rgb(131, 131, 131);
+border-radius: 10px;
+}
+
+.data-details::-webkit-scrollbar-thumb {
+background : rgba(168, 168, 168, 0.5);
+border-radius: 10px;
+box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
 }

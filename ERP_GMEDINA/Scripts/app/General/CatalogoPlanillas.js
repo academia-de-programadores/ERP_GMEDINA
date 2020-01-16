@@ -18,6 +18,8 @@ var pathname = window.location.pathname + '/',
 const btnGuardar = $('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), //Boton para guardar el catalogo de planilla con sus detalles
 	btnEditar = $('#btnEditarCatalogoDePlanillasIngresosDeducciones'), //Boton para editar editar el catalogo de planilla con sus detalles
 	validacionDescripcionPlanilla = $('#validacionDescripcionPlanilla'), //Mensaje de validacion para la descripcion de la planilla
+	asteriscoDescripcionPlanilla = $('#asteriscoDescripcion'),
+	asteriscoFrecuenciaPago = $('#asteriscoFrecuenciaPago'),
 	validacionFrecuenciaDias = $('#validacionFrecuenciaDias'), //Mensaje de validación para la frecuencia en días
 	validacionCatalogoIngresos = $(
 		'#catalogoDeIngresos #validacionCatalogoIngresos'
@@ -257,7 +259,6 @@ function estaEnDetalles() {
 
 
 function estaEnIndex() {
-	console.log('esta en index');
 	return getUrl.toString().indexOf('Index');
 }
 
@@ -291,15 +292,23 @@ function verificarCampos(
 		scrollArriba();
 		validacionDescripcionPlanilla.show();
 		inputDescripcionPlanilla.focus();
+		asteriscoDescripcionPlanilla.addClass('text-danger');
 		todoBien = false;
-	} else validacionDescripcionPlanilla.hide();
+	} else {
+		asteriscoDescripcionPlanilla.removeClass('text-danger');
+		validacionDescripcionPlanilla.hide();
+	}
 	//Validar que la frecuencia en días esté bien
 	if (frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0) {
 		scrollArriba();
 		validacionFrecuenciaDias.show();
 		if (todoBien) inputFrecuenciaEnDias.focus();
+		asteriscoFrecuenciaPago.addClass('text-danger');
 		todoBien = false;
-	} else validacionFrecuenciaDias.hide();
+	} else {
+		asteriscoFrecuenciaPago.removeClass('text-danger');
+		validacionFrecuenciaDias.hide();
+	}
 
 	//Validar que se haya seleccionado por lo menos un ingreso
 	if (catalogoIngresos.length == 0) {
@@ -479,7 +488,6 @@ function listarCatalogos() {
 
 	var urlFetchData = baseUrl + '/GetIngresosDeducciones?esCrear=';
 	if (estaEnEditar() > 1) {
-		console.log('Esta en editar');
 		urlFetchData += 'false&id=' + URLactual.substr((URLactual.search(/Edit/i) + 'Edit'.length + 1))
 
 		//Ingresos
@@ -572,19 +580,17 @@ function listarCatalogos() {
 				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 				//Se activara el switch, si esta desactivado
 				$(catalogoIngresosInputs).on('ifChecked', () => {
+					console.log('click');
+					validacionCatalogoIngresos.hide();
 					if (listaCatalogoIngresosFalse()) {
-						console.log('ok1')
 						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
 							$('#checkSeleccionarTodosIngresos').click();
-							console.log('ok2')
-
 						}
 					}
 				});
 
 				//Activar switch seleccionar todos en ingresos
 				if (listaCatalogoIngresosFalse()) {
-					console.log('ok3')
 					$('#checkSeleccionarTodosIngresos').click();
 				}
 
@@ -826,10 +832,7 @@ function listarCatalogos() {
 		//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 		//Se activara el switch, si esta desactivado
 		$(catalogoIngresosInputs).on('ifChecked', () => {
-			console.log('check ');
-
 			if (listaCatalogoIngresosFalse()) {
-				console.log('check all');
 				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
 					$('#checkSeleccionarTodosIngresos').prop("checked", true);
 			}
@@ -969,8 +972,6 @@ $(document).ready(() => {
 		listarCatalogos();
 	}
 
-	console.log('Leyendo');
-
 	if (estaEnDetalles() > 1) {
 
 		$('.tbl-catalogos').DataTable({
@@ -1022,7 +1023,10 @@ $(document).ready(() => {
 				.trim() != ''
 		) {
 			validacionDescripcionPlanilla.hide();
+			asteriscoDescripcionPlanilla.removeClass('text-danger');
+
 		} else {
+			asteriscoDescripcionPlanilla.addClass('text-danger');
 			validacionDescripcionPlanilla.show();
 		}
 	});
@@ -1035,8 +1039,10 @@ $(document).ready(() => {
 			inputFrecuenciaEnDias.val() > 0
 		) {
 			validacionFrecuenciaDias.hide();
+			asteriscoFrecuenciaPago.removeClass('text-danger');
 		} else {
 			validacionFrecuenciaDias.show();
+			asteriscoFrecuenciaPago.addClass('text-danger');
 		}
 	});
 });
@@ -1096,7 +1102,6 @@ $(document).on('click', 'td.details-control', function () {
 					dom: 'lft',
 					"order": [[0, "asc"]],
 					initComplete: function () {
-						console.log('Hola');
 					}
 				});
 
@@ -1141,7 +1146,6 @@ $('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
 			arrayDeducciones
 		)
 	) {
-		console.log(descripcionPlanilla);
 		$('#modalConfirmacionCreate').modal();
 	}
 
@@ -1173,7 +1177,6 @@ $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
 			arrayDeducciones
 		)
 	) {
-		console.log(descripcionPlanilla);
 		$('#modalConfirmacionEdit').modal();
 	}
 
