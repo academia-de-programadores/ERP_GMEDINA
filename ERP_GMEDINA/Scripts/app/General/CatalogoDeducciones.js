@@ -129,7 +129,9 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarCatalogoDeducciones").modal();
+    $("#AgregarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#Crear #tde_IdTipoDedu").val("0");
 });
 
