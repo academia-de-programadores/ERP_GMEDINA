@@ -506,7 +506,8 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
                   "~/Scripts/app/general/Competencias/Competencias.js"));
 
-
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+            "~/Scripts/app/General/Competencias/Admin.js"));
 
             //bundles APP/TipoHoras/TipoHoras
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
@@ -562,6 +563,8 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/RazonSalidas").Include(
               "~/Scripts/app/general/RazonSalidas/RazonSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/RazonSalidas/Admin").Include("~/Scripts/app/General/RazonSalidas/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades").Include(
             "~/Scripts/app/General/Nacionalidades/Nacionalidades.js"));
@@ -671,7 +674,11 @@ namespace ERP_GMEDINA
 
             //~/Scripts/app/general/Requisiciones
             bundles.Add(new ScriptBundle("~/Scripts/app/general/RequerimientosEspeciales").Include(
-                "~/Scripts/app/General/RequerimientosEspeciale/RequerimientosEspeciales.js"));
+                "~/Scripts/app/General/RequerimientosEspeciales/RequerimientosEspeciales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/RequerimientosEspeciales/Admin").Include(
+"~/Scripts/app/General/RequerimientosEspeciales/Admin.js"));
+
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
                 "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));

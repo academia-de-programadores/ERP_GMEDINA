@@ -17,33 +17,55 @@ namespace ERP_GMEDINA.Controllers
         // GET: Competencias
         public ActionResult Index()
         {
-            List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
+            tbCompetencias tbCompetencias = new tbCompetencias { comp_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbCompetencias = db.tbCompetencias.Where(x => x.comp_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbCompetencias);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbCompetencias.Add(new tbCompetencias { comp_Id = 0, comp_Descripcion = "fallo la conexion" });
+                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
             }
             return View(tbCompetencias);
+
+            //List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
+            //Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            //try
+            //{
+            //    tbCompetencias = db.tbCompetencias.Where(x => x.comp_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+            //    return View(tbCompetencias);
+            //}
+            //catch (Exception ex)
+            //{
+            //    ex.Message.ToString();
+            //    tbCompetencias.Add(new tbCompetencias { comp_Id = 0, comp_Descripcion = "fallo la conexion" });
+            //}
+            //return View(tbCompetencias);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbCompetencias> tbCompetencias = new List<Models.tbCompetencias> { };
-            foreach (tbCompetencias x in db.tbCompetencias.ToList().Where(x => x.comp_Estado == true))
+            try
             {
-                tbCompetencias.Add(new tbCompetencias
-                {
-                    comp_Id = x.comp_Id,
-                    comp_Descripcion = x.comp_Descripcion
-                });
+                var tbCompetencias = db.tbCompetencias
+                    .Select(
+                    t => new
+                    {
+                        comp_Id = t.comp_Id,
+                        comp_Descripcion = t.comp_Descripcion,
+                        comp_Estado = t.comp_Estado,
+                    }
+                    ).ToList();
+                return Json(tbCompetencias, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbCompetencias, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
         [HttpPost]
         public JsonResult Create(tbCompetencias tbCompetencias)
@@ -183,6 +205,29 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbCompetencias_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbCompetencias_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -193,6 +238,7 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+
 
 
 

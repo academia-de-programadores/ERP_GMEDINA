@@ -1,4 +1,9 @@
-﻿
+﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
+
+var fill = 0;
 var id = 0;
 //Funciones GET
 function tablaEditar(ID) {
@@ -36,24 +41,30 @@ function llenarTabla() {
         '/RequerimientosEspeciales/llenarTabla',
         'POST',
         function (Lista) {
-            var tabla = $("#IndexTable").DataTable();
             tabla.clear();
             tabla.draw();
             if (validarDT(Lista)) {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.resp_Descripcion);
+                var Acciones = value.resp_Estado == 1
+                  ?null:
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                  "</div>";
+                if (value.resp_Estado > fill) {
                 tabla.row.add({
                     ID: value.resp_Id,
+                    "Número" : value.resp_Id,
                     Descripción: value.resp_Descripcion,
+                    Acciones: Acciones,
+                    Estado: value.resp_Estado ? "Activo":"Inactivo"
                 }).draw();
+                }
             });
         });
 }
-$(document).ready(function () {
-    llenarTabla();
-});
+
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
