@@ -264,6 +264,7 @@
     <Compile Include="Models\ComprobantePagoModel.cs" />
     <Compile Include="Models\cPeriodos.cs" />
     <Compile Include="Models\cPreaviso.cs" />
+    <Compile Include="Models\cPreviewPlanilla.cs" />
     <Compile Include="Models\cRAPRPT.cs" />
     <Compile Include="Models\cTechosDeducciones.cs" />
     <Compile Include="Models\cTipoDeducciones.cs" />
