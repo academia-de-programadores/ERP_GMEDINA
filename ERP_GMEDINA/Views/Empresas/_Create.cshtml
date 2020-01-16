@@ -22,8 +22,24 @@
                      <div class="form-group">
                       @Html.LabelFor(model => model.empr_Logo, htmlAttributes: new { @class = "control-label col-md-3" })
                       <div class="col-md-8">
-                       <input type="file"  name="empr_Logo" accept=".png,.jpeg,.jpg" id="empr_Logo" value="Logo" />
-                      </div>
+                         <div>
+                             <label title="Upload image file" for="empr_Logo" class="btn btn-primary">
+                                 Upload image
+                                <input type="file"  name="empr_Logo" accept=".png,.jpeg,.jpg" id="empr_Logo" style="display:none" />Logo
+                             </label>
+                         <div>
+                             <h4>Preview image</h4>
+                             <div class="img-preview img-preview-sm" style="width: 200px; height: 123.609px;"><img style="display: block;width: 100%; height: 100%; min-width: 0px !important; min-height: 0px !important; max-width: none !important; max-height: none !important; transform: translateX(-25px) translateY(-63.1953px);"></div>
+
+                         </div>    
+                         </div>
+                        </div>
+                         <div class="image-crop" style="display:none">
+                             <img src="" class="cropper-hidden"><div class="cropper-container cropper-bg" touch-action="none" 
+                                style="width: 200px; height: 123.609px;"><div class="cropper-wrap-box">
+                             <div class="cropper-canvas" style="width: 200px; height: 123.609px; transform: none;">
+                             <img src="" style="width: 200px; height: 123.609px; transform: none;"></div></div><div class="cropper-drag-box cropper-crop cropper-modal" data-action="crop"></div><div class="cropper-crop-box" style="width: 204.8px; height: 126.576px; transform: translateX(149.6px) translateY(64.712px);"><span class="cropper-view-box"><img src="" style="width: 256px; height: 256px; transform: translateX(-25.6px) translateY(-64.712px);"></span><span class="cropper-dashed dashed-h"></span><span class="cropper-dashed dashed-v"></span><span class="cropper-center"></span><span class="cropper-face cropper-move" data-action="all"></span><span class="cropper-line line-e" data-action="e"></span><span class="cropper-line line-n" data-action="n"></span><span class="cropper-line line-w" data-action="w"></span><span class="cropper-line line-s" data-action="s"></span><span class="cropper-point point-e" data-action="e"></span><span class="cropper-point point-n" data-action="n"></span><span class="cropper-point point-w" data-action="w"></span><span class="cropper-point point-s" data-action="s"></span><span class="cropper-point point-ne" data-action="ne"></span><span class="cropper-point point-nw" data-action="nw"></span><span class="cropper-point point-sw" data-action="sw"></span><span class="cropper-point point-se" data-action="se"></span></div></div>
+                         </div>
                      </div>
 					</div>
             </div>
