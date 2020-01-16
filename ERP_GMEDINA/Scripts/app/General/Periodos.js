@@ -85,11 +85,12 @@ function ValidarForm() {
     //VARIABLE DE RETORNO
     var Retorno = true;
     //DECLARACION DE OBJETOS 
-    var DescPeriodo = $("#Editar #prea_RangoInicioMeses").val('');
+    var DescPeriodo = $("#peri_DescripPeriodo").val();
     //VALIDAR QUE LOS CAMPOS NO SEAN NUMERICOS
-    if (!DescPeriodo >= 0 || DescPeriodo != '')
+    if (DescPeriodo <= 0 || DescPeriodo == '' || DescPeriodo == null)
         Retorno = false;
     //RETORNO DE FUNCION
+    console.log(Retorno);
     return Retorno;
 }
 
@@ -100,8 +101,10 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
     $("#CrearPeriodo").modal();
     //OCULTAR EL DATAANNOTATION
     DataAnnotations(true);
-    //OCULTAR EL SCROLLVIEW
-    $('body').css("overflow", "hidden");
+    //SETEAR EL COLOR DEL ASTERISCO
+    $("#AsteriscoPeriodos").removeClass("text-danger");
+    ////OCULTAR EL SCROLLVIEW
+    //$('body').css("overflow", "hidden");
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
@@ -115,8 +118,7 @@ $('#btnCrearPeriodoConfirmar').click(function () {
     var data = $("#frmCreatePeriodo").serializeArray();
 
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if (!ValidarForm()) {
-        mostrarCargandoCrear();
+    if (ValidarForm()) {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
          $.ajax({
              url: "/Periodos/Create",
@@ -141,12 +143,18 @@ $('#btnCrearPeriodoConfirmar').click(function () {
                   });
                   ocultarCargandoCrear;
               }
-            });
+          });
+        //SETEAR EL COLOR DEL ASTERISCO
+         $("#AsteriscoPeriodos").removeClass("text-danger");
+         console.log("if");
     } else {
+        console.log("Else");
         //MOSTRAR DATAANNOTATIONS
         DataAnnotations(false);
         //OCULTAR EL SCROLLVIEW
         $('body').css("overflow", "hidden");
+        //SETEAR EL COLOR DEL ASTERISCO
+        $("#AsteriscoPeriodos").addClass("text-danger");
     }
 });
 
@@ -158,7 +166,8 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function ()
 
     //OCULTAR EL DATAANNOTATIONS
     DataAnnotations(true);
-
+    //SETEAR EL COLOR DEL ASTERISCO
+    $("#AsteriscoPeriodosEdit").removeClass("text-danger");
     //CAPTURAR EL ID DEL REGISTRO
     var ID = $(this).data('id');
 
@@ -204,6 +213,8 @@ $("#btnUpdatePeriodo").click(function () {
     else {
         //MOSTRAR DATAANNOTATION
         DataAnnotations(false);
+        //SETEAR EL COLOR DEL ASTERISCO
+        $("#AsteriscoPeriodosEdit").addClass("text-danger");
         //OCULTAR EL SCROLLVIEW
         $('body').css("overflow", "hidden");
     }
@@ -431,11 +442,6 @@ $(document).on("click", "#tblPeriodo tbody tr td #btnDetallePeriodo", function (
 });
 
 //*****************CREAR******************//
-
-$("#IconCerrarCrear").click(function () {
-    $("#EditarPeriodo #Validation_descripcion").css("display", "none");
-    $("#CrearPeriodo").modal("hide");
-});
 
 //OCULTAR MODAL DE CREACION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
 $("#btnCerrarCrear").click(function () {

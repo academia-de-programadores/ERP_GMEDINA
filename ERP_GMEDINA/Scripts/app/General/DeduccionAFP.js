@@ -1,12 +1,10 @@
-﻿//
-//Obtención de Script para Formateo de Fechas
-//
+﻿//Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      //console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+      //console.log("No se pudo recuperar Script SerializeDate");
   });
 
 
@@ -219,7 +217,6 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
     var val2 = $("#Crear #dafp_AporteLps").val();
     var val3 = $("#Crear #afp_Id").val();
 
-    debugger;
     if (val1 == "" || val1 == 0 || val1 == "0") {
         $("#Crear #validatione1d").css("display", "");
     }
@@ -313,7 +310,6 @@ $("#btnCerrarAgregar").click(function () {
 });
 
 
-
 //Editar//
 
 const btnEditar = $('#btnEditDeduccionAFP')
@@ -395,7 +391,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                 $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
-                
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -440,7 +436,6 @@ $(document).on("click", "#btnRegresar", function () {
     $("html, body").css("overflow", "scroll");
     $("#EditarDeduccionAFPConfirmacion").modal('hide');
 });
-
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionAFPConfirmar").click(function () {
@@ -500,9 +495,6 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione1").css("display", "none");
     $("#EditarDeduccionAFP").modal('hide');
 });
-
-
-
 
 //Detalles//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -592,12 +584,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
         });
 });
 
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
     $("#EditarDeduccionAFP").modal({ backdrop: 'static', keyboard: false });
@@ -647,14 +633,14 @@ $("#btnInactivarRegistroDeduccionAFP").click(function () {
                 message: '¡No se inactivó el registro, contacte al administrador!',
             });
         }
-        
+
         else {
             mostrarCargandoInhabilitar();
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#InactivarDeduccionAFP").modal('hide');
-            
+
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',

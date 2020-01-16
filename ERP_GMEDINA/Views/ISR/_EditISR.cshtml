@@ -1,69 +1,74 @@
 ﻿@model ERP_GMEDINA.Models.tbISR
 
-
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditISR" }))
 {
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        @Html.HiddenFor(model => model.isr_Id)
-        @Html.HiddenFor(model => model.isr_FechaCrea)
-        @Html.HiddenFor(model => model.isr_UsuarioCrea)
+    <div class="modal-body" id="Editar">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.isr_Id)
+            @Html.HiddenFor(model => model.isr_FechaCrea)
+            @Html.HiddenFor(model => model.isr_UsuarioCrea)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
+                </div>
+                <div class="col-md-8">
                     @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
-            </div>
+            </div>            
 
             <div class="form-group">
-                @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger" })
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
                 </div>
-            </div>
-
-            <div class="form-group">
-               <label class = "control-label col-md-2">Tipo deducción</label>  @* @Html.LabelFor(model => model.cde_IdDeducciones, "cde_IdDeducciones", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "Validation_descripcion" })
                 </div>
             </div>
 
-            @*<div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label" })
+                    <label class="" id="AsteriscoISR">*</label>
                 </div>
-            </div>*@
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            @*data-dismiss="modal"*@
-            <input type="submit" class="btn btn-primary pull-left" id="btnEditarISR" value="Actualizar">
-
-
-            @*<button type="button" class="btn btn-primary" id="btnEditarTecho">Aceptar</button>*@
-            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="btnModalInactivarISR">Inhabilitar</button>
-            <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
-        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" value="Cerrar" id="btnCerrarEditar" class="btn btn-default pull-right" />
+        <input type="submit" value="Actualizar" id="btnEditarISR" class="btn btn-primary pull-left" />
+        <input type="button" value="Inactivar" id="btnModalInactivarISR" class="btn btn-danger pull-left" />
+    </div>
 }
+
+
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarISR" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.isr_Id)
 }
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

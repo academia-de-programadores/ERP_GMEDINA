@@ -84,9 +84,7 @@
     </div>
 </div>
 
-
 @*Modales de Agregar, Editar, Detalles, Inhabilitar y Activar*@
-
 
 @*Agregar*@
 <div class="modal fade" id="AgregarDeduccionAFP" tabindex="-1" role="dialog" aria-hidden="false">
@@ -95,13 +93,10 @@
             <div class="modal-header">
                 <h4 class="modal-title">Crear Deducción AFP</h4>
             </div>
-            <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
-            </div>
         </div>
     </div>
 </div>
-
 
 @*Editar*@
 <div class="modal fade" id="EditarDeduccionAFP" tabindex="-1" role="dialog" aria-hidden="false">
@@ -114,7 +109,6 @@
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
             </div>
-
         </div>
     </div>
 </div>

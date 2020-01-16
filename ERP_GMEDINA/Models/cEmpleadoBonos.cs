@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Ingreso")]
         public int cin_IdIngreso { get; set; }
 
-        [Required(ErrorMessage = "Campo Monto Requerido")]
+        [Required(ErrorMessage = "Campo monto requerido")]
         [Range(1, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}")]
         [RegularExpression(@"^[1-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [Display(Name = "Monto")]

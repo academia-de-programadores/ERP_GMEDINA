@@ -10,20 +10,28 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>ISR</h5>
-                    <div class="ibox-tools">                        
-                        <ul>
-                            <button type="button" class="btn btn-primary btn-xs" id="btnAgregarISR">Registrar ISR</button>
-                        </ul>
+                    <h5>Tabla progresiva de ISR</h5>
+                    <div class="ibox-tools">
+                        <button type="button" class="btn btn-primary btn-xs pull-right animated fadeInRight" id="btnAgregarISR">Registrar rango ISR</button>
                     </div>
                 </div>
                 <div class="ibox-content">
+                    @{
+                        <!-- obtener la sesion actual del usuario para luego verificar si este es adminsitrador-->
+                        var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];
+
+                        <!-- Esto es para hacer las validaciones del rol de usuario a la hora de recargar la tabla con el JS -->
+                        string rol_Usuario = oUsuario?.usu_EsAdministrador == true ? "1" : "0";
+
+                        <!-- Tomaremos el valor de este input en el JS para validar si el usuario es administrador-->
+                        <input type="hidden" name="rol_Usuario" id="rol_Usuario" value="@rol_Usuario" />
+                    }
                     <table class="table table-striped table-bordered table-hover dataTables-example animated fadeInRight" id="tblISR">
                         <thead>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_RangoInicial)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_RangoFinal)</th>
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_Porcentaje)</th>                                                                                                
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.isr_Porcentaje)</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
                                 <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 128px;">Acciones</th>
                             </tr>
@@ -31,6 +39,9 @@
                         <tbody id="tbodyISR">
                             @foreach (var item in Model)
                             {
+                                <!-- validar el estado del registro (activo/inactivo)-->
+                                string estadoISR = item.isr_Activo == false ? "Inactivo" : "Activo";
+
                                 <tr class="gradeA odd" role="row">
                                     <td>
                                         @Html.DisplayFor(modelItem => item.isr_RangoInicial)
@@ -40,27 +51,31 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.isr_Porcentaje)
-                                    </td>                                        
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.tbTipoDeduccion.tde_Descripcion)
                                     </td>
                                     <td>
-                                        
-                                        <button type="button" data-id="@item.isr_Id" class="btn btn-primary btn-xs" id="btnDetalleISR">Detalle</button> 
-                                        <button type="button" data-id="@item.isr_Id" class="btn btn-default btn-xs" id="btnModalEditarISR">Editar</button>                                       
-                                        @*<button type="button" class="btn btn-danger btn-xs" id="btnInactivarTechosDeducciones">Inactivar</button>*@
+                                        <!-- variable del estado del registro creada arriba-->
+                                        @estadoISR
+                                    </td>
+                                    <td>
+                                        @{
+                                            <!-- validar si el estado es activo para mostrar los botones "detalles" y "editar" -->
+                                            if (item.isr_Activo == true)
+                                            {
+                                                <button type="button" data-id="@item.isr_Id" class="btn btn-primary btn-xs" id="btnDetalleISR">Detalles</button>
+                                                <button type="button" data-id="@item.isr_Id" class="btn btn-default btn-xs" id="btnModalEditarISR">Editar</button>
+                                            }
+                                            <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
+                                            if (oUsuario?.usu_EsAdministrador == true && item.isr_Activo == false)
+                                            {
+                                                 <!-- ACTIVAR -->
+                                                <button type="button" data-id="@item.isr_Activo" class="btn btn-primary btn-xs" id="btnActivarISR">Activar</button>
+                                            }
+                                        }
                                     </td>
                                 </tr>
-                            }
+                                            }
                         </tbody>
                         <tfoot>
-                            <tr role="row">
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.isr_RangoInicial)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.isr_RangoFinal)</th>
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.isr_Porcentaje)</th>                                                                                                
-                                <th rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.tbTipoDeduccion.tde_Descripcion)</th>
-                                <th rowspan="1" colspan="1">Acciones</th>                                
-                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -74,13 +89,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Edición de datos</h4>
+                <h4 class="modal-title">Editar rango de ISR</h4>
             </div>
-            <div class="modal-body" id="Editar">
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditISR", new ERP_GMEDINA.Models.tbISR())
-            </div>
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditISR", new ERP_GMEDINA.Models.tbISR())
         </div>
     </div>
 </div>
@@ -89,12 +101,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Agregar datos</h4>
+                <h4 class="modal-title">Crear rango de ISR</h4>
             </div>
-            <div class="modal-body" id="Crear">
-                @Html.Partial("_CreateISR", new ERP_GMEDINA.Models.tbISR())
-            </div>            
+            @Html.Partial("_CreateISR", new ERP_GMEDINA.Models.tbISR())
         </div>
     </div>
 </div>
@@ -104,14 +113,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Detalles del registro</h4>
+                <h4 class="modal-title">Detalles del rango ISR</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsISR", new ERP_GMEDINA.Models.tbISR())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>                
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -122,7 +130,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Inhabilitar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
@@ -138,7 +145,7 @@
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/izitoast")
-    @Scripts.Render("~/Scripts/app/General/ISR")    
+    @Scripts.Render("~/Scripts/app/General/ISR")
 }
 
 @section Styles {
