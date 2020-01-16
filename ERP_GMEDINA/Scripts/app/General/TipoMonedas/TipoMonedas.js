@@ -53,8 +53,10 @@ function llenarTabla() {
                 if (value.tmon_Estado>fill) {
                     
                     tabla.row.add({
-                        ID:value.tmon_Id,
-                        Moneda:value.tmon_Descripcion,
+                        ID: value.tmon_Id,
+                        "Número":value.tmon_Id,
+                        Moneda: value.tmon_Descripcion,
+                        Estado:value.tmon_Estado ? "Activo":"Inactivo",
                         Acciones: Acciones
                     });
                 } 

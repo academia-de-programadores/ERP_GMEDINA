@@ -12,14 +12,15 @@ namespace ERP_GMEDINA.Controllers
 {
     public class RequisicionesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Requisiciones
         public ActionResult Index()
         {
-            var tbRequisiciones = db.tbRequisiciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
-
-            return View(tbRequisiciones.ToList());
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            
+            tbRequisiciones tbRequisiciones = new tbRequisiciones { req_Estado = true };
+            return View(tbRequisiciones);
         }
 
         // GET: Requisiciones/Details/5
@@ -189,20 +190,17 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult ChildRowData(int? id)
         {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            //List<tbHorarios> lista = new List<tbHorarios> { };
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                try
+                using (db = new ERP_GMEDINAEntities())
                 {
                     var lista = db.V_DatosRequisicion.Where(x => x.req_Id == id)
                         .Select(tabla => new { Descripcion = tabla.Descripcion, TipoDato = tabla.TipoDato, req_Id = tabla.req_Id }).ToList();
                     DatosProfesionales Data = new DatosProfesionales();
                     Data.req_Id = Convert.ToInt32(id);
-                    foreach(var X in lista)
+                    foreach (var X in lista)
                     {
-                        switch(X.TipoDato)
+                        switch (X.TipoDato)
                         {
                             case "C":
                                 tbCompetencias Comp = new tbCompetencias();
@@ -235,41 +233,75 @@ namespace ERP_GMEDINA.Controllers
                                 break;
                         }
                     }
-                    
+
                     return Json(Data, JsonRequestBehavior.AllowGet);
                 }
-                catch
-                {
-                }
+            }
+            catch
+            {
             }
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult llenarTabla()
         {
-            List<tbRequisiciones> tbRequisiciones =
-                new List<Models.tbRequisiciones> { };
-            foreach (tbRequisiciones x in db.tbRequisiciones.ToList().Where(x => x.req_Estado == true))
+            try
             {
-                tbRequisiciones.Add(new tbRequisiciones
+                db = new ERP_GMEDINAEntities();
+                List<tbRequisiciones> tbRequisiciones =
+                    new List<Models.tbRequisiciones> { };
+                foreach (tbRequisiciones x in db.tbRequisiciones.ToList())
                 {
-                    req_Id = x.req_Id,
-                    req_Experiencia = x.req_Experiencia,
-                    req_Sexo = x.req_Sexo,
-                    req_Descripcion = x.req_Descripcion,
-                    req_EdadMinima = x.req_EdadMinima,
-                    req_EdadMaxima = x.req_EdadMaxima,
-                    req_EstadoCivil = x.req_EstadoCivil,
-                    req_EducacionSuperior = x.req_EducacionSuperior,
-                    req_Permanente = x.req_Permanente,
-                    req_Duracion = x.req_Duracion,
-                    req_Vacantes = x.req_Vacantes,
-                    req_FechaRequisicion = x.req_FechaRequisicion,
-                    req_FechaContratacion = x.req_FechaContratacion
-                });
+                    tbRequisiciones.Add(new tbRequisiciones
+                    {
+                        req_Id = x.req_Id,
+                        req_Experiencia = x.req_Experiencia,
+                        req_Sexo = x.req_Sexo,
+                        req_Descripcion = x.req_Descripcion,
+                        req_EdadMinima = x.req_EdadMinima,
+                        req_EdadMaxima = x.req_EdadMaxima,
+                        req_EstadoCivil = x.req_EstadoCivil,
+                        req_EducacionSuperior = x.req_EducacionSuperior,
+                        req_Permanente = x.req_Permanente,
+                        req_Duracion = x.req_Duracion,
+                        req_Vacantes = x.req_Vacantes,
+                        req_FechaRequisicion = x.req_FechaRequisicion,
+                        req_FechaContratacion = x.req_FechaContratacion,
+                        req_Estado = x.req_Estado
+                    });
+                }
+                return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
 
+
+        //Nota: Los parametros y nombres de funciones, dependen de la tabla trabajada
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbRequisiciones_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRequisiciones_Restore_Result1 item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -450,11 +482,13 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Edit(tbRequisiciones tbRequisiciones, DatosProfesionalesArray DatosProfesionales)
         {
+
             var msj = "";
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                try
+                using (db = new ERP_GMEDINAEntities())
                 {
+
                     string ResultI = "";
                     string ResultE = "";
                     var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
@@ -525,7 +559,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var h in habV)
                                             {
-                                                var Habilidades = db.rrhh_tbHabilidadesRequisicion_Delete(h.hreq_Id,  1, DateTime.Now);
+                                                var Habilidades = db.rrhh_tbHabilidadesRequisicion_Delete(h.hreq_Id, 1, DateTime.Now);
                                                 foreach (rrhh_tbHabilidadesRequisicion_Delete_Result Com in Habilidades)
                                                 {
                                                     ResultE = Com.MensajeError + "";
@@ -557,7 +591,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var i in IdiV)
                                             {
-                                                var Idiomas = db.rrhh_tbIdiomasRequisicion_Delete(i.idpe_Id,  1, DateTime.Now);
+                                                var Idiomas = db.rrhh_tbIdiomasRequisicion_Delete(i.idpe_Id, 1, DateTime.Now);
                                                 foreach (rrhh_tbIdiomasRequisicion_Delete_Result idio in Idiomas)
                                                 {
                                                     ResultE = idio.MensajeError + "";
@@ -589,7 +623,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var t in TitV)
                                             {
-                                                var Titulos = db.rrhh_tbTitulosRequisicion_Delete(t.tipe_Id,  1, DateTime.Now);
+                                                var Titulos = db.rrhh_tbTitulosRequisicion_Delete(t.tipe_Id, 1, DateTime.Now);
                                                 foreach (rrhh_tbTitulosRequisicion_Delete_Result titu in Titulos)
                                                 {
                                                     ResultE = titu.MensajeError + "";
@@ -621,7 +655,7 @@ namespace ERP_GMEDINA.Controllers
                                         {
                                             foreach (var r in RepV)
                                             {
-                                                var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Delete(r.rer_Id,  1, DateTime.Now);
+                                                var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Delete(r.rer_Id, 1, DateTime.Now);
                                                 foreach (rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result resp in ReqEspeciales)
                                                 {
                                                     ResultE = resp.MensajeError + "";
@@ -633,14 +667,14 @@ namespace ERP_GMEDINA.Controllers
                             }
                         }
                     }
-
+                }
                 }
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
                     msj = "-2";
                 }
-            }
+            
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
@@ -690,16 +724,24 @@ namespace ERP_GMEDINA.Controllers
         // GET: Requisiciones/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db = new ERP_GMEDINAEntities();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
+                if (tbRequisiciones == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbRequisiciones);
             }
-            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
-            if (tbRequisiciones == null)
+            catch
             {
-                return HttpNotFound();
+                return View();
             }
-            return View(tbRequisiciones);
         }
 
         // POST: Requisiciones/Delete/5
@@ -707,32 +749,35 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbRequisiciones Requisicion)
         {
             string msj = "";
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                try
+                using (db = new ERP_GMEDINAEntities())
                 {
+
                     var _list = db.UDP_RRHH_tbRequisiciones_Delete(Requisicion.req_Id, Requisicion.req_RazonInactivo, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbRequisiciones_Delete_Result1 item in _list)
                     {
-                        msj = item.MensajeError + "";                        
+                        msj = item.MensajeError + "";
                     }
                 }
-                catch
-                {
-                    msj = "-2";
-                }
             }
+            catch
+            {
+                msj = "-2";
+            }
+
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
+
     }
 }

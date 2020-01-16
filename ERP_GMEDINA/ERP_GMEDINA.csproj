@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1254,6 +1255,7 @@
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
+    <Content Include="Scripts\app\General\FasesReclutamiento\Admin.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Admin.js" />
@@ -1279,6 +1281,7 @@
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
+    <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\EditRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
@@ -1287,6 +1290,7 @@
     <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
     <Content Include="Scripts\app\General\Sueldos\Sueldos.js" />
+    <Content Include="Scripts\app\General\TipoAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
