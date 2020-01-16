@@ -38,7 +38,7 @@ function cargarGridAcumuladosISR() {
             if (data.length == 0) {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             var ListaAcumuladosISR = data, template = '';
@@ -103,7 +103,7 @@ $('#btnCreateAcumuladosISR').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: 'No guardó el registro, contacte al administrador',
                 });
             }
             else if (data == "bien") {
@@ -112,7 +112,7 @@ $('#btnCreateAcumuladosISR').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: 'El registro fue creado de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
         });
@@ -147,7 +147,7 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No cargó la información, contacte al administrador',
                 });
             }
         });
@@ -174,7 +174,7 @@ $("#btnEditarAcumulado").click(function () {
                 //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
+                    message: 'No se editó el registro, contacte al administrador',
                 });
             }
             else {
@@ -184,7 +184,7 @@ $("#btnEditarAcumulado").click(function () {
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             }
         });
@@ -214,7 +214,7 @@ $("#btnInactivarAcumuladosISREjecutar").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inactivar el registro, contacte al administrador',
+                message: 'No inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -224,7 +224,7 @@ $("#btnInactivarAcumuladosISREjecutar").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inactivado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -324,7 +324,7 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
         if (data == "error") {
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo activar el registro.',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -333,7 +333,7 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });

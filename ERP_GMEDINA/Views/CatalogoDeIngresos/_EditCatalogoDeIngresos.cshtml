@@ -6,10 +6,10 @@
 				@Html.HiddenFor(model => model.cin_IdIngreso)
 				@Html.HiddenFor(model => model.cin_FechaCrea)
 				@Html.HiddenFor(model => model.cin_UsuarioCrea)
-				@Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" })
+				@Html.LabelFor(model => model.cin_DescripcionIngreso, htmlAttributes: new { @class = "" }) <label class="" id="asteriscoEdit">*</label>
 			</div>
 			<div class="col-md-6">
-				@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+				@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @maxlength = "50" } }) 
 				@Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "validareditar" })
 			</div>
 		</div>

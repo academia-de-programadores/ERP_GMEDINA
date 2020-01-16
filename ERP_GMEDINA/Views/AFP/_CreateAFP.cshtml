@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_Descripcion)
+                    @Html.LabelFor(model => model.afp_Descripcion)<span id="ast1">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "form-control", @id = "afp_Descripcion" } })
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_AporteMinimoLps)
+                    @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="ast2">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "form-control", @id = "afp_AporteMinimoLps" } })
@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAporte)
+                    @Html.LabelFor(model => model.afp_InteresAporte)<span id="ast3">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAporte" } })
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAnual)
+                    @Html.LabelFor(model => model.afp_InteresAnual)<span id="ast4">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "form-control", @id = "afp_InteresAnual" } })
@@ -52,7 +52,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.tde_IdTipoDedu)
+                    @Html.LabelFor(model => model.tde_IdTipoDedu)<span id="ast5">*</span>
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>

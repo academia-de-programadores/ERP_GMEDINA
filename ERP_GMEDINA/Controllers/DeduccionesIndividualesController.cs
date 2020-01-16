@@ -63,9 +63,17 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_UsuarioCrea,dei_FechaCrea")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
+        public ActionResult Create(string dei_Motivo, int emp_Id, decimal dei_MontoInicial, decimal dei_MontoRestante, decimal dei_Cuota, bool dei_PagaSiempre)
         {
+            tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
+            {
+                dei_Motivo = dei_Motivo,
+                emp_Id = emp_Id,
+                dei_MontoInicial = dei_MontoInicial,
+                dei_MontoRestante = dei_MontoRestante,
+                dei_Cuota = dei_Cuota,
+                dei_PagaSiempre = dei_PagaSiempre
+            };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbDeduccionesIndividuales.dei_UsuarioCrea = 1;
             tbDeduccionesIndividuales.dei_FechaCrea = DateTime.Now;
@@ -150,9 +158,18 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dei_IdDeduccionesIndividuales,dei_Motivo,emp_Id,dei_MontoInicial,dei_MontoRestante,dei_Cuota,dei_PagaSiempre,dei_UsuarioModifica,dei_FechaModifica")] tbDeduccionesIndividuales tbDeduccionesIndividuales)
+        public ActionResult Edit(int dei_IdDeduccionesIndividuales, string dei_Motivo, int emp_Id, decimal dei_MontoInicial, decimal dei_MontoRestante, decimal dei_Cuota, bool dei_PagaSiempre)
         {
+            tbDeduccionesIndividuales tbDeduccionesIndividuales = new tbDeduccionesIndividuales
+            {
+                dei_IdDeduccionesIndividuales = dei_IdDeduccionesIndividuales,
+                dei_Motivo = dei_Motivo,
+                emp_Id = emp_Id,
+                dei_MontoInicial = dei_MontoInicial,
+                dei_MontoRestante = dei_MontoRestante,
+                dei_Cuota = dei_Cuota,
+                dei_PagaSiempre = dei_PagaSiempre
+            };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbDeduccionesIndividuales.dei_UsuarioModifica = 1;
             tbDeduccionesIndividuales.dei_FechaModifica = DateTime.Now;
