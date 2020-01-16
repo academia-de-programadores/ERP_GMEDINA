@@ -12,15 +12,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             Colaborador
-                            <label  id="Validation_descipcion9" opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                            <label class="text-danger" id="Validation_descipcion1" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                            <label class="" id="AsteriscoEmpleado">*</label> 
                             <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                            <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Empleado Requerido</label>
+                            <label class="text-danger" id="Validation_descipcion2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo empleado requerido</label>
                         </div>
                         <div class="col-md-6">
                             Bono
-                            <label id="Validation_descipcion7"  opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                             <label class="text-danger" id="Validation_descipcion3" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
+                            <label class="" id="AsteriscoBono">*</label>                         
                             <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
                             <label class="text-danger" id="Validation_descipcion4" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Campo Bono requerido</label>
                         </div>
@@ -31,8 +29,7 @@
                     <div class="row">
                         <div class="col-md-6">
                              Monto
-                            <label id="Validation_descipcion8"  opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
-                            <label class="text-danger" id="Validation_descipcion5" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>  
+                            <label class="" id="AsteriscoMonto">*</label>  
                             @Html.EditorFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "col-md-9", @type = "number", @name = "cb_Monto", @id = "cb_Monto", @autocomplete = "off" } })
                              <br />
                                  @Html.ValidationMessageFor(model => model.cb_Monto, "", new { @class = "text-danger", @id = "Validation_descipcion6" })
