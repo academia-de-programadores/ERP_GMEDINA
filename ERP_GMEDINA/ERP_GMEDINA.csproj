@@ -1993,6 +1993,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="CodeTemplates\MvcView\" />
     <Folder Include="Downloadable files\" />
+    <Folder Include="Logos\" />
     <Folder Include="Views\General\" />
   </ItemGroup>
   <ItemGroup>

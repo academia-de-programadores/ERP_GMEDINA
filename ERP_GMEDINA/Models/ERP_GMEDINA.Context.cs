@@ -572,11 +572,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Delete_Result>("UDP_RRHH_tbEmpresas_Delete", empr_IdParameter, empr_razon_InactivoParameter, empr_UsuarioModificaParameter, empr_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Insert_Result> UDP_RRHH_tbEmpresas_Insert(string empr_Nombre, Nullable<int> empr_usuarioCrea, Nullable<System.DateTime> empr_FechaCrea)
+        public virtual ObjectResult<UDP_RRHH_tbEmpresas_Insert_Result> UDP_RRHH_tbEmpresas_Insert(string empr_Nombre, string empr_Logo, Nullable<int> empr_usuarioCrea, Nullable<System.DateTime> empr_FechaCrea)
         {
             var empr_NombreParameter = empr_Nombre != null ?
                 new ObjectParameter("empr_Nombre", empr_Nombre) :
                 new ObjectParameter("empr_Nombre", typeof(string));
+    
+            var empr_LogoParameter = empr_Logo != null ?
+                new ObjectParameter("empr_Logo", empr_Logo) :
+                new ObjectParameter("empr_Logo", typeof(string));
     
             var empr_usuarioCreaParameter = empr_usuarioCrea.HasValue ?
                 new ObjectParameter("empr_usuarioCrea", empr_usuarioCrea) :
@@ -586,7 +590,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("empr_FechaCrea", empr_FechaCrea) :
                 new ObjectParameter("empr_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Insert_Result>("UDP_RRHH_tbEmpresas_Insert", empr_NombreParameter, empr_usuarioCreaParameter, empr_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEmpresas_Insert_Result>("UDP_RRHH_tbEmpresas_Insert", empr_NombreParameter, empr_LogoParameter, empr_usuarioCreaParameter, empr_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_RRHH_tbEmpresas_Restore_Result> UDP_RRHH_tbEmpresas_Restore(Nullable<int> empr_Id, Nullable<int> empr_UsuarioModifica, Nullable<System.DateTime> empr_FechaModifica)
