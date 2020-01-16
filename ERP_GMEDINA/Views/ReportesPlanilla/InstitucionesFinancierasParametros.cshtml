@@ -1,5 +1,5 @@
 ﻿@using ReportViewerForMvc;
-@model ERP_GMEDINA.Models.V_Ingresos_RPT
+@model ERP_GMEDINA.Models.V_ReporteInstitucionesFinancieras_RPT
 
 @{
     ViewBag.Title = "Reportes ingresos";
@@ -21,7 +21,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Planilla</label>
+                                <label class="font-normal">Institución financiera</label>
 
                                 @Html.DropDownList("insf_IdInstitucionFinanciera", (IEnumerable<SelectListItem>)ViewBag.Instituciones, "Seleccione una opción", new { @class = "form-control" })
 
@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Ingreso</label>
+                                <label class="font-normal">Empleado</label>
 
                                 @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
 

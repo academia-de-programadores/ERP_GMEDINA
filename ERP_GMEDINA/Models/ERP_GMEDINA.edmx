@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -352,42 +352,6 @@
           <Property Name="hip_UsuarioModifica" Type="int" />
           <Property Name="hip_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbHistorialDeLiquidaciones">
-          <Property Name="hdli_Id" Type="int" />
-          <Property Name="emp_Id" Type="int" />
-          <Property Name="hdli_FechaLiquidacion" Type="datetime" />
-          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioOrdinarioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Preaviso_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Cesantia_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_VacacionesPendientes_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalariosAdeudados" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_OtrosPagos" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoHEPendiente" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ValorBonoEducativo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonoPorVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ReajusteSalarial" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonificacionVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorEmbarazo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorLactancia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PrePosNatal" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorDiasFeriado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_MontoTotalLiquidacion" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_UsuarioCrea" Type="int" />
-          <Property Name="hdli_FechaCrea" Type="datetime" />
-          <Property Name="hdli_UsuarioModifica" Type="int" />
-          <Property Name="hdli_FechaModifica" Type="datetime" />
-          <Property Name="moli_IdMotivo" Type="int" />
-        </EntityType>-->
         <EntityType Name="tbHistorialDePago">
           <Key>
             <PropertyRef Name="hipa_IdHistorialDePago" />
@@ -2121,11 +2085,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistorialPlani
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="V_Plani_FechaPlani">
-          <Property Name="hipa_FechaPago" Type="int" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -2306,6 +2265,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ReporteInstitucionesFinanciera
           <Property Name="insf_DescInstitucionFinanc" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="deif_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="deif_Comentarios" Type="nvarchar" MaxLength="100" />
+          <Property Name="deif_FechaCrea" Type="date" />
           <Property Name="deif_Pagado" Type="varchar" MaxLength="9" />
           <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
@@ -4496,9 +4456,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_Plani_Historial_De_Liquidaciones_emp_Id" />-->
         <Association Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="1" />
           <End Role="tbDeduccionAFP" Type="Self.tbDeduccionAFP" Multiplicity="*" />
@@ -4691,9 +4648,6 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_Plani_tbHistorialDeLiquidaciones_tbMotivos_moli_IdMotivo" />-->
         <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
           <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="1" />
           <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
@@ -7005,6 +6959,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
     [V_ReporteInstitucionesFinancieras_RPT].[insf_DescInstitucionFinanc] AS [insf_DescInstitucionFinanc], 
     [V_ReporteInstitucionesFinancieras_RPT].[deif_Monto] AS [deif_Monto], 
     [V_ReporteInstitucionesFinancieras_RPT].[deif_Comentarios] AS [deif_Comentarios], 
+    [V_ReporteInstitucionesFinancieras_RPT].[deif_FechaCrea] AS [deif_FechaCrea], 
     [V_ReporteInstitucionesFinancieras_RPT].[deif_Pagado] AS [deif_Pagado], 
     [V_ReporteInstitucionesFinancieras_RPT].[per_Apellidos] AS [per_Apellidos], 
     [V_ReporteInstitucionesFinancieras_RPT].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
@@ -8183,8 +8138,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
             <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -10896,6 +10850,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
           <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deif_FechaCrea" Type="DateTime" />
         </EntityType>
         <EntityType Name="V_ReportesVarios">
           <Key>
@@ -15521,10 +15476,10 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
             <Parameter Name="aces_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeduccionesEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeduccionesEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeIngresosEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeIngresosEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Activar_Result1)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
@@ -15688,7 +15643,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result1)">
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
@@ -18473,6 +18428,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' is referenc
           <EntitySetMapping Name="V_ReporteInstitucionesFinancieras_RPT">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_ReporteInstitucionesFinancieras_RPT">
               <MappingFragment StoreEntitySet="V_ReporteInstitucionesFinancieras_RPT">
+                <ScalarProperty Name="deif_FechaCrea" ColumnName="deif_FechaCrea" />
                 <ScalarProperty Name="deif_IdDeduccionInstFinanciera" ColumnName="deif_IdDeduccionInstFinanciera" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="per_Id" ColumnName="per_Id" />
