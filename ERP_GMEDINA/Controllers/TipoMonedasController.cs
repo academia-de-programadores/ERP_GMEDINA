@@ -12,42 +12,52 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoMonedasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: TipoMonedas
         public ActionResult Index()
         {
-            List<tbTipoMonedas> tbTipoMonedas = new List<Models.tbTipoMonedas> { };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbTipoMonedas = db.tbTipoMonedas.Where(x => x.tmon_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbTipoMonedas);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbTipoMonedas.Add(new tbTipoMonedas { tmon_Id = 0, tmon_Descripcion = "Fallo la conexión" });
-
-            }
+            bool Admin = (bool)Session["Admin"];
+            tbTipoMonedas tbTipoMonedas = new tbTipoMonedas { tmon_Estado = true };
             return View(tbTipoMonedas);
         }
 
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTipoMonedas> tbTipoMonedas =
-                new List<Models.tbTipoMonedas> { };
-            foreach (tbTipoMonedas x in db.tbTipoMonedas.ToList().Where(x => x.tmon_Estado == true))
+            try
             {
-                tbTipoMonedas.Add(new tbTipoMonedas
-                {
-                    tmon_Id = x.tmon_Id,
-                    tmon_Descripcion = x.tmon_Descripcion
-                });
+                db = new ERP_GMEDINAEntities();
+                var tbTipoMonedas = db.tbTipoMonedas
+                    .Select(
+                    t => new
+                    {
+                        tmon_Id = t.tmon_Id,
+                        tmon_Estado = t.tmon_Estado,
+                        tmon_Descripcion = t.tmon_Descripcion
+                    }
+                    )
+                    .ToList();
+                return Json(tbTipoMonedas, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbTipoMonedas, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
         }
+        //{
+        //    List<tbTipoMonedas> tbTipoMonedas =
+        //        new List<Models.tbTipoMonedas> { };
+        //    foreach (tbTipoMonedas x in db.tbTipoMonedas.ToList().Where(x => x.tmon_Estado == true))
+        //    {
+        //        tbTipoMonedas.Add(new tbTipoMonedas
+        //        {
+        //            tmon_Id = x.tmon_Id,
+        //            tmon_Descripcion = x.tmon_Descripcion
+        //        });
+        //    }
+        //    return Json(tbTipoMonedas, JsonRequestBehavior.AllowGet);
+        //}
 
         // GET: TipoMonedas/Create
         public ActionResult Create()
@@ -69,6 +79,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoMonedas_Insert(tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
                     {
@@ -101,6 +112,7 @@ namespace ERP_GMEDINA.Controllers
             tbTipoMonedas tbTipoMonedas = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbTipoMonedas = db.tbTipoMonedas.Find(id);
                 if (tbTipoMonedas == null || !tbTipoMonedas.tmon_Estado)
                 {
@@ -141,6 +153,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoMoneda_Update(id, tbTipoMonedas.tmon_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoMoneda_Update_Result item in list)
                     {
@@ -172,6 +185,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbTipoMonedas_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoMonedas_Delete_Result item in list)
                     {
@@ -216,11 +230,35 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbTipoPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoPermisos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
@@ -338,3 +376,8 @@ namespace ERP_GMEDINA.Controllers
 //        }
 //    }
 //}
+
+    
+    //Nota: Los parametros y nombres de funciones, dependen de la tabla trabajada
+  
+
