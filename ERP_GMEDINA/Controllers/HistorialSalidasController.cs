@@ -16,28 +16,19 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            //ViewBag.tsal_Id = new SelectList(db.tbTipoSalidas, "tsal_Id", "tsal_Descripcion");
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbHistorialSalidas = new List<tbHistorialSalidas> { };
+            bool Admin = (bool)Session["Admin"];
+            tbHistorialSalidas tbHistorialSalidas = new tbHistorialSalidas { hsal_Estado = true };
             return View(tbHistorialSalidas);
         }
         public ActionResult llenarTabla()
         {
-            //string estado = 
             try
             {
-                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-                //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities())
-                {
-                   
-
-                  var V_tbHistorialSalidas_completa = db.V_tbHistorialSalidas_completa
-                        .Select(
+                db = new ERP_GMEDINAEntities();
+                var V_tbHistorialSalidas_completa = db.V_tbHistorialSalidas_completa
+                    .Select(
                         t => new
                         {
-                            // p => (p.Date.Value == null ? p.Date.Value : p.Date.Value.Date) == SelectedDate.Date
-
                             hsal_Id = t.hsal_Id,
                             tsal_Id = t.tsal_Id,
                             tsal_Descripcion = t.tsal_Descripcion,
@@ -50,12 +41,12 @@ namespace ERP_GMEDINA.Controllers
                             per_Edad = t.per_Edad,
                             per_EstadoCivil = t.per_EstadoCivil,
                             hsal_Observacion = t.hsal_Observacion,
+                            hsal_Estado = t.hsal_Estado,
                             hsal_FechaSalida = t.hsal_FechaSalida
                         }
                         )
                         .ToList();
                     return Json(V_tbHistorialSalidas_completa, JsonRequestBehavior.AllowGet);
-                }
             }
             catch(Exception ex)
             {
@@ -63,6 +54,30 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialSalidas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialSalidas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -191,6 +206,7 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
+            db = new ERP_GMEDINAEntities();
             var Usuario = (tbUsuario)Session["Usuario"];
             //en esta area ingresamos el registro con el procedimiento almacenado
             try

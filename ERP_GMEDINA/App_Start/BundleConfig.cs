@@ -726,6 +726,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
+            // SCRIPT Hsal 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialSalidas/Admin").Include(
+            "~/Scripts/app/general/HistorialSalidas/Admin.js"));
+
+            // SCRIPT tper
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoPermisos/Admin").Include(
+            "~/Scripts/app/general/TipoPermisos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+ "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones").Include(
                 "~/Scripts/app/General/CreateHistorialVacaciones.js"));
