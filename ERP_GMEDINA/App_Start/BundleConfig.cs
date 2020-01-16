@@ -469,6 +469,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoHOras/Admin").Include(
             "~/Scripts/app/general/TipoHOras/Admin.js"));
 
+            //SCRIPT HISTORIALPERMISOS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialPermisos/Admin").Include(
+            "~/Scripts/app/general/HistorialPermisos/Admin.js"));
+
             // SCRIPT TIPOSALIDAS ADMIN
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas/Admin").Include(
             "~/Scripts/app/general/TipoSalidas/Admin.js"));

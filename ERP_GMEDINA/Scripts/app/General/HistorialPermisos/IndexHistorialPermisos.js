@@ -1,4 +1,5 @@
-﻿var id = 0;
+﻿var fill = 0;
+var Admin = false;
 
 //Funciones GET
 function tablaEditar(ID) {
@@ -100,8 +101,14 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
+                var Acciones = value.hper_Estado == 1
+                    ? null : Admin ?
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "</div>" : '';
                 tabla.row.add({
                     Id: value.hper_Id,
+                    "Número": value.hper_Id,
                     tper_Id: value.tper_Id,
                     TipoPermiso: value.tper_Descripcion,
                     NombreCompleto: value.per_Nombres,
@@ -112,7 +119,9 @@ function llenarTabla() {
                     per_EstadoCivil: value.per_EstadoCivil,
                     hper_Observacion: value.hper_Observacion,
                     FechaInicio: value.FechaInicio,
-                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
+                    Estado: value.hper_Estado ? 'Activo' : 'Inactivo',
+                    Acciones:Acciones
+                    //Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                 });
             });
             tabla.draw();

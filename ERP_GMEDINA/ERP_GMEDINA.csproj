@@ -1266,6 +1266,7 @@
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\CreateIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
+    <Content Include="Scripts\app\General\HistorialPermisos\Admin.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\CreateHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\IndexHistorialPermisos.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
