@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-md-10">
 					<div>
-						Descripción Ingreso
+						<label>Descripción Ingreso </label><label class="" id="asteriscoCreate">*</label>
 						@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50" } })
 					</div>
 					@Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
