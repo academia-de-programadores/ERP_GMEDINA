@@ -54,8 +54,9 @@ function llenarTabla() {
                    "</div>";
                 if (value.car_Estado > fill) {
                     tabla.row.add({
-                        ID: value.car_Id,
+                        Numero: value.car_Id,
                         Cargo: value.car_Descripcion,
+                        Estado:value.car_Estado ?"Activo":"Inactivo",
                         Acciones:Acciones
                     }).draw();
                 }

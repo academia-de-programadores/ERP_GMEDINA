@@ -516,6 +516,9 @@ namespace ERP_GMEDINA
                 bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento").Include(
                     "~/Scripts/app/General/FasesReclutamiento/FasesReclutamiento.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento/Admin").Include(
+                    "~/Scripts/app/General/FasesReclutamiento/Admin.js"));
+
             //SCRIPT EMPRESAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
                 "~/Scripts/app/general/Empresas/Empresas.js"));
@@ -541,6 +544,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
                   "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones/Admin").Include(
+                  "~/Scripts/app/General/TipoAmonestaciones/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
                 "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));

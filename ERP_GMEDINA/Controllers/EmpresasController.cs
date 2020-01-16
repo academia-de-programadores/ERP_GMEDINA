@@ -28,8 +28,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 ex.Message.ToString();
                 tbEmpresas.Add(new tbEmpresas { empr_Id = 0, empr_Nombre = "Fallo la conexión" });
-                
-            }           
+
+            }
             return View(tbEmpresas);
         }
 
@@ -56,20 +56,35 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
-
+        [HttpPost]
+        public JsonResult Upload(HttpPostedFileBase file)
+        {
+            if (file!=null)
+            {
+                string path = Server.MapPath("~/Logos/" + file.FileName);
+                if (!System.IO.File.Exists(path))
+                {//OPEN IF
+                    file.SaveAs(path);
+                    Session["Path"] = path;
+                return Json(true, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
         // POST: Empresas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598. tbEmpresas tbEmpresas,
         [HttpPost]
         public JsonResult Create(tbEmpresas tbEmpresas)
         {
+            string path = (string)Session["Path"];
             string msj = "...";
             if (tbEmpresas.empr_Nombre != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, path, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
                         msj = item.MensajeError;
@@ -204,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        protected tbUsuario IsNull (tbUsuario valor)
+        protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
             {
