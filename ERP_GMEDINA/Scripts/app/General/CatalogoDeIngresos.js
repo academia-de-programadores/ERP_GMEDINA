@@ -31,7 +31,7 @@ function cargarGridIngresos() {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
@@ -98,7 +98,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -122,6 +122,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
             if (data) {
                 $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
+                $('#asteriscoEdit').removeClass('text-danger');
                 $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "scroll");
@@ -131,26 +132,30 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
 });
 
-$('#cin_DescripcionIngreso').blur(function(){
+$('#frmCatalogoIngresosCreate #cin_DescripcionIngreso').keyup(function(){
+    if($(this)
+    .val()
+    .trim() != ''){
+        $('#asteriscoCreate').removeClass('text-danger');
+    }
+});
+
+$('#Editar #cin_DescripcionIngreso').keyup(function(){
     if($(this)
     .val()
     .trim() != ''){
         $('#validareditar').hide();
         $('#asteriscoEdit').removeClass('text-danger');
-    } else{
-        $('#validareditar').show();
-        $('#asteriscoEdit').add('text-danger');
     }
 });
 
 $("#btnUpdateIngresos").click(function () {
-    debugger;
     //descedit es la variable que uso para validar si esta vacio o no
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
@@ -168,10 +173,6 @@ $("#btnUpdateIngresos").click(function () {
         $('#validareditar').html('Campo Descripción Ingresos requerido');
         $('#validareditar').show();
         $('#asteriscoEdit').addClass('text-danger');
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
     }
 });
 
@@ -205,9 +206,14 @@ $("#btnEditarIngresos").click(function () {
                 cargarGridIngresos();
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
                 ocultarcargandoEditar();
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se editó el registro, contacte al administrador',
+                });
             }
 
         });
@@ -266,7 +272,7 @@ $("#btnInactivarIngresos").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo inhabilitar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -276,7 +282,7 @@ $("#btnInactivarIngresos").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -289,6 +295,7 @@ $("#btnInactivarIngresos").click(function () {
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #cin_DescripcionIngreso").val('');
+    $('#asteriscoCreate').removeClass('text-danger');
     $("#AgregarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
@@ -324,7 +331,7 @@ $('#btnCreateRegistroIngresos').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue guardado de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
                 ocultarCargandoCrear()
                 $("#Crear #cin_DescripcionIngreso").val('');
@@ -339,13 +346,7 @@ $('#btnCreateRegistroIngresos').click(function () {
     else {
         $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
-
-
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos',
-        });
-
+        $('#asteriscoCreate').addClass('text-danger');
     }
 });
 
@@ -434,7 +435,7 @@ $("#btnActivarIngreso").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Activar el registro, contacte al administrador',
+                message: 'No se activó el registro, contacte al administrador',
             });
         }
         else {
@@ -445,7 +446,7 @@ $("#btnActivarIngreso").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Activado de forma exitosa!',
+                message: '¡El registro se activó de forma exitosa!',
             });
         }
     });
