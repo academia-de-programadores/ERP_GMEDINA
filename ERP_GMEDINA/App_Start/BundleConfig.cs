@@ -454,61 +454,69 @@ namespace ERP_GMEDINA
                         "~/Content/plugins/izitoast/iziToast.css",
                         "~/Content/plugins/izitoast/iziToast.min.css"));
 
-            // Touch Spin Styless
+            // SCRIPT GENERAL
             bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
              "~/Scripts/plugins/iziToast/iziToast.js",
              "~/Scripts/plugins/iziToast/iziToast.min.js",
              "~/Scripts/app/general/general.js"));
 
-            // script Habilidades
+            // SCRIPT HABILIDADES ADMIN
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
             "~/Scripts/app/general/Habilidades/Admin.js"));
 
 
-
+            //SCRIPT TIPOHORAS ADMIN
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoHOras/Admin").Include(
             "~/Scripts/app/general/TipoHOras/Admin.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos/Admin").Include(
-          "~/Scripts/app/general/Cargos/Admin.js"));
-
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
-            "~/Scripts/app/general/Habilidades/Habilidades.js"));
-
-            // script TipoSalidas
+            // SCRIPT TIPOSALIDAS ADMIN
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas/Admin").Include(
             "~/Scripts/app/general/TipoSalidas/Admin.js"));
 
+
+            //SCRIPT CARGOS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos/Admin").Include(
+          "~/Scripts/app/general/Cargos/Admin.js"));
+
+            //SCRIPT HABILIDADES
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            //SCRIPT TIPOSALIDAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
             "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
 
+            //SCRIPT IDIOMAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas").Include(
                 "~/Scripts/app/general/Idiomas/Idiomas.js"));
 
+            //SCRIPT TITULOS
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
                 "~/Scripts/app/General/Titulos/Titulos.js"));
 
+            //SCRIPT TIPOINCAPACIDADES
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoIncapacidades").Include(
                "~/Scripts/app/General/TipoIncapacidades/TipoIncapacidades.js"));
 
+            //SCRIPT COMPETENCIAS
             bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
                   "~/Scripts/app/general/Competencias/Competencias.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
-                "~/Scripts/app/General/Titulos/Titulos.js"));
+
 
             //bundles APP/TipoHoras/TipoHoras
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento").Include(
-                "~/Scripts/app/General/FasesReclutamiento/FasesReclutamiento.js"));
+            //SCRIPT FASES RECLUTAMIENTO
+                bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento").Include(
+                    "~/Scripts/app/General/FasesReclutamiento/FasesReclutamiento.js"));
 
-
+            //SCRIPT EMPRESAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
                 "~/Scripts/app/general/Empresas/Empresas.js"));
 
-
+            //SCRIPT TIPOMONEDAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
                 "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
 
@@ -518,10 +526,12 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
                                "~/Scripts/app/general/Idiomas/Idiomas.js"));
 
+            //SCRIPT EMPLEADOS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
                               "~/Scripts/app/general/Empleados/IndexEmpleados.js",
                               "~/Scripts/app/general/Empleados/AgregarEmpleado.js"));
 
+            //SCRIPT CARGOS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
                              "~/Scripts/app/general/Cargos/Cargos.js"));
 
