@@ -244,7 +244,6 @@
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
-    <Compile Include="Models\cHistorialIncapacidades.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -1292,6 +1291,7 @@
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
+    <Content Include="Scripts\app\General\TipoMonedas\Admin.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
     <Content Include="Scripts\app\General\TipoPermisos\TipoPermisos.js" />
