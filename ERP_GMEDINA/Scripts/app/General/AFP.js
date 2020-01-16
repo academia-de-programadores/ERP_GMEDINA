@@ -600,7 +600,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify({ ID })
                 })
-                    .done(function (data) {
+                .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         //$("#Detalles #tde_IdTipoDedu").empty();
                         //LLENAR EL DROPDOWNLIST

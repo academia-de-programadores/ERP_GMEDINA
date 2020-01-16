@@ -176,10 +176,10 @@ namespace PruebaPlanilla.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from TipoDedu in db.tbTipoDeduccion
-            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-            where TipoDedu.tde_Activo == true
-            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+                from TipoDedu in db.tbTipoDeduccion
+                where TipoDedu.tde_Activo == true
+                select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion =  TipoDedu.tde_Descripcion };
+
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -190,14 +190,12 @@ namespace PruebaPlanilla.Controllers
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
-                                            //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
-                                            //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
                                         where tbCatDedu.cde_Activo == true && tbCatDedu.cde_IdDeducciones == ID
                                         select new
                                         {
                                             tbCatDedu.cde_IdDeducciones,
                                             tbCatDedu.cde_DescripcionDeduccion,
-                                            TipoDedu = tbCatDedu.tbTipoDeduccion.tde_IdTipoDedu,
+                                            tbCatDedu.tde_IdTipoDedu,
                                             tbCatDedu.cde_PorcentajeColaborador,
                                             tbCatDedu.cde_PorcentajeEmpresa,
                                             tbCatDedu.cde_Activo,
@@ -210,7 +208,6 @@ namespace PruebaPlanilla.Controllers
                                         };
 
             db.Configuration.ProxyCreationEnabled = false;
-            //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
             return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
@@ -257,6 +254,8 @@ namespace PruebaPlanilla.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Activar(int id)
@@ -299,6 +298,8 @@ namespace PruebaPlanilla.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
