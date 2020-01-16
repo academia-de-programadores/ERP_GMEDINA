@@ -107,12 +107,14 @@ function cargarGridBonos() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
+    document.getElementById("btnCreateRegistroBonos").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE EMPLEADOS DEL MODAL
     $("#Validation_descipcion7").css("display", "");
     $("#Validation_descipcion8").css("display", "");
     $("#Validation_descipcion9").css("display", "");
     $("#Validation_descipcion4").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
+    $("#Validation_descipcion6").css("display", "none");
     $.ajax({
         url: "/EmpleadoBonos/EditGetDDLEmpleado",
         method: "GET",
