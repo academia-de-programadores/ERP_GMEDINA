@@ -708,6 +708,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditPersonas").Include(
             "~/Scripts/app/General/Personas/EditPersonas.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Personas/Admin").Include(
+            "~/Scripts/app/General/Personas/Admin.js"));
+
+
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
                 "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
 

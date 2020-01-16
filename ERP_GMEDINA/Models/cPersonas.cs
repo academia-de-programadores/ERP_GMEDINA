@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
     public class cPersonas
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
-        [Display(Name = "Id")]
+        [Display(Name = "Número")]
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public int per_Id { get; set; }
 
@@ -79,7 +79,10 @@ namespace ERP_GMEDINA.Models
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string per_TipoSangre { get; set; }
 
+        [Display(Name = "Estado")]
         public bool per_Estado { get; set; }
+
+        [Display(Name = "Razon Inactivo")]
         public string per_RazonInactivo { get; set; }
         public int per_UsuarioCrea { get; set; }
         public System.DateTime per_FechaCrea { get; set; }

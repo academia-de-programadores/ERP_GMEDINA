@@ -4144,5 +4144,22 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbTitulosPersona_Restore", tipe_IdParameter, tipe_UsuarioModificaParameter, tipe_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Habilitar_Result> UDP_RRHH_tbPersonas_Habilitar(Nullable<int> per_Id, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var per_UsuarioModificaParameter = per_UsuarioModifica.HasValue ?
+                new ObjectParameter("per_UsuarioModifica", per_UsuarioModifica) :
+                new ObjectParameter("per_UsuarioModifica", typeof(int));
+    
+            var per_FechaModificaParameter = per_FechaModifica.HasValue ?
+                new ObjectParameter("per_FechaModifica", per_FechaModifica) :
+                new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Habilitar_Result>("UDP_RRHH_tbPersonas_Habilitar", per_IdParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+        }
     }
 }
