@@ -59,7 +59,7 @@ function cargarGridAcumuladosISR() {
 
                 //variable boton activar
                 var botonActivar = ListaAcumuladosISR[i].aisr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarAcumuladosISR">Activar</button>' : '' : '';
-                
+
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblAcumuladosISR').dataTable().fnAddData([
                     ListaAcumuladosISR[i].aisr_Id,
@@ -338,4 +338,10 @@ $("#btnActivarAcumuladosISREjecutar").click(function () {
         }
     });
     activarID = 0;
+});
+
+//Modal editar despues de No Inactivar
+$("#btnNoInactivar").click(function () {
+    $("#EditarAcumuladosISR").modal();
+    $("#InactivarAcumuladosISR").modal('hide');
 });
