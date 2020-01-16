@@ -39,7 +39,8 @@ function cargarGridTipoDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaTipoDeducciones = data, template = '';
+            var ListaTipoDeducciones = data;
+            $('#tblTipoDeducciones').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaTipoDeducciones.length; i++) {
 
@@ -47,7 +48,7 @@ function cargarGridTipoDeducciones() {
                 var estadoRegistro = ListaTipoDeducciones[i].tde_Activo == false ? 'Inactivo' : 'Activo'
 
                 //variable boton detalles
-                var botonDetalles = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleTipoDeducciones">Detalles</button>' : '';
+                var botonDetalles = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-primary btn-xs" style="margin-right:3px;" id="btnDetalleTipoDeducciones">Detalles</button>' : '';
 
                 //variable boton editar
                 var botonEditar = ListaTipoDeducciones[i].tde_Activo == true ? '<button data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '" type="button" class="btn btn-default btn-xs"  id="btnEditarTipoDeducciones">Editar</button>' : '';
@@ -61,27 +62,13 @@ function cargarGridTipoDeducciones() {
 
                 UsuarioModifica = ListaTipoDeducciones[i].tde_UsuarioModifica == null ? 'Sin modificaciones' : ListaTipoDeducciones[i].NombreUsuarioModifica;
 
-
-
-
-                template += '<tr data-id = "' + ListaTipoDeducciones[i].tde_IdTipoDedu + '">' +
-                    '<td>' + ListaTipoDeducciones[i].tde_IdTipoDedu + '</td>' +
-                    '<td>' + ListaTipoDeducciones[i].tde_Descripcion + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                    //variable donde está el boton de detalles
-                    '<td>' +
-                    botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
+                $('#tblTipoDeducciones').dataTable().fnAddData([
+                                ListaTipoDeducciones[i].tde_IdTipoDedu,
+                                ListaTipoDeducciones[i].tde_Descripcion,
+                                estadoRegistro,
+                                  botonDetalles + botonEditar + botonActivar]
+                                );
             }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyTipoDeducciones').html(template);
         });
     FullBody();
 }
@@ -157,7 +144,7 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeduccion
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
         });
@@ -172,7 +159,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
         $("html, body").css("overflow", "hidden");
         $("html, body").css("overflow", "scroll");
     }
-    
+
 });
 
 ////////MODAAAAAAAAL DE CONFIRMACION DE EDITAR------
@@ -357,7 +344,7 @@ $("#btnInactivarRegistroTipoDeducciones").click(function () {
         cargarGridTipoDeducciones();
         //Mensaje de error si no hay data
         iziToast.success({
-            title: 'Exito',
+            title: 'Éxito',
             message: '¡El registro se inactivó de forma exitosa!',
         });
     });

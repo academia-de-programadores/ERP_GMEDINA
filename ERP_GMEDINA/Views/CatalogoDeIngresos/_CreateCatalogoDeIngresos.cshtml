@@ -1,31 +1,29 @@
 ﻿@model ERP_GMEDINA.Models.tbCatalogoDeIngresos
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoIngresosCreate" }))
 {
-    @Html.AntiForgeryToken()
-    <div class="modal-body" id="Crear">
-        @Html.HiddenFor(model => model.cin_IdIngreso)
-        @Html.HiddenFor(model => model.cin_FechaCrea)
-        @Html.HiddenFor(model => model.cin_UsuarioCrea)
-       
-           
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-10">
-                    <div>
-                        Descripción Ingreso
-                        @Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off" } })
-                    </div>
-                    @Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
-        <input type="submit" id="btnCreateRegistroIngresos" value="Guardar" class="btn btn-primary pull-left" />
-        <div style="display:none" class="btn pull-left" id="cargandoCrear">
-        </div>
-    </div>
+	@Html.AntiForgeryToken()
+	<div class="modal-body" id="Crear">
+		@Html.HiddenFor(model => model.cin_IdIngreso)
+		@Html.HiddenFor(model => model.cin_FechaCrea)
+		@Html.HiddenFor(model => model.cin_UsuarioCrea)
 
 
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-10">
+					<div>
+						Descripción Ingreso
+						@Html.EditorFor(model => model.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", id = "cin_DescripcionIngreso", @autocomplete = "off", @maxlength = "50" } })
+					</div>
+					@Html.ValidationMessageFor(model => model.cin_DescripcionIngreso, "", new { @class = "text-danger", @id = "descripcioncrear" })
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" data-dismiss="modal" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
+		<input type="submit" id="btnCreateRegistroIngresos" value="Guardar" class="btn btn-primary pull-left" />
+		<div style="display:none" class="btn pull-left" id="cargandoCrear">
+		</div>
+	</div>
 }

@@ -44,7 +44,11 @@ function cargarGridAdelantos() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaAdelantos = data, template = '';
+            var ListaAdelantos = data;
+
+            //limpiar la data del datatable
+            $('#tblAdelantoSueldo').DataTable().clear();
+
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaAdelantos.length; i++) {
                 var FechaAdelanto = FechaFormato(ListaAdelantos[i].adsu_FechaAdelanto);
@@ -52,41 +56,36 @@ function cargarGridAdelantos() {
                 var Activo = ListaAdelantos[i].adsu_Activo == true ? 'Activo' : 'Inactivo';
                 UsuarioModifica = ListaAdelantos[i].adsu_UsuarioModifica == null ? 'Sin modificaciones' : ListaAdelantos[i].adsu_UsuarioModifica;
 
-                var botonDetalles = ListaAdelantos[i].adsu_Activo == true ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAdelantoSueldo">Detalles</button>' : '';
+                var botonDetalles = ListaAdelantos[i].adsu_Activo == true ? '<button style="margin-right:3px;" data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAdelantoSueldo">Detalles</button>' : '';
 
                 //variable boton editar
-                var botonEditar = ListaAdelantos[i].adsu_Activo == true ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAdelantoSueldo">Editar</button>' : '';
+                var botonEditar = ListaAdelantos[i].adsu_Activo == true ? '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-default btn-xs"  id="btnEditarAdelantoSueldo">Editar</button>' : '';
 
                 //variable donde está el boton activar
-                var botonActivar = ListaAdelantos[i].adsu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAdelantos[i].cb_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroAdelantos">Activar</button>' : '' : '';
+                var botonActivar = ListaAdelantos[i].adsu_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarRegistroAdelantos">Activar</button>' : '' : '';
                 var dataId = ListaAdelantos[i].adsu_IdAdelantoSueldo;
 
-                template += '<tr data-id = "' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '">' +
-                    '<td>' + ListaAdelantos[i].adsu_IdAdelantoSueldo + '</td>' +
-                    '<td>' + ListaAdelantos[i].empleadoNombre + '</td>' +
-                    '<td>' + ListaAdelantos[i].adsu_RazonAdelanto + '</td>' +
-                    '<td>' + ListaAdelantos[i].adsu_Monto + '</td>' +
-                    '<td>' + FechaAdelanto + '</td>' +
-                    '<td>' + Deducido + '</td>' +
-                    '<td>' + Activo + '</td>' +
-                    '<td>' +
+                $('#tblAdelantoSueldo').dataTable().fnAddData([
+                    ListaAdelantos[i].adsu_IdAdelantoSueldo,
+                    ListaAdelantos[i].empleadoNombre,
+                    ListaAdelantos[i].adsu_RazonAdelanto,
+                    ListaAdelantos[i].adsu_Monto,
+                    FechaAdelanto,
+                    Deducido,
+                    Activo,
                     botonDetalles +
                     botonEditar +
-                    botonActivar +
-                    '</td>' +
-                    '</tr>';
+                    botonActivar
+                    ]);
             }
-            
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyAdelantoSueldo').html(template);
             FullBody();
-            //table.ajax.reload(null, true);
         });
    
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarAdelanto", function () {
+    document.getElementById("btnCreateRegistroAdelantos").disabled = false;
     $("#Crear #adsu_RazonAdelanto").val("");
     $("#Crear #adsu_Monto").val("");
     $("#Crear #emp_IdEmpleado").val(0);
@@ -150,7 +149,9 @@ $('#btnCreateRegistroAdelantos').click(function () {
         && Fecha != "" && Fecha != null && Fecha != undefined)
     {
         //MOSTRAR EL SPINNER DE CARGA
-        mostrarCargandoCrear();
+        //mostrarCargandoCrear();
+        document.getElementById("btnCreateRegistroAdelantos").disabled = true;
+
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmEmpleadoAdelantos").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -161,13 +162,14 @@ $('#btnCreateRegistroAdelantos').click(function () {
         }).done(function (data) {
             //CERRAR EL MODAL DE AGREGAR
             $("#AgregarAdelantos").modal('hide');
-            ocultarCargandoCrear();
+            //ocultarCargandoCrear();
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
+                document.getElementById("btnCreateRegistroAdelantos").disabled = false;
             }
             else {
                 OcultarValidaciones();
@@ -183,6 +185,7 @@ $('#btnCreateRegistroAdelantos').click(function () {
         });
     }
     else {
+        document.getElementById("btnCreateRegistroAdelantos").disabled = false;
         //VALIDAR LOS TIPOS DE ERRORES EN LOS CAMPOS
         ValidarCamposCrear(Razon, Monto, IdEmp, Fecha);
     }
@@ -193,19 +196,16 @@ function ValidarCamposCrear(Razon, Monto, IdEmp, Fecha) {
     if ($("#Crear #adsu_Monto").val() > MaxSueldoCreate
         && $("#Crear #adsu_Monto").val() != '' && $("#Crear #adsu_Monto").val() != undefined && $("#Crear #adsu_Monto").val() != null
         && IdEmp != 0) {
-        //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+        //MENSAJE DE ERROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
         iziToast.error({
             title: 'Error',
             message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
         });
         //IGUALAR EL MONTO AL SUELDO PROMEDIO
         $("#Crear #adsu_Monto").val('');
-        //$("#Crear #adsu_Monto").placeholder = 'El monto debe ser menor o igual que ' + MaxSueldoCreate;
-        //document.getElementById("adsu_Monto").placeholder = 'El sueldo promedio es ' + MaxSueldoCreate;
         $("#Crear #SueldoPromedioCrear").html('El sueldo promedio es ' + MaxSueldoCreate);
         $("#Crear #SueldoPromedioCrear").show();
         $("#Crear #AsteriscoMonto").css("display", "");
-        //$("#Crear #adsu_Monto").val(MaxSueldoCreate);
     } else {
         $("#Crear #AsteriscoMonto").css("display", "none");
         $("#Crear #SueldoPromedioCrear").hide();
@@ -271,8 +271,7 @@ $('#btnCerrarCrearAdelanto').click(function () {
     OcultarValidaciones()
 });
 $('#IconCerrar').click(function () {
-    OcultarValidaciones()
-    console.log('icon cerrar agregar');
+    OcultarValidaciones();
 });
 $("#AgregarAdelantos").on('hidden.bs.modal', function () {
     OcultarValidaciones()
@@ -282,7 +281,7 @@ $("#AgregarAdelantos").on('hidden.bs.modal', function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnEditarAdelantoSueldo", function () {
     $("#Editar #emp_Id").empty();
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     IDInactivar = ID;
 
     var idEmpSelect = "";
@@ -449,9 +448,9 @@ $("#btnConfirmarEditar").click(function () {
 
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
 function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
+    console.log(monto.val());
     var pasoValidacion = true;
-    var SuelPromedio = 0;
-    console.log(IdEmp);
+    var SuelPromedio;
     $.ajax({
         url: "/AdelantoSueldo/GetSueldoNetoProm",
         method: "POST",
@@ -460,6 +459,8 @@ function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
         data: JSON.stringify({ id: IdEmp })
     }).done(function (data) {
         SuelPromedio = data;
+        console.log('data ajax ' + data);
+        console.log('suelprom ajax' + SuelPromedio);
         $('#SueldoPromedio').html('El sueldo promedio es ' + data);
     }).fail(function (data) {
         //ACCIONES EN CASO DE ERROR
@@ -469,7 +470,7 @@ function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
             message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
         });
     });
-    console.log(SuelPromedio);
+    console.log('suelprom fuera de ajax' + SuelPromedio);
     if (colaborador.val() == '') {
         pasoValidacion = false;
         //Codigo para mostrar el span de validacion
@@ -514,6 +515,7 @@ function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
     }
 
     if (monto.val() > SuelPromedio) {
+        console.log('sueldo prom validacion' + SuelPromedio);
         pasoValidacion = false;
         //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
         iziToast.error({
@@ -568,7 +570,9 @@ $("#IconCerrarEditar").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueldo", function () {
-    var ID = $(this).closest('tr').data('id');
+    ActivarID = $(this).data('id');
+    var ID = $(this).data('id');
+    //var ID = $(this).closest('tr').data('id');
     $.ajax({
         url: "/AdelantoSueldo/Details/" + ID,
         method: "GET",
@@ -666,7 +670,7 @@ $("#btnCerrarInactivar").click(function () {
 
 //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdelantos", function () {
-    IDActivar = $(this).closest('tr').data('id');
+    IDActivar = $(this).data('id');
     $("#ActivarAdelantoSueldo").modal();
 });
 
@@ -684,6 +688,8 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
                 title: 'Error',
                 message: 'No se activó el registro, contacte al administrador',
             });
+            $("#ActivarAdelantoSueldo").modal('hide');
+            ocultarCargandoActivar();
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA

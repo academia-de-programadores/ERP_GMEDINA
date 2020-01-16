@@ -52,8 +52,15 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: IngresosIndividuales/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ini_Motivo,emp_Id,ini_Monto,ini_PagaSiempre,ini_UsuarioCrea,ini_FechaCrea")] tbIngresosIndividuales tbIngresosIndividuales)
+        public ActionResult Create(string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
         {
+            tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
+            {
+                ini_Motivo = ini_Motivo,
+                emp_Id = emp_Id,
+                ini_Monto = ini_Monto,
+                ini_PagaSiempre = ini_PagaSiempre
+            };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioCrea = 1;
             tbIngresosIndividuales.ini_FechaCrea = DateTime.Now;
@@ -137,9 +144,16 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ini_IdIngresosIndividuales,ini_Motivo,emp_Id,ini_Monto,ini_PagaSiempre,ini_UsuarioModifica,ini_FechaModifica")] tbIngresosIndividuales tbIngresosIndividuales)
+        public ActionResult Edit(int ini_IdIngresosIndividuales, string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
         {
+            tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
+            {
+                ini_IdIngresosIndividuales = ini_IdIngresosIndividuales,
+                ini_Motivo = ini_Motivo,
+                emp_Id = emp_Id,
+                ini_Monto = ini_Monto,
+                ini_PagaSiempre = ini_PagaSiempre
+            };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbIngresosIndividuales.ini_UsuarioModifica = 1;
             tbIngresosIndividuales.ini_FechaModifica = DateTime.Now;

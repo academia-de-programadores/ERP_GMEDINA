@@ -11,6 +11,7 @@
                         <div class="col-md-6">
                             @*@Html.HiddenFor(model => model.emp_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="emp_Id" htmlattributes="{ class = text-box single-line, disabled = disabled }">Colaborador</label>
+                            <label id="Validation_descipcion1" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                         </div>
                         <div class="col-md-6">
                             <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
@@ -23,6 +24,7 @@
                         <div class="col-md-6">
                             @*@Html.HiddenFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })*@
                             <label for="cin_IdIngreso" htmlattributes="{ class = text-box single-line, disabled = disabled }">Bono</label>
+                            <label id="Validation_descipcion2" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                         </div>
                         <div class="col-md-6">
                             <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>
@@ -33,7 +35,8 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.cb_Monto, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            <label for="cb_Monto" htmlattributes="{ class = text-box single-line, disabled = disabled }">Monto</label>           
+                            <label id="Validation_descipcion3" opacity 1; font-family open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight normal;">*</label>
                             <label class="text-danger" id="Validation_descipcion5" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                         </div>
                         <div class="col-md-6">
@@ -67,7 +70,7 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary pull-left" id="btnUpdateBonos">Actualizar</button>
-        <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarEmpleadoBonos">Inhabilitar</button>
+        <button type="button" class="btn btn-danger pull-left" id="btnmodalInactivarEmpleadoBonos">Inactivar</button>
     </div>
 }
 

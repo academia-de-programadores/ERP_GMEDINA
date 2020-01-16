@@ -1,10 +1,10 @@
 ﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 // REGION DE VARIABLES
 var InactivarID = 0;
 
@@ -39,8 +39,7 @@ function cargarGridIngresos() {
             //LIMPIAR LA DATA DEL DATATABLE
             $('#tblCatalogoIngresos').DataTable().clear();
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaIngresos.length; i++)
-            {
+            for (var i = 0; i < ListaIngresos.length; i++) {
                 var estadoRegistro = ListaIngresos[i].cin_Activo == false ? "Inactivo" : "Activo";
 
                 var botonDetalles = ListaIngresos[i].cin_Activo == true ?
@@ -53,14 +52,14 @@ function cargarGridIngresos() {
 
                 var botonActivar = ListaIngresos[i].cin_Activo == false ? esAdministrador == "1" ?
                     '<button type="button" class="btn btn-primary btn-xs" id="btnActivar" data-id="'
-                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' :''; 
+                    + ListaIngresos[i].cin_IdIngresos + '">Activar</button>' : '' : '';
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblCatalogoIngresos').dataTable().fnAddData([
-                     ListaIngresos[i].cin_IdIngresos,
-                     ListaIngresos[i].cin_DescripcionIngreso,
-                     estadoRegistro,
-                     botonDetalles + botonEditar + botonActivar]
-                 );
+                    ListaIngresos[i].cin_IdIngresos,
+                    ListaIngresos[i].cin_DescripcionIngreso,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
+                );
             }
         });
     FullBody();
@@ -137,14 +136,14 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
 });
 
 $("#btnUpdateIngresos").click(function () {
-
+    debugger;
     //descedit es la variable que uso para validar si esta vacio o no
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
-        $("#EditarCatalogoIngresosConfirmacion").modal();
         $("#Editar #validareditar").css("display", "none");
+        $("#EditarCatalogoIngresosConfirmacion").modal();
     }
     else {
         //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
@@ -161,9 +160,12 @@ $("#btnUpdateIngresos").click(function () {
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarIngresos").click(function () {
-
+    debugger;
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmCatalogoIngresos").serializeArray();
+    var data = $('input[name$="cin_DescripcionIngreso"').val();
+    var id = $('input[name$="cin_IdIngreso"').val();
+
+    console.log(data);
     var descedit = $("#Editar #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS
@@ -173,11 +175,11 @@ $("#btnEditarIngresos").click(function () {
         $.ajax({
             url: "/CatalogoDeIngresos/Edit",
             method: "POST",
-            data: data
+            data: { cin_DescripcionIngreso: data, id: id }
         }).done(function (data) {
 
             if (data != "error") {
-                
+
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                 $("#EditarCatalogoIngresos").modal('hide');
                 $("#EditarCatalogoIngresosConfirmacion").modal('hide');
@@ -199,23 +201,19 @@ $("#btnEditarIngresos").click(function () {
 });
 
 const btneditar = $('#btnEditarIngresos'),
-
-cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
+    cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
 
 function mostrarcargandoEditar() {
     btneditar.hide();
     cargandoEditar.html(spinner());
     cargandoEditar.show();
 }
- 
+
 function ocultarcargandoEditar() {
     btneditar.show();
     cargandoEditar.html('');
     cargandoEditar.hide();
 }
-
-
-
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
@@ -262,46 +260,7 @@ $("#btnInactivarIngresos").click(function () {
     $("#frmCatalogoIngresos").submit(function (e) {
         return false;
     });
-}
-
-);
-
-//MODAL ACTIVAR
-
-//$("#btnActivarIngresos").click(function () {
-//    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-//    var data = $("#frmActivarCatalogoIngresos").serializeArray();
-//    var ID = InactivarID;
-//    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-//    $.ajax({
-//        url: "/CatalogoDeIngresos/Activar/" + ID,
-//        method: "POST",
-//        data: data
-//    }).done(function (data) {
-//        if (data == "error") {
-//            //Cuando traiga un error del backend al guardar la edicion
-//            iziToast.error({
-//                title: 'Error',
-//                message: 'No se pudo activar el registro, contacte al administrador',
-//            });
-//        }
-//        else {
-//            $("#ActivarCatalogoIngresos").modal('hide');
-//            cargarGridIngresos();
-//            //Mensaje de exito de la edicion
-//            iziToast.success({
-//                title: 'Éxito',
-//                message: '¡El registro fue activado de forma exitosa!',
-//            });
-//        }
-//    });
-//    $("#frmCatalogoIngresos").submit(function (e) {
-//        return false;
-//    });
-//}
-
-//);
-
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
@@ -335,10 +294,10 @@ $('#btnCreateRegistroIngresos').click(function () {
         }).done(function (data) {
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
 
-            if (data != "error") {       
+            if (data != "error") {
                 $("#AgregarCatalogoIngresos").modal('hide');
                 cargarGridIngresos();
-                
+
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Éxito',
@@ -346,7 +305,7 @@ $('#btnCreateRegistroIngresos').click(function () {
                 });
                 ocultarCargandoCrear()
                 $("#Crear #cin_DescripcionIngreso").val('');
-                
+
 
             }
 
@@ -370,12 +329,7 @@ $("#btnCerrarEditar").click(function () {
 });
 
 
-
-
-
-
-
-////////////////////////CREAR
+//#region CREAR
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
@@ -386,9 +340,9 @@ $("#btnCerrarCrear").click(function () {
 $("#IconCerrarCreate").click(function () {
     $("#descripcioncrear").css("display", "none");
 });
+//#endregion
 
-////////////////////////EDITAR
-
+//#region EDITAR
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
@@ -398,30 +352,30 @@ $("#btnCerrarEditar").click(function () {
 $("#IconCerrarEditar").click(function () {
     $("#validareditar").css("display", "none");
 });
-
+//#endregion
 
 
 const btnGuardar = $('#btnCreateRegistroIngresos'),
 
-cargandoCrearcargandoCrear = $('#cargandoCrear'),
+    cargandoCrearcargandoCrear = $('#cargandoCrear'),
 
-cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
+    cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
 
-function mostrarCargandoCrear(){
+function mostrarCargandoCrear() {
     btnGuardar.hide();
     cargandoCrear.html(spinner());
     cargandoCrear.show();
 }
- 
-function ocultarCargandoCrear(){
+
+function ocultarCargandoCrear() {
     btnGuardar.show();
     cargandoCrear.html('');
     cargandoCrear.hide();
 }
 
 //Mostrar el spinner
-function spinner(){
-    return`<div class="sk-spinner sk-spinner-wave">
+function spinner() {
+    return `<div class="sk-spinner sk-spinner-wave">
  <div class="sk-rect1"></div>
  <div class="sk-rect2"></div>
  <div class="sk-rect3"></div>
@@ -435,9 +389,9 @@ function spinner(){
 
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
-        IDActivar = $(this).data('id');
+    IDActivar = $(this).data('id');
     $("#ActivarCatalogoIngresos").modal();
- });
+});
 
 
 //EJECUTAR LA ACTIVACION DEL REGISTRO

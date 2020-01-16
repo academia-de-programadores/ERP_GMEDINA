@@ -69,9 +69,8 @@
                                         }
                                     </td>
                                 </tr>
-                                            }
+                              }
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -86,12 +85,11 @@
                 <button type="button" class="close" data-dismiss="modal" id="IconCerrarEditar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Editar Catálogo de Ingreso</h4>
             </div>
-                @*Mandamos un nuevo modelo solo para poder cargar la página *@
-                @Html.Partial("_EditCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
-           
+            @*Mandamos un nuevo modelo solo para poder cargar la página *@
+            @Html.Partial("_EditCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
         </div>
-</div>
     </div>
+</div>
 
 <div class="modal fade" id="EditarCatalogoIngresosConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -107,8 +105,6 @@
                 <input type="button" id="btnEditarIngresos" value="Si" class="btn btn-primary " />
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div>
-                
-                @*<button type="button" class="btn btn-primary" id="btnEditarIngresos">Si</button>*@
                 <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -123,7 +119,7 @@
                 <h4 class="modal-title">Crear Catálogo de Ingreso</h4>
             </div>
 
-                @Html.Partial("_CreateCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
+            @Html.Partial("_CreateCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
 
         </div>
     </div>

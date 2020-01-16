@@ -243,7 +243,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
             }
-
         });
     }
 });
