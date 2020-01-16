@@ -44,6 +44,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         public virtual DbSet<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
+        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         public virtual DbSet<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
@@ -51,6 +52,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         public virtual DbSet<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         public virtual DbSet<tbHistorialDePago> tbHistorialDePago { get; set; }
+        public virtual DbSet<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
         public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbISR> tbISR { get; set; }
         public virtual DbSet<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
@@ -112,6 +114,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbTitulosPersona> tbTitulosPersona { get; set; }
         public virtual DbSet<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         public virtual DbSet<EmpleadosVendedores> EmpleadosVendedores { get; set; }
+        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
         public virtual DbSet<V_BonosColaborador> V_BonosColaborador { get; set; }
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
@@ -125,6 +128,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoTercerMes_RPT> V_DecimoTercerMes_RPT { get; set; }
         public virtual DbSet<V_Deducciones_RPT> V_Deducciones_RPT { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
         public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
@@ -132,8 +136,13 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
         public virtual DbSet<V_GeneralTotales_RPT> V_GeneralTotales_RPT { get; set; }
+        public virtual DbSet<V_HistorialEmpleadosLiquidados> V_HistorialEmpleadosLiquidados { get; set; }
+        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
+        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
         public virtual DbSet<V_Ingresos_RPT> V_Ingresos_RPT { get; set; }
+        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
+        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
         public virtual DbSet<V_Liquidaciones_RPT> V_Liquidaciones_RPT { get; set; }
         public virtual DbSet<V_Plani_AnioPlanilla> V_Plani_AnioPlanilla { get; set; }
         public virtual DbSet<V_Plani_DecimoCuarto> V_Plani_DecimoCuarto { get; set; }
@@ -147,22 +156,14 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
+        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
+        public virtual DbSet<V_ReporteInstitucionesFinancieras_RPT> V_ReporteInstitucionesFinancieras_RPT { get; set; }
         public virtual DbSet<V_ReportesVarios> V_ReportesVarios { get; set; }
         public virtual DbSet<V_tbAdelantoSueldo> V_tbAdelantoSueldo { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<V_tbEmpleadoComisiones> V_tbEmpleadoComisiones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
-        public virtual DbSet<V_INFOP_RPT> V_INFOP_RPT { get; set; }
-        public virtual DbSet<V_InstitucionesFinancieras_RPT> V_InstitucionesFinancieras_RPT { get; set; }
-        public virtual DbSet<V_IHSS_RPT> V_IHSS_RPT { get; set; }
-        public virtual DbSet<V_ISR_RPT> V_ISR_RPT { get; set; }
-        public virtual DbSet<V_AFP_RPT> V_AFP_RPT { get; set; }
-        public virtual DbSet<V_RAP_RPT> V_RAP_RPT { get; set; }
-        public virtual DbSet<V_HistorialEmpleadosLiquidados> V_HistorialEmpleadosLiquidados { get; set; }
-        public virtual DbSet<tbDeduccionesIndividuales> tbDeduccionesIndividuales { get; set; }
-        public virtual DbSet<tbIngresosIndividuales> tbIngresosIndividuales { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -267,6 +268,23 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
+        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Activar_Result> UDP_Plani_tbAuxilioDeCesantias_Activar(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
+        {
+            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
+                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
+                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
+    
+            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
+                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
+                new ObjectParameter("aces_UsuarioModifica", typeof(int));
+    
+            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
+                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
+                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Activar_Result>("UDP_Plani_tbAuxilioDeCesantias_Activar", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Delete_Result> UDP_Plani_tbAuxilioDeCesantias_Delete(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
         {
             var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
@@ -360,7 +378,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_CatalogoDeIngresosEdit_Select_Result>("UDP_Plani_CatalogoDeIngresosEdit_Select", cpla_IdPlanillaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Activar_Result> UDP_Plani_EmpleadoComisiones_Activar(Nullable<int> cc_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifcia)
+        public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Activar_Result1> UDP_Plani_EmpleadoComisiones_Activar(Nullable<int> cc_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifcia)
         {
             var cc_IdParameter = cc_Id.HasValue ?
                 new ObjectParameter("cc_Id", cc_Id) :
@@ -374,7 +392,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cc_FechaModifcia", cc_FechaModifcia) :
                 new ObjectParameter("cc_FechaModifcia", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Activar_Result>("UDP_Plani_EmpleadoComisiones_Activar", cc_IdParameter, cc_UsuarioModificaParameter, cc_FechaModifciaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_EmpleadoComisiones_Activar_Result1>("UDP_Plani_EmpleadoComisiones_Activar", cc_IdParameter, cc_UsuarioModificaParameter, cc_FechaModifciaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_EmpleadoComisiones_Inactivar_Result> UDP_Plani_EmpleadoComisiones_Inactivar(Nullable<int> cc_Id, Nullable<int> cc_UsuarioModifica, Nullable<System.DateTime> cc_FechaModifcia)
@@ -913,7 +931,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeIngresos_Update_Result>("UDP_Plani_tbCatalogoDeIngresos_Update", cin_IdIngresoParameter, cin_DescripcionIngresoParameter, cin_UsuarioModificaParameter, cin_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Activar_Result> UDP_Plani_tbCatalogoDePlanillas_Activar(Nullable<int> cpla_IdPlanilla, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Activar_Result1> UDP_Plani_tbCatalogoDePlanillas_Activar(Nullable<int> cpla_IdPlanilla, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica)
         {
             var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
                 new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
@@ -927,19 +945,19 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cpla_FechaModifica", cpla_FechaModifica) :
                 new ObjectParameter("cpla_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Activar_Result>("UDP_Plani_tbCatalogoDePlanillas_Activar", cpla_IdPlanillaParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Activar_Result1>("UDP_Plani_tbCatalogoDePlanillas_Activar", cpla_IdPlanillaParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result> UDP_Plani_tbCatalogoDePlanillas_Inactivar(Nullable<int> cpla_IdPlanilla)
+        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1> UDP_Plani_tbCatalogoDePlanillas_Inactivar(Nullable<int> cpla_IdPlanilla)
         {
             var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
                 new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
                 new ObjectParameter("cpla_IdPlanilla", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result>("UDP_Plani_tbCatalogoDePlanillas_Inactivar", cpla_IdPlanillaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1>("UDP_Plani_tbCatalogoDePlanillas_Inactivar", cpla_IdPlanillaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Insert_Result> UDP_Plani_tbCatalogoDePlanillas_Insert(string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioCrea, Nullable<System.DateTime> cpla_FechaCrea, Nullable<bool> cpla_RecibeComision)
+        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Insert_Result1> UDP_Plani_tbCatalogoDePlanillas_Insert(string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioCrea, Nullable<System.DateTime> cpla_FechaCrea, Nullable<bool> cpla_RecibeComision)
         {
             var cpla_DescripcionPlanillaParameter = cpla_DescripcionPlanilla != null ?
                 new ObjectParameter("cpla_DescripcionPlanilla", cpla_DescripcionPlanilla) :
@@ -961,10 +979,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cpla_RecibeComision", cpla_RecibeComision) :
                 new ObjectParameter("cpla_RecibeComision", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Insert_Result>("UDP_Plani_tbCatalogoDePlanillas_Insert", cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioCreaParameter, cpla_FechaCreaParameter, cpla_RecibeComisionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Insert_Result1>("UDP_Plani_tbCatalogoDePlanillas_Insert", cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioCreaParameter, cpla_FechaCreaParameter, cpla_RecibeComisionParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Update_Result> UDP_Plani_tbCatalogoDePlanillas_Update(Nullable<int> cpla_IdPlanilla, string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica, Nullable<bool> cpla_RecibeComision)
+        public virtual ObjectResult<UDP_Plani_tbCatalogoDePlanillas_Update_Result1> UDP_Plani_tbCatalogoDePlanillas_Update(Nullable<int> cpla_IdPlanilla, string cpla_DescripcionPlanilla, Nullable<int> cpla_FrecuenciaEnDias, Nullable<int> cpla_UsuarioModifica, Nullable<System.DateTime> cpla_FechaModifica, Nullable<bool> cpla_RecibeComision)
         {
             var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
                 new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
@@ -990,7 +1008,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cpla_RecibeComision", cpla_RecibeComision) :
                 new ObjectParameter("cpla_RecibeComision", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Update_Result>("UDP_Plani_tbCatalogoDePlanillas_Update", cpla_IdPlanillaParameter, cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter, cpla_RecibeComisionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDePlanillas_Update_Result1>("UDP_Plani_tbCatalogoDePlanillas_Update", cpla_IdPlanillaParameter, cpla_DescripcionPlanillaParameter, cpla_FrecuenciaEnDiasParameter, cpla_UsuarioModificaParameter, cpla_FechaModificaParameter, cpla_RecibeComisionParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbDecimoCuartoMes_Insert_Result> UDP_Plani_tbDecimoCuartoMes_Insert(Nullable<int> emp_Id, Nullable<decimal> dtm_DecimoCuartoMonto)
@@ -1141,6 +1159,43 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Inactivar", dex_IdDeduccionesExtraParameter, dex_UsuarioModificaParameter, dex_FechaModificaParameter);
         }
     
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result> UDP_Plani_tbDeduccionesExtraordinarias_Insert(Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioCrea, Nullable<System.DateTime> dex_FechaCrea)
+        {
+            var eqem_IdParameter = eqem_Id.HasValue ?
+                new ObjectParameter("eqem_Id", eqem_Id) :
+                new ObjectParameter("eqem_Id", typeof(int));
+    
+            var dex_MontoInicialParameter = dex_MontoInicial.HasValue ?
+                new ObjectParameter("dex_MontoInicial", dex_MontoInicial) :
+                new ObjectParameter("dex_MontoInicial", typeof(decimal));
+    
+            var dex_MontoRestanteParameter = dex_MontoRestante.HasValue ?
+                new ObjectParameter("dex_MontoRestante", dex_MontoRestante) :
+                new ObjectParameter("dex_MontoRestante", typeof(decimal));
+    
+            var dex_ObservacionesComentariosParameter = dex_ObservacionesComentarios != null ?
+                new ObjectParameter("dex_ObservacionesComentarios", dex_ObservacionesComentarios) :
+                new ObjectParameter("dex_ObservacionesComentarios", typeof(string));
+    
+            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
+                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
+                new ObjectParameter("cde_IdDeducciones", typeof(int));
+    
+            var dex_CuotaParameter = dex_Cuota.HasValue ?
+                new ObjectParameter("dex_Cuota", dex_Cuota) :
+                new ObjectParameter("dex_Cuota", typeof(decimal));
+    
+            var dex_UsuarioCreaParameter = dex_UsuarioCrea.HasValue ?
+                new ObjectParameter("dex_UsuarioCrea", dex_UsuarioCrea) :
+                new ObjectParameter("dex_UsuarioCrea", typeof(int));
+    
+            var dex_FechaCreaParameter = dex_FechaCrea.HasValue ?
+                new ObjectParameter("dex_FechaCrea", dex_FechaCrea) :
+                new ObjectParameter("dex_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Insert", eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioCreaParameter, dex_FechaCreaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Update_Result> UDP_Plani_tbDeduccionesExtraordinarias_Update(Nullable<int> dex_IdDeduccionesExtra, Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioModifica, Nullable<System.DateTime> dex_FechaModifica)
         {
             var dex_IdDeduccionesExtraParameter = dex_IdDeduccionesExtra.HasValue ?
@@ -1180,6 +1235,118 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("dex_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Update_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Update", dex_IdDeduccionesExtraParameter, eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioModificaParameter, dex_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Activar_Result> UDP_Plani_tbDeduccionesIndividuales_Activar(Nullable<int> dei_IdDeduccionesIndividuales, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
+        {
+            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
+                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
+                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
+    
+            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
+                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
+                new ObjectParameter("dei_UsuarioModifica", typeof(int));
+    
+            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
+                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
+                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Activar_Result>("UDP_Plani_tbDeduccionesIndividuales_Activar", dei_IdDeduccionesIndividualesParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result> UDP_Plani_tbDeduccionesIndividuales_Inactivar(Nullable<int> dei_IdDeduccionesIndividuales, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
+        {
+            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
+                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
+                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
+    
+            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
+                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
+                new ObjectParameter("dei_UsuarioModifica", typeof(int));
+    
+            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
+                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
+                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result>("UDP_Plani_tbDeduccionesIndividuales_Inactivar", dei_IdDeduccionesIndividualesParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Insert_Result> UDP_Plani_tbDeduccionesIndividuales_Insert(string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioCrea, Nullable<System.DateTime> dei_FechaCrea)
+        {
+            var dei_MotivoParameter = dei_Motivo != null ?
+                new ObjectParameter("dei_Motivo", dei_Motivo) :
+                new ObjectParameter("dei_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var dei_MontoInicialParameter = dei_MontoInicial.HasValue ?
+                new ObjectParameter("dei_MontoInicial", dei_MontoInicial) :
+                new ObjectParameter("dei_MontoInicial", typeof(decimal));
+    
+            var dei_MontoRestanteParameter = dei_MontoRestante.HasValue ?
+                new ObjectParameter("dei_MontoRestante", dei_MontoRestante) :
+                new ObjectParameter("dei_MontoRestante", typeof(decimal));
+    
+            var dei_CuotaParameter = dei_Cuota.HasValue ?
+                new ObjectParameter("dei_Cuota", dei_Cuota) :
+                new ObjectParameter("dei_Cuota", typeof(decimal));
+    
+            var dei_PagaSiempreParameter = dei_PagaSiempre.HasValue ?
+                new ObjectParameter("dei_PagaSiempre", dei_PagaSiempre) :
+                new ObjectParameter("dei_PagaSiempre", typeof(bool));
+    
+            var dei_UsuarioCreaParameter = dei_UsuarioCrea.HasValue ?
+                new ObjectParameter("dei_UsuarioCrea", dei_UsuarioCrea) :
+                new ObjectParameter("dei_UsuarioCrea", typeof(int));
+    
+            var dei_FechaCreaParameter = dei_FechaCrea.HasValue ?
+                new ObjectParameter("dei_FechaCrea", dei_FechaCrea) :
+                new ObjectParameter("dei_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Insert_Result>("UDP_Plani_tbDeduccionesIndividuales_Insert", dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioCreaParameter, dei_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Update_Result> UDP_Plani_tbDeduccionesIndividuales_Update(Nullable<int> dei_IdDeduccionesIndividuales, string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
+        {
+            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
+                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
+                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
+    
+            var dei_MotivoParameter = dei_Motivo != null ?
+                new ObjectParameter("dei_Motivo", dei_Motivo) :
+                new ObjectParameter("dei_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var dei_MontoInicialParameter = dei_MontoInicial.HasValue ?
+                new ObjectParameter("dei_MontoInicial", dei_MontoInicial) :
+                new ObjectParameter("dei_MontoInicial", typeof(decimal));
+    
+            var dei_MontoRestanteParameter = dei_MontoRestante.HasValue ?
+                new ObjectParameter("dei_MontoRestante", dei_MontoRestante) :
+                new ObjectParameter("dei_MontoRestante", typeof(decimal));
+    
+            var dei_CuotaParameter = dei_Cuota.HasValue ?
+                new ObjectParameter("dei_Cuota", dei_Cuota) :
+                new ObjectParameter("dei_Cuota", typeof(decimal));
+    
+            var dei_PagaSiempreParameter = dei_PagaSiempre.HasValue ?
+                new ObjectParameter("dei_PagaSiempre", dei_PagaSiempre) :
+                new ObjectParameter("dei_PagaSiempre", typeof(bool));
+    
+            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
+                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
+                new ObjectParameter("dei_UsuarioModifica", typeof(int));
+    
+            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
+                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
+                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Update_Result>("UDP_Plani_tbDeduccionesIndividuales_Update", dei_IdDeduccionesIndividualesParameter, dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbEmpleadoBonos_Activar_Result> UDP_Plani_tbEmpleadoBonos_Activar(Nullable<int> cb_Id, Nullable<int> cb_UsuarioModifica, Nullable<System.DateTime> cb_FechaModifica)
@@ -1564,6 +1731,136 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbHistorialDePago_Insert_Result>("UDP_Plani_tbHistorialDePago_Insert", emp_IdParameter, hipa_SueldoNetoParameter, hipa_FechaInicioParameter, hipa_FechaFinParameter, hipa_FechaPagoParameter, hipa_AnioParameter, hipa_MesParameter, peri_IdPeriodoParameter, hipa_UsuarioCreaParameter, hipa_FechaCreaParameter, hipa_TotalISRParameter, hipa_ISRPendienteParameter, hipa_AFPParameter, hipa_TotalHorasConPermisoJustificadoParameter, hipa_TotalComisionesParameter, hipa_TotalHorasExtrasParameter, hipa_TotalVacacionesParameter, hipa_TotalSeptimoDiaParameter, hipa_AdelantoSueldoParameter, hipa_TotalSalarioParameter);
         }
     
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Activar_Result> UDP_Plani_tbIngresosIndividuales_Activar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
+        {
+            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
+                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
+                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
+    
+            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
+                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
+                new ObjectParameter("ini_UsuarioModifica", typeof(int));
+    
+            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
+                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
+                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Activar_Result>("UDP_Plani_tbIngresosIndividuales_Activar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Inactivar_Result> UDP_Plani_tbIngresosIndividuales_Inactivar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
+        {
+            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
+                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
+                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
+    
+            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
+                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
+                new ObjectParameter("ini_UsuarioModifica", typeof(int));
+    
+            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
+                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
+                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Inactivar_Result>("UDP_Plani_tbIngresosIndividuales_Inactivar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Insert_Result> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
+        {
+            var ini_MotivoParameter = ini_Motivo != null ?
+                new ObjectParameter("ini_Motivo", ini_Motivo) :
+                new ObjectParameter("ini_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var ini_MontoParameter = ini_Monto.HasValue ?
+                new ObjectParameter("ini_Monto", ini_Monto) :
+                new ObjectParameter("ini_Monto", typeof(decimal));
+    
+            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
+                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
+                new ObjectParameter("ini_PagaSiempre", typeof(bool));
+    
+            var ini_UsuarioCreaParameter = ini_UsuarioCrea.HasValue ?
+                new ObjectParameter("ini_UsuarioCrea", ini_UsuarioCrea) :
+                new ObjectParameter("ini_UsuarioCrea", typeof(int));
+    
+            var ini_FechaCreaParameter = ini_FechaCrea.HasValue ?
+                new ObjectParameter("ini_FechaCrea", ini_FechaCrea) :
+                new ObjectParameter("ini_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Insert_Result>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Update_Result> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
+        {
+            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
+                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
+                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
+    
+            var ini_MotivoParameter = ini_Motivo != null ?
+                new ObjectParameter("ini_Motivo", ini_Motivo) :
+                new ObjectParameter("ini_Motivo", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var ini_MontoParameter = ini_Monto.HasValue ?
+                new ObjectParameter("ini_Monto", ini_Monto) :
+                new ObjectParameter("ini_Monto", typeof(decimal));
+    
+            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
+                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
+                new ObjectParameter("ini_PagaSiempre", typeof(bool));
+    
+            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
+                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
+                new ObjectParameter("ini_UsuarioModifica", typeof(int));
+    
+            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
+                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
+                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Update_Result>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Activar1_Result> UDP_Plani_tbInstitucionesFinancieras_Activar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
+                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
+                new ObjectParameter("insf_UsuarioModifica", typeof(int));
+    
+            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
+                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
+                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbInstitucionesFinancieras_Activar1_Result>("UDP_Plani_tbInstitucionesFinancieras_Activar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result> UDP_Plani_tbInstitucionesFinancieras_Inactivar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
+                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
+                new ObjectParameter("insf_UsuarioModifica", typeof(int));
+    
+            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
+                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
+                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result>("UDP_Plani_tbInstitucionesFinancieras_Inactivar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Insert_Result> UDP_Plani_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<System.DateTime> insf_FechaCrea, Nullable<bool> insf_Activo)
         {
             var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
@@ -1781,7 +2078,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Insert_Result>("UDP_Plani_tbPeriodos_Insert", peri_DescripPeriodoParameter, peri_UsuarioCreaParameter, peri_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbPeriodos_Update_Result> UDP_Plani_tbPeriodos_Update(Nullable<int> peri_IdPeriodo, string peri_DescripPeriodo, Nullable<int> peri_UsuarioModifica, Nullable<System.DateTime> peri_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbPeriodos_Update_Result1> UDP_Plani_tbPeriodos_Update(Nullable<int> peri_IdPeriodo, string peri_DescripPeriodo, Nullable<int> peri_UsuarioModifica, Nullable<System.DateTime> peri_FechaModifica)
         {
             var peri_IdPeriodoParameter = peri_IdPeriodo.HasValue ?
                 new ObjectParameter("peri_IdPeriodo", peri_IdPeriodo) :
@@ -1799,7 +2096,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("peri_FechaModifica", peri_FechaModifica) :
                 new ObjectParameter("peri_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Update_Result>("UDP_Plani_tbPeriodos_Update", peri_IdPeriodoParameter, peri_DescripPeriodoParameter, peri_UsuarioModificaParameter, peri_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbPeriodos_Update_Result1>("UDP_Plani_tbPeriodos_Update", peri_IdPeriodoParameter, peri_DescripPeriodoParameter, peri_UsuarioModificaParameter, peri_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbPreaviso_Activar_Result> UDP_Plani_tbPreaviso_Activar(Nullable<int> prea_IdPreaviso, Nullable<int> prea_UsuarioModifica, Nullable<System.DateTime> prea_FechaModifica)
@@ -2124,336 +2421,6 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cin_IdIngreso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Update_Result>("UDP_tbTipoPlanillaDetalleIngreso_Update", cpla_IdPlanillaParameter, cin_IdIngresoParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result> UDP_Plani_tbDeduccionesExtraordinarias_Insert(Nullable<int> eqem_Id, Nullable<decimal> dex_MontoInicial, Nullable<decimal> dex_MontoRestante, string dex_ObservacionesComentarios, Nullable<int> cde_IdDeducciones, Nullable<decimal> dex_Cuota, Nullable<int> dex_UsuarioCrea, Nullable<System.DateTime> dex_FechaCrea)
-        {
-            var eqem_IdParameter = eqem_Id.HasValue ?
-                new ObjectParameter("eqem_Id", eqem_Id) :
-                new ObjectParameter("eqem_Id", typeof(int));
-    
-            var dex_MontoInicialParameter = dex_MontoInicial.HasValue ?
-                new ObjectParameter("dex_MontoInicial", dex_MontoInicial) :
-                new ObjectParameter("dex_MontoInicial", typeof(decimal));
-    
-            var dex_MontoRestanteParameter = dex_MontoRestante.HasValue ?
-                new ObjectParameter("dex_MontoRestante", dex_MontoRestante) :
-                new ObjectParameter("dex_MontoRestante", typeof(decimal));
-    
-            var dex_ObservacionesComentariosParameter = dex_ObservacionesComentarios != null ?
-                new ObjectParameter("dex_ObservacionesComentarios", dex_ObservacionesComentarios) :
-                new ObjectParameter("dex_ObservacionesComentarios", typeof(string));
-    
-            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
-                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
-                new ObjectParameter("cde_IdDeducciones", typeof(int));
-    
-            var dex_CuotaParameter = dex_Cuota.HasValue ?
-                new ObjectParameter("dex_Cuota", dex_Cuota) :
-                new ObjectParameter("dex_Cuota", typeof(decimal));
-    
-            var dex_UsuarioCreaParameter = dex_UsuarioCrea.HasValue ?
-                new ObjectParameter("dex_UsuarioCrea", dex_UsuarioCrea) :
-                new ObjectParameter("dex_UsuarioCrea", typeof(int));
-    
-            var dex_FechaCreaParameter = dex_FechaCrea.HasValue ?
-                new ObjectParameter("dex_FechaCrea", dex_FechaCrea) :
-                new ObjectParameter("dex_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result>("UDP_Plani_tbDeduccionesExtraordinarias_Insert", eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioCreaParameter, dex_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Plani_tbAuxilioDeCesantias_Activar(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
-        {
-            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
-                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
-                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
-    
-            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
-                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
-                new ObjectParameter("aces_UsuarioModifica", typeof(int));
-    
-            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
-                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
-                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAuxilioDeCesantias_Activar", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Activar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
-        {
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
-    
-            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
-                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
-                new ObjectParameter("insf_UsuarioModifica", typeof(int));
-    
-            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
-                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
-                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Activar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbAuxilioDeCesantias_Activar_Result> UDP_Plani_tbAuxilioDeCesantias_Activar1(Nullable<int> aces_IdAuxilioCesantia, Nullable<int> aces_UsuarioModifica, Nullable<System.DateTime> aces_FechaModifica)
-        {
-            var aces_IdAuxilioCesantiaParameter = aces_IdAuxilioCesantia.HasValue ?
-                new ObjectParameter("aces_IdAuxilioCesantia", aces_IdAuxilioCesantia) :
-                new ObjectParameter("aces_IdAuxilioCesantia", typeof(int));
-    
-            var aces_UsuarioModificaParameter = aces_UsuarioModifica.HasValue ?
-                new ObjectParameter("aces_UsuarioModifica", aces_UsuarioModifica) :
-                new ObjectParameter("aces_UsuarioModifica", typeof(int));
-    
-            var aces_FechaModificaParameter = aces_FechaModifica.HasValue ?
-                new ObjectParameter("aces_FechaModifica", aces_FechaModifica) :
-                new ObjectParameter("aces_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAuxilioDeCesantias_Activar_Result>("UDP_Plani_tbAuxilioDeCesantias_Activar1", aces_IdAuxilioCesantiaParameter, aces_UsuarioModificaParameter, aces_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Activar1_Result> UDP_Plani_tbInstitucionesFinancieras_Activar1(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
-        {
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
-    
-            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
-                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
-                new ObjectParameter("insf_UsuarioModifica", typeof(int));
-    
-            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
-                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
-                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbInstitucionesFinancieras_Activar1_Result>("UDP_Plani_tbInstitucionesFinancieras_Activar1", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Activar_Result> UDP_Plani_tbDeduccionesIndividuales_Activar(Nullable<int> dei_IdDeduccionesIndividuales, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
-        {
-            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
-                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
-                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
-    
-            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
-                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
-                new ObjectParameter("dei_UsuarioModifica", typeof(int));
-    
-            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
-                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
-                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Activar_Result>("UDP_Plani_tbDeduccionesIndividuales_Activar", dei_IdDeduccionesIndividualesParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result> UDP_Plani_tbDeduccionesIndividuales_Inactivar(Nullable<int> dei_IdDeduccionesIndividuales, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
-        {
-            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
-                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
-                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
-    
-            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
-                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
-                new ObjectParameter("dei_UsuarioModifica", typeof(int));
-    
-            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
-                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
-                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Inactivar_Result>("UDP_Plani_tbDeduccionesIndividuales_Inactivar", dei_IdDeduccionesIndividualesParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Activar_Result> UDP_Plani_tbIngresosIndividuales_Activar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
-        {
-            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
-                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
-                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
-    
-            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
-                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
-                new ObjectParameter("ini_UsuarioModifica", typeof(int));
-    
-            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
-                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
-                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Activar_Result>("UDP_Plani_tbIngresosIndividuales_Activar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Inactivar_Result> UDP_Plani_tbIngresosIndividuales_Inactivar(Nullable<int> ini_IdIngresosIndividuales, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
-        {
-            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
-                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
-                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
-    
-            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
-                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
-                new ObjectParameter("ini_UsuarioModifica", typeof(int));
-    
-            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
-                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
-                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Inactivar_Result>("UDP_Plani_tbIngresosIndividuales_Inactivar", ini_IdIngresosIndividualesParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Insert_Result> UDP_Plani_tbDeduccionesIndividuales_Insert(string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioCrea, Nullable<System.DateTime> dei_FechaCrea)
-        {
-            var dei_MotivoParameter = dei_Motivo != null ?
-                new ObjectParameter("dei_Motivo", dei_Motivo) :
-                new ObjectParameter("dei_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var dei_MontoInicialParameter = dei_MontoInicial.HasValue ?
-                new ObjectParameter("dei_MontoInicial", dei_MontoInicial) :
-                new ObjectParameter("dei_MontoInicial", typeof(decimal));
-    
-            var dei_MontoRestanteParameter = dei_MontoRestante.HasValue ?
-                new ObjectParameter("dei_MontoRestante", dei_MontoRestante) :
-                new ObjectParameter("dei_MontoRestante", typeof(decimal));
-    
-            var dei_CuotaParameter = dei_Cuota.HasValue ?
-                new ObjectParameter("dei_Cuota", dei_Cuota) :
-                new ObjectParameter("dei_Cuota", typeof(decimal));
-    
-            var dei_PagaSiempreParameter = dei_PagaSiempre.HasValue ?
-                new ObjectParameter("dei_PagaSiempre", dei_PagaSiempre) :
-                new ObjectParameter("dei_PagaSiempre", typeof(bool));
-    
-            var dei_UsuarioCreaParameter = dei_UsuarioCrea.HasValue ?
-                new ObjectParameter("dei_UsuarioCrea", dei_UsuarioCrea) :
-                new ObjectParameter("dei_UsuarioCrea", typeof(int));
-    
-            var dei_FechaCreaParameter = dei_FechaCrea.HasValue ?
-                new ObjectParameter("dei_FechaCrea", dei_FechaCrea) :
-                new ObjectParameter("dei_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Insert_Result>("UDP_Plani_tbDeduccionesIndividuales_Insert", dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioCreaParameter, dei_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbDeduccionesIndividuales_Update_Result> UDP_Plani_tbDeduccionesIndividuales_Update(Nullable<int> dei_IdDeduccionesIndividuales, string dei_Motivo, Nullable<int> emp_Id, Nullable<decimal> dei_MontoInicial, Nullable<decimal> dei_MontoRestante, Nullable<decimal> dei_Cuota, Nullable<bool> dei_PagaSiempre, Nullable<int> dei_UsuarioModifica, Nullable<System.DateTime> dei_FechaModifica)
-        {
-            var dei_IdDeduccionesIndividualesParameter = dei_IdDeduccionesIndividuales.HasValue ?
-                new ObjectParameter("dei_IdDeduccionesIndividuales", dei_IdDeduccionesIndividuales) :
-                new ObjectParameter("dei_IdDeduccionesIndividuales", typeof(int));
-    
-            var dei_MotivoParameter = dei_Motivo != null ?
-                new ObjectParameter("dei_Motivo", dei_Motivo) :
-                new ObjectParameter("dei_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var dei_MontoInicialParameter = dei_MontoInicial.HasValue ?
-                new ObjectParameter("dei_MontoInicial", dei_MontoInicial) :
-                new ObjectParameter("dei_MontoInicial", typeof(decimal));
-    
-            var dei_MontoRestanteParameter = dei_MontoRestante.HasValue ?
-                new ObjectParameter("dei_MontoRestante", dei_MontoRestante) :
-                new ObjectParameter("dei_MontoRestante", typeof(decimal));
-    
-            var dei_CuotaParameter = dei_Cuota.HasValue ?
-                new ObjectParameter("dei_Cuota", dei_Cuota) :
-                new ObjectParameter("dei_Cuota", typeof(decimal));
-    
-            var dei_PagaSiempreParameter = dei_PagaSiempre.HasValue ?
-                new ObjectParameter("dei_PagaSiempre", dei_PagaSiempre) :
-                new ObjectParameter("dei_PagaSiempre", typeof(bool));
-    
-            var dei_UsuarioModificaParameter = dei_UsuarioModifica.HasValue ?
-                new ObjectParameter("dei_UsuarioModifica", dei_UsuarioModifica) :
-                new ObjectParameter("dei_UsuarioModifica", typeof(int));
-    
-            var dei_FechaModificaParameter = dei_FechaModifica.HasValue ?
-                new ObjectParameter("dei_FechaModifica", dei_FechaModifica) :
-                new ObjectParameter("dei_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionesIndividuales_Update_Result>("UDP_Plani_tbDeduccionesIndividuales_Update", dei_IdDeduccionesIndividualesParameter, dei_MotivoParameter, emp_IdParameter, dei_MontoInicialParameter, dei_MontoRestanteParameter, dei_CuotaParameter, dei_PagaSiempreParameter, dei_UsuarioModificaParameter, dei_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Insert_Result> UDP_Plani_tbIngresosIndividuales_Insert(string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioCrea, Nullable<System.DateTime> ini_FechaCrea)
-        {
-            var ini_MotivoParameter = ini_Motivo != null ?
-                new ObjectParameter("ini_Motivo", ini_Motivo) :
-                new ObjectParameter("ini_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ini_MontoParameter = ini_Monto.HasValue ?
-                new ObjectParameter("ini_Monto", ini_Monto) :
-                new ObjectParameter("ini_Monto", typeof(decimal));
-    
-            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
-                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
-                new ObjectParameter("ini_PagaSiempre", typeof(bool));
-    
-            var ini_UsuarioCreaParameter = ini_UsuarioCrea.HasValue ?
-                new ObjectParameter("ini_UsuarioCrea", ini_UsuarioCrea) :
-                new ObjectParameter("ini_UsuarioCrea", typeof(int));
-    
-            var ini_FechaCreaParameter = ini_FechaCrea.HasValue ?
-                new ObjectParameter("ini_FechaCrea", ini_FechaCrea) :
-                new ObjectParameter("ini_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Insert_Result>("UDP_Plani_tbIngresosIndividuales_Insert", ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioCreaParameter, ini_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbIngresosIndividuales_Update_Result> UDP_Plani_tbIngresosIndividuales_Update(Nullable<int> ini_IdIngresosIndividuales, string ini_Motivo, Nullable<int> emp_Id, Nullable<decimal> ini_Monto, Nullable<bool> ini_PagaSiempre, Nullable<int> ini_UsuarioModifica, Nullable<System.DateTime> ini_FechaModifica)
-        {
-            var ini_IdIngresosIndividualesParameter = ini_IdIngresosIndividuales.HasValue ?
-                new ObjectParameter("ini_IdIngresosIndividuales", ini_IdIngresosIndividuales) :
-                new ObjectParameter("ini_IdIngresosIndividuales", typeof(int));
-    
-            var ini_MotivoParameter = ini_Motivo != null ?
-                new ObjectParameter("ini_Motivo", ini_Motivo) :
-                new ObjectParameter("ini_Motivo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ini_MontoParameter = ini_Monto.HasValue ?
-                new ObjectParameter("ini_Monto", ini_Monto) :
-                new ObjectParameter("ini_Monto", typeof(decimal));
-    
-            var ini_PagaSiempreParameter = ini_PagaSiempre.HasValue ?
-                new ObjectParameter("ini_PagaSiempre", ini_PagaSiempre) :
-                new ObjectParameter("ini_PagaSiempre", typeof(bool));
-    
-            var ini_UsuarioModificaParameter = ini_UsuarioModifica.HasValue ?
-                new ObjectParameter("ini_UsuarioModifica", ini_UsuarioModifica) :
-                new ObjectParameter("ini_UsuarioModifica", typeof(int));
-    
-            var ini_FechaModificaParameter = ini_FechaModifica.HasValue ?
-                new ObjectParameter("ini_FechaModifica", ini_FechaModifica) :
-                new ObjectParameter("ini_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbIngresosIndividuales_Update_Result>("UDP_Plani_tbIngresosIndividuales_Update", ini_IdIngresosIndividualesParameter, ini_MotivoParameter, emp_IdParameter, ini_MontoParameter, ini_PagaSiempreParameter, ini_UsuarioModificaParameter, ini_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result> UDP_Plani_tbInstitucionesFinancieras_Inactivar(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> insf_UsuarioModifica, Nullable<System.DateTime> insf_FechaModifica)
-        {
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
-    
-            var insf_UsuarioModificaParameter = insf_UsuarioModifica.HasValue ?
-                new ObjectParameter("insf_UsuarioModifica", insf_UsuarioModifica) :
-                new ObjectParameter("insf_UsuarioModifica", typeof(int));
-    
-            var insf_FechaModificaParameter = insf_FechaModifica.HasValue ?
-                new ObjectParameter("insf_FechaModifica", insf_FechaModifica) :
-                new ObjectParameter("insf_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbInstitucionesFinancieras_Inactivar_Result>("UDP_Plani_tbInstitucionesFinancieras_Inactivar", insf_IdInstitucionFinancieraParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter);
         }
     }
 }

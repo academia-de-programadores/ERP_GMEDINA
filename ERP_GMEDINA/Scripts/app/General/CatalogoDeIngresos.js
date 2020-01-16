@@ -341,7 +341,6 @@ $('#btnCreateRegistroIngresos').click(function () {
         $("#Crear #cin_DescripcionIngreso").focus();
 
 
-
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos válidos',
