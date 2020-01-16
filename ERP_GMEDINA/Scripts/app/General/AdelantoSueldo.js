@@ -149,7 +149,6 @@ $('#btnCreateRegistroAdelantos').click(function () {
         && Fecha != "" && Fecha != null && Fecha != undefined)
     {
         //MOSTRAR EL SPINNER DE CARGA
-        //mostrarCargandoCrear();
         document.getElementById("btnCreateRegistroAdelantos").disabled = true;
 
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
@@ -162,7 +161,6 @@ $('#btnCreateRegistroAdelantos').click(function () {
         }).done(function (data) {
             //CERRAR EL MODAL DE AGREGAR
             $("#AgregarAdelantos").modal('hide');
-            //ocultarCargandoCrear();
             //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data == "error") {
                 iziToast.error({
@@ -382,16 +380,51 @@ $(cmbEmpleadoEdit).change(() => {
 $("#btnUpdateAdelantos").click(function () {
     //OBTENER EL ID DEL EMPLEADO 
     var IdEmp = $("#frmAdelantosEdit #emp_Id").val();
+    var monto = $('#EditarAdelantoSueldo #adsu_Monto');
 
-    if (ValidarCamposEditar(IdEmp, $('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto'))) {
+    if (ValidarCamposEditar($('#EditarAdelantoSueldo #emp_Id'), $('#EditarAdelantoSueldo #adsu_RazonAdelanto'), $('#EditarAdelantoSueldo #adsu_Monto'))) {
+        $.ajax({
+            url: "/AdelantoSueldo/GetSueldoNetoProm",
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: IdEmp })
+        }).done(function (data) {
+            SuelPromedio = data;
+            $('#SueldoPromedio').html('El sueldo promedio es ' + data);
+            if (monto.val() > SuelPromedio
+                && monto.val() != '' && monto.val() != undefined && monto.val() != null) {
+                pasoValidacion = false;
+                //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
+                iziToast.error({
+                    title: 'Error',
+                    message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
+                });
+                //MENSAJES DEL SUELDO PROMEDIO
+                $("#EditarAdelantoSueldo #adsu_Monto").val('');
+                $('#SueldoPromedio').show();
+                $("#Editar #MontoAsterisco").css("display", "");
+            } else {
+                $("#Editar #MontoAsterisco").css("display", "none");
+                $('#SueldoPromedio').hide();
+
                 $("#EditarAdelantoSueldo").modal('hide');
                 $("#ConfirmarEdicion").modal();
+            }
+        }).fail(function (data) {
+            //ACCIONES EN CASO DE ERROR
+            $("#EditarAdelantoSueldo").modal('hide');
+            iziToast.error({
+                title: 'Error',
+                message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
+            });
+        });
     }
 });
 
 //FUNCION: EJECUTAR EDICION DE REGISTROS
 $("#btnConfirmarEditar").click(function () {
-    mostrarCargandoEditar();
+    document.getElementById("btnConfirmarEditar").disabled = true;
 
     $.ajax({
         url: "/AdelantoSueldo/Edit/" + IDInactivar,
@@ -422,7 +455,7 @@ $("#btnConfirmarEditar").click(function () {
                         //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
                         FullBody();
                         $("#ConfirmarEdicion").modal('hide');
-                        ocultarCargandoEditar();
+                        document.getElementById("btnConfirmarEditar").disabled = false;
                         //Setear la variable de SueldoAdelantoMaximo a cero 
                         MaxSueldoEdit = 0;
                         //Mensaje de exito de la edicion
@@ -434,7 +467,7 @@ $("#btnConfirmarEditar").click(function () {
                 });
             } else {
                 $("#ConfirmarEdicion").modal('hide');
-                ocultarCargandoEditar();
+                document.getElementById("btnConfirmarEditar").disabled = false;
                 iziToast.error({
                     title: 'Error',
                     message: 'No puede editar un registro deducido',
@@ -446,30 +479,12 @@ $("#btnConfirmarEditar").click(function () {
     });
 });
 
+
 //FUNCION: VALIDAR LOS CAMPOS DEL MODAL DE EDITAR
-function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
-    console.log(monto.val());
+function ValidarCamposEditar(colaborador, razon, monto) {
     var pasoValidacion = true;
     var SuelPromedio;
-    $.ajax({
-        url: "/AdelantoSueldo/GetSueldoNetoProm",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: IdEmp })
-    }).done(function (data) {
-        SuelPromedio = data;
-        console.log('data ajax ' + data);
-        console.log('suelprom ajax' + SuelPromedio);
-        $('#SueldoPromedio').html('El sueldo promedio es ' + data);
-    }).fail(function (data) {
-        //ACCIONES EN CASO DE ERROR
-        $("#EditarAdelantoSueldo").modal('hide');
-        iziToast.error({
-            title: 'Error',
-            message: 'No se recuperó el sueldo neto promedio, contacte al administrador',
-        });
-    });
+
     console.log('suelprom fuera de ajax' + SuelPromedio);
     if (colaborador.val() == '') {
         pasoValidacion = false;
@@ -513,24 +528,6 @@ function ValidarCamposEditar(IdEmp, colaborador, razon, monto) {
         $("#Editar #MontoAsterisco").css("display", "none");
         $('#adsu_MontoValidacion2').hide();
     }
-
-    if (monto.val() > SuelPromedio) {
-        console.log('sueldo prom validacion' + SuelPromedio);
-        pasoValidacion = false;
-        //MENSAJE DE EEROR EN CASO QUE EL MONTO SEA MAYOR AL SUELDO PROMEDIO 
-        iziToast.error({
-            title: 'Error',
-            message: 'El monto ingresado es mayor que el sueldo promedio del colaborador',
-        });
-        //MENSAJES DEL SUELDO PROMEDIO
-        $("#EditarAdelantoSueldo #adsu_Monto").val('');
-        $('#SueldoPromedio').show();
-        $("#Editar #MontoAsterisco").css("display", "");
-    } else {
-        $("#Editar #MontoAsterisco").css("display", "none");
-        $('#SueldoPromedio').hide();
-    }
-
     return pasoValidacion;
 }
 
@@ -549,7 +546,6 @@ $("#btnCerrarConfirmarEditar").click(function () {
     OcultarValidacionesEditar()
     $("#ConfirmarEdicion").modal('hide');
     $("#EditarAdelantoSueldo").modal();
-    //document.getElementById("adsu_Monto").placeholder = '';
 });
 
 //FUNCION: CERRAR MODAL DE EDICION CON EL BOTON CERRAR DEL MODAL DE EDITAR
@@ -568,11 +564,22 @@ $("#IconCerrarEditar").click(function () {
     FullBody();
 });
 
+$("#IconCerrarConfirmarEditar").click(function () {
+    $("#ConfirmarEdicion").modal('hide');
+    $("#EditarAdelantoSueldo").modal();
+});
+
+//REGRESAR AL MODAL DE EDITAR CON EL BOTON X DEL MODAL DE INACTIVAR, OCULTANDO LAS VALIDACIONES
+$("#IconCerrarInactivar").click(function () {
+    OcultarValidacionesEditar();
+    $("#InactivarAdelantoSueldo").modal('hide');
+    $("#EditarAdelantoSueldo").modal();
+});
+
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
 $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnDetalleAdelantoSueldo", function () {
     ActivarID = $(this).data('id');
     var ID = $(this).data('id');
-    //var ID = $(this).closest('tr').data('id');
     $.ajax({
         url: "/AdelantoSueldo/Details/" + ID,
         method: "GET",
@@ -631,7 +638,7 @@ $("#btnInactivarAdelantos").click(function () {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroAdelantos").click(function () {
-    mostrarCargandoInactivar();
+    document.getElementById("btnInactivarRegistroAdelantos").disabled = true;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AdelantoSueldo/Inactivar/" + IDInactivar,
@@ -650,7 +657,7 @@ $("#btnInactivarRegistroAdelantos").click(function () {
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             OcultarValidacionesEditar();
             $("#InactivarAdelantoSueldo").modal('hide');
-            ocultarCargandoInactivar();
+            document.getElementById("btnInactivarRegistroAdelantos").disabled = false;
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -676,7 +683,7 @@ $(document).on("click", "#tblAdelantoSueldo tbody tr td #btnActivarRegistroAdela
 
 //EJECUTAR ACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnActivarRegistroAdelantosModal").click(function () {
-    mostrarCargandoActivar();
+    document.getElementById("btnActivarRegistroAdelantosModal").disabled = true;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/AdelantoSueldo/Activar/" + IDActivar,
@@ -689,14 +696,14 @@ $("#btnActivarRegistroAdelantosModal").click(function () {
                 message: 'No se activó el registro, contacte al administrador',
             });
             $("#ActivarAdelantoSueldo").modal('hide');
-            ocultarCargandoActivar();
+            document.getElementById("btnActivarRegistroAdelantosModal").disabled = false;
         }
         else {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridAdelantos();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#ActivarAdelantoSueldo").modal('hide');
-            ocultarCargandoActivar();
+            document.getElementById("btnActivarRegistroAdelantosModal").disabled = false;
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
@@ -712,100 +719,3 @@ $("#btnCerrarActivar").click(function () {
     $("#ActivarAdelantoSueldo").modal('hide');
     FullBody();
 });
-
-//---------------------------------------FUNCIONES SPINNER---------------------------------------
-//Mostrar el spinner
-function spinner() {
-    return `<div class="sk-spinner sk-spinner-wave">
- <div class="sk-rect1"></div>
- <div class="sk-rect2"></div>
- <div class="sk-rect3"></div>
- <div class="sk-rect4"></div>
- <div class="sk-rect5"></div>
- </div>`;
-}
-
-//MODAL AGREGAR
-function mostrarCargandoCrear() {
-    btnGuardar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnGuardar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-const btnGuardar = $('#btnCreateRegistroAdelantos'),
-
-
-cargandoCrearcargandoCrear = $('#cargandoCrear')
-
-
-cargandoCrear = $('#cargandoCrear')//Div que aparecera cuando se le de click en crear
-
-
-//FUNCIONES SPINNER MODAL EDITAR
-function mostrarCargandoEditar() {
-    btnEditar.hide();
-    cargandoEditar.html(spinner());
-    cargandoEditar.show();
-}
-
-function ocultarCargandoEditar() {
-    btnEditar.show();
-    cargandoEditar.html('');
-    cargandoEditar.hide();
-}
-
-const btnEditar = $('#btnConfirmarEditar'),
-
-
-cargandoEditarcargandoEditar = $('#cargandoEditar')
-
-
-cargandoEditar = $('#cargandoEditar')//Div que aparecera cuando se le de click en crear
-
-//FUNCIONES SPINNER MODAL INACTIVAR
-function mostrarCargandoInactivar() {
-    btnInactivar.hide();
-    cargandoInactivar.html(spinner());
-    cargandoInactivar.show();
-}
-
-function ocultarCargandoInactivar() {
-    btnInactivar.show();
-    cargandoInactivar.html('');
-    cargandoInactivar.hide();
-}
-const btnInactivar = $('#btnInactivarRegistroAdelantos'),
-
-
-cargandoInactivarcargandoInactivar = $('#cargandoInactivar')
-
-
-cargandoInactivar = $('#cargandoInactivar')//Div que aparecera cuando se le de click en crear
-
-
-//FUNCIONES SPINNER MODAL ACTIVAR
-function mostrarCargandoActivar() {
-    btnActivar.hide();
-    cargandoActivar.html(spinner());
-    cargandoActivar.show();
-}
-
-function ocultarCargandoActivar() {
-    btnActivar.show();
-    cargandoActivar.html('');
-    cargandoActivar.hide();
-}
-
-const btnActivar = $('#btnActivarRegistroAdelantosModal'),
-
-
-cargandoActivarcargandoActivar = $('#cargandoActivar')
-
-
-cargandoActivar = $('#cargandoActivar')//Div que aparecera cuando se le de click en crear
