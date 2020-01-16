@@ -97,7 +97,6 @@ $('#btnCrearFormaPago').click(function () {
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
-        //$("#Crear #AsteriscoFormaPago").css("display", "none");
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
@@ -190,11 +189,6 @@ $("#btnUpdateFormaPago").click(function () {
         $("#AsteriscoFormaPagoEditar").addClass("text-danger");
     }
    
-});
-
-//CAMBIAR EL COLOR DEL ASTERISCO A NEGRO
-$(".Asterisco").click(function () {
-    $("#AsteriscoFormaPagoEditar").removeClass("text-danger");
 });
 
 //MOSTRAR EL MODAL DE EDICION AL MOMENTO DE CERRAR EL MODAL CON EL BOTON CERRAR
@@ -302,7 +296,7 @@ $(document).on("click", "#btnInactivarFormaPago", function () {
 //OCULTAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnCerrarInactivar", function () {
     //OCULTAR DATAANOTATIONS
-    DataAnnotations(true);
+    //DataAnnotations(true);
     //OCULTAR MODAL DE INACTIVACION
     $("#InactivarFormaPago").modal('hide');
     //MOSTRAR MODAL DE EDICION
@@ -393,7 +387,6 @@ $("#IconCerrarCrear").click(function () {
 
 //OCULTAR MODAL DE CREACION CON EL ICONO DE CERRAR OCULTANDO EL DATAANNOTATION
 $("#btnCerrarCrear").click(function () {
-    $("#Crear #AsteriscoFormaPago").css("display", "none");
     $("#CrearFormaPago #Validation_descripcion").css("display", "none");
     $("#CrearFormaPago").modal("hide");
 });
@@ -429,14 +422,6 @@ $("#frmEditFormaPago").submit(function (event) {
 $(document).on("click", "#btnmodalInactivarFormaPago", function () {
     $("#InactivarFormaPago").modal();
 });
-
-//BOTON PARA CERRAR EL MODAL DE INACTIVAR
-$("#btnCerrarInactivar").click(function () {
-    //DataAnnotations(true);
-    $("#InactivarFormaPago").modal('hide');
-});
-
-
 
 //******************ACTIVAR*******************//
 
