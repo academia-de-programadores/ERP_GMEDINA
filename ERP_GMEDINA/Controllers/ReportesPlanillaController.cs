@@ -21,7 +21,7 @@ namespace ERP_GMEDINA.Controllers
 
 		ReportesPlanillaDS ds = new ReportesPlanillaDS();
 
-		#region deducciones dinamico 
+		#region deducciones dinamico
 
 		//parametros del reporte
 		public ActionResult DeduccionesParametros()
@@ -66,11 +66,11 @@ namespace ERP_GMEDINA.Controllers
 			ViewBag.Deducciones = new SelectList(db.tbCatalogoDeDeducciones.Where(o => o.cde_Activo == true), "cde_IdDeducciones", "cde_DescripcionDeduccion");
 			ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
 			return View();
-		}	
+		}
 
 		#endregion
 
-		#region ingresos dinamico 
+		#region ingresos dinamico
 
 		//parametros del reporte
 		public ActionResult IngresosParametros()
@@ -120,7 +120,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		#region reportes varios dinamico 
+		#region reportes varios dinamico
 
 		//parametros del reporte
 		public ActionResult ReportesVariosParametros()
@@ -212,7 +212,7 @@ namespace ERP_GMEDINA.Controllers
 
 		#endregion
 
-		#region decimo tercer mes 
+		#region decimo tercer mes
 
 		//parametros del reporte
 		public ActionResult DecimoTercerParametros()
@@ -255,7 +255,7 @@ namespace ERP_GMEDINA.Controllers
 		}
 		#endregion
 
-		#region decimo cuarto mes 
+		#region decimo cuarto mes
 
 		//parametros del reporte
 		public ActionResult DecimoCuartoParametros()
