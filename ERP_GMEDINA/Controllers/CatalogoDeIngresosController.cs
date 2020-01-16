@@ -129,9 +129,9 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cin_IdIngreso,cin_DescripcionIngreso,cin_UsuarioModifica,cin_FechaModifica,cin_Activo")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
+        public ActionResult Edit(int id, string cin_DescripcionIngreso)
         {
+            tbCatalogoDeIngresos tbCatalogoDeIngresos = new Models.tbCatalogoDeIngresos { cin_DescripcionIngreso = cin_DescripcionIngreso, cin_IdIngreso = id };
             #region declaracion de variables 
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
@@ -141,8 +141,6 @@ namespace ERP_GMEDINA.Controllers
             string MensajeError = "";
             #endregion
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
@@ -170,13 +168,6 @@ namespace ERP_GMEDINA.Controllers
                     ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                     response = "error";
                 }
-            }
-            else
-            {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
-                response = "error";
-            }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
