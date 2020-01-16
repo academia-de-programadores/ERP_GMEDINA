@@ -1,9 +1,27 @@
 ﻿$(document).ready(function () {
  llenarTabla();
 });
+function init() {
+    var inputFile = document.getElementById('empr_Logo');
+    inputFile.addEventListener('change', mostrarImagen, false);
+}
+
+function mostrarImagen(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = document.getElementById('img1');
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+
+window.addEventListener('load', init, false);
 $("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+     var img = document.getElementById('img1');
+     img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
  } else {
   var formData = new FormData();
@@ -18,10 +36,13 @@ $("#empr_Logo").change(function () {
    processData: false
   })
  .done(function (res) {
-  if (res) {
+     if (res) {     
+         
    MsgSuccess("Exito","Archivo subido exitosamente");
   } else {
-   MsgError("Error","El archivo no es valido");
+         MsgError("Error", "El archivo no es valido");
+         var img = document.getElementById('img1');
+         img.src = "";
   }
   $("#ModalNuevo").data("res", res);
  });

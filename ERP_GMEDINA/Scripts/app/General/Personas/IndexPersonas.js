@@ -1,4 +1,7 @@
-﻿function format(obj) {
+﻿var id = 0;
+var fill = 0;
+var Admin = false;
+function format(obj) {
     var div = '<div class="col-lg-12  >';
     div += '<div class="row col-lg-12">';
     div += '<div class="ibox">';
@@ -48,17 +51,17 @@
     div += '</div>';
     return div ;
 }
-$("#btnInactivar").click(function () {
+function ModalInactivar(id) {
     CierraPopups();
     $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#per_Id").val(id);
     $("#ModalInactivar").find("#per_RazonInactivo").val("");
     $("#ModalInactivar").find("#per_RazonInactivo").focus();
-});
+};
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
     if (data != null) {
-        data.per_Id = id;
         data = JSON.stringify({ tbPersonas: data });
         _ajax(data,
             '/Personas/Delete',
@@ -82,17 +85,27 @@ function llenarTabla() {
        '/Personas/llenarTabla',
        'POST',
        function (Lista) {
-           tabla.clear();
-           tabla.draw();
            if (validarDT(Lista)) {
                return null;
            }
+           tabla.clear();
+           tabla.draw();
            $.each(Lista, function (index, value) {
+               var Acciones = value.per_Estado == 1
+                    ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.Id + ")'>Editar</a><a class='btn btn-danger btn-xs ' onclick='ModalInactivar("+value.Id+")'>Inactivar</a>"
+                    : Admin ?
+                    "<div>" +
+                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "</div>" : '';
+               if(value.per_Estado > fill)
                tabla.row.add({
+                   Estado: value.per_Estado ? 'Activo' : 'Inactivo',
+                   "Número": value.Id,
                    ID: value.Id,
                    Identidad: value.Identidad,
                    NombreCompleto: value.Nombre,
-                   CorreoElectronico: value.CorreoElectronico
+                   CorreoElectronico: value.CorreoElectronico,
+                   Acciones: Acciones
                });
            });
            tabla.draw();
@@ -100,6 +113,7 @@ function llenarTabla() {
 }
 
 $(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
     sessionStorage.clear();
 });

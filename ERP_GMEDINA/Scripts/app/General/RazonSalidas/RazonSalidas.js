@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
-
+var fill = 0;
 var id = 0;
 //Funciones GET
+
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
@@ -16,6 +18,7 @@ function tablaEditar(ID) {
             }
         });
 }
+
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -33,21 +36,35 @@ function tablaDetalles(ID) {
             }
         });
 }
+
 function llenarTabla() {
     _ajax(null,
         '/RazonSalidas/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
-            tabla.draw();
+            tabla.clear().draw();
+            if (validarDT(Lista)) {
+                return null;
+            }
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    ID:value.rsal_Id,
-                Razon:value.rsal_Descripcion
-            }).draw();
+                var Acciones = value.rsal_Estado == 1
+                   ?null:
+                   "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                   "</div>";
+                if (value.rsal_Estado > fill) {
+                    tabla.row.add({
+                        ID:value.rsal_Id,
+                        "Número": value.rsal_Id,
+                        "Descripción": value.rsal_Descripcion,
+                        Estado: value.rsal_Estado ? "Activo" : "Inactivo",
+                        Acciones:Acciones
+                    }).draw();
+                }
             });
-        });
+        });         
 }
+
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
