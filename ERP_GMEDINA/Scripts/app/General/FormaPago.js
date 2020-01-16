@@ -97,7 +97,7 @@ $('#btnCrearFormaPago').click(function () {
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
-        $("#Crear #AsteriscoFormaPago").css("display", "none");
+        //$("#Crear #AsteriscoFormaPago").css("display", "none");
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
