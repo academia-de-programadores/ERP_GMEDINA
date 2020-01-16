@@ -17,11 +17,11 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            List<tbTipoIncapacidades> tbTipoIncapacidades = new List<Models.tbTipoIncapacidades> { };
+           tbTipoIncapacidades tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Estado=true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbTipoIncapacidades = db.tbTipoIncapacidades.Where(x => x.ticn_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbTipoIncapacidades);
             }
             catch (Exception ex)
@@ -29,7 +29,7 @@ namespace ERP_GMEDINA.Controllers
 
 
                 ex.Message.ToString();
-                tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
+                //tbTipoIncapacidades.Add(new tbTipoIncapacidades { ticn_Id = 0, ticn_Descripcion = "Fallo la conexión" });
             }
             return View(tbTipoIncapacidades);
         }
@@ -38,17 +38,25 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTipoIncapacidades> tbTipoIncapacidades = new List<Models.tbTipoIncapacidades> { };
-            foreach (tbTipoIncapacidades x in db.tbTipoIncapacidades.ToList().Where(x => x.ticn_Estado == true))
+            try
             {
-                tbTipoIncapacidades.Add(new tbTipoIncapacidades
-                {
-                    ticn_Id = x.ticn_Id,
+                var tbTipoIncapacidades = db.tbTipoIncapacidades
+                    .Select(
+                    x => new {
 
-                    ticn_Descripcion = x.ticn_Descripcion
-                });
-            }
+                        ticn_Id = x.ticn_Id,
+                        ticn_Descripcion = x.ticn_Descripcion,
+                        ticn_Estado = x.ticn_Estado
+                    }
+
+                    ).ToList();
             return Json(tbTipoIncapacidades, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
 
 
@@ -83,7 +91,6 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: Habilidades/Edit/5
-        [HttpGet]
         public ActionResult Edit(int? id)
         {
 
@@ -202,6 +209,29 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbTipoIncapacidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoIncapacidades_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

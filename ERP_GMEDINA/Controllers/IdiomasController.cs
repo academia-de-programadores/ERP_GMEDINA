@@ -15,19 +15,33 @@ namespace ERP_GMEDINA.Controllers
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
         // GET: Idiomas Index
+        //public ActionResult Index()
+        //{
+        //    List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
+        //    Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+        //    try
+        //    {
+        //        tbIdiomas = db.tbIdiomas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+        //        return View(tbIdiomas);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        ex.Message.ToString();
+        //        tbIdiomas.Add(new tbIdiomas { idi_Id = 0, idi_Descripcion = "Fallo la conexión" });
+        //    }
+        //    return View(tbIdiomas);
+        //}
         public ActionResult Index()
         {
-            List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
+            tbIdiomas tbIdiomas = new tbIdiomas { idi_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbIdiomas = db.tbIdiomas.Where(x => x.idi_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbIdiomas);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbIdiomas.Add(new tbIdiomas { idi_Id = 0, idi_Descripcion = "Fallo la conexión" });
             }
             return View(tbIdiomas);
         }
@@ -36,12 +50,13 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult llenarTabla()
         {
             List<tbIdiomas> tbIdiomas = new List<Models.tbIdiomas> { };
-            foreach(tbIdiomas x in db.tbIdiomas.ToList().Where(x=> x.idi_Estado == true))
+            foreach(tbIdiomas x in db.tbIdiomas.ToList())
             {
                 tbIdiomas.Add(new tbIdiomas
                 {
                     idi_Id = x.idi_Id,
-                    idi_Descripcion = x.idi_Descripcion
+                    idi_Descripcion = x.idi_Descripcion,
+                    idi_Estado = x.idi_Estado
                 });
             }
             return Json(tbIdiomas, JsonRequestBehavior.AllowGet);
@@ -157,7 +172,29 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
-        
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbIdiomas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbIdiomas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         // Idiomas/Delete
         [HttpPost]
         public ActionResult Delete(tbIdiomas tbIdiomas)

@@ -17,18 +17,18 @@ namespace ERP_GMEDINA.Controllers
         // GET: Titulos
         public ActionResult Index()
         {
-            List<tbTitulos> tbtitulos = new List<Models.tbTitulos> { };
+            tbTitulos tbtitulos = new tbTitulos { titu_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 return View(tbtitulos);
             }
             catch (Exception ex)
             {
 
                 ex.Message.ToString();
-                tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
+                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
             }
             return View(tbtitulos);
         }
@@ -36,18 +36,27 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbTitulos> tbtitulos = new List<Models.tbTitulos> { };
-            foreach (tbTitulos x in db.tbTitulos.ToList().Where(x => x.titu_Estado == true))
+            try
             {
-                tbtitulos.Add(new tbTitulos
-                {
-                    titu_Id = x.titu_Id,
+                var tbTitulos = db.tbTitulos
+                    .Select(
+                    t => new
+                    {
+                        titu_Id = t.titu_Id,
+                        titu_Descripcion = t.titu_Descripcion,
+                        titu_Estado = t.titu_Estado,
 
-                    titu_Descripcion = x.titu_Descripcion
-                });
+                    }
+                    ).ToList();
+
+                return Json(tbTitulos, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbtitulos, JsonRequestBehavior.AllowGet);
-        }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
+        } 
 
         public ActionResult Create()
         {
@@ -205,6 +214,31 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbTitulos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTitulos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -235,6 +269,3 @@ namespace ERP_GMEDINA.Controllers
 
 
 
-
-
-     

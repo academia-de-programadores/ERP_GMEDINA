@@ -1,16 +1,19 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 
-function tablaEditar(ID)
-{
+var fill = 0;
+var id = 0;
+
+function tablaEditar(ID) {
     id = ID;
     _ajax(null,
     '/Titulos/Edit/' + ID,
     'GET',
     function (obj) {
         if (obj != "-1" && obj != "-2" && obj != "-3") {
-            $("#FormEditar").find("#titu_Descripcion").val(obj.titu_Descripcion); 
+            $("#FormEditar").find("#titu_Descripcion").val(obj.titu_Descripcion);
             $("#ModalEditar").modal('show');
         }
     });
@@ -45,15 +48,29 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.titu_Descripcion);
-                tabla.row.add({
-                    ID: value.titu_Id,
-                    Titulos: value.titu_Descripcion
-                }).draw();
 
+                var Acciones = value.titu_Estado == 1
+                  ? null :
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                  "</div>";
+                if (value.titu_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.titu_Id,
+                        "Número": value.titu_Id,
+                        Titulos: value.titu_Descripcion,
+                        Acciones: Acciones,
+                        Estado: value.titu_Estado ? "Activo" : "Inactivo"
+
+                    }).draw();
+                }
             });
         });
 }
+
+
+
+
 
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
@@ -78,11 +95,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#titu_Descripcion").val("");
-    $("#ModalInhabilitar").find("titu_Descripcion").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#titu_Descripcion").val("");
+    $("#ModalInactivar").find("titu_Descripcion").focus();
 });
 
 
@@ -127,7 +144,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["titu_Descripcion", "titu_RazonInactivo"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {

@@ -15,7 +15,7 @@ namespace ERP_GMEDINA.Models
 
     public class cTipoIncapacidades
     {
-        [Display(Name = "ID")]
+        [Display(Name = "Numero")]
         public int ticn_Id { get; set; }
 
         [Display(Name = "Descripción")]

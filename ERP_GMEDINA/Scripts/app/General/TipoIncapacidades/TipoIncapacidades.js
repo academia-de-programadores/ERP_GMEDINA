@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+
     llenarTabla();
 });
+var fill = 0;
 
 var id = 0;
 
@@ -43,18 +46,25 @@ function llenarTabla() {
         '/TipoIncapacidades/llenarTabla',
         'POST',
         function (Lista) {
-            tabla.clear();
-            tabla.draw();
+            tabla.clear().draw();
             if (validarDT(Lista)) {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.ticn_Descripcion);
+                var Acciones = value.ticn_Estado == 1
+                ?null:
+                "<div>" +
+                    "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                "</div>";
+                if (value.ticn_Estado > fill) {
                 tabla.row.add({
-                    ID:value.ticn_Id,
-                    Descripción:value.ticn_Descripcion
+                    ID: value.ticn_Id,
+                    "Número": value.ticn_Id,
+                    Descripción: value.ticn_Descripcion,
+                    Estado:value.ticn_Estado ? "Activo":"Inactivo",
+                    Acciones:Acciones
                     }).draw();
-
+                   }
             });
         });
 }
@@ -80,11 +90,11 @@ $("#btnEditar").click(function () {
         });
 });
 
-$("#btnInhabilitar").click(function () {
+$("#btnInactivar").click(function () {
     CierraPopups();
-    $('#ModalInhabilitar').modal('show');
-    $("#ModalInhabilitar").find("#ticn_Descripcion").val("");
-    $("#ModalInhabilitar").find("ticn_Descripcion").focus();
+    $('#ModalInactivar').modal('show');
+    $("#ModalInactivar").find("#ticn_Descripcion").val("");
+    $("#ModalInactivar").find("ticn_Descripcion").focus();
 });
 
 $("#btnGuardar").click(function () {
@@ -126,7 +136,7 @@ $("#InActivar").click(function () {
                     LimpiarControles(["ticn_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
-                    MsgError("Error", "No se logró inhabilitar el registro, contacte al administrador");
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
