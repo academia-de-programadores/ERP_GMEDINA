@@ -1,26 +1,23 @@
 ﻿$(document).ready(function () {
  llenarTabla();
 });
-$("#empr_Logo").change(function () {
-    var $this = this;
-    var $inputImage = $("#empr_Logo");
-    var $image = $(".image-crop > img")
-    var $cropped = $($image).cropper({
-        aspectRatio: 1.618,
-        preview: ".img-preview",
-        done: function (data) {
-            // Output the result data for cropping image.
-        }
-    });
-    var fileReader = new FileReader(),
-                            files = this.files,
-                            file;
+function init() {
+    var inputFile = document.getElementById('empr_Logo');
+    inputFile.addEventListener('change', mostrarImagen, false);
+}
 
-    if (!files.length) {
-        return;
+function mostrarImagen(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = document.getElementById('img1');
+        img.src = event.target.result;
     }
+    reader.readAsDataURL(file);
+}
 
-    file = files[0];
+window.addEventListener('load', init, false);
+$("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
@@ -38,15 +35,7 @@ $("#empr_Logo").change(function () {
   })
  .done(function (res) {
      if (res) {     
-         if (/^image\/\w+$/.test(file.type)) {
-             fileReader.readAsDataURL(file);
-             fileReader.onload = function () {
-                 $inputImage.val("");
-                 $image.cropper("reset", true).cropper("replace", this.result);
-             };
-         } else {
-             showMessage("Please choose an image file.");
-         }
+         
    MsgSuccess("Exito","Archivo subido exitosamente");
   } else {
    MsgError("Error","El archivo no es valido");
