@@ -60,7 +60,7 @@ $("#btnGuardar").click(function () {
     data = serializar(data);
     if (data != null) {
         data = JSON.stringify({ tbEquipoEmpleados: data });
-        _ajax(data, '/tbEquipoEmpleados/Create', 'POST',
+        _ajax(data, '/EquipoEmpleados/Create', 'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
