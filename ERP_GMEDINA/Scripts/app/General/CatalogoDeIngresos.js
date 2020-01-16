@@ -89,7 +89,9 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                 $("#Detallar #cin_FechaModifica").val(FechaModifica);
-                $("#DetailCatalogoIngresos").modal();
+                $("#DetailCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
 
             }
             else {
@@ -135,6 +137,18 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         });
 });
 
+$('#cin_DescripcionIngreso').blur(function(){
+    if($(this)
+    .val()
+    .trim() != ''){
+        $('#validareditar').hide();
+        $('#asteriscoEdit').removeClass('text-danger');
+    } else{
+        $('#validareditar').show();
+        $('#asteriscoEdit').add('text-danger');
+    }
+});
+
 $("#btnUpdateIngresos").click(function () {
     debugger;
     //descedit es la variable que uso para validar si esta vacio o no
@@ -143,12 +157,17 @@ $("#btnUpdateIngresos").click(function () {
     if (descedit != '' && descedit != null && descedit != undefined && isNaN(descedit) == true) {
         //al validar que no este vacio muestro mi modal de confirmación
         $("#Editar #validareditar").css("display", "none");
-        $("#EditarCatalogoIngresosConfirmacion").modal();
+        $("#EditarCatalogoIngresosConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
     }
     else {
-        //si esta vacio no muestra modal de confirmacion, y solo muestra IziToast y los datanotations
-        $("#Editar #validareditar").css("display", "");
-        $("#Editar #cin_DescripcionIngreso").focus();
+        $("#descripcioncrear").css("display", "");
+        $("#Crear #cin_DescripcionIngreso").focus();
+
+        $('#validareditar').html('Campo Descripción Ingresos requerido');
+        $('#validareditar').show();
+        $('#asteriscoEdit').addClass('text-danger');
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos válidos',
@@ -218,13 +237,17 @@ function ocultarcargandoEditar() {
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
-    $("#InactivarCatalogoIngresos").modal();
+    $("#InactivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //Modal editar despues de No Inactivar
 $("#btnNoInactivar").click(function () {
     $("#validareditar").css("display", "none");
-    $("#EditarCatalogoIngresos").modal();
+    $("#EditarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#InactivarCatalogoIngresos").modal('hide');
 });
 
@@ -305,15 +328,19 @@ $('#btnCreateRegistroIngresos').click(function () {
                 });
                 ocultarCargandoCrear()
                 $("#Crear #cin_DescripcionIngreso").val('');
-
-
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se guardó el registro, contacte al administrador',
+                });
             }
-
         });
     }
     else {
         $("#descripcioncrear").css("display", "");
         $("#Crear #cin_DescripcionIngreso").focus();
+
+
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos válidos',
@@ -390,7 +417,9 @@ function spinner() {
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnActivar", function () {
     //FUNCION: MOSTRAR EL MODAL DE ACTIVAR
     IDActivar = $(this).data('id');
-    $("#ActivarCatalogoIngresos").modal();
+    $("#ActivarCatalogoIngresos").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 

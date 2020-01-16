@@ -21,8 +21,8 @@ namespace ERP_GMEDINA.Models
         public int cc_Id { get; set; }
 
 
-        [Display(Name = "Empleado")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Display(Name = "Colaborador")]
+        [Required(ErrorMessage = "Campo colaborador requerido")]
         public int emp_Id { get; set; }
 
         [Display(Name = "Ingreso")]
@@ -51,15 +51,15 @@ namespace ERP_GMEDINA.Models
         public bool cc_Activo { get; set; }
 
 
-        [Display(Name = "Porcentaje Comision")]
-        [Required(ErrorMessage = "Campo Porcentaje Comision Requerido")]
-        [Range(1, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}")]
+        [Display(Name = "Porcentaje Comisión")]
+        [Required(ErrorMessage = "Campo porcentaje comisión requerido")]
+        [Range(1, 100, ErrorMessage = "El {0} debe estar entre {1} y {2}")]
         public decimal cc_PorcentajeComision { get; set; }
 
 
         [Display(Name = "Total Venta")]
-        [Required(ErrorMessage = "Campo Total Venta Requerido")]
-        [Range(1, 999999.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}")]   
+        [Required(ErrorMessage = "Campo total venta requerido")]
+        [Range(1, 999999.99, ErrorMessage = "El campo {0} debe ser mayor que cero")]   
         public decimal cc_TotalVenta { get; set; }
 
         public virtual tbUsuario tbUsuario { get; set; }
