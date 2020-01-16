@@ -1,4 +1,15 @@
 ﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
+
+
+
+var fill = 0
+
+
+
+$(document).ready(function () {
     llenarTabla();
 });
 var id = 0;
@@ -45,14 +56,27 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                console.log(value.comp_Descripcion);
-                tabla.row.add({
-                    ID:value.comp_Id,
-                    Competencia: value.comp_Descripcion
-                }).draw();
+                var Acciones = value.comp_Estado == 1
+                  ? null :
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                  "</div>";
+                if (value.comp_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.comp_Id,
+                        "Número": value.comp_Id,
+                        Descripcion: value.comp_Descripcion,
+                        Estado: value.comp_Estado ? "Activo" : "Inactivo",
+                        Acciones: Acciones
+                    }).draw();
+                }
             });
         });
 }
+
+
+
+
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');

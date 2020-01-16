@@ -1,24 +1,46 @@
-﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Registrar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" data-id="@item.cin_IdIngreso">Audiecia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
+﻿var fill = 0;
+function format(obj) {
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" data-id="@item.cin_IdIngreso">Audiecia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                '<th>' + 'Tipo Amonestación' + '</th>' +
+                '<th>' + 'Número' + '</th>' +
+                '<th>' + 'Tipo Amonestacion' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
-                '<th>' + 'Observación' + '</th>' +
+                '<th>' + 'Obsevarcion' + '</th>' +
+                 '<th>' + 'Estado' + '</th>' +
                 '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
-            div = div +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td>' + index.tamo_Descripcion + '</td>' +
-                    '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
-                    '<td>' + index.hamo_Observacion + '</td>' +
-                    '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles('+index.hamo_Id+')"data-id="@item.hamo_Id">Detalles</button>' + '</td>' +
-                    '</tr>' +
+        var Estado = "";
+        if (index.hamo_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
+        //var MostrarBoton = index.hamo_Estado == 1 ? null : '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>';
+        //if (value.hamo_Estado > fill) {
+        div = div +
+                '<tbody>' +
+                '<tr>' +
+                '<td>' + index.hamo_Id + '</td>' +
+                '<td>' + index.tamo_Descripcion + '</td>' +
+                '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
+                '<td>' + index.hamo_Observacion + '</td>' +
+                '<td>' + Estado + '</td>' +
+                '<td>';
+        if (index.hamo_Estado)
+        {
+            div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hamo_Id + ')" data-id="@item.hamo_Id">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Detalle</button>';
+        }
+        else
+            {
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hamo_Id + ')"data-id="@item.hamo_Id">Habilitar</button>' + '</td>';
+            }       
+             
+        div += '</tr>' +
                     '</tbody>'
             '</table>'
+        //}
     });
     return div + '</div></div>';
 }
@@ -29,12 +51,10 @@ function llenarTabla() {
        function (Lista) {
            tabla.clear();
            tabla.draw();
-           if (validarDT(Lista)) {
-               return null;
-           }
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento
@@ -44,6 +64,7 @@ function llenarTabla() {
        });
 }
 $(document).ready(function () {
+//    fill = Admin = undefined ? 0 : -1;
     llenarTabla();
 });
 var IdEmpleado = 0;
@@ -78,8 +99,8 @@ function llamarmodal() {
     modalnuevo.modal('show');
 }
 function llamarmodaldelete(ID) {
-    var modaldelete = $("#ModalInactivar");
-    $("#ModalInactivar").find("#hamo_Id").val(ID);
+    var modaldelete = $("#ModalInhabilitar");
+    $("#ModalInhabilitar").find("#hamo_Id").val(ID);
     modaldelete.modal('show');
 }
 
@@ -97,7 +118,7 @@ function llamarmodaldetalles(ID) {
                 $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = FechaFormato(obj.hamo_FechaCrea);
                 $('#ModalDetalles').modal('show');
             }
-        }); 
+        });
 }
 
 $("#InActivar").click(function () {
@@ -110,12 +131,13 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    $("#ModalInhabilitar").modal("hide");
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["hamo_Id"]);
-                    MsgSuccess("¡Éxito!", "El registro se inhabilitado  de forma exitosa");
+                    MsgWarning("¡Exito!", "Se ha inactivado el registro");
                 } else {
-                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
             });
     } else {
@@ -127,25 +149,26 @@ $("#InActivar").click(function () {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
+    debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialAmonestaciones: data });
         _ajax(data,
             '/HistorialAmonestaciones/Create',
             'POST',
             function (obj) {
+                debugger
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "tamo_Id","hamo_Fecha","hamo_Observacion"]);
-                    MsgSuccess("¡Éxito!", "El registro se agregó de forma exitosa");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
-                    MsgError("Error", "No se guardó el registro, contacte al administrador");
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
             });
     } else {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
-
 
 

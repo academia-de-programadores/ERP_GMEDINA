@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
@@ -960,6 +961,9 @@
     <Compile Include="Models\V_Empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_EquipoTrabajoDetalles.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1020,6 +1024,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="administracion_wHr_icon.ico" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1233,6 +1238,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="IconoInicial.ico" />
     <Content Include="Models\ERP_GMEDINA.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
@@ -1249,16 +1255,19 @@
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
     <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
+    <Content Include="Scripts\app\General\Competencias\Admin.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
+    <Content Include="Scripts\app\General\EquipoEmpleados\EquipoEmpleados.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\Admin.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Admin.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\HistorialAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
@@ -1275,11 +1284,13 @@
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
+    <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
+    <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
@@ -1992,6 +2003,7 @@
     <Content Include="Views\Sueldos\Create.cshtml" />
     <Content Include="Views\HistorialCargos\_Create.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
+    <Content Include="Views\EquipoEmpleados\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2064,6 +2076,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IconoInicial.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

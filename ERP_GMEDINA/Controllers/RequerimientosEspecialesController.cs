@@ -16,36 +16,45 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
-            List<tbRequerimientosEspeciales> tbRequerimientosEspeciales = new List<Models.tbRequerimientosEspeciales> { };
+            tbRequerimientosEspeciales tbRequerimientosEspeciales = new tbRequerimientosEspeciales { resp_Estado=true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
             {
-                tbRequerimientosEspeciales = db.tbRequerimientosEspeciales.Where(x => x.resp_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                //tbRequerimientosEspeciales = db.tbRequerimientosEspeciales.Where(x => x.resp_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
                 //tbFasesReclutamiento.Add(new tbFasesReclutamiento { fare_Id = 0, habi_Descripcion = "fallo la conexion" });
                 return View(tbRequerimientosEspeciales);
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbRequerimientosEspeciales.Add(new tbRequerimientosEspeciales { resp_Id = 0, resp_Descripcion = "fallo la conexion" });
+                //tbRequerimientosEspeciales.Add(new tbRequerimientosEspeciales { resp_Id = 0, resp_Descripcion = "fallo la conexion" });
             }
             return View(tbRequerimientosEspeciales);
         }
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbRequerimientosEspeciales> tbRequerimientosEspeciales =
-                new List<Models.tbRequerimientosEspeciales> { };
-            foreach (tbRequerimientosEspeciales x in db.tbRequerimientosEspeciales.ToList().Where(x => x.resp_Estado == true))
+            try
             {
-                tbRequerimientosEspeciales.Add(new tbRequerimientosEspeciales
-                {
-                    resp_Id = x.resp_Id,
-                    resp_Descripcion = x.resp_Descripcion
-                });
+                var tbRequerimientosEspeciales = db.tbRequerimientosEspeciales
+                    .Select(
+                       x => new {
+                           resp_Id = x.resp_Id,
+                           resp_Descripcion = x.resp_Descripcion,
+                           resp_Estado = x.resp_Estado
+                       }
+                    )
+                    .ToList();
+                return Json(tbRequerimientosEspeciales, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbRequerimientosEspeciales, JsonRequestBehavior.AllowGet);
-        }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
+        
+    }
+
 
         // POST: FasesReclutamiento/Create
         [HttpPost]
@@ -191,6 +200,30 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbRequerimientosEspeciales_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRequerimientosEspeciales_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -201,3 +234,4 @@ namespace ERP_GMEDINA.Controllers
         }
     }
 }
+

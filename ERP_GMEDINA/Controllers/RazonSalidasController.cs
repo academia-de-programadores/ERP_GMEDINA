@@ -14,39 +14,43 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-
         // GET: RazonSalidas
         public ActionResult Index()
         {
-            List<tbRazonSalidas> tbRazonSalidas = new List<Models.tbRazonSalidas> { };
+            tbRazonSalidas tbRazonSalidas = new tbRazonSalidas { rsal_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             try
-            {
-                tbRazonSalidas = db.tbRazonSalidas.Where(x => x.rsal_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbRazonSalidas.Add(new tbRazonSalidas { rsal_Id = 0, rsal_Descripcion = "fallo la conexion" });
+            {              
                 return View(tbRazonSalidas);
             }
             catch (Exception ex)
             {
-                ex.Message.ToString();
-                tbRazonSalidas.Add(new tbRazonSalidas { rsal_Id = 0, rsal_Descripcion = "fallo la conexion" });
+                ex.Message.ToString();            
             }
             return View(tbRazonSalidas);
         }
+
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbRazonSalidas> tbRazonSalidas =
-                new List<Models.tbRazonSalidas> { };
-            foreach (tbRazonSalidas x in db.tbRazonSalidas.ToList().Where(x => x.rsal_Estado == true))
+            try
             {
-                tbRazonSalidas.Add(new tbRazonSalidas
-                {
-                    rsal_Id = x.rsal_Id,
-                    rsal_Descripcion = x.rsal_Descripcion
-                });
+                var tbRazonSalidas = db.tbRazonSalidas
+                    .Select(
+                    x => new {
+                        rsal_Id = x.rsal_Id,
+                        rsal_Descripcion = x.rsal_Descripcion,
+                        rsal_Estado = x.rsal_Estado
+                    }
+
+                    ).ToList();
+                return Json(tbRazonSalidas, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbRazonSalidas, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
 
         // POST: RazonSalidas/Create
@@ -193,6 +197,31 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbRazonSalidas_Restore (id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbRazonSalidas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
