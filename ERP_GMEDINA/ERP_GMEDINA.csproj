@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
+    <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1277,6 +1278,7 @@
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\HistorialIncapacidades\Admin.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\CreateIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\Admin.js" />

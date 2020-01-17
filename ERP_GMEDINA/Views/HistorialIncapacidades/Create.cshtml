@@ -1,11 +1,20 @@
 ﻿@model ERP_GMEDINA.Models.tbHistorialIncapacidades
 
 @{
-    ViewBag.Title = "Crear Incapacidad";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Create</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>tbHistorialIncapacidades</strong>
+            </li>
+        </ol>
+    </div>
+</div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
   <div class="row">
@@ -14,7 +23,7 @@
         <div class="ibox-title">
             <a href="Index" class="pull-right">Regresar</a>
         	
-        	<h2>Crear Incapacidad</h2>
+        	<h2>Create</h2>
         </div>
 
 
@@ -40,10 +49,11 @@
 
                   <div  class="form-group">
 
+                     
 
 
-                          <div align="left" class="col-sm-offset-1">
-                              <div align="left" class="col-md-10">
+                          <div align="right" class="col-md-9">
+                              <div align="left" class="col-md-9">
                                   <div class="ibox">
                                       <div class="ibox-title">
                                           <h5>Datos del empleado</h5>
@@ -65,8 +75,8 @@
                                   </div>
                               </div>
                           </div>
-
-
+                      
+                        
                       </div>
                           
                   <div class="form-group">
@@ -83,16 +93,10 @@
                           </div>
                       </div>
                  
-                      <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_Dias, htmlAttributes: new { @class = "control-label col-md-2" })
-                          <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_Dias, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.hinc_Dias, "", new { @class = "text-danger" })
-                          </div>
-                      </div>
+                      
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_CentroMedico, htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_CentroMedico, "Centro Medico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
                               @Html.EditorFor(model => model.hinc_CentroMedico, new { htmlAttributes = new { @class = "form-control" } })
                               @Html.ValidationMessageFor(model => model.hinc_CentroMedico, "", new { @class = "text-danger" })
@@ -101,14 +105,14 @@
 
                       <div class="form-group">
                           @Html.LabelFor(model => model.hinc_Doctor, htmlAttributes: new { @class = "control-label col-md-2" })
-                          <div class="col-md-10">,
-                              @Html.EditorFor(model => model.hinc_Doctor, new { htmlAttributes = new { @class = "form-control" } })
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.hinc_Doctor, "Doctor", new { htmlAttributes = new { @class = "form-control" } })
                               @Html.ValidationMessageFor(model => model.hinc_Doctor, "", new { @class = "text-danger" })
                           </div>
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_Diagnostico, htmlAttributes: new { @class = "control-label col-md-2" })
+                          @Html.LabelFor(model => model.hinc_Diagnostico,"Diagnostico", htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
                               @Html.EditorFor(model => model.hinc_Diagnostico, new { htmlAttributes = new { @class = "form-control" } })
                               @Html.ValidationMessageFor(model => model.hinc_Diagnostico, "", new { @class = "text-danger" })
@@ -116,18 +120,19 @@
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-                          <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.hinc_FechaInicio, "", new { @class = "text-danger" })
+                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-4">
+                              @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaInicio" })
+                            
+                              
                           </div>
                       </div>
 
                       <div class="form-group">
-                          @Html.LabelFor(model => model.hinc_FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
-                          <div class="col-md-10">
-                              @Html.EditorFor(model => model.hinc_FechaFin, new { htmlAttributes = new { @class = "form-control" } })
-                              @Html.ValidationMessageFor(model => model.hinc_FechaFin, "", new { @class = "text-danger" })
+                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-4">
+                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin" })
+                          
                           </div>
                       </div>
 
@@ -174,6 +179,6 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/app/General")
-@Scripts.Render("~/Scripts/app/General/CreateHistorialAudienciaDescargos")
+@Scripts.Render("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades")
 
 }
