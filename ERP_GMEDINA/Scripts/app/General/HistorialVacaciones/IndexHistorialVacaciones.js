@@ -12,7 +12,6 @@ function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Registrar vacación</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Fecha inicio' + '</th>' +
                 '<th>' + 'Fecha fin' + '</th>' +
                 '<th>' + 'Cantidad dias' + '</th>' +
@@ -31,7 +30,6 @@ function format(obj) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                '<td>' + index.hvac_Id + '</td>' +
                 '<td>' + FechaFormato(index.hvac_FechaInicio).substring(0, 10) + '</td>' +
                 '<td>' + FechaFormato(index.hvac_FechaFin).substring(0, 10) + '</td>' +
                 '<td>' + index.hvac_CantDias + '</td>' +
@@ -62,6 +60,7 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento,
@@ -134,7 +133,7 @@ function llamarmodaldetalles(ID) {
                 $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj[0].hvac_FechaInicio).substring(0, 10);
                 $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj[0].hvac_FechaFin).substring(0, 10);
                 $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj[0].hvac_CantDias;
-                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados;
+                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj[0].hvac_DiasPagados ? "Si":"No";
                 $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj[0].hvac_MesVacaciones;
                 $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj[0].hvac_AnioVacaciones;
                 //$("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj[0].hvac_Estado;

@@ -29,8 +29,9 @@ namespace ERP_GMEDINA.Models
         [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string eqtra_Observacion { get; set; }
 
-  
+        [Display(Name = "Estado")]
+        public string eqtra_Estado { get; set; }
 
-       
+
     }
 }

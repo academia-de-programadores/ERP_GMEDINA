@@ -3,7 +3,6 @@ function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Amonestaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Agregar Amonestación</button> <button type="button" class="btn btn-primary btn-xs" id="btnAudienciaDescargo" onclick="redireccionar()">Audiecia Descargo</button></div></div><div class="ibox-content"><div class="row">' + '<table class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Tipo Amonestacion' + '</th>' +
                 '<th>' + 'Fecha' + '</th>' +
                 '<th>' + 'Obsevarcion' + '</th>' +
@@ -22,7 +21,6 @@ function format(obj) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                '<td>' + index.hamo_Id + '</td>' +
                 '<td>' + index.tamo_Descripcion + '</td>' +
                 '<td>' + FechaFormato(index.hamo_Fecha).substring(0, 10) + '</td>' +
                 '<td>' + index.hamo_Observacion + '</td>' +

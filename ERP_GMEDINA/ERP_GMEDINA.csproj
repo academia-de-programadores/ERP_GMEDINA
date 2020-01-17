@@ -261,6 +261,7 @@
     <Compile Include="Models\cRequerimientosEspeciales.cs" />
     <Compile Include="Models\cRequisiciones.cs" />
     <Compile Include="Models\cSeleccionCandidatos.cs" />
+    <Compile Include="Models\cSucursales.cs" />
     <Compile Include="Models\cSueldos.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
@@ -1313,6 +1314,10 @@
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
+    <Content Include="Scripts\app\General\Sucursales\Admin.js" />
+    <Content Include="Scripts\app\General\Sucursales\CreateSucursales.js" />
+    <Content Include="Scripts\app\General\Sucursales\EditSucursales.js" />
+    <Content Include="Scripts\app\General\Sucursales\IndexSucursales.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
