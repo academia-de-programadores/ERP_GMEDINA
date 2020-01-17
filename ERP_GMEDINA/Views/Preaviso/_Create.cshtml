@@ -15,6 +15,7 @@
                     <div class="col-md-6">
                         <div class="input-group date">
                             Rango de Inicio del Mes
+                            <label class="" id="AsteriscoInicio">*</label> 
                             @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         @Html.ValidationMessageFor(model => model.prea_RangoInicioMeses, "", new { @class = "text-danger", @id = "Validation_descripcion" })
@@ -22,6 +23,7 @@
                     <div class="col-md-6">
                         <div class="input-group date">
                             Rango del Fin de Mes
+                            <label class="" id="AsteriscoFin">*</label> 
                             @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         @Html.ValidationMessageFor(model => model.prea_RangoFinMeses, "", new { @class = "text-danger", @id = "Validation_descripcion1" })
@@ -32,6 +34,7 @@
                     <div class="col-md-6">
                         <div class="input-group date">
                             Dias Preaviso
+                            <label class="" id="AsteriscoDias">*</label> 
                             @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         @Html.ValidationMessageFor(model => model.prea_DiasPreaviso, "", new { @class = "text-danger", @id = "Validation_descripcion2" })

@@ -78,7 +78,6 @@
                                             {
                                                 @Html.ActionLink("Detalle", "Details", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-primary btn-xs" })
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-default btn-xs" })
-                                                <button type="button" iddeduccionextra="iddeduccionesextraordinarias" name="iddeduccionesextraordinarias" class="btn btn-danger" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.dex_Activo == false)
@@ -98,26 +97,6 @@
     </div>
 </div>
 
-@*Modal de Inhabilitar*@
-<div class="modal fade" id="InactivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Inactivar</h4>
-            </div>
-            <div class="modal-body" id="Inactivar">
-                <h4>¿Esta seguro que desea Inactivar este registro?</h4>
-            </div>
-            <div class="modal-footer">
-                @*data-dismiss="modal"*@
-                <button type="button" class="btn btn-danger pull-right" id="btnInactivar">Si</button>
-                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
-                <button type="button" class="btn btn-default pull-right" id="btnCerrarInactivar">No</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @*Modal de Activar*@
 <div class="modal fade" id="ActivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -129,9 +108,9 @@
                 ¿Esta seguro que desea Activar este registro?
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary pull-right" id="btnActivarRegistroDeduccionesExtraordinarias">Si</button>
                 <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
