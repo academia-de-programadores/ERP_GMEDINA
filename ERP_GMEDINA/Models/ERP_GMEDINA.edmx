@@ -68,6 +68,16 @@
           <Property Name="usu_EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="usu_SesionesValidas" Type="tinyint" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tbCatalogoDePlanillas">
           <Key>
             <PropertyRef Name="cpla_IdPlanilla" />
@@ -215,6 +225,7 @@
           <Property Name="empr_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="empr_UsuarioModifica" Type="int" />
           <Property Name="empr_FechaModifica" Type="datetime" />
+          <Property Name="empr_Logo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tbEquipoEmpleados">
           <Key>
@@ -321,7 +332,7 @@
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="tamo_Id" Type="int" Nullable="false" />
           <Property Name="hamo_Fecha" Type="datetime" Nullable="false" />
-          <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
+          <Property Name="hamo_AmonestacionAnterior" Type="int" />
           <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
           <Property Name="hamo_Estado" Type="bit" Nullable="false" />
           <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -426,7 +437,7 @@
           <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
           <Property Name="hper_Duracion" Type="int" Nullable="false" />
           <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hper_Justificado" Type="bit" />
+          <Property Name="hper_Justificado" Type="bit" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
           <Property Name="hper_Estado" Type="bit" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -475,7 +486,7 @@
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
           <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
-          <Property Name="hvac_CantDias" Type="int" />
+          <Property Name="hvac_CantDias" Type="int" Nullable="false" />
           <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
           <Property Name="hvac_AnioVacaciones" Type="int" Nullable="false" />
@@ -665,6 +676,7 @@
           <Property Name="req_Estado" Type="bit" Nullable="false" />
           <Property Name="req_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="req_Vacantes" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="req_VacantesOcupadas" Type="int" Nullable="false" />
           <Property Name="req_FechaRequisicion" Type="datetime" />
           <Property Name="req_FechaContratacion" Type="datetime" />
           <Property Name="req_UsuarioCrea" Type="int" Nullable="false" />
@@ -1025,7 +1037,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <PropertyRef Name="tamo_Id" />
             <PropertyRef Name="tamo_Descripcion" />
             <PropertyRef Name="hamo_Id" />
-            <PropertyRef Name="hamo_AmonestacionAnterior" />
             <PropertyRef Name="hamo_Estado" />
             <PropertyRef Name="hamo_UsuarioCrea" />
             <PropertyRef Name="hamo_FechaCrea" />
@@ -1037,7 +1048,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hamo_Id" Type="int" Nullable="false" />
           <Property Name="hamo_Fecha" Type="date" />
-          <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
           <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
           <Property Name="hamo_Estado" Type="bit" Nullable="false" />
           <Property Name="hamo_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -1132,6 +1142,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
             <PropertyRef Name="Cargo" />
             <PropertyRef Name="Jornada" />
             <PropertyRef Name="Tipo Horas" />
+            <PropertyRef Name="Cantidad" />
             <PropertyRef Name="Recargo" />
             <PropertyRef Name="Fecha Crea" />
           </Key>
@@ -1142,6 +1153,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialHorasTrabajadas' does 
           <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Jornada" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Tipo Horas" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Recargo" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" />
           <Property Name="Usuario Crea" Type="varchar" MaxLength="100" />
@@ -1273,6 +1285,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
             <PropertyRef Name="depto_Id" />
             <PropertyRef Name="depto_Descripcion" />
             <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="emp_Fechaingreso" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -1281,6 +1294,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Property Name="depto_Id" Type="int" Nullable="false" />
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Empleado_Curriculum' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1482,6 +1496,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does n
             <PropertyRef Name="hvac_Id" />
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="hvac_CantDias" />
             <PropertyRef Name="hvac_FechaInicio" />
             <PropertyRef Name="hvac_DiasPagados" />
             <PropertyRef Name="hvac_MesVacaciones" />
@@ -1491,7 +1506,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does n
           <Property Name="hvac_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="Nombre_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="hvac_CantDias" Type="int" />
+          <Property Name="hvac_CantDias" Type="int" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
           <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
@@ -1610,7 +1625,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_Sueldos' does not have a primar
           <Property Name="Usuario_Nombre" Type="varchar" MaxLength="150" />
           <Property Name="Usuario_Crea" Type="int" Nullable="false" />
           <Property Name="Fecha_Crea" Type="datetime" />
-          <Property Name="Usuario_Modifica" Type="datetime" />
+          <Property Name="Usuario_Modifica" Type="int" />
           <Property Name="Fecha_Modifica" Type="datetime" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -1676,6 +1691,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
             <PropertyRef Name="hper_fechaInicio" />
             <PropertyRef Name="hper_fechaFin" />
             <PropertyRef Name="hper_Duracion" />
+            
             <PropertyRef Name="hper_PorcentajeIndemnizado" />
             <PropertyRef Name="hper_Estado" />
             <PropertyRef Name="hper_FechaCrea" />
@@ -1707,7 +1723,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbHistorialPermisos_completa' d
           <Property Name="hper_fechaFin" Type="datetime" Nullable="false" />
           <Property Name="hper_Duracion" Type="int" Nullable="false" />
           <Property Name="hper_Observacion" Type="nvarchar" MaxLength="25" />
-          <Property Name="hper_Justificado" Type="bit" />
+          <Property Name="hper_Justificado" Type="bit" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="int" Nullable="false" />
           <Property Name="hper_Estado" Type="bit" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -2753,31 +2769,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbNacionalidades">
-              <PropertyRef Name="nac_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbNacionalidades" Type="Self.tbNacionalidades" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3557,18 +3549,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
-          <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="1" />
-          <End Role="tbHistorialAmonestaciones1" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbHistorialAmonestaciones">
-              <PropertyRef Name="hamo_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAmonestaciones1">
-              <PropertyRef Name="hamo_AmonestacionAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbIdiomas_idi_Id_rrhh_tbIdiomaPersona_idi_Id">
           <End Role="tbIdiomas" Type="Self.tbIdiomas" Multiplicity="0..1" />
           <End Role="tbIdiomaPersona" Type="Self.tbIdiomaPersona" Multiplicity="*" />
@@ -3977,6 +3957,37 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="rrhh_tbCompetenciasRequisicion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="creq_Id" Type="int" Mode="In" />
           <Parameter Name="creq_UsuarioModifica" Type="int" Mode="In" />
@@ -3987,6 +3998,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="comp_Id" Type="int" Mode="In" />
           <Parameter Name="creq_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="creq_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="rrhh_tbCompetenciasRequisicion_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="creq_Id" Type="int" Mode="In" />
+          <Parameter Name="creq_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="creq_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="rrhh_tbHabilidadesRequisicion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hreq_Id" Type="int" Mode="In" />
@@ -3999,6 +4015,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="hreq_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hreq_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="rrhh_tbHabilidadesRequisicion_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hreq_Id" Type="int" Mode="In" />
+          <Parameter Name="hreq_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hreq_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="rrhh_tbIdiomasRequisicion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="ireq_Id" Type="int" Mode="In" />
           <Parameter Name="ireq_UsuarioModifica" Type="int" Mode="In" />
@@ -4009,6 +4030,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="idi_Id" Type="int" Mode="In" />
           <Parameter Name="ireq_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="ireq_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="rrhh_tbIdiomasRequisicion_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="ireq_Id" Type="int" Mode="In" />
+          <Parameter Name="ireq_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="ireq_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="rrhh_tbRequerimientosEspecialesRequisicion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="rer_Id" Type="int" Mode="In" />
@@ -4021,6 +4047,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="rer_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="rer_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="rrhh_tbRequerimientosEspecialesRequisicion_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rer_Id" Type="int" Mode="In" />
+          <Parameter Name="rer_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="rer_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="rrhh_tbTitulosRequisicion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="treq_Id" Type="int" Mode="In" />
           <Parameter Name="tipe_UsuarioModifica" Type="int" Mode="In" />
@@ -4031,6 +4062,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="titu_Id" Type="int" Mode="In" />
           <Parameter Name="treq_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="treq_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="rrhh_tbTitulosRequisicion_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="treq_Id" Type="int" Mode="In" />
+          <Parameter Name="tipe_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tipe_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -4115,6 +4151,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="cope_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="cope_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbCompetenciasPersona_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="cope_Id" Type="int" Mode="In" />
+          <Parameter Name="cope_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="cope_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbDepartamentos_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="depto_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -4143,7 +4184,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Contratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
-          <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
@@ -4152,6 +4192,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
+          <Parameter Name="tmon_Id" Type="int" Mode="In" />
+          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="emp_Fechaingreso" Type="datetime" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
@@ -4184,7 +4227,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Recontratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
-          <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
@@ -4193,6 +4235,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
+          <Parameter Name="tmon_Id" Type="int" Mode="In" />
+          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="emp_Fechareingreso" Type="datetime" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
@@ -4210,6 +4255,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbEmpresas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_Logo" Type="nvarchar" Mode="In" />
           <Parameter Name="empr_usuarioCrea" Type="int" Mode="In" />
           <Parameter Name="empr_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -4224,8 +4270,33 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_Logo" Type="nvarchar" Mode="In" />
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleado_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="eqem_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleado_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="eqtra_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_Fecha" Type="date" Mode="In" />
+          <Parameter Name="eqem_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="eqem_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="eqtra_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="eqem_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="eqem_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleados_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="eqtra_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_Fecha" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEquipoTrabajo_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="eqtra_Id" Type="int" Mode="In" />
@@ -4238,6 +4309,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="eqtra_Observacion" Type="nvarchar" Mode="In" />
           <Parameter Name="eqtra_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="eqtra_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEquipoTrabajo_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqtra_Id" Type="int" Mode="In" />
+          <Parameter Name="eqtra_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="eqtra_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbEquipoTrabajo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="eqtra_Id" Type="int" Mode="In" />
@@ -4303,6 +4379,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="hape_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hape_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbHabilidadesPersona_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hape_Id" Type="int" Mode="In" />
+          <Parameter Name="hape_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hape_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbHistorialAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hamo_Id" Type="int" Mode="In" />
           <Parameter Name="hamo_RazonInactivo" Type="nvarchar" Mode="In" />
@@ -4356,6 +4437,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="hcar_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
           <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="emp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -4394,7 +4476,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <Function Name="UDP_RRHH_tbHistorialIncapacidades_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="Emp_Id" Type="int" Mode="In" />
           <Parameter Name="ticn_Id" Type="int" Mode="In" />
-          <Parameter Name="hinc_Dias" Type="int" Mode="In" />
           <Parameter Name="hinc_CentroMedico" Type="nvarchar" Mode="In" />
           <Parameter Name="hinc_Doctor" Type="nvarchar" Mode="In" />
           <Parameter Name="hinc_Diagnostico" Type="nvarchar" Mode="In" />
@@ -4481,6 +4562,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="hvac_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hvac_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbHistrialVacaciones_Periodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_id" Type="int" Mode="In" />
           <Parameter Name="hor_razonInactivo" Type="nvarchar" Mode="In" />
@@ -4543,6 +4627,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="idpe_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="idpe_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbIdiomasPersona_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="idpe_Id" Type="int" Mode="In" />
+          <Parameter Name="idpe_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="idpe_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbJornadas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="jor_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -4592,6 +4681,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="tper_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="tper_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="tper_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbPersonas_Habilitar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="per_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="per_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbPersonas_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="per_Id" Type="int" Mode="In" />
@@ -4686,6 +4780,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="rep_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="rep_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbRequerimientosEspecialesPersona_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="rep_Id" Type="int" Mode="In" />
+          <Parameter Name="rep_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="rep_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbRequisiciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="req_id" Type="int" Mode="In" />
           <Parameter Name="req_razonInactivo" Type="nvarchar" Mode="In" />
@@ -4757,13 +4856,55 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="scan_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="scan_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Activar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="bod_Id" Type="int" Mode="In" />
+          <Parameter Name="pemi_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Correo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="bod_Id" Type="int" Mode="In" />
+          <Parameter Name="pemi_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Correo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbSueldos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="sue_Id" Type="int" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="tmon_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="sue_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="sue_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSueldos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="sue_id" Type="int" Mode="In" />
+          <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="sue_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tamo_Id" Type="int" Mode="In" />
@@ -4940,12 +5081,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="tipe_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="tipe_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbTitulosPersona_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="tipe_Id" Type="int" Mode="In" />
+          <Parameter Name="tipe_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="tipe_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbRol" EntityType="Self.tbRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbRolesUsuario" EntityType="Self.tbRolesUsuario" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbUsuario" EntityType="Self.tbUsuario" Schema="Acce" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCatalogoDePlanillas" EntityType="Self.tbCatalogoDePlanillas" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbFormaPago" EntityType="Self.tbFormaPago" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbAreas" EntityType="Self.tbAreas" Schema="rrhh" store:Type="Tables" />
@@ -5106,7 +5253,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HistorialAmonestacion].[tamo_Descripcion] AS [tamo_Descripcion], 
     [V_HistorialAmonestacion].[hamo_Id] AS [hamo_Id], 
     [V_HistorialAmonestacion].[hamo_Fecha] AS [hamo_Fecha], 
-    [V_HistorialAmonestacion].[hamo_AmonestacionAnterior] AS [hamo_AmonestacionAnterior], 
     [V_HistorialAmonestacion].[hamo_Observacion] AS [hamo_Observacion], 
     [V_HistorialAmonestacion].[hamo_Estado] AS [hamo_Estado], 
     [V_HistorialAmonestacion].[hamo_RazonInactivo] AS [hamo_RazonInactivo], 
@@ -5172,6 +5318,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HistorialHorasTrabajadas].[Cargo] AS [Cargo], 
     [V_HistorialHorasTrabajadas].[Jornada] AS [Jornada], 
     [V_HistorialHorasTrabajadas].[Tipo Horas] AS [Tipo Horas], 
+    [V_HistorialHorasTrabajadas].[Cantidad] AS [Cantidad], 
     [V_HistorialHorasTrabajadas].[Recargo] AS [Recargo], 
     [V_HistorialHorasTrabajadas].[Fecha] AS [Fecha], 
     [V_HistorialHorasTrabajadas].[Usuario Crea] AS [Usuario Crea], 
@@ -5259,7 +5406,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HVacacionesEmpleados].[car_Descripcion] AS [car_Descripcion], 
     [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id], 
     [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion], 
-    [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado]
+    [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado], 
+    [V_HVacacionesEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso]
     FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_Empleado_Curriculum" EntityType="Self.V_RPT_Empleado_Curriculum" store:Type="Views" store:Schema="rrhh">
@@ -5913,15 +6061,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_rrhh_tbNacionalidades_nac_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbNacionalidades" EntitySet="tbNacionalidades" />
           </AssociationSet>
@@ -6180,10 +6320,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <AssociationSet Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesRequisicion_habi_Id" Association="Self.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesRequisicion_habi_Id">
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
             <End Role="tbHabilidadesRequisicion" EntitySet="tbHabilidadesRequisicion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="Self.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
-            <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
-            <End Role="tbHistorialAmonestaciones1" EntitySet="tbHistorialAmonestaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbIdiomas_idi_Id_rrhh_tbIdiomaPersona_idi_Id" Association="Self.FK_rrhh_tbIdiomas_idi_Id_rrhh_tbIdiomaPersona_idi_Id">
             <End Role="tbIdiomas" EntitySet="tbIdiomas" />
@@ -6962,7 +7098,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="hvac_CantDias" Type="Int32" />
+          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
           <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
           <Property Name="hvac_AnioVacaciones" Type="Int32" Nullable="false" />
@@ -7199,6 +7335,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbRequerimientosEspecialesRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbRequerimientosEspecialesRequisicion" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
+          <Property Name="req_VacantesOcupadas" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -10348,6 +10485,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Insert_Result)">
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_Logo" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10362,6 +10500,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_Logo" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10500,7 +10639,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Insert_Result)">
             <Parameter Name="Emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hinc_Dias" Mode="In" Type="Int32" />
             <Parameter Name="hinc_CentroMedico" Mode="In" Type="String" />
             <Parameter Name="hinc_Doctor" Mode="In" Type="String" />
             <Parameter Name="hinc_Diagnostico" Mode="In" Type="String" />
@@ -11048,7 +11186,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="sue_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="sue_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbFaseSeleccion" EntityType="ERP_GMEDINAModel.tbFaseSeleccion" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFaseSeleccion_fsel_UsuarioCrea">
@@ -11093,7 +11232,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Contratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Contratar_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
@@ -11102,13 +11240,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
             <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="emp_Fechaingreso" Mode="In" Type="DateTime" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
@@ -11117,6 +11257,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
             <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="emp_Fechareingreso" Mode="In" Type="DateTime" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
@@ -11340,6 +11483,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -11471,6 +11615,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="tipe_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_EquipoTrabajoDetalles" EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" />
           <FunctionImport Name="UDP_RRHH_tbEquipoEmpleados_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
@@ -11482,6 +11627,33 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="per_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleado_Inactivar" ReturnType="Collection(String)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleado_Insert" ReturnType="Collection(String)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="eqem_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleados_Update" ReturnType="Collection(String)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Restore1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Restore1_Result)">
+            <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSueldos_Restore" ReturnType="Collection(String)">
+            <Parameter Name="sue_id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_RPT_Empleado_Curriculum" EntityType="ERP_GMEDINAModel.V_RPT_Empleado_Curriculum" />
           <EntitySet Name="V_RPT_EquipoEmpleado" EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" />
@@ -11497,11 +11669,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
-          <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
-            <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
-            <End Role="tbHistorialAmonestaciones1" EntitySet="tbHistorialAmonestaciones" />
-          </AssociationSet>
-          <EntitySet Name="V_EquipoTrabajoDetalles" EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11944,7 +12111,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
           <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_Justificado" Type="Boolean" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
           <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -12528,7 +12695,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hper_fechaFin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hper_Duracion" Type="Int32" Nullable="false" />
           <Property Name="hper_Observacion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="hper_Justificado" Type="Boolean" />
+          <Property Name="hper_Justificado" Type="Boolean" Nullable="false" />
           <Property Name="hper_PorcentajeIndemnizado" Type="Int32" Nullable="false" />
           <Property Name="hper_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -12662,7 +12829,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="tamo_Id" Type="Int32" Nullable="false" />
           <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
+          <Property Name="hamo_AmonestacionAnterior" Type="Int32" />
           <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hamo_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -12674,8 +12841,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioModifica" FromRole="tbHistorialAmonestaciones" ToRole="tbUsuario" />
           <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAmonestaciones_emp_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbTipoAmonestaciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" FromRole="tbHistorialAmonestaciones" ToRole="tbTipoAmonestaciones" />
-          <NavigationProperty Name="tbHistorialAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones" ToRole="tbHistorialAmonestaciones1" />
-          <NavigationProperty Name="tbHistorialAmonestaciones2" Relationship="ERP_GMEDINAModel.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" FromRole="tbHistorialAmonestaciones1" ToRole="tbHistorialAmonestaciones" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialAmonestaciones_hamo_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -12736,7 +12901,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="hamo_Estado" />
             <PropertyRef Name="hamo_UsuarioCrea" />
             <PropertyRef Name="hamo_FechaCrea" />
-            <PropertyRef Name="hamo_AmonestacionAnterior" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
@@ -12752,7 +12916,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hamo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hamo_UsuarioModifica" Type="Int32" />
           <Property Name="hamo_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
         </EntityType>
         <ComplexType Name="UDP_RRHH_tbHistrialVacaciones_Periodos_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -12762,12 +12925,41 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbTipoHoras_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="V_EquipoTrabajoDetalles">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="eqtra_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="eqtra_Descripcion" />
+            <PropertyRef Name="eqem_Estado" />
+            <PropertyRef Name="eqem_Fecha" />
+            <PropertyRef Name="eqem_UsuarioCrea" />
+            <PropertyRef Name="eqem_FechaCrea" />
+          </Key>
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eqtra_Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eqem_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="eqem_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="eqem_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqem_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="eqem_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="eqem_UsuarioModifica" Type="Int32" />
+          <Property Name="eqem_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
         <ComplexType Name="UDP_RRHH_tbEquipoEmpleados_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
           </ComplexType>
         <ComplexType Name="UDP_RRHH_tbPersonas_Habilitar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
           </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEquipoTrabajo_Restore1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <EntityType Name="V_RPT_Empleado_Curriculum">
           <Key>
             <PropertyRef Name="Id_Empleado" />
@@ -12944,6 +13136,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="hvac_Id" />
             <PropertyRef Name="emp_Id" />
             <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="hvac_CantDias" />
             <PropertyRef Name="hvac_FechaInicio" />
             <PropertyRef Name="hvac_DiasPagados" />
             <PropertyRef Name="hvac_MesVacaciones" />
@@ -12953,7 +13146,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hvac_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="hvac_CantDias" Type="Int32" />
+          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
           <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
           <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
@@ -13006,44 +13199,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
-          <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones" Multiplicity="1" />
-          <End Type="ERP_GMEDINAModel.tbHistorialAmonestaciones" Role="tbHistorialAmonestaciones1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbHistorialAmonestaciones">
-              <PropertyRef Name="hamo_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialAmonestaciones1">
-              <PropertyRef Name="hamo_AmonestacionAnterior" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="V_EquipoTrabajoDetalles">
-          <Key>
-            <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="eqtra_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="eqtra_Codigo" />
-            <PropertyRef Name="eqtra_Descripcion" />
-            <PropertyRef Name="eqem_Estado" />
-            <PropertyRef Name="eqem_Fecha" />
-            <PropertyRef Name="eqem_UsuarioCrea" />
-            <PropertyRef Name="eqem_FechaCrea" />
-          </Key>
-          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="eqtra_Codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="eqtra_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="eqtra_Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="eqem_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="eqem_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="eqem_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="eqem_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="eqem_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="eqem_UsuarioModifica" Type="Int32" />
-          <Property Name="eqem_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13116,6 +13271,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="usu_RazonInactivo" ColumnName="usu_RazonInactivo" />
                 <ScalarProperty Name="usu_EsAdministrador" ColumnName="usu_EsAdministrador" />
                 <ScalarProperty Name="usu_SesionesValidas" ColumnName="usu_SesionesValidas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -13238,6 +13404,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbEmpresas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbEmpresas">
               <MappingFragment StoreEntitySet="tbEmpresas">
+                <ScalarProperty Name="empr_Logo" ColumnName="empr_Logo" />
                 <ScalarProperty Name="empr_Id" ColumnName="empr_Id" />
                 <ScalarProperty Name="empr_Nombre" ColumnName="empr_Nombre" />
                 <ScalarProperty Name="empr_Estado" ColumnName="empr_Estado" />
@@ -13641,6 +13808,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbRequisiciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbRequisiciones">
               <MappingFragment StoreEntitySet="tbRequisiciones">
+                <ScalarProperty Name="req_VacantesOcupadas" ColumnName="req_VacantesOcupadas" />
                 <ScalarProperty Name="req_Id" ColumnName="req_Id" />
                 <ScalarProperty Name="req_Experiencia" ColumnName="req_Experiencia" />
                 <ScalarProperty Name="req_Sexo" ColumnName="req_Sexo" />
@@ -13958,6 +14126,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HistorialHorasTrabajadas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialHorasTrabajadas">
               <MappingFragment StoreEntitySet="V_HistorialHorasTrabajadas">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
@@ -14070,6 +14239,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ERP_GMEDINAModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ERP_GMEDINAModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ERP_GMEDINAModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ERP_GMEDINAModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ERP_GMEDINAModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ERP_GMEDINAModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ERP_GMEDINAModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbAreas_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbAreas_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbAreas_Delete_Result">
@@ -14847,6 +15040,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HVacacionesEmpleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HVacacionesEmpleados">
               <MappingFragment StoreEntitySet="V_HVacacionesEmpleados">
+                <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
                 <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
                 <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
                 <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
@@ -15440,7 +15634,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HistorialAmonestacion">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAmonestacion">
               <MappingFragment StoreEntitySet="V_HistorialAmonestacion">
-                <ScalarProperty Name="hamo_AmonestacionAnterior" ColumnName="hamo_AmonestacionAnterior" />
                 <ScalarProperty Name="hamo_FechaModifica" ColumnName="hamo_FechaModifica" />
                 <ScalarProperty Name="hamo_UsuarioModifica" ColumnName="hamo_UsuarioModifica" />
                 <ScalarProperty Name="hamo_FechaCrea" ColumnName="hamo_FechaCrea" />
@@ -15458,6 +15651,73 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="rrhh_tbCompetenciasRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbCompetenciasRequisicion_Restore" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbHabilidadesRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbHabilidadesRequisicion_Restore" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbIdiomasRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbIdiomasRequisicion_Restore" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbRequerimientosEspecialesRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbRequerimientosEspecialesRequisicion_Restore" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbTitulosRequisicion_Restore" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbTitulosRequisicion_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbCompetenciasPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbCompetenciasPersona_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHabilidadesPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHabilidadesPersona_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistrialVacaciones_Periodos" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistrialVacaciones_Periodos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistrialVacaciones_Periodos_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbIdiomasPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbIdiomasPersona_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspecialesPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspecialesPersona_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Activar" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Inactivar" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Restore" />
+          <EntitySetMapping Name="V_EquipoTrabajoDetalles">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EquipoTrabajoDetalles">
+              <MappingFragment StoreEntitySet="V_EquipoTrabajoDetalles">
+                <ScalarProperty Name="eqem_FechaModifica" ColumnName="eqem_FechaModifica" />
+                <ScalarProperty Name="eqem_UsuarioModifica" ColumnName="eqem_UsuarioModifica" />
+                <ScalarProperty Name="eqem_FechaCrea" ColumnName="eqem_FechaCrea" />
+                <ScalarProperty Name="eqem_UsuarioCrea" ColumnName="eqem_UsuarioCrea" />
+                <ScalarProperty Name="eqem_Fecha" ColumnName="eqem_Fecha" />
+                <ScalarProperty Name="eqem_RazonInactivo" ColumnName="eqem_RazonInactivo" />
+                <ScalarProperty Name="eqem_Estado" ColumnName="eqem_Estado" />
+                <ScalarProperty Name="eqtra_Observacion" ColumnName="eqtra_Observacion" />
+                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
+                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleados_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleados_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Habilitar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Habilitar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Habilitar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleado_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleado_Inactivar" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleado_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleado_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleados_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleados_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoTrabajo_Restore1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoTrabajo_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoTrabajo_Restore1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Restore" />
           <EntitySetMapping Name="V_RPT_Empleado_Curriculum">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_Empleado_Curriculum">
               <MappingFragment StoreEntitySet="V_RPT_Empleado_Curriculum">
@@ -15649,25 +15909,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
                 <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
                 <ScalarProperty Name="Id_Requisicion" ColumnName="Id_Requisicion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_EquipoTrabajoDetalles">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EquipoTrabajoDetalles">
-              <MappingFragment StoreEntitySet="V_EquipoTrabajoDetalles">
-                <ScalarProperty Name="eqem_FechaModifica" ColumnName="eqem_FechaModifica" />
-                <ScalarProperty Name="eqem_UsuarioModifica" ColumnName="eqem_UsuarioModifica" />
-                <ScalarProperty Name="eqem_FechaCrea" ColumnName="eqem_FechaCrea" />
-                <ScalarProperty Name="eqem_UsuarioCrea" ColumnName="eqem_UsuarioCrea" />
-                <ScalarProperty Name="eqem_Fecha" ColumnName="eqem_Fecha" />
-                <ScalarProperty Name="eqem_RazonInactivo" ColumnName="eqem_RazonInactivo" />
-                <ScalarProperty Name="eqem_Estado" ColumnName="eqem_Estado" />
-                <ScalarProperty Name="eqtra_Observacion" ColumnName="eqtra_Observacion" />
-                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
-                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

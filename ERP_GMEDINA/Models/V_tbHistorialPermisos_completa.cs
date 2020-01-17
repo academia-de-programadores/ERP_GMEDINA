@@ -41,7 +41,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hper_fechaFin { get; set; }
         public int hper_Duracion { get; set; }
         public string hper_Observacion { get; set; }
-        public Nullable<bool> hper_Justificado { get; set; }
+        public bool hper_Justificado { get; set; }
         public int hper_PorcentajeIndemnizado { get; set; }
         public bool hper_Estado { get; set; }
         public string hper_RazonInactivo { get; set; }
