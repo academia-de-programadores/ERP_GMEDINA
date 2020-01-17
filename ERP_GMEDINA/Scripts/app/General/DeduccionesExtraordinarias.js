@@ -23,6 +23,21 @@ const btnAgregar = $('#btnAgregar'),
     validacionCuota = $('#validacionCuota');
     ;
 
+const btnEditar = $("#btnEditar"),
+MontoInicial = $('#dex_MontoInicial'),
+MontoRestante = $('#dex_MontoRestante'),
+Observaciones = $('#dex_ObservacionesComentarios'),
+Cuota = $('#dex_Cuota'),
+asteriscMontoInicial = $('#asteriscoMontoInicial'),
+asteriscMontoRestante = $('#asteriscoMontoRestante'),
+asteriscObservaciones = $('#asteriscoObservaciones'),
+asteriscCuota = $('#asteriscoCuota'),
+validnEquipoEmpleado = $('#validEquipoEmpleado'),
+validMontoInicial = $('#validMontoInicial'),
+validMontoRestante = $('#validMontoRestante'),
+validObservaciones = $('#validObservaciones'),
+validCuota = $('#validCuota');
+
 //#endregion
 
 //
@@ -197,9 +212,8 @@ $(btnAgregar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-
-                cargarGridDeducciones();
                 location.href = "DeduccionesExtraordinarias/Index"
+                cargarGridDeducciones();
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -294,6 +308,105 @@ function validaciones(equipoEmpId,
     return todoBien;
 }
 
+
+//Editar
+$(btnEditar).click(function () {
+    console.clear();
+    if (validaciones(
+        MontoInicial,
+        MontoRestante,
+        Observaciones,
+        Cuota
+    )) {
+        console.log('Paso las validaciones')
+        mostrarCargandoCrear();
+
+        var data = $("#frmEditar").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+
+                cargarGridDeducciones();
+                location.href = "DeduccionesExtraordinarias/Index"
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se editó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se editó el registro, contacte al administrador!',
+                });
+            }
+
+            ocultarCargandoCrear();
+        });
+
+    }
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmEdit").submit(function (e) {
+        return false;
+    });
+});
+
+function validacion(
+    MontoInicial,
+    MontoRestante,
+    Observaciones,
+    Cuota) {
+    var todoCorrecto = true;
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+
+    // Monto inicial
+    if (MontoInicial.val() != '' && expreg.test(MontoInicial.val())) {
+        asteriscMontoInicial.removeClass('text-danger');
+        validMontoInicial.hide();
+    } else {
+        asteriscMontoInicial.addClass('text-danger');
+        validMontoInicial.show();
+        todoCorrecto = false;
+    }
+
+    // Monto Restante
+    if (MontoRestante.val() != '' && expreg.test(MontoRestante.val())) {
+        asteriscMontoRestante.removeClass('text-danger');
+        validMontoRestante.hide();
+    } else {
+        asteriscMontoRestante.addClass('text-danger');
+        validMontoRestante.show();
+        todoCorrecto = false;
+    }
+
+    // Observaciones
+    if (Observaciones.val() != '') {
+        validObservaciones.hide();
+        asteriscObservaciones.removeClass('text-danger');
+    } else {
+        asteriscObservaciones.addClass('text-danger');
+        validObservaciones.show();
+        todoCorrecto = false;
+    }
+
+    // Cuota
+    if (Cuota.val() != '') {
+        asteriscCuota.removeClass('text-danger');
+        validCuota.hide();
+    } else {
+        asteriscCuota.addClass('text-danger');
+        validCuota.show();
+        todoCorrecto = false;
+    }
+    return todoCorrecto;
+}
 
 
 //Modal de Inactivar
