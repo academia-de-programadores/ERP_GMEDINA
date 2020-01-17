@@ -175,6 +175,10 @@ $(".required").each(function (indice, input) {
     $(input).keypress(function (event) {
         key(event);
     });
+    $(input).focusin(function () {
+        var lol = $(form).find("#error" + id);
+        $(form).find("#error" + id)[0].innerText = '';
+    });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
         if ($(input).val() == null || $(input).val()==0 || $(input).val().trim() == "") {
@@ -190,7 +194,7 @@ $(".required").each(function (indice, input) {
         var span = $(form).find("#error" + id);
         $(span).closest("div").removeClass("has-error");
         $(span).removeClass("text-danger");
-        if ($(input).val().length > maxlength) {
+        if ($(input).val().length >= maxlength) {
             $(span).addClass("text-warning");
             $(span).closest("div").addClass("has-warning");
             span.text(txt_maxlength);
