@@ -37,7 +37,7 @@ function cargarGridISR() {
             if (data.length == 0) {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No se cargó la información, contacte al administrador',
                 });
             }
             var ListaISR = data, template = '';
@@ -92,8 +92,10 @@ $(document).on("click", "#btnAgregarISR", function () {
 
     //mostrar modal
     $('#Crear input[type=text], input[type=number]').val('');
+    $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display', 'none');
+    $('#frmISRCreate .messageValidation').css('display', 'none');    
     $('#frmISRCreate .asterisco').removeClass('text-danger');
-    $("#AgregarISR").modal();
+    $("#AgregarISR").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
 });
@@ -102,14 +104,41 @@ $(document).on("click", "#btnAgregarISR", function () {
 $('#btnCreateISR').click(function () {
     var ModelState = true;
 
-    //$("#Editar #tede_Id").val() == "" ? ModelState = false : '';
-    $("#Crear #isr_RangoInicial").val() == "" ? ModelState = false : $("#Crear #isr_RangoInicial").val() == "0.00" ? ModelState = false : $("#Crear #isr_RangoInicial").val() == null ? ModelState = false : isNaN($("#Crear #isr_RangoInicial").val()) == true ? ModelState = false : '';
-    $("#Crear #isr_RangoFinal").val() == "" ? ModelState = false : $("#Crear #isr_RangoFinal").val() == "0.00" ? ModelState = false : $("#Crear #isr_RangoFinal").val() == null ? ModelState = false : isNaN($("#Crear #isr_RangoFinal").val()) == true ? ModelState = false : '';
-    $("#Crear #isr_Porcentaje").val() == "" ? ModelState = false : $("#Crear #isr_Porcentaje").val() == "0" ? ModelState = false : $("#Crear #isr_Porcentaje").val() == null ? ModelState = false : isNaN($("#Crear #isr_Porcentaje").val()) == true ? ModelState = false : '';
-    $("#Crear #tde_IdTipoDedu").val() == "" ? ModelState = false : $("#Crear #tde_IdTipoDedu").val() == "0" ? ModelState = false : $("#Crear #tde_IdTipoDedu").val() == null ? ModelState = false : isNaN($("#Crear #tde_IdTipoDedu").val()) == true ? ModelState = false : '';
+    var rangoInicial = $("#Crear #isr_RangoInicial").val().trim();
+    var rangoFinal = $("#Crear #isr_RangoFinal").val().trim();
+    var tipoDeduccion = $("#Crear #tde_IdTipoDedu").val().trim();
+    var porcentaje = $("#Crear #isr_Porcentaje").val().trim();
 
-    //serializar formulario
-    if (ModelState) {
+    if (rangoInicial == null || rangoInicial == 0 || rangoInicial == '' || rangoInicial == undefined) {
+        ModelState = false;
+        $("#Crear #Validation_RangoInicial").css('display', '');
+        $('#Crear #AsteriscoRangoInicialISR').addClass('text-danger');
+    }
+    if (rangoFinal == null || rangoFinal == 0 || rangoFinal == '' || rangoFinal == undefined) {
+        ModelState = false;
+        $("#Crear #Validation_RangoFinal").css('display', '');
+        $('#Crear #AsteriscoRangoFinalISR').addClass('text-danger');
+    }
+    debugger;
+    if (rangoFinal <= rangoInicial) {
+        ModelState = false;
+        $("#Crear #Validation_RangoFinalOtro").css('display', '');
+        $('#Crear #AsteriscoRangoFinalISR').addClass('text-danger');
+    }
+
+    if (tipoDeduccion == null || tipoDeduccion == 0 || tipoDeduccion == '' || tipoDeduccion == undefined) {
+        ModelState = false;
+        $("#Crear #Validation_tde_IdTipoDedu").css('display', '');
+        $('#Crear #Asteriscotde_IdTipoDeduISR').addClass('text-danger');
+    }
+
+    if (porcentaje == null || porcentaje == 0 || porcentaje == '' || porcentaje == undefined) {
+        ModelState = false;
+        $("#Crear #Validation_Porcentaje").css('display', '');
+        $('#Crear #Asteriscoisr_PorcentajeISR').addClass('text-danger');
+    }
+
+    if (ModelState == true) {
         var data = $("#frmISRCreate").serializeArray();
         $.ajax({
             url: "/ISR/Create",
@@ -121,7 +150,7 @@ $('#btnCreateISR').click(function () {
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
+                    message: 'No guardó el registro, contacte al administrador',
                 });
             }
             else if (data == "bien") {
@@ -130,15 +159,9 @@ $('#btnCreateISR').click(function () {
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
-                    message: '¡El registro fue agregado de forma exitosa!',
+                    message: '¡El registro se agregó de forma exitosa!',
                 });
             }
-        });
-    }
-    else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
         });
     }
 
@@ -149,9 +172,11 @@ $('#btnCreateISR').click(function () {
 $('#frmISRCreate #isr_RangoInicial').keyup(function () {
     if ($("#frmISRCreate #isr_RangoInicial").val().trim() != '') {
         $('#AsteriscoRangoInicialISR').removeClass('text-danger');
+        $("#Crear #Validation_RangoInicial").css('display', 'none');
     }
     else {
-        $('#frmISRCreate #AsteriscoRangoInicialISR').addClass("text-danger");;
+        $('#frmISRCreate #AsteriscoRangoInicialISR').addClass("text-danger");
+        $("#Crear #Validation_RangoInicial").css('display', '');
     }
 });
 
@@ -159,9 +184,11 @@ $('#frmISRCreate #isr_RangoInicial').keyup(function () {
 $('#frmISRCreate #isr_RangoFinal').keyup(function () {
     if ($("#frmISRCreate #isr_RangoFinal").val().trim() != '') {
         $('#frmISRCreate #AsteriscoRangoFinalISR').removeClass('text-danger');
+        $("#Crear #Validation_RangoFinal").css('display', 'none');
     }
     else {
-        $('#frmISRCreate #AsteriscoRangoFinalISR').addClass("text-danger");;
+        $('#frmISRCreate #AsteriscoRangoFinalISR').addClass("text-danger");
+        $("#Crear #Validation_RangoFinal").css('display', '');
     }
 });
 
@@ -181,9 +208,11 @@ $('#frmISRCreate #tde_IdTipoDedu').on('change', function () {
 $('#frmISRCreate #isr_Porcentaje').keyup(function () {
     if ($("#frmISRCreate #isr_Porcentaje").val().trim() != '') {
         $('#frmISRCreate #Asteriscoisr_PorcentajeISR').removeClass('text-danger');
+        $("#Crear #Validation_Porcentaje").css('display', 'none');
     }
     else {
         $('#frmISRCreate #Asteriscoisr_PorcentajeISR').addClass("text-danger");
+        $("#Crear #Validation_Porcentaje").css('display', '');
     }
 });
 
@@ -196,7 +225,6 @@ $('#frmISRCreate #isr_Porcentaje').keyup(function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
     var ID = $(this).data('id');
-    $("#EditISR").modal('show');
     InactivarID = ID;
     $.ajax({
         url: "/ISR/Edit/" + ID,
@@ -239,7 +267,7 @@ $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No cargó la información, contacte al administrador',
                 });
             }
         });
@@ -268,7 +296,7 @@ $("#btnEditarISR").click(function () {
                 //Cuando traiga un error del backend al guardar la edicion
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
+                    message: 'No editó el registro, contacte al administrador',
                 });
             }
             else {
@@ -278,15 +306,9 @@ $("#btnEditarISR").click(function () {
                 //Mensaje de exito de la edicion
                 iziToast.success({
                     title: 'Éxito',
-                    message: '¡El registro fue editado de forma exitosa!',
+                    message: '¡El registro se editó de forma exitosa!',
                 });
             }
-        });
-    }
-    else {
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
         });
     }
 });
@@ -296,14 +318,15 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarISR").modal('hide');
 });
 
-
-
-
 $(document).on("click", "#btnModalInactivarISR", function () {
     $("#EditarISR").modal('hide');
-    $("#InactivarISR").modal();
+    $("#InactivarISR").modal({ backdrop: 'static', keyboard: false });
 });
 
+$(document).on("click", "#btnBack", function () {
+    $("#InactivarISR").modal('hide');
+    $("#EditarISR").modal({ backdrop: 'static', keyboard: false });
+});
 
 
 //Inactivar registro Techos Deducciones    
@@ -319,7 +342,7 @@ $("#btnInactivarISR").click(function () {
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
-                message: 'No se pudo Inhabilitar el registro, contacte al administrador',
+                message: 'No se inactivó el registro, contacte al administrador',
             });
         }
         else {
@@ -329,7 +352,7 @@ $("#btnInactivarISR").click(function () {
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Éxito',
-                message: '¡El registro fue Inhabilitado de forma exitosa!',
+                message: '¡El registro se inactivó de forma exitosa!',
             });
         }
     });
@@ -376,13 +399,13 @@ $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
                     .done(function (data) {
                         $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                     });
-                $("#DetailsISR").modal();
+                $("#DetailsISR").modal({ backdrop: 'static', keyboard: false });
             }
             else {
                 //Mensaje de error si no hay data
                 iziToast.error({
                     title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
+                    message: 'No cargó la información, contacte al administrador',
                 });
             }
         });

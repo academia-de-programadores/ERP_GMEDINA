@@ -16,8 +16,8 @@
                     <label class="asterisco" id="AsteriscoRangoInicialISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @type = "number" ,@class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger messageValidation", @id = "Validation_RangoInicial" })
                 </div>
             </div>
 
@@ -27,8 +27,9 @@
                     <label class="asterisco" id="AsteriscoRangoFinalISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinal"})
+                    @Html.ValidationMessage("El rango final no puede ser menor o igual que el inicial", new { @class = "text-danger messageValidation", @id = "Validation_RangoFinalOtro" })
                 </div>
             </div>
 
@@ -39,7 +40,7 @@
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "Este campo es requerido", new { @class = "text-danger", @id = "Validation_tde_IdTipoDedu" })
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "El campo tipo de deducción es requerido", new { @class = "text-danger messageValidation", @id = "Validation_tde_IdTipoDedu" })
                 </div>
             </div>
 
@@ -49,8 +50,8 @@
                     <label class="asterisco" id="Asteriscoisr_PorcentajeISR">*</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger messageValidation", @id = "Validation_Porcentaje" })
                 </div>
             </div>
         </div>
