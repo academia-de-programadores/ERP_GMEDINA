@@ -11,7 +11,7 @@ function _ajax(params, uri, type, callback) {
 }
 var InactivarID = 0;
 
-//OBTENER SCRIPT DE FORMATEO DE FECHA
+//formato fecha
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
       console.log(textStatus);
@@ -20,7 +20,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
       console.log("No se pudo recuperar Script SerializeDate");
   });
 
-// EVITAR POSTBACK DE FORMULARIOS 
+// evitar postbacks
 $("#frmEditISR").submit(function (e) {
     return false;
 });
@@ -28,7 +28,7 @@ $("#frmISRCreate").submit(function (e) {
     return false;
 });
 
-//FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
+//cargar grid
 function cargarGridISR() {
     _ajax(null,
         '/ISR/GetData',
@@ -41,9 +41,9 @@ function cargarGridISR() {
                 });
             }
             var ListaISR = data, template = '';
-            //LIMPIAR LA DATA DEL DATATABLE
+            //limpiar datatable
             $('#tblISR').DataTable().clear();
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+            //recorrer data obtenida del backend
             for (var i = 0; i < ListaISR.length; i++) {                
 
                 //variable para verificar el estado del registro
@@ -58,7 +58,7 @@ function cargarGridISR() {
                 //variable boton activar
                 var botonActivar = ListaISR[i].isr_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaISR[i].isr_Activo + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarISR">Activar</button>' : '' : '';
 
-                //AGREGAR EL ROW AL DATATABLE
+                //agregar el row al datatable
                 $('#tblAcumuladosISR').dataTable().fnAddData([
                     ListaISR[i].isr_RangoInicial,
                     ListaISR[i].isr_RangoFinal,
@@ -72,16 +72,16 @@ function cargarGridISR() {
     FullBody();
 }
 
-//Modal Create ISR
+//crear isr
 $(document).on("click", "#btnAgregarISR", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+    //llenar ddls
     $.ajax({
         url: "/ISR/EditGetDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+        //llenar los dropdownlists
         .done(function (data) {
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
@@ -89,13 +89,16 @@ $(document).on("click", "#btnAgregarISR", function () {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $(".field-validation-error").css('display', 'none');
+
+    //mostrar modal
     $('#Crear input[type=text], input[type=number]').val('');
+    $('#frmISRCreate .asterisco').removeClass('text-danger');
     $("#AgregarISR").modal();
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
-//FUNCION: CREAR EL NUEVO REGISTROISR
+//crear nuevo rango isr
 $('#btnCreateISR').click(function () {
     var ModelState = true;
 
@@ -105,7 +108,7 @@ $('#btnCreateISR').click(function () {
     $("#Crear #isr_Porcentaje").val() == "" ? ModelState = false : $("#Crear #isr_Porcentaje").val() == "0" ? ModelState = false : $("#Crear #isr_Porcentaje").val() == null ? ModelState = false : isNaN($("#Crear #isr_Porcentaje").val()) == true ? ModelState = false : '';
     $("#Crear #tde_IdTipoDedu").val() == "" ? ModelState = false : $("#Crear #tde_IdTipoDedu").val() == "0" ? ModelState = false : $("#Crear #tde_IdTipoDedu").val() == null ? ModelState = false : isNaN($("#Crear #tde_IdTipoDedu").val()) == true ? ModelState = false : '';
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    //serializar formulario
     if (ModelState) {
         var data = $("#frmISRCreate").serializeArray();
         $.ajax({
@@ -114,7 +117,7 @@ $('#btnCreateISR').click(function () {
             data: data
         }).done(function (data) {
             $("#AgregarISR").modal('hide');
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            //validar respuesta del backend
             if (data == "error") {
                 iziToast.error({
                     title: 'Error',
@@ -140,6 +143,55 @@ $('#btnCreateISR').click(function () {
     }
 
 });
+
+
+// validaciones AsteriscoRangoInicialISR
+$('#frmISRCreate #isr_RangoInicial').keyup(function () {
+    if ($("#frmISRCreate #isr_RangoInicial").val().trim() != '') {
+        $('#AsteriscoRangoInicialISR').removeClass('text-danger');
+    }
+    else {
+        $('#frmISRCreate #AsteriscoRangoInicialISR').addClass("text-danger");;
+    }
+});
+
+// validaciones AsteriscoRangoFinalISR
+$('#frmISRCreate #isr_RangoFinal').keyup(function () {
+    if ($("#frmISRCreate #isr_RangoFinal").val().trim() != '') {
+        $('#frmISRCreate #AsteriscoRangoFinalISR').removeClass('text-danger');
+    }
+    else {
+        $('#frmISRCreate #AsteriscoRangoFinalISR').addClass("text-danger");;
+    }
+});
+
+// validaciones Asteriscotde_IdTipoDeduISR
+$('#frmISRCreate #tde_IdTipoDedu').on('change', function () {
+    if (this.value != '0') {
+        $('#frmISRCreate #Asteriscotde_IdTipoDeduISR').removeClass('text-danger');
+        $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display', 'none');
+    }
+    else {
+        $('#frmISRCreate #Asteriscotde_IdTipoDeduISR').addClass("text-danger");
+        $('#frmISRCreate #Validation_tde_IdTipoDedu').css('display','');
+    }
+});
+
+// validaciones Asteriscoisr_PorcentajeISR
+$('#frmISRCreate #isr_Porcentaje').keyup(function () {
+    if ($("#frmISRCreate #isr_Porcentaje").val().trim() != '') {
+        $('#frmISRCreate #Asteriscoisr_PorcentajeISR').removeClass('text-danger');
+    }
+    else {
+        $('#frmISRCreate #Asteriscoisr_PorcentajeISR').addClass("text-danger");
+    }
+});
+
+
+
+
+
+
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblISR tbody tr td #btnModalEditarISR", function () {

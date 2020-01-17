@@ -589,7 +589,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
     }
 
     mostrarCargandoEditar();
-
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionesIndividuales/Edit",
