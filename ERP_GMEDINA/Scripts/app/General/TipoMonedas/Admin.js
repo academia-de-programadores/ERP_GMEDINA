@@ -14,7 +14,7 @@ $("#btnActivar").click(function () {
  var Id = $("#ModalHabilitar").data("id");
  //$("#txtIdRestore").val();
  _ajax(JSON.stringify({ id: Id }), // <<<<<<===================================
-     '/Areas/hablilitar/',
+     '/TipoMonedas/hablilitar/',
      'POST',
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {

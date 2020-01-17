@@ -12,8 +12,8 @@ function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="tablaEditar('+idEmpleado+')" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
-        + '<tr> <th>  Incapacidad  </th>'
-        + '<th>Número</th>'
+        + '<tr> <th> Número   </th>'
+        + '<th>Incapacidad</th>'
         + '<th>Dias de retiro</th>'
         + '<th>Centro Medico</th> '
          + '<th>Diagnostico</th> '
@@ -32,7 +32,7 @@ function format(obj) {
             Estado = "Activo";
         div = div +
             '<tbody>' + '<tr>'
-                + '<td>' + index.hinc_Id + '</td>'
+                + '<td>' + index.hinc_Id  + '</td>'
                 + '<td>' + index.ticn_Descripcion + '</td>'
                 + '<td>' + index.hinc_Dias + '</td>'
                 + '<td>' + index.hinc_CentroMedico + '</td>'
@@ -73,6 +73,7 @@ function llenarTabla() {
                empleado = value.Empleado
                tabla.row.add({                 
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento
