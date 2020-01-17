@@ -183,7 +183,6 @@ function listaCatalogoIngresos(arrayIngresos) {
 }
 
 function listaCatalogoDeduccionesFalse() {
-	debugger;
 	var hayUnoFalso = true;
 	$('#catalogoDeDeducciones table tbody tr td input[type="checkbox"].i-checks').each(function (
 		index,
@@ -564,11 +563,9 @@ function listarCatalogos() {
 
 				//Seleccionar o deseleccionar los ingresos
 				catalogoIngresosChangeCheckbox.onchange = function () {
-					console.log('change');
 					const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
 					let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
 					if (catalogoIngresosChangeCheckbox.checked) {
-						console.log('click');
 						catalogoIngresosInputs.iCheck('check');
 						seleccionarTodosLosIngresos.html(
 							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
@@ -584,7 +581,6 @@ function listarCatalogos() {
 				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 				//Se activara el switch, si esta desactivado
 				$(catalogoIngresosInputs).on('ifChecked', () => {
-					console.log('click');
 					validacionCatalogoIngresos.hide();
 					if (listaCatalogoIngresosFalse()) {
 						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
@@ -730,11 +726,9 @@ function listarCatalogos() {
 
 				//Seleccionar o deseleccionar los ingresos
 				catalogoIngresosChangeCheckbox.onchange = function () {
-					console.log('change');
 					const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
 					let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
 					if (catalogoIngresosChangeCheckbox.checked) {
-						console.log('click');
 						catalogoIngresosInputs.iCheck('check');
 						seleccionarTodosLosIngresos.html(
 							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
@@ -750,7 +744,6 @@ function listarCatalogos() {
 				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 				//Se activara el switch, si esta desactivado
 				$(catalogoIngresosInputs).on('ifChecked', () => {
-					console.log('click');
 					validacionCatalogoIngresos.hide();
 					if (listaCatalogoIngresosFalse()) {
 						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
@@ -1115,7 +1108,6 @@ $(document).on('click', 'td.details-control', function () {
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
 				detail = null;
-				console.log();
 				detail = new $('table tbody tr td #child-' + localStorage.getItem("idDatatableChild")).DataTable({
 					destroy: true,
 					"language": {
