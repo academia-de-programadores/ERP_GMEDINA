@@ -254,7 +254,6 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
 
     if (TOF) {
         mostrarCargandoCrear();
-
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/IngresosIndividuales/Create",

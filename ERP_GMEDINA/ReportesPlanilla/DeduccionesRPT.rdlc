@@ -52,6 +52,7 @@
                               <Value>Cod. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -86,6 +87,7 @@
                               <Value>Nombres</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -120,6 +122,7 @@
                               <Value>Apellidos</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -154,6 +157,7 @@
                               <Value>Descripcion Deduccion</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -188,6 +192,7 @@
                               <Value>Total a Deducir</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -222,6 +227,7 @@
                               <Value>Fecha Inicio</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -256,6 +262,7 @@
                               <Value>Fecha Fin</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -290,6 +297,7 @@
                               <Value>Fecha Pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -324,6 +332,7 @@
                               <Value>Codigo Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -358,6 +367,7 @@
                               <Value>Descripcion Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
