@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
+    <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2011,6 +2012,10 @@
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\Index.cshtml" />
     <Content Include="Views\EquipoEmpleados\_Create.cshtml" />
+    <Content Include="Views\HistorialPermisos\Create.cshtml" />
+    <Content Include="Views\HistorialPermisos\Delete.cshtml" />
+    <Content Include="Views\HistorialPermisos\Details.cshtml" />
+    <Content Include="Views\HistorialPermisos\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
