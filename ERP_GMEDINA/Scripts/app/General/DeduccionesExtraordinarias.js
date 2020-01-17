@@ -1,9 +1,27 @@
 ﻿//#region Declaracion de variables
 //Validaciones de Botones de las Pantallas
 const btnAgregar = $('#btnAgregar'),
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear'),
-equipoEmpId = $('#eqemp_Id');
+    //Div que aparecera cuando se le de click en crear
+    cargandoCrear = $('#cargandoCrear'),
+    equipoEmpId = $('#eqemp_Id'),
+    montoInicial = $('#dex_MontoInicial'),
+    montoRestante = $('#dex_MontoRestante'),
+    observaciones = $('#dex_ObservacionesComentarios'),
+    idDeduccion = $('#cde_Id'),
+    cuota = $('#dex_Cuota'),
+    asteriscoEquipoEmpleado = $('#asteriscoEquipoEmpleado'),
+    asteriscoMontoInicial = $('#asteriscoMontoInicial'),
+    asteriscoMontoRestante = $('#asteriscoMontoRestante'),
+    asteriscoObservaciones = $('#asteriscoObservaciones'),
+    asteriscoIdDeducciones = $('#asteriscoIdDeducciones'),
+    asteriscoCuota = $('#asteriscoCuota'),
+    validacionEquipoEmpleado = $('#validacionEquipoEmpleado'),
+    validacionMontoInicial = $('#validacionMontoInicial'),
+    validacionMontoRestante = $('#validacionMontoRestante'),
+    validacionObservaciones = $('#validacionObservaciones'),
+    validacionIdDeducciones = $('#validacionIdDeducciones'),
+    validacionCuota = $('#validacionCuota');
+    ;
 
 //#endregion
 
@@ -11,10 +29,10 @@ equipoEmpId = $('#eqemp_Id');
 //Obtención de Script para Formateo de Fechas
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-  })
-  .fail(function (jqxhr, settings, exception) {
-  });
+    .done(function (script, textStatus) {
+    })
+    .fail(function (jqxhr, settings, exception) {
+    });
 
 //#region Funciones
 
@@ -81,7 +99,7 @@ function cargarGridDeducciones() {
                     estadoRegistro,
                     botonDetalles + botonEditar + botonInactivar + botonActivar
                 ]);
-                }
+            }
             //APLICAR EL MAX WIDTH
             FullBody();
         });
@@ -123,6 +141,7 @@ $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarD
     $("#ActivarDeduccionesExtraordinarias").modal();
 });
 
+//Activar
 $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
     let ID = localStorage.getItem('id')
     $.ajax({
@@ -155,9 +174,91 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 
 });
 
-$(btnAgregar).click(function(){
-    console.log('click');
-})
+$(btnAgregar).click(function () {
+    console.clear();
+    if (validaciones(equipoEmpId,
+        montoInicial,
+        montoRestante,
+        observaciones,
+        idDeduccion,
+        cuota
+    )) {
+        console.log('Paso las validaciones')
+    } else {
+        console.log('No Paso las validaciones')
+    }
+});
+
+function validaciones(equipoEmpId,
+    montoInicial,
+    montoRestante,
+    observaciones,
+    idDeduccion,
+    cuota) {
+    var todoBien = true;
+    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+
+    //Equipo Empleado
+    if (equipoEmpId.val() != '') {
+        asteriscoEquipoEmpleado.removeClass('text-danger');
+        validacionEquipoEmpleado.hide();
+    } else {
+        asteriscoEquipoEmpleado.addClass('text-danger');
+        validacionEquipoEmpleado.show();
+        todoBien = false;
+    }
+
+    // Monto inicial
+    if (montoInicial.val() != '' && expreg.test(montoInicial.val())) {
+        asteriscoMontoInicial.removeClass('text-danger');
+        validacionMontoInicial.hide();
+    } else {
+        asteriscoMontoInicial.addClass('text-danger');
+        validacionMontoInicial.show();
+        todoBien = false;
+    }
+
+    // Monto Restante
+    if (montoRestante.val() != '' && expreg.test(montoRestante.val())) {
+        asteriscoMontoRestante.removeClass('text-danger');
+        validacionMontoRestante.hide();
+    } else {
+        asteriscoMontoRestante.addClass('text-danger');
+        validacionMontoRestante.show();
+        todoBien = false;
+    }
+
+    // Observaciones
+    if (observaciones.val() != '') {
+        validacionObservaciones.hide();
+        asteriscoObservaciones.removeClass('text-danger');
+    } else {
+        asteriscoObservaciones.addClass('text-danger');
+        validacionObservaciones.show();
+        todoBien = false;
+    }
+
+    // Id deduccion
+    if (idDeduccion.val() != '') {
+        asteriscoIdDeducciones.removeClass('text-danger');
+        validacionIdDeducciones.hide();
+    } else {
+        asteriscoIdDeducciones.addClass('text-danger');
+        validacionIdDeducciones.show();
+        todoBien = false;
+    }
+
+    // Cuota
+    if (cuota.val() != '') {
+        asteriscoCuota.removeClass('text-danger');
+        validacionCuota.hide();
+    } else {
+        asteriscoCuota.addClass('text-danger');
+        validacionCuota.show();
+        todoBien = false;
+    }
+    return todoBien;
+}
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
@@ -182,7 +283,7 @@ $("#btnInactivar").click(function () {
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar",
         method: "POST",
-        data: {id: ID}
+        data: { id: ID }
     }).done(function (data) {
         if (data == "Error") {
             //Cuando trae un error en el BackEnd al realizar la Inactivación
@@ -194,13 +295,13 @@ $("#btnInactivar").click(function () {
         else {
             // Actualizar el Index para ver los cambios
             $("#InactivarDeduccionesExtraordinarias").modal('hide');
-                cargarGridDeducciones();
-                //Mensaje de Éxito de la Inactivación
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se inactivó de forma exitosa!',
-                });
-            }
+            cargarGridDeducciones();
+            //Mensaje de Éxito de la Inactivación
+            iziToast.success({
+                title: 'Exito',
+                message: '¡El registro se inactivó de forma exitosa!',
+            });
+        }
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
