@@ -237,6 +237,7 @@ namespace ERP_GMEDINA.Controllers
             base.Dispose(disposing);
         }
 
+
         [HttpPost]
         public JsonResult hablilitar(int id)
         {
@@ -246,8 +247,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var list = db.UDP_RRHH_tbTipoPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbTipoPermisos_Restore_Result item in list)
+                    var list = db.UDP_RRHH_tbTipoMonedas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoMonedas_Restore_Result item in list)
                     {
                         result = item.MensajeError;
                     }
@@ -260,6 +261,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
     }
 }
 
