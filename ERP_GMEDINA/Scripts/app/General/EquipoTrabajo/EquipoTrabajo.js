@@ -52,7 +52,7 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                var Acciones = value.car_Estado == 1
+                var Acciones = value.eqtra_Estado == 1
                   ? null :
                   "<div>" +
                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
