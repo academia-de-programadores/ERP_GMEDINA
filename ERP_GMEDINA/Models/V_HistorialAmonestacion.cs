@@ -28,5 +28,6 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hamo_FechaCrea { get; set; }
         public Nullable<int> hamo_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hamo_FechaModifica { get; set; }
+        public int hamo_AmonestacionAnterior { get; set; }
     }
 }
