@@ -5912,17 +5912,17 @@ body.body-small .vote-icon {
  *    </div>
  *
  */
-.sk-spinner-wave.sk-spinner {
+ .sk-spinner-wave.sk-spinner {
   margin: 0 auto;
-  width: 50px;
-  height: 30px;
+  width: 100px;
+  height: 60px;
   text-align: center;
   font-size: 10px;
 }
 .sk-spinner-wave div {
   background-color: #1ab394;
   height: 100%;
-  width: 6px;
+  width: 12px;
   display: inline-block;
   -webkit-animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
   animation: sk-waveStretchDelay 1.2s infinite ease-in-out;

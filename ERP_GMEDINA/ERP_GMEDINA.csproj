@@ -1719,7 +1719,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutBase.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
-    <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
@@ -1860,6 +1859,7 @@
     <Content Include="Views\ReportesPlanilla\DecimoTercerParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\DecimoCuartoParametros.cshtml" />
     <Content Include="Views\ReportesPlanilla\InstitucionesFinancierasParametros.cshtml" />
+    <Content Include="Views\Shared\_RightSidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
