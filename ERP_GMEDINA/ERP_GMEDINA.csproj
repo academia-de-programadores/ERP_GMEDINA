@@ -192,7 +192,6 @@
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
-    <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
     <Compile Include="Controllers\FasesReclutamientoController.cs" />
@@ -200,7 +199,6 @@
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialAudienciaDescargosController.cs" />
-    <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
