@@ -17,6 +17,8 @@ namespace ERP_GMEDINA.Models
         public int titu_Id { get; set; }
 
         [Display(Name = "Titulos")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MaxLength(50, ErrorMessage = "Exedio el numero maximo de caracteres")]
         public string titu_Descripcion { get; set; }
 
         [Display(Name = "Estado")]
