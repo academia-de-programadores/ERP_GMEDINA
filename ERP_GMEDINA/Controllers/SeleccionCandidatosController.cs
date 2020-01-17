@@ -466,10 +466,20 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+                    var requisicionesddl = db.tbRequisiciones.Where(x => x.req_Estado)
+                        .Select(
+                        t => new
+                        {
+                            req_Id = t.req_Id,
+                            req_Descripcion = t.req_Descripcion,
+                            req_Vacantes = t.req_Vacantes,
+                            req_VacantesOcupadas = t.req_VacantesOcupadas,
+                            req_Estado = t.req_Estado
+                        }).ToList();
 
-                    Requisicion.AddRange(db.tbRequisiciones
-                    .Select(tabla => new { Id = tabla.req_Id , Descripcion = tabla.req_Descripcion, Estado = tabla.req_Estado, tabla.req_Vacantes })
-                    .Where(x => x.Estado).ToList());
+                    Requisicion.AddRange(requisicionesddl
+                    .Select(tabla => new { Id = tabla.req_Id, Descripcion = tabla.req_Descripcion, Estado = tabla.req_Estado, tabla.req_Vacantes, tabla.req_VacantesOcupadas })
+                    .Where(x => x.Estado).Where(x => Convert.ToInt32(x.req_Vacantes) > x.req_VacantesOcupadas).ToList());
                 }
                 catch
                 {

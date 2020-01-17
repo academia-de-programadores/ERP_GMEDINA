@@ -44,12 +44,10 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
 
 });
-
+//Promoción
 function btnAgregar() {
-    var modalnuevo = $("#ModalNuevo");
-    modalnuevo.modal('show');
+    $(location).attr('href', "/HistorialCargos/Promover");
 }
-
 $("#btnGuardar").click(function () {
     var data1 = $("#FormNuevo").serializeArray();
     data = serializar(data1);
@@ -75,3 +73,4 @@ $("#btnGuardar").click(function () {
     }
 
 });
+

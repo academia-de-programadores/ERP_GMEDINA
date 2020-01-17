@@ -8,24 +8,9 @@
 function llenarDropDownList() {
 
 
-    _ajax(null,
-       '/SeleccionCandidatos/llenarDropDowlistTipoMonedas',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-
-               Lista.forEach(function (value, index) {
-                   var x = document.getElementById("tmon_Id");
-                   var option = document.createElement("option");
-                   option.text = value.Descripcion;
-                   option.value = value.Id;
-                   x.add(option);
-               });
-           });
-       });
 
     _ajax(null,
-   '/SeleccionCandidatos/llenarDropDowlistRequisicion',
+   '/HistorialCargos/llenarDropDowlistRequisicion',
    'POST',
    function (result) {
        $.each(result, function (id, Lista) {
@@ -40,27 +25,22 @@ function llenarDropDownList() {
    });
 }
 
+
+
+
 $("#btnGuardar").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
-    debugger
+    
     try
     {
 
-    
-        var tbSeleccionCandidatos =
-    {
-        scan_Id: sessionStorage.getItem("scan_Id"),
-    };
-
     var tbEmpleados =
         {
-            per_id:     sessionStorage.getItem("per_Id"),
+            emp_Id:     document.getElementById("emp_Id").value,
             car_Id:     document.getElementById("car_Id").value,
             area_Id:    document.getElementById("area_Id").value,
             depto_Id:   document.getElementById("depto_Id").value,
             jor_Id:     document.getElementById("jor_Id").value,
-            cpla_IdPlanilla: document.getElementById("cpla_IdPlanilla").value,
-            fpa_IdFormaPago: document.getElementById("fpa_IdFormaPago").value,
             emp_CuentaBancaria: $("#emp_CuentaBancaria").val(),
             emp_Fechaingreso: $("#emp_Fechaingreso").val(),
         };
@@ -68,7 +48,6 @@ $("#btnGuardar").click(function () {
     var tbSueldos =
         {
             sue_Cantidad: $("#sue_Cantidad").val(),
-            tmon_Id: document.getElementById("tmon_Id").value,
         };
     var tbRequisiciones =
         {
@@ -81,22 +60,21 @@ $("#btnGuardar").click(function () {
 
     }
     if (tbEmpleados.car_Id != null && tbEmpleados.area_Id != null && tbEmpleados.depto_Id != null && tbEmpleados.jor_Id != null &&
-        tbEmpleados.cpla_IdPlanilla != null && tbEmpleados.fpa_IdFormaPago != null && tbEmpleados.emp_Fechaingreso != "" &&
-        tbEmpleados.emp_CuentaBancaria != "" && tbSueldos.tmon_Id != null && tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
+        tbEmpleados.area_Id != "" && tbEmpleados.emp_Fechaingreso != "" &&
+        tbSueldos.sue_Cantidad != "" && tbSueldos.sue_Cantidad >= 0 && tbRequisiciones.req_Id != null) {
         data = JSON.stringify({
-            tbSeleccionCandidatos: tbSeleccionCandidatos,
             tbEmpleados: tbEmpleados,
             tbSueldos: tbSueldos,
             tbRequisiciones: tbRequisiciones
         });
         _ajax(data,
-            '/SeleccionCandidatos/Contratar',
+            '/HistorialCargos/PromoverGuardar',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     MsgSuccess("¡Exito!", "Se ah contratado el candidato");
                     sessionStorage.clear();
-                    $(location).attr('href', "/SeleccionCandidatos/Index");
+                    $(location).attr('href', "/HistorialCargos/Index");
 
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
