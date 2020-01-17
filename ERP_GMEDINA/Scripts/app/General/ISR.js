@@ -300,17 +300,17 @@ $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
             if (data) {
                 var FechaCrea = FechaFormato(data[0].isr_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].isr_FechaModifica);
-                $("#Detalles #isr_Id").val(data[0].isr_Id);
-                $("#Detalles #isr_RangoInicial").val(data[0].isr_RangoInicial);
-                $("#Detalles #isr_RangoFinal").val(data[0].isr_RangoFinal);
-                $("#Detalles #isr_Porcentaje").val(data[0].isr_Porcentaje);
-                $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
-                $("#Detalles #isr_UsuarioCrea").val(data[0].isr_UsuarioCrea);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
-                $("#Detalles #isr_FechaCrea").val(FechaCrea);
-                $("#Detalles #isr_UsuarioModifica").val(data.isr_UsuarioModifica);
-                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
-                $("#Detalles #isr_FechaModifica").val(FechaModifica);
+                $("#Detalles #isr_Id").html(data[0].isr_Id);
+                $("#Detalles #isr_RangoInicial").html(data[0].isr_RangoInicial);
+                $("#Detalles #isr_RangoFinal").html(data[0].isr_RangoFinal);
+                $("#Detalles #isr_Porcentaje").html(data[0].isr_Porcentaje);
+                $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
+                $("#Detalles #isr_UsuarioCrea").html(data[0].isr_UsuarioCrea);
+                $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+                $("#FechaCrea").html(FechaCrea);
+                $("#isr_UsuarioModifica").html(data.isr_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+                $("#Detalles #isr_FechaModifica").html(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
                 var SelectedId = data[0].tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
@@ -322,13 +322,7 @@ $(document).on("click", "#tblISR tbody tr td #btnDetalleISR", function () {
                     data: JSON.stringify({ ID })
                 })
                     .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #tde_IdTipoDedu").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
+                        $("#Detalles #tde_IdTipoDedu").html(data[0].tde_IdTipoDedu);
                     });
                 $("#DetailsISR").modal();
             }
