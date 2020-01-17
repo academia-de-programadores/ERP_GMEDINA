@@ -50,6 +50,15 @@ namespace ERP_GMEDINA
            "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
 
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/Admin").Include(
+          "~/Scripts/app/General/HistorialIncapacidades/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades").Include(
+            "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
+
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
@@ -591,6 +600,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                         "~/Scripts/app/general/Areas/EditArea.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
          "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
 
