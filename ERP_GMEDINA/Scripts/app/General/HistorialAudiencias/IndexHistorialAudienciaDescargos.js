@@ -109,12 +109,12 @@ function Llamarmodaldetalle(ID) {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#aude_Descripcion")["0"].innerText = obj.aude_Descripcion;
                 $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0,10);
-                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo;
+                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo?'Si':'No';
                 $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
+                //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
                 $('#ModalDetalles').modal('show');
 
