@@ -1266,6 +1266,7 @@
     <Content Include="Scripts\app\General\Liquidacion.js" />
     <Content Include="Scripts\app\General\LiquidacionesRPT.js" />
     <Content Include="Scripts\app\General\Periodos.js" />
+    <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\Scripts_Base\Planilla.js" />
     <Content Include="Scripts\app\General\Preaviso.js" />
     <Content Include="Scripts\app\General\RAPRPT.js" />
