@@ -1,13 +1,20 @@
-﻿//
+﻿//#region Declaracion de variables
+//Validaciones de Botones de las Pantallas
+const btnAgregar = $('#btnAgregar'),
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+//#endregion
+
+//
 //Obtención de Script para Formateo de Fechas
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
   });
+
+//#region Funciones
 
 //Funció Genérica para utilizar Ajax
 function _ajax(params, uri, type, callback) {
@@ -78,8 +85,6 @@ function cargarGridDeducciones() {
         });
 }
 
-
-
 //Mostrar el spinner
 function spinner() {
     return `<div class="sk-spinner sk-spinner-wave">
@@ -91,6 +96,19 @@ function spinner() {
  </div>`;
 }
 
+function mostrarCargandoCrear() {
+    btnAgregar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnAgregar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+//#endregion
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
@@ -98,18 +116,13 @@ $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarD
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('iddeduccionesextra');
-
-    console.log(ID)
-
     localStorage.setItem('id', ID);
     //Mostrar el Modal
     $("#ActivarDeduccionesExtraordinarias").modal();
 });
 
 $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
-
     let ID = localStorage.getItem('id')
-    console.log(ID)
     $.ajax({
         url: "/DeduccionesExtraordinarias/Activar",
         method: "POST",
@@ -140,62 +153,9 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 $(btnAgregar).click(function(){
     console.log('click');
 })
-
-
-//Validaciones de Botones de las Pantallas
-const btnAgregar = $('#btnAgregar')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-function mostrarCargandoCrear() {
-    btnAgregar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnAgregar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-
-/*$("#btnAgregar").click(function () {
-    //Validación para Agregar
-    var Vali1 = $("#val1").css("display", "");
-    var Vali2 = $("#val2").css("display", "");
-    var Vali3 = $("#val3").css("display", "");
-    var Vali4 = $("#val4").css("display", "");
-    var Vali5 = $("#val5").css("display", "");
-    var Vali6 = $("#val6").css("display", "");
-
-    var Valid1 = $("#val1").css("display", "none");
-    var Valid2 = $("#val2").css("display", "none");
-    var Valid3 = $("#val3").css("display", "none");
-    var Valid4 = $("#val4").css("display", "none");
-    var Valid5 = $("#val5").css("display", "none");
-    var Valid6 = $("#val6").css("display", "none");
-
-    debugger;
-
-    if (Vali1 != Valid1 || Vali2 != Valid2 || Vali3 != Valid3 || Vali4 != Valid4 || Vali5 != Valid5 || Vali6 != Valid6) {
-        mostrarCargandoCrear();
-        ocultarCargandoCrear();
-    }
-    else {
-        mostrarCargandoCrear();
-    }
-        
-});*/
-
-
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
@@ -216,8 +176,6 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
     let ID = localStorage.getItem('id')
-    console.log(ID)
-
     //Se envia el Formato Json al Controlador para realizar la Inactivación
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar",
@@ -250,10 +208,6 @@ $("#btnInactivar").click(function () {
 
 
 });
-
-
-
-
 
 //Ocultar Modal de Create
 $("#btnCerrarCreate").click(function () {
