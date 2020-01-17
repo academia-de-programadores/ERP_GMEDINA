@@ -29,6 +29,10 @@
             "TipoSalidas",
             "HistorialSalidas"
     ];
+    var Equipo_Trabajo = [
+        "EquipoTrabajo",
+        "EquipoEmpleado"
+    ]
     var Permisos= [
             "TipoPermisos",
             "HistorialPermisos"
