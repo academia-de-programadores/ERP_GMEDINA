@@ -243,14 +243,8 @@ namespace ERP_GMEDINA.Controllers
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Inactivar(int dex_IdDeduccionesExtra)
+		public ActionResult Inactivar(int id)
 		{
-
-			//Para llenar los campos de auditoria
-			//tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
-			//tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
-
 			//Variable para enviarla al lado del Cliente
 			string Response = String.Empty;
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -261,7 +255,7 @@ namespace ERP_GMEDINA.Controllers
 				{
 
 					//Ejecutar Procedimiento Almacenado
-					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(dex_IdDeduccionesExtra,
+					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(id,
 																										 1,
 																										 DateTime.Now);
 
