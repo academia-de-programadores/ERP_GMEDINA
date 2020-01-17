@@ -78,50 +78,9 @@
                                     @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger", @id = "val6" })
                                 </div>
                             </div>
-                            <script>
-
-                                $("#btnAgregar").click(function () {
-                                    var TOF = true;
-                                    debugger;
-                                    var cde_Id = $("#cde_Id").val();
-                                    var eqemp_Id = $("#eqem_Id").val();
-
-                                    $("#btnAgregar").css("display", "none");
-                                    if (eqemp_Id == 0 || eqemp_Id == "0" || eqemp_Id == "") {
-                                        $("#val1").css("display", "");
-                                        $("#ast1").css("color", "red");
-                                        TOF = false;
-                                    }
-                                    else {
-                                        $("#val1").css("display", "none");
-                                        $("#ast1").css("color", "black");
-                                    }
-                                    //--
-                                    if (cde_Id == 0 || cde_Id == "0" || cde_Id == "") {
-                                        $("#val5").css("display", "");
-                                        $("#ast5").css("color", "red");
-                                        TOF = false;
-                                    }
-                                    else {
-                                        $("#val5").css("display", "none");
-                                        $("#ast5").css("color", "black");
-                                    }
-                                    //--
-                                    if (TOF) {
-                                        $("#btnAgregar").css("display", "none");
-                                    }
-                                    else {
-                                        $("#btnAgregar").css("display", "");
-                                        $("#frmCreate").submit(function (e) {
-                                            return false;
-                                        });
-                                    }
-                                });
-
-                            </script>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" id="btnAgregar" value="Guardar" class="btn btn-primary" style="display:block" />
+                                    <input type="button" id="btnAgregar" value="Guardar" class="btn btn-primary" style="display:block" />
                                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                                 </div>
                             </div>
