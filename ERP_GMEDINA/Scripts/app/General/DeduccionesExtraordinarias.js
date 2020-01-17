@@ -95,7 +95,7 @@ $(document).on("click", "btnAgregarDeduccionExtraordinaria", function () {
     //DDL Equipo Empleado
     $.ajax({
         url: "/DeduccionesExtraordinarias/DDLEquipoEmpleado",
-        method: "GET",
+        method: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
@@ -109,7 +109,7 @@ $(document).on("click", "btnAgregarDeduccionExtraordinaria", function () {
     //DDL Deducciones
     $.ajax({
         url: "/DeduccionesExtraordinarias/DDLDeducciones",
-        method: "GET",
+        method: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
@@ -145,7 +145,6 @@ function ocultarCargandoCrear() {
 
 $("#btnAgregar").click(function () {
     //Validación para Agregar
-
 
 });
 

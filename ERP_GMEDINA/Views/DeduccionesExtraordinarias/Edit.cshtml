@@ -21,7 +21,7 @@
                     @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.eqem_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.eqem_Id, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste1"></span>
                         <div class="col-md-6">
                             @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.eqem_Id, "", new { @class = "text-danger" })
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste2"></span>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger" })
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste3"></span>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger" })
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_ObservacionesComentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.dex_ObservacionesComentarios, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste4"></span>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_ObservacionesComentarios, "", new { @class = "text-danger" })
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.cde_IdDeducciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.cde_IdDeducciones, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste5"></span>
                         <div class="col-md-6">
                             @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })<span id="aste6"></span>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger" })
@@ -78,11 +78,6 @@
                     </div>
                 </div>
             </div>
-        }
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeduccionesExtraordinariasInactivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
         }
     </div>
 </div>
