@@ -104,7 +104,6 @@
 												<tbody></tbody>
 											</table>
 										</div>
-										<br />
 										<div class="form-horizontal col-xs-offset-1">
 											<div class="form-group">
 												<input type="checkbox" class="i-checks-no-aplica" id="noAplica" checked="@false" /> No Aplica
@@ -114,7 +113,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-md-offset-2 col-md-10">
+								<div class="col-md-offset-4 col-md-10">
 									<input type="button" id="btnEditarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
 									@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
 									<button type="button" class="btn btn-danger" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="inactivar">Inactivar</button>
