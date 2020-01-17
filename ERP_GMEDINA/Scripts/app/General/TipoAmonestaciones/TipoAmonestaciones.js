@@ -58,7 +58,7 @@ function llenarTabla() {
                     tabla.row.add({
                         ID: value.tamo_Id,
                         "Número": value.tamo_Id,
-                        Estado: value.tamo_Estado,
+                        Estado: value.tamo_Estado ?"Activo":"Inactivo",
                         Descripcion: value.tamo_Descripcion,
                         Acciones:Acciones
                     })
