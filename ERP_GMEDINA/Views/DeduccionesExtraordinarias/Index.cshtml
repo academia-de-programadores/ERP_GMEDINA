@@ -110,7 +110,7 @@
             </div>
             <div class="modal-footer">
                 @*data-dismiss="modal"*@
-                <button type="button" class="btn btn-danger" id="btnInactivar">Si</button>
+                <button type="button" class="btn btn-danger" style="margin:3px" id="btnInactivar">Si</button>
                 <button type="button" class="btn btn-default" id="btnCerrarInactivar">No</button>
             </div>
         </div>
@@ -127,10 +127,9 @@
             <div class="modal-body" id="Activar">
                 ¿Esta seguro que desea Activar este registro?
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary pull-right" id="btnActivarRegistroDeduccionesExtraordinarias">Si</button>
-                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+                <div class="modal-footer"><button type="button" class="btn btn-primary" style="margin:3px" id="btnActivarRegistroDeduccionesExtraordinarias">Si</button>
+                    <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

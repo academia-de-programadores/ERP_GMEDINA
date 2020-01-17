@@ -128,7 +128,7 @@
                 ¿Esta seguro que desea Editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
+                <button type="button" class="btn btn-white" style="margin:3px" id="btnRegresar">No</button>
                 <input type="button" id="btnEditIngresoIndividual2" value="Si" class="btn btn-primary " />
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div>
@@ -158,15 +158,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Eliminar este registro?
+                ¿Esta seguro que desea Inactivar este registro?
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-right" style="margin:3px" id="btnInactivarRegistroIngresoIndividual">Si</button>
+                <div style="display:none" class="btn" id="cargandoInhabilitar"></div>
                 <button type="button" class="btn btn-white pull-right" id="btnBack">No</button>
-                <button type="button" class="btn btn-danger pull-right" id="btnInactivarRegistroIngresoIndividual">Si</button>
-                <div style="display:none" class="btn pull-right" id="cargandoInhabilitar"></div>
             </div>
         </div>
     </div>
@@ -183,9 +183,9 @@
                 ¿Esta seguro que desea Activar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary pull-right" id="btnActivarRegistroIngresoIndividual">Si</button>
-                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+                <button type="button" class="btn btn-primary" style="margin:3px" id="btnActivarRegistroIngresoIndividual">Si</button>
+                <div style="display:none" class="btn" id="cargandoActivar"></div>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

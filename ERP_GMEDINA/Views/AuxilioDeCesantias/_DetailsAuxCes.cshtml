@@ -1,19 +1,8 @@
 ﻿@model ERP_GMEDINA.Models.tbAuxilioDeCesantias
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetallesAuxCess" }))
 {
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-6">
-                <label class="control-label">Descripción</label>
-            </div>
-            @*<div class="col-md-6">
-                <label class="control-label">Valor</label>
-            </div>*@
-        </div>
-    </div>
-        <hr class="col-md-11" style="margin:0px 15px 0px 0px;" />
         <div class="ibox-content" style="border-color:#fff;">
-            
+
                 <div class="form-horizontal">
                     <div class="row">
                         <div class="col-md-6">
@@ -24,14 +13,15 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.LabelFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })
-                        </div>
-                        <div class="col-md-6">
-                            <span id="aces_RangoInicioMeses">@Html.DisplayFor(model => model.aces_RangoInicioMeses, new { htmlAttributes = new { @class = "text-box single-line" } })</span>
-                        </div>
-                    </div>
+			<div class="form-horizontal">
+				<div class="row">
+					<div class="col-md-6">
+						@Html.LabelFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+					</div>
+					<div class="col-md-6">
+						<span id="aces_IdAuxilioCesantia">@Html.DisplayFor(model => model.aces_IdAuxilioCesantia, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+					</div>
+				</div>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -52,7 +42,9 @@
                 </div>
             </div>
             <div class="ibox float-e-margins">
-                <h4 class="modal-title">Detalles</h4>
+                <div class="ibox-title">
+                    <h4>Auditoría</h4>
+                </div>
                 <div class="ibox-content">
                     <div class="form-horizontal">
                         <table class="table table-striped table-bordered dataTable">
@@ -82,4 +74,3 @@
                 </div>
             </div>
             }
-

@@ -75,7 +75,7 @@ function DataAnnotations(ToF) {
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "none");
         $("#Editar #RangoInicio_Validation_descripcion").removeClass("text-danger");
         $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
-        $("#Editar #RangoFin_Validation_descripcion").removeClass("text-danger");
+        //$("#Editar #RangoFin_Validation_descripcion").removeClass("text-danger");
         $("#Editar #Dias_descripcion").css("display", "none");
         $("#Editar #Dias_descripcion").removeClass("text-danger");
     }
@@ -84,7 +84,7 @@ function DataAnnotations(ToF) {
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
         $("#Editar #RangoInicio_Validation_descripcion").addClass("text-danger");
         $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
-        $("#Editar #RangoFin_Validation_descripcion").addClass("text-danger");
+        //$("#Editar #RangoFin_Validation_descripcion").addClass("text-danger");
         $("#Editar #Dias_descripcion").css("display", "block");
         $("#Editar #Dias_descripcion").addClass("text-danger");
     }
@@ -110,10 +110,10 @@ function ValidarForm() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarPreaviso", function () {
+    //OCULTAR VALIDACION
+    $("#Crear #RangoFinCrear").css("display", "none");
+    $("#Crear #AsteriscoFin").removeClass("text-danger");
     //MOSTRAR EL MODAL DE AGREGAR
-
-
-
     $("#Crear #prea_RangoInicioMeses").val('');
     $("#Crear #prea_RangoFinMeses").val('');
     $("#Crear #prea_DiasPreaviso").val('');
@@ -131,7 +131,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     var Dias = $("#Crear #prea_DiasPreaviso").val();
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
-    if (Inicio != "0" && Fin != "0" && Inicio != "" && Fin != "" && Dias != "") {
+    if (Inicio >= 0 && Fin > Inicio && Inicio != "" && Fin != "" && Dias != "") {
         var data = $("#frmCreatePreaviso").serializeArray();
         $("#Crear #AsteriscoInicio").removeClass("text-danger");
         $("#Crear #AsteriscoFin").removeClass("text-danger");
@@ -161,7 +161,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         });
     }
     else {
-        if (Inicio == "" || Inicio == "0" || Inicio == "0.00" || Inicio <= "0" || Inicio >= "12") {
+        if (Inicio == "" || Inicio < 0 || Inicio >= 36) {
             $("#Crear #Validation_descripcion").css("display", "block");
             $("#Crear #AsteriscoInicio").addClass("text-danger");
         }
@@ -169,15 +169,28 @@ $('#btnCrearPreavisoConfirmar').click(function () {
             $("#Crear #Validation_descripcion").css("display", "none");
             $("#Crear #AsteriscoInicio").removeClass("text-danger");
         }
-        if (Fin == "" || Fin == "0" || Fin == "0.00" || Fin <= "0" || Fin >= "0 ") {
+        //
+       
+        if (Fin == "" || Fin <= 0) {
             $("#Crear #Validation_descripcion1").css("display", "block");
             $("#Crear #AsteriscoFin").addClass("text-danger");
+            console.log("Entra");
         }
         else {
             $("#Crear #Validation_descripcion1").css("display", "none");
             $("#Crear #AsteriscoFin").removeClass("text-danger");
+            if (Fin < Inicio) {
+                $("#Crear #RangoFinCrear").css("display", "block");
+                $("#Crear #AsteriscoFin").addClass("text-danger");
+            }
+            else {
+                $("#Crear #RangoFinCrear").css("display", "none");
+                $("#Crear #AsteriscoFin").removeClass("text-danger");
+            }
         }
-        if (Dias == "" || Dias <= "0") {
+        //
+       
+        if (Dias == "" || Dias < "0") {
             $("#Crear #Validation_descripcion2").css("display", "block");
             $("#Crear #AsteriscoDias").addClass("text-danger");
         }
@@ -230,8 +243,8 @@ $("#btnUpdatePreaviso").click(function () {
     var prea_RangoInicioMeses = $("#Editar #prea_RangoInicioMeses").val();
     var prea_RangoFinMeses = $("#Editar #prea_RangoFinMeses").val();
     var prea_DiasPreaviso = $("#Editar #prea_DiasPreaviso").val();
-    
-    if (prea_RangoInicioMeses == "0" || prea_RangoInicioMeses == "" || prea_RangoInicioMeses <= 1 || prea_RangoInicioMeses >= 12) {
+    debugger;
+    if ( prea_RangoInicioMeses == "" || prea_RangoInicioMeses >= 36) {
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
         $("#Editar #AsteriscoInicio").addClass("text-danger");
         Error = false;
@@ -240,8 +253,8 @@ $("#btnUpdatePreaviso").click(function () {
         $("#Editar  #RangoInicio_Validation_descripcion").css("display", "none");
         $("#Editar #AsteriscoInicio").removeClass("text-danger");
     }
-
-    if (prea_RangoFinMeses == "0" || prea_RangoFinMeses == "" || prea_RangoFinMeses <= 1 || prea_RangoFinMeses >= 12) {
+    debugger;
+    if (prea_RangoFinMeses == "0" || prea_RangoFinMeses == ""|| prea_RangoFinMeses >= 36) {
             $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
         $("#Editar #AsteriscoFin").addClass("text-danger");
         Error = false;
@@ -249,9 +262,22 @@ $("#btnUpdatePreaviso").click(function () {
         else {
             $("#Editar #RangoFin_Validation_descripcion").css("display", "none");
             $("#Editar #AsteriscoFin").removeClass("text-danger");
-        }
 
-       if (prea_DiasPreaviso == "") {
+            if (prea_RangoFinMeses < prea_RangoInicioMeses) {
+               
+                $("#Editar #RangoFinEditar").css("display", "block");
+                $("#Editar #AsteriscoFin").addClass("text-danger");
+                Error = false;
+
+            }
+            else {
+                $("#Editar #RangoFinEditar").css("display", "none");
+                $("#Editar #AsteriscoFin").removeClass("text-danger");
+            }
+    }
+    
+
+       if (prea_DiasPreaviso == "" || prea_DiasPreaviso < 0) {
            $("#Editar #Dias_Validation_descripcion").css("display", "block");
         $("#Editar #AsteriscoDias").addClass("text-danger");
         Error = false;

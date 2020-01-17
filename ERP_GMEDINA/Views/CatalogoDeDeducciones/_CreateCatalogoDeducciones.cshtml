@@ -5,12 +5,12 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-md-6">
-                    Descripción
+                    Descripción<label class="" id="AsteriscoDescripcionDedu" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @id = "cde_DescripcionDeduccionA", @Value = "" } })
                     @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id = "Validation_descipcionA" })
                 </div>
                 <div class="col-md-6">
-                    Tipo de Deducción
+                    Tipo de Deducción<label class="" id="AsteriscoTipoDedu" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
                     <label class="text-danger" id="Validation_descipcion2A" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">No puede dejar campos vacios.</label>
                 </div>
@@ -18,13 +18,13 @@
 
             <div class="form-group">
                 <div class="col-md-6">
-                    Porcentaje Colaborador
+                    Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaborador" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeColaboradorA", @Value = "" } })
                     @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion3A" })
                 </div>
 
                 <div class="col-md-6">
-                    Porcentaje Empresa
+                    Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresa" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @id = "cde_PorcentajeEmpresaA", @Value = "" } })
                     @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion4A" })
                 </div>
