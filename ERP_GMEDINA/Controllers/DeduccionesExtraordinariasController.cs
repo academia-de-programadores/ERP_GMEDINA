@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -119,7 +120,6 @@ namespace ERP_GMEDINA.Controllers
 			}
 			else
 			{
-
 				//Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
 				Response = "Error";
 			}

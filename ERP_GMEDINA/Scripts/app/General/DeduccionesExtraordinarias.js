@@ -249,6 +249,10 @@ $("#btnInactivar").click(function () {
 
 });
 
+
+
+
+
 //Ocultar Modal de Create
 $("#btnCerrarCreate").click(function () {
     $("#AgregarDeduccionesExtraordinarias").modal('hide');
