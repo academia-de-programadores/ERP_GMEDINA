@@ -33,13 +33,18 @@
         var fecha1 = $("#hinc_FechaInicio").val();
         var fecha2 = $("#hinc_FechaFin").val();
 
-
-        if (Date.parse(fecha1) <= Date.parse(fecha2)) {
-            return true;
-        } else {
-            MsgError("Error", "La fecha Fin debe ser mayor ");
-            return false;
+        if (Date.parse(fecha1) > Date.parse(fecha2)) {
+            MsgError("Error", "La Fecha Fin debe ser mayor ");
         }
+       else if (Date.parse(fecha1) == Date.parse(fecha2)) {
+            MsgError("Error", "La Fecha Inicio y la Fecha Fin no pueden ser iguales ");
+        }
+        
+        else {
+
+            return true;
+        }
+
     }
 
 
