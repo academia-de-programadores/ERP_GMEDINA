@@ -12,31 +12,44 @@ namespace ERP_GMEDINA.Controllers
 {				
 	public class EquipoTrabajoController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: /EquipoTrabajo/
         public ActionResult Index()        
-		{           
-		    List<tbEquipoTrabajo> tbEquipoTrabajo = new List<Models.tbEquipoTrabajo> { };
+		{
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            var tbEquipoTrabajo = new List<tbEquipoTrabajo> { };
             return View(tbEquipoTrabajo);
         }
 		[HttpPost]
         public JsonResult llenarTabla()
         {
-			List<tbEquipoTrabajo> tbEquipoTrabajo = new List<Models.tbEquipoTrabajo> { };
-            var lista = db.tbEquipoTrabajo.Where(x => x.eqtra_Estado).ToList();
-            foreach (tbEquipoTrabajo x in db.tbEquipoTrabajo.ToList().Where(x=>x.eqtra_Estado))
+            try
             {
-                tbEquipoTrabajo.Add( new tbEquipoTrabajo
-                {
-					eqtra_Id = x.eqtra_Id,
+                db = new ERP_GMEDINAEntities();
+                //Aqui codigo llenarTabla
+                var tbEquipoTrabajo = db.tbEquipoTrabajo
+                    .Select(
+                        x =>
+                        new
+                        {
+                            Número = x.eqtra_Id,
+                    eqtra_Id = x.eqtra_Id,
 					eqtra_Codigo = x.eqtra_Codigo,
 					eqtra_Descripcion = x.eqtra_Descripcion,
-					eqtra_Observacion = x.eqtra_Observacion
-				});
+					eqtra_Observacion = x.eqtra_Observacion,
+                            eqtra_Estado = x.eqtra_Estado
+                        }
+                        )
+                        .ToList();
+                return Json(tbEquipoTrabajo, JsonRequestBehavior.AllowGet);
+
+                //aqui termina llenarTabla
             }
-            return Json(tbEquipoTrabajo, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
         }
         // POST: /EquipoTrabajo/Create
         [HttpPost]
@@ -48,6 +61,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbEquipoTrabajo_Insert(tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoTrabajo_Insert_Result item in list)
                     {
@@ -77,6 +91,7 @@ namespace ERP_GMEDINA.Controllers
             tbEquipoTrabajo tbEquipoTrabajo = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbEquipoTrabajo = db.tbEquipoTrabajo.Find(id);
                 if (tbEquipoTrabajo == null || !tbEquipoTrabajo.eqtra_Estado)
                 {
@@ -117,6 +132,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbEquipoTrabajo_Update(id, tbEquipoTrabajo.eqtra_Codigo, tbEquipoTrabajo.eqtra_Descripcion, tbEquipoTrabajo.eqtra_Observacion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoTrabajo_Update_Result item in list)
                     {
@@ -147,6 +163,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbEquipoTrabajo_Inactivar(id, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoTrabajo_Inactivar_Result item in list)
                     {
@@ -166,6 +183,30 @@ namespace ERP_GMEDINA.Controllers
             }            
             return Json(msj.Substring(0, 2),JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbEquipoTrabajo_Restore1(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbEquipoTrabajo_Restore1_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor!=null)
@@ -179,7 +220,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db!=null)
             {
                 db.Dispose();
             }

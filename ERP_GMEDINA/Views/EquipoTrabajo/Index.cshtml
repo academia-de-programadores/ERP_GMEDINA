@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbEquipoTrabajo>
+﻿@model ERP_GMEDINA.Models.tbEquipoTrabajo
 
 @{
     ViewBag.Title = "Equipo Trabajo ";
@@ -46,4 +46,8 @@
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/EquipoTrabajo")
+@if (Model.eqtra_Estado)
+    {
+    @Scripts.Render("~/Scripts/app/general/EquipoTrabajo/Admin")
+    }
 }

@@ -49,6 +49,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/Admin").Include(
            "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
 
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/Admin").Include(
+          "~/Scripts/app/General/HistorialIncapacidades/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades").Include(
+            "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
+
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
@@ -590,6 +600,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                         "~/Scripts/app/general/Areas/EditArea.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
          "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
 
@@ -701,6 +712,10 @@ namespace ERP_GMEDINA
                "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
 
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAudienciaDescargos/Admin").Include(
+          "~/Scripts/app/General/HistorialAudiencias/Admin.js"));
+
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
                 "~/Scripts/app/General/Personas/CreatePersonas.js"));
             //Inputmask
@@ -726,7 +741,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
-            // SCRIPT Hsal 
+            // SCRIPT Hsal
             bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialSalidas/Admin").Include(
             "~/Scripts/app/general/HistorialSalidas/Admin.js"));
 
@@ -773,6 +788,14 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
             "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+             "~/Scripts/app/General/Competencias/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+             "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
+     "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

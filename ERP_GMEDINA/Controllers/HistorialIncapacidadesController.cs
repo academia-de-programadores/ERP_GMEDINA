@@ -12,23 +12,37 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialIncapacidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialIncapacidades
         public ActionResult Index()
         {
-            
-       ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+                bool Admin = (bool)Session["Admin"];
+                tbHistorialIncapacidades tbHistorialIncapacidades = new tbHistorialIncapacidades { hinc_Estado = true };
+                return View(tbHistorialIncapacidades);
+            }
+            catch
+            {
+                return View();
+            }
+           
 
-        var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
-            return View(tbHistorialIncapacidades.ToList());
-          
+            //bool Admin = (bool)Session["Admin"];
+            //tbHistorialIncapacidades tbHistorialIncapacidades = new tbHistorialIncapacidades { hinc_Estado = true };
+            //return View(tbHistorialIncapacidades);
+
+
         }
 
 
-       
+
         public ActionResult Create()
         {
+            db = new ERP_GMEDINAEntities();
             ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
@@ -49,11 +63,12 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    //var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_Dias, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, 1, DateTime.Now);
-                    //foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
-                    //{
-                    //    msj = item.MensajeError + " ";
-                    //}
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id, tbHistorialIncapacidades.ticn_Id, tbHistorialIncapacidades.hinc_CentroMedico, tbHistorialIncapacidades.hinc_Doctor, tbHistorialIncapacidades.hinc_Diagnostico, tbHistorialIncapacidades.hinc_FechaInicio, tbHistorialIncapacidades.hinc_FechaFin, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -73,6 +88,7 @@ namespace ERP_GMEDINA.Controllers
         {
             try
             {
+                db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var Empleados = db.V_EmpleadoIncapacidades.Where(t => t.emp_Estado == true)
@@ -102,27 +118,20 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialIncapacidades> lista = new List<V_HistorialIncapacidades> { };
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                try
+                db = new ERP_GMEDINAEntities();
+                using (db = new ERP_GMEDINAEntities())
                 {
-                    lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id & x.hinc_Estado == true).ToList();
-
+                    lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id).ToList();
                 }
-                catch
-                {
-
-                }
-               
             }
-           
+            catch
+            {
+
+            }
                 return Json(lista, JsonRequestBehavior.AllowGet);
         }
-
-
-       
-
-       
         // GET: HistorialIncapacidades/Details/5
         public ActionResult Details(int? id)
         {
@@ -182,6 +191,7 @@ namespace ERP_GMEDINA.Controllers
 
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     tbEmpleados1 = db.tbEmpleados.Find(id);
                     if (tbEmpleados1 == null || !tbEmpleados1.emp_Estado)
                     {
@@ -269,6 +279,7 @@ namespace ERP_GMEDINA.Controllers
             tbHistorialIncapacidades tbHistIncapacidades = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbHistIncapacidades = db.tbHistorialIncapacidades.Find(ID);
                 if (tbHistIncapacidades == null || !tbHistIncapacidades.hinc_Estado)
                 {
@@ -290,7 +301,8 @@ namespace ERP_GMEDINA.Controllers
                 hinc_FechaInicio = tbHistIncapacidades.hinc_FechaInicio,
                 hinc_FechaFin = tbHistIncapacidades.hinc_FechaFin,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistIncapacidades.tbUsuario).usu_NombreUsuario },
-                hinc_FechaCrea = tbHistIncapacidades.hinc_FechaCrea
+                hinc_FechaCrea = tbHistIncapacidades.hinc_FechaCrea,
+                
             };
 
             return Json(Incapacidades, JsonRequestBehavior.AllowGet);
@@ -353,14 +365,13 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
             string msj = "";
-            string RazonInactivo = "Se ha Inhabilitado este Registro";
-
-            if (tbHistorialIncapacidades.hinc_Id != 0 )
+            if (tbHistorialIncapacidades.hinc_Id != 0 && tbHistorialIncapacidades.hinc_RazonInactivo != "")
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, RazonInactivo, 1, DateTime.Now);
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id,"Predeterminado", 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -390,9 +401,40 @@ namespace ERP_GMEDINA.Controllers
         //    return RedirectToAction("Index");
         //}
 
+
+
+
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialIncapacidades tbHistorialIncapacidades)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Restore(tbHistorialIncapacidades.hinc_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialIncapacidades_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

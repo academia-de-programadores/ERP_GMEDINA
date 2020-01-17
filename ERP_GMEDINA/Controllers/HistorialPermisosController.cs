@@ -23,7 +23,7 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult llenarTabla()
         {
-            //string estado = 
+            //string estado =
             try
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -56,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
                           )
                           .ToList();
                     return Json(V_tbHistorialPermisos_completa, JsonRequestBehavior.AllowGet);
-                
+
             }
             catch (Exception ex)
             {
@@ -361,7 +361,7 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
- 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && db != null)

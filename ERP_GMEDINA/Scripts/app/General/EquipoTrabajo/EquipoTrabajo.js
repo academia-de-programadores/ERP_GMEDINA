@@ -1,4 +1,6 @@
 ﻿var ID = 0;
+var fill = 0;
+
 //Funciones GET
 function tablaEditar(id) {
     //var tr = $(btn).closest("tr");
@@ -50,11 +52,19 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
+                var Acciones = value.car_Estado == 1
+                  ? null :
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                  "</div>";
                 tabla.row.add({
+                    Número:value.Número,    
                     ID: value.eqtra_Id,
                     Codigo: value.eqtra_Codigo,
                     Equipo: value.eqtra_Descripcion,
-                    Observacion: value.eqtra_Observacion
+                    Observacion: value.eqtra_Observacion,
+                    Estado:value.eqtra_Estado,
+                    Acciones:Acciones
                 });
             });
             tabla.draw();
@@ -62,6 +72,8 @@ function llenarTabla() {
 }
 $(document).ready(function () {
     llenarTabla();
+    fill = Admin == undefined ? 0 : -1;
+
 });
 //Botones GET
 $("#btnAgregar").click(function () {
