@@ -15,15 +15,15 @@ function Add(Empleados,ver) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
             if (Fila.Empleados == '0' || Fila.Empleados == ver) {
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                var span = $("#FormEmpleados").find("#errorddlEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
                     span.text('Seleccione otra opción');
-                    $("#FormEmpleados").find("#Empleados").focus();
+                    $("#FormEmpleados").find("#ddlEmpleados").focus();
                 return null;
             }
             else {
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    var span = $("#FormEmpleados").find("#errorddlEmpleados");
                     $(span).removeClass("text-warning");
                     span.text('');
             }
@@ -35,7 +35,7 @@ function Add(Empleados,ver) {
             }
         ).draw();
         //$("#FormEmpleados").find("#Razon").val("");
-        $("#FormEmpleados").find("#Empleados").focus();
+        $("#FormEmpleados").find("#ddlEmpleados").focus();
     }
     //else {
     //    if (Razon.trim().length == 0) {
@@ -161,19 +161,19 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
-    var Id = $("#FormEmpleados").find("#Empleados").val();
+    var Id = $("#FormEmpleados").find("#ddlEmpleados").val();
     if (Id == 0) {
         var span = $("#FormEmpleados").find("#errorEmpleados");
         $(span).addClass("text-warning");
         $(span).closest("div").addClass("has-warning");
         span.text('Seleccione otra opción');
-        $("#FormEmpleados").find("#Empleados").focus();
+        $("#FormEmpleados").find("#ddlEmpleados").focus();
     }
         //hsal_FechaSalida: $("#hsal_FechaSalida").val()
     else {
-        var Id = $("#FormEmpleados").find("#Empleados").val();
+        var Id = $("#FormEmpleados").find("#ddlEmpleados").val();
         //var Razon = $("#FormEmpleados").find("#Razon").val();
-        var ver = $('#Empleados option:selected').html();
+        var ver = $('#ddlEmpleados option:selected').html();
         //var Salida = $("#hper_fechaInicio").val();
         //var Regreso = $("#hper_fechaFin").val();
         //var justificado = $("#hper_Justificado").val();
@@ -246,7 +246,7 @@ $("#btnCrear").click(function () {
         }
     }
 });
-$("#FormEmpleados").find("#Empleados").keypress(function (envet) {
+$("#FormEmpleados").find("#ddlEmpleados").keypress(function (envet) {
     if (alerta($(this).closest("div"))) {
         return null;
     }
