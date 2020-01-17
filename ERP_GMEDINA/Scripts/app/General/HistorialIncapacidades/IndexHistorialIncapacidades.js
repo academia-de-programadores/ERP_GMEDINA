@@ -73,6 +73,7 @@ function llenarTabla() {
                empleado = value.Empleado
                tabla.row.add({                 
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento
