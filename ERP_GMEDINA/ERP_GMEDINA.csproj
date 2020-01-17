@@ -1320,13 +1320,16 @@
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
+    <Content Include="Scripts\app\General\TipoIncapacidades\Admin.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\Admin.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
+    <Content Include="Scripts\app\General\TipoPermisos\Admin.js" />
     <Content Include="Scripts\app\General\TipoPermisos\TipoPermisos.js" />
     <Content Include="Scripts\app\General\TipoSalidas\Admin.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
+    <Content Include="Scripts\app\General\Titulos\Admin.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\Menu\Menu.js" />
