@@ -37,7 +37,7 @@
         if (Date.parse(fecha1) <= Date.parse(fecha2)) {
             return true;
         } else {
-            MsgError("Error", "La fecha Incio debe ser mayor");
+            MsgError("Error", "La fecha Fin debe ser mayor ");
             return false;
         }
     }
