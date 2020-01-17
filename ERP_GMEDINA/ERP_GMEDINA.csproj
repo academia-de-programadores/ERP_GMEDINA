@@ -1293,6 +1293,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
+    <Content Include="Scripts\app\General\HistorialVacaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />

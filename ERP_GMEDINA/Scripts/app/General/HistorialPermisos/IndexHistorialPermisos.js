@@ -1,6 +1,10 @@
-﻿var fill = 0;
-var Admin = false;
+﻿var id = 0;
+var fill = 0;
 
+$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
 //Funciones GET
 function tablaEditar(ID) {
     //alert(ID);
@@ -102,12 +106,11 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 var Acciones = value.hper_Estado == 1
-                      ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Editar</a>"
-                      : Admin ?
-                          "<div>" +
-                          "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
-                          "</div>" : '';
-                if (value.hsal_Estado > fill) {
+                ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
+                   : Admin ?
+                       "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "</div>" : '';
                 tabla.row.add({
                     Id: value.hper_Id,
                     "Número": value.hper_Id,
@@ -125,7 +128,6 @@ function llenarTabla() {
                     Acciones: Acciones
                     //Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                 });
-                }
             });
             tabla.draw();
         });
@@ -245,11 +247,6 @@ function format(obj) {
     //});
     return div + '</div></div></div>';
 }
-
-$(document).ready(function () {
-    fill = Admin == undefined ? 0 : -1;
-    llenarTabla();
-});
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
