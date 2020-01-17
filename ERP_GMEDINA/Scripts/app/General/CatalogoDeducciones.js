@@ -201,10 +201,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
     }
 
     if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
-        iziToast.error({
-            title: 'Error',
-            message: 'Porfavor revise que ningún campo este vacío.',
-        });
+
     }
     else {
         $("#Crear #Validation_descipcionA").css("display", "none");
@@ -380,10 +377,6 @@ $('#btnUpdateDeduccion').click(function () {
 
     if(CorrectoEdit == false || CorrectoEdit2 == false || CorrectoEdit3 == false){
         $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos validos',
-        });
     }
     else {
         $("#EditarCatalogoDeduccionesConfirmacion").modal({ backdrop: 'static', keyboard: false });
@@ -425,7 +418,7 @@ $("#btnUpdateDeduccion2").click(function () {
             {
                 iziToast.error({
                     title: 'Error',
-                    message: 'Ingrese datos validos',
+                    message: 'No se editó el registro, contacte al administrador',
                 });
                 $("#Editar #Validation_descipcion2").css("display", "");
                 $("#Editar #Validation_descipcion3").css("display", "");
