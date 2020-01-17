@@ -1,16 +1,16 @@
 ﻿var IDInactivar = 0;
 
 const btnGuardar = $('#btnCrearPreavisoConfirmar'),
-cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
+    cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+    })
+    .fail(function (jqxhr, settings, exception) {
+        console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -57,13 +57,13 @@ function cargarGridPreaviso() {
                 var botonActivar = ListaPreaviso[i].prea_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaPreaviso[i].prea_IdPreaviso + '" type="button" class="btn btn-primary btn-xs"  id="btnActivarPreaviso">Activar</button>' : '' : '';
                 //AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
                 $('#tblPreaviso').dataTable().fnAddData([
-                     ListaPreaviso[i].prea_IdPreaviso,
-                     ListaPreaviso[i].prea_RangoInicioMeses,
-                     ListaPreaviso[i].prea_RangoFinMeses,
-                     ListaPreaviso[i].prea_DiasPreaviso,
-                     estadoRegistro,
-                     botonDetalles + botonEditar + botonActivar]
-                 );
+                    ListaPreaviso[i].prea_IdPreaviso,
+                    ListaPreaviso[i].prea_RangoInicioMeses,
+                    ListaPreaviso[i].prea_RangoFinMeses,
+                    ListaPreaviso[i].prea_DiasPreaviso,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
+                );
             }
         });
     FullBody();
@@ -87,7 +87,7 @@ function DataAnnotations(ToF) {
 function ValidarForm() {
     //VARIABLE DE RETORNO
     var Retorno = true;
-    //DECLARACION DE OBJETOS 
+    //DECLARACION DE OBJETOS
     var RangoInicio = $("#Editar #prea_RangoInicioMeses").val('');
     var RangoFin = $("#Editar #prea_RangoFinMeses").val('');
     var Dias = $("#Editar #prea_DiasPreaviso").val('');
@@ -108,16 +108,20 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
     $("#CrearPreaviso #prea_RangoInicioMeses").val('');
     $("#CrearPreaviso #prea_RangoFinMeses").val('');
     $("#CrearPreaviso #prea_DiasPreaviso").val('');
-    $("#CrearPreaviso").modal();
+    $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     DataAnnotations(true);
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
 $('#btnCrearPreavisoConfirmar').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    $("#CrearPreaviso #Validation_descripcion").css("display", "block");
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreatePreaviso").serializeArray();
+
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    $("#CrearPreaviso #Validation_descripcion").css("display", "block");
+    
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if (ValidarForm()) {
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -145,8 +149,9 @@ $('#btnCrearPreavisoConfirmar').click(function () {
         });
     }
     else {
-        //MOSTRAR DATAANNOTATIONS
-        DataAnnotations(false);
+        $("#descripcioncrear").css("display", "");
+        $("#Crear #cin_DescripcionIngreso").focus();
+        $('#asteriscoCreate').addClass('text-danger');
     }
 });
 
@@ -154,7 +159,7 @@ $('#btnCrearPreavisoConfirmar').click(function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function () {
 
-    //OCULTAR DATAANNOTATIONS 
+    //OCULTAR DATAANNOTATIONS
     $("#Validation_descipcion").css("display", "block");
     $("#Validation_descipcion1").css("display", "block");
     $("#Validation_descipcion2").css("display", "block");
@@ -225,25 +230,25 @@ $(document).on("click", "#btnConfirmarEditar", function () {
             method: "POST",
             data: data
         })
-        .done(function (data) {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data != "error") {
-                cargarGridPreaviso();
-                
-                $("#ConfirmarEdicion").modal('hide');
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: '¡El registro se editó de forma exitosa!',
-                });
-            } else {
-                $("#ConfirmarEdicion").modal('hide');
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡No se editó el registro, contacte al administrador!',
-                });
-            }
-        });
+            .done(function (data) {
+                //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+                if (data != "error") {
+                    cargarGridPreaviso();
+
+                    $("#ConfirmarEdicion").modal('hide');
+                    // Mensaje de exito cuando un registro se ha guardado bien
+                    iziToast.success({
+                        title: 'Exito',
+                        message: '¡El registro se editó de forma exitosa!',
+                    });
+                } else {
+                    $("#ConfirmarEdicion").modal('hide');
+                    iziToast.error({
+                        title: 'Error',
+                        message: '¡No se editó el registro, contacte al administrador!',
+                    });
+                }
+            });
     }
 });
 

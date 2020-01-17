@@ -20,15 +20,15 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.eqem_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.eqem_Id, htmlAttributes: new { @class = "control-label col-md-2" })<span id="ast1"></span>
                                 <div class="col-md-6">
-                                    @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
+                                    <select id="eqem_Id" name="eqem_Id" class="form-control"></select>
                                     @Html.ValidationMessageFor(model => model.eqem_Id, "", new { @class = "text-danger", @id = "val1" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })<span id="ast2"></span>
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger", @id = "val2" })
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })<span id="ast3"></span>
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger", @id = "val3" })
@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.dex_ObservacionesComentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.dex_ObservacionesComentarios, htmlAttributes: new { @class = "control-label col-md-2" })<span id="ast4"></span>
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.dex_ObservacionesComentarios, "", new { @class = "text-danger", @id = "val4" })
@@ -52,15 +52,15 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.cde_IdDeducciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.cde_IdDeducciones, htmlAttributes: new { @class = "control-label col-md-2" <span id="ast5"></span>
                                 <div class="col-md-6">
-                                    @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
+                                    <select id="cde_IdDeducciones" name="cde_IdDeducciones" class="form-control"></select>
                                     @Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger", @id = "val5" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })<span id="ast6"></span>
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger", @id = "val6" })
