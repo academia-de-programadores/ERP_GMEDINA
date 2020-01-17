@@ -140,7 +140,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
+                //Session.Remove("id");
             }
             else
             {
@@ -201,7 +201,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
+                //Session.Remove("id");
             }
             else
             {

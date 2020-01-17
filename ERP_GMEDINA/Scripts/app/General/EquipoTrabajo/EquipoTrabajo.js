@@ -52,10 +52,10 @@ function llenarTabla() {
             tabla.clear();
             tabla.draw();
             $.each(Lista, function (index, value) {
-                var Acciones = value.car_Estado == 1
+                var Acciones = value.eqtra_Estado == 1
                   ? null :
                   "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                   "</div>";
                 tabla.row.add({
                     Número:value.Número,    
@@ -63,7 +63,7 @@ function llenarTabla() {
                     Codigo: value.eqtra_Codigo,
                     Equipo: value.eqtra_Descripcion,
                     Observacion: value.eqtra_Observacion,
-                    Estado:value.eqtra_Estado,
+                    Estado:value.eqtra_Estado ? "Activo":"Inactivo",
                     Acciones:Acciones
                 });
             });

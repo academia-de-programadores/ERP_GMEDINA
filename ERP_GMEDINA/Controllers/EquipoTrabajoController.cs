@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()        
 		{
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbEquipoTrabajo = new List<tbEquipoTrabajo> { };
+            var tbEquipoTrabajo = new tbEquipoTrabajo { eqtra_Estado = true };
             return View(tbEquipoTrabajo);
         }
 		[HttpPost]

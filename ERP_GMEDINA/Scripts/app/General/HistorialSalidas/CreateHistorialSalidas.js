@@ -15,16 +15,16 @@ function Add(Empleados, Razon, ver) {
             var Fila = ChildTable.rows().data()[i];
             if (Fila.Empleados == ver || Fila.Empleados == '0') {
                 if (Fila.Empleados == ver) {
-                    var span = $("#FormEmpleados").find("#errorEmpleados");
+                    var span = $("#FormEmpleados").find("#errorDDOWNEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
                     span.text('Seleccione otra opción');
-                    $("#FormEmpleados").find("#Empleados").focus();
+                    $("#FormEmpleados").find("#DDOWNEmpleados").focus();
                 }
                 return null;
             }
             else {
-                var span = $("#FormEmpleados").find("#errorEmpleados");
+                var span = $("#FormEmpleados").find("#errorDDOWNEmpleados");
                 $(span).removeClass("text-warning");
                 span.text('');
             }
@@ -37,7 +37,7 @@ function Add(Empleados, Razon, ver) {
             }
         ).draw();
         $("#FormEmpleados").find("#Razon").val("");
-        $("#FormEmpleados").find("#Empleados").focus();
+        $("#FormEmpleados").find("#DDOWNEmpleados").focus();
     } else {
         if (Razon.trim().length == 0) {
             var txt_required = $("#FormEmpleados").find("#Razon").data("val-required");
@@ -107,7 +107,7 @@ function llenarDropDowlistEmpleados() {
         function (result) {
             $.each(result, function (id, Lista) {
                 Lista.forEach(function (value, index) {
-                    $("#" + id).append(new Option(value.Descripcion, value.Id));
+                    $("#DDOWN" + id).append(new Option(value.Descripcion, value.Id));
                 });
             });
         });
@@ -120,7 +120,7 @@ function Remover(btn) {
 }
 //Llamamos los dropdowns
 $(document).ready(function () {
-    $("#Empleados").select2();
+    $("#DDOWNEmpleados").select2();
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -160,18 +160,18 @@ $(document).ready(function () {
     });
 });
 $("#add").click(function () {
-    var Id = $("#FormEmpleados").find("#Empleados").val();
+    var Id = $("#FormEmpleados").find("#DDOWNEmpleados").val();
     if (Id == 0) {
         var span = $("#FormEmpleados").find("#errorEmpleados");
         $(span).addClass("text-warning");
         $(span).closest("div").addClass("has-warning");
         span.text('Seleccione otra opción');
-        $("#FormEmpleados").find("#Empleados").focus();
+        $("#FormEmpleados").find("#DDOWNEmpleados").focus();
     }
     else {
-    var Id = $("#FormEmpleados").find("#Empleados").val();
+    var Id = $("#FormEmpleados").find("#DDOWNEmpleados").val();
     var Razon = $("#FormEmpleados").find("#Razon").val();
-    var ver = $('#Empleados option:selected').html();
+    var ver = $('#DDOWNEmpleados option:selected').html();
     var valores = Id + Razon + ver;
     for (var i = 0; i < valores.length; i++) {
         if (valores[i] == ">" || valores[i] == "<") {
@@ -230,7 +230,7 @@ $("#btnCrear").click(function () {
         }
 }
 });
-$("#FormEmpleados").find("#Empleados").keypress(function (envet) {
+$("#FormEmpleados").find("#DDOWNEmpleados").keypress(function (envet) {
     if (alerta($(this).closest("div"))) {
         return null;
     }
