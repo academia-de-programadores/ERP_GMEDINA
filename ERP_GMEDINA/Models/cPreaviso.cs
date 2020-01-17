@@ -17,15 +17,17 @@ namespace ERP_GMEDINA.Models
         public int prea_IdPreaviso { get; set; }
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
-        [Range(0.00, 999999.99, ErrorMessage = "La cantidad no puede ser menor de 0 dígitos, ni mayor que 6 dígitos")]
+       
         [Display(Name = "Rango de Inicio del Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
+        [Range(1, 12, ErrorMessage = "El Rango Inicio Meses debe estar entre {1} y {2}")]
         public string prea_RangoInicioMeses { get; set; }
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]
-        [Range(0.00, 999999.99, ErrorMessage = "La cantidad no puede ser menor de 0 dígitos, ni mayor que 6 dígitos")]
+      
         [Display(Name = "Rango de Fin de Mes")]
         [Required(ErrorMessage = "No puede dejar el campo vacio.")]
+        [Range(1, 12, ErrorMessage = "El Rango Fin Meses debe estar entre {1} y {2}")]
         public string prea_RangoFinMeses { get; set; }
 
         //[RegularExpression(@"^[0-9]+(\.[0-9])$", ErrorMessage = "No puede ingresar un carácter que no sea numérico!")]

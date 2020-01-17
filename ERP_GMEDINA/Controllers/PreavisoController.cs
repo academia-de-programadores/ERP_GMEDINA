@@ -83,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
         #region POST: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "prea_IdPreaviso,prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso,prea_UsuarioCrea,prea_FechaCrea,prea_UsuarioModifica,prea_FechaModifica,prea_Activo")] tbPreaviso tbPreaviso)
+        public ActionResult Create([Bind(Include = "prea_RangoInicioMeses,prea_RangoFinMeses,prea_DiasPreaviso,prea_UsuarioCrea,prea_FechaCrea,prea_Activo")] tbPreaviso tbPreaviso)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
             tbPreaviso.prea_UsuarioCrea = 1;
