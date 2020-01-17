@@ -99,14 +99,14 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
 
-        //                lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
-        //        }
-        //        catch
-        //        {
-        //        }
-        //    }
-        //    return Json(lista, JsonRequestBehavior.AllowGet);
-        //}
+                        lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
+                }
+                catch
+                {
+                }
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         //--------------------------------------------DESPLEGABLES--------------------------------------------
         //Tipo salidas
         public ActionResult llenarDropDowlistTipoPermisos()
