@@ -60,7 +60,8 @@ function llenarTabla() {
                 tabla.row.add({
                     ID: value.fare_Id,
                     "Número": value.fare_Id,
-                    Descripción:value.fare_Descripcion,
+                    Descripción: value.fare_Descripcion,
+                    Estado: value.fare_Estado ? "Activo" : "Inactivo",
                     Acciones: Acciones
                 });
                 } 

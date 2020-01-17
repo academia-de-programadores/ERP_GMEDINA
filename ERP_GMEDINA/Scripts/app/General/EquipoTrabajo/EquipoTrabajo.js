@@ -63,7 +63,7 @@ function llenarTabla() {
                     Codigo: value.eqtra_Codigo,
                     Equipo: value.eqtra_Descripcion,
                     Observacion: value.eqtra_Observacion,
-                    Estado:value.eqtra_Estado,
+                    Estado:value.eqtra_Estado ? "Activo":"Inactivo",
                     Acciones:Acciones
                 });
             });
