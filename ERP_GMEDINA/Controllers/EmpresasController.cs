@@ -60,14 +60,14 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Upload(HttpPostedFileBase file)
         {
             string extencion = file.FileName.Split('.')[1].ToLower();
-            if (file!=null && (extencion=="png" || extencion == "jpg" || extencion == "jpeg"))
+            if (file != null && (extencion == "png" || extencion == "jpg" || extencion == "jpeg"))
             {
-                string path = "~/Logos/" + file.FileName;
-                if (!System.IO.File.Exists(path))
+                string path = "/Logos/" + file.FileName;
+                if (!System.IO.File.Exists(Server.MapPath("~/") + path))
                 {//OPEN IF
-                    Session["file"]=file;
+                    Session["file"] = file;
                     Session["Path"] = path;
-                return Json(true, JsonRequestBehavior.AllowGet);
+                    return Json(true, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(false, JsonRequestBehavior.AllowGet);
@@ -81,7 +81,7 @@ namespace ERP_GMEDINA.Controllers
             HttpPostedFileBase file = (HttpPostedFileBase)Session["file"];
             string path = (string)Session["Path"];
             string msj = "...";
-            if (tbEmpresas.empr_Nombre != "" && file!=null && path!=null)
+            if (tbEmpresas.empr_Nombre != "" && file != null && path != null)
             {
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -91,7 +91,7 @@ namespace ERP_GMEDINA.Controllers
                     {
                         msj = item.MensajeError;
                     }
-                    file.SaveAs(path);
+                    file.SaveAs(Server.MapPath("~/") + path);
                     Session["file"] = null;
                     Session["Path"] = null;
                     Session.Remove("file");
@@ -140,6 +140,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 empr_Id = tbEmpresas.empr_Id,
                 empr_Nombre = tbEmpresas.empr_Nombre,
+                empr_Logo = tbEmpresas.empr_Logo,
                 empr_Estado = tbEmpresas.empr_Estado,
                 empr_RazonInactivo = tbEmpresas.empr_RazonInactivo,
                 empr_UsuarioCrea = tbEmpresas.empr_UsuarioCrea,
@@ -158,6 +159,8 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public JsonResult Edit(tbEmpresas tbEmpresas)
         {
+            HttpPostedFileBase file = (HttpPostedFileBase)Session["file"];
+            string path = (string)Session["Path"];
             string msj = "";
             if (tbEmpresas.empr_Id != 0 && tbEmpresas.empr_Nombre != "")
             {
@@ -165,11 +168,16 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbEmpresas_Update(id,tbEmpresas.empr_Nombre, path, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
+                    file.SaveAs(Server.MapPath("~/") + path);
+                    Session["file"] = null;
+                    Session["Path"] = null;
+                    Session.Remove("file");
+                    Session.Remove("Path");
                 }
                 catch (Exception ex)
                 {
