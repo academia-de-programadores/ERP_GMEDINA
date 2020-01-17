@@ -57,6 +57,9 @@ function cargarGridDeducciones() {
                 //variable donde está el boton activar
                 var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias" iddeduccionesextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
 
+                //variable boton inactivar
+                var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias" iddeduccionextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inactivar</button>' : '' : '';
+
                 //AGREGAR EL ROW AL DATATABLE
                 $('#tblDeduccionesExtraordinarias').dataTable().fnAddData([
                     ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra,
@@ -67,7 +70,7 @@ function cargarGridDeducciones() {
                     ListaDeduccionesExtraordinarias[i].dex_Cuota,
                     ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion,
                     estadoRegistro,
-                    botonDetalles + botonEditar + botonActivar
+                    botonDetalles + botonEditar + botonInactivar + botonActivar
                 ]);
                 }
             //APLICAR EL MAX WIDTH
@@ -130,6 +133,11 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
         }
     });
 
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
+        return false;
+    });
+
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +197,14 @@ function ocultarCargandoCrear() {
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
-    //Mostrar el Modal de Inactivar
+    var ID = $(this).closest('tr').data('id');
+
+    var ID = $(this).attr('iddeduccionextra');
+
+    console.log(ID)
+
+    localStorage.setItem('id', ID);
+    //Mostrar el Modal
     $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
     $("html, body").css("overflow", "scroll");
@@ -198,14 +213,14 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-    //Serializar el Formulario del Modal que esta en su respectiva Vista Parcial, para Parsear al Formato Json 
-    var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
+    let ID = localStorage.getItem('id')
+    console.log(ID)
 
     //Se envia el Formato Json al Controlador para realizar la Inactivación
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar",
         method: "POST",
-        data: data
+        data: {id: ID}
     }).done(function (data) {
         if (data == "Error") {
             //Cuando trae un error en el BackEnd al realizar la Inactivación
@@ -216,10 +231,7 @@ $("#btnInactivar").click(function () {
         }
         else {
             // Actualizar el Index para ver los cambios
-            $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-            $("html, body").css("overflow", "hidden");
-            $("html, body").css("overflow", "scroll");
-                location.href = "/DeduccionesExtraordinarias/Index";
+            $("#InactivarDeduccionesExtraordinarias").modal('hide');
                 cargarGridDeducciones();
                 //Mensaje de Éxito de la Inactivación
                 iziToast.success({
@@ -230,7 +242,7 @@ $("#btnInactivar").click(function () {
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmDeduccionesExtraordinariasInactivar").submit(function (e) {
+    $("#InactivarDeduccionesExtraordinarias").submit(function (e) {
         return false;
     });
 

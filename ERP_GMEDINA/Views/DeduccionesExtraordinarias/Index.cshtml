@@ -78,6 +78,7 @@
                                             {
                                                 @Html.ActionLink("Detalle", "Details", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-primary btn-xs" })
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.dex_IdDeduccionesExtra }, new { @class = "btn btn-default btn-xs" })
+                                                <button type="button" iddeduccionextra="@item.dex_IdDeduccionesExtra" name="iddeduccionesextraordinarias" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>
                                             }
                                             <!-- validar si el usuario es administrador para mostrar el boton "activar" -->
                                             if (oUsuario?.usu_EsAdministrador == true && item.dex_Activo == false)
@@ -92,6 +93,25 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Inhabilitar*@
+<div class="modal fade" id="InactivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Inactivar</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <h4>¿Esta seguro que desea Inactivar este registro?</h4>
+            </div>
+            <div class="modal-footer">
+                @*data-dismiss="modal"*@
+                <button type="button" class="btn btn-danger" id="btnInactivar">Si</button>
+                <button type="button" class="btn btn-default" id="btnCerrarInactivar">No</button>
             </div>
         </div>
     </div>

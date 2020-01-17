@@ -74,39 +74,14 @@
                             <div style="display:none" class="btn" id="cargandoEditar">
                             </div>
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                            <button type="button" iddeduccionesextra="iddeduccionesextraordinarias" name="iddeduccionesextraordinarias" class="btn btn-danger" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>
                         </div>
                     </div>
                 </div>
             </div>
         }
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeduccionesExtraordinariasInactivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
-        }
     </div>
 </div>
 
-@*Modal de Inhabilitar*@
-<div class="modal fade" id="InactivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Inactivar</h4>
-            </div>
-            <div class="modal-body" id="Inactivar">
-                <h4>¿Esta seguro que desea Inactivar este registro?</h4>
-            </div>
-            <div class="modal-footer">
-                @*data-dismiss="modal"*@
-                    <button type="button" class="btn btn-danger" id="btnInactivar">Si</button>
-                    <button type="button" class="btn btn-default" id="btnCerrarInactivar">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
