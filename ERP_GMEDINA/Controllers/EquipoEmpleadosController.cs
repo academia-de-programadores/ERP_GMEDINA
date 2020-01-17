@@ -93,6 +93,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbEquipoEmpleados_Insert(tbEquipoEmpleados.emp_Id, tbEquipoEmpleados.eqtra_Id, tbEquipoEmpleados.eqem_Fecha, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEquipoEmpleados_Insert_Result item in list)
                     {
