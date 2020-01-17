@@ -109,6 +109,12 @@
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
+                <button type="submit" class="btn btn-primary pull-left" id="btnEditDeduccionAFP">Actualizar</button>
+                <div style="display:none" class="btn pull-left" id="cargandoEditar"></div>
+                <button type="button" class="btn btn-danger pull-left" id="btnInactivarDeduccionAFP">Inactivar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -120,11 +126,11 @@
                 <h4 class="modal-title">Editar</h4>
             </div>
             <div class="modal-body" id="Editar">
-                ¿Esta seguro que desea Editar este registro?
+                ¿Está seguro que desea editar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
                 <input type="button" id="btnEditDeduccionAFPConfirmar" value="Si" class="btn btn-primary " />
+                <button type="button" class="btn btn-white" id="btnRegresar">No</button>
                 <div style="display:none" class="btn" id="cargandoEditar">
                 </div>
             </div>
@@ -138,10 +144,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Detalle de Deducción AFP</h4>
+                <h4 class="modal-title">Detalle Deducción AFP</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
+            </div>
+            <div class="footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -152,14 +161,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Eliminar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Esta seguro que desea Eliminar este registro?
+                ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-right" id="btnBack">No</button>
-                <button type="button" class="btn btn-danger pull-right" id="btnInactivarRegistroDeduccionAFP">Si</button>
+                <button type="button" class="btn btn-danger" id="btnInactivarRegistroDeduccionAFP">Si</button>
+                <button type="button" class="btn btn-default" id="btnBack">No</button>
                 <div style="display:none" class="btn" id="cargandoInhabilitar"></div>
             </div>
         </div>
@@ -174,11 +183,11 @@
                 <h4 class="modal-title">Activar</h4>
             </div>
             <div class="modal-body" id="Activar">
-                ¿Esta seguro que desea Activar este registro?
+                ¿Esta seguro que desea activar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary pull-right" id="btnActivarRegistroDeduccionAFP">Si</button>
+                <button type="button" class="btn btn-primary" id="btnActivarRegistroDeduccionAFP">Si</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
                 <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
             </div>
         </div>
