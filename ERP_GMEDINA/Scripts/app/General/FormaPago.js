@@ -80,6 +80,8 @@ function DataAnnotations(ToF) {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarFormaPago", function () {
+    //DESBLOQUEAR EL BOTON DE CONFIRMACION
+    $("#btnCrearFormaPago").attr("disabled", false);
     //MOSTRAR EL MODAL DE AGREGAR
     $("#Crear #fpa_Descripcion").val('');
     $("#CrearFormaPago").modal({ backdrop: 'static', keyboard: false });
@@ -97,6 +99,8 @@ $('#btnCrearFormaPago').click(function () {
     var data = $("#frmCreateFormaPago").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if ($("#CrearFormaPago #Crear #fpa_Descripcion").val() != "") {
+        //BLOQUEAR EL BOTON DE CONFIRMACION
+        $("#btnCrearFormaPago").attr("disabled", true);
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
             url: "/FormaPago/Create",
@@ -109,6 +113,8 @@ $('#btnCrearFormaPago').click(function () {
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
+                //DESBLOQUEAR EL BOTON DE CONFIRMACION
+                $("#btnCrearFormaPago").attr("disabled", false);
             }
             else {
                 $("#Crear #fpa_Descripcion").val();
@@ -135,6 +141,8 @@ $('#btnCrearFormaPago').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", function () {
+    //DESBLOQUEAR EL BOTON DE CONFIRMACION
+    $("#btnConfirmarEditar2").attr("disabled", false);
     //CAPTURAR EL ID DEL REGISTRO SELECCIONADO
     var ID = $(this).data('id');
     //SETEAR LA VARIABLE GLOBAL DE INACTIVACION
@@ -173,9 +181,6 @@ $(document).on("click", "#tblFormaPago tbody tr td #btnEditarFormaPago", functio
 });
 
 
-
-
-
 $("#btnUpdateFormaPago").click(function () {
     var Descripcion = $("#Editar #fpa_Descripcion").val();
     if (Descripcion != '' && Descripcion != null && Descripcion != undefined && isNaN(Descripcion) == true) {
@@ -201,6 +206,8 @@ $("#btnConfirmarEditar2").click(function () {
     //VALIDAR QUE EL CAMPO NO ESTE VACIO
     DataAnnotations(false);
     if ($("#Editar #fpa_Descripcion").val() != "") {
+        //BLOQUEAR EL BOTON DE CONFIRMACION
+        $("#btnConfirmarEditar2").attr("disabled", true);
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditFormaPago").serializeArray();
         console.log(data);
@@ -228,6 +235,8 @@ $("#btnConfirmarEditar2").click(function () {
                     title: 'Error',
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
+                //DESBLOQUEAR EL BOTON DE CONFIRMACION
+                $("#btnConfirmarEditar2").attr("disabled", false);
             }
         });
     }

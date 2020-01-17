@@ -49,7 +49,7 @@ function cargarGridAcumuladosISR() {
             for (var i = 0; i < ListaAcumuladosISR.length; i++) {
 
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaAcumuladosISR[i].aisr_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaAcumuladosISR[i].aisr_Activo == true ? '<button data-id = "' + ListaAcumuladosISR[i].aisr_Id + '" type="button" class="btn btn-primary btn-xs"  id="btnDetalleAcumuladosISR">Detalles</button>' : '';

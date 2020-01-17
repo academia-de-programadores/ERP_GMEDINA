@@ -103,8 +103,8 @@ $(document).on("click", "#btnAgregarPeriodo", function () {
     DataAnnotations(true);
     //SETEAR EL COLOR DEL ASTERISCO
     $("#AsteriscoPeriodos").removeClass("text-danger");
-    ////OCULTAR EL SCROLLVIEW
-    //$('body').css("overflow", "hidden");
+    //DESBLOQUEAR EL BOTON
+    $("#btnCrearPeriodoConfirmar").attr("disabled", false);
 });
 
 //FUNCION: CREAR UN NUEVO REGISTRO
@@ -113,7 +113,8 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
-
+    //BLOQUEAR EL BOTON
+    $("#btnCrearPeriodoConfirmar").attr("disabled", true);
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreatePeriodo").serializeArray();
 
@@ -155,6 +156,8 @@ $('#btnCrearPeriodoConfirmar').click(function () {
         $('body').css("overflow", "hidden");
         //SETEAR EL COLOR DEL ASTERISCO
         $("#AsteriscoPeriodos").addClass("text-danger");
+        //DESBLOQUEAR EL BOTON
+        $("#btnCrearPeriodoConfirmar").attr("disabled", false);
     }
 });
 
@@ -163,7 +166,8 @@ $('#btnCrearPeriodoConfirmar').click(function () {
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblPeriodo tbody tr td #btnEditarPeriodo", function () {
-
+    //DESBLOQUEAR EL BOTON DE CONFIRMACION
+    $("#btnConfirmarEditar").attr("disabled", false);
     //OCULTAR EL DATAANNOTATIONS
     DataAnnotations(true);
     //SETEAR EL COLOR DEL ASTERISCO
@@ -231,6 +235,8 @@ $("#btnCerrarConfirmarEditar").click(function () {
 
 //GUARADAR LA EDICION DEL REGISTRO
 $(document).on("click", "#btnConfirmarEditar", function () {
+    //BLOQUEAR EL BOTON
+    $("#btnConfirmarEditar").attr("disabled", true);
 
     DataAnnotations(false);
     if ($("#Editar #peri_DescripPeriodo").val() != "") {
@@ -259,6 +265,8 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                     title: 'Error',
                     message: '¡No se editó el registro, contacte al administrador!',
                 });
+                //DESBLOQUEAR EL BOTON
+                $("#btnConfirmarEditar").attr("disabled", false);
             }
         });
     }
