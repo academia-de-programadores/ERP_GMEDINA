@@ -7,10 +7,6 @@ tr.shown td.details-control {
     background: url('../../img/menos.png') no-repeat center center;
 }
 
-#tblCatalogoPlanillas_next {
-    background: url(../../img/flecha-derecha.png) no-repeat center left;
-}
-
 .no-sort::after {
     display: none !important;
 }
@@ -26,12 +22,6 @@ tr.shown td.details-control {
     height: 400px;
     overflow: auto;
 }
-
-/*.data {
-    max-height: calc(100vh);
-    overflow-y: auto;
-    position: fixed;
-}*/
 
 .data::-webkit-scrollbar {
     width: 10px;

@@ -60,6 +60,7 @@ function _ajax(params, uri, type, callback, enviar) {
 
 // Funcion para crear y editar
 var crearEditar = function (edit) {
+	debugger;
 	//Array de Ingresos y deducciones
 	var arrayIngresos = [];
 	var arrayDeducciones = [];
@@ -286,6 +287,7 @@ function verificarCampos(
 	catalogoIngresos,
 	catalogoDeducciones
 ) {
+	debugger;
 	var todoBien = true;
 	//Validar que la descripción este bien
 	if (descripcionPlanilla.trim() == '') {
@@ -313,6 +315,7 @@ function verificarCampos(
 	//Validar que se haya seleccionado por lo menos un ingreso
 	if (catalogoIngresos.length == 0) {
 		scrollArriba();
+		validacionCatalogoIngresos.show();
 		validacionCatalogoIngresos.parent().show();
 		todoBien = false;
 	} else {
@@ -880,7 +883,7 @@ function getIngresos(data) {
             <h5>Ingresos de la Planilla</h5>
         </div>
 		<div class="ibox-content">
-		<div class="data-details">
+		<div class="data-details" style="padding:5px">
             <table class="table table-bordered tbl-catalogos" id="childIngresos">
                 <thead>
                     <tr>
@@ -917,7 +920,7 @@ function getDeducciones(data) {
             <h5>Deducciones de la Planilla</h5>
         </div>
 		<div class="ibox-content">
-		<div class="data-details">
+		<div class="data-details" style="padding:5px">
             <table class="table table-bordered tbl-catalogos">
                 <thead>
                     <tr>
@@ -1052,7 +1055,7 @@ $(document).ready(() => {
 $(document).on('click', 'td.details-control', function () {
 	var tr = $(this).closest('tr');
 	var row = table.row(tr);
-
+	var detail;
 	//Que cierre el detalle
 	if (row.child.isShown()) {
 		// This row is already open - close it
@@ -1070,8 +1073,9 @@ $(document).on('click', 'td.details-control', function () {
 				//Mostrar el detalle con sus datos
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
-
-				let detail = $('.tbl-catalogos').DataTable({
+				detail = null;
+				detail = $('table tbody tr td .tbl-catalogos').DataTable({
+					destroy: true,
 					"language": {
 						"paging": false,
 						"sProcessing": spinner(),
@@ -1099,7 +1103,7 @@ $(document).on('click', 'td.details-control', function () {
 					},
 					"paging": true,
 					responsive: false,
-					dom: 'lft',
+					dom: 'lftpi',
 					"order": [[0, "asc"]],
 					initComplete: function () {
 					}

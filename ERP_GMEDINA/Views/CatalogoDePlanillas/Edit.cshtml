@@ -23,7 +23,7 @@
 								<div class="form-group">
 									<div class="col-md-1"></div>
 									<div class="col-md-2">
-										@Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+										@Html.LabelFor(model => model.cpla_DescripcionPlanilla, htmlAttributes: new { @class = "control-label" }) <label class="" id="asteriscoDescripcion">*</label>
 									</div>
 									<div class="col-md-4">
 										<input class="form-control text-box single-line valid" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) id="cpla_DescripcionPlanilla" name="cpla_DescripcionPlanilla" type="text" value="@Model.cpla_DescripcionPlanilla">
@@ -35,7 +35,7 @@
 								<div class="form-group">
 									<div class="col-md-1"></div>
 									<div class="col-md-2">
-										<label class="control-label">Frecuencia de pago</label>
+										<label class="control-label">Frecuencia de pago</label><label class="" id="asteriscoFrecuenciaPago">*</label>
 									</div>
 									<div class="col-md-4">
 										<select id="cpla_FrecuenciaEnDias" name="cpla_FrecuenciaEnDias" @((Model.cpla_DescripcionPlanilla == "Decimo Cuarto Mes" || Model.cpla_DescripcionPlanilla == "Decimo Tercer Mes") ? "disabled" : "" ) class="form-control valid" id="eqem_Id">
@@ -60,16 +60,16 @@
 							</div>
 						</div>
 						<div class="ibox-content">
-							<div class="col-lg-5" id="catalogoDeIngresos">
+							<div class="col-lg-6" id="catalogoDeIngresos">
 								<div class="ibox float-e-margins">
 									<h3 style="margin-left:85px;">Lista del catalogo de Ingresos</h3>
 									<div class="col-lg-offset-2">
 										<hr />
-										<div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
-											<span class="field-validation-valid text-danger" id="validacionCatalogoIngresos" data-valmsg-replace="true">Debe de seleccionar por lo menos un ingreso</span>
-										</div>
+                                        <div class="col-xs-offset-1" style="display:none; margin-bottom: 10px">
+                                            <span class="field-validation-valid text-danger" id="validacionCatalogoIngresos">Debe de seleccionar por lo menos un ingreso</span>
+                                        </div>
 										<input type="checkbox" checked="@false" id="checkSeleccionarTodosIngresos" class="js-switch js-check-change" /> &nbsp; &nbsp; &nbsp; <label id="seleccionarTodosLosIngresos">Seleccionar todos los Ingresos</label><br /><br />
-										<div class="data">
+										<div class="data" style="padding:5px">
 											<table id="tblCatalogoIngresos" class="table table-striped table-bordered table-hover tbl-catalogos">
 												<thead>
 													<tr>
@@ -93,7 +93,7 @@
 											<span class="field-validation-valid text-danger" id="validacionCatalogoDeducciones" data-valmsg-replace="true">Debe de seleccionar por lo menos una deducción</span>
 										</div>
 										&nbsp; &nbsp; &nbsp;<input type="checkbox" checked="@false" id="checkSeleccionarTodasDeducciones" class="js-switch js-check-change" />&nbsp;&nbsp;<label id="seleccionarTodasLasDeducciones">Seleccionar todas las deducciones</label>
-										<div class="data">
+										<div class="data" style="padding:5px">
 											<table id="tblCatalogoDeducciones" class="table table-striped table-bordered table-hover tbl-catalogos-d">
 												<thead>
 													<tr>

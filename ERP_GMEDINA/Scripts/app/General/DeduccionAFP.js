@@ -1,11 +1,11 @@
 ﻿//Obtención de Script para Formateo de Fechas
 $.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      //console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      //console.log("No se pudo recuperar Script SerializeDate");
-  });
+    .done(function (script, textStatus) {
+        //console.log(textStatus);
+    })
+    .fail(function (jqxhr, settings, exception) {
+        //console.log("No se pudo recuperar Script SerializeDate");
+    });
 
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
@@ -63,7 +63,7 @@ function cargarGridDeducciones() {
                     estadoRegistro,
                     botonDetalles + botonEditar + botonActivar
                 ]);
-                }
+            }
             //APLICAR EL MAX WIDTH
             FullBody();
         });
@@ -127,7 +127,7 @@ $("#btnActivarRegistroDeduccionAFP").click(function () {
                 message: '¡No se activó el registro, contacte al administrador!',
             });
         }
-        else{
+        else {
             cargarGridDeducciones();
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
@@ -220,82 +220,82 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
     if (val1 == "" || val1 == 0 || val1 == "0") {
         $("#Crear #validatione1d").css("display", "");
     }
-    else{
+    else {
 
     }
     if (val1 != "" || val1 != 0 || val1 != "0") {
         $("#Crear #validatione1d").css("display", "none");
     }
-        if (val2 != "" || val2 != null || val2 != undefined) {
-            if (expreg.test(val2)) {
-                if (val3 == "" || val3 == 0 || val3 == "0") {
-                    $("#Crear #validatione3d").css("display", "");
-                }
-                else if (val3 != "" || val3 != 0 || val3 != "0") {
-                    $("#Crear #validatione3d").css("display", "none");
-
-                    
-                }
+    if (val2 != "" || val2 != null || val2 != undefined) {
+        if (expreg.test(val2)) {
+            if (val3 == "" || val3 == 0 || val3 == "0") {
+                $("#Crear #validatione3d").css("display", "");
             }
-            else {
-                $("#Crear #validatione2d").css("display", "");
-                iziToast.error({
-                    title: 'Error',
-                    message: '¡Ingrese datos válidos!',
-                });
+            else if (val3 != "" || val3 != 0 || val3 != "0") {
+                $("#Crear #validatione3d").css("display", "none");
+
+
             }
         }
+        else {
+            $("#Crear #validatione2d").css("display", "");
+            iziToast.error({
+                title: 'Error',
+                message: '¡Ingrese datos válidos!',
+            });
+        }
     }
+}
     else {
         $("#Crear #validatione1d").css("display", "");
     }
 
     mostrarCargandoCrear();
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateDeduccionAFP").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/DeduccionAFP/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
+//SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+var data = $("#frmCreateDeduccionAFP").serializeArray();
+//ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+$.ajax({
+    url: "/DeduccionAFP/Create",
+    method: "POST",
+    data: data
+}).done(function (data) {
 
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data != "error") {
+    //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+    if (data != "error") {
 
-            cargarGridDeducciones();
+        cargarGridDeducciones();
 
-            $("#Crear #dafp_AporteLps").val('');
+        $("#Crear #dafp_AporteLps").val('');
 
-            //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarDeduccionAFP").modal('hide');
+        //CERRAR EL MODAL DE AGREGAR
+        $("#AgregarDeduccionAFP").modal('hide');
 
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: '¡El registro se agregó de forma exitosa!',
-            });
+        // Mensaje de exito cuando un registro se ha guardado bien
+        iziToast.success({
+            title: 'Exito',
+            message: '¡El registro se agregó de forma exitosa!',
+        });
 
-            $("#Crear #emp_Id").val("0");
-            $("#Crear #dafp_AporteLps").val('');
-            $("#Crear #afp_Id").val("0");
-        }
-        else {
-            iziToast.error({
-                title: 'Error',
-                message: '¡No se guardó el registro, contacte al administrador!',
-            });
-        }
+        $("#Crear #emp_Id").val("0");
+        $("#Crear #dafp_AporteLps").val('');
+        $("#Crear #afp_Id").val("0");
+    }
+    else {
+        iziToast.error({
+            title: 'Error',
+            message: '¡No se guardó el registro, contacte al administrador!',
+        });
+    }
 
-        ocultarCargandoCrear();
+    ocultarCargandoCrear();
 
-    });
+});
 
-    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmCreateDeduccionAFP").submit(function (e) {
-        return false;
-    });
+// Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+$("#frmCreateDeduccionAFP").submit(function (e) {
+    return false;
+});
 
 });
 
@@ -472,8 +472,7 @@ $("#btnEditDeduccionAFPConfirmar").click(function () {
                 message: '¡El registro se editó de forma exitosa!',
             });
         }
-        else
-        {
+        else {
             iziToast.error({
                 title: 'Error',
                 message: '¡No se editó el registro, contacte al administrador!',
@@ -541,8 +540,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                         //LLENAR EL DROPDOWNLIST
                         $.each(data, function (i, iter) {
                             //$("#Detalles #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                            if (iter.Id == SelectedIdEmpleado)
-                            {
+                            if (iter.Id == SelectedIdEmpleado) {
                                 $("#Detalles #emp_Id").html(iter.Descripcion);
                             }
                         });
