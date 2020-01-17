@@ -66,6 +66,7 @@ $(document).ready(function () {
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
+    $("#FormEditar").find("#errortsal_Descripcion").val('');
     $("#FormNuevo").find("#tsal_Descripcion").val("");
     modalnuevo.modal('show');
     $("#FormNuevo").find("#tsal_Descripcion").focus();
