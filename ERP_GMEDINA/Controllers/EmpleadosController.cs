@@ -39,10 +39,12 @@ namespace ERP_GMEDINA.Controllers
                     var tbEmpleados = db.tbEmpleados
                         .Select(x=>new
                         {
-                            Id=x.emp_Id,
+                            Número= x.emp_Id,
+                            Id =x.emp_Id,
                             per_Identidad = x.tbPersonas.per_Identidad,
                             Nombre = x.tbPersonas.per_Nombres+" "+x.tbPersonas.per_Apellidos,
                             depto_Descripcion = x.tbDepartamentos.depto_Descripcion,
+                            Estado=x.emp_Estado,
                             per_Sexo = x.tbPersonas.per_Sexo,
                             per_Edad = x.tbPersonas.per_Edad,
                             per_Telefono = x.tbPersonas.per_Telefono,

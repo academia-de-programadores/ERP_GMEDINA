@@ -686,6 +686,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
                 "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
 
+            //App/Jornadas
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/EquipoEmpleados").Include(
+                "~/Scripts/app/General/EquipoEmpleados/EquipoEmpleados.js"));
+
             //~/Scripts/app/general/Requisiciones
             bundles.Add(new ScriptBundle("~/Scripts/app/general/RequerimientosEspeciales").Include(
                 "~/Scripts/app/General/RequerimientosEspeciales/RequerimientosEspeciales.js"));
@@ -706,6 +710,10 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/CreateHistorialAudienciaDescargos").Include(
                "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAudienciaDescargos/Admin").Include(
+          "~/Scripts/app/General/HistorialAudiencias/Admin.js"));
 
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
@@ -733,6 +741,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
+            // SCRIPT Hsal
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialSalidas/Admin").Include(
+            "~/Scripts/app/general/HistorialSalidas/Admin.js"));
+
+            // SCRIPT tper
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoPermisos/Admin").Include(
+            "~/Scripts/app/general/TipoPermisos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+ "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones").Include(
                 "~/Scripts/app/General/CreateHistorialVacaciones.js"));
@@ -770,6 +788,14 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
             "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+             "~/Scripts/app/General/Competencias/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+             "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
+     "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

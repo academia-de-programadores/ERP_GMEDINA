@@ -13,7 +13,7 @@ namespace ERP_GMEDINA.Models
     }
     public class cEmpleados
     {
-        [Display(Name = "Id")]
+        [Display(Name = "Número")]
         public int emp_Id { get; set; }
 
         //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\" es requerido")]
@@ -48,6 +48,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> emp_CargoAnterior { get; set; }
         [Display(Name = "Fecha de Salida")]
         public Nullable<System.DateTime> emp_FechaDeSalida { get; set; }
+        [Display(Name = "Estado")]
         public bool emp_Estado { get; set; }
         public string emp_RazonInactivo { get; set; }
         public int emp_UsuarioCrea { get; set; }

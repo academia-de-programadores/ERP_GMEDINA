@@ -12,21 +12,30 @@ namespace ERP_GMEDINA.Controllers
 {
     public class HistorialAudienciaDescargosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: HistorialAudienciaDescargos
         public ActionResult Index()
         {
-            var tbHistorialAudienciaDescargo = db.tbHistorialAudienciaDescargo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
-            return View(tbHistorialAudienciaDescargo.ToList());
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                //var tbHistorialAudienciaDescargo = db.tbHistorialAudienciaDescargo.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
+                tbHistorialAudienciaDescargo tbHistorialAudienciaDescargos = new tbHistorialAudienciaDescargo { aude_Estado = true };
+                bool Admin = (bool)Session["Admin"];
+                return View(tbHistorialAudienciaDescargos);
+            }
+            catch
+            {
+                return View();
+            }
+           
         }
-
-
-
         public ActionResult llenarTabla()
         {
             try
             {
+                db = new ERP_GMEDINAEntities();
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var Empleados = db.V_EmpleadoIncapacidades.Where(t => t.emp_Estado == true)
@@ -52,17 +61,16 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             List<V_HistorialAudienciaDescargo> lista = new List<V_HistorialAudienciaDescargo> { };
-            using (db = new ERP_GMEDINAEntities())
+            try
             {
-                try
+                db = new ERP_GMEDINAEntities();
+                using (db = new ERP_GMEDINAEntities())
                 {
-                    lista = db.V_HistorialAudienciaDescargo.Where(x => x.emp_Id == id & x.aude_Estado == true).ToList();
-
+                    lista = db.V_HistorialAudienciaDescargo.Where(x => x.emp_Id == id).ToList();
                 }
-                catch
-                {
-
-                }
+            }
+            catch
+            {
 
             }
 
@@ -77,6 +85,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Insert(tbHistorialAudienciaDescargo.emp_Id,
                                                                             tbHistorialAudienciaDescargo.aude_Descripcion,
                                                                             tbHistorialAudienciaDescargo.aude_FechaAudiencia,
@@ -112,6 +121,7 @@ namespace ERP_GMEDINA.Controllers
             tbHistorialAudienciaDescargo tbHistaudiencia = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbHistaudiencia = db.tbHistorialAudienciaDescargo.Find(ID);
                 if (tbHistaudiencia == null || !tbHistaudiencia.aude_Estado)
                 {
@@ -149,6 +159,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Update(id, tbHistorialAudienciaDescargo.aude_FechaAudiencia, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result item in list)
                     {
@@ -180,16 +191,6 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
-
-
-
-
-
-
-
-
-
-
         // GET: HistorialAudienciaDescargos/Details/5
         public ActionResult Details(int? id)
         {
@@ -213,12 +214,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
             return View();
         }
-
-
-
-
-
-
         [HttpPost]
         public ActionResult Delete(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
@@ -231,6 +226,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, RazonInactivo, 1, DateTime.Now);
                     foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result item in list)
                     {
@@ -250,6 +246,31 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Restore(tbHistorialAudienciaDescargo.aude_Id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // POST: HistorialAudienciaDescargos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -260,15 +281,9 @@ namespace ERP_GMEDINA.Controllers
         // POST: HistorialAudienciaDescargos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
-
-
-
-       
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

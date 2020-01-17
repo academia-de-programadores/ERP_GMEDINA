@@ -13,15 +13,16 @@ namespace ERP_GMEDINA.Controllers
     public class EquipoEmpleadosController : Controller
     {
         private ERP_GMEDINAEntities db = null;
+       
         // GET: EquipoEmpleados
         public ActionResult Index()
         {
             db = new ERP_GMEDINAEntities();
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbEquipoEmpleados = new List<tbEquipoEmpleados> { };
-            var equipo = db.tbEquipoEmpleados.Where(e => e.eqem_Estado == true).Select(ee => new { eqtra_Id = ee.eqtra_Id });
-            ViewBag.eqtra_Id = new SelectList(db.tbEquipoTrabajo.Where(x => x.eqtra_Estado == true).Select(x => new { eqtra_Id = x.eqtra_Id, eqtra_Descripcion = x.eqtra_Descripcion }), "eqtra_Id", "eqtra_Descripcion");
-            return View();
+            var equipoe = db.tbEquipoEmpleados.Where(e => e.eqem_Estado == true).Select(ee => new { eqtra_Id = ee.eqtra_Id });
+            ViewBag.eqtra_Id = new SelectList(db.tbEquipoTrabajo.Where(x => x.eqtra_Estado == true).Select(x => new { eqtra_Id = x.eqtra_Id, eqtra_Descripcion = x.eqtra_Descripcion }), "eqtra_Id","eqtra_Descripcion");
+            return View(tbEquipoEmpleados);
         }
 
         public ActionResult llenarTabla()
@@ -82,26 +83,35 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        // GET: EquipoEmpleados/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: EquipoEmpleados/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(tbEquipoEmpleados tbEquipoEmpleados)
         {
-            try
+            string msj = "";
+            if (tbEquipoEmpleados.eqtra_Id !=0)
             {
-                // TODO: Add insert logic here
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbEquipoEmpleados_Insert(tbEquipoEmpleados.emp_Id, tbEquipoEmpleados.eqtra_Id, tbEquipoEmpleados.eqem_Fecha, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbEquipoEmpleados_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+            }
+            else
+            {
+                msj = "-3";
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         // GET: EquipoEmpleados/Edit/5

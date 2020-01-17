@@ -12,70 +12,68 @@ namespace ERP_GMEDINA.Controllers
 {
     public class TipoPermisosController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
-
-        // GET: Competencias
+        private ERP_GMEDINAEntities db = null;
 
         public ActionResult Index()
         {
-            List<tbTipoPermisos> tbTipoPermisos = new List<Models.tbTipoPermisos> { };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            bool Admin = (bool)Session["Admin"];
+            tbTipoPermisos tbTipoPermisos = new tbTipoPermisos { tper_Estado = true };
+            return View(tbTipoPermisos);
+        }
+
+        public ActionResult llenarTabla()
+        {
             try
             {
-                tbTipoPermisos = db.tbTipoPermisos.Where(x => x.tper_Estado).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbTipoPermisos);
+                db = new ERP_GMEDINAEntities();
+                var tbTipoPermisos = db.tbTipoPermisos
+                    .Select(
+                t =>
+                new
+                {
+                    tper_Id = t.tper_Id,
+                    tper_Descripcion = t.tper_Descripcion,
+                    tper_Estado = t.tper_Estado
+                })
+                .ToList();
+                return Json(tbTipoPermisos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbTipoPermisos_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbTipoPermisos_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
-                tbTipoPermisos.Add(new tbTipoPermisos { tper_Id = 0, tper_Descripcion = "fallo la conexion" });
+                result = "-2";
             }
-            return View(tbTipoPermisos);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-        //[HttpPost]
-        //public JsonResult llenarTabla()
-        //{
-        //    var lista = db.tbTipoSalidas
-        //        .Where(x => x.tsal_Estado == true)
-        //        .Select(
-        //        t =>
-        //        new
-        //        {
-        //            tsal_Id = t.tsal_Id,
-        //            tsal_Descripcion = t.tsal_Descripcion
-        //        })
-        //        .ToList();
-        //    return Json(lista, JsonRequestBehavior.AllowGet);
-        //}
-
-        [HttpPost]
-        public JsonResult llenarTabla()
-        {
-            var lista = db.tbTipoPermisos.Where(X => X.tper_Estado == true).Select(
-                t=>
-                new
-                {
-                    tper_Id = t.tper_Id,
-                    tper_Descripcion = t.tper_Descripcion
-                })
-                .ToList();
-                return Json(lista, JsonRequestBehavior.AllowGet);
-            }
-
-
-
-
         [HttpPost]
         public JsonResult Create(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "";
             if (tbTipoPermisos.tper_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
@@ -109,6 +107,7 @@ namespace ERP_GMEDINA.Controllers
             tbTipoPermisos tbTipoPermisos = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbTipoPermisos = db.tbTipoPermisos.Find(id);
                 if (tbTipoPermisos == null || !tbTipoPermisos.tper_Estado)
                 {
@@ -142,6 +141,7 @@ namespace ERP_GMEDINA.Controllers
             string msj = "";
             if (tbTipoPermisos.tper_Id != 0 && tbTipoPermisos.tper_Descripcion != "")
             {
+                db = new ERP_GMEDINAEntities();
                 var id = (int)Session["id"];
                 var usuario = (tbUsuario)Session["Usuario"];
                 try
@@ -170,7 +170,6 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbTipoPermisos tbTipoPermisos)
         {
             string msj = "...";
-            string RazonInactivo = "Se ha Inhabilitado este Registro";
 
             if (tbTipoPermisos.tper_Id != 0 )
             {
@@ -178,7 +177,8 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbTipoPermisos_Delete(id, null, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbTipoPermisos_Delete_Result item in list)
                     {
                         msj = item.MensajeError = " ";
@@ -197,7 +197,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj, JsonRequestBehavior.AllowGet);
         }
-
+        
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
@@ -209,9 +209,10 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

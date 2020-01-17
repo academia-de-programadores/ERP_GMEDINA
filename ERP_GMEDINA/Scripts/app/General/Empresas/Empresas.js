@@ -40,7 +40,9 @@ $("#empr_Logo").change(function () {
          
    MsgSuccess("Exito","Archivo subido exitosamente");
   } else {
-   MsgError("Error","El archivo no es valido");
+         MsgError("Error", "El archivo no es valido");
+         var img = document.getElementById('img1');
+         img.src = "";
   }
   $("#ModalNuevo").data("res", res);
  });

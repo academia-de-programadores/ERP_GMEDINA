@@ -1,34 +1,54 @@
-﻿
+﻿$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
+
+
+
+var fill = 0
 
 
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Vacaciones</h5><div align=right> <button type="button" class="btn btn-primary btn-xs" onclick="llamarmodal(' + IdEmpleado + ')">Registrar vacación</button> </div></div><div class="ibox-content"><div class="row">' + '<table id="IndexTable" class="table table-striped table-borderef table-hover dataTables-example"> ' +
         '<thead>' +
             '<tr>' +
-                
+                '<th>' + 'Número' + '</th>' +
                 '<th>' + 'Fecha inicio' + '</th>' +
                 '<th>' + 'Fecha fin' + '</th>' +
                 '<th>' + 'Cantidad dias' + '</th>' +
                 '<th>' + 'Mes vacaciones' + '</th>' +
                 '<th>' + 'Año vacaciones' + '</th>' +
+                '<th>' + 'Estado' + '</th>' +
                 '<th>' + 'Acciones' + '</th>' +
                 '</tr>' +
                 '</thead>';
     obj.forEach(function (index, value) {
+        var Estado = "";
+        if (index.hvac_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                
+                '<td>' + index.hvac_Id + '</td>' +
                 '<td>' + FechaFormato(index.hvac_FechaInicio).substring(0, 10) + '</td>' +
                 '<td>' + FechaFormato(index.hvac_FechaFin).substring(0, 10) + '</td>' +
                 '<td>' + index.hvac_CantDias + '</td>' +
                 '<td>' + index.hvac_MesVacaciones + '</td>' +
                 '<td>' + index.hvac_AnioVacaciones + '</td>' +
-                '<td>' + ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalles</button>' + '</td>' +
-                '</tr>' +
-                '</tbody>'
-        '</table>'
+                 '<td>' + Estado + '</td>' +
+                '<td>'; if (index.hvac_Estado) {
+                    div += ' <button type="button" class="btn btn-danger btn-xs" onclick="llamarmodaldelete(' + index.hvac_Id + ')" data-id="@item.hvac_Id">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="llamarmodaldetalles(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Detalle</button>';
+                }
+                else {
+                    div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.hvac_Id + ')"data-id="@item.hvac_Id">Habilitar</button>' + '</td>';
+                }
 
+        div += '</tr>' +
+                    '</tbody>'
+        '</table>'
+        
     });
     return div + '</div></div>';
 }
@@ -177,6 +197,10 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+
+
+
 
 
 
