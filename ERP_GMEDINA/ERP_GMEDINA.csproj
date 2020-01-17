@@ -1313,9 +1313,7 @@
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
-    <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
-    <Content Include="Scripts\app\General\Sueldos\Sueldos.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
