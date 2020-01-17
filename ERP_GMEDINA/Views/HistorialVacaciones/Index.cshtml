@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialVacaciones>
+﻿@model ERP_GMEDINA.Models.tbHistorialVacaciones
 
 @{
     ViewBag.Title = "Index";
@@ -36,7 +36,35 @@
             </div>
         </div>
     </div>
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormActivar" }))
+    { 
+    <div class="modal fade" id="ModalHabilitar" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title">Activar</h4>
+                </div>
+                <div class="modal-body" id="Activar">
+                    ¿Esta seguro que desea Activar este registro?
+                </div>
+                <input type="hidden" value="" id="hvac_Id" name="hvac_Id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary pull-right" id="btnActivar" data-dismiss="modal">Si</button>
+                    <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
  </div>
+
+
+
+
 
 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialVacaciones())
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialVacaciones())
@@ -49,8 +77,14 @@
 }
 
 @section Scripts {
+@if (Model.hvac_Estado)
+{
+    @Scripts.Render("~/Scripts/app/General/HistorialVacaciones/Admin")
+}
+
   @Scripts.Render("~/plugins/dataTables")
   @Scripts.Render("~/Scripts/app/General")
   @Scripts.Render("~/Scripts/app/General/HistorialVacaciones")
   @Scripts.Render("~/Scripts/app/General/IndexHistorialVacaciones")
+
 }

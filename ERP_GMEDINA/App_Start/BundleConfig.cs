@@ -729,6 +729,13 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
             "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+             "~/Scripts/app/General/Competencias/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+             "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

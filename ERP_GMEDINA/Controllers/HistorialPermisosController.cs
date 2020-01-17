@@ -61,25 +61,25 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult ChildRowData(int? id)
-        {
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            //List<V_tbHistorialPermisos_completa> lista = new List<V_tbHistorialPermisos_completa> { };
-            //using (db = new ERP_GMEDINAEntities())
-            {
-                try
-                {
-                    using (db = new ERP_GMEDINAEntities())
+        //public ActionResult ChildRowData(int? id)
+        //{
+        //    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+        //    //posteriormente es destruida.
+        //    //List<V_tbHistorialPermisos_completa> lista = new List<V_tbHistorialPermisos_completa> { };
+        //    //using (db = new ERP_GMEDINAEntities())
+        //    {
+        //        try
+        //        {
+        //            using (db = new ERP_GMEDINAEntities())
 
-                        lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
-                }
-                catch
-                {
-                }
-            }
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
+        //                lista = db.V_tbHistorialPermisos_completa.Where(x => x.hper_Id == id).ToList();
+        //        }
+        //        catch
+        //        {
+        //        }
+        //    }
+        //    return Json(lista, JsonRequestBehavior.AllowGet);
+        //}
         //--------------------------------------------DESPLEGABLES--------------------------------------------
         //Tipo salidas
         public ActionResult llenarDropDowlistTipoPermisos()

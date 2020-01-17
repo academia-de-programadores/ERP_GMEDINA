@@ -1250,6 +1250,7 @@
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
     <Content Include="Scripts\app\General\Areas\IndexAreas.js" />
+    <Content Include="Scripts\app\General\Competencias\Admin.js" />
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
@@ -1274,6 +1275,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
+    <Content Include="Scripts\app\General\HistorialVacaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
