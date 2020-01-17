@@ -16,7 +16,7 @@ namespace ERP_GMEDINA.Models
         public int cde_IdDeducciones { get; set; }
 
         [Display(Name = "Descripción Deducción")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo {0} requerido")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "El Campo {0} debe tener una longitud minima de 2")]
         public string cde_DescripcionDeduccion { get; set; }
 
@@ -26,14 +26,14 @@ namespace ERP_GMEDINA.Models
 
         
         [Display(Name = "Porcentaje Colaborador")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo {0} requerido")]
         [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales, Ejemplo(2.00, 12.20, etc).")]     
         public decimal cde_PorcentajeColaborador { get; set; }
 
         
         [Display(Name = "Porcentaje Empresa")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required(ErrorMessage = "Campo {0} requerido")]
         [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales, Ejemplo(2.00, 12.20, etc).")]
         public decimal cde_PorcentajeEmpresa { get; set; }

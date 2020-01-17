@@ -76,23 +76,69 @@ function cargarGridAcumuladosISR() {
 //Modal Create Techos Deducciones
 $(document).on("click", "#btnAgregarAcumuladosISR", function () {
     //MOSTRAR EL MODAL DE AGREGAR
-    $(".field-validation-error").css('display', 'none');
     $('#Crear input[type=text], input[type=number]').val('');
     $("#AgregarAcumuladosISR").modal();
 });
 
+//BOTON ICONCERRAR AGREGAR
+$("#IconCerrarCrear").click(function () {
+    $("#Crear #Validation_descripcion").css("display", "none");
+    $("#Crear #Validation_descripcion2").css("display", "none");
+    $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
+    $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
+
+});
+
+//BOTON CERRAR AGREGAR
+$("#btnCerrarCrear").click(function () {
+    $("#Crear #Validation_descripcion").css("display", "none");
+    $("#Crear #Validation_descripcion2").css("display", "none");
+    $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
+    $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
+});
+
 //FUNCION: CREAR EL NUEVO REGISTRO TECHOS DEDUCCIONES
 $('#btnCreateAcumuladosISR').click(function () {
+    var aisr_Descripcion = $("#Crear #aisr_Descripcion").val();
+    var aisr_Monto = $("#Crear #aisr_Monto").val();
     var ModelState = true;
+    var ModelState2 = true;
 
-    $("#Crear #aisr_Descripcion").val() == "" ? ModelState = false : $("#Crear #aisr_Descripcion").val() == " " ? ModelState = false : $("#Crear #aisr_Descripcion").val() == null ? ModelState = false : isNaN($("#Crear #aisr_Descripcion").val()) == false ? ModelState = false : '';
-    $("#Crear #aisr_Monto").val() == "" ? ModelState = false : $("#Crear #aisr_Monto").val() == "0.00" ? ModelState = false : $("#Crear #aisr_Monto").val() == null ? ModelState = false : isNaN($("#Crear #aisr_Monto").val()) == true ? ModelState = false : '';
+    if (aisr_Descripcion == "" || aisr_Descripcion == " " || aisr_Descripcion == null || isNaN(aisr_Descripcion) == false) {
+        $("#Crear #Validation_descripcion").css("display", "");
+        $("#Crear #AsteriscoDescripcionAISR").addClass("text-danger");
+        ModelState = false;
+    }
+    else {
+        $("#Crear #Validation_descripcion").css("display", "none");
+        $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
+        ModelState = true;
+    }
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    if (ModelState) {
+    if (aisr_Monto == "" || aisr_Monto < 0 || aisr_Monto == null || isNaN(aisr_Monto) == false) {
+        $("#Crear #Validation_descripcion2").css("display", "");
+        $("#Crear #AsteriscoMontoAISR").addClass("text-danger");
+        ModelState2 = false;
+    }
+    else {
+        $("#Crear #Validation_descripcion2").css("display", "none");
+        $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
+        ModelState2 = true;
+    }
+
+    
+    if (ModelState == false || ModelState2 == false) {
+
+    }
+    else
+    {
+        $("#Crear #Validation_descripcion").css("display", "none");
+        $("#Crear #Validation_descripcion2").css("display", "none");
+        $("#Crear #AsteriscoDescripcionAISR").removeClass("text-danger");
+        $("#Crear #AsteriscoMontoAISR").removeClass("text-danger");
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmAcumuladosISRCreate").serializeArray();
-        console.log(data);
-        debugger;
+
         $.ajax({
             url: "/AcumuladosISR/Create",
             method: "POST",
@@ -108,7 +154,6 @@ $('#btnCreateAcumuladosISR').click(function () {
             }
             else if (data == "bien") {
                 cargarGridAcumuladosISR();
-                console.log(data);
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -155,13 +200,37 @@ $(document).on("click", "#tblAcumuladosISR tbody tr td #btnEditarAcumuladosISR",
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditarAcumulado").click(function () {
+    var aisr_Descripcione = $("#Editar #aisr_Descripcion").val();
+    var aisr_Montoe = $("#Editar #aisr_Monto").val();
+    var ModelStatee = true;
+    var ModelState2e = true;
 
-    var ModelState = true;
-    $("#Editar #aisr_Id").val() == "" ? ModelState = false : $("#Editar #aisr_Id").val() == "0" ? ModelState = false : $("#Editar #aisr_Id").val() == null ? ModelState = false : '';
-    $("#Editar #aisr_Descripcion").val() == "" ? ModelState = false : $("#Editar #aisr_Descripcion").val() == " " ? ModelState = false : $("#Editar #aisr_Descripcion").val() == null ? ModelState = false : '';
-    $("#Editar #aisr_Monto").val() == "" ? ModelState = false : $("#Editar #aisr_Monto").val() == "0.00" ? ModelState = false : $("#Editar #aisr_Monto").val() == null ? ModelState = false : '';
+    if (aisr_Descripcione == "" || aisr_Descripcione == " " || aisr_Descripcione == null || isNaN(aisr_Descripcione) == false) {
+        $("#Editar #validatione1").css("display", "");
+        $("#Editar #AsteriscoDescripcionEditAISR").addClass("text-danger");
+        ModelStatee = false;
+    }
+    else {
+        $("#Editar #validatione1").css("display", "none");
+        $("#Editar #AsteriscoDescripcionEditAISR").removeClass("text-danger");
+        ModelStatee = true;
+    }
 
-    if (ModelState) {
+    if (aisr_Montoe == "" || aisr_Montoe < 0 || aisr_Montoe == null || isNaN(aisr_Montoe) == false) {
+        $("#Editar #validatione2").css("display", "");
+        $("#Editar #AsteriscoMontoEditAISR").addClass("text-danger");
+        ModelState2e = false;
+    }
+    else {
+        $("#Editar #validatione2").css("display", "none");
+        $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
+        ModelState2e = true;
+    }
+    if (ModelStatee == false || ModelState2e == false) {
+
+    }
+    else
+    {
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmEditAcumuladosISR").serializeArray();
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -191,11 +260,23 @@ $("#btnEditarAcumulado").click(function () {
     }
 });
 
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarAcumuladosISR").modal('hide');
+//BOTON ICON CERRAR EDITAR
+$("#IconCerrarEdit").click(function () {
+    $("#Editar #validatione1").css("display", "none");
+    $("#Editar #validatione2").css("display", "none");
+    $("#Editar #AsteriscoDescripcionEditAISR").removeClass("text-danger");
+    $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
 });
 
+//BOTON CERRAR EDITAR
+$("#btnCerrarEditar").click(function () {
+    $("#Editar #validatione1").css("display", "none");
+    $("#Editar #validatione2").css("display", "none");
+    $("#Editar #AsteriscoDescripcionEditAISR").removeClass("text-danger");
+    $("#Editar #AsteriscoMontoEditAISR").removeClass("text-danger");
+});
+
+//FUNCION: OCULTAR MODAL DE EDICIÓN
 $(document).on("click", "#btnInactivarAcumuladosISR", function () {
     $("#EditarAcumuladosISR").modal('hide');
     $("#InactivarAcumuladosISR").modal();
