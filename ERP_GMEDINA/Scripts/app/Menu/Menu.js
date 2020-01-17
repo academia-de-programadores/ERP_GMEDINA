@@ -64,6 +64,10 @@
             $("#Empleados").addClass("active");
             $("#Empleados").find(".Empleados").addClass("in");
         }
+        else if (buscarItem(controler, Equipo_Trabajo)) {
+            $("#Equipo_Trabajo").addClass("active");
+            $("#Equipo_Trabajo").find(".Equipo_Trabajo").addClass("in");
+        }
         else if (buscarItem(controler, Amonestaciones)) {
             $("#Amonestaciones").addClass("active");
             $("#Amonestaciones").find(".Amonestaciones").addClass("in");

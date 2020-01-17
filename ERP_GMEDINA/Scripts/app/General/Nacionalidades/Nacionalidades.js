@@ -57,7 +57,7 @@ function llenarTabla() {
                     tabla.row.add({
                         ID: value.nac_Id,
                         "Número": value.nac_Id,
-                        Estado: value.nac_Estado,
+                        Estado: value.nac_Estado ? "Activo" : "Inactivo",
                         Descripcion: value.nac_Descripcion,
                         Acciones: Acciones
                     })
