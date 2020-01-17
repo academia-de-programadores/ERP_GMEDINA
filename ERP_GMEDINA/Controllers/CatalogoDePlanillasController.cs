@@ -30,7 +30,30 @@ namespace ERP_GMEDINA.Controllers
 			return Json(json, JsonRequestBehavior.AllowGet);
 		}
 
-		private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false)
+        [HttpGet]
+        public JsonResult getPeriodos()
+        {
+            string response = "ok";
+            object json = null;
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var listaPeriodos = db.tbPeriodos
+                        .Where(x=> x.peri_Activo == true)
+                        .Select(x=> new { id = x.peri_IdPeriodo, descripcion = x.peri_DescripPeriodo }).ToList();
+                    return Json(json = new { data = listaPeriodos, status = response }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+               
+            }
+            json = new { status = response };
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        private IQueryable<CatalogoDePlanillasViewModel> GetPlanilla(bool? usuario = false)
 		{
 			return db.tbCatalogoDePlanillas
 							.OrderByDescending(x => x.cpla_FechaCrea)

@@ -31,7 +31,7 @@ namespace ERP_GMEDINA.Models
         [MaxLength(15, ErrorMessage = "Numero debe ser inferior a 15 digitos.")]
        
         public string insf_Telefono { get; set; }
-        [Display(Name = "Correo Electrónico Contacto")]
+        [Display(Name = "Correo Electrónico")]
         [EmailAddress(ErrorMessage = "Correo Electrónico inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Correo { get; set; }

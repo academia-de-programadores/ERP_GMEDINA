@@ -21,7 +21,9 @@
                     @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.eqem_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.eqem_Id)<span id="aste1">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.DropDownList("eqem_Id", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.eqem_Id, "", new { @class = "text-danger" })
@@ -29,7 +31,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_MontoInicial, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.dex_MontoInicial)<span id="aste2">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_MontoInicial, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoInicial, "", new { @class = "text-danger" })
@@ -37,7 +41,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_MontoRestante, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.dex_MontoRestante)<span id="aste3">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_MontoRestante, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_MontoRestante, "", new { @class = "text-danger" })
@@ -45,7 +51,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_ObservacionesComentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.dex_ObservacionesComentarios)<span id="aste4">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_ObservacionesComentarios, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_ObservacionesComentarios, "", new { @class = "text-danger" })
@@ -53,7 +61,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.cde_IdDeducciones, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.cde_IdDeducciones)<span id="aste5">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.DropDownList("cde_IdDeducciones", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.cde_IdDeducciones, "", new { @class = "text-danger" })
@@ -61,7 +71,9 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.dex_Cuota, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.dex_Cuota)<span id="aste6">*</span>
+                        </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.dex_Cuota, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.dex_Cuota, "", new { @class = "text-danger" })
@@ -74,39 +86,14 @@
                             <div style="display:none" class="btn" id="cargandoEditar">
                             </div>
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                            <button type="button" iddeduccionesextra="iddeduccionesextraordinarias" name="iddeduccionesextraordinarias" class="btn btn-danger" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>
                         </div>
                     </div>
                 </div>
             </div>
         }
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeduccionesExtraordinariasInactivar" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
-        }
     </div>
 </div>
 
-@*Modal de Inhabilitar*@
-<div class="modal fade" id="InactivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Inactivar</h4>
-            </div>
-            <div class="modal-body" id="Inactivar">
-                <h4>¿Esta seguro que desea Inactivar este registro?</h4>
-            </div>
-            <div class="modal-footer">
-                @*data-dismiss="modal"*@
-                    <button type="button" class="btn btn-danger" id="btnInactivar">Si</button>
-                    <button type="button" class="btn btn-default" id="btnCerrarInactivar">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")

@@ -6,37 +6,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.62687cm</Width>
+              <Width>2.86777cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.53646cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.28569cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.55027cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -52,13 +49,16 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Codigo Empleado</Value>
+                              <Value>Cod. Empleado</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -87,10 +87,13 @@
                               <Value>Nombres</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
@@ -119,45 +122,16 @@
                               <Value>Apellidos</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Codigo Deduccion</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -183,10 +157,13 @@
                               <Value>Descripcion Deduccion</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -215,10 +192,13 @@
                               <Value>Total a Deducir</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox11</rd:DefaultName>
@@ -247,10 +227,13 @@
                               <Value>Fecha Inicio</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox13</rd:DefaultName>
@@ -279,10 +262,13 @@
                               <Value>Fecha Fin</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox15</rd:DefaultName>
@@ -311,10 +297,13 @@
                               <Value>Fecha Pago</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox17</rd:DefaultName>
@@ -343,10 +332,13 @@
                               <Value>Codigo Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox19</rd:DefaultName>
@@ -375,10 +367,13 @@
                               <Value>Descripcion Planilla</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Language>es-HN</Language>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox21</rd:DefaultName>
@@ -413,7 +408,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>emp_Id</rd:DefaultName>
@@ -477,36 +474,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>per_Apellidos</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="cde_IdDeducciones">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!cde_IdDeducciones.Value</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>cde_IdDeducciones</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -593,7 +560,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>hipa_FechaInicio</rd:DefaultName>
@@ -623,7 +592,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>hipa_FechaFin</rd:DefaultName>
@@ -653,7 +624,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>hipa_FechaPago</rd:DefaultName>
@@ -683,7 +656,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>cpla_IdPlanilla</rd:DefaultName>
@@ -746,7 +721,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -759,9 +733,15 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <FixedColumnHeaders>true</FixedColumnHeaders>
+        <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
+        <Top>0.17639cm</Top>
+        <Left>0cm</Left>
         <Height>1.2cm</Height>
-        <Width>25.66333cm</Width>
+        <Width>25.55562cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -769,13 +749,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.47244in</Height>
+    <Height>0.60786in</Height>
     <Style />
   </Body>
-  <Width>10.10367in</Width>
+  <Width>10.06127in</Width>
   <Page>
     <PageHeader>
-      <Height>1.27cm</Height>
+      <Height>1.30583cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -790,7 +770,7 @@
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
+                    <TextDecoration>None</TextDecoration>
                   </Style>
                 </TextRun>
                 <TextRun>
@@ -798,7 +778,7 @@
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
-                    <TextDecoration>Underline</TextDecoration>
+                    <TextDecoration>None</TextDecoration>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -808,10 +788,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.3175cm</Top>
-          <Left>9.2075cm</Left>
+          <Top>0.70583cm</Top>
           <Height>0.6cm</Height>
-          <Width>8.95583cm</Width>
+          <Width>25.55562cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -822,25 +801,29 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox4">
+        <Textbox Name="Textbox7">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Globals!ExecutionTime</Value>
-                  <Style />
+                  <Value>Sistema de Planillas</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.3175cm</Top>
-          <Left>20.89896cm</Left>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Left>0cm</Left>
           <Height>0.6cm</Height>
-          <Width>4.37854cm</Width>
+          <Width>25.55562cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -860,7 +843,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.82021cm</Height>
+      <Height>1.77271cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -871,7 +854,19 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
+                  <Value>Página: </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
                   <Value>=Globals!PageNumber</Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value> de </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!TotalPages</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -879,10 +874,46 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.22021cm</Top>
-          <Left>21.825cm</Left>
+          <Top>1.06687cm</Top>
+          <Left>18.70287cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
+          <Width>6.85275cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Fecha de Impresion: </Value>
+                  <Style />
+                </TextRun>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox8</rd:DefaultName>
+          <Top>0.19912cm</Top>
+          <Left>18.70287cm</Left>
+          <Height>0.6cm</Height>
+          <Width>6.85275cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -904,8 +935,8 @@
     <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

@@ -15637,22 +15637,22 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cin_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cin_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result1)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result)">
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cpla_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result)">
           <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result1)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result)">
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
             <Parameter Name="cpla_FrecuenciaEnDias" Mode="In" Type="Int32" />
             <Parameter Name="cpla_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cpla_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="cpla_RecibeComision" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Update_Result1)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Update_Result)">
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
             <Parameter Name="cpla_FrecuenciaEnDias" Mode="In" Type="Int32" />
@@ -16152,18 +16152,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         <ComplexType Name="UDP_Plani_tbCatalogoDeIngresos_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Activar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="UDP_tbTipoPlanillaDetalleIngreso_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -16175,18 +16163,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </ComplexType>
         <ComplexType Name="UDP_tbTipoPlanillaDetalleDeduccion_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Insert_Result1">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Update_Result1">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Activar_Result1">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbDecimoCuartoMes_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
@@ -16367,6 +16343,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbInstitucionesFinancieras_Activar1_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -18805,29 +18793,29 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Activar" >
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Activar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Inactivar" >
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Insert" >
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Update" >
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Update_Result1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbISR>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tabla progresiva ISR";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -96,6 +96,26 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="EditarISRConfirmacion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro que desea Editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" id="btnRegresar">No</button>
+                <input type="button" id="btnEditISR2" value="Si" class="btn btn-primary " />
+                <div style="display:none" class="btn" id="cargandoEditar">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -125,19 +145,20 @@
     </div>
 </div>
 
-@* Modal de confirmación inactivar *@
+@*Inactivar*@
 <div class="modal fade" id="InactivarISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Inhabilitar</h4>
+                <h4 class="modal-title">Eliminar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Está seguro que desea Inhabilitar este registro?
+                ¿Esta seguro que desea eliminar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger pull-left " data-dismiss="modal" id="btnInactivarISR">Inhabilitar</button>
+                <button type="button" class="btn btn-white pull-right" id="btnBack">No</button>
+                <button type="button" class="btn btn-danger pull-right" id="btnInactivarISR">Si</button>
+                <div style="display:none" class="btn pull-right" id="cargandoInhabilitar"></div>
             </div>
         </div>
     </div>

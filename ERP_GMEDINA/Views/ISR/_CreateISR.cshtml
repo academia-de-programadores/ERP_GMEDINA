@@ -13,7 +13,7 @@
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoInicial, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="AsteriscoRangoInicialISR">*</label>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control" } })
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_RangoFinal, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="AsteriscoRangoFinalISR">*</label>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control" } })
@@ -35,18 +35,18 @@
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="Asteriscotde_IdTipoDeduISR">*</label>
                 </div>
                 <div class="col-md-8">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "Validation_descripcion" })
+                    @Html.ValidationMessageFor(model => model.tde_IdTipoDedu, "Este campo es requerido", new { @class = "text-danger", @id = "Validation_tde_IdTipoDedu" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-4">
                     @Html.LabelFor(model => model.isr_Porcentaje, htmlAttributes: new { @class = "control-label" })
-                    <label class="" id="AsteriscoISR">*</label>
+                    <label class="asterisco" id="Asteriscoisr_PorcentajeISR">*</label>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control" } })
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <input type="button" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
+        <input type="button" data-dismiss="modal" value="Cerrar" id="btnCerrarCrear" class="btn btn-default pull-right" />
         <input type="submit" value="Guardar" id="btnCreateISR" class="btn btn-primary pull-left" />
     </div>
 }

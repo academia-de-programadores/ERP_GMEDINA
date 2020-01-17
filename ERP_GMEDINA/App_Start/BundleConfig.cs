@@ -507,7 +507,7 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/AcumuladosISR.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
-                "~/Scripts/app/General/CatalogoPlanillas.js"));
+				"~/Scripts/app/General/CatalogoPlanillas.js"));
 
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));

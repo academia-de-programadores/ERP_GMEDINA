@@ -26,6 +26,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_RangoInicioMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                            <label class="" id="AsteriscoInicio">*</label> 
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.prea_RangoInicioMeses, new { htmlAttributes = new { @class = "form-control col-md-2" } })
@@ -38,6 +39,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_RangoFinMeses, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                            <label class="" id="AsteriscoFin">*</label> 
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.prea_RangoFinMeses, new { htmlAttributes = new { @class = "form-control" } })
@@ -50,6 +52,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.prea_DiasPreaviso, htmlAttributes: new { @class = "control-label", @disabled = "disabled" })
+                            <label class="" id="AsteriscoDias">*</label> 
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.prea_DiasPreaviso, new { htmlAttributes = new { @class = "form-control" } })

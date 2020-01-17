@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.ini_Motivo)
+                    @Html.LabelFor(model => model.ini_Motivo)<span id="aste1">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.ini_Motivo, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Motivo" } })
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.emp_Id)
+                    @Html.LabelFor(model => model.emp_Id)<span id="aste2">*</span>
                 </div>
                 <div class="col-md-8">
                     <select id="emp_Id" name="emp_Id" class="form-control"></select>
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    @Html.LabelFor(model => model.ini_Monto)
+                    @Html.LabelFor(model => model.ini_Monto)<span id="aste3">*</span>
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.ini_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "ini_Monto" } })

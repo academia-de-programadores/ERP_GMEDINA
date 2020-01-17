@@ -18,6 +18,8 @@ var pathname = window.location.pathname + '/',
 const btnGuardar = $('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), //Boton para guardar el catalogo de planilla con sus detalles
 	btnEditar = $('#btnEditarCatalogoDePlanillasIngresosDeducciones'), //Boton para editar editar el catalogo de planilla con sus detalles
 	validacionDescripcionPlanilla = $('#validacionDescripcionPlanilla'), //Mensaje de validacion para la descripcion de la planilla
+	asteriscoDescripcionPlanilla = $('#asteriscoDescripcion'),
+	asteriscoFrecuenciaPago = $('#asteriscoFrecuenciaPago'),
 	validacionFrecuenciaDias = $('#validacionFrecuenciaDias'), //Mensaje de validación para la frecuencia en días
 	validacionCatalogoIngresos = $(
 		'#catalogoDeIngresos #validacionCatalogoIngresos'
@@ -73,7 +75,7 @@ var crearEditar = function (edit) {
 
 
 	if (!edit) {
-		mostrarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+		mostrarSpinner($('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), cargandoCrear);
 
 		_ajax(
 			{
@@ -97,7 +99,7 @@ var crearEditar = function (edit) {
 						message: 'No se guardó el registro, contacte al administrador'
 					});
 
-					ocultarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+					ocultarSpinner($('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), cargandoCrear);
 				}
 			},
 			(enviar) => { }
@@ -257,7 +259,6 @@ function estaEnDetalles() {
 
 
 function estaEnIndex() {
-	console.log('esta en index');
 	return getUrl.toString().indexOf('Index');
 }
 
@@ -291,19 +292,28 @@ function verificarCampos(
 		scrollArriba();
 		validacionDescripcionPlanilla.show();
 		inputDescripcionPlanilla.focus();
+		asteriscoDescripcionPlanilla.addClass('text-danger');
 		todoBien = false;
-	} else validacionDescripcionPlanilla.hide();
+	} else {
+		asteriscoDescripcionPlanilla.removeClass('text-danger');
+		validacionDescripcionPlanilla.hide();
+	}
 	//Validar que la frecuencia en días esté bien
 	if (frecuenciaDias == null || frecuenciaDias.trim() == '' || parseInt(frecuenciaDias) <= 0) {
 		scrollArriba();
 		validacionFrecuenciaDias.show();
 		if (todoBien) inputFrecuenciaEnDias.focus();
+		asteriscoFrecuenciaPago.addClass('text-danger');
 		todoBien = false;
-	} else validacionFrecuenciaDias.hide();
+	} else {
+		asteriscoFrecuenciaPago.removeClass('text-danger');
+		validacionFrecuenciaDias.hide();
+	}
 
 	//Validar que se haya seleccionado por lo menos un ingreso
 	if (catalogoIngresos.length == 0) {
 		scrollArriba();
+		validacionCatalogoIngresos.show();
 		validacionCatalogoIngresos.parent().show();
 		todoBien = false;
 	} else {
@@ -479,7 +489,6 @@ function listarCatalogos() {
 
 	var urlFetchData = baseUrl + '/GetIngresosDeducciones?esCrear=';
 	if (estaEnEditar() > 1) {
-		console.log('Esta en editar');
 		urlFetchData += 'false&id=' + URLactual.substr((URLactual.search(/Edit/i) + 'Edit'.length + 1))
 
 		//Ingresos
@@ -572,19 +581,16 @@ function listarCatalogos() {
 				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 				//Se activara el switch, si esta desactivado
 				$(catalogoIngresosInputs).on('ifChecked', () => {
+					validacionCatalogoIngresos.hide();
 					if (listaCatalogoIngresosFalse()) {
-						console.log('ok1')
 						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
 							$('#checkSeleccionarTodosIngresos').click();
-							console.log('ok2')
-
 						}
 					}
 				});
 
 				//Activar switch seleccionar todos en ingresos
 				if (listaCatalogoIngresosFalse()) {
-					console.log('ok3')
 					$('#checkSeleccionarTodosIngresos').click();
 				}
 
@@ -702,17 +708,55 @@ function listarCatalogos() {
 			],
 			"order": [[1, "asc"]],
 			initComplete: function (settings, json) {
-				$('#tblCatalogoIngresos tbody tr td .i-checks, #tblCatalogoIngresos tbody tr td .i-checks input.i-checks-no-aplica').iCheck({
+			
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
 
-				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
 
-				seleccionarCheckbox_CatalogoIngresos();
+				var catalogoIngresosChangeCheckbox = document.querySelector(
+					'#catalogoDeIngresos .js-check-change'
+				);
+				const catalogoIngresosInputs = $('#tblCatalogoIngresos tbody tr td input.i-checks');
+
+				//Seleccionar o deseleccionar los ingresos
+				catalogoIngresosChangeCheckbox.onchange = function () {
+					const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
+					let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
+					if (catalogoIngresosChangeCheckbox.checked) {
+						catalogoIngresosInputs.iCheck('check');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						catalogoIngresosInputs.iCheck('uncheck');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+					}
+				};
+
+				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
+				//Se activara el switch, si esta desactivado
+				$(catalogoIngresosInputs).on('ifChecked', () => {
+					validacionCatalogoIngresos.hide();
+					if (listaCatalogoIngresosFalse()) {
+						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
+							$('#checkSeleccionarTodosIngresos').click();
+						}
+					}
+				});
+
+				//Activar switch seleccionar todos en ingresos
+				if (listaCatalogoIngresosFalse()) {
+					$('#checkSeleccionarTodosIngresos').click();
+				}
+
 			}
 		});
 
@@ -746,14 +790,15 @@ function listarCatalogos() {
 			],
 			"order": [[1, "asc"]],
 			initComplete: function (settings, json) {
-				const catalogoDeduccionesInputs = $(
-					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
-				);
 
 				$('#tblCatalogoDeducciones tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
+
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
+				);
 
 				var catalogoDeduccionesChangeCheckbox = document.querySelector(
 					'#catalogoDeDeducciones .js-check-change'
@@ -761,40 +806,37 @@ function listarCatalogos() {
 
 				$('#noAplica').on('ifChecked', () => {
 					catalogoDeduccionesInputs.iCheck('uncheck');
-
 					const seleccionarTodasLasDeducciones = checkSeleccionarTodasLasDeducciones;
 					if (seleccionarTodasLasDeducciones.is(':checked'))
 						seleccionarTodasLasDeducciones.click();
 				});
 
 				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					validacionCatalogoDeducciones.hide();
 					$('#noAplica').iCheck('uncheck');
 					if (listaCatalogoDeduccionesFalse()) {
 						if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
-							checkSeleccionarTodasLasDeducciones.prop("checked", true);
-						else {
-							checkSeleccionarTodasLasDeducciones.prop("checked", false);
-						}
+							checkSeleccionarTodasLasDeducciones.click();
 					}
 				});
 
 				catalogoDeduccionesChangeCheckbox.onchange = function () {
-					const seleccionarTodasLasDeducciones = $(
-						'#seleccionarTodasLasDeducciones'
-					);
+					const seleccionarTodasLasDeducciones = $('#seleccionarTodasLasDeducciones');
 					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
 					if (catalogoDeduccionesChangeCheckbox.checked) {
 						catalogoDeduccionesInputs.iCheck('check');
-						seleccionarTodasLasDeducciones.html(
-							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-						);
-					} else {
-						seleccionarTodasLasDeducciones.html(
-							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-						);
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar'));
+					}
+					else {
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar'));
 						catalogoDeduccionesInputs.iCheck('uncheck');
 					}
 				};
+
+				//Activar switch seleccionar todos en deducciones
+				if (listaCatalogoDeduccionesFalse()) {
+					checkSeleccionarTodasLasDeducciones.click();
+				}
 			}
 		});
 	}
@@ -826,10 +868,7 @@ function listarCatalogos() {
 		//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 		//Se activara el switch, si esta desactivado
 		$(catalogoIngresosInputs).on('ifChecked', () => {
-			console.log('check ');
-
 			if (listaCatalogoIngresosFalse()) {
-				console.log('check all');
 				if (!$('#checkSeleccionarTodosIngresos').is(':checked'))
 					$('#checkSeleccionarTodosIngresos').prop("checked", true);
 			}
@@ -877,8 +916,8 @@ function getIngresos(data) {
             <h5>Ingresos de la Planilla</h5>
         </div>
 		<div class="ibox-content">
-		<div class="data-details">
-            <table class="table table-bordered tbl-catalogos" id="childIngresos">
+		<div class="data-details" style="padding:5px">
+            <table class="table table-bordered tbl-catalogos" id="child-`+ localStorage.getItem("idDatatableChild") + `">
                 <thead>
                     <tr>
                         <th>Ingreso</th>
@@ -914,8 +953,8 @@ function getDeducciones(data) {
             <h5>Deducciones de la Planilla</h5>
         </div>
 		<div class="ibox-content">
-		<div class="data-details">
-            <table class="table table-bordered tbl-catalogos">
+		<div class="data-details" style="padding:5px">
+            <table class="table table-bordered tbl-catalogos" id="child-`+ localStorage.getItem("idDatatableChild") + `">
                 <thead>
                     <tr>
                         <th>Deducción</th>
@@ -969,8 +1008,6 @@ $(document).ready(() => {
 		listarCatalogos();
 	}
 
-	console.log('Leyendo');
-
 	if (estaEnDetalles() > 1) {
 
 		$('.tbl-catalogos').DataTable({
@@ -1022,7 +1059,10 @@ $(document).ready(() => {
 				.trim() != ''
 		) {
 			validacionDescripcionPlanilla.hide();
+			asteriscoDescripcionPlanilla.removeClass('text-danger');
+
 		} else {
+			asteriscoDescripcionPlanilla.addClass('text-danger');
 			validacionDescripcionPlanilla.show();
 		}
 	});
@@ -1035,8 +1075,10 @@ $(document).ready(() => {
 			inputFrecuenciaEnDias.val() > 0
 		) {
 			validacionFrecuenciaDias.hide();
+			asteriscoFrecuenciaPago.removeClass('text-danger');
 		} else {
 			validacionFrecuenciaDias.show();
+			asteriscoFrecuenciaPago.addClass('text-danger');
 		}
 	});
 });
@@ -1046,7 +1088,7 @@ $(document).ready(() => {
 $(document).on('click', 'td.details-control', function () {
 	var tr = $(this).closest('tr');
 	var row = table.row(tr);
-
+	var detail;
 	//Que cierre el detalle
 	if (row.child.isShown()) {
 		// This row is already open - close it
@@ -1056,6 +1098,7 @@ $(document).on('click', 'td.details-control', function () {
 		//Que desplegue el detalle
 		row.child([spinner()]).show();
 		tr.addClass('shown');
+		localStorage.setItem('idDatatableChild', row.data().idPlanilla)
 
 		// Obtener los datos para el detalle
 		obtenerDetalles(
@@ -1064,8 +1107,9 @@ $(document).on('click', 'td.details-control', function () {
 				//Mostrar el detalle con sus datos
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
-
-				let detail = $('.tbl-catalogos').DataTable({
+				detail = null;
+				detail = new $('table tbody tr td #child-' + localStorage.getItem("idDatatableChild")).DataTable({
+					destroy: true,
 					"language": {
 						"paging": false,
 						"sProcessing": spinner(),
@@ -1076,7 +1120,7 @@ $(document).on('click', 'td.details-control', function () {
 						"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
 						"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 						"sInfoPostFix": "",
-						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar: ",
 						"sUrl": "",
 						"sInfoThousands": ",",
 						"sLoadingRecords": spinner(),
@@ -1093,13 +1137,11 @@ $(document).on('click', 'td.details-control', function () {
 					},
 					"paging": true,
 					responsive: false,
-					dom: 'lft',
+					dom: 'lftpi',
 					"order": [[0, "asc"]],
 					initComplete: function () {
-						console.log('Hola');
 					}
 				});
-
 			},
 			() => { }
 		);
@@ -1109,43 +1151,34 @@ $(document).on('click', 'td.details-control', function () {
 //Insetar
 $(document).on(
 	'click',
-	'#btnConfirmacionCreate',
+	'#btnGuardarCatalogoDePlanillasIngresosDeducciones',
 	function () {
-		crearEditar(false);
+		table.search('').draw();
+		table2.search('').draw();
+		//Array de Ingresos y deducciones
+		let arrayIngresos = [];
+		let arrayDeducciones = [];
+		//Obtener los valores del catalogo de planillas
+		let descripcionPlanilla = inputDescripcionPlanilla.val();
+		let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+		//Obtener las lista del catalogo de ingresos
+		listaCatalogoIngresos(arrayIngresos);
+
+		//Obtener las lista del catalogo de deducciones
+		listaCatalogoDeducciones(arrayDeducciones);
+		if (
+			verificarCampos(
+				descripcionPlanilla,
+				frecuenciaDias,
+				arrayIngresos,
+				arrayDeducciones
+			)
+		) {
+			crearEditar(false);
+		}
 	}
 );
-
-//Desplegar modal de que si desea guardar
-$('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
-	table.search('').draw();
-	table2.search('').draw();
-	//Array de Ingresos y deducciones
-	let arrayIngresos = [];
-	let arrayDeducciones = [];
-	//Obtener los valores del catalogo de planillas
-	let descripcionPlanilla = inputDescripcionPlanilla.val();
-	let frecuenciaDias = inputFrecuenciaEnDias.val();
-
-	//Obtener las lista del catalogo de ingresos
-	listaCatalogoIngresos(arrayIngresos);
-
-	//Obtener las lista del catalogo de deducciones
-	listaCatalogoDeducciones(arrayDeducciones);
-
-	//Insertar o editar
-	if (
-		verificarCampos(
-			descripcionPlanilla,
-			frecuenciaDias,
-			arrayIngresos,
-			arrayDeducciones
-		)
-	) {
-		console.log(descripcionPlanilla);
-		$('#modalConfirmacionCreate').modal();
-	}
-
-});
 
 //Desplegar modal de que si desea editar
 $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
@@ -1173,7 +1206,6 @@ $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {
 			arrayDeducciones
 		)
 	) {
-		console.log(descripcionPlanilla);
 		$('#modalConfirmacionEdit').modal();
 	}
 

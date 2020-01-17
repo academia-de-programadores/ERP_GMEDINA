@@ -7,10 +7,6 @@ tr.shown td.details-control {
     background: url('../../img/menos.png') no-repeat center center;
 }
 
-#tblCatalogoPlanillas_next {
-    background: url(../../img/flecha-derecha.png) no-repeat center left;
-}
-
 .no-sort::after {
     display: none !important;
 }
@@ -22,13 +18,50 @@ tr.shown td.details-control {
 }
 
 .data {
-    width: 300px;
-    height: 400px;
-    overflow: scroll;
+    max-width: 370px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.data::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.data::-webkit-scrollbar-track {
+background : rgb(131, 131, 131);
+border-radius: 10px;
+}
+
+.data::-webkit-scrollbar-thumb {
+background : rgba(168, 168, 168, 0.5);
+border-radius: 10px;
+box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .data-details {
     width: 460px;
     height: 300px;
-    overflow: scroll;
+    overflow: auto;
+}
+
+.data-details::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.data-details::-webkit-scrollbar-track {
+background : rgb(131, 131, 131);
+border-radius: 10px;
+}
+
+.data-details::-webkit-scrollbar-thumb {
+background : rgba(168, 168, 168, 0.5);
+border-radius: 10px;
+box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.dataTables_wrapper{
+    padding-bottom: 10px !important;
 }

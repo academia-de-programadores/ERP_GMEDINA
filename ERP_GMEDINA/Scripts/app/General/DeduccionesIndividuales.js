@@ -139,6 +139,11 @@ $("#btnCerrarCrear").click(function () {
     $("#validation3").css("display", "none");
     $("#validation4").css("display", "none");
     $("#validation5").css("display", "none");
+    $("#Crear #ast1").css("color", "black");
+    $("#Crear #ast2").css("color", "black");
+    $("#Crear #ast3").css("color", "black");
+    $("#Crear #ast4").css("color", "black");
+    $("#Crear #ast5").css("color", "black");
     $("#emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -154,6 +159,11 @@ $("#btnIconCerrar").click(function () {
     $("#validation3").css("display", "none");
     $("#validation4").css("display", "none");
     $("#validation5").css("display", "none");
+    $("#Crear #ast1").css("color", "black");
+    $("#Crear #ast2").css("color", "black");
+    $("#Crear #ast3").css("color", "black");
+    $("#Crear #ast4").css("color", "black");
+    $("#Crear #ast5").css("color", "black");
     $("#emp_Id").val("0");
     $("#dei_Motivo").val('');
     $("#dei_MontoInicial").val('');
@@ -211,6 +221,7 @@ $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionIndividual').click(function () {
+    var TOF = true;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var emp_Id = $("#Crear #emp_Id").val();
     var dei_Motivo = $("#Crear #dei_Motivo").val();
@@ -226,83 +237,125 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     else {
         dei_PagaSiempre = false;
     }
+    //----
 
     if (dei_Motivo == "" || dei_Motivo == null) {
         $("#Crear #validation1").css("display", "");
+        $("#Crear #ast1").css("color", "red");
+        TOF = false;
     }
     else {
         $("#Crear #validation1").css("display", "none");
+        $("#Crear #ast1").css("color", "black");
     }
-
+    //--
     if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
         $("#Crear #validation2").css("display", "");
+        $("#Crear #ast2").css("color", "red");
+        TOF = false;
     }
-    else if (emp_Id != "" || emp_Id != 0 || emp_Id != "0") {
+    else {
         $("#Crear #validation2").css("display", "none");
+        $("#Crear #ast2").css("color", "black");
     }
+    //--
     if (dei_MontoInicial != "" || dei_MontoInicial != null || dei_MontoInicial != undefined) {
-        if (expr.test(dei_MontoInicial)) {
-            if (dei_MontoRestante != "" || dei_MontoRestante != null || dei_MontoRestante != undefined) {
-                if (expr.test(dei_MontoRestante)) {
-                    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) {
-                            if (expr.test(dei_Cuota)) {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(dei_MontoInicial)) {
+        $("#Crear #validation3").css("display", "none");
+        $("#Crear #ast3").css("color", "black");
+    }
+    else{
+        $("#Crear #validation3").css("display", "");
+        $("#Crear #ast3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (dei_MontoRestante != "" || dei_MontoRestante != null || dei_MontoRestante != undefined) {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(dei_MontoRestante)) {
+        $("#Crear #validation4").css("display", "none");
+        $("#Crear #ast4").css("color", "black");
+    }
+    else {
+        $("#Crear #validation4").css("display", "");
+        $("#Crear #ast4").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (dei_Cuota != "" || dei_Cuota != null || dei_Cuota != undefined) { 
+        $("#Crear #validation5").css("display", "none");
+        $("#Crear #ast5").css("color", "black");
+    }
+    else {
+        $("#Crear #validation5").css("display", "");
+        $("#Crear #ast5").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(dei_Cuota)) {
+        $("#Crear #validation5").css("display", "none");
+        $("#Crear #ast5").css("color", "black");
+    }
+    else {
+        $("#Crear #validation5").css("display", "");
+        $("#Crear #ast5").css("color", "red");
+        TOF = false;
+    }
 
-                                mostrarCargandoCrear();
+    if (TOF) {
+        mostrarCargandoCrear();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesIndividuales/Create",
+            method: "POST",
+            data: { dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_MontoInicial: dei_MontoInicial, dei_MontoRestante: dei_MontoRestante, dei_Cuota: dei_Cuota, dei_PagaSiempre: dei_PagaSiempre }
+        }).done(function (data) {
 
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
 
+                cargarGridDeducciones();
 
-                                //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-                                $.ajax({
-                                    url: "/DeduccionesIndividuales/Create",
-                                    method: "POST",
-                                    data: { dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_MontoInicial: dei_MontoInicial, dei_MontoRestante: dei_MontoRestante, dei_Cuota: dei_Cuota, dei_PagaSiempre: dei_PagaSiempre }
-                                }).done(function (data) {
+                $("#Crear #dei_Motivo").val('');
+                $("#Crear #dei_MontoInicial").val('');
+                $("#Crear #dei_MontoRestante").val('');
+                $("#Crear #dei_Cuota").val('');
+                $("#Crear #dei_PagaSiempre").val('');
 
-                                    //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-                                    if (data != "error") {
+                //CERRAR EL MODAL DE AGREGAR
+                $("#AgregarDeduccionesIndividuales").modal('hide');
 
-                                        cargarGridDeducciones();
-
-                                        $("#Crear #dei_Motivo").val('');
-                                        $("#Crear #dei_MontoInicial").val('');
-                                        $("#Crear #dei_MontoRestante").val('');
-                                        $("#Crear #dei_Cuota").val('');
-                                        $("#Crear #dei_PagaSiempre").val('');
-
-                                        //CERRAR EL MODAL DE AGREGAR
-                                        $("#AgregarDeduccionesIndividuales").modal('hide');
-
-                                        // Mensaje de exito cuando un registro se ha guardado bien
-                                        iziToast.success({
-                                            title: 'Exito',
-                                            message: '¡El registro se agregó de forma exitosa!',
-                                        });
-                                    }
-                                    else {
-                                        iziToast.error({
-                                            title: 'Error',
-                                            message: '¡No se guardó el registro, contacte al administrador!',
-                                        });
-                                    }
-
-                                    ocultarCargandoCrear();
-                                });
-                            }
-                        }
-                        else {
-                            $("#Editar #validation5").css("display", "");
-                        }
-                    }
-                }
-                else {
-                    $("#Crear #validation4").css("display", "");
-                }
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
             }
-        }
-        else {
-            $("#Crear #validation3").css("display", "");
-        }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
 
+            ocultarCargandoCrear();
+        });
+    }
+   
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
     $("#frmCreateDeduccionIndividual").submit(function (e) {
@@ -316,25 +369,16 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
     $("#validatione4").css("display", "none");
     $("#validatione4").css("display", "none");
+    $("#Editar #aste1").css("color", "black");
+    $("#Editar #aste2").css("color", "black");
+    $("#Editar #aste3").css("color", "black");
+    $("#Editar #aste4").css("color", "black");
+    $("#Editar #aste5").css("color", "black");
     $("#EditarDeduccionesIndividuales").modal('hide');
 });
-
-$("#btnIconCerrare").click(function () {
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#validatione4").css("display", "none");
-    $("#EditarDeduccionesIndividuales").modal('hide');
-});
-
-
-
-
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -418,43 +462,88 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividual
 });
 
 $("#btnEditDeduccionIndividual").click(function () {
-    var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
+    var TOF = true;
+    var expr = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
 
     var vale2 = $("#Editar #dei_Motivo").val();
     var vale3 = $("#Editar #dei_MontoInicial").val();
     var vale4 = $("#Editar #dei_MontoRestante").val();
     var vale5 = $("#Editar #dei_Cuota").val();
-
-
+    debugger;
     if (vale2 == "" || vale2 == null) {
         $("#Editar #validatione1").css("display", "");
+        $("#Editar #aste1").css("color", "red");
+        TOF = false;
     }
-    else if (vale3 != "" || vale3 != null || vale3 != undefined) {
-        debugger;
-        if (expreg.test(vale3)) {
-            if (vale4 != "" || vale4 != null || vale4 != undefined) {
-                if (expreg.test(vale4)) {
-                    if (vale5 != "" || vale5 != null || vale5 != undefined) {
-                        if (expreg.test(vale5)) {
-                            $("#EditarDeduccionesIndividuales").modal('hide');
-                            $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-                            $("html, body").css("overflow", "hidden");
-                            $("html, body").css("overflow", "scroll");
-                        }
-                        else {
-                            $("#Editar #validatione5").css("display", "");
-                        }
-                    }
-                }
-                else{
-                    $("#Editar #validatione4").css("display", "");
-                }
-            }
-        }
-        else {
-            $("#Editar #validatione3").css("display", "");
-        }
+    else {
+        $("#Editar #validatione1").css("display", "none");
+        $("#Editar #aste1").css("color", "black");
     }
+    //--
+    if (vale3 != "" || vale3 != null || vale3 != undefined) {
+        $("#Editar #validatione3").css("display", "none");
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(vale3)) {
+        $("#Editar #validatione3").css("display", "none");
+        $("#Editar #aste3").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione3").css("display", "");
+        $("#Editar #aste3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (vale4 != "" || vale4 != null || vale4 != undefined) {
+        $("#Editar #validatione4").css("display", "none");
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(vale4)) {
+        $("#Editar #validatione4").css("display", "none");
+        $("#Editar #aste4").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione4").css("display", "");
+        $("#Editar #aste4").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (vale5 != "" || vale5 != null || vale5 != undefined) {
+        $("#Editar #validatione5").css("display", "none");
+        $("#Editar #aste5").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione5").css("display", "");
+        $("#Editar #aste5").css("color", "red");
+        TOF = false;
+    }
+    if (expr.test(vale5)) {
+        $("#Editar #validatione5").css("display", "none");
+        $("#Editar #aste5").css("color", "black");
+    }
+    else {
+        $("#Editar #validatione5").css("display", "");
+        $("#Editar #aste5").css("color", "red");
+        TOF = false;
+    }
+
+    if (TOF) {
+        $("#EditarDeduccionesIndividuales").modal('hide');
+        $("#EditarDeduccionesIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
+    }
+
 
     $("#EditarDeduccionesIndividuales").submit(function (e) {
         return false;
@@ -500,7 +589,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
     }
 
     mostrarCargandoEditar();
-
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionesIndividuales/Edit",
