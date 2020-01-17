@@ -43,10 +43,6 @@
             @Html.Partial("_Footer")
 
         </div>
-        <!-- End page wrapper-->
-
-        <!-- Right Sidebar -->
-        @Html.Partial("_RightSidebar")
 
     </div>
     <!-- End wrapper-->
@@ -61,6 +57,11 @@
 
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
+	<script>
+		$('#menuDesplegar').click(function () {
+			$('#menulateral').removeClass("custom-scrollbar");
+		});
+	</script>
 </body>
 </html>
 

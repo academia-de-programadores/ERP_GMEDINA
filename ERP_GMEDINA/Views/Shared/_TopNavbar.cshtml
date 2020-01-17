@@ -1,10 +1,10 @@
 ﻿<div class="row border-bottom">
-    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;" id="navMenu">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" id="menuDesplegar"><i class="fa fa-bars"></i> </a>
             
         </div>
-        <ul class="nav navbar-top-links navbar-right">
+        <ul class="nav navbar-top-links navbar-right" id="ulMenu">
 			
 			@{ 
 				var oUsuario = (ERP_GMEDINA.Models.tbUsuario)HttpContext.Current.Session["sesionUsuario"];

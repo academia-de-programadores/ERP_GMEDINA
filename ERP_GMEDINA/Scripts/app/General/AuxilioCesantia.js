@@ -1,14 +1,13 @@
 ﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
-    $.ajax({
-        url: uri,
-        type: type,
-        data: { params },
-        success: function (data)
-        {
-            callback(data);
-        }
-    });
+	$.ajax({
+		url: uri,
+		type: type,
+		data: { params },
+		success: function (data) {
+			callback(data);
+		}
+	});
 }
 
 // REGION DE VARIABLES
@@ -17,361 +16,499 @@ var EliminarID = 0;
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+  	console.log(textStatus);
   })
   .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
+  	console.log("No se pudo recuperar Script SerializeDate");
   });
 
 //Funcion para refrescar la tabala (Index)
 function cargarGridAuxilioCesantia() {
-    var esAdministrador = $("#rol_Usuario").val();
-    _ajax(null,
+	var esAdministrador = $("#rol_Usuario").val();
+	_ajax(null,
         '/AuxilioDeCesantias/GetData',
         'GET',
         (data) => {
-            if (data.length == 0)
-            {
-                //Validar si se genera un error al cargar de nuevo el grid
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
-            //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaAuxCes = data, template = '';
-            //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaAuxCes.length; i++)
-            {
+        	if (data.length == 0) {
+        		//Validar si se genera un error al cargar de nuevo el grid
+        		iziToast.error({
+        			title: 'Error',
+        			message: 'No se pudo cargar la información, contacte al administrador',
+        		});
+        	}
+        	//GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
+        	var ListaAuxCes = data;
+        	//LIMPIAR LA DATA DEL DATATABLE
+        	$('#tblAuxCesantia').DataTable().clear();
+        	//RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
+        	for (var i = 0; i < ListaAuxCes.length; i++) {
 
-                //variable para verificar el estado del registro
-                var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
+        		//variable para verificar el estado del registro
+        		var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
 
-                //variable boton detalles
-                var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
+        		//variable boton detalles
+        		var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
 
-                //variable boton editar
-                var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
+        		//variable boton editar
+        		var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
 
-                //variable donde está el boton activar
-                var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarAuxCes">Activar</button>' : '' : '';
+        		//variable donde está el boton activar
+        		var botonActivar = ListaAuxCes[i].aces_Activo == false ? esAdministrador == "1" ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalActivarAuxCes">Activar</button>' : '' : '';
 
 
-                console.log(estadoRegistro);
-
-                template += '<tr data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '">' +
-                    '<td>' + ListaAuxCes[i].aces_IdAuxilioCesantia + '</td>' +
-                    '<td>' + ListaAuxCes[i].aces_RangoInicioMeses + '</td>' +
-                    '<td>' + ListaAuxCes[i].aces_RangoFinMeses + '</td>' +
-                    '<td>' + ListaAuxCes[i].aces_DiasAuxilioCesantia + '</td>' +
-                    '<td>' + estadoRegistro + '</td>' +
-                     //variable donde está el boton de detalles
-                    '<td>' + botonDetalles +
-
-                    //variable donde está el boton de detalles
-                     botonEditar +
-
-                    //boton activar 
-                    botonActivar
-                '</td>' +
-                '</tr>';
-            }
-            //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyAuxCes').html(template);
+        		console.log(estadoRegistro);
+        		//AGREGAR FILA AL DATATABLE POR ITERACIÓN DEL CICLO
+        		$('#tblAuxCesantia').dataTable().fnAddData([
+                    ListaAuxCes[i].aces_IdAuxilioCesantia,
+                    ListaAuxCes[i].aces_RangoInicioMeses,
+                    ListaAuxCes[i].aces_RangoFinMeses,
+                    ListaAuxCes[i].aces_DiasAuxilioCesantia,
+                    estadoRegistro,
+                    botonDetalles + botonEditar + botonActivar]
+                );
+        	}
         });
-    FullBody();
+	FullBody();
 
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnModalCrear", function ()
-{
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#Crear #aces_RangoInicioMeses").val('');
-    $("#Crear #aces_RangoFinMeses").val('');
-    $("#Crear #aces_DiasAuxilioCesantia").val('');
-    $("#frmCrearAuxCes").modal();
+$(document).on("click", "#btnModalCrear", function () {
+	//MOSTRAR EL MODAL DE AGREGAR
+	$("#Crear #aces_RangoInicioMeses").val('');
+	$("#Crear #aces_RangoFinMeses").val('');
+	$("#Crear #aces_DiasAuxilioCesantia").val('');
+	$("#Crear #Validation_descipcion").css("display", "none");
+	$("#Crear #Validation_descipcion2").css("display", "none");
+	$("#Crear #Validation_descipcion3").css("display", "none");
+	$("#Crear #AsteriscoRIM").removeClass("text-danger");
+	$("#Crear #AsteriscoRFM").removeClass("text-danger");
+	$("#Crear #AsteriscoACD").removeClass("text-danger");
+	$("#frmCrearAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
-$("#frmCrearAuxCes").submit(function (e)
-{
-    return false;
+$("#frmCrearAuxCes").submit(function (e) {
+	return false;
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCrearAuxCes').click(function ()
-{
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCrearAuxCess").serializeArray();
+$('#btnCrearAuxCes').click(function () {
 
-    var rangoInicio = $("#Crear #aces_RangoInicioMeses").val();
-    var rangoFin = $("#Crear #aces_RangoFinMeses").val();
-    var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
+	//SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+	var data = $("#frmCrearAuxCess").serializeArray();
 
-   // console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
+	var rangoInicio = $("#Crear #aces_RangoInicioMeses").val();
+	var rangoFin = $("#Crear #aces_RangoFinMeses").val();
+	var diasAuxCes = $("#Crear #aces_DiasAuxilioCesantia").val();
 
-    //VALIDAMOS LOS CAMPOS
-    if (rangoInicio >= 0 && rangoFin > 0 && diasAuxCes > 0)
-    {
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-        $.ajax({
-            url: "/AuxilioDeCesantias/Create",
-            method: "POST",
-            data: data
-        }).done(function (data)
-        {
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+	console.log(parseInt(rangoInicio) + parseInt(rangoFin));
 
-            if (data == "error")
-            {
-                $("#frmCrearAuxCes").modal('hide');
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se guardó el registro, contacte al administrador',
-                });
-            }
-            else {
-                $("#frmCrearAuxCes").modal('hide');
-                cargarGridAuxilioCesantia();
-                $("#Crear #aces_RangoInicioMeses").val('');
-                $("#Crear #aces_RangoFinMeses").val('');
-                $("#Crear #aces_DiasAuxilioCesantia").val('');
-                // Mensaje de exito cuando un registro se ha guardado bien
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro se agregó de forma exitosa!',
-                });
-            }
+	// console.log(rangoInicio + ' ' + rangoFin +' '+ diasAuxCes);
 
-        });
-    }
-    else
-    {
-        $("#rangoinicio").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
+	//VALIDAMOS LOS CAMPOS
+	if (rangoInicio > 0 && rangoInicio != "" && rangoInicio != null && rangoInicio != undefined &&
+        rangoFin > 0 && rangoFin != "" && rangoFin != null && rangoFin != undefined &&
+        diasAuxCes > 0 && diasAuxCes != "" && diasAuxCes != null && diasAuxCes != undefined
+        && parseInt(rangoInicio) < parseInt(rangoFin) && rangoInicio != rangoFin) {
+		//ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+		$.ajax({
+			url: "/AuxilioDeCesantias/Create",
+			method: "POST",
+			data: data
+		}).done(function (data) {
+			//VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+
+			if (data == "error") {
+				iziToast.error({
+					title: 'Error',
+					message: 'No se guardó el registro, contacte al administrador',
+				});
+			}
+			else {
+				$("#frmCrearAuxCes").modal('hide');
+				cargarGridAuxilioCesantia();
+				$("#Crear #aces_RangoInicioMeses").val('');
+				$("#Crear #aces_RangoFinMeses").val('');
+				$("#Crear #aces_DiasAuxilioCesantia").val('');
+				// Mensaje de exito cuando un registro se ha guardado bien
+				iziToast.success({
+					title: 'Exito',
+					message: 'El registro se agregó de forma exitosa!',
+				});
+			}
+
+		});
+	}
+	else {
+		if (rangoInicio <= 0 || rangoInicio == "" || rangoInicio == undefined) {
+			$("#Crear #Validation_descipcion").css("display", "block");
+			$("#AsteriscoRIM").addClass("text-danger");
+		} else {
+			$("#AsteriscoRIM").removeClass("text-danger");
+		}
+		if (rangoFin <= 0 || rangoFin == "" || rangoFin == undefined) {
+			$("#Crear #Validation_descipcion2").css("display", "block");
+			$("#AsteriscoRFM").addClass("text-danger");
+		} else {
+			$("#AsteriscoRFM").removeClass("text-danger");
+		}
+		if (parseInt(rangoFin) < parseInt(rangoInicio)) {
+
+			iziToast.error({
+				title: 'Error',
+				message: 'Rango Inicio no puede ser mayor que Rango Fin.',
+			});
+		} if (parseInt(rangoFin) == parseInt(rangoInicio)) {
+
+			iziToast.error({
+				title: 'Error',
+				message: 'Rango Inicio no puede ser igual que Rango Fin.',
+			});
+		}
+		if (diasAuxCes <= 0 || diasAuxCes == "" || diasAuxCes == undefined) {
+			$("#Crear #Validation_descipcion3").css("display", "block");
+			$("#AsteriscoACD").addClass("text-danger");
+		} else {
+			$("#AsteriscoACD").removeClass("text-danger");
+		}
+
+		$("#rangoinicio").focus();
+	}
 });
 
 
 // OCULTAR MODAL DE REGISTRO NUEVO
 $("#btnCerrarCrearAuxCes").click(function () {
-    $("#frmCrearAuxCes").modal('hide');
+	$("#frmCrearAuxCes").modal('hide');
+});
+
+$("#closebutton").click(function () {
+	$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+});
+
+$("#closebutton2").click(function () {
+	$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrearAuxCes").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#Validation_descipcion3").css("display", "none");
+	$("#Crear #Validation_descipcion").css("display", "none");
+	$("#Crear #Validation_descipcion2").css("display", "none");
+	$("#Crear #Validation_descipcion3").css("display", "none");
 });
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
 $("#IconCerrar").click(function () {
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
-    $("#Validation_descipcion3").css("display", "none");
+	$("#Crear #Validation_descipcion").css("display", "none");
+	$("#Crear #Validation_descipcion2").css("display", "none");
+	$("#Editar #Validation_descipcion").css("display", "none");
+	$("#Editar #Validation_descipcion2").css("display", "none");
+	$("#Editar #Validation_descipcion3").css("display", "none");
+	$("#Crear #Validation_descipcion3").css("display", "none");
 });
 
 // DETALLES Auxilio Cesantias
 $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalDetalles", function () {
-    var ID = $(this).data('id');
-    $.ajax({
-        url: "/AuxilioDeCesantias/Details/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data)
-        {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data)
-            {
-                console.log('la data es:');
-                console.log(data);
-                console.log(data);
-                var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
-                var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
-                $("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
-                $("#frmDetallesAuxCess #aces_RangoInicioMeses").html(data[0].aces_RangoInicioMeses);
-                //$("frmDetallesAuxCess #aces_RangoInicioMeses2").html(data[0].aces_RangoInicioMeses);
-                $("#frmDetallesAuxCess #aces_RangoFinMeses").html(data[0].aces_RangoFinMeses);
-                $("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").html(data[0].aces_DiasAuxilioCesantia);
-                $("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
-                $("#aces_FechaCrea").html(FechaCrea);
-                data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
-                $("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
-                $("#aces_FechaModifica").html(FechaModifica);
-                $("#frmDetailAuxCes").modal();
+	var ID = $(this).data('id');
+	$.ajax({
+		url: "/AuxilioDeCesantias/Details/" + ID,
+		method: "GET",
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		data: JSON.stringify({ ID: ID })
+	})
+        .done(function (data) {
+        	//SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        	if (data) {
+        		console.log('la data es:');
+        		console.log(data);
+        		console.log(data);
+        		var FechaCrea = FechaFormato(data[0].aces_FechaCrea);
+        		var FechaModifica = FechaFormato(data[0].aces_FechaModifica);
+        		$("#aces_IdAuxilioCesantia").html(data[0].aces_IdAuxilioCesantia);
+        		$("#frmDetallesAuxCess #aces_RangoInicioMeses").html(data[0].aces_RangoInicioMeses);
+        		$("#frmDetallesAuxCess #aces_RangoFinMeses").html(data[0].aces_RangoFinMeses);
+        		$("#frmDetallesAuxCess #aces_DiasAuxilioCesantia").html(data[0].aces_DiasAuxilioCesantia);
+        		$("#tbUsuario_usu_NombreUsuario").html(data[0].UsuCrea);
+        		$("#aces_FechaCrea").html(FechaCrea);
+        		data[0].UsuModifica == null ? $("#tbUsuario1_usu_NombreUsuario").html('Sin modificaciones') : $("#tbUsuario1_usu_NombreUsuario").html(data[0].UsuModifica);
+        		$("#aces_UsuarioModifica").val(data[0].aces_UsuarioModifica);
+        		$("#aces_FechaModifica").html(FechaModifica);
+        		$("#frmDetailAuxCes").modal({ backdrop: 'static', keyboard: false });
 
-            }
-            else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
+        	}
+        	else {
+        		//Mensaje de error si no hay data
+        		iziToast.error({
+        			title: 'Error',
+        			message: 'No se pudo cargar la información, contacte al administrador',
+        		});
+        	}
         });
 });
+
+
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblAuxCesantia tbody tr td #btnModalEdit", function () {
-    var ID = $(this).data('id');
-    EliminarID = ID;
-    $.ajax({
-        url: "/AuxilioDeCesantias/Edit/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    })
-        .done(function (data)
-        {
-            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
-            if (data)
-            {
-                var FechaModifica = FechaFormato(data.aces_FechaModifica);
-                $("#frmEditarAuxCes #aces_IdAuxilioCesantia").val(data.aces_IdAuxilioCesantia);
-                $("#frmEditarAuxCes #aces_RangoInicioMeses").val(data.aces_RangoInicioMeses);
-                $("#frmEditarAuxCes #aces_RangoFinMeses").val(data.aces_RangoFinMeses);
-                $("#frmEditarAuxCes #aces_DiasAuxilioCesantia").val(data.aces_DiasAuxilioCesantia);
-                $("#aces_UsuarioModifica").val(data.aces_UsuarioModifica);
-                $("#aces_FechaModifica").val(FechaModifica);
-                $("#frmEditarAuxCes").modal();
-            }
-            else
-            {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
-            }
+	var ID = $(this).data('id');
+	$("#Editar #EValidation_descripcion").css("display", "none");
+	$("#Editar #EValidation_descripcion2").css("display", "none");
+	$("#Editar #Validation_descipcion").css("display", "none");
+	$("#Editar #Validation_descipcion2").css("display", "none");
+	$("#Editar #Validation_descipcion3").css("display", "none");
+	$("#Editar #EValidation_descripcion3").css("display", "none");
+	$("#Editar #Validation_descripcion").hide();
+	$("#Editar #Validation_descripcion2").hide();
+	$("#Editar #Validation_descripcion3").hide();
+	$("#Editar #AsteriscoRIM").removeClass("text-danger");
+	$("#Editar #AsteriscoRFM").removeClass("text-danger");
+	$("#Editar #AsteriscoACD").removeClass("text-danger");
+	EliminarID = ID;
+	$.ajax({
+		url: "/AuxilioDeCesantias/Edit/" + ID,
+		method: "GET",
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		data: JSON.stringify({ ID: ID })
+	})
+        .done(function (data) {
+        	//SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+        	if (data != 'error') {
+        		var FechaModifica = FechaFormato(data.aces_FechaModifica);
+        		$("#frmEditarAuxCes #aces_IdAuxilioCesantia").val(data.aces_IdAuxilioCesantia);
+        		$("#frmEditarAuxCes #aces_RangoInicioMeses").val(data.aces_RangoInicioMeses);
+        		$("#frmEditarAuxCes #aces_RangoFinMeses").val(data.aces_RangoFinMeses);
+        		$("#frmEditarAuxCes #aces_DiasAuxilioCesantia").val(data.aces_DiasAuxilioCesantia);
+        		$("#aces_UsuarioModifica").val(data.aces_UsuarioModifica);
+        		$("#aces_FechaModifica").val(FechaModifica);
+        		$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+        	}
+        	else {
+        		//Mensaje de error si no hay data
+        		iziToast.error({
+        			title: 'Error',
+        			message: 'No se pudo cargar la información, contacte al administrador',
+        		});
+        	}
         });
 });
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+
+
 $("#btnUpdateAuxCes").click(function () {
+	var rangoInicio = $("#Editar #aces_RangoInicioMeses").val();
+	var rangoFin = $("#Editar #aces_RangoFinMeses").val();
+	var diasAuxCes = $("#Editar #aces_DiasAuxilioCesantia").val();
 
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEditarAuxCesan").serializeArray();
-   // var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
-    var rangoInicio = $("#Editar #aces_RangoInicioMeses").val();
-    var rangoFin = $("#Editar #aces_RangoFinMeses").val();
-    var diasAuxCes = $("#Editar #aces_DiasAuxilioCesantia").val();
-    console.log(data);
-    debugger;
+	//VALIDAMOS LOS CAMPOS
+	if (rangoInicio > 0 && rangoInicio != "" && rangoInicio != null && rangoInicio != undefined &&
+        rangoFin > 0 && rangoFin != "" && rangoFin != null && rangoFin != undefined &&
+        diasAuxCes > 0 && diasAuxCes != "" && diasAuxCes != null && diasAuxCes != undefined
+        && parseInt(rangoInicio) < parseInt(rangoFin) && rangoInicio != rangoFin) {
+		$("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+		$("#frmEditarAuxCes").modal('hide');
+	}
+	else {
+		debugger;
 
-    //VALIDAMOS LOS CAMPOS
-    if (rangoInicio >= 0 && rangoInicio < rangoFin && rangoFin > 0 && diasAuxCes > 0)
-    {
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/AuxilioDeCesantias/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
-            }
-            else {
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#frmEditarAuxCes").modal('hide');
-                cargarGridAuxilioCesantia();
+		if (rangoInicio == "" || rangoInicio == undefined) {
+			$("#Editar #Validation_descripcion").hide();
+			$("#Editar #EValidation_descripcion").css("display", "block");
+			$("#Editar #AsteriscoRIM").addClass("text-danger");
+		} else {
+			$("#Editar #EValidation_descripcion").css("display", "none");
+			$("#Editar #AsteriscoRIM").removeClass("text-danger");
+		} if (rangoInicio < 0 || rangoInicio == "0") {
+			$("#Editar #EValidation_descripcion").css("display", "none");
+			$("#Editar #Validation_descripcion").show();
+			$("#Editar #AsteriscoRIM").addClass("text-danger");
+		} else {
+			$("#Editar #Validation_descripcion").hide();
+		}
+		if (rangoFin == "" || rangoFin == undefined) {
+			$("#Editar #EValidation_descripcion2").css("display", "block");
+			$("#Editar #AsteriscoRFM").addClass("text-danger");
+		} else {
+			$("#Editar #EValidation_descripcion2").css("display", "none");
+			$("#Editar #AsteriscoRFM").removeClass("text-danger");
+		} if (rangoFin < 0 || rangoFin == "0") {
+			$("#Editar #EValidation_descripcion2").css("display", "none");
+			$("#Editar #Validation_descripcion2").show();
+			$("#Editar #AsteriscoRFM").addClass("text-danger");
+		} else {
+			$("#Editar #Validation_descripcion2").hide();
+		}
+		if (parseInt(rangoFin) < parseInt(rangoInicio)) {
 
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro se editó de forma exitosa!',
-                });
-            }
-        });
-    }
-    else {
-        $("#Editar #aces_RangoInicioMeses").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
-    }
+			iziToast.error({
+				title: 'Error',
+				message: 'Rango Inicio no puede ser mayor que Rango Fin.',
+			});
+		} if (rangoFin == rangoInicio) {
+
+			iziToast.error({
+				title: 'Error',
+				message: 'Rango Inicio no puede ser igual que Rango Fin.',
+			});
+		}
+		if (diasAuxCes == "" || diasAuxCes == undefined) {
+			$("#Editar #EValidation_descripcion3").css("display", "block");
+			$("#Editar #AsteriscoACD").addClass("text-danger");
+		} else {
+			$("#Editar #EValidation_descripcion3").css("display", "none");
+			$("#Editar #AsteriscoACD").removeClass("text-danger");
+		} if (diasAuxCes < 0 || diasAuxCes == "0") {
+			$("#Editar #EValidation_descripcion3").css("display", "none");
+			$("#Editar #Validation_descripcion3").show();
+			$("#Editar #AsteriscoACD").addClass("text-danger");
+		} else {
+			$("#Editar #Validation_descripcion3").hide();
+		}
+
+	}
+
+});
+
+
+$("#btnCerrarConfirmarEditar").click(function () {
+
+	$("#ConfirmarEdicion").modal('hide');
+	$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+
+
+});
+
+$("#btnCerrarInactivar").click(function () {
+	$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+
+
+});
+
+
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnConfirmarEditar").click(function () {
+
+
+	$("#Editar #EValidation_descripcion").css("display", "none");
+	$("#Editar #EValidation_descripcion2").css("display", "none");
+	$("#Editar #EValidation_descripcion3").css("display", "none");
+
+	//SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+	var data = $("#frmEditarAuxCesan").serializeArray();
+	// var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
+	var rangoInicio = $("#Editar #aces_RangoInicioMeses").val();
+	var rangoFin = $("#Editar #aces_RangoFinMeses").val();
+	var diasAuxCes = $("#Editar #aces_DiasAuxilioCesantia").val();
+
+	//VALIDAMOS LOS CAMPOS
+	if (rangoInicio > 0 && rangoInicio < rangoFin && rangoFin > 0 && diasAuxCes > 0) {
+		//SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+		$.ajax({
+			url: "/AuxilioDeCesantias/Edit",
+			method: "POST",
+			data: data
+		}).done(function (data) {
+			if (data == "error") {
+				//Cuando traiga un error del backend al guardar la edicion
+				iziToast.error({
+					title: 'Error',
+					message: 'No se pudo editar el registro, contacte al administrador',
+				});
+				$("#frmEditarAuxCes").modal({ backdrop: 'static', keyboard: false });
+				$("#ConfirmarEdicion").modal('hide');
+			}
+			else {
+				//UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+				$("#frmEditarAuxCes").modal('hide');
+				cargarGridAuxilioCesantia();
+
+				$("#ConfirmarEdicion").modal('hide');
+				iziToast.success({
+					title: 'Exito',
+					message: 'El registro se editó de forma exitosa!',
+				});
+			}
+		});
+	}
+	else {
+		$("#Editar #aces_RangoInicioMeses").focus();
+		iziToast.error({
+			title: 'Error',
+			message: 'Ingrese datos válidos.',
+		});
+	}
 });
 
 // INACTIVAR 
 $("#btnModalEliminar").click(function () {
-    $("#frmEditarAuxCes").modal('hide');
-    $("#frmEliminarAuxCes").modal();
+	$("#frmEditarAuxCes").modal('hide');
+	$("#frmEliminarAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
 $("#btnEliminarAuxCes").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmEliminarAuxCes").serializeArray();
-    var ID = EliminarID;
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/AuxilioDeCesantias/Inactivar/" + ID,
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se logró inactivar el registro, contacte al administrador',
-            });
-        }
-        else {
-            $("#frmEliminarAuxCes").modal('hide');
-            $("#frmEditarAuxCes").modal('hide');
-            cargarGridAuxilioCesantia();
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro se inactivó de forma exitosa!',
-            });
-        }
-    });
+	//SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+	var data = $("#frmEliminarAuxCes").serializeArray();
+	var ID = EliminarID;
+	//SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+	$.ajax({
+		url: "/AuxilioDeCesantias/Inactivar/" + ID,
+		method: "POST",
+		data: data
+	}).done(function (data) {
+		if (data == "error") {
+			//Cuando traiga un error del backend al guardar la edicion
+			iziToast.error({
+				title: 'Error',
+				message: 'No se logró inactivar el registro, contacte al administrador',
+			});
+		}
+		else {
+			$("#frmEliminarAuxCes").modal('hide');
+			$("#frmEditarAuxCes").modal('hide');
+			cargarGridAuxilioCesantia();
+			//Mensaje de exito de la edicion
+			iziToast.success({
+				title: 'Exito',
+				message: 'El registro se inactivó de forma exitosa!',
+			});
+		}
+	});
 });
 
 
 // Activar
 var activarID = 0;
 $(document).on("click", "#btnModalActivarAuxCes", function () {
-    activarID = $(this).data('id');
-    $("#frmActivarAuxCes").modal();
+	activarID = $(this).data('id');
+	$("#frmActivarAuxCes").modal({ backdrop: 'static', keyboard: false });
 });
 
 //activar ejecutar
 $("#btnActivarAuxCes").click(function () {
 
-    $.ajax({
-        url: "/AuxilioDeCesantias/Activar/" + activarID,
-        method: "POST",
-        data: { id: activarID }
-    }).done(function (data) {
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se logró activar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridAuxilioCesantia();
-            $("#frmActivarAuxCes").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Éxito',
-                message: '¡El registro se activó de forma exitosa!',
-            });
-        }
-    });
-    activarID = 0;
+	$.ajax({
+		url: "/AuxilioDeCesantias/Activar/" + activarID,
+		method: "POST",
+		data: { id: activarID }
+	}).done(function (data) {
+		if (data == "error") {
+			iziToast.error({
+				title: 'Error',
+				message: 'No se logró activar el registro, contacte al administrador',
+			});
+		}
+		else {
+			cargarGridAuxilioCesantia();
+			$("#frmActivarAuxCes").modal('hide');
+			//Mensaje de exito de la edicion
+			iziToast.success({
+				title: 'Éxito',
+				message: '¡El registro se activó de forma exitosa!',
+			});
+		}
+	});
+	activarID = 0;
 });
 
 

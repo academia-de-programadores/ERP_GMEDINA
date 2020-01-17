@@ -3,7 +3,7 @@
 		"language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
 		responsive: true,
 		pageLength: 10,
-		dom: '<"html5buttons"B>lTfgtip',
+		dom: '<"html5buttons"B>lTfgt<"pull-left"i><"col-sm-pull-11"p>',
 		buttons: [
 			{
 				extend: 'copy',
