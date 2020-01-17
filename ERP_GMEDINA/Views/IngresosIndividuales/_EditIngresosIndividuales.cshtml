@@ -60,6 +60,7 @@
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarIngresoIndividual" }))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
 }
 

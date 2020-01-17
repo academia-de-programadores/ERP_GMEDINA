@@ -174,6 +174,7 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 
 });
 
+
 $(btnAgregar).click(function () {
     console.clear();
     if (validaciones(equipoEmpId,
@@ -184,9 +185,42 @@ $(btnAgregar).click(function () {
         cuota
     )) {
         console.log('Paso las validaciones')
-    } else {
-        console.log('No Paso las validaciones')
+        mostrarCargandoCrear();
+
+        var data = $("#frmCreate").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/DeduccionesExtraordinarias/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+
+                cargarGridDeducciones();
+                location.href = "DeduccionesExtraordinarias/Index"
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+
+            ocultarCargandoCrear();
+        });
+
     }
+        // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+        $("#frmCreate").submit(function (e) {
+            return false;
+        });
 });
 
 function validaciones(equipoEmpId,
@@ -259,6 +293,8 @@ function validaciones(equipoEmpId,
     }
     return todoBien;
 }
+
+
 
 //Modal de Inactivar
 $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
