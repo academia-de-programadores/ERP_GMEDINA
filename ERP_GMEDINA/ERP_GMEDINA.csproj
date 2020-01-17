@@ -216,6 +216,8 @@
     <Compile Include="Controllers\RazonSalidasController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
+    <Compile Include="Controllers\SeleccionCandidatosController.cs" />
+    <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
@@ -2029,6 +2031,11 @@
     <Content Include="Views\HistorialPermisos\Delete.cshtml" />
     <Content Include="Views\HistorialPermisos\Details.cshtml" />
     <Content Include="Views\HistorialPermisos\Edit.cshtml" />
+    <Content Include="Views\Sucursales\Create.cshtml" />
+    <Content Include="Views\Sucursales\Edit.cshtml" />
+    <Content Include="Views\Sucursales\Index.cshtml" />
+    <Content Include="Views\Sucursales\_Delete.cshtml" />
+    <Content Include="Views\Sucursales\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
