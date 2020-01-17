@@ -106,7 +106,8 @@ $("#btnGuardar").click(function () {
                     llenarTabla();
                     LimpiarControles(["idi_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                } else {
+                }
+                else {
                     MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
