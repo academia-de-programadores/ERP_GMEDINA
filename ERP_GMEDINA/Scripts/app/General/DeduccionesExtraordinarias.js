@@ -143,7 +143,9 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+$(btnAgregar).click(function(){
+    console.log('click');
+})
 
 
 //Validaciones de Botones de las Pantallas
