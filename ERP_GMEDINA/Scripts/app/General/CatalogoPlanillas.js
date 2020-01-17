@@ -60,7 +60,6 @@ function _ajax(params, uri, type, callback, enviar) {
 
 // Funcion para crear y editar
 var crearEditar = function (edit) {
-	debugger;
 	//Array de Ingresos y deducciones
 	var arrayIngresos = [];
 	var arrayDeducciones = [];
@@ -76,7 +75,7 @@ var crearEditar = function (edit) {
 
 
 	if (!edit) {
-		mostrarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+		mostrarSpinner($('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), cargandoCrear);
 
 		_ajax(
 			{
@@ -100,7 +99,7 @@ var crearEditar = function (edit) {
 						message: 'No se guardó el registro, contacte al administrador'
 					});
 
-					ocultarSpinner($('#btnConfirmacionCreate'), cargandoCrear);
+					ocultarSpinner($('#btnGuardarCatalogoDePlanillasIngresosDeducciones'), cargandoCrear);
 				}
 			},
 			(enviar) => { }
@@ -287,7 +286,6 @@ function verificarCampos(
 	catalogoIngresos,
 	catalogoDeducciones
 ) {
-	debugger;
 	var todoBien = true;
 	//Validar que la descripción este bien
 	if (descripcionPlanilla.trim() == '') {
@@ -583,7 +581,6 @@ function listarCatalogos() {
 				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
 				//Se activara el switch, si esta desactivado
 				$(catalogoIngresosInputs).on('ifChecked', () => {
-					console.log('click');
 					validacionCatalogoIngresos.hide();
 					if (listaCatalogoIngresosFalse()) {
 						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
@@ -711,17 +708,55 @@ function listarCatalogos() {
 			],
 			"order": [[1, "asc"]],
 			initComplete: function (settings, json) {
-				$('#tblCatalogoIngresos tbody tr td .i-checks, #tblCatalogoIngresos tbody tr td .i-checks input.i-checks-no-aplica').iCheck({
+			
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
 
-				$('#tblCatalogoIngresos tbody tr td .i-checks, input.i-checks-no-aplica').iCheck({
+				$('#tblCatalogoIngresos tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
 
-				seleccionarCheckbox_CatalogoIngresos();
+				var catalogoIngresosChangeCheckbox = document.querySelector(
+					'#catalogoDeIngresos .js-check-change'
+				);
+				const catalogoIngresosInputs = $('#tblCatalogoIngresos tbody tr td input.i-checks');
+
+				//Seleccionar o deseleccionar los ingresos
+				catalogoIngresosChangeCheckbox.onchange = function () {
+					const seleccionarTodosLosIngresos = $('#seleccionarTodosLosIngresos');
+					let seleccionarDeseleccionar = seleccionarTodosLosIngresos.html();
+					if (catalogoIngresosChangeCheckbox.checked) {
+						catalogoIngresosInputs.iCheck('check');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
+						);
+					} else {
+						catalogoIngresosInputs.iCheck('uncheck');
+						seleccionarTodosLosIngresos.html(
+							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
+						);
+					}
+				};
+
+				//Si estan todos los checkboxs seleccionados en catalogo de ingresos 
+				//Se activara el switch, si esta desactivado
+				$(catalogoIngresosInputs).on('ifChecked', () => {
+					validacionCatalogoIngresos.hide();
+					if (listaCatalogoIngresosFalse()) {
+						if (!$('#checkSeleccionarTodosIngresos').is(':checked')) {
+							$('#checkSeleccionarTodosIngresos').click();
+						}
+					}
+				});
+
+				//Activar switch seleccionar todos en ingresos
+				if (listaCatalogoIngresosFalse()) {
+					$('#checkSeleccionarTodosIngresos').click();
+				}
+
 			}
 		});
 
@@ -755,14 +790,15 @@ function listarCatalogos() {
 			],
 			"order": [[1, "asc"]],
 			initComplete: function (settings, json) {
-				const catalogoDeduccionesInputs = $(
-					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
-				);
 
 				$('#tblCatalogoDeducciones tbody tr td .i-checks').iCheck({
 					checkboxClass: 'icheckbox_square-green',
 					radioClass: 'iradio_square-green'
 				});
+
+				const catalogoDeduccionesInputs = $(
+					'#catalogoDeDeducciones #tblCatalogoDeducciones tbody tr td input.i-checks'
+				);
 
 				var catalogoDeduccionesChangeCheckbox = document.querySelector(
 					'#catalogoDeDeducciones .js-check-change'
@@ -770,40 +806,37 @@ function listarCatalogos() {
 
 				$('#noAplica').on('ifChecked', () => {
 					catalogoDeduccionesInputs.iCheck('uncheck');
-
 					const seleccionarTodasLasDeducciones = checkSeleccionarTodasLasDeducciones;
 					if (seleccionarTodasLasDeducciones.is(':checked'))
 						seleccionarTodasLasDeducciones.click();
 				});
 
 				$(catalogoDeduccionesInputs).on('ifChecked', () => {
+					validacionCatalogoDeducciones.hide();
 					$('#noAplica').iCheck('uncheck');
 					if (listaCatalogoDeduccionesFalse()) {
 						if (!checkSeleccionarTodasLasDeducciones.is(':checked'))
-							checkSeleccionarTodasLasDeducciones.prop("checked", true);
-						else {
-							checkSeleccionarTodasLasDeducciones.prop("checked", false);
-						}
+							checkSeleccionarTodasLasDeducciones.click();
 					}
 				});
 
 				catalogoDeduccionesChangeCheckbox.onchange = function () {
-					const seleccionarTodasLasDeducciones = $(
-						'#seleccionarTodasLasDeducciones'
-					);
+					const seleccionarTodasLasDeducciones = $('#seleccionarTodasLasDeducciones');
 					let seleccionarDeseleccionar = seleccionarTodasLasDeducciones.html();
 					if (catalogoDeduccionesChangeCheckbox.checked) {
 						catalogoDeduccionesInputs.iCheck('check');
-						seleccionarTodasLasDeducciones.html(
-							seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar')
-						);
-					} else {
-						seleccionarTodasLasDeducciones.html(
-							seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar')
-						);
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Seleccionar', 'Deseleccionar'));
+					}
+					else {
+						seleccionarTodasLasDeducciones.html(seleccionarDeseleccionar.replace('Deseleccionar', 'Seleccionar'));
 						catalogoDeduccionesInputs.iCheck('uncheck');
 					}
 				};
+
+				//Activar switch seleccionar todos en deducciones
+				if (listaCatalogoDeduccionesFalse()) {
+					checkSeleccionarTodasLasDeducciones.click();
+				}
 			}
 		});
 	}
@@ -884,7 +917,7 @@ function getIngresos(data) {
         </div>
 		<div class="ibox-content">
 		<div class="data-details" style="padding:5px">
-            <table class="table table-bordered tbl-catalogos" id="childIngresos">
+            <table class="table table-bordered tbl-catalogos" id="child-`+ localStorage.getItem("idDatatableChild") + `">
                 <thead>
                     <tr>
                         <th>Ingreso</th>
@@ -921,7 +954,7 @@ function getDeducciones(data) {
         </div>
 		<div class="ibox-content">
 		<div class="data-details" style="padding:5px">
-            <table class="table table-bordered tbl-catalogos">
+            <table class="table table-bordered tbl-catalogos" id="child-`+ localStorage.getItem("idDatatableChild") + `">
                 <thead>
                     <tr>
                         <th>Deducción</th>
@@ -1065,6 +1098,7 @@ $(document).on('click', 'td.details-control', function () {
 		//Que desplegue el detalle
 		row.child([spinner()]).show();
 		tr.addClass('shown');
+		localStorage.setItem('idDatatableChild', row.data().idPlanilla)
 
 		// Obtener los datos para el detalle
 		obtenerDetalles(
@@ -1074,7 +1108,7 @@ $(document).on('click', 'td.details-control', function () {
 				row.child([getIngresos(data) + getDeducciones(data)]).show();
 				tr.addClass('shown');
 				detail = null;
-				detail = $('table tbody tr td .tbl-catalogos').DataTable({
+				detail = new $('table tbody tr td #child-' + localStorage.getItem("idDatatableChild")).DataTable({
 					destroy: true,
 					"language": {
 						"paging": false,
@@ -1086,7 +1120,7 @@ $(document).on('click', 'td.details-control', function () {
 						"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
 						"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 						"sInfoPostFix": "",
-						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar:</div> ",
+						"sSearch": "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp; Buscar: ",
 						"sUrl": "",
 						"sInfoThousands": ",",
 						"sLoadingRecords": spinner(),
@@ -1108,7 +1142,6 @@ $(document).on('click', 'td.details-control', function () {
 					initComplete: function () {
 					}
 				});
-
 			},
 			() => { }
 		);
@@ -1118,42 +1151,34 @@ $(document).on('click', 'td.details-control', function () {
 //Insetar
 $(document).on(
 	'click',
-	'#btnConfirmacionCreate',
+	'#btnGuardarCatalogoDePlanillasIngresosDeducciones',
 	function () {
-		crearEditar(false);
+		table.search('').draw();
+		table2.search('').draw();
+		//Array de Ingresos y deducciones
+		let arrayIngresos = [];
+		let arrayDeducciones = [];
+		//Obtener los valores del catalogo de planillas
+		let descripcionPlanilla = inputDescripcionPlanilla.val();
+		let frecuenciaDias = inputFrecuenciaEnDias.val();
+
+		//Obtener las lista del catalogo de ingresos
+		listaCatalogoIngresos(arrayIngresos);
+
+		//Obtener las lista del catalogo de deducciones
+		listaCatalogoDeducciones(arrayDeducciones);
+		if (
+			verificarCampos(
+				descripcionPlanilla,
+				frecuenciaDias,
+				arrayIngresos,
+				arrayDeducciones
+			)
+		) {
+			crearEditar(false);
+		}
 	}
 );
-
-//Desplegar modal de que si desea guardar
-$('#btnGuardarCatalogoDePlanillasIngresosDeducciones').click(function () {
-	table.search('').draw();
-	table2.search('').draw();
-	//Array de Ingresos y deducciones
-	let arrayIngresos = [];
-	let arrayDeducciones = [];
-	//Obtener los valores del catalogo de planillas
-	let descripcionPlanilla = inputDescripcionPlanilla.val();
-	let frecuenciaDias = inputFrecuenciaEnDias.val();
-
-	//Obtener las lista del catalogo de ingresos
-	listaCatalogoIngresos(arrayIngresos);
-
-	//Obtener las lista del catalogo de deducciones
-	listaCatalogoDeducciones(arrayDeducciones);
-
-	//Insertar o editar
-	if (
-		verificarCampos(
-			descripcionPlanilla,
-			frecuenciaDias,
-			arrayIngresos,
-			arrayDeducciones
-		)
-	) {
-		$('#modalConfirmacionCreate').modal();
-	}
-
-});
 
 //Desplegar modal de que si desea editar
 $('#btnEditarCatalogoDePlanillasIngresosDeducciones').click(function () {

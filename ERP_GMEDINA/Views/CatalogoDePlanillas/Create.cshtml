@@ -118,32 +118,14 @@
 							<div class="form-group">
 								<div class="col-md-offset-3 col-md-10">
 									<input type="button" id="btnGuardarCatalogoDePlanillasIngresosDeducciones" value="Guardar" class="btn btn-primary" />
+									<div style="display:none" class="btn" id="cargandoCrear">
+									</div>
 									@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
 								</div>
 							</div>
 						</div>
 						<div class="clearfix"></div>
-
 					}
-				</div>
-			</div>
-		</div>
-		<div class="modal fade" id="modalConfirmacionCreate" tabindex="-1" role="dialog" aria-hidden="false">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-						<h4 class="modal-title">Crear</h4>
-					</div>
-					<div class="modal-body" id="Activar">
-						¿Esta seguro que desea Crear este registro?
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-						<input type="button" id="btnConfirmacionCreate" value="Si" class="btn btn-primary " />
-						<div style="display:none" class="btn" id="cargandoCrear">
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
