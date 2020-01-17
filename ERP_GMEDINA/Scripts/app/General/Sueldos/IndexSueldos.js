@@ -74,6 +74,7 @@ function llenarTabla() {
                tabla.row.add({
 
                    ID: value.Id,
+                   "Número":value.Id,
                    Identidad: value.Identidad,
                    Id_Empleado: value.Id_Empleado,
                    Id_Amonestacion: value.Id_Amonestacion,
