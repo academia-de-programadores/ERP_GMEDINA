@@ -1,17 +1,20 @@
-﻿$(document).ready(function () {
+﻿
+var fill = 0;
+var id = 0;
+var Admin = false;
+//Funciones GET
+$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 
-
-var id = 0;
-//Funciones GET
 function tablaEditar(ID) {
     id = ID;
     _ajax(null,
         '/Nacionalidades/Edit/' + ID,
         'GET',
         function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {  //PENDIENTE REVISAR CANTIDAD***********
                 $("#FormEditar").find("#nac_Descripcion").val(obj.nac_Descripcion);
                 $('#ModalEditar').modal('show');
             }
@@ -45,20 +48,30 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-             
-                tabla.row.add({
-                    ID: value.nac_Id,
-                    Nacionalidades: value.nac_Descripcion
-                });
-            });tabla.draw();           
+                var Acciones = value.nac_Estado == 1
+                  ? null :
+                  "<div>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                  "</div>";
+                if (value.nac_Estado > fill) {
+                    tabla.row.add({
+                        ID: value.nac_Id,
+                        "Número": value.nac_Id,
+                        Estado: value.nac_Estado,
+                        Descripcion: value.nac_Descripcion,
+                        Acciones: Acciones
+                    })
+                }
+            });
+            tabla.draw();
         });
 }
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');
     $("#FormNuevo").find("#nac_Descripcion").val("");
-    $("#FormEditar").find("#nac_Descripcion").focus();
     modalnuevo.modal('show');
+    $("#FormNuevo").find("#nac_Descripcion").focus();
 });
 $("#btnEditar").click(function () {
     _ajax(null,
@@ -91,14 +104,13 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["nac_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
                     MsgError("Error", "No se guardó el registro, contacte al administrador");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 $("#InActivar").click(function () {
@@ -114,14 +126,14 @@ $("#InActivar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["nac_Descripcion", "nac_RazonInactivo"]);
+                    LimpiarControles(["nac_Descripcion"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
                 } else {
                     MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
 $("#btnActualizar").click(function () {
@@ -143,6 +155,6 @@ $("#btnActualizar").click(function () {
                 }
             });
     } else {
-        MsgError("Error", "Por favor llene todas las cajas de texto");
+        MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });

@@ -1,6 +1,9 @@
 ﻿var id = 0;
+var fill = 0;
+//var Admin = false;
 $(document).ready(function () {
     llenarTabla();
+    fill = Admin == undefined ? 0 : -1;
     $('.clockpicker').clockpicker();
 });
 //Funciones GET
@@ -46,11 +49,26 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    ID: value.tper_Id,
-                    Permiso: value.tper_Descripcion
-                }).draw();
+                var Acciones = value.tper_Estado == 1
+                    ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tper_Id + ")'>Editar</a>"
+                    : Admin ?
+                        "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                        "</div>" : '';
+                if (value.tper_Estado > fill) {
+                    tabla.row.add({
+                        Id: value.tper_Id,
+                        ID: value.tper_Id,
+                        Permiso: value.tper_Descripcion,
+                        "Número": value.tper_Id,
+                        Acciones: Acciones,
+                        Estado: value.tper_Estado ? "Activo" : "Inactivo"
+                        //
+                    });
+                }
             });
+            tabla.draw();
+
         });
 }
 $("#btnAgregar").click(function () {

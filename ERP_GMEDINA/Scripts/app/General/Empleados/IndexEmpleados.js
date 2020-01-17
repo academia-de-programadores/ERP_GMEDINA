@@ -29,12 +29,13 @@ function llenarTabla() {
            }
            $.each(Lista, function (index, value) {
                tabla.row.add({
+                   Número:value.Id,
                    ID: value.Id,
-                   Identidad: value.per_Identidad,
+                  
                    Nombre: value.Nombre,
                    Departamento: value.depto_Descripcion,
                    Sexo: value.per_Sexo,
-                   Edad: value.per_Edad,
+                  Estado:value.Estado ? "Activo":"Inactivo",
                    Telefono: value.per_Telefono,
                    Correo: value.per_CorreoElectronico
 

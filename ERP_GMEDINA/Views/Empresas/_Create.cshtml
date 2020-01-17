@@ -22,8 +22,18 @@
                      <div class="form-group">
                       @Html.LabelFor(model => model.empr_Logo, htmlAttributes: new { @class = "control-label col-md-3" })
                       <div class="col-md-8">
-                       <input type="file" name="empr_Logo" accept=".png,.jpeg,.jpg" id="empr_Logo" value="Logo" />
-                      </div>
+                         <div>
+                             <label title="Upload image file" for="empr_Logo" class="btn btn-primary">
+                                 Upload image
+                                <input type="file"  name="empr_Logo" accept=".png,.jpeg,.jpg" id="empr_Logo" style="display:none" />Logo
+                             </label>
+                         <div>
+                             <h4>Preview image</h4>
+                             <div class="img-preview img-preview-sm" style="width: 200px; height: 100px;"><img id="img1" style="display: block;height: 100px ; "></div>
+
+                         </div>    
+                         </div>
+                        </div>
                      </div>
 					</div>
             </div>

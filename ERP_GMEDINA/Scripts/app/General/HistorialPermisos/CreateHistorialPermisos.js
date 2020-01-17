@@ -109,7 +109,7 @@ function llenarDropDowlistEmpleados() {
         function (result) {
             $.each(result, function (id, Lista) {
                 Lista.forEach(function (value, index) {
-                    $("#" + id).append(new Option(value.Descripcion, value.Id));
+                    $("#ddl" + id).append(new Option(value.Descripcion, value.Id));
                 });
             });
         });
@@ -122,7 +122,7 @@ function llenarDropDowlistEmpleados() {
 //}
 //Llamamos los dropdowns
 $(document).ready(function () {
-    $("#Empleados").select2();
+    $("#ddlEmpleados").select2();
     //var today = new Date();
     //var dd = today.getDate();
     //var mm = today.getMonth() + 1; //January is 0!

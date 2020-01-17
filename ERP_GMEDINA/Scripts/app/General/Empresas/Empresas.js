@@ -1,9 +1,27 @@
 ﻿$(document).ready(function () {
  llenarTabla();
 });
+function init() {
+    var inputFile = document.getElementById('empr_Logo');
+    inputFile.addEventListener('change', mostrarImagen, false);
+}
+
+function mostrarImagen(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = document.getElementById('img1');
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+
+window.addEventListener('load', init, false);
 $("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+     var img = document.getElementById('img1');
+     img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
  } else {
   var formData = new FormData();
@@ -18,10 +36,13 @@ $("#empr_Logo").change(function () {
    processData: false
   })
  .done(function (res) {
-  if (res) {
+     if (res) {     
+         
    MsgSuccess("Exito","Archivo subido exitosamente");
   } else {
-   MsgError("Error","El archivo no es valido");
+         MsgError("Error", "El archivo no es valido");
+         var img = document.getElementById('img1');
+         img.src = "";
   }
   $("#ModalNuevo").data("res", res);
  });
@@ -105,22 +126,27 @@ $("#btnInactivar").click(function () {
  $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 $("#FormNuevo").on("submit", function (event) {
- if ($("#ModalNuevo").data("res")) {
-  event.preventDefault();
-  var data = $("#FormNuevo").serializeArray();
-  data = serializar(data);
-  _ajax(JSON.stringify({ tbEmpresas: data }),
-      '/Empresas/Create/',
-      'POST',
-      function (obj) {
-       if (obj != "-1" && obj != "-2" && obj != "-3") {
-        llenarTabla();
-       }
-      });
- } else {
-  MsgError("Error", "Aun no se carga el archivo ó el archibo no es valido");
- }
-
+    if ($("#ModalNuevo").data("res")) {
+        event.preventDefault();
+        var data = $("#FormNuevo").serializeArray();
+        data = serializar(data);
+        _ajax(JSON.stringify({ tbEmpresas: data }),
+            '/Empresas/Create/',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    llenarTabla();
+                    MsgSuccess("Exito","Archivo subido exitosamente");
+                    $("#ModalNuevo").modal('hide');//ocultamos el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el
+                }else {
+                    MsgError("Error","valores incorrectos");
+                }
+            });
+    } else {
+        MsgError("Error", "El archivo no es valido o el campo ya existe");
+    }
 });
 
 $("#btnActualizar").click(function () {

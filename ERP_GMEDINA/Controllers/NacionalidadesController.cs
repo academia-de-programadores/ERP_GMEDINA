@@ -12,41 +12,41 @@ namespace ERP_GMEDINA.Controllers
 {
     public class NacionalidadesController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Nacionalidades
         public ActionResult Index()
         {
-            List<tbNacionalidades> tbNacionalidades = new List<Models.tbNacionalidades> { };
+            tbNacionalidades tbNacionalidades = new tbNacionalidades { nac_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbNacionalidades = db.tbNacionalidades.Where(x => x.nac_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                //tbNacionalidades.Add(new tbNacionalidades { nac_Id = 0, nac_Descripcion = "fallo la conexion" });
-                return View(tbNacionalidades);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbNacionalidades.Add(new tbNacionalidades { nac_Id = 0, nac_Descripcion = "falló la conexion" });
-            }
             return View(tbNacionalidades);
+
         }
 
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbNacionalidades> tbNacionalidades =
-                new List<Models.tbNacionalidades> { };
-            foreach (tbNacionalidades x in db.tbNacionalidades.ToList().Where(x => x.nac_Estado == true))
+
+            try
             {
-                tbNacionalidades.Add(new tbNacionalidades
-                {
-                    nac_Id = x.nac_Id,
-                    nac_Descripcion = x.nac_Descripcion
-                });
+                db = new ERP_GMEDINAEntities();
+                var tbNacionalidades = db.tbNacionalidades
+                .Select(
+                    t => new
+                    {
+                        nac_Id = t.nac_Id,
+                        nac_Descripcion = t.nac_Descripcion,
+                        nac_Estado = t.nac_Estado
+                    }
+                    )
+                    .ToList();
+                return Json(tbNacionalidades, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbNacionalidades, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
         }
 
         // POST: Nacionalidades/Create
@@ -59,6 +59,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbNacionalidades_Insert(tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbNacionalidades_Insert_Result item in list)
                     {
@@ -89,6 +90,7 @@ namespace ERP_GMEDINA.Controllers
             tbNacionalidades tbNacionalidades = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbNacionalidades = db.tbNacionalidades.Find(id);
                 if (tbNacionalidades == null || !tbNacionalidades.nac_Estado)
                 {
@@ -122,7 +124,6 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
-            string RazonInactivo = "Se ha Inhabilitado este Registro";
 
             if (tbNacionalidades.nac_Id != 0)
             {
@@ -130,7 +131,8 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbNacionalidades_Update(id, tbNacionalidades.nac_Descripcion, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbNacionalidades_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
@@ -150,6 +152,37 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+        //-------------------------------------------------------------------------------------//
+        //Código para poder habilitar / activar el registro.
+
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                db = new ERP_GMEDINAEntities();
+                //using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbNacionalidades_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbNacionalidades_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //-------------------------------------------------------------------------------------------//
+
+
         // GET: Nacionalidades/Delete/5
         [HttpPost]
         public ActionResult Delete(tbNacionalidades tbNacionalidades)
@@ -161,6 +194,7 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
+                    db = new ERP_GMEDINAEntities();
                     var list = db.UDP_RRHH_tbNacionalidades_Delete(id, tbNacionalidades.nac_RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbNacionalidades_Delete_Result item in list)
                     {
@@ -181,6 +215,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
+
+
         protected tbUsuario IsNull(tbUsuario valor)
         {
             if (valor != null)
@@ -192,13 +228,15 @@ namespace ERP_GMEDINA.Controllers
                 return new tbUsuario { usu_NombreUsuario = "" };
             }
         }
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
+
     }
 }

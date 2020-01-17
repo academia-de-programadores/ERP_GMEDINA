@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: Personas
         public ActionResult Index()
         {
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            var tbPersonas = new List<tbPersonas> { };
+            bool Admin = (bool)Session["Admin"];
+            tbPersonas   tbPersonas = new tbPersonas { per_Estado = true};
             return View(tbPersonas);
         }
         // GET: Personas/Details
@@ -133,11 +133,11 @@ namespace ERP_GMEDINA.Controllers
                         {
                             Id = p.per_Id,
                             Identidad = p.per_Identidad,
+                            per_Estado = p.per_Estado,
                             Nombre = p.per_Nombres + " " + p.per_Apellidos,
                             CorreoElectronico = p.per_CorreoElectronico,
                             Estado = p.per_Estado
                         })
-                        .Where(p => p.Estado == true)
                         .ToList();
                     return Json(tbPersonas, JsonRequestBehavior.AllowGet);
                 }
@@ -645,78 +645,14 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(Personas tbPersonas)
         {
             string msj = "";
-            string result = "";
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,"",1,DateTime.Now);
+                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,tbPersonas.per_RazonInactivo,1,DateTime.Now);
                     foreach(UDP_RRHH_tbPersonas_Inactivar_Result item in _list)
                     {
-                        msj = item.MensajeError + "";
-                        if(msj != "-1")
-                        {
-                            var Competencias = db.tbCompetenciasPersona.Select(c => new { cope_Id = c.cope_Id, per_Id = c.per_Id }).ToList();
-                            foreach (var X in Competencias)
-                            {
-                                if (X.per_Id == tbPersonas.per_Id)
-                                    {
-                                        var Comp = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(X.cope_Id,"Persona Inactivada",1,DateTime.Now);
-                                        foreach(UDP_RRHH_tbCompetenciasPersona_Inactivar_Result cmp in Comp)
-                                        {
-                                            result = cmp.MensajeError + "";
-                                        }
-                                    }
-                            }
-                            var Habilidades = db.tbHabilidadesPersona.Select(h => new { hape_Id = h.hape_Id , per_Id = h.per_Id }).ToList();
-                            foreach(var x in Habilidades)
-                            {
-                                if(x.per_Id == tbPersonas.per_Id)
-                                    {
-                                        var Habi = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(x.hape_Id,"Personas Inactivada",1,DateTime.Now);
-                                        foreach(UDP_RRHH_tbHabilidadesPersona_Inactivar_Result hab in Habi)
-                                        {
-                                            result = hab.MensajeError + "";
-                                        }
-                                    }
-                            }
-                            var Idiomas = db.tbIdiomaPersona.Select(i => new { idpe_Id = i.idpe_Id, per_Id = i.per_Id }).ToList();
-                            foreach (var x in Idiomas)
-                            {
-                                if (x.per_Id == tbPersonas.per_Id)
-                                {
-                                    var Idim = db.UDP_RRHH_tbIdiomasPersona_Inactivar(x.idpe_Id, "Personas Inactivada", 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbIdiomasPersona_Inactivar_Result idi in Idim)
-                                    {
-                                        result = idi.MensajeError + "";
-                                    }
-                                }
-                            }
-                            var REspeciales = db.tbRequerimientosEspecialesPersona.Select(re => new { rep_Id = re.rep_Id, per_Id = re.per_Id }).ToList();
-                            foreach (var x in REspeciales)
-                            {
-                                if (x.per_Id == tbPersonas.per_Id)
-                                {
-                                    var ReEs = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(x.rep_Id, "Personas Inactivada", 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result resp in ReEs)
-                                    {
-                                        result = resp.MensajeError + "";
-                                    }
-                                }
-                            }
-                            var Titulos = db.tbTitulosPersona.Select(t => new { tipe_Id = t.tipe_Id, per_Id = t.per_Id }).ToList();
-                            foreach (var x in Titulos)
-                            {
-                                if (x.per_Id == tbPersonas.per_Id)
-                                {
-                                    var Titu = db.UDP_RRHH_tbTitulosPersona_Inactivar(x.tipe_Id, "Personas Inactivada", 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbTitulosPersona_Inactivar_Result tit in Titu)
-                                    {
-                                        result = tit.MensajeError + "";
-                                    }
-                                }
-                            }
-                        }
+                        msj = item.MensajeError + " ";
                     }
                 }
                 catch
@@ -725,6 +661,27 @@ namespace ERP_GMEDINA.Controllers
                 }
             }
             return Json(msj.Substring(0,2), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult hablilitar(int id)
+        {
+            string msj = "";
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var _list = db.UDP_RRHH_tbPersonas_Habilitar(id, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbPersonas_Habilitar_Result item in _list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    msj = "-2";
+                }
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         protected tbUsuario IsNull(tbUsuario valor)
