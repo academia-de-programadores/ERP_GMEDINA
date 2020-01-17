@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            <strong>Descripción<label class="" id="AsteriscoDescripcionDeduEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion" } })
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.tde_IdTipoDedu, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            <strong>Tipo de Deducción<label class="" id="AsteriscoTipoDeduEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
                             <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            <strong>Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaboradorEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeColaborador", @value = "" } })
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            @Html.LabelFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })
+                            <strong>Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresaEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
                             @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeEmpresa", @value = "" } })

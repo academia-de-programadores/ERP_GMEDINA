@@ -47,7 +47,7 @@ function cargarGridAuxilioCesantia() {
         		var estadoRegistro = ListaAuxCes[i].aces_Activo == false ? 'Inactivo' : 'Activo';
 
         		//variable boton detalles
-        		var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
+        		var botonDetalles = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" style="margin-right:3px;" class="btn btn-primary btn-xs"  id="btnModalDetalles">Detalles</button>' : '';
 
         		//variable boton editar
         		var botonEditar = ListaAuxCes[i].aces_Activo == true ? '<button data-id = "' + ListaAuxCes[i].aces_IdAuxilioCesantia + '" type="button" class="btn btn-default btn-xs"  id="btnModalEdit">Editar</button>' : '';
