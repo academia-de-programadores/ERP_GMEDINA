@@ -96,6 +96,24 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar2">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -115,9 +133,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Detalles del rango ISR</h4>
             </div>
-            <div class="modal-body" id="Detalles">
-                @Html.Partial("_DetailsISR", new ERP_GMEDINA.Models.tbISR())
-            </div>
+            @Html.Partial("_DetailsISR", new ERP_GMEDINA.Models.tbISR())
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
             </div>
@@ -130,14 +146,32 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Inhabilitar</h4>
+                <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
-                ¿Está seguro que desea Inhabilitar este registro?
+                ¿Está seguro que desea inactivar este registro?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-danger pull-left " data-dismiss="modal" id="btnInactivarISR">Inhabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ACTIVAR*@
+<div class="modal fade" id="ActivarISR" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea activar este Registro?
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnActivarISRConfirm">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarActivar" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>

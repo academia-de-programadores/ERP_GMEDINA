@@ -2,67 +2,78 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDetailsISR" }))
 { 
 @Html.AntiForgeryToken()
-<div class="form-horizontal">
-    <div class="form-group">
-        <label class="control-label col-md-2">Rango Inicial</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            @Html.ValidationMessageFor(model => model.isr_RangoInicial, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="modal-body" id="Detalles">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Rango Final</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            @Html.ValidationMessageFor(model => model.isr_RangoFinal, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class = "control-label col-md-2">Porcentaje</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            @Html.ValidationMessageFor(model => model.isr_Porcentaje, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <div class="ibox-content" style="border-color:#fff;">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Tipo Deducción</label>
-        <div class="col-md-10">
-            <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" disabled="disabled"></select>
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Rango inicial", new { htmlAttributes = new { @class = "text -box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="isr_RangoInicial">@Html.DisplayFor(model => model.isr_RangoInicial, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Rango final", new { htmlAttributes = new { @class = "text -box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="isr_RangoFinal">@Html.DisplayFor(model => model.isr_RangoFinal, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Porcentaje", new { htmlAttributes = new { @class = "text -box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="isr_Porcentaje">@Html.DisplayFor(model => model.isr_Porcentaje, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.Label("Tipo Deducción", new { htmlAttributes = new { @class = "text -box single-line", @disabled = "disabled" } })
+                    </div>
+                    <div class="col-md-6">
+                        <span id="tde_IdTipoDedu">@Html.DisplayFor(model => model.tde_IdTipoDedu, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled" } })</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ibox float-e-margins">
+            <h4 class="modal-title">Detalles</h4>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <table class="table table-striped table-bordered dataTable">
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Creado</td>
+                                @Html.HiddenFor(model => model.isr_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="FechaCrea">@Html.DisplayFor(model => model.isr_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            </tr>
+                            <tr>
+                                <td>Modificado</td>
+                                @Html.HiddenFor(model => model.isr_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                <td><span id="isr_FechaModifica">@Html.DisplayFor(model => model.isr_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h2>Auditoría</h2>
-    </div>
-    <div class="ibox-content">
-        <div class="form-horizontal">
-            <table class="table table-striped table-bordered dataTable">
-                <thead>
-                    <tr>
-                        <th>Acción</th>
-                        <th>Usuario</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Creado</td>
-                        @Html.HiddenFor(model => model.isr_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                        <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                        <td>@Html.EditorFor(model => model.isr_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                    </tr>
-                    <tr>
-                        <td>Modificado</td>
-                        @Html.HiddenFor(model => model.isr_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
-                        <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                        <td>@Html.EditorFor(model => model.isr_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 }

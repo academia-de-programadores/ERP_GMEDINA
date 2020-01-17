@@ -96,6 +96,24 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ConfirmarEdicion" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar</h4>
+            </div>
+            <div class="modal-body" id="confirmarEditar">
+                ¿Está seguro que desea editar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnConfirmarEditar2">Si</button>
+                <button type="button" class="btn btn-white" id="btnCerrarConfirmarEditar">No</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @* MODAL DE CREACIÓN *@
 <div class="modal fade" id="AgregarAcumuladosISR" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -113,7 +131,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Detalle acumulado ISR</h4>
+                <h4 class="modal-title">Detalle de acumulado ISR</h4>
             </div>
             <div class="modal-body" id="Detalles">
                 @Html.Partial("_DetailsTechosDeducciones", new ERP_GMEDINA.Models.tbAcumuladosISR())
