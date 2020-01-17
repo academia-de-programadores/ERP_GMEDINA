@@ -33,7 +33,7 @@ $(document).ready(function () {
             //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
-                data: null,
+                data: campo,
                 orderable: false,
                 defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                                     "<a class='btn btn-primary btn-xs' style= 'min-width: 70px;' onclick='CallDetalles(this)' >Detalles</a>" +
