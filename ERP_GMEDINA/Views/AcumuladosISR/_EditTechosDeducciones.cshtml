@@ -11,7 +11,7 @@
 
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.aisr_Descripcion)<span id="aste1">*</span>
+                        Descripción<label class="" id="AsteriscoDescripcionEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.aisr_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "aisr_Descripcion" } })
@@ -20,11 +20,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.LabelFor(model => model.aisr_Monto)<span id="aste2">*</span>
+                        Monto<label class="" id="AsteriscoMontoEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
                     </div>
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.aisr_Monto, new { htmlAttributes = new { @class = "text-box single-line", @id = "aisr_Monto" } })
-                        @Html.ValidationMessageFor(model => model.aisr_Monto, "", new { @class = "text-danger", @id = "validatione1" })
+                        @Html.ValidationMessageFor(model => model.aisr_Monto, "", new { @class = "text-danger", @id = "validatione2" })
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
     </div>
     <!-- BOTONES -->
     <div class="modal-footer">
-        <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar">Cerrar</button>
+        <button type="button" class="btn btn-white pull-right" id="btnCerrarEditar" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary pull-left" id="btnEditarAcumulado">Actualizar</button>
         <button type="button" class="btn btn-danger pull-left" id="btnInactivarAcumuladosISR">Inactivar</button>
     </div>

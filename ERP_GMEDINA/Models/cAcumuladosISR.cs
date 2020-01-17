@@ -13,14 +13,14 @@ namespace ERP_GMEDINA.Models
     public class cAcumuladosISR
     {
         [Display(Name = "ID acumulados ISR")]
-        [Required(ErrorMessage ="Este campo es requerido")]
+        [Required(ErrorMessage ="Este campo requerido")]
         public int aisr_Id { get; set; }
         [Display(Name = "Descripción")]
-        [Required(ErrorMessage = "Este campo es requerido")]
+        [Required(ErrorMessage = "Campo {0} requerido")]
         
         public string aisr_Descripcion { get; set; }
         [Display(Name = "Monto")]
-        [Required(ErrorMessage = "Este campo es requerido")]
+        [Required(ErrorMessage = "Campo {0} es requerido")]
         public decimal aisr_Monto { get; set; }
         [Display(Name = "Creado por")]
         public int aisr_UsuarioCrea { get; set; }
