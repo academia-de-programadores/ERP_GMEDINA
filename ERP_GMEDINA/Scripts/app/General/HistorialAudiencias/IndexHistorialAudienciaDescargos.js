@@ -3,8 +3,10 @@
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Motivo  </th>'
+        + '<th>Número</th>'
         + '<th>Fecha</th>'
         + '<th>Testigo</th> '
+        + '<th>Estado</th> '
          + '<th>Acciones</th> '
         + '</tr> </thead> ';
     obj.forEach(function (index, value) {
@@ -13,17 +15,29 @@
             testigo = "No";
         else
             testigo = "Si";
+        var Estado = "";
+        if (index.aude_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
         div = div +
             '<tbody>' + '<tr>'
+               + '<td>' + index.aude_Id + '</td>'
                 + '<td>' + index.aude_Descripcion + '</td>'
-                + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
+                + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0, 10) + '</td>'
                 + '<td>' + testigo + '</td>'
-               
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
-                + '</tr>' + '</tbody>'
+               + '<td>' + Estado + '</td>'
+        + '<td>';
+        if (index.aude_Estado)
+        {
+            div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
+        }
+        else
+        {
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>';
+        }
+              div += '</tr>' + '</tbody>'
         '</table>'
-
-
     });
     return div + '</div></div>';
 }
@@ -40,6 +54,7 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento
