@@ -17,7 +17,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                         <thead>
                             <tr role="row">
-
+                                <th></th>
                                 <th>Número</th>
                                 <th>Nombre Completo</th>
                                 <th>Tipo Permiso</th>
@@ -127,6 +127,6 @@
     @Scripts.Render("~/Scripts/app/general/HistorialPermisos/IndexHistorialPermisos.js")
     @if (Model.hper_Estado)
     {
-        @Scripts.Render("~/Scripts/app/general/HistorialPermisos/Admin")
+        @Scripts.Render("~/Scripts/app/general/HistorialPermisos/Admin.js")
     }
 }
