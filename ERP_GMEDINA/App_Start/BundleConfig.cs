@@ -114,6 +114,20 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
                       "~/Content/plugins/iCheck/custom.css"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateSucursal").Include(
+            "~/Scripts/app/General/Sucursales/CreateSucursales.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/SucursalesEdit").Include(
+            "~/Scripts/app/General/Sucursales/EditSucursales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales/Admin").Include(
+            "~/Scripts/app/General/Sucursales/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
+            "~/Scripts/app/General/Sucursales/IndexSucursales.js",
+            "~/Scripts/app/General/Sucursales/Admin.js"));
+
             // iCheck
             bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
                       "~/Scripts/plugins/iCheck/icheck.min.js"));

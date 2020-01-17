@@ -3,7 +3,6 @@
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Motivo  </th>'
-        + '<th>Número</th>'
         + '<th>Fecha</th>'
         + '<th>Testigo</th> '
         + '<th>Estado</th> '
@@ -22,7 +21,6 @@
             Estado = "Activo";
         div = div +
             '<tbody>' + '<tr>'
-               + '<td>' + index.aude_Id + '</td>'
                 + '<td>' + index.aude_Descripcion + '</td>'
                 + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0, 10) + '</td>'
                 + '<td>' + testigo + '</td>'
