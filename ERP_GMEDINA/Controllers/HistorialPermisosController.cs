@@ -28,9 +28,10 @@ namespace ERP_GMEDINA.Controllers
             {
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
                 //posteriormente es destruida.
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var V_tbHistorialPermisos_completa = db.V_tbHistorialPermisos_completa
+                //using (db = new ERP_GMEDINAEntities())
+                db = new ERP_GMEDINAEntities();
+
+                var V_tbHistorialPermisos_completa = db.V_tbHistorialPermisos_completa
                           .Select(
                           t => new
                           {
@@ -55,7 +56,7 @@ namespace ERP_GMEDINA.Controllers
                           )
                           .ToList();
                     return Json(V_tbHistorialPermisos_completa, JsonRequestBehavior.AllowGet);
-                }
+                
             }
             catch (Exception ex)
             {
@@ -115,7 +116,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    using (db = new ERP_GMEDINAEntities())
+                    //using (db = new ERP_GMEDINAEntities())
 
                         TipoPermisos.Add(new
                         {
@@ -187,6 +188,7 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
+            db = new ERP_GMEDINAEntities();
             var Usuario = (tbUsuario)Session["Usuario"];
             //en esta area ingresamos el registro con el procedimiento almacenado
             try
