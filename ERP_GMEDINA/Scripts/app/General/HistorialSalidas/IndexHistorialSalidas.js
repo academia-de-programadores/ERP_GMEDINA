@@ -158,8 +158,8 @@ function format(obj) {
         div = div
         + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
-        + '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
-        + '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
+        //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
+        //+ '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
         + '<div class="col-md-5"><b>Estado civil: </b>' + EstadoCivil + '</div>'
         + '<div class="col-md-5"><b>Teléfono: </b>' + index.per_Telefono + '</div>'
         + '</div>' +
