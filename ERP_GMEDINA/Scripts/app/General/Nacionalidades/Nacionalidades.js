@@ -51,7 +51,7 @@ function llenarTabla() {
                 var Acciones = value.nac_Estado == 1
                   ? null :
                   "<div>" +
-                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                      "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                   "</div>";
                 if (value.nac_Estado > fill) {
                     tabla.row.add({

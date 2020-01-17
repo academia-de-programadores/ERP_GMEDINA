@@ -52,13 +52,13 @@ function llenarTabla() {
                  var Acciones = value.tamo_Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.tamo_Estado > fill) {
                     tabla.row.add({
                         ID: value.tamo_Id,
                         "Número": value.tamo_Id,
-                        Estado: value.tamo_Estado,
+                        Estado: value.tamo_Estado ?"Activo":"Inactivo",
                         Descripcion: value.tamo_Descripcion,
                         Acciones:Acciones
                     })

@@ -119,7 +119,7 @@ function llenarChild() {
       data.forEach(function (valor, indice) {
        Acciones = valor.depto_Estado ? null : Admin ?
         "<div>" +
-            "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+            "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
         "</div>" :
         '';
        ChildTable.row.add(
