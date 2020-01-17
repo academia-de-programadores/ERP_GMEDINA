@@ -200,9 +200,10 @@
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialAudienciaDescargosController.cs" />
-    <Compile Include="Controllers\HistorialCargosController.cs" />
     <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
+    <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
+    <Compile Include="Controllers\HistorialPermisosController.cs" />
     <Compile Include="Controllers\HistorialSalidasController.cs" />
     <Compile Include="Controllers\HistorialVacacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,10 +214,10 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
-    <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
+    <Compile Include="Controllers\SucursalesController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoAmonestacionesController.cs" />
     <Compile Include="Controllers\TipoHorasController.cs" />
@@ -225,11 +226,6 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
-    <Compile Include="DataSets\ReportesRRHH.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -251,6 +247,7 @@
     <Compile Include="Models\cHistorialCargos.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
+    <Compile Include="Models\cHistorialIncapacidades.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -265,6 +262,7 @@
     <Compile Include="Models\cRequerimientosEspeciales.cs" />
     <Compile Include="Models\cRequisiciones.cs" />
     <Compile Include="Models\cSeleccionCandidatos.cs" />
+    <Compile Include="Models\cSucursales.cs" />
     <Compile Include="Models\cSueldos.cs" />
     <Compile Include="Models\cTipoAmonestaciones.cs" />
     <Compile Include="Models\cTipoHoras.cs" />
@@ -602,6 +600,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Restore1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbEquipoTrabajo_Update_Result.cs">
@@ -1009,48 +1010,6 @@
     <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_RPT_Empleado_Curriculum.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_EquipoEmpleado.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_FaseSeleccion.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialAmonestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialAudienciaDescargo.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialCargos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialContrataciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialIncapacidad.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialPermisos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialSalidas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialSueldos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialVacaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_Requisiciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1315,6 +1274,7 @@
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\EquipoEmpleados\EquipoEmpleados.js" />
+    <Content Include="Scripts\app\General\EquipoTrabajo\Admin.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\EquipoTrabajo.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\Admin.js" />
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
@@ -1324,10 +1284,12 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialAudiencias\Admin.js" />
     <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
     <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
+    <Content Include="Scripts\app\General\HistorialIncapacidades\Admin.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\CreateIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialPermisos\Admin.js" />
@@ -1336,6 +1298,7 @@
     <Content Include="Scripts\app\General\HistorialSalidas\CreateHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\EditHistorialSalidas.js" />
     <Content Include="Scripts\app\General\HistorialSalidas\IndexHistorialSalidas.js" />
+    <Content Include="Scripts\app\General\HistorialVacaciones\Admin.js" />
     <Content Include="Scripts\app\General\HistorialVacaciones\IndexHistorialVacaciones.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
@@ -1352,20 +1315,25 @@
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
-    <Content Include="Scripts\app\General\Sueldos\CreateSueldos.js" />
+    <Content Include="Scripts\app\General\Sucursales\Admin.js" />
+    <Content Include="Scripts\app\General\Sucursales\CreateSucursales.js" />
+    <Content Include="Scripts\app\General\Sucursales\EditSucursales.js" />
+    <Content Include="Scripts\app\General\Sucursales\IndexSucursales.js" />
     <Content Include="Scripts\app\General\Sueldos\IndexSueldos.js" />
-    <Content Include="Scripts\app\General\Sueldos\Sueldos.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\Admin.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\TipoHoras\Admin.js" />
     <Content Include="Scripts\app\General\TipoHoras\TipoHoras.js" />
+    <Content Include="Scripts\app\General\TipoIncapacidades\Admin.js" />
     <Content Include="Scripts\app\General\TipoIncapacidades\TipoIncapacidades.js" />
     <Content Include="Scripts\app\General\TipoMonedas\Admin.js" />
     <Content Include="Scripts\app\General\TipoMonedas\TipoMonedas.js" />
     <Content Include="Scripts\app\General\Idiomas\Idiomas.js" />
+    <Content Include="Scripts\app\General\TipoPermisos\Admin.js" />
     <Content Include="Scripts\app\General\TipoPermisos\TipoPermisos.js" />
     <Content Include="Scripts\app\General\TipoSalidas\Admin.js" />
     <Content Include="Scripts\app\General\TipoSalidas\TipoSalidas.js" />
+    <Content Include="Scripts\app\General\Titulos\Admin.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\Menu\Menu.js" />
@@ -1415,17 +1383,6 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\api\spanish.json" />
-    <Content Include="DataSets\ReportesRRHH.xsc">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
-    <None Include="DataSets\ReportesRRHH.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesRRHH.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesRRHH.xss">
-      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2070,6 +2027,19 @@
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\Index.cshtml" />
     <Content Include="Views\EquipoEmpleados\_Create.cshtml" />
+    <Content Include="Views\HistorialPermisos\Create.cshtml" />
+    <Content Include="Views\HistorialPermisos\Delete.cshtml" />
+    <Content Include="Views\HistorialPermisos\Details.cshtml" />
+    <Content Include="Views\HistorialPermisos\Edit.cshtml" />
+    <Content Include="Views\Sucursales\Create.cshtml" />
+    <Content Include="Views\Sucursales\Edit.cshtml" />
+    <Content Include="Views\Sucursales\Index.cshtml" />
+    <Content Include="Views\Sucursales\_Delete.cshtml" />
+    <Content Include="Views\Sucursales\_Detalles.cshtml" />
+    <Content Include="Views\al\View.cshtml" />
+    <Content Include="Views\al\View1.cshtml" />
+    <Content Include="Views\al\View2.cshtml" />
+    <Content Include="Views\al\View3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2077,7 +2047,6 @@
     <Folder Include="Downloadable files\" />
     <Folder Include="Logos\" />
     <Folder Include="Views\General\" />
-    <Folder Include="Views\ReportesRRHH\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2139,12 +2108,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
-    <EmbeddedResource Include="Reports\EquipoEmpleadosRPT.rdlc" />
-    <EmbeddedResource Include="Reports\FaseSeleccionRPT.rdlc" />
-    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

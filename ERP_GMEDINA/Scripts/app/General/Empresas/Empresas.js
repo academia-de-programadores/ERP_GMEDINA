@@ -4,6 +4,9 @@
 function init() {
     var inputFile = document.getElementById('empr_Logo');
     inputFile.addEventListener('change', mostrarImagen, false);
+
+    var inputFile = document.getElementById('UPempr_Logo');
+    inputFile.addEventListener('change', mostrarImagen, false);
 }
 
 function mostrarImagen(event) {
@@ -11,6 +14,8 @@ function mostrarImagen(event) {
     var reader = new FileReader();
     reader.onload = function (event) {
         var img = document.getElementById('img1');
+        img.src = event.target.result;
+        var img = document.getElementById('img2');
         img.src = event.target.result;
     }
     reader.readAsDataURL(file);
@@ -36,13 +41,42 @@ $("#empr_Logo").change(function () {
    processData: false
   })
  .done(function (res) {
-     if (res) {     
-         
-   MsgSuccess("Exito","Archivo subido exitosamente");
+  if (res == "true") {
+      MsgSuccess("Exito","Archivo subido exitosamente");
+     } else {
+            MsgError("Error", "Cambiar el nombre del archivo");
+            var img = document.getElementById('img1');
+            img.src = "";
+     }
+  $("#ModalNuevo").data("res", res);
+ });
+ }
+});
+$("#UPempr_Logo").change(function () {
+ var fileExtension = ['png', 'jpeg', 'jpg'];
+ if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+  var img = document.getElementById('img2');
+  img.src = "";
+  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+ } else {
+  var formData = new FormData();
+  formData.append('file', $('#UPempr_Logo')[0].files[0]);
+  $.ajax({
+   url: "/Empresas/Upload",
+   type: "post",
+   dataType: "html",
+   data: formData,
+   cache: false,
+   contentType: false,
+   processData: false
+  })
+ .done(function (res) {
+  if (res) {
+   MsgSuccess("Exito", "Archivo subido exitosamente");
   } else {
-         MsgError("Error", "El archivo no es valido");
-         var img = document.getElementById('img1');
-         img.src = "";
+   MsgError("Error", "El archivo no es valido");
+   var img = document.getElementById('img2');
+   img.src = "";
   }
   $("#ModalNuevo").data("res", res);
  });
@@ -73,6 +107,7 @@ function tablaEditar(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+       $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
      });
@@ -103,6 +138,7 @@ $("#btnAgregar").click(function () {
  $(modalnuevo).find("#empr_Nombre").val("");
  $(modalnuevo).find("#empr_Nombre").focus();
  $(modalnuevo).find("#empr_Logo").val(null);
+ $("#ModalEditar").find("#img1")[0].src = obj.empr_Logo;
 })
 
 $("#btnEditar").click(function () {
@@ -113,7 +149,7 @@ $("#btnEditar").click(function () {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        CierraPopups();
        $('#ModalEditar').modal('show');
-       $("#ModalEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+       var img = $("#ModalEditar").find("#img2");
        $("#ModalEditar").find("#empr_Nombre").focus();
       }
      });
@@ -141,7 +177,7 @@ $("#FormNuevo").on("submit", function (event) {
                     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                     $('.modal-backdrop').remove();//eliminamos el
                 }else {
-                    MsgError("Error","valores incorrectos");
+                    MsgError("Error","Imagen Requerida");
                 }
             });
     } else {

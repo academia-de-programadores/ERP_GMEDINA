@@ -268,20 +268,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="17.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" Width="1.5" PointX="17.375" PointY="5.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Empleado_Curriculum" Width="1.5" PointX="5.75" PointY="17.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" Width="1.5" PointX="17.75" PointY="10.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" Width="1.5" PointX="17.75" PointY="13.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones" Width="1.5" PointX="17.75" PointY="16.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" Width="1.5" PointX="7.75" PointY="18.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" Width="1.5" PointX="9.75" PointY="18.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" Width="1.5" PointX="19.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" Width="1.5" PointX="19.75" PointY="3.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" Width="1.5" PointX="19.75" PointY="7.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="19.75" PointY="10.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="19.75" PointY="13.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="19.75" PointY="17.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" Width="1.5" PointX="0.75" PointY="20.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="2.75" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

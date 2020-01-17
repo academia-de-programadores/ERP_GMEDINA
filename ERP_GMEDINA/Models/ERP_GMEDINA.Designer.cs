@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Axel Omar\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\Models\ERP_GMEDINA.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\keyci\Documents\ERP_MEDINA\PROYECTO_ERPGMEDINA\Proyecto_ERP_GMEDINA\ERP_GMEDINA\Models\ERP_GMEDINA.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
