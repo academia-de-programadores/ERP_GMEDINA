@@ -1,10 +1,10 @@
 ﻿@model ERP_GMEDINA.Models.tbSeleccionCandidatos
-<div class="modal inmodal" id="ModalInactivar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<div class="modal inmodal" id="ModalInhabilitar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">¿Seguro que desea Inactivar el registro?</h4>
+                <h4 class="modal-title">¿Seguro que desea inhabilitar el registro?</h4>
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormInactivar" }))
@@ -25,8 +25,8 @@
 					}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary pull-left" id="InActivar">Inactivar</button>
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="InActivar">Inhabilitar</button>
             </div>
         </div>
     </div>

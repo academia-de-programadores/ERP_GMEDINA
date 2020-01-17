@@ -49,6 +49,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/Admin").Include(
            "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
 
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/Admin").Include(
+          "~/Scripts/app/General/HistorialIncapacidades/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades").Include(
+            "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
+
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
@@ -103,6 +113,20 @@ namespace ERP_GMEDINA
             // iCheck css styles
             bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
                       "~/Content/plugins/iCheck/custom.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateSucursal").Include(
+            "~/Scripts/app/General/Sucursales/CreateSucursales.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/SucursalesEdit").Include(
+            "~/Scripts/app/General/Sucursales/EditSucursales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales/Admin").Include(
+            "~/Scripts/app/General/Sucursales/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
+            "~/Scripts/app/General/Sucursales/IndexSucursales.js",
+            "~/Scripts/app/General/Sucursales/Admin.js"));
 
             // iCheck
             bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
@@ -590,6 +614,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
                         "~/Scripts/app/general/Areas/EditArea.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
          "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
 
@@ -701,6 +726,10 @@ namespace ERP_GMEDINA
                "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
 
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAudienciaDescargos/Admin").Include(
+          "~/Scripts/app/General/HistorialAudiencias/Admin.js"));
+
+
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
                 "~/Scripts/app/General/Personas/CreatePersonas.js"));
             //Inputmask
@@ -726,6 +755,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
             "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
 
+            // SCRIPT Hsal
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialSalidas/Admin").Include(
+            "~/Scripts/app/general/HistorialSalidas/Admin.js"));
+
+            // SCRIPT tper
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoPermisos/Admin").Include(
+            "~/Scripts/app/general/TipoPermisos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+ "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones").Include(
                 "~/Scripts/app/General/CreateHistorialVacaciones.js"));
@@ -745,6 +784,13 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAudienciaDescargos").Include(
                "~/Scripts/app/General/HistorialAudiencias/IndexHistorialAudienciaDescargos.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/SeleccionCandidatos/Admin").Include(
+            "~/Scripts/app/General/SeleccionCandidatos/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ContratarCandidato").Include(
+                "~/Scripts/app/General/SeleccionCandidatos/ContratarCandidato.js"));
+
             // dataTables
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSeleccionCandidatos").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
@@ -763,6 +809,14 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
             "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+             "~/Scripts/app/General/Competencias/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+             "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+             bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
+     "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network

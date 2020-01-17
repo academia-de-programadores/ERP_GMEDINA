@@ -62,7 +62,7 @@
 //            string extencion = file.FileName.Split('.')[1].ToLower();
 //            if (file!=null && (extencion=="png" || extencion == "jpg" || extencion == "jpeg"))
 //            {
-//                string path = Server.MapPath("~/Logos/" + file.FileName);
+//                string path = "~/Logos/" + file.FileName;
 //                if (!System.IO.File.Exists(path))
 //                {//OPEN IF
 //                    Session["file"]=file;

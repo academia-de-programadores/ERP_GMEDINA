@@ -54,13 +54,14 @@ function llenarTabla() {
                 var Acciones = value.fare_Estado == 1
                     ? null :
                     "<div>" +
-                    "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                    "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                     "</div>";
                 if (value.fare_Estado > fill) {
                 tabla.row.add({
                     ID: value.fare_Id,
                     "Número": value.fare_Id,
-                    Descripción:value.fare_Descripcion,
+                    Descripción: value.fare_Descripcion,
+                    Estado: value.fare_Estado ? "Activo" : "Inactivo",
                     Acciones: Acciones
                 });
                 } 

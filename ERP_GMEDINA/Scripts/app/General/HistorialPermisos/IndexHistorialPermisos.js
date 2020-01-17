@@ -1,6 +1,10 @@
-﻿var fill = 0;
-var Admin = false;
+﻿var id = 0;
+var fill = 0;
 
+$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
 //Funciones GET
 function tablaEditar(ID) {
     //alert(ID);
@@ -33,7 +37,7 @@ function tablaDetalles(ID) {
                 $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio);
                 $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin);
                 $("#ModalDetallesAX").find("#hper_Duracion")["0"].innerText = obj.hper_Duracion;
-             
+
 
                 //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
@@ -102,10 +106,11 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 var Acciones = value.hper_Estado == 1
-                    ? null : Admin ?
-                    "<div>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
-                    "</div>" : '';
+                ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
+                   : Admin ?
+                       "<div>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                       "</div>" : '';
                 tabla.row.add({
                     Id: value.hper_Id,
                     "Número": value.hper_Id,
@@ -120,7 +125,7 @@ function llenarTabla() {
                     hper_Observacion: value.hper_Observacion,
                     FechaInicio: value.FechaInicio,
                     Estado: value.hper_Estado ? 'Activo' : 'Inactivo',
-                    Acciones:Acciones
+                    Acciones: Acciones
                     //Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                 });
             });
@@ -242,10 +247,6 @@ function format(obj) {
     //});
     return div + '</div></div></div>';
 }
-
-$(document).ready(function () {
-    llenarTabla();
-});
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

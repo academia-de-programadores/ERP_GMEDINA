@@ -17,44 +17,49 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialVacaciones
         public ActionResult Index()
         {
-            var tbHistorialVacaciones = db.tbHistorialVacaciones.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados);
-            return View(tbHistorialVacaciones.ToList());
+            tbHistorialVacaciones tbHistorialVacaciones = new tbHistorialVacaciones { hvac_Estado = true };
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            try
+            {
+                // tbtitulos = db.tbTitulos.Where(x => x.titu_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+                return View(tbHistorialVacaciones);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                // tbtitulos.Add(new tbTitulos { titu_Id = 0, titu_Descripcion = "fallo la conexion" });
+            }
+            return View(tbHistorialVacaciones);
         }
 
         // GET: HistorialVacaciones/Details/5
-        public ActionResult llenarTabla()
-        {
-            try
-            {
-                using (db = new ERP_GMEDINAEntities())
-                {
-                    var Empleados = db.V_HVacacionesEmpleados.Where(t => t.emp_Estado == true)
-                        .Select(
-                        t => new
-                        {
-                            emp_Id = t.emp_Id,
-                            Empleado = t.emp_NombreCompleto,
-                            Cargo = t.car_Descripcion,
-                            Departamento = t.depto_Descripcion,
-                            FechaContratacion = t.emp_Fechaingreso
-                        }).ToList();
+        //public ActionResult llenarTabla()
+        //{
+        //    try
+        //    {
+        //        using (db = new ERP_GMEDINAEntities())
+        //        {
+        //            var Empleados = db.V_HVacacionesEmpleados
+        //                .Select(
+        //                t => new
+        //                {
+        //                    emp_Id = t.emp_Id,
+        //                    Empleado = t.emp_NombreCompleto,
+        //                    Cargo = t.car_Descripcion,
+        //                    //Departamento = t.depto_Descripcion,
+        //                    //FechaContratacion = t.emp_Fechaingreso
+        //                }).ToList();
 
-                    foreach(var e in Empleados)
-                    {
-                        if(DateTime.Now.AddYears(-1) < e.FechaContratacion )
-                        {
 
-                        }
-                    }
 
-                    return Json(Empleados, JsonRequestBehavior.AllowGet);
-                }
-            }
-            catch
-            {
-                return Json("-2", JsonRequestBehavior.AllowGet);
-            }
-        }
+        //            return Json(Empleados, JsonRequestBehavior.AllowGet);
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return Json("-2", JsonRequestBehavior.AllowGet);
+        //    }
+        //}
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -64,7 +69,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id && x.hvac_Estado == true).ToList();
+                    lista = db.V_Historialvacaciones.Where(x => x.emp_Id == id).ToList();
                     if (lista == null)
                     {
                         lista.Add(new V_Historialvacaciones { });
@@ -125,7 +130,7 @@ namespace ERP_GMEDINA.Controllers
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
+                //Session.Remove("id");
             }
             else
             {
@@ -283,6 +288,56 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
+
+
+        [HttpPost]
+        public JsonResult llenarTabla()
+        {
+            try
+            {
+                var Empleados = db.V_HVacacionesEmpleados
+                        .Select(
+                        t => new
+                        {
+                            emp_Id = t.emp_Id,
+                            Empleado = t.emp_NombreCompleto,
+                            Cargo = t.car_Descripcion,
+                            Departamento = t.depto_Descripcion,
+                            FechaContratacion = t.emp_Fechaingreso
+                        }).ToList();
+
+
+                return Json(Empleados, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                throw;
+            }
+        }
+        [HttpPost]
+        public JsonResult habilitar(tbHistorialVacaciones tbHistorialVacaciones)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialVacaciones_Restore(tbHistorialVacaciones.hvac_Id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialVacaciones_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    result = "-2";
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -292,4 +347,5 @@ namespace ERP_GMEDINA.Controllers
             base.Dispose(disposing);
         }
     }
-}
+
+    }

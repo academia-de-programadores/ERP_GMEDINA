@@ -17,6 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: Nacionalidades
         public ActionResult Index()
         {
+            //bool Admin = (bool)Session["Admin"];
+            bool Admin = (bool)Session["Admin"];
             tbNacionalidades tbNacionalidades = new tbNacionalidades { nac_Estado = true };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             return View(tbNacionalidades);
@@ -31,15 +33,15 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 var tbNacionalidades = db.tbNacionalidades
-                .Select(
-                    t => new
-                    {
-                        nac_Id = t.nac_Id,
-                        nac_Descripcion = t.nac_Descripcion,
-                        nac_Estado = t.nac_Estado
-                    }
-                    )
-                    .ToList();
+                       .Select(
+                       t => new
+                       {
+                           nac_Id = t.nac_Id,
+                           nac_Descripcion = t.nac_Descripcion,
+                           nac_Estado = t.nac_Estado
+                       }
+                       )
+                       .ToList();
                 return Json(tbNacionalidades, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -92,7 +94,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 db = new ERP_GMEDINAEntities();
                 tbNacionalidades = db.tbNacionalidades.Find(id);
-                if (tbNacionalidades == null || !tbNacionalidades.nac_Estado)
+                if (tbNacionalidades == null)
                 {
                     return HttpNotFound();
                 }
@@ -103,7 +105,7 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var habilidad = new tbNacionalidades
+            var tbNacionalidad = new tbNacionalidades
             {
                 nac_Id = tbNacionalidades.nac_Id,
                 nac_Descripcion = tbNacionalidades.nac_Descripcion,
@@ -116,7 +118,7 @@ namespace ERP_GMEDINA.Controllers
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbNacionalidades.tbUsuario).usu_NombreUsuario },
                 tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbNacionalidades.tbUsuario1).usu_NombreUsuario }
             };
-            return Json(habilidad, JsonRequestBehavior.AllowGet);
+            return Json(tbNacionalidad, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Nacionalidades/Edit/5
@@ -124,8 +126,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Edit(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
-
-            if (tbNacionalidades.nac_Id != 0)
+            if (tbNacionalidades.nac_Id != 0 && tbNacionalidades.nac_Descripcion != "")
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
@@ -188,14 +189,18 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Delete(tbNacionalidades tbNacionalidades)
         {
             string msj = "";
-            if (tbNacionalidades.nac_Id != 0 && tbNacionalidades.nac_RazonInactivo != "")
+            string RazonInactivo = "Se ha Inhabilitado este Registro";
+
+
+            if (tbNacionalidades.nac_Id != 0)
             {
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
+
                 try
                 {
                     db = new ERP_GMEDINAEntities();
-                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, tbNacionalidades.nac_RazonInactivo, Usuario.usu_Id, DateTime.Now);
+                    var list = db.UDP_RRHH_tbNacionalidades_Delete(id, RazonInactivo, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbNacionalidades_Delete_Result item in list)
                     {
                         msj = item.MensajeError + " ";

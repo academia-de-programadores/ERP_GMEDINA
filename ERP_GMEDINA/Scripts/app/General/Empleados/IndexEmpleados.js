@@ -1,7 +1,7 @@
 ﻿
 function format(obj) {
     
-    var div = '<div class="ibox"><div class="ibox-title"> <i class="fa fa-newspaper-o"> </i><strong class="mr-auto m-l-sm">Datos de Empleado</strong><div class="btn-group pull-right"><button data-toggle="dropdown" class="btn btn-outline btn-primary btn-xs dropdown-toggle"><i class="fa fa-paste"></i> Reportes </button><ul class="dropdown-menu"><li><a class="dropdown-item" href="#">Horas Trabajadas</a></li><li><a class="dropdown-item" href="#">Perfil Profesional</a></li></ul> </div></div><div class="ibox-content"><div class="row">';
+    var div = '<div class="ibox"><div class="ibox-title"> <i class="fa fa-newspaper-o"> </i><strong class="mr-auto m-l-sm">Datos de Empleado</strong></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
             '<div class="col-md-5">' +
@@ -29,12 +29,13 @@ function llenarTabla() {
            }
            $.each(Lista, function (index, value) {
                tabla.row.add({
+                   Número:value.Id,
                    ID: value.Id,
-                   Identidad: value.per_Identidad,
+                  
                    Nombre: value.Nombre,
                    Departamento: value.depto_Descripcion,
                    Sexo: value.per_Sexo,
-                   Edad: value.per_Edad,
+                  Estado:value.Estado ? "Activo":"Inactivo",
                    Telefono: value.per_Telefono,
                    Correo: value.per_CorreoElectronico
 

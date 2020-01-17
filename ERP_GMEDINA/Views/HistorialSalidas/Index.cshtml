@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialSalidas>
+﻿@model ERP_GMEDINA.Models.tbHistorialSalidas
 
 @{
     ViewBag.Title = "Finalizaciones Laborales";
@@ -20,9 +20,11 @@
                         <thead>
                             <tr role="row">
                                 <th></th>
+                                <th>Número</th>
                                 <th>Nombre Completo</th>
                                 <th>Tipo Salida</th>
-                                <th>Accion</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -108,13 +110,37 @@
         </div>
     </div>
 </div>
-@*MODAL DETALLES*@
+@*MODAL habilitar*@
+<div class="modal fade" id="ModalHabilitar" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Activar</h4>
+            </div>
+            <div class="modal-body" id="Activar">
+                ¿Esta seguro que desea Activar este registro?
+            </div>
+            <input type="hidden" value="" id="txtIdRestore">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary pull-right" id="btnActivar" data-dismiss="modal">Si</button>
+                <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+            </div>
+        </div>
+    </div>
+</div>
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
 @section Scripts {
-    @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general")
     @Scripts.Render("~/Scripts/app/general/IndexHistorialSalidas")
+
+    @if (Model.hsal_Estado)
+    {
+        @Scripts.Render("~/Scripts/app/general/HistorialSalidas/Admin")
+    }
 }

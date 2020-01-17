@@ -5,6 +5,7 @@
         + '<tr> <th>  Motivo  </th>'
         + '<th>Fecha</th>'
         + '<th>Testigo</th> '
+        + '<th>Estado</th> '
          + '<th>Acciones</th> '
         + '</tr> </thead> ';
     obj.forEach(function (index, value) {
@@ -13,17 +14,28 @@
             testigo = "No";
         else
             testigo = "Si";
+        var Estado = "";
+        if (index.aude_Estado == false)
+            Estado = "Inactivo";
+        else
+            Estado = "Activo";
         div = div +
             '<tbody>' + '<tr>'
                 + '<td>' + index.aude_Descripcion + '</td>'
-                + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
+                + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0, 10) + '</td>'
                 + '<td>' + testigo + '</td>'
-               
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
-                + '</tr>' + '</tbody>'
+               + '<td>' + Estado + '</td>'
+        + '<td>';
+        if (index.aude_Estado)
+        {
+            div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
+        }
+        else
+        {
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>';
+        }
+              div += '</tr>' + '</tbody>'
         '</table>'
-
-
     });
     return div + '</div></div>';
 }
@@ -40,6 +52,7 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.emp_Id,
+                   "Número": value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento
@@ -94,12 +107,12 @@ function Llamarmodaldetalle(ID) {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#aude_Descripcion")["0"].innerText = obj.aude_Descripcion;
                 $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0,10);
-                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo;
+                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo?'Si':'No';
                 $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
+                //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
                 $('#ModalDetalles').modal('show');
 

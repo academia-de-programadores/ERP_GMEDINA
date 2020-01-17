@@ -1,5 +1,11 @@
 ﻿var id = 0;
+var fill = 0;
+//var Admin = false;
 
+$(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
+    llenarTabla();
+});
 //Funciones GET
 function tablaEditar(ID) {
     //alert(ID);
@@ -46,22 +52,35 @@ function llenarTabla() {
                 return null;
             }
             $.each(Lista, function (index, value) {
-                tabla.row.add({
-                    Id: value.hsal_Id,
-                    tsal_Id: value.tsal_Id,
-                    TipoSalida: value.tsal_Descripcion,
-                    rsal_Id: value.rsal_Id,
-                    rsal_Descripcion: value.rsal_Descripcion,
-                    NombreCompleto: value.per_Nombres,
-                    per_CorreoElectronico: value.per_CorreoElectronico,
-                    per_Telefono: value.per_Telefono,
-                    per_Direccion: value.per_Direccion,
-                    per_Edad: value.per_Edad,
-                    per_EstadoCivil: value.per_EstadoCivil,
-                    hsal_Observacion: value.hsal_Observacion,
-                    hsal_FechaSalida: value.hsal_FechaSalida,
-                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>"
-                });
+                var Acciones = value.hsal_Estado == 1
+                    ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hsal_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hsal_Id + ")'>Editar</a>"
+                    : Admin ?
+                        "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                        "</div>" : '';
+                if (value.hsal_Estado > fill) {
+                    tabla.row.add({
+                        Id: value.hsal_Id,
+                        ID: value.hsal_Id,
+                        "Número": value.hsal_Id,
+                        tsal_Id: value.tsal_Id,
+                        TipoSalida: value.tsal_Descripcion,
+                        rsal_Id: value.rsal_Id,
+                        rsal_Descripcion: value.rsal_Descripcion,
+                        NombreCompleto: value.per_Nombres,
+                        per_CorreoElectronico: value.per_CorreoElectronico,
+                        per_Telefono: value.per_Telefono,
+                        per_Direccion: value.per_Direccion,
+                        per_Edad: value.per_Edad,
+                        per_EstadoCivil: value.per_EstadoCivil,
+                        hsal_Observacion: value.hsal_Observacion,
+                        hsal_Estado: value.hsal_Estado,
+                        hsal_FechaSalida: value.hsal_FechaSalida,
+                        Acciones: Acciones,
+                        Estado: value.hsal_Estado ? "Activo" : "Inactivo"
+                        //
+                    });
+                }
             });
             tabla.draw();
         });
@@ -85,7 +104,7 @@ $("#btnInactivar").click(function () {
     $("#ModalInactivar").find("#hsal_RazonInactivo").val("");
     $("#ModalInactivar").find("#hsal_RazonInactivo").focus();
 });
-//aqui
+
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -139,8 +158,8 @@ function format(obj) {
         div = div
         + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
         + '<div class="col-md-5"><B>Correo electrónico: </b>' + index.per_CorreoElectronico + '</div>'
-        + '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
-        + '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
+        //+ '<div class="col-md-5"><b>Edad: </b>' + index.per_Edad + '</div>'
+        //+ '<div class="col-md-5"><b>Dirección: </b>' + index.per_Direccion + '</div>'
         + '<div class="col-md-5"><b>Estado civil: </b>' + EstadoCivil + '</div>'
         + '<div class="col-md-5"><b>Teléfono: </b>' + index.per_Telefono + '</div>'
         + '</div>' +
@@ -168,9 +187,6 @@ function format(obj) {
     return div + '</div></div></div>';
 }
 
-$(document).ready(function () {
-    llenarTabla();
-});
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
