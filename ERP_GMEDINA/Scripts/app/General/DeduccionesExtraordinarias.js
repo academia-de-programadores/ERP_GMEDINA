@@ -2,7 +2,9 @@
 //Validaciones de Botones de las Pantallas
 const btnAgregar = $('#btnAgregar'),
 //Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
+cargandoCrear = $('#cargandoCrear'),
+equipoEmpId = $('#eqemp_Id');
+
 //#endregion
 
 //
