@@ -132,37 +132,6 @@ $("#btnActivarRegistroIngresoIndividual").click(function () {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-$("#btnCerrarCrear").click(function () {
-    $("#Crear #emp_Id").val("0");
-    $("#ini_Motivo").val('');
-    $("#ini_Monto").val('');
-    $("#ini_PagaSiempre").val('');
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#AgregarIngresosIndividuales").modal('hide');
-});
-
-$("#btnIconCerrar").click(function () {
-    $("#Crear #emp_Id").val("0");
-    $("#ini_Motivo").val('');
-    $("#ini_Monto").val('');
-    $("#ini_PagaSiempre").val('');
-    $("#validatione1").css("display", "none");
-    $("#validatione2").css("display", "none");
-    $("#validatione3").css("display", "none");
-    $("#AgregarIngresosIndividuales").modal('hide');
-});
-
-//Agregar//
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
 function ocultarCargandoCrear() {
     btnGuardar.show();
     cargandoCrear.html('');
@@ -174,6 +143,28 @@ function mostrarCargandoCrear() {
     cargandoCrear.html(spinner());
     cargandoCrear.show();
 }
+
+$("#btnCerrarCrear").click(function () {
+    $("#Crear #emp_Id").val("0");
+    $("#ini_Motivo").val('');
+    $("#ini_Monto").val('');
+    $("#ini_PagaSiempre").prop('checked', false);
+    $("#ast1").css("color", "black");
+    $("#ast2").css("color", "black");
+    $("#ast3").css("color", "black");
+    $("#validatione1").css("display", "none");
+    $("#validatione2").css("display", "none");
+    $("#validatione3").css("display", "none");
+    $("#AgregarIngresosIndividuales").modal('hide');
+    ocultarCargandoCrear();
+});
+
+//Agregar//
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+const btnGuardar = $('#btnCreateRegistroIngresoIndividual')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
 
 $(document).on("click", "#btnAgregarIngresoIndividual", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
@@ -206,9 +197,9 @@ $(document).on("click", "#btnAgregarIngresoIndividual", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroIngresoIndividual').click(function () {
     debugger;
+    var TOF = true;
     var ini_PagaSiempre = false;
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var ini_IdIngresosIndividuales = $("#Crear #ini_IdIngresosIndividuales").val();
     var emp_Id = $("#Crear #emp_Id").val();
     var ini_Motivo = $("#Crear #ini_Motivo").val();
     var ini_Monto = $("#Crear #ini_Monto").val();
@@ -220,62 +211,82 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
     else{
         ini_PagaSiempre = false;
     }
-
+    //----
     if (ini_Motivo == "" || ini_Motivo == null) {
         $("#Crear #validatione1").css("display", "");
+        $("#ast1").css("color", "red");
+        TOF = false;
     }
     else {
         $("#Crear #validatione1").css("display", "none");
+        $("#ast1").css("color", "black");
     }
-
+    //--
     if (emp_Id == "" || emp_Id == 0 || emp_Id == "0") {
         $("#Crear #validatione2").css("display", "");
+        $("#ast2").css("color", "red");
+        TOF = false;
     }
-    else if (emp_Id != "" || emp_Id != 0 || emp_Id != "0") {
+    else {
         $("#Crear #validatione2").css("display", "none");
+        $("#ast2").css("color", "black");
     }
+    //--
     if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
-        if (expr.test(ini_Monto))
-        {
-            $("#Crear #validatione3").css("display", "none");
-            mostrarCargandoCrear();
-
-            //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-            $.ajax({
-                url: "/IngresosIndividuales/Create",
-                method: "POST",
-                data: { ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: ini_Monto, ini_PagaSiempre: ini_PagaSiempre }
-            }).done(function (data) {
-                //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-                if (data != "error") {
-
-                    cargarGridDeducciones();
-
-                    $("#Crear #ini_Motivo").val('');
-                    $("#Crear #ini_Monto").val('');
-                    $("#Crear #ini_PagaSiempre").val('');
-                    //CERRAR EL MODAL DE AGREGAR
-                    $("#AgregarIngresosIndividuales").modal('hide');
-
-                    // Mensaje de exito cuando un registro se ha guardado bien
-                    iziToast.success({
-                        title: 'Exito',
-                        message: '¡El registro se agregó de forma exitosa!',
-                    });
-                }
-                else {
-                    iziToast.error({
-                        title: 'Error',
-                        message: '¡No se guardó el registro, contacte al administrador!',
-                    });
-                }
-
-                ocultarCargandoCrear();
-            })
-        }
+        $("#Crear #validatione3").css("display", "none");
+        $("#ast3").css("color", "black");
     }
     else {
         $("#Crear #validatione3").css("display", "");
+        $("#ast3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (expr.test(ini_Monto)) {
+        $("#Crear #validatione3").css("display", "none");
+        $("#ast3").css("color", "black");
+    }
+    else {
+        $("#Crear #validatione3").css("display", "");
+        $("#ast3").css("color", "red");
+        TOF = false;
+    }
+
+    if (TOF) {
+        mostrarCargandoCrear();
+
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/IngresosIndividuales/Create",
+            method: "POST",
+            data: { ini_Motivo: ini_Motivo, emp_Id: emp_Id, ini_Monto: ini_Monto, ini_PagaSiempre: ini_PagaSiempre }
+        }).done(function (data) {
+            //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data != "error") {
+
+                cargarGridDeducciones();
+
+                $("#Crear #ini_Motivo").val('');
+                $("#Crear #ini_Monto").val('');
+                $("#Crear #ini_PagaSiempre").val('');
+                //CERRAR EL MODAL DE AGREGAR
+                $("#AgregarIngresosIndividuales").modal('hide');
+
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: '¡El registro se agregó de forma exitosa!',
+                });
+            }
+            else {
+                iziToast.error({
+                    title: 'Error',
+                    message: '¡No se guardó el registro, contacte al administrador!',
+                });
+            }
+
+            ocultarCargandoCrear();
+        });
     }
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -296,19 +307,9 @@ $("#btnCerrarEditar").click(function () {
     $("#Editar #ini_IdIngresosIndividuales").val('');
     $("#Editar #ini_Motivo").val('');
     $("#Editar #ini_Monto").val('');
-    $("#Editar #ini_PagaSiempre").val();
+    $("#Editar #ini_PagaSiempre").prop('checked', false);
 });
 
-$("#btnIconCerrare").click(function () {
-    $("#validation1").css("display", "none");
-    $("#validation2").css("display", "none");
-    $("#validation3").css("display", "none");
-    $("#EditarIngresosIndividuales").modal('hide');
-    $("#Editar #ini_IdIngresosIndividuales").val('');
-    $("#Editar #ini_Motivo").val('');
-    $("#Editar #ini_Monto").val('');
-    $("#Editar #ini_PagaSiempre").val();
-});
 
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
@@ -393,24 +394,48 @@ $(document).on("click", "#IndexTable tbody tr td #btnEditarIngresosIndividuales"
 });
 
 $("#btnEditIngresoIndividual").click(function () {
-    var vale2 = $("#Editar #ini_Motivo").val();
-    var vale3 = $("#Editar #ini_Monto").val();
+    var TOF = true;
+    var ini_Motivo = $("#Editar #ini_Motivo").val();
+    var ini_Monto = $("#Editar #ini_Monto").val();
     var expreg = new RegExp(/^[0-9]+(\.[0-9]{1,2})$/);
-
-    if (vale2 == "" || vale2 == null) {
+    debugger;
+    if (ini_Motivo == "" || ini_Motivo == null) {
         $("#Editar #validation1").css("display", "");
+        $("#aste1").css("color", "red");
+        TOF = false;
     }
-    else if (vale3 != null || vale3 != "") {
-        if (expreg.test(vale3)) {
-            $("#EditarIngresosIndividuales").modal('hide');
-            $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
-            $("html, body").css("overflow", "hidden");
-            $("html, body").css("overflow", "scroll");
-        }
-        else {
-            $("#Editar #validation3").css("display", "");
-        }
+    else {
+        $("#Editar #validation1").css("display", "none");
+        $("#aste1").css("color", "black");
     }
+    //--
+    if (ini_Monto != "" || ini_Monto != null || ini_Monto != undefined) {
+        $("#Editar #validation3").css("display", "none");
+        $("#aste3").css("color", "black");
+    }
+    else {
+        $("#Editar #validation3").css("display", "");
+        $("#aste3").css("color", "red");
+        TOF = false;
+    }
+    //--
+    if (expreg.test(ini_Monto)) {
+        $("#Editar #validation3").css("display", "none");
+        $("#aste3").css("color", "black");
+    }
+    else {
+        $("#Editar #validation3").css("display", "");
+        $("#aste3").css("color", "red");
+        TOF = false;
+    }
+
+    if (TOF) {
+        $("#EditarIngresosIndividuales").modal('hide');
+        $("#EditarIngresosIndividualesConfirmacion").modal({ backdrop: 'static', keyboard: false });
+        $("html, body").css("overflow", "hidden");
+        $("html, body").css("overflow", "scroll");
+    }
+
     $("#EditarIngresosIndividuales").submit(function (e) {
         return false;
     });

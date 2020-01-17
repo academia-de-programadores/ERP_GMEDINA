@@ -52,13 +52,14 @@ namespace ERP_GMEDINA.Controllers
 
         // POST: IngresosIndividuales/Create
         [HttpPost]
-        public ActionResult Create(string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
+        public ActionResult Create(string ini_Motivo, int emp_Id, string ini_Monto, bool ini_PagaSiempre)
         {
+            decimal ini_Montos = decimal.Parse(ini_Monto);
             tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
             {
                 ini_Motivo = ini_Motivo,
                 emp_Id = emp_Id,
-                ini_Monto = ini_Monto,
+                ini_Monto = ini_Montos,
                 ini_PagaSiempre = ini_PagaSiempre
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
@@ -144,14 +145,15 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int ini_IdIngresosIndividuales, string ini_Motivo, int emp_Id, decimal ini_Monto, bool ini_PagaSiempre)
+        public ActionResult Edit(int ini_IdIngresosIndividuales, string ini_Motivo, int emp_Id, string ini_Monto, bool ini_PagaSiempre)
         {
+            decimal ini_Montos = decimal.Parse(ini_Monto);
             tbIngresosIndividuales tbIngresosIndividuales = new tbIngresosIndividuales
             {
                 ini_IdIngresosIndividuales = ini_IdIngresosIndividuales,
                 ini_Motivo = ini_Motivo,
                 emp_Id = emp_Id,
-                ini_Monto = ini_Monto,
+                ini_Monto = ini_Montos,
                 ini_PagaSiempre = ini_PagaSiempre
             };
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH

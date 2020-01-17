@@ -18,8 +18,8 @@ tr.shown td.details-control {
 }
 
 .data {
-    width: 370px;
-    height: 400px;
+    max-width: 370px;
+    max-height: 400px;
     overflow: auto;
 }
 
@@ -59,4 +59,9 @@ border-radius: 10px;
 background : rgba(168, 168, 168, 0.5);
 border-radius: 10px;
 box-shadow:  0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.dataTables_wrapper{
+    padding-bottom: 10px !important;
 }
