@@ -676,6 +676,7 @@
           <Property Name="req_Estado" Type="bit" Nullable="false" />
           <Property Name="req_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="req_Vacantes" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="req_VacantesOcupadas" Type="int" Nullable="false" />
           <Property Name="req_FechaRequisicion" Type="datetime" />
           <Property Name="req_FechaContratacion" Type="datetime" />
           <Property Name="req_UsuarioCrea" Type="int" Nullable="false" />
@@ -3915,7 +3916,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Contratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
-          <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
@@ -3924,6 +3924,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
+          <Parameter Name="tmon_Id" Type="int" Mode="In" />
+          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="emp_Fechaingreso" Type="datetime" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
@@ -3956,7 +3959,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         </Function>
         <Function Name="UDP_RRHH_tbEmpleados_Recontratar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
-          <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
@@ -3965,6 +3967,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
+          <Parameter Name="tmon_Id" Type="int" Mode="In" />
+          <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="emp_Fechareingreso" Type="datetime" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
@@ -3997,6 +4002,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <Function Name="UDP_RRHH_tbEmpresas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="empr_Id" Type="int" Mode="In" />
           <Parameter Name="empr_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="empr_Logo" Type="nvarchar" Mode="In" />
           <Parameter Name="empr_usuarioModifica" Type="int" Mode="In" />
           <Parameter Name="empr_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -4163,6 +4169,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="hcar_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="req_Id" Type="int" Mode="In" />
           <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="emp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -6894,6 +6901,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <NavigationProperty Name="tbRequerimientosEspecialesRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbRequerimientosEspecialesRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbRequerimientosEspecialesRequisicion" />
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_req_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
+          <Property Name="req_VacantesOcupadas" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -10058,6 +10066,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
             <Parameter Name="empr_Nombre" Mode="In" Type="String" />
+            <Parameter Name="empr_Logo" Mode="In" Type="String" />
             <Parameter Name="empr_usuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -10789,7 +10798,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Contratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Contratar_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
@@ -10798,13 +10806,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
             <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="emp_Fechaingreso" Mode="In" Type="DateTime" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratar" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratar_Result)">
             <Parameter Name="scan_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
             <Parameter Name="depto_Id" Mode="In" Type="Int32" />
@@ -10813,6 +10823,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
             <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
             <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="emp_Fechareingreso" Mode="In" Type="DateTime" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
@@ -11036,6 +11049,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="hcar_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="req_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -13106,6 +13120,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="tbRequisiciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbRequisiciones">
               <MappingFragment StoreEntitySet="tbRequisiciones">
+                <ScalarProperty Name="req_VacantesOcupadas" ColumnName="req_VacantesOcupadas" />
                 <ScalarProperty Name="req_Id" ColumnName="req_Id" />
                 <ScalarProperty Name="req_Experiencia" ColumnName="req_Experiencia" />
                 <ScalarProperty Name="req_Sexo" ColumnName="req_Sexo" />
