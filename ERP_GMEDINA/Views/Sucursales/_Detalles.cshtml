@@ -1,0 +1,75 @@
+﻿@model ERP_GMEDINA.Models.tbSucursales
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Detalle Sucursales</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+					<dt>@Html.DisplayNameFor(model => model.mun_Codigo)</dt>
+                    <dd id="mun_Codigo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.bod_Id)</dt>
+                    <dd id="bod_Id"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.pemi_Id)</dt>
+                    <dd id="pemi_Id"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbEmpresas.empr_Nombre)</dt>
+                    <dd id="tbEmpresas"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.suc_Descripcion)</dt>
+                    <dd id="suc_Descripcion"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.suc_Correo)</dt>
+                    <dd id="suc_Correo"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.suc_Direccion)</dt>
+                    <dd id="suc_Direccion"></dd>
+
+					<dt>@Html.DisplayNameFor(model => model.suc_Telefono)</dt>
+                    <dd id="suc_Telefono"></dd>
+
+
+
+				</dl>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>Auditoría</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <table class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Acción</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        <td><span id="suc_UsuarioCrea">@Html.DisplayFor(model => model.tbUsuario.usu_Nombres, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="suc_FechaCrea">@Html.DisplayFor(model => model.suc_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modificado</td>
+                                        <td><span id="suc_UsuarioModifica">@Html.DisplayFor(model => model.suc_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        <td><span id="suc_FechaModifica">@Html.DisplayFor(model => model.suc_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                        @*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
+                    </div>
+                </div>
+		</div>
+	</div>
+</div>
+

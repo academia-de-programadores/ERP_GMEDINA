@@ -52,7 +52,7 @@ function llenarTabla() {
                  var Acciones = value.tamo_Estado == 1
                    ?null:
                    "<div>" +
-                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                    "</div>";
                 if (value.tamo_Estado > fill) {
                     tabla.row.add({

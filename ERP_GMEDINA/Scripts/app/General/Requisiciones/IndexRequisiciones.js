@@ -220,7 +220,7 @@ function llenarTabla() {
                 var Acciones = value.req_Estado==1
                     ?null:
                     "<div>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                     "</div>";
                 if (value.req_Estado>fill) {
                     

@@ -53,7 +53,7 @@ function llenarTabla() {
                     ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.tper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.tper_Id + ")'>Editar</a>"
                     : Admin ?
                         "<div>" +
-                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Habilitar</a>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                         "</div>" : '';
                 if (value.tper_Estado > fill) {
                     tabla.row.add({
