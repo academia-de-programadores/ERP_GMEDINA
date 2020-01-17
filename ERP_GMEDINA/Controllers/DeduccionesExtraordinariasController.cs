@@ -53,6 +53,31 @@ namespace ERP_GMEDINA.Controllers
 		}
         #endregion
 
+        #region DropdownList
+        
+        public JsonResult DDLEquipoEmpleado()
+        {
+            var DDL =
+                from EqEm in db.tbEquipoEmpleados
+                where EqEm.eqem_Estado == true
+                join EqTr in db.tbEquipoTrabajo on EqEm.eqtra_Id equals EqTr.eqtra_Id
+                join Emp in db.tbEmpleados on EqEm.emp_Id equals Emp.emp_Id
+                join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
+                select new { Id = EqEm.eqem_Id, Descripcion = EqTr.eqtra_Descripcion + " - " + Per.per_Nombres + " " + Per.per_Apellidos};
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        } 
+
+        public JsonResult DDLDeducciones()
+        {
+            var DDL =
+                from CaDe in db.tbCatalogoDeDeducciones
+                where CaDe.cde_Activo == true
+                select new { Id = CaDe.cde_IdDeducciones, Descripcion = CaDe.cde_DescripcionDeduccion };
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+        
+        #endregion
+
         #region Crear Deducciones Extraordinarias
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
@@ -238,19 +263,13 @@ namespace ERP_GMEDINA.Controllers
         }
         #endregion
 
-        #region Inhabilitar Deducciones Extraordinarias
+        #region Inactivar Deducciones Extraordinarias
 		//POST: DeduccionesExtraordinarias/Inactivar
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Inactivar(int dex_IdDeduccionesExtra)
+		public ActionResult Inactivar(int id)
 		{
-
-			//Para llenar los campos de auditoria
-			//tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
-			//tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
-
 			//Variable para enviarla al lado del Cliente
 			string Response = String.Empty;
 			IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -261,7 +280,7 @@ namespace ERP_GMEDINA.Controllers
 				{
 
 					//Ejecutar Procedimiento Almacenado
-					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(dex_IdDeduccionesExtra,
+					listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(id,
 																										 1,
 																										 DateTime.Now);
 

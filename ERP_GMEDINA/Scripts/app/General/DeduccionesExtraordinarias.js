@@ -54,6 +54,9 @@ function cargarGridDeducciones() {
                 //variable boton editar
                 var botonEditar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? '<a type="button" style="margin-right:3px;" class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Editar</a>' : '';
 
+                //variable boton inactivar
+                var botonInactivar = ListaDeduccionesExtraordinarias[i].dex_Activo == true ? esAdministrador == "1" ? '<button type="button" class="btn btn-danger btn-xs"  id="btnInactivarDeduccionesExtraordinarias" iddeduccionextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '"  data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Inctivar</button>' : '' : '';
+
                 //variable donde está el boton activar
                 var botonActivar = ListaDeduccionesExtraordinarias[i].dex_Activo == false ? esAdministrador == "1" ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnActivarDeduccionesExtraordinarias" iddeduccionesextra="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '" data-id="' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">Activar</button>' : '' : '';
 
@@ -88,19 +91,77 @@ function spinner() {
  </div>`;
 }
 
+$(document).on("click", "btnAgregarDeduccionExtraordinaria", function () {
+    //DDL Equipo Empleado
+    $.ajax({
+        url: "/DeduccionesExtraordinarias/DDLEquipoEmpleado",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $("#eqem_Id").empty();
+        $("#eqem_Id").append("<option value='0'>Selecione una opción...</option>");
+        $.each(data, function (i, iter) {
+            $("#eqem_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+        });
+    });
+
+    //DDL Deducciones
+    $.ajax({
+        url: "/DeduccionesExtraordinarias/DDLDeducciones",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data) {
+        $("#cde_IdDeducciones").empty();
+        $("#cde_IdDeducciones").append("<option value='0'>Selecione una opción...</option>");
+        $.each(data, function (i, iter) {
+            $("#cde_IdDeducciones").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+        });
+    });
+
+});
+
+
+
+//Validaciones de Botones de las Pantallas
+const btnAgregar = $('#btnAgregar')
+
+//Div que aparecera cuando se le de click en crear
+cargandoCrear = $('#cargandoCrear')
+
+function mostrarCargandoCrear() {
+    btnAgregar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
+
+function ocultarCargandoCrear() {
+    btnAgregar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
+
+
+$("#btnAgregar").click(function () {
+    //Validación para Agregar
+
+
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //Activar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnActivarDeduccionesExtraordinarias", function () {
-
     var ID = $(this).closest('tr').data('id');
-
     var ID = $(this).attr('iddeduccionesextra');
-
     console.log(ID)
-
     localStorage.setItem('id', ID);
     //Mostrar el Modal
-    $("#ActivarDeduccionesExtraordinarias").modal();
+    $("#ActivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
@@ -130,65 +191,22 @@ $("#btnActivarRegistroDeduccionesExtraordinarias").click(function () {
         }
     });
 
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#ActivarDeduccionesExtraordinarias").submit(function (e) {
+        return false;
+    });
+
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-//Validaciones de Botones de las Pantallas
-const btnAgregar = $('#btnAgregar')
-
-//Div que aparecera cuando se le de click en crear
-cargandoCrear = $('#cargandoCrear')
-
-function mostrarCargandoCrear() {
-    btnAgregar.hide();
-    cargandoCrear.html(spinner());
-    cargandoCrear.show();
-}
-
-function ocultarCargandoCrear() {
-    btnAgregar.show();
-    cargandoCrear.html('');
-    cargandoCrear.hide();
-}
-
-
-/*$("#btnAgregar").click(function () {
-    //Validación para Agregar
-    var Vali1 = $("#val1").css("display", "");
-    var Vali2 = $("#val2").css("display", "");
-    var Vali3 = $("#val3").css("display", "");
-    var Vali4 = $("#val4").css("display", "");
-    var Vali5 = $("#val5").css("display", "");
-    var Vali6 = $("#val6").css("display", "");
-
-    var Valid1 = $("#val1").css("display", "none");
-    var Valid2 = $("#val2").css("display", "none");
-    var Valid3 = $("#val3").css("display", "none");
-    var Valid4 = $("#val4").css("display", "none");
-    var Valid5 = $("#val5").css("display", "none");
-    var Valid6 = $("#val6").css("display", "none");
-
-    debugger;
-
-    if (Vali1 != Valid1 || Vali2 != Valid2 || Vali3 != Valid3 || Vali4 != Valid4 || Vali5 != Valid5 || Vali6 != Valid6) {
-        mostrarCargandoCrear();
-        ocultarCargandoCrear();
-    }
-    else {
-        mostrarCargandoCrear();
-    }
-        
-});*/
-
-
-
 //Modal de Inactivar
-$(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
+$(document).on("click", "tblDeduccionesExtraordinarias tbody tr td #btnInactivarDeduccionesExtraordinarias", function () {
+    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).attr('iddeduccionextra');
+    console.log(ID)
+    localStorage.setItem('id', ID);
     //Mostrar el Modal de Inactivar
     $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -198,14 +216,13 @@ $(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
 //Funcionamiento del Modal Inactivar
 $("#btnInactivar").click(function () {
-    //Serializar el Formulario del Modal que esta en su respectiva Vista Parcial, para Parsear al Formato Json 
-    var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
 
+    let ID = localStorage.getItem('id')
     //Se envia el Formato Json al Controlador para realizar la Inactivación
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar",
         method: "POST",
-        data: data
+        data: {id: ID}
     }).done(function (data) {
         if (data == "Error") {
             //Cuando trae un error en el BackEnd al realizar la Inactivación
@@ -215,11 +232,7 @@ $("#btnInactivar").click(function () {
             });
         }
         else {
-            // Actualizar el Index para ver los cambios
-            $("#InactivarDeduccionesExtraordinarias").modal({ backdrop: 'static', keyboard: false });
-            $("html, body").css("overflow", "hidden");
-            $("html, body").css("overflow", "scroll");
-                location.href = "/DeduccionesExtraordinarias/Index";
+            $("#InactivarDeduccionesExtraordinarias").modal('hide');
                 cargarGridDeducciones();
                 //Mensaje de Éxito de la Inactivación
                 iziToast.success({
@@ -230,7 +243,7 @@ $("#btnInactivar").click(function () {
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
-    $("#frmDeduccionesExtraordinariasInactivar").submit(function (e) {
+    $("#InactivarDeduccionesExtraordinarias").submit(function (e) {
         return false;
     });
 
