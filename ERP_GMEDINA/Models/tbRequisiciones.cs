@@ -38,6 +38,7 @@ namespace ERP_GMEDINA.Models
         public bool req_Estado { get; set; }
         public string req_RazonInactivo { get; set; }
         public string req_Vacantes { get; set; }
+        public int req_VacantesOcupadas { get; set; }
         public Nullable<System.DateTime> req_FechaRequisicion { get; set; }
         public Nullable<System.DateTime> req_FechaContratacion { get; set; }
         public int req_UsuarioCrea { get; set; }
