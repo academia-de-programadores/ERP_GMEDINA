@@ -1,0 +1,81 @@
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_RPT_HistorialSueldos
+@{
+    ViewBag.Title = "SueldosRPT";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+
+@using (Html.BeginForm("SueldosRPT", "ReportesRRHH", FormMethod.Post, new { id = "Sueldos" }))
+{
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Reportes de Sueldos</h5>
+                    <div class="ibox-tools">
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Empleados</label>
+
+                                    @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
+
+                                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                                <label class="font-normal">Sueldos</label>
+
+                                @Html.DropDownList("sue_Id", (IEnumerable<SelectListItem>)ViewBag.Sueldos, "Seleccione una opción", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.sue_Id, "", new { @class = "text-danger" })
+
+
+                            </div>
+
+
+                            @*<label class="font-normal">Fecha</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fecha", @id = "fecha" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })*@
+                        </div>
+
+                    </div><br>
+                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+
+@{
+    string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
+}
+
+<div class="row" style="display:@visibilidadPreview;">
+    <div class="col-lg-12">
+        <div class="float-e-margins">
+            <div class="ibox-title">
+                <h5>Previsualización de reporte</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (ViewBag.ReportViewer != null)
+                    {
+                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

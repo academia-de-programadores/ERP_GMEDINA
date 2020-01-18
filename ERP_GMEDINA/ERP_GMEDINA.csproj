@@ -1475,11 +1475,17 @@
     <Content Include="DataSets\ReportesRRHH.xss">
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Content>
+    <Content Include="Reports\EquipoEmpleadosRPT.rdlc" />
+    <Content Include="Reports\HistorialCargosRPT.rdlc" />
+    <Content Include="Reports\HistorialContratacionesRPT.rdlc" />
+    <Content Include="Reports\HistorialSalidasRPT.rdlc" />
+    <Content Include="Reports\HistorialVacacionesRPT.rdlc" />
     <None Include="Reports\ReportesDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportesDS1.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Reports\SueldosRPT.rdlc" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2145,6 +2151,12 @@
     <Content Include="Views\ReportesRRHH\EmpleadosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
+    <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
+    <Content Include="Views\ReportesRRHH\SueldosRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialCargosRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialContratacionesRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
