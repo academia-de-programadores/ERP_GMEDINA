@@ -3,9 +3,9 @@ var emp_Id = 0;
 $(document).ready(function () {
     llenarTabla();
 });
-function format(obj, emp_Id) {
+function format(obj, eqem_Id) {
     var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Equipo de trabajo</strong><div class="btn-group pull-right">' +
-        '<button id = "btnAgregar" data-id="' + emp_Id + '" data-toggle="ModalNuevo" class="btn btn-outline btn-primary btn-xs" onClick = "ShowModalCreate(this)"> Asignar Equipo </button>' +
+        '<button id = "btnAgregar" data-id="' + eqem_Id + '" data-toggle="ModalNuevo" class="btn btn-outline btn-primary btn-xs" onClick = "ShowModalCreate(this)"> Asignar Equipo </button>' +
         '</div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
         div = div +
@@ -89,6 +89,8 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
     var row = tabla.row(tr);
 
+
+
     if (row.child.isShown()) {
         row.child.hide();
         tr.removeClass('shown');
@@ -107,7 +109,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                     row.child.hide();
                     tr.removeClass('shown');
                     //dibuja el childRow
-                    row.child(format(obj, id)).show();
+                    row.child(format(obj)).show();
                     tr.addClass('shown');
                 } else {
                     row.child.hide();
