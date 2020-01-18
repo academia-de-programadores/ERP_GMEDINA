@@ -36,6 +36,7 @@ namespace ERP_GMEDINA.Controllers
                         .Select(t =>
                         new
                         {
+                            emp_Id = t.emp_Id,
                             eqem_Id = t.eqem_Id,
                             Empleado = t.tbEquipoTrabajo.tbEquipoEmpleados.Select(p => p.tbEmpleados.tbPersonas.per_Nombres + " " + p.tbEmpleados.tbPersonas.per_Apellidos),
                             Correo = t.tbEquipoTrabajo.tbEquipoEmpleados.Select(p => p.tbEmpleados.tbPersonas.per_CorreoElectronico),

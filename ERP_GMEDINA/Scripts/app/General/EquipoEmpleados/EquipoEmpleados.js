@@ -1,4 +1,5 @@
 ﻿var eqem_Id = 0;
+var emp_Id = 0;
 $(document).ready(function () {
     llenarTabla();
 });
@@ -39,6 +40,7 @@ function llenarTabla() {
             $.each(lista, function (index, value) {
                 tabla.row.add
                     ({
+                        emp_Id : value.emp_Id,
                         ID: value.eqem_Id,
                         Empleado: value.Empleado[0],
                         Correo: value.Correo[0],
@@ -49,6 +51,10 @@ function llenarTabla() {
         });
 }
 function ShowModalCreate(btn) {
+    var tr = $(btn).closest('tr');
+    var row = tabla.row(tr);
+    var id = row.data().emp_Id;
+    var emp_ = id;
     eqem_Id = $(btn).data('id');
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');
@@ -58,6 +64,7 @@ function ShowModalCreate(btn) {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
+    data.emp_Id = emp_;
     if (data != null) {
         data = JSON.stringify({ tbEquipoEmpleados: data });
         _ajax(data, '/EquipoEmpleados/Create', 'POST',
