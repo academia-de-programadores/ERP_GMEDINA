@@ -4,10 +4,13 @@
  *   version 2.4
  *
  */
-
+function AdjustDataTable() {
+    $.fn.dataTable
+        .tables({ visible: true, api: true })
+        .columns.adjust().responsive.recalc();
+};
 
 $(document).ready(function () {
-
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {
@@ -95,12 +98,6 @@ $(document).ready(function () {
         label.toggleClass('todo-completed');
         return false;
     });
-
-    function AdjustDataTable(){
-        $.fn.dataTable
-            .tables({ visible: true, api: true })
-            .columns.adjust().responsive.recalc();
-    };
 
     // Minimalize menu
     $('.navbar-minimalize').on('click', function () {
@@ -231,6 +228,7 @@ $(document).ready(function () {
             $(".footer").addClass('fixed');
         }
     }
+    setTimeout(AdjustDataTable, 500);
 });
 
 // check if browser support HTML5 local storage

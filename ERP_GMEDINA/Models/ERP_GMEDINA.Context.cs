@@ -96,7 +96,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         public virtual DbSet<V_HistorialSalidas_Empleados> V_HistorialSalidas_Empleados { get; set; }
         public virtual DbSet<V_Historialvacaciones> V_Historialvacaciones { get; set; }
-        public virtual DbSet<V_HVacacionesEmpleados> V_HVacacionesEmpleados { get; set; }
         public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
         public virtual DbSet<V_tbHistorialSalidas_completa> V_tbHistorialSalidas_completa { get; set; }
         public virtual DbSet<tbHorarios> tbHorarios { get; set; }
@@ -112,6 +111,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<V_EquipoTrabajoDetalles> V_EquipoTrabajoDetalles { get; set; }
+        public virtual DbSet<V_HVacacionesEmpleados> V_HVacacionesEmpleados { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

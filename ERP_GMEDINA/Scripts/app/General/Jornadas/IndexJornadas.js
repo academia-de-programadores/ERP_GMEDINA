@@ -123,8 +123,10 @@ function showmodaledit(btn) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
-                var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
+                var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
+                hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes;
+                var hor_HoraFin = obj.hor_HoraFin.Hours < 10 ? "0" + obj.hor_HoraFin.Hours : obj.hor_HoraFin.Hours;
+                hor_HoraFin += ":" + obj.hor_HoraFin.Minutes;
                 $('#ModalEditarHorarios').modal('show');
                 $("#ModalEditarHorarios").find("#hor_Descripcion").val(obj.hor_Descripcion);
                 $("#ModalEditarHorarios").find("#hor_Descripcion").focus();
@@ -151,8 +153,10 @@ function showmodalDetalle(btn) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();                
-                var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
-                var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
+                var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
+                hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes;
+                var hor_HoraFin = obj.hor_HoraFin.Hours < 10 ? "0" + obj.hor_HoraFin.Hours : obj.hor_HoraFin.Hours;
+                hor_HoraFin += ":" + obj.hor_HoraFin.Minutes;
                 $('#ModalDetallesHorario').modal('show');
                 $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;                
                 $("#ModalDetallesHorario").find("#hor_HoraInicio")["0"].innerText = hor_HoraInicio;

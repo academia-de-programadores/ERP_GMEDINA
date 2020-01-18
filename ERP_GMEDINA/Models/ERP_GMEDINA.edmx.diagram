@@ -232,7 +232,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialPermisos" Width="1.5" PointX="18.75" PointY="122.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialSalidas_Empleados" Width="1.5" PointX="11.375" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Historialvacaciones" Width="1.5" PointX="13.375" PointY="4.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" Width="1.5" PointX="13.375" PointY="9.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbHistorialSalidas_completa" Width="1.5" PointX="13.375" PointY="13.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialPermisos_hper_UsuarioCrea" />
@@ -268,6 +267,7 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="17.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" Width="1.5" PointX="17.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HVacacionesEmpleados" Width="1.5" PointX="5.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
