@@ -1,4 +1,6 @@
 ﻿
+
+
 function ListFill(obj) {
     var SlctCompetencias = $(".SlctCompetencias");
     var SlctHabilidades = $(".SlctHabilidades");
@@ -45,6 +47,19 @@ function Req_check() {
     }
 };
 
+function SetMinOn_req_EdadMaxima() {
+    var EdadMax = $("#req_EdadMaxima");
+    var EdadMin = $("#req_EdadMinima");
+    EdadMax.attr({       // substitute your own
+        "min": EdadMin.val()        // values (or variables) here
+    });
+
+    if (EdadMax.val() < EdadMin.val())
+    {
+        EdadMax.val(EdadMin.val());
+    }
+}
+
 $(document).ready(function () {
     _ajax(null,
             '/Requisiciones/DualListBoxData',
@@ -55,7 +70,6 @@ $(document).ready(function () {
                 }
             });
 
-    
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
         onStepChanging: function (event, currentIndex, newIndex) {
