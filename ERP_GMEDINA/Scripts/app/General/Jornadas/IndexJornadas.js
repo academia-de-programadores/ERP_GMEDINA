@@ -123,7 +123,8 @@ function showmodaledit(btn) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
-                var hor_HoraInicio = obj.hor_HoraInicio.Hours + ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
+                var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
+                hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes + obj.hor_HoraInicio.Seconds;
                 var hor_HoraFin = obj.hor_HoraFin.Hours + ":" + obj.hor_HoraFin.Minutes + obj.hor_HoraFin.Seconds;
                 $('#ModalEditarHorarios').modal('show');
                 $("#ModalEditarHorarios").find("#hor_Descripcion").val(obj.hor_Descripcion);
