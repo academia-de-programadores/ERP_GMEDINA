@@ -17,10 +17,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: Sucursales
         public ActionResult Index()
         {
-            bool Admin = true;
-            tbSucursales tbSucursales = new tbSucursales { suc_Estado = Admin };
-            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            return View("Index");
+            bool Admin = (bool)Session["Admin"];
+            tbSucursales tbSucursales = new tbSucursales { suc_Estado = true };
+            return View(tbSucursales);
         }
         //Llenar Tabla
         [HttpPost]
