@@ -68,7 +68,7 @@ function llenarTabla() {
                    DiasTotales: value.DiasTotales,
                    DiasTomados: value.DiasTomados,
                    DiasRestantes: value.DiasRestantes,
-                   Año: value.Año
+                   //Año: value.Año
                });
            });
            tabla.draw();
