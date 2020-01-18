@@ -32,7 +32,7 @@
     ];
     var Equipo_Trabajo = [
         "EquipoTrabajo",
-        "EquipoEmpleado"
+        "EquipoEmpleados"
     ]
     var Permisos= [
             "TipoPermisos",
