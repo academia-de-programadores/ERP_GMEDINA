@@ -51,11 +51,7 @@ function llenarTabla() {
         });
 }
 function ShowModalCreate(btn) {
-    var tr = $(btn).closest('tr');
-    var row = tabla.row(tr);
-    var id = row.data().emp_Id;
-    var emp_ = id;
-    eqem_Id = $(btn).data('id');
+    emp_Id = $(btn).data('id');
     var modalnuevo = $('#ModalNuevo');
     modalnuevo.modal('show');
     $(modalnuevo).find("#eqtra_Id").focus();
