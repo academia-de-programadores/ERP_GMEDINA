@@ -27,7 +27,8 @@ $("#empr_Logo").change(function () {
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
      var img = document.getElementById('img1');
      img.src = "";
-  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+     MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+     $("#ModalNuevo").data("res", false);
  } else {
   var formData = new FormData();
   formData.append('file', $('#empr_Logo')[0].files[0]);
@@ -47,6 +48,7 @@ $("#empr_Logo").change(function () {
             MsgError("Error", "Cambiar el nombre del archivo");
             var img = document.getElementById('img1');
             img.src = "";
+            $("#ModalNuevo").data("res", false);
      }
   $("#ModalNuevo").data("res", res);
  });
@@ -58,6 +60,7 @@ $("#UPempr_Logo").change(function () {
   var img = document.getElementById('img2');
   img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+  $("#ModalNuevo").data("res", false);
  } else {
   var formData = new FormData();
   formData.append('file', $('#UPempr_Logo')[0].files[0]);
@@ -77,6 +80,7 @@ $("#UPempr_Logo").change(function () {
    MsgError("Error", "El archivo no es valido");
    var img = document.getElementById('img2');
    img.src = "";
+   $("#ModalNuevo").data("res", false);
   }
   $("#ModalNuevo").data("res", res);
  });
@@ -120,10 +124,7 @@ function tablaDetalles(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#ModalDetalles").find("#empr_Nombre")["0"].innerText = obj.empr_Nombre;
-       $("#ModalDetalles").find("#empr_FechaCrea")["0"].innerText = FechaFormato(obj.empr_FechaCrea);
-       $("#ModalDetalles").find("#empr_FechaModifica")["0"].innerText = FechaFormato(obj.empr_FechaModifica);
-       $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-       $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+       var lol = $("#ModalDetalles").find("#empr_Logo")["0"].src = obj.empr_Logo;
        //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = ID;
        $('#ModalDetalles').modal('show');
       }
