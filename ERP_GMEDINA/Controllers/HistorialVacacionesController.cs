@@ -303,7 +303,11 @@ namespace ERP_GMEDINA.Controllers
                             Empleado = t.emp_NombreCompleto,
                             Cargo = t.car_Descripcion,
                             Departamento = t.depto_Descripcion,
-                            FechaContratacion = t.emp_Fechaingreso
+                            FechaContratacion = t.emp_Fechaingreso,
+                            DiasTotales = t.DiasMax,
+                            DiasTomados = t.DiasTomados,
+                            DiasRestantes = t.DiasTotales,
+                            Año = t.Annio
                         }).ToList();
 
 

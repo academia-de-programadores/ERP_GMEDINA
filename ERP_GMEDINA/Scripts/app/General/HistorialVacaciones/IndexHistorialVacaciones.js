@@ -64,7 +64,11 @@ function llenarTabla() {
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
                    Departamento: value.Departamento,
-                   FechaContratacion: FechaFormatoSimple(value.FechaContratacion)
+                   FechaContratacion: FechaFormatoSimple(value.FechaContratacion),
+                   DiasTotales: value.DiasTotales,
+                   DiasTomados: value.DiasTomados,
+                   DiasRestantes: value.DiasRestantes,
+                   Año: value.Año
                });
            });
            tabla.draw();
@@ -174,27 +178,39 @@ $("#InActivar").click(function () {
 
 
 $("#btnGuardar").click(function () {
-    var data = $("#FormNuevo").serializeArray();
-    data = serializar(data);
-    
-    if (data != null) {
-        data = JSON.stringify({ tbHistorialVacaciones: data });
-        _ajax(data,
-            '/HistorialVacaciones/Create',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    llenarTabla();
-                    LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                    MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
-                } else {
-                    MsgError("Error", "No se pudo cargar la información, contacte al administrador");
-                }
-            });
-    } else {
-        MsgError("Error", "por favor llene todas las cajas de texto");
+    var fechaInicio = $("#hvac_FechaInicio").val();
+    var fechaFinal = $("#hvac_FechaFin").val();
+
+    if (fechaInicio <= fechaFinal) {
+        var data = $("#FormNuevo").serializeArray();
+        data = serializar(data);
+
+        if (data != null) {
+            data = JSON.stringify({ tbHistorialVacaciones: data });
+            _ajax(data,
+                '/HistorialVacaciones/Create',
+                'POST',
+                function (obj) {
+                    if (obj != "-1" && obj != "-2" && obj != "-3") {
+                        CierraPopups();
+                        llenarTabla();
+                        LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                        MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
+                    } else {
+                        MsgError("Error", "No se pudo cargar la información, contacte al administrador");
+                    }
+                });
+        } else {
+            MsgError("Error", "por favor llene todas las cajas de texto");
+        }
     }
+    else
+    {
+        MsgError("Error", "por favor ingrese un rango de fecha positivo");
+    }
+
+
+    
 });
 
 
