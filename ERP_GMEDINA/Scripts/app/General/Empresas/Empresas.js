@@ -139,7 +139,7 @@ $("#btnAgregar").click(function () {
  $(modalnuevo).find("#empr_Nombre").val("");
  $(modalnuevo).find("#empr_Nombre").focus();
  $(modalnuevo).find("#empr_Logo").val(null);
- $("#ModalEditar").find("#img1")[0].src = obj.empr_Logo;
+ $("#ModalNuevo").find("#img1")[0].src = '';
 })
 
 $("#btnEditar").click(function () {
