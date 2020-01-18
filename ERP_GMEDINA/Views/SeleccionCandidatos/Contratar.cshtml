@@ -1,0 +1,120 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleados
+
+@{
+    ViewBag.Title = "Contratar";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+                    <h2>Contratar</h2>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
+                        {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="tbPersonas">Candidato</label>
+                                <div class="col-md-8 has-error">
+                                    <input class="form-contro required valid text-box single-line" disabled="disabled" id="Candidato" name="Candidato" type="text" value="">
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.car_Id, "Cargo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("car_Id", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger", @id = "errorcar_Id" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.area_Id, "Area", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("area_Id", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.depto_Id, "Departamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("depto_Id", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.jor_Id, "Jornada", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("jor_Id", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.jor_Id, "", new { @class = "text-danger", @id = "errorjor_Id" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.cpla_IdPlanilla, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("cpla_IdPlanilla", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.cpla_IdPlanilla, "", new { @class = "text-danger", @id = "errorcpla_IdPlanilla" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.fpa_IdFormaPago, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("fpa_IdFormaPago", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.fpa_IdFormaPago, "", new { @class = "text-danger", @id = "errorfpa_IdFormaPago" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.emp_CuentaBancaria, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.emp_CuentaBancaria, new { htmlAttributes = new { @class = "form-contro required valid" } })
+                                        @Html.ValidationMessageFor(model => model.emp_CuentaBancaria, "", new { @class = "text-danger", @id = "erroremp_CuentaBancaria" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="fpa_IdFormaPago">Tipo Moneda</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="tmon_Id" name="tmon_Id"></select>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="tbPersonas">Sueldo</label>
+                                    <div class="col-md-8 has-error">
+                                        <input class="form-contro required valid text-box single-line" id="sue_Cantidad" name="sue_Cantidad" type="number" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="fpa_IdFormaPago">Requisicion</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" id="req_Id" name="req_Id"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="emp_Fechaingreso">Fecha</label>
+                                    <div class="col-md-8 has-error">
+                                        <input class="form-contro required valid text-box single-line" data-val="true" data-val-date="The field emp_Fechaingreso must be a date." id="emp_Fechaingreso" name="emp_Fechaingreso" type="date" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="emp_Fechaingreso" data-valmsg-replace="true" id="erroremp_Fechaingreso"></span>
+                                    </div>
+                                </div>
+                        }
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" value="Guardar" class="btn btn-primary" id="btnGuardar" />
+                                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTablesSeleccionCandidatos")
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/app/general/ContratarCandidato")
+}

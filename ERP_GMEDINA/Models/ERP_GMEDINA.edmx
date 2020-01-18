@@ -20102,7 +20102,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="eqtra_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="eqtra_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete">
+          <FunctionImport Name="UDP_RRHH_tbfasesReclutamiento_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result)">
             <Parameter Name="fare_Id" Mode="In" Type="Int32" />
             <Parameter Name="fare_razon_Inactivo" Mode="In" Type="String" />
             <Parameter Name="fare_UsuarioModifica" Mode="In" Type="Int32" />
@@ -21705,6 +21705,9 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -25592,7 +25595,13 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbfasesReclutamiento_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbfasesReclutamiento_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbFasesReclutamiento_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbFasesReclutamiento_Insert">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbFasesReclutamiento_Insert_Result">

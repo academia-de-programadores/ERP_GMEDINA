@@ -13,7 +13,8 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
-                      "~/Content/style.css"));
+                      "~/Content/style.css",
+                      "~/Content/BTN/BTN-HOME.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
@@ -21,13 +22,14 @@ namespace ERP_GMEDINA
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.1.1.min.js"));
+                        "~/Scripts/jquery-2.1.1.min.js",
+                        "~/Scripts/app/Menu/Menu.js"));
 
             // jQueryUI CSS
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.css"));
 
-            // jQueryUI 
+            // jQueryUI
             bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
 
@@ -44,6 +46,19 @@ namespace ERP_GMEDINA
             // Inspinia skin config script
             bundles.Add(new ScriptBundle("~/bundles/skinConfig").Include(
                       "~/Scripts/app/skin.config.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/Admin").Include(
+           "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/Admin").Include(
+          "~/Scripts/app/General/HistorialIncapacidades/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades").Include(
+            "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
 
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
@@ -100,6 +115,20 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
                       "~/Content/plugins/iCheck/custom.css"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateSucursal").Include(
+            "~/Scripts/app/General/Sucursales/CreateSucursales.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/SucursalesEdit").Include(
+            "~/Scripts/app/General/Sucursales/EditSucursales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales/Admin").Include(
+            "~/Scripts/app/General/Sucursales/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Sucursales").Include(
+            "~/Scripts/app/General/Sucursales/IndexSucursales.js",
+            "~/Scripts/app/General/Sucursales/Admin.js"));
+
             // iCheck
             bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
                       "~/Scripts/plugins/iCheck/icheck.min.js"));
@@ -112,6 +141,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
+            // dataTables personalizado
+            bundles.Add(new ScriptBundle("~/plugins/customdataTables").Include(
+                     "~/Scripts/plugins/dataTables/datatables.min.js"));
 
             // dataTables RPT
             bundles.Add(new ScriptBundle("~/plugins/dataTablesRPT").Include(
@@ -120,13 +152,13 @@ namespace ERP_GMEDINA
 
             // jeditable 
             bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
-                      "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
+                       "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
 
             // jqGrid styles
             bundles.Add(new StyleBundle("~/Content/plugins/jqGrid/jqGridStyles").Include(
                       "~/Content/plugins/jqGrid/ui.jqgrid.css"));
 
-            // jqGrid 
+            // jqGrid
             bundles.Add(new ScriptBundle("~/plugins/jqGrid").Include(
                       "~/Scripts/plugins/jqGrid/i18n/grid.locale-en.js",
                       "~/Scripts/plugins/jqGrid/jquery.jqGrid.min.js"));
@@ -136,16 +168,16 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/codemirror/codemirror.css",
                       "~/Content/plugins/codemirror/ambiance.css"));
 
-            // codeEditor 
+            // codeEditor
             bundles.Add(new ScriptBundle("~/plugins/codeEditor").Include(
                       "~/Scripts/plugins/codemirror/codemirror.js",
                       "~/Scripts/plugins/codemirror/mode/javascript/javascript.js"));
 
-            // codeEditor 
+            // codeEditor
             bundles.Add(new ScriptBundle("~/plugins/nestable").Include(
                       "~/Scripts/plugins/nestable/jquery.nestable.js"));
 
-            // validate 
+            // validate
             bundles.Add(new ScriptBundle("~/plugins/validate").Include(
                       "~/Scripts/plugins/validate/jquery.validate.min.js"));
 
@@ -153,12 +185,12 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/fullCalendarStyles").Include(
                       "~/Content/plugins/fullcalendar/fullcalendar.css"));
 
-            // fullCalendar 
+            // fullCalendar
             bundles.Add(new ScriptBundle("~/plugins/fullCalendar").Include(
                       "~/Scripts/plugins/fullcalendar/moment.min.js",
                       "~/Scripts/plugins/fullcalendar/fullcalendar.min.js"));
 
-            // vectorMap 
+            // vectorMap
             bundles.Add(new ScriptBundle("~/plugins/vectorMap").Include(
                       "~/Scripts/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
                       "~/Scripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"));
@@ -168,7 +200,7 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/ionRangeSlider/ion.rangeSlider.css",
                       "~/Content/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css"));
 
-            // ionRange 
+            // ionRange
             bundles.Add(new ScriptBundle("~/plugins/ionRange").Include(
                       "~/Scripts/plugins/ionRangeSlider/ion.rangeSlider.min.js"));
 
@@ -176,7 +208,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
                       "~/Content/plugins/datapicker/datepicker3.css"));
 
-            // dataPicker 
+            // dataPicker
             bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
                       "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
 
@@ -184,7 +216,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/nouiSliderStyles").Include(
                       "~/Content/plugins/nouslider/jquery.nouislider.css"));
 
-            // nouiSlider 
+            // nouiSlider
             bundles.Add(new ScriptBundle("~/plugins/nouiSlider").Include(
                       "~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
 
@@ -192,7 +224,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/jasnyBootstrapStyles").Include(
                       "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
 
-            // jasnyBootstrap 
+            // jasnyBootstrap
             bundles.Add(new ScriptBundle("~/plugins/jasnyBootstrap").Include(
                       "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
 
@@ -200,7 +232,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/switcheryStyles").Include(
                       "~/Content/plugins/switchery/switchery.css"));
 
-            // switchery 
+            // switchery
             bundles.Add(new ScriptBundle("~/plugins/switchery").Include(
                       "~/Scripts/plugins/switchery/switchery.js"));
 
@@ -208,11 +240,11 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
                       "~/Content/plugins/chosen/bootstrap-chosen.css"));
 
-            // chosen 
+            // chosen
             bundles.Add(new ScriptBundle("~/plugins/chosen").Include(
                       "~/Scripts/plugins/chosen/chosen.jquery.js"));
 
-            // knob 
+            // knob
             bundles.Add(new ScriptBundle("~/plugins/knob").Include(
                       "~/Scripts/plugins/jsKnob/jquery.knob.js"));
 
@@ -220,7 +252,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
                       "~/Content/plugins/steps/jquery.steps.css"));
 
-            // wizardSteps 
+            // wizardSteps
             bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
                       "~/Scripts/plugins/staps/jquery.steps.min.js"));
 
@@ -229,7 +261,7 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/dropzone/basic.css",
                       "~/Content/plugins/dropzone/dropzone.css"));
 
-            // dropZone 
+            // dropZone
             bundles.Add(new ScriptBundle("~/plugins/dropZone").Include(
                       "~/Scripts/plugins/dropzone/dropzone.js"));
 
@@ -238,11 +270,11 @@ namespace ERP_GMEDINA
                       "~/Content/plugins/summernote/summernote.css",
                       "~/Content/plugins/summernote/summernote-bs3.css"));
 
-            // summernote 
+            // summernote
             bundles.Add(new ScriptBundle("~/plugins/summernote").Include(
                       "~/Scripts/plugins/summernote/summernote.min.js"));
 
-            // toastr notification 
+            // toastr notification
             bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
                       "~/Scripts/plugins/toastr/toastr.min.js"));
 
@@ -313,7 +345,7 @@ namespace ERP_GMEDINA
 
             // Date range picker
             bundles.Add(new ScriptBundle("~/plugins/dateRange").Include(
-                      // Date range use moment.js same as full calendar plugin 
+                      // Date range use moment.js same as full calendar plugin
                       "~/Scripts/plugins/fullcalendar/moment.min.js",
                       "~/Scripts/plugins/daterangepicker/daterangepicker.js"));
 
@@ -411,7 +443,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/plugins/markdownStyles").Include(
                       "~/Content/plugins/bootstrap-markdown/bootstrap-markdown.min.css"));
 
-            // Markdown 
+            // Markdown
             bundles.Add(new ScriptBundle("~/plugins/markdown").Include(
                       "~/Scripts/plugins/bootstrap-markdown/bootstrap-markdown.js",
                       "~/Scripts/plugins/bootstrap-markdown/markdown.js"));
@@ -431,7 +463,7 @@ namespace ERP_GMEDINA
 
             // Duallist Styless
             bundles.Add(new StyleBundle("~/plugins/duallistStyles").Include(
-                      "~/Content/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"));
+                      "~/Content/plugins/dualListbox/bootstrap-duallistbox.min.css"));
 
             // Duallist
             bundles.Add(new ScriptBundle("~/plugins/duallist").Include(
@@ -449,17 +481,13 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
                       "~/Scripts/plugins/pdfjs/pdf.js"));
 
-            // iziToast JS
-            bundles.Add(new ScriptBundle("~/plugins/izitoast").Include(
-                        "~/Scripts/plugins/iziToast/iziToast.js",
-                        "~/Scripts/plugins/iziToast/iziToast.min.js"));
-            //iziToast CSS
-            // Touch Spin Styless
+            // iziToast css
             bundles.Add(new StyleBundle("~/Content/plugins/izitoast/iziToast").Include(
                       "~/Content/plugins/izitoast/iziToast.css",
                       "~/Content/plugins/izitoast/iziToast.min.css"));
             #endregion
 
+            #region Planillas
             #region Equipo Flamenco
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionesExtraordinarias").Include(
                 "~/Scripts/app/General/DeduccionesExtraordinarias.js"));
@@ -507,11 +535,38 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/AcumuladosISR.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
-				"~/Scripts/app/General/CatalogoPlanillas.js"));
+                "~/Scripts/app/General/CatalogoPlanillas.js"));
+
+            // SCRIPT GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general").Include(
+             "~/Scripts/plugins/iziToast/iziToast.js",
+             "~/Scripts/plugins/iziToast/iziToast.min.js",
+             "~/Scripts/app/general/general.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Planilla").Include(
+                "~/Scripts/app/General/Planilla.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeIngresos").Include(
+                "~/Scripts/app/General/CatalogoDeIngresos.js"));
+
+            //bundles APP/GENERAL
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TechosDeducciones").Include(
+                "~/Scripts/app/General/TechosDeducciones.js"));
+
+            // SELVIN
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoPlanillas").Include(
+                "~/Scripts/app/General/CatalogoPlanillas.js"));
 
             bundles.Add(new ScriptBundle("~/plugins/dataTablesSelvin").Include(
                  "~/Scripts/plugins/dataTables/datatables.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialIncapacidades").Include(
+             "~/Scripts/app/General/HistorialIncapacidades/IndexHistorialIncapacidades.js"));
+
+            //dataTables.buttons.min.js
 
             bundles.Add(new StyleBundle("~/Content/app/General").Include(
                  "~/Content/app/General/catalogoPlanillas.css"));
@@ -521,6 +576,16 @@ namespace ERP_GMEDINA
             #endregion
 
             #region Equipo Malcom
+
+            //bundles ScripBase/Validate DataAnnotations
+            bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
+                "~/Scripts/Scripts_Base/jquery.validate.js",
+                "~/Scripts/Scripts_Base/jquery.validate.min.js",
+                "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
+
+            //==========================EQUIPO MALCOM ===========================
             bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoDeducciones").Include(
                 "~/Scripts/app/General/TipoDeducciones.js"));
 
@@ -546,10 +611,9 @@ namespace ERP_GMEDINA
                 "~/Scripts/app/General/InstitucionesFinancierasEdit.js"));
             #endregion
 
-            #region Equipo Todos
+            #region Otros
             bundles.Add(new ScriptBundle("~/Scripts/app/General/FechaPlanilla").Include(
                 "~/Scripts/app/General/FechaPlanilla.js"));
-            #endregion
 
             //DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
@@ -558,9 +622,296 @@ namespace ERP_GMEDINA
                 "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
                 "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
                 "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
+            #endregion
+            #endregion
+
+            #region Recursos Humanos
+
+            // SCRIPT HABILIDADES ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades/Admin").Include(
+            "~/Scripts/app/general/Habilidades/Admin.js"));
 
 
-            //Allow any type of Content Delivery Network 
+            //SCRIPT TIPOHORAS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoHOras/Admin").Include(
+            "~/Scripts/app/general/TipoHOras/Admin.js"));
+
+            //SCRIPT HISTORIALPERMISOS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialPermisos/Admin").Include(
+            "~/Scripts/app/general/HistorialPermisos/Admin.js"));
+
+            // SCRIPT TIPOSALIDAS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas/Admin").Include(
+            "~/Scripts/app/general/TipoSalidas/Admin.js"));
+
+
+            //SCRIPT CARGOS ADMIN
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos/Admin").Include(
+          "~/Scripts/app/general/Cargos/Admin.js"));
+
+            //SCRIPT HABILIDADES
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            //SCRIPT TIPOSALIDAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
+            "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+
+            //SCRIPT IDIOMAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas").Include(
+                "~/Scripts/app/general/Idiomas/Idiomas.js"));
+
+            //SCRIPT TITULOS
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos").Include(
+                "~/Scripts/app/General/Titulos/Titulos.js"));
+
+            //SCRIPT TIPOINCAPACIDADES
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoIncapacidades").Include(
+               "~/Scripts/app/General/TipoIncapacidades/TipoIncapacidades.js"));
+
+            //SCRIPT COMPETENCIAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/Competencias/Competencias").Include(
+                  "~/Scripts/app/general/Competencias/Competencias.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+            "~/Scripts/app/General/Competencias/Admin.js"));
+
+            //bundles APP/TipoHoras/TipoHoras
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
+                "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
+
+            //SCRIPT FASES RECLUTAMIENTO
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento").Include(
+                "~/Scripts/app/General/FasesReclutamiento/FasesReclutamiento.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/FasesReclutaiento/Admin").Include(
+                    "~/Scripts/app/General/FasesReclutamiento/Admin.js"));
+
+            //SCRIPT EMPRESAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
+                "~/Scripts/app/general/Empresas/Empresas.js"));
+
+            //SCRIPT TIPOMONEDAS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
+                "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas/Admin").Include(
+                "~/Scripts/app/general/TipoMonedas/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Idiomas").Include(
+                               "~/Scripts/app/general/Idiomas/Idiomas.js"));
+
+            //SCRIPT EMPLEADOS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Empleados").Include(
+                              "~/Scripts/app/general/Empleados/IndexEmpleados.js",
+                              "~/Scripts/app/general/Empleados/AgregarEmpleado.js"));
+
+            //SCRIPT CARGOS
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Cargos").Include(
+                             "~/Scripts/app/general/Cargos/Cargos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones").Include(
+                  "~/Scripts/app/General/TipoAmonestaciones/TipoAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoAmonestaciones/Admin").Include(
+                  "~/Scripts/app/General/TipoAmonestaciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones/Admin").Include(
+                "~/Scripts/app/General/Requisiciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/EditRequisiciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/RazonSalidas").Include(
+              "~/Scripts/app/general/RazonSalidas/RazonSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/RazonSalidas/Admin").Include("~/Scripts/app/General/RazonSalidas/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades").Include(
+            "~/Scripts/app/General/Nacionalidades/Nacionalidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Nacionalidades/Admin").Include(
+            "~/Scripts/app/General/Nacionalidades/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Habilidades").Include(
+            "~/Scripts/app/general/Habilidades/Habilidades.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoSalidas").Include(
+            "~/Scripts/app/general/TipoSalidas/TipoSalidas.js"));
+            //script de areas
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexArea").Include(
+            "~/Scripts/app/general/Areas/IndexAreas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateArea").Include(
+                        "~/Scripts/app/general/Areas/CreateArea.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditArea").Include(
+                        "~/Scripts/app/general/Areas/EditArea.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoIncapacidades/Admin").Include(
+             "~/Scripts/app/general/TipoIncapacidades/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Titulos/Admin").Include(
+           "~/Scripts/app/General/Titulos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones/AdminHistorialAmonestaciones").Include(
+                       "~/Scripts/app/General/HistorialAmonestaciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Idiomas/Admin").Include(
+              "~/Scripts/app/general/Idiomas/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Admin").Include(
+                "~/Scripts/app/general/Areas/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
+                         "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialCargos").Include(
+                         "~/Scripts/app/General/HistorialCargos/HistorialCargos.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/PromoverHistorialCargos").Include(
+                 "~/Scripts/app/General/HistorialCargos/PromoverHistorialCargos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialHorasTrabajadas").Include(
+                "~/Scripts/app/General/HistorialHorasTrabajadas/HistorialHorasTrabajadas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialContrataciones").Include(
+                "~/Scripts/app/General/HistorialContrataciones/HistorialContrataciones.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones").Include(
+                "~/Scripts/app/General/CreateHistorialAmonestaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
+               "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
+            //App/Jornadas
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Jornadas").Include(
+                "~/Scripts/app/General/Jornadas/IndexJornadas.js"));
+
+            //App/Jornadas
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/EquipoEmpleados").Include(
+                "~/Scripts/app/General/EquipoEmpleados/EquipoEmpleados.js"));
+
+            //~/Scripts/app/general/Requisiciones
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/RequerimientosEspeciales").Include(
+                "~/Scripts/app/General/RequerimientosEspeciales/RequerimientosEspeciales.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/RequerimientosEspeciales/Admin").Include(
+                "~/Scripts/app/General/RequerimientosEspeciales/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Requisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/IndexRequisiciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateRequisiciones").Include(
+                "~/Scripts/app/General/Requisiciones/CreateRequisiciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAudienciaDescargos").Include(
+              "~/Scripts/app/General/HistorialAudiencias/IndexHistorialAudienciaDescargos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/CreateHistorialAudienciaDescargos").Include(
+               "~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAudienciaDescargos/Admin").Include(
+             "~/Scripts/app/General/HistorialAudiencias/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreatePersonas").Include(
+                "~/Scripts/app/General/Personas/CreatePersonas.js"));
+            //Inputmask
+            bundles.Add(new ScriptBundle("~/Content/InputMask").Include(
+            "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/jasny").Include(
+                "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EditPersonas").Include(
+                "~/Scripts/app/General/Personas/EditPersonas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Personas/Admin").Include(
+                "~/Scripts/app/General/Personas/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/TipoHoras").Include(
+                "~/Scripts/app/General/TipoHoras/TipoHoras.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexHistorialSalidas").Include(
+            "~/Scripts/app/general/HistorialSalidas/IndexHistorialSalidas.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialSalidas").Include(
+            "~/Scripts/app/general/HistorialSalidas/CreateHistorialSalidas.js"));
+
+            // SCRIPT Hsal
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/HistorialSalidas/Admin").Include(
+            "~/Scripts/app/general/HistorialSalidas/Admin.js"));
+
+            // SCRIPT tper
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoPermisos/Admin").Include(
+            "~/Scripts/app/general/TipoPermisos/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+                "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones").Include(
+                "~/Scripts/app/General/CreateHistorialVacaciones.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
+               "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/IndexSueldos").Include(
+                         "~/Scripts/app/general/Sueldos/IndexSueldos.js"));
+
+
+            //SELECCION CANDIDATOS
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/SeleccionCandidatos").Include(
+             "~/Scripts/app/General/SeleccionCandidatos/IndexSeleccionCandidatos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAudienciaDescargos").Include(
+               "~/Scripts/app/General/HistorialAudiencias/IndexHistorialAudienciaDescargos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/SeleccionCandidatos/Admin").Include(
+                  "~/Scripts/app/General/SeleccionCandidatos/Admin.js"));
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/ContratarCandidato").Include(
+                    "~/Scripts/app/General/SeleccionCandidatos/ContratarCandidato.js"));
+
+            // dataTables
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesSeleccionCandidatos").Include(
+                      "~/Scripts/plugins/dataTables/datatables.min.js",
+                      "~/Scripts/plugins/dataTables/Datatables_SeleccionCandidatos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
+                 "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
+
+            //App/HistorialPermisos
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(
+                "~/Scripts/app/General/HistorialPermisos/IndexHistorialPermisos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/CreateHistorialPermisos").Include(
+                 "~/Scripts/app/general/HistorialPermisos/CreateHistorialPermisos.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo").Include(
+                 "~/Scripts/app/general/EquipoTrabajo/EquipoTrabajo.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Competencias/Admin").Include(
+                 "~/Scripts/app/General/Competencias/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialVacaciones/Admin").Include(
+                 "~/Scripts/app/General/HistorialVacaciones/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
+                "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
+            #endregion
+
+            #region Optimizaciones
+            //Allow any type of Content Delivery Network
             bundles.UseCdn = true;
 
             //Execute the Optimization at Bundles in runtime
@@ -569,7 +920,7 @@ namespace ERP_GMEDINA
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #endif
-
+            #endregion
         }
     }
 }

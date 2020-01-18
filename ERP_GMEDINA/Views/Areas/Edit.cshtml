@@ -1,0 +1,104 @@
+﻿@model ERP_GMEDINA.Models.cAreas
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+ <div class="row">
+  <div class="col-lg-12">
+   <div class="ibox float-e-margins">
+    <div class="ibox-title">
+     @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+     <h2>Editar </h2>
+    </div>
+    <div class="ibox-content">
+     <div class="form-horizontal">
+      @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormAreas" }))
+      {
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+          <div class="form-group">
+           @Html.LabelFor(model => model.suc_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+           <div class="col-md-10">
+            @Html.DropDownList("suc_Id", null, htmlAttributes: new { @class = "form-control required", @id = "Sucursales" })
+            @Html.ValidationMessageFor(model => model.suc_Id, "", new { @class = "text-danger", @id = "errorSucursales" })
+           </div>
+          </div>
+                            <div class="form-group">
+                             @Html.LabelFor(model => model.area_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                             <div class="col-md-10">
+                              @Html.EditorFor(model => model.area_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
+                              @Html.ValidationMessageFor(model => model.area_Descripcion, "", new { @class = "text-danger", @id = "errorarea_Descripcion" })
+                             </div>
+                            </div>
+                            <div class="form-group">
+                             @Html.LabelFor(model => model.car_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                             <div class="col-md-10">
+                              @Html.EditorFor(model => model.car_Descripcion, new { htmlAttributes = new { @class = "form-control required" } })
+                              @Html.ValidationMessageFor(model => model.car_Descripcion, "", new { @class = "text-danger", @id = "errorcar_Descripcion" })
+                             </div>
+                            </div>
+      }
+      <div class="ibox">
+       <div class="ibox-title">
+        <h5>Departamentos</h5>
+        <div class="ibox-tools">
+         <a class="collapse-link">
+          <i class="fa fa-chevron-up"></i>
+         </a>
+        </div>
+       </div>
+       <div class="ibox-content" style="">
+        <div class="row">
+         @Html.Partial("_CreateDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
+         <div class="col-lg-8">
+          <table class="table" id="ChildDataTable">
+           <thead>
+            <tr>
+             <th>Descripcion</th>
+             <th>Cargo</th>
+             <th>Acciones</th>
+            </tr>
+           </thead>
+           <tbody></tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="form-group">
+       <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear" />
+        <input type="button" value="Inactivar" class="btn btn-danger" id="btnInactivarArea" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  @Html.Partial("_DeleteDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
+  @Html.Partial("_EditDepartamento", new ERP_GMEDINA.Models.cDepartamentos())
+  @Html.Partial("_Activar")
+ </div>
+</div>
+
+@section Styles {
+ @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+ @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+
+@section Scripts {
+ @Scripts.Render("~/plugins/customdataTables")
+ @Scripts.Render("~/Scripts/app/general")
+ @Scripts.Render("~/Scripts/app/general/EditArea")
+ @if ((bool)Session["Admin"])
+    {
+     <script>
+      Admin = true;
+     </script>
+ }
+ <script>
+  var area_Id=@Html.DisplayFor(model => model.area_Id);
+ </script>
+}

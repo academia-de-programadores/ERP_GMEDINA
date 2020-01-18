@@ -1,0 +1,117 @@
+﻿@model ERP_GMEDINA.Models.cHistorialSalidas
+
+@{
+    /**/
+
+    ViewBag.Title = "Registrar Finalizacion";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
+                    <h2>Registrar Finalizacion Laboral</h2>
+                </div>
+
+
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormHistorialSalidas" }))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            //---TipoSalidas---
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.tsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("tsal_Id", null, htmlAttributes: new { @class = "form-control required", @id = "TipoSalidas" })
+                                    @Html.ValidationMessageFor(model => model.tsal_Id, "", new { @class = "text-danger", @id = "errorTipoSalidas" })
+                                </div>
+                            </div>
+
+                            //---RazonSalida---
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.rsal_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("rsal_Id", null, htmlAttributes: new { @class = "form-control required", @id = "RazonSalidas" })
+                                    @Html.ValidationMessageFor(model => model.rsal_Id, "", new { @class = "text-danger", @id = "errorRazonSalidas" })
+                                </div>
+                            </div>
+
+                            //---Observaciones---
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hsal_Observacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.hsal_Observacion, new { htmlAttributes = new { @class = "form-control required" } })
+                                    @Html.ValidationMessageFor(model => model.hsal_Observacion, "", new { @class = "text-danger", @id = "errorhsal_Observacion" })
+                                </div>
+                            </div>
+                            //---Fechasalida---
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.hsal_FechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    <i class="fa fa-calendar"></i>
+                                    @Html.TextBoxFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control datepicker required" }, type = "date", max = "2018-12-31" })
+                                    @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger", @id = "errorhsal_FechaSalida" })
+                                </div>
+                            </div>
+
+                            //@Html.TextBoxFor(model => model.EndTime, new { type = "time" })
+
+                        }
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>Empleados</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content" style="">
+                                <div class="row">
+                                    @Html.Partial("_AddEmpleado", new ERP_GMEDINA.Models.cHistorialSalidas_Empleados())
+                                    <div class="col-lg-8">
+                                        <table class="table" id="ChildDataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Observacion</th>
+                                                    <th  style="visibility:hidden;">Usar</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" value="Guardar" class="btn btn-primary" id="btnCrear" />
+                                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+    @Styles.Render("~/plugins/select2Styles")
+}
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general/CreateHistorialSalidas")
+    @Scripts.Render("~/plugins/select2")
+}

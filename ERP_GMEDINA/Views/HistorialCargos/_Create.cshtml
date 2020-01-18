@@ -1,0 +1,74 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleados
+<div class="modal inmodal" id="ModalNuevo" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Promover empleado</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.car_Id, "Encargado", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger", @id = "erroremp_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.car_Id, "Cargo", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("car_Id", null, htmlAttributes: new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.car_Id, "", new { @class = "text-danger", @id = "errorcar_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.area_Id, "Area", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("area_Id", null, htmlAttributes: new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.area_Id, "", new { @class = "text-danger", @id = "errorarea_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.depto_Id, "Departamento", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("depto_Id", null, htmlAttributes: new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.depto_Id, "", new { @class = "text-danger", @id = "errordepto_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.jor_Id, "Jornada", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("jor_Id", null, htmlAttributes: new { @class = "form-control required valid" })
+                                @Html.ValidationMessageFor(model => model.jor_Id, "", new { @class = "text-danger", @id = "errorjor_Id" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="emp_CuentaBancaria">Sueldo</label>
+                            <div class="col-md-8 has-error">
+                                <input type="number" class="form-contro required valid text-box single-line" data-val="true" data-val-required="El campo &quot;Sueldo&quot;es requerido" id="emp_CuentaBancaria" name="emp_CuentaBancaria" type="text" value="">
+                                <span class="field-validation-valid text-danger" data-valmsg-for="emp_CuentaBancaria" data-valmsg-replace="true" id="erroremp_CuentaBancaria"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="emp_CuentaBancaria">Fecha</label>
+                            <div class="col-md-8 has-error">
+                                <input type="date" class="form-contro required valid text-box single-line" data-val="true" data-val-required="El campo &quot;Sueldo&quot;es requerido" id="emp_FechaIngreso" name="emp_FechaIngreso" type="text" value="">
+                                <span class="field-validation-valid text-danger" data-valmsg-for="emp_FechaIngreso" data-valmsg-replace="true" id="erroremp_FechaIngreso"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

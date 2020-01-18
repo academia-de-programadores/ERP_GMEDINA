@@ -1,0 +1,184 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialIncapacidades
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Create</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>tbHistorialIncapacidades</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <a href="Index" class="pull-right">Regresar</a>
+        	
+        	<h2>Create</h2>
+        </div>
+
+
+       @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
+       {
+          <div id="MeterId" class="ibox-content">
+            @Html.AntiForgeryToken()
+              <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+
+
+                 
+
+
+
+
+                     
+
+
+                  <div  class="form-group">
+
+                     
+
+
+                          <div align="right" class="col-md-9">
+                              <div align="left" class="col-md-9">
+                                  <div class="ibox">
+                                      <div class="ibox-title">
+                                          <h5>Datos del empleado</h5>
+                                      </div>
+
+                                      <div id="llamardata" class="ibox-content">
+                                          <h4 class="col-md-2">Empleado</h4>
+                                          <h4 id="nombre" name="nombre" class="col-md-5"></h4>
+                                          <br>
+                                      </div>
+
+                                      <div id="llamardataa" class="ibox-content">
+                                          <h4 class="col-md-2">Identidad</h4>
+                                          <h4 id="identidad" name="identidad" class="col-md-4"></h4>
+
+                                      </div>
+                                      <hr>
+
+                                  </div>
+                              </div>
+                          </div>
+                      
+                        
+                      </div>
+                          
+                  <div class="form-group">
+                      <div id="MeterId" hidden="hidden" class="col-md-8">
+                          @Html.EditorFor(model => model.emp_Id, new { htmlAttributes = new { @class = "form-control", @id = "emp_idd" } })
+                          @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+
+                      </div>
+
+                          @Html.LabelFor(model => model.ticn_Id, "Tipo Incapacidad", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-10">
+                              @Html.DropDownList("ticn_Id", null, htmlAttributes: new { @class = "form-control" })
+                              @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+                 
+                      
+
+                      <div class="form-group">
+                          @Html.LabelFor(model => model.hinc_CentroMedico, "Centro Medico", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.hinc_CentroMedico, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.hinc_CentroMedico, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          @Html.LabelFor(model => model.hinc_Doctor, htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.hinc_Doctor, "Doctor", new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.hinc_Doctor, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          @Html.LabelFor(model => model.hinc_Diagnostico,"Diagnostico", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.hinc_Diagnostico, new { htmlAttributes = new { @class = "form-control" } })
+                              @Html.ValidationMessageFor(model => model.hinc_Diagnostico, "", new { @class = "text-danger" })
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          @Html.LabelFor(model => model.hinc_FechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-4">
+                              @Html.TextBoxFor(model => model.hinc_FechaInicio, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaInicio" })
+                            
+                              
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          @Html.LabelFor(model => model.hinc_FechaFin, "Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
+                          <div class="col-md-4">
+                              @Html.TextBoxFor(model => model.hinc_FechaFin, new { @class = "form-control datepicker", @type = "date", @id = "hinc_FechaFin" })
+                          
+                          </div>
+                      </div>
+
+                      @*<div class="form-group">
+              @Html.LabelFor(model => model.hinc_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+              <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.hinc_Estado)
+                    @Html.ValidationMessageFor(model => model.hinc_Estado, "", new { @class = "text-danger" })
+                </div>
+              </div>
+            </div>*@
+                  <br>
+                      <div class="form-group">
+
+                          <div class="col-md-offset-1 col-md-10">
+                              <div class="col-md-1 col-md-4">
+                                  <input type="submit" value="Guardar" id="btnGuardar" class="btn btn-primary" />
+
+                              </div>
+                              <div class="col-md-1 ol-md-1">
+                                  <a href="index" class="btn btn-default">Cancelar</a>
+
+
+
+                              </div>
+                              </div>
+                          </div>
+                 
+                  </div>
+              </div>
+          }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+@Styles.Render("~/Content/plugins/izitoast/iziToast")
+@Styles.Render("~/plugins/izitoast")
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/General")
+@Scripts.Render("~/Scripts/app/General/HistorialIncapacidades/CreateIncapacidades")
+
+}

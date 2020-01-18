@@ -1,0 +1,290 @@
+﻿@model ERP_GMEDINA.Models.tbEmpleados
+
+@{
+    ViewBag.Title = "Detalles de Empleado";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
+            <h2>Detalles del Empleado</h2>
+        </div>
+        <div class="">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                       
+                            <div class="tabs-container">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="fa fa-user"></i>Datos Personales</a></li>
+                                                <li><a class="nav-link" href="#tab-2" data-toggle="tab"><i class="fa fa-newspaper-o"></i>Datos del Empleado</a></li>
+                                                <li><a class="nav-link" href="#tab-3" data-toggle="tab"><i class="fa fa-briefcase"></i>Datos del Puesto</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+
+
+                                                <dl class="dl-horizontal">
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Identidad)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Identidad)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Nombres)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Nombres)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Apellidos)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Apellidos)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Edad)
+                                                    </dt>
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Edad)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Direccion)
+                                                    </dt>
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Direccion)
+                                                    </dd>
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_CorreoElectronico)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_CorreoElectronico)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Telefono)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Telefono)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbPersonas.per_Sexo)
+                                                    </dt>
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbPersonas.per_Sexo)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.emp_CuentaBancaria)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.emp_CuentaBancaria)
+                                                    </dd>
+
+                                                </dl>
+
+                                            </div>
+                                            <div class="tab-pane" id="tab-2">
+
+
+
+                                                <dl class="dl-horizontal">
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.emp_Fechaingreso)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.emp_Fechaingreso)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.emp_Reingreso)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.emp_Reingreso)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbCatalogoDePlanillas.cpla_DescripcionPlanilla)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbFormaPago.fpa_Descripcion)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbFormaPago.fpa_Descripcion)
+                                                    </dd>
+
+
+
+                                                    @*<dt>
+                                                            @Html.DisplayNameFor(model => model.emp_RazonSalida)
+                                                        </dt>
+
+                                                        <dd>
+                                                            @Html.DisplayFor(model => model.emp_RazonSalida)
+                                                        </dd>*@
+
+                                                    @*<dt>
+                                                            @Html.DisplayNameFor(model => model.emp_FechaDeSalida)
+                                                        </dt>
+
+                                                        <dd>
+                                                            @Html.DisplayFor(model => model.emp_FechaDeSalida)
+                                                        </dd>*@
+
+
+                                                    @*<dt>
+                                                            @Html.DisplayNameFor(model => model.emp_RazonInactivo)
+                                                        </dt>
+
+                                                        <dd>
+                                                            @Html.DisplayFor(model => model.emp_RazonInactivo)
+                                                        </dd>*@
+
+                                                </dl>
+
+
+                                            </div>
+
+
+
+                                            <div class="tab-pane" id="tab-3">
+
+                                                <dl class="dl-horizontal">
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbAreas.area_Descripcion)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbAreas.area_Descripcion)
+                                                    </dd>
+
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbDepartamentos.depto_Descripcion)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbDepartamentos.depto_Descripcion)
+                                                    </dd>
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbJornadas.jor_Descripcion)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbJornadas.jor_Descripcion)
+                                                    </dd>
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.tbCargos.car_Descripcion)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.tbCargos.car_Descripcion)
+                                                    </dd>
+
+
+                                                    <dt>
+                                                        @Html.DisplayNameFor(model => model.emp_CargoAnterior)
+                                                    </dt>
+
+                                                    <dd>
+                                                        @Html.DisplayFor(model => model.emp_CargoAnterior)
+                                                    </dd>
+
+                                                </dl>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h4>Auditoría</h4>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="form-horizontal">
+                                        <table class="table table-striped table-bordered dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Acción</th>
+                                                    <th>Usuario</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Creado</td>
+                                                    @Html.HiddenFor(model => model.emp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                                    <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                                    <td><span id="emp_FechaCrea">@Html.DisplayFor(model => model.emp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Modificado</td>
+                                                    @Html.HiddenFor(model => model.emp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                                    <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                                    <td><span id="emp_FechaModifica">@Html.DisplayFor(model => model.emp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

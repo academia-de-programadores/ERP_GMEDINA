@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +11,16 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
-        {@RenderSection("Styles", required: false)}
-     
+    {@RenderSection("Styles", required: false)}
+
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
 
-    <!-- Primary Inspinia style -->     
+    <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
-    
+
 </head>
 <body id="Body">
     <!-- Wrapper-->
@@ -40,13 +40,12 @@
             @RenderBody()
 
             <!-- Footer -->
-            @Html.Partial("_Footer")
+            @*@Html.Partial("_Footer")*@
 
         </div>
 
     </div>
     <!-- End wrapper-->
-
     <!-- Section for main scripts render -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -57,11 +56,10 @@
 
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
-	<script>
-		$('#menuDesplegar').click(function () {
-			$('#menulateral').removeClass("custom-scrollbar");
-		});
-	</script>
+    <script>
+        $('#menuDesplegar').click(function () {
+            $('#menulateral').removeClass("custom-scrollbar");
+        });
+    </script>
 </body>
 </html>
-

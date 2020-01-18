@@ -1,0 +1,46 @@
+﻿
+@model ERP_GMEDINA.Models.tbHorarios
+<div class="modal inmodal" id="ModalNuevoHorarios" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar Horario</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevoHorario" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.hor_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.hor_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" } })
+                                @Html.ValidationMessageFor(model => model.hor_Descripcion, "", new { @class = "text-danger", @id = "errorhor_Descripcion" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.hor_HoraInicio, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.hor_HoraInicio, new { htmlAttributes = new { @class = "form-contro required valid", @type = "time" } })
+                                @Html.ValidationMessageFor(model => model.hor_HoraInicio, "", new { @class = "text-danger", @id = "errorhor_HoraInicio" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.hor_HoraFin, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.hor_HoraFin, new { htmlAttributes = new { @class = "form-contro required valid", @type = "time" } })
+                                @Html.ValidationMessageFor(model => model.hor_HoraFin, "", new { @class = "text-danger", @id = "errorhor_HoraFin" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" id="btnCerrarModal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnGuardarHorario">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

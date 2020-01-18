@@ -1,0 +1,59 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialAudienciaDescargo
+<div class="modal inmodal" id="ModalNuevo" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Agregar Audiencia de Descargo</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        
+                        <div class="form-group">
+							@Html.LabelFor(model => model.aude_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-control required valid" , @id="aude_Descripcion1"} })
+								@Html.ValidationMessageFor(model => model.aude_Descripcion, "", new { @class = "text-danger", @id = "erroraude_Descripcion" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.aude_FechaAudiencia, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker", @type = "date", @id = "aude_FechaAudiencia1" })
+								@Html.ValidationMessageFor(model => model.aude_FechaAudiencia, "", new { @class = "text-danger", @id = "erroraude_FechaAudiencia" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.aude_Testigo, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								<div class="checkbox">
+    								@Html.EditorFor(model => model.aude_Testigo,  new { htmlAttributes = new { @id = "aude_Testigo1" } })
+    								@Html.ValidationMessageFor(model => model.aude_Testigo, "", new { @class = "text-danger", @id = "erroraude_Testigo" })
+									</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+							@Html.LabelFor(model => model.aude_DireccionArchivo, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.aude_DireccionArchivo, new { htmlAttributes = new { @class = "form-control required valid" , @id = "aude_DireccionArchivo1"} })
+								@Html.ValidationMessageFor(model => model.aude_DireccionArchivo, "", new { @class = "text-danger", @id = "erroraude_DireccionArchivo" })
+                            </div>
+
+                            <div hidden="hidden" class="col-md-8">
+                                <input class="form-contro required valid text-box single-line" data-val="true" id="emp_Id" name="emp_Id" type="text" value="">
+                            </div>
+                        </div>
+					</div>
+				}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

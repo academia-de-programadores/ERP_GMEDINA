@@ -1,0 +1,40 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialAmonestaciones
+<div class="modal inmodal" id="ModalInhabilitar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">¿Seguro que desea Inactivar el registro?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="blockquote">
+                    <form id="FormInactivar">
+                        <input type="hidden" id="hamo_Id" name="hamo_Id"/>
+                    </form>
+                    <p>
+
+                        Esta accion puede tener repercuciones en otras secciones del sistema
+                        (Si sucede un error,consulte al administrador)
+
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger pull-right" id="InActivar">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General")
+    @Scripts.Render("~/Scripts/app/General/HistorialAmonestaciones")
+    @Scripts.Render("~/Scripts/app/General/IndexHistorialAmonestaciones")
+
+}
+

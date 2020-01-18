@@ -1,0 +1,95 @@
+﻿@model ERP_GMEDINA.Models.tbHistorialVacaciones
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de Vacaciones</h5>
+                    @*<div class="ibox-tools">
+                       @Html.ActionLink("Registrar tVacaciones", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                    </div>*@
+                </div>
+                <div class="ibox-content">
+                  <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
+                    <thead>
+                        <tr role="row">
+                            <th></th>
+                            <th>Número</th>
+                            <th>Empleado</th>
+                            <th>Cargo</th>
+                            <th>Departamento</th>
+                            <th>Dias Totales</th>
+                            <th>Dias Tomados</th>
+                            <th>Dias Restantes</th>
+                            <th>Año</th>
+                            <th>Fecha Contratacion</th>
+                            @*<th>Acciones</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormActivar" }))
+    { 
+    <div class="modal fade" id="ModalHabilitar" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title">Activar</h4>
+                </div>
+                <div class="modal-body" id="Activar">
+                    ¿Esta seguro que desea Activar este registro?
+                </div>
+                <input type="hidden" value="" id="hvac_Id" name="hvac_Id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white pull-right" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary pull-right" id="btnActivar" data-dismiss="modal">Si</button>
+                    <div style="display:none" class="btn pull-right" id="cargandoActivar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+ </div>
+
+
+
+
+
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/dataPicker")
+}
+
+@section Scripts {
+@if (Model.hvac_Estado)
+{
+    @Scripts.Render("~/Scripts/app/General/HistorialVacaciones/Admin")
+}
+
+  @Scripts.Render("~/plugins/dataTables")
+  @Scripts.Render("~/Scripts/app/General")
+  @Scripts.Render("~/Scripts/app/General/HistorialVacaciones")
+  @Scripts.Render("~/Scripts/app/General/IndexHistorialVacaciones")
+
+}
