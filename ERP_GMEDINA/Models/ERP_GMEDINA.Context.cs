@@ -114,6 +114,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EquipoTrabajoDetalles> V_EquipoTrabajoDetalles { get; set; }
         public virtual DbSet<V_RPT_FaseSeleccion> V_RPT_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
+        public virtual DbSet<V_RPT_EquipoEmpleado> V_RPT_EquipoEmpleado { get; set; }
+        public virtual DbSet<V_RPT_HistorialCargos> V_RPT_HistorialCargos { get; set; }
+        public virtual DbSet<V_RPT_HistorialContrataciones> V_RPT_HistorialContrataciones { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

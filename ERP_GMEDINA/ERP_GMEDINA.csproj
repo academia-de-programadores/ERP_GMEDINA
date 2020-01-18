@@ -2113,6 +2113,7 @@
     <Content Include="Views\ReportesRRHH\HistorialIncapacidades.cshtml" />
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
+    <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

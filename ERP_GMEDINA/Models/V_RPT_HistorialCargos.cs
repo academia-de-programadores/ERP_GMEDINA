@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
         public string Nombre { get; set; }
         public string Identidad { get; set; }
         public string CargoAnterior { get; set; }
+        public int car_Id { get; set; }
         public string CargoNuevo { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
     }

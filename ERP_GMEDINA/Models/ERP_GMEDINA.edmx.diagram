@@ -270,6 +270,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" Width="1.5" PointX="17.375" PointY="5.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" Width="1.5" PointX="17.375" PointY="10.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="17.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" Width="1.5" PointX="3.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" Width="1.5" PointX="5.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" Width="1.5" PointX="7.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -217,7 +217,53 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-}
+
+        ///////////////////////////////////////////////////////////////////////////////////
+        public ActionResult Empleado()
+        {
+
+            ViewBag.FechaNacimiento = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "per_FechaNacimiento");
+            ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
+            ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Empleado(int per_Id, int habi_Id, int comp_Id, DateTime Fecha_Nacimiento)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+
+
+            //comando para el dataAdapter
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT * from [rrhh].[V_RPT_Empleado_Curriculum] where per_Id = @per_Id and habi_Id = @habi_Id  and comp_Id = @comp_Id and Fecha_Nacimiento = @Fecha_Nacimiento";
+            command.Parameters.AddWithValue("@per_Id", SqlDbType.Int).Value = per_Id;
+            command.Parameters.AddWithValue("@habi_Id", SqlDbType.Int).Value = habi_Id;
+            command.Parameters.AddWithValue("@comp_Id", SqlDbType.Int).Value = comp_Id;
+            command.Parameters.AddWithValue("@Fecha_Nacimiento", SqlDbType.DateTime).Value = Fecha_Nacimiento;
+
+            SqlConnection conx = new SqlConnection(connectionString);
+            command.Connection = conx;
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(ds, ds.V_RPT_Empleado_Curriculum.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reporte\Empleado.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("REPORTE", ds.Tables["V_RPT_Empleado_Curriculum"]));
+            conx.Close();
+
+            ViewBag.ReportViewer = reportViewer;
+            ViewBag.FechaNacimiento = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "per_FechaNacimiento");
+            ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
+            ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
+            return View();
+        }
+    }
 }
 
 

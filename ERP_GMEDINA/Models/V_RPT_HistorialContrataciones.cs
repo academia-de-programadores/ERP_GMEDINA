@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Models
         public int hcon_Id { get; set; }
         public string NombreCompleto { get; set; }
         public string Identidad { get; set; }
+        public int car_Id { get; set; }
         public string Cargo { get; set; }
         public Nullable<System.DateTime> FechaContratacion { get; set; }
     }
