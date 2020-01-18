@@ -28,7 +28,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
             return View();
         }
-
         [HttpPost]
         public ActionResult HorasTrabajadas( int tiho_Id,  DateTime Fecha)
         {
@@ -66,13 +65,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
-
-        /// <summary>
-        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
-
         public ActionResult HistorialIncapacidades()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -81,7 +73,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.incapacidades = new SelectList(db.tbTipoIncapacidades.Where(o => o.ticn_Estado == true), "ticn_Id", "ticn_Descripcion");
             return View();
         }
-
         [HttpPost]
         public ActionResult HistorialIncapacidades(int ticn_Id, DateTime FechaInicio,DateTime FechaFin)
         {
@@ -120,11 +111,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
         public ActionResult FaseSeleccion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -132,7 +118,6 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-
         //parametros del reporte
         [HttpPost]
         public ActionResult FaseSeleccion(int fare_Id, DateTime Fecha)
@@ -167,10 +152,6 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-
-        //////////////////////////////////////////////////////////////////////////////////////////
-
-
         public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -178,7 +159,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
             return View();
         }
-
         [HttpPost]
         public ActionResult Requisicion(int Id_Requisicion, DateTime Fecha_Contratacion)
         {
@@ -217,8 +197,6 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-
-        ///////////////////////////////////////////////////////////////////////////////////
         public ActionResult Empleado()
         {
 
@@ -227,7 +205,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
-
         [HttpPost]
         public ActionResult Empleado(int per_Id, int habi_Id, int comp_Id, DateTime Fecha_Nacimiento)
         {
@@ -263,6 +240,96 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
+        public ActionResult HistorialAmonestaciones()
+        {
+            ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+            return View();
+        }
+        public ActionResult HistorialAudienciaDescargo()
+        {
+            //ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult HistorialAmonestaciones(int tamo_Id, DateTime Fecha, DateTime Fecha1, string Colaborador)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+
+
+            //comando para el dataAdapter
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAmonestaciones WHERE  tamo_Id = @tamo_Id  and Fecha BETWEEN @Fecha AND @Fecha1 and Colaborador like '%@Colaborador%'";
+            command.Parameters.AddWithValue("@tamo_Id", SqlDbType.Int).Value = tamo_Id;
+            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+            command.Parameters.AddWithValue("@Fecha1", SqlDbType.DateTime).Value = Fecha1;
+            command.Parameters.AddWithValue("@Colaborador", SqlDbType.Text).Value = Colaborador;
+
+            SqlConnection conx = new SqlConnection(connectionString);
+            command.Connection = conx;
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(ds, ds.V_RPT_HistorialAmonestaciones.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialAmonestacionesRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialAmonestaciones"]));
+            conx.Close();
+
+
+            ViewBag.ReportViewer = reportViewer;
+            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+
+            ViewBag.Titulos = db.tbTipoAmonestaciones.Where(x => x.tamo_Id == tamo_Id).Select(x => x.tamo_Descripcion).FirstOrDefault();
+            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+            ViewBag.Turno = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+            return View();
+        }
+        //HistorialAudienciaDescargo
+        [HttpPost]
+        public ActionResult HistorialAudienciaDescargo(DateTime aude_fechaaudiencia, DateTime aude_fechaaudiencia1, string nombre)
+        {
+
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+
+            //comando para el dataAdapter
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAudienciaDescargo WHERE aude_fechaaudiencia BETWEEN @Fecha AND @Fecha1 and nombre like '%@nombre%'";
+            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = aude_fechaaudiencia;
+            command.Parameters.AddWithValue("@Fecha1", SqlDbType.DateTime).Value = aude_fechaaudiencia1;
+            command.Parameters.AddWithValue("@nombre", SqlDbType.Text).Value = nombre;
+
+
+            SqlConnection conx = new SqlConnection(connectionString);
+            command.Connection = conx;
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(ds, ds.V_RPT_HorasTrabajadas.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AudienciaDescargo.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialAudienciaDescargo"]));
+            conx.Close();
+
+
+            ViewBag.ReportViewer = reportViewer;
+            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+
+            //ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
+            ////Cargar DDL del modal (Tipo de planilla a seleccionar)
+            //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+            ////ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+            return View();
+        }
+
     }
 }
 

@@ -2114,6 +2114,9 @@
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
+    <Content Include="Views\ReportesRRHH\EmpleadosRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2187,7 +2190,6 @@
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
-    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
