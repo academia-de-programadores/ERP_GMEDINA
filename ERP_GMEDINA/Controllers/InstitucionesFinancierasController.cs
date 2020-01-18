@@ -263,7 +263,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     listINFS = db.UDP_Plani_tbInstitucionesFinancieras_Activar(id, 1, DateTime.Now);
 
-                    foreach (UDP_Plani_tbInstitucionesFinancieras_Activar1_Result Resultado in listINFS)
+                    foreach (UDP_Plani_tbInstitucionesFinancieras_Activar_Result Resultado in listINFS)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))
