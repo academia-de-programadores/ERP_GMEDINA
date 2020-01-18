@@ -1480,6 +1480,7 @@
     <Content Include="Reports\HistorialContratacionesRPT.rdlc" />
     <Content Include="Reports\HistorialSalidasRPT.rdlc" />
     <Content Include="Reports\HistorialVacacionesRPT.rdlc" />
+    <Content Include="Reports\PermisosRPT.rdlc" />
     <None Include="Reports\ReportesDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -2157,6 +2158,7 @@
     <Content Include="Views\ReportesRRHH\HistorialContratacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -75,6 +75,37 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult EquipoEmpleados(int eqem_Id, DateTime Fecha, int emp_Id)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+
+
+            //comando para el dataAdapter
+            SqlCommand command = new SqlCommand();
+            command.CommandText = "SELECT * FROM [rrhh].[V_RPT_EquipoEmpleado]";
+            command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
+            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+
+            SqlConnection conx = new SqlConnection(connectionString);
+            command.Connection = conx;
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
+            conx.Close();
+            ViewBag.ReportViewer = reportViewer;
+            return View();
+        }
+
         public ActionResult HistorialContratacionesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -321,8 +352,17 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
+        public ActionResult Permisos()
+        {
+            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+            //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
+            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult EquipoEmpleados(int eqem_Id, DateTime Fecha, int emp_Id)
+        public ActionResult Permisos(int tper_Id, int emp_Id, DateTime FechaInicio, DateTime FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -335,20 +375,30 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM [rrhh].[V_RPT_EquipoEmpleado]";
-            command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
-            command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = emp_Id;
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where tper_Id = @tper_Id and emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
+            command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
+            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+            command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+            command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
 
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
+            adp.Fill(ds, ds.V_RPT_HistorialPermisos.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\PermisosRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPermisosDS", ds.Tables["V_RPT_HistorialPermisos"]));
             conx.Close();
+
             ViewBag.ReportViewer = reportViewer;
+            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
+
+            //ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
+            ////Cargar DDL del modal (Tipo de planilla a seleccionar)
+            //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
+            //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
 
