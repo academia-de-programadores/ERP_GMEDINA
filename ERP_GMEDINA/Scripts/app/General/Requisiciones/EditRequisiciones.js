@@ -148,6 +148,8 @@ $(document).ready(function () {
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         MsgSuccess("¡Exito!", "El registro se edito de forma exitosa");
+                        $("#finish").attr("href", " ");
+                        setTimeout(function () { window.location.href = "/Requisiciones/Index"; }, 3000);
                     } else {
                         MsgError("Error", "No se guardó el registro, contacte al administrador");
                     }

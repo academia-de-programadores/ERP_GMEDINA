@@ -1317,6 +1317,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\Personas\Admin.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
@@ -2050,6 +2051,7 @@
     <Content Include="Views\Sucursales\Index.cshtml" />
     <Content Include="Views\Sucursales\_Delete.cshtml" />
     <Content Include="Views\Sucursales\_Detalles.cshtml" />
+    <Content Include="Views\HistorialCargos\Promover.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
