@@ -150,6 +150,7 @@ namespace ERP_GMEDINA.Controllers
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbEmpresas.tbUsuario).usu_NombreUsuario },
                 tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbEmpresas.tbUsuario1).usu_NombreUsuario }
             };
+            Session["Path"] = tbEmpresas.empr_Logo;
             return Json(empresa, JsonRequestBehavior.AllowGet);
         }
 
@@ -173,7 +174,10 @@ namespace ERP_GMEDINA.Controllers
                     {
                         msj = item.MensajeError + " ";
                     }
-                    file.SaveAs(Server.MapPath("~/") + path);
+                    if (!System.IO.File.Exists(Server.MapPath("~/") + path))
+                    {
+                        file.SaveAs(Server.MapPath("~/") + path);
+                    }
                     Session["file"] = null;
                     Session["Path"] = null;
                     Session.Remove("file");
