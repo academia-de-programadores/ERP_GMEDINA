@@ -99,7 +99,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj, JsonRequestBehavior.AllowGet);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int? ID)
