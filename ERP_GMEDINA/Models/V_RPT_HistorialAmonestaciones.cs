@@ -20,6 +20,7 @@ namespace ERP_GMEDINA.Models
         public string TipoAmonestación { get; set; }
         public string Observaciones { get; set; }
         public System.DateTime Fecha { get; set; }
+        public int tamo_Id { get; set; }
         public string DescripcionAnterior { get; set; }
         public string ObservacionAnterior { get; set; }
         public Nullable<System.DateTime> FechaAnterior { get; set; }

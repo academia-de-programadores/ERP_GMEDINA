@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         public string Nombre_Empleado { get; set; }
         public string tsal_Descripcion { get; set; }
+        public int tsal_Id { get; set; }
         public string observaciones { get; set; }
         public System.DateTime hsal_FechaSalida { get; set; }
     }

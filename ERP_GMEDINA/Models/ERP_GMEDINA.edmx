@@ -1323,6 +1323,22 @@ warning 6013: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Empleado_Curriculum' does n
         </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_EquipoEmpleado">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="Id_Persona" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre_Completo" />
+            <PropertyRef Name="Descripcion_del_Equipo" />
+            <PropertyRef Name="Fecha" />
+          </Key>
+          <Property Name="eqem_Id" Type="int" Nullable="false" />
+          <Property Name="Id_Persona" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Descripcion_del_Equipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_FaseSeleccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_RPT_FaseSeleccion">
@@ -1347,43 +1363,206 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_FaseSeleccion' does not hav
           <Property Name="Fecha" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAmonestaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialAmonestaciones">
+          <Key>
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="Colaborador" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="TipoAmonestación" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="tamo_Id" />
+          </Key>
+          <Property Name="hamo_Id" Type="int" Nullable="false" />
+          <Property Name="Colaborador" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="TipoAmonestación" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="150" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="tamo_Id" Type="int" Nullable="false" />
+          <Property Name="DescripcionAnterior" Type="nvarchar" MaxLength="50" />
+          <Property Name="ObservacionAnterior" Type="nvarchar" MaxLength="150" />
+          <Property Name="FechaAnterior" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAudienciaDescargo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialAudienciaDescargo">
+          <Key>
+            <PropertyRef Name="aude_Id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="aude_Descripcion" />
+            <PropertyRef Name="aude_fechaaudiencia" />
+          </Key>
+          <Property Name="aude_Id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="aude_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="aude_fechaaudiencia" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialCargos">
+          <Key>
+            <PropertyRef Name="hcar_Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="CargoAnterior" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="CargoNuevo" />
+          </Key>
+          <Property Name="hcar_Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="CargoAnterior" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="CargoNuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialContrataciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialContrataciones">
+          <Key>
+            <PropertyRef Name="hcon_Id" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="Cargo" />
+          </Key>
+          <Property Name="hcon_Id" Type="int" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaContratacion" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialIncapacidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialIncapacidad">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+            <PropertyRef Name="ticn_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="TipoIncapacidad" />
+            <PropertyRef Name="Dias" />
+          </Key>
+          <Property Name="hinc_Id" Type="int" Nullable="false" />
+          <Property Name="ticn_Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="TipoIncapacidad" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Dias" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialPermisos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialPermisos">
+          <Key>
+            <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="tper_Id" />
+            <PropertyRef Name="TipoPermiso" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="hper_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="tper_Id" Type="int" Nullable="false" />
+          <Property Name="TipoPermiso" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="FechaFin" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialSalidas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialSalidas">
+          <Key>
+            <PropertyRef Name="hsal_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="tsal_Id" />
+            <PropertyRef Name="observaciones" />
+            <PropertyRef Name="hsal_FechaSalida" />
+          </Key>
+          <Property Name="hsal_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="tsal_Id" Type="int" Nullable="false" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="hsal_FechaSalida" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialSueldos">
+          <Key>
+            <PropertyRef Name="sue_Id" />
+            <PropertyRef Name="NombreEmp" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="sue_Cantidad" />
+            <PropertyRef Name="tmon_Descripcion" />
+            <PropertyRef Name="car_Descripcion" />
+          </Key>
+          <Property Name="sue_Id" Type="int" Nullable="false" />
+          <Property Name="NombreEmp" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="tmon_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialVacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialVacaciones">
+          <Key>
+            <PropertyRef Name="hvac_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="hvac_CantDias" />
+            <PropertyRef Name="hvac_FechaInicio" />
+            <PropertyRef Name="hvac_DiasPagados" />
+            <PropertyRef Name="hvac_MesVacaciones" />
+            <PropertyRef Name="hvac_anioVacaciones" />
+            <PropertyRef Name="hvac_FechaFin" />
+          </Key>
+          <Property Name="hvac_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="hvac_CantDias" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="date" Nullable="false" />
+          <Property Name="hvac_DiasPagados" Type="bit" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_anioVacaciones" Type="int" Nullable="false" />
+          <Property Name="hvac_FechaFin" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HorasTrabajadas">
+          <Key>
+            <PropertyRef Name="htra_Id" />
+            <PropertyRef Name="tiho_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="TipoHora" />
+            <PropertyRef Name="CantidadHoras" />
+          </Key>
+          <Property Name="htra_Id" Type="int" Nullable="false" />
+          <Property Name="tiho_Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="TipoHora" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="CantidadHoras" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Requisiciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_RPT_Requisiciones">
-          <Key>
-            <PropertyRef Name="Id_Requisicion" />
-            <PropertyRef Name="Id_Persona" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Edad_Minima" />
-            <PropertyRef Name="Edad_Maxima" />
-            <PropertyRef Name="Titulos" />
-            <PropertyRef Name="Competencias" />
-          </Key>
-          <Property Name="Id_Requisicion" Type="int" Nullable="false" />
-          <Property Name="Id_Persona" Type="int" Nullable="false" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Duracion" Type="nvarchar" MaxLength="50" />
-          <Property Name="Edad_Minima" Type="int" Nullable="false" />
-          <Property Name="Edad_Maxima" Type="int" Nullable="false" />
-          <Property Name="Educacion_Superior" Type="varchar" MaxLength="2" />
-          <Property Name="Experiencia" Type="nvarchar" MaxLength="100" />
-          <Property Name="Fecha_Requisicion" Type="datetime" />
-          <Property Name="Fecha_Contratacion" Type="datetime" />
-          <Property Name="Sexo" Type="char" MaxLength="10" />
-          <Property Name="Permanente" Type="varchar" MaxLength="2" />
-          <Property Name="Titulos" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Competencias" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
-          <Property Name="Idiomas" Type="nvarchar" MaxLength="50" />
-          <Property Name="Requerimientos Especiales" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_SeleccionCandidatos">
@@ -5235,6 +5414,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HVacacionesEmpleados].[Annio] AS [Annio]
     FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_RPT_EquipoEmpleado" EntityType="Self.V_RPT_EquipoEmpleado" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_EquipoEmpleado].[eqem_Id] AS [eqem_Id], 
+    [V_RPT_EquipoEmpleado].[Id_Persona] AS [Id_Persona], 
+    [V_RPT_EquipoEmpleado].[Identidad] AS [Identidad], 
+    [V_RPT_EquipoEmpleado].[Nombre_Completo] AS [Nombre_Completo], 
+    [V_RPT_EquipoEmpleado].[Descripcion_del_Equipo] AS [Descripcion_del_Equipo], 
+    [V_RPT_EquipoEmpleado].[Fecha] AS [Fecha]
+    FROM [rrhh].[V_RPT_EquipoEmpleado] AS [V_RPT_EquipoEmpleado]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_RPT_FaseSeleccion" EntityType="Self.V_RPT_FaseSeleccion" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_RPT_FaseSeleccion].[fsel_Id] AS [fsel_Id], 
@@ -5248,28 +5437,122 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_FaseSeleccion].[Fecha] AS [Fecha]
     FROM [rrhh].[V_RPT_FaseSeleccion] AS [V_RPT_FaseSeleccion]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" store:Type="Views" store:Schema="rrhh">
+          <EntitySet Name="V_RPT_HistorialAmonestaciones" EntityType="Self.V_RPT_HistorialAmonestaciones" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
-    [V_RPT_Requisiciones].[Id_Requisicion] AS [Id_Requisicion], 
-    [V_RPT_Requisiciones].[Id_Persona] AS [Id_Persona], 
-    [V_RPT_Requisiciones].[Identidad] AS [Identidad], 
-    [V_RPT_Requisiciones].[Nombre_Completo] AS [Nombre_Completo], 
-    [V_RPT_Requisiciones].[Descripcion] AS [Descripcion], 
-    [V_RPT_Requisiciones].[Duracion] AS [Duracion], 
-    [V_RPT_Requisiciones].[Edad_Minima] AS [Edad_Minima], 
-    [V_RPT_Requisiciones].[Edad_Maxima] AS [Edad_Maxima], 
-    [V_RPT_Requisiciones].[Educacion_Superior] AS [Educacion_Superior], 
-    [V_RPT_Requisiciones].[Experiencia] AS [Experiencia], 
-    [V_RPT_Requisiciones].[Fecha_Requisicion] AS [Fecha_Requisicion], 
-    [V_RPT_Requisiciones].[Fecha_Contratacion] AS [Fecha_Contratacion], 
-    [V_RPT_Requisiciones].[Sexo] AS [Sexo], 
-    [V_RPT_Requisiciones].[Permanente] AS [Permanente], 
-    [V_RPT_Requisiciones].[Titulos] AS [Titulos], 
-    [V_RPT_Requisiciones].[Competencias] AS [Competencias], 
-    [V_RPT_Requisiciones].[Habilidades] AS [Habilidades], 
-    [V_RPT_Requisiciones].[Idiomas] AS [Idiomas], 
-    [V_RPT_Requisiciones].[Requerimientos Especiales] AS [Requerimientos Especiales]
-    FROM [rrhh].[V_RPT_Requisiciones] AS [V_RPT_Requisiciones]</DefiningQuery>
+    [V_RPT_HistorialAmonestaciones].[hamo_Id] AS [hamo_Id], 
+    [V_RPT_HistorialAmonestaciones].[Colaborador] AS [Colaborador], 
+    [V_RPT_HistorialAmonestaciones].[Identidad] AS [Identidad], 
+    [V_RPT_HistorialAmonestaciones].[TipoAmonestación] AS [TipoAmonestación], 
+    [V_RPT_HistorialAmonestaciones].[Observaciones] AS [Observaciones], 
+    [V_RPT_HistorialAmonestaciones].[Fecha] AS [Fecha], 
+    [V_RPT_HistorialAmonestaciones].[tamo_Id] AS [tamo_Id], 
+    [V_RPT_HistorialAmonestaciones].[DescripcionAnterior] AS [DescripcionAnterior], 
+    [V_RPT_HistorialAmonestaciones].[ObservacionAnterior] AS [ObservacionAnterior], 
+    [V_RPT_HistorialAmonestaciones].[FechaAnterior] AS [FechaAnterior]
+    FROM [rrhh].[V_RPT_HistorialAmonestaciones] AS [V_RPT_HistorialAmonestaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="Self.V_RPT_HistorialAudienciaDescargo" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialAudienciaDescargo].[aude_Id] AS [aude_Id], 
+    [V_RPT_HistorialAudienciaDescargo].[nombre] AS [nombre], 
+    [V_RPT_HistorialAudienciaDescargo].[per_Identidad] AS [per_Identidad], 
+    [V_RPT_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion], 
+    [V_RPT_HistorialAudienciaDescargo].[aude_fechaaudiencia] AS [aude_fechaaudiencia]
+    FROM [rrhh].[V_RPT_HistorialAudienciaDescargo] AS [V_RPT_HistorialAudienciaDescargo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialCargos" EntityType="Self.V_RPT_HistorialCargos" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialCargos].[hcar_Id] AS [hcar_Id], 
+    [V_RPT_HistorialCargos].[Nombre] AS [Nombre], 
+    [V_RPT_HistorialCargos].[Identidad] AS [Identidad], 
+    [V_RPT_HistorialCargos].[CargoAnterior] AS [CargoAnterior], 
+    [V_RPT_HistorialCargos].[car_Id] AS [car_Id], 
+    [V_RPT_HistorialCargos].[CargoNuevo] AS [CargoNuevo], 
+    [V_RPT_HistorialCargos].[Fecha] AS [Fecha], 
+    [V_RPT_HistorialCargos].[FechaFin] AS [FechaFin]
+    FROM [rrhh].[V_RPT_HistorialCargos] AS [V_RPT_HistorialCargos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="Self.V_RPT_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialContrataciones].[hcon_Id] AS [hcon_Id], 
+    [V_RPT_HistorialContrataciones].[NombreCompleto] AS [NombreCompleto], 
+    [V_RPT_HistorialContrataciones].[Identidad] AS [Identidad], 
+    [V_RPT_HistorialContrataciones].[car_Id] AS [car_Id], 
+    [V_RPT_HistorialContrataciones].[Cargo] AS [Cargo], 
+    [V_RPT_HistorialContrataciones].[FechaContratacion] AS [FechaContratacion], 
+    [V_RPT_HistorialContrataciones].[FechaFin] AS [FechaFin]
+    FROM [rrhh].[V_RPT_HistorialContrataciones] AS [V_RPT_HistorialContrataciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="Self.V_RPT_HistorialIncapacidad" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialIncapacidad].[hinc_Id] AS [hinc_Id], 
+    [V_RPT_HistorialIncapacidad].[ticn_Id] AS [ticn_Id], 
+    [V_RPT_HistorialIncapacidad].[Identidad] AS [Identidad], 
+    [V_RPT_HistorialIncapacidad].[NombreCompleto] AS [NombreCompleto], 
+    [V_RPT_HistorialIncapacidad].[TipoIncapacidad] AS [TipoIncapacidad], 
+    [V_RPT_HistorialIncapacidad].[Dias] AS [Dias], 
+    [V_RPT_HistorialIncapacidad].[FechaInicio] AS [FechaInicio], 
+    [V_RPT_HistorialIncapacidad].[FechaFin] AS [FechaFin]
+    FROM [rrhh].[V_RPT_HistorialIncapacidad] AS [V_RPT_HistorialIncapacidad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialPermisos" EntityType="Self.V_RPT_HistorialPermisos" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialPermisos].[hper_Id] AS [hper_Id], 
+    [V_RPT_HistorialPermisos].[emp_Id] AS [emp_Id], 
+    [V_RPT_HistorialPermisos].[Identidad] AS [Identidad], 
+    [V_RPT_HistorialPermisos].[NombreCompleto] AS [NombreCompleto], 
+    [V_RPT_HistorialPermisos].[tper_Id] AS [tper_Id], 
+    [V_RPT_HistorialPermisos].[TipoPermiso] AS [TipoPermiso], 
+    [V_RPT_HistorialPermisos].[emp_Estado] AS [emp_Estado], 
+    [V_RPT_HistorialPermisos].[FechaInicio] AS [FechaInicio], 
+    [V_RPT_HistorialPermisos].[FechaFin] AS [FechaFin]
+    FROM [rrhh].[V_RPT_HistorialPermisos] AS [V_RPT_HistorialPermisos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialSalidas" EntityType="Self.V_RPT_HistorialSalidas" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialSalidas].[hsal_Id] AS [hsal_Id], 
+    [V_RPT_HistorialSalidas].[emp_Id] AS [emp_Id], 
+    [V_RPT_HistorialSalidas].[Nombre_Empleado] AS [Nombre_Empleado], 
+    [V_RPT_HistorialSalidas].[tsal_Descripcion] AS [tsal_Descripcion], 
+    [V_RPT_HistorialSalidas].[tsal_Id] AS [tsal_Id], 
+    [V_RPT_HistorialSalidas].[observaciones] AS [observaciones], 
+    [V_RPT_HistorialSalidas].[hsal_FechaSalida] AS [hsal_FechaSalida]
+    FROM [rrhh].[V_RPT_HistorialSalidas] AS [V_RPT_HistorialSalidas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="Self.V_RPT_HistorialSueldos" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialSueldos].[sue_Id] AS [sue_Id], 
+    [V_RPT_HistorialSueldos].[NombreEmp] AS [NombreEmp], 
+    [V_RPT_HistorialSueldos].[emp_Id] AS [emp_Id], 
+    [V_RPT_HistorialSueldos].[sue_Cantidad] AS [sue_Cantidad], 
+    [V_RPT_HistorialSueldos].[tmon_Descripcion] AS [tmon_Descripcion], 
+    [V_RPT_HistorialSueldos].[fecha] AS [fecha], 
+    [V_RPT_HistorialSueldos].[car_Descripcion] AS [car_Descripcion]
+    FROM [rrhh].[V_RPT_HistorialSueldos] AS [V_RPT_HistorialSueldos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="Self.V_RPT_HistorialVacaciones" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialVacaciones].[hvac_Id] AS [hvac_Id], 
+    [V_RPT_HistorialVacaciones].[emp_Id] AS [emp_Id], 
+    [V_RPT_HistorialVacaciones].[Nombre_Empleado] AS [Nombre_Empleado], 
+    [V_RPT_HistorialVacaciones].[hvac_CantDias] AS [hvac_CantDias], 
+    [V_RPT_HistorialVacaciones].[hvac_FechaInicio] AS [hvac_FechaInicio], 
+    [V_RPT_HistorialVacaciones].[hvac_DiasPagados] AS [hvac_DiasPagados], 
+    [V_RPT_HistorialVacaciones].[hvac_MesVacaciones] AS [hvac_MesVacaciones], 
+    [V_RPT_HistorialVacaciones].[hvac_anioVacaciones] AS [hvac_anioVacaciones], 
+    [V_RPT_HistorialVacaciones].[hvac_FechaFin] AS [hvac_FechaFin]
+    FROM [rrhh].[V_RPT_HistorialVacaciones] AS [V_RPT_HistorialVacaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="Self.V_RPT_HorasTrabajadas" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HorasTrabajadas].[htra_Id] AS [htra_Id], 
+    [V_RPT_HorasTrabajadas].[tiho_Id] AS [tiho_Id], 
+    [V_RPT_HorasTrabajadas].[Identidad] AS [Identidad], 
+    [V_RPT_HorasTrabajadas].[NombreCompleto] AS [NombreCompleto], 
+    [V_RPT_HorasTrabajadas].[TipoHora] AS [TipoHora], 
+    [V_RPT_HorasTrabajadas].[CantidadHoras] AS [CantidadHoras], 
+    [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha]
+    FROM [rrhh].[V_RPT_HorasTrabajadas] AS [V_RPT_HorasTrabajadas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -11351,7 +11634,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_RPT_FaseSeleccion" EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" />
-          <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
+          <EntitySet Name="V_RPT_EquipoEmpleado" EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" />
+          <EntitySet Name="V_RPT_HistorialAmonestaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones" />
+          <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
+          <EntitySet Name="V_RPT_HistorialCargos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" />
+          <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" />
+          <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" />
+          <EntitySet Name="V_RPT_HistorialPermisos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" />
+          <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
+          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
+          <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
+          <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12682,37 +12975,200 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="V_RPT_Requisiciones">
+        <EntityType Name="V_RPT_EquipoEmpleado">
           <Key>
-            <PropertyRef Name="Id_Requisicion" />
+            <PropertyRef Name="eqem_Id" />
             <PropertyRef Name="Id_Persona" />
             <PropertyRef Name="Identidad" />
             <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Edad_Minima" />
-            <PropertyRef Name="Edad_Maxima" />
-            <PropertyRef Name="Titulos" />
-            <PropertyRef Name="Competencias" />
+            <PropertyRef Name="Descripcion_del_Equipo" />
+            <PropertyRef Name="Fecha" />
           </Key>
-          <Property Name="Id_Requisicion" Type="Int32" Nullable="false" />
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
           <Property Name="Id_Persona" Type="Int32" Nullable="false" />
           <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Edad_Minima" Type="Int32" Nullable="false" />
-          <Property Name="Edad_Maxima" Type="Int32" Nullable="false" />
-          <Property Name="Educacion_Superior" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Experiencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Requisicion" Type="DateTime" Precision="3" />
-          <Property Name="Fecha_Contratacion" Type="DateTime" Precision="3" />
-          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Permanente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Titulos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Competencias" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion_del_Equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialAmonestaciones">
+          <Key>
+            <PropertyRef Name="hamo_Id" />
+            <PropertyRef Name="Colaborador" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="TipoAmonestación" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="tamo_Id" />
+          </Key>
+          <Property Name="hamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="Colaborador" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="TipoAmonestación" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tamo_Id" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionAnterior" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ObservacionAnterior" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAnterior" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialAudienciaDescargo">
+          <Key>
+            <PropertyRef Name="aude_Id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="aude_Descripcion" />
+            <PropertyRef Name="aude_fechaaudiencia" />
+          </Key>
+          <Property Name="aude_Id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="aude_fechaaudiencia" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialCargos">
+          <Key>
+            <PropertyRef Name="hcar_Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="CargoAnterior" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="CargoNuevo" />
+          </Key>
+          <Property Name="hcar_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CargoAnterior" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="CargoNuevo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialContrataciones">
+          <Key>
+            <PropertyRef Name="hcon_Id" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="Cargo" />
+          </Key>
+          <Property Name="hcon_Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaContratacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialIncapacidad">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+            <PropertyRef Name="ticn_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="TipoIncapacidad" />
+            <PropertyRef Name="Dias" />
+          </Key>
+          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="TipoIncapacidad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialPermisos">
+          <Key>
+            <PropertyRef Name="hper_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="tper_Id" />
+            <PropertyRef Name="TipoPermiso" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="hper_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="tper_Id" Type="Int32" Nullable="false" />
+          <Property Name="TipoPermiso" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialSalidas">
+          <Key>
+            <PropertyRef Name="hsal_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="tsal_Id" />
+            <PropertyRef Name="observaciones" />
+            <PropertyRef Name="hsal_FechaSalida" />
+          </Key>
+          <Property Name="hsal_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="tsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tsal_Id" Type="Int32" Nullable="false" />
+          <Property Name="observaciones" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hsal_FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialSueldos">
+          <Key>
+            <PropertyRef Name="sue_Id" />
+            <PropertyRef Name="NombreEmp" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="sue_Cantidad" />
+            <PropertyRef Name="tmon_Descripcion" />
+            <PropertyRef Name="car_Descripcion" />
+          </Key>
+          <Property Name="sue_Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreEmp" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialVacaciones">
+          <Key>
+            <PropertyRef Name="hvac_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="Nombre_Empleado" />
+            <PropertyRef Name="hvac_CantDias" />
+            <PropertyRef Name="hvac_FechaInicio" />
+            <PropertyRef Name="hvac_DiasPagados" />
+            <PropertyRef Name="hvac_MesVacaciones" />
+            <PropertyRef Name="hvac_anioVacaciones" />
+            <PropertyRef Name="hvac_FechaFin" />
+          </Key>
+          <Property Name="hvac_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="hvac_CantDias" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hvac_DiasPagados" Type="Boolean" Nullable="false" />
+          <Property Name="hvac_MesVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_anioVacaciones" Type="Int32" Nullable="false" />
+          <Property Name="hvac_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HorasTrabajadas">
+          <Key>
+            <PropertyRef Name="htra_Id" />
+            <PropertyRef Name="tiho_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="TipoHora" />
+            <PropertyRef Name="CantidadHoras" />
+          </Key>
+          <Property Name="htra_Id" Type="Int32" Nullable="false" />
+          <Property Name="tiho_Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="TipoHora" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15276,28 +15732,152 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_Requisiciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_Requisiciones">
-              <MappingFragment StoreEntitySet="V_RPT_Requisiciones">
-                <ScalarProperty Name="Requerimientos_Especiales" ColumnName="Requerimientos Especiales" />
-                <ScalarProperty Name="Idiomas" ColumnName="Idiomas" />
-                <ScalarProperty Name="Habilidades" ColumnName="Habilidades" />
-                <ScalarProperty Name="Competencias" ColumnName="Competencias" />
-                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
-                <ScalarProperty Name="Permanente" ColumnName="Permanente" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Fecha_Contratacion" ColumnName="Fecha_Contratacion" />
-                <ScalarProperty Name="Fecha_Requisicion" ColumnName="Fecha_Requisicion" />
-                <ScalarProperty Name="Experiencia" ColumnName="Experiencia" />
-                <ScalarProperty Name="Educacion_Superior" ColumnName="Educacion_Superior" />
-                <ScalarProperty Name="Edad_Maxima" ColumnName="Edad_Maxima" />
-                <ScalarProperty Name="Edad_Minima" ColumnName="Edad_Minima" />
-                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <EntitySetMapping Name="V_RPT_EquipoEmpleado">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_EquipoEmpleado">
+              <MappingFragment StoreEntitySet="V_RPT_EquipoEmpleado">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion_del_Equipo" ColumnName="Descripcion_del_Equipo" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
                 <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-                <ScalarProperty Name="Id_Requisicion" ColumnName="Id_Requisicion" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialAmonestaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialAmonestaciones">
+                <ScalarProperty Name="FechaAnterior" ColumnName="FechaAnterior" />
+                <ScalarProperty Name="ObservacionAnterior" ColumnName="ObservacionAnterior" />
+                <ScalarProperty Name="DescripcionAnterior" ColumnName="DescripcionAnterior" />
+                <ScalarProperty Name="tamo_Id" ColumnName="tamo_Id" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="TipoAmonestación" ColumnName="TipoAmonestación" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Colaborador" ColumnName="Colaborador" />
+                <ScalarProperty Name="hamo_Id" ColumnName="hamo_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialAudienciaDescargo">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialAudienciaDescargo">
+                <ScalarProperty Name="aude_fechaaudiencia" ColumnName="aude_fechaaudiencia" />
+                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialCargos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialCargos">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialCargos">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CargoNuevo" ColumnName="CargoNuevo" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="CargoAnterior" ColumnName="CargoAnterior" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialContrataciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialContrataciones">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialContrataciones">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaContratacion" ColumnName="FechaContratacion" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="hcon_Id" ColumnName="hcon_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialIncapacidad">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialIncapacidad">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="TipoIncapacidad" ColumnName="TipoIncapacidad" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
+                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialPermisos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialPermisos">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialPermisos">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="TipoPermiso" ColumnName="TipoPermiso" />
+                <ScalarProperty Name="tper_Id" ColumnName="tper_Id" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hper_Id" ColumnName="hper_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialSalidas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSalidas">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialSalidas">
+                <ScalarProperty Name="hsal_FechaSalida" ColumnName="hsal_FechaSalida" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
+                <ScalarProperty Name="tsal_Descripcion" ColumnName="tsal_Descripcion" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialSueldos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
+                <ScalarProperty Name="sue_Cantidad" ColumnName="sue_Cantidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
+                <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialVacaciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
+                <ScalarProperty Name="hvac_FechaFin" ColumnName="hvac_FechaFin" />
+                <ScalarProperty Name="hvac_anioVacaciones" ColumnName="hvac_anioVacaciones" />
+                <ScalarProperty Name="hvac_MesVacaciones" ColumnName="hvac_MesVacaciones" />
+                <ScalarProperty Name="hvac_DiasPagados" ColumnName="hvac_DiasPagados" />
+                <ScalarProperty Name="hvac_FechaInicio" ColumnName="hvac_FechaInicio" />
+                <ScalarProperty Name="hvac_CantDias" ColumnName="hvac_CantDias" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hvac_Id" ColumnName="hvac_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HorasTrabajadas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HorasTrabajadas">
+              <MappingFragment StoreEntitySet="V_RPT_HorasTrabajadas">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
+                <ScalarProperty Name="TipoHora" ColumnName="TipoHora" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="tiho_Id" ColumnName="tiho_Id" />
+                <ScalarProperty Name="htra_Id" ColumnName="htra_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
