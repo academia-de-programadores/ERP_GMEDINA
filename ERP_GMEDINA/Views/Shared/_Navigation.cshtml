@@ -82,8 +82,8 @@
 				<a href="#"><i class="fa fa-print"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ReportesPlanilla", cssClass: "in")">
 					<li class="@Html.IsSelected(action: "DeduccionesParametros")"><a href="@Url.Action("DeduccionesParametros", "ReportesPlanilla")">Deducciones</a></li>
-					<li class="@Html.IsSelected(action: "IngresosParametros")"><a href="@Url.Action("DecimoTercerParametros", "ReportesPlanilla")">Decimo tercer mes</a></li>
-					<li class="@Html.IsSelected(action: "IngresosParametros")"><a href="@Url.Action("DecimoCuartoParametros", "ReportesPlanilla")">Decimo cuarto mes</a></li>
+					<li class="@Html.IsSelected(action: "DecimoTercerParametros")"><a href="@Url.Action("DecimoTercerParametros", "ReportesPlanilla")">Decimo tercer mes</a></li>
+					<li class="@Html.IsSelected(action: "DecimoCuartoParametros")"><a href="@Url.Action("DecimoCuartoParametros", "ReportesPlanilla")">Decimo cuarto mes</a></li>
 					<li class="@Html.IsSelected(action: "IngresosParametros")"><a href="@Url.Action("IngresosParametros", "ReportesPlanilla")">Ingresos</a></li>
 					<li class="@Html.IsSelected(action: "ReportesVariosParametros")"><a href="@Url.Action("ReportesVariosParametros", "ReportesPlanilla")">Reportes Varios</a></li>
 				</ul>
