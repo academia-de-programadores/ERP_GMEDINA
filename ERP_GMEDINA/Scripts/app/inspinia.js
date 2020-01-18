@@ -96,11 +96,18 @@ $(document).ready(function () {
         return false;
     });
 
+    function AdjustDataTable(){
+        $.fn.dataTable
+            .tables({ visible: true, api: true })
+            .columns.adjust().responsive.recalc();
+    };
+
     // Minimalize menu
     $('.navbar-minimalize').on('click', function () {
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
-
+        setTimeout(AdjustDataTable, 400);
+        
     });
 
     // Tooltips demo
@@ -265,6 +272,7 @@ function SmoothlyMenu() {
         // Remove all inline style from jquery fadeIn function to reset menu state
         $('#side-menu').removeAttr('style');
     }
+
 }
 
 // Dragable panels
