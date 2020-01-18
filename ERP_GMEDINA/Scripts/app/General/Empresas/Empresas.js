@@ -60,7 +60,7 @@ $("#UPempr_Logo").change(function () {
   var img = document.getElementById('img2');
   img.src = "";
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
-  $("#ModalNuevo").data("res", false);
+  $("#ModalEditar").data("res", false);
  } else {
   var formData = new FormData();
   formData.append('file', $('#UPempr_Logo')[0].files[0]);
@@ -80,9 +80,9 @@ $("#UPempr_Logo").change(function () {
    MsgError("Error", "El archivo no es valido");
    var img = document.getElementById('img2');
    img.src = "";
-   $("#ModalNuevo").data("res", false);
+   $("#ModalEditar").data("res", false);
   }
-  $("#ModalNuevo").data("res", res);
+  $("#ModalEditar").data("res", res);
  });
  }
 });
@@ -188,8 +188,9 @@ $("#FormNuevo").on("submit", function (event) {
 
 $("#btnActualizar").click(function () {
  var data = $("#FormEditar").serializeArray();
+ var formEditar = $("#ModalEditar").data("res");
  data = serializar(data);
- if (data != null) {
+ if (data != null && formEditar) {
   data.empr_Id = id;
   data = JSON.stringify({ tbEmpresas: data });
   _ajax(data,
