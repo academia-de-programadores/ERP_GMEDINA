@@ -94,6 +94,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
@@ -105,6 +117,10 @@
     </Reference>
     <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Syncfusion.Compression.Base, Version=17.3451.0.33, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
@@ -214,6 +230,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
+    <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
@@ -226,6 +243,11 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
+    <Compile Include="DataSets\ReportesRRHH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -851,6 +873,18 @@
     <Compile Include="Models\UDP_RRHH_tbSeleccionCandidatos_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbSucursales_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbSucursales_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbSucursales_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbSucursales_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbSueldos_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1010,6 +1044,14 @@
     <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_FaseSeleccion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_RPT_HistorialIncapacidad.cs" />
+    <Compile Include="Models\V_RPT_HorasTrabajadas.cs" />
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1035,6 +1077,11 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportesDS1.Designer.cs">
+      <DependentUpon>ReportesDS.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="administracion_wHr_icon.ico" />
@@ -1262,6 +1309,12 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Reports\ReportesDS.xsc">
+      <DependentUpon>ReportesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\ReportesDS.xss">
+      <DependentUpon>ReportesDS.xsd</DependentUpon>
+    </Content>
     <Content Include="Scripts\app\General\Areas\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Cargos.js" />
@@ -1383,6 +1436,22 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\api\spanish.json" />
+    <Content Include="DataSets\ReportesRRHH.xsc">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReportesRRHH.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>ReportesRRHH.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSets\ReportesRRHH.xss">
+      <DependentUpon>ReportesRRHH.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\ReportesDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesDS1.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2040,6 +2109,10 @@
     <Content Include="Views\al\View1.cshtml" />
     <Content Include="Views\al\View2.cshtml" />
     <Content Include="Views\al\View3.cshtml" />
+    <Content Include="Views\ReportesRRHH\HorasTrabajadas.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialIncapacidades.cshtml" />
+    <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
+    <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2108,6 +2181,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
+    <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
+    <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
+    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

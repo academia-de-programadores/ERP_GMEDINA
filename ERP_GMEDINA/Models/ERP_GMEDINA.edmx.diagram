@@ -268,6 +268,8 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HistorialAmonestacion" Width="1.5" PointX="17.375" PointY="0.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EquipoTrabajoDetalles" Width="1.5" PointX="17.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" Width="1.5" PointX="17.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="17.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

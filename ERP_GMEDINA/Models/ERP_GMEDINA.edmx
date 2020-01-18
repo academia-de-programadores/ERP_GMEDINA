@@ -1286,6 +1286,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
             <PropertyRef Name="depto_Descripcion" />
             <PropertyRef Name="emp_Estado" />
             <PropertyRef Name="emp_Fechaingreso" />
+            <PropertyRef Name="DiasTomados" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -1295,6 +1296,68 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
           <Property Name="emp_Fechaingreso" Type="datetime" Nullable="false" />
+          <Property Name="DiasMax" Type="int" />
+          <Property Name="DiasTomados" Type="int" Nullable="false" />
+          <Property Name="DiasTotales" Type="int" />
+          <Property Name="AnnioIngreso" Type="int" />
+          <Property Name="Annio" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_FaseSeleccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_FaseSeleccion">
+          <Key>
+            <PropertyRef Name="fsel_Id" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="Id_Persona" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="fare_Id" />
+            <PropertyRef Name="Fase" />
+            <PropertyRef Name="req_Id" />
+            <PropertyRef Name="Plaza_Solicitada" />
+          </Key>
+          <Property Name="fsel_Id" Type="int" Nullable="false" />
+          <Property Name="per_Id" Type="int" Nullable="false" />
+          <Property Name="Id_Persona" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="fare_Id" Type="int" Nullable="false" />
+          <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="req_Id" Type="int" Nullable="false" />
+          <Property Name="Plaza_Solicitada" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Requisiciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_Requisiciones">
+          <Key>
+            <PropertyRef Name="Id_Requisicion" />
+            <PropertyRef Name="Id_Persona" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre_Completo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Edad_Minima" />
+            <PropertyRef Name="Edad_Maxima" />
+            <PropertyRef Name="Titulos" />
+            <PropertyRef Name="Competencias" />
+          </Key>
+          <Property Name="Id_Requisicion" Type="int" Nullable="false" />
+          <Property Name="Id_Persona" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Duracion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Edad_Minima" Type="int" Nullable="false" />
+          <Property Name="Edad_Maxima" Type="int" Nullable="false" />
+          <Property Name="Educacion_Superior" Type="varchar" MaxLength="2" />
+          <Property Name="Experiencia" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fecha_Requisicion" Type="datetime" />
+          <Property Name="Fecha_Contratacion" Type="datetime" />
+          <Property Name="Sexo" Type="char" MaxLength="10" />
+          <Property Name="Permanente" Type="varchar" MaxLength="2" />
+          <Property Name="Titulos" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Competencias" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
+          <Property Name="Idiomas" Type="nvarchar" MaxLength="50" />
+          <Property Name="Requerimientos Especiales" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5139,8 +5202,49 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_HVacacionesEmpleados].[depto_Id] AS [depto_Id], 
     [V_HVacacionesEmpleados].[depto_Descripcion] AS [depto_Descripcion], 
     [V_HVacacionesEmpleados].[emp_Estado] AS [emp_Estado], 
-    [V_HVacacionesEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso]
+    [V_HVacacionesEmpleados].[emp_Fechaingreso] AS [emp_Fechaingreso], 
+    [V_HVacacionesEmpleados].[DiasMax] AS [DiasMax], 
+    [V_HVacacionesEmpleados].[DiasTomados] AS [DiasTomados], 
+    [V_HVacacionesEmpleados].[DiasTotales] AS [DiasTotales], 
+    [V_HVacacionesEmpleados].[AnnioIngreso] AS [AnnioIngreso], 
+    [V_HVacacionesEmpleados].[Annio] AS [Annio]
     FROM [rrhh].[V_HVacacionesEmpleados] AS [V_HVacacionesEmpleados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_FaseSeleccion" EntityType="Self.V_RPT_FaseSeleccion" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_FaseSeleccion].[fsel_Id] AS [fsel_Id], 
+    [V_RPT_FaseSeleccion].[per_Id] AS [per_Id], 
+    [V_RPT_FaseSeleccion].[Id_Persona] AS [Id_Persona], 
+    [V_RPT_FaseSeleccion].[Nombre] AS [Nombre], 
+    [V_RPT_FaseSeleccion].[fare_Id] AS [fare_Id], 
+    [V_RPT_FaseSeleccion].[Fase] AS [Fase], 
+    [V_RPT_FaseSeleccion].[req_Id] AS [req_Id], 
+    [V_RPT_FaseSeleccion].[Plaza_Solicitada] AS [Plaza_Solicitada], 
+    [V_RPT_FaseSeleccion].[Fecha] AS [Fecha]
+    FROM [rrhh].[V_RPT_FaseSeleccion] AS [V_RPT_FaseSeleccion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_Requisiciones].[Id_Requisicion] AS [Id_Requisicion], 
+    [V_RPT_Requisiciones].[Id_Persona] AS [Id_Persona], 
+    [V_RPT_Requisiciones].[Identidad] AS [Identidad], 
+    [V_RPT_Requisiciones].[Nombre_Completo] AS [Nombre_Completo], 
+    [V_RPT_Requisiciones].[Descripcion] AS [Descripcion], 
+    [V_RPT_Requisiciones].[Duracion] AS [Duracion], 
+    [V_RPT_Requisiciones].[Edad_Minima] AS [Edad_Minima], 
+    [V_RPT_Requisiciones].[Edad_Maxima] AS [Edad_Maxima], 
+    [V_RPT_Requisiciones].[Educacion_Superior] AS [Educacion_Superior], 
+    [V_RPT_Requisiciones].[Experiencia] AS [Experiencia], 
+    [V_RPT_Requisiciones].[Fecha_Requisicion] AS [Fecha_Requisicion], 
+    [V_RPT_Requisiciones].[Fecha_Contratacion] AS [Fecha_Contratacion], 
+    [V_RPT_Requisiciones].[Sexo] AS [Sexo], 
+    [V_RPT_Requisiciones].[Permanente] AS [Permanente], 
+    [V_RPT_Requisiciones].[Titulos] AS [Titulos], 
+    [V_RPT_Requisiciones].[Competencias] AS [Competencias], 
+    [V_RPT_Requisiciones].[Habilidades] AS [Habilidades], 
+    [V_RPT_Requisiciones].[Idiomas] AS [Idiomas], 
+    [V_RPT_Requisiciones].[Requerimientos Especiales] AS [Requerimientos Especiales]
+    FROM [rrhh].[V_RPT_Requisiciones] AS [V_RPT_Requisiciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -11221,6 +11325,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_RPT_FaseSeleccion" EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" />
+          <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -11727,6 +11833,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             <PropertyRef Name="depto_Descripcion" />
             <PropertyRef Name="emp_Estado" />
             <PropertyRef Name="emp_Fechaingreso" />
+            <PropertyRef Name="DiasTomados" />
           </Key>
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
@@ -11736,6 +11843,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
           <Property Name="emp_Fechaingreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiasMax" Type="Int32" />
+          <Property Name="DiasTomados" Type="Int32" Nullable="false" />
+          <Property Name="DiasTotales" Type="Int32" />
+          <Property Name="AnnioIngreso" Type="Int32" />
+          <Property Name="Annio" Type="Int32" />
         </EntityType>
         <EntityType Name="V_SeleccionCandidatos">
           <Key>
@@ -12524,6 +12636,59 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
         <ComplexType Name="UDP_RRHH_tbSucursales_Activar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="V_RPT_FaseSeleccion">
+          <Key>
+            <PropertyRef Name="fsel_Id" />
+            <PropertyRef Name="per_Id" />
+            <PropertyRef Name="Id_Persona" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="fare_Id" />
+            <PropertyRef Name="Fase" />
+            <PropertyRef Name="req_Id" />
+            <PropertyRef Name="Plaza_Solicitada" />
+          </Key>
+          <Property Name="fsel_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_Persona" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="fare_Id" Type="Int32" Nullable="false" />
+          <Property Name="Fase" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="req_Id" Type="Int32" Nullable="false" />
+          <Property Name="Plaza_Solicitada" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_Requisiciones">
+          <Key>
+            <PropertyRef Name="Id_Requisicion" />
+            <PropertyRef Name="Id_Persona" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre_Completo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Edad_Minima" />
+            <PropertyRef Name="Edad_Maxima" />
+            <PropertyRef Name="Titulos" />
+            <PropertyRef Name="Competencias" />
+          </Key>
+          <Property Name="Id_Requisicion" Type="Int32" Nullable="false" />
+          <Property Name="Id_Persona" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Edad_Minima" Type="Int32" Nullable="false" />
+          <Property Name="Edad_Maxima" Type="Int32" Nullable="false" />
+          <Property Name="Educacion_Superior" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Experiencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha_Requisicion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Contratacion" Type="DateTime" Precision="3" />
+          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Permanente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Titulos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Competencias" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14364,6 +14529,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_HVacacionesEmpleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HVacacionesEmpleados">
               <MappingFragment StoreEntitySet="V_HVacacionesEmpleados">
+                <ScalarProperty Name="Annio" ColumnName="Annio" />
+                <ScalarProperty Name="AnnioIngreso" ColumnName="AnnioIngreso" />
+                <ScalarProperty Name="DiasTotales" ColumnName="DiasTotales" />
+                <ScalarProperty Name="DiasTomados" ColumnName="DiasTomados" />
+                <ScalarProperty Name="DiasMax" ColumnName="DiasMax" />
                 <ScalarProperty Name="emp_Fechaingreso" ColumnName="emp_Fechaingreso" />
                 <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
                 <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
@@ -15066,6 +15236,46 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSueldos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSueldos_Restore" />
+          <EntitySetMapping Name="V_RPT_FaseSeleccion">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_FaseSeleccion">
+              <MappingFragment StoreEntitySet="V_RPT_FaseSeleccion">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Plaza_Solicitada" ColumnName="Plaza_Solicitada" />
+                <ScalarProperty Name="req_Id" ColumnName="req_Id" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="fare_Id" ColumnName="fare_Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
+                <ScalarProperty Name="fsel_Id" ColumnName="fsel_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_Requisiciones">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_Requisiciones">
+              <MappingFragment StoreEntitySet="V_RPT_Requisiciones">
+                <ScalarProperty Name="Requerimientos_Especiales" ColumnName="Requerimientos Especiales" />
+                <ScalarProperty Name="Idiomas" ColumnName="Idiomas" />
+                <ScalarProperty Name="Habilidades" ColumnName="Habilidades" />
+                <ScalarProperty Name="Competencias" ColumnName="Competencias" />
+                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
+                <ScalarProperty Name="Permanente" ColumnName="Permanente" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Contratacion" ColumnName="Fecha_Contratacion" />
+                <ScalarProperty Name="Fecha_Requisicion" ColumnName="Fecha_Requisicion" />
+                <ScalarProperty Name="Experiencia" ColumnName="Experiencia" />
+                <ScalarProperty Name="Educacion_Superior" ColumnName="Educacion_Superior" />
+                <ScalarProperty Name="Edad_Maxima" ColumnName="Edad_Maxima" />
+                <ScalarProperty Name="Edad_Minima" ColumnName="Edad_Minima" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Id_Requisicion" ColumnName="Id_Requisicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
