@@ -47,7 +47,7 @@ function format(obj) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                '<td>' + index.Sueldo + ' ' + index.Tipo_Moneda + '</td>' +
+                '<td>' + index.Sueldo + '</td>' +
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +

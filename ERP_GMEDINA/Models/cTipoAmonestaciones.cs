@@ -15,7 +15,8 @@ namespace ERP_GMEDINA.Models
     {
         [Display(Name ="ID")]
         public int tamo_Id { get; set; }
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        [MaxLength(25, ErrorMessage = "Exedió el número máximo de caracteres.")]
         [Display (Name ="Descripcion")]
         public string tamo_Descripcion { get; set; }
 
