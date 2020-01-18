@@ -84,14 +84,14 @@ namespace ERP_GMEDINA.Controllers
                     foreach (UDP_RRHH_tbTipoMonedas_Insert_Result item in list)
                     {
                         msj = item.MensajeError;
-                        return Json(msj, JsonRequestBehavior.AllowGet);
+                        //return Json(msj, JsonRequestBehavior.AllowGet);
                     }
                 }
                 catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
-                    return Json(msj,JsonRequestBehavior.AllowGet);
+                    //return Json(msj,JsonRequestBehavior.AllowGet);
                 }
             }
 
