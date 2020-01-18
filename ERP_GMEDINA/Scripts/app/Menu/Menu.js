@@ -3,6 +3,7 @@
             "Cargos",
             "Empresas",
             "Idiomas",
+            "Sucursales",
             "TipoMonedas",
             "Nacionalidades",
             "Jornadas",
