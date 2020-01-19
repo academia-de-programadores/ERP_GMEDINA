@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de deduciones</h5>
+                    <h5>Reportes de Vacaciones</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Tipo Salidas</label>
+                                <label class="font-normal">Empleado</label>
 
                                 @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
 
@@ -51,7 +51,7 @@
                             
                         </div>
 
-                        @*<div class="col-md-3">
+                        <div class="col-md-3">
 
                             <label class="font-normal">Fecha Fin</label>
                             <div class="input-group date">
@@ -60,36 +60,19 @@
                             @Html.ValidationMessageFor(model => model.hvac_FechaFin, "", new { @class = "text-danger" })
 
 
-                            </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            </div>
 
 
                         </div>
-                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-lg-offset-5">
+                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                    </div>
 
-                </div>
+                    </div>
             </div>
         </div>
     </div>
