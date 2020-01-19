@@ -23,24 +23,27 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Empleados</label>
 
-                                    @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
+                                    @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control", @name = "emp_Id", @id = "emp_Id" })
 
                                     @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
-                                <label class="font-normal">Sueldos</label>
-
-                                @Html.DropDownList("sue_Id", (IEnumerable<SelectListItem>)ViewBag.Sueldos, "Seleccione una opción", new { @class = "form-control" })
-
-                                @Html.ValidationMessageFor(model => model.sue_Id, "", new { @class = "text-danger" })
-
-
-                            </div>
-
-
-                            @*<label class="font-normal">Fecha</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fecha", @id = "fecha" } })
+                               
                                 </div>
-                                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })*@
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label class="font-normal">Fecha Inicio</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaInicio", @id = "FechaInicio" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="font-normal">Fecha Fin</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechafin" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
 
                     </div><br>
@@ -78,4 +81,13 @@
         </div>
     </div>
 </div>
-
+@*@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/Scripts/App/General/Reporteria/Sueldos")
+    
+}*@
