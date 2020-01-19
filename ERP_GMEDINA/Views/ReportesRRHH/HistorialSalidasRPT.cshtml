@@ -30,18 +30,32 @@
                             <br />
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="font-normal">Fecha Salida</label>
+                        <div class="col-md-3">
+                            <label class="font-normal">Fecha Inicio</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.hsal_FechaSalida, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "hsal_FechaSalida", @id = "hsal_FechaSalida" } })
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaSalida, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaSalida", @id = "FechaSalida" } })
                             </div>
-                            @Html.ValidationMessageFor(model => model.hsal_FechaSalida, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.FechaSalida, "", new { @class = "text-danger" })
                         </div>
 
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                        <div class="col-md-3">
+                            <label class="font-normal">Fecha Fin</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechafin" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger" })
+                            </div>
 
-                </div>
+                        </div>
+                    <br>
+                    <br>
+                   <br>
+                    <br>
+                    <div class="col-lg-offset-5">
+                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
