@@ -318,13 +318,13 @@ namespace ERP_GMEDINA.Controllers
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            //ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Permisos(int tper_Id, int emp_Id, DateTime FechaInicio, DateTime FechaFin)
+        public ActionResult Permisos(int emp_Id, DateTime FechaInicio, DateTime FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -337,8 +337,8 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where tper_Id = @tper_Id and emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
-            command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
+            //command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
             command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
             command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
             command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
@@ -359,7 +359,7 @@ namespace ERP_GMEDINA.Controllers
             ////Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            //ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
@@ -521,7 +521,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //parametros del reporte
         [HttpPost]
-        public ActionResult FaseSeleccion(int? habi_Id, int? comp_Id)
+        public ActionResult Empleado(int? habi_Id, int? comp_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;

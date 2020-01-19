@@ -299,6 +299,7 @@
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
+    <Compile Include="Models\cV_RPT_RRHH_Permisos.cs" />
     <Compile Include="Models\DatosProfesionales.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
     <Compile Include="Models\DatosProfessionalesEdit.cs" />
@@ -1389,6 +1390,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\PermisosRPT\PermisosRPT.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
