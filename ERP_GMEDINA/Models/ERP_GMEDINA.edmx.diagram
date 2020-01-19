@@ -170,11 +170,9 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" Width="1.5" PointX="14.75" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" Width="1.5" PointX="26.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="26.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="26.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" Width="1.5" PointX="16.75" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="26.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" Width="1.5" PointX="26.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_Sueldos" Width="1.5" PointX="2.75" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbEmpleados" Width="1.5" PointX="18.75" PointY="27.75" IsExpanded="true" />

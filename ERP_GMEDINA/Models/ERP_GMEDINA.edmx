@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ERP_GMEDINAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbAccesoRol">
           <Key>
             <PropertyRef Name="acrol_Id" />
@@ -352,42 +352,6 @@
           <Property Name="hip_UsuarioModifica" Type="int" />
           <Property Name="hip_FechaModifica" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="tbHistorialDeLiquidaciones">
-          <Property Name="hdli_Id" Type="int" />
-          <Property Name="emp_Id" Type="int" />
-          <Property Name="hdli_FechaLiquidacion" Type="datetime" />
-          <Property Name="hdli_SalarioOrdinarioMensual_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioMensual_Liql" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioOrdinarioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalarioPromedioDiario_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Preaviso_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_Cesantia_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesProporcional_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_VacacionesPendientes_Liq" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_SalariosAdeudados" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_OtrosPagos" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoHEPendiente" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ValorBonoEducativo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoSeptimoDia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonoPorVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_ReajusteSalarial" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoTercerMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_DecimoCuartoMesAdeudado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_BonificacionVacaciones" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorEmbarazo" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorLactancia" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PrePosNatal" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_PagoPorDiasFeriado" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_MontoTotalLiquidacion" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hdli_UsuarioCrea" Type="int" />
-          <Property Name="hdli_FechaCrea" Type="datetime" />
-          <Property Name="hdli_UsuarioModifica" Type="int" />
-          <Property Name="hdli_FechaModifica" Type="datetime" />
-          <Property Name="moli_IdMotivo" Type="int" />
-        </EntityType>-->
         <EntityType Name="tbHistorialDePago">
           <Key>
             <PropertyRef Name="hipa_IdHistorialDePago" />
@@ -2122,11 +2086,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
           <Property Name="peri_DescripPeriodo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_FechaPlani' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="V_Plani_FechaPlani">
-          <Property Name="hipa_FechaPago" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_HistorialDeducciones">
           <Key>
@@ -2809,8 +2768,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' n
           <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
-          <Property Name="hinc_FechaInicio" Type="date" />
-          <Property Name="hinc_FechaFin" Type="date" />
+          <Property Name="hinc_FechaInicio" Type="datetime" />
+          <Property Name="hinc_FechaFin" Type="datetime" />
           <Property Name="hinc_Estado" Type="bit" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -2928,25 +2887,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' no 
           <Property Name="Annio" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_Empleado_Curriculum' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="V_RPT_Empleado_Curriculum">
-          <Property Name="per_Id" Type="int" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="101" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" />
-          <Property Name="Edad" Type="int" />
-          <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fecha_Nacimiento" Type="date" />
-          <Property Name="Estado_Civil" Type="varchar" MaxLength="10" />
-          <Property Name="Sexo" Type="varchar" MaxLength="9" />
-          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
-          <Property Name="Correo_Electronico" Type="nvarchar" MaxLength="50" />
-          <Property Name="Tipo_Sangre" Type="nvarchar" MaxLength="4" />
-          <Property Name="habi_Id" Type="int" />
-          <Property Name="comp_Id" Type="int" />
-          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
-          <Property Name="Competencias" Type="nvarchar" MaxLength="100" />
-        </EntityType>-->
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_RPT_EquipoEmpleado">
           <Key>
@@ -3043,6 +2983,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialCargos' no t
           <Property Name="car_Id" Type="int" Nullable="false" />
           <Property Name="CargoNuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Fecha" Type="date" />
+          <Property Name="FechaFin" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialContrataciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3060,6 +3001,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialContratacion
           <Property Name="car_Id" Type="int" Nullable="false" />
           <Property Name="Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaContratacion" Type="date" />
+          <Property Name="FechaFin" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialIncapacidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3105,23 +3047,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialPermisos' no
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialSalidas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_RPT_HistorialSalidas">
-          <Key>
-            <PropertyRef Name="hsal_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre_Empleado" />
-            <PropertyRef Name="tsal_Id" />
-            <PropertyRef Name="observaciones" />
-            <PropertyRef Name="hsal_FechaSalida" />
-          </Key>
-          <Property Name="hsal_Id" Type="int" Nullable="false" />
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="Nombre_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="tsal_Descripcion" Type="nvarchar" MaxLength="50" />
-          <Property Name="tsal_Id" Type="int" Nullable="false" />
-          <Property Name="observaciones" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="hsal_FechaSalida" Type="date" Nullable="false" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_RPT_HistorialSueldos">
@@ -3183,41 +3108,10 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas' no t
           <Property Name="TipoHora" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="CantidadHoras" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" />
+          <Property Name="FechaFin" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_RPT_Requisiciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_RPT_Requisiciones">
-          <Key>
-            <PropertyRef Name="Id_Requisicion" />
-            <PropertyRef Name="Id_Persona" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Edad_Minima" />
-            <PropertyRef Name="Edad_Maxima" />
-            <PropertyRef Name="Titulos" />
-            <PropertyRef Name="Competencias" />
-          </Key>
-          <Property Name="Id_Requisicion" Type="int" Nullable="false" />
-          <Property Name="Id_Persona" Type="int" Nullable="false" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="Nombre_Completo" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Duracion" Type="nvarchar" MaxLength="50" />
-          <Property Name="Edad_Minima" Type="int" Nullable="false" />
-          <Property Name="Edad_Maxima" Type="int" Nullable="false" />
-          <Property Name="Educacion_Superior" Type="varchar" MaxLength="2" />
-          <Property Name="Experiencia" Type="nvarchar" MaxLength="100" />
-          <Property Name="Fecha_Requisicion" Type="datetime" />
-          <Property Name="Fecha_Contratacion" Type="datetime" />
-          <Property Name="Sexo" Type="char" MaxLength="10" />
-          <Property Name="Permanente" Type="varchar" MaxLength="2" />
-          <Property Name="Titulos" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Competencias" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
-          <Property Name="Idiomas" Type="nvarchar" MaxLength="50" />
-          <Property Name="Requerimientos Especiales" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_SeleccionCandidatos">
@@ -5515,9 +5409,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_tbtiposalidas' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones', pero no se encuentra la tabla.
-        <Association Name="FK_Plani_Historial_De_Liquidaciones_emp_Id" />-->
         <Association Name="FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id">
           <End Role="tbAFP" Type="Self.tbAFP" Multiplicity="1" />
           <End Role="tbDeduccionAFP" Type="Self.tbDeduccionAFP" Multiplicity="*" />
@@ -5710,9 +5601,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistorialDeLiquidaciones', pero no se encuentra la tabla.
-        <Association Name="FK_Plani_tbHistorialDeLiquidaciones_tbMotivos_moli_IdMotivo" />-->
         <Association Name="FK_Plani_tbHistorialDePago_hipa_IdHistorialDePago_Plani_tbHistorialDeduccionPago_hipa_IdHistorialDePago">
           <End Role="tbHistorialDePago" Type="Self.tbHistorialDePago" Multiplicity="1" />
           <End Role="tbHistorialDeduccionPago" Type="Self.tbHistorialDeduccionPago" Multiplicity="*" />
@@ -7644,6 +7532,11 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Parameter Name="eqem_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="eqem_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleados_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="eqem_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbEquipoEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="eqtra_Id" Type="int" Mode="In" />
@@ -9557,7 +9450,8 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
     [V_RPT_HistorialCargos].[CargoAnterior] AS [CargoAnterior], 
     [V_RPT_HistorialCargos].[car_Id] AS [car_Id], 
     [V_RPT_HistorialCargos].[CargoNuevo] AS [CargoNuevo], 
-    [V_RPT_HistorialCargos].[Fecha] AS [Fecha]
+    [V_RPT_HistorialCargos].[Fecha] AS [Fecha], 
+    [V_RPT_HistorialCargos].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HistorialCargos] AS [V_RPT_HistorialCargos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="Self.V_RPT_HistorialContrataciones" store:Type="Views" store:Schema="rrhh">
@@ -9567,7 +9461,8 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
     [V_RPT_HistorialContrataciones].[Identidad] AS [Identidad], 
     [V_RPT_HistorialContrataciones].[car_Id] AS [car_Id], 
     [V_RPT_HistorialContrataciones].[Cargo] AS [Cargo], 
-    [V_RPT_HistorialContrataciones].[FechaContratacion] AS [FechaContratacion]
+    [V_RPT_HistorialContrataciones].[FechaContratacion] AS [FechaContratacion], 
+    [V_RPT_HistorialContrataciones].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HistorialContrataciones] AS [V_RPT_HistorialContrataciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="Self.V_RPT_HistorialIncapacidad" store:Type="Views" store:Schema="rrhh">
@@ -9594,17 +9489,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
     [V_RPT_HistorialPermisos].[FechaInicio] AS [FechaInicio], 
     [V_RPT_HistorialPermisos].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HistorialPermisos] AS [V_RPT_HistorialPermisos]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_RPT_HistorialSalidas" EntityType="Self.V_RPT_HistorialSalidas" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_RPT_HistorialSalidas].[hsal_Id] AS [hsal_Id], 
-    [V_RPT_HistorialSalidas].[emp_Id] AS [emp_Id], 
-    [V_RPT_HistorialSalidas].[Nombre_Empleado] AS [Nombre_Empleado], 
-    [V_RPT_HistorialSalidas].[tsal_Descripcion] AS [tsal_Descripcion], 
-    [V_RPT_HistorialSalidas].[tsal_Id] AS [tsal_Id], 
-    [V_RPT_HistorialSalidas].[observaciones] AS [observaciones], 
-    [V_RPT_HistorialSalidas].[hsal_FechaSalida] AS [hsal_FechaSalida]
-    FROM [rrhh].[V_RPT_HistorialSalidas] AS [V_RPT_HistorialSalidas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="Self.V_RPT_HistorialSueldos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -9638,31 +9522,9 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
     [V_RPT_HorasTrabajadas].[NombreCompleto] AS [NombreCompleto], 
     [V_RPT_HorasTrabajadas].[TipoHora] AS [TipoHora], 
     [V_RPT_HorasTrabajadas].[CantidadHoras] AS [CantidadHoras], 
-    [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha]
+    [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha], 
+    [V_RPT_HorasTrabajadas].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HorasTrabajadas] AS [V_RPT_HorasTrabajadas]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_RPT_Requisiciones].[Id_Requisicion] AS [Id_Requisicion], 
-    [V_RPT_Requisiciones].[Id_Persona] AS [Id_Persona], 
-    [V_RPT_Requisiciones].[Identidad] AS [Identidad], 
-    [V_RPT_Requisiciones].[Nombre_Completo] AS [Nombre_Completo], 
-    [V_RPT_Requisiciones].[Descripcion] AS [Descripcion], 
-    [V_RPT_Requisiciones].[Duracion] AS [Duracion], 
-    [V_RPT_Requisiciones].[Edad_Minima] AS [Edad_Minima], 
-    [V_RPT_Requisiciones].[Edad_Maxima] AS [Edad_Maxima], 
-    [V_RPT_Requisiciones].[Educacion_Superior] AS [Educacion_Superior], 
-    [V_RPT_Requisiciones].[Experiencia] AS [Experiencia], 
-    [V_RPT_Requisiciones].[Fecha_Requisicion] AS [Fecha_Requisicion], 
-    [V_RPT_Requisiciones].[Fecha_Contratacion] AS [Fecha_Contratacion], 
-    [V_RPT_Requisiciones].[Sexo] AS [Sexo], 
-    [V_RPT_Requisiciones].[Permanente] AS [Permanente], 
-    [V_RPT_Requisiciones].[Titulos] AS [Titulos], 
-    [V_RPT_Requisiciones].[Competencias] AS [Competencias], 
-    [V_RPT_Requisiciones].[Habilidades] AS [Habilidades], 
-    [V_RPT_Requisiciones].[Idiomas] AS [Idiomas], 
-    [V_RPT_Requisiciones].[Requerimientos Especiales] AS [Requerimientos Especiales]
-    FROM [rrhh].[V_RPT_Requisiciones] AS [V_RPT_Requisiciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -10910,8 +10772,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <End Role="tbPorcentajeMotivoLiquidacion" EntitySet="tbPorcentajeMotivoLiquidacion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ERP_GMEDINAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -14080,8 +13941,8 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Name="hinc_CentroMedico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Doctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
           <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -14275,6 +14136,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Name="car_Id" Type="Int32" Nullable="false" />
           <Property Name="CargoNuevo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="V_RPT_HistorialContrataciones">
           <Key>
@@ -14290,6 +14152,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Name="car_Id" Type="Int32" Nullable="false" />
           <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FechaContratacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="V_RPT_HistorialIncapacidad">
           <Key>
@@ -14328,23 +14191,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="V_RPT_HistorialSalidas">
-          <Key>
-            <PropertyRef Name="hsal_Id" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="Nombre_Empleado" />
-            <PropertyRef Name="tsal_Id" />
-            <PropertyRef Name="observaciones" />
-            <PropertyRef Name="hsal_FechaSalida" />
-          </Key>
-          <Property Name="hsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Nombre_Empleado" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tsal_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tsal_Id" Type="Int32" Nullable="false" />
-          <Property Name="observaciones" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hsal_FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="V_RPT_HistorialSueldos">
           <Key>
@@ -14401,38 +14247,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Name="TipoHora" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="V_RPT_Requisiciones">
-          <Key>
-            <PropertyRef Name="Id_Requisicion" />
-            <PropertyRef Name="Id_Persona" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="Nombre_Completo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="Edad_Minima" />
-            <PropertyRef Name="Edad_Maxima" />
-            <PropertyRef Name="Titulos" />
-            <PropertyRef Name="Competencias" />
-          </Key>
-          <Property Name="Id_Requisicion" Type="Int32" Nullable="false" />
-          <Property Name="Id_Persona" Type="Int32" Nullable="false" />
-          <Property Name="Identidad" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nombre_Completo" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Edad_Minima" Type="Int32" Nullable="false" />
-          <Property Name="Edad_Maxima" Type="Int32" Nullable="false" />
-          <Property Name="Educacion_Superior" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Experiencia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha_Requisicion" Type="DateTime" Precision="3" />
-          <Property Name="Fecha_Contratacion" Type="DateTime" Precision="3" />
-          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Permanente" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="Titulos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Competencias" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Habilidades" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="V_SeleccionCandidatos">
           <Key>
@@ -18069,11 +17884,9 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="Self.V_RPT_HistorialContrataciones" />
           <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="Self.V_RPT_HistorialIncapacidad" />
           <EntitySet Name="V_RPT_HistorialPermisos" EntityType="Self.V_RPT_HistorialPermisos" />
-          <EntitySet Name="V_RPT_HistorialSalidas" EntityType="Self.V_RPT_HistorialSalidas" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="Self.V_RPT_HistorialSueldos" />
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="Self.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="Self.V_RPT_HorasTrabajadas" />
-          <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" />
           <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" />
           <EntitySet Name="V_Sueldos" EntityType="Self.V_Sueldos" />
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" />
@@ -19267,10 +19080,10 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeduccionesEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeduccionesEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_CatalogoDeIngresosEdit_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_CatalogoDeIngresosEdit_Select_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_EmpleadoComisiones_Activar_Result)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
@@ -19455,7 +19268,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="cpla_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Inactivar_Result)">
-            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+          <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbCatalogoDePlanillas_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDePlanillas_Insert_Result)">
             <Parameter Name="cpla_DescripcionPlanilla" Mode="In" Type="String" />
@@ -20044,7 +19857,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="empr_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Update_Result)">
             <Parameter Name="empr_Id" Mode="In" Type="Int32" />
@@ -20342,7 +20155,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHistrialVacaciones_Periodos" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistrialVacaciones_Periodos_Result)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+          <Parameter Name="emp_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHorarios_Delete_Result)">
             <Parameter Name="hor_id" Mode="In" Type="Int32" />
@@ -20732,7 +20545,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoHoras_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoHoras_Select_Result)">
-            <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tiho_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoIncapacidades_Delete_Result)">
             <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
@@ -20779,7 +20592,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="tmon_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoPermisos_Delete_Result)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -20889,6 +20702,11 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="cin_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cin_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleados_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Delete_Result)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -21707,6 +21525,9 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbfasesReclutamiento_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbEquipoEmpleados_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
@@ -24269,6 +24090,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <EntitySetMapping Name="V_RPT_HistorialCargos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialCargos">
               <MappingFragment StoreEntitySet="V_RPT_HistorialCargos">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="hcar_Id" ColumnName="hcar_Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
@@ -24282,6 +24104,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <EntitySetMapping Name="V_RPT_HistorialContrataciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialContrataciones">
               <MappingFragment StoreEntitySet="V_RPT_HistorialContrataciones">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="hcon_Id" ColumnName="hcon_Id" />
                 <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
@@ -24320,19 +24143,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialSalidas">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSalidas">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialSalidas">
-                <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
-                <ScalarProperty Name="tsal_Descripcion" ColumnName="tsal_Descripcion" />
-                <ScalarProperty Name="tsal_Id" ColumnName="tsal_Id" />
-                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
-                <ScalarProperty Name="hsal_FechaSalida" ColumnName="hsal_FechaSalida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialSueldos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
               <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
@@ -24364,6 +24174,7 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <EntitySetMapping Name="V_RPT_HorasTrabajadas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HorasTrabajadas">
               <MappingFragment StoreEntitySet="V_RPT_HorasTrabajadas">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="htra_Id" ColumnName="htra_Id" />
                 <ScalarProperty Name="tiho_Id" ColumnName="tiho_Id" />
                 <ScalarProperty Name="Identidad" ColumnName="Identidad" />
@@ -24371,31 +24182,6 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
                 <ScalarProperty Name="TipoHora" ColumnName="TipoHora" />
                 <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_Requisiciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_Requisiciones">
-              <MappingFragment StoreEntitySet="V_RPT_Requisiciones">
-                <ScalarProperty Name="Id_Requisicion" ColumnName="Id_Requisicion" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-                <ScalarProperty Name="Edad_Minima" ColumnName="Edad_Minima" />
-                <ScalarProperty Name="Edad_Maxima" ColumnName="Edad_Maxima" />
-                <ScalarProperty Name="Educacion_Superior" ColumnName="Educacion_Superior" />
-                <ScalarProperty Name="Experiencia" ColumnName="Experiencia" />
-                <ScalarProperty Name="Fecha_Requisicion" ColumnName="Fecha_Requisicion" />
-                <ScalarProperty Name="Fecha_Contratacion" ColumnName="Fecha_Contratacion" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Permanente" ColumnName="Permanente" />
-                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
-                <ScalarProperty Name="Competencias" ColumnName="Competencias" />
-                <ScalarProperty Name="Habilidades" ColumnName="Habilidades" />
-                <ScalarProperty Name="Idiomas" ColumnName="Idiomas" />
-                <ScalarProperty Name="Requerimientos_Especiales" ColumnName="Requerimientos Especiales" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -26472,6 +26258,13 @@ error 6004: Una relación hace referencia a la tabla 'ERP_GMEDINA.Plani.tbHistor
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeIngresos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeIngresos_Inactivar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleados_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleados_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Delete_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

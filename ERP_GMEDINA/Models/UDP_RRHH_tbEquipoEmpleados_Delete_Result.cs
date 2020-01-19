@@ -10,16 +10,9 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class V_RPT_HistorialSalidas
+    public partial class UDP_RRHH_tbEquipoEmpleados_Delete_Result
     {
-        public int hsal_Id { get; set; }
-        public int emp_Id { get; set; }
-        public string Nombre_Empleado { get; set; }
-        public string tsal_Descripcion { get; set; }
-        public int tsal_Id { get; set; }
-        public string observaciones { get; set; }
-        public System.DateTime hsal_FechaSalida { get; set; }
+        public string MensajeError { get; set; }
     }
 }

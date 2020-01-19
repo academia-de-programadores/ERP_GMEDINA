@@ -21,5 +21,6 @@ namespace ERP_GMEDINA.Models
         public string TipoHora { get; set; }
         public int CantidadHoras { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
     }
 }

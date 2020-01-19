@@ -192,11 +192,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RPT_HistorialContrataciones> V_RPT_HistorialContrataciones { get; set; }
         public virtual DbSet<V_RPT_HistorialIncapacidad> V_RPT_HistorialIncapacidad { get; set; }
         public virtual DbSet<V_RPT_HistorialPermisos> V_RPT_HistorialPermisos { get; set; }
-        public virtual DbSet<V_RPT_HistorialSalidas> V_RPT_HistorialSalidas { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
         public virtual DbSet<V_RPT_HistorialVacaciones> V_RPT_HistorialVacaciones { get; set; }
         public virtual DbSet<V_RPT_HorasTrabajadas> V_RPT_HorasTrabajadas { get; set; }
-        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
         public virtual DbSet<V_SeleccionCandidatos> V_SeleccionCandidatos { get; set; }
         public virtual DbSet<V_Sueldos> V_Sueldos { get; set; }
         public virtual DbSet<V_tbEmpleados> V_tbEmpleados { get; set; }
@@ -6363,6 +6361,23 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cin_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result>("UDP_Plani_tbCatalogoDeIngresos_Inactivar", cin_IdIngresoParameter, cin_UsuarioModificaParameter, cin_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbEquipoEmpleados_Delete_Result> UDP_RRHH_tbEquipoEmpleados_Delete(Nullable<int> eqem_Id, Nullable<int> eqem_UsuarioModifica, Nullable<System.DateTime> eqem_FechaModifica)
+        {
+            var eqem_IdParameter = eqem_Id.HasValue ?
+                new ObjectParameter("eqem_Id", eqem_Id) :
+                new ObjectParameter("eqem_Id", typeof(int));
+    
+            var eqem_UsuarioModificaParameter = eqem_UsuarioModifica.HasValue ?
+                new ObjectParameter("eqem_UsuarioModifica", eqem_UsuarioModifica) :
+                new ObjectParameter("eqem_UsuarioModifica", typeof(int));
+    
+            var eqem_FechaModificaParameter = eqem_FechaModifica.HasValue ?
+                new ObjectParameter("eqem_FechaModifica", eqem_FechaModifica) :
+                new ObjectParameter("eqem_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEquipoEmpleados_Delete_Result>("UDP_RRHH_tbEquipoEmpleados_Delete", eqem_IdParameter, eqem_UsuarioModificaParameter, eqem_FechaModificaParameter);
         }
     }
 }
