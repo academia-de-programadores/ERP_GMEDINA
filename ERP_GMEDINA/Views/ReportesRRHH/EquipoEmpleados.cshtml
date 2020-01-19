@@ -6,8 +6,6 @@
 }
 
 
-
-
 @using (Html.BeginForm("EquipoEmpleados", "ReportesRRHH", FormMethod.Post, new { id = "" }))
 {
 
@@ -24,7 +22,7 @@
                         <div class="form-group">
 
                             <div class="col-md-6">
-                                <label class="font-normal">Empleado</label>
+                                <label class="font-normal">Nombre del Empleado</label>
 
                                 @Html.DropDownList("Id_Persona", (IEnumerable<SelectListItem>)ViewBag.Vista_Empleados, "Seleccione una opción", new { @class = "form-control" })
 

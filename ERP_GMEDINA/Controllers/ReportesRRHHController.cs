@@ -126,7 +126,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialSalidasRPT(int tsal_Id, DateTime FechaSalida, DateTime fechaFin)
+        public ActionResult HistorialSalidasRPT(int? tsal_Id, DateTime? FechaSalida, DateTime? fechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -136,15 +136,67 @@ namespace ERP_GMEDINA.Controllers
             reportViewer.BackColor = System.Drawing.Color.White;
             var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
 
-
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas where tsal_Id = @tsal_Id and FechaSalida between @FechaSalida and @fechaFin";
-            command.Parameters.AddWithValue("@tsal_Id", SqlDbType.Int).Value = tsal_Id;
-            //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
-            command.Parameters.AddWithValue("@FechaSalida", SqlDbType.DateTime).Value = FechaSalida;
-            command.Parameters.AddWithValue("@fechaFin", SqlDbType.DateTime).Value = fechaFin;
 
+            if (tsal_Id == null && FechaSalida == null && fechaFin == null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas";
+
+            }
+            else if (tsal_Id == null && FechaSalida != null && fechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas where FechaSalida between @FechaSalida and @fechaFin";
+                command.Parameters.AddWithValue("@FechaSalida", SqlDbType.Date).Value = FechaSalida;
+                command.Parameters.AddWithValue("@fechaFin", SqlDbType.Date).Value = fechaFin;
+            }
+
+            else if (tsal_Id == null && FechaSalida == null && fechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas  where fechaFin = @fechaFin";
+                command.Parameters.AddWithValue("@fechaFin", SqlDbType.Date).Value = fechaFin;
+            }
+
+
+
+            else if (tsal_Id == null && fechaFin == null && FechaSalida != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas  where FechaSalida = @FechaSalida";
+                command.Parameters.AddWithValue("@FechaSalida", SqlDbType.Date).Value = FechaSalida;
+            }
+
+
+
+            else if (fechaFin == null && FechaSalida == null && tsal_Id != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas where tsal_Id = @tsal_Id ";
+                command.Parameters.AddWithValue("@tsal_Id", SqlDbType.Int).Value = tsal_Id;
+            }
+
+
+
+            else if (FechaSalida == null && tsal_Id != null && fechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas where tsal_Id = @tsal_Id and @fechaFin = fechaFin";
+                command.Parameters.AddWithValue("@tsal_Id", SqlDbType.Int).Value = tsal_Id;
+                command.Parameters.AddWithValue("@fechaFin", SqlDbType.Date).Value = fechaFin;
+            }
+
+            else if (fechaFin == null && tsal_Id != null && FechaSalida != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSalidas where tsal_Id = @tsal_Id and FechaSalida=@FechaSalida";
+                command.Parameters.AddWithValue("@tsal_Id", SqlDbType.Int).Value = tsal_Id;
+                command.Parameters.AddWithValue("@FechaSalida", SqlDbType.Date).Value = FechaSalida;
+            }
+
+            else
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSalidas where tsal_Id = @tsal_Id and FechaSalida between @FechaSalida and @fechaFin";
+                command.Parameters.AddWithValue("@tsal_Id", SqlDbType.Int).Value = tsal_Id;
+                //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
+                command.Parameters.AddWithValue("@FechaSalida", SqlDbType.DateTime).Value = FechaSalida;
+                command.Parameters.AddWithValue("@fechaFin", SqlDbType.DateTime).Value = fechaFin;
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -180,7 +232,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialVacacionesRPT(int emp_Id, DateTime hvac_FechaInicio, DateTime hvac_FechaFin /*,int hvac_AnioVacaciones, int hvac_MesVacaciones*/)
+        public ActionResult HistorialVacacionesRPT(int? emp_Id, DateTime? hvac_FechaInicio, DateTime? hvac_FechaFin /*,int hvac_AnioVacaciones, int hvac_MesVacaciones*/)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -194,14 +246,61 @@ namespace ERP_GMEDINA.Controllers
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
 
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where emp_Id = @emp_Id and hvac_FechaInicio between @hvac_FechaInicio and @hvac_FechaFin";
-            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
-            //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
-            command.Parameters.AddWithValue("@hvac_FechaInicio", SqlDbType.DateTime).Value = hvac_FechaInicio;
-            command.Parameters.AddWithValue("@hvac_FechaFin", SqlDbType.DateTime).Value = hvac_FechaFin;
-            //command.Parameters.AddWithValue("@hvac_AnioVacaciones", SqlDbType.DateTime).Value = hvac_AnioVacaciones;
-            //command.Parameters.AddWithValue("@hvac_MesVacaciones", SqlDbType.DateTime).Value = hvac_MesVacaciones;
+            if (emp_Id == null && hvac_FechaInicio == null && hvac_FechaFin == null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones";
 
+            }
+
+            else if (emp_Id == null && hvac_FechaInicio != null && hvac_FechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where hvac_FechaInicio between @hvac_FechaInicio and @hvac_FechaFin";
+                command.Parameters.AddWithValue("@hvac_FechaInicio", SqlDbType.Date).Value = hvac_FechaInicio;
+                command.Parameters.AddWithValue("@hvac_FechaFin", SqlDbType.Date).Value = hvac_FechaFin;
+            }
+
+            else if (emp_Id == null && hvac_FechaInicio == null && hvac_FechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where hvac_FechaFin = @hvac_FechaFin";
+                command.Parameters.AddWithValue("@hvac_FechaFin", SqlDbType.Date).Value = hvac_FechaFin;
+            }
+
+
+            else if (emp_Id == null && hvac_FechaFin == null && hvac_FechaInicio != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones  where hvac_FechaInicio = @hvac_FechaInicio";
+                command.Parameters.AddWithValue("@hvac_FechaInicio", SqlDbType.Date).Value = hvac_FechaInicio;
+            }
+
+            else if (hvac_FechaFin == null && hvac_FechaInicio == null && emp_Id != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where emp_Id = @emp_Id ";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+            }
+
+            else if (hvac_FechaInicio == null && emp_Id != null && hvac_FechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where emp_Id = @emp_Id and @hvac_FechaFin = hvac_FechaFin";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@hvac_FechaFin", SqlDbType.Date).Value = hvac_FechaFin;
+            }
+
+            else if (hvac_FechaFin == null && emp_Id != null && hvac_FechaInicio != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where emp_Id = @emp_Id and hvac_FechaInicio=@hvac_FechaInicio";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@hvac_FechaInicio", SqlDbType.Date).Value = hvac_FechaInicio;
+            }
+            else
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialVacaciones where emp_Id = @emp_Id and hvac_FechaInicio between @hvac_FechaInicio and @hvac_FechaFin";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
+                command.Parameters.AddWithValue("@hvac_FechaInicio", SqlDbType.DateTime).Value = hvac_FechaInicio;
+                command.Parameters.AddWithValue("@hvac_FechaFin", SqlDbType.DateTime).Value = hvac_FechaFin;
+                //command.Parameters.AddWithValue("@hvac_AnioVacaciones", SqlDbType.DateTime).Value = hvac_AnioVacaciones;
+                //command.Parameters.AddWithValue("@hvac_MesVacaciones", SqlDbType.DateTime).Value = hvac_MesVacaciones;
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -266,13 +365,13 @@ namespace ERP_GMEDINA.Controllers
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
 
-            ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
+            //ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
 
             return View();
         }
         [HttpPost]
-        public ActionResult SueldosRPT(int sue_Id, int emp_Id)
+        public ActionResult SueldosRPT(int? emp_Id, DateTime? fechainicio, DateTime? fechafin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -285,14 +384,51 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialSueldos where sue_Id = @sue_Id and emp_Id = @emp_Id";
-            command.Parameters.AddWithValue("@sue_Id", SqlDbType.Int).Value = sue_Id;
-            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
-            //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
-            //command.Parameters.AddWithValue("@tmon_Descripcion", SqlDbType.NVarChar).Value = tmon_Descripcion;
 
-
-
+            if (emp_Id == null && fechainicio == null && fechafin == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos";
+            }
+            else if (emp_Id == null && fechainicio != null && fechafin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where fechainicio between @fechainicio and @fechafin";
+                command.Parameters.AddWithValue("@fechainicio", SqlDbType.Date).Value = fechainicio;
+                command.Parameters.AddWithValue("@fechafin", SqlDbType.Date).Value = fechafin;
+            }
+            else if (emp_Id == null && fechainicio == null && fechafin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where fechafin= @fechafin";
+                command.Parameters.AddWithValue("@fechafin", SqlDbType.Date).Value = fechafin;
+            }
+            else if (emp_Id == null && fechafin == null && fechainicio != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where fechainicio= @fechainicio";
+                command.Parameters.AddWithValue("@fechainicio", SqlDbType.Date).Value = fechainicio;
+            }
+            else if (fechafin == null && fechainicio == null && emp_Id != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where emp_Id = @emp_Id";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+            }
+            else if (fechainicio == null && emp_Id != null && fechafin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where emp_Id = @emp_Id and fechafin=@fechafin";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@fechafin", SqlDbType.Date).Value = fechafin;
+            }
+            else if (fechafin == null && emp_Id != null && fechainicio != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where emp_Id = @emp_Id and fechainicio=@fechainicio";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@fechainicio", SqlDbType.Date).Value = fechainicio;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialSueldos where emp_Id = @emp_Id and fechainicio between @fechainicio and @fechafin";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@fechainicio", SqlDbType.Date).Value = fechainicio;
+                command.Parameters.AddWithValue("@fechafin", SqlDbType.Date).Value = fechafin;
+            }
 
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
@@ -304,11 +440,11 @@ namespace ERP_GMEDINA.Controllers
             conx.Close();
 
             ViewBag.ReportViewer = reportViewer;
-            ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
+          //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
 
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
+          //  ViewBag.Sueldos = new SelectList(db.tbSueldos.Where(o => o.sue_Estado == true), "sue_Id", "sue_Cantidad");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
@@ -318,13 +454,13 @@ namespace ERP_GMEDINA.Controllers
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-            //ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Permisos(int emp_Id, DateTime FechaInicio, DateTime FechaFin)
+        public ActionResult Permisos(int tper_Id, int emp_Id, DateTime FechaInicio, DateTime FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -337,8 +473,8 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
-            //command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where tper_Id = @tper_Id and emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
+            command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
             command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
             command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
             command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
@@ -359,7 +495,7 @@ namespace ERP_GMEDINA.Controllers
             ////Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            //ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
+            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
@@ -373,7 +509,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialIncapacidades(int? ticn_Id, DateTime? FechaInicio,DateTime? FechaFin)
+        public ActionResult HistorialIncapacidades(int ticn_Id, DateTime FechaInicio,DateTime FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -419,7 +555,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //parametros del reporte
         [HttpPost]
-        public ActionResult FaseSeleccion(int? fare_Id, DateTime? Fecha)
+        public ActionResult FaseSeleccion(int fare_Id, DateTime Fecha)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -432,26 +568,9 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            if (fare_Id == null && Fecha == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion";
-            }
-            else if (fare_Id == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where Fecha =@Fecha ";
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-            }
-            else if (Fecha == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where  fare_Id =@fare_Id ";
-                command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
-            }
-            else
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where fare_Id =@fare_Id and Fecha =@Fecha ";
-                command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-            }
+            command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where fare_Id = @fare_Id  and Fecha = @Fecha";
+            command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
+            command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -468,7 +587,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-        public ActionResult Requisiciones()
+        public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
@@ -535,7 +654,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //parametros del reporte
         [HttpPost]
-        public ActionResult Empleado(int? habi_Id, int? comp_Id)
+        public ActionResult FaseSeleccion(int? habi_Id, int? comp_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -585,7 +704,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
-    
+
     public ActionResult HistorialAmonestaciones()
         {
             ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
@@ -678,91 +797,5 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-
-
-        public ActionResult EquipoEmpleados()
-        {
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
-            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-            //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult EquipoEmpleados(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
-        {
-            ReportViewer reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-            reportViewer.SizeToReportContent = false;
-            reportViewer.Width = Unit.Pixel(1050);
-            reportViewer.Height = Unit.Pixel(500);
-            reportViewer.BackColor = System.Drawing.Color.White;
-            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-
-
-
-            //comando para el dataAdapter
-            SqlCommand command = new SqlCommand();
-            if (eqem_Id == null && Fecha == null && Id_Persona == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado";
-            }
-            else if (eqem_Id == null && Fecha==null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  Id_Persona =@Id_Persona ";
-                //command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
-            }
-            else if (eqem_Id == null && Id_Persona == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where Fecha=@Fecha ";
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-                
-            }
-            else if (eqem_Id == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where Fecha=@Fecha and  Id_Persona =@Id_Persona ";
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
-            }
-
-            else if (Fecha == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  eqem_Id =@eqem_Id and  Id_Persona=@Id_Persona";
-                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
-                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
-            }
-            else if (Id_Persona == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  eqem_Id =@eqem_Id and Fecha =@Fecha ";
-                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-            }
-            else
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where eqem_Id =@eqem_Id and Fecha =@Fecha and Id_Persona=@Id_Persona ";
-                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
-                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
-            }
-           
-            SqlConnection conx = new SqlConnection(connectionString);
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
-            conx.Close();
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
-            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
-
-            return View();
-        }
-
     }
 }
-
-

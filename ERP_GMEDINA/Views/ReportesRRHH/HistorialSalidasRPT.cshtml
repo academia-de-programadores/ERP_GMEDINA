@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de deduciones</h5>
+                    <h5>Reportes de Salidas</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                             <div class="input-group date">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechafin" } })
                             </div>
-                            @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger", @name = "fechafin", @id = "fechafin" })
                             </div>
 
                         </div>

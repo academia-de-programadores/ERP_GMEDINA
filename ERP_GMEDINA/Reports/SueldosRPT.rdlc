@@ -6,24 +6,24 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.34375in</Width>
+              <Width>1.73832in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34375in</Width>
+              <Width>1.73832in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34375in</Width>
+              <Width>1.73832in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34375in</Width>
+              <Width>1.73832in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.34375in</Width>
+              <Width>1.73832in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.35938in</Height>
+              <Height>0.25in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -34,7 +34,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre Emp</Value>
+                              <Value>Nombre del empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -70,7 +70,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>sue Cantidad</Value>
+                              <Value>Cantidad</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -106,7 +106,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>tmon Descripcion</Value>
+                              <Value>Moneda</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -142,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>fecha</Value>
+                              <Value>Fecha</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -171,14 +171,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox13">
+                    <Textbox Name="Textbox15">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>car Descripcion</Value>
+                              <Value>Cargo</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -190,7 +190,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <rd:DefaultName>Textbox15</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#7292cc</Color>
@@ -208,7 +208,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.35938in</Height>
+              <Height>0.25in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -252,7 +252,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!sue_Cantidad.Value)</Value>
+                              <Value>=Fields!sue_Cantidad.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -311,14 +311,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fecha">
+                    <Textbox Name="FechaInicio">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fecha.Value</Value>
+                              <Value>=Fields!FechaInicio.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -328,7 +328,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>fecha</rd:DefaultName>
+                      <rd:DefaultName>FechaInicio</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -399,17 +399,16 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.40625in</Top>
-        <Left>0.14583in</Left>
-        <Height>0.71875in</Height>
-        <Width>6.71875in</Width>
+        <Top>0.41667in</Top>
+        <Height>0.5in</Height>
+        <Width>8.69162in</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox16">
+      <Textbox Name="Textbox18">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -423,9 +422,8 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox16</rd:DefaultName>
-        <Top>0.11333in</Top>
-        <Left>5.8425in</Left>
+        <rd:DefaultName>Textbox18</rd:DefaultName>
+        <Left>7.69162in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>1</ZIndex>
@@ -440,17 +438,17 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.125in</Height>
+    <Height>1.03114in</Height>
     <Style />
   </Body>
-  <Width>7in</Width>
+  <Width>8.89698in</Width>
   <Page>
     <PageFooter>
-      <Height>0.38417in</Height>
+      <Height>0.45055in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox15">
+        <Textbox Name="Textbox17">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -464,9 +462,9 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>0.12375in</Top>
-          <Left>5.86458in</Left>
+          <rd:DefaultName>Textbox17</rd:DefaultName>
+          <Top>0.05556in</Top>
+          <Left>7.69162in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <Style>
@@ -499,7 +497,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>696dce78-715e-43e9-a94f-1741203cbbd9</rd:DataSourceID>
+      <rd:DataSourceID>c8b16495-182b-4645-93d5-72766c127098</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -529,8 +527,12 @@
           <DataField>tmon_Descripcion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="fecha">
-          <DataField>fecha</DataField>
+        <Field Name="FechaInicio">
+          <DataField>FechaInicio</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="fechafin">
+          <DataField>fechafin</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="car_Descripcion">
@@ -549,5 +551,5 @@
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>361fdb96-a04b-4e0c-a98d-be6e80bec8fd</rd:ReportID>
+  <rd:ReportID>999c174c-0ae0-4e62-9f4f-2948eb88b7d5</rd:ReportID>
 </Report>
