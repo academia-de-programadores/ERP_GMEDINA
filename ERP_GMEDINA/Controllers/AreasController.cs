@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Index()
         {
             bool Admin = (bool)Session["Admin"];
-            tbAreas tbAreas = new tbAreas {area_Estado= Admin };
+            tbAreas tbAreas = new tbAreas { area_Estado = Admin };
             return View(tbAreas);
         }
         public ActionResult llenarTabla()
@@ -27,7 +27,7 @@ namespace ERP_GMEDINA.Controllers
                 db = new ERP_GMEDINAEntities();
 
                 //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-                //posteriormente es destruida. 
+                //posteriormente es destruida.
                 var tbAreas = db.tbAreas
                     .Select(
                     t => new
@@ -37,7 +37,7 @@ namespace ERP_GMEDINA.Controllers
                         Sucursales = t.tbSucursales.suc_Descripcion,
                         Encargado = t.tbCargos.tbEmpleados
                             .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                        area_Estado=t.area_Estado
+                        area_Estado = t.area_Estado
                     }
                     )
                     .ToList();
@@ -60,7 +60,8 @@ namespace ERP_GMEDINA.Controllers
                     var lista = db.tbDepartamentos
                         .Where(x => x.area_Id == id && x.depto_Estado == true)
                         .Select(depto =>
-                        new {
+                        new
+                        {
                             car_Descripcion = depto.tbCargos.car_Descripcion,
                             depto_Descripcion = depto.depto_Descripcion,
                             persona = new
@@ -94,12 +95,12 @@ namespace ERP_GMEDINA.Controllers
                             car_Id = depto.tbCargos.car_Id,
                             car_Descripcion = depto.tbCargos.car_Descripcion,
                             depto_Descripcion = depto.depto_Descripcion,
-                            depto_Estado=depto.depto_Estado
+                            depto_Estado = depto.depto_Estado
                         }).ToList();
                     return Json(lista, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch 
+            catch
             {
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
@@ -225,42 +226,42 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-                List<tbSucursales> Sucursales = null;
-                try
+            List<tbSucursales> Sucursales = null;
+            try
+            {
+                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+                //posteriormente es destruida.
+                using (db = new ERP_GMEDINAEntities())
                 {
-                    //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-                    //posteriormente es destruida.
-                    using (db = new ERP_GMEDINAEntities())
+                    Session["area_Id"] = id;
+                    var tbAreas = db.tbAreas
+                        .Select(tabla => new cAreas
+                        {
+                            area_Id = tabla.area_Id,
+                            suc_Id = tabla.suc_Id,
+                            area_Descripcion = tabla.area_Descripcion,
+                            car_Descripcion = tabla.tbCargos.car_Descripcion,
+                            area_Estado = tabla.area_Estado
+                        }).ToList()
+                        .Where(x => x.area_Id == id)
+                        .First();
+                    Sucursales = db.tbSucursales.ToList();
+                    ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
+                    if (tbAreas.area_Estado == false)
                     {
-                        Session["area_Id"] = id;
-                        var tbAreas = db.tbAreas
-                            .Select(tabla => new cAreas
-                            {
-                                area_Id = tabla.area_Id,
-                                suc_Id = tabla.suc_Id,
-                                area_Descripcion = tabla.area_Descripcion,
-                                car_Descripcion = tabla.tbCargos.car_Descripcion,
-                                area_Estado = tabla.area_Estado
-                            }).ToList()
-                            .Where(x => x.area_Id == id)
-                            .First();
-                        Sucursales = db.tbSucursales.ToList();
-                        ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
-                        if (tbAreas.area_Estado == false)
-                        {
-                            return HttpNotFound();
-                        }
-                        if (tbAreas == null)
-                        {
-                            return HttpNotFound();
-                        }
-                        return View(tbAreas);
+                        return HttpNotFound();
                     }
+                    if (tbAreas == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(tbAreas);
                 }
-                catch
-                {
-                    return HttpNotFound();
-                }
+            }
+            catch
+            {
+                return HttpNotFound();
+            }
         }
         // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -416,22 +417,22 @@ namespace ERP_GMEDINA.Controllers
         {
             string result = "";
             var Usuario = (tbUsuario)Session["Usuario"];
-                try
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
                 {
-                    using (db = new ERP_GMEDINAEntities())
+                    var list = db.UDP_RRHH_tbAreas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbAreas_Restore_Result item in list)
                     {
-                        var list = db.UDP_RRHH_tbAreas_Restore(id, Usuario.usu_Id, DateTime.Now);
-                        foreach (UDP_RRHH_tbAreas_Restore_Result item in list)
-                        {
-                            result = item.MensajeError;
-                        }
+                        result = item.MensajeError;
                     }
                 }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                    result = "-2";
-                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)

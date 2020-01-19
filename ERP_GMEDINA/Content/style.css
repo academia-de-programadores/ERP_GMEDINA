@@ -11,6 +11,10 @@ h2,
 h3,
 h4,
 h5,
+label.requerido::after
+{
+      content: " *";
+}
 h6 {
   font-weight: 100;
 }
@@ -1023,7 +1027,7 @@ button.dim {
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
-  padding-top: 6px;
+  padding-top: 3%;
   margin-right: 10px;
   position: relative;
   cursor: pointer;
@@ -1092,8 +1096,9 @@ button.dim:active:before {
   font-size: 10px;
   font-weight: 600;
   padding: 3px 8px;
-  text-shadow: none;
+  text-shadow: none; 
 }
+
 .badge {
   background-color: #d1dade;
   color: #5e5e5e;

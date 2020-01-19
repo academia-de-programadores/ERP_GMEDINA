@@ -1,57 +1,58 @@
-﻿$(document).ready(function () {
+﻿var Admin = false;
+$(document).ready(function () {
  llenarTabla();
 });
 function init() {
-    var inputFile = document.getElementById('empr_Logo');
-    inputFile.addEventListener('change', mostrarImagen, false);
+ var inputFile = document.getElementById('empr_Logo');
+ inputFile.addEventListener('change', mostrarImagen, false);
 
-    var inputFile = document.getElementById('UPempr_Logo');
-    inputFile.addEventListener('change', mostrarImagen, false);
+ var inputFile = document.getElementById('UPempr_Logo');
+ inputFile.addEventListener('change', mostrarImagen, false);
 }
 
 function mostrarImagen(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = document.getElementById('img1');
-        img.src = event.target.result;
-        var img = document.getElementById('img2');
-        img.src = event.target.result;
-    }
-    reader.readAsDataURL(file);
+ var file = event.target.files[0];
+ var reader = new FileReader();
+ reader.onload = function (event) {
+  var img = document.getElementById('img1');
+  img.src = event.target.result;
+  var img = document.getElementById('img2');
+  img.src = event.target.result;
+ }
+ reader.readAsDataURL(file);
 }
 
 window.addEventListener('load', init, false);
 $("#empr_Logo").change(function () {
  var fileExtension = ['png', 'jpeg', 'jpg'];
  if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-     var img = document.getElementById('img1');
-     img.src = "";
-     MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
-     $("#ModalNuevo").data("res", false);
+  var img = document.getElementById('img1');
+  img.src = "";
+  MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
+  $("#ModalNuevo").data("res", false);
  } else {
-  var formData = new FormData();
-  formData.append('file', $('#empr_Logo')[0].files[0]);
-  $.ajax({
-   url: "/Empresas/Upload",
-   type: "post",
-   dataType: "html",
-   data: formData,
-   cache: false,
-   contentType: false,
-   processData: false
-  })
- .done(function (res) {
-  if (res == "true") {
-      MsgSuccess("Exito","Archivo subido exitosamente");
-     } else {
-            MsgError("Error", "Cambiar el nombre del archivo");
-            var img = document.getElementById('img1');
-            img.src = "";
-            $("#ModalNuevo").data("res", false);
-     }
-  $("#ModalNuevo").data("res", res);
- });
+  //var formData = new FormData();
+  //formData.append('file', $('#empr_Logo')[0].files[0]);
+  // $.ajax({
+  //  url: "/Empresas/Upload",
+  //  type: "post",
+  //  dataType: "html",
+  //  data: formData,
+  //  cache: false,
+  //  contentType: false,
+  //  processData: false
+  // })
+  //.done(function (res) {
+  // if (res == "true") {
+  //     MsgSuccess("Exito","Archivo subido exitosamente");
+  //    } else {
+  //           MsgError("Error", "Cambiar el nombre del archivo");
+  //           var img = document.getElementById('img1');
+  //           img.src = "";
+  //           $("#ModalNuevo").data("res", false);
+  //    }
+  //});
+  $("#ModalNuevo").data("res", true);
  }
 });
 $("#UPempr_Logo").change(function () {
@@ -62,28 +63,7 @@ $("#UPempr_Logo").change(function () {
   MsgError("¡Error!", "Debe Agregar el logo en el formato correspondiente");
   $("#ModalEditar").data("res", false);
  } else {
-  var formData = new FormData();
-  formData.append('file', $('#UPempr_Logo')[0].files[0]);
-  $.ajax({
-   url: "/Empresas/Upload",
-   type: "post",
-   dataType: "html",
-   data: formData,
-   cache: false,
-   contentType: false,
-   processData: false
-  })
- .done(function (res) {
-  if (res) {
-   MsgSuccess("Exito", "Archivo subido exitosamente");
-  } else {
-   MsgError("Error", "El archivo no es valido");
-   var img = document.getElementById('img2');
-   img.src = "";
-   $("#ModalEditar").data("res", false);
-  }
-  $("#ModalEditar").data("res", res);
- });
+  $("#ModalEditar").data("res", true);
  }
 });
 function llenarTabla() {
@@ -95,10 +75,17 @@ function llenarTabla() {
       tabla.clear();
       tabla.draw();
       $.each(Lista, function (index, value) {
-       console.log(value.empr_Nombre);
+       var Acciones = value.empr_Estado == 1
+                    ? null : Admin ?
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                    "</div>" : '';;
        tabla.row.add({
         ID: value.empr_Id,
+        "Número": value.empr_Id,
         Empresa: value.empr_Nombre,
+        Estado: value.empr_Estado ? 'Activo' : 'Inactivo',
+        Acciones: Acciones
        }).draw();
       });
      });
@@ -111,6 +98,7 @@ function tablaEditar(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+       //$('#UPempr_Logo').val(obj.empr_Logo);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
@@ -163,50 +151,71 @@ $("#btnInactivar").click(function () {
  $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 $("#FormNuevo").on("submit", function (event) {
-    if ($("#ModalNuevo").data("res")) {
-        event.preventDefault();
-        var data = $("#FormNuevo").serializeArray();
-        data = serializar(data);
-        _ajax(JSON.stringify({ tbEmpresas: data }),
-            '/Empresas/Create/',
-            'POST',
-            function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    llenarTabla();
-                    MsgSuccess("Exito","Archivo subido exitosamente");
-                    $("#ModalNuevo").modal('hide');//ocultamos el modal
-                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
-                    $('.modal-backdrop').remove();//eliminamos el
-                }else {
-                    MsgError("Error","Imagen Requerida");
-                }
-            });
-    } else {
-        MsgError("Error", "El archivo no es valido o el campo ya existe");
-    }
+ var data = $("#FormNuevo").serializeArray();
+ data = serializar(data);
+
+ var modalNuevo = $("#img1")[0].src;
+ if (modalNuevo != "http://localhost:51144/Empresas") {
+  event.preventDefault();
+  if (data != null) {
+   var data = new FormData($("#FormNuevo")[0]);
+   data.append('file', $('#empr_Logo')[0].files[0]);
+   $.ajax({
+    url: '/Empresas/Create/',
+    type: "post",
+    dataType: "html",
+    data: data,
+    cache: false,
+    contentType: false,
+    processData: false
+   })
+    .done(function (obj) {
+     if (obj == "-4") {
+      MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
+     } else if (obj != "-1" && obj != "-2" && obj != "-3") {
+      llenarTabla();
+      MsgSuccess("Exito", "Archivo subido exitosamente");
+      $("#ModalNuevo").modal('hide');//ocultamos el modal
+      $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+      $('.modal-backdrop').remove();//eliminamos el
+     } else {
+      MsgError("Error", "No se pudo crear la empresa, contacte al administrador");
+     }
+    });
+  }
+ } else {
+  MsgError("Error", "por favor, seleccione una imagen");
+ }
 });
 
 $("#btnActualizar").click(function () {
- var data = $("#FormEditar").serializeArray();
- var formEditar = $("#ModalEditar").data("res");
- data = serializar(data);
- if (data != null && formEditar) {
-  data.empr_Id = id;
-  data = JSON.stringify({ tbEmpresas: data });
-  _ajax(data,
-      '/Empresas/Edit',
-      'POST',
-      function (obj) {
-       if (obj != "-1" && obj != "-2" && obj != "-3") {
-        CierraPopups();
-        llenarTabla();
-        MsgSuccess("¡Exito!", "El registro se editó de forma exitosa");
-       } else {
-        MsgError("Error", "No se pudo editar el registro, contacte al administrador");
-       }
-      });
- } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+ var img = $("#img2")[0].innerText;
+ if (ModalEditar != '') {
+  event.preventDefault();
+  var data = new FormData($("#FormEditar")[0]);
+  data.append('file', $('#UPempr_Logo')[0].files[0]);
+  $.ajax({
+   url: '/Empresas/Edit/',
+   type: "post",
+   dataType: "html",
+   data: data,
+   cache: false,
+   contentType: false,
+   processData: false
+  })
+   .done(function (obj) {
+    if (obj == "-4") {
+     MsgError("Error", "formato incorrecto, use archivos con extension .jpg, .png y .jpeg");
+    } else if (obj != "-1" && obj != "-2" && obj != "-3") {
+     llenarTabla();
+     MsgSuccess("Exito", "Archivo subido exitosamente");
+     $("#ModalEditar").modal('hide');//ocultamos el modal
+     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+     $('.modal-backdrop').remove();//eliminamos el
+    } else {
+     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
+    }
+   });
  }
 });
 

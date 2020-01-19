@@ -196,6 +196,8 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 
 <#
     }
+	}
+	
 }
 #>
                   <div class="form-group">
