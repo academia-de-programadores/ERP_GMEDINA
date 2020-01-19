@@ -35,7 +35,7 @@
                         <div class="col-md-6">
                             <label class="font-normal">Fecha</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha_Contratacion, new { htmlAttributes = new { @class = "form-control", @type = "string", @name = "Fecha_Contratacion", @id = "Fecha_Contratacion" } })
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha_Contratacion, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha_Contratacion", @id = "Fecha_Contratacion" } })
                             </div>
                             @Html.ValidationMessageFor(model => model.Fecha_Contratacion, "", new { @class = "text-danger" })
                         </div>
