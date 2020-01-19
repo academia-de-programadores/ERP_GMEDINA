@@ -324,7 +324,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public ActionResult Permisos(int emp_Id, DateTime FechaInicio, DateTime FechaFin)
+        public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -337,12 +337,32 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
-            //command.Parameters.AddWithValue("@tper_Id", SqlDbType.Int).Value = tper_Id;
-            command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
-            command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
-
+            if(emp_Id == null && FechaInicio == null && FechaFin == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos";
+            }
+            else if(emp_Id == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+            }
+            else if(FechaInicio == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+            }
+            else if(FechaFin == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaFin between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+            else
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin  and FechaFin between @FechaInicio and @FechaFin  ";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
