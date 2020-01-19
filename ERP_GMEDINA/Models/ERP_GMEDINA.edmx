@@ -1383,13 +1383,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAudienciaDescargo'
             <PropertyRef Name="nombre" />
             <PropertyRef Name="per_Identidad" />
             <PropertyRef Name="aude_Descripcion" />
-            <PropertyRef Name="aude_fechaaudiencia" />
+            <PropertyRef Name="fechaAudiencia" />
           </Key>
           <Property Name="aude_Id" Type="int" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="aude_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="aude_fechaaudiencia" Type="datetime" Nullable="false" />
+          <Property Name="fechaAudiencia" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAudienciaDescargo_empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialAudienciaDescargo_empleados">
+          <Key>
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+          </Key>
+          <Property Name="nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialCargos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5454,8 +5464,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HistorialAudienciaDescargo].[nombre] AS [nombre], 
     [V_RPT_HistorialAudienciaDescargo].[per_Identidad] AS [per_Identidad], 
     [V_RPT_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion], 
-    [V_RPT_HistorialAudienciaDescargo].[aude_fechaaudiencia] AS [aude_fechaaudiencia]
+    [V_RPT_HistorialAudienciaDescargo].[fechaAudiencia] AS [fechaAudiencia]
     FROM [rrhh].[V_RPT_HistorialAudienciaDescargo] AS [V_RPT_HistorialAudienciaDescargo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialAudienciaDescargo_empleados" EntityType="Self.V_RPT_HistorialAudienciaDescargo_empleados" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialAudienciaDescargo_empleados].[nombre] AS [nombre], 
+    [V_RPT_HistorialAudienciaDescargo_empleados].[per_Identidad] AS [per_Identidad]
+    FROM [rrhh].[V_RPT_HistorialAudienciaDescargo_empleados] AS [V_RPT_HistorialAudienciaDescargo_empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialCargos" EntityType="Self.V_RPT_HistorialCargos" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -11636,7 +11652,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_FaseSeleccion" EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" />
           <EntitySet Name="V_RPT_EquipoEmpleado" EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" />
           <EntitySet Name="V_RPT_HistorialAmonestaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones" />
-          <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
           <EntitySet Name="V_RPT_HistorialCargos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" />
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" />
           <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" />
@@ -11645,7 +11660,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
+          <EntitySet Name="V_RPT_HistorialAudienciaDescargo_empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" />
           <EntitySet Name="V_RPT_HistorialAmonestaciones_Empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" />
+          <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13012,20 +13029,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="ObservacionAnterior" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="FechaAnterior" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="V_RPT_HistorialAudienciaDescargo">
-          <Key>
-            <PropertyRef Name="aude_Id" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="per_Identidad" />
-            <PropertyRef Name="aude_Descripcion" />
-            <PropertyRef Name="aude_fechaaudiencia" />
-          </Key>
-          <Property Name="aude_Id" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="aude_fechaaudiencia" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="V_RPT_HistorialCargos">
           <Key>
             <PropertyRef Name="hcar_Id" />
@@ -13173,6 +13176,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="fechafin" Type="DateTime" Precision="0" />
           <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="V_RPT_HistorialAudienciaDescargo_empleados">
+          <Key>
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+          </Key>
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="V_RPT_HistorialAmonestaciones_Empleados">
           <Key>
             <PropertyRef Name="nombre" />
@@ -13180,6 +13191,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           </Key>
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialAudienciaDescargo">
+          <Key>
+            <PropertyRef Name="aude_Id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+            <PropertyRef Name="aude_Descripcion" />
+            <PropertyRef Name="fechaAudiencia" />
+          </Key>
+          <Property Name="aude_Id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fechaAudiencia" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15771,17 +15796,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialAudienciaDescargo">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialAudienciaDescargo">
-                <ScalarProperty Name="aude_fechaaudiencia" ColumnName="aude_fechaaudiencia" />
-                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
-                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialCargos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialCargos">
               <MappingFragment StoreEntitySet="V_RPT_HistorialCargos">
@@ -15895,11 +15909,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialAudienciaDescargo_empleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialAudienciaDescargo_empleados">
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialAmonestaciones_Empleados">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados">
               <MappingFragment StoreEntitySet="V_RPT_HistorialAmonestaciones_Empleados">
                 <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialAudienciaDescargo">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialAudienciaDescargo">
+                <ScalarProperty Name="fechaAudiencia" ColumnName="fechaAudiencia" />
+                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
