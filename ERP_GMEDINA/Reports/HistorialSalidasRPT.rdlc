@@ -6,22 +6,61 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.12719cm</Width>
+              <Width>3.35196cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.12719cm</Width>
+              <Width>3.35196cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.12719cm</Width>
+              <Width>3.35196cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.12719cm</Width>
+              <Width>3.35196cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.35196cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.82931cm</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Codigo empleado</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#7292cc</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#4c68a2</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox5">
@@ -60,14 +99,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
+                    <Textbox Name="Textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>tsal Descripcion</Value>
+                              <Value>Tipo Salida</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -79,7 +118,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#7292cc</Color>
@@ -103,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>observaciones</Value>
+                              <Value>Razon salida</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -139,7 +178,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>hsal Fecha Salida</Value>
+                              <Value>Fecha Salida</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -169,8 +208,41 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.82931cm</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="emp_Id">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!emp_Id.Value)</Value>
+                              <Style>
+                                <FontFamily>Tahoma</FontFamily>
+                                <Color>#4d4d4d</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>emp_Id</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>#e5e5e5</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Nombre_Empleado">
@@ -206,14 +278,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="tsal_Descripcion">
+                    <Textbox Name="tsal_Id">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!tsal_Descripcion.Value</Value>
+                              <Value>=Sum(Fields!tsal_Id.Value)</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -223,7 +295,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>tsal_Descripcion</rd:DefaultName>
+                      <rd:DefaultName>tsal_Id</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -272,14 +344,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="hsal_FechaSalida">
+                    <Textbox Name="FechaSalida">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!hsal_FechaSalida.Value</Value>
+                              <Value>=Fields!FechaSalida.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -289,7 +361,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>hsal_FechaSalida</rd:DefaultName>
+                      <rd:DefaultName>FechaSalida</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -313,6 +385,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -326,16 +399,16 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>1.12007cm</Top>
-        <Height>1.65861cm</Height>
-        <Width>16.50875cm</Width>
+        <Top>1.27cm</Top>
+        <Height>1.2cm</Height>
+        <Width>16.75979cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox15">
+      <Textbox Name="Textbox17">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -349,11 +422,11 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.3937cm</Top>
-        <Left>13.64933cm</Left>
+        <rd:DefaultName>Textbox17</rd:DefaultName>
+        <Top>0.49361cm</Top>
+        <Left>12.54cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.5cm</Width>
+        <Width>4.21979cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -366,17 +439,17 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.10786in</Height>
+    <Height>1.11458in</Height>
     <Style />
   </Body>
-  <Width>6.70175in</Width>
+  <Width>7.01985in</Width>
   <Page>
     <PageFooter>
-      <Height>1.11125cm</Height>
+      <Height>2.54cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox16">
+        <Textbox Name="Textbox19">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -390,9 +463,9 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox16</rd:DefaultName>
-          <Top>0.03528cm</Top>
-          <Left>14.00875cm</Left>
+          <rd:DefaultName>Textbox19</rd:DefaultName>
+          <Top>0.14111cm</Top>
+          <Left>15.13292cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -428,7 +501,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>8abcf68b-daa4-4982-8d41-86045f25b0e4</rd:DataSourceID>
+      <rd:DataSourceID>644c4146-214f-4c16-b106-2fb66c0844ad</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -462,8 +535,12 @@
           <DataField>observaciones</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="hsal_FechaSalida">
-          <DataField>hsal_FechaSalida</DataField>
+        <Field Name="FechaSalida">
+          <DataField>FechaSalida</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="fechafin">
+          <DataField>fechafin</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
@@ -478,5 +555,5 @@
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>15921298-b44b-4383-9581-18db414757ff</rd:ReportID>
+  <rd:ReportID>c434c080-2718-4388-9cb4-5e561c962428</rd:ReportID>
 </Report>
