@@ -169,6 +169,9 @@ $(".required").each(function (indice, input) {
     var txt_maxlength = $(input).data("val-maxlength");
     var txt_required = $(input).data("val-required");
     var id = input.id;
+    var label=$(input).closest(".form-group").find("label")[0];
+    label.innerHTML=label.innerHTML+'<font color="black">*</font>';
+    var asterisco=$(label).find("font")[0];
     $(input).keyup(function (event) {
         key(event);
     });
@@ -176,16 +179,19 @@ $(".required").each(function (indice, input) {
         key(event);
     });
     $(input).focusin(function () {
+        asterisco.color="black";
         var lol = $(form).find("#error" + id);
         $(form).find("#error" + id)[0].innerText = '';
     });
     $(input).focusout(function () {
         var span = $(form).find("#error" + id);
         if ($(input).val() == null || $(input).val()==0 || $(input).val().trim() == "") {
+        asterisco.color="red";
             $(span).closest("div").addClass("has-error");
             span.text(txt_required);
             $(span).addClass("text-danger");
         } else {
+            asterisco.color="black";
             $(span).closest("div").removeClass("has-error");
             $(span).removeClass("text-danger");
         }
@@ -234,7 +240,7 @@ function validarEmail(valor) {
     }
 }
 function alphanumeric(e) {
-    var regex = new RegExp("[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ ]");
+    var regex = new RegExp("[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ]");
     var key = e.keyCode || e.which;
     key = String.fromCharCode(key);
     if (!regex.test(key)) {

@@ -7,100 +7,76 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
+using System.IO;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class EmpresasController : Controller
     {
-        private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        private ERP_GMEDINAEntities db = null;
 
         // GET: Empresas
         public ActionResult Index()
         {
-            List<tbEmpresas> tbEmpresas = new List<Models.tbEmpresas> { };
+            var Admin = (bool)Session["Admin"];
+            var tbEmpresas = new tbEmpresas {empr_Estado= Admin };
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
-            try
-            {
-                tbEmpresas = db.tbEmpresas.Where(x => x.empr_Estado == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-                return View(tbEmpresas);
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                tbEmpresas.Add(new tbEmpresas { empr_Id = 0, empr_Nombre = "Fallo la conexión" });
-
-            }
             return View(tbEmpresas);
         }
 
         [HttpPost]
         public JsonResult llenarTabla()
         {
-            List<tbEmpresas> tbEmpresas =
-                new List<tbEmpresas> { };
-            foreach (tbEmpresas x in db.tbEmpresas.ToList().Where(x => x.empr_Estado == true))
+            try
             {
-                tbEmpresas.Add(new tbEmpresas
+                db = new ERP_GMEDINAEntities();
+                var tbEmpresas = db.tbEmpresas
+                .Select(x => new
                 {
                     empr_Id = x.empr_Id,
-                    empr_Nombre = x.empr_Nombre
-                });
+                    empr_Nombre = x.empr_Nombre,
+                    empr_Estado = x.empr_Estado
+                }
+                ).ToList();
+                return Json(tbEmpresas, JsonRequestBehavior.AllowGet);
             }
-            return Json(tbEmpresas, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                return Json(-2, JsonRequestBehavior.AllowGet);
+            }
         }
 
-        // GET: Empresas/Create
-        public ActionResult Create()
-        {
-            ViewBag.empr_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.empr_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            return View();
-        }
-        [HttpPost]
-        public JsonResult Upload(HttpPostedFileBase file)
-        {
-            string extencion = file.FileName.Split('.')[1].ToLower();
-            if (file != null && (extencion == "png" || extencion == "jpg" || extencion == "jpeg"))
-            {
-                string path = "/Logos/" + file.FileName;
-                if (!System.IO.File.Exists(Server.MapPath("~/") + path))
-                {//OPEN IF
-                    Session["file"] = file;
-                    Session["Path"] = path;
-                    return Json(true, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(false, JsonRequestBehavior.AllowGet);
-        }
         // POST: Empresas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598. tbEmpresas tbEmpresas,
         [HttpPost]
-        public JsonResult Create(tbEmpresas tbEmpresas)
+        public JsonResult Create(tbEmpresas tbEmpresas, HttpPostedFileBase file)
         {
-            HttpPostedFileBase file = (HttpPostedFileBase)Session["file"];
-            string path = (string)Session["Path"];
-            string msj = "...";
-            if (tbEmpresas.empr_Nombre != "" && file != null && path != null)
+            int msj = 0;
+            if (tbEmpresas.empr_Nombre != "" && file != null)
             {
+                string ext = file.FileName.Split('.')[1].ToLower();
+                if (ext != "png" && ext != "jpeg" && ext != "jpg")
+                {
+                    return Json(-4, JsonRequestBehavior.AllowGet);
+                }
+                string path = file.FileName;
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, path, Usuario.usu_Id, DateTime.Now);
+                    db = new ERP_GMEDINAEntities();
+                    var list = db.UDP_RRHH_tbEmpresas_Insert(tbEmpresas.empr_Nombre, ext, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Insert_Result item in list)
                     {
-                        msj = item.MensajeError;
+                        msj = int.Parse(item.MensajeError);
                     }
-                    file.SaveAs(Server.MapPath("~/") + path);
-                    Session["file"] = null;
-                    Session["Path"] = null;
-                    Session.Remove("file");
-                    Session.Remove("Path");
+                    string ruta = Server.MapPath("~/") + "/Logos/" + msj.ToString() + "." + ext;
+                    file.SaveAs(ruta);
                     return Json(msj, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
-                    msj = "-2";
+                    msj = -2;
                     ex.Message.ToString();
                     return Json(msj, JsonRequestBehavior.AllowGet);
                 }
@@ -108,9 +84,9 @@ namespace ERP_GMEDINA.Controllers
 
             else
             {
-                msj = "-3";
+                msj = -3;
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Empresas/Edit/5
@@ -124,6 +100,7 @@ namespace ERP_GMEDINA.Controllers
             tbEmpresas tbEmpresas = null;
             try
             {
+                db = new ERP_GMEDINAEntities();
                 tbEmpresas = db.tbEmpresas.Find(id);
                 if (tbEmpresas == null || !tbEmpresas.empr_Estado)
                 {
@@ -158,30 +135,30 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JsonResult Edit(tbEmpresas tbEmpresas)
+        public JsonResult Edit(tbEmpresas tbEmpresas, HttpPostedFileBase file)
         {
-            HttpPostedFileBase file = (HttpPostedFileBase)Session["file"];
-            string path = (string)Session["Path"];
             string msj = "";
-            if (tbEmpresas.empr_Id != 0 && tbEmpresas.empr_Nombre != "")
+            if (tbEmpresas.empr_Nombre != "")
             {
+                string path = file == null ? (string)Session["Path"] : file.FileName;
+                string ext = path.Split('.')[1].ToLower();
+                if (ext != "png" && ext != "jpeg" && ext != "jpg")
+                {
+                    return Json("-4", JsonRequestBehavior.AllowGet);
+                }
                 var id = (int)Session["id"];
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpresas_Update(id,tbEmpresas.empr_Nombre, path, Usuario.usu_Id, DateTime.Now);
+                    db = new ERP_GMEDINAEntities();
+                    string ruta = "/Logos/" + id + "." + ext;
+                    var list = db.UDP_RRHH_tbEmpresas_Update(id, tbEmpresas.empr_Nombre, ruta, Usuario.usu_Id, DateTime.Now);
                     foreach (UDP_RRHH_tbEmpresas_Update_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
-                    if (!System.IO.File.Exists(Server.MapPath("~/") + path))
-                    {
-                        file.SaveAs(Server.MapPath("~/") + path);
-                    }
-                    Session["file"] = null;
-                    Session["Path"] = null;
-                    Session.Remove("file");
-                    Session.Remove("Path");
+                    ruta = Server.MapPath("~/") + "/Logos/" + id + "." + ext;
+                    file.SaveAs(ruta);
                 }
                 catch (Exception ex)
                 {
@@ -193,12 +170,36 @@ namespace ERP_GMEDINA.Controllers
             {
                 msj = "-3";
             }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult hablilitar(int id)
+        {
+            string result = "";
+            var Usuario = (tbUsuario)Session["Usuario"];
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var list = db.UDP_RRHH_tbEmpresas_Restore(id, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbEmpresas_Restore_Result item in list)
+                    {
+                        result = item.MensajeError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         // GET: Empresas/Delete/5
         public ActionResult Delete(tbEmpresas tbEmpresas)
         {
+            db = new ERP_GMEDINAEntities();
             string msj = "...";
             if (tbEmpresas.empr_Id != 0 && tbEmpresas.empr_RazonInactivo != "")
             {
@@ -250,7 +251,7 @@ namespace ERP_GMEDINA.Controllers
         }
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
                 db.Dispose();
             }

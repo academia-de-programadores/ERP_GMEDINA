@@ -1027,45 +1027,6 @@
     <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_RPT_EquipoEmpleado.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_FaseSeleccion.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialAmonestaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialAudienciaDescargo.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialCargos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialContrataciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialIncapacidad.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialPermisos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialSalidas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialSueldos.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialVacaciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_Requisiciones.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1328,6 +1289,7 @@
     <Content Include="Scripts\app\General\Competencias\Competencias.js" />
     <Content Include="Scripts\app\General\Empleados\AgregarEmpleado.js" />
     <Content Include="Scripts\app\General\Empleados\IndexEmpleados.js" />
+    <Content Include="Scripts\app\General\Empresas\Admin.js" />
     <Content Include="Scripts\app\General\Empresas\Empresas.js" />
     <Content Include="Scripts\app\General\EquipoEmpleados\EquipoEmpleados.js" />
     <Content Include="Scripts\app\General\EquipoTrabajo\Admin.js" />
