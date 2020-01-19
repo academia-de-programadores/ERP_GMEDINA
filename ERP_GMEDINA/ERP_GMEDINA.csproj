@@ -2255,11 +2255,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\EmpleadosCurriculumInfor.rdlc" />
+    <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
     <EmbeddedResource Include="Reports\PermisosRPT.rdlc" />
+    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

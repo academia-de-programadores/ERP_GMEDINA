@@ -914,7 +914,7 @@ namespace ERP_GMEDINA.Controllers
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_EmpleadoCurriculum.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadoCurriculum.rdlc";
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadosCurriculumInfor.rdlc";
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Empleado_Curriculum"]));
             conx.Close();
 
@@ -925,13 +925,20 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
+
         public ActionResult HistorialAmonestaciones()
         {
             ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+            ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
+            return View();
+        }
+        public ActionResult HistorialAudienciaDescargo()
+        {
+            ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialAmonestaciones(int tamo_Id, DateTime Fecha, DateTime Fecha1, string Colaborador)
+        public ActionResult HistorialAmonestaciones(int? tamo_Id, string Identidad)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -941,41 +948,43 @@ namespace ERP_GMEDINA.Controllers
             reportViewer.BackColor = System.Drawing.Color.White;
             var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
 
-
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAmonestaciones WHERE  tamo_Id = @tamo_Id  and Fecha BETWEEN @Fecha AND @Fecha1 and Colaborador like '%@Colaborador%'";
-            command.Parameters.AddWithValue("@tamo_Id", SqlDbType.Int).Value = tamo_Id;
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
-            command.Parameters.AddWithValue("@Fecha1", SqlDbType.DateTime).Value = Fecha1;
-            command.Parameters.AddWithValue("@Colaborador", SqlDbType.Text).Value = Colaborador;
-
+            if (tamo_Id == null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAmonestaciones WHERE Identidad like '%'+ @Identidad + '%' ";
+                command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = Identidad;
+            }
+            else
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAmonestaciones WHERE  tamo_Id = @tamo_Id and Identidad like '%'+ @Identidad + '%' ";
+                command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = Identidad;
+                command.Parameters.AddWithValue("@tamo_Id", SqlDbType.Int).Value = tamo_Id;
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialAmonestaciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialAmonestacionesRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialAmonestaciones"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AmonestacionesRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAmonestacionesDS", ds.Tables["V_RPT_HistorialAmonestaciones"]));
             conx.Close();
 
 
             ViewBag.ReportViewer = reportViewer;
             //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
-            ViewBag.Titulos = db.tbTipoAmonestaciones.Where(x => x.tamo_Id == tamo_Id).Select(x => x.tamo_Descripcion).FirstOrDefault();
+            //ViewBag.Titulos = db.tbTipoAmonestaciones.Where(x => x.tamo_Id == tamo_Id).Select(x => x.tamo_Descripcion).FirstOrDefault();
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            ViewBag.Turno = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+
+            ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
+            ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-        public ActionResult HistorialAudienciaDescargo()
-        {
-            //ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
-            return View();
-        }
+        //HistorialAudienciaDescargo
         [HttpPost]
-        public ActionResult HistorialAudienciaDescargo(DateTime aude_fechaaudiencia, DateTime aude_fechaaudiencia1, string nombre)
+        public ActionResult HistorialAudienciaDescargo(string per_Identidad/*,DateTime? fechaAudiencia*/)
         {
 
             ReportViewer reportViewer = new ReportViewer();
@@ -988,22 +997,27 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAudienciaDescargo WHERE aude_fechaaudiencia BETWEEN @Fecha AND @Fecha1 and nombre like '%@nombre%'";
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = aude_fechaaudiencia;
-            command.Parameters.AddWithValue("@Fecha1", SqlDbType.DateTime).Value = aude_fechaaudiencia1;
-            command.Parameters.AddWithValue("@nombre", SqlDbType.Text).Value = nombre;
+            command.CommandText = "SELECT * from rrhh.V_RPT_HistorialAudienciaDescargo WHERE per_identidad like '%'+@Identidad+'%'";
+            command.Parameters.AddWithValue("@Identidad", SqlDbType.NVarChar).Value = per_Identidad;
+            //command.Parameters.AddWithValue("@fechaAudiencia", SqlDbType.Date).Value = fechaAudiencia;
 
 
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HorasTrabajadas.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AudienciaDescargo.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialAudienciaDescargo"]));
+            ds.EnforceConstraints = false;
+            adp.Fill(ds, ds.V_RPT_HistorialAudienciaDescargo.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\AudienciasDescargo.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesAudiencias", ds.Tables["V_RPT_HistorialAudienciaDescargo"]));
             conx.Close();
 
 
+            ViewBag.ReportViewer = reportViewer;
+
+
+            ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
             ViewBag.ReportViewer = reportViewer;
             //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
