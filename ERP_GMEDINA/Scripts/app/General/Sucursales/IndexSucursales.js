@@ -63,7 +63,7 @@ function tablaDetalles(id) {
                 $("#ModalDetalles").find("#suc_Telefono")["0"].innerText = obj[0].suc_Telefono;
                 $("#ModalDetalles").find("#suc_FechaCrea").innerText = FechaFormato(obj[0].suc_FechaCrea);
                 $("#ModalDetalles").find("#suc_FechaModifica").innerText = FechaFormato(obj[0].suc_FechaModifica);
-                $("#ModalDetalles").find("#suc_UsuarioCrea").innerText = obj[0].suc_UsuarioCrea;
+                $("#ModalDetalles").find("#suc_UsuarioCrea").innerText = obj[0].tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#suc_UsuarioModifica").innerText = obj[0].suc_UsuarioModifica;
                 //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
