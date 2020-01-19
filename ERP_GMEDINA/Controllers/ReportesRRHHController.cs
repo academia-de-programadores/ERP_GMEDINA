@@ -987,7 +987,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //HistorialAudienciaDescargo
         [HttpPost]
-        public ActionResult HistorialAudienciaDescargo(string per_Identidad/*,DateTime? fechaAudiencia*/)
+        public ActionResult HistorialAudienciaDescargo(string per_Identidad ,DateTime? fechaAudiencia)
         {
 
             ReportViewer reportViewer = new ReportViewer();
@@ -1022,12 +1022,7 @@ namespace ERP_GMEDINA.Controllers
 
             ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
             ViewBag.ReportViewer = reportViewer;
-            //ViewBag.TipoHora = db.tbHistorialHorasTrabajadas.Where(x => x.htra_Id == htra_Id);
 
-            //ViewBag.Titulos = db.tbTipoHoras.Where(x => x.tiho_Id == tiho_Id).Select(x => x.tiho_Descripcion).FirstOrDefault();
-            ////Cargar DDL del modal (Tipo de planilla a seleccionar)
-            //ViewBag.Turno = new SelectList(db.tbTipoHoras.Where(o => o.tiho_Estado == true), "tiho_Id", "tiho_Descripcion");
-            ////ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
         public ActionResult EquipoEmpleados()

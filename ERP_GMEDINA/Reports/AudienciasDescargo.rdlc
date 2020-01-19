@@ -272,14 +272,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="aude_fechaaudiencia">
+                    <Textbox Name="fechaAudiencia">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!aude_fechaaudiencia.Value</Value>
+                              <Value>=Fields!fechaAudiencia.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -289,7 +289,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>aude_fechaaudiencia</rd:DefaultName>
+                      <rd:DefaultName>fechaAudiencia</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -329,7 +329,7 @@
         <Top>0.17639cm</Top>
         <Left>1.37583cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.26229cm</Width>
+        <Width>24.26228cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -498,14 +498,14 @@
           <DataField>aude_Descripcion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="aude_fechaaudiencia">
-          <DataField>aude_fechaaudiencia</DataField>
+        <Field Name="fechaAudiencia">
+          <DataField>fechaAudiencia</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>ReportesAudiencias</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Axel Omar\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesAudiencias.xsd</rd:SchemaPath>
+        <rd:DataSetName>ReportesRRHH</rd:DataSetName>
+        <rd:SchemaPath>G:\Documentos y trabajos\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesRRHH.xsd</rd:SchemaPath>
         <rd:TableName>V_RPT_HistorialAudienciaDescargo</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
