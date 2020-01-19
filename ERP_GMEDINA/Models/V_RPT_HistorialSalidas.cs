@@ -20,6 +20,7 @@ namespace ERP_GMEDINA.Models
         public string tsal_Descripcion { get; set; }
         public int tsal_Id { get; set; }
         public string observaciones { get; set; }
-        public System.DateTime hsal_FechaSalida { get; set; }
+        public Nullable<System.DateTime> FechaSalida { get; set; }
+        public Nullable<System.DateTime> fechafin { get; set; }
     }
 }
