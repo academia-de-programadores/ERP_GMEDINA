@@ -1049,6 +1049,9 @@
     <Compile Include="Models\V_HVacacionesEmpleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_EmpleadoCurriculum.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_RPT_Empleado_Curriculum.cs" />
     <Compile Include="Models\V_RPT_EquipoEmpleado.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>

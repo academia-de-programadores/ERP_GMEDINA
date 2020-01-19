@@ -227,6 +227,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         //parametros del reporte
+        [HttpPost]
         public ActionResult HistorialCargosRPT(int? car_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
@@ -289,13 +290,14 @@ namespace ERP_GMEDINA.Controllers
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
+            conx.Close();
 
-    
-            //Cargar DDL del modal (Tipo de planilla a seleccionar)
-            //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
-            ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
-            //ViewBag.Permiso = new SelectList(db.tbTipoPermisos.Where(o => o.tper_Estado == true), "tper_Id", "tper_Descripcion");
-            ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+            ViewBag.ReportViewer = reportViewer;
+
+            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
+
             return View();
     }
 
@@ -358,10 +360,17 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
             }
             SqlConnection conx = new SqlConnection(connectionString);
-
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialContrataciones.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
+            conx.Close();
+
+            ViewBag.ReportViewer = reportViewer;
+
+            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
 
             return View();
     }
@@ -576,40 +585,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult HistorialCargosRPT(int car_Id, DateTime Fecha, DateTime FechaFin)
-        {
-            ReportViewer reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-            reportViewer.SizeToReportContent = false;
-            reportViewer.Width = Unit.Pixel(1050);
-            reportViewer.Height = Unit.Pixel(500);
-            reportViewer.BackColor = System.Drawing.Color.White;
-            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-            SqlConnection conx = new SqlConnection(connectionString);
-
-            //comando para el dataAdapter
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id and Fecha between @Fecha and @FechaFin";
-            command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
-            command.Connection = conx;
-            SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialCargosRPT.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialCargos"]));
-            conx.Close();
-
-            ViewBag.ReportViewer = reportViewer;
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
-
-            //Cargar DDL del modal (DDL para Cargo)
-            ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
-            return View();
-        }
-
+       
         public ActionResult SueldosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -894,6 +870,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         //parametros del reporte
+        //parametros del reporte
         [HttpPost]
         public ActionResult Empleado(int? habi_Id, int? comp_Id)
         {
@@ -910,21 +887,21 @@ namespace ERP_GMEDINA.Controllers
             SqlCommand command = new SqlCommand();
             if (comp_Id == null && habi_Id == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EmpleadoCurriculum";
             }
             else if (comp_Id == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where habi_Id = @habi_Id ";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EmpleadoCurriculum where habi_Id = @habi_Id ";
                 command.Parameters.AddWithValue("@habi_Id", SqlDbType.Date).Value = habi_Id;
             }
             else if (habi_Id == null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where  comp_Id =@comp_Id ";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EmpleadoCurriculum where  comp_Id =@comp_Id ";
                 command.Parameters.AddWithValue("@comp_Id", SqlDbType.Int).Value = comp_Id;
             }
             else
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where habi_Id = @habi_Id and comp_Id = @comp_Id";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EmpleadoCurriculum where habi_Id = @habi_Id and comp_Id = @comp_Id";
                 command.Parameters.AddWithValue("@habi_Id", SqlDbType.Date).Value = habi_Id;
                 command.Parameters.AddWithValue("@comp_Id", SqlDbType.Date).Value = comp_Id;
 
@@ -932,7 +909,7 @@ namespace ERP_GMEDINA.Controllers
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
-            adp.Fill(ds, ds.V_RPT_Empleado_Curriculum.TableName);
+            adp.Fill(ds, ds.V_RPT_EmpleadoCurriculum.TableName);
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadoCurriculum.rdlc";
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Empleado_Curriculum"]));

@@ -127,6 +127,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RPT_HistorialAudienciaDescargo_empleados> V_RPT_HistorialAudienciaDescargo_empleados { get; set; }
         public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
         public virtual DbSet<V_RPT_HistorialAudienciaDescargo> V_RPT_HistorialAudienciaDescargo { get; set; }
+        public virtual DbSet<V_RPT_EmpleadoCurriculum> V_RPT_EmpleadoCurriculum { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

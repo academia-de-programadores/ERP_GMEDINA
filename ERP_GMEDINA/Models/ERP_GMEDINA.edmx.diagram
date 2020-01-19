@@ -283,6 +283,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" Width="1.5" PointX="19.375" PointY="16.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" Width="1.5" PointX="19.375" PointY="19.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" Width="1.5" PointX="21.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" Width="1.5" PointX="21.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
