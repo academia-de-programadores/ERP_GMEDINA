@@ -418,7 +418,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //parametros del reporte
         [HttpPost]
-        public ActionResult FaseSeleccion(int fare_Id, DateTime Fecha)
+        public ActionResult FaseSeleccion(int? fare_Id, DateTime? Fecha)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -431,9 +431,26 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where fare_Id = @fare_Id  and Fecha = @Fecha";
-            command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            if (fare_Id == null&& Fecha == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion";
+            }
+            else if (fare_Id==null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where Fecha =@Fecha ";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            }
+            else if (Fecha == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where  fare_Id =@fare_Id ";
+                command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_FaseSeleccion where fare_Id =@fare_Id and Fecha =@Fecha ";
+                command.Parameters.AddWithValue("@fare_Id", SqlDbType.Int).Value = fare_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            }            
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
