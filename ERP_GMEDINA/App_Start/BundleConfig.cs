@@ -817,6 +817,9 @@ namespace ERP_GMEDINA
 
              bundles.Add(new ScriptBundle("~/Scripts/app/general/EquipoTrabajo/Admin").Include(
      "~/Scripts/app/general/EquipoTrabajo/Admin.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/PermisosRPT/Permisos").Include(
+           "~/Scripts/app/General/PermisosRPT/PermisosRPT.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network
