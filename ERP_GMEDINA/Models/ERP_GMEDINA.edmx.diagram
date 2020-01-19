@@ -278,7 +278,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="19.75" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="19.75" PointY="16.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="0.75" PointY="20.75" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" Width="1.5" PointX="15.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" Width="3.125" PointX="15.375" PointY="18.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" Width="6.5" PointX="19.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>

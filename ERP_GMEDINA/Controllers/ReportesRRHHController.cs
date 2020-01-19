@@ -29,7 +29,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HorasTrabajadas( int tiho_Id,  DateTime Fecha, DateTime FechaFin)
+        public ActionResult HorasTrabajadas(int? tiho_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -42,10 +42,60 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id = @tiho_Id and Fecha between @Fecha and  @FechaFin";
-            command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;      
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            if (tiho_Id == null && Fecha == null && FechaFin == null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas";
+            }
+            else if (tiho_Id == null && Fecha != null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where Fecha between @Fecha and @FechaFin";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+            else if (tiho_Id == null && Fecha == null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where  FechaFin = @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+
+            }
+            else if (tiho_Id == null && FechaFin == null && Fecha != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where  Fecha =@Fecha ";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+            }
+            else if (FechaFin == null && Fecha == null && tiho_Id != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where  tiho_Id =@tiho_Id";
+                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
+
+            }
+
+            else if (Fecha == null && tiho_Id != null && FechaFin != null )
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id=@tiho_Id  and FechaFin =@FechaFin";
+                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Int).Value = FechaFin;
+
+            }
+
+            else if (FechaFin == null && tiho_Id != null && Fecha != null)
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id=@tiho_Id and Fecha =@Fecha";
+                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Int).Value = Fecha;
+
+            }
+
+
+
+            else
+            {
+                command.CommandText = "SELECT * from rrhh.V_RPT_HorasTrabajadas where tiho_Id = @tiho_Id and  Fecha between @Fecha and @FechaFin";
+                command.Parameters.AddWithValue("@tiho_Id", SqlDbType.Int).Value = tiho_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.DateTime).Value = Fecha;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+          
 
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
@@ -372,7 +422,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialIncapacidades(int ticn_Id, DateTime FechaInicio,DateTime FechaFin)
+        public ActionResult HistorialIncapacidades(int? ticn_Id, DateTime? FechaInicio,DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -385,11 +435,61 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = " select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id = @ticn_Id and FechaInicio  between  @FechaInicio and @FechaFin ";
-            command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+            if (ticn_Id == null && FechaInicio == null && FechaFin == null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad";
+            }
+            else if (ticn_Id == null && FechaInicio != null && FechaFin != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where FechaInicio between @FechaInicio and @FechaFin";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+            else if (ticn_Id == null && FechaInicio == null && FechaFin != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  FechaFin = @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
 
-            command.Parameters.AddWithValue("@FechaInicio", SqlDbType.Date).Value = FechaInicio;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (ticn_Id == null && FechaFin == null && FechaInicio != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  FechaInicio =@FechaInicio ";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+            }
+            else if (FechaFin == null && FechaInicio == null && ticn_Id != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where  ticn_Id =@ticn_Id";
+                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+
+            }
+
+            else if (FechaInicio == null && ticn_Id != null && FechaFin != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id=@ticn_Id and FechaFin =@FechaFin";
+                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Int).Value = FechaFin;
+
+            }
+
+            else if (FechaFin == null && ticn_Id != null && FechaInicio != null)
+            {
+                command.CommandText = "select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id=@ticn_Id and FechaInicio =@FechaInicio";
+                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.Int).Value = FechaInicio;
+
+            }
+
+
+
+            else
+            {
+                command.CommandText = " select * from rrhh.V_RPT_HistorialIncapacidad where ticn_Id = @ticn_Id and  FechaInicio between  @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@ticn_Id", SqlDbType.Int).Value = ticn_Id;
+
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.Date).Value = FechaInicio;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+          
 
 
             SqlConnection conx = new SqlConnection(connectionString);

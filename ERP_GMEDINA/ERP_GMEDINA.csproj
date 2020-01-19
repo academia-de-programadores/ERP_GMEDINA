@@ -230,7 +230,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
-    <Compile Include="Controllers\ReportesRRHH1Controller.cs" />
+    <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
@@ -270,7 +270,6 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
     <Compile Include="Models\cHistorialIncapacidades.cs" />
-    <Compile Include="Models\cHistorialIncapacidadesRPT.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -1482,7 +1481,6 @@
     <Content Include="Reports\HistorialContratacionesRPT.rdlc" />
     <Content Include="Reports\HistorialSalidasRPT.rdlc" />
     <Content Include="Reports\HistorialVacacionesRPT.rdlc" />
-    <Content Include="Reports\PermisosRPT.rdlc" />
     <None Include="Reports\ReportesDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -2160,7 +2158,6 @@
     <Content Include="Views\ReportesRRHH\HistorialContratacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
-    <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
