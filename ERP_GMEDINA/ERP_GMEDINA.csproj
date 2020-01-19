@@ -1086,6 +1086,9 @@
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

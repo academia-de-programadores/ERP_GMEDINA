@@ -19,7 +19,8 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         public decimal sue_Cantidad { get; set; }
         public string tmon_Descripcion { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> fechafin { get; set; }
         public string car_Descripcion { get; set; }
     }
 }
