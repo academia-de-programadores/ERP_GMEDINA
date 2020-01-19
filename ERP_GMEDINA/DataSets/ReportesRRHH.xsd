@@ -92,6 +92,28 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialIncapacidadTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialIncapacidadTableAdapter" Name="V_RPT_HistorialIncapacidad" UserDataComponentName="V_RPT_HistorialIncapacidadTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialIncapacidad" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT hinc_Id, Identidad, NombreCompleto, TipoIncapacidad, Dias, FechaInicio, FechaFin FROM rrhh.V_RPT_HistorialIncapacidad</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="hinc_Id" DataSetColumn="hinc_Id" />
+              <Mapping SourceColumn="Identidad" DataSetColumn="Identidad" />
+              <Mapping SourceColumn="NombreCompleto" DataSetColumn="NombreCompleto" />
+              <Mapping SourceColumn="TipoIncapacidad" DataSetColumn="TipoIncapacidad" />
+              <Mapping SourceColumn="Dias" DataSetColumn="Dias" />
+              <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
+              <Mapping SourceColumn="FechaFin" DataSetColumn="FechaFin" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialPermisosTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialPermisosTableAdapter" Name="V_RPT_HistorialPermisos" UserDataComponentName="V_RPT_HistorialPermisosTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialPermisos" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -110,27 +132,6 @@
               <Mapping SourceColumn="TipoPermiso" DataSetColumn="TipoPermiso" />
               <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
               <Mapping SourceColumn="FechaFin" DataSetColumn="FechaFin" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialSalidasTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialSalidasTableAdapter" Name="V_RPT_HistorialSalidas" UserDataComponentName="V_RPT_HistorialSalidasTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialSalidas" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT hsal_Id, emp_Id, Nombre_Empleado, tsal_Descripcion, observaciones, hsal_FechaSalida FROM rrhh.V_RPT_HistorialSalidas</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="hsal_Id" DataSetColumn="hsal_Id" />
-              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
-              <Mapping SourceColumn="Nombre_Empleado" DataSetColumn="Nombre_Empleado" />
-              <Mapping SourceColumn="tsal_Descripcion" DataSetColumn="tsal_Descripcion" />
-              <Mapping SourceColumn="observaciones" DataSetColumn="observaciones" />
-              <Mapping SourceColumn="hsal_FechaSalida" DataSetColumn="hsal_FechaSalida" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -184,9 +185,8 @@
             <MainSource>
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT      *
-FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT htra_Id, tiho_Id, Identidad, NombreCompleto, TipoHora, CantidadHoras, Fecha FROM rrhh.V_RPT_HorasTrabajadas</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -200,7 +200,6 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
               <Mapping SourceColumn="TipoHora" DataSetColumn="TipoHora" />
               <Mapping SourceColumn="CantidadHoras" DataSetColumn="CantidadHoras" />
               <Mapping SourceColumn="Fecha" DataSetColumn="Fecha" />
-              <Mapping SourceColumn="FechaFin" DataSetColumn="FechaFin" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -335,26 +334,26 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialIncapacidadTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialIncapacidadTableAdapter" Name="V_RPT_HistorialIncapacidad" UserDataComponentName="V_RPT_HistorialIncapacidadTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialSalidasTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialSalidasTableAdapter" Name="V_RPT_HistorialSalidas" UserDataComponentName="V_RPT_HistorialSalidasTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialIncapacidad" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialSalidas" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT hinc_Id, ticn_Id, Identidad, NombreCompleto, TipoIncapacidad, Dias, FechaInicio, FechaFin FROM rrhh.V_RPT_HistorialIncapacidad</CommandText>
+                    <CommandText>SELECT hsal_Id, emp_Id, Nombre_Empleado, tsal_Descripcion, tsal_Id, observaciones, FechaSalida, fechafin FROM rrhh.V_RPT_HistorialSalidas</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="hinc_Id" DataSetColumn="hinc_Id" />
-              <Mapping SourceColumn="ticn_Id" DataSetColumn="ticn_Id" />
-              <Mapping SourceColumn="Identidad" DataSetColumn="Identidad" />
-              <Mapping SourceColumn="NombreCompleto" DataSetColumn="NombreCompleto" />
-              <Mapping SourceColumn="TipoIncapacidad" DataSetColumn="TipoIncapacidad" />
-              <Mapping SourceColumn="Dias" DataSetColumn="Dias" />
-              <Mapping SourceColumn="FechaInicio" DataSetColumn="FechaInicio" />
-              <Mapping SourceColumn="FechaFin" DataSetColumn="FechaFin" />
+              <Mapping SourceColumn="hsal_Id" DataSetColumn="hsal_Id" />
+              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
+              <Mapping SourceColumn="Nombre_Empleado" DataSetColumn="Nombre_Empleado" />
+              <Mapping SourceColumn="tsal_Descripcion" DataSetColumn="tsal_Descripcion" />
+              <Mapping SourceColumn="tsal_Id" DataSetColumn="tsal_Id" />
+              <Mapping SourceColumn="observaciones" DataSetColumn="observaciones" />
+              <Mapping SourceColumn="FechaSalida" DataSetColumn="FechaSalida" />
+              <Mapping SourceColumn="fechafin" DataSetColumn="fechafin" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -366,7 +365,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
   <xs:element name="ReportesRRHH" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportesRRHH" msprop:Generator_UserDSName="ReportesRRHH">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="V_RPT_HistorialAmonestaciones" msprop:Generator_TableClassName="V_RPT_HistorialAmonestacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialAmonestaciones" msprop:Generator_RowChangedName="V_RPT_HistorialAmonestacionesRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialAmonestaciones" msprop:Generator_RowDeletingName="V_RPT_HistorialAmonestacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialAmonestacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialAmonestacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialAmonestacionesRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialAmonestacionesRow" msprop:Generator_UserTableName="V_RPT_HistorialAmonestaciones" msprop:Generator_RowEvArgName="V_RPT_HistorialAmonestacionesRowChangeEvent">
+        <xs:element name="V_RPT_HistorialAmonestaciones" msprop:Generator_TableClassName="V_RPT_HistorialAmonestacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialAmonestaciones" msprop:Generator_TablePropName="V_RPT_HistorialAmonestaciones" msprop:Generator_RowDeletingName="V_RPT_HistorialAmonestacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialAmonestacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialAmonestacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialAmonestacionesRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialAmonestaciones" msprop:Generator_RowChangedName="V_RPT_HistorialAmonestacionesRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialAmonestacionesRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialAmonestacionesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hamo_Id" msprop:Generator_ColumnVarNameInTable="columnhamo_Id" msprop:Generator_ColumnPropNameInRow="hamo_Id" msprop:Generator_ColumnPropNameInTable="hamo_IdColumn" msprop:Generator_UserColumnName="hamo_Id" type="xs:int" />
@@ -417,7 +416,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialAudienciaDescargo" msprop:Generator_TableClassName="V_RPT_HistorialAudienciaDescargoDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialAudienciaDescargo" msprop:Generator_RowChangedName="V_RPT_HistorialAudienciaDescargoRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowDeletingName="V_RPT_HistorialAudienciaDescargoRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialAudienciaDescargoRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialAudienciaDescargoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialAudienciaDescargoRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialAudienciaDescargoRow" msprop:Generator_UserTableName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowEvArgName="V_RPT_HistorialAudienciaDescargoRowChangeEvent">
+        <xs:element name="V_RPT_HistorialAudienciaDescargo" msprop:Generator_TableClassName="V_RPT_HistorialAudienciaDescargoDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialAudienciaDescargo" msprop:Generator_TablePropName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowDeletingName="V_RPT_HistorialAudienciaDescargoRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialAudienciaDescargoRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialAudienciaDescargoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialAudienciaDescargoRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowChangedName="V_RPT_HistorialAudienciaDescargoRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialAudienciaDescargoRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialAudienciaDescargoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="aude_Id" msprop:Generator_ColumnVarNameInTable="columnaude_Id" msprop:Generator_ColumnPropNameInRow="aude_Id" msprop:Generator_ColumnPropNameInTable="aude_IdColumn" msprop:Generator_UserColumnName="aude_Id" type="xs:int" />
@@ -446,7 +445,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialCargos" msprop:Generator_TableClassName="V_RPT_HistorialCargosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialCargos" msprop:Generator_RowChangedName="V_RPT_HistorialCargosRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialCargos" msprop:Generator_RowDeletingName="V_RPT_HistorialCargosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialCargosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialCargosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialCargosRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialCargosRow" msprop:Generator_UserTableName="V_RPT_HistorialCargos" msprop:Generator_RowEvArgName="V_RPT_HistorialCargosRowChangeEvent">
+        <xs:element name="V_RPT_HistorialCargos" msprop:Generator_TableClassName="V_RPT_HistorialCargosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialCargos" msprop:Generator_TablePropName="V_RPT_HistorialCargos" msprop:Generator_RowDeletingName="V_RPT_HistorialCargosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialCargosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialCargosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialCargosRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialCargos" msprop:Generator_RowChangedName="V_RPT_HistorialCargosRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialCargosRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialCargosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hcar_Id" msprop:Generator_ColumnVarNameInTable="columnhcar_Id" msprop:Generator_ColumnPropNameInRow="hcar_Id" msprop:Generator_ColumnPropNameInTable="hcar_IdColumn" msprop:Generator_UserColumnName="hcar_Id" type="xs:int" />
@@ -482,7 +481,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialContrataciones" msprop:Generator_TableClassName="V_RPT_HistorialContratacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialContrataciones" msprop:Generator_RowChangedName="V_RPT_HistorialContratacionesRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialContrataciones" msprop:Generator_RowDeletingName="V_RPT_HistorialContratacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialContratacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialContratacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialContratacionesRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialContratacionesRow" msprop:Generator_UserTableName="V_RPT_HistorialContrataciones" msprop:Generator_RowEvArgName="V_RPT_HistorialContratacionesRowChangeEvent">
+        <xs:element name="V_RPT_HistorialContrataciones" msprop:Generator_TableClassName="V_RPT_HistorialContratacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialContrataciones" msprop:Generator_TablePropName="V_RPT_HistorialContrataciones" msprop:Generator_RowDeletingName="V_RPT_HistorialContratacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialContratacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialContratacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialContratacionesRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialContrataciones" msprop:Generator_RowChangedName="V_RPT_HistorialContratacionesRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialContratacionesRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialContratacionesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hcon_Id" msprop:Generator_ColumnVarNameInTable="columnhcon_Id" msprop:Generator_ColumnPropNameInRow="hcon_Id" msprop:Generator_ColumnPropNameInTable="hcon_IdColumn" msprop:Generator_UserColumnName="hcon_Id" type="xs:int" />
@@ -511,7 +510,38 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialPermisos" msprop:Generator_TableClassName="V_RPT_HistorialPermisosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialPermisos" msprop:Generator_RowChangedName="V_RPT_HistorialPermisosRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialPermisos" msprop:Generator_RowDeletingName="V_RPT_HistorialPermisosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialPermisosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialPermisosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialPermisosRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialPermisosRow" msprop:Generator_UserTableName="V_RPT_HistorialPermisos" msprop:Generator_RowEvArgName="V_RPT_HistorialPermisosRowChangeEvent">
+        <xs:element name="V_RPT_HistorialIncapacidad" msprop:Generator_TableClassName="V_RPT_HistorialIncapacidadDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialIncapacidad" msprop:Generator_TablePropName="V_RPT_HistorialIncapacidad" msprop:Generator_RowDeletingName="V_RPT_HistorialIncapacidadRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialIncapacidadRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialIncapacidadRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialIncapacidadRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialIncapacidad" msprop:Generator_RowChangedName="V_RPT_HistorialIncapacidadRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialIncapacidadRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialIncapacidadRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="hinc_Id" msprop:Generator_ColumnVarNameInTable="columnhinc_Id" msprop:Generator_ColumnPropNameInRow="hinc_Id" msprop:Generator_ColumnPropNameInTable="hinc_IdColumn" msprop:Generator_UserColumnName="hinc_Id" type="xs:int" />
+              <xs:element name="Identidad" msprop:Generator_ColumnVarNameInTable="columnIdentidad" msprop:Generator_ColumnPropNameInRow="Identidad" msprop:Generator_ColumnPropNameInTable="IdentidadColumn" msprop:Generator_UserColumnName="Identidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NombreCompleto" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombreCompleto" msprop:Generator_ColumnPropNameInRow="NombreCompleto" msprop:Generator_ColumnPropNameInTable="NombreCompletoColumn" msprop:Generator_UserColumnName="NombreCompleto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoIncapacidad" msprop:Generator_ColumnVarNameInTable="columnTipoIncapacidad" msprop:Generator_ColumnPropNameInRow="TipoIncapacidad" msprop:Generator_ColumnPropNameInTable="TipoIncapacidadColumn" msprop:Generator_UserColumnName="TipoIncapacidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Dias" msprop:Generator_ColumnVarNameInTable="columnDias" msprop:Generator_ColumnPropNameInRow="Dias" msprop:Generator_ColumnPropNameInTable="DiasColumn" msprop:Generator_UserColumnName="Dias" type="xs:int" />
+              <xs:element name="FechaInicio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaInicio" msprop:Generator_ColumnPropNameInRow="FechaInicio" msprop:Generator_ColumnPropNameInTable="FechaInicioColumn" msprop:Generator_UserColumnName="FechaInicio" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FechaFin" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaFin" msprop:Generator_ColumnPropNameInRow="FechaFin" msprop:Generator_ColumnPropNameInTable="FechaFinColumn" msprop:Generator_UserColumnName="FechaFin" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_RPT_HistorialPermisos" msprop:Generator_TableClassName="V_RPT_HistorialPermisosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialPermisos" msprop:Generator_TablePropName="V_RPT_HistorialPermisos" msprop:Generator_RowDeletingName="V_RPT_HistorialPermisosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialPermisosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialPermisosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialPermisosRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialPermisos" msprop:Generator_RowChangedName="V_RPT_HistorialPermisosRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialPermisosRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialPermisosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hper_Id" msprop:Generator_ColumnVarNameInTable="columnhper_Id" msprop:Generator_ColumnPropNameInRow="hper_Id" msprop:Generator_ColumnPropNameInTable="hper_IdColumn" msprop:Generator_UserColumnName="hper_Id" type="xs:int" />
@@ -541,37 +571,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialSalidas" msprop:Generator_TableClassName="V_RPT_HistorialSalidasDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSalidas" msprop:Generator_RowChangedName="V_RPT_HistorialSalidasRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialSalidas" msprop:Generator_RowDeletingName="V_RPT_HistorialSalidasRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSalidasRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSalidasRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSalidasRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialSalidasRow" msprop:Generator_UserTableName="V_RPT_HistorialSalidas" msprop:Generator_RowEvArgName="V_RPT_HistorialSalidasRowChangeEvent">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="hsal_Id" msprop:Generator_ColumnVarNameInTable="columnhsal_Id" msprop:Generator_ColumnPropNameInRow="hsal_Id" msprop:Generator_ColumnPropNameInTable="hsal_IdColumn" msprop:Generator_UserColumnName="hsal_Id" type="xs:int" />
-              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
-              <xs:element name="Nombre_Empleado" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombre_Empleado" msprop:Generator_ColumnPropNameInRow="Nombre_Empleado" msprop:Generator_ColumnPropNameInTable="Nombre_EmpleadoColumn" msprop:Generator_UserColumnName="Nombre_Empleado" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="101" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="tsal_Descripcion" msprop:Generator_ColumnVarNameInTable="columntsal_Descripcion" msprop:Generator_ColumnPropNameInRow="tsal_Descripcion" msprop:Generator_ColumnPropNameInTable="tsal_DescripcionColumn" msprop:Generator_UserColumnName="tsal_Descripcion" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="observaciones" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnobservaciones" msprop:Generator_ColumnPropNameInRow="observaciones" msprop:Generator_ColumnPropNameInTable="observacionesColumn" msprop:Generator_UserColumnName="observaciones" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="hsal_FechaSalida" msprop:Generator_ColumnVarNameInTable="columnhsal_FechaSalida" msprop:Generator_ColumnPropNameInRow="hsal_FechaSalida" msprop:Generator_ColumnPropNameInTable="hsal_FechaSalidaColumn" msprop:Generator_UserColumnName="hsal_FechaSalida" type="xs:dateTime" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="V_RPT_HistorialSueldos" msprop:Generator_TableClassName="V_RPT_HistorialSueldosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos" msprop:Generator_RowChangedName="V_RPT_HistorialSueldosRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialSueldos" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldosRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialSueldosRow" msprop:Generator_UserTableName="V_RPT_HistorialSueldos" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldosRowChangeEvent">
+        <xs:element name="V_RPT_HistorialSueldos" msprop:Generator_TableClassName="V_RPT_HistorialSueldosDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos" msprop:Generator_TablePropName="V_RPT_HistorialSueldos" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldosRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldosRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldosRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldosRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialSueldos" msprop:Generator_RowChangedName="V_RPT_HistorialSueldosRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldosRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialSueldosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sue_Id" msprop:Generator_ColumnVarNameInTable="columnsue_Id" msprop:Generator_ColumnPropNameInRow="sue_Id" msprop:Generator_ColumnPropNameInTable="sue_IdColumn" msprop:Generator_UserColumnName="sue_Id" type="xs:int" />
@@ -602,7 +602,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialVacaciones" msprop:Generator_TableClassName="V_RPT_HistorialVacacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialVacaciones" msprop:Generator_RowChangedName="V_RPT_HistorialVacacionesRowChanged" msprop:Generator_TablePropName="V_RPT_HistorialVacaciones" msprop:Generator_RowDeletingName="V_RPT_HistorialVacacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialVacacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialVacacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialVacacionesRowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialVacacionesRow" msprop:Generator_UserTableName="V_RPT_HistorialVacaciones" msprop:Generator_RowEvArgName="V_RPT_HistorialVacacionesRowChangeEvent">
+        <xs:element name="V_RPT_HistorialVacaciones" msprop:Generator_TableClassName="V_RPT_HistorialVacacionesDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialVacaciones" msprop:Generator_TablePropName="V_RPT_HistorialVacaciones" msprop:Generator_RowDeletingName="V_RPT_HistorialVacacionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialVacacionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialVacacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialVacacionesRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialVacaciones" msprop:Generator_RowChangedName="V_RPT_HistorialVacacionesRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialVacacionesRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialVacacionesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="hvac_Id" msprop:Generator_ColumnVarNameInTable="columnhvac_Id" msprop:Generator_ColumnPropNameInRow="hvac_Id" msprop:Generator_ColumnPropNameInTable="hvac_IdColumn" msprop:Generator_UserColumnName="hvac_Id" type="xs:int" />
@@ -623,7 +623,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HorasTrabajadas" msprop:Generator_TableClassName="V_RPT_HorasTrabajadasDataTable" msprop:Generator_TableVarName="tableV_RPT_HorasTrabajadas" msprop:Generator_RowChangedName="V_RPT_HorasTrabajadasRowChanged" msprop:Generator_TablePropName="V_RPT_HorasTrabajadas" msprop:Generator_RowDeletingName="V_RPT_HorasTrabajadasRowDeleting" msprop:Generator_RowChangingName="V_RPT_HorasTrabajadasRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HorasTrabajadasRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HorasTrabajadasRowDeleted" msprop:Generator_RowClassName="V_RPT_HorasTrabajadasRow" msprop:Generator_UserTableName="V_RPT_HorasTrabajadas" msprop:Generator_RowEvArgName="V_RPT_HorasTrabajadasRowChangeEvent">
+        <xs:element name="V_RPT_HorasTrabajadas" msprop:Generator_TableClassName="V_RPT_HorasTrabajadasDataTable" msprop:Generator_TableVarName="tableV_RPT_HorasTrabajadas" msprop:Generator_TablePropName="V_RPT_HorasTrabajadas" msprop:Generator_RowDeletingName="V_RPT_HorasTrabajadasRowDeleting" msprop:Generator_RowChangingName="V_RPT_HorasTrabajadasRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HorasTrabajadasRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HorasTrabajadasRowDeleted" msprop:Generator_UserTableName="V_RPT_HorasTrabajadas" msprop:Generator_RowChangedName="V_RPT_HorasTrabajadasRowChanged" msprop:Generator_RowEvArgName="V_RPT_HorasTrabajadasRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HorasTrabajadasRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="htra_Id" msprop:Generator_ColumnVarNameInTable="columnhtra_Id" msprop:Generator_ColumnPropNameInRow="htra_Id" msprop:Generator_ColumnPropNameInTable="htra_IdColumn" msprop:Generator_UserColumnName="htra_Id" type="xs:int" />
@@ -651,11 +651,10 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
               </xs:element>
               <xs:element name="CantidadHoras" msprop:Generator_ColumnVarNameInTable="columnCantidadHoras" msprop:Generator_ColumnPropNameInRow="CantidadHoras" msprop:Generator_ColumnPropNameInTable="CantidadHorasColumn" msprop:Generator_UserColumnName="CantidadHoras" type="xs:int" />
               <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="FechaFin" msprop:Generator_ColumnVarNameInTable="columnFechaFin" msprop:Generator_ColumnPropNameInRow="FechaFin" msprop:Generator_ColumnPropNameInTable="FechaFinColumn" msprop:Generator_UserColumnName="FechaFin" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_FaseSeleccion" msprop:Generator_TableClassName="V_RPT_FaseSeleccionDataTable" msprop:Generator_TableVarName="tableV_RPT_FaseSeleccion" msprop:Generator_TablePropName="V_RPT_FaseSeleccion" msprop:Generator_RowDeletingName="V_RPT_FaseSeleccionRowDeleting" msprop:Generator_RowChangingName="V_RPT_FaseSeleccionRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_FaseSeleccionRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_FaseSeleccionRowDeleted" msprop:Generator_UserTableName="V_RPT_FaseSeleccion" msprop:Generator_RowChangedName="V_RPT_FaseSeleccionRowChanged" msprop:Generator_RowEvArgName="V_RPT_FaseSeleccionRowChangeEvent" msprop:Generator_RowClassName="V_RPT_FaseSeleccionRow">
+        <xs:element name="V_RPT_FaseSeleccion" msprop:Generator_TableClassName="V_RPT_FaseSeleccionDataTable" msprop:Generator_TableVarName="tableV_RPT_FaseSeleccion" msprop:Generator_RowChangedName="V_RPT_FaseSeleccionRowChanged" msprop:Generator_TablePropName="V_RPT_FaseSeleccion" msprop:Generator_RowDeletingName="V_RPT_FaseSeleccionRowDeleting" msprop:Generator_RowChangingName="V_RPT_FaseSeleccionRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_FaseSeleccionRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_FaseSeleccionRowDeleted" msprop:Generator_RowClassName="V_RPT_FaseSeleccionRow" msprop:Generator_UserTableName="V_RPT_FaseSeleccion" msprop:Generator_RowEvArgName="V_RPT_FaseSeleccionRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="fsel_Id" msprop:Generator_ColumnVarNameInTable="columnfsel_Id" msprop:Generator_ColumnPropNameInRow="fsel_Id" msprop:Generator_ColumnPropNameInTable="fsel_IdColumn" msprop:Generator_UserColumnName="fsel_Id" type="xs:int" />
@@ -688,7 +687,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_Requisiciones" msprop:Generator_TableClassName="V_RPT_RequisicionesDataTable" msprop:Generator_TableVarName="tableV_RPT_Requisiciones" msprop:Generator_RowChangedName="V_RPT_RequisicionesRowChanged" msprop:Generator_TablePropName="V_RPT_Requisiciones" msprop:Generator_RowDeletingName="V_RPT_RequisicionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_RequisicionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_RequisicionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_RequisicionesRowDeleted" msprop:Generator_RowClassName="V_RPT_RequisicionesRow" msprop:Generator_UserTableName="V_RPT_Requisiciones" msprop:Generator_RowEvArgName="V_RPT_RequisicionesRowChangeEvent">
+        <xs:element name="V_RPT_Requisiciones" msprop:Generator_TableClassName="V_RPT_RequisicionesDataTable" msprop:Generator_TableVarName="tableV_RPT_Requisiciones" msprop:Generator_TablePropName="V_RPT_Requisiciones" msprop:Generator_RowDeletingName="V_RPT_RequisicionesRowDeleting" msprop:Generator_RowChangingName="V_RPT_RequisicionesRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_RequisicionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_RequisicionesRowDeleted" msprop:Generator_UserTableName="V_RPT_Requisiciones" msprop:Generator_RowChangedName="V_RPT_RequisicionesRowChanged" msprop:Generator_RowEvArgName="V_RPT_RequisicionesRowChangeEvent" msprop:Generator_RowClassName="V_RPT_RequisicionesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id_Requisicion" msprop:Generator_ColumnVarNameInTable="columnId_Requisicion" msprop:Generator_ColumnPropNameInRow="Id_Requisicion" msprop:Generator_ColumnPropNameInTable="Id_RequisicionColumn" msprop:Generator_UserColumnName="Id_Requisicion" type="xs:int" />
@@ -791,7 +790,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_Empleado_Curriculum" msprop:Generator_TableClassName="V_RPT_Empleado_CurriculumDataTable" msprop:Generator_TableVarName="tableV_RPT_Empleado_Curriculum" msprop:Generator_TablePropName="V_RPT_Empleado_Curriculum" msprop:Generator_RowDeletingName="V_RPT_Empleado_CurriculumRowDeleting" msprop:Generator_RowChangingName="V_RPT_Empleado_CurriculumRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_Empleado_CurriculumRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_Empleado_CurriculumRowDeleted" msprop:Generator_UserTableName="V_RPT_Empleado_Curriculum" msprop:Generator_RowChangedName="V_RPT_Empleado_CurriculumRowChanged" msprop:Generator_RowEvArgName="V_RPT_Empleado_CurriculumRowChangeEvent" msprop:Generator_RowClassName="V_RPT_Empleado_CurriculumRow">
+        <xs:element name="V_RPT_Empleado_Curriculum" msprop:Generator_TableClassName="V_RPT_Empleado_CurriculumDataTable" msprop:Generator_TableVarName="tableV_RPT_Empleado_Curriculum" msprop:Generator_RowChangedName="V_RPT_Empleado_CurriculumRowChanged" msprop:Generator_TablePropName="V_RPT_Empleado_Curriculum" msprop:Generator_RowDeletingName="V_RPT_Empleado_CurriculumRowDeleting" msprop:Generator_RowChangingName="V_RPT_Empleado_CurriculumRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_Empleado_CurriculumRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_Empleado_CurriculumRowDeleted" msprop:Generator_RowClassName="V_RPT_Empleado_CurriculumRow" msprop:Generator_UserTableName="V_RPT_Empleado_Curriculum" msprop:Generator_RowEvArgName="V_RPT_Empleado_CurriculumRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="per_Id" msprop:Generator_ColumnVarNameInTable="columnper_Id" msprop:Generator_ColumnPropNameInRow="per_Id" msprop:Generator_ColumnPropNameInTable="per_IdColumn" msprop:Generator_UserColumnName="per_Id" type="xs:int" minOccurs="0" />
@@ -872,7 +871,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_EquipoEmpleado" msprop:Generator_TableClassName="V_RPT_EquipoEmpleadoDataTable" msprop:Generator_TableVarName="tableV_RPT_EquipoEmpleado" msprop:Generator_RowChangedName="V_RPT_EquipoEmpleadoRowChanged" msprop:Generator_TablePropName="V_RPT_EquipoEmpleado" msprop:Generator_RowDeletingName="V_RPT_EquipoEmpleadoRowDeleting" msprop:Generator_RowChangingName="V_RPT_EquipoEmpleadoRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_EquipoEmpleadoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_EquipoEmpleadoRowDeleted" msprop:Generator_RowClassName="V_RPT_EquipoEmpleadoRow" msprop:Generator_UserTableName="V_RPT_EquipoEmpleado" msprop:Generator_RowEvArgName="V_RPT_EquipoEmpleadoRowChangeEvent">
+        <xs:element name="V_RPT_EquipoEmpleado" msprop:Generator_TableClassName="V_RPT_EquipoEmpleadoDataTable" msprop:Generator_TableVarName="tableV_RPT_EquipoEmpleado" msprop:Generator_TablePropName="V_RPT_EquipoEmpleado" msprop:Generator_RowDeletingName="V_RPT_EquipoEmpleadoRowDeleting" msprop:Generator_RowChangingName="V_RPT_EquipoEmpleadoRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_EquipoEmpleadoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_EquipoEmpleadoRowDeleted" msprop:Generator_UserTableName="V_RPT_EquipoEmpleado" msprop:Generator_RowChangedName="V_RPT_EquipoEmpleadoRowChanged" msprop:Generator_RowEvArgName="V_RPT_EquipoEmpleadoRowChangeEvent" msprop:Generator_RowClassName="V_RPT_EquipoEmpleadoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="eqem_Id" msprop:Generator_ColumnVarNameInTable="columneqem_Id" msprop:Generator_ColumnPropNameInRow="eqem_Id" msprop:Generator_ColumnPropNameInTable="eqem_IdColumn" msprop:Generator_UserColumnName="eqem_Id" type="xs:int" />
@@ -902,7 +901,7 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialSueldos1" msprop:Generator_TableClassName="V_RPT_HistorialSueldos1DataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos1" msprop:Generator_RowChangedName="V_RPT_HistorialSueldos1RowChanged" msprop:Generator_TablePropName="V_RPT_HistorialSueldos1" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldos1RowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldos1RowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldos1RowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldos1RowDeleted" msprop:Generator_RowClassName="V_RPT_HistorialSueldos1Row" msprop:Generator_UserTableName="V_RPT_HistorialSueldos1" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldos1RowChangeEvent">
+        <xs:element name="V_RPT_HistorialSueldos1" msprop:Generator_TableClassName="V_RPT_HistorialSueldos1DataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSueldos1" msprop:Generator_TablePropName="V_RPT_HistorialSueldos1" msprop:Generator_RowDeletingName="V_RPT_HistorialSueldos1RowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSueldos1RowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSueldos1RowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSueldos1RowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialSueldos1" msprop:Generator_RowChangedName="V_RPT_HistorialSueldos1RowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialSueldos1RowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialSueldos1Row">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="sue_Id" msprop:Generator_ColumnVarNameInTable="columnsue_Id" msprop:Generator_ColumnPropNameInRow="sue_Id" msprop:Generator_ColumnPropNameInTable="sue_IdColumn" msprop:Generator_UserColumnName="sue_Id" type="xs:int" />
@@ -933,35 +932,35 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="V_RPT_HistorialIncapacidad" msprop:Generator_TableClassName="V_RPT_HistorialIncapacidadDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialIncapacidad" msprop:Generator_TablePropName="V_RPT_HistorialIncapacidad" msprop:Generator_RowDeletingName="V_RPT_HistorialIncapacidadRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialIncapacidadRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialIncapacidadRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialIncapacidadRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialIncapacidad" msprop:Generator_RowChangedName="V_RPT_HistorialIncapacidadRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialIncapacidadRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialIncapacidadRow">
+        <xs:element name="V_RPT_HistorialSalidas" msprop:Generator_TableClassName="V_RPT_HistorialSalidasDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialSalidas" msprop:Generator_TablePropName="V_RPT_HistorialSalidas" msprop:Generator_RowDeletingName="V_RPT_HistorialSalidasRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialSalidasRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialSalidasRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialSalidasRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialSalidas" msprop:Generator_RowChangedName="V_RPT_HistorialSalidasRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialSalidasRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialSalidasRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="hinc_Id" msprop:Generator_ColumnVarNameInTable="columnhinc_Id" msprop:Generator_ColumnPropNameInRow="hinc_Id" msprop:Generator_ColumnPropNameInTable="hinc_IdColumn" msprop:Generator_UserColumnName="hinc_Id" type="xs:int" />
-              <xs:element name="ticn_Id" msprop:Generator_ColumnVarNameInTable="columnticn_Id" msprop:Generator_ColumnPropNameInRow="ticn_Id" msprop:Generator_ColumnPropNameInTable="ticn_IdColumn" msprop:Generator_UserColumnName="ticn_Id" type="xs:int" />
-              <xs:element name="Identidad" msprop:Generator_ColumnVarNameInTable="columnIdentidad" msprop:Generator_ColumnPropNameInRow="Identidad" msprop:Generator_ColumnPropNameInTable="IdentidadColumn" msprop:Generator_UserColumnName="Identidad">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="16" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="NombreCompleto" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombreCompleto" msprop:Generator_ColumnPropNameInRow="NombreCompleto" msprop:Generator_ColumnPropNameInTable="NombreCompletoColumn" msprop:Generator_UserColumnName="NombreCompleto" minOccurs="0">
+              <xs:element name="hsal_Id" msprop:Generator_ColumnVarNameInTable="columnhsal_Id" msprop:Generator_ColumnPropNameInRow="hsal_Id" msprop:Generator_ColumnPropNameInTable="hsal_IdColumn" msprop:Generator_UserColumnName="hsal_Id" type="xs:int" />
+              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
+              <xs:element name="Nombre_Empleado" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNombre_Empleado" msprop:Generator_ColumnPropNameInRow="Nombre_Empleado" msprop:Generator_ColumnPropNameInTable="Nombre_EmpleadoColumn" msprop:Generator_UserColumnName="Nombre_Empleado" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="101" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TipoIncapacidad" msprop:Generator_ColumnVarNameInTable="columnTipoIncapacidad" msprop:Generator_ColumnPropNameInRow="TipoIncapacidad" msprop:Generator_ColumnPropNameInTable="TipoIncapacidadColumn" msprop:Generator_UserColumnName="TipoIncapacidad">
+              <xs:element name="tsal_Descripcion" msprop:Generator_ColumnVarNameInTable="columntsal_Descripcion" msprop:Generator_ColumnPropNameInRow="tsal_Descripcion" msprop:Generator_ColumnPropNameInTable="tsal_DescripcionColumn" msprop:Generator_UserColumnName="tsal_Descripcion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="tsal_Id" msprop:Generator_ColumnVarNameInTable="columntsal_Id" msprop:Generator_ColumnPropNameInRow="tsal_Id" msprop:Generator_ColumnPropNameInTable="tsal_IdColumn" msprop:Generator_UserColumnName="tsal_Id" type="xs:int" />
+              <xs:element name="observaciones" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnobservaciones" msprop:Generator_ColumnPropNameInRow="observaciones" msprop:Generator_ColumnPropNameInTable="observacionesColumn" msprop:Generator_UserColumnName="observaciones" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Dias" msprop:Generator_ColumnVarNameInTable="columnDias" msprop:Generator_ColumnPropNameInRow="Dias" msprop:Generator_ColumnPropNameInTable="DiasColumn" msprop:Generator_UserColumnName="Dias" type="xs:int" />
-              <xs:element name="FechaInicio" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaInicio" msprop:Generator_ColumnPropNameInRow="FechaInicio" msprop:Generator_ColumnPropNameInTable="FechaInicioColumn" msprop:Generator_UserColumnName="FechaInicio" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="FechaFin" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaFin" msprop:Generator_ColumnPropNameInRow="FechaFin" msprop:Generator_ColumnPropNameInTable="FechaFinColumn" msprop:Generator_UserColumnName="FechaFin" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FechaSalida" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFechaSalida" msprop:Generator_ColumnPropNameInRow="FechaSalida" msprop:Generator_ColumnPropNameInTable="FechaSalidaColumn" msprop:Generator_UserColumnName="FechaSalida" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="fechafin" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfechafin" msprop:Generator_ColumnPropNameInRow="fechafin" msprop:Generator_ColumnPropNameInTable="fechafinColumn" msprop:Generator_UserColumnName="fechafin" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -978,6 +977,10 @@ FROM            rrhh.V_RPT_HorasTrabajadas</CommandText>
     <xs:unique name="V_RPT_HistorialContrataciones_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:V_RPT_HistorialContrataciones" />
       <xs:field xpath="mstns:hcon_Id" />
+    </xs:unique>
+    <xs:unique name="V_RPT_HistorialIncapacidad_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:V_RPT_HistorialIncapacidad" />
+      <xs:field xpath="mstns:hinc_Id" />
     </xs:unique>
     <xs:unique name="V_RPT_HistorialPermisos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:V_RPT_HistorialPermisos" />

@@ -8,11 +8,12 @@
 
 @using (Html.BeginForm("HistorialIncapacidades", "ReportesRRHH", FormMethod.Post, new { id = "" }))
 {
+
     <div class="row">
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de Historial Incapacidades</h5>
+                    <h5>Reportes de deduciones</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -20,15 +21,13 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Tipo Incapacidad</label>
+                                <label class="font-normal">Deducción</label>
 
                                 @Html.DropDownList("ticn_Id", (IEnumerable<SelectListItem>)ViewBag.incapacidades, "Seleccione una opción", new { @class = "form-control" })
 
                                 @Html.ValidationMessageFor(model => model.ticn_Id, "", new { @class = "text-danger" })
                             </div>
 
-
-                            <br />
                         </div>
 
                         <div class="form-group">
@@ -37,7 +36,6 @@
                                 <div class="input-group date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaInicio", @id = "FechaInicio" } })
                                 </div>
-
                                 @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
                             </div>
 
@@ -48,10 +46,10 @@
                                 </div>
                                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                             </div>
-                           
+
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarHistorialIncapacidades">Previsualizar</button>
+                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
                     </div>
                 </div>
             </div>
@@ -60,7 +58,6 @@
 }
 
 <br />
-   
 
 @{
     string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";

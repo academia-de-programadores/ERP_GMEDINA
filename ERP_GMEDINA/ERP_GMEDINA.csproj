@@ -242,6 +242,11 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
+    <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSets\ReportesRRHH.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +298,7 @@
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
+    <Compile Include="Models\cV_RPT_RRHH_Permisos.cs" />
     <Compile Include="Models\DatosProfesionales.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
     <Compile Include="Models\DatosProfessionalesEdit.cs" />
@@ -1079,6 +1085,9 @@
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1342,7 +1351,6 @@
     <Content Include="Reports\ReportesDS.xss">
       <DependentUpon>ReportesDS.xsd</DependentUpon>
     </Content>
-    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\General\Areas\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Cargos.js" />
@@ -1384,6 +1392,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\PermisosRPT\PermisosRPT.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
@@ -1467,6 +1476,17 @@
     <Content Include="DataSets\ReportesRRHH.xsc">
       <DependentUpon>ReportesRRHH.xsd</DependentUpon>
     </Content>
+    <Content Include="DataSets\ReportesPlanillaDS.xsc">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSets\ReportesPlanillaDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportesPlanillaDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSets\ReportesPlanillaDS.xss">
+      <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
+    </Content>
     <None Include="DataSets\ReportesRRHH.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
@@ -1478,7 +1498,6 @@
     <Content Include="Reports\EquipoEmpleadosRPT.rdlc" />
     <Content Include="Reports\HistorialCargosRPT.rdlc" />
     <Content Include="Reports\HistorialContratacionesRPT.rdlc" />
-    <Content Include="Reports\HistorialSalidasRPT.rdlc" />
     <Content Include="Reports\HistorialVacacionesRPT.rdlc" />
     <Content Include="Reports\PermisosRPT.rdlc" />
     <None Include="Reports\ReportesDS.xsd">
@@ -2149,7 +2168,6 @@
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
-    <Content Include="Views\ReportesRRHH\EmpleadosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
     <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
@@ -2201,7 +2219,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
-    <EmbeddedResource Include="Reports\HistorialIncapacidadesRPT.rdlc" />
+    <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
+    <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
   </ItemGroup>
   <PropertyGroup>
