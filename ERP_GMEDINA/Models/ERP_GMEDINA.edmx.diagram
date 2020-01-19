@@ -281,6 +281,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="19.375" PointY="12.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="18.375" PointY="20.75" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="17.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" Width="1.5" PointX="19.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

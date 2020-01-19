@@ -1385,6 +1385,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAmonestaciones' do
           <Property Name="FechaAnterior" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAmonestaciones_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_RPT_HistorialAmonestaciones_Empleados">
+          <Key>
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+          </Key>
+          <Property Name="nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="per_Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialAudienciaDescargo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_RPT_HistorialAudienciaDescargo">
           <Key>
@@ -5484,6 +5494,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HistorialAmonestaciones].[ObservacionAnterior] AS [ObservacionAnterior], 
     [V_RPT_HistorialAmonestaciones].[FechaAnterior] AS [FechaAnterior]
     FROM [rrhh].[V_RPT_HistorialAmonestaciones] AS [V_RPT_HistorialAmonestaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_RPT_HistorialAmonestaciones_Empleados" EntityType="Self.V_RPT_HistorialAmonestaciones_Empleados" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_RPT_HistorialAmonestaciones_Empleados].[nombre] AS [nombre], 
+    [V_RPT_HistorialAmonestaciones_Empleados].[per_Identidad] AS [per_Identidad]
+    FROM [rrhh].[V_RPT_HistorialAmonestaciones_Empleados] AS [V_RPT_HistorialAmonestaciones_Empleados]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="Self.V_RPT_HistorialAudienciaDescargo" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -11706,6 +11722,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
+          <EntitySet Name="V_RPT_HistorialAmonestaciones_Empleados" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13264,6 +13281,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="fechafin" Type="DateTime" Precision="0" />
           <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialAmonestaciones_Empleados">
+          <Key>
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="per_Identidad" />
+          </Key>
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="per_Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -16001,6 +16026,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
                 <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialAmonestaciones_Empleados">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialAmonestaciones_Empleados">
+                <ScalarProperty Name="per_Identidad" ColumnName="per_Identidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
