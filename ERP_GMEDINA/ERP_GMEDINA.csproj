@@ -230,6 +230,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
+    <Compile Include="Controllers\ReportesRRHH1Controller.cs" />
     <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
@@ -243,16 +244,6 @@
     <Compile Include="Controllers\TipoPermisosController.cs" />
     <Compile Include="Controllers\TipoSalidasController.cs" />
     <Compile Include="Controllers\TitulosController.cs" />
-    <Compile Include="DataSets\ReportesAmonestacionesDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportesAmonestacionesDS.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSets\ReportesAudiencias.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportesAudiencias.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DataSets\ReportesPlanillaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1068,13 +1059,7 @@
     <Compile Include="Models\V_RPT_HistorialAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\V_RPT_HistorialAmonestaciones_Empleados.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\V_RPT_HistorialAudienciaDescargo.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\V_RPT_HistorialAudienciaDescargo_empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RPT_HistorialCargos.cs">
@@ -1409,7 +1394,6 @@
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
-    <Content Include="Scripts\app\General\Reporteria\HistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
@@ -1491,27 +1475,6 @@
     </Content>
     <Content Include="DataSets\ReportesPlanillaDS.xsc">
       <DependentUpon>ReportesPlanillaDS.xsd</DependentUpon>
-    </Content>
-    <Content Include="DataSets\ReportesAmonestacionesDS.xsc">
-      <DependentUpon>ReportesAmonestacionesDS.xsd</DependentUpon>
-    </Content>
-    <None Include="DataSets\ReportesAmonestacionesDS.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesAmonestacionesDS.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesAmonestacionesDS.xss">
-      <DependentUpon>ReportesAmonestacionesDS.xsd</DependentUpon>
-    </Content>
-    <Content Include="DataSets\ReportesAudiencias.xsc">
-      <DependentUpon>ReportesAudiencias.xsd</DependentUpon>
-    </Content>
-    <None Include="DataSets\ReportesAudiencias.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReportesAudiencias.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSets\ReportesAudiencias.xss">
-      <DependentUpon>ReportesAudiencias.xsd</DependentUpon>
     </Content>
     <None Include="DataSets\ReportesPlanillaDS.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -2203,7 +2166,8 @@
     <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
     <Content Include="Views\ReportesRRHH\EmpleadosRPT.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargo.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
     <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
     <Content Include="Views\ReportesRRHH\SueldosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialCargosRPT.cshtml" />
@@ -2211,7 +2175,6 @@
     <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAmonestaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2282,9 +2245,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\AmonestacionesRPT.rdlc" />
-    <EmbeddedResource Include="Reports\AudienciaDescargo.rdlc" />
-    <EmbeddedResource Include="Reports\AudienciasDescargo.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
