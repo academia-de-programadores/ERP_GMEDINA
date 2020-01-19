@@ -17,7 +17,8 @@
             "Sueldos",
             "HistorialVacaciones",
             "HistorialHorasTrabajadas",
-            "HistorialCargos"
+            "HistorialCargos",
+            "HistorialContrataciones"
     ];
 
     var Amonestaciones= [

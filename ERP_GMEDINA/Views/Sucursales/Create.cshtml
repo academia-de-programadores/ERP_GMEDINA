@@ -21,7 +21,7 @@
                         <div class="form-horizontal" id="tbSucursales">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.empr_Id, "empr_Id", htmlAttributes: new { @class = "control-label col-md-3" })
+                                @Html.LabelFor(model => model.empr_Id, "Empresa", htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-8">
                                     @Html.DropDownList("empr_Id", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.empr_Id, "", new { @class = "text-danger", @id = "errorempr_Id" })

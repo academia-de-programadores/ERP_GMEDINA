@@ -111,6 +111,7 @@ function tablaEditar(ID) {
      function (obj) {
       if (obj != "-1" && obj != "-2" && obj != "-3") {
        $("#FormEditar").find("#empr_Nombre").val(obj.empr_Nombre);
+       //$('#UPempr_Logo').val(obj.empr_Logo);
        $("#ModalEditar").find("#img2")[0].src = obj.empr_Logo;
        $('#ModalEditar').modal('show');
       }
@@ -163,7 +164,8 @@ $("#btnInactivar").click(function () {
  $("#ModalInactivar").find("#empr_RazonInactivo").focus();
 });
 $("#FormNuevo").on("submit", function (event) {
-    if ($("#ModalNuevo").data("res")) {
+ var modalNuevo=$("#ModalNuevo").data("res");
+    if (modalNuevo=="true") {
         event.preventDefault();
         var data = $("#FormNuevo").serializeArray();
         data = serializar(data);
@@ -178,19 +180,20 @@ $("#FormNuevo").on("submit", function (event) {
                     $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
                     $('.modal-backdrop').remove();//eliminamos el
                 }else {
-                    MsgError("Error","Imagen Requerida");
+                 MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }
             });
     } else {
-        MsgError("Error", "El archivo no es valido o el campo ya existe");
+     MsgError("Error", "Intente con otra imagen ó cambiar el nombre");
     }
 });
 
 $("#btnActualizar").click(function () {
  var data = $("#FormEditar").serializeArray();
- var formEditar = $("#ModalEditar").data("res");
+ var img2 = $("#img2")[0].src;
+ //var formEditar = $("#ModalEditar").data("res");
  data = serializar(data);
- if (data != null && formEditar) {
+ if (data != null && img2 != "http://localhost:51144/Empresas") {
   data.empr_Id = id;
   data = JSON.stringify({ tbEmpresas: data });
   _ajax(data,
@@ -206,7 +209,7 @@ $("#btnActualizar").click(function () {
        }
       });
  } else {
-  MsgError("Error", "por favor llene todas las cajas de texto");
+  MsgError("Error", "Intente con otra imagen ó cambiar el nombre");
  }
 });
 

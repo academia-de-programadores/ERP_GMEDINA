@@ -34,7 +34,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.per_Identidad, htmlAttributes: new { @class = "requerido control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.per_Identidad, new { htmlAttributes = new { @class = "required form-control", type="number" , @size = "16"  } })
+                                                @Html.EditorFor(model => model.per_Identidad, new { htmlAttributes = new { @class = "required form-control", type="number" , @size = "16", @onkeypress = "return Numericos(event)" } })
                                                 @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

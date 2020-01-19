@@ -32,7 +32,7 @@
         }
         else
         {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>';
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
         }
               div += '</tr>' + '</tbody>'
         '</table>'
