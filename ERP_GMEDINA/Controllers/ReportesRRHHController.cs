@@ -917,8 +917,8 @@ namespace ERP_GMEDINA.Controllers
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_EmpleadoCurriculum.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadosCurriculumInfor.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Empleado_Curriculum"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadosCurriculumRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EmpleadoCurriculum"]));
             conx.Close();
 
             ViewBag.ReportViewer = reportViewer;

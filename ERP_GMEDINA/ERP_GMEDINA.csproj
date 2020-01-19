@@ -2255,7 +2255,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\EmpleadosCurriculumInfor.rdlc" />
     <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
