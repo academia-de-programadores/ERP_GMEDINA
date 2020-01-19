@@ -115,7 +115,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RPT_FaseSeleccion> V_RPT_FaseSeleccion { get; set; }
         public virtual DbSet<V_RPT_EquipoEmpleado> V_RPT_EquipoEmpleado { get; set; }
         public virtual DbSet<V_RPT_HistorialAmonestaciones> V_RPT_HistorialAmonestaciones { get; set; }
-        public virtual DbSet<V_RPT_HistorialAudienciaDescargo> V_RPT_HistorialAudienciaDescargo { get; set; }
         public virtual DbSet<V_RPT_HistorialCargos> V_RPT_HistorialCargos { get; set; }
         public virtual DbSet<V_RPT_HistorialContrataciones> V_RPT_HistorialContrataciones { get; set; }
         public virtual DbSet<V_RPT_HistorialIncapacidad> V_RPT_HistorialIncapacidad { get; set; }
@@ -125,6 +124,9 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_RPT_HistorialSalidas> V_RPT_HistorialSalidas { get; set; }
         public virtual DbSet<V_RPT_HistorialSueldos> V_RPT_HistorialSueldos { get; set; }
         public virtual DbSet<V_RPT_HistorialAmonestaciones_Empleados> V_RPT_HistorialAmonestaciones_Empleados { get; set; }
+        public virtual DbSet<V_RPT_HistorialAudienciaDescargo_empleados> V_RPT_HistorialAudienciaDescargo_empleados { get; set; }
+        public virtual DbSet<V_RPT_Requisiciones> V_RPT_Requisiciones { get; set; }
+        public virtual DbSet<V_RPT_HistorialAudienciaDescargo> V_RPT_HistorialAudienciaDescargo { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

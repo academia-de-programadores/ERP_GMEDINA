@@ -1,13 +1,9 @@
 ﻿@using ReportViewerForMvc;
 @model ERP_GMEDINA.Models.V_RPT_HistorialVacaciones
 @{
-    ViewBag.Title = "HistorialVacacionesRPT";
+    ViewBag.Title = "Reportes de Vacaciones";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
-
-
-<h2>HistorialVacacionesRPT</h2>
-
 
 @using (Html.BeginForm("HistorialVacacionesRPT", "ReportesRRHH", FormMethod.Post, new { id = "" }))
 {
