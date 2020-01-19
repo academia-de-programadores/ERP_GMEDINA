@@ -664,6 +664,90 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
+
+
+        public ActionResult EquipoEmpleados()
+        {
+            //Cargar DDL del modal (Tipo de planilla a seleccionar)
+            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
+            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+            //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EquipoEmpleados(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+
+
+
+            //comando para el dataAdapter
+            SqlCommand command = new SqlCommand();
+            if (eqem_Id == null && Fecha == null && Id_Persona == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado";
+            }
+            else if (eqem_Id == null && Fecha==null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  Id_Persona =@Id_Persona ";
+                //command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
+            }
+            else if (eqem_Id == null && Id_Persona == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where Fecha=@Fecha ";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                
+            }
+            else if (eqem_Id == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where Fecha=@Fecha and  Id_Persona =@Id_Persona ";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
+            }
+
+            else if (Fecha == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  eqem_Id =@eqem_Id and  Id_Persona=@Id_Persona";
+                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
+                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
+            }
+            else if (Id_Persona == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where  eqem_Id =@eqem_Id and Fecha =@Fecha ";
+                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_EquipoEmpleado where eqem_Id =@eqem_Id and Fecha =@Fecha and Id_Persona=@Id_Persona ";
+                command.Parameters.AddWithValue("@eqem_Id", SqlDbType.Int).Value = eqem_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                command.Parameters.AddWithValue("@Id_Persona", SqlDbType.Int).Value = Id_Persona;
+            }
+           
+            SqlConnection conx = new SqlConnection(connectionString);
+            command.Connection = conx;
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(ds, ds.V_RPT_EquipoEmpleado.TableName);
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EquipoEmpleadosRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_EquipoEmpleado"]));
+            conx.Close();
+            ViewBag.ReportViewer = reportViewer;
+            ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
+            ViewBag.Vista_Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
+
+            return View();
+        }
+
     }
 }
 
