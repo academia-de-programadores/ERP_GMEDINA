@@ -98,6 +98,7 @@ $("#btnInactivar").click(function () {
     $("#ModalInactivar").find("#habi_RazonInactivo").focus();
 });
 //botones POST
+
 $("#btnGuardar").click(function () {
  var data = $("#FormNuevo").serializeArray();
  data = serializar(data);
@@ -120,6 +121,7 @@ $("#btnGuardar").click(function () {
   MsgError("Error", "por favor llene todas las cajas de texto");
  }
 });
+
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
@@ -143,6 +145,7 @@ $("#InActivar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
 $("#btnActualizar").click(function () {
  var data = $("#FormEditar").serializeArray();
  data = serializar(data);

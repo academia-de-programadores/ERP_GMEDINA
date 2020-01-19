@@ -595,6 +595,9 @@
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbEquipoEmpleados_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbEquipoEmpleados_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -2091,6 +2094,7 @@
     <Content Include="Views\Sucursales\_Delete.cshtml" />
     <Content Include="Views\Sucursales\_Detalles.cshtml" />
     <Content Include="Views\HistorialCargos\Promover.cshtml" />
+    <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

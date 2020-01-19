@@ -4291,5 +4291,22 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbSueldos_Restore", sue_idParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_RRHH_tbEquipoEmpleados_Delete_Result> UDP_RRHH_tbEquipoEmpleados_Delete(Nullable<int> eqem_Id, Nullable<int> eqem_UsuarioModifica, Nullable<System.DateTime> eqem_FechaModifica)
+        {
+            var eqem_IdParameter = eqem_Id.HasValue ?
+                new ObjectParameter("eqem_Id", eqem_Id) :
+                new ObjectParameter("eqem_Id", typeof(int));
+    
+            var eqem_UsuarioModificaParameter = eqem_UsuarioModifica.HasValue ?
+                new ObjectParameter("eqem_UsuarioModifica", eqem_UsuarioModifica) :
+                new ObjectParameter("eqem_UsuarioModifica", typeof(int));
+    
+            var eqem_FechaModificaParameter = eqem_FechaModifica.HasValue ?
+                new ObjectParameter("eqem_FechaModifica", eqem_FechaModifica) :
+                new ObjectParameter("eqem_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbEquipoEmpleados_Delete_Result>("UDP_RRHH_tbEquipoEmpleados_Delete", eqem_IdParameter, eqem_UsuarioModificaParameter, eqem_FechaModificaParameter);
+        }
     }
 }

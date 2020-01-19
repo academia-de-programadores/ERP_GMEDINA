@@ -1184,8 +1184,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
-          <Property Name="hinc_FechaInicio" Type="date" />
-          <Property Name="hinc_FechaFin" Type="date" />
+          <Property Name="hinc_FechaInicio" Type="datetime" />
+          <Property Name="hinc_FechaFin" Type="datetime" />
           <Property Name="hinc_Estado" Type="bit" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -1302,25 +1302,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Property Name="AnnioIngreso" Type="int" />
           <Property Name="Annio" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Empleado_Curriculum' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="V_RPT_Empleado_Curriculum">
-          <Property Name="per_Id" Type="int" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="101" />
-          <Property Name="Identidad" Type="nvarchar" MaxLength="16" />
-          <Property Name="Edad" Type="int" />
-          <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fecha_Nacimiento" Type="date" />
-          <Property Name="Estado_Civil" Type="varchar" MaxLength="10" />
-          <Property Name="Sexo" Type="varchar" MaxLength="9" />
-          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
-          <Property Name="Correo_Electronico" Type="nvarchar" MaxLength="50" />
-          <Property Name="Tipo_Sangre" Type="nvarchar" MaxLength="4" />
-          <Property Name="habi_Id" Type="int" />
-          <Property Name="comp_Id" Type="int" />
-          <Property Name="Habilidades" Type="nvarchar" MaxLength="100" />
-          <Property Name="Competencias" Type="nvarchar" MaxLength="100" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_EquipoEmpleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_RPT_EquipoEmpleado">
@@ -1560,6 +1541,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HorasTrabajadas' does not h
           <Property Name="TipoHora" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="CantidadHoras" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" />
+          <Property Name="FechaFin" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_Requisiciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4317,6 +4299,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Parameter Name="eqem_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="eqem_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbEquipoEmpleados_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="eqem_Id" Type="int" Mode="In" />
+          <Parameter Name="eqem_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="eqem_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbEquipoEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="eqtra_Id" Type="int" Mode="In" />
@@ -5583,7 +5570,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HorasTrabajadas].[NombreCompleto] AS [NombreCompleto], 
     [V_RPT_HorasTrabajadas].[TipoHora] AS [TipoHora], 
     [V_RPT_HorasTrabajadas].[CantidadHoras] AS [CantidadHoras], 
-    [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha]
+    [V_RPT_HorasTrabajadas].[Fecha] AS [Fecha], 
+    [V_RPT_HorasTrabajadas].[FechaFin] AS [FechaFin]
     FROM [rrhh].[V_RPT_HorasTrabajadas] AS [V_RPT_HorasTrabajadas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RPT_Requisiciones" EntityType="Self.V_RPT_Requisiciones" store:Type="Views" store:Schema="rrhh">
@@ -7782,8 +7770,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="hinc_CentroMedico" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Doctor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
           <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -11701,6 +11689,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_RPT_Requisiciones" EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" />
+          <FunctionImport Name="UDP_RRHH_tbEquipoEmpleados_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Delete_Result)">
+            <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="eqem_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13225,6 +13218,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="TipoHora" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="CantidadHoras" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="V_RPT_Requisiciones">
           <Key>
@@ -13258,6 +13252,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Idiomas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Requerimientos_Especiales" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_RRHH_tbEquipoEmpleados_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -15959,6 +15956,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySetMapping Name="V_RPT_HorasTrabajadas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HorasTrabajadas">
               <MappingFragment StoreEntitySet="V_RPT_HorasTrabajadas">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="CantidadHoras" ColumnName="CantidadHoras" />
                 <ScalarProperty Name="TipoHora" ColumnName="TipoHora" />
@@ -15994,6 +15992,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEquipoEmpleados_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEquipoEmpleados_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEquipoEmpleados_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

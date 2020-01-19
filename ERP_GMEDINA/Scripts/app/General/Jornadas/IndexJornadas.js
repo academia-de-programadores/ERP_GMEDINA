@@ -33,6 +33,7 @@ function tablaEditar(ID) {
             }
         });
 }
+
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -115,6 +116,7 @@ function showmodal(btn) {
     $(modalnuevo).find("#hor_HoraInicio").val("");
     $(modalnuevo).find("#hor_HoraFin").val("");
 }
+
 function showmodaledit(btn) {
     jor_Id = $(btn).data('id');
     _ajax(null,

@@ -208,6 +208,8 @@ function tablaDetalles(ID) {
             }
         });
 }
+
+
 function llenarTabla() {
     _ajax(null,
         '/Requisiciones/llenarTabla',
