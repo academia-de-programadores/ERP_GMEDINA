@@ -11621,12 +11621,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" />
           <EntitySet Name="V_RPT_HistorialCargos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" />
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" />
-          <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" />
           <EntitySet Name="V_RPT_HistorialPermisos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" />
           <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
+<<<<<<< HEAD
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
+=======
+          <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" />
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13041,24 +13044,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="FechaContratacion" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="V_RPT_HistorialIncapacidad">
-          <Key>
-            <PropertyRef Name="hinc_Id" />
-            <PropertyRef Name="ticn_Id" />
-            <PropertyRef Name="Identidad" />
-            <PropertyRef Name="NombreCompleto" />
-            <PropertyRef Name="TipoIncapacidad" />
-            <PropertyRef Name="Dias" />
-          </Key>
-          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
-          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
-          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="TipoIncapacidad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Dias" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="FechaFin" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="V_RPT_HistorialPermisos">
           <Key>
             <PropertyRef Name="hper_Id" />
@@ -13136,6 +13121,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="Fecha" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="V_RPT_HistorialSalidas">
           <Key>
             <PropertyRef Name="hsal_Id" />
@@ -13152,6 +13138,25 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="observaciones" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="FechaSalida" Type="DateTime" Precision="0" />
           <Property Name="fechafin" Type="DateTime" Precision="0" />
+=======
+        <EntityType Name="V_RPT_HistorialIncapacidad">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+            <PropertyRef Name="ticn_Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="TipoIncapacidad" />
+            <PropertyRef Name="Dias" />
+          </Key>
+          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="TipoIncapacidad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15781,20 +15786,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialIncapacidad">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialIncapacidad">
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="Dias" ColumnName="Dias" />
-                <ScalarProperty Name="TipoIncapacidad" ColumnName="TipoIncapacidad" />
-                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
-                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
-                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
-                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialPermisos">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialPermisos">
               <MappingFragment StoreEntitySet="V_RPT_HistorialPermisos">
@@ -15852,6 +15843,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="V_RPT_HistorialSalidas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSalidas">
               <MappingFragment StoreEntitySet="V_RPT_HistorialSalidas">
@@ -15863,6 +15855,19 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
+=======
+          <EntitySetMapping Name="V_RPT_HistorialIncapacidad">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialIncapacidad">
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="TipoIncapacidad" ColumnName="TipoIncapacidad" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
+                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

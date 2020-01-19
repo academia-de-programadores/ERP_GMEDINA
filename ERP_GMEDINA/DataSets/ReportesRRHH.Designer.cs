@@ -32,8 +32,6 @@ namespace ERP_GMEDINA.DataSets {
         
         private V_RPT_HistorialContratacionesDataTable tableV_RPT_HistorialContrataciones;
         
-        private V_RPT_HistorialIncapacidadDataTable tableV_RPT_HistorialIncapacidad;
-        
         private V_RPT_HistorialPermisosDataTable tableV_RPT_HistorialPermisos;
         
         private V_RPT_HistorialSueldosDataTable tableV_RPT_HistorialSueldos;
@@ -52,7 +50,11 @@ namespace ERP_GMEDINA.DataSets {
         
         private V_RPT_HistorialSueldos1DataTable tableV_RPT_HistorialSueldos1;
         
+<<<<<<< HEAD
         private V_RPT_HistorialSalidasDataTable tableV_RPT_HistorialSalidas;
+=======
+        private V_RPT_HistorialIncapacidadDataTable tableV_RPT_HistorialIncapacidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -94,9 +96,6 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_RPT_HistorialContrataciones"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialContratacionesDataTable(ds.Tables["V_RPT_HistorialContrataciones"]));
                 }
-                if ((ds.Tables["V_RPT_HistorialIncapacidad"] != null)) {
-                    base.Tables.Add(new V_RPT_HistorialIncapacidadDataTable(ds.Tables["V_RPT_HistorialIncapacidad"]));
-                }
                 if ((ds.Tables["V_RPT_HistorialPermisos"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialPermisosDataTable(ds.Tables["V_RPT_HistorialPermisos"]));
                 }
@@ -124,8 +123,13 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_RPT_HistorialSueldos1"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialSueldos1DataTable(ds.Tables["V_RPT_HistorialSueldos1"]));
                 }
+<<<<<<< HEAD
                 if ((ds.Tables["V_RPT_HistorialSalidas"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialSalidasDataTable(ds.Tables["V_RPT_HistorialSalidas"]));
+=======
+                if ((ds.Tables["V_RPT_HistorialIncapacidad"] != null)) {
+                    base.Tables.Add(new V_RPT_HistorialIncapacidadDataTable(ds.Tables["V_RPT_HistorialIncapacidad"]));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -187,6 +191,7 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public V_RPT_HistorialIncapacidadDataTable V_RPT_HistorialIncapacidad {
@@ -197,6 +202,8 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public V_RPT_HistorialPermisosDataTable V_RPT_HistorialPermisos {
@@ -207,6 +214,19 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public V_RPT_HistorialSalidasDataTable V_RPT_HistorialSalidas {
+            get {
+                return this.tableV_RPT_HistorialSalidas;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public V_RPT_HistorialSueldosDataTable V_RPT_HistorialSueldos {
@@ -289,9 +309,15 @@ namespace ERP_GMEDINA.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+<<<<<<< HEAD
         public V_RPT_HistorialSalidasDataTable V_RPT_HistorialSalidas {
             get {
                 return this.tableV_RPT_HistorialSalidas;
+=======
+        public V_RPT_HistorialIncapacidadDataTable V_RPT_HistorialIncapacidad {
+            get {
+                return this.tableV_RPT_HistorialIncapacidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
         }
         
@@ -374,9 +400,6 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_RPT_HistorialContrataciones"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialContratacionesDataTable(ds.Tables["V_RPT_HistorialContrataciones"]));
                 }
-                if ((ds.Tables["V_RPT_HistorialIncapacidad"] != null)) {
-                    base.Tables.Add(new V_RPT_HistorialIncapacidadDataTable(ds.Tables["V_RPT_HistorialIncapacidad"]));
-                }
                 if ((ds.Tables["V_RPT_HistorialPermisos"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialPermisosDataTable(ds.Tables["V_RPT_HistorialPermisos"]));
                 }
@@ -404,8 +427,13 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_RPT_HistorialSueldos1"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialSueldos1DataTable(ds.Tables["V_RPT_HistorialSueldos1"]));
                 }
+<<<<<<< HEAD
                 if ((ds.Tables["V_RPT_HistorialSalidas"] != null)) {
                     base.Tables.Add(new V_RPT_HistorialSalidasDataTable(ds.Tables["V_RPT_HistorialSalidas"]));
+=======
+                if ((ds.Tables["V_RPT_HistorialIncapacidad"] != null)) {
+                    base.Tables.Add(new V_RPT_HistorialIncapacidadDataTable(ds.Tables["V_RPT_HistorialIncapacidad"]));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -464,12 +492,6 @@ namespace ERP_GMEDINA.DataSets {
                     this.tableV_RPT_HistorialContrataciones.InitVars();
                 }
             }
-            this.tableV_RPT_HistorialIncapacidad = ((V_RPT_HistorialIncapacidadDataTable)(base.Tables["V_RPT_HistorialIncapacidad"]));
-            if ((initTable == true)) {
-                if ((this.tableV_RPT_HistorialIncapacidad != null)) {
-                    this.tableV_RPT_HistorialIncapacidad.InitVars();
-                }
-            }
             this.tableV_RPT_HistorialPermisos = ((V_RPT_HistorialPermisosDataTable)(base.Tables["V_RPT_HistorialPermisos"]));
             if ((initTable == true)) {
                 if ((this.tableV_RPT_HistorialPermisos != null)) {
@@ -524,10 +546,17 @@ namespace ERP_GMEDINA.DataSets {
                     this.tableV_RPT_HistorialSueldos1.InitVars();
                 }
             }
+<<<<<<< HEAD
             this.tableV_RPT_HistorialSalidas = ((V_RPT_HistorialSalidasDataTable)(base.Tables["V_RPT_HistorialSalidas"]));
             if ((initTable == true)) {
                 if ((this.tableV_RPT_HistorialSalidas != null)) {
                     this.tableV_RPT_HistorialSalidas.InitVars();
+=======
+            this.tableV_RPT_HistorialIncapacidad = ((V_RPT_HistorialIncapacidadDataTable)(base.Tables["V_RPT_HistorialIncapacidad"]));
+            if ((initTable == true)) {
+                if ((this.tableV_RPT_HistorialIncapacidad != null)) {
+                    this.tableV_RPT_HistorialIncapacidad.InitVars();
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
         }
@@ -548,8 +577,6 @@ namespace ERP_GMEDINA.DataSets {
             base.Tables.Add(this.tableV_RPT_HistorialCargos);
             this.tableV_RPT_HistorialContrataciones = new V_RPT_HistorialContratacionesDataTable();
             base.Tables.Add(this.tableV_RPT_HistorialContrataciones);
-            this.tableV_RPT_HistorialIncapacidad = new V_RPT_HistorialIncapacidadDataTable();
-            base.Tables.Add(this.tableV_RPT_HistorialIncapacidad);
             this.tableV_RPT_HistorialPermisos = new V_RPT_HistorialPermisosDataTable();
             base.Tables.Add(this.tableV_RPT_HistorialPermisos);
             this.tableV_RPT_HistorialSueldos = new V_RPT_HistorialSueldosDataTable();
@@ -568,8 +595,13 @@ namespace ERP_GMEDINA.DataSets {
             base.Tables.Add(this.tableV_RPT_EquipoEmpleado);
             this.tableV_RPT_HistorialSueldos1 = new V_RPT_HistorialSueldos1DataTable();
             base.Tables.Add(this.tableV_RPT_HistorialSueldos1);
+<<<<<<< HEAD
             this.tableV_RPT_HistorialSalidas = new V_RPT_HistorialSalidasDataTable();
             base.Tables.Add(this.tableV_RPT_HistorialSalidas);
+=======
+            this.tableV_RPT_HistorialIncapacidad = new V_RPT_HistorialIncapacidadDataTable();
+            base.Tables.Add(this.tableV_RPT_HistorialIncapacidad);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -598,18 +630,30 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         private bool ShouldSerializeV_RPT_HistorialIncapacidad() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         private bool ShouldSerializeV_RPT_HistorialPermisos() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
+        private bool ShouldSerializeV_RPT_HistorialSalidas() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         private bool ShouldSerializeV_RPT_HistorialSueldos() {
             return false;
         }
@@ -658,7 +702,11 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         private bool ShouldSerializeV_RPT_HistorialSalidas() {
+=======
+        private bool ShouldSerializeV_RPT_HistorialIncapacidad() {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             return false;
         }
         
@@ -730,12 +778,21 @@ namespace ERP_GMEDINA.DataSets {
         public delegate void V_RPT_HistorialContratacionesRowChangeEventHandler(object sender, V_RPT_HistorialContratacionesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public delegate void V_RPT_HistorialIncapacidadRowChangeEventHandler(object sender, V_RPT_HistorialIncapacidadRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void V_RPT_HistorialPermisosRowChangeEventHandler(object sender, V_RPT_HistorialPermisosRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
+        public delegate void V_RPT_HistorialPermisosRowChangeEventHandler(object sender, V_RPT_HistorialPermisosRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void V_RPT_HistorialSalidasRowChangeEventHandler(object sender, V_RPT_HistorialSalidasRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         public delegate void V_RPT_HistorialSueldosRowChangeEventHandler(object sender, V_RPT_HistorialSueldosRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -760,7 +817,11 @@ namespace ERP_GMEDINA.DataSets {
         public delegate void V_RPT_HistorialSueldos1RowChangeEventHandler(object sender, V_RPT_HistorialSueldos1RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public delegate void V_RPT_HistorialSalidasRowChangeEventHandler(object sender, V_RPT_HistorialSalidasRowChangeEvent e);
+=======
+        public delegate void V_RPT_HistorialIncapacidadRowChangeEventHandler(object sender, V_RPT_HistorialIncapacidadRowChangeEvent e);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2119,357 +2180,6 @@ namespace ERP_GMEDINA.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class V_RPT_HistorialIncapacidadDataTable : global::System.Data.TypedTableBase<V_RPT_HistorialIncapacidadRow> {
-            
-            private global::System.Data.DataColumn columnhinc_Id;
-            
-            private global::System.Data.DataColumn columnIdentidad;
-            
-            private global::System.Data.DataColumn columnNombreCompleto;
-            
-            private global::System.Data.DataColumn columnTipoIncapacidad;
-            
-            private global::System.Data.DataColumn columnDias;
-            
-            private global::System.Data.DataColumn columnFechaInicio;
-            
-            private global::System.Data.DataColumn columnFechaFin;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_HistorialIncapacidadDataTable() {
-                this.TableName = "V_RPT_HistorialIncapacidad";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal V_RPT_HistorialIncapacidadDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected V_RPT_HistorialIncapacidadDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn hinc_IdColumn {
-                get {
-                    return this.columnhinc_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IdentidadColumn {
-                get {
-                    return this.columnIdentidad;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NombreCompletoColumn {
-                get {
-                    return this.columnNombreCompleto;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TipoIncapacidadColumn {
-                get {
-                    return this.columnTipoIncapacidad;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DiasColumn {
-                get {
-                    return this.columnDias;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FechaInicioColumn {
-                get {
-                    return this.columnFechaInicio;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FechaFinColumn {
-                get {
-                    return this.columnFechaFin;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_HistorialIncapacidadRow this[int index] {
-                get {
-                    return ((V_RPT_HistorialIncapacidadRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_HistorialIncapacidadRow AddV_RPT_HistorialIncapacidadRow(int hinc_Id, string Identidad, string NombreCompleto, string TipoIncapacidad, int Dias, System.DateTime FechaInicio, System.DateTime FechaFin) {
-                V_RPT_HistorialIncapacidadRow rowV_RPT_HistorialIncapacidadRow = ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        hinc_Id,
-                        Identidad,
-                        NombreCompleto,
-                        TipoIncapacidad,
-                        Dias,
-                        FechaInicio,
-                        FechaFin};
-                rowV_RPT_HistorialIncapacidadRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowV_RPT_HistorialIncapacidadRow);
-                return rowV_RPT_HistorialIncapacidadRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_HistorialIncapacidadRow FindByhinc_Id(int hinc_Id) {
-                return ((V_RPT_HistorialIncapacidadRow)(this.Rows.Find(new object[] {
-                            hinc_Id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                V_RPT_HistorialIncapacidadDataTable cln = ((V_RPT_HistorialIncapacidadDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new V_RPT_HistorialIncapacidadDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnhinc_Id = base.Columns["hinc_Id"];
-                this.columnIdentidad = base.Columns["Identidad"];
-                this.columnNombreCompleto = base.Columns["NombreCompleto"];
-                this.columnTipoIncapacidad = base.Columns["TipoIncapacidad"];
-                this.columnDias = base.Columns["Dias"];
-                this.columnFechaInicio = base.Columns["FechaInicio"];
-                this.columnFechaFin = base.Columns["FechaFin"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnhinc_Id = new global::System.Data.DataColumn("hinc_Id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhinc_Id);
-                this.columnIdentidad = new global::System.Data.DataColumn("Identidad", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIdentidad);
-                this.columnNombreCompleto = new global::System.Data.DataColumn("NombreCompleto", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNombreCompleto);
-                this.columnTipoIncapacidad = new global::System.Data.DataColumn("TipoIncapacidad", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTipoIncapacidad);
-                this.columnDias = new global::System.Data.DataColumn("Dias", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDias);
-                this.columnFechaInicio = new global::System.Data.DataColumn("FechaInicio", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFechaInicio);
-                this.columnFechaFin = new global::System.Data.DataColumn("FechaFin", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFechaFin);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnhinc_Id}, true));
-                this.columnhinc_Id.AllowDBNull = false;
-                this.columnhinc_Id.Unique = true;
-                this.columnIdentidad.AllowDBNull = false;
-                this.columnIdentidad.MaxLength = 16;
-                this.columnNombreCompleto.ReadOnly = true;
-                this.columnNombreCompleto.MaxLength = 101;
-                this.columnTipoIncapacidad.AllowDBNull = false;
-                this.columnTipoIncapacidad.MaxLength = 25;
-                this.columnDias.AllowDBNull = false;
-                this.columnFechaInicio.ReadOnly = true;
-                this.columnFechaFin.ReadOnly = true;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_RPT_HistorialIncapacidadRow NewV_RPT_HistorialIncapacidadRow() {
-                return ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new V_RPT_HistorialIncapacidadRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(V_RPT_HistorialIncapacidadRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.V_RPT_HistorialIncapacidadRowChanged != null)) {
-                    this.V_RPT_HistorialIncapacidadRowChanged(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.V_RPT_HistorialIncapacidadRowChanging != null)) {
-                    this.V_RPT_HistorialIncapacidadRowChanging(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.V_RPT_HistorialIncapacidadRowDeleted != null)) {
-                    this.V_RPT_HistorialIncapacidadRowDeleted(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.V_RPT_HistorialIncapacidadRowDeleting != null)) {
-                    this.V_RPT_HistorialIncapacidadRowDeleting(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ReportesRRHH ds = new ReportesRRHH();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "V_RPT_HistorialIncapacidadDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class V_RPT_HistorialPermisosDataTable : global::System.Data.TypedTableBase<V_RPT_HistorialPermisosRow> {
             
             private global::System.Data.DataColumn columnhper_Id;
@@ -2486,8 +2196,13 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialIncapacidadDataTable() {
+                this.TableName = "V_RPT_HistorialIncapacidad";
+=======
             public V_RPT_HistorialPermisosDataTable() {
                 this.TableName = "V_RPT_HistorialPermisos";
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -2495,7 +2210,11 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            internal V_RPT_HistorialIncapacidadDataTable(global::System.Data.DataTable table) {
+=======
             internal V_RPT_HistorialPermisosDataTable(global::System.Data.DataTable table) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -2512,14 +2231,22 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            protected V_RPT_HistorialIncapacidadDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+=======
             protected V_RPT_HistorialPermisosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn hinc_IdColumn {
+=======
             public global::System.Data.DataColumn hper_IdColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     return this.columnhper_Id;
                 }
@@ -2543,7 +2270,19 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn TipoIncapacidadColumn {
+                get {
+                    return this.columnTipoIncapacidad;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DiasColumn {
+=======
             public global::System.Data.DataColumn TipoPermisoColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     return this.columnTipoPermiso;
                 }
@@ -2576,13 +2315,33 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialIncapacidadRow this[int index] {
+=======
             public V_RPT_HistorialPermisosRow this[int index] {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     return ((V_RPT_HistorialPermisosRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
+=======
             public event V_RPT_HistorialPermisosRowChangeEventHandler V_RPT_HistorialPermisosRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2597,13 +2356,19 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void AddV_RPT_HistorialPermisosRow(V_RPT_HistorialPermisosRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialIncapacidadRow AddV_RPT_HistorialIncapacidadRow(int hinc_Id, string Identidad, string NombreCompleto, string TipoIncapacidad, int Dias, System.DateTime FechaInicio, System.DateTime FechaFin) {
+                V_RPT_HistorialIncapacidadRow rowV_RPT_HistorialIncapacidadRow = ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
+=======
             public V_RPT_HistorialPermisosRow AddV_RPT_HistorialPermisosRow(int hper_Id, string Identidad, string NombreCompleto, string TipoPermiso, System.DateTime FechaInicio, System.DateTime FechaFin) {
                 V_RPT_HistorialPermisosRow rowV_RPT_HistorialPermisosRow = ((V_RPT_HistorialPermisosRow)(this.NewRow()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 object[] columnValuesArray = new object[] {
                         hper_Id,
                         Identidad,
@@ -2618,9 +2383,15 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialIncapacidadRow FindByhinc_Id(int hinc_Id) {
+                return ((V_RPT_HistorialIncapacidadRow)(this.Rows.Find(new object[] {
+                            hinc_Id})));
+=======
             public V_RPT_HistorialPermisosRow FindByhper_Id(int hper_Id) {
                 return ((V_RPT_HistorialPermisosRow)(this.Rows.Find(new object[] {
                             hper_Id})));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2679,8 +2450,13 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialIncapacidadRow NewV_RPT_HistorialIncapacidadRow() {
+                return ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
+=======
             public V_RPT_HistorialPermisosRow NewV_RPT_HistorialPermisosRow() {
                 return ((V_RPT_HistorialPermisosRow)(this.NewRow()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2733,7 +2509,11 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public void RemoveV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
+=======
             public void RemoveV_RPT_HistorialPermisosRow(V_RPT_HistorialPermisosRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.Rows.Remove(row);
             }
             
@@ -2761,6 +2541,420 @@ namespace ERP_GMEDINA.DataSets {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "V_RPT_HistorialPermisosDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class V_RPT_HistorialSalidasDataTable : global::System.Data.TypedTableBase<V_RPT_HistorialSalidasRow> {
+            
+            private global::System.Data.DataColumn columnhsal_Id;
+            
+            private global::System.Data.DataColumn columnemp_Id;
+            
+            private global::System.Data.DataColumn columnNombre_Empleado;
+            
+            private global::System.Data.DataColumn columntsal_Descripcion;
+            
+            private global::System.Data.DataColumn columnobservaciones;
+            
+            private global::System.Data.DataColumn columnhsal_FechaSalida;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialPermisosDataTable() {
+                this.TableName = "V_RPT_HistorialPermisos";
+=======
+            public V_RPT_HistorialSalidasDataTable() {
+                this.TableName = "V_RPT_HistorialSalidas";
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            internal V_RPT_HistorialPermisosDataTable(global::System.Data.DataTable table) {
+=======
+            internal V_RPT_HistorialSalidasDataTable(global::System.Data.DataTable table) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            protected V_RPT_HistorialPermisosDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+=======
+            protected V_RPT_HistorialSalidasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn hper_IdColumn {
+=======
+            public global::System.Data.DataColumn hsal_IdColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columnhsal_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn IdentidadColumn {
+=======
+            public global::System.Data.DataColumn emp_IdColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columnemp_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn NombreCompletoColumn {
+=======
+            public global::System.Data.DataColumn Nombre_EmpleadoColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columnNombre_Empleado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn TipoPermisoColumn {
+=======
+            public global::System.Data.DataColumn tsal_DescripcionColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columntsal_Descripcion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn FechaInicioColumn {
+=======
+            public global::System.Data.DataColumn observacionesColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columnobservaciones;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn FechaFinColumn {
+=======
+            public global::System.Data.DataColumn hsal_FechaSalidaColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return this.columnhsal_FechaSalida;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialPermisosRow this[int index] {
+=======
+            public V_RPT_HistorialSalidasRow this[int index] {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return ((V_RPT_HistorialSalidasRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public event V_RPT_HistorialPermisosRowChangeEventHandler V_RPT_HistorialPermisosRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialPermisosRowChangeEventHandler V_RPT_HistorialPermisosRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialPermisosRowChangeEventHandler V_RPT_HistorialPermisosRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialPermisosRowChangeEventHandler V_RPT_HistorialPermisosRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_RPT_HistorialPermisosRow(V_RPT_HistorialPermisosRow row) {
+=======
+            public event V_RPT_HistorialSalidasRowChangeEventHandler V_RPT_HistorialSalidasRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialSalidasRowChangeEventHandler V_RPT_HistorialSalidasRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialSalidasRowChangeEventHandler V_RPT_HistorialSalidasRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialSalidasRowChangeEventHandler V_RPT_HistorialSalidasRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_RPT_HistorialSalidasRow(V_RPT_HistorialSalidasRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialPermisosRow AddV_RPT_HistorialPermisosRow(int hper_Id, string Identidad, string NombreCompleto, string TipoPermiso, System.DateTime FechaInicio, System.DateTime FechaFin) {
+                V_RPT_HistorialPermisosRow rowV_RPT_HistorialPermisosRow = ((V_RPT_HistorialPermisosRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        hper_Id,
+                        Identidad,
+                        NombreCompleto,
+                        TipoPermiso,
+                        FechaInicio,
+                        FechaFin};
+                rowV_RPT_HistorialPermisosRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowV_RPT_HistorialPermisosRow);
+                return rowV_RPT_HistorialPermisosRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_HistorialPermisosRow FindByhper_Id(int hper_Id) {
+                return ((V_RPT_HistorialPermisosRow)(this.Rows.Find(new object[] {
+                            hper_Id})));
+=======
+            public V_RPT_HistorialSalidasRow AddV_RPT_HistorialSalidasRow(int hsal_Id, int emp_Id, string Nombre_Empleado, string tsal_Descripcion, string observaciones, System.DateTime hsal_FechaSalida) {
+                V_RPT_HistorialSalidasRow rowV_RPT_HistorialSalidasRow = ((V_RPT_HistorialSalidasRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        hsal_Id,
+                        emp_Id,
+                        Nombre_Empleado,
+                        tsal_Descripcion,
+                        observaciones,
+                        hsal_FechaSalida};
+                rowV_RPT_HistorialSalidasRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowV_RPT_HistorialSalidasRow);
+                return rowV_RPT_HistorialSalidasRow;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                V_RPT_HistorialSalidasDataTable cln = ((V_RPT_HistorialSalidasDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new V_RPT_HistorialSalidasDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnhsal_Id = base.Columns["hsal_Id"];
+                this.columnemp_Id = base.Columns["emp_Id"];
+                this.columnNombre_Empleado = base.Columns["Nombre_Empleado"];
+                this.columntsal_Descripcion = base.Columns["tsal_Descripcion"];
+                this.columnobservaciones = base.Columns["observaciones"];
+                this.columnhsal_FechaSalida = base.Columns["hsal_FechaSalida"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnhsal_Id = new global::System.Data.DataColumn("hsal_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhsal_Id);
+                this.columnemp_Id = new global::System.Data.DataColumn("emp_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnemp_Id);
+                this.columnNombre_Empleado = new global::System.Data.DataColumn("Nombre_Empleado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombre_Empleado);
+                this.columntsal_Descripcion = new global::System.Data.DataColumn("tsal_Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntsal_Descripcion);
+                this.columnobservaciones = new global::System.Data.DataColumn("observaciones", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobservaciones);
+                this.columnhsal_FechaSalida = new global::System.Data.DataColumn("hsal_FechaSalida", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhsal_FechaSalida);
+                this.columnhsal_Id.AllowDBNull = false;
+                this.columnemp_Id.AllowDBNull = false;
+                this.columnNombre_Empleado.ReadOnly = true;
+                this.columnNombre_Empleado.MaxLength = 101;
+                this.columntsal_Descripcion.MaxLength = 50;
+                this.columnobservaciones.ReadOnly = true;
+                this.columnobservaciones.MaxLength = 25;
+                this.columnhsal_FechaSalida.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public V_RPT_HistorialPermisosRow NewV_RPT_HistorialPermisosRow() {
+                return ((V_RPT_HistorialPermisosRow)(this.NewRow()));
+=======
+            public V_RPT_HistorialSalidasRow NewV_RPT_HistorialSalidasRow() {
+                return ((V_RPT_HistorialSalidasRow)(this.NewRow()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new V_RPT_HistorialSalidasRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(V_RPT_HistorialSalidasRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.V_RPT_HistorialSalidasRowChanged != null)) {
+                    this.V_RPT_HistorialSalidasRowChanged(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.V_RPT_HistorialSalidasRowChanging != null)) {
+                    this.V_RPT_HistorialSalidasRowChanging(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.V_RPT_HistorialSalidasRowDeleted != null)) {
+                    this.V_RPT_HistorialSalidasRowDeleted(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.V_RPT_HistorialSalidasRowDeleting != null)) {
+                    this.V_RPT_HistorialSalidasRowDeleting(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public void RemoveV_RPT_HistorialPermisosRow(V_RPT_HistorialPermisosRow row) {
+=======
+            public void RemoveV_RPT_HistorialSalidasRow(V_RPT_HistorialSalidasRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ReportesRRHH ds = new ReportesRRHH();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "V_RPT_HistorialSalidasDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2860,6 +3054,7 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn sue_IdColumn {
                 get {
                     return this.columnsue_Id;
+<<<<<<< HEAD
                 }
             }
             
@@ -2868,11 +3063,24 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn NombreEmpColumn {
                 get {
                     return this.columnNombreEmp;
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
+            public global::System.Data.DataColumn NombreEmpColumn {
+                get {
+                    return this.columnNombreEmp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             public global::System.Data.DataColumn emp_IdColumn {
                 get {
                     return this.columnemp_Id;
@@ -3516,6 +3724,7 @@ namespace ERP_GMEDINA.DataSets {
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class V_RPT_HorasTrabajadasDataTable : global::System.Data.TypedTableBase<V_RPT_HorasTrabajadasRow> {
+<<<<<<< HEAD
             
             private global::System.Data.DataColumn columnhtra_Id;
             
@@ -3530,6 +3739,24 @@ namespace ERP_GMEDINA.DataSets {
             private global::System.Data.DataColumn columnCantidadHoras;
             
             private global::System.Data.DataColumn columnFecha;
+=======
+            
+            private global::System.Data.DataColumn columnhtra_Id;
+            
+            private global::System.Data.DataColumn columntiho_Id;
+            
+            private global::System.Data.DataColumn columnIdentidad;
+            
+            private global::System.Data.DataColumn columnNombreCompleto;
+            
+            private global::System.Data.DataColumn columnTipoHora;
+            
+            private global::System.Data.DataColumn columnCantidadHoras;
+            
+            private global::System.Data.DataColumn columnFecha;
+            
+            private global::System.Data.DataColumn columnFechaFin;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3567,6 +3794,10 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn htra_IdColumn {
+<<<<<<< HEAD
+                get {
+                    return this.columnhtra_Id;
+=======
                 get {
                     return this.columnhtra_Id;
                 }
@@ -3585,6 +3816,30 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn IdentidadColumn {
                 get {
                     return this.columnIdentidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn tiho_IdColumn {
+                get {
+                    return this.columntiho_Id;
+=======
+            public global::System.Data.DataColumn NombreCompletoColumn {
+                get {
+                    return this.columnNombreCompleto;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn IdentidadColumn {
+                get {
+                    return this.columnIdentidad;
                 }
             }
             
@@ -3593,30 +3848,53 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn NombreCompletoColumn {
                 get {
                     return this.columnNombreCompleto;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
             public global::System.Data.DataColumn TipoHoraColumn {
                 get {
                     return this.columnTipoHora;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn TipoHoraColumn {
+                get {
+                    return this.columnTipoHora;
+=======
             public global::System.Data.DataColumn CantidadHorasColumn {
                 get {
                     return this.columnCantidadHoras;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn CantidadHorasColumn {
+                get {
+                    return this.columnCantidadHoras;
+=======
             public global::System.Data.DataColumn FechaColumn {
                 get {
                     return this.columnFecha;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn FechaColumn {
+                get {
+                    return this.columnFecha;
+=======
+            public global::System.Data.DataColumn FechaFinColumn {
+                get {
+                    return this.columnFechaFin;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
@@ -3657,7 +3935,11 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HorasTrabajadasRow AddV_RPT_HorasTrabajadasRow(int htra_Id, int tiho_Id, string Identidad, string NombreCompleto, string TipoHora, int CantidadHoras, System.DateTime Fecha) {
+=======
+            public V_RPT_HorasTrabajadasRow AddV_RPT_HorasTrabajadasRow(int htra_Id, int tiho_Id, string Identidad, string NombreCompleto, string TipoHora, int CantidadHoras, System.DateTime Fecha, System.DateTime FechaFin) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 V_RPT_HorasTrabajadasRow rowV_RPT_HorasTrabajadasRow = ((V_RPT_HorasTrabajadasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         htra_Id,
@@ -3666,7 +3948,12 @@ namespace ERP_GMEDINA.DataSets {
                         NombreCompleto,
                         TipoHora,
                         CantidadHoras,
+<<<<<<< HEAD
                         Fecha};
+=======
+                        Fecha,
+                        FechaFin};
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 rowV_RPT_HorasTrabajadasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowV_RPT_HorasTrabajadasRow);
                 return rowV_RPT_HorasTrabajadasRow;
@@ -3696,6 +3983,10 @@ namespace ERP_GMEDINA.DataSets {
                 this.columnTipoHora = base.Columns["TipoHora"];
                 this.columnCantidadHoras = base.Columns["CantidadHoras"];
                 this.columnFecha = base.Columns["Fecha"];
+<<<<<<< HEAD
+=======
+                this.columnFechaFin = base.Columns["FechaFin"];
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3715,6 +4006,11 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columnCantidadHoras);
                 this.columnFecha = new global::System.Data.DataColumn("Fecha", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFecha);
+<<<<<<< HEAD
+=======
+                this.columnFechaFin = new global::System.Data.DataColumn("FechaFin", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaFin);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.columnhtra_Id.AllowDBNull = false;
                 this.columntiho_Id.AllowDBNull = false;
                 this.columnIdentidad.AllowDBNull = false;
@@ -4387,6 +4683,13 @@ namespace ERP_GMEDINA.DataSets {
                 }
             }
             
+<<<<<<< HEAD
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Fecha_ContratacionColumn {
+                get {
+                    return this.columnFecha_Contratacion;
+=======
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Fecha_ContratacionColumn {
@@ -4400,35 +4703,60 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn SexoColumn {
                 get {
                     return this.columnSexo;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn SexoColumn {
+                get {
+                    return this.columnSexo;
+=======
             public global::System.Data.DataColumn PermanenteColumn {
                 get {
                     return this.columnPermanente;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn PermanenteColumn {
+                get {
+                    return this.columnPermanente;
+=======
             public global::System.Data.DataColumn TitulosColumn {
                 get {
                     return this.columnTitulos;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn TitulosColumn {
+                get {
+                    return this.columnTitulos;
+=======
+            public global::System.Data.DataColumn CompetenciasColumn {
+                get {
+                    return this.columnCompetencias;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn CompetenciasColumn {
                 get {
                     return this.columnCompetencias;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
             public global::System.Data.DataColumn HabilidadesColumn {
                 get {
                     return this.columnHabilidades;
@@ -4445,6 +4773,224 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Requerimientos_EspecialesColumn {
+                get {
+                    return this.columnRequerimientos_Especiales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_RequisicionesRow this[int index] {
+                get {
+                    return ((V_RPT_RequisicionesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_RequisicionesRowChangeEventHandler V_RPT_RequisicionesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_RequisicionesRowChangeEventHandler V_RPT_RequisicionesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_RequisicionesRowChangeEventHandler V_RPT_RequisicionesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_RequisicionesRowChangeEventHandler V_RPT_RequisicionesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_RPT_RequisicionesRow(V_RPT_RequisicionesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_RequisicionesRow AddV_RPT_RequisicionesRow(
+                        int Id_Requisicion, 
+                        int Id_Persona, 
+                        string Identidad, 
+                        string Nombre_Completo, 
+                        string Descripcion, 
+                        string Duracion, 
+                        int Edad_Minima, 
+                        int Edad_Maxima, 
+                        string Educacion_Superior, 
+                        string Experiencia, 
+                        System.DateTime Fecha_Requisicion, 
+                        System.DateTime Fecha_Contratacion, 
+                        string Sexo, 
+                        string Permanente, 
+                        string Titulos, 
+                        string Competencias, 
+                        string Habilidades, 
+                        string Idiomas, 
+                        string Requerimientos_Especiales) {
+                V_RPT_RequisicionesRow rowV_RPT_RequisicionesRow = ((V_RPT_RequisicionesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Id_Requisicion,
+                        Id_Persona,
+                        Identidad,
+                        Nombre_Completo,
+                        Descripcion,
+                        Duracion,
+                        Edad_Minima,
+                        Edad_Maxima,
+                        Educacion_Superior,
+                        Experiencia,
+                        Fecha_Requisicion,
+                        Fecha_Contratacion,
+                        Sexo,
+                        Permanente,
+                        Titulos,
+                        Competencias,
+                        Habilidades,
+                        Idiomas,
+                        Requerimientos_Especiales};
+                rowV_RPT_RequisicionesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowV_RPT_RequisicionesRow);
+                return rowV_RPT_RequisicionesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                V_RPT_RequisicionesDataTable cln = ((V_RPT_RequisicionesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new V_RPT_RequisicionesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnId_Requisicion = base.Columns["Id_Requisicion"];
+                this.columnId_Persona = base.Columns["Id_Persona"];
+                this.columnIdentidad = base.Columns["Identidad"];
+                this.columnNombre_Completo = base.Columns["Nombre_Completo"];
+                this.columnDescripcion = base.Columns["Descripcion"];
+                this.columnDuracion = base.Columns["Duracion"];
+                this.columnEdad_Minima = base.Columns["Edad_Minima"];
+                this.columnEdad_Maxima = base.Columns["Edad_Maxima"];
+                this.columnEducacion_Superior = base.Columns["Educacion_Superior"];
+                this.columnExperiencia = base.Columns["Experiencia"];
+                this.columnFecha_Requisicion = base.Columns["Fecha_Requisicion"];
+                this.columnFecha_Contratacion = base.Columns["Fecha_Contratacion"];
+                this.columnSexo = base.Columns["Sexo"];
+                this.columnPermanente = base.Columns["Permanente"];
+                this.columnTitulos = base.Columns["Titulos"];
+                this.columnCompetencias = base.Columns["Competencias"];
+                this.columnHabilidades = base.Columns["Habilidades"];
+                this.columnIdiomas = base.Columns["Idiomas"];
+                this.columnRequerimientos_Especiales = base.Columns["Requerimientos Especiales"];
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn HabilidadesColumn {
+                get {
+                    return this.columnHabilidades;
+                }
+=======
+            private void InitClass() {
+                this.columnId_Requisicion = new global::System.Data.DataColumn("Id_Requisicion", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId_Requisicion);
+                this.columnId_Persona = new global::System.Data.DataColumn("Id_Persona", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId_Persona);
+                this.columnIdentidad = new global::System.Data.DataColumn("Identidad", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdentidad);
+                this.columnNombre_Completo = new global::System.Data.DataColumn("Nombre_Completo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombre_Completo);
+                this.columnDescripcion = new global::System.Data.DataColumn("Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescripcion);
+                this.columnDuracion = new global::System.Data.DataColumn("Duracion", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDuracion);
+                this.columnEdad_Minima = new global::System.Data.DataColumn("Edad_Minima", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEdad_Minima);
+                this.columnEdad_Maxima = new global::System.Data.DataColumn("Edad_Maxima", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEdad_Maxima);
+                this.columnEducacion_Superior = new global::System.Data.DataColumn("Educacion_Superior", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEducacion_Superior);
+                this.columnExperiencia = new global::System.Data.DataColumn("Experiencia", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExperiencia);
+                this.columnFecha_Requisicion = new global::System.Data.DataColumn("Fecha_Requisicion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFecha_Requisicion);
+                this.columnFecha_Contratacion = new global::System.Data.DataColumn("Fecha_Contratacion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFecha_Contratacion);
+                this.columnSexo = new global::System.Data.DataColumn("Sexo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSexo);
+                this.columnPermanente = new global::System.Data.DataColumn("Permanente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPermanente);
+                this.columnTitulos = new global::System.Data.DataColumn("Titulos", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTitulos);
+                this.columnCompetencias = new global::System.Data.DataColumn("Competencias", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompetencias);
+                this.columnHabilidades = new global::System.Data.DataColumn("Habilidades", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHabilidades);
+                this.columnIdiomas = new global::System.Data.DataColumn("Idiomas", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdiomas);
+                this.columnRequerimientos_Especiales = new global::System.Data.DataColumn("Requerimientos Especiales", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRequerimientos_Especiales);
+                this.columnId_Requisicion.AllowDBNull = false;
+                this.columnId_Persona.AllowDBNull = false;
+                this.columnIdentidad.AllowDBNull = false;
+                this.columnIdentidad.MaxLength = 16;
+                this.columnNombre_Completo.ReadOnly = true;
+                this.columnNombre_Completo.MaxLength = 101;
+                this.columnDescripcion.AllowDBNull = false;
+                this.columnDescripcion.MaxLength = 50;
+                this.columnDuracion.MaxLength = 50;
+                this.columnEdad_Minima.AllowDBNull = false;
+                this.columnEdad_Maxima.AllowDBNull = false;
+                this.columnEducacion_Superior.ReadOnly = true;
+                this.columnEducacion_Superior.MaxLength = 2;
+                this.columnExperiencia.MaxLength = 100;
+                this.columnSexo.MaxLength = 10;
+                this.columnPermanente.ReadOnly = true;
+                this.columnPermanente.MaxLength = 2;
+                this.columnTitulos.AllowDBNull = false;
+                this.columnTitulos.MaxLength = 100;
+                this.columnCompetencias.AllowDBNull = false;
+                this.columnCompetencias.MaxLength = 100;
+                this.columnHabilidades.MaxLength = 100;
+                this.columnIdiomas.MaxLength = 50;
+                this.columnRequerimientos_Especiales.MaxLength = 50;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn IdiomasColumn {
+                get {
+                    return this.columnIdiomas;
+                }
+=======
+            public V_RPT_RequisicionesRow NewV_RPT_RequisicionesRow() {
+                return ((V_RPT_RequisicionesRow)(this.NewRow()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Requerimientos_EspecialesColumn {
                 get {
                     return this.columnRequerimientos_Especiales;
@@ -4647,6 +5193,8 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new V_RPT_RequisicionesRow(builder);
             }
@@ -4852,6 +5400,7 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn IdentidadColumn {
+<<<<<<< HEAD
                 get {
                     return this.columnIdentidad;
                 }
@@ -4862,76 +5411,146 @@ namespace ERP_GMEDINA.DataSets {
             public global::System.Data.DataColumn EdadColumn {
                 get {
                     return this.columnEdad;
+=======
+                get {
+                    return this.columnIdentidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn DireccionColumn {
                 get {
                     return this.columnDireccion;
+=======
+            public global::System.Data.DataColumn EdadColumn {
+                get {
+                    return this.columnEdad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Fecha_NacimientoColumn {
                 get {
                     return this.columnFecha_Nacimiento;
+=======
+            public global::System.Data.DataColumn DireccionColumn {
+                get {
+                    return this.columnDireccion;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Estado_CivilColumn {
                 get {
                     return this.columnEstado_Civil;
+=======
+            public global::System.Data.DataColumn Fecha_NacimientoColumn {
+                get {
+                    return this.columnFecha_Nacimiento;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn SexoColumn {
                 get {
                     return this.columnSexo;
+=======
+            public global::System.Data.DataColumn Estado_CivilColumn {
+                get {
+                    return this.columnEstado_Civil;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn TelefonoColumn {
                 get {
                     return this.columnTelefono;
+=======
+            public global::System.Data.DataColumn SexoColumn {
+                get {
+                    return this.columnSexo;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Correo_ElectronicoColumn {
                 get {
                     return this.columnCorreo_Electronico;
+=======
+            public global::System.Data.DataColumn TelefonoColumn {
+                get {
+                    return this.columnTelefono;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Tipo_SangreColumn {
                 get {
                     return this.columnTipo_Sangre;
+=======
+            public global::System.Data.DataColumn Correo_ElectronicoColumn {
+                get {
+                    return this.columnCorreo_Electronico;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn habi_IdColumn {
                 get {
                     return this.columnhabi_Id;
+=======
+            public global::System.Data.DataColumn Tipo_SangreColumn {
+                get {
+                    return this.columnTipo_Sangre;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn comp_IdColumn {
+                get {
+                    return this.columncomp_Id;
+=======
+            public global::System.Data.DataColumn habi_IdColumn {
+                get {
+                    return this.columnhabi_Id;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public global::System.Data.DataColumn HabilidadesColumn {
+=======
+            public global::System.Data.DataColumn comp_IdColumn {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     return this.columncomp_Id;
                 }
@@ -4939,6 +5558,8 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
             public global::System.Data.DataColumn HabilidadesColumn {
                 get {
                     return this.columnHabilidades;
@@ -4947,6 +5568,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             public global::System.Data.DataColumn CompetenciasColumn {
                 get {
                     return this.columnCompetencias;
@@ -5892,12 +6514,21 @@ namespace ERP_GMEDINA.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+<<<<<<< HEAD
         public partial class V_RPT_HistorialSalidasDataTable : global::System.Data.TypedTableBase<V_RPT_HistorialSalidasRow> {
             
             private global::System.Data.DataColumn columnhsal_Id;
+=======
+        public partial class V_RPT_HistorialIncapacidadDataTable : global::System.Data.TypedTableBase<V_RPT_HistorialIncapacidadRow> {
             
-            private global::System.Data.DataColumn columnemp_Id;
+            private global::System.Data.DataColumn columnhinc_Id;
             
+            private global::System.Data.DataColumn columnticn_Id;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            
+            private global::System.Data.DataColumn columnIdentidad;
+            
+<<<<<<< HEAD
             private global::System.Data.DataColumn columnNombre_Empleado;
             
             private global::System.Data.DataColumn columntsal_Descripcion;
@@ -5914,6 +6545,22 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public V_RPT_HistorialSalidasDataTable() {
                 this.TableName = "V_RPT_HistorialSalidas";
+=======
+            private global::System.Data.DataColumn columnNombreCompleto;
+            
+            private global::System.Data.DataColumn columnTipoIncapacidad;
+            
+            private global::System.Data.DataColumn columnDias;
+            
+            private global::System.Data.DataColumn columnFechaInicio;
+            
+            private global::System.Data.DataColumn columnFechaFin;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_HistorialIncapacidadDataTable() {
+                this.TableName = "V_RPT_HistorialIncapacidad";
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -5921,7 +6568,11 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             internal V_RPT_HistorialSalidasDataTable(global::System.Data.DataTable table) {
+=======
+            internal V_RPT_HistorialIncapacidadDataTable(global::System.Data.DataTable table) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -5938,72 +6589,124 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             protected V_RPT_HistorialSalidasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+=======
+            protected V_RPT_HistorialIncapacidadDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn hsal_IdColumn {
                 get {
                     return this.columnhsal_Id;
+=======
+            public global::System.Data.DataColumn hinc_IdColumn {
+                get {
+                    return this.columnhinc_Id;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn emp_IdColumn {
                 get {
                     return this.columnemp_Id;
+=======
+            public global::System.Data.DataColumn ticn_IdColumn {
+                get {
+                    return this.columnticn_Id;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn Nombre_EmpleadoColumn {
                 get {
                     return this.columnNombre_Empleado;
+=======
+            public global::System.Data.DataColumn IdentidadColumn {
+                get {
+                    return this.columnIdentidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn tsal_DescripcionColumn {
                 get {
                     return this.columntsal_Descripcion;
+=======
+            public global::System.Data.DataColumn NombreCompletoColumn {
+                get {
+                    return this.columnNombreCompleto;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn tsal_IdColumn {
                 get {
                     return this.columntsal_Id;
+=======
+            public global::System.Data.DataColumn TipoIncapacidadColumn {
+                get {
+                    return this.columnTipoIncapacidad;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn observacionesColumn {
                 get {
                     return this.columnobservaciones;
+=======
+            public global::System.Data.DataColumn DiasColumn {
+                get {
+                    return this.columnDias;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn FechaSalidaColumn {
                 get {
                     return this.columnFechaSalida;
+=======
+            public global::System.Data.DataColumn FechaInicioColumn {
+                get {
+                    return this.columnFechaInicio;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn fechafinColumn {
                 get {
                     return this.columnfechafin;
+=======
+            public global::System.Data.DataColumn FechaFinColumn {
+                get {
+                    return this.columnFechaFin;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
@@ -6018,13 +6721,20 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HistorialSalidasRow this[int index] {
                 get {
                     return ((V_RPT_HistorialSalidasRow)(this.Rows[index]));
+=======
+            public V_RPT_HistorialIncapacidadRow this[int index] {
+                get {
+                    return ((V_RPT_HistorialIncapacidadRow)(this.Rows[index]));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public event V_RPT_HistorialSalidasRowChangeEventHandler V_RPT_HistorialSalidasRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -6039,11 +6749,28 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void AddV_RPT_HistorialSalidasRow(V_RPT_HistorialSalidasRow row) {
+=======
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_RPT_HistorialIncapacidadRowChangeEventHandler V_RPT_HistorialIncapacidadRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HistorialSalidasRow AddV_RPT_HistorialSalidasRow(int hsal_Id, int emp_Id, string Nombre_Empleado, string tsal_Descripcion, int tsal_Id, string observaciones, System.DateTime FechaSalida, System.DateTime fechafin) {
                 V_RPT_HistorialSalidasRow rowV_RPT_HistorialSalidasRow = ((V_RPT_HistorialSalidasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -6058,12 +6785,32 @@ namespace ERP_GMEDINA.DataSets {
                 rowV_RPT_HistorialSalidasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowV_RPT_HistorialSalidasRow);
                 return rowV_RPT_HistorialSalidasRow;
+=======
+            public V_RPT_HistorialIncapacidadRow AddV_RPT_HistorialIncapacidadRow(int hinc_Id, int ticn_Id, string Identidad, string NombreCompleto, string TipoIncapacidad, int Dias, System.DateTime FechaInicio, System.DateTime FechaFin) {
+                V_RPT_HistorialIncapacidadRow rowV_RPT_HistorialIncapacidadRow = ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        hinc_Id,
+                        ticn_Id,
+                        Identidad,
+                        NombreCompleto,
+                        TipoIncapacidad,
+                        Dias,
+                        FechaInicio,
+                        FechaFin};
+                rowV_RPT_HistorialIncapacidadRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowV_RPT_HistorialIncapacidadRow);
+                return rowV_RPT_HistorialIncapacidadRow;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
+<<<<<<< HEAD
                 V_RPT_HistorialSalidasDataTable cln = ((V_RPT_HistorialSalidasDataTable)(base.Clone()));
+=======
+                V_RPT_HistorialIncapacidadDataTable cln = ((V_RPT_HistorialIncapacidadDataTable)(base.Clone()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 cln.InitVars();
                 return cln;
             }
@@ -6071,12 +6818,17 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
+<<<<<<< HEAD
                 return new V_RPT_HistorialSalidasDataTable();
+=======
+                return new V_RPT_HistorialIncapacidadDataTable();
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+<<<<<<< HEAD
                 this.columnhsal_Id = base.Columns["hsal_Id"];
                 this.columnemp_Id = base.Columns["emp_Id"];
                 this.columnNombre_Empleado = base.Columns["Nombre_Empleado"];
@@ -6085,11 +6837,22 @@ namespace ERP_GMEDINA.DataSets {
                 this.columnobservaciones = base.Columns["observaciones"];
                 this.columnFechaSalida = base.Columns["FechaSalida"];
                 this.columnfechafin = base.Columns["fechafin"];
+=======
+                this.columnhinc_Id = base.Columns["hinc_Id"];
+                this.columnticn_Id = base.Columns["ticn_Id"];
+                this.columnIdentidad = base.Columns["Identidad"];
+                this.columnNombreCompleto = base.Columns["NombreCompleto"];
+                this.columnTipoIncapacidad = base.Columns["TipoIncapacidad"];
+                this.columnDias = base.Columns["Dias"];
+                this.columnFechaInicio = base.Columns["FechaInicio"];
+                this.columnFechaFin = base.Columns["FechaFin"];
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+<<<<<<< HEAD
                 this.columnhsal_Id = new global::System.Data.DataColumn("hsal_Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhsal_Id);
                 this.columnemp_Id = new global::System.Data.DataColumn("emp_Id", typeof(int), null, global::System.Data.MappingType.Element);
@@ -6116,32 +6879,79 @@ namespace ERP_GMEDINA.DataSets {
                 this.columnobservaciones.MaxLength = 25;
                 this.columnFechaSalida.ReadOnly = true;
                 this.columnfechafin.ReadOnly = true;
+=======
+                this.columnhinc_Id = new global::System.Data.DataColumn("hinc_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhinc_Id);
+                this.columnticn_Id = new global::System.Data.DataColumn("ticn_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnticn_Id);
+                this.columnIdentidad = new global::System.Data.DataColumn("Identidad", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdentidad);
+                this.columnNombreCompleto = new global::System.Data.DataColumn("NombreCompleto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombreCompleto);
+                this.columnTipoIncapacidad = new global::System.Data.DataColumn("TipoIncapacidad", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTipoIncapacidad);
+                this.columnDias = new global::System.Data.DataColumn("Dias", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDias);
+                this.columnFechaInicio = new global::System.Data.DataColumn("FechaInicio", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaInicio);
+                this.columnFechaFin = new global::System.Data.DataColumn("FechaFin", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaFin);
+                this.columnhinc_Id.AllowDBNull = false;
+                this.columnticn_Id.AllowDBNull = false;
+                this.columnIdentidad.AllowDBNull = false;
+                this.columnIdentidad.MaxLength = 16;
+                this.columnNombreCompleto.ReadOnly = true;
+                this.columnNombreCompleto.MaxLength = 101;
+                this.columnTipoIncapacidad.AllowDBNull = false;
+                this.columnTipoIncapacidad.MaxLength = 25;
+                this.columnDias.AllowDBNull = false;
+                this.columnFechaInicio.ReadOnly = true;
+                this.columnFechaFin.ReadOnly = true;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HistorialSalidasRow NewV_RPT_HistorialSalidasRow() {
                 return ((V_RPT_HistorialSalidasRow)(this.NewRow()));
+=======
+            public V_RPT_HistorialIncapacidadRow NewV_RPT_HistorialIncapacidadRow() {
+                return ((V_RPT_HistorialIncapacidadRow)(this.NewRow()));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+<<<<<<< HEAD
                 return new V_RPT_HistorialSalidasRow(builder);
+=======
+                return new V_RPT_HistorialIncapacidadRow(builder);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
+<<<<<<< HEAD
                 return typeof(V_RPT_HistorialSalidasRow);
+=======
+                return typeof(V_RPT_HistorialIncapacidadRow);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
+<<<<<<< HEAD
                 if ((this.V_RPT_HistorialSalidasRowChanged != null)) {
                     this.V_RPT_HistorialSalidasRowChanged(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+=======
+                if ((this.V_RPT_HistorialIncapacidadRowChanged != null)) {
+                    this.V_RPT_HistorialIncapacidadRowChanged(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
@@ -6149,8 +6959,13 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
+<<<<<<< HEAD
                 if ((this.V_RPT_HistorialSalidasRowChanging != null)) {
                     this.V_RPT_HistorialSalidasRowChanging(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+=======
+                if ((this.V_RPT_HistorialIncapacidadRowChanging != null)) {
+                    this.V_RPT_HistorialIncapacidadRowChanging(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
@@ -6158,8 +6973,13 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
+<<<<<<< HEAD
                 if ((this.V_RPT_HistorialSalidasRowDeleted != null)) {
                     this.V_RPT_HistorialSalidasRowDeleted(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+=======
+                if ((this.V_RPT_HistorialIncapacidadRowDeleted != null)) {
+                    this.V_RPT_HistorialIncapacidadRowDeleted(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
@@ -6167,14 +6987,23 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
+<<<<<<< HEAD
                 if ((this.V_RPT_HistorialSalidasRowDeleting != null)) {
                     this.V_RPT_HistorialSalidasRowDeleting(this, new V_RPT_HistorialSalidasRowChangeEvent(((V_RPT_HistorialSalidasRow)(e.Row)), e.Action));
+=======
+                if ((this.V_RPT_HistorialIncapacidadRowDeleting != null)) {
+                    this.V_RPT_HistorialIncapacidadRowDeleting(this, new V_RPT_HistorialIncapacidadRowChangeEvent(((V_RPT_HistorialIncapacidadRow)(e.Row)), e.Action));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public void RemoveV_RPT_HistorialSalidasRow(V_RPT_HistorialSalidasRow row) {
+=======
+            public void RemoveV_RPT_HistorialIncapacidadRow(V_RPT_HistorialIncapacidadRow row) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.Rows.Remove(row);
             }
             
@@ -6201,7 +7030,11 @@ namespace ERP_GMEDINA.DataSets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
+<<<<<<< HEAD
                 attribute2.FixedValue = "V_RPT_HistorialSalidasDataTable";
+=======
+                attribute2.FixedValue = "V_RPT_HistorialIncapacidadDataTable";
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -6628,6 +7461,7 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFechaNull() {
                 this[this.tableV_RPT_HistorialCargos.FechaColumn] = global::System.Convert.DBNull;
+<<<<<<< HEAD
             }
         }
         
@@ -6734,18 +7568,21 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFechaContratacionNull() {
                 this[this.tableV_RPT_HistorialContrataciones.FechaContratacionColumn] = global::System.Convert.DBNull;
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
         }
         
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class V_RPT_HistorialIncapacidadRow : global::System.Data.DataRow {
+        public partial class V_RPT_HistorialContratacionesRow : global::System.Data.DataRow {
             
-            private V_RPT_HistorialIncapacidadDataTable tableV_RPT_HistorialIncapacidad;
+            private V_RPT_HistorialContratacionesDataTable tableV_RPT_HistorialContrataciones;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             internal V_RPT_HistorialIncapacidadRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableV_RPT_HistorialIncapacidad = ((V_RPT_HistorialIncapacidadDataTable)(this.Table));
@@ -6760,16 +7597,25 @@ namespace ERP_GMEDINA.DataSets {
                 set {
                     this[this.tableV_RPT_HistorialIncapacidad.hinc_IdColumn] = value;
                 }
+=======
+            internal V_RPT_HistorialContratacionesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableV_RPT_HistorialContrataciones = ((V_RPT_HistorialContratacionesDataTable)(this.Table));
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public string Identidad {
+=======
+            public int hcon_Id {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
-                    return ((string)(this[this.tableV_RPT_HistorialIncapacidad.IdentidadColumn]));
+                    return ((int)(this[this.tableV_RPT_HistorialContrataciones.hcon_IdColumn]));
                 }
                 set {
-                    this[this.tableV_RPT_HistorialIncapacidad.IdentidadColumn] = value;
+                    this[this.tableV_RPT_HistorialContrataciones.hcon_IdColumn] = value;
                 }
             }
             
@@ -6778,14 +7624,15 @@ namespace ERP_GMEDINA.DataSets {
             public string NombreCompleto {
                 get {
                     try {
-                        return ((string)(this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn]));
+                        return ((string)(this[this.tableV_RPT_HistorialContrataciones.NombreCompletoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NombreCompleto\' in table \'V_RPT_HistorialIncapacidad\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NombreCompleto\' in table \'V_RPT_HistorialContrataciones\' is" +
+                                " DBNull.", e);
                     }
                 }
                 set {
+<<<<<<< HEAD
                     this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn] = value;
                 }
             }
@@ -6798,62 +7645,73 @@ namespace ERP_GMEDINA.DataSets {
                 }
                 set {
                     this[this.tableV_RPT_HistorialIncapacidad.TipoIncapacidadColumn] = value;
+=======
+                    this[this.tableV_RPT_HistorialContrataciones.NombreCompletoColumn] = value;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public int Dias {
+=======
+            public string Identidad {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
-                    return ((int)(this[this.tableV_RPT_HistorialIncapacidad.DiasColumn]));
+                    return ((string)(this[this.tableV_RPT_HistorialContrataciones.IdentidadColumn]));
                 }
                 set {
-                    this[this.tableV_RPT_HistorialIncapacidad.DiasColumn] = value;
+                    this[this.tableV_RPT_HistorialContrataciones.IdentidadColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public System.DateTime FechaInicio {
+=======
+            public string Cargo {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FechaInicio\' in table \'V_RPT_HistorialIncapacidad\' is DBNul" +
-                                "l.", e);
-                    }
+                    return ((string)(this[this.tableV_RPT_HistorialContrataciones.CargoColumn]));
                 }
                 set {
-                    this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn] = value;
+                    this[this.tableV_RPT_HistorialContrataciones.CargoColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public System.DateTime FechaFin {
+=======
+            public System.DateTime FechaContratacion {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn]));
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialContrataciones.FechaContratacionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FechaFin\' in table \'V_RPT_HistorialIncapacidad\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaContratacion\' in table \'V_RPT_HistorialContrataciones\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn] = value;
+                    this[this.tableV_RPT_HistorialContrataciones.FechaContratacionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombreCompletoNull() {
-                return this.IsNull(this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn);
+                return this.IsNull(this.tableV_RPT_HistorialContrataciones.NombreCompletoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNombreCompletoNull() {
+<<<<<<< HEAD
                 this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn] = global::System.Convert.DBNull;
             }
             
@@ -6867,18 +7725,28 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFechaInicioNull() {
                 this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn] = global::System.Convert.DBNull;
+=======
+                this[this.tableV_RPT_HistorialContrataciones.NombreCompletoColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public bool IsFechaFinNull() {
                 return this.IsNull(this.tableV_RPT_HistorialIncapacidad.FechaFinColumn);
+=======
+            public bool IsFechaContratacionNull() {
+                return this.IsNull(this.tableV_RPT_HistorialContrataciones.FechaContratacionColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFechaFinNull() {
-                this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn] = global::System.Convert.DBNull;
+<<<<<<< HEAD
+=======
+            public void SetFechaContratacionNull() {
+                this[this.tableV_RPT_HistorialContrataciones.FechaContratacionColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -7010,8 +7878,200 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            public void SetFechaFinNull() {
+                this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class V_RPT_HistorialPermisosRow : global::System.Data.DataRow {
+            
+            private V_RPT_HistorialPermisosDataTable tableV_RPT_HistorialPermisos;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            internal V_RPT_HistorialPermisosRow(global::System.Data.DataRowBuilder rb) : 
+=======
+            internal V_RPT_HistorialSalidasRow(global::System.Data.DataRowBuilder rb) : 
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                    base(rb) {
+                this.tableV_RPT_HistorialPermisos = ((V_RPT_HistorialPermisosDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public int hper_Id {
+=======
+            public int hsal_Id {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return ((int)(this[this.tableV_RPT_HistorialPermisos.hper_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.hper_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public string Identidad {
+=======
+            public int emp_Id {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return ((string)(this[this.tableV_RPT_HistorialPermisos.IdentidadColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.IdentidadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public string NombreCompleto {
+=======
+            public string Nombre_Empleado {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    try {
+                        return ((string)(this[this.tableV_RPT_HistorialPermisos.NombreCompletoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NombreCompleto\' in table \'V_RPT_HistorialPermisos\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.NombreCompletoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public string TipoPermiso {
+=======
+            public string tsal_Descripcion {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    return ((string)(this[this.tableV_RPT_HistorialPermisos.TipoPermisoColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.TipoPermisoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public System.DateTime FechaInicio {
+=======
+            public string observaciones {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialPermisos.FechaInicioColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaInicio\' in table \'V_RPT_HistorialPermisos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.FechaInicioColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public System.DateTime FechaFin {
+=======
+            public System.DateTime hsal_FechaSalida {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialPermisos.FechaFinColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaFin\' in table \'V_RPT_HistorialPermisos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialPermisos.FechaFinColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public bool IsNombreCompletoNull() {
+                return this.IsNull(this.tableV_RPT_HistorialPermisos.NombreCompletoColumn);
+=======
+            public bool IsNombre_EmpleadoNull() {
+                return this.IsNull(this.tableV_RPT_HistorialSalidas.Nombre_EmpleadoColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public void SetNombreCompletoNull() {
+                this[this.tableV_RPT_HistorialPermisos.NombreCompletoColumn] = global::System.Convert.DBNull;
+=======
+            public void SetNombre_EmpleadoNull() {
+                this[this.tableV_RPT_HistorialSalidas.Nombre_EmpleadoColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public bool IsFechaInicioNull() {
+                return this.IsNull(this.tableV_RPT_HistorialPermisos.FechaInicioColumn);
+=======
+            public bool Istsal_DescripcionNull() {
+                return this.IsNull(this.tableV_RPT_HistorialSalidas.tsal_DescripcionColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public void SetFechaInicioNull() {
+                this[this.tableV_RPT_HistorialPermisos.FechaInicioColumn] = global::System.Convert.DBNull;
+=======
+            public void Settsal_DescripcionNull() {
+                this[this.tableV_RPT_HistorialSalidas.tsal_DescripcionColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+            public bool IsFechaFinNull() {
+                return this.IsNull(this.tableV_RPT_HistorialPermisos.FechaFinColumn);
+=======
+            public bool IsobservacionesNull() {
+                return this.IsNull(this.tableV_RPT_HistorialSalidas.observacionesColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public void SetFechaFinNull() {
                 this[this.tableV_RPT_HistorialPermisos.FechaFinColumn] = global::System.Convert.DBNull;
+=======
+            public void SetobservacionesNull() {
+                this[this.tableV_RPT_HistorialSalidas.observacionesColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
         }
         
@@ -7377,6 +8437,25 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
+            public System.DateTime FechaFin {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HorasTrabajadas.FechaFinColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaFin\' in table \'V_RPT_HorasTrabajadas\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HorasTrabajadas.FechaFinColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             public bool IsNombreCompletoNull() {
                 return this.IsNull(this.tableV_RPT_HorasTrabajadas.NombreCompletoColumn);
             }
@@ -7397,6 +8476,18 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFechaNull() {
                 this[this.tableV_RPT_HorasTrabajadas.FechaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFechaFinNull() {
+                return this.IsNull(this.tableV_RPT_HorasTrabajadas.FechaFinColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFechaFinNull() {
+                this[this.tableV_RPT_HorasTrabajadas.FechaFinColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8591,6 +9682,7 @@ namespace ERP_GMEDINA.DataSets {
                 set {
                     this[this.tableV_RPT_HistorialSueldos1.fechaColumn] = value;
                 }
+<<<<<<< HEAD
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8787,36 +9879,224 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsobservacionesNull() {
                 return this.IsNull(this.tableV_RPT_HistorialSalidas.observacionesColumn);
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public void SetobservacionesNull() {
                 this[this.tableV_RPT_HistorialSalidas.observacionesColumn] = global::System.Convert.DBNull;
+=======
+            public string car_Descripcion {
+                get {
+                    return ((string)(this[this.tableV_RPT_HistorialSueldos1.car_DescripcionColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialSueldos1.car_DescripcionColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNombreEmpNull() {
+                return this.IsNull(this.tableV_RPT_HistorialSueldos1.NombreEmpColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNombreEmpNull() {
+                this[this.tableV_RPT_HistorialSueldos1.NombreEmpColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsfechaNull() {
+                return this.IsNull(this.tableV_RPT_HistorialSueldos1.fechaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetfechaNull() {
+                this[this.tableV_RPT_HistorialSueldos1.fechaColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class V_RPT_HistorialIncapacidadRow : global::System.Data.DataRow {
+            
+            private V_RPT_HistorialIncapacidadDataTable tableV_RPT_HistorialIncapacidad;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal V_RPT_HistorialIncapacidadRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableV_RPT_HistorialIncapacidad = ((V_RPT_HistorialIncapacidadDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int hinc_Id {
+                get {
+                    return ((int)(this[this.tableV_RPT_HistorialIncapacidad.hinc_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.hinc_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ticn_Id {
+                get {
+                    return ((int)(this[this.tableV_RPT_HistorialIncapacidad.ticn_IdColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.ticn_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Identidad {
+                get {
+                    return ((string)(this[this.tableV_RPT_HistorialIncapacidad.IdentidadColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.IdentidadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string NombreCompleto {
+                get {
+                    try {
+                        return ((string)(this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NombreCompleto\' in table \'V_RPT_HistorialIncapacidad\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TipoIncapacidad {
+                get {
+                    return ((string)(this[this.tableV_RPT_HistorialIncapacidad.TipoIncapacidadColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.TipoIncapacidadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Dias {
+                get {
+                    return ((int)(this[this.tableV_RPT_HistorialIncapacidad.DiasColumn]));
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.DiasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime FechaInicio {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaInicio\' in table \'V_RPT_HistorialIncapacidad\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime FechaFin {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FechaFin\' in table \'V_RPT_HistorialIncapacidad\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNombreCompletoNull() {
+                return this.IsNull(this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNombreCompletoNull() {
+                this[this.tableV_RPT_HistorialIncapacidad.NombreCompletoColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public bool IsFechaSalidaNull() {
                 return this.IsNull(this.tableV_RPT_HistorialSalidas.FechaSalidaColumn);
+=======
+            public bool IsFechaInicioNull() {
+                return this.IsNull(this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public void SetFechaSalidaNull() {
                 this[this.tableV_RPT_HistorialSalidas.FechaSalidaColumn] = global::System.Convert.DBNull;
+=======
+            public void SetFechaInicioNull() {
+                this[this.tableV_RPT_HistorialIncapacidad.FechaInicioColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public bool IsfechafinNull() {
                 return this.IsNull(this.tableV_RPT_HistorialSalidas.fechafinColumn);
+=======
+            public bool IsFechaFinNull() {
+                return this.IsNull(this.tableV_RPT_HistorialIncapacidad.FechaFinColumn);
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public void SetfechafinNull() {
                 this[this.tableV_RPT_HistorialSalidas.fechafinColumn] = global::System.Convert.DBNull;
+=======
+            public void SetFechaFinNull() {
+                this[this.tableV_RPT_HistorialIncapacidad.FechaFinColumn] = global::System.Convert.DBNull;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             }
         }
         
@@ -8949,6 +10229,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
@@ -8983,6 +10264,8 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
@@ -9017,6 +10300,43 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
+=======
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class V_RPT_HistorialSalidasRowChangeEvent : global::System.EventArgs {
+            
+            private V_RPT_HistorialSalidasRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_HistorialSalidasRowChangeEvent(V_RPT_HistorialSalidasRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_RPT_HistorialSalidasRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
@@ -9300,22 +10620,36 @@ namespace ERP_GMEDINA.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public class V_RPT_HistorialSalidasRowChangeEvent : global::System.EventArgs {
             
             private V_RPT_HistorialSalidasRow eventRow;
+=======
+        public class V_RPT_HistorialIncapacidadRowChangeEvent : global::System.EventArgs {
+            
+            private V_RPT_HistorialIncapacidadRow eventRow;
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HistorialSalidasRowChangeEvent(V_RPT_HistorialSalidasRow row, global::System.Data.DataRowAction action) {
+=======
+            public V_RPT_HistorialIncapacidadRowChangeEvent(V_RPT_HistorialIncapacidadRow row, global::System.Data.DataRowAction action) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
             public V_RPT_HistorialSalidasRow Row {
+=======
+            public V_RPT_HistorialIncapacidadRow Row {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
                 get {
                     return this.eventRow;
                 }
@@ -9464,6 +10798,7 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             tableMapping.ColumnMappings.Add("DescripcionAnterior", "DescripcionAnterior");
             tableMapping.ColumnMappings.Add("ObservacionAnterior", "ObservacionAnterior");
             tableMapping.ColumnMappings.Add("FechaAnterior", "FechaAnterior");
+<<<<<<< HEAD
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -9637,6 +10972,183 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             tableMapping.ColumnMappings.Add("per_Identidad", "per_Identidad");
             tableMapping.ColumnMappings.Add("aude_Descripcion", "aude_Descripcion");
             tableMapping.ColumnMappings.Add("aude_fechaaudiencia", "aude_fechaaudiencia");
+=======
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT hamo_Id, Colaborador, Identidad, TipoAmonestación, Observaciones, Fecha, D" +
+                "escripcionAnterior, ObservacionAnterior, FechaAnterior FROM rrhh.V_RPT_Historial" +
+                "Amonestaciones";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(ReportesRRHH.V_RPT_HistorialAmonestacionesDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual ReportesRRHH.V_RPT_HistorialAmonestacionesDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            ReportesRRHH.V_RPT_HistorialAmonestacionesDataTable dataTable = new ReportesRRHH.V_RPT_HistorialAmonestacionesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+<<<<<<< HEAD
+=======
+    public partial class V_RPT_HistorialAudienciaDescargoTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public V_RPT_HistorialAudienciaDescargoTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "V_RPT_HistorialAudienciaDescargo";
+            tableMapping.ColumnMappings.Add("aude_Id", "aude_Id");
+            tableMapping.ColumnMappings.Add("nombre", "nombre");
+            tableMapping.ColumnMappings.Add("per_Identidad", "per_Identidad");
+            tableMapping.ColumnMappings.Add("aude_Descripcion", "aude_Descripcion");
+            tableMapping.ColumnMappings.Add("aude_fechaaudiencia", "aude_fechaaudiencia");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -9692,6 +11204,7 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
     public partial class V_RPT_HistorialCargosTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -10051,7 +11564,11 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public V_RPT_HistorialIncapacidadTableAdapter() {
+=======
+        public V_RPT_HistorialPermisosTableAdapter() {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this.ClearBeforeFill = true;
         }
         
@@ -10225,7 +11742,11 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public V_RPT_HistorialPermisosTableAdapter() {
+=======
+        public V_RPT_HistorialSalidasTableAdapter() {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this.ClearBeforeFill = true;
         }
         
@@ -10854,6 +12375,7 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             tableMapping.ColumnMappings.Add("TipoHora", "TipoHora");
             tableMapping.ColumnMappings.Add("CantidadHoras", "CantidadHoras");
             tableMapping.ColumnMappings.Add("Fecha", "Fecha");
+            tableMapping.ColumnMappings.Add("FechaFin", "FechaFin");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -10870,8 +12392,7 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT htra_Id, tiho_Id, Identidad, NombreCompleto, TipoHora, CantidadHoras, Fech" +
-                "a FROM rrhh.V_RPT_HorasTrabajadas";
+            this._commandCollection[0].CommandText = "SELECT      *\r\nFROM            rrhh.V_RPT_HorasTrabajadas";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -11798,7 +13319,11 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+<<<<<<< HEAD
     public partial class V_RPT_HistorialSalidasTableAdapter : global::System.ComponentModel.Component {
+=======
+    public partial class V_RPT_HistorialIncapacidadTableAdapter : global::System.ComponentModel.Component {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -11812,7 +13337,11 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+<<<<<<< HEAD
         public V_RPT_HistorialSalidasTableAdapter() {
+=======
+        public V_RPT_HistorialIncapacidadTableAdapter() {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this.ClearBeforeFill = true;
         }
         
@@ -11909,6 +13438,7 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
+<<<<<<< HEAD
             tableMapping.DataSetTable = "V_RPT_HistorialSalidas";
             tableMapping.ColumnMappings.Add("hsal_Id", "hsal_Id");
             tableMapping.ColumnMappings.Add("emp_Id", "emp_Id");
@@ -11918,6 +13448,17 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             tableMapping.ColumnMappings.Add("observaciones", "observaciones");
             tableMapping.ColumnMappings.Add("FechaSalida", "FechaSalida");
             tableMapping.ColumnMappings.Add("fechafin", "fechafin");
+=======
+            tableMapping.DataSetTable = "V_RPT_HistorialIncapacidad";
+            tableMapping.ColumnMappings.Add("hinc_Id", "hinc_Id");
+            tableMapping.ColumnMappings.Add("ticn_Id", "ticn_Id");
+            tableMapping.ColumnMappings.Add("Identidad", "Identidad");
+            tableMapping.ColumnMappings.Add("NombreCompleto", "NombreCompleto");
+            tableMapping.ColumnMappings.Add("TipoIncapacidad", "TipoIncapacidad");
+            tableMapping.ColumnMappings.Add("Dias", "Dias");
+            tableMapping.ColumnMappings.Add("FechaInicio", "FechaInicio");
+            tableMapping.ColumnMappings.Add("FechaFin", "FechaFin");
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11934,8 +13475,13 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
+<<<<<<< HEAD
             this._commandCollection[0].CommandText = "SELECT hsal_Id, emp_Id, Nombre_Empleado, tsal_Descripcion, tsal_Id, observaciones" +
                 ", FechaSalida, fechafin FROM rrhh.V_RPT_HistorialSalidas";
+=======
+            this._commandCollection[0].CommandText = "SELECT hinc_Id, ticn_Id, Identidad, NombreCompleto, TipoIncapacidad, Dias, FechaI" +
+                "nicio, FechaFin FROM rrhh.V_RPT_HistorialIncapacidad";
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -11943,7 +13489,11 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+<<<<<<< HEAD
         public virtual int Fill(ReportesRRHH.V_RPT_HistorialSalidasDataTable dataTable) {
+=======
+        public virtual int Fill(ReportesRRHH.V_RPT_HistorialIncapacidadDataTable dataTable) {
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -11956,9 +13506,15 @@ namespace ERP_GMEDINA.DataSets.ReportesRRHHTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+<<<<<<< HEAD
         public virtual ReportesRRHH.V_RPT_HistorialSalidasDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             ReportesRRHH.V_RPT_HistorialSalidasDataTable dataTable = new ReportesRRHH.V_RPT_HistorialSalidasDataTable();
+=======
+        public virtual ReportesRRHH.V_RPT_HistorialIncapacidadDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            ReportesRRHH.V_RPT_HistorialIncapacidadDataTable dataTable = new ReportesRRHH.V_RPT_HistorialIncapacidadDataTable();
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

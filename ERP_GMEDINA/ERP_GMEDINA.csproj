@@ -230,7 +230,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
-    <Compile Include="Controllers\ReportesRRHHController.cs" />
+    <Compile Include="Controllers\ReportesRRHH1Controller.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
@@ -275,6 +275,7 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
     <Compile Include="Models\cHistorialIncapacidades.cs" />
+    <Compile Include="Models\cHistorialIncapacidadesRPT.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -1348,6 +1349,7 @@
     <Content Include="Reports\ReportesDS.xss">
       <DependentUpon>ReportesDS.xsd</DependentUpon>
     </Content>
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\General\Areas\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Admin.js" />
     <Content Include="Scripts\app\General\Cargos\Cargos.js" />
@@ -2245,8 +2247,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
+<<<<<<< HEAD
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
+=======
+    <EmbeddedResource Include="Reports\HistorialIncapacidadesRPT.rdlc" />
+>>>>>>> 1c3b1c9de0f644fde8325ff4e494c6ce6749ba57
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
   </ItemGroup>
   <PropertyGroup>
