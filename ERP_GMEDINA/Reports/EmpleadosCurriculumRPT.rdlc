@@ -6,40 +6,40 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.64993cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -910,9 +910,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>1.53458cm</Top>
+        <Top>1.40229cm</Top>
+        <Left>0.47625cm</Left>
         <Height>1.2cm</Height>
-        <Width>30cm</Width>
+        <Width>31.79916cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -926,11 +927,9 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reporte de Empleados</Value>
+                <Value>Reporte de Empleado Curriculum</Value>
                 <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>12pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
+                  <FontSize>14pt</FontSize>
                   <TextDecoration>Underline</TextDecoration>
                 </Style>
               </TextRun>
@@ -941,10 +940,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox25</rd:DefaultName>
-        <Top>0.42016cm</Top>
-        <Left>7.51099cm</Left>
-        <Height>0.6cm</Height>
-        <Width>8.66479cm</Width>
+        <Top>0.28787cm</Top>
+        <Left>9.04558cm</Left>
+        <Height>0.83812cm</Height>
+        <Width>9.43208cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -971,41 +970,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox26</rd:DefaultName>
-        <Top>0.42016cm</Top>
-        <Left>27.14308cm</Left>
+        <Top>0.52599cm</Top>
+        <Left>28.83641cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.5cm</Width>
+        <Width>2.94979cm</Width>
         <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox27">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Globals!PageNumber</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox27</rd:DefaultName>
-        <Top>4.12433cm</Top>
-        <Left>27.14308cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.5cm</Width>
-        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1020,8 +989,49 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>11.81102in</Width>
+  <Width>12.84227in</Width>
   <Page>
+    <PageFooter>
+      <Height>2.54cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox27">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!PageNumber</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox27</rd:DefaultName>
+          <Top>0.7112cm</Top>
+          <Left>29.32562cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.94979cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
@@ -1038,7 +1048,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>9afc09fb-9a18-46a1-95b5-3b945d7b5ad1</rd:DataSourceID>
+      <rd:DataSourceID>2a6632d4-b510-4f5d-aa91-85da054106db</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1048,6 +1058,14 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="per_Id">
+          <DataField>per_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="emp_Id">
+          <DataField>emp_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="Nombre">
           <DataField>Nombre</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1088,6 +1106,22 @@
           <DataField>Tipo_Sangre</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="hape_Id">
+          <DataField>hape_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="cope_Id">
+          <DataField>cope_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="habi_Id">
+          <DataField>habi_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="comp_Id">
+          <DataField>comp_Id</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="Habilidades">
           <DataField>Habilidades</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1100,13 +1134,13 @@
       <rd:DataSetInfo>
         <rd:DataSetName>ReportesRRHH</rd:DataSetName>
         <rd:SchemaPath>C:\Users\DELL\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesRRHH.xsd</rd:SchemaPath>
-        <rd:TableName>V_Empleado_CurriculumRPT</rd:TableName>
+        <rd:TableName>V_RPT_EmpleadoCurriculum</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>V_Empleado_CurriculumRPTTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>V_RPT_EmpleadoCurriculumTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>96cec3d6-1100-4536-a9d1-a975466be7c0</rd:ReportID>
+  <rd:ReportID>bbf40a0c-a9d2-4983-8ecc-fdfd5e464bbe</rd:ReportID>
 </Report>

@@ -2176,8 +2176,6 @@
     <Content Include="Views\ReportesRRHH\HistorialIncapacidades.cshtml" />
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
     <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
     <Content Include="Views\ReportesRRHH\SueldosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialCargosRPT.cshtml" />
@@ -2185,7 +2183,8 @@
     <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
-    <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAmonestaciones.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2256,11 +2255,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\EmpleadosCurriculumInfor.rdlc" />
+    <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
     <EmbeddedResource Include="Reports\PermisosRPT.rdlc" />
+    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
