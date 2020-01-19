@@ -290,8 +290,8 @@ namespace ERP_GMEDINA.Controllers
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialCargosRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialCargos"]));
             conx.Close();
 
             ViewBag.ReportViewer = reportViewer;
@@ -364,8 +364,8 @@ namespace ERP_GMEDINA.Controllers
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialContrataciones.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\FaseSeleccion.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_FaseSeleccion"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\HistorialContratacionesRPT.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_HistorialContrataciones"]));
             conx.Close();
 
             ViewBag.ReportViewer = reportViewer;
