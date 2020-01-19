@@ -468,7 +468,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-        public ActionResult Requisicion()
+        public ActionResult Requisiciones()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.Requisicion = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
@@ -476,7 +476,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Requisicion(int Id_Requisicion, DateTime Fecha_Contratacion)
+        public ActionResult Requisiciones(int Id_Requisicion, DateTime Fecha_Contratacion)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
