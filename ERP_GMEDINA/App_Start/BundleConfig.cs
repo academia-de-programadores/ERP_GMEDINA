@@ -890,6 +890,10 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/TipoPermisos").Include(
                  "~/Scripts/app/general/TipoPermisos/TipoPermisos.js"));
 
+            bundles.Add(new ScriptBundle("~/plugins/dataTablesMatutina").Include(
+                      "~/Scripts/plugins/dataTablesMatutina/datatables.min.js",
+                      "~/Scripts/plugins/dataTablesMatutina/DatatablesConfigurations.js"));
+
             //App/HistorialPermisos
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialPermisos").Include(
                 "~/Scripts/app/General/HistorialPermisos/IndexHistorialPermisos.js"));
