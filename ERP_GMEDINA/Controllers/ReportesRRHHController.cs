@@ -515,14 +515,13 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult Empleado()
         {
-
-            ViewBag.FechaNacimiento = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "per_FechaNacimiento");
             ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
+        //parametros del reporte
         [HttpPost]
-        public ActionResult Empleado(int per_Id, int habi_Id, int comp_Id, DateTime Fecha_Nacimiento)
+        public ActionResult FaseSeleccion(int? habi_Id, int? comp_Id)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -535,28 +534,45 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * from [rrhh].[V_RPT_Empleado_Curriculum] where per_Id = @per_Id and habi_Id = @habi_Id  and comp_Id = @comp_Id and Fecha_Nacimiento = @Fecha_Nacimiento";
-            command.Parameters.AddWithValue("@per_Id", SqlDbType.Int).Value = per_Id;
-            command.Parameters.AddWithValue("@habi_Id", SqlDbType.Int).Value = habi_Id;
-            command.Parameters.AddWithValue("@comp_Id", SqlDbType.Int).Value = comp_Id;
-            command.Parameters.AddWithValue("@Fecha_Nacimiento", SqlDbType.DateTime).Value = Fecha_Nacimiento;
+            if (comp_Id == null && habi_Id == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum";
+            }
+            else if (comp_Id == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where habi_Id = @habi_Id ";
+                command.Parameters.AddWithValue("@habi_Id", SqlDbType.Date).Value = habi_Id;
+            }
+            else if (habi_Id == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where  comp_Id =@comp_Id ";
+                command.Parameters.AddWithValue("@comp_Id", SqlDbType.Int).Value = comp_Id;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Empleado_Curriculum where habi_Id = @habi_Id and comp_Id = @comp_Id";
+                command.Parameters.AddWithValue("@habi_Id", SqlDbType.Date).Value = habi_Id;
+                command.Parameters.AddWithValue("@comp_Id", SqlDbType.Date).Value = comp_Id;
 
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_Empleado_Curriculum.TableName);
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reporte\Empleado.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("REPORTE", ds.Tables["V_RPT_Empleado_Curriculum"]));
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\EmpleadoCurriculum.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesRRHH", ds.Tables["V_RPT_Empleado_Curriculum"]));
             conx.Close();
 
             ViewBag.ReportViewer = reportViewer;
-            ViewBag.FechaNacimiento = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "per_FechaNacimiento");
+            ViewBag.Titulo = db.tbHabilidades.Where(x => x.habi_Id == habi_Id).Select(x => x.habi_Descripcion).FirstOrDefault();
+            // ViewBag.Titulo1 = db.tbCompetencias.Where(x => x.Comp_Id == Comp_Id).Select(x => x.comp_Descripcion).FirstOrDefault();
             ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
-        public ActionResult HistorialAmonestaciones()
+    
+    public ActionResult HistorialAmonestaciones()
         {
             ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
             return View();
