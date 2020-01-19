@@ -278,14 +278,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="tsal_Id">
+                    <Textbox Name="tsal_Descripcion">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!tsal_Id.Value)</Value>
+                              <Value>=Fields!tsal_Descripcion.Value</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <Color>#4d4d4d</Color>
@@ -295,7 +295,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>tsal_Id</rd:DefaultName>
+                      <rd:DefaultName>tsal_Descripcion</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>#e5e5e5</Color>
@@ -307,6 +307,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -401,7 +402,7 @@
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>1.27cm</Top>
         <Height>1.2cm</Height>
-        <Width>16.75979cm</Width>
+        <Width>16.7598cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

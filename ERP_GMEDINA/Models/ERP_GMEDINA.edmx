@@ -1496,7 +1496,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RPT_HistorialSueldos' does not 
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="sue_Cantidad" Type="decimal" Precision="16" Scale="4" Nullable="false" />
           <Property Name="tmon_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="fecha" Type="datetime" />
+          <Property Name="FechaInicio" Type="date" />
+          <Property Name="fechafin" Type="date" />
           <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -5507,7 +5508,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
     [V_RPT_HistorialSueldos].[emp_Id] AS [emp_Id], 
     [V_RPT_HistorialSueldos].[sue_Cantidad] AS [sue_Cantidad], 
     [V_RPT_HistorialSueldos].[tmon_Descripcion] AS [tmon_Descripcion], 
-    [V_RPT_HistorialSueldos].[fecha] AS [fecha], 
+    [V_RPT_HistorialSueldos].[FechaInicio] AS [FechaInicio], 
+    [V_RPT_HistorialSueldos].[fechafin] AS [fechafin], 
     [V_RPT_HistorialSueldos].[car_Descripcion] AS [car_Descripcion]
     FROM [rrhh].[V_RPT_HistorialSueldos] AS [V_RPT_HistorialSueldos]</DefiningQuery>
           </EntitySet>
@@ -11623,10 +11625,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <EntitySet Name="V_RPT_HistorialContrataciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" />
           <EntitySet Name="V_RPT_HistorialIncapacidad" EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" />
           <EntitySet Name="V_RPT_HistorialPermisos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" />
-          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
           <EntitySet Name="V_RPT_HistorialVacaciones" EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" />
           <EntitySet Name="V_RPT_HorasTrabajadas" EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" />
           <EntitySet Name="V_RPT_HistorialSalidas" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" />
+          <EntitySet Name="V_RPT_HistorialSueldos" EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13079,23 +13081,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="V_RPT_HistorialSueldos">
-          <Key>
-            <PropertyRef Name="sue_Id" />
-            <PropertyRef Name="NombreEmp" />
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="sue_Cantidad" />
-            <PropertyRef Name="tmon_Descripcion" />
-            <PropertyRef Name="car_Descripcion" />
-          </Key>
-          <Property Name="sue_Id" Type="Int32" Nullable="false" />
-          <Property Name="NombreEmp" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="V_RPT_HistorialVacaciones">
           <Key>
             <PropertyRef Name="hvac_Id" />
@@ -13152,6 +13137,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
           <Property Name="observaciones" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="FechaSalida" Type="DateTime" Precision="0" />
           <Property Name="fechafin" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="V_RPT_HistorialSueldos">
+          <Key>
+            <PropertyRef Name="sue_Id" />
+            <PropertyRef Name="NombreEmp" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="sue_Cantidad" />
+            <PropertyRef Name="tmon_Descripcion" />
+            <PropertyRef Name="car_Descripcion" />
+          </Key>
+          <Property Name="sue_Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreEmp" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="tmon_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="fechafin" Type="DateTime" Precision="0" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15810,19 +15813,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RPT_HistorialSueldos">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
-              <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
-                <ScalarProperty Name="sue_Cantidad" ColumnName="sue_Cantidad" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
-                <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_RPT_HistorialVacaciones">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialVacaciones">
               <MappingFragment StoreEntitySet="V_RPT_HistorialVacaciones">
@@ -15863,6 +15853,20 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbtiposalidas' does not have a 
                 <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hsal_Id" ColumnName="hsal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RPT_HistorialSueldos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RPT_HistorialSueldos">
+              <MappingFragment StoreEntitySet="V_RPT_HistorialSueldos">
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="fechafin" ColumnName="fechafin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="tmon_Descripcion" ColumnName="tmon_Descripcion" />
+                <ScalarProperty Name="sue_Cantidad" ColumnName="sue_Cantidad" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="NombreEmp" ColumnName="NombreEmp" />
+                <ScalarProperty Name="sue_Id" ColumnName="sue_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
