@@ -83,7 +83,7 @@ namespace ERP_GMEDINA.Controllers
 
         //parametros del reporte
         [HttpPost]
-        public ActionResult HistorialContratacionesRPT(int car_Id, DateTime FechaContratacion, DateTime FechaFin)
+        public ActionResult HistorialContratacionesRPT(int? car_Id, DateTime? FechaContratacion, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -96,10 +96,51 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaContratacion between @FechaContratacion and @FechaFin";
-            command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-            command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            if (car_Id == null && FechaContratacion == null && FechaFin == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones";
+            }
+            else if (car_Id == null && FechaContratacion != null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaContratacion between @FechaContratacion and @FechaFin";
+                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (car_Id == null && FechaContratacion == null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaFin= @FechaFin";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (car_Id == null && FechaFin == null && FechaContratacion != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where FechaContratacion= @FechaContratacion";
+                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
+            }
+            else if (FechaFin == null && FechaContratacion == null && car_Id != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+            }
+            else if (FechaContratacion == null && car_Id != null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaFin=@FechaFin";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (FechaFin == null && car_Id != null && FechaContratacion != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaContratacion=@FechaContratacion";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialContrataciones where car_Id = @car_Id and FechaContratacion between @FechaContratacion and @FechaFin";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@FechaContratacion", SqlDbType.Date).Value = FechaContratacion;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+     
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialContrataciones.TableName);
@@ -227,7 +268,7 @@ namespace ERP_GMEDINA.Controllers
 
 
         [HttpPost]
-        public ActionResult HistorialCargosRPT(int car_Id, DateTime Fecha, DateTime FechaFin)
+        public ActionResult HistorialCargosRPT(int? car_Id, DateTime? Fecha, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -239,11 +280,51 @@ namespace ERP_GMEDINA.Controllers
             SqlConnection conx = new SqlConnection(connectionString);
 
             //comando para el dataAdapter
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id and Fecha between @Fecha and @FechaFin";
-            command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
-            command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
-            command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            SqlCommand command = new SqlCommand();       
+            if (car_Id == null && Fecha == null && FechaFin== null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos";     
+            }        
+            else if (car_Id == null && Fecha !=null && FechaFin !=null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where Fecha between @Fecha and @FechaFin";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;            
+            }
+            else if (car_Id == null && Fecha == null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where FechaFin= @FechaFin";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (car_Id == null && FechaFin == null && Fecha != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where Fecha= @Fecha";
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            }
+            else if (FechaFin == null && Fecha == null && car_Id !=null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+            }
+            else if (Fecha == null && car_Id != null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id and FechaFin=@FechaFin";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
+            else if (FechaFin == null && car_Id != null && Fecha != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id and Fecha=@Fecha";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialCargos where car_Id = @car_Id and Fecha between @Fecha and @FechaFin";
+                command.Parameters.AddWithValue("@car_Id", SqlDbType.Int).Value = car_Id;
+                command.Parameters.AddWithValue("@Fecha", SqlDbType.Date).Value = Fecha;
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.Date).Value = FechaFin;
+            }
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
             adp.Fill(ds, ds.V_RPT_HistorialCargos.TableName);

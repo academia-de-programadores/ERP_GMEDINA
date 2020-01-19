@@ -207,7 +207,6 @@
     <Compile Include="Controllers\AreasController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
-    <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\EquipoEmpleadosController.cs" />
     <Compile Include="Controllers\EquipoTrabajoController.cs" />
@@ -230,7 +229,7 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
-    <Compile Include="Controllers\ReportesRRHH1Controller.cs" />
+    <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
     <Compile Include="Controllers\SeleccionCandidatosController.cs" />
@@ -270,7 +269,6 @@
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cHistorialHorasTrabajadas.cs" />
     <Compile Include="Models\cHistorialIncapacidades.cs" />
-    <Compile Include="Models\cHistorialIncapacidadesRPT.cs" />
     <Compile Include="Models\cHistorialPermisos.cs" />
     <Compile Include="Models\cHistorialPermisos_Empleados.cs" />
     <Compile Include="Models\cHistorialSalidas.cs" />
@@ -2200,35 +2198,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
