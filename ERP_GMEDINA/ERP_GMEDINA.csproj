@@ -2185,6 +2185,7 @@
     <Content Include="Views\ReportesRRHH\HistorialSalidasRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
+    <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

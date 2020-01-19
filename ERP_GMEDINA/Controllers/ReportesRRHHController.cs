@@ -18,7 +18,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: ReportesRRHH
         ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         ReportesRRHH ds = new ReportesRRHH();
-    
+
         public ActionResult HistorialIncapacidades()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -193,7 +193,7 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
 
-           
+
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -809,6 +809,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
+        
         public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -817,7 +818,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Requisiciones(int? Id_Requisicion, DateTime? Fecha_Contratacion)
+        public ActionResult Requisicion(int? Id_Requisicion, DateTime? Fecha_Contratacion)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -828,6 +829,7 @@ namespace ERP_GMEDINA.Controllers
             var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
 
 
+            //comando para el dataAdapter
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
             if (Id_Requisicion == null && Fecha_Contratacion == null)
@@ -868,6 +870,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
+
         public ActionResult Empleado()
         {
             ViewBag.Habilidad = new SelectList(db.tbHabilidades.Where(o => o.habi_Estado == true), "habi_Id", "habi_Descripcion");
