@@ -193,7 +193,7 @@ namespace ERP_GMEDINA.Controllers
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
             }
 
-           
+
             SqlConnection conx = new SqlConnection(connectionString);
             command.Connection = conx;
             SqlDataAdapter adp = new SqlDataAdapter(command);
@@ -218,15 +218,12 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
             return View();
         }
-
         public ActionResult HistorialCargosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.Cargo = new SelectList(db.tbCargos.Where(o => o.car_Estado == true), "car_Id", "car_Descripcion");
             return View();
         }
-
-        //parametros del reporte
         [HttpPost]
         public ActionResult HistorialCargosRPT(int? car_Id, DateTime? Fecha, DateTime? FechaFin)
         {
@@ -300,7 +297,6 @@ namespace ERP_GMEDINA.Controllers
 
             return View();
     }
-
         [HttpPost]
         public ActionResult HistorialContratacionesRPT(int? car_Id, DateTime? FechaContratacion, DateTime? FechaFin)
         {
@@ -374,8 +370,7 @@ namespace ERP_GMEDINA.Controllers
 
             return View();
     }
-
-         public ActionResult HistorialSalidasRPT()
+        public ActionResult HistorialSalidasRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
@@ -477,7 +472,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
         public ActionResult HistorialVacacionesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -583,9 +577,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
-
-       
         public ActionResult SueldosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -675,7 +666,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
         public ActionResult Permisos()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -684,7 +674,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
-
         [HttpPost]
         public ActionResult Permisos(int? emp_Id, DateTime? FechaInicio, DateTime? FechaFin)
         {
@@ -699,24 +688,42 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            if(emp_Id == null && FechaInicio == null && FechaFin == null)
+            if (emp_Id == null && FechaInicio == null && FechaFin == null)
             {
                 command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos";
             }
-            else if(emp_Id == null)
+            else if (emp_Id == null && FechaInicio != null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where FechaInicio between @FechaInicio and @FechaFin ";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+            }
+            else if (emp_Id == null && FechaInicio == null && FechaFin != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where FechaFin = @FechaFin";
+                command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+            else if (emp_Id == null && FechaFin == null && FechaInicio != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where FechaIncio = @FechaInicio";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+            }
+            else if (FechaFin == null && FechaInicio == null && emp_Id != null)
             {
                 command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id";
                 command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
             }
-            else if(FechaInicio == null)
+            else if (FechaInicio == null && emp_Id != null && FechaFin != null)
             {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio between @FechaInicio and @FechaFin ";
-                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
-            }
-            else if(FechaFin == null)
-            {
-                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaFin between @FechaInicio and @FechaFin ";
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaFin = @FechaFin";
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
                 command.Parameters.AddWithValue("@FechaFin", SqlDbType.DateTime).Value = FechaFin;
+            }
+            else if (FechaFin == null && emp_Id != null && FechaInicio != null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_HistorialPermisos where emp_Id = @emp_Id and FechaInicio = @FechaInicio";
+                command.Parameters.AddWithValue("@FechaInicio", SqlDbType.DateTime).Value = FechaInicio;
+                command.Parameters.AddWithValue("@emp_Id", SqlDbType.Int).Value = emp_Id;
             }
             else
             {
@@ -752,7 +759,6 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-        //parametros del reporte
         [HttpPost]
         public ActionResult FaseSeleccion(int? fare_Id, DateTime? Fecha)
         {
@@ -803,8 +809,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.Requisiciones = new SelectList(db.tbRequisiciones.Where(o => o.req_Estado == true), "req_Id", "req_Descripcion");
             return View();
         }
-
-
+        
         public ActionResult Requisicion()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -872,8 +877,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
-        //parametros del reporte
-        //parametros del reporte
         [HttpPost]
         public ActionResult Empleado(int? habi_Id, int? comp_Id)
         {
@@ -925,7 +928,6 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Competencias = new SelectList(db.tbCompetencias.Where(o => o.comp_Estado == true), "comp_Id", "comp_Descripcion");
             return View();
         }
-
         public ActionResult HistorialAmonestaciones()
         {
             ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
@@ -970,15 +972,11 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-        //HistorialAudienciaDescargo
         public ActionResult HistorialAudienciaDescargo()
         {
             //ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
             return View();
         }
-
-
-      
         [HttpPost]
         public ActionResult HistorialAudienciaDescargo(DateTime aude_fechaaudiencia, DateTime aude_fechaaudiencia1, string nombre)
         {
@@ -1018,7 +1016,6 @@ namespace ERP_GMEDINA.Controllers
             ////ViewBag.Planillas = new SelectList(db.tbCatalogoDePlanillas.Where(o => o.cpla_Activo == true), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
             return View();
         }
-
         public ActionResult EquipoEmpleados()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
@@ -1027,7 +1024,6 @@ namespace ERP_GMEDINA.Controllers
             //ViewBag.Persona = new SelectList(db.tbPersonas.Where(o => o.per_Estado == true), "per_Id", "req_Descripcion");
             return View();
         }
-
         [HttpPost]
         public ActionResult EquipoEmpleados(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
         {
