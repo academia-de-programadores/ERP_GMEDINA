@@ -439,13 +439,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1in</Height>
+    <Height>1.15625in</Height>
     <Style />
   </Body>
-  <Width>5.35417in</Width>
+  <Width>5.52084in</Width>
   <Page>
     <PageFooter>
-      <Height>0.375in</Height>
+      <Height>0.36458in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>

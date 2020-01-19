@@ -327,7 +327,7 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>0.30556in</Top>
-        <Height>0.71875in</Height>
+        <Height>0.71876in</Height>
         <Width>6.5in</Width>
         <Style>
           <Border>
@@ -365,13 +365,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.02431in</Height>
+    <Height>1.15974in</Height>
     <Style />
   </Body>
-  <Width>6.5in</Width>
+  <Width>6.6875in</Width>
   <Page>
     <PageFooter>
-      <Height>0.29167in</Height>
+      <Height>0.375in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -390,7 +390,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>0.04167in</Top>
+          <Top>0.04166in</Top>
           <Left>5.5in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
