@@ -2176,8 +2176,6 @@
     <Content Include="Views\ReportesRRHH\HistorialIncapacidades.cshtml" />
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
-    <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
     <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
     <Content Include="Views\ReportesRRHH\SueldosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialCargosRPT.cshtml" />
@@ -2186,6 +2184,7 @@
     <Content Include="Views\ReportesRRHH\HistorialVacacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\Permisos.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
+    <Content Include="Views\ReportesRRHH\HistorialAmonestaciones.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargo.cshtml" />
   </ItemGroup>
   <ItemGroup>
