@@ -615,7 +615,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Requisicion(int Id_Requisicion, DateTime Fecha_Contratacion)
+        public ActionResult Requisiciones(int? Id_Requisicion, DateTime? Fecha_Contratacion)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -628,12 +628,26 @@ namespace ERP_GMEDINA.Controllers
 
             //comando para el dataAdapter
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM [rrhh].[V_RPT_Requisiciones] where Id_Requisicion = @Id_Requisicion  and Fecha_Contratacion = @Fecha_Contratacion";
-
-            command.Parameters.AddWithValue("@Id_Requisicion", SqlDbType.Int).Value = Id_Requisicion;
-            //command.Parameters.AddWithValue("@tiho_Descripcion", SqlDbType.NVarChar).Value = tiho_Descripcion;
-            command.Parameters.AddWithValue("@Fecha_Contratacion", SqlDbType.NVarChar).Value = Fecha_Contratacion;
-
+            if (Id_Requisicion == null && Fecha_Contratacion == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Requisiciones";
+            }
+            else if (Id_Requisicion == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Requisiciones where Fecha_Contratacion =@Fecha_Contratacion ";
+                command.Parameters.AddWithValue("@Fecha_Contratacion", SqlDbType.Date).Value = Fecha_Contratacion;
+            }
+            else if (Fecha_Contratacion == null)
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Requisiciones where  Id_Requisicion =@Id_Requisicion ";
+                command.Parameters.AddWithValue("@Id_Requisicion", SqlDbType.Int).Value = Id_Requisicion;
+            }
+            else
+            {
+                command.CommandText = "SELECT * FROM rrhh.V_RPT_Requisiciones where Id_Requisicion =@Id_Requisicion and Fecha_Contratacion =@Fecha_Contratacion ";
+                command.Parameters.AddWithValue("@Id_Requisicion", SqlDbType.Int).Value = Id_Requisicion;
+                command.Parameters.AddWithValue("@Fecha_Contratacion", SqlDbType.Date).Value = Fecha_Contratacion;
+            }
             SqlConnection conx = new SqlConnection(connectionString);
             SqlDataAdapter adp = new SqlDataAdapter(command);
             command.Connection = conx;

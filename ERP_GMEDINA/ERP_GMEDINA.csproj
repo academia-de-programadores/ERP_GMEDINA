@@ -230,7 +230,6 @@
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\RazonSalidasController.cs" />
-    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ReportesRRHHController.cs" />
     <Compile Include="Controllers\RequerimientosEspecialesController.cs" />
     <Compile Include="Controllers\RequisicionesController.cs" />
@@ -300,6 +299,7 @@
     <Compile Include="Models\cTipoSalidas.cs" />
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
+    <Compile Include="Models\cV_RPT_RRHH_Permisos.cs" />
     <Compile Include="Models\DatosProfesionales.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
     <Compile Include="Models\DatosProfessionalesEdit.cs" />
@@ -1059,6 +1059,9 @@
     <Compile Include="Models\V_RPT_HistorialAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_HistorialAmonestaciones_Empleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_RPT_HistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1084,6 +1087,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
@@ -1390,11 +1396,11 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Admin.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
+    <Content Include="Scripts\app\General\PermisosRPT\PermisosRPT.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
-    <Content Include="Scripts\app\General\Reporteria\Sueldos.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\Admin.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\Admin.js" />
@@ -1503,6 +1509,7 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ReportesDS1.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Reports\SueldosRPT.rdlc" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -2165,7 +2172,6 @@
     <Content Include="Views\ReportesRRHH\FaseSeleccion.cshtml" />
     <Content Include="Views\ReportesRRHH\Requisiciones.cshtml" />
     <Content Include="Views\ReportesRRHH\Empleado.cshtml" />
-    <Content Include="Views\ReportesRRHH\EmpleadosRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAmonestacionesRPT.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargoRPT .cshtml" />
     <Content Include="Views\ReportesRRHH\EquipoEmpleados.cshtml" />
@@ -2249,7 +2255,7 @@
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
     <EmbeddedResource Include="Reports\HistorialSalidasRPT.rdlc" />
     <EmbeddedResource Include="Reports\HorasTrabajadas.rdlc" />
-    <EmbeddedResource Include="Reports\SueldosRPT.rdlc" />
+    <EmbeddedResource Include="Reports\RequisicionesRPT.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
