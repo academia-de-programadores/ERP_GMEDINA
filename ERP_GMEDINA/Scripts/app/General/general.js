@@ -245,6 +245,19 @@ function alphanumeric(e) {
     }
 };
 
+function Numericos(e) {
+    var regex = new RegExp("[1234567890]");
+    var key = e.keyCode || e.which;
+    key = String.fromCharCode(key);
+    if (!regex.test(key)) {
+        e.returnValue = false;
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+    }
+};
+
+
 
 ///Esta reemplazala
 function FechaFormatoSimple(pFecha) {
