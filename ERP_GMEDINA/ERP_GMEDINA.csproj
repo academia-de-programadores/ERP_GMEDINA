@@ -2186,6 +2186,7 @@
     <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAmonestaciones.cshtml" />
     <Content Include="Views\ReportesRRHH\HistorialAudienciaDescargo.cshtml" />
+    <Content Include="Views\ReportesRRHH\Requisicion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2256,7 +2257,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\EmpleadosCurriculumInfor.rdlc" />
     <EmbeddedResource Include="Reports\EmpleadosCurriculumRPT.rdlc" />
     <EmbeddedResource Include="Reports\FaseSeleccion.rdlc" />
     <EmbeddedResource Include="Reports\HistorialIncapacidades.rdlc" />
