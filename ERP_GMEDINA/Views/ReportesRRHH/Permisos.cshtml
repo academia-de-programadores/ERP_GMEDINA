@@ -21,44 +21,35 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <label class="font-normal">Empleados</label>
+                                @* @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-3" })*@
 
-                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control" })
+                                @Html.DropDownList("emp_Id", (IEnumerable<SelectListItem>)ViewBag.Empleados, "Seleccione una opción", new { @class = "form-control required valid " })
 
                                 @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
-
-                                <label class="font-normal">Permisos</label>
-
-                                @Html.DropDownList("tper_Id", (IEnumerable<SelectListItem>)ViewBag.Permiso, "Seleccione una opción", new { @class = "form-control" })
-
-                                @Html.ValidationMessageFor(model => model.tper_Id, "", new { @class = "text-danger" })
                             </div>
-
-
-                            <br />
                         </div>
 
                         <div class="col-md-6">
                             <label class="font-normal">Fecha Inicio</label>
                             <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaInicio", @id = "FechaInicio" } })
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control required valid", @type = "date", @name = "FechaInicio", @id = "FechaInicio" } })
                             </div>
                             @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-6">
                             <label class="font-normal">
-                                Fecha Fin</label>
-                                <div class="input-group date">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaFin", @id = "FechaFin" } })
-                                </div>
-                                @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+                                Fecha Fin
+                            </label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control required valid", @type = "date", @name = "FechaFin", @id = "FechaFin" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
 
 }
@@ -88,7 +79,16 @@
         </div>
     </div>
 </div>
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
 
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/Scripts/app/General")
+    @Scripts.Render("~/Scripts/app/General/PermisosRPT/PermisosRPT.js")
+
+}
 
 
 
