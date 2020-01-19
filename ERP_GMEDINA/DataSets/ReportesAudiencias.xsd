@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportesAudiencias" targetNamespace="http://tempuri.org/ReportesAudiencias.xsd" xmlns:mstns="http://tempuri.org/ReportesAudiencias.xsd" xmlns="http://tempuri.org/ReportesAudiencias.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ERP_GMEDINAConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ERP_GMEDINAConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ERP_GMEDINAConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_RPT_HistorialAudienciaDescargoTableAdapter" GeneratorDataComponentClassName="V_RPT_HistorialAudienciaDescargoTableAdapter" Name="V_RPT_HistorialAudienciaDescargo" UserDataComponentName="V_RPT_HistorialAudienciaDescargoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.rrhh.V_RPT_HistorialAudienciaDescargo" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT aude_Id, nombre, per_Identidad, aude_Descripcion, aude_fechaaudiencia FROM rrhh.V_RPT_HistorialAudienciaDescargo</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="aude_Id" DataSetColumn="aude_Id" />
+              <Mapping SourceColumn="nombre" DataSetColumn="nombre" />
+              <Mapping SourceColumn="per_Identidad" DataSetColumn="per_Identidad" />
+              <Mapping SourceColumn="aude_Descripcion" DataSetColumn="aude_Descripcion" />
+              <Mapping SourceColumn="aude_fechaaudiencia" DataSetColumn="aude_fechaaudiencia" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportesAudiencias" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportesAudiencias" msprop:Generator_UserDSName="ReportesAudiencias">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_RPT_HistorialAudienciaDescargo" msprop:Generator_TableClassName="V_RPT_HistorialAudienciaDescargoDataTable" msprop:Generator_TableVarName="tableV_RPT_HistorialAudienciaDescargo" msprop:Generator_TablePropName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowDeletingName="V_RPT_HistorialAudienciaDescargoRowDeleting" msprop:Generator_RowChangingName="V_RPT_HistorialAudienciaDescargoRowChanging" msprop:Generator_RowEvHandlerName="V_RPT_HistorialAudienciaDescargoRowChangeEventHandler" msprop:Generator_RowDeletedName="V_RPT_HistorialAudienciaDescargoRowDeleted" msprop:Generator_UserTableName="V_RPT_HistorialAudienciaDescargo" msprop:Generator_RowChangedName="V_RPT_HistorialAudienciaDescargoRowChanged" msprop:Generator_RowEvArgName="V_RPT_HistorialAudienciaDescargoRowChangeEvent" msprop:Generator_RowClassName="V_RPT_HistorialAudienciaDescargoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="aude_Id" msprop:Generator_ColumnVarNameInTable="columnaude_Id" msprop:Generator_ColumnPropNameInRow="aude_Id" msprop:Generator_ColumnPropNameInTable="aude_IdColumn" msprop:Generator_UserColumnName="aude_Id" type="xs:int" />
+              <xs:element name="nombre" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="per_Identidad" msprop:Generator_ColumnVarNameInTable="columnper_Identidad" msprop:Generator_ColumnPropNameInRow="per_Identidad" msprop:Generator_ColumnPropNameInTable="per_IdentidadColumn" msprop:Generator_UserColumnName="per_Identidad">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="aude_Descripcion" msprop:Generator_ColumnVarNameInTable="columnaude_Descripcion" msprop:Generator_ColumnPropNameInRow="aude_Descripcion" msprop:Generator_ColumnPropNameInTable="aude_DescripcionColumn" msprop:Generator_UserColumnName="aude_Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="aude_fechaaudiencia" msprop:Generator_ColumnVarNameInTable="columnaude_fechaaudiencia" msprop:Generator_ColumnPropNameInRow="aude_fechaaudiencia" msprop:Generator_ColumnPropNameInTable="aude_fechaaudienciaColumn" msprop:Generator_UserColumnName="aude_fechaaudiencia" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:V_RPT_HistorialAudienciaDescargo" />
+      <xs:field xpath="mstns:aude_Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

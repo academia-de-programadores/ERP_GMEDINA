@@ -15,6 +15,9 @@ namespace ERP_GMEDINA
                       "~/Content/style.css",
                       "~/Content/BTN/BTN-HOME.css"));
 
+
+            bundles.Add(new StyleBundle("~/Scripts/app/General/Reporteria/HistorialAmonestaciones").Include(
+                      "~/Scripts/app/General/Reporteria/HistorialAmonestaciones.js"));
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));

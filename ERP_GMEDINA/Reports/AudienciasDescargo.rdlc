@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.1275cm</Width>
+              <Width>6.13833cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.1275cm</Width>
+              <Width>4.70958cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.1275cm</Width>
+              <Width>7.75229cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.1275cm</Width>
+              <Width>5.66208cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>nombre</Value>
+                              <Value>Colaborador</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -67,7 +67,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>per Identidad</Value>
+                              <Value>Identidad</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -103,7 +103,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>aude Descripcion</Value>
+                              <Value>Descripción audiencia</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -139,7 +139,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>aude fechaaudiencia</Value>
+                              <Value>Fecha de audiencia</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -325,9 +325,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>ReportesRRHH</DataSetName>
+        <DataSetName>ReportesAudiencias</DataSetName>
+        <Top>0.17639cm</Top>
+        <Left>1.37583cm</Left>
         <Height>1.2cm</Height>
-        <Width>16.51cm</Width>
+        <Width>24.26229cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -338,10 +340,10 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>6.5in</Width>
+  <Width>10.09375in</Width>
   <Page>
     <PageHeader>
-      <Height>1.11125cm</Height>
+      <Height>1.29646cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -360,8 +362,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.30854cm</Top>
-          <Left>13.10365cm</Left>
+          <Top>0.36594cm</Top>
+          <Left>22.35083cm</Left>
           <Height>0.6cm</Height>
           <Width>3.00271cm</Width>
           <Style>
@@ -391,10 +393,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.21167cm</Top>
-          <Left>2.13021cm</Left>
+          <Top>0.36594cm</Top>
+          <Left>5.50364cm</Left>
           <Height>0.69687cm</Height>
-          <Width>9.90833cm</Width>
+          <Width>11.17833cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -414,7 +416,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.00542cm</Height>
+      <Height>1.05833cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -434,7 +436,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.17639cm</Top>
-          <Left>13.60636cm</Left>
+          <Left>22.85354cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -465,18 +467,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ReportesRRHH">
+    <DataSource Name="ReportesAudiencias">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>ad707c24-839a-494f-b4a5-bbab2e216649</rd:DataSourceID>
+      <rd:DataSourceID>ec26242e-755e-464a-adf8-563b2620b483</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ReportesRRHH">
+    <DataSet Name="ReportesAudiencias">
       <Query>
-        <DataSourceName>ReportesRRHH</DataSourceName>
+        <DataSourceName>ReportesAudiencias</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -502,8 +504,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>ReportesRRHH</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Axel Omar\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesRRHH.xsd</rd:SchemaPath>
+        <rd:DataSetName>ReportesAudiencias</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Axel Omar\Documents\GitHub\Proyecto_ERP_GMEDINA\ERP_GMEDINA\DataSets\ReportesAudiencias.xsd</rd:SchemaPath>
         <rd:TableName>V_RPT_HistorialAudienciaDescargo</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -512,5 +514,5 @@
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>0f434f5e-6cc1-4401-ab3e-4ceb367938de</rd:ReportID>
+  <rd:ReportID>58011a16-17cf-4dae-84f4-198e4fad0eff</rd:ReportID>
 </Report>
