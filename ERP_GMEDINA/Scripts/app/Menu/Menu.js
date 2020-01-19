@@ -11,21 +11,22 @@
             "TipoHoras",
             "Jornadas"
     ];
-            
-    var Empleados= [
+
+    var Empleados = [
           "Empleados",
             "Sueldos",
             "HistorialVacaciones",
             "HistorialHorasTrabajadas",
-            "HistorialCargos"
+            "HistorialCargos",
+            "HistorialContrataciones"
     ];
 
-    var Amonestaciones= [
+    var Amonestaciones = [
             "TipoAmonestaciones",
             "HistorialAudienciaDescargos",
             "HistorialAmonestaciones"
     ];
-    var Salidas= [
+    var Salidas = [
             "RazonSalidas",
             "TipoSalidas",
             "HistorialSalidas"
@@ -34,20 +35,20 @@
         "EquipoTrabajo",
         "EquipoEmpleados"
     ]
-    var Permisos= [
+    var Permisos = [
             "TipoPermisos",
             "HistorialPermisos"
     ];
-    var Incapacidades= [
+    var Incapacidades = [
             "TipoIncapacidades",
             "HistorialIncapacidades"
     ];
     var Reclutamiento = [
-           
+
             "Personas",
             "Requisiciones",
             "SeleccionCandidatos"
-           
+
     ];
     var Datos_Profesionales = [
          "Competencias",
@@ -56,7 +57,7 @@
             "FasesReclutamiento",
              "RequerimientosEspeciales"
     ]
-    
+
     var url = window.location.href;
     var pieces = url.split("/");
     var controler = ''; //pieces[pieces.length - 1];
@@ -64,7 +65,8 @@
         controler = value;
         if (buscarItem(controler, General)) {
             $("#General").addClass("active");
-            $("#General").find(".General").addClass("in");}
+            $("#General").find(".General").addClass("in");
+        }
         else if (buscarItem(controler, Empleados)) {
             $("#Empleados").addClass("active");
             $("#Empleados").find(".Empleados").addClass("in");
@@ -104,7 +106,7 @@ function buscarItem(item, lista) {
     var valor = false;
     $.each(lista, function (index, value) {
         if (item == value) {
-            valor= true;
+            valor = true;
         }
     });
     return valor;

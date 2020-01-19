@@ -33,6 +33,7 @@ function tablaEditar(ID) {
             }
         });
 }
+
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -40,11 +41,11 @@ function tablaDetalles(ID) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;                
+                $("#ModalDetalles").find("#jor_Descripcion")["0"].innerText = obj.jor_Descripcion;
                 $("#ModalDetalles").find("#jor_FechaCrea")["0"].innerText = FechaFormato(obj.jor_FechaCrea);
                 $("#ModalDetalles").find("#jor_FechaModifica")["0"].innerText = FechaFormato(obj.jor_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;                
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -109,17 +110,18 @@ $("#btnAgregar").click(function () {
 function showmodal(btn) {
     jor_Id = $(btn).data('id');
     var modalnuevo = $('#ModalNuevoHorarios');
-    modalnuevo.modal('show');    
+    modalnuevo.modal('show');
     $(modalnuevo).find("#hor_Descripcion").val("");
     $(modalnuevo).find("#hor_Descripcion").focus();
     $(modalnuevo).find("#hor_HoraInicio").val("");
     $(modalnuevo).find("#hor_HoraFin").val("");
 }
+
 function showmodaledit(btn) {
     jor_Id = $(btn).data('id');
     _ajax(null,
         '/Jornadas/EditHorario/' + jor_Id,
-        'GET',        
+        'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
@@ -152,20 +154,20 @@ function showmodalDetalle(btn) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();                
+                CierraPopups();
                 var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
                 hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes;
                 var hor_HoraFin = obj.hor_HoraFin.Hours < 10 ? "0" + obj.hor_HoraFin.Hours : obj.hor_HoraFin.Hours;
                 hor_HoraFin += ":" + obj.hor_HoraFin.Minutes;
                 $('#ModalDetallesHorario').modal('show');
-                $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;                
+                $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;
                 $("#ModalDetallesHorario").find("#hor_HoraInicio")["0"].innerText = hor_HoraInicio;
                 $("#ModalDetallesHorario").find("#hor_HoraFin")["0"].innerText = hor_HoraFin;
-                $("#ModalDetallesHorario").find("#hor_CantidadHoras")["0"].innerText = obj.hor_CantidadHoras;                
+                $("#ModalDetallesHorario").find("#hor_CantidadHoras")["0"].innerText = obj.hor_CantidadHoras;
                 $("#ModalDetallesHorario").find("#hor_FechaCrea")["0"].innerText = FechaFormato(obj.hor_FechaCrea);
                 $("#ModalDetallesHorario").find("#hor_FechaModifica")["0"].innerText = FechaFormato(obj.hor_FechaModifica);
                 $("#ModalDetallesHorario").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesHorario").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;                
+                $("#ModalDetallesHorario").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 $('#ModalDetallesHorario').modal('show');
             }
         });
@@ -226,7 +228,7 @@ $("#btnGuardarHorario").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     $('#btnCerrarModal').click();
                     llenarTabla();
-                    LimpiarControles(["hor_Descripcion","hor_HoraInicio","hor_HoraFin"]);
+                    LimpiarControles(["hor_Descripcion", "hor_HoraInicio", "hor_HoraFin"]);
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
                     MsgError("Error", "No se guardó el registro, contacte al administrador");

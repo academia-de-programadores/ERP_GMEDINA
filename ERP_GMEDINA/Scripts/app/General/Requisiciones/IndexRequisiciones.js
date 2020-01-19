@@ -19,18 +19,18 @@ function format(obj) {
     var div = '<div class="ibox-title">'
 + '<h5>Datos del perfil</h5>'
 + '</div>';
-    
-   div += '<div class="ibox-content">'
-  + '<div class="panel-body">'
-    + '<div class="panel-group" id="accordion">'
-      + '<div class="panel panel-default">'
-        + '<div class="panel-heading">'
-          + '<h5 class="panel-title">'
-            + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseCompetencias' + obj.req_Id + '" class="" aria-expanded="true">Competencias</a>'
-          + '</h5>'
-        + '</div>'
-        + '<div id="collapseCompetencias' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
-          + '<div class="panel-body">';
+
+    div += '<div class="ibox-content">'
+   + '<div class="panel-body">'
+     + '<div class="panel-group" id="accordion">'
+       + '<div class="panel panel-default">'
+         + '<div class="panel-heading">'
+           + '<h5 class="panel-title">'
+             + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseCompetencias' + obj.req_Id + '" class="" aria-expanded="true">Competencias</a>'
+           + '</h5>'
+         + '</div>'
+         + '<div id="collapseCompetencias' + obj.req_Id + '" class="panel-collapse in collapse" style="">'
+           + '<div class="panel-body">';
 
     if (obj.Competencias.length > 0)
         obj.Competencias.forEach(function (index, value) {
@@ -39,36 +39,36 @@ function format(obj) {
     else
         div += "<h5>Sin datos que mostrar.*</h5>";
 
- div +=   '</div>'
- + '</div>'
-+ '</div>'
-+ '<div class="panel panel-default">'
- + '<div class="panel-heading">'
-   + '<h5 class="panel-title">'
-     + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseHabilidades' + obj.req_Id+ '" class="" aria-expanded="true">Habilidades</a>'
-   + '</h5>'
- + '</div>'
- + '<div id="collapseHabilidades' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
-   + '<div class="panel-body">';
+    div += '</div>'
+    + '</div>'
+   + '</div>'
+   + '<div class="panel panel-default">'
+    + '<div class="panel-heading">'
+      + '<h5 class="panel-title">'
+        + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseHabilidades' + obj.req_Id + '" class="" aria-expanded="true">Habilidades</a>'
+      + '</h5>'
+    + '</div>'
+    + '<div id="collapseHabilidades' + obj.req_Id + '" class="panel-collapse in collapse" style="">'
+      + '<div class="panel-body">';
 
- if (obj.Habilidades.length > 0)
-     obj.Habilidades.forEach(function (index, value) {
-         div = div + index.habi_Descripcion + '<br>';
-     })
- else
-     div += "<h5>Sin datos que mostrar.*</h5>";
+    if (obj.Habilidades.length > 0)
+        obj.Habilidades.forEach(function (index, value) {
+            div = div + index.habi_Descripcion + '<br>';
+        })
+    else
+        div += "<h5>Sin datos que mostrar.*</h5>";
 
- div += '</div>'
-  + '</div>'
-+ '</div>'
-+ '<div class="panel panel-default">'
-  + '<div class="panel-heading">'
-    + '<h4 class="panel-title">'
-      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseIdiomas' + obj.req_Id+ '" class="" aria-expanded="true">Idiomas</a>'
-    + '</h4>'
-  + '</div>'
-  + '<div id="collapseIdiomas' + obj.req_Id+ '" class="panel-collapse collapse in">'
-    + '<div class="panel-body">';
+    div += '</div>'
+     + '</div>'
+   + '</div>'
+   + '<div class="panel panel-default">'
+     + '<div class="panel-heading">'
+       + '<h4 class="panel-title">'
+         + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseIdiomas' + obj.req_Id + '" class="" aria-expanded="true">Idiomas</a>'
+       + '</h4>'
+     + '</div>'
+     + '<div id="collapseIdiomas' + obj.req_Id + '" class="panel-collapse collapse in">'
+       + '<div class="panel-body">';
 
     if (obj.Idiomas.length > 0)
         obj.Idiomas.forEach(function (index, value) {
@@ -83,10 +83,10 @@ function format(obj) {
 + '<div class="panel panel-default">'
   + '<div class="panel-heading">'
     + '<h4 class="panel-title">'
-      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseRequisitos' + obj.req_Id+ '"  class="" aria-expanded="true">Requisitos especiales</a>'
+      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseRequisitos' + obj.req_Id + '"  class="" aria-expanded="true">Requisitos especiales</a>'
     + '</h4>'
   + '</div>'
-  + '<div id="collapseRequisitos' + obj.req_Id+ '" class="panel-collapse collapse in">'
+  + '<div id="collapseRequisitos' + obj.req_Id + '" class="panel-collapse collapse in">'
     + '<div class="panel-body">';
 
     if (obj.ReqEspeciales.length > 0)
@@ -102,15 +102,15 @@ function format(obj) {
 + '<div class="panel panel-default">'
   + '<div class="panel-heading">'
     + '<h5 class="panel-title">'
-      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTitulos' + obj.req_Id+ '" class="" aria-expanded="true">Titulos</a>'
+      + '<a data-toggle="collapse" data-parent="#accordion" href="#collapseTitulos' + obj.req_Id + '" class="" aria-expanded="true">Titulos</a>'
     + '</h5>'
   + '</div>'
-  + '<div id="collapseTitulos' + obj.req_Id+ '" class="panel-collapse in collapse" style="">'
+  + '<div id="collapseTitulos' + obj.req_Id + '" class="panel-collapse in collapse" style="">'
     + '<div class="panel-body">';
 
     if (obj.Titulos.length > 0)
         obj.Titulos.forEach(function (index, value) {
-        div = div + index.titu_Descripcion + '<br>';
+            div = div + index.titu_Descripcion + '<br>';
         })
     else
         div += "<h5>Sin datos que mostrar.*</h5>";
@@ -208,6 +208,8 @@ function tablaDetalles(ID) {
             }
         });
 }
+
+
 function llenarTabla() {
     _ajax(null,
         '/Requisiciones/llenarTabla',
@@ -217,13 +219,13 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
 
-                var Acciones = value.req_Estado==1
-                    ?null:
+                var Acciones = value.req_Estado == 1
+                    ? null :
                     "<div>" +
                         "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                     "</div>";
-                if (value.req_Estado>fill) {
-                    
+                if (value.req_Estado > fill) {
+
                     tabla.row.add({
                         ID: value.req_Id,
                         "Número": value.req_Id,
@@ -240,13 +242,13 @@ function llenarTabla() {
                         FechaRequisicion: FechaFormatoSimple(value.req_FechaRequisicion),
                         FechaContratacion: FechaFormatoSimple(value.req_FechaContratacion),
                         Acciones: Acciones,
-                        Estado : value.req_Estado ? "Activo" : "Inactivo"
+                        Estado: value.req_Estado ? "Activo" : "Inactivo"
                     });
-                } 
+                }
                 tabla.draw();
             });
         })
-    };
+};
 
 $(document).ready(function () {
     fill = Admin == undefined ? 0 : -1;

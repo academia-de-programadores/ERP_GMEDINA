@@ -106,7 +106,7 @@ function llenarTabla() {
             tabla.draw();
             $.each(Lista, function (index, value) {
                 var Acciones = value.hper_Estado == 1
-                ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
+                ? "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inactivar</a>"
                    : Admin ?
                        "<div>" +
                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +

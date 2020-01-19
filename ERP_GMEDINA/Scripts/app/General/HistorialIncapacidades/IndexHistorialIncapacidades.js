@@ -9,7 +9,7 @@ $(document).ready(function () {
 function format(obj) {
 
 
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="tablaEditar('+idEmpleado+')" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="tablaEditar(' + idEmpleado + ')" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th> Número   </th>'
@@ -32,7 +32,7 @@ function format(obj) {
             Estado = "Activo";
         div = div +
             '<tbody>' + '<tr>'
-                + '<td>' + index.hinc_Id  + '</td>'
+                + '<td>' + index.hinc_Id + '</td>'
                 + '<td>' + index.ticn_Descripcion + '</td>'
                 + '<td>' + index.hinc_Dias + '</td>'
                 + '<td>' + index.hinc_CentroMedico + '</td>'
@@ -41,17 +41,15 @@ function format(obj) {
                 + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
                 + '<td>' + Estado + '</td>'
                 + '<td>';
-        if (index.hinc_Estado)
-        {
-            div +=  '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
+        if (index.hinc_Estado) {
+            div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
-        else
-        {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>';
+        else {
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalhabilitar(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
         }
         div += '</tr>' +
                   '</tbody>'
-            '</table>'
+        '</table>'
 
         //}
     });
@@ -71,7 +69,7 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                empleado = value.Empleado
-               tabla.row.add({                 
+               tabla.row.add({
                    Id: value.emp_Id,
                    "Número": value.emp_Id,
                    Empleado: value.Empleado,
@@ -131,7 +129,7 @@ function Llamarmodaldetalle(ID) {
         '/HistorialIncapacidades/Edit/',
         'GET',
         function (obj) {
-            
+
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
@@ -268,7 +266,7 @@ function Llamarmodalhabilitar(ID) {
     var modalhabilitar = $("#ModalHabilitar");
     Id = $("#ModalHabilitar").find("#hinc_Id").val(ID);
     modalhabilitar.modal('show');
-   
+
 
 }
 
@@ -289,7 +287,7 @@ function Llamarmodalhabilitar(ID) {
 
 
 //$("#btnActivar").click(function () {
-   
+
 //    debugger
 //    var data = $("#FormActivar").serializeArray();
 //    data = serializar(data);

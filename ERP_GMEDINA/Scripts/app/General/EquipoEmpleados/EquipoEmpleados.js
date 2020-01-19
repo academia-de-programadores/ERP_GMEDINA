@@ -20,8 +20,7 @@ function format(obj, emp_Id) {
                   '<br> Fecha de Entrega: ' + FechaFormatoSimple(index.eqem_Fecha) +
                 '</div>' +
                 '<div class="modal-footer">' +
-                  '<button id = "btnDetalle" data-id="' + index.eqtra_Id + '" data-toggle="ModalDetalles" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalles </button>' +
-                  '<button id = "btnEditar" data-id="' + index.eqtra_Id + '" data-toggle="ModalEditar" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                  '<button id = "btnDetalle" data-id="' + index.eqem_Id + '" data-toggle="ModalInactivar" class="btn btn-primary btn-xs pull-right" onClick = "Inactivar(this)"> Inactivar </button>' +
                 '</div>' +
               '</div>' +
             '</div>'
@@ -36,15 +35,14 @@ function llenarTabla() {
             if (validarDT(lista)) {
                 return null;
             }
-
             $.each(lista, function (index, value) {
                 tabla.row.add
                     ({
-                        emp_Id : value.emp_Id,
-                        ID: value.eqem_Id,
-                        Empleado: value.Empleado[0],
-                        Correo: value.Correo[0],
-                        Telefono: value.Telefono[0]
+                        emp_Id: value.emp_Id,
+                        ID: value.emp_Id,
+                        Empleado: value.Empleado,
+                        Correo: value.Correo,
+                        Telefono: value.Telefono
                     })
             });
             tabla.draw();
@@ -57,10 +55,11 @@ function ShowModalCreate(btn) {
     $(modalnuevo).find("#eqtra_Id").focus();
     $(modalnuevo).find("#eqtra_Id").val("");
 }
+
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    data.emp_Id = emp_;
+    data.emp_Id = emp_Id;
     if (data != null) {
         data = JSON.stringify({ tbEquipoEmpleados: data });
         _ajax(data, '/EquipoEmpleados/Create', 'POST',
@@ -80,6 +79,37 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todaslas cajas de texto.");
     }
 })
+
+function Inactivar(btn) {
+    Id = $(btn).data('id');
+    $("#FormInactivar input").val(Id);
+    CierraPopups();
+    $('#ModalInactivar').modal('show');
+};
+
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data = JSON.stringify({ tbEquipoEmpleados: data });
+        _ajax(data,
+            '/EquipoEmpleados/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["habi_Descripcion", "habi_RazonInactivo"]);
+                    MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
+                } else {
+                    MsgError("Error", "No se logró Inactivar el registro, contacte al administrador");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
 
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');

@@ -1,4 +1,4 @@
-﻿@model ERP_GMEDINA.Models.tbTitulos
+﻿@model ERP_GMEDINA.Models.tbEquipoEmpleados
 <div class="modal inmodal" id="ModalInactivar" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
@@ -8,12 +8,12 @@
             </div>
             <div class="modal-body">
                 <div class="blockquote">
-
+                    <form id="FormInactivar">
+                        <input type="hidden" name="eqem_Id" />
+                    </form>
                     <p>
-
                         Esta accion puede tener repercuciones en otras secciones del sistema
                         (Si sucede un error,consulte al administrador)
-
                     </p>
                 </div>
             </div>
@@ -24,4 +24,3 @@
         </div>
     </div>
 </div>
-

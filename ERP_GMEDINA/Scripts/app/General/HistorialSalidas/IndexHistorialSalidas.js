@@ -31,12 +31,12 @@ function tablaDetalles(ID) {
         function (obj) {
             var o = obj.hsal_Observacion == null ? "Ninguna" : obj.hsal_Observacion;
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText =            o;
-                $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText =              FechaFormato(obj.hsal_FechaCrea);
-                $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText =          FechaFormato(obj.hsal_FechaModifica);
+                $("#ModalDetallesAX").find("#hsal_Observacion")["0"].innerText = o;
+                $("#ModalDetallesAX").find("#hsal_FechaCrea")["0"].innerText = FechaFormato(obj.hsal_FechaCrea);
+                $("#ModalDetallesAX").find("#hsal_FechaModifica")["0"].innerText = FechaFormato(obj.hsal_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText= obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
+                $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
         });
@@ -147,13 +147,13 @@ $("#btnActualizar").click(function () {
 //aqui estaba
 function format(obj) {
     var EstadoCivil = '';
-    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",];
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ];
     var div = '<div class="ibox"><div class="ibox-title"><h5>Informacion personal y de contacto: </h5></div><div class="ibox-content"><div class="row">';
-    obj.forEach(function (index,value) {
+    obj.forEach(function (index, value) {
         index.per_EstadoCivil.toUpperCase() == ('S') ? EstadoCivil = 'Soltero(a)'
-    :   index.per_EstadoCivil.toUpperCase() == ('C') ? EstadoCivil = 'Casado(a)'
-    :   index.per_EstadoCivil.toUpperCase() == ('D') ? EstadoCivil = 'Divorciado(a)'
-    :   index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
+    : index.per_EstadoCivil.toUpperCase() == ('C') ? EstadoCivil = 'Casado(a)'
+    : index.per_EstadoCivil.toUpperCase() == ('D') ? EstadoCivil = 'Divorciado(a)'
+    : index.per_EstadoCivil.toUpperCase() == ('V') ? EstadoCivil = 'Viudo'
     : 'Union Libre';
         div = div
         + '<div class="col-md-5"><b>Numero de identidad: </b>' + index.per_Identidad + '</div>'
@@ -198,15 +198,15 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     else {
         id = row.data().Id;
         hola = row.data().hola;
-        _ajax({ id : parseInt(id) },
+        _ajax({ id: parseInt(id) },
             '/HistorialSalidas/ChildRowData',
             'GET',
             function (obj) {
-                if (obj != "-1" && obj != "-2" && obj != "-3") {                        
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
                     row.child(format(obj)).show();
                     tr.addClass('shown');
                 }
-            });       
+            });
     }
 
 });

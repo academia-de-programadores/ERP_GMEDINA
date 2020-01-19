@@ -26,15 +26,13 @@
                 + '<td>' + testigo + '</td>'
                + '<td>' + Estado + '</td>'
         + '<td>';
-        if (index.aude_Estado)
-        {
+        if (index.aude_Estado) {
             div += '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>';
         }
-        else
-        {
-            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Habilitar</button>' + '</td>';
+        else {
+            div += '<button type="button" class="btn btn-primary btn-xs" onclick="llamarmodalhabilitar(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Activar</button>' + '</td>';
         }
-              div += '</tr>' + '</tbody>'
+        div += '</tr>' + '</tbody>'
         '</table>'
     });
     return div + '</div></div>';
@@ -95,7 +93,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 var idEditar = 0;
 
-function Llamarmodaldetalle(ID) {   
+function Llamarmodaldetalle(ID) {
     idEditar = ID;
     var modalnuevo = $("#ModalDetalles");
     _ajax({ ID: parseInt(ID) },
@@ -106,8 +104,8 @@ function Llamarmodaldetalle(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#aude_Descripcion")["0"].innerText = obj.aude_Descripcion;
-                $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0,10);
-                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo?'Si':'No';
+                $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0, 10);
+                $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo ? 'Si' : 'No';
                 $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea).substring(0, 10);
@@ -144,7 +142,7 @@ $("#btnGuardar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["aude_Descripcion1", "aude_FechaAudiencia1","aude_DireccionArchivo1", "emp_Id"]);
+                    LimpiarControles(["aude_Descripcion1", "aude_FechaAudiencia1", "aude_DireccionArchivo1", "emp_Id"]);
                     $("#aude_Testigo1").val("false");
                     MsgSuccess("¡Exito!", "El registro se agregó de forma exitosa");
                 } else {
@@ -178,7 +176,7 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();                 
+                    CierraPopups();
                     llenarTabla();
                     LimpiarControles(["aude_Id"]);
                     MsgSuccess("¡Exito!", "El registro se inhabilitado  de forma exitosa");
@@ -205,7 +203,7 @@ $("#btnEditar").click(function (ID) {
             $("#ModalEditar").find("#aude_FechaAudiencia2").val(FechaFormatoSimple(obj.aude_FechaAudiencia).substring(0, 10));
         }
     });
-        modalnuevo.modal('show');
+    modalnuevo.modal('show');
 });
 
 $("#btnActualizar").click(function () {

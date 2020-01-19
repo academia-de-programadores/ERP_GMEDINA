@@ -2848,6 +2848,7 @@
     <Content Include="Views\Jornadas\_Edit.cshtml" />
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
+    <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

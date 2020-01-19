@@ -39,7 +39,7 @@ function format(obj) {
                 '<th>' + 'Cargo' + '</th>' +
                 '<th>' + 'Fecha Modifica' + '</th>' +
 
-                
+
 
                 '</tr>' +
                 '</thead>';
@@ -47,13 +47,13 @@ function format(obj) {
         div = div +
                 '<tbody>' +
                 '<tr>' +
-                '<td>' + index.Sueldo + ' ' + index.Tipo_Moneda + '</td>' +
+                '<td>' + index.Sueldo + '</td>' +
                 '<td>' + index.Identidad + '</td>' +
                 '<td>' + index.Cuenta + '</td>' +
                 '<td>' + index.Cargo + '</td>' +
                 '<td>' + FechaFormato(index.Fecha_Crea).substring(0, 10) + '</td>' +
 
-              
+
                 '</tr>' +
                 '</tbody>'
         '</table>'
@@ -74,7 +74,7 @@ function llenarTabla() {
                tabla.row.add({
 
                    ID: value.Id,
-                   "Número":value.Id,
+                   "Número": value.Id,
                    Identidad: value.Identidad,
                    Id_Empleado: value.Id_Empleado,
                    Id_Amonestacion: value.Id_Amonestacion,
@@ -115,7 +115,7 @@ function tablaDetalles(ID) {
                 //$("#ModalDetalles").find("#sue_FechaModifica")["0"].innerText = FechaFormato(obj.sue_FechaModifica);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-      
+
                 $('#ModalDetalles').modal('show');
             }
         });
