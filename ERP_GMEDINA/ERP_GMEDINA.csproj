@@ -1171,8 +1171,6 @@
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\IngresosIndividuales.js" />
-    <Content Include="Scripts\app\General\InstitucionesFinancierasEdit.js" />
-    <Content Include="Scripts\app\General\InstitucionesFinancierasIndex.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancieras.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
     <Content Include="Scripts\app\General\ISR.js" />
@@ -1781,8 +1779,6 @@
     <Content Include="Views\TechosDeducciones\_EditTechosDeducciones.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\CargaDocumento.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
-    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\FechaEspecifica.cshtml" />
@@ -1799,10 +1795,6 @@
     <Content Include="Views\TipoDeducciones\Index.cshtml" />
     <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
     <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
-    <Content Include="Views\ISR\Create.cshtml" />
-    <Content Include="Views\ISR\Delete.cshtml" />
-    <Content Include="Views\ISR\Details.cshtml" />
-    <Content Include="Views\ISR\Edit.cshtml" />
     <Content Include="Views\ISR\Index.cshtml" />
     <Content Include="Views\ISR\_CreateISR.cshtml" />
     <Content Include="Views\ISR\_DetailsISR.cshtml" />

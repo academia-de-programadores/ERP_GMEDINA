@@ -36,9 +36,9 @@ namespace ERP_GMEDINA.DataSets {
         
         private V_ReporteInstitucionesFinancieras_RPTDataTable tableV_ReporteInstitucionesFinancieras_RPT;
         
-        private V_Plani_HistorialDeduccionesDataTable tableV_Plani_HistorialDeducciones;
-        
         private V_Plani_HistorialIngresoDataTable tableV_Plani_HistorialIngreso;
+        
+        private V_Plani_HistorialDeduccionesDataTable tableV_Plani_HistorialDeducciones;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -86,11 +86,11 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_ReporteInstitucionesFinancieras_RPT"] != null)) {
                     base.Tables.Add(new V_ReporteInstitucionesFinancieras_RPTDataTable(ds.Tables["V_ReporteInstitucionesFinancieras_RPT"]));
                 }
-                if ((ds.Tables["V_Plani_HistorialDeducciones"] != null)) {
-                    base.Tables.Add(new V_Plani_HistorialDeduccionesDataTable(ds.Tables["V_Plani_HistorialDeducciones"]));
-                }
                 if ((ds.Tables["V_Plani_HistorialIngreso"] != null)) {
                     base.Tables.Add(new V_Plani_HistorialIngresoDataTable(ds.Tables["V_Plani_HistorialIngreso"]));
+                }
+                if ((ds.Tables["V_Plani_HistorialDeducciones"] != null)) {
+                    base.Tables.Add(new V_Plani_HistorialDeduccionesDataTable(ds.Tables["V_Plani_HistorialDeducciones"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -174,9 +174,9 @@ namespace ERP_GMEDINA.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public V_Plani_HistorialDeduccionesDataTable V_Plani_HistorialDeducciones {
+        public V_Plani_HistorialIngresoDataTable V_Plani_HistorialIngreso {
             get {
-                return this.tableV_Plani_HistorialDeducciones;
+                return this.tableV_Plani_HistorialIngreso;
             }
         }
         
@@ -184,9 +184,9 @@ namespace ERP_GMEDINA.DataSets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public V_Plani_HistorialIngresoDataTable V_Plani_HistorialIngreso {
+        public V_Plani_HistorialDeduccionesDataTable V_Plani_HistorialDeducciones {
             get {
-                return this.tableV_Plani_HistorialIngreso;
+                return this.tableV_Plani_HistorialDeducciones;
             }
         }
         
@@ -275,11 +275,11 @@ namespace ERP_GMEDINA.DataSets {
                 if ((ds.Tables["V_ReporteInstitucionesFinancieras_RPT"] != null)) {
                     base.Tables.Add(new V_ReporteInstitucionesFinancieras_RPTDataTable(ds.Tables["V_ReporteInstitucionesFinancieras_RPT"]));
                 }
-                if ((ds.Tables["V_Plani_HistorialDeducciones"] != null)) {
-                    base.Tables.Add(new V_Plani_HistorialDeduccionesDataTable(ds.Tables["V_Plani_HistorialDeducciones"]));
-                }
                 if ((ds.Tables["V_Plani_HistorialIngreso"] != null)) {
                     base.Tables.Add(new V_Plani_HistorialIngresoDataTable(ds.Tables["V_Plani_HistorialIngreso"]));
+                }
+                if ((ds.Tables["V_Plani_HistorialDeducciones"] != null)) {
+                    base.Tables.Add(new V_Plani_HistorialDeduccionesDataTable(ds.Tables["V_Plani_HistorialDeducciones"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -350,16 +350,16 @@ namespace ERP_GMEDINA.DataSets {
                     this.tableV_ReporteInstitucionesFinancieras_RPT.InitVars();
                 }
             }
-            this.tableV_Plani_HistorialDeducciones = ((V_Plani_HistorialDeduccionesDataTable)(base.Tables["V_Plani_HistorialDeducciones"]));
-            if ((initTable == true)) {
-                if ((this.tableV_Plani_HistorialDeducciones != null)) {
-                    this.tableV_Plani_HistorialDeducciones.InitVars();
-                }
-            }
             this.tableV_Plani_HistorialIngreso = ((V_Plani_HistorialIngresoDataTable)(base.Tables["V_Plani_HistorialIngreso"]));
             if ((initTable == true)) {
                 if ((this.tableV_Plani_HistorialIngreso != null)) {
                     this.tableV_Plani_HistorialIngreso.InitVars();
+                }
+            }
+            this.tableV_Plani_HistorialDeducciones = ((V_Plani_HistorialDeduccionesDataTable)(base.Tables["V_Plani_HistorialDeducciones"]));
+            if ((initTable == true)) {
+                if ((this.tableV_Plani_HistorialDeducciones != null)) {
+                    this.tableV_Plani_HistorialDeducciones.InitVars();
                 }
             }
         }
@@ -384,10 +384,10 @@ namespace ERP_GMEDINA.DataSets {
             base.Tables.Add(this.tableV_DecimoCuartoMes_RPT);
             this.tableV_ReporteInstitucionesFinancieras_RPT = new V_ReporteInstitucionesFinancieras_RPTDataTable();
             base.Tables.Add(this.tableV_ReporteInstitucionesFinancieras_RPT);
-            this.tableV_Plani_HistorialDeducciones = new V_Plani_HistorialDeduccionesDataTable();
-            base.Tables.Add(this.tableV_Plani_HistorialDeducciones);
             this.tableV_Plani_HistorialIngreso = new V_Plani_HistorialIngresoDataTable();
             base.Tables.Add(this.tableV_Plani_HistorialIngreso);
+            this.tableV_Plani_HistorialDeducciones = new V_Plani_HistorialDeduccionesDataTable();
+            base.Tables.Add(this.tableV_Plani_HistorialDeducciones);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -428,13 +428,13 @@ namespace ERP_GMEDINA.DataSets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeV_Plani_HistorialDeducciones() {
+        private bool ShouldSerializeV_Plani_HistorialIngreso() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeV_Plani_HistorialIngreso() {
+        private bool ShouldSerializeV_Plani_HistorialDeducciones() {
             return false;
         }
         
@@ -512,10 +512,10 @@ namespace ERP_GMEDINA.DataSets {
         public delegate void V_ReporteInstitucionesFinancieras_RPTRowChangeEventHandler(object sender, V_ReporteInstitucionesFinancieras_RPTRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void V_Plani_HistorialDeduccionesRowChangeEventHandler(object sender, V_Plani_HistorialDeduccionesRowChangeEvent e);
+        public delegate void V_Plani_HistorialIngresoRowChangeEventHandler(object sender, V_Plani_HistorialIngresoRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void V_Plani_HistorialIngresoRowChangeEventHandler(object sender, V_Plani_HistorialIngresoRowChangeEvent e);
+        public delegate void V_Plani_HistorialDeduccionesRowChangeEventHandler(object sender, V_Plani_HistorialDeduccionesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2835,6 +2835,8 @@ namespace ERP_GMEDINA.DataSets {
             
             private global::System.Data.DataColumn columndeif_Comentarios;
             
+            private global::System.Data.DataColumn columndeif_FechaCrea;
+            
             private global::System.Data.DataColumn columndeif_Pagado;
             
             private global::System.Data.DataColumn columnper_Apellidos;
@@ -2942,6 +2944,14 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn deif_FechaCreaColumn {
+                get {
+                    return this.columndeif_FechaCrea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn deif_PagadoColumn {
                 get {
                     return this.columndeif_Pagado;
@@ -3009,7 +3019,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_ReporteInstitucionesFinancieras_RPTRow AddV_ReporteInstitucionesFinancieras_RPTRow(int deif_IdDeduccionInstFinanciera, int emp_Id, int per_Id, string per_Nombres, int insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, decimal deif_Monto, string deif_Comentarios, string deif_Pagado, string per_Apellidos, int cpla_IdPlanilla, string cpla_DescripcionPlanilla) {
+            public V_ReporteInstitucionesFinancieras_RPTRow AddV_ReporteInstitucionesFinancieras_RPTRow(int deif_IdDeduccionInstFinanciera, int emp_Id, int per_Id, string per_Nombres, int insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, decimal deif_Monto, string deif_Comentarios, System.DateTime deif_FechaCrea, string deif_Pagado, string per_Apellidos, int cpla_IdPlanilla, string cpla_DescripcionPlanilla) {
                 V_ReporteInstitucionesFinancieras_RPTRow rowV_ReporteInstitucionesFinancieras_RPTRow = ((V_ReporteInstitucionesFinancieras_RPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         deif_IdDeduccionInstFinanciera,
@@ -3020,6 +3030,7 @@ namespace ERP_GMEDINA.DataSets {
                         insf_DescInstitucionFinanc,
                         deif_Monto,
                         deif_Comentarios,
+                        deif_FechaCrea,
                         deif_Pagado,
                         per_Apellidos,
                         cpla_IdPlanilla,
@@ -3065,6 +3076,7 @@ namespace ERP_GMEDINA.DataSets {
                 this.columninsf_DescInstitucionFinanc = base.Columns["insf_DescInstitucionFinanc"];
                 this.columndeif_Monto = base.Columns["deif_Monto"];
                 this.columndeif_Comentarios = base.Columns["deif_Comentarios"];
+                this.columndeif_FechaCrea = base.Columns["deif_FechaCrea"];
                 this.columndeif_Pagado = base.Columns["deif_Pagado"];
                 this.columnper_Apellidos = base.Columns["per_Apellidos"];
                 this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
@@ -3090,6 +3102,8 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columndeif_Monto);
                 this.columndeif_Comentarios = new global::System.Data.DataColumn("deif_Comentarios", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeif_Comentarios);
+                this.columndeif_FechaCrea = new global::System.Data.DataColumn("deif_FechaCrea", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndeif_FechaCrea);
                 this.columndeif_Pagado = new global::System.Data.DataColumn("deif_Pagado", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeif_Pagado);
                 this.columnper_Apellidos = new global::System.Data.DataColumn("per_Apellidos", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3113,6 +3127,7 @@ namespace ERP_GMEDINA.DataSets {
                 this.columninsf_DescInstitucionFinanc.AllowDBNull = false;
                 this.columninsf_DescInstitucionFinanc.MaxLength = 50;
                 this.columndeif_Comentarios.MaxLength = 100;
+                this.columndeif_FechaCrea.ReadOnly = true;
                 this.columndeif_Pagado.ReadOnly = true;
                 this.columndeif_Pagado.MaxLength = 9;
                 this.columnper_Apellidos.AllowDBNull = false;
@@ -3251,6 +3266,361 @@ namespace ERP_GMEDINA.DataSets {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class V_Plani_HistorialIngresoDataTable : global::System.Data.TypedTableBase<V_Plani_HistorialIngresoRow> {
+            
+            private global::System.Data.DataColumn columnemp_Id;
+            
+            private global::System.Data.DataColumn columnhipa_IdHistorialDePago;
+            
+            private global::System.Data.DataColumn columncin_DescripcionIngreso;
+            
+            private global::System.Data.DataColumn columnhip_TotalPagar;
+            
+            private global::System.Data.DataColumn columnhipa_FechaPago;
+            
+            private global::System.Data.DataColumn columnnombreEmpleado;
+            
+            private global::System.Data.DataColumn columnidentidadEmpleado;
+            
+            private global::System.Data.DataColumn columncpla_IdPlanilla;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_Plani_HistorialIngresoDataTable() {
+                this.TableName = "V_Plani_HistorialIngreso";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal V_Plani_HistorialIngresoDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected V_Plani_HistorialIngresoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn emp_IdColumn {
+                get {
+                    return this.columnemp_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn hipa_IdHistorialDePagoColumn {
+                get {
+                    return this.columnhipa_IdHistorialDePago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cin_DescripcionIngresoColumn {
+                get {
+                    return this.columncin_DescripcionIngreso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn hip_TotalPagarColumn {
+                get {
+                    return this.columnhip_TotalPagar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn hipa_FechaPagoColumn {
+                get {
+                    return this.columnhipa_FechaPago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn nombreEmpleadoColumn {
+                get {
+                    return this.columnnombreEmpleado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn identidadEmpleadoColumn {
+                get {
+                    return this.columnidentidadEmpleado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cpla_IdPlanillaColumn {
+                get {
+                    return this.columncpla_IdPlanilla;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_Plani_HistorialIngresoRow this[int index] {
+                get {
+                    return ((V_Plani_HistorialIngresoRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddV_Plani_HistorialIngresoRow(V_Plani_HistorialIngresoRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_Plani_HistorialIngresoRow AddV_Plani_HistorialIngresoRow(int emp_Id, int hipa_IdHistorialDePago, string cin_DescripcionIngreso, decimal hip_TotalPagar, System.DateTime hipa_FechaPago, string nombreEmpleado, string identidadEmpleado, int cpla_IdPlanilla) {
+                V_Plani_HistorialIngresoRow rowV_Plani_HistorialIngresoRow = ((V_Plani_HistorialIngresoRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        emp_Id,
+                        hipa_IdHistorialDePago,
+                        cin_DescripcionIngreso,
+                        hip_TotalPagar,
+                        hipa_FechaPago,
+                        nombreEmpleado,
+                        identidadEmpleado,
+                        cpla_IdPlanilla};
+                rowV_Plani_HistorialIngresoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowV_Plani_HistorialIngresoRow);
+                return rowV_Plani_HistorialIngresoRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                V_Plani_HistorialIngresoDataTable cln = ((V_Plani_HistorialIngresoDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new V_Plani_HistorialIngresoDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnemp_Id = base.Columns["emp_Id"];
+                this.columnhipa_IdHistorialDePago = base.Columns["hipa_IdHistorialDePago"];
+                this.columncin_DescripcionIngreso = base.Columns["cin_DescripcionIngreso"];
+                this.columnhip_TotalPagar = base.Columns["hip_TotalPagar"];
+                this.columnhipa_FechaPago = base.Columns["hipa_FechaPago"];
+                this.columnnombreEmpleado = base.Columns["nombreEmpleado"];
+                this.columnidentidadEmpleado = base.Columns["identidadEmpleado"];
+                this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnemp_Id = new global::System.Data.DataColumn("emp_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnemp_Id);
+                this.columnhipa_IdHistorialDePago = new global::System.Data.DataColumn("hipa_IdHistorialDePago", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhipa_IdHistorialDePago);
+                this.columncin_DescripcionIngreso = new global::System.Data.DataColumn("cin_DescripcionIngreso", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncin_DescripcionIngreso);
+                this.columnhip_TotalPagar = new global::System.Data.DataColumn("hip_TotalPagar", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhip_TotalPagar);
+                this.columnhipa_FechaPago = new global::System.Data.DataColumn("hipa_FechaPago", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhipa_FechaPago);
+                this.columnnombreEmpleado = new global::System.Data.DataColumn("nombreEmpleado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnombreEmpleado);
+                this.columnidentidadEmpleado = new global::System.Data.DataColumn("identidadEmpleado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnidentidadEmpleado);
+                this.columncpla_IdPlanilla = new global::System.Data.DataColumn("cpla_IdPlanilla", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncpla_IdPlanilla);
+                this.columnemp_Id.AllowDBNull = false;
+                this.columnhipa_IdHistorialDePago.AllowDBNull = false;
+                this.columncin_DescripcionIngreso.AllowDBNull = false;
+                this.columncin_DescripcionIngreso.MaxLength = 50;
+                this.columnhipa_FechaPago.AllowDBNull = false;
+                this.columnnombreEmpleado.ReadOnly = true;
+                this.columnnombreEmpleado.MaxLength = 101;
+                this.columnidentidadEmpleado.AllowDBNull = false;
+                this.columnidentidadEmpleado.MaxLength = 16;
+                this.columncpla_IdPlanilla.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public V_Plani_HistorialIngresoRow NewV_Plani_HistorialIngresoRow() {
+                return ((V_Plani_HistorialIngresoRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new V_Plani_HistorialIngresoRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(V_Plani_HistorialIngresoRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.V_Plani_HistorialIngresoRowChanged != null)) {
+                    this.V_Plani_HistorialIngresoRowChanged(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.V_Plani_HistorialIngresoRowChanging != null)) {
+                    this.V_Plani_HistorialIngresoRowChanging(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.V_Plani_HistorialIngresoRowDeleted != null)) {
+                    this.V_Plani_HistorialIngresoRowDeleted(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.V_Plani_HistorialIngresoRowDeleting != null)) {
+                    this.V_Plani_HistorialIngresoRowDeleting(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveV_Plani_HistorialIngresoRow(V_Plani_HistorialIngresoRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ReportesPlanillaDS ds = new ReportesPlanillaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "V_Plani_HistorialIngresoDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class V_Plani_HistorialDeduccionesDataTable : global::System.Data.TypedTableBase<V_Plani_HistorialDeduccionesRow> {
             
             private global::System.Data.DataColumn columnemp_Id;
@@ -3270,6 +3640,10 @@ namespace ERP_GMEDINA.DataSets {
             private global::System.Data.DataColumn columncpla_IdPlanilla;
             
             private global::System.Data.DataColumn columnhipa_FechaPago;
+            
+            private global::System.Data.DataColumn columnnombreEmpleado;
+            
+            private global::System.Data.DataColumn columnidentidadEmpleado;
             
             private global::System.Data.DataColumn columnTotalDeducciones;
             
@@ -3380,6 +3754,22 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn nombreEmpleadoColumn {
+                get {
+                    return this.columnnombreEmpleado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn identidadEmpleadoColumn {
+                get {
+                    return this.columnidentidadEmpleado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn TotalDeduccionesColumn {
                 get {
                     return this.columnTotalDeducciones;
@@ -3423,7 +3813,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialDeduccionesRow AddV_Plani_HistorialDeduccionesRow(int emp_Id, int hipa_IdHistorialDePago, int hidp_IdHistorialdeDeduPago, decimal hipa_TotalISR, decimal hipa_AFP, string cde_DescripcionDeduccion, decimal hidp_Total, int cpla_IdPlanilla, System.DateTime hipa_FechaPago, int TotalDeducciones) {
+            public V_Plani_HistorialDeduccionesRow AddV_Plani_HistorialDeduccionesRow(int emp_Id, int hipa_IdHistorialDePago, int hidp_IdHistorialdeDeduPago, decimal hipa_TotalISR, decimal hipa_AFP, string cde_DescripcionDeduccion, decimal hidp_Total, int cpla_IdPlanilla, System.DateTime hipa_FechaPago, string nombreEmpleado, string identidadEmpleado, int TotalDeducciones) {
                 V_Plani_HistorialDeduccionesRow rowV_Plani_HistorialDeduccionesRow = ((V_Plani_HistorialDeduccionesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         emp_Id,
@@ -3435,6 +3825,8 @@ namespace ERP_GMEDINA.DataSets {
                         hidp_Total,
                         cpla_IdPlanilla,
                         hipa_FechaPago,
+                        nombreEmpleado,
+                        identidadEmpleado,
                         TotalDeducciones};
                 rowV_Plani_HistorialDeduccionesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowV_Plani_HistorialDeduccionesRow);
@@ -3467,6 +3859,8 @@ namespace ERP_GMEDINA.DataSets {
                 this.columnhidp_Total = base.Columns["hidp_Total"];
                 this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
                 this.columnhipa_FechaPago = base.Columns["hipa_FechaPago"];
+                this.columnnombreEmpleado = base.Columns["nombreEmpleado"];
+                this.columnidentidadEmpleado = base.Columns["identidadEmpleado"];
                 this.columnTotalDeducciones = base.Columns["TotalDeducciones"];
             }
             
@@ -3491,6 +3885,10 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columncpla_IdPlanilla);
                 this.columnhipa_FechaPago = new global::System.Data.DataColumn("hipa_FechaPago", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhipa_FechaPago);
+                this.columnnombreEmpleado = new global::System.Data.DataColumn("nombreEmpleado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnombreEmpleado);
+                this.columnidentidadEmpleado = new global::System.Data.DataColumn("identidadEmpleado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnidentidadEmpleado);
                 this.columnTotalDeducciones = new global::System.Data.DataColumn("TotalDeducciones", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalDeducciones);
                 this.columnemp_Id.AllowDBNull = false;
@@ -3502,6 +3900,10 @@ namespace ERP_GMEDINA.DataSets {
                 this.columncde_DescripcionDeduccion.MaxLength = 50;
                 this.columncpla_IdPlanilla.AllowDBNull = false;
                 this.columnhipa_FechaPago.AllowDBNull = false;
+                this.columnnombreEmpleado.ReadOnly = true;
+                this.columnnombreEmpleado.MaxLength = 101;
+                this.columnidentidadEmpleado.AllowDBNull = false;
+                this.columnidentidadEmpleado.MaxLength = 16;
                 this.columnTotalDeducciones.ReadOnly = true;
             }
             
@@ -3589,329 +3991,6 @@ namespace ERP_GMEDINA.DataSets {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "V_Plani_HistorialDeduccionesDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class V_Plani_HistorialIngresoDataTable : global::System.Data.TypedTableBase<V_Plani_HistorialIngresoRow> {
-            
-            private global::System.Data.DataColumn columnemp_Id;
-            
-            private global::System.Data.DataColumn columnhipa_IdHistorialDePago;
-            
-            private global::System.Data.DataColumn columncin_DescripcionIngreso;
-            
-            private global::System.Data.DataColumn columnhip_TotalPagar;
-            
-            private global::System.Data.DataColumn columnhipa_FechaPago;
-            
-            private global::System.Data.DataColumn columncpla_IdPlanilla;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoDataTable() {
-                this.TableName = "V_Plani_HistorialIngreso";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal V_Plani_HistorialIngresoDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected V_Plani_HistorialIngresoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn emp_IdColumn {
-                get {
-                    return this.columnemp_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn hipa_IdHistorialDePagoColumn {
-                get {
-                    return this.columnhipa_IdHistorialDePago;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cin_DescripcionIngresoColumn {
-                get {
-                    return this.columncin_DescripcionIngreso;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn hip_TotalPagarColumn {
-                get {
-                    return this.columnhip_TotalPagar;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn hipa_FechaPagoColumn {
-                get {
-                    return this.columnhipa_FechaPago;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn cpla_IdPlanillaColumn {
-                get {
-                    return this.columncpla_IdPlanilla;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoRow this[int index] {
-                get {
-                    return ((V_Plani_HistorialIngresoRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event V_Plani_HistorialIngresoRowChangeEventHandler V_Plani_HistorialIngresoRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddV_Plani_HistorialIngresoRow(V_Plani_HistorialIngresoRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoRow AddV_Plani_HistorialIngresoRow(int emp_Id, int hipa_IdHistorialDePago, string cin_DescripcionIngreso, decimal hip_TotalPagar, System.DateTime hipa_FechaPago, int cpla_IdPlanilla) {
-                V_Plani_HistorialIngresoRow rowV_Plani_HistorialIngresoRow = ((V_Plani_HistorialIngresoRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        emp_Id,
-                        hipa_IdHistorialDePago,
-                        cin_DescripcionIngreso,
-                        hip_TotalPagar,
-                        hipa_FechaPago,
-                        cpla_IdPlanilla};
-                rowV_Plani_HistorialIngresoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowV_Plani_HistorialIngresoRow);
-                return rowV_Plani_HistorialIngresoRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                V_Plani_HistorialIngresoDataTable cln = ((V_Plani_HistorialIngresoDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new V_Plani_HistorialIngresoDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnemp_Id = base.Columns["emp_Id"];
-                this.columnhipa_IdHistorialDePago = base.Columns["hipa_IdHistorialDePago"];
-                this.columncin_DescripcionIngreso = base.Columns["cin_DescripcionIngreso"];
-                this.columnhip_TotalPagar = base.Columns["hip_TotalPagar"];
-                this.columnhipa_FechaPago = base.Columns["hipa_FechaPago"];
-                this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnemp_Id = new global::System.Data.DataColumn("emp_Id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnemp_Id);
-                this.columnhipa_IdHistorialDePago = new global::System.Data.DataColumn("hipa_IdHistorialDePago", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhipa_IdHistorialDePago);
-                this.columncin_DescripcionIngreso = new global::System.Data.DataColumn("cin_DescripcionIngreso", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncin_DescripcionIngreso);
-                this.columnhip_TotalPagar = new global::System.Data.DataColumn("hip_TotalPagar", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhip_TotalPagar);
-                this.columnhipa_FechaPago = new global::System.Data.DataColumn("hipa_FechaPago", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhipa_FechaPago);
-                this.columncpla_IdPlanilla = new global::System.Data.DataColumn("cpla_IdPlanilla", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncpla_IdPlanilla);
-                this.columnemp_Id.AllowDBNull = false;
-                this.columnhipa_IdHistorialDePago.AllowDBNull = false;
-                this.columncin_DescripcionIngreso.AllowDBNull = false;
-                this.columncin_DescripcionIngreso.MaxLength = 50;
-                this.columnhipa_FechaPago.AllowDBNull = false;
-                this.columncpla_IdPlanilla.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoRow NewV_Plani_HistorialIngresoRow() {
-                return ((V_Plani_HistorialIngresoRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new V_Plani_HistorialIngresoRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(V_Plani_HistorialIngresoRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.V_Plani_HistorialIngresoRowChanged != null)) {
-                    this.V_Plani_HistorialIngresoRowChanged(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.V_Plani_HistorialIngresoRowChanging != null)) {
-                    this.V_Plani_HistorialIngresoRowChanging(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.V_Plani_HistorialIngresoRowDeleted != null)) {
-                    this.V_Plani_HistorialIngresoRowDeleted(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.V_Plani_HistorialIngresoRowDeleting != null)) {
-                    this.V_Plani_HistorialIngresoRowDeleting(this, new V_Plani_HistorialIngresoRowChangeEvent(((V_Plani_HistorialIngresoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveV_Plani_HistorialIngresoRow(V_Plani_HistorialIngresoRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                ReportesPlanillaDS ds = new ReportesPlanillaDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "V_Plani_HistorialIngresoDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5232,6 +5311,23 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime deif_FechaCrea {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'deif_FechaCrea\' in table \'V_ReporteInstitucionesFinancieras" +
+                                "_RPT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string deif_Pagado {
                 get {
                     try {
@@ -5306,6 +5402,18 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isdeif_FechaCreaNull() {
+                return this.IsNull(this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setdeif_FechaCreaNull() {
+                this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Isdeif_PagadoNull() {
                 return this.IsNull(this.tableV_ReporteInstitucionesFinancieras_RPT.deif_PagadoColumn);
             }
@@ -5314,6 +5422,145 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setdeif_PagadoNull() {
                 this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_PagadoColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class V_Plani_HistorialIngresoRow : global::System.Data.DataRow {
+            
+            private V_Plani_HistorialIngresoDataTable tableV_Plani_HistorialIngreso;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal V_Plani_HistorialIngresoRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableV_Plani_HistorialIngreso = ((V_Plani_HistorialIngresoDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int emp_Id {
+                get {
+                    return ((int)(this[this.tableV_Plani_HistorialIngreso.emp_IdColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.emp_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int hipa_IdHistorialDePago {
+                get {
+                    return ((int)(this[this.tableV_Plani_HistorialIngreso.hipa_IdHistorialDePagoColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.hipa_IdHistorialDePagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string cin_DescripcionIngreso {
+                get {
+                    return ((string)(this[this.tableV_Plani_HistorialIngreso.cin_DescripcionIngresoColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.cin_DescripcionIngresoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal hip_TotalPagar {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'hip_TotalPagar\' in table \'V_Plani_HistorialIngreso\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime hipa_FechaPago {
+                get {
+                    return ((global::System.DateTime)(this[this.tableV_Plani_HistorialIngreso.hipa_FechaPagoColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.hipa_FechaPagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string nombreEmpleado {
+                get {
+                    try {
+                        return ((string)(this[this.tableV_Plani_HistorialIngreso.nombreEmpleadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nombreEmpleado\' in table \'V_Plani_HistorialIngreso\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.nombreEmpleadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string identidadEmpleado {
+                get {
+                    return ((string)(this[this.tableV_Plani_HistorialIngreso.identidadEmpleadoColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.identidadEmpleadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int cpla_IdPlanilla {
+                get {
+                    return ((int)(this[this.tableV_Plani_HistorialIngreso.cpla_IdPlanillaColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialIngreso.cpla_IdPlanillaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Iship_TotalPagarNull() {
+                return this.IsNull(this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Sethip_TotalPagarNull() {
+                this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsnombreEmpleadoNull() {
+                return this.IsNull(this.tableV_Plani_HistorialIngreso.nombreEmpleadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetnombreEmpleadoNull() {
+                this[this.tableV_Plani_HistorialIngreso.nombreEmpleadoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5438,6 +5685,34 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string nombreEmpleado {
+                get {
+                    try {
+                        return ((string)(this[this.tableV_Plani_HistorialDeducciones.nombreEmpleadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nombreEmpleado\' in table \'V_Plani_HistorialDeducciones\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableV_Plani_HistorialDeducciones.nombreEmpleadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string identidadEmpleado {
+                get {
+                    return ((string)(this[this.tableV_Plani_HistorialDeducciones.identidadEmpleadoColumn]));
+                }
+                set {
+                    this[this.tableV_Plani_HistorialDeducciones.identidadEmpleadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int TotalDeducciones {
                 get {
                     try {
@@ -5467,6 +5742,18 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsnombreEmpleadoNull() {
+                return this.IsNull(this.tableV_Plani_HistorialDeducciones.nombreEmpleadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetnombreEmpleadoNull() {
+                this[this.tableV_Plani_HistorialDeducciones.nombreEmpleadoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTotalDeduccionesNull() {
                 return this.IsNull(this.tableV_Plani_HistorialDeducciones.TotalDeduccionesColumn);
             }
@@ -5475,105 +5762,6 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTotalDeduccionesNull() {
                 this[this.tableV_Plani_HistorialDeducciones.TotalDeduccionesColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class V_Plani_HistorialIngresoRow : global::System.Data.DataRow {
-            
-            private V_Plani_HistorialIngresoDataTable tableV_Plani_HistorialIngreso;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal V_Plani_HistorialIngresoRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableV_Plani_HistorialIngreso = ((V_Plani_HistorialIngresoDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int emp_Id {
-                get {
-                    return ((int)(this[this.tableV_Plani_HistorialIngreso.emp_IdColumn]));
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.emp_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int hipa_IdHistorialDePago {
-                get {
-                    return ((int)(this[this.tableV_Plani_HistorialIngreso.hipa_IdHistorialDePagoColumn]));
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.hipa_IdHistorialDePagoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string cin_DescripcionIngreso {
-                get {
-                    return ((string)(this[this.tableV_Plani_HistorialIngreso.cin_DescripcionIngresoColumn]));
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.cin_DescripcionIngresoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal hip_TotalPagar {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'hip_TotalPagar\' in table \'V_Plani_HistorialIngreso\' is DBNu" +
-                                "ll.", e);
-                    }
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime hipa_FechaPago {
-                get {
-                    return ((global::System.DateTime)(this[this.tableV_Plani_HistorialIngreso.hipa_FechaPagoColumn]));
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.hipa_FechaPagoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int cpla_IdPlanilla {
-                get {
-                    return ((int)(this[this.tableV_Plani_HistorialIngreso.cpla_IdPlanillaColumn]));
-                }
-                set {
-                    this[this.tableV_Plani_HistorialIngreso.cpla_IdPlanillaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Iship_TotalPagarNull() {
-                return this.IsNull(this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Sethip_TotalPagarNull() {
-                this[this.tableV_Plani_HistorialIngreso.hip_TotalPagarColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5785,22 +5973,22 @@ namespace ERP_GMEDINA.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class V_Plani_HistorialDeduccionesRowChangeEvent : global::System.EventArgs {
+        public class V_Plani_HistorialIngresoRowChangeEvent : global::System.EventArgs {
             
-            private V_Plani_HistorialDeduccionesRow eventRow;
+            private V_Plani_HistorialIngresoRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialDeduccionesRowChangeEvent(V_Plani_HistorialDeduccionesRow row, global::System.Data.DataRowAction action) {
+            public V_Plani_HistorialIngresoRowChangeEvent(V_Plani_HistorialIngresoRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialDeduccionesRow Row {
+            public V_Plani_HistorialIngresoRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5819,22 +6007,22 @@ namespace ERP_GMEDINA.DataSets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class V_Plani_HistorialIngresoRowChangeEvent : global::System.EventArgs {
+        public class V_Plani_HistorialDeduccionesRowChangeEvent : global::System.EventArgs {
             
-            private V_Plani_HistorialIngresoRow eventRow;
+            private V_Plani_HistorialDeduccionesRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoRowChangeEvent(V_Plani_HistorialIngresoRow row, global::System.Data.DataRowAction action) {
+            public V_Plani_HistorialDeduccionesRowChangeEvent(V_Plani_HistorialDeduccionesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_Plani_HistorialIngresoRow Row {
+            public V_Plani_HistorialDeduccionesRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -6892,6 +7080,7 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             tableMapping.ColumnMappings.Add("insf_DescInstitucionFinanc", "insf_DescInstitucionFinanc");
             tableMapping.ColumnMappings.Add("deif_Monto", "deif_Monto");
             tableMapping.ColumnMappings.Add("deif_Comentarios", "deif_Comentarios");
+            tableMapping.ColumnMappings.Add("deif_FechaCrea", "deif_FechaCrea");
             tableMapping.ColumnMappings.Add("deif_Pagado", "deif_Pagado");
             tableMapping.ColumnMappings.Add("per_Apellidos", "per_Apellidos");
             tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
@@ -6912,7 +7101,7 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT deif_IdDeduccionInstFinanciera, emp_Id, per_Id, per_Nombres, insf_IdInstitucionFinanciera, insf_DescInstitucionFinanc, deif_Monto, deif_Comentarios, deif_Pagado, per_Apellidos, cpla_IdPlanilla, cpla_DescripcionPlanilla FROM Plani.V_ReporteInstitucionesFinancieras_RPT";
+            this._commandCollection[0].CommandText = @"SELECT deif_IdDeduccionInstFinanciera, emp_Id, per_Id, per_Nombres, insf_IdInstitucionFinanciera, insf_DescInstitucionFinanc, deif_Monto, deif_Comentarios, deif_FechaCrea, deif_Pagado, per_Apellidos, cpla_IdPlanilla, cpla_DescripcionPlanilla FROM Plani.V_ReporteInstitucionesFinancieras_RPT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6936,6 +7125,182 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
         public virtual ReportesPlanillaDS.V_ReporteInstitucionesFinancieras_RPTDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             ReportesPlanillaDS.V_ReporteInstitucionesFinancieras_RPTDataTable dataTable = new ReportesPlanillaDS.V_ReporteInstitucionesFinancieras_RPTDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class V_Plani_HistorialIngresoTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public V_Plani_HistorialIngresoTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "V_Plani_HistorialIngreso";
+            tableMapping.ColumnMappings.Add("emp_Id", "emp_Id");
+            tableMapping.ColumnMappings.Add("hipa_IdHistorialDePago", "hipa_IdHistorialDePago");
+            tableMapping.ColumnMappings.Add("cin_DescripcionIngreso", "cin_DescripcionIngreso");
+            tableMapping.ColumnMappings.Add("hip_TotalPagar", "hip_TotalPagar");
+            tableMapping.ColumnMappings.Add("hipa_FechaPago", "hipa_FechaPago");
+            tableMapping.ColumnMappings.Add("nombreEmpleado", "nombreEmpleado");
+            tableMapping.ColumnMappings.Add("identidadEmpleado", "identidadEmpleado");
+            tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT emp_Id, hipa_IdHistorialDePago, cin_DescripcionIngreso, hip_TotalPagar, hi" +
+                "pa_FechaPago, nombreEmpleado, identidadEmpleado, cpla_IdPlanilla FROM Plani.V_Pl" +
+                "ani_HistorialIngreso";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable dataTable = new ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -7071,6 +7436,8 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             tableMapping.ColumnMappings.Add("hidp_Total", "hidp_Total");
             tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
             tableMapping.ColumnMappings.Add("hipa_FechaPago", "hipa_FechaPago");
+            tableMapping.ColumnMappings.Add("nombreEmpleado", "nombreEmpleado");
+            tableMapping.ColumnMappings.Add("identidadEmpleado", "identidadEmpleado");
             tableMapping.ColumnMappings.Add("TotalDeducciones", "TotalDeducciones");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -7090,7 +7457,8 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT emp_Id, hipa_IdHistorialDePago, hidp_IdHistorialdeDeduPago, hipa_TotalISR," +
                 " hipa_AFP, cde_DescripcionDeduccion, hidp_Total, cpla_IdPlanilla, hipa_FechaPago" +
-                ", TotalDeducciones FROM Plani.V_Plani_HistorialDeducciones";
+                ", nombreEmpleado, identidadEmpleado, TotalDeducciones FROM Plani.V_Plani_Histori" +
+                "alDeducciones";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7114,179 +7482,6 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
         public virtual ReportesPlanillaDS.V_Plani_HistorialDeduccionesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             ReportesPlanillaDS.V_Plani_HistorialDeduccionesDataTable dataTable = new ReportesPlanillaDS.V_Plani_HistorialDeduccionesDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class V_Plani_HistorialIngresoTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public V_Plani_HistorialIngresoTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "V_Plani_HistorialIngreso";
-            tableMapping.ColumnMappings.Add("emp_Id", "emp_Id");
-            tableMapping.ColumnMappings.Add("hipa_IdHistorialDePago", "hipa_IdHistorialDePago");
-            tableMapping.ColumnMappings.Add("cin_DescripcionIngreso", "cin_DescripcionIngreso");
-            tableMapping.ColumnMappings.Add("hip_TotalPagar", "hip_TotalPagar");
-            tableMapping.ColumnMappings.Add("hipa_FechaPago", "hipa_FechaPago");
-            tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
-            this._adapter.TableMappings.Add(tableMapping);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT emp_Id, hipa_IdHistorialDePago, cin_DescripcionIngreso, hip_TotalPagar, hi" +
-                "pa_FechaPago, cpla_IdPlanilla FROM Plani.V_Plani_HistorialIngreso";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable dataTable = new ReportesPlanillaDS.V_Plani_HistorialIngresoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
