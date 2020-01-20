@@ -2087,45 +2087,8 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_EncabezadoHistoria
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_Plani_HistorialDeducciones">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
-            <PropertyRef Name="hipa_TotalISR" />
-            <PropertyRef Name="hipa_AFP" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
-          <Property Name="hidp_IdHistorialdeDeduPago" Type="int" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="hipa_AFP" Type="decimal" Precision="16" Scale="4" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
-          <Property Name="TotalDeducciones" Type="int" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_HistorialIngreso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="V_Plani_HistorialIngreso">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="cin_DescripcionIngreso" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
-          <Property Name="cin_DescripcionIngreso" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
-          <Property Name="cpla_IdPlanilla" Type="int" Nullable="false" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_Plani_Prueba' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_Plani_Prueba">
@@ -6860,30 +6823,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
     [V_Plani_EncabezadoHistorialPlanilla].[hipa_SueldoNeto] AS [hipa_SueldoNeto], 
     [V_Plani_EncabezadoHistorialPlanilla].[peri_DescripPeriodo] AS [peri_DescripPeriodo]
     FROM [Plani].[V_Plani_EncabezadoHistorialPlanilla] AS [V_Plani_EncabezadoHistorialPlanilla]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="Self.V_Plani_HistorialDeducciones" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_HistorialDeducciones].[emp_Id] AS [emp_Id], 
-    [V_Plani_HistorialDeducciones].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_Plani_HistorialDeducciones].[hidp_IdHistorialdeDeduPago] AS [hidp_IdHistorialdeDeduPago], 
-    [V_Plani_HistorialDeducciones].[hipa_TotalISR] AS [hipa_TotalISR], 
-    [V_Plani_HistorialDeducciones].[hipa_AFP] AS [hipa_AFP], 
-    [V_Plani_HistorialDeducciones].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion], 
-    [V_Plani_HistorialDeducciones].[hidp_Total] AS [hidp_Total], 
-    [V_Plani_HistorialDeducciones].[cpla_IdPlanilla] AS [cpla_IdPlanilla], 
-    [V_Plani_HistorialDeducciones].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_Plani_HistorialDeducciones].[TotalDeducciones] AS [TotalDeducciones]
-    FROM [Plani].[V_Plani_HistorialDeducciones] AS [V_Plani_HistorialDeducciones]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_Plani_HistorialIngreso" EntityType="Self.V_Plani_HistorialIngreso" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_Plani_HistorialIngreso].[emp_Id] AS [emp_Id], 
-    [V_Plani_HistorialIngreso].[hipa_IdHistorialDePago] AS [hipa_IdHistorialDePago], 
-    [V_Plani_HistorialIngreso].[cin_DescripcionIngreso] AS [cin_DescripcionIngreso], 
-    [V_Plani_HistorialIngreso].[hip_TotalPagar] AS [hip_TotalPagar], 
-    [V_Plani_HistorialIngreso].[hipa_FechaPago] AS [hipa_FechaPago], 
-    [V_Plani_HistorialIngreso].[cpla_IdPlanilla] AS [cpla_IdPlanilla]
-    FROM [Plani].[V_Plani_HistorialIngreso] AS [V_Plani_HistorialIngreso]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Plani_Prueba" EntityType="Self.V_Plani_Prueba" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -16038,8 +15977,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
             <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="V_Plani_HistorialDeducciones" EntityType="ERP_GMEDINAModel.V_Plani_HistorialDeducciones" />
-          <EntitySet Name="V_Plani_HistorialIngreso" EntityType="ERP_GMEDINAModel.V_Plani_HistorialIngreso" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -16341,43 +16278,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
         <ComplexType Name="UDP_Plani_tbCatalogoDePlanillas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <EntityType Name="V_Plani_HistorialDeducciones">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="hidp_IdHistorialdeDeduPago" />
-            <PropertyRef Name="hipa_TotalISR" />
-            <PropertyRef Name="hipa_AFP" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-            <PropertyRef Name="hipa_FechaPago" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="hidp_IdHistorialdeDeduPago" Type="Int32" Nullable="false" />
-          <Property Name="hipa_TotalISR" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="hipa_AFP" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TotalDeducciones" Type="Int32" />
-        </EntityType>
-        <EntityType Name="V_Plani_HistorialIngreso">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="hipa_IdHistorialDePago" />
-            <PropertyRef Name="cin_DescripcionIngreso" />
-            <PropertyRef Name="hipa_FechaPago" />
-            <PropertyRef Name="cpla_IdPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="cin_DescripcionIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19211,34 +19111,6 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.Plani.V_TipoDeduccion' no tiene 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="V_Plani_HistorialDeducciones">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialDeducciones">
-              <MappingFragment StoreEntitySet="V_Plani_HistorialDeducciones">
-                <ScalarProperty Name="TotalDeducciones" ColumnName="TotalDeducciones" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="hidp_Total" ColumnName="hidp_Total" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-                <ScalarProperty Name="hipa_AFP" ColumnName="hipa_AFP" />
-                <ScalarProperty Name="hipa_TotalISR" ColumnName="hipa_TotalISR" />
-                <ScalarProperty Name="hidp_IdHistorialdeDeduPago" ColumnName="hidp_IdHistorialdeDeduPago" />
-                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Plani_HistorialIngreso">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_Plani_HistorialIngreso">
-              <MappingFragment StoreEntitySet="V_Plani_HistorialIngreso">
-                <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
-                <ScalarProperty Name="hipa_FechaPago" ColumnName="hipa_FechaPago" />
-                <ScalarProperty Name="hip_TotalPagar" ColumnName="hip_TotalPagar" />
-                <ScalarProperty Name="cin_DescripcionIngreso" ColumnName="cin_DescripcionIngreso" />
-                <ScalarProperty Name="hipa_IdHistorialDePago" ColumnName="hipa_IdHistorialDePago" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
