@@ -6,31 +6,31 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.84634cm</Width>
+              <Width>2.85199cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>4.07576cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.36873cm</Width>
+              <Width>2.83311cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -625,6 +625,7 @@
                               <Value>=Fields!hidp_Total.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -643,6 +644,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -668,31 +670,80 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <RepeatRowHeaders>true</RepeatRowHeaders>
-        <FixedColumnHeaders>true</FixedColumnHeaders>
-        <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.49389cm</Top>
+        <Left>0.92604cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.91695cm</Width>
+        <Width>24.96779cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line1">
+        <Top>2.92834cm</Top>
+        <Height>0cm</Height>
+        <Width>8.40021cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Firma</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Top>3.10473cm</Top>
+        <Left>3.27619cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>0.66689in</Height>
+    <Height>1.45856in</Height>
     <Style />
   </Body>
-  <Width>10.19442in</Width>
+  <Width>9.80982in</Width>
   <Page>
     <PageHeader>
       <Height>4.98019cm</Height>
@@ -741,9 +792,8 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>3.72848cm</Top>
-          <Left>0.3489cm</Left>
           <Height>0.6cm</Height>
-          <Width>23.02678cm</Width>
+          <Width>24.91695cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -776,9 +826,8 @@
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
           <Top>3.02265cm</Top>
-          <Left>0.3489cm</Left>
           <Height>0.6cm</Height>
-          <Width>23.02678cm</Width>
+          <Width>24.91695cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -813,7 +862,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.23762cm</Height>
+      <Height>1.6379cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -844,10 +893,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.06687cm</Top>
-          <Left>15.84537cm</Left>
+          <Top>0.98498cm</Top>
+          <Left>21.41325cm</Left>
           <Height>0.6cm</Height>
-          <Width>7.18141cm</Width>
+          <Width>3.5037cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -879,8 +928,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.19912cm</Top>
-          <Left>15.84537cm</Left>
+          <Top>0.17638cm</Top>
+          <Left>17.73554cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <ZIndex>1</ZIndex>
@@ -894,47 +943,30 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Line Name="Line1">
-          <Top>1.30248cm</Top>
-          <Left>1.3462cm</Left>
-          <Height>0cm</Height>
-          <Width>8.40021cm</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>Solid</Style>
-            </Border>
-          </Style>
-        </Line>
-        <Textbox Name="Textbox10">
+        <Textbox Name="Textbox11">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Firma</Value>
+                  <Value>Usuario:</Value>
                   <Style />
                 </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
                 <TextRun>
-                  <Value />
+                  <Value>=Parameters!usuario.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>1.47887cm</Top>
-          <Left>4.81224cm</Left>
+          <rd:DefaultName>Textbox11</rd:DefaultName>
+          <Top>0.98498cm</Top>
+          <Left>17.96957cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>3</ZIndex>
+          <Width>3.26729cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -954,9 +986,9 @@
     </PageFooter>
     <PageHeight>25cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>1cm</LeftMargin>
+    <LeftMargin>0cm</LeftMargin>
     <RightMargin>1cm</RightMargin>
-    <TopMargin>1cm</TopMargin>
+    <TopMargin>0cm</TopMargin>
     <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
@@ -1033,6 +1065,20 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="logo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="usuario">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <EmbeddedImages>
     <EmbeddedImage Name="WhatsAppImage20191023at15553PM">
       <MIMEType>image/jpeg</MIMEType>
