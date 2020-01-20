@@ -204,6 +204,33 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_Plani_HistorialDeduccionesTableAdapter" GeneratorDataComponentClassName="V_Plani_HistorialDeduccionesTableAdapter" Name="V_Plani_HistorialDeducciones" UserDataComponentName="V_Plani_HistorialDeduccionesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_Plani_HistorialDeducciones" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT emp_Id, hipa_IdHistorialDePago, hidp_IdHistorialdeDeduPago, hipa_TotalISR, hipa_AFP, cde_DescripcionDeduccion, hidp_Total, cpla_IdPlanilla, hipa_FechaPago, nombreEmpleado, identidadEmpleado, TotalDeducciones FROM Plani.V_Plani_HistorialDeducciones</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="emp_Id" DataSetColumn="emp_Id" />
+              <Mapping SourceColumn="hipa_IdHistorialDePago" DataSetColumn="hipa_IdHistorialDePago" />
+              <Mapping SourceColumn="hidp_IdHistorialdeDeduPago" DataSetColumn="hidp_IdHistorialdeDeduPago" />
+              <Mapping SourceColumn="hipa_TotalISR" DataSetColumn="hipa_TotalISR" />
+              <Mapping SourceColumn="hipa_AFP" DataSetColumn="hipa_AFP" />
+              <Mapping SourceColumn="cde_DescripcionDeduccion" DataSetColumn="cde_DescripcionDeduccion" />
+              <Mapping SourceColumn="hidp_Total" DataSetColumn="hidp_Total" />
+              <Mapping SourceColumn="cpla_IdPlanilla" DataSetColumn="cpla_IdPlanilla" />
+              <Mapping SourceColumn="hipa_FechaPago" DataSetColumn="hipa_FechaPago" />
+              <Mapping SourceColumn="nombreEmpleado" DataSetColumn="nombreEmpleado" />
+              <Mapping SourceColumn="identidadEmpleado" DataSetColumn="identidadEmpleado" />
+              <Mapping SourceColumn="TotalDeducciones" DataSetColumn="TotalDeducciones" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -529,6 +556,42 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="V_Plani_HistorialDeducciones" msprop:Generator_TableClassName="V_Plani_HistorialDeduccionesDataTable" msprop:Generator_TableVarName="tableV_Plani_HistorialDeducciones" msprop:Generator_TablePropName="V_Plani_HistorialDeducciones" msprop:Generator_RowDeletingName="V_Plani_HistorialDeduccionesRowDeleting" msprop:Generator_RowChangingName="V_Plani_HistorialDeduccionesRowChanging" msprop:Generator_RowEvHandlerName="V_Plani_HistorialDeduccionesRowChangeEventHandler" msprop:Generator_RowDeletedName="V_Plani_HistorialDeduccionesRowDeleted" msprop:Generator_UserTableName="V_Plani_HistorialDeducciones" msprop:Generator_RowChangedName="V_Plani_HistorialDeduccionesRowChanged" msprop:Generator_RowEvArgName="V_Plani_HistorialDeduccionesRowChangeEvent" msprop:Generator_RowClassName="V_Plani_HistorialDeduccionesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="emp_Id" msprop:Generator_ColumnVarNameInTable="columnemp_Id" msprop:Generator_ColumnPropNameInRow="emp_Id" msprop:Generator_ColumnPropNameInTable="emp_IdColumn" msprop:Generator_UserColumnName="emp_Id" type="xs:int" />
+              <xs:element name="hipa_IdHistorialDePago" msprop:Generator_ColumnVarNameInTable="columnhipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInRow="hipa_IdHistorialDePago" msprop:Generator_ColumnPropNameInTable="hipa_IdHistorialDePagoColumn" msprop:Generator_UserColumnName="hipa_IdHistorialDePago" type="xs:int" />
+              <xs:element name="hidp_IdHistorialdeDeduPago" msprop:Generator_ColumnVarNameInTable="columnhidp_IdHistorialdeDeduPago" msprop:Generator_ColumnPropNameInRow="hidp_IdHistorialdeDeduPago" msprop:Generator_ColumnPropNameInTable="hidp_IdHistorialdeDeduPagoColumn" msprop:Generator_UserColumnName="hidp_IdHistorialdeDeduPago" type="xs:int" />
+              <xs:element name="hipa_TotalISR" msprop:Generator_ColumnVarNameInTable="columnhipa_TotalISR" msprop:Generator_ColumnPropNameInRow="hipa_TotalISR" msprop:Generator_ColumnPropNameInTable="hipa_TotalISRColumn" msprop:Generator_UserColumnName="hipa_TotalISR" type="xs:decimal" />
+              <xs:element name="hipa_AFP" msprop:Generator_ColumnVarNameInTable="columnhipa_AFP" msprop:Generator_ColumnPropNameInRow="hipa_AFP" msprop:Generator_ColumnPropNameInTable="hipa_AFPColumn" msprop:Generator_UserColumnName="hipa_AFP" type="xs:decimal" />
+              <xs:element name="cde_DescripcionDeduccion" msprop:Generator_ColumnVarNameInTable="columncde_DescripcionDeduccion" msprop:Generator_ColumnPropNameInRow="cde_DescripcionDeduccion" msprop:Generator_ColumnPropNameInTable="cde_DescripcionDeduccionColumn" msprop:Generator_UserColumnName="cde_DescripcionDeduccion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="hidp_Total" msprop:Generator_ColumnVarNameInTable="columnhidp_Total" msprop:Generator_ColumnPropNameInRow="hidp_Total" msprop:Generator_ColumnPropNameInTable="hidp_TotalColumn" msprop:Generator_UserColumnName="hidp_Total" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
+              <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
+              <xs:element name="nombreEmpleado" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnombreEmpleado" msprop:Generator_ColumnPropNameInRow="nombreEmpleado" msprop:Generator_ColumnPropNameInTable="nombreEmpleadoColumn" msprop:Generator_UserColumnName="nombreEmpleado" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="101" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="identidadEmpleado" msprop:Generator_ColumnVarNameInTable="columnidentidadEmpleado" msprop:Generator_ColumnPropNameInRow="identidadEmpleado" msprop:Generator_ColumnPropNameInTable="identidadEmpleadoColumn" msprop:Generator_UserColumnName="identidadEmpleado">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalDeducciones" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalDeducciones" msprop:Generator_ColumnPropNameInRow="TotalDeducciones" msprop:Generator_ColumnPropNameInTable="TotalDeduccionesColumn" msprop:Generator_UserColumnName="TotalDeducciones" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
