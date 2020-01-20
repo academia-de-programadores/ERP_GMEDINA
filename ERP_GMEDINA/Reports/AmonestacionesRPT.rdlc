@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.04cm</Width>
+              <Width>4.95828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.42604cm</Width>
+              <Width>3.34432cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.37313cm</Width>
+              <Width>3.29141cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.41828cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.39958cm</Width>
+              <Width>3.31786cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.84938cm</Width>
+              <Width>3.76766cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -43,7 +43,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Colaborador</Value>
+                              <Value>Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -619,8 +619,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesAmonestacionesDS</DataSetName>
         <Top>1.69333cm</Top>
+        <Left>0.37042cm</Left>
         <Height>1.2cm</Height>
-        <Width>26.58813cm</Width>
+        <Width>25.93437cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -634,13 +635,15 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reporte sobre el historial de amonestaciones</Value>
+                <Value>Reporte de Amonestaciones</Value>
                 <Style>
                   <FontSize>20pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox8</rd:DefaultName>

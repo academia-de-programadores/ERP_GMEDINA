@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.13833cm</Width>
+              <Width>6.33838cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.70958cm</Width>
+              <Width>4.90963cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>7.75229cm</Width>
+              <Width>7.95234cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.66208cm</Width>
+              <Width>5.86213cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Colaborador</Value>
+                              <Value>Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -103,7 +103,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Descripción audiencia</Value>
+                              <Value>Descripción de Audiencia</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -139,7 +139,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Fecha de audiencia</Value>
+                              <Value>Fecha de Audiencia</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -326,10 +326,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesAudiencias</DataSetName>
-        <Top>0.17639cm</Top>
-        <Left>1.37583cm</Left>
+        <Top>0.10583cm</Top>
+        <Left>0.29106cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.26228cm</Width>
+        <Width>25.06248cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -343,7 +343,7 @@
   <Width>10.09375in</Width>
   <Page>
     <PageHeader>
-      <Height>1.29646cm</Height>
+      <Height>2.2666cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -383,19 +383,21 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte sobre el historial de audiencias de descargo</Value>
+                  <Value>Reporte de Audiencias de descargo</Value>
                   <Style>
-                    <FontSize>12pt</FontSize>
+                    <FontSize>20pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.36594cm</Top>
-          <Left>5.50364cm</Left>
-          <Height>0.69687cm</Height>
+          <Top>0.18955cm</Top>
+          <Left>7.14406cm</Left>
+          <Height>1.89184cm</Height>
           <Width>11.17833cm</Width>
           <ZIndex>1</ZIndex>
           <Style>

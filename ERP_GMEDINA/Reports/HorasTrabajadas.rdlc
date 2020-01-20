@@ -402,7 +402,7 @@
         <Top>2.56646cm</Top>
         <Left>0.82021cm</Left>
         <Height>1.2cm</Height>
-        <Width>15.46141cm</Width>
+        <Width>15.4614cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -418,17 +418,19 @@
               <TextRun>
                 <Value>Reporte De Horas Trabajadas</Value>
                 <Style>
-                  <FontSize>16pt</FontSize>
+                  <FontSize>20pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>0.86995cm</Top>
-        <Left>5.02725cm</Left>
-        <Height>0.9175cm</Height>
+        <Top>0.3937cm</Top>
+        <Left>4.49808cm</Left>
+        <Height>1.87cm</Height>
         <Width>8.16208cm</Width>
         <ZIndex>1</ZIndex>
         <Style>

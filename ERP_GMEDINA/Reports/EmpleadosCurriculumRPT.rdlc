@@ -910,8 +910,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>1.40229cm</Top>
-        <Left>0.47625cm</Left>
+        <Top>1.66687cm</Top>
+        <Left>0.17639cm</Left>
         <Height>1.2cm</Height>
         <Width>31.79916cm</Width>
         <Style>
@@ -927,10 +927,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reporte de Empleado Curriculum</Value>
+                <Value>Reporte de Empleado</Value>
                 <Style>
-                  <FontSize>14pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontSize>20pt</FontSize>
+                  <TextDecoration>None</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>

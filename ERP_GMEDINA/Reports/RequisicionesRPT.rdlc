@@ -1296,6 +1296,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
+        <Top>0.37042cm</Top>
         <Height>0.5in</Height>
         <Width>20.88542in</Width>
         <Style>
@@ -1305,13 +1306,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.61458in</Height>
+    <Height>1.07291in</Height>
     <Style />
   </Body>
   <Width>20.905in</Width>
   <Page>
     <PageHeader>
-      <Height>0.3425in</Height>
+      <Height>0.75917in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1322,18 +1323,22 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Globals!ExecutionTime</Value>
-                  <Style />
+                  <Value>Reporte de Requisiciones</Value>
+                  <Style>
+                    <FontSize>20pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.03694in</Top>
-          <Left>19.75917in</Left>
-          <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Top>0.13417in</Top>
+          <Left>5.35292in</Left>
+          <Height>0.56944in</Height>
+          <Width>5.15625in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1352,7 +1357,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.44792in</Height>
+      <Height>0.39584in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>

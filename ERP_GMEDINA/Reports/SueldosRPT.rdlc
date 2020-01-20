@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.73832in</Width>
+              <Width>1.71124in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73832in</Width>
+              <Width>1.71124in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73832in</Width>
+              <Width>1.71124in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73832in</Width>
+              <Width>1.71124in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73832in</Width>
+              <Width>1.71124in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -34,7 +34,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nombre del empleado</Value>
+                              <Value>Nombre del Empleado</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontSize>11pt</FontSize>
@@ -399,9 +399,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>0.41667in</Top>
+        <Top>0.31944in</Top>
+        <Left>0.34396cm</Left>
         <Height>0.5in</Height>
-        <Width>8.69162in</Width>
+        <Width>8.5562in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -443,6 +444,51 @@
   </Body>
   <Width>8.89698in</Width>
   <Page>
+    <PageHeader>
+      <Height>1in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Reporte de Sueldos</Value>
+                  <Style>
+                    <FontSize>20pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.13417in</Top>
+          <Left>2.69667in</Left>
+          <Height>0.81028in</Height>
+          <Width>3.08333in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <PageFooter>
       <Height>0.45055in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>

@@ -6,22 +6,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.69403cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -473,9 +473,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>1.71979cm</Top>
-        <Left>1.56104cm</Left>
+        <Left>0.66146cm</Left>
         <Height>1.2cm</Height>
-        <Width>15cm</Width>
+        <Width>16.16417cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -489,20 +489,22 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reporte Historial Incapacidades</Value>
+                <Value>Reporte de Incapacidades</Value>
                 <Style>
-                  <FontSize>16pt</FontSize>
+                  <FontSize>20pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.78465cm</Top>
-        <Left>4.73287cm</Left>
-        <Height>0.75875cm</Height>
-        <Width>8.34729cm</Width>
+        <Top>0.36132cm</Top>
+        <Left>3.09245cm</Left>
+        <Height>1.02333cm</Height>
+        <Width>10.56979cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>

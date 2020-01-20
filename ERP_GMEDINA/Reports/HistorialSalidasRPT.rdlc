@@ -307,7 +307,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -401,6 +400,7 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
         <Top>1.27cm</Top>
+        <Left>0.37042cm</Left>
         <Height>1.2cm</Height>
         <Width>16.7598cm</Width>
         <Style>
@@ -425,7 +425,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox17</rd:DefaultName>
         <Top>0.49361cm</Top>
-        <Left>12.54cm</Left>
+        <Left>12.91043cm</Left>
         <Height>0.6cm</Height>
         <Width>4.21979cm</Width>
         <ZIndex>1</ZIndex>
@@ -440,13 +440,58 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.11458in</Height>
+    <Height>1.40625in</Height>
     <Style />
   </Body>
   <Width>7.01985in</Width>
   <Page>
-    <PageFooter>
+    <PageHeader>
       <Height>2.54cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Reporte de Finalizacion Laboral</Value>
+                  <Style>
+                    <FontSize>20pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.20849cm</Top>
+          <Left>4.41537cm</Left>
+          <Height>2.15512cm</Height>
+          <Width>8.47958cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>1.53458cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>

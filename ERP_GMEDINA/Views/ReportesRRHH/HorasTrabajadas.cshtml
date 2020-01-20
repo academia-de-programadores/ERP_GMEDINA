@@ -40,6 +40,9 @@
                                 @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                             </div>
 
+
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-6">
                                 <label class="font-normal">Fecha Fin</label>
                                 <div class="input-group date">
@@ -47,11 +50,10 @@
                                 </div>
                                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
                             </div>
-
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
-                    </div>
+                            <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                        </div>
                 </div>
             </div>
         </div>

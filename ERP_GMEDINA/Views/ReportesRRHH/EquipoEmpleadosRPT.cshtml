@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm("EquipoEmpleados", "ReportesRRHH", FormMethod.Post, new { id = "" }))
+@using (Html.BeginForm("EquipoEmpleadosRPT", "ReportesRRHH", FormMethod.Post, new { id = "" }))
 {
 
     <div class="row">
@@ -28,20 +28,20 @@
 
                                 @Html.ValidationMessageFor(model => model.Id_Persona, "", new { @class = "text-danger" })
                             </div>
-
+                            <br />
 
                         </div>
-
-                        <div class="col-md-6">
-                            <label class="font-normal">Fecha</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha", @id = "Fecha" } })
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Fecha</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha", @id = "Fecha" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                             </div>
-                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                         </div>
-
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                        </div>
 
                 </div>
             </div>

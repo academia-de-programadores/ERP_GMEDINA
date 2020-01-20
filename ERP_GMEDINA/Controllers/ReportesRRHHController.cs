@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Controllers
         ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
         ReportesRRHH ds = new ReportesRRHH();
 
-        public ActionResult HistorialIncapacidades()
+        public ActionResult HistorialIncapacidadesRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             //ViewBag.Turno2 = new SelectList(db.tbHistorialHorasTrabajadas.Where(o => o.htra_Estado == true), "htra_Id");
@@ -28,7 +28,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialIncapacidades(int? ticn_Id, DateTime? FechaInicio, DateTime? FechaFin)
+        public ActionResult HistorialIncapacidadesRPT(int? ticn_Id, DateTime? FechaInicio, DateTime? FechaFin)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -752,7 +752,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.Empleados = new SelectList(db.V_Empleados.Where(o => o.emp_Estado == true), "emp_Id", "per_NombreCompleto");
             return View();
         }
-        public ActionResult FaseSeleccion()
+        public ActionResult FaseSeleccionRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.FaseReclutamiento = new SelectList(db.tbFasesReclutamiento.Where(o => o.fare_Estado == true), "fare_Id", "fare_Descripcion");
@@ -760,7 +760,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult FaseSeleccion(int? fare_Id, DateTime? Fecha)
+        public ActionResult FaseSeleccionRPT(int? fare_Id, DateTime? Fecha)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -929,19 +929,19 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        public ActionResult HistorialAmonestaciones()
+        public ActionResult HistorialAmonestacionesRPT()
         {
             ViewBag.TipoAmonesta = new SelectList(db.tbTipoAmonestaciones.Where(o => o.tamo_Estado == true), "tamo_Id", "tamo_Descripcion");
             ViewBag.EmpleadoAMON = new SelectList(db.V_RPT_HistorialAmonestaciones_Empleados, "per_Identidad", "nombre");
             return View();
         }
-        public ActionResult HistorialAudienciaDescargo()
+        public ActionResult HistorialAudienciaDescargoRPT()
         {
             ViewBag.EmpleadoAUDE = new SelectList(db.V_RPT_HistorialAudienciaDescargo_empleados, "per_Identidad", "nombre");
             return View();
         }
         [HttpPost]
-        public ActionResult HistorialAmonestaciones(int? tamo_Id, string Identidad)
+        public ActionResult HistorialAmonestacionesRPT(int? tamo_Id, string Identidad)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
@@ -987,7 +987,7 @@ namespace ERP_GMEDINA.Controllers
         }
         //HistorialAudienciaDescargo
         [HttpPost]
-        public ActionResult HistorialAudienciaDescargo(string per_Identidad ,DateTime? fechaAudiencia)
+        public ActionResult HistorialAudienciaDescargoRPT(string per_Identidad ,DateTime? fechaAudiencia)
         {
 
             ReportViewer reportViewer = new ReportViewer();
@@ -1025,7 +1025,7 @@ namespace ERP_GMEDINA.Controllers
 
             return View();
         }
-        public ActionResult EquipoEmpleados()
+        public ActionResult EquipoEmpleadosRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.Equipo_Empleado = new SelectList(db.tbEquipoEmpleados.Where(o => o.eqem_Estado == true), "eqem_Id", "eqem_Fecha");
@@ -1034,7 +1034,7 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult EquipoEmpleados(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
+        public ActionResult EquipoEmpleadosRPT(int? eqem_Id, DateTime? Fecha, int? Id_Persona)
         {
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;

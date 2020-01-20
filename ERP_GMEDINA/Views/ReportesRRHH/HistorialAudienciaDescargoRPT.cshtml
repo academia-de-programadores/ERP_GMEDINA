@@ -1,19 +1,18 @@
-﻿@using ReportViewerForMvc;
-    @model ERP_GMEDINA.Models.V_RPT_FaseSeleccion
+﻿
+@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_RPT_HistorialAudienciaDescargo
 @{
-    ViewBag.Title = "Reportes de Fase Seleccion";
+    ViewBag.Title = "Reporte de Audiencias de Descargo";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-
-@using (Html.BeginForm("FaseSeleccion", "ReportesRRHH", FormMethod.Post, new { id = "" }))
+@using (Html.BeginForm("HistorialAudienciaDescargoRPT", "ReportesRRHH", FormMethod.Post, new { id = "" }))
 {
-
     <div class="row">
         <div class="col-lg-12">
             <div class="float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes de Fase Seleccion</h5>
+                    <h5>Reporte de Audiencias de Descargo</h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -21,33 +20,20 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <label class="font-normal">Fase </label>
+                                <label class="font-normal">Colaborador</label>
+                                @Html.DropDownList("per_Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAUDE, "(Opcional) seleccione el colaborador", new { @id = "per_Identidad", @class = "form-control" })
 
-                                @Html.DropDownList("fare_Id", (IEnumerable<SelectListItem>)ViewBag.FaseReclutamiento, "Seleccione una opción", new { @class = "form-control" })
-
-                                @Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
                             </div>
-
-
-                            <br />
+                            
                         </div>
-
-                        <div class="col-md-6">
-                            <label class="font-normal">Fecha</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "Fecha", @id = "Fecha" } })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                        </div>
-
-                    </div>
                     <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
-
 }
 
 <br />
@@ -75,7 +61,3 @@
         </div>
     </div>
 </div>
-
-
-<br />
-<br />

@@ -618,9 +618,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesRRHH</DataSetName>
-        <Top>1.61396cm</Top>
+        <Top>1.07542cm</Top>
+        <Left>0.82021cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.24626cm</Width>
+        <Width>24.24624cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -642,8 +643,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.83757cm</Top>
-        <Left>20.23652cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>21.05671cm</Left>
         <Height>0.6cm</Height>
         <Width>4.00974cm</Width>
         <ZIndex>1</ZIndex>
@@ -663,8 +664,53 @@
   </Body>
   <Width>10.10827in</Width>
   <Page>
+    <PageHeader>
+      <Height>1.99912cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Reporte de Vacaciones</Value>
+                  <Style>
+                    <FontSize>20pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>0.55245cm</Top>
+          <Left>6.88177cm</Left>
+          <Height>1.12917cm</Height>
+          <Width>9.98193cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <PageFooter>
-      <Height>2.54cm</Height>
+      <Height>1.42875cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
