@@ -49,9 +49,8 @@
                           <label class="" id="AsteriscoTelefono">*</label>
                       </div>
                           <div class="col-md-8">
-                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @type = "number", @name = "phone", @id = "phone" } })
+                              @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @name = "phone", @id = "phone" } })
                               @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @id = "validacionTelefono" })
-
                           </div>
                       </div>
 
@@ -80,9 +79,9 @@
   </div>
 </div>
 
-<script>
+@*<script>
     $(phone).mask("(999) 9999-9999");
-</script>
+</script>*@
 
 @section Scripts
 {

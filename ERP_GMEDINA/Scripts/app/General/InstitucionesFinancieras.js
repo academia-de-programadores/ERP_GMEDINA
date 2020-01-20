@@ -10,7 +10,8 @@
     validacionDescripcion = $('#validacionDescripcion'),
     validacionContacto = $('#validacionContacto'),
     validacionTelefono = $('#validacionTelefono'),
-    validacionCorreo = $('#validacionCorreo')
+    validacionCorreo = $('#validacionCorreo'),
+    validatel = $('#validatel')
 ;
 
 function Validaciones(
@@ -18,7 +19,9 @@ function Validaciones(
     Contac,
     Telef,
     Corre) {
-
+    debugger;
+    var ExpregPhone = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/);
+    var ExpregEmail = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
     var todoBien = true;
 
     // Descripción Institución Financiera
@@ -35,6 +38,7 @@ function Validaciones(
     if (Contac.val() != '') {
         AsteriscoContacto.removeClass('text-danger');
         validacionContacto.hide();
+        validatel.hide();
     } else {
         AsteriscoContacto.addClass('text-danger');
         validacionContacto.show();
@@ -42,9 +46,9 @@ function Validaciones(
     }
 
     // Telefono
-    if (Telef.val() != '') {
-        validacionTelefono.hide();
+    if (Telef.val() != '' && ExpregPhone.test(Telef.val())) {
         AsteriscoTelefono.removeClass('text-danger');
+        validacionTelefono.hide();
     } else {
         AsteriscoTelefono.addClass('text-danger');
         validacionTelefono.show();
@@ -52,7 +56,7 @@ function Validaciones(
     }
 
     // Correo
-    if (Corre.val() != '') {
+    if (Corre.val() != '' && ExpregEmail.test(Corre.val())) {
         AsteriscoCorreo.removeClass('text-danger');
         validacionCorreo.hide();
     } else {
@@ -60,6 +64,7 @@ function Validaciones(
         validacionCorreo.show();
         todoBien = false;
     }
+
     return todoBien;
 }
 
@@ -254,15 +259,14 @@ $('#btnCargarPlanilla').click(function ()
 
 //Crear Institución Financiera ya validado
 $(btnAgregar).click(function () {
-    console.clear();
-    if (validaciones(
-    DescripInstFin,
-    Contact,
-    Tel,
-    Cor
+    if (Validaciones(
+    DescInstFin,
+    Contac,
+    Telef,
+    Corre
     )) {
         console.log('Paso las validaciones');
-
+        debugger;
         var data = $("#frmCreateInstFin").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -302,7 +306,7 @@ $(btnAgregar).click(function () {
 //Editar Institución Financiera ya validado
 $(btnEditarConfirmar).click(function () {
 
-    if (validaciones(
+    if (Validacion(
     DescripInstFin,
     Contact,
     Tel,

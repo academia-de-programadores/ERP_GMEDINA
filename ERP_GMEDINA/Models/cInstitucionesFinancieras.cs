@@ -29,13 +29,13 @@ namespace ERP_GMEDINA.Models
         public string insf_Contacto { get; set; }
 
         [Display(Name = "Telefono Contacto")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Favor ingresar solamente números.")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$", ErrorMessage = "Número de Teléfono Inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         [MaxLength(15, ErrorMessage = "Numero debe ser inferior a 15 digitos.")]
         public string insf_Telefono { get; set; }
 
         [Display(Name = "Correo Electrónico")]
-        [EmailAddress(ErrorMessage = "Correo Electrónico inválido.")]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", ErrorMessage = "Correo Electrónico Inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Correo { get; set; }
 

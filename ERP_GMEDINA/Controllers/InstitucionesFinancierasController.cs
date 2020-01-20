@@ -40,7 +40,7 @@ namespace ERP_GMEDINA.Controllers
                             insf_FechaModifica = c.insf_FechaModifica,
                             insf_Activo = c.insf_Activo
                         })
-                                           .OrderByDescending(x => x.insf_FechaCrea)
+                                           //.OrderByDescending(x => x.insf_FechaCrea)
                                            /*.Where(x => x.aces_Activo == true)*/.ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -99,7 +99,6 @@ namespace ERP_GMEDINA.Controllers
                 //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
                 //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
                 response = "bien";
-                return RedirectToAction("Index");
 
             }
             else
@@ -111,7 +110,7 @@ namespace ERP_GMEDINA.Controllers
             // ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioCrea);
             // ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioModifica);
             // return View(tbInstitucionesFinancieras);
-            return View(tbInstitucionesFinancieras);
+            return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: InstitucionesFinancieras/Edit/5
@@ -167,11 +166,10 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Ex.Message.ToString();
                 }
-                return RedirectToAction("Index");
             }
             //ViewBag.insf_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioCrea);
             //ViewBag.insf_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbInstitucionesFinancieras.insf_UsuarioModifica);
-            return View(tbInstitucionesFinancieras);
+            return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
         // GET: InstitucionesFinancieras/Details/5
