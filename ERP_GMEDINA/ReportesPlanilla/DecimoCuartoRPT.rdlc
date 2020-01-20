@@ -6,28 +6,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.94598cm</Width>
+              <Width>2.7788cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.94598cm</Width>
+              <Width>2.7788cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.94598cm</Width>
+              <Width>2.7788cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.68682cm</Width>
+              <Width>3.51964cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.52748cm</Width>
+              <Width>3.3603cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.37473cm</Width>
+              <Width>4.20755cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.94598cm</Width>
+              <Width>2.7788cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.97797cm</Width>
+              <Width>2.81079cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -537,7 +537,6 @@
                         <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -568,9 +567,9 @@
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.03528cm</Top>
-        <Left>0.05817cm</Left>
+        <Left>1.39563cm</Left>
         <Height>1.2cm</Height>
-        <Width>26.35092cm</Width>
+        <Width>25.01347cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -667,6 +666,76 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Reporte de Decimocuarto mes</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>3.6586cm</Top>
+          <Left>0.05817cm</Left>
+          <Height>0.76746cm</Height>
+          <Width>26.35092cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Sistema de Planillas</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>2.95535cm</Top>
+          <Left>0.05817cm</Left>
+          <Height>0.61408cm</Height>
+          <Width>26.35092cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -763,11 +832,11 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
+    <LeftMargin>0cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
+    <TopMargin>0cm</TopMargin>
     <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
