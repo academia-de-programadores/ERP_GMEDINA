@@ -1652,6 +1652,9 @@
     <Compile Include="Models\V_ReportesVarios.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_EmpleadoCurriculum.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_RPT_EquipoEmpleado.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1661,7 +1664,13 @@
     <Compile Include="Models\V_RPT_HistorialAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_HistorialAmonestaciones_Empleados.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_RPT_HistorialAudienciaDescargo.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_RPT_HistorialAudienciaDescargo_empleados.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RPT_HistorialCargos.cs">
@@ -1676,6 +1685,9 @@
     <Compile Include="Models\V_RPT_HistorialPermisos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_RPT_HistorialSalidas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_RPT_HistorialSueldos.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1683,6 +1695,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_RPT_HorasTrabajadas.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_RPT_Requisiciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_SeleccionCandidatos.cs">
@@ -1986,6 +2001,10 @@
     <Content Include="Scripts\app\General\Titulos\Admin.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
     <Content Include="Scripts\app\Menu\Menu.js" />
+    <Content Include="Scripts\plugins\dataTablesMatutina\dataTables.buttons.min.js" />
+    <Content Include="Scripts\plugins\dataTablesMatutina\datatables.min.js" />
+    <Content Include="Scripts\plugins\dataTablesMatutina\DatatablesConfigurations.js" />
+    <Content Include="Scripts\plugins\dataTablesMatutina\Datatables_SeleccionCandidatos.js" />
     <Content Include="Scripts\plugins\dataTables\dataTables.buttons.min.js" />
     <Content Include="Scripts\plugins\dataTables\Datatables_SeleccionCandidatos.js" />
     <Content Include="Scripts\Scripts_Base\Planilla.js" />
@@ -2504,6 +2523,7 @@
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
     <Content Include="Scripts\plugins\dataTables\datatables1.10.20" />
+    <Content Include="Scripts\plugins\dataTablesMatutina\datatables1.10.20" />
     <None Include="Scripts\Scripts_Base\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.min.js" />
@@ -2859,6 +2879,7 @@
     <Content Include="Views\Jornadas\_EditHorarios.cshtml" />
     <Content Include="Views\Shared\_Activar.cshtml" />
     <Content Include="Views\EquipoEmpleados\_Delete.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

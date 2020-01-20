@@ -165,12 +165,10 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EquipoEmpleado" Width="1.5" PointX="24.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_FaseSeleccion" Width="1.5" PointX="24.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones" Width="1.5" PointX="24.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" Width="1.5" PointX="24.75" PointY="24.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialCargos" Width="1.5" PointX="6.75" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialContrataciones" Width="1.5" PointX="14.75" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialIncapacidad" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialPermisos" Width="1.5" PointX="26.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="26.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialVacaciones" Width="1.5" PointX="26.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HorasTrabajadas" Width="1.5" PointX="16.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" Width="1.5" PointX="26.75" PointY="26.75" IsExpanded="true" />
@@ -448,6 +446,13 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_EmpleadoCurriculum" Width="1.5" PointX="27.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAmonestaciones_Empleados" Width="1.5" PointX="11.375" PointY="28.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo_empleados" Width="1.5" PointX="5.375" PointY="29.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSalidas" Width="1.5" PointX="29.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_Requisiciones" Width="1.5" PointX="13.375" PointY="29.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialAudienciaDescargo" Width="1.5" PointX="29.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RPT_HistorialSueldos" Width="1.5" PointX="29.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

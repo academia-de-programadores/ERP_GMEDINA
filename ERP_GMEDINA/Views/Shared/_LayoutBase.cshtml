@@ -5,9 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Planilla | @ViewBag.Title</title>
-
+    @*<link rel="icon" href="@Url.Content("~/Content/IconoInicial.ico")" />*@
+    <title>ERP_GMEDINA | @ViewBag.Title</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
@@ -15,35 +14,31 @@
 
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
-
     <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
-    @Styles.Render("~/Content/plugins/izitoast/iziToast")
 
 </head>
-<body id="Body">
+<body class="pace-done  fixed-sidebar">
+    <!-- Skin configuration box -->
+    <!-- @Html.Partial("_SkinConfig") -->
     <!-- Wrapper-->
     <!-- PageClass give you ability to specify custom style for specific view based on action -->
     <div id="wrapper" class="@Html.PageClass()">
-
         <!-- Navigation -->
         @Html.Partial("_Navigation")
-
         <!-- Page wraper -->
         <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
-
             <!-- Top Navbar -->
             @Html.Partial("_TopNavbar")
-
             <!-- Main view  -->
             @RenderBody()
-
             <!-- Footer -->
             @*@Html.Partial("_Footer")*@
-
         </div>
-
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @Html.Partial("_RightSidebar")
     </div>
     <!-- End wrapper-->
     <!-- Section for main scripts render -->
@@ -51,15 +46,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
-    @Scripts.Render("~/plugins/izitoast")
-    @Scripts.Render("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations")
-
+    <!-- Skin config script - only for demo purpose-->
+    @Scripts.Render("~/bundles/skinConfig")
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)
-    <script>
-        $('#menuDesplegar').click(function () {
-            $('#menulateral').removeClass("custom-scrollbar");
-        });
-    </script>
 </body>
 </html>

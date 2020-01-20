@@ -14,6 +14,9 @@ namespace ERP_GMEDINA.Models
     }
     public class cEquipoTrabajo
     {
+        [Display(Name = "Número")]
+        public int eqtra_Id { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
         [Display(Name = "Codigo")]
         [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]

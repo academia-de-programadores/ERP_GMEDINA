@@ -58,7 +58,7 @@ function llenarTabla() {
                       "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
                   "</div>";
                 tabla.row.add({
-                    Número:value.Número,    
+                    "Número": value.eqtra_Id,
                     ID: value.eqtra_Id,
                     Codigo: value.eqtra_Codigo,
                     Equipo: value.eqtra_Descripcion,
@@ -165,7 +165,7 @@ $("#btnActualizar").click(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
-                    MsgSuccess("El registro se editó de forma exitosa");
+                    MsgSuccess("Éxito","El registro se editó de forma exitosa");
                 } else {
                     MsgError("Error", "No se pudo editar el registro, contacte al administrador");
                 }

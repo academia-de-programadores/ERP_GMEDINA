@@ -691,6 +691,12 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/Empresas").Include(
                 "~/Scripts/app/general/Empresas/Empresas.js"));
 
+
+
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/Admin/Empresas").Include(
+                          "~/Scripts/app/general/Empresas/Admin.js"));
+
+
             //SCRIPT TIPOMONEDAS
             bundles.Add(new ScriptBundle("~/Scripts/app/general/TipoMonedas").Include(
                 "~/Scripts/app/general/TipoMonedas/TipoMonedas.js"));
