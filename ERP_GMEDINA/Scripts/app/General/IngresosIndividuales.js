@@ -52,7 +52,7 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaIngresoIndividual.length; i++) {
                 //variable para verificar el estado del registro
-                var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo'
+                var estadoRegistro = ListaIngresoIndividual[i].ini_Activo == false ? 'Inactivo' : 'Activo';
 
                 //variable boton detalles
                 var botonDetalles = ListaIngresoIndividual[i].ini_Activo == true ? '<button type="button" style="margin-right:3px;" class="btn btn-primary btn-xs" id="btnDetalleIngresosIndividuales" data-id = "' + ListaIngresoIndividual[i].ini_IdIngresosIndividuales + '">Detalles</button>' : '';
@@ -271,6 +271,7 @@ $('#btnCreateRegistroIngresoIndividual').click(function () {
                 $('#Crear #ini_PagaSiempre').prop('checked', false);
                 //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarIngresosIndividuales").modal('hide');
+                cargarGridDeducciones();
 
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
