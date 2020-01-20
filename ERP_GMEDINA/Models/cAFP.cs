@@ -19,6 +19,7 @@ namespace ERP_GMEDINA.Models
 
         [StringLength(100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
         [Required(ErrorMessage = "Campo AFP Requerido")]
+        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Texto válido sin Números")]
         [Display(Name = "AFP")]
         public string afp_Descripcion { get; set; }
         
@@ -26,12 +27,12 @@ namespace ERP_GMEDINA.Models
         [DataType(DataType.Currency)]
         [Display(Name = "Aporte Mínimo")]
         public decimal afp_AporteMinimoLps { get; set; }
-        
+
         [Required(ErrorMessage = "Campo Interés Aporte Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés por Aporte")]
         public decimal afp_InteresAporte { get; set; }
-        
+
         [Required(ErrorMessage = "Campo Interés Anual Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Interés Anual")]

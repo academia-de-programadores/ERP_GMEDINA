@@ -24,17 +24,18 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo Empleado Requerido")]
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
-        
+
+
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]
         public decimal dei_MontoInicial { get; set; }
-        
+
         [Required(ErrorMessage = "Campo Monto Restante Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Monto Restante")]
         public decimal dei_MontoRestante { get; set; }
-        
+
         [Required(ErrorMessage = "Campo Cuota Requerido")]
         [DataType(DataType.Currency)]
         [Display(Name = "Cuota")]

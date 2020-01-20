@@ -2835,8 +2835,6 @@ namespace ERP_GMEDINA.DataSets {
             
             private global::System.Data.DataColumn columndeif_Comentarios;
             
-            private global::System.Data.DataColumn columndeif_FechaCrea;
-            
             private global::System.Data.DataColumn columndeif_Pagado;
             
             private global::System.Data.DataColumn columnper_Apellidos;
@@ -2944,14 +2942,6 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn deif_FechaCreaColumn {
-                get {
-                    return this.columndeif_FechaCrea;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn deif_PagadoColumn {
                 get {
                     return this.columndeif_Pagado;
@@ -3019,7 +3009,7 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public V_ReporteInstitucionesFinancieras_RPTRow AddV_ReporteInstitucionesFinancieras_RPTRow(int deif_IdDeduccionInstFinanciera, int emp_Id, int per_Id, string per_Nombres, int insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, decimal deif_Monto, string deif_Comentarios, System.DateTime deif_FechaCrea, string deif_Pagado, string per_Apellidos, int cpla_IdPlanilla, string cpla_DescripcionPlanilla) {
+            public V_ReporteInstitucionesFinancieras_RPTRow AddV_ReporteInstitucionesFinancieras_RPTRow(int deif_IdDeduccionInstFinanciera, int emp_Id, int per_Id, string per_Nombres, int insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, decimal deif_Monto, string deif_Comentarios, string deif_Pagado, string per_Apellidos, int cpla_IdPlanilla, string cpla_DescripcionPlanilla) {
                 V_ReporteInstitucionesFinancieras_RPTRow rowV_ReporteInstitucionesFinancieras_RPTRow = ((V_ReporteInstitucionesFinancieras_RPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         deif_IdDeduccionInstFinanciera,
@@ -3030,7 +3020,6 @@ namespace ERP_GMEDINA.DataSets {
                         insf_DescInstitucionFinanc,
                         deif_Monto,
                         deif_Comentarios,
-                        deif_FechaCrea,
                         deif_Pagado,
                         per_Apellidos,
                         cpla_IdPlanilla,
@@ -3076,7 +3065,6 @@ namespace ERP_GMEDINA.DataSets {
                 this.columninsf_DescInstitucionFinanc = base.Columns["insf_DescInstitucionFinanc"];
                 this.columndeif_Monto = base.Columns["deif_Monto"];
                 this.columndeif_Comentarios = base.Columns["deif_Comentarios"];
-                this.columndeif_FechaCrea = base.Columns["deif_FechaCrea"];
                 this.columndeif_Pagado = base.Columns["deif_Pagado"];
                 this.columnper_Apellidos = base.Columns["per_Apellidos"];
                 this.columncpla_IdPlanilla = base.Columns["cpla_IdPlanilla"];
@@ -3102,8 +3090,6 @@ namespace ERP_GMEDINA.DataSets {
                 base.Columns.Add(this.columndeif_Monto);
                 this.columndeif_Comentarios = new global::System.Data.DataColumn("deif_Comentarios", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeif_Comentarios);
-                this.columndeif_FechaCrea = new global::System.Data.DataColumn("deif_FechaCrea", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndeif_FechaCrea);
                 this.columndeif_Pagado = new global::System.Data.DataColumn("deif_Pagado", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndeif_Pagado);
                 this.columnper_Apellidos = new global::System.Data.DataColumn("per_Apellidos", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3127,7 +3113,6 @@ namespace ERP_GMEDINA.DataSets {
                 this.columninsf_DescInstitucionFinanc.AllowDBNull = false;
                 this.columninsf_DescInstitucionFinanc.MaxLength = 50;
                 this.columndeif_Comentarios.MaxLength = 100;
-                this.columndeif_FechaCrea.ReadOnly = true;
                 this.columndeif_Pagado.ReadOnly = true;
                 this.columndeif_Pagado.MaxLength = 9;
                 this.columnper_Apellidos.AllowDBNull = false;
@@ -5311,23 +5296,6 @@ namespace ERP_GMEDINA.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime deif_FechaCrea {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'deif_FechaCrea\' in table \'V_ReporteInstitucionesFinancieras" +
-                                "_RPT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string deif_Pagado {
                 get {
                     try {
@@ -5398,18 +5366,6 @@ namespace ERP_GMEDINA.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setdeif_ComentariosNull() {
                 this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_ComentariosColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isdeif_FechaCreaNull() {
-                return this.IsNull(this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setdeif_FechaCreaNull() {
-                this[this.tableV_ReporteInstitucionesFinancieras_RPT.deif_FechaCreaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7080,7 +7036,6 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             tableMapping.ColumnMappings.Add("insf_DescInstitucionFinanc", "insf_DescInstitucionFinanc");
             tableMapping.ColumnMappings.Add("deif_Monto", "deif_Monto");
             tableMapping.ColumnMappings.Add("deif_Comentarios", "deif_Comentarios");
-            tableMapping.ColumnMappings.Add("deif_FechaCrea", "deif_FechaCrea");
             tableMapping.ColumnMappings.Add("deif_Pagado", "deif_Pagado");
             tableMapping.ColumnMappings.Add("per_Apellidos", "per_Apellidos");
             tableMapping.ColumnMappings.Add("cpla_IdPlanilla", "cpla_IdPlanilla");
@@ -7101,7 +7056,7 @@ namespace ERP_GMEDINA.DataSets.ReportesPlanillaDSTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT deif_IdDeduccionInstFinanciera, emp_Id, per_Id, per_Nombres, insf_IdInstitucionFinanciera, insf_DescInstitucionFinanc, deif_Monto, deif_Comentarios, deif_FechaCrea, deif_Pagado, per_Apellidos, cpla_IdPlanilla, cpla_DescripcionPlanilla FROM Plani.V_ReporteInstitucionesFinancieras_RPT";
+            this._commandCollection[0].CommandText = @"SELECT deif_IdDeduccionInstFinanciera, emp_Id, per_Id, per_Nombres, insf_IdInstitucionFinanciera, insf_DescInstitucionFinanc, deif_Monto, deif_Comentarios, deif_Pagado, per_Apellidos, cpla_IdPlanilla, cpla_DescripcionPlanilla FROM Plani.V_ReporteInstitucionesFinancieras_RPT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

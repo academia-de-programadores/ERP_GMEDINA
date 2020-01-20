@@ -23,7 +23,7 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "Apellidos")]
 		public string per_Apellidos { get; set; }
 		[Display(Name = "Fecha Pago")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
 		public System.DateTime dcm_FechaPago { get; set; }
 		[Display(Name = "Monto")]
 		public Nullable<decimal> dcm_Monto { get; set; }
@@ -33,7 +33,7 @@ namespace ERP_GMEDINA.Models
 		public string dcm_CodigoPago { get; set; }
 		public int cpla_IdPlanilla { get; set; }
 		[Display(Name = "Tipo Planilla")]
-		[Required(ErrorMessage = "Campo {0} requerido.")]
+		[Required(ErrorMessage = "No puede dejar campos vacios.")]
 		public string cpla_DescripcionPlanilla { get; set; }
 	}
 }

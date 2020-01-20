@@ -116,8 +116,7 @@ namespace PruebaPlanilla.Controllers
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
             tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
             tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
-            //tbCatalogoDeDeducciones.cde_PorcentajeColaborador = (decimal)((tbCatalogoDeDeducciones.cde_PorcentajeColaborador % 1 == 0) ? Convert.ToDecimal(tbCatalogoDeDeducciones.cde_PorcentajeColaborador + ".00") : Convert.ToDecimal(tbCatalogoDeDeducciones.cde_PorcentajeColaborador));
-            //tbCatalogoDeDeducciones.cde_PorcentajeEmpresa = (decimal)((tbCatalogoDeDeducciones.cde_PorcentajeColaborador % 1 == 0) ? Convert.ToDecimal(tbCatalogoDeDeducciones.cde_PorcentajeEmpresa + ".00") : Convert.ToDecimal(tbCatalogoDeDeducciones.cde_PorcentajeEmpresa));
+
 
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeDeducciones.cde_UsuarioModifica = 1;

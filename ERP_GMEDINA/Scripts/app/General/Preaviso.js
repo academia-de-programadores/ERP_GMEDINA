@@ -1,5 +1,7 @@
 ﻿var IDInactivar = 0;
 
+const btnGuardar = $('#btnCrearPreavisoConfirmar'),
+cargandoCrear = $('#cargandoCrear') //Div que aparecera cuando se le de click en crear
 //
 //OBTENER SCRIPT DE FORMATEO DE FECHA
 //
@@ -108,8 +110,6 @@ function ValidarForm() {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarPreaviso", function () {
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnCrearPreavisoConfirmar").attr("disabled", false);
     //OCULTAR VALIDACION
     $("#Crear #RangoFinCrear").css("display", "none");
     $("#Crear #AsteriscoFin").removeClass("text-danger");
@@ -118,6 +118,8 @@ $(document).on("click", "#btnAgregarPreaviso", function () {
     $("#Crear #prea_RangoFinMeses").val('');
     $("#Crear #prea_DiasPreaviso").val('');
     $("#CrearPreaviso").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     DataAnnotations(true);
 });
 
@@ -130,9 +132,6 @@ $('#btnCrearPreavisoConfirmar').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
     if (Inicio >= 0 && Fin > Inicio && Inicio != "" && Fin != "" && Dias != "") {
-        //BLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-        $("#btnCrearPreavisoConfirmar").attr("disabled", true);
-        //SERIALIZAR EL FORMULARIO
         var data = $("#frmCreatePreaviso").serializeArray();
         $("#Crear #AsteriscoInicio").removeClass("text-danger");
         $("#Crear #AsteriscoFin").removeClass("text-danger");
@@ -154,8 +153,6 @@ $('#btnCrearPreavisoConfirmar').click(function () {
                 });
             }
             else {
-                //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-                $("#btnCrearPreavisoConfirmar").attr("disabled", false);
                 iziToast.error({
                     title: 'Error',
                     message: '¡No se guardó el registro, contacte al administrador!',
@@ -235,6 +232,8 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnEditarPreaviso", function 
                     $("#Editar #prea_DiasPreaviso").val(iter.prea_DiasPreaviso);
                 });
                 $("#EditarPreaviso").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
         });
 });
@@ -244,6 +243,7 @@ $("#btnUpdatePreaviso").click(function () {
     var prea_RangoInicioMeses = $("#Editar #prea_RangoInicioMeses").val();
     var prea_RangoFinMeses = $("#Editar #prea_RangoFinMeses").val();
     var prea_DiasPreaviso = $("#Editar #prea_DiasPreaviso").val();
+    debugger;
     if ( prea_RangoInicioMeses == "" || prea_RangoInicioMeses >= 36) {
         $("#Editar #RangoInicio_Validation_descripcion").css("display", "block");
         $("#Editar #AsteriscoInicio").addClass("text-danger");
@@ -253,6 +253,7 @@ $("#btnUpdatePreaviso").click(function () {
         $("#Editar  #RangoInicio_Validation_descripcion").css("display", "none");
         $("#Editar #AsteriscoInicio").removeClass("text-danger");
     }
+    debugger;
     if (prea_RangoFinMeses == "0" || prea_RangoFinMeses == ""|| prea_RangoFinMeses >= 36) {
             $("#Editar #RangoFin_Validation_descripcion").css("display", "block");
         $("#Editar #AsteriscoFin").addClass("text-danger");
@@ -289,11 +290,10 @@ $("#btnUpdatePreaviso").click(function () {
            $("#Editar #AsteriscoInicio").removeClass("text-danger");
            $("#Editar #AsteriscoFin").removeClass("text-danger");
            $("#Editar #AsteriscoDias").removeClass("text-danger");
-           //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
-           $("#btnConfirmarEditar").attr("disabled", false);
-           //INTERACCION DE MODALES
            $("#EditarPreaviso").modal('hide');
            $("#ConfirmarEdicion").modal({ backdrop: 'static', keyboard: false });
+           $("html, body").css("overflow", "hidden");
+           $("html, body").css("overflow", "scroll");
        }
 });
 
@@ -312,10 +312,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
     $("#CrearPreaviso #Validation_descripcion").css("display", "block");
 
     if ($("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoInicioMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "" || $("#EditarPreaviso #Editar #prea_RangoFinMeses").val() != "0.00" || $("#EditarPreaviso #Editar #prea_DiasPreaviso").val() != "") {
-        //BLOQUEAR EL BOTON DE CONFIRMAR EDICION
-        $("#btnConfirmarEditar").attr("disabled", true);
-
-        //SERIALIZAR EL FORMULARIO
         var data = $("#frmEditPreaviso").serializeArray();
         $.ajax({
             url: "/Preaviso/Editar",
@@ -334,9 +330,6 @@ $(document).on("click", "#btnConfirmarEditar", function () {
                     message: '¡El registro se editó de forma exitosa!',
                 });
             } else {
-                //DESBLOQUEAR EL BOTON DE CONFIRMAR EDICION
-                $("#btnConfirmarEditar").attr("disabled", false);
-                //OCULTAR EL MODAL DE CONFIRMACION
                 $("#ConfirmarEdicion").modal('hide');
                 iziToast.error({
                     title: 'Error',
@@ -349,12 +342,12 @@ $(document).on("click", "#btnConfirmarEditar", function () {
 
 //DESPLEGAR EL MODAL DE INACTIVAR
 $(document).on("click", "#btnInactivarPreaviso", function () {
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnInactivarPreavisoConfirmar").attr("disabled", false);
     //OCULTAR EL MODAL DE EDICION
     $("#EditarPreaviso").modal('hide');
     //MOSTRAR MODAL DE INACTIVACION
     $("#InactivarPreaviso").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //CERRAR EL MODAL DE INACTIVAR
@@ -367,8 +360,6 @@ $(document).on("click", "#btnCerrarInactivar", function () {
 
 //CONFIRMAR INACTIVACION DEL REGISTRO
 $("#btnInactivarPreavisoConfirmar").click(function () {
-    //BLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnInactivarPreavisoConfirmar").attr("disabled", true);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/Preaviso/Inactivar/" + IDInactivar,
@@ -376,8 +367,6 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
         contentType: "application/json; charset=utf-8"
     }).done(function (data) {
         if (data == "error") {
-            //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-            $("#btnInactivarPreavisoConfirmar").attr("disabled", false);
             //Cuando traiga un error del backend al guardar la edicion
             iziToast.error({
                 title: 'Error',
@@ -405,25 +394,20 @@ $("#btnInactivarPreavisoConfirmar").click(function () {
 var activarID = 0;
 $(document).on("click", "#btnActivarPreaviso", function () {
     activarID = $(this).data('id');
-    //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnActivarPreavis").attr("disabled", false);
-    //DESPLEGAR EL MODAL
     $("#frmActivarPreavis").modal({ backdrop: 'static', keyboard: false });
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
 });
 
 //activar ejecutar
 $("#btnActivarPreavis").click(function () {
-    //BLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-    $("#btnActivarPreavis").attr("disabled", true);
+
     $.ajax({
         url: "/Preaviso/Activar/" + activarID,
         method: "POST",
         data: { id: activarID }
     }).done(function (data) {
         if (data == "error") {
-            //DESBLOQUEAR EL BOTON DE CONFIRMAR INACTIVACION
-            $("#btnActivarPreavis").attr("disabled", false);
-            //MOSTRAR MENSAJE DE ERROR
             iziToast.error({
                 title: 'Error',
                 message: '¡No se activó el registro, contacte al administrador!',
@@ -475,6 +459,8 @@ $(document).on("click", "#tblPreaviso tbody tr td #btnDetallePreaviso", function
                     $("#Detalles #prea_FechaModifica").html(FechaModifica);
                 });
                 $("#DetallarPreaviso").modal({ backdrop: 'static', keyboard: false });
+                $("html, body").css("overflow", "hidden");
+                $("html, body").css("overflow", "scroll");
             }
             else {
                 //Mensaje de error si no hay data

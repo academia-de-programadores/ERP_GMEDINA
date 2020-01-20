@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-
         // GET: InstitucionesFinancieras
         public ActionResult Index()
         {
@@ -46,6 +45,21 @@ namespace ERP_GMEDINA.Controllers
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        // GET: InstitucionesFinancieras/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            if (tbInstitucionesFinancieras == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbInstitucionesFinancieras);
+        }
+
         // GET: InstitucionesFinancieras/Create
         public ActionResult Create()
         {
@@ -55,7 +69,6 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
@@ -172,8 +185,8 @@ namespace ERP_GMEDINA.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: InstitucionesFinancieras/Details/5
-        public ActionResult Details(int? id)
+        // GET: InstitucionesFinancieras/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -185,6 +198,17 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             return View(tbInstitucionesFinancieras);
+        }
+
+        // POST: InstitucionesFinancieras/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            db.tbInstitucionesFinancieras.Remove(tbInstitucionesFinancieras);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -1,0 +1,96 @@
+﻿@model ERP_GMEDINA.Models.tbTechosDeducciones
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+	@Html.ActionLink("Regresar", "Index", null, new {@class="pull-right" })
+	<h2>Details</h2>
+</div>
+
+<div class="ibox-content">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_RangoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_RangoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_RangoFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_RangoFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_Porcentaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_Porcentaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tede_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tede_Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
+        </dd>
+
+    </dl>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.tede_Id }, new {@class="btn btn-primary" }) 
+    @Html.ActionLink("Cancelar", "Index", null, new {@class="btn btn-default" })
+</p>
+</div>
+</div>
+</div>

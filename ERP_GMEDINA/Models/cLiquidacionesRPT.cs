@@ -32,14 +32,14 @@ namespace ERP_GMEDINA.Models
         public int cpla_IdPlanilla { get; set; }
 
         [Display(Name = "Planilla")]
-        [Required(ErrorMessage = "Campo {0} requerido.")]
+        [Required(ErrorMessage = "No puede dejar campos vacios.")]
         public string cpla_DescripcionPlanilla { get; set; }
 
         [Display(Name = "Fecha Ingreso")]
         public System.DateTime hliq_fechaIngreso { get; set; }
 
         [Display(Name = "Fecha Liquidacion")]
-        [Required(ErrorMessage = "Campo {0} requerido.")]
+        [Required(ErrorMessage = "No puede dejar campos vacios.")]
         public System.DateTime hliq_fechaLiquidacion { get; set; }
 
         [Display(Name = "Porcentaje Liquidacion")]

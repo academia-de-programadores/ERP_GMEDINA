@@ -28,14 +28,14 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Porcentaje Colaborador")]
         [Required(ErrorMessage = "Campo {0} requerido")]
         [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales")]     
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales, Ejemplo(2.00, 12.20, etc).")]     
         public decimal cde_PorcentajeColaborador { get; set; }
 
         
         [Display(Name = "Porcentaje Empresa")]
         [Required(ErrorMessage = "Campo {0} requerido")]
         [Range(0, 99.99, ErrorMessage = "El monto {0} debe estar entre {1} y {2}.")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales, Ejemplo(2.00, 12.20, etc).")]
         public decimal cde_PorcentajeEmpresa { get; set; }
 
         [Display(Name = "Creado por")]

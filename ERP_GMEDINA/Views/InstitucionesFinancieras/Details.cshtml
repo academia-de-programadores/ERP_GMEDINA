@@ -1,43 +1,55 @@
 ﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
+
 @{
     ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
+
 <div class="col-lg-12">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default pull-right" })
             <h2>Detalle de Institución Financiera</h2>
         </div>
+
         <div class="ibox-content">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @width = "100" })
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.insf_DescInstitucionFinanc)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.insf_Contacto)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Contacto)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.insf_Telefono)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Telefono)
-                </dd>
-                <dt>
-                    @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @width = 150 })
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Correo)
-                </dd>
-            </dl>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.LabelFor(model => model.insf_DescInstitucionFinanc, htmlAttributes: new { @width = "100" })
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_DescInstitucionFinanc)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.insf_Contacto)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Contacto)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.insf_Telefono)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Telefono)
+                    </dd>
+
+                    <dt>
+                        @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @width = 150 })
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.insf_Correo)
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
+
+
 
 
     <div class="ibox float-e-margins">
@@ -70,5 +82,12 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 </div>

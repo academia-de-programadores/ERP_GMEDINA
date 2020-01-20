@@ -80,15 +80,15 @@
                     <div class="ibox-tools">
                         <button type="button" class="btn btn-primary btn-w-m" id="btnPlanilla">Generar planilla</button>
                         <div id="dvjson"></div>
-						<div class="modal inmodal fade" id="Modal" tabindex="-1" role="dialog" aria-hidden="true">
-							<div id="Cargando" style="display:none" class="sk-spinner sk-spinner-wave">
-								<div class="sk-rect1"></div>
-								<div class="sk-rect2"></div>
-								<div class="sk-rect3"></div>
-								<div class="sk-rect4"></div>
-								<div class="sk-rect5"></div>
-							</div>
-						</div>
+                        <div class="modal inmodal fade" id="Modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div id="Cargando" style="display:none" class="sk-spinner sk-spinner-wave">
+                                <div class="sk-rect1"></div>
+                                <div class="sk-rect2"></div>
+                                <div class="sk-rect3"></div>
+                                <div class="sk-rect4"></div>
+                                <div class="sk-rect5"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -120,7 +120,7 @@
                                 </tr>
                             }
                         </tbody>
-                       
+
                     </table>
                 </div>
             </div>
@@ -130,22 +130,22 @@
 
 @* Modal de confirmación generar planilla *@
 @*<div class="modal fade" id="confirmarGenerarPlanilla" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <h4 class="modal-title">Generar planilla</h4>
-            </div>
-            <div class="modal-body" id="Inactivar">
-                ¿Está seguro que desea generar planilla?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger " id="btnConfigurarPlanilla">Confirmar</button>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title">Generar planilla</h4>
+                </div>
+                <div class="modal-body" id="Inactivar">
+                    ¿Está seguro que desea generar planilla?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger " id="btnConfigurarPlanilla">Confirmar</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 <div class="modal fade" id="ConfigurarGenerarPlanilla" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog">
@@ -176,7 +176,7 @@
                                 <div class="form-group">
                                     <input type="checkbox" checked class="i-checks" id="Excel" name="Excel" /> &nbsp;
                                     Excel
-                                </div>                                
+                                </div>
                                 <div class="form-group">
                                     <input type="checkbox" class="i-checks" id="CSV" name="CSV" /> &nbsp;
                                     CSV
@@ -203,51 +203,51 @@
                         </div>
                     </div>
                     @*<div class="row">
-                        <div class="col-lg-12">
-                            <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>Configurar reportes</h5>
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
+                            <div class="col-lg-12">
+                                <div class="ibox">
+                                    <div class="ibox-title">
+                                        <h5>Configurar reportes</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <select name="ColumnasReportes" class="form-control dual_select" multiple>
+                                            <option selected value="Cod. Colaborador">Cod. Colaborador</option>
+                                            <option selected value="Nombre Completo">Nombre Completo</option>
+                                            <option selected value="Salario Base">Salario Base</option>
+                                            <option value="Horas Trabajadas">Horas Trabajadas</option>
+                                            <option value="Salario por Hora">Salario por Hora</option>
+                                            <option value="Total Salario ">Total Salario </option>
+                                            <option value="Tipo de Planilla">Tipo de Planilla</option>
+                                            <option value="Porcentaje de Comision">Porcentaje de Comision</option>
+                                            <option value="Total Ventas">Total Ventas</option>
+                                            <option value="Bulgaria">Total Comisiones</option>
+                                            <option value="Horas al 25%">Horas al 25%</option>
+                                            <option value="Horas al 50%">Horas al 50%</option>
+                                            <option value="Horas al 75%">Horas al 75%</option>
+                                            <option value="Total Ingresos al 25%">Total Ingresos al 25%</option>
+                                            <option value="Total Ingresos al 50%">Total Ingresos al 50%</option>
+                                            <option value="Total Ingresos al 75%">Total Ingresos al 75%</option>
+                                            <option value="Total Bonificaciones">Total Bonificaciones</option>
+                                            <option selected value="Total Ingresos">Total Ingresos</option>
+                                            <option value="Total ISR">Total ISR</option>
+                                            <option value="Total IHSS">Total IHSS</option>
+                                            <option value="Total RAP">Total RAP</option>
+                                            <option value="Total INFOP">Total INFOP</option>
+                                            <option value="Total IV">Total IV</option>
+                                            <option value="Total AFP">Total AFP</option>
+                                            <option value="Total Instituciones Financieras">Total Instituciones Financieras</option>
+                                            <option value="Otra Deducciones">Otra Deducciones</option>
+                                            <option selected value="Canada">Total Deducciones</option>
+                                            <option selected value="Canada">Total a Pagar</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="ibox-content">
-                                    <select name="ColumnasReportes" class="form-control dual_select" multiple>
-                                        <option selected value="Cod. Colaborador">Cod. Colaborador</option>
-                                        <option selected value="Nombre Completo">Nombre Completo</option>
-                                        <option selected value="Salario Base">Salario Base</option>
-                                        <option value="Horas Trabajadas">Horas Trabajadas</option>
-                                        <option value="Salario por Hora">Salario por Hora</option>
-                                        <option value="Total Salario ">Total Salario </option>
-                                        <option value="Tipo de Planilla">Tipo de Planilla</option>
-                                        <option value="Porcentaje de Comision">Porcentaje de Comision</option>
-                                        <option value="Total Ventas">Total Ventas</option>
-                                        <option value="Bulgaria">Total Comisiones</option>
-                                        <option value="Horas al 25%">Horas al 25%</option>
-                                        <option value="Horas al 50%">Horas al 50%</option>
-                                        <option value="Horas al 75%">Horas al 75%</option>
-                                        <option value="Total Ingresos al 25%">Total Ingresos al 25%</option>
-                                        <option value="Total Ingresos al 50%">Total Ingresos al 50%</option>
-                                        <option value="Total Ingresos al 75%">Total Ingresos al 75%</option>
-                                        <option value="Total Bonificaciones">Total Bonificaciones</option>
-                                        <option selected value="Total Ingresos">Total Ingresos</option>
-                                        <option value="Total ISR">Total ISR</option>
-                                        <option value="Total IHSS">Total IHSS</option>
-                                        <option value="Total RAP">Total RAP</option>
-                                        <option value="Total INFOP">Total INFOP</option>
-                                        <option value="Total IV">Total IV</option>
-                                        <option value="Total AFP">Total AFP</option>
-                                        <option value="Total Instituciones Financieras">Total Instituciones Financieras</option>
-                                        <option value="Otra Deducciones">Otra Deducciones</option>
-                                        <option selected value="Canada">Total Deducciones</option>
-                                        <option selected value="Canada">Total a Pagar</option>
-                                    </select>
-                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
                 </form>
             </div>
             <div class="modal-footer">
