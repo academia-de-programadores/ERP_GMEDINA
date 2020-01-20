@@ -86,7 +86,7 @@ function spinner() {
 
 //Activar
 $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
-
+    document.getElementById("btnActivarRegistroAFP").disabled = false;
     var ID = $(this).closest('tr').data('id');
 
     var ID = $(this).attr('afpid');
@@ -96,7 +96,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnActivarAFP", function () {
 });
 
 $("#btnActivarRegistroAFP").click(function () {
-
+    document.getElementById("btnActivarRegistroAFP").disabled = true;
     let ID = localStorage.getItem('id')
 
     $.ajax({
