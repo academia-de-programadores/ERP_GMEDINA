@@ -129,7 +129,7 @@ function MsgInfo(Titulo, Mensajes) {
 }
 function MsgSuccess(Titulo, Mensajes) {
     iziToast.success({
-        title: Titulo,
+        title: "Éxito",//Titulo,
         message: Mensajes,
     });
 }
