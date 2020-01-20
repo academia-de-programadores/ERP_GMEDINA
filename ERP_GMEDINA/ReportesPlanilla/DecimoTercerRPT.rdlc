@@ -64,6 +64,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -559,6 +560,7 @@
           <TablixMembers>
             <TablixMember>
               <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
@@ -765,7 +767,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
-          <Top>0.49374cm</Top>
+          <Top>0.49373cm</Top>
           <Left>17.10054cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
@@ -806,7 +808,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>1.49916cm</Top>
+          <Top>1.49915cm</Top>
           <Left>20.64596cm</Left>
           <Height>0.6cm</Height>
           <Width>3.63599cm</Width>
@@ -840,8 +842,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox12</rd:DefaultName>
-          <Top>1.49916cm</Top>
-          <Left>17.10054cm</Left>
+          <Top>1.49915cm</Top>
+          <Left>17.41804cm</Left>
           <Height>0.6cm</Height>
           <Width>3.36903cm</Width>
           <ZIndex>2</ZIndex>
