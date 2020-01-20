@@ -1,0 +1,91 @@
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_RPT_HistorialSalidas
+@{
+    ViewBag.Title = "Reporte de Salidas";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+
+@using (Html.BeginForm("HistorialSalidasRPT", "ReportesRRHH", FormMethod.Post, new { id = "" }))
+{
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Reportes de Salidas</h5>
+                    <div class="ibox-tools">
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="font-normal">Tipo Salidas</label>
+
+                                @Html.DropDownList("tsal_Id", (IEnumerable<SelectListItem>)ViewBag.TipoSalida, "Seleccione una opción", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.tsal_Id, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="font-normal">Fecha Inicio</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.FechaSalida, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "FechaSalida", @id = "FechaSalida" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FechaSalida, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="font-normal">Fecha Fin</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>@Html.EditorFor(model => model.fechafin, new { htmlAttributes = new { @class = "form-control", @type = "date", @name = "fechafin", @id = "fechafin" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.fechafin, "", new { @class = "text-danger", @name = "fechafin", @id = "fechafin" })
+                            </div>
+
+                        </div>
+                    <br>
+                    <br>
+                   <br>
+                    <br>
+                    <div class="col-lg-offset-5">
+                        <button type="submit" class="btn btn-primary btn-sm" id="btnPrevisualizarDeducciones">Previsualizar</button>
+
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<br />
+
+@{
+    string visibilidadPreview = ViewBag.ReportViewer == null ? "none" : "";
+}
+
+<div class="row" style="display:@visibilidadPreview;">
+    <div class="col-lg-12">
+        <div class="float-e-margins">
+            <div class="ibox-title">
+                <h5>Previsualización de reporte</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (ViewBag.ReportViewer != null)
+                    {
+                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

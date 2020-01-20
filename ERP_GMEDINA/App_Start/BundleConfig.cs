@@ -137,7 +137,7 @@ namespace ERP_GMEDINA
             bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
                       "~/Content/plugins/dataTables/datatables.min.css"));
 
-            // dataTables 
+            // dataTables
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
@@ -150,7 +150,7 @@ namespace ERP_GMEDINA
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurationsRPT.js"));
 
-            // jeditable 
+            // jeditable
             bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
                        "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
 
