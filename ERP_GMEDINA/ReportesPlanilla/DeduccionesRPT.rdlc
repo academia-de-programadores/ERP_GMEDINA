@@ -6,31 +6,31 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.84634cm</Width>
+              <Width>2.85199cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.52884cm</Width>
+              <Width>2.53449cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.07011cm</Width>
+              <Width>4.07576cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.82746cm</Width>
+              <Width>2.83311cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -70,7 +70,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -681,8 +680,9 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>ReportesPlanillaDS</DataSetName>
         <Top>0.49389cm</Top>
+        <Left>0.92604cm</Left>
         <Height>1.2cm</Height>
-        <Width>24.91695cm</Width>
+        <Width>24.96779cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -989,9 +989,9 @@
     </PageFooter>
     <PageHeight>25cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>1cm</LeftMargin>
+    <LeftMargin>0cm</LeftMargin>
     <RightMargin>1cm</RightMargin>
-    <TopMargin>1cm</TopMargin>
+    <TopMargin>0cm</TopMargin>
     <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
