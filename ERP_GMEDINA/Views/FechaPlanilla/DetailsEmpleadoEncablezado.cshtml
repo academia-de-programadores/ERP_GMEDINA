@@ -1,0 +1,33 @@
+﻿@using ReportViewerForMvc;
+@model ERP_GMEDINA.Models.V_Ingresos_RPT
+
+@{
+    ViewBag.Title = "Reporte Historial de Ingresos";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row" style="">
+    <div class="col-lg-12">
+        <div class="float-e-margins">
+            <div class="ibox-title">
+                <h5>Previsualización de reporte</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (ViewBag.ReportViewer != null)
+                    {
+                        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+
+
