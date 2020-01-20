@@ -515,7 +515,10 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!dcm_Monto.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>'L'0.00;('L'0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -531,8 +534,10 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-HN</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -562,7 +567,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
-        <Top>5.0301cm</Top>
+        <Top>0.03528cm</Top>
+        <Left>0.05817cm</Left>
         <Height>1.2cm</Height>
         <Width>26.35092cm</Width>
         <Style>
@@ -571,41 +577,12 @@
           </Border>
         </Style>
       </Tablix>
-      <Image Name="Image5">
-        <Source>Embedded</Source>
-        <Value>image11</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>0.01463cm</Top>
-        <Height>4.98019cm</Height>
-        <Width>10.43286cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
-      <Image Name="Image6">
-        <Source>Embedded</Source>
-        <Value>payrollicon</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>0.33897cm</Top>
-        <Left>22.97861cm</Left>
-        <Height>1.92246cm</Height>
-        <Width>1.93834cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
       <Line Name="Line1">
-        <Top>7.85486cm</Top>
-        <Left>0.83683cm</Left>
+        <Top>2.86004cm</Top>
+        <Left>0.895cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -636,11 +613,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>8.13125cm</Top>
-        <Left>4.30287cm</Left>
+        <Top>3.13643cm</Top>
+        <Left>4.36104cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -652,11 +629,51 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3.4375in</Height>
+    <Height>1.48008in</Height>
     <Style />
   </Body>
   <Width>10.39728in</Width>
   <Page>
+    <PageHeader>
+      <Height>4.98019cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Image Name="Image5">
+          <Source>Embedded</Source>
+          <Value>image11</Value>
+          <Sizing>FitProportional</Sizing>
+          <Left>0cm</Left>
+          <Height>4.98019cm</Height>
+          <Width>10.43286cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Image Name="Image6">
+          <Source>Embedded</Source>
+          <Value>payrollicon</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.32434cm</Top>
+          <Left>22.97861cm</Left>
+          <Height>1.92246cm</Height>
+          <Width>1.93834cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <PageFooter>
       <Height>2.54cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
