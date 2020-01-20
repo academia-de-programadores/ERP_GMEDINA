@@ -7,12 +7,18 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Rotativa;
+using System.Data.SqlClient;
+using Microsoft.Reporting.WebForms;
+using System.Web.UI.WebControls;
+using System.Configuration;
+using ERP_GMEDINA.DataSets;
 
 namespace ERP_GMEDINA.Controllers
 {
     public class FechaPlanillaController : Controller
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
+        ReportesPlanillaDS ds = new ReportesPlanillaDS();
 
         public ActionResult Index()
         {
@@ -66,40 +72,47 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
-        [HttpPost]
+        [Route("FechaPlanilla/{id}")]
         public ActionResult DetailsEmpleadoEncablezado(int id)
         {
+            //Obtener de la sesion el id de la planilla y el año para hacer la filtracion
             ComprobantePagoSessionViewModel sessionComprobantePago = Session["HistorialDePago"] as ComprobantePagoSessionViewModel;
-            //Filtrar Historial de Ingresos
-            var historialDeducciones = db.V_Plani_HistorialDeducciones
-                .Where(x => x.emp_Id == id && x.cpla_IdPlanilla == sessionComprobantePago.Id && x.hipa_FechaPago.Year == sessionComprobantePago.Anio).
-                Select(x => new V_Plani_HistorialDeduccionesViewModel
-                {
-                    AFP = x.hipa_AFP,
-                    descripcion = x.cde_DescripcionDeduccion,
-                    FechaPago = x.hipa_FechaPago,
-                    total = x.hidp_Total ?? 0,
-                    TotalDeducciones = x.TotalDeducciones ?? 0,
-                    totalISR = x.hipa_TotalISR
-                });
 
-            //Filtrar Historial de Deducciones
-            var historialIngresos = db.V_Plani_HistorialIngreso.Where(x => x.cpla_IdPlanilla == sessionComprobantePago.Id && x.hipa_FechaPago.Year == sessionComprobantePago.Anio && x.emp_Id == id)
-                .Select(x => new V_Plani_HistorialIngresoViewModel
-                {
-                    total = x.hip_TotalPagar,
-                    descripcion = x.cin_DescripcionIngreso,
-                    fechaPago = x.hipa_FechaPago
-                });
+            #region Configuracion de Reportes
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = false;
+            reportViewer.Width = Unit.Pixel(1050);
+            reportViewer.Height = Unit.Pixel(500);
+            reportViewer.BackColor = System.Drawing.Color.White;
+            var connectionString = ConfigurationManager.ConnectionStrings["ERP_GMEDINAConnectionString"].ConnectionString;
+            SqlConnection conx = new SqlConnection(connectionString);
+            #endregion
 
-
-
-            //string NombrePdf = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
-            string NombrePdf = "comprobante-de-pago";
-            return new ActionAsPdf("Report")
+            if (sessionComprobantePago != null)
             {
-                FileName = $"{NombrePdf}.pdf"
-            };
+                int anio = sessionComprobantePago.Anio;
+                int planilla = sessionComprobantePago.Id;
+
+                //comando para el dataAdapter
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "SELECT * FROM [Plani].[V_Plani_HistorialIngreso] WHERE emp_Id = @id AND cpla_IdPlanilla = @planilla AND YEAR(hipa_FechaPago) = @anio";
+
+                command.Parameters.AddWithValue("@id", SqlDbType.Int).Value = id;
+                command.Parameters.AddWithValue("@planilla", SqlDbType.Int).Value = planilla;
+                command.Parameters.AddWithValue("@anio", SqlDbType.Int).Value = anio;
+                command.Connection = conx;
+                SqlDataAdapter adp = new SqlDataAdapter(command);
+                //adp.Fill(ds, ds.V_Ingresos_RPT.TableName);
+                adp.Fill(ds, "V_Plani_HistorialIngreso");
+                reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"ReportesPlanilla\HistorialIngresosRPT.rdlc";
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ReportesPlanillaDS", ds.Tables["V_Plani_HistorialIngreso"]));
+                ViewBag.ReportViewer = reportViewer;
+                conx.Close();
+            }
+
+            return View();
+
 
         }
     }
