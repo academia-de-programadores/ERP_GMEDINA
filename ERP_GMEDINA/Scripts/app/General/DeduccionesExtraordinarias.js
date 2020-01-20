@@ -212,8 +212,9 @@ $(btnAgregar).click(function () {
 
             //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
             if (data != "error") {
-                location.href = "DeduccionesExtraordinarias/Index"
+
                 cargarGridDeducciones();
+                window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -226,8 +227,6 @@ $(btnAgregar).click(function () {
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoCrear();
         });
 
     }
@@ -308,6 +307,19 @@ function validaciones(equipoEmpId,
     return todoBien;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function mostrarCargandoEditar() {
+    btnEditar.hide();
+    cargandoEditar.html(spinner());
+    cargandoEditar.show();
+}
+
+function ocultarCargandoEditar() {
+    btnEditar.show();
+    cargandoEditar.html('');
+    cargandoEditar.hide();
+}
 
 //Editar
 $(btnEditar).click(function () {
@@ -319,7 +331,7 @@ $(btnEditar).click(function () {
         Cuota
     )) {
         console.log('Paso las validaciones')
-        mostrarCargandoCrear();
+        mostrarCargandoEditar();
 
         var data = $("#frmEditar").serializeArray();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -333,7 +345,7 @@ $(btnEditar).click(function () {
             if (data != "error") {
 
                 cargarGridDeducciones();
-                location.href = "DeduccionesExtraordinarias/Index"
+                window.location.href = '/DeduccionesExtraordinarias/Index';
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
                     title: 'Exito',
@@ -347,7 +359,6 @@ $(btnEditar).click(function () {
                 });
             }
 
-            ocultarCargandoCrear();
         });
 
     }

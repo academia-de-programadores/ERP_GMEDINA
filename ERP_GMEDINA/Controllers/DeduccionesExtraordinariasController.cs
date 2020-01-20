@@ -115,9 +115,8 @@ namespace ERP_GMEDINA.Controllers
 
 				//Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
 				Response = "Exito";
-				return RedirectToAction("Index");
 
-			}
+            }
 			else
 			{
 				//Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
@@ -203,7 +202,6 @@ namespace ERP_GMEDINA.Controllers
 
 				//Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
 				Response = "Exito";
-				return RedirectToAction("Index");
 			}
 			else
 			{
