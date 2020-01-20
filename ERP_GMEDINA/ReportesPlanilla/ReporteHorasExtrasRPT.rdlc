@@ -868,7 +868,7 @@
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
     <LeftMargin>0cm</LeftMargin>
-    <RightMargin>0cm</RightMargin>
+    <RightMargin>1in</RightMargin>
     <TopMargin>0cm</TopMargin>
     <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
