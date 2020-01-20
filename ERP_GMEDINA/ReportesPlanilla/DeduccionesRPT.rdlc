@@ -844,10 +844,11 @@
             </Border>
           </Style>
         </Image>
-        <Image Name="Image5">
+        <Image Name="Image7">
           <Source>Embedded</Source>
           <Value>image11</Value>
           <Sizing>FitProportional</Sizing>
+          <Top>0.03528cm</Top>
           <Height>3.55551cm</Height>
           <Width>10.43286cm</Width>
           <ZIndex>3</ZIndex>

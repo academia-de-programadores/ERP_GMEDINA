@@ -4,6 +4,7 @@
     <ReportItems>
       <Line Name="Line1">
         <Top>2.1082cm</Top>
+        <Left>0.60533cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <Style>
@@ -37,7 +38,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>2.38459cm</Top>
-        <Left>3.46604cm</Left>
+        <Left>4.07137cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>1</ZIndex>
@@ -93,13 +94,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.9947cm</Width>
+              <Width>4.19925cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.9947cm</Width>
+              <Width>4.19925cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.9947cm</Width>
+              <Width>4.19925cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -323,7 +324,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>5.9947cm</Size>
+                <Size>4.19925cm</Size>
                 <CellContents>
                   <Textbox Name="hipa_IdHistorialDePago">
                     <CanGrow>true</CanGrow>
@@ -360,7 +361,7 @@
         <Top>0.07056cm</Top>
         <Left>2.37213cm</Left>
         <Height>1.23528cm</Height>
-        <Width>23.9788cm</Width>
+        <Width>16.79698cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -372,7 +373,7 @@
     <Height>1.27387in</Height>
     <Style />
   </Body>
-  <Width>10.37438in</Width>
+  <Width>7.54689in</Width>
   <Page>
     <PageHeader>
       <Height>3.55551cm</Height>
@@ -384,7 +385,7 @@
           <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.32434cm</Top>
-          <Left>22.97861cm</Left>
+          <Left>15.52074cm</Left>
           <Height>1.92246cm</Height>
           <Width>1.93834cm</Width>
           <Style>
@@ -440,7 +441,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox8</rd:DefaultName>
           <Top>0.46441cm</Top>
-          <Left>18.02395cm</Left>
+          <Left>11.50572cm</Left>
           <Height>0.6cm</Height>
           <Width>7.18141cm</Width>
           <Style>

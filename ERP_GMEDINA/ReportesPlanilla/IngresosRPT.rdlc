@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>2.06217cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.93295cm</Width>
@@ -15,28 +15,28 @@
               <Width>2.93295cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>1.6897cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.80373cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>2.32981cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>2.66675cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.46407cm</Width>
+              <Width>2.09566cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>2.56454cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.93295cm</Width>
+              <Width>1.69376cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.40183cm</Width>
+              <Width>2.79898cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -148,7 +148,18 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Cod. Ingreso</Value>
+                              <Value>Cod. </Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Ingreso</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -762,22 +773,75 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ReportesPlanillaDS</DataSetName>
+        <Top>0.10583cm</Top>
+        <Left>0.81509cm</Left>
         <Height>1.2cm</Height>
-        <Width>33.13323cm</Width>
+        <Width>27.57101cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line1">
+        <Top>1.83561cm</Top>
+        <Left>1.28081cm</Left>
+        <Height>0cm</Height>
+        <Width>8.40021cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Firma</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox10</rd:DefaultName>
+        <Top>2.012cm</Top>
+        <Left>4.64003cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>0.47244in</Height>
+    <Height>1.02835in</Height>
     <Style />
   </Body>
-  <Width>13.04458in</Width>
+  <Width>11.69964in</Width>
   <Page>
     <PageHeader>
-      <Height>5.15658cm</Height>
+      <Height>3.55551cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -810,10 +874,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox26</rd:DefaultName>
-          <Top>3.8308cm</Top>
-          <Left>11.49046cm</Left>
+          <Top>2.76055cm</Top>
           <Height>0.79496cm</Height>
-          <Width>10.26566cm</Width>
+          <Width>29.71709cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -824,12 +887,14 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Image Name="Image5">
+        <Image Name="Image6">
           <Source>Embedded</Source>
-          <Value>image11</Value>
+          <Value>payrollicon</Value>
           <Sizing>FitProportional</Sizing>
-          <Height>4.98019cm</Height>
-          <Width>10.43286cm</Width>
+          <Top>0.46888cm</Top>
+          <Left>25.58712cm</Left>
+          <Height>1.92246cm</Height>
+          <Width>1.93834cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -837,14 +902,12 @@
             </Border>
           </Style>
         </Image>
-        <Image Name="Image6">
+        <Image Name="Image7">
           <Source>Embedded</Source>
-          <Value>payrollicon</Value>
+          <Value>image11</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.38124cm</Top>
-          <Left>29.02187cm</Left>
-          <Height>1.92246cm</Height>
-          <Width>1.93834cm</Width>
+          <Height>3.55551cm</Height>
+          <Width>10.43286cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -852,6 +915,40 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Sistema de Planillas</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox7</rd:DefaultName>
+          <Top>2.16055cm</Top>
+          <Height>0.6cm</Height>
+          <Width>29.71709cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -860,7 +957,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.24756cm</Height>
+      <Height>0.96879cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -879,61 +976,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox24</rd:DefaultName>
-          <Top>0.87117cm</Top>
-          <Left>29.32955cm</Left>
+          <Top>0.17639cm</Top>
+          <Left>26.48277cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Line Name="Line1">
-          <Top>1.47117cm</Top>
-          <Left>1.65432cm</Left>
-          <Height>0cm</Height>
-          <Width>8.40021cm</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>Solid</Style>
-            </Border>
-          </Style>
-        </Line>
-        <Textbox Name="Textbox10">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Firma</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox10</rd:DefaultName>
-          <Top>1.64756cm</Top>
-          <Left>5.01354cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -953,10 +999,10 @@
     </PageFooter>
     <PageHeight>21cm</PageHeight>
     <PageWidth>29.7cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
