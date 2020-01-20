@@ -691,7 +691,7 @@
       </Tablix>
       <Line Name="Line1">
         <Top>2.92834cm</Top>
-        <Left>1.19062cm</Left>
+        <Left>0.26458cm</Left>
         <Height>0cm</Height>
         <Width>8.40021cm</Width>
         <ZIndex>1</ZIndex>
@@ -726,7 +726,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>3.10473cm</Top>
-        <Left>4.46681cm</Left>
+        <Left>3.54077cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
         <ZIndex>2</ZIndex>
@@ -783,7 +783,7 @@
           <Top>3.7319cm</Top>
           <Left>0.26458cm</Left>
           <Height>0.6cm</Height>
-          <Width>25.89384cm</Width>
+          <Width>24.91695cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -817,7 +817,7 @@
           <Top>3.02607cm</Top>
           <Left>0.26458cm</Left>
           <Height>0.6cm</Height>
-          <Width>25.89384cm</Width>
+          <Width>24.91695cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>

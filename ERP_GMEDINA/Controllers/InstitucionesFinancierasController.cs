@@ -17,7 +17,6 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-
         // GET: InstitucionesFinancieras
         public ActionResult Index()
         {
@@ -44,6 +43,21 @@ namespace ERP_GMEDINA.Controllers
                                            /*.Where(x => x.aces_Activo == true)*/.ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbInstitucionesFinancieras1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        // GET: InstitucionesFinancieras/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            if (tbInstitucionesFinancieras == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbInstitucionesFinancieras);
         }
 
         // GET: InstitucionesFinancieras/Create
@@ -173,8 +187,8 @@ namespace ERP_GMEDINA.Controllers
             return View(tbInstitucionesFinancieras);
         }
 
-        // GET: InstitucionesFinancieras/Details/5
-        public ActionResult Details(int? id)
+        // GET: InstitucionesFinancieras/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -186,6 +200,17 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             return View(tbInstitucionesFinancieras);
+        }
+
+        // POST: InstitucionesFinancieras/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            db.tbInstitucionesFinancieras.Remove(tbInstitucionesFinancieras);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

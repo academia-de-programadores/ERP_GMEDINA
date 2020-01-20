@@ -84,8 +84,6 @@ function cargarGridDeducciones() {
 
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarCrear").click(function () {
-    document.getElementById('Validation_PorcentajeEmpresa').innerHTML = '';
-    document.getElementById('Validation_PorcentajeColaborador').innerHTML = '';
     $("#Crear #Validation_descipcionA").css("display", "none");
     $("#Crear #Validation_descipcion2A").css("display", "none");
     $("#Crear #Validation_descipcion3A").css("display", "none");
@@ -98,6 +96,7 @@ $("#btnCerrarCrear").click(function () {
     $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
     $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
     $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
+    ocultarCargandoCrear();
 });
 
 
@@ -115,6 +114,7 @@ $("#IconCerrarCreate").click(function () {
     $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
     $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
     $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
+    ocultarCargandoCrear();
 });
 
 
@@ -138,15 +138,14 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarCatalogoDeducciones").modal({ backdrop: 'static', keyboard: false });
-    $('#btnCreateRegistroDeduccion').attr('disabled', false);
-    //$("html, body").css("overflow", "hidden");
-    //$("html, body").css("overflow", "scroll");
+    $("html, body").css("overflow", "hidden");
+    $("html, body").css("overflow", "scroll");
     $("#Crear #tde_IdTipoDedu").val("0");
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccion').click(function () {
-    $('#btnCreateRegistroDeduccion').attr('disabled', true);
+
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var cde_DescripcionDeduccionA = $("#Crear #cde_DescripcionDeduccionA").val();
     var cde_PorcentajeColaboradorA = $("#Crear #cde_PorcentajeColaboradorA").val();
@@ -156,8 +155,6 @@ $('#btnCreateRegistroDeduccion').click(function () {
     var Correcto2 = true;
     var Correcto3 = true;
     var Correcto4 = true;
-    var colaborador = cde_PorcentajeColaboradorA.split(".");
-    var empresa = cde_PorcentajeEmpresaA.split(".");
 
     if (cde_DescripcionDeduccionA == "" || cde_DescripcionDeduccionA == null || cde_DescripcionDeduccionA == undefined) {
         $("#Crear #cde_DescripcionDeduccionA").val("");
@@ -173,7 +170,6 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #Validation_descipcion2A").css("display", "");
         $("#Crear #tde_IdTipoDedu").val("0");
         $("#Crear #AsteriscoTipoDedu").addClass("text-danger");
-        $('#btnCreateRegistroDeduccion').attr('disabled', false);
         Correcto2 = false;
     }
     else {
@@ -182,100 +178,32 @@ $('#btnCreateRegistroDeduccion').click(function () {
         Correcto2 = true;
     }
 
-    //if (cde_PorcentajeColaboradorA == "" || cde_PorcentajeColaboradorA == 0 || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA < 0) {
-    //    $("#Crear #Validation_descipcion3A").css("display", "");
-    //    $("#Crear #c_Validation_decimal1").css("display", "none");
-    //    $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-    //    Correcto3 = false;
-    //}
-    //else {
-    //    if (colaborador[1] == null && cde_PorcentajeColaboradorA != 0
-    //        || colaborador[1] == undefined && cde_PorcentajeColaboradorA != 0) {
-    //        $("#Crear #c_Validation_decimal1").css("display", "");
-    //        $("#Crear #Validation_descipcion3A").css("display", "none");
-    //        $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-    //        Correcto3 = false;
-    //    }else{
-    //        $("#Crear #c_Validation_decimal1").css("display", "none");
-    //        $("#Crear #Validation_descipcion3A").css("display", "none");
-    //        $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
-    //        Correcto3 = true;
-    //    }
-    //}
-
-    //.innerHTML= 'Nuevo valor';
-    if (cde_PorcentajeColaboradorA == "" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined) {
-        //$("#Validation_PorcentajeColaborador").innerHTML = 'Campo Porcentaje Colaborador requerido';
-        document.getElementById('Validation_PorcentajeColaborador').innerHTML = 'Campo Porcentaje Colaborador requerido';
+    if (cde_PorcentajeColaboradorA == "" || cde_PorcentajeColaboradorA == "0" || cde_PorcentajeColaboradorA == null || cde_PorcentajeColaboradorA == undefined || cde_PorcentajeColaboradorA < 0) {
+        $("#Crear #Validation_descipcion3A").css("display", "");
         $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
         Correcto3 = false;
-    } else {
-        if (cde_PorcentajeColaboradorA <= 0) {
-            document.getElementById('Validation_PorcentajeColaborador').innerHTML = 'El campo Porcentaje Colaborador debe ser mayor que cero';
-            $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-            Correcto3 = false;
-        } else {
-            if (colaborador[1] == null || colaborador[1] == undefined) {
-                document.getElementById('Validation_PorcentajeColaborador').innerHTML = 'Número decimal válido con un máximo de 2 decimales';
-                $("#Crear #AsteriscoPorcentajeColaborador").addClass("text-danger");
-                Correcto3 = false;
-            } else {
-                document.getElementById('Validation_PorcentajeColaborador').innerHTML = '';
-                Correcto3 = true;
-            }
-        }
-    }
-
-    if (cde_PorcentajeEmpresaA == "" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined) {
-        //$("#Validation_PorcentajeColaborador").innerHTML = 'Campo Porcentaje Colaborador requerido';
-        document.getElementById('Validation_PorcentajeEmpresa').innerHTML = 'Campo Porcentaje Colaborador requerido';
-        $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-        Correcto3 = false;
-    } else {
-        if (cde_PorcentajeEmpresaA <= 0) {
-            document.getElementById('Validation_PorcentajeEmpresa').innerHTML = 'El campo Porcentaje Colaborador debe ser mayor que cero';
-            $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-            Correcto3 = false;
-        } else {
-            if (empresa[1] == null || empresa[1] == undefined) {
-                document.getElementById('Validation_PorcentajeEmpresa').innerHTML = 'Número decimal válido con un máximo de 2 decimales';
-                $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-                Correcto3 = false;
-            } else {
-                document.getElementById('Validation_PorcentajeEmpresa').innerHTML = '';
-                Correcto3 = true;
-            }
-        }
-    }
-
-
-    //if (cde_PorcentajeEmpresaA == "" || cde_PorcentajeEmpresaA == "0" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA < 0) {
-    //    $("#Crear #Validation_descipcion4A").css("display", "");
-    //    $("#Crear #c_Validation_decimal2").css("display", "none");
-    //    $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-    //    Correcto4 = false;
-    //}
-    //else {
-    //    if(empresa[1] == null || empresa[1] == undefined){
-    //        $("#Crear #c_Validation_decimal2").css("display", "");
-    //        $("#Crear #Validation_descipcion4A").css("display", "none");
-    //        $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
-    //        Correcto4 = false;
-    //    } else {
-    //        $("#Crear #c_Validation_decimal2").css("display", "none");
-    //        $("#Crear #Validation_descipcion4A").css("display", "none");
-    //        $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
-    //        Correcto4 = true;
-    //        }
-    //}
-
-    if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
-        $('#btnCreateRegistroDeduccion').attr('disabled', false);
     }
     else {
-        $('#btnCreateRegistroDeduccion').attr('disabled', true);
-        document.getElementById('Validation_PorcentajeEmpresa').innerHTML = '';
-        document.getElementById('Validation_PorcentajeColaborador').innerHTML = '';
+        $("#Crear #Validation_descipcion3A").css("display", "none");
+        $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
+        Correcto3 = true;
+    }
+
+    if (cde_PorcentajeEmpresaA == "" || cde_PorcentajeEmpresaA == "0" || cde_PorcentajeEmpresaA == null || cde_PorcentajeEmpresaA == undefined || cde_PorcentajeEmpresaA < 0) {
+        $("#Crear #Validation_descipcion4A").css("display", "");
+        $("#Crear #AsteriscoPorcentajeEmpresa").addClass("text-danger");
+        Correcto4 = false;
+    }
+    else {
+        $("#Crear #Validation_descipcion3A").css("display", "none");
+        $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
+        Correcto4 = true;
+    }
+
+    if (Correcto == false || Correcto2 == false || Correcto3 == false || Correcto4 == false) {
+
+    }
+    else {
         $("#Crear #Validation_descipcionA").css("display", "none");
         $("#Crear #Validation_descipcion2A").css("display", "none");
         $("#Crear #Validation_descipcion3A").css("display", "none");
@@ -284,7 +212,7 @@ $('#btnCreateRegistroDeduccion').click(function () {
         $("#Crear #AsteriscoPorcentajeColaborador").removeClass("text-danger");
         $("#Crear #AsteriscoPorcentajeEmpresa").removeClass("text-danger");
         $("#Crear #AsteriscoTipoDedu").removeClass("text-danger");
-        document.getElementById('btnCreateRegistroDeduccion').disabled = true;
+        mostrarCargandoCrear();
         //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
 
@@ -303,24 +231,21 @@ $('#btnCreateRegistroDeduccion').click(function () {
 
                 //ocultar el modal
                 $("#AgregarCatalogoDeducciones").modal('hide');
-                document.getElementById('btnCreateRegistroDeduccion').disabled = false;
 
                 // Mensaje de exito cuando un registro se ha guardado bien
                 iziToast.success({
-                    title: 'Éxito',
+                    title: 'Exito',
                     message: '¡El registro se agregó de forma exitosa!',
                 });
             }
             else
             {
-                $("#AgregarCatalogoDeducciones").modal('hide');
-                document.getElementById('btnCreateRegistroDeduccion').disabled = false;
                 iziToast.error({
                     title: 'Error',
                     message: 'No se guardó el registro, contacte al administrador',
                 });
-                $('#btnCreateRegistroDeduccion').attr('disabled', false);
             }
+            ocultarCargandoCrear();
         });
     }
 });
@@ -335,19 +260,11 @@ $("#frmCatalogoDeduccionesCreate").submit(function (e) {
 //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
 $("#btnCerrarEditar").click(function () {
     OcultarValidacionesEditar();
-    //$("#Validation_descipcion").css("display", "none");
-    //$("#Validation_descipcion2").css("display", "none");
-    //$("#Validation_descipcion3").css("display", "none");
-    //$("#Editar #AsteriscoDescripcionDeduEdit").removeClass("text-danger");
-    //$("#Editar #AsteriscoPorcentajeColaboradorEdit").removeClass("text-danger");
-    //$("#Editar #AsteriscoPorcentajeEmpresaEdit").removeClass("text-danger");
-    //$("#Editar #AsteriscoTipoDeduEdit").removeClass("text-danger")
 });
 
-//FUNCION: OCULTAR LOS MENSAJES DE VALIDACION DEL MODAL DE EDITAR
-function OcultarValidacionesEditar() {
-    $("#Validation_decimal").css("display", "none");
-    $("#Validation_decimal2").css("display", "none");
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconCerrarEdit").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
     $("#Validation_descipcion3").css("display", "none");
@@ -404,6 +321,7 @@ function OcultarValidacionesEditar() {
                 $("html, body").css("overflow", "hidden");
                 $("html, body").css("overflow", "auto");
                 $('#btnUpdateDeduccion2').attr('disabled', false);
+
             }
             else {
                 //Mensaje de error si no hay data
@@ -415,15 +333,16 @@ function OcultarValidacionesEditar() {
         });
     });
 
-    $('#btnUpdateDeduccion').click(function () {
-        var cde_DescripcionDeduccionE2 = $("#Editar #cde_DescripcionDeduccion").val();
-        var cde_PorcentajeColaboradorE2 = $("#Editar #cde_PorcentajeColaborador").val();
-        var cde_PorcentajeEmpresaE2 = $("#Editar #cde_PorcentajeEmpresa").val();
-        var CorrectoEdit = true;
-        var CorrectoEdit2 = true;
-        var CorrectoEdit3 = true;
-        var colaborador = cde_PorcentajeColaboradorE2.split(".");
-        var empresa = cde_PorcentajeEmpresaE2.split(".");
+
+$('#btnUpdateDeduccion').click(function () {
+    var cde_DescripcionDeduccionE2 = $("#Editar #cde_DescripcionDeduccion").val();
+    var cde_PorcentajeColaboradorE2 = $("#Editar #cde_PorcentajeColaborador").val();
+    var cde_PorcentajeEmpresaE2 = $("#Editar #cde_PorcentajeEmpresa").val();
+    var CorrectoEdit = true;
+    var CorrectoEdit2 = true;
+    var CorrectoEdit3 = true;
+    var colaborador = cde_PorcentajeColaboradorE2.split(".");
+    var empresa = cde_PorcentajeEmpresaE2.split(".");
 
         if (cde_DescripcionDeduccionE2 == "") {
             $("#Editar #Validation_descipcion").css("display", "");
@@ -495,6 +414,7 @@ function OcultarValidacionesEditar() {
     //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
     $("#btnUpdateDeduccion2").click(function () {
         $('#btnUpdateDeduccion2').attr('disabled', true);
+
         //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
         var data = $("#frmCatalogoDeducciones").serializeArray();
 
@@ -506,16 +426,16 @@ function OcultarValidacionesEditar() {
         })
         .done(function (data) {
             if (data != "error") {
+                debugger;
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
 
                 //Ocultar el modal
                 $("#EditarCatalogoDeducciones").modal('hide');
                 $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-                document.getElementById('btnUpdateDeduccion2').disabled = false;
                 //Mensaje de exito de la edicion
                 iziToast.success({
-                    title: 'Éxito',
+                    title: 'Exito',
                     message: '¡El registro se editó de forma exitosa!',
                 });
             }
@@ -524,12 +444,11 @@ function OcultarValidacionesEditar() {
                     title: 'Error',
                     message: 'No se editó el registro, contacte al administrador',
                 });
-                $('#btnUpdateDeduccion2').attr('disabled', false);
                 $("#EditarCatalogoDeduccionesConfirmacion").modal('hide');
-                document.getElementById('btnUpdateDeduccion2').disabled = false;
             }
         });
     });
+
 
     // EVITAR POSTBACK DE FORMULARIOS
     $("#frmCatalogoDeducciones").submit(function (e) {
@@ -652,6 +571,7 @@ function OcultarValidacionesEditar() {
                     message: '¡El registro se inactivó de forma exitosa!',
                 });
 
+
             }
         });
     });
@@ -718,50 +638,32 @@ function OcultarValidacionesEditar() {
         });
     });
 
+function ocultarCargandoCrear() {
+    btnGuardar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
 
- //   function mostrarCargandoCrear() {
- //       btnGuardar.hide();
- //       cargandoCrear.html(spinner());
- //       cargandoCrear.show();
- //   }
+function mostrarCargandoEditar() {
+    btnGuardarEditar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
 
- //   function ocultarCargandoCrear() {
- //       btnGuardar.show();
- //       cargandoCrear.html('');
- //       cargandoCrear.hide();
- //   }
+function ocultarCargandoEditar() {
+    btnGuardarEditar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}
 
- //   function mostrarCargandoEditar() {
- //       btnGuardarEditar.hide();
- //       cargandoCrear.html(spinner());
- //       cargandoCrear.show();
- //   }
+function mostrarCargandoActivar() {
+    btnGuardarActivar.hide();
+    cargandoCrear.html(spinner());
+    cargandoCrear.show();
+}
 
- //   function ocultarCargandoEditar() {
- //       btnGuardarEditar.show();
- //       cargandoCrear.html('');
- //       cargandoCrear.hide();
- //   }
-
- //   function mostrarCargandoActivar() {
- //       btnGuardarActivar.hide();
- //       cargandoCrear.html(spinner());
- //       cargandoCrear.show();
- //   }
-
- //   function ocultarCargandoActivar() {
- //       btnGuardarActivar.show();
- //       cargandoCrear.html('');
- //       cargandoCrear.hide();
- //   }
-
- //   //Mostrar el spinner
- //   function spinner() {
- //       return `<div class="sk-spinner sk-spinner-wave">
- //<div class="sk-rect1"></div>
- //<div class="sk-rect2"></div>
- //<div class="sk-rect3"></div>
- //<div class="sk-rect4"></div>
- //<div class="sk-rect5"></div>
- //</div>`;
- //   }
+function ocultarCargandoActivar() {
+    btnGuardarActivar.show();
+    cargandoCrear.html('');
+    cargandoCrear.hide();
+}

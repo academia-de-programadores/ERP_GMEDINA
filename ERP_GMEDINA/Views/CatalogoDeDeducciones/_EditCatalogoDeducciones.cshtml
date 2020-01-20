@@ -15,7 +15,7 @@
                             <strong>Descripción<label class="" id="AsteriscoDescripcionDeduEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_DescripcionDeduccion" } })
                             @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger", @id = "Validation_descipcion" })
                         </div>
                     </div>
@@ -39,10 +39,9 @@
                             <strong>Porcentaje Colaborador<label class="" id="AsteriscoPorcentajeColaboradorEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeColaborador", @value = "", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeColaborador", @value = "" } })
                             @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger", @id = "Validation_descipcion2" })
 
-                            <label class="text-danger" id="Validation_decimal" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
                             <span class="field-validation-valid text-danger" style="display: none" id="validareditar2">El campo Porcentaje Colaborador es obligatorio.</span>
                         </div>
                     </div>
@@ -54,10 +53,9 @@
                             <strong>Porcentaje Empresa<label class="" id="AsteriscoPorcentajeEmpresaEdit" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label></strong>
                         </div>
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeEmpresa", @value = "", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "text-box single-line", @id = "cde_PorcentajeEmpresa", @value = "" } })
                             @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger", @id = "Validation_descipcion3" })
-                            
-                            <label class="text-danger" id="Validation_decimal2" style="display:none; opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">Número decimal válido con un máximo de 2 decimales</label>
+
                             <span class="field-validation-valid text-danger" style="display: none" id="validareditar3">El campo Porcentaje Empresa es obligatorio.</span>
                         </div>
                     </div>
