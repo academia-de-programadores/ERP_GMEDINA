@@ -10,13 +10,14 @@
            }
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.Id,
-                   Colaborador: value.Colaborador,
+                   Id: value.hcon_Id,
+                   "Número": value.hcon_Id,
+                   Nombre: value.Nombre,
                    Departamento: value.dep_Descripcion,
                    Area: value.area_Descripcion,
                    Cargo: value.car_Descripcion,
                    FechaSeleccion: FechaFormato(value.scan_Fecha),
-                   FechaContratado: FechaFormato(value.scan_Fecha)
+                   FechaContratado: FechaFormato(value.scan_Fecha)                   
                });
            });
            tabla.draw();

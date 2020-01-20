@@ -36,7 +36,7 @@ namespace ERP_GMEDINA.Controllers
                         {
                            
                             hcon_Id = t.Id,
-                            Colaborador = t.Nombre_Completo,
+                            Nombre = t.Nombre_Completo,
                             dep_Descripcion = t.Departamento,
                             area_Descripcion = t.Area,
                             car_Descripcion = t.Cargo,
