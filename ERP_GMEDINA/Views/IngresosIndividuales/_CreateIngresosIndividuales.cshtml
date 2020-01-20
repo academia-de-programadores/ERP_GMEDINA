@@ -2,9 +2,8 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateIngresosIndividuales" }))
 {
-    <div class="modal-body" id="Crear">
         @Html.HiddenFor(model => model.ini_IdIngresosIndividuales)
-
+    <div class="modal-body" id="Crear">
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -44,12 +43,11 @@
                     @Html.LabelFor(model => model.ini_PagaSiempre)
                 </div>
                 <div class="col-md-8">
-                        <input type="checkbox" class="icheckbox_square-green" id="ini_PagaSiempre" name="ini_PagaSiempre" />
+                    <input type="checkbox" class="icheckbox_square-green" id="ini_PagaSiempre" name="ini_PagaSiempre" />
                 </div>
             </div>
 
         </div>
-
     </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-white pull-right" id="btnCerrarCrear">Cerrar</button>

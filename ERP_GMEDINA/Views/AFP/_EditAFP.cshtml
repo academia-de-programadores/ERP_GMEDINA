@@ -2,71 +2,73 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditarAFP" }))
 {
-    <div class="ibox-content">
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.afp_Id)
+    <div class="modal-body" id="Editar">
+        <div class="ibox-content">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.afp_Id)
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_Id)<span>*</span>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.afp_Id)<span>*</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.afp_Id, new { htmlAttributes = new { @class = "text-box single-line", disabled = "disabled" } })
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_Id, new { htmlAttributes = new { @class = "text-box single-line", @disabled = "disabled"} })
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.afp_Descripcion)<span id="aste1">*</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_Descripcion" } })
+                        @Html.ValidationMessageFor(model => model.afp_Descripcion, "", new { @class = "text-danger", @id = "validationes1" })
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="aste2">*</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_AporteMinimoLps" } })
+                        @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger", @id = "validationes2" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.afp_InteresAporte)<span id="aste3">*</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAporte" } })
+                        @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger", @id = "validationes3" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.afp_InteresAnual)<span id="aste4">*</span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAnual" } })
+                        @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger", @id = "validationes4" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.tde_IdTipoDedu)<span>*</span>
+                    </div>
+                    <div class="col-md-8">
+                        <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="text-box single-line"></select>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_Descripcion)<span id="aste1">*</span>
-                </div>                
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_Descripcion, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_Descripcion" } })
-                    @Html.ValidationMessageFor(model => model.afp_Descripcion, "", new { @class = "text-danger", @id = "validationes1" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_AporteMinimoLps)<span id="aste2">*</span>
-                </div>                
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_AporteMinimoLps, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_AporteMinimoLps" } })
-                    @Html.ValidationMessageFor(model => model.afp_AporteMinimoLps, "", new { @class = "text-danger", @id = "validationes2" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAporte)<span id="aste3">*</span>
-                </div>                
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAporte, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAporte" } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAporte, "", new { @class = "text-danger", @id = "validationes3" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.afp_InteresAnual)<span id="aste4">*</span>
-                </div>               
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.afp_InteresAnual, new { htmlAttributes = new { @class = "text-box single-line", @id = "afp_InteresAnual" } })
-                    @Html.ValidationMessageFor(model => model.afp_InteresAnual, "", new { @class = "text-danger", @id = "validationes4" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.tde_IdTipoDedu)<span>*</span>
-                </div>
-                <div class="col-md-8">
-                    <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="text-box single-line"></select>
-                </div>
-            </div>
-
         </div>
     </div>
     <div class="modal-footer">
@@ -76,8 +78,6 @@
         <div style="display:none" class="btn pull-left" id="cargandoEditar"></div>
         <button type="button" class="btn btn-danger pull-left" id="btnInactivarAFP">Inactivar</button>
     </div>
-
-
 }
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarAFP" }))
 {

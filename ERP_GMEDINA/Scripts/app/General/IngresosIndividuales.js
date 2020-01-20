@@ -303,6 +303,9 @@ $("#btnCerrarEditar").click(function () {
     $("#validation1").css("display", "none");
     $("#validation2").css("display", "none");
     $("#validation3").css("display", "none");
+    $("#aste1").css("color", "black");
+    $("#aste2").css("color", "black");
+    $("#aste3").css("color", "black");
     $("#EditarIngresosIndividuales").modal('hide');
     $("#Editar #ini_IdIngresosIndividuales").val('');
     $("#Editar #ini_Motivo").val('');

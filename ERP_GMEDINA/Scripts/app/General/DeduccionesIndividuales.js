@@ -93,7 +93,7 @@ function spinner() {
 
 //Activar
 $(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividuales", function () {
-
+    document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = false;
     var id = $(this).closest('tr').data('id');
 
     var id = $(this).attr('deiid');
@@ -103,7 +103,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnActivarDeduccionesIndividua
 });
 
 $("#btnActivarRegistroDeduccionIndividual").click(function () {
-
+    document.getElementById("btnActivarRegistroDeduccionIndividual").disabled = true;
     let id = localStorage.getItem('id')
 
     $.ajax({
@@ -193,6 +193,7 @@ function mostrarCargandoCrear() {
 }
 
 $(document).on("click", "#btnAgregarDeduccionIndividual", function () {
+    document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = false;
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/DeduccionesIndividuales/EditGetEmpleadoDDL",
@@ -317,6 +318,7 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
     }
 
     if (TOF) {
+        document.getElementById("btnCreateRegistroDeduccionIndividual").disabled = true;
         mostrarCargandoCrear();
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -351,8 +353,6 @@ $('#btnCreateRegistroDeduccionIndividual').click(function () {
                     message: '¡No se guardó el registro, contacte al administrador!',
                 });
             }
-
-            ocultarCargandoCrear();
         });
     }
    
@@ -401,6 +401,7 @@ function mostrarCargandoEditar() {
 }
 
 $(document).on("click", "#IndexTable tbody tr td #btnEditarDeduccionesIndividuales", function () {
+    document.getElementById("btnEditDeduccionIndividual2").disabled = false;
     var id = $(this).data('id');
     $.ajax({
         url: "/DeduccionesIndividuales/Edit/" + id,
@@ -587,8 +588,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
     else {
         dei_PagaSiempre = false;
     }
-
-    mostrarCargandoEditar();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionesIndividuales/Edit",
@@ -596,7 +595,7 @@ $("#btnEditDeduccionIndividual2").click(function () {
         data: { dei_IdDeduccionesIndividuales: dei_IdDeduccionesIndividuales, dei_Motivo: dei_Motivo, emp_Id: emp_Id, dei_MontoInicial: dei_MontoInicial, dei_MontoRestante: dei_MontoRestante, dei_Cuota: dei_Cuota, dei_PagaSiempre: dei_PagaSiempre }
     }).done(function (data) {
         if (data != "error") {
-
+            document.getElementById("btnEditDeduccionIndividual2").disabled = false;
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionesIndividualesConfirmacion").modal('hide');
             $("#EditarDeduccionesIndividuales").modal('hide');
@@ -616,8 +615,6 @@ $("#btnEditDeduccionIndividual2").click(function () {
                 message: '¡No se editó el registro, contacte al administrador!',
             });
         }
-
-        ocultarCargandoEditar();
     });
 
     // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
@@ -709,6 +706,7 @@ $(document).on("click", "#IndexTable tbody tr td #btnDetalleDeduccionesIndividua
 
 //Inactivar//
 $(document).on("click", "#btnBack", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -716,6 +714,7 @@ $(document).on("click", "#btnBack", function () {
 });
 
 $(document).on("click", "#btnBa", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#InactivarDeduccionesIndividuales").modal('hide');
     $("#EditarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -723,6 +722,7 @@ $(document).on("click", "#btnBa", function () {
 });
 
 $(document).on("click", "#btnInactivarDeduccionesIndividuales", function () {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = false;
     $("#EditarDeduccionesIndividuales").modal('hide');
     $("#InactivarDeduccionesIndividuales").modal({ backdrop: 'static', keyboard: false });
     $("html, body").css("overflow", "hidden");
@@ -749,6 +749,7 @@ function mostrarCargandoInhabilitar() {
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionIndividual").click(function ()
 {
+    document.getElementById("btnInactivarRegistroDeduccionIndividual").disabled = true;
     var data = $("#frmInactivarDeduccionIndividual").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
