@@ -43,8 +43,10 @@
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.dei_MontoRestante, new { htmlAttributes = new { @class = "text-box single-line", @id = "dei_MontoRestante" } })
                         @Html.ValidationMessageFor(model => model.dei_MontoRestante, "", new { @class = "text-danger", @id = "validatione4" })
+                        <span id="MontoRestanteEditar" class="text-danger" style="display:none;">El campo rango fin no puede ser mayor que rango inicio</span>
                     </div>
-                </div>
+                    </div>
+               
 
                 <div class="form-group">
                     <div class="col-md-4">

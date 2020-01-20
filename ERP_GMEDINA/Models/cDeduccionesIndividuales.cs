@@ -25,14 +25,14 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
-        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "Campo monto inicial debe ser mayor que 0.00")]
         [Required(ErrorMessage = "Campo Monto Inicial Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Monto Inicial")]
         public decimal dei_MontoInicial { get; set; }
 
-        [Range(0.01, 9999999999.99, ErrorMessage = "La Cuota no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
+        [Range(0.00, 9999999999.99, ErrorMessage = "La Cuota no puede ser menor a 0 dígitos, ni mayor a 10 dígitos")]
         [Required(ErrorMessage = "Campo Monto Restante Requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})$", ErrorMessage = "Número decimal válido con un máximo de 2 decimales.")]
         [DataType(DataType.Currency)]
