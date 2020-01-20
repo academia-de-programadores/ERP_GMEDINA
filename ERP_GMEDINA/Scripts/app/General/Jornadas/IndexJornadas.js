@@ -1,5 +1,7 @@
 ﻿var jor_Id = 0;
+var fill = 0;
 $(document).ready(function () {
+    fill = Admin == undefined ? 0 : -1;
     llenarTabla();
 });
 function llenarTabla() {
@@ -13,12 +15,24 @@ function llenarTabla() {
                return null;
            }
            $.each(Lista, function (index, value) {
-               tabla.row.add({
-                   ID: value.jor_Id,
-                   Jornada: value.jor_Descripcion
-               });
+               var Acciones = value.jor_Estado == 1
+                    ? null : Admin ?
+                    "<div>" +
+                        "<a class='btn btn-primary btn-xs ' onclick='hablilitar(this)' >Activar</a>" +
+                    "</div>" : "";
+
+               if (value.jor_Estado > fill) {
+                   tabla.row.add({
+                       ID: value.jor_Id,
+                       "Número": value.jor_Id,
+                       Jornada: value.jor_Descripcion,
+                       Estado: value.jor_Estado ? "Activo" : "Inactivo",
+                       Acciones: Acciones
+                   });
+               }
            });
            tabla.draw();
+
        });
 }
 function tablaEditar(ID) {
@@ -33,7 +47,6 @@ function tablaEditar(ID) {
             }
         });
 }
-
 function tablaDetalles(ID) {
     id = ID;
     _ajax(null,
@@ -50,11 +63,16 @@ function tablaDetalles(ID) {
             }
         });
 }
-function format(obj, jor_Id) {
+function format(obj, jor_Id, estado) {
+    var emerson = estado == 'Inactivo' ? '' : '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>';
     var div = '<div class="ibox"><div class="ibox-title"><strong class="mr-auto m-l-sm">Horarios</strong><div class="btn-group pull-right">' +
-        '<button id = "btnAgregarHorarios" data-id="' + jor_Id + '" data-toggle="ModalNuevoHorarios" class="btn btn-outline btn-primary btn-xs" onClick = "showmodal(this)"> Agregar </button>' +
+        emerson +
         '</div></div><div class="ibox-content"><div class="row">';
     obj.forEach(function (index, value) {
+        var Acciones = index.hor_Estado == 1
+            ? '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
+            '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' : Admin ?
+            "<div>" + "<a class='btn btn-primary btn-xs ' onclick='hablilitarhorario(" + index.hor_Id + ")' >Activar</a>" + "</div>" : "";
         div = div +
             '<div class="col-md-3">' +
               '<div class="panel panel-default">' +
@@ -66,8 +84,7 @@ function format(obj, jor_Id) {
                   '<br> Hora Fin: ' + index.hor_HoraFin +
                 '</div>' +
                 '<div class="modal-footer">' +
-                  '<button id = "btnDetalleHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalDetallesHorario" class="btn btn-primary btn-xs pull-right" onClick = "showmodalDetalle(this)"> Detalle </button>' +
-                  '<button id = "btnEditarHorarios" data-id="' + index.hor_Id + '" data-toggle="ModalEditarHorarios" class="btn btn-defaults btn-xs pull-right" onClick = "showmodaledit(this)"> Editar </button>' +
+                    Acciones +
                 '</div>' +
               '</div>' +
             '</div>'
@@ -84,15 +101,16 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().ID;
-        hola = row.data().hola;
+        data = row.data();
+        id = data.ID;
+        hola = data.hola;
         tr.addClass('loading');
         _ajax({ id: parseInt(id) },
             '/Jornadas/ChildRowData',
             'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    row.child(format(obj, id)).show();
+                    row.child(format(obj, id, data.Estado)).show();
                     tr.removeClass('loading');
                     tr.addClass('shown');
                 }
@@ -116,7 +134,6 @@ function showmodal(btn) {
     $(modalnuevo).find("#hor_HoraInicio").val("");
     $(modalnuevo).find("#hor_HoraFin").val("");
 }
-
 function showmodaledit(btn) {
     jor_Id = $(btn).data('id');
     _ajax(null,
@@ -124,11 +141,14 @@ function showmodaledit(btn) {
         'GET',
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                CierraPopups();
                 var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
-                hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes;
+                hor_HoraInicio += ":";
+                hor_HoraInicio += obj.hor_HoraInicio.Minutes < 10 ? "0" + obj.hor_HoraInicio.Minutes : obj.hor_HoraInicio.Minutes;
+
                 var hor_HoraFin = obj.hor_HoraFin.Hours < 10 ? "0" + obj.hor_HoraFin.Hours : obj.hor_HoraFin.Hours;
-                hor_HoraFin += ":" + obj.hor_HoraFin.Minutes;
+                hor_HoraFin += ":";
+                hor_HoraFin += obj.hor_HoraFin.Minutes < 10 ? "0" + obj.hor_HoraFin.Minutes : obj.hor_HoraFin.Minutes;
+
                 $('#ModalEditarHorarios').modal('show');
                 $("#ModalEditarHorarios").find("#hor_Descripcion").val(obj.hor_Descripcion);
                 $("#ModalEditarHorarios").find("#hor_Descripcion").focus();
@@ -156,9 +176,13 @@ function showmodalDetalle(btn) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 CierraPopups();
                 var hor_HoraInicio = obj.hor_HoraInicio.Hours < 10 ? "0" + obj.hor_HoraInicio.Hours : obj.hor_HoraInicio.Hours;
-                hor_HoraInicio += ":" + obj.hor_HoraInicio.Minutes;
+                hor_HoraInicio += ":";
+                hor_HoraInicio += obj.hor_HoraInicio.Minutes < 10 ? "0" + obj.hor_HoraInicio.Minutes : obj.hor_HoraInicio.Minutes;
+
                 var hor_HoraFin = obj.hor_HoraFin.Hours < 10 ? "0" + obj.hor_HoraFin.Hours : obj.hor_HoraFin.Hours;
-                hor_HoraFin += ":" + obj.hor_HoraFin.Minutes;
+                hor_HoraFin += ":";
+                hor_HoraFin += obj.hor_HoraFin.Minutes < 10 ? "0" + obj.hor_HoraFin.Minutes : obj.hor_HoraFin.Minutes;
+
                 $('#ModalDetallesHorario').modal('show');
                 $("#ModalDetallesHorario").find("#hor_Descripcion")["0"].innerText = obj.hor_Descripcion;
                 $("#ModalDetallesHorario").find("#hor_HoraInicio")["0"].innerText = hor_HoraInicio;

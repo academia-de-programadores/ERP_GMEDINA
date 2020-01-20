@@ -56,7 +56,23 @@
             "Titulos",
             "FasesReclutamiento",
              "RequerimientosEspeciales"
-    ]
+    ];
+    var ReportesRRHH = [
+        "HistorialIncapacidades",
+           "HorasTrabajadas",
+           "HistorialContratacionesRPT",
+           "HistorialCargosRPT",
+            "HistorialSalidasRPT",
+              "HistorialVacacionesRPT",
+    "SueldosRPT",
+     "Permisos",
+    "FaseSeleccion",
+         "Requisicion",
+          "Empleado",
+          "HistorialAmonestaciones",
+          "HistorialAudienciaDescargo",
+          "EquipoEmpleados"
+    ];
 
     var url = window.location.href;
     var pieces = url.split("/");
@@ -99,6 +115,10 @@
             $("#Datos_Profesionales").addClass("active");
             $("#Datos_Profesionales").find(".Datos_Profesionales").addClass("in");
         }
+        //else if (buscarItem(controler, ReportesRRHH)) {
+        //    $("#ReportesRRHH").addClass("active");
+        //    $("#ReportesRRHH").find(".ReportesRRHH").addClass("in");
+        //}
     });
 
 });

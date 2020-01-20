@@ -182,6 +182,56 @@
             </li>
             @*DATOS PROFESIONALES*@
 
+            @*REPORTES*@
+            <li id="ReportesRRHH" class="@Html.IsSelected(action: "Dashboard_5")">
+                <a href="@Url.Action("General", "General")"><i class="fa fa-external-link"></i> <span class="nav-label" data-i18n="nav.dashboard">Reportes</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level  @Html.IsSelected(controller: "ReportesRRHH", cssClass: "in")">
+                    <li class="@Html.IsSelected(action:"HistorialAmonestaciones")">
+                        <a href="@Url.Action("HistorialAmonestaciones", "ReportesRRHH")">Amonestaciones</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialAudienciaDescargo")">
+                        <a href="@Url.Action("HistorialAudienciaDescargo", "ReportesRRHH")">Audiencias de Descargo</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"EquipoEmpleados")">
+                        <a href="@Url.Action("EquipoEmpleados", "ReportesRRHH")">Equipos por Empleado</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"FaseSeleccion")">
+                        <a href="@Url.Action("FaseSeleccion", "ReportesRRHH")">Fases de Seleccion</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Empleado")">
+                        <a href="@Url.Action("Empleado", "ReportesRRHH")">Empleado</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HorasTrabajadas")">
+                        <a href="@Url.Action("HorasTrabajadas", "ReportesRRHH")">Horas Trabajadas</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialContratacionesRPT")">
+                        <a href="@Url.Action("HistorialContratacionesRPT", "ReportesRRHH")">Contrataciones</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialIncapacidades")">
+                        <a href="@Url.Action("HistorialIncapacidades", "ReportesRRHH")">Incapacidades</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialCargosRPT")">
+                        <a href="@Url.Action("HistorialCargosRPT", "ReportesRRHH")">Cargos</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialSalidasRPT")">
+                        <a href="@Url.Action("HistorialSalidasRPT", "ReportesRRHH")">Finalizaciones Laborales</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"SueldosRPT")">
+                        <a href="@Url.Action("SueldosRPT", "ReportesRRHH")">Sueldos</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Permisos")">
+                        <a href="@Url.Action("Permisos", "ReportesRRHH")">Permisos</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"HistorialVacacionesRPT")">
+                        <a href="@Url.Action("HistorialVacacionesRPT", "ReportesRRHH")">Vacaciones</a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Requisicion")">
+                        <a href="@Url.Action("Requisicion", "ReportesRRHH")">Requisiciones</a>
+                    </li>
+
+                </ul>
+            </li>
+            @*REPORTES*@
 
 
 
