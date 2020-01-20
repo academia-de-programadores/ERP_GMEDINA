@@ -10,16 +10,17 @@ function Remove(Id, lista) {
     return list;
 }
 function Add(Empleados, Razon, ver) {
+    debugger
     if (Empleados.trim().length != 0 || Razon.trim().length != 0) {
         for (var i = 0; i < ChildTable.data().length; i++) {
             var Fila = ChildTable.rows().data()[i];
-            if (Fila.Empleados == ver || Fila.Empleados == '0') {
+            if (Fila.Empleados == ver || Fila.Empleados == 0) {
                 if (Fila.Empleados == ver) {
                     var span = $("#FormEmpleados").find("#errorDDOWNEmpleados");
                     $(span).addClass("text-warning");
                     $(span).closest("div").addClass("has-warning");
                     span.text('Seleccione otra opción');
-                    $("#FormEmpleados").find("#DDOWNEmpleados").focus();
+                    $("#FormEmpleados").find("#select2-DDOWNEmpleados-container").focus();
                 }
                 return null;
             }
@@ -162,11 +163,11 @@ $(document).ready(function () {
 $("#add").click(function () {
     var Id = $("#FormEmpleados").find("#DDOWNEmpleados").val();
     if (Id == 0) {
-        var span = $("#FormEmpleados").find("#errorEmpleados");
+        var span = $("#FormEmpleados").find("#errorDDOWNEmpleados");
         $(span).addClass("text-warning");
         $(span).closest("div").addClass("has-warning");
         span.text('Seleccione otra opción');
-        $("#FormEmpleados").find("#DDOWNEmpleados").focus();
+        $("#FormEmpleados").find("#select2-DDOWNEmpleados-container").focus();
     }
     else {
     var Id = $("#FormEmpleados").find("#DDOWNEmpleados").val();
@@ -188,11 +189,11 @@ $("#FormCreate").submit(function (e) {
 $("#btnCrear").click(function () {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     if ($("#TipoSalidas").val() == 0) {
-        MsgWarning("Error", "Es nesesario seleccionar el tipo de la salida");
+        MsgError("Error", "Es nesesario seleccionar el tipo de la salida");
     } else if ($("#RazonSalidas").val() == 0) {
-        MsgWarning("Error", "Es nesesario seleccionar la razon de la salida");
+        MsgError("Error", "Es nesesario seleccionar la razón de la salida");
     } else if ($("#hsal_FechaSalida").val() == "") {
-        MsgWarning("Error", "Es nesesario seleccionar la fecha en que desocuparon su pueso de trabajo");
+        MsgError("Error", "Es necesario seleccionar la fecha en la cual se desocupo el puesto de trabajo");
     } else {
     //declaramos el objeto principal de nuestra tabla y asignamos sus valores
     var tbHistorialSalidas =
@@ -204,7 +205,7 @@ $("#btnCrear").click(function () {
     };
         var lista = getJson();
         if (lista == "") {
-            MsgWarning("Error", "Es nesesario seleccionar al menos 1 colaborador");
+            MsgError("Error", "Es nesesario seleccionar al menos 1 colaborador");
         } else {
             if (tbHistorialSalidas != null) {
                 data = JSON.stringify({
