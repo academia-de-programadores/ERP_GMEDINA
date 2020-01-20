@@ -707,7 +707,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Reporte de Adelanto de Sueldo</Value>
+                  <Value>Reporte de AFP</Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -722,7 +722,7 @@
           <rd:DefaultName>Textbox7</rd:DefaultName>
           <Top>2.76049cm</Top>
           <Left>0.21739cm</Left>
-          <Height>0.6cm</Height>
+          <Height>0.75975cm</Height>
           <Width>28.228cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
