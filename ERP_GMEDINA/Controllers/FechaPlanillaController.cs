@@ -16,12 +16,14 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
+            Session["HistorialDePago"] = null;
             return View();
         }
 
         [HttpPost]
         public ActionResult ComprobanteEmpleadoEncabezado(int ID = 1, int anio = 2019)
         {
+            Session["HistorialDePago"] = new ComprobantePagoSessionViewModel { Id = ID, Anio = anio };
             var V_Plani_EncabezadoHistorialPlanilla = db.V_Plani_EncabezadoHistorialPlanilla.Where( x => x.cpla_IdPlanilla == ID && (x.hipa_FechaPago.Value).Year == anio);
 
             foreach (var item in V_Plani_EncabezadoHistorialPlanilla)
@@ -67,8 +69,10 @@ namespace ERP_GMEDINA.Controllers
 		[HttpPost]
 		public ActionResult DetailsEmpleadoEncablezado(int id)
 		{
-			//string NombrePdf = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
-			string NombrePdf = "comprobante-de-pago";
+            ComprobantePagoSessionViewModel session = Session["HistorialDePago"] as ComprobantePagoSessionViewModel;
+
+            //string NombrePdf = db.tbCatalogoDeDeducciones.Where(x => x.cde_IdDeducciones == cde_IdDeducciones).Select(x => x.cde_DescripcionDeduccion).FirstOrDefault();
+            string NombrePdf = "comprobante-de-pago";
 			return new ActionAsPdf("Report")
 			{
 				FileName = $"{NombrePdf}.pdf"
