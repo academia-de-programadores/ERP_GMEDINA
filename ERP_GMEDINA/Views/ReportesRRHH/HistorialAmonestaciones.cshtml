@@ -33,8 +33,7 @@
                             <div class="col-md-6">
                                 <label class="font-normal">Colaborador</label>
 
-                                @Html.DropDownList("Identidad", (IEnumerable<SelectListItem>
-                                    )ViewBag.EmpleadoAMON, "(Opcional) seleccione el colaborador", new {@id = "Identidad", @class = "form-control" })
+                                @Html.DropDownList("Identidad", (IEnumerable<SelectListItem>)ViewBag.EmpleadoAMON, "(Opcional) seleccione el colaborador", new {@id = "Identidad", @class = "form-control" })
 
                                     @Html.ValidationMessageFor(model => model.Identidad, "", new { @class = "text-danger" })
                             </div>
