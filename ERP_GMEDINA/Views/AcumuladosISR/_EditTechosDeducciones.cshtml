@@ -2,13 +2,15 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditAcumuladosISR" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.aisr_Id)
+
     <!-- CAJAS DE TEXTO -->
     <div class="modal-body" id="Editar">
         <div class="ibox-content">
             <div class="form-horizontal">
 
-
+                @Html.HiddenFor(model => model.aisr_Id)
+                @Html.HiddenFor(model => model.aisr_UsuarioModifica)
+                @Html.HiddenFor(model => model.aisr_FechaModifica)
                 <div class="form-group">
                     <div class="col-md-4">
                         Descripción<label class="" id="AsteriscoDescripcionEditAISR" style="opacity: 1; font-family: open sans, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight: normal;">*</label>
